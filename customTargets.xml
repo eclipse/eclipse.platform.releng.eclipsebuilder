@@ -780,10 +780,7 @@
 
 <target name="macosxCarbonPostAssembly">
 	<antcall target="sdkAndPlatformPostAssembly" />
-	<copy todir="${workingDirectory}">
-		<fileset dir="${buildDirectory}/plugins/org.eclipse.platform.macosx.carbon" includes="Eclipse.app/"  />
-	</copy>
-	
+
 	<copy file="${buildDirectory}/plugins/org.eclipse.platform.macosx.carbon/legal.html" todir="${workingDirectory}" />
 	
 	<!--fix for #23918-->
@@ -792,13 +789,17 @@
 		<param name="linkFile" value="Java" />
 		<param name="originalFile" value="../../.." />
 	</antcall>
-	
-	<!--fix for #33404, delete bogus placeholder file-->
-	<delete file="${workingDirectory}/eclipse" />
-		
-	<chmod file="${workingDirectory}/Eclipse.app/Contents/MacOS/Eclipse" perm="755" />
-	<antcall target="macosxCreateTar" />
 
+	<antcall target="makeSymbolicLink">
+		<param name="execDir" value="${workingDirectory}" />
+		<param name="linkFile" value="eclipse" />
+		<param name="originalFile" value="${workingDirectory}/Eclipse.app/Contents/MacOS/eclipse" />
+	</antcall>
+	
+	<chmod dir="${workingDirectory}/Eclipse.app/Contents/MacOS/" perm="ugo+rx" includes="JavaApplicationStub,eclipse"/>
+	<chmod file="${workingDirectory}/eclipse" perm="ugo+rx"/>
+	
+	<antcall target="macosxCreateTar" />
 
 </target>
 
