@@ -11,8 +11,17 @@
 		<exec dir="." executable="${copyClient}">
 			<arg line="${tester}/../../testScripts/test.xml ${testMachine}:${executionDir}" />
 		</exec>
-		
-		<replace file="${tester}/vm.properties" token="@buildType@@timestamp@" value="${buildType}${timestamp}"/>
+		<condition property="buildRelease" value="3.0_200406251208">
+			<equals arg1="mapVersionTag" arg2="perf_30"/>
+		</condition>
+		<condition property="buildRelease" value="3.0.1_">
+			<equals arg1="mapVersionTag" arg2="perf_301_200409161125"/>
+		</condition>
+		<condition property="buildRelease" value="2.1.3_200403101828">
+			<equals arg1="mapVersionTag" arg2="perf_213"/>
+		</condition>
+			
+		<replace file="${tester}/vm.properties" token="@buildType@@timestamp@" value="${buildRelease}_${timestamp}"/>
 		
 		<!--copy in the properties file for testing with J9 vm args-->	
 		<exec dir="." executable="${copyClient}">
