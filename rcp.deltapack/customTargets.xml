@@ -35,7 +35,8 @@
       <property name="buildId" value="${buildId}"/>
       <property name="packagingInfo" value="${builder}/scripts"/>
     </ant>
-    <move file="${buildDirectory}/deltapacktmp/temp/${archiveName}" todir="${postingDirectory}/${buildLabel}"/>            
+
+    <move file="${buildDirectory}/deltapacktmp/workingPlace/${buildId}/${archiveName}" todir="${postingDirectory}/${buildLabel}"/>            
     <mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
 	<checksum file="${postingDirectory}/${buildLabel}/${archiveName}" property="md5"/>
 	<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5"/>    
