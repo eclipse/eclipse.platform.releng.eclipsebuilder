@@ -1,4 +1,4 @@
-<project name="Customized testing instructions">
+<project name="Customized testing instructions" default="customSetup">
 
 	<target name="customSetup">
 		<!--copy the script which sets up environment and invokes the tests on test machine-->
