@@ -56,7 +56,7 @@
 		<property name="testMachine" value="${0}" />
 			
 		<ant antfile="${test.xml}">
-			<property name="tester" value="${basedir}/ rhelws3-linux-gtk-perf" />
+			<property name="tester" value="${basedir}/rhelws3-linux-gtk-perf" />
 		</ant>
 		<delete file="${markerContainer}/${markerName}.marker" />
 </target>
@@ -67,7 +67,7 @@
 	<property name="testMachine" value="${0}" />
 			
 	<ant antfile="${test.xml}">
-		<property name="tester" value="${basedir}/ rhelws3-linux-gtk-perf-213" />
+		<property name="tester" value="${basedir}/rhelws3-linux-gtk-perf-213" />
 	</ant>
 	<delete file="${markerContainer}/${markerName}.marker" />
 </target>
