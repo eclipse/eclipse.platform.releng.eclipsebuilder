@@ -9,7 +9,7 @@
 </target>
 
 <target name="assemble.delta.delta.delta.xml">
-	<ant antfile="${assembleScriptName}" target="assemble">
+	<ant antfile="${assembleScriptName}">
 		<property name="archiveName" value="eclipse-RCP-${buildId}-delta-pack.zip"/>
 	</ant>
 </target>
