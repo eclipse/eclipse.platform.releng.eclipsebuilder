@@ -25,7 +25,7 @@
 		</exec>
 		
 		<!--add Cloudscape to junit test zip if it is available-->
-		<available file="${CloudscapeLoc}" type="dir" property="Cloudscape.available" />
+		<available file="${internalPlugins}/Cloudscape" type="dir" property="Cloudscape.available" />
 		<antcall target="installCloudscape" />
 	</target>
 	
