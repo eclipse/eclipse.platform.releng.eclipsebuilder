@@ -21,16 +21,20 @@
 
 <!-- POST STEPS TO ADD -->
 <target name="assemble.org.eclipse.launchers">
-	<property name="archiveName" value="eclipse-RCP-tempDeltapack-${buildId}.zip"/>
+	<property name="feature.destination" value="${postingDirectory}/${buildLabel}"/>
 	<antcall target="assemble" />
 </target>
 
 <target name="assemble">
-	<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
-	<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
-	<ant antfile="${assembleScriptName}" />
-	<checksum file="${archiveFullPath}" property="md5"/>
-	<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5"/>
+	<property name="archiveName" value="eclipse-${buildId}-RCP-delta-pack.zip"/>
+    <ant target="zip.distribution" antfile="build.xml" dir="${buildDirectory}/features/org.eclipse.launchers"/>
+    <ant antfile="package.xml" dir="${pde.build.scripts}">
+      <property name="packagingInfo" value="${builder}/scripts"/>
+    </ant>
+    <move file="${buildDirectory}/deltapacktmp/temp/${archiveName}" todir="${postingDirectory}/${buildLabel}"/>            
+    mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
+	<checksum file="${postingDirectory}/${buildLabel}/${archiveName}" property="md5"/>
+	<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5"/>    
 </target>
 
 <!-- ===================================================================== -->
