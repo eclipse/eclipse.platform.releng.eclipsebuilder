@@ -468,13 +468,13 @@
 		<property name="featureTargetList" value="macosxCarbonSdkFeatures" />
 		<property name="os" value="macosx" />
 		<property name="ws" value="carbon" />
+		<property name="productTarName" value="${basedir}/${buildLabel}/eclipse-platform-${buildid}-macosx-carbon.tar" />
 		<property name="productZipName" value="${basedir}/${buildLabel}/eclipse-SDK-${buildid}-macosx-carbon.zip" />
 		<property name="productIsSDK" value="true" />
 		<property name="postAssemblyTarget" value="macosxCarbonPostAssembly" />
 		<property name="launcherFilesDir" value="macosx" />
 		<property name="workingDirectory" value="${basedir}/temp/eclipse" />
 		<property name="zipRootDir" value="${basedir}/temp" />
-		<property name="zipArgs" value="-y" />
 		<property name="preCleanTarget" value="macosxDeleteSymbolicLink" />
 	</ant>
 	
@@ -638,11 +638,11 @@
 		<property name="os" value="macosx" />
 		<property name="ws" value="carbon" />
 		<property name="productZipName" value="${basedir}/${buildLabel}/eclipse-platform-${buildid}-macosx-carbon.zip" />
+		<property name="productTarName" value="${basedir}/${buildLabel}/eclipse-platform-${buildid}-macosx-carbon.tar" />
 		<property name="postAssemblyTarget" value="macosxCarbonPostAssembly" />
 		<property name="workingDirectory" value="${basedir}/temp/eclipse" />
 		<property name="launcherFilesDir" value="macosx" />
 		<property name="zipRootDir" value="${basedir}/temp" />
-		<property name="zipArgs" value="-y" />
 		<property name="preCleanTarget" value="macosxDeleteSymbolicLink" />
 	</ant>
 
@@ -802,19 +802,37 @@
 		<param name="linkFile" value="Java" />
 		<param name="originalFile" value="../../.." />
 	</antcall>
-	
-	
-	<!--move todir="${workingDirectory}/Eclipse.app/Contents/Resources/Java/" overwrite="true" includeEmptyDirs="true">
-		<fileset dir="${workingDirectory}" includes="plugins/**,features/**,*" excludes="Eclipse.app/, cpl-v10.html, notice.html, readme/,legal.html" />
-	</move-->
-	
-	
-	<!-- Delete empty directories left behind by Ant move task  -->
-	<!--delete includeEmptyDirs="true">
-		<fileset dir="${workingDirectory}" includes="plugins/,features/" />
-	</delete-->
+	<chmod file="${workingDirectory}/Eclipse.app/Contents/MacOS/Eclipse" perm="755" />
+	<antcall target="macosxCreateTar" />
 
-	<!--chmod dir="${workingDirectory}" perm="755" includes="**/eclipse,**/*.jnilib,**/*.so*,**/*.sl"/-->
+
+</target>
+
+<target name="macosxCreateTar">
+	<!--The Ant task does not work as expected.  Must use exec of tar-->
+
+	<!-- This does not work.  We lose the symbolic link.
+	<tar longfile="gnu" tarfile="${workingDirectory}/../${productTarName}" >
+
+    	<tarfileset dir="${workingDirectory}/.." mode="755" followsymlinks="false">
+		    <include name="Eclipse.app/Contents/MacOS/Eclipse" />
+		    <include name="**/*.jnilib" />
+		</tarfileset> 
+	    <tarfileset dir="${workingDirectory}/.." followsymlinks="false"> 
+		    <include name="**" />
+		    <exclude name="Eclipse.app/Contents/MacOS/Eclipse"/>
+		    <exclude name="**/*.jnilib" />
+	   </tarfileset>
+	</tar> 
+	-->
+	
+	<exec dir="${zipRootDir}" executable="tar">
+		<arg line="-cvf ${productTarName} eclipse" />
+	</exec>
+	
+	<!--delete the eclipse directory so it is not included in the product zip file-->
+	<antcall target="macosxDeleteSymbolicLink" />
+	<delete dir="${workingDirectory}" />
 </target>
 
 <target name="macosxDeleteSymbolicLink" if="onUnix">
