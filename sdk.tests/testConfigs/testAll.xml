@@ -15,6 +15,11 @@
 	</parallel>
 </target>
 
+<target name="performanceTests">
+	<antcall target="testWinXPPerf" />
+	<echo message="Performance testing complete." />
+</target>
+	
 <target name="testLinuxGTK">
 	<property name="markerName" value="eclipse30-linux-gtk-${timestamp}" />
 	<findMachine cfg="${cfg}" markerContainer="${markerContainer}" cfgKey="eclipse30LinuxGtkTest" markerName="${markerName}" waitInterval="30"/>
@@ -40,4 +45,15 @@
 	<delete file="${markerContainer}/${markerName}.marker" />
 </target>
 
+<target name="testWinXPPerf">
+	<property name="markerName" value="eclipse30-winxp-perf-${timestamp}" />
+	<findMachine cfg="${cfg}" markerContainer="${markerContainer}" cfgKey="eclipse30WinXPTestPerf" markerName="${markerName}" waitInterval="30"/>
+	<property file="${markerContainer}/${markerName}.marker" />
+	<property name="testMachine" value="${0}" />
+		
+	<ant antfile="${test.xml}">
+		<property name="tester" value="${basedir}/win32-perf" />
+	</ant>
+	<delete file="${markerContainer}/${markerName}.marker" />
+</target>
 </project>

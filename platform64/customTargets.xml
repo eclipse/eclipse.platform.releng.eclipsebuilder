@@ -125,13 +125,11 @@
 <!-- Steps to do before running the build.xmls for the elements being built. -->
 <!-- ===================================================================== -->
 <target name="preProcess">
-	<!--create backup copy of swt plug-in so that it is restored for 32 bit build-->
-	 <copy todir="${buildDirectory}/plugins/org.eclipse.swt.bak">
-	    <fileset dir="${buildDirectory}/plugins/org.eclipse.swt"/>
-	 </copy>
-
 	<replace dir="${buildDirectory}/plugins" value="${timestamp}" token="@build@">
 		<include name="**/about.mappings" />
+	</replace>
+	<replace dir="${buildDirectory}/features/org.eclipse.platform" value="${buildType}${timestamp}" token="@build@">
+		<include name="**/config.ini" />
 	</replace>
 </target>
 
@@ -150,12 +148,6 @@
 <!-- (e.g., testing, posting, emailing, ...) -->
 <!-- ===================================================================== -->
 <target name="postBuild">
-	<!--restore backup copy of swt 32 bit code-->
-     <delete dir="${buildDirectory}/plugins/org.eclipse.swt" />
-	 <copy todir="${buildDirectory}/plugins/org.eclipse.swt">
-	    <fileset dir="${buildDirectory}/plugins/org.eclipse.swt.bak"/>
-	 </copy>
-
 </target>
 
 <!-- ===================================================================== -->
