@@ -277,9 +277,7 @@
       		</antcall>
 	</target>
 
-	<target name="all"/>
-
-	<target name="all1">
+	<target name="all">
 		<antcall target="jdttext" />
 		<antcall target="antui" />
 		<antcall target="pdeui" />
