@@ -29,10 +29,10 @@
 		<mkdir dir="${install}" />
 		<exec dir="." executable="unzip">
 			<arg line="-o -qq eclipse-SDK-*.zip -d ${install}"/>
-	      </exec>
-	      <exec dir="." executable="unzip">
+	    </exec>
+	    <exec dir="." executable="unzip">
 			<arg line="-o -qq eclipse-junit-tests-*.zip -d ${install}"/>
-    		</exec>
+    	</exec>
 		
 		<!-- Fill in cvs repository information -->
 		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@user@" value="@cvs_user@"/>
@@ -222,19 +222,20 @@
 
 
 	<target name="teamcore" description="Runs the org.eclipse.team.tests.core test.xml">      
-    	<antcall target="runtests" >
-     		<param name="testPlugin" value="${org.eclipse.team.tests.core}" />
+    		<antcall target="runtests" >
+    	  		<param name="testPlugin" value="${org.eclipse.team.tests.core}" />
 			<param name="report" value="org.eclipse.team.tests.core" />
-   		</antcall>
+    		</antcall>
 	</target>
 
-	<target name="teamcvs" description="Runs the org.eclipse.team.tests.cvs.core test.xml.  This test requires additional setup.  See documentation in org.eclipse.team.tests.cvs.core">	
+	<target name="teamcvs" description="Runs the org.eclipse.team.tests.cvs.core test.xml.  This test requires additional setup.  See documentation in org.eclipse.team.tests.cvs.core">
 		<antcall target="runtests">
 	  		<param name="testPlugin" value="${org.eclipse.team.tests.cvs.core}" />
 			<param name="output-file" value="org.eclipse.team.tests.cvs.xml" />
 			<param name="report" value="org.eclipse.team.tests.cvs" />
-   		</antcall>
+    		</antcall>
    	</target>
+
 
 	<target name="ui" description="Runs the org.eclipse.ui.tests test.xml">
 		<antcall target="runtests">

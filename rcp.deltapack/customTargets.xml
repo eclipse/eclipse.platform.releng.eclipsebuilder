@@ -8,7 +8,7 @@
 <target name="allElements">
 	<ant antfile="${genericTargets}" target="${target}" >
 		<property name="type" value="feature" />
-		<property name="id" value="org.eclipse.test" />
+		<property name="id" value="org.eclipse.launchers" />
 	</ant>
 </target>
 
@@ -19,8 +19,9 @@
 <!-- Add one target for each root element and each configuration -->
 <!-- ===================================================================== -->
 
-<target name="assemble.org.eclipse.test">
-	<property name="archiveName" value="eclipse-test-framework-${buildId}.zip"/>
+<!-- POST STEPS TO ADD -->
+<target name="assemble.org.eclipse.launchers">
+	<property name="archiveName" value="eclipse-RCP-tempDeltapack-${buildId}.zip"/>
 	<antcall target="assemble" />
 </target>
 
@@ -39,12 +40,10 @@
 <target name="checkLocal">
 	<available property="mapsLocal" file="${buildDirectory}/maps/org.eclipse.releng" />
 </target>
-
 <target name="getMapFiles" depends="checkLocal" unless="mapsLocal">
 
 	<!-- ***  change the repo info -->
 	<property name="mapCvsRoot" value=":pserver:anonymous@dev.eclipse.org:/home/eclipse" />
-
 	<property name="mapVersionTag" value="HEAD" />
 	<cvs cvsRoot="${mapCvsRoot}"
 		package="org.eclipse.releng"
@@ -81,23 +80,18 @@
 <!-- Steps to do after the fetch -->
 <!-- ===================================================================== -->
 <target name="postFetch">
-	<replace dir="${buildDirectory}/plugins" value="${timestamp}" token="@build@">
-		<include name="**/about.mappings" />
-	</replace>
 </target>
 
 <!-- ===================================================================== -->
 <!-- Steps to do before generating build scripts -->
 <!-- ===================================================================== -->
 <target name="preGenerate">
-
 </target>
 
 <!-- ===================================================================== -->
 <!-- Steps to do after generating the build scripts -->
 <!-- ===================================================================== -->
 <target name="postGenerate">
-	<antcall target="clean" />
 </target>
 
 <!-- ===================================================================== -->
@@ -114,23 +108,17 @@
 </target>
 
 
+
 <!-- ===================================================================== -->
 <!-- Steps to do before running the build.xmls for the elements being built. -->
 <!-- ===================================================================== -->
 <target name="preProcess">
-	<replace dir="${buildDirectory}/plugins" value="${timestamp}" token="@build@">
-		<include name="**/about.mappings" />
-	</replace>
 </target>
 
 <!-- ===================================================================== -->
 <!-- Steps to do after running the build.xmls for the elements being built. -->
 <!-- ===================================================================== -->
 <target name="postProcess">
-	<condition property="logsAvailable">
-		<istrue value="${javacVerbose}"/> 
-	</condition>
-	<antcall target="gatherLogs" />
 </target>
 
 <!-- ===================================================================== -->
@@ -138,29 +126,21 @@
 <!-- (e.g., testing, posting, emailing, ...) -->
 <!-- ===================================================================== -->
 <target name="postBuild">
-</target>
+     <ant file="${pde.build.scripts}/package.xml>
+         <property name="packagingInfo" value="${builder}/scripts"/>
+         <property name="buildingOSGi" value="true"/>
+     </ant>
+     <delete file="eclipse-RCP-tempDeltapack-${buildId}.zip"/>
+       </target>
 
 <!-- ===================================================================== -->
 <!-- Helper targets -->
 <!-- ===================================================================== -->
-<target name="gatherLogs" if="logsAvailable">
-	<mkdir dir="${postingDirectory}/${buildLabel}/compilelogs" />
-	<antcall target="allElements">
-		<param name="target" value="gatherLogs" />
-	</antcall>
-
-	<unzip dest="${postingDirectory}/${buildLabel}/compilelogs" overwrite="true">
-		<fileset dir="${buildDirectory}/features/org.eclipse.test">
-			<include name="*.log.zip" />
-		</fileset>
-	</unzip>
-</target>
 <target name="clean" unless="noclean">
 	<antcall target="allElements">
 		<param name="target" value="cleanElement" />
 	</antcall>
 </target>
-
 <!-- ===================================================================== -->
 <!-- Default target                                                        -->
 <!-- ===================================================================== -->

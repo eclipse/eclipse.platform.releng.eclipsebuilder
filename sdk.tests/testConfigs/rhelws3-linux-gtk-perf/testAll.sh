@@ -10,6 +10,11 @@ DISPLAY=$HOSTNAME:0.0
 ulimit -c unlimited
 
 export LD_LIBRARY_PATH USERNAME DISPLAY
+mkdir -p results/xml
+mkdir -p results/html
+
+# add Cloudscape plugin to junit tests zip file
+zip eclipse-junit-tests-$1.zip -rm eclipse
 
 #execute command to run tests
 
