@@ -131,7 +131,7 @@
 <!-- ===================================================================== -->
 <target name="postBuild">
 
-	<!--package automated test framework-->
+	<!--package automated test framework used in Eclipse builds-->
 	<property name="workingDirectory" value="${buildDirectory}/test.assembly" />
 
 	<!--unzip the junit tests-->
@@ -139,17 +139,18 @@
 		<arg line="-o -qq eclipse*junit*.zip -d ${workingDirectory}" />
 	</exec>
 	
-	<!-- create top level testing directory and test scripts-->    
+	<!-- create top level testing directory-->    
     <mkdir dir="${workingDirectory}/eclipse-testing" />
 	
-	<!--compile the tool used to generate the test.properties file then run it-->
-    <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+	<!--compile the tool used to generate the test.properties file, then run it.-->
+	<!--test.properties maps test plugin id's to the name of the plugin directory-->
     
-    <!--eclipse.home is relative to the scripts directory in org.eclipse.pde.build-->
+    <!--eclipse.home is relative to the scripts directory in the org.eclipse.pde.build plugin.  Assume the plugins used in the classpath are in the same directory as org.eclipse.pde.build-->
     <property name="eclipse.home" value="../../.." />
+
+    <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
     <javac verbose="true" failonerror="true" srcdir="${builderDirectory}/tools" destdir="${builderDirectory}/tools" classpath="${eclipse.home}/plugins/org.apache.xerces_4.0.13/xercesImpl.jar:${eclipse.home}/plugins/org.apache.xerces_4.0.13/xmlParserAPIs.jar"/>
    		
-    <!--generate the test.properties file containing the directory names of the test plugins-->
     <java classname="TestVersionTracker" >
          <arg line="${workingDirectory}/eclipse/features/org.eclipse.sdk.tests_3.0.0/feature.xml  ${buildDirectory} ${workingDirectory}/eclipse-testing/test.properties" /> 
          <classpath>
@@ -171,32 +172,31 @@
   	<!--the Ant move task leaves behind an empty directory-->
   	<delete dir="${workingDirectory}/eclipse/plugins/${org.eclipse.test}" includeEmptyDirs="true" />
 	
- 	<!-- Create zip file containing built JUnit plugin tests -->
+ 	<!-- rezip the JUnit plugin tests -->
 	<exec dir="${workingDirectory}" executable="zip">
 			<arg line="-r -q eclipse-junit-tests-${buildId}.zip eclipse"/>
 	</exec>	
  
 	<delete dir="${workingDirectory}/eclipse" includeEmptyDirs="true" />
  	
+ 	<!--Copy scripts and doc used in the automated testing to the testing directory-->
     <copy todir="${workingDirectory}/eclipse-testing">
      	<fileset dir="${buildDirectory}/plugins/org.eclipse.test" includes="testframework.html,JUNIT.XSL" />
     </copy>
-
     <copy todir="${workingDirectory}/eclipse-testing">
      	<fileset dir="${builderDirectory}/testScripts" />
     </copy>
-
     <move file="${workingDirectory}/eclipse-junit-tests-${buildId}.zip" todir="${workingDirectory}/eclipse-testing"/>
 
-	<!--set execute permission on shell script-->
+	<!--set execute permission on *nix shell script-->
 	<chmod file="${workingDirectory}/eclipse-testing/runtests" perm="755"/>
-	
+
+	<!--create zip file of the automated testing framework-->	
 	<exec dir="${workingDirectory}" executable="zip">
 		<arg line="-r -q ${buildDirectory}/${buildLabel}/eclipse-Automated-Tests-${buildId}.zip eclipse-testing"/>
 	</exec>
 	
 	<delete file="${buildDirectory}/${buildLabel}/eclipse-junit-tests-${buildId}.zip"  />
-
 </target>
 
 <!-- ===================================================================== -->
