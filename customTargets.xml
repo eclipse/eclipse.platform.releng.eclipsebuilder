@@ -18,7 +18,7 @@
 <property name="org.eclipse.sdk.tests.version" value="2.1.0" />
 <property name="org.eclipse.team.extras.version" value="2.1.0" />
 <property name="org.eclipse.platform.version" value="2.1.0" />
-
+	
 
 <!-- ===================================================================== -->
 <!-- Target called in org.eclipse.releng.basebuilder/build.xml             -->
@@ -40,6 +40,7 @@
 <target name="getMapFiles">
 
 	<property name="cvsRoot" value=":pserver:anonymous@dev.eclipse.org:/home/eclipse" />
+
 	<!--Notify recipients that build has started.-->
 	<antcall target="mail">
 		<param name="subject" value="Build has started " />
@@ -728,14 +729,6 @@
 		<param name="linkFile" value="libXm.so.2" />
 	</antcall>
 	
-	<!--
-	<exec dir="${workingDirectory}" executable="ln">
-		<arg line="-s libXm.so.2.1 libXm.so"/>
-	</exec>
-	<exec dir="${workingDirectory}" executable="ln">
-		<arg line="-s libXm.so.2.1 libXm.so.2"/>
-	</exec>
-	-->
 </target>
 
 
@@ -1106,7 +1099,7 @@
 	</exec>
 </target>
 
-<target name="mail" unless="noMail">
+<target name="mail" unless="noMail" failonerror="false">
 <!-- helper target for sending email messages related to build. -->
 	<mail mailhost="${host}" from="${sender}"
       		tolist="${recipients}"
