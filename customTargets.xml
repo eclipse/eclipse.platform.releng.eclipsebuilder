@@ -58,7 +58,7 @@
 </target>
 
 <target name="tagMapFiles" if="tag">
-	<cvs dest="org.eclipse.releng" command="tag r212_v${timestamp}" />
+	<cvs dest="org.eclipse.releng" command="tag r213_v${timestamp}" />
 </target>
 
 <!-- Add any steps required after setup but before building -->
