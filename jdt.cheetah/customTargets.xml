@@ -18,7 +18,7 @@
 <!-- ===================================================================== -->
 
 <target name="assemble.org.eclipse.jdt.cheetah05">
-	<property name="archiveName" value="eclipse-JDT-${buildId}.zip"/>
+	<property name="archiveName" value="eclipse-JDT-Cheetah-${buildId}.zip"/>
 	<ant antfile="${assembleScriptName}"/>
 </target>
 
@@ -48,6 +48,14 @@
 	<cvs dest="${buildDirectory}/maps/org.eclipse.jdt.core.cheetah.map" command="tag v${timestamp}" />
 </target>
 
+<target name="getBaseEclipse">
+	<property file="${buildDirectory}/maps/org.eclipse.jdt.core.cheetah.map/maps/build.cfg"/>
+	<get src="${eclipseURL}/eclipse-SDK-${eclipseBuildID}-win32.zip" dest="${buildDirectory}/eclipse-SDK.zip" usetimestamp="true"/>
+		<exec dir="${buildDirectory}" executable="unzip">
+			<arg line="-o -qq eclipse-SDK.zip"/>
+	   	</exec>
+</target>
+	
 <!-- ===================================================================== -->
 <!-- Steps to do before setup -->
 <!-- ===================================================================== -->
