@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<model:component xmlns:model="http://eclipse.org/wtp/releng/tools/component-model" name="Platform_Debug_Core">
-  <model:plugin fragment="false" id="org.eclipse.debug.core"/>
-  <model:package name="org.eclipse.debug.core.model"/>
-  <model:package name="org.eclipse.debug.core.sourcelookup.containers"/>
-  <model:package name="org.eclipse.debug.core"/>
-  <model:package name="org.eclipse.debug.core.sourcelookup"/>
-  <model:component-depends unrestricted="true"/>
-</model:component>

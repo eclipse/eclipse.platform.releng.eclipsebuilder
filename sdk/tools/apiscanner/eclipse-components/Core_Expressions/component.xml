@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<model:component xmlns:model="http://eclipse.org/wtp/releng/tools/component-model" name="Core_Expressions">
-  <model:plugin fragment="false" id="org.eclipse.core.expressions"/>
-  <model:package name="org.eclipse.core.expressions"/>
-  <model:component-depends unrestricted="true"/>
-</model:component>
