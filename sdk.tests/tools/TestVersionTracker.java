@@ -23,6 +23,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.SAXException;
 import java.io.*;
+import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.Enumeration;
 import java.util.StringTokenizer;
@@ -44,14 +45,12 @@ public class TestVersionTracker{
 	
 	public static void main(String[] args) {
 		TestVersionTracker Tracker =
-		new TestVersionTracker(args[1]);
+		new TestVersionTracker(args[0]+"/../..");
 		Tracker.parse(args[0],Tracker.new FeatureHandler());
-		//Tracker.parse(Tracker.new PluginHandler());
-		Tracker.writeProperties(args[2], true);
+		Tracker.writeProperties(args[1], true);
 	}
 
-	public TestVersionTracker(){
-	}
+	public TestVersionTracker(){}
 	
 	public TestVersionTracker(String install) {
 		elements = new Hashtable();
@@ -88,7 +87,6 @@ public class TestVersionTracker{
 			String qName,
 			Attributes atts) {
 
-    		//need to parse the plugin.xml or fragment.xml for the correct version value since the 3.0 features may list these as "0.0.0"
     		if (qName.equals("eclipse.idReplacer")) {
     			try{
     				String pluginIds = atts.getValue("pluginIds");
@@ -144,10 +142,10 @@ public class TestVersionTracker{
 			
 		PrintWriter writer = new PrintWriter(new FileWriter(propertiesFile,append));
 				
-			Enumeration keys = elements.keys();
-			
-			while (keys.hasMoreElements()){
-				Object key = keys.nextElement();
+			Object[] keys = elements.keySet().toArray();
+			Arrays.sort(keys);
+			for (int i=0;i<keys.length;i++){
+				Object key = keys[i];
 				writer.println(key.toString()+"="+elements.get(key).toString());
 				writer.flush();
 			}
