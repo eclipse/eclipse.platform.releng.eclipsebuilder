@@ -1,6 +1,6 @@
 <title>org.eclipse.releng.eclipsebuilder README</title> 
 <p><b><font size="+2">README</font></b></p>
-<p>Last Updated: July 28, 2003</p>
+<p>Last Updated: Nov 17, 2003</p>
 <p>This document describes how to build Eclipse components from the command line 
   using Ant scripts in this project and org.eclipse.releng.basebuilder.</p>
 <p><br>
@@ -212,15 +212,6 @@
       &lt;javac&gt; task</a> in a plugins' build.xml. Default set to true.</td>
   </tr>
   <tr> 
-    <td>JAVADOC14_HOME</td>
-    <td>The JAVADOC14_HOME property is used in the *.doc.isv/buildDoc.xml scripts 
-      and must be set to the bin directory of a JDK containing the javadoc tool 
-      in order to generate javadoc in both org.eclipse.platform.doc.isv and org.eclipse.jdt.doc.isv. 
-      This only needs to be set when building an Eclipse SDK component. A 1.4 
-      level JDK is recommended to generate javadoc with the correct separator 
-      character '/' in links to external classes (see <a href="http://developer.java.sun.com/developer/bugParade/bugs/4359874.html">http://developer.java.sun.com/developer/bugParade/bugs/4359874.html</a>).</td>
-  </tr>
-  <tr> 
     <td>mapVersionTag</td>
     <td> 
       <p>Sets the tag attribute in a call to the <a href="http://ant.apache.org/manual/CoreTasks/cvs.html">Ant 
@@ -340,7 +331,7 @@
   <b><a name="examples"></a>Examples<br>
   <br>
   </b>
-<p><a href="#ex1">Build Windows SDK including javadoc on Windows</a><br>
+<p><a href="#ex1">Build Windows SDK Windows</a><br>
   <a href="#ex2">Build Linux GTK and Motif SDK on Linux</a><b><br>
   </b><a href="#ex3">Build Windows SDK component on Linux</a><b><br>
   </b><a href="#ex4">Build Linux Motif platform component on Linux</a><b><br>
@@ -354,17 +345,16 @@
   SDK on Windows </a><br>
 </p>
 <p><b><br>
-  <a name="ex1"></a>Build Windows SDK component with javadoc generation on Windows</b></p>
+  <a name="ex1"></a>Build Windows SDK component on Windows</b></p>
 <p><b>java -cp ..\org.eclipse.releng.basebuilder\startup.jar org.eclipse.core.launcher.Main 
   -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=sdk 
   -Dconfigs=&quot;win32,win32,x86&quot; -Djavacfailonerror=true -DjavacVerbose=false 
-  -DbuildDirectory=c:\mybuild</b> -<b>DJAVADOC14_HOME=c:\jdk141\bin</b><br>
+  -DbuildDirectory=c:\mybuild</b>
   <br>
   This builds an eclipse SDK for the windows configuration only in the directory 
   c:\mybuild. &quot;-DjavaVerbose=false&quot; indicates that no compile logs will 
   be generated and &quot;-Djavacfailonerror=true&quot; will cause the build to 
-  fail if there are any compile errors. <b></b> By setting the value of &quot;-DJAVA14_HOME&quot;, 
-  javadoc will be generated in plugins org.eclipse.platform.doc.isv and org.eclipse.jdt.doc.isv.<br>
+  fail if there are any compile errors. <b></b>
   <br>
   <br>
   <b><a name="ex2"></a>Build Linux GTK and Motif SDK components on Linux</b><br>
@@ -378,7 +368,7 @@
   &quot;-Dzipargs=-y&quot; is used here to preserve the symbolic links libXm.so 
   and libXm.so.2 in the Linux Motif root directory of eclipse. The symbolic links 
   will only be created at build time if the build is run on a Linux operating 
-  system. No javadoc is generated here since JAVADOC14_HOME is not set.<br>
+  system.
   <br>
   <br>
   <b><a name="ex3"></a>Build Windows SDK component on Linux</b></p>
