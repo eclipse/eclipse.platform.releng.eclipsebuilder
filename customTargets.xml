@@ -659,7 +659,7 @@
 	<ant antfile="assemble.xml" target="${target}" >
 		<property name="featureTargetList" value="jdtRuntimeFeatures" />
 		<property name="productZipName" value="${basedir}/${buildLabel}/eclipse-JDT-${buildid}.zip" />
-		<property name="workingDirectory" value="${basedir}/temp/" />
+		<property name="workingDirectory" value="${basedir}/temp/eclipse" />
 		<property name="zipRootDir" value="${basedir}/temp" />
 		<property name="postAssemblyTarget" value="jdtPostAssembly" />
 	</ant>
@@ -669,7 +669,7 @@
 		<property name="featureTargetList" value="teamExtrasRuntimeFeatures" />
 		<property name="productZipName" value="${basedir}/${buildLabel}/eclipse-FTP-WebDAV-${buildid}.zip" />
 		<property name="productIsSDK" value="true" />
-		<property name="workingDirectory" value="${basedir}/temp/" />
+		<property name="workingDirectory" value="${basedir}/temp/eclipse" />
 		<property name="zipRootDir" value="${basedir}/temp" />
 		<property name="postAssemblyTarget" value="teamExtrasPostAssembly" />
 	</ant>
@@ -680,7 +680,7 @@
 		<property name="productZipName" value="${basedir}/${buildLabel}/eclipse-examples-${buildid}-win32.zip" />
 		<property name="productIsSDK" value="true" />
 		<property name="postAssemblyTarget" value="win32ExamplesPostAssembly" />
-		<property name="workingDirectory" value="${basedir}/temp" />
+		<property name="workingDirectory" value="${basedir}/temp/eclipse" />
 		<property name="zipRootDir" value="${basedir}/temp" />
 	</ant>
 	
@@ -689,7 +689,7 @@
 		<property name="productZipName" value="${basedir}/${buildLabel}/eclipse-examples-${buildid}.zip" />
 		<property name="productIsSDK" value="true" />
 		<property name="postAssemblyTarget" value="examplesPostAssembly" />
-		<property name="workingDirectory" value="${basedir}/temp" />
+		<property name="workingDirectory" value="${basedir}/temp/eclipse" />
 		<property name="zipRootDir" value="${basedir}/temp" />
 	</ant>
 
