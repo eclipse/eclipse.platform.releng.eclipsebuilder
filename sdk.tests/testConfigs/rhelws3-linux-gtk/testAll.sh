@@ -13,6 +13,6 @@ export LD_ASSUME_KERNEL LD_LIBRARY_PATH USERNAME DISPLAY
 
 #execute command to run tests
 
-./runtests -os linux -ws gtk -arch x86 -Dplatform=linux.gtk -vm ../jdk1.4.2_03/jre/bin/java> linux.gtk_consolelog.txt
+./runtests -os linux -ws gtk -arch x86 -Dplatform=linux.gtk -Dperf.host=eclipseperf.torolab.ibm.com -Dperf.port=9080 -vm ../jdk1.4.2_03/jre/bin/java> linux.gtk_consolelog.txt
 
 
