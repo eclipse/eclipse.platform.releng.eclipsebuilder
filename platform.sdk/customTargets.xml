@@ -35,6 +35,21 @@
 		<antcall target="assemble" />
 	</target>
 
+	<target name="assemble.org.eclipse.platform.sdk.linux.gtk.ia64">
+		<condition property="skip.assembly">
+			<not>
+				<equals arg1="${configs}" arg2="linux,gtk,ia64" />
+			</not>
+		</condition>
+		<antcall target="compilelibs">
+			<param name="ws" value="gtk" />
+			<param name="os" value="linux" />
+			<param name="arch" value="ia64"/>
+		</antcall>
+		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-linux-gtk-ia64.tar.gz" />
+		<antcall target="assemble" />
+	</target>
+		
 	<target name="assemble.org.eclipse.platform.sdk.linux.gtk.amd64">
 		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-linux-gtk-amd64.tar.gz" />
 		<antcall target="assemble" />
@@ -71,7 +86,7 @@
 		<antcall target="assemble" />
 	</target>
 
-	<target name="assemble">
+	<target name="assemble" unless="skip.assembly">
 		<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
 		<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
 		<ant antfile="${assembleScriptName}" />
@@ -131,11 +146,10 @@
 	<!-- ===================================================================== -->
 	<target name="postFetch">
 		<ant antfile="${genericTargets}" target="fetchElement">
-			<property name="type" value="plugin" />
-			<property name="id" value="platform-launcher" />
+			<property name="type" value="feature" />
+			<property name="id" value="org.eclipse.launchers" />
 		</ant>
-		<!--create launchersrc.zip and copy to org.eclipse.platform plugin (fix for bug #49237) -->
-		<zip destfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/plugins/platform-launcher" includes="library/**" />
+		<zip zipfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/features/org.eclipse.launchers" includes="library/" />
 
 		<!--fetch and compile swt tools-->
 		<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
@@ -146,18 +160,15 @@
 			<property name="type" value="plugin" />
 			<property name="id" value="org.eclipse.swt.tools" />
 		</ant>
-		<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.win32" target="build.jars">
+		<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.gtk64" target="build.jars">
 			<property name="type" value="plugin" />
-			<property name="id" value="org.eclipse.swt.win32" />
+			<property name="id" value="org.eclipse.swt.gtk64" />
 		</ant>
 		<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.tools" target="build.jars">
-			<property name="type" value="plugin" />
-			<property name="id" value="org.eclipse.swt.tools" />
-			<property name="baseos" value="win32" />
-			<property name="basews" value="win32" />
-			<property name="basearch" value="x86" />
+			<property name="baseos" value="linux" />
+			<property name="basews" value="gtk" />
+			<property name="basearch" value="ia64" />
 		</ant>
-
 	</target>
 
 	<!-- ===================================================================== -->
@@ -237,6 +248,62 @@
 		<antcall target="allElements">
 			<param name="target" value="cleanElement" />
 		</antcall>
+	</target>
+	<target name="compilelibs" unless="skip.assembly">
+		<property name="swtlibs" value="${buildDirectory}/swttmp"/>
+		<mkdir dir="${swtlibs}"/>
+		<condition property="wsType" value="gtk64">
+			<or>
+				<equals arg1="${os}-${ws}-${arch}"
+                               arg2="linux-gtk-ppc64"/>
+				<equals arg1="${os}-${ws}-${arch}"
+                               arg2="linux-gtk-ia64"/>
+				<equals arg1="${os}-${ws}-${arch}"
+                               arg2="linux-gtk-amd64"/>
+			</or>
+		</condition>
+		<condition property="wsType" value="gtk">
+			<or>
+				<equals arg1="${os}-${ws}-${arch}"
+                           arg2="linux-gtk-ppc"/>
+				<equals arg1="${os}-${ws}-${arch}"
+                           arg2="linux-gtk-x86"/>
+			</or>
+		</condition>
+		<condition property="wsType" value="motif">
+			<or>
+				<equals arg1="${os}-${ws}-${arch}"
+                           arg2="linux-motif-x86"/>
+				<equals arg1="${os}-${ws}-${arch}"
+                           arg2="hpux-motif-ia64"/>
+			</or>
+		</condition>
+
+		<!-- unzip swt zips -->
+		<unzip  dest="${swtlibs}">
+			<fileset dir="${buildDirectory}/plugins/org.eclipse.platform.source.${os}.${ws}.${arch}/src/">
+				<include name ="org.eclipse.swt.${wsType}_*/ws/${ws}/**/*.zip"/>
+			</fileset>
+		</unzip>
+		<exec dir="${swtlibs}/" executable="sh" failonerror="true">
+			<arg line="build.sh"/>
+		</exec>
+		<property name="swtdir" value="${buildDirectory}/plugins/org.eclipse.swt.${wsType}/os/${os}/${arch}"/>
+		<mkdir dir="${swtdir}"/>
+		<move todir="${swtdir}/">
+			<fileset dir="${swtlibs}">
+				<include name="**/*.so"/>
+			</fileset>
+		</move>
+
+		<!--compile launcher -->
+		<property name="launcherlibs" value="${buildDirectory}/features/org.eclipse.launchers"/>
+
+		<exec dir="${launcherlibs}/library/${ws}/" executable="sh" os="Linux" failonerror="true">
+			<arg line="build.sh"/>
+		</exec>
+		<move file="${launcherlibs}/library/${ws}/eclipse" todir="${launcherlibs}/">
+		</move>
 	</target>
 	<!-- ===================================================================== -->
 	<!-- Default target                                                        -->
