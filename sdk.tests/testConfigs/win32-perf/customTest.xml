@@ -1,3 +1,4 @@
+
 <project name="Customized testing instructions" default="customSetup">
 
 	<target name="customSetup">
@@ -13,6 +14,7 @@
 		</exec>
 		
 		<replace file="${tester}/vm.properties" token="@buildType@@timestamp@" value="${buildType}${timestamp}"/>
+		<replace file="${tester}/vm.properties" token="@reference@" value="${eclipse.perf.ref}"/>
 		
 		<!--copy in the properties file for testing with J9 vm args-->	
 		<exec dir="." executable="${copyClient}">
