@@ -66,7 +66,15 @@
 <!-- ===================================================================== -->
 <!-- Steps to do before fetching the build elements -->
 <!-- ===================================================================== -->
-<target name="preFetch">
+<target name="preFetch" if="performance.base">
+	<condition property="eclipse.base" value="http://download.eclipse.org/downloads/drops/R-3.0-200406251208/eclipse-SDK-3.0-win32.zip" >
+		<equals arg1="${fetchTag}" arg2="perf_30" />
+	</condition>
+	<condition property="eclipse.base" value="http://download.eclipse.org/downloads/drops/R-3.0.1-200409161125/eclipse-SDK-3.0.1-win32.zip" >
+		<equals arg1="${fetchTag}" arg2="perf_301" />
+	</condition>	
+	<get src="${eclipse.base}" dest="sdk.zip" />
+	<unzip src="sdk.zip" dest="${buildDirectory}" />
 </target>
 
 <!-- ===================================================================== -->

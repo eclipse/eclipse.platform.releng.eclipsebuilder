@@ -5,9 +5,12 @@
 	<target name="main">
 		<touch file="${user.home}/.cvspass" />
 
+
 		<!--Default values for required properties-->
 		<property name="buildDirectory" value="${basedir}/src" />
-
+		<condition property="baseLocation" value="${buildDirectory}/eclipse">
+			<isset property="performance.base" />
+		</condition>
 		<available file="${buildDirectory}/label.properties" property="label.properties.exists" />
 		<antcall target="create.label.properties" />
 		<property file="${buildDirectory}/label.properties" />
@@ -17,6 +20,32 @@
 			<equals arg1="${buildType}" arg2="N" />
 		</condition>
 		<property name="fetchTag" value="" />
+
+		<!--set the compiler and compiler arguments-->
+		<!--the default compiler is set to the one used by eclipse rel. eng. -->
+		<property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter" />
+		<property name="compilerArg" value="-enableJavadoc -encoding ISO-8859-1" />
+		<property name="javacSource" value="1.3" />
+		<property name="javacTarget" value="1.2" />
+		<property name="javacDebugInfo" value="true" />
+		<property name="javacFailOnError" value="true" />
+
+		<!--bootclasspath-->
+		<path id="default.bootclasspath">
+			<fileset dir="${java.home}/lib">
+				<include name="*.jar" />
+			</fileset>
+		</path>
+		<path id="mac.bootclasspath">
+		    <fileset dir="${java.home}/..">
+		        <include name="Classes/**/*.jar"/>
+		    </fileset>
+		</path>
+		<property name="mac.bootclasspath" refid="mac.bootclasspath" />
+		<condition property="bootclasspath" value="${mac.bootclasspath}" >
+	     		<os family="mac"/>
+	    </condition>
+		<property name="bootclasspath" refid="default.bootclasspath" />
 
 		<!--this property required as of Eclipse 3.0 stream builds > 20031126 -->
 		<property name="buildingOSGi" value="true" />
