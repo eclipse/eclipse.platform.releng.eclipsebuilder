@@ -12,6 +12,9 @@
 	<!-- The root of the eclipse installation -->
 	<property name="eclipse-home" value="${install}/eclipse" />
 
+	<!-- The path to libary.xml -->
+	<property name="library-file" value="${eclipse-home}/plugins/${org.eclipse.test}/library.xml" />
+
 	<!-- The directory that will contain the xml and html results from the tests that are run -->
  	<property name="results" value="${basedir}/results" />
 
@@ -56,9 +59,6 @@
 	</target>
 	
 	<target name="relEng" description="Runs the org.eclipse.releng.tests test.xml">
-		<!--create directory that will hold chkpii results-->
-		<mkdir dir="${results}/chkpii" />
-		
 		<antcall target="runtests">
 			<param name="testPlugin" value="${org.eclipse.releng.tests}" />
 			<param name="report" value="org.eclipse.releng.tests" />
