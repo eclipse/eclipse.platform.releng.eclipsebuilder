@@ -28,14 +28,15 @@
       <p>To view the build notes for this build click <a href="buildNotes.php">here</a>.<br>
         To view the test results for this build click <a href="testResults.php">here</a>.<br>
         To view the map file entries for this build click <a href="directory.txt">here</a>.<br>
-	<br>
+        <br>
         You can download the files below by clicking on the associated http (for 
         an http download) or ftp (for an ftp download) link. Some browsers have 
         problems with the ftp file links. If you cannot use the ftp links associated 
         with a particular file but still want to try an ftp download use this 
         <?php echo "<a href=\"ftp://$SERVER_NAME/@buildlabel@/\">link</a>"?>
-        For unknown reasons certain browsers are more tolerant of FTP directory 
-        links than file links.<br>
+        .For unknown reasons certain browsers are more tolerant of FTP directory 
+        links than file links. Non-browser FTP clients can also be used to download 
+        from download.eclipse.org using anonymous FTP. <br>
       </p> 
     </td>
   </tr>
