@@ -1093,7 +1093,19 @@
 <!-- ===================================================================== -->
 
 <target name="test">
-	<!--required-->
+	<echo message="Starting tests." />
+	<ant antfile="customTest.xml" />
+	
+	<!--regenerate the index page with links to test results-->
+	<ant antfile="publish.xml" target="generateIndex">
+		<property name="isBuildTested" value="true" />
+		<property name="dropTokenList" value="%sdk%,%tests%,%example%,%runtime%,%jdt%,%teamextras%" />
+	</ant>
+	
+	<!--copy the test results and new index page to the posting location-->
+	<copy todir="${postingDirectory}/${buildLabel}" overwrite="true">
+		<fileset dir="${buildLabel}" includes="testresults/**,*.php" />
+	</copy>
 </target>
 
 <!-- ===================================================================== -->
