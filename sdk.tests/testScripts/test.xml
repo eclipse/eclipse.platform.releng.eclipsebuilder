@@ -306,7 +306,6 @@
 		<antcall target="help" />
 		<antcall target="update" />
 		<antcall target="teamcore" />
-		<antcall target="antui" />
 		<antcall target="teamcvs" />
 		<antcall target="jdtcoreperf" />
 		<antcall target="jdtcorebuilder" />
@@ -324,6 +323,7 @@
 		<antcall target="text" />
 		<antcall target="jface" />
 		<antcall target="filebuffers" />
+		<antcall target="antui" />
 		<antcall target="swt" />
 	</target>
 	
