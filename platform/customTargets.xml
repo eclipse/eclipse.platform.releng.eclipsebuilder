@@ -111,6 +111,8 @@
 		<property name="type" value="plugin" />
 		<property name="id" value="platform-launcher" />
 	</ant>
+	<!--create launchersrc.zip and copy to org.eclipse.platform plugin (fix for bug #49237) -->
+	<zip destfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/plugins/platform-launcher" includes="library/**" />
 </target>
 
 <!-- ===================================================================== -->
