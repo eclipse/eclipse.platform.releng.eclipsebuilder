@@ -960,7 +960,7 @@
     <java classname="org.eclipse.releng.generators.TestVersionTracker" >
          <arg line="${buildDirectory} ${workingDirectory}/eclipse-testing/test.properties" /> 
          <classpath>
-            	<pathelement path="${basedir}/plugins/org.apache.xerces_4.0.7/xercesImpl.jar:${basedir}/plugins/org.apache.xerces_4.0.7/xmlParserAPIs.jar:${basedir}/plugins/org.eclipse.build.tools/buildTools.jar" />
+            	<pathelement path="${basedir}/plugins/org.apache.xerces_4.0.13/xercesImpl.jar:${basedir}/plugins/org.apache.xerces_4.0.13/xmlParserAPIs.jar:${basedir}/plugins/org.eclipse.build.tools/buildTools.jar" />
          </classpath>
     </java>
 
