@@ -67,6 +67,20 @@
 		</antcall>
 	</target>
 	
+	<target name="ltkuirefactoringtests" description="Runs the org.eclipse.ltk.ui.refactoring.tests test.xml">
+		<antcall target="runtests">
+			<param name="testPlugin" value="${org.eclipse.ltk.ui.refactoring.tests}" />
+			<param name="report" value="org.eclipse.ltk.ui.refactoring.tests" />
+		</antcall>
+	</target>
+	
+	<target name="ltkcorerefactoringtests" description="Runs the org.eclipse.ltk.core.refactoring.tests test.xml">
+		<antcall target="runtests">
+			<param name="testPlugin" value="${org.eclipse.ltk.core.refactoring.tests}" />
+			<param name="report" value="org.eclipse.ltk.core.refactoring.tests" />
+		</antcall>
+	</target>
+	
 	<target name="relEng" description="Runs the org.eclipse.releng.tests test.xml">
 		<antcall target="runtests">
 			<param name="testPlugin" value="${org.eclipse.releng.tests}" />
@@ -184,6 +198,8 @@
 		<antcall target="ant" />
 		<antcall target="core" />
 		<antcall target="coreexpressions" />
+		<antcall target="ltkuirefactoringtests" />
+		<antcall target="ltkcorerefactoringtests" />
 		<antcall target="help" />
 		<antcall target="update" />
 		<antcall target="teamcore" />
