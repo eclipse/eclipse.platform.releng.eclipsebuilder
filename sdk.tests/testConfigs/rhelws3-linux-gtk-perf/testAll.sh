@@ -11,8 +11,10 @@ ulimit -c unlimited
 
 export LD_LIBRARY_PATH USERNAME DISPLAY
 
-#execute command to run tests
+REM add Cloudscape plugin to junit tests zip file
+zip eclipse-junit-tests-$1.zip -rm eclipse
 
+#execute command to run tests
 ./runtests -os linux -ws gtk -arch x86 -vm ../jdk1.4.2_06/jre/bin/java -properties vm.properties -Dtest.target=performance -Dplatform=linux.gtk.perf> linux.gtk.perf_consolelog.txt
 
 
