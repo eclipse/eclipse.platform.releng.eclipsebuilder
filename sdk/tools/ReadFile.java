@@ -201,40 +201,57 @@ public class ReadFile extends Task {
 		 	 }
        
 		 	 String nextLine,newFileName ="";	 	 
+		 	 
 		 	  	 	 
 		 	 try {
 		 	 	BufferedWriter outfile = new BufferedWriter(new FileWriter(path+"/"+xmlFileName+".2"));
 		 	 	for (Iterator i = fileContents.iterator(); i.hasNext();) {
 		 	 		String currentLine = ((String)(i.next()));
+		 	 		//System.out.println("currentLine "+currentLine);
                    if ((currentLine.matches("(?i).*topic label=.*")) && (! currentLine.matches("(?i).*href=\".*"))) {
 		 	 			//if the xml file doesn't have the appropriate link
-		 	 			nextLine =  ((String)(i.next()));
-		 	 			
-		 	 			//contruct a new line from the two lines
-		 	 			int indexEndCurrent = currentLine.lastIndexOf(">");
-		 	 			int indexStartNext = nextLine.indexOf("=\"");
-		 	 			int indexEndNext = nextLine.lastIndexOf("\"");
-		 	 			                        
-		 	 			currentLine = currentLine.substring(0,indexEndCurrent);
-		 	 			newFileName =  nextLine.substring(indexStartNext+2,indexEndNext);
-		 	 			currentLine = currentLine + newFileName;                    
+                   	
+		 	 		    	nextLine =  ((String)(i.next()));
 		 	 			
 		 	 			
-		 	 			//	If xml file, add to the list of files that need to be converted
-		 	 			if (newFileName.matches("(?i).*xml")) {		 	 				
-		 	 				//replace .xml with .html in the link
-		 	 				int indexStartSuffix = newFileName.indexOf(".xml");
-		 	 				htmlFileName = newFileName.substring(0,indexStartSuffix) + ".html";
-		 	 				convertFiles.put(path +"/" + newFileName,path+"/"+htmlFileName);		 	 		
-		 	 			}
+		 	 			if (! (( nextLine.matches("(?i).*topic label=.*")) &&  (nextLine.matches("(?i).*href=\".*")))) {		 	 				
 		 	 			
-		 	 			String newLink = " href=\"" + htmlFileName + "\">";
-                        String newLine = currentLine.substring(0,indexEndCurrent) + newLink;
+		 	 				//contruct a new line from the two lines
+		 	 				int indexEndCurrent = currentLine.lastIndexOf(">");
+		 	 				boolean indexLastSlashNext = currentLine.lastIndexOf("/") > 0;
+		 	 				int indexStartNext = nextLine.indexOf("=\"");
+		 	 				int indexEndNext = nextLine.lastIndexOf("\"");
+		 	 					 	 			                        
+		 	 				currentLine = currentLine.substring(0,indexEndCurrent);
+		 	 				newFileName =  nextLine.substring(indexStartNext+2,indexEndNext);
+		 	 				currentLine = currentLine + newFileName;            
+		 	 					 	 			
+		 	 				//	If xml file, add to the list of files that need to be converted
+		 	 				if (newFileName.matches("(?i).*xml")) {		 	 				
+		 	 					//replace .xml with .html in the link
+		 	 					int indexStartSuffix = newFileName.indexOf(".xml");
+		 	 					htmlFileName = newFileName.substring(0,indexStartSuffix) + ".html";
+		 	 					convertFiles.put(path +"/" + newFileName,path+"/"+htmlFileName);		 	 		
+		 	 				}
+		 	 		
+		 	 				String closeString = "\"/>";
+		 	 			
+		 	 				if (! indexLastSlashNext) {
+		 	 				closeString = "\">";
+		 	 				} 	 			
+		 	 				String newLink = " href=\"" + htmlFileName + closeString;
+		 	 				String newLine = currentLine.substring(0,indexEndCurrent) + newLink;
                        
                                            
-                        outfile.write(newLine+"\n");
+		 	 				outfile.write(newLine+"\n");
+		 	 				} else {
+		 	 					outfile.write(currentLine+"\n");
+		 	 					outfile.write(nextLine+"\n");
+		 	 					System.out.println("currentLine in else "+currentLine);
+		 	 					System.out.println("nextLine in else "+nextLine);
+		 	 				}
                         
-                        //add the xml link to the list of files that needs to be constructed via xslt
+		 	 				//add the xml link to the list of files that needs to be constructed via xslt
                     
                 } else {
                     //updatedFileContents.add(currentLine);
@@ -459,7 +476,7 @@ public class ReadFile extends Task {
 		 		command[3] = styleSheet; 
 		 		command[4] = "-out";
 		 		command[5] = outputFile;
-		 		 		
+				 		
  		 		try {
  		 	        org.apache.xalan.xslt.Process.main(command);	 	      
 		 	    } catch (Exception ex) {		 		 	    
