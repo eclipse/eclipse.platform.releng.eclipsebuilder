@@ -159,6 +159,13 @@
 		</antcall>
 	</target>
 
+	<target name="jdtcoreperf">
+		<antcall target="runtests" >
+			<param name="testPlugin" value="${org.eclipse.jdt.core.tests.performance}" />
+			<param name="report" value="org.eclipse.jdt.core.tests.performance" />
+		</antcall>
+	</target>
+	
 	<target name="jdtdebug" description="Runs the org.eclipse.jdt.debug.tests test.xml">
 		<antcall target="runtests" >
 			<param name="testPlugin" value="${org.eclipse.jdt.debug.tests}" />
@@ -262,6 +269,7 @@
 		<antcall target="swt" />
 		<antcall target="antui" />
 		<antcall target="teamcvs" />
+		<antcall target="jdtcoreperf" />
 		<antcall target="jdtcorebuilder" />
 		<antcall target="jdtcorecompiler" />
 		<antcall target="jdtcoremodel" />
