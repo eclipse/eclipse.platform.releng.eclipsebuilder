@@ -202,25 +202,66 @@ you will need the following environment variables set.
 <p>&nbsp;</p>
 <h2><a name="limitations"></a>Known Limitations </h2>
 <ol>
-  <li>Building unix flavours of Eclipse on Windows will result in incorrect file 
-    permissions. The *.so, *.sl, and Eclipse executable files will not have execute 
-    permissions. In addition, linux-motif and linux-gtk builds will not have soft 
-    links to libXm.so.2.1 in the installation root directory. In these cases you 
-    would have to write an install or post install script to set permissions properly. 
-    (UNIX builds built on UNIX systems will set sufficient permissions and make 
+  <li>Building unix flavours of Eclipse on Windows will result in incorrect file
+     permissions. The *.so, *.sl, and Eclipse executable files will not have
+    execute 
+    permissions. In addition, linux-motif and linux-gtk builds will not have
+    soft  links to libXm.so.2.1 in the installation root directory. In these
+    cases you 
+    would have to write an install or post install script to set permissions
+    properly.  (UNIX builds built on UNIX systems will set sufficient permissions
+    and make 
     the appropriate soft links).</li>
   <li>Only Java source code is compiled. *.dll, *so, *sl and Eclipse executables
     are all checked out of dev.eclipse.org prebuilt in this build process. The
-    linux-gtk-ppc, linux-gtk-ppc64, linux-gtk-ia64 and hpux-motif-ia64 configurations will require 
-	a re-compilation of the eclipse executable and swt libaries and copying these files to the apppropriate directories.
-	This can be accomplished by using the -compilelibs flag when running the build.  The instructions on  <a href="http://dev.eclipse.org/viewcvs/index.cgi/%7Echeckout%7E/platform-swt-home/faq.html#buildeclipseexe">recompiling
+    linux-gtk-ppc, linux-gtk-ppc64, linux-gtk-ia64 and hpux-motif-ia64 configurations
+    will require  a re-compilation of the eclipse executable and swt libaries
+    and copying these files to the apppropriate directories.
+	This can be accomplished by using the -compilelibs flag when running the
+    build. The instructions on  <a href="http://dev.eclipse.org/viewcvs/index.cgi/%7Echeckout%7E/platform-swt-home/faq.html#buildeclipseexe">recompiling
     the eclipse executable</a> and <a href="http://dev.eclipse.org/viewcvs/index.cgi/%7Echeckout%7E/platform-swt-home/faq.html#howbuilddll">recompiling
     the swt libraries</a>  available in the <a href="http://dev.eclipse.org/viewcvs/index.cgi/%7Echeckout%7E/platform-swt-home/faq.html">SWT
-    FAQ</a> are also a useful reference. This document also includes a list of the prerequisites <a href="http://dev.eclipse.org/viewcvs/index.cgi/%7Echeckout%7E/platform-swt-home/faq.html#gtkstartup">for
+    FAQ</a> are also a useful reference. This document also includes a list of
+    the prerequisites <a href="http://dev.eclipse.org/viewcvs/index.cgi/%7Echeckout%7E/platform-swt-home/faq.html#gtkstartup">for
     running  SWT on Linux GTK</a> </li>
-	<li>If you wish to use a 1.5 JDK to build Eclipse, change the value for javacSource to 1.4 in the build.xml of your source build.</li>
-
-<property name="javacSource" value="1.4" /></li>
+	<li>If you wish to use a 1.5 JDK to build Eclipse, change the value for javacSource
+	  to 1.4 in the build.xml of your source build.
+	  
+     <div style="margin-left: 40px;"><tt>&lt;property name=&quot;javacSource&quot; value=&quot;1.4&quot; /&gt;</tt></div>
+</li>
+</ol>
+<p>&nbsp;</p>
+</p><h2><a name="port"></a>Using the source build to construct a new Eclipse
+  port</h2>
+<p>The Eclipse platform releng team has limited hardware, software and time to compile Eclipse on every conceivable platform. If you would like to enhance
+  the source build scripts to build eclipse on a platform
+  that is not currently included, please follow the following steps:</p>
+<ul><li>Extract the source build drop</li>
+<li>Update the build.bat and build files to reflect the new architecture. For
+  example: <ul>
+  <li>in the <tt>build</tt> file: add an another entry to the <tt>if [ &quot;$os-$ws-$arch&quot; = &quot;linux-motif-x86&quot; ]
+    </tt>line similar to <tt>|| [ &quot;$os-$ws-$arch&quot; = &quot;newOs-newWs-newArch&quot;]
+    </tt>that reflects the new os-ws-arch combination</li>
+	<li>in the <tt>build.bat</tt> file:
+add an entry similar to <tt>if %os%-%ws%-%arch%==NewOs-newWs-newArch goto run</tt> that reflects the new os-ws-arch combination</li>
+  </ul> 
+</li>
+<li>Copy an existing <tt>assemble.org.eclipse.sdk.os.ws.arch.xml</tt> script to a new one that
+  indicates that platform being built</li>
+ <li>In the <tt>build.xml</tt></li><ul>
+    <li>update the compilelibs property in the init target to reflect the new
+      architecture</li>
+    <li>update the compilelibs target to reflect the new architecture</li></ul>
+<li>Run the build using &quot;build -compilelibs&quot; to force the recompilation
+  of the native libaries</li>
+  <li>Patches may be required to the swt native library and launcher build scripts
+    to compile the new port. The swt native library files
+    and launcher source and build files are stored in the <tt>swttmp</tt> and <tt>launchertmp</tt>
+    directories respectively.</li>
+  <li>Please open a bug with platform-releng with patches required to build this platform so they can be included in future source
+  builds. This allows others to use your contribution and compile the new eclipse
+  port<br>
+ </p> </ul>
 </ol>
 </body>
 </html>
