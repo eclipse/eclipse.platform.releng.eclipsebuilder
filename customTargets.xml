@@ -1078,8 +1078,9 @@
 		<property name="dropTokenList" value="%sdk%,%tests%,%example%,%runtime%,%jdt%,%teamextras%" />	
  	</ant>
  	
- 	<!--  Insert Build Label  -->
-	<replace file="${buildLabel}/index.php" token="@buildlabel@" value="${buildLabel}"/>
+ 	<!--  Insert ftp url for drop directory  -->
+	<replace file="${buildLabel}/index.php" token="@ftpdir@" value="ftp://download.eclipse.org/${buildLabel}"/>
+
  	<ant antfile="publish.xml" target="getStaticFiles" />
   	<ant antfile="publish.xml" target="copyBuild" />
  	 	
