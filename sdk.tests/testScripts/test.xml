@@ -3,6 +3,9 @@
 	<!--properties file containing the plugin directory name including version number-->
 	<property file="test.properties" />
 
+	<!--properties file containing the build information-->
+	<property file="label.properties" />
+	
 	<!--default directory where test-eclipse will be installed-->
 	<property name="install" value="${basedir}/test-eclipse" />
 	
