@@ -475,6 +475,7 @@
 		<property name="workingDirectory" value="${basedir}/temp/eclipse" />
 		<property name="zipRootDir" value="${basedir}/temp" />
 		<property name="zipArgs" value="-y" />
+		<property name="preCleanTarget" value="macosxDeleteSymbolicLink" />
 	</ant>
 	
 	<ant antfile="assemble.xml" target="${target}" >
@@ -642,6 +643,7 @@
 		<property name="launcherFilesDir" value="macosx" />
 		<property name="zipRootDir" value="${basedir}/temp" />
 		<property name="zipArgs" value="-y" />
+		<property name="preCleanTarget" value="macosxDeleteSymbolicLink" />
 	</ant>
 
 	<ant antfile="assemble.xml" target="${target}" >
@@ -710,10 +712,6 @@
 <!-- Targets called before extracting binary distributables.               -->
 <!-- ===================================================================== -->
 
-<target name="preAssembly">
-<!--required-->
-</target>
-
 <target name="linuxMotifPreAssembly">
 	<!--  Copy libXm.so.2.1 from plugin to root of install and set permission -->
 	<copy file="${buildDirectory}/plugins/org.eclipse.platform.linux.motif/os/linux/x86/libXm.so.2.1" todir="${workingDirectory}" />
@@ -775,7 +773,6 @@
 </target>
 
 <target name="postAssembly">
-<!-- required -->
 	<replace dir="${workingDirectory}" value="${timestamp}" token="@buildid@">
 		<include name="**/about.mappings" />
 	</replace>
@@ -818,6 +815,15 @@
 	</delete-->
 
 	<!--chmod dir="${workingDirectory}" perm="755" includes="**/eclipse,**/*.jnilib,**/*.so*,**/*.sl"/-->
+</target>
+
+<target name="macosxDeleteSymbolicLink" if="onUnix">
+	<!--This symbolic link cannot be deleted using the Ant delete task because
+		it is linked to a directory.
+	-->
+	<exec dir="${workingDirectory}" executable="rm">
+		<arg line="Eclipse.app/Contents/Resources/Java" />
+	</exec>
 </target>
 
 <target name="examplesPostAssembly">
@@ -1094,6 +1100,13 @@
       		message="${message}"
 	/>
 </target>
+
+<!-- ===================================================================== -->
+<!-- Target with empty implementation                                      -->
+<!-- Designed to be called in assembly phase when the following properties -->
+<!-- have not been set:  preAssemblyTarget, postAssemblyTarget, preClean   -->
+<!-- ===================================================================== -->
+<target name="noop" />
 
 <!-- ===================================================================== -->
 <!-- Default target                                                        -->
