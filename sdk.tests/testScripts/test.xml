@@ -81,6 +81,30 @@
 		</antcall>
 	</target>
 	
+	<target name="text" description="Runs the org.eclipse.text.tests test.xml">
+		<antcall target="runtests">
+			<param name="testPlugin" value="${org.eclipse.text.tests}" />
+			<param name="report" value="org.eclipse.text.tests" />
+		</antcall>
+		
+	<target name="jface" description="Runs the org.eclipse.jface.text.tests test.xml">
+		<antcall target="runtests">
+			<param name="testPlugin" value="${org.eclipse.jface.text.tests}" />
+			<param name="report" value="org.eclipse.jface.text.tests" />
+		</antcall>	
+		
+	<target name="filebuffers" description="Runs the org.eclipse.core.filebuffers.tests test.xml">
+		<antcall target="runtests">
+			<param name="testPlugin" value="${org.eclipse.core.filebuffers.tests}" />
+			<param name="report" value="org.eclipse.core.filebuffers.tests" />
+		</antcall>	
+	
+	<target name="jdttext" description="Runs the  org.eclipse.jdt.text.tests test.xml">
+		<antcall target="runtests">
+			<param name="testPlugin" value="${org.eclipse.jdt.text.tests}" />
+			<param name="report" value=" org.eclipse.jdt.text.tests" />
+		</antcall>	
+			
 	<target name="relEng" description="Runs the org.eclipse.releng.tests test.xml">
 		<antcall target="runtests">
 			<param name="testPlugin" value="${org.eclipse.releng.tests}" />
@@ -213,6 +237,10 @@
 		<antcall target="jdtuirefactoring" />
 		<antcall target="ltkuirefactoringtests" />
 		<antcall target="ltkcorerefactoringtests" />
+		<antcall target="text" />
+		<antcall target="jface" />
+		<antcall target="filebuffers" />
+		<antcall target="jdttext" />
 	</target>
 	
 
