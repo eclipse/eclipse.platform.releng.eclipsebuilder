@@ -18,7 +18,7 @@
 	<!-- The directory that will contain the xml and html results from the tests that are run -->
  	<property name="results" value="${basedir}/results" />
 	
-	<target name="setup" unless="clean">
+	<target name="setup" unless="noclean">
 		<condition property="tar.gz">
 			<not>
    				<equals arg1="${os}" arg2="win32" />
@@ -46,7 +46,7 @@
 		<delete dir="${install}" />
 		<mkdir dir="${install}" />
 		<exec dir="${install}" executable="tar">
-			<arg line="-xzf ${currentDir}/eclipse-SDK-*.tar.gz"/>
+			<arg line="-xzf ${currentDir}/eclipse-SDK-${buildId}-linux-gtk.tar.gz"/>
 	    </exec>
 	    <exec dir="." executable="unzip">
 			<arg line="-o -qq eclipse-junit-tests-*.zip -d ${install}"/>
