@@ -1,0 +1,10 @@
+#test properties
+
+url=@url@
+ws=@ws@
+os=@os@
+arch=@arch@
+buildtype=@buildtype@
+buildid=@buildid@
+buildlabel=@buildlabel@
+

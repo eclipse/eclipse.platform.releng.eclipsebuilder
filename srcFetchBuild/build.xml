@@ -1,0 +1,263 @@
+<project name="Eclipse SDK Source Build" default="run" basedir=".">
+
+	<!--  directory where to perform the build  -->
+	<property name="install" value="${basedir}" />
+	
+	<!--  identifies build type and original build date  -->
+	<property file="${basedir}/label.properties" />
+	
+	<!--  default setting for bootclasspath if none specified  -->
+	<property name="bootclasspath" value="${java.home}/lib/rt.jar" />
+	
+	<!--  sourcepath setting for rt.jar in javadoc scripts in org.eclipse.platform.doc.isv and org.eclipse.jdt.doc.isv  -->
+	<property name="rt" value="${bootclasspath}" />
+	
+	<!--  default target that runs complete build  -->
+	<target name="run" depends="fetchAll,slamBuildId,copyScripts,compile,buildDoc,install" />
+	
+	<!--  all features required to build eclipse sdk and javadoc  -->
+	<target name="allElements">
+		<ant antfile="${install}/features/org.eclipse.platform-feature/build.xml" target="${target}" dir="${install}/features/org.eclipse.platform-feature" />
+		<ant antfile="${install}/features/org.eclipse.platform.${platformId}-feature/build.xml" target="${target}" dir="${install}/features/org.eclipse.platform.${platformId}-feature" />
+		<ant antfile="${install}/features/org.eclipse.jdt-feature/build.xml" target="${target}" dir="${install}/features/org.eclipse.jdt-feature"/>
+		<ant antfile="${install}/features/org.eclipse.pde-feature/build.xml" target="${target}" dir="${install}/features/org.eclipse.pde-feature"/>
+		<ant antfile="${install}/features/org.eclipse.team.extras-feature/build.xml" target="${target}" dir="${install}/features/org.eclipse.jdt.source-feature"/>
+		<ant antfile="${install}/features/org.eclipse.platform.source-feature/build.xml" target="${target}" dir="${install}/features/org.eclipse.platform.source-feature" />
+		<ant antfile="${install}/features/org.eclipse.platform.${platformId}.source-feature/build.xml" target="${target}" dir="${install}/features/org.eclipse.platform.${platformId}.source-feature" />
+		<ant antfile="${install}/features/org.eclipse.jdt.source-feature/build.xml" target="${target}" dir="${install}/features/org.eclipse.jdt.source-feature"/>
+	</target>
+	
+	<!--   runs targets that fetch all projects required for eclipse sdk from dev.eclipse.org  -->
+	<target name="fetchAll" depends="fetchPlatform,fetchPlatformSpecific,fetchJdt,fetchPde,fetchTeamExtras" />
+
+	<target name="fetchPlatform" depends="cvspass">
+		<ant antfile="buildScripts/fetch_platform-launcher.xml" />
+		<ant antfile="buildScripts/fetch_org.eclipse.platform-feature.xml" />
+		<ant antfile="buildScripts/fetch_org.eclipse.platform.source-feature.xml" />
+	</target>
+	
+	<target name="fetchPlatformSpecific" depends="init,cvspass">
+		<ant antfile="buildScripts/fetch_org.eclipse.platform.${platformId}-feature.xml" />
+		<ant antfile="buildScripts/fetch_org.eclipse.platform.${platformId}.source-feature.xml" />
+		<ant antfile="buildScripts/fetch_org.eclipse.sdk.${platformId}-feature.xml" />
+	</target>
+
+	<target name="fetchJdt" depends="cvspass">
+		<ant antfile="buildScripts/fetch_org.eclipse.jdt.source-feature.xml" />
+		<ant antfile="buildScripts/fetch_org.eclipse.jdt-feature.xml" />
+	</target>
+
+	<target name="fetchPde" depends="cvspass">
+		<ant antfile="buildScripts/fetch_org.eclipse.pde-feature.xml" />
+	</target>
+
+	<target name="fetchTeamExtras" depends="cvspass">
+		<ant antfile="buildScripts/fetch_org.eclipse.team.extras-feature.xml" />
+	</target>
+	
+	<!--     Fill in values for original timestamp in all about.mappings files  -->
+	<target name="slamBuildId" depends="init">
+		<replace dir="${install}/plugins" value="${timestamp}" token="@build@">
+		<include name="**/about.mappings" />
+		</replace>
+	</target>
+
+	<!--  
+		  Compiles jars for all sdk plugins, and generates javadoc.
+		  Deletes previously compiled jars first.
+	-->
+	<target name="compile" depends="init,copyScripts,clean">
+		<record name="compilelog.txt" action="start" />
+		<antcall target="compileSwt" />
+  		<antcall target="allElements">
+			<param name="target" value="build.jars" />
+		</antcall>
+		<record name="compilelog.txt" action="stop" /> 
+	</target>
+		
+	<target name="compileSwt" depends="init">
+		<!--copy the build.xml into the plugin without overwrite-->
+		<copy file="buildScripts/plugins/org.eclipse.swt.${ws}/build.xml" todir="${install}/plugins/org.eclipse.swt.${ws}" />
+
+      	<!--  Compile dependencies require that the swt.jar be compiled first  -->
+	   	<ant antfile="${install}/plugins/org.eclipse.swt.${ws}/build.xml" target="clean" dir="${install}/plugins/org.eclipse.swt.${ws}" />
+	   	<ant antfile="${install}/plugins/org.eclipse.swt.${ws}/build.xml" target="build.jars" dir="${install}/plugins/org.eclipse.swt.${ws}" />
+	</target>
+
+	<!--  create doc.zips for all *.doc.isv and *.doc.user plugins in the eclipse sdk -->
+	<target name="buildDoc">
+	   	<ant antfile="${install}/plugins/org.eclipse.platform.doc.isv/build.xml" target="gather.bin.parts" dir="${install}/plugins/org.eclipse.platform.doc.isv">
+			<property name="destination.temp.folder" value="${install}/plugins" />
+			<property name="full.name" value="org.eclipse.platform.doc.isv" />
+		</ant>
+	   	<ant antfile="${install}/plugins/org.eclipse.platform.doc.user/build.xml" target="gather.bin.parts" dir="${install}/plugins/org.eclipse.platform.doc.user" >
+			<property name="destination.temp.folder" value="${install}/plugins" />
+			<property name="full.name" value="org.eclipse.platform.doc.user" />
+		</ant>
+	   	<ant antfile="${install}/plugins/org.eclipse.jdt.doc.isv/build.xml" target="gather.bin.parts" dir="${install}/plugins/org.eclipse.jdt.doc.isv" >
+			<property name="destination.temp.folder" value="${install}/plugins" />
+			<property name="full.name" value="org.eclipse.jdt.doc.isv" />
+		</ant>
+	   	<ant antfile="${install}/plugins/org.eclipse.jdt.doc.user/build.xml" target="gather.bin.parts" dir="${install}/plugins/org.eclipse.jdt.doc.user" >
+			<property name="destination.temp.folder" value="${install}/plugins" />
+			<property name="full.name" value="org.eclipse.jdt.doc.user" />
+		</ant>
+	   	<ant antfile="${install}/plugins/org.eclipse.pde.doc.user/build.xml" target="gather.bin.parts" dir="${install}/plugins/org.eclipse.pde.doc.user" >
+			<property name="destination.temp.folder" value="${install}/plugins" />
+			<property name="full.name" value="org.eclipse.pde.doc.user" />
+		</ant>
+
+	</target>
+	
+	<!--  copies only those scripts required to build the specified platform of the Eclipse Sdk. Overwrite set to false by default.  -->
+	<target name="copyScripts" depends="init">
+		<copy todir="${install}">
+			<fileset dir="buildScripts" includes="features/org.eclipse.platform-feature/build.xml,features/org.eclipse.platform.source-feature/build.xml,features/org.eclipse.platform.${platformId}*/build.xml,features/org.eclipse.sdk.${platformId}*/build.xml" />
+			<fileset dir="buildScripts" includes="features/*/build.xml" excludes="features/org.eclipse.platform*/build.xml,features/org.eclipse.sdk*/build.xml" />
+			<fileset dir="buildScripts" includes="plugins/org.eclipse.platform/build.xml,plugins/org.eclipse.platform.source/build.xml,plugins/org.eclipse.platform.${platformId}/build.xml,plugins/org.eclipse.platform.${platformId}.source/build.xml,plugins/org.eclipse.sdk.${platformId}" />
+			<fileset dir="buildScripts" includes="plugins/*${ws}/build.xml" excludes="plugins/org.eclipse.platform*/build.xml,plugins/org.eclipse.sdk*/build.xml,plugins/*test*/build.xml,plugins/*example*/build.xml"/>
+			<fileset dir="buildScripts" includes="plugins/*${os}/build.xml" excludes="plugins/org.eclipse.platform*/build.xml,plugins/org.eclipse.sdk*/build.xml,plugins/*test*/build.xml,plugins/*example*/build.xml"/>
+			<fileset dir="buildScripts" includes="plugins/*/build.xml" excludes="plugins/org.eclipse.platform*/build.xml,plugins/org.eclipse.sdk*/build.xml,plugins/*test*/build.xml,plugins/*example*/build.xml,plugins/*aix*/build.xml,plugins/*hpux*/build.xml,*plugins/*win32*/build.xml,plugins/*linux*/build.xml,plugins/*motif*/build.xml,plugins/*gtk*/build.xml,plugins/*photon*/build.xml,plugins/*solaris*/build.xml,plugins/*hpux*/build.xml"/>
+		</copy>
+	</target>
+	
+	<!--  
+		This target will set execute permissions on the eclipse launcher, .so files and .sl files (for unix flavours)
+		and copy files needed to launch eclipse to the root of the install, i.e. startup.jar, eclipse executables, splash screen
+	-->
+	<target name="install" depends="init">
+
+		<!--  copy the startup.jar and the splash screen to the root  of the install  -->
+		<copy todir="${install}" overwrite="true">
+			<fileset dir="${install}/plugins/org.eclipse.platform" includes="startup.jar, splash.bmp" />
+		</copy>
+		
+		<!--  copy the correct launcher files to the root of the install  -->
+		<copy todir="${install}" overwrite="true">
+			<fileset dir="${launcherBin}" />
+		</copy>
+		
+		<!--  create soft links to open motif library if building linux gtk or linux motif platform -->
+		<antcall target="symlink" />
+
+		<!--  if build running on linux, set permissions on *.so, *.sl and eclipse executable files, if any -->		
+		<antcall target="setPermissions" />
+	</target>
+	
+	<!--  Only deletes jars that are to be compiled, i.e. xercesImpl.jar and ant.jar do not get deleted -->	
+	<target name="clean" depends="init">
+		<antcall target="allElements">
+			<param name="target" value="clean" />
+		</antcall>
+	</target>
+	
+	<target name="setPermissions">
+		<chmod dir="${install}" perm="755" includes="**/eclipse,**/*.so*,**/*.sl"/>
+	</target>
+
+	<target name="symlink" depends="init" if="linux">
+		<!--  Copy libXm.so.2.1 from plugin to root of install and set permission -->
+		<copy file="${install}/plugins/org.eclipse.platform.${platformId}/os/linux/x86/libXm.so.2.1" todir="${install}" />
+		<chmod file="${install}/libXm.so.2.1" perm="755"/>
+		<exec dir="${install}" executable="ln">
+			<arg line="-s libXm.so.2.1 libXm.so"/>
+		</exec>
+		<exec dir="${install}" executable="ln">
+			<arg line="-s libXm.so.2.1 libXm.so.2"/>
+		</exec>
+	</target>
+
+	<target name="init">
+
+		<available file="${java.home}/../bin/javadoc.exe" property="JAVADOC14_HOME" value="${java.home}/../bin" />
+		<available file="${java.home}/../bin/javadoc" property="JAVADOC14_HOME" value="${java.home}/../bin" />
+
+		<condition property="platformId" value="${os}.${ws}">
+			<not>
+				<equals arg1="${os}" arg2="${ws}" />
+			</not>
+		</condition>
+		<condition property="platformId" value="${os}">
+			<and>
+				<equals arg1="${os}" arg2="${ws}" />
+			</and>
+		</condition>
+		<condition property="linux">
+			<and>
+				<equals arg1="${os}" arg2="linux" />
+				<os family="unix" />
+			</and>
+		</condition>
+		
+		<!--
+			 set the directory in the platform-launcher project which contains the eclipse
+		 	  executable based on os and ws values
+		-->
+		<condition property="launcherBin" value="${install}/plugins/platform-launcher/bin/win32">
+			<and>
+				<equals arg1="${os}" arg2="win32" />
+			</and>
+		</condition>
+		<condition property="launcherBin" value="${install}/plugins/platform-launcher/bin/linux/motif">
+			<and>
+				<equals arg1="${os}" arg2="linux" />
+				<equals arg1="${ws}" arg2="motif" />
+			</and>
+		</condition>
+		<condition property="launcherBin" value="${install}/plugins/platform-launcher/bin/linux/gtk">
+			<and>
+				<equals arg1="${os}" arg2="linux" />
+				<equals arg1="${ws}" arg2="gtk" />
+			</and>
+		</condition>
+		<condition property="launcherBin" value="${install}/plugins/platform-launcher/bin/aix">
+			<and>
+				<equals arg1="${os}" arg2="aix" />
+				<equals arg1="${ws}" arg2="motif" />
+			</and>
+		</condition>
+		<condition property="launcherBin" value="${install}/plugins/platform-launcher/bin/hpux">
+			<and>
+				<equals arg1="${os}" arg2="hpux" />
+				<equals arg1="${ws}" arg2="motif" />
+			</and>
+		</condition>
+		<condition property="launcherBin" value="${install}/plugins/platform-launcher/bin/solaris">
+			<and>
+				<equals arg1="${os}" arg2="solaris" />
+				<equals arg1="${ws}" arg2="motif" />
+			</and>
+		</condition>
+		<condition property="launcherBin" value="${install}/plugins/platform-launcher/bin/photon">
+			<and>
+				<equals arg1="${os}" arg2="qnx" />
+				<equals arg1="${ws}" arg2="photon" />
+			</and>
+		</condition>
+		
+		<condition property="win">
+			<and>
+			     <os family="windows" />
+      		</and>
+		</condition>
+		<condition property="unix">
+			<and>
+			     <os family="unix" />
+      		</and>
+		</condition>
+	</target>
+
+	<target name="cvspass" depends="init">
+		<antcall target="wincvspass" />
+		<antcall target="unixcvspass" />
+	</target>
+
+	<target name="wincvspass"  if="win">
+		<touch file="c:\.cvspass" />
+	</target>
+
+	<target name="unixcvspass"  if="unix">
+		<touch file="${user.home}/.cvspass" />
+	</target>
+	
+</project>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+    <classpathentry kind="src"
+        output="plugins/org.eclipse.build.extra.tools/bin" path="plugins/org.eclipse.build.extra.tools/src"/>
+    <classpathentry kind="var" path="JRE_LIB" sourcepath="JRE_SRC"/>
+    <classpathentry kind="src" path="/org.eclipse.releng.basebuilder"/>
+    <classpathentry kind="src" path="/org.apache.ant"/>
+    <classpathentry kind="src" path="/org.apache.xerces"/>
+    <classpathentry kind="output" path="plugins/org.eclipse.build.extra.tools/bin"/>
+</classpath>

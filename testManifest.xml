@@ -1,0 +1,437 @@
+<?xml version="1.0"?>
+<topLevel>
+<zipTypes>
+	<zipType name="Eclipse SDK">
+		<platform id="SW" name="Windows 98/ME/2000/XP" fileName='&lt;a href="download.php?dropFile=eclipse-SDK-@build@-win32.zip">eclipse-SDK-@build@-win32.zip&lt;/a>'></platform>
+		<platform id="SLM" name="Linux RH 7.1/SuSE 7.1 (x86/Motif)" fileName='&lt;a href="download.php?dropFile=eclipse-SDK-@build@-linux-motif.zip">eclipse-SDK-@build@-linux-motif.zip&lt;/a>'></platform>
+		<platform id="SLG2" name="Linux RH 7.1/SuSE 7.1 (x86/GTK 2)" fileName='&lt;a href="download.php?dropFile=eclipse-SDK-@build@-linux-gtk.zip">eclipse-SDK-@build@-linux-gtk.zip&lt;/a>'></platform>
+		<platform id="SSM" name="Solaris 8 (SPARC/Motif)" fileName='&lt;a href="download.php?dropFile=eclipse-SDK-@build@-solaris-motif.zip">eclipse-SDK-@build@-solaris-motif.zip&lt;/a>'></platform>
+		<platform id="SNP" name="QNX (x86/Photon)" fileName='&lt;a href="download.php?dropFile=eclipse-SDK-@build@-qnx-photon.zip">eclipse-SDK-@build@-qnx-photon.zip&lt;/a>'></platform>
+		<platform id="SAM" name="AIX (PPC/Motif)" fileName='&lt;a href="download.php?dropFile=eclipse-SDK-@build@-aix-motif.zip">eclipse-SDK-@build@-aix-motif.zip&lt;/a>'></platform>
+		<platform id="SHM" name="HP-UX (HP9000/Motif)" fileName='&lt;a href="download.php?dropFile=eclipse-SDK-@build@-hpux-motif.zip">eclipse-SDK-@build@-hpux-motif.zip&lt;/a>'></platform>
+		<platform id="SMC" name="Mac OSX (Mac/Carbon)" fileName='&lt;a href="download.php?dropFile=eclipse-SDK-@build@-macosx-carbon.zip">eclipse-SDK-@build@-macosx-carbon.zip&lt;/a>'></platform>
+		<platform id="SAA2" name='Source Build (Source in .zip) (&lt;a href="srcIncludedBuildInstructions.html">instructions&lt;/a>)' fileName='&lt;a href="download.php?dropFile=eclipse-sourceBuild-srcIncluded-@build@.zip">eclipse-sourceBuild-srcIncluded-@build@.zip&lt;/a>'></platform>
+		<platform id="SAA" name='Source Build (Source fetched via CVS) (&lt;a href="srcFetchBuildInstructions.html">instructions&lt;/a>)' fileName='&lt;a href="download.php?dropFile=eclipse-sourceBuild-srcFetch-@build@.zip">eclipse-sourceBuild-srcFetch-@build@.zip&lt;/a>'></platform>
+	</zipType>
+
+	<zipType name="JUnit test plug-ins">
+		<platform id="JT" name="All" fileName='&lt;a href="download.php?dropFile=eclipse-Automated-Tests-@build@.zip">eclipse-Automated-Tests-@build@.zip&lt;/a>'></platform>
+	</zipType>
+
+	<zipType name="Example plug-ins">
+		<platform id="EW" name="Windows 98/ME/2000/XP" fileName='&lt;a href="download.php?dropFile=eclipse-examples-@build@-win32.zip">eclipse-examples-@build@-win32.zip&lt;/a>'></platform>
+		<platform id="EA" name="All Other Platforms" fileName='&lt;a href="download.php?dropFile=eclipse-examples-@build@.zip">eclipse-examples-@build@.zip&lt;/a>'></platform>
+	</zipType>
+
+	<zipType name="Platform Runtime Binary">
+		<platform id="PW" name="Windows 98/ME/2000/XP" fileName='&lt;a href="download.php?dropFile=eclipse-platform-@build@-win32.zip">eclipse-platform-@build@-win32.zip&lt;/a>'></platform>
+		<platform id="PLM" name="Linux RH 7.1/SuSE 7.1 (x86/Motif)" fileName='&lt;a href="download.php?dropFile=eclipse-platform-@build@-linux-motif.zip">eclipse-platform-@build@-linux-motif.zip&lt;/a>'></platform>
+		<platform id="PLG2" name="Linux RH 7.1/SuSE 7.1 (x86/GTK 2)" fileName='&lt;a href="download.php?dropFile=eclipse-platform-@build@-linux-gtk.zip">eclipse-platform-@build@-linux-gtk.zip&lt;/a>'></platform>
+		<platform id="PSM" name="Solaris 8 (SPARC/Motif)" fileName='&lt;a href="download.php?dropFile=eclipse-platform-@build@-solaris-motif.zip">eclipse-platform-@build@-solaris-motif.zip&lt;/a>'></platform>
+		<platform id="PNP" name="QNX (x86/Photon)" fileName='&lt;a href="download.php?dropFile=eclipse-platform-@build@-qnx-photon.zip">eclipse-platform-@build@-qnx-photon.zip&lt;/a>'></platform>
+		<platform id="PAM" name="AIX (PPC/Motif)" fileName='&lt;a href="download.php?dropFile=eclipse-platform-@build@-aix-motif.zip">eclipse-platform-@build@-aix-motif.zip&lt;/a>'></platform>
+		<platform id="PHM" name="HP-UX (HP9000/Motif)" fileName='&lt;a href="download.php?dropFile=eclipse-platform-@build@-hpux-motif.zip">eclipse-platform-@build@-hpux-motif.zip&lt;/a>'></platform>
+		<platform id="PMC" name="Mac OSX (Mac/Carbon)" fileName='&lt;a href="download.php?dropFile=eclipse-platform-@build@-macosx-carbon.zip">eclipse-platform-@build@-macosx-carbon.zip&lt;/a>'></platform>
+	</zipType>
+	<zipType name="JDT Runtime Binary">
+		<platform id="JA" name="All" fileName='&lt;a href="download.php?dropFile=eclipse-JDT-@build@.zip">eclipse-JDT-@build@.zip&lt;/a>'></platform>
+	</zipType>
+	
+	<zipType name="FTP-WebDAV plug-ins">
+		<platform id="FW" name="All" fileName='&lt;a href="download.php?dropFile=eclipse-FTP-WebDAV-@build@.zip">eclipse-FTP-WebDAV-@build@.zip&lt;/a>'></platform>
+	</zipType>
+	
+</zipTypes>
+
+<logFiles>
+	<logFile name="org.eclipse.core.tests_linux.motif.xml">
+		<effectedFile id="SLM"></effectedFile>
+		<effectedFile id="SLG2"></effectedFile>
+		<effectedFile id="SSM"></effectedFile>
+		<effectedFile id="SAM"></effectedFile>
+		<effectedFile id="SHM"></effectedFile>
+		<effectedFile id="PLM"></effectedFile>
+		<effectedFile id="PLG2"></effectedFile>
+		<effectedFile id="PSM"></effectedFile>
+		<effectedFile id="PAM"></effectedFile>
+		<effectedFile id="PHM"></effectedFile>
+
+	</logFile>
+
+	<logFile name="org.eclipse.core.tests_win32.xml">
+		<effectedFile id="SW"></effectedFile>
+		<effectedFile id="PW"></effectedFile>
+	</logFile>
+	
+	<logFile name="org.eclipse.help.tests_linux.motif.xml">
+		<effectedFile id="SLM"></effectedFile>
+		<effectedFile id="SSM"></effectedFile>
+		<effectedFile id="SAM"></effectedFile>
+		<effectedFile id="SHM"></effectedFile>
+
+		<effectedFile id="PLM"></effectedFile>
+		<effectedFile id="PSM"></effectedFile>
+		<effectedFile id="PAM"></effectedFile>
+		<effectedFile id="PHM"></effectedFile>
+	</logFile>
+
+	<logFile name="org.eclipse.help.tests_win32.xml">
+		<effectedFile id="SW"></effectedFile>
+		<effectedFile id="PW"></effectedFile>
+	</logFile>
+
+	<logFile name="org.eclipse.jdt.ui.tests_linux.motif.xml">
+		<effectedFile id="SLM"></effectedFile>
+		<effectedFile id="SLG2"></effectedFile>
+		<effectedFile id="SSM"></effectedFile>
+		<effectedFile id="SAM"></effectedFile>
+		<effectedFile id="SHM"></effectedFile>
+		<effectedFile id="JA"></effectedFile>
+	</logFile>
+
+	<logFile name="org.eclipse.jdt.ui.tests_win32.xml">
+		<effectedFile id="SW"></effectedFile>
+		<effectedFile id="JA"></effectedFile>
+	</logFile>
+	
+	<logFile name="org.eclipse.jdt.ui.tests.refactoring_linux.motif.xml">
+		<effectedFile id="SLM"></effectedFile>
+		<effectedFile id="SLG2"></effectedFile>
+		<effectedFile id="SSM"></effectedFile>
+		<effectedFile id="SAM"></effectedFile>
+		<effectedFile id="SHM"></effectedFile>
+		<effectedFile id="JA"></effectedFile>
+	</logFile>
+
+	<logFile name="org.eclipse.jdt.ui.tests.refactoring_win32.xml">
+		<effectedFile id="SW"></effectedFile>
+		<effectedFile id="JA"></effectedFile>
+	</logFile>
+	
+	<logFile name="org.eclipse.jdt.debug.tests_linux.motif.xml">
+		<effectedFile id="SLM"></effectedFile>
+		<effectedFile id="SLG2"></effectedFile>
+		<effectedFile id="SSM"></effectedFile>
+		<effectedFile id="SAM"></effectedFile>
+		<effectedFile id="SHM"></effectedFile>
+		<effectedFile id="JA"></effectedFile>
+	</logFile>
+
+	<logFile name="org.eclipse.jdt.debug.tests_win32.xml">
+		<effectedFile id="SW"></effectedFile>
+		<effectedFile id="JA"></effectedFile>
+	</logFile>
+
+	<logFile name="org.eclipse.swt.tests_win32.xml">
+		<effectedFile id="SW"></effectedFile>
+		<effectedFile id="PW"></effectedFile>
+	</logFile>
+
+	<logFile name="org.eclipse.ui.tests_linux.motif.xml">
+		<effectedFile id="SLM"></effectedFile>
+		<effectedFile id="SLG2"></effectedFile>
+		<effectedFile id="SSM"></effectedFile>
+		<effectedFile id="SAM"></effectedFile>
+		<effectedFile id="SHM"></effectedFile>
+		
+		<effectedFile id="PLM"></effectedFile>
+		<effectedFile id="PLG2"></effectedFile>
+		<effectedFile id="PSM"></effectedFile>
+		<effectedFile id="PAM"></effectedFile>
+		<effectedFile id="PHM"></effectedFile>
+	</logFile>
+
+	<logFile name="org.eclipse.ui.tests_win32.xml">
+		<effectedFile id="SW"></effectedFile>
+		<effectedFile id="PW"></effectedFile>
+	</logFile>
+
+	<logFile name="org.eclipse.update.tests.core_win32.xml">
+		<effectedFile id="SW"></effectedFile>
+		<effectedFile id="PW"></effectedFile>
+	</logFile>
+
+	<logFile name="org.eclipse.team.tests.cvs_linux.motif.xml">
+		<effectedFile id="SLM"></effectedFile>
+		<effectedFile id="SLG2"></effectedFile>
+		<effectedFile id="SSM"></effectedFile>
+		<effectedFile id="SAM"></effectedFile>
+		<effectedFile id="SHM"></effectedFile>
+
+		<effectedFile id="PLM"></effectedFile>
+		<effectedFile id="PLG2"></effectedFile>
+		<effectedFile id="PSM"></effectedFile>
+		<effectedFile id="PAM"></effectedFile>
+		<effectedFile id="PHM"></effectedFile>
+	</logFile>
+
+	<logFile name="org.eclipse.team.tests.cvs_win32.xml">
+		<effectedFile id="SW"></effectedFile>
+		<effectedFile id="PW"></effectedFile>
+	</logFile>
+	
+	<logFile name="org.eclipse.team.tests.core_linux.motif.xml">
+		<effectedFile id="SLM"></effectedFile>
+		<effectedFile id="SLG2"></effectedFile>
+		<effectedFile id="SSM"></effectedFile>
+		<effectedFile id="SAM"></effectedFile>
+		<effectedFile id="SHM"></effectedFile>
+
+		<effectedFile id="PLM"></effectedFile>
+		<effectedFile id="PLG2"></effectedFile>
+		<effectedFile id="PSM"></effectedFile>
+		<effectedFile id="PAM"></effectedFile>
+		<effectedFile id="PHM"></effectedFile>
+	</logFile>
+
+	<logFile name="org.eclipse.team.tests.core_win32.xml">
+		<effectedFile id="SW"></effectedFile>
+		<effectedFile id="PW"></effectedFile>
+	</logFile>
+	
+	<logFile name="plugins\org.eclipse.jdt.core_*\temp.folder\jdtcore.jar.bin.log">
+		<effectedFile id="SW"></effectedFile>
+		<effectedFile id="SLM"></effectedFile>
+		<effectedFile id="SLG2"></effectedFile>
+		<effectedFile id="SSM"></effectedFile>
+		<effectedFile id="SAM"></effectedFile>
+		<effectedFile id="SHM"></effectedFile>
+		<effectedFile id="SNP"></effectedFile>
+		<effectedFile id="SMC"></effectedFile>
+		<effectedFile id="JA"></effectedFile>
+	</logFile>
+
+	<logFile name="plugins\org.eclipse.jdt.debug_*\temp.folder\jdimodel.jar.bin.log">
+		<effectedFile id="SW"></effectedFile>
+		<effectedFile id="SLM"></effectedFile>
+		<effectedFile id="SLG2"></effectedFile>
+		<effectedFile id="SSM"></effectedFile>
+		<effectedFile id="SAM"></effectedFile>
+		<effectedFile id="SHM"></effectedFile>
+		<effectedFile id="SNP"></effectedFile>
+		<effectedFile id="SMC"></effectedFile>
+		<effectedFile id="JA"></effectedFile>
+	</logFile>
+	
+	<logFile name="plugins\org.eclipse.jdt.debug.ui_*\temp.folder\jdiui.jar.bin.log">
+		<effectedFile id="SW"></effectedFile>
+		<effectedFile id="SLM"></effectedFile>
+		<effectedFile id="SLG2"></effectedFile>
+		<effectedFile id="SSM"></effectedFile>
+		<effectedFile id="SAM"></effectedFile>
+		<effectedFile id="SHM"></effectedFile>
+		<effectedFile id="SNP"></effectedFile>
+		<effectedFile id="SMC"></effectedFile>
+		<effectedFile id="JA"></effectedFile>
+	</logFile>
+
+	<logFile name="plugins\org.eclipse.jdt.launching_*\temp.folder\launching.jar.bin.log">
+		<effectedFile id="SW"></effectedFile>
+		<effectedFile id="SLM"></effectedFile>
+		<effectedFile id="SLG2"></effectedFile>
+		<effectedFile id="SSM"></effectedFile>
+		<effectedFile id="SAM"></effectedFile>
+		<effectedFile id="SHM"></effectedFile>
+		<effectedFile id="SNP"></effectedFile>
+		<effectedFile id="SMC"></effectedFile>
+		<effectedFile id="JA"></effectedFile>
+	</logFile>
+
+	<logFile name="plugins\org.eclipse.jdt.ui_*\temp.folder\jdt.jar.bin.log">
+		<effectedFile id="SW"></effectedFile>
+		<effectedFile id="SLM"></effectedFile>
+		<effectedFile id="SLG2"></effectedFile>
+		<effectedFile id="SSM"></effectedFile>
+		<effectedFile id="SAM"></effectedFile>
+		<effectedFile id="SHM"></effectedFile>
+		<effectedFile id="SNP"></effectedFile>
+		<effectedFile id="SMC"></effectedFile>
+		<effectedFile id="JA"></effectedFile>
+	</logFile>
+	
+	<logFile name="plugins\org.eclipse.jdt.junit_*\temp.folder\junitsupport.jar.bin.log">
+		<effectedFile id="SW"></effectedFile>
+		<effectedFile id="SLM"></effectedFile>
+		<effectedFile id="SLG2"></effectedFile>
+		<effectedFile id="SSM"></effectedFile>
+		<effectedFile id="SAM"></effectedFile>
+		<effectedFile id="SHM"></effectedFile>
+		<effectedFile id="SNP"></effectedFile>
+		<effectedFile id="SMC"></effectedFile>
+		<effectedFile id="JA"></effectedFile>
+	</logFile>
+
+	<logFile name="plugins\org.eclipse.jdt.ui.vcm_*\temp.folder\jdtvcm.jar.bin.log">
+		<effectedFile id="SW"></effectedFile>
+		<effectedFile id="SLM"></effectedFile>
+		<effectedFile id="SLG2"></effectedFile>
+		<effectedFile id="SSM"></effectedFile>
+		<effectedFile id="SAM"></effectedFile>
+		<effectedFile id="SHM"></effectedFile>
+		<effectedFile id="SNP"></effectedFile>
+		<effectedFile id="SMC"></effectedFile>
+		<effectedFile id="JA"></effectedFile>
+	</logFile>
+
+	<logFile name="plugins\org.eclipse.swt.carbon_*\temp.folder\ws\carbon\swt.jar.bin.log">
+		<effectedFile id="SMC"></effectedFile>
+		<effectedFile id="PMC"></effectedFile>
+	</logFile>
+
+	<logFile name="plugins\org.eclipse.swt.photon_*\temp.folder\ws\photon\swt.jar.bin.log">
+		<effectedFile id="SNP"></effectedFile>
+		<effectedFile id="PNP"></effectedFile>
+	</logFile>
+
+	<logFile name="plugins\org.eclipse.swt.gtk_*\temp.folder\ws\gtk\swt.jar.bin.log">
+		<effectedFile id="SLG2"></effectedFile>
+		<effectedFile id="PLG2"></effectedFile>
+	</logFile>
+
+	<logFile name="plugins\org.eclipse.swt.gtk_*\temp.folder\ws\gtk\swt-pi.jar.bin.log">
+		<effectedFile id="SLG2"></effectedFile>
+		<effectedFile id="PLG2"></effectedFile>
+	</logFile>
+
+	<logFile name="plugins\org.eclipse.swt_*\temp.folder\ws\motif\swt.jar.bin.log">
+		<effectedFile id="SLM"></effectedFile>
+		<effectedFile id="PLM"></effectedFile>
+		<effectedFile id="SAM"></effectedFile>
+		<effectedFile id="SHM"></effectedFile>
+
+		<effectedFile id="PAM"></effectedFile>
+		<effectedFile id="SSM"></effectedFile>
+		<effectedFile id="PSM"></effectedFile>
+		<effectedFile id="PHM"></effectedFile>
+	</logFile>
+
+	<logFile name="plugins\org.eclipse.swt_*\temp.folder\ws\win32\swt.jar.bin.log">
+		<effectedFile id="SW"></effectedFile>
+		<effectedFile id="PW"></effectedFile>
+	</logFile>
+	
+	<logFile name="plugins\org.eclipse.jdt.ui.examples.projects_*\temp.folder\jdtexamples.jar.bin.log">
+		<effectedFile id="EW"></effectedFile>
+		<effectedFile id="EA"></effectedFile>
+	</logFile>
+	
+		<logFile name="plugins\org.eclipse.scripting.examples_*\temp.folder\scriptex1.jar.bin.log">
+		<effectedFile id="EW"></effectedFile>
+		<effectedFile id="EA"></effectedFile>
+	</logFile>
+
+	<logFile name="plugins\org.eclipse.swt.examples_*\temp.folder\swtexamples.jar.bin.log">
+		<effectedFile id="EW"></effectedFile>
+		<effectedFile id="EA"></effectedFile>
+	</logFile>
+
+	<logFile name="plugins\org.eclipse.swt.examples.controls_*\temp.folder\controls.jar.bin.log">
+		<effectedFile id="EW"></effectedFile>
+		<effectedFile id="EA"></effectedFile>
+	</logFile>
+
+	<logFile name="plugins\org.eclipse.swt.examples.launcher_*\temp.folder\launcher.jar.bin.log">
+		<effectedFile id="EW"></effectedFile>
+		<effectedFile id="EA"></effectedFile>
+	</logFile>
+
+	<logFile name="plugins\org.eclipse.swt.examples.ole.win32_*\temp.folder\olewin32.jar.bin.log">
+		<effectedFile id="EW"></effectedFile>
+	</logFile>
+
+	<logFile name="plugins\org.eclipse.swt.examples.paint_*\temp.folder\paint.jar.bin.log">
+		<effectedFile id="EW"></effectedFile>
+		<effectedFile id="EA"></effectedFile>
+	</logFile>
+
+	<logFile name="plugins\org.eclipse.ui.examples.javaeditor_*\temp.folder\javaeditorexample.jar.bin.log">
+		<effectedFile id="EW"></effectedFile>
+		<effectedFile id="EA"></effectedFile>
+	</logFile>
+
+	<logFile name="plugins\org.eclipse.ui.examples.multipageeditor_*\temp.folder\multipageeditor.jar.bin.log">
+		<effectedFile id="EW"></effectedFile>
+		<effectedFile id="EA"></effectedFile>
+	</logFile>
+
+	<logFile name="plugins\org.eclipse.ui.examples.propertysheet_*\temp.folder\propertysheet.jar.bin.log">
+		<effectedFile id="EW"></effectedFile>
+		<effectedFile id="EA"></effectedFile>
+	</logFile>
+
+	<logFile name="plugins\org.eclipse.ui.examples.readmetool_*\temp.folder\readmetool.jar.bin.log">
+		<effectedFile id="EW"></effectedFile>
+		<effectedFile id="EA"></effectedFile>
+	</logFile>
+	
+	<logFile name="plugins\org.eclipse.core.tests.harness_*\temp.folder\testharness.jar.bin.log">
+		<effectedFile id="JT"></effectedFile>
+	</logFile>
+
+	<logFile name="plugins\org.eclipse.core.tests.runtime_*\temp.folder\runtimetests.jar.bin.log">
+		<effectedFile id="JT"></effectedFile>
+	</logFile>
+	
+	<logFile name="plugins\org.eclipse.core.tests.resources_*\temp.folder\resourcestests.jar.bin.log">
+		<effectedFile id="JT"></effectedFile>
+	</logFile>
+	
+	<logFile name="plugins\org.eclipse.jdt.debug.tests_*\temp.folder\javadebugtests.jar.bin.log">
+		<effectedFile id="JT"></effectedFile>
+	</logFile>
+	
+	<logFile name="plugins\org.eclipse.help.tests_*\temp.folder\helptests.jar.bin.log">
+		<effectedFile id="JT"></effectedFile>
+	</logFile>
+	
+	<logFile name="plugins\org.eclipse.jdt.ui.tests_*\temp.folder\javauitests.jar.bin.log">
+		<effectedFile id="JT"></effectedFile>
+	</logFile>
+	
+	<logFile name="plugins\org.eclipse.jdt.ui.tests.refactoring_*\temp.folder\refactoringtests.jar.bin.log">
+		<effectedFile id="JT"></effectedFile>
+	</logFile>
+	
+	<logFile name="plugins\org.eclipse.swt.tests_*\temp.folder\swttests.jar.bin.log">
+		<effectedFile id="JT"></effectedFile>
+	</logFile>
+	
+	<logFile name="plugins\org.eclipse.ui.tests_*\temp.folder\uitests.jar.bin.log">
+		<effectedFile id="JT"></effectedFile>
+	</logFile>
+	
+	<logFile name="plugins\org.eclipse.update.tests.core_*\temp.folder\updatetests.jar.bin.log">
+		<effectedFile id="JT"></effectedFile>
+	</logFile>
+
+	<logFile name="plugins\org.eclipse.team.tests.core_*\temp.folder\teamtests.jar.bin.log">
+		<effectedFile id="JT"></effectedFile>
+	</logFile>
+
+	<logFile name="plugins\org.eclipse.team.tests.cvs.core_*\temp.folder\cvstests.jar.bin.log">
+		<effectedFile id="JT"></effectedFile>
+	</logFile>
+	
+	<logFile name="plugins\org.eclipse.jdt.core.tests.builder_*\temp.folder\.jdtcoretestsbuilder.jar.bin.log">
+		<effectedFile id="JT"></effectedFile>
+	</logFile>
+	
+	<logFile name="plugins\org.eclipse.jdt.core.tests.compiler_*\temp.folder\.jdtcoretestscompiler.jar.bin.log">
+		<effectedFile id="JT"></effectedFile>
+	</logFile>
+
+	<logFile name="plugins\org.eclipse.jdt.core.tests.model_*\temp.folder\.jdtcoretestsmodel.jar.bin.log">
+		<effectedFile id="JT"></effectedFile>
+	</logFile>
+
+	<logFile name="plugins\org.eclipse.test_*\temp.folder\.automated.jar.bin.log">
+		<effectedFile id="JT"></effectedFile>
+	</logFile>
+
+</logFiles>
+</topLevel>
+
+
+
+	
+		
