@@ -38,20 +38,30 @@
 <?php
 	$hasNotes = false;
 	$aDirectory = dir("buildnotes");
+	$index = 0;
 	while ($anEntry = $aDirectory->read()) {
 		if ($anEntry != "." && $anEntry != "..") {
-			$parts = explode("_", $anEntry);
-			$baseName = $parts[1];
-			$parts = explode(".", $baseName);
-			$component = $parts[0];
-			$line = "<td>Component: <a href=\"buildnotes/$anEntry\">$component</a></td>";
-			echo "<tr>";
-			echo "$line";
-			echo "</tr>";
-			$hasNotes = true;
+			$entries[$index] = $anEntry;
+			$index++;
 		}
 	}
+	
 	aDirectory.closedir();
+	sort($entries);
+
+	for ($i = 0; $i < $index; $i++) {
+		$anEntry = $entries[$i];
+		$parts = explode("_", $anEntry);
+		$baseName = $parts[1];
+		$parts = explode(".", $baseName);
+		$component = $parts[0];
+		$line = "<td>Component: <a href=\"buildnotes/$anEntry\">$component</a></td>";
+		echo "<tr>";
+		echo "$line";
+		echo "</tr>";
+		$hasNotes = true;
+	}
+	
 	if (!$hasNotes) {
 		echo "<br>There are no build notes for this build.";
 	}
