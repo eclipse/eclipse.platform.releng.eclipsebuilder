@@ -78,7 +78,11 @@
 		<equals arg1="${mapVersionTag}" arg2="perf_213" />
 	</condition>
 	<get src="${eclipse.base}" dest="${buildDirectory}/${buildLabel}/eclipse-SDK-${mapVersionTag}-win32.zip" usetimestamp="true" />
-	<unzip src="${buildDirectory}/${buildLabel}/eclipse-SDK-${mapVersionTag}-win32.zip" dest="${buildDirectory}" />
+	
+	<parallel>
+		<get src="${eclipse.base}" dest="${buildDirectory}/${buildLabel}/eclipse-SDK-${mapVersionTag}-linux-gtk.zip" usetimestamp="true" />
+		<unzip src="${buildDirectory}/${buildLabel}/eclipse-SDK-${mapVersionTag}-win32.zip" dest="${buildDirectory}" />
+	</parallel>
 </target>
 
 <!-- ===================================================================== -->
