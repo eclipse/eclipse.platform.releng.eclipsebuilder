@@ -216,6 +216,20 @@
 		</antcall>
 	</target>
 
+	<target name="uieditors" description="Runs the org.eclipse.ui.editors.tests test.xml">
+		<antcall target="runtests">
+			<param name="testPlugin" value="${org.eclipse.ui.editors.tests}" />
+			<param name="report" value="org.eclipse.ui.editors.tests" />
+		</antcall>
+	</target>
+	
+	<target name="uiworkbenchtexteditor" description="Runs the org.eclipse.ui.workbench.texteditor.tests test.xml">
+		<antcall target="runtests">
+			<param name="testPlugin" value="${org.eclipse.ui.workbench.texteditor.tests}" />
+			<param name="report" value="org.eclipse.ui.workbench.texteditor.tests" />
+		</antcall>
+	</target>
+
 	<target name="update" description="Runs the org.eclipse.update.tests.core test.xml">
 	    	<antcall target="runtests" >
 			<param name="testPlugin" value="${org.eclipse.update.tests.core}" />
@@ -225,7 +239,6 @@
 
 
 	<target name="all">
-		<antcall target="uircp" />
 		<antcall target="relEng" />
 		<antcall target="ant" />
 		<antcall target="core" />
@@ -240,6 +253,9 @@
 		<antcall target="jdtcorecompiler" />
 		<antcall target="jdtcoremodel" />
 		<antcall target="ui" />
+		<antcall target="uieditors" />
+		<antcall target="uiworkbenchtexteditor" />
+		<antcall target="uircp" />
 		<antcall target="jdtdebug" />
 		<antcall target="jdtui" />
 		<antcall target="jdtuirefactoring" />
