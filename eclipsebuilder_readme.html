@@ -19,26 +19,18 @@
 </ol>
 <h4>&nbsp;</h4>
 <h4><a name="description"></a>Description</h4>
-<p>This document describes how to run a build from the command line which produces 
-  all Eclipse SDK and runtime products. The PDE-BUILD, Ant and the JDT Core Eclipse 
-  components are the techologies from build 2.1 M3 are used in this process. These, 
-  along with scripts that drive the process, are contained in the combined resources 
-  of <a href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.releng.basebuilder/">org.eclipse.releng.basebuilder</a> 
+<p>This document describes how to produce all Eclipse SDK and runtime products 
+  for all supported platforms in a single, monolithic build. The PDE-BUILD, Ant 
+  and the JDT Core Eclipse components are the techologies used in this mechanism. 
+  These, along with scripts that drive the process, are contained in the combined 
+  resources of <a href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.releng.basebuilder/">org.eclipse.releng.basebuilder</a> 
   and <a href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.releng.eclipsebuilder/">org.eclipse.releng.eclipsebuilder</a>, 
   two projects available from the dev.eclipse.org Eclipse repository.</p>
-<p>PDE-BUILD is a technology in Eclipse which generates build scripts for features, 
-  plugins and fragments. The script generation functions are made available via 
-  custom Ant tasks (see <a href="http://dev.eclipse.org/viewcvs/index.cgi/%7Echeckout%7E/org.eclipse.pde.build/notes/usingPDEBuild.html?rev=HEAD&content-type=text/html">documentation 
-  on PDE-BUILD</a>). Calls to these tasks are contained in static Ant scripts 
-  provided in the projects noted above. The JDT Core compiler is used for compiling 
-  the java source code in Ant javac calls. The Ant technology in Eclipse is used 
-  to run both static and generated Ant scripts.</p>
-<p>This is the mechanism used by Eclipse Release Engineering.</p>
 <p>&nbsp;</p>
 <p><a name="systemrequirements"></a><b>System Requirements</b></p>
 <p>The Eclipse plugins and fragments for this mechanism were taken from Windows 
   and Linux-Motif installations of the Eclipse 2.1 M3 build. It is recommended 
-  that the builds are conducted on one of these two platforms.</p>
+  that the builds are conducted on one of these two operating systems.</p>
 <p>The following will also be required:</p>
 <ol>
   <li>Sun or IBM JDK 1.3 or higher</li>
@@ -143,10 +135,11 @@
     <tr> 
       <td width="24%" height="173">mail</td>
       <td width="76%" height="173"> 
-        <p>Set this flag if you wish to send mail when a build starts. Setting 
-          this flag will require a monitor.properties file created in the same 
-          directory containing the exported build scripts. At a minimum, the monitor.properties 
-          file will require key value entries such as the following:</p>
+        <p>Set this flag if you wish to send notification e-mail that a the build 
+          has started. Setting this flag will require a monitor.properties file 
+          created in the same directory containing the exported build scripts. 
+          At a minimum, the <b>monitor.properties</b> file will require key value 
+          entries such as the following:</p>
         host=aserver.ca.ibm.com<br>
         sender=myemailaddress<br>
         recipients=address1,address2,address3
