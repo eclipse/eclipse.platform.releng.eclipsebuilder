@@ -95,7 +95,6 @@
 <!-- Steps to do after setup but before starting the build proper -->
 <!-- ===================================================================== -->
 <target name="postSetup">
-	<!--fetch pieces required to build linux-gtk 62 bit swt fragment for source build drops.-->
 	<!--fetch the additional pieces to build swt gtk64-->
 	<property name="featureOnly" value="false"/>
 	<property name="featureAndPlugins" value="true"/>
@@ -103,22 +102,6 @@
 	<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
 		<property name="type" value="fragment" />
 		<property name="id" value="org.eclipse.swt.gtk64" />
-	</ant>
-	<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
-		<property name="type" value="plugin" />
-		<property name="id" value="org.eclipse.swt.tools" />
-	</ant>
-	<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="generateScript">
-		<property name="type" value="fragment" />
-		<property name="id" value="org.eclipse.swt.gtk64" />
-	</ant>
-	<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="generateScript">
-		<property name="type" value="plugin" />
-		<property name="id" value="org.eclipse.swt.tools" />
-	</ant>
-	<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.tools" target="build.jars">
-		<property name="type" value="plugin" />
-		<property name="id" value="org.eclipse.swt.tools" />
 	</ant>
 </target>
 
