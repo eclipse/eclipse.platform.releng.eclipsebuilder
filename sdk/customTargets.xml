@@ -62,7 +62,13 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<property name="archiveName" value="eclipse-SDK-${buildId}-solaris-motif.zip"/>
 	</ant>
 </target>
-
+	
+<target name="assemble.org.eclipse.sdk.solaris.gtk.sparc">
+	<ant antfile="${assembleScriptName}">
+		<property name="archiveName" value="eclipse-SDK-${buildId}-solaris-gtk.zip"/>
+	</ant>
+</target>
+	
 <target name="assemble.org.eclipse.sdk.hpux.motif.PA_RISC">
 	<ant antfile="${assembleScriptName}">
 		<property name="archiveName" value="eclipse-SDK-${buildId}-hpux-motif.zip"/>

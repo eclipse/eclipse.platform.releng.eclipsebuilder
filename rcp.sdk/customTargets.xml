@@ -43,6 +43,11 @@
 		<antcall target="assemble" />
 	</target>
 
+	<target name="assemble.org.eclipse.rcp.sdk.solaris.gtk.sparc">
+		<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-solaris-gtk.zip" />
+		<antcall target="assemble" />
+	</target>
+
 	<target name="assemble.org.eclipse.rcp.sdk.qnx.photon.x86">
 		<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-qnx-photon.zip" />
 		<antcall target="assemble" />

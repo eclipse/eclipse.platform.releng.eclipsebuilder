@@ -43,6 +43,11 @@
 	<ant antfile="${assembleScriptName}"/>
 </target>
 
+<target name="assemble.org.eclipse.rcp.solaris.gtk.sparc">
+	<property name="archiveName" value="eclipse-RCP-${buildId}-solaris-gtk.zip"/>
+	<ant antfile="${assembleScriptName}"/>
+</target>
+
 <target name="assemble.org.eclipse.rcp.qnx.photon.x86">
 	<property name="archiveName" value="eclipse-RCP-${buildId}-qnx-photon.zip"/>
 	<ant antfile="${assembleScriptName}"/>
