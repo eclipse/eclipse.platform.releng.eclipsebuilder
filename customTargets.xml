@@ -1111,7 +1111,7 @@
 </target>
 
 <target name="generateEclipseIndex">
-	<available classname="org.eclipse.releng.internal.generators.EclipseTestResultsGenerator" property="class" value="org.eclipse.releng.generators.EclipseTestResultsGenerator" />
+	<available classname="org.eclipse.releng.generators.EclipseTestResultsGenerator" property="class" value="org.eclipse.releng.generators.EclipseTestResultsGenerator" />
 	<property name="class" value="org.eclipse.releng.generators.TestResultsGenerator" />
 
 	<!--regenerate the index page with links to test results-->
@@ -1142,10 +1142,10 @@
 		for command md5sum -c filename.md5
 	-->
 	<exec dir="${buildLabel}" executable="sh" os="Linux">
-		<arg line="${basedir}/produceChecksum `ls *.zip`" />
+		<arg line="${basedir}/produceChecksum" />
 	</exec>
 	
-	<mdkir dir="${buildLabel}/checksum" />
+	<mkdir dir="${buildLabel}/checksum" />
 	
 	<move todir="${buildLabel}/checksum">
 		<fileset dir="${buildLabel}">

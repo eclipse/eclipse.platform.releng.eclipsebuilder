@@ -1,10 +1,12 @@
 # !/bin/sh
 
-while [ $# -gt 0 ]
-do
-	echo [md5sum] $1
-	md5sum $1 > $1.MD5
-	shift
+#array of zipfiles
+zipfiles=`ls *.zip`
+
+for zipfile in ${zipfiles[*]}
+do 
+	echo [md5] ${zipfile}
+	md5sum ${zipfile} > ${zipfile}.md5
 done
 
 
