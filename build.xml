@@ -3,12 +3,14 @@
 	<property name="pde.build.scripts" value="${basedir}/../org.eclipse.releng.basebuilder/plugins/org.eclipse.pde.build_3.0.0/scripts" />
 	
 	<target name="main">
-		<tstamp/>
 		<touch file="${user.home}/.cvspass" />
 
 		<!--Default values for required properties-->
 		<property name="buildDirectory" value="${basedir}/src" />
-		<property name="timestamp" value="${DSTAMP}${TSTAMP}" />
+
+		<available file="${buildDirectory}/label.properties" property="label.properties.exists" />
+		<antcall target="create.label.properties" />
+		<property file="${buildDirectory}/label.properties" />
 
 		<!--fetch the HEAD stream of all projects if build type specified as N-->
 		<condition property="fetchTag" value="HEAD">
@@ -26,4 +28,31 @@
 		
 	</target>
 	
+	<target name="create.label.properties" unless="label.properties.exists">
+			<mkdir dir="${buildDirectory}" />
+			<tstamp/>
+			<property name="date" value="${DSTAMP}" />
+			<property name="time" value="${TSTAMP}" />
+			<property name="timestamp" value="${date}${time}" />
+			<property name="buildType" value="I" />
+			<property name="buildId" value="${buildType}${date}" />
+
+			<!--this naming convention used by php scripts on download server-->
+			<property name="buildLabel" value="${buildType}-${buildId}-${timestamp}" />
+
+			<!--store the build label information in a file-->
+			<echo file="${buildDirectory}/label.properties" append="true" >
+			buildType=${buildType}
+			</echo>
+			<echo file="${buildDirectory}/label.properties" append="true" >
+			buildId=${buildId}
+			</echo>
+			<echo file="${buildDirectory}/label.properties" append="true" >
+			timestamp=${timestamp}
+			</echo>
+			<echo file="${buildDirectory}/label.properties" append="true" >
+			buildLabel=${buildLabel}
+			</echo>
+		</target>
+
 </project>
