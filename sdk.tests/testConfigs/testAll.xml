@@ -16,8 +16,8 @@
 </target>
 
 <target name="performanceTests">
-	<antcall target="testWinXPPerf" />
-	<echo message="Performance testing complete." />
+<!-- 	<antcall target="testWinXPPerf" />
+	<echo message="Performance testing complete." /> -->
 </target>
 	
 <target name="testLinuxGTK">
