@@ -1,6 +1,8 @@
 <project default="main">
 
 	<property name="pde.build.scripts" value="${basedir}/../org.eclipse.releng.basebuilder/plugins/org.eclipse.pde.build_3.1.0/scripts" />
+	<!-- value below is for people using basebuilder from the command line as described in the org.eclipse.releng.eclipsebuilder readme -->
+	<property name="eclipse.build.scripts" value="${basedir}"/>
 	
 	<target name="main">
 		<touch file="${user.home}/.cvspass" />
