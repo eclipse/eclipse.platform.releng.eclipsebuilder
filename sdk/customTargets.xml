@@ -69,7 +69,12 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	</ant>
 </target>
 
-
+<target name="assemble.org.eclipse.sdk.hpux.motif.ia64">
+	<ant antfile="${assembleScriptName}">
+		<property name="archiveName" value="eclipse-SDK-${buildId}-hpux-motif.zip"/>
+	</ant>
+</target>
+	
 <target name="assemble.org.eclipse.sdk.qnx.photon.x86">
 	<!--do not assemble this drop for now-->
 	<!--ant antfile="${assembleScriptName}">
