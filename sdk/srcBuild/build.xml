@@ -195,4 +195,7 @@
 			</or>
 		</condition> 
 	</target>
+	
+	<!-- temporary fix until https://bugs.eclipse.org/bugs/show_bug.cgi?id=86571 is fixed -->
+    <property name="tarargs" value=""/>
 </project>
