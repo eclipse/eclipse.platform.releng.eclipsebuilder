@@ -1,0 +1,29 @@
+#sample file used to store performance test configuration information.
+#database location
+dbloc=net://trelenggtk.ottawa.ibm.com
+
+#reference build. Typically read from property file.
+eclipse.perf.ref=3.0_200406251208_200501211811
+
+#jvm
+eclipse.perf.jvm=sun1.4.2_06
+
+#semi-colon separated list of configuration descriptors
+#machinename,\
+#description,\
+#http url,\
+#output directory
+eclipse.perf.config.descriptors="relengbuildwin2,\
+								Win XP Sun 1.4.2_06,\
+								../../../performance/win,\
+								/builds/transfer/files/master/downloads/performance/win;\
+								bachlnx,\
+								RHEL 3.0 Sun 1.4.2_06,\
+								../../../performance/linux,\
+								/builds/transfer/files/master/downloads/performance/linux"
+
+#parent result directory
+eclipse.perf.result.dir=/builds/transfer/files/master/downloads/performance
+
+#parent result url
+eclipse.perf.result.url=../../../../performance
