@@ -10,4 +10,4 @@ mkdir results\html
 mkdir results\performance
 
 REM run all tests
-call runtests.bat -vm ..\jre\bin\java -properties vm.properties "-Dtest.target=performance">> %2
+call runtests.bat -vm ..\jdk1.4.2_05\jre\bin\java "-Dtest.target=performance">> %2
