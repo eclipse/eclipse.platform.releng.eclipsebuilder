@@ -57,6 +57,13 @@
 			<param name="report" value="org.eclipse.core.tests" />
 		</antcall>
 	</target>
+
+	<target name="coreexpressions" description="Runs the org.eclipse.core.expressions.tests test.xml">
+		<antcall target="runtests">
+			<param name="testPlugin" value="${org.eclipse.core.expressions.tests}" />
+			<param name="report" value="org.eclipse.core.expressions.tests" />
+		</antcall>
+	</target>
 	
 	<target name="relEng" description="Runs the org.eclipse.releng.tests test.xml">
 		<antcall target="runtests">
@@ -174,6 +181,7 @@
 		<antcall target="relEng" />
 		<antcall target="ant" />
 		<antcall target="core" />
+		<antcall target="coreexpressions" />
 		<antcall target="help" />
 		<antcall target="update" />
 		<antcall target="teamcore" />
