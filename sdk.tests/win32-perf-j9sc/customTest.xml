@@ -1,4 +1,3 @@
-
 <project name="Customized testing instructions" default="customSetup">
 
 	<target name="customSetup">
@@ -73,7 +72,7 @@
 			<arg line="${jxeUrl} ${testMachine}:${testDir}" />
 		</exec>
 		<exec dir="." executable="${loginClient}">
-			<arg line="${testMachine} ${vmInstallCommand}" />
+			<arg line="${testMachine} ${jxeInstallCommand}" />
 		</exec>
 	</target>
 </project>
