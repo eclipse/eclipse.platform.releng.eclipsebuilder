@@ -50,6 +50,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<property name="archiveName" value="eclipse-SDK-${buildId}-linux-gtk-amd64.zip"/>
 	</ant>
 </target>
+
 	
 <target name="assemble.org.eclipse.sdk.solaris.motif.sparc">
 	<ant antfile="${assembleScriptName}">
@@ -63,7 +64,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	</ant>
 </target>
 
-
 <target name="assemble.org.eclipse.sdk.qnx.photon.x86">
 	<!--do not assemble this drop for now-->
 	<!--ant antfile="${assembleScriptName}">
@@ -72,6 +72,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 </target>
 
 <target name="assemble.org.eclipse.sdk.linux.gtk.ppc" />
+<target name="assemble.org.eclipse.sdk.linux.gtk.ia64" />
 
 <target name="assemble.org.eclipse.sdk.aix.motif.ppc">
 	<ant antfile="${assembleScriptName}">
