@@ -55,7 +55,7 @@
   </tr>
 </table>
 <br>
-These <a href="testresults/chkpii">logs</a> only need to be checked if the org.eclipse.releng.tests 
+These <a href="chkpiiResults.php">logs</a> only need to be checked if the org.eclipse.releng.tests 
 above report a chkpii test failure. <br>
 <br>
 <table border=0 cellspacing=5 cellpadding=2 width="100%" >
