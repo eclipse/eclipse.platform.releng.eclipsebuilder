@@ -88,21 +88,23 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		tag="${mapVersionTag}"
 	/>
 	<!--compare the map files project-->
-	<antcall target="compareMapFiles" />	
+	<antcall target="compareMapFiles" />
 	<!--tag the map files project-->
 	<antcall target="tagMapFiles" />
 </target>
 
 <target name="compareMapFiles" if="compareMaps">
 <property file="${mapTag.properties}"/>
-     <cvs cvsRoot="${mapCvsRoot}" dest="c:/temp/mapfiles" command="diff -d -r ${lastMapTag}" output="${buildDirectory}/compareMaps" />
+	 <property name="cvsDiffFile" value="${buildDirectory}/cvsDiff.txt" />
+     <cvs cvsRoot="${mapCvsRoot}" dest="${buildDirectory}/maps" command="diff -w -r ${lastMapTag}" output="${cvsDiffFile}" />
+     <modifiedMaps mapDiffFile="${cvsDiffFile}" mapOwnerProperties="${buildDirectory}/maps/org.eclipse.releng/component.properties" />
 </target>
 
 <target name="tagMapFiles" if="tagMaps">
     <!-- Stores tag on the filesystem so map files can be compared -->
-	<echo file="${mapTag.properties}" 
-	>lastMapTag=v${timestamp}
-		</echo>
+	<echo file="${mapTag.properties}">
+		lastMapTag=v${timestamp}
+	</echo>
 	<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag v${timestamp}" />
 </target>
 
