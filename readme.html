@@ -69,7 +69,8 @@
         R - Release<br>
         M - Maintenance<br>
       </p>
-      <p>Default set to I.</p>
+      <p>Default set to I. This value is used by programs internal to OTI Labs, 
+        IBM Canada (ie. web page generation, automated e-mail notices).</p>
     </td>
   </tr>
   <tr> 
@@ -87,7 +88,9 @@
     <td> 
       <p>An ampersand separated list of configurations to build where a configuration 
         is specified as &lt;os&gt;,&lt;ws&gt;,&lt;arch&gt;.<br>
-        ie.configs=win32,win32,x86 &amp; linux, motif, x86 &amp; linux, gtk, x86</p>
+        ie.configs=&quot;win32,win32,x86 &amp; linux, motif, x86 &amp; linux, 
+        gtk, x86&quot;. See list of <a href="#buildconfigs">build configurations</a> 
+        in the table below.</p>
     </td>
   </tr>
   <tr> 
@@ -100,32 +103,28 @@
     <td>javacFailOnError</td>
     <td>Sets the value for the attribute &quot;failonerror&quot; in calls to the 
       <a href="http://ant.apache.org/manual/CoreTasks/javac.html">Ant &lt;javac&gt; 
-      task</a> plugins' build.xml. Build will continue even if there are compilation 
-      errors when this is set to false.</td>
+      task</a> in a plugins' build.xml. Build will continue even if there are 
+      compilation errors when this is set to false.</td>
   </tr>
   <tr> 
     <td>javacDebugInfo</td>
     <td>Sets the value for the attribute &quot;debug&quot; in calls to the <a href="http://ant.apache.org/manual/CoreTasks/javac.html">Ant 
-      &lt;javac&gt; task </a>to the value set for this property. Default set to 
-      on.</td>
+      &lt;javac&gt; task </a>in a plugins' build.xml. Default set to on.</td>
   </tr>
   <tr> 
     <td>javacVerbose</td>
     <td>Sets the value for the attribute &quot;verbose&quot; in calls to the <a href="http://ant.apache.org/manual/CoreTasks/javac.html">Ant 
-      &lt;javac&gt; task</a> to the value set for this property. Default set to 
-      true.</td>
+      &lt;javac&gt; task</a> in a plugins' build.xml. Default set to true.</td>
   </tr>
   <tr> 
     <td>javacSource</td>
     <td>Sets the value for the attribute &quot;source&quot; in calls to the <a href="http://ant.apache.org/manual/CoreTasks/javac.html">Ant 
-      &lt;javac&gt; task</a> to the value set for this property. Default set to 
-      1.3.</td>
+      &lt;javac&gt; task</a> in a plugins' build.xml. Default set to 1.3.</td>
   </tr>
   <tr> 
     <td>javacTarget</td>
     <td>Sets the value for the attribute &quot;target&quot; in calls to the <a href="http://ant.apache.org/manual/CoreTasks/javac.html">Ant 
-      &lt;javac&gt; task</a> to the value set for this property. Default set to 
-      1.1.</td>
+      &lt;javac&gt; task</a> in a plugins' build.xml. Default set to 1.1.</td>
   </tr>
   <tr> 
     <td>mapVersionTag</td>
@@ -137,7 +136,8 @@
         integration build. Typically, these tags are in the form &quot;v&lt;date 
         and timestamp of build&gt;&quot; for example &quot;v200307110800&quot; 
         will checkout the map files used to run the integration at the specified 
-        date/time. This mechanism will only work with builds &gt; 20030701.<br>
+        date/time. This mechanism will only work with 3.0 + stream builds &gt; 
+        20030701.<br>
       </p>
     </td>
   </tr>
@@ -149,7 +149,8 @@
   <tr> 
     <td>baseos,basews,basearch</td>
     <td>The os, ws and arch values of a pre-built eclipse SDK configuration which 
-      is being compiled against. See list of supported values in the table below.</td>
+      is being compiled against. See list of possible values in the table of <a href="#buildconfigs">build 
+      configurations</a>.</td>
   </tr>
   <tr> 
     <td>timestamp</td>
@@ -158,3 +159,65 @@
       this project.)</td>
   </tr>
 </table>
+<p>&nbsp;</p>
+<p><font size="+1"><b><a name="buildconfigs"></a>Eclipse Build Configurations</b></font></p>
+<p><b></b>One or more build configurations can be specified to build a runtime 
+  version of any of the Eclipse components. If these are omitted, all configurations 
+  available will be built.</p>
+<table width="100%" border="1">
+  <tr> 
+    <td width="25%" height="24">Build Configuration (os, ws, arch)</td>
+    <td width="23%" height="24">Operating System (os)</td>
+    <td width="18%" height="24">Window System (ws)</td>
+    <td width="34%" height="24">Processor Architecture (arch)</td>
+  </tr>
+  <tr> 
+    <td width="25%" height="30">linux, motif, x86</td>
+    <td width="23%" height="30">Redhat Linux 9 Professional</td>
+    <td width="18%" height="30">Motif</td>
+    <td width="34%" height="30">Intel x86</td>
+  </tr>
+  <tr> 
+    <td width="25%">linux, gtk, x86</td>
+    <td width="23%">Redhat Linux 9 Professional</td>
+    <td width="18%">GTK</td>
+    <td width="34%">Intel x86</td>
+  </tr>
+  <tr> 
+    <td width="25%">aix, motif, ppc</td>
+    <td width="23%">IBM AIX 5.1</td>
+    <td width="18%">Motif</td>
+    <td width="34%">PowerPC</td>
+  </tr>
+  <tr> 
+    <td width="25%">solaris, motif, sparc</td>
+    <td width="23%">Sun Solaris 8</td>
+    <td width="18%">Motif</td>
+    <td width="34%">SPARC</td>
+  </tr>
+  <tr> 
+    <td width="25%">hpux, motif, PA_RISC</td>
+    <td width="23%">HP HP-UX 11i</td>
+    <td width="18%">Motif</td>
+    <td width="34%">hp9000 PA-RISC</td>
+  </tr>
+  <tr> 
+    <td width="25%">qnx, photon, x86</td>
+    <td width="23%">QNX Neutrino RTOS</td>
+    <td width="18%">Photon</td>
+    <td width="34%">Intel x86</td>
+  </tr>
+  <tr> 
+    <td width="25%">macosx, carbon, ppc</td>
+    <td width="23%">Apple Mac OS X 10.2</td>
+    <td width="18%">Carbon</td>
+    <td width="34%">PowerPC</td>
+  </tr>
+  <tr> 
+    <td width="25%">win32,win32, x86</td>
+    <td width="23%">Microsoft Windows XP</td>
+    <td width="18%">Win32</td>
+    <td width="34%">Intel x86</td>
+  </tr>
+</table>
+<p>&nbsp;</p>

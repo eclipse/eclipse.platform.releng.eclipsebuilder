@@ -1,20 +1,27 @@
 <project default="main">
 
-	<property name="pde.build.scripts" value="../org.eclipse.releng.basebuilder/plugins/org.eclipse.pde.build_2.1.0/scripts" />
-
+	<property name="pde.build.scripts" value="../org.eclipse.releng.basebuilder/plugins/org.eclipse.pde.build_3.0.0/scripts" />
+	
 	<target name="main">
 		<tstamp/>
 		<touch file="${user.home}/.cvspass" />
 
-		<property name="timestamp" value="${DSTAMP}${TSTAMP}" />
+		<!--Default values for required properties-->
 		<property name="buildDirectory" value="${basedir}/src" />
-		<property name="bootclasspath" value="${java.home}/lib/rt.jar" />
-		<property name="buildType" value="I" />
-		<property name="buildId" value="build" />
+		<property name="timestamp" value="${DSTAMP}${TSTAMP}" />
 
+		<!--fetch the HEAD stream of all projects if build type specified as N-->
+		<condition property="fetchTag" value="HEAD">
+			<equals arg1="${buildType}" arg2="N" />
+		</condition>
+		<property name="fetchTag" value="" />
+
+
+		<!--run the build for the specified component-->
 		<ant antfile="build.xml" dir="${pde.build.scripts}">
 			<property name="builder" value="${basedir}/${component}" />
 		</ant>
+		
 	</target>
 	
 </project>
