@@ -15,7 +15,7 @@
 			<arg line="${tester}/../../testScripts/test.xml ${testMachine}:${executionDir}" />
 		</exec>
 		
-		<replace file="${tester}/vm.properties" token="@buildType@@timestamp@" value="${buildType}${timestamp}"/>
+		<replace file="${tester}/vm.properties" token="@buildType@@timestamp@" value="${buildId}"/>
 		<replace file="${tester}/vm.properties" token="@reference@" value="${eclipse.perf.ref}"/>
 		
 		<!--copy in the properties file for vm args-->	

@@ -81,7 +81,7 @@
 <!-- Steps to do after the fetch -->
 <!-- ===================================================================== -->
 <target name="postFetch">
-	<replace dir="${buildDirectory}/plugins" value="${timestamp}" token="@buildid@">
+	<replace dir="${buildDirectory}/plugins" value="${timestamp}" token="@build@">
 		<include name="**/about.mappings" />
 	</replace>
 </target>
