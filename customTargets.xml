@@ -783,14 +783,13 @@
 
 	<copy file="${buildDirectory}/plugins/org.eclipse.platform.macosx.carbon/legal.html" todir="${workingDirectory}" />
 	
-	<!--fix for #23918-->
-	<antcall target="makeSymbolicLink">
-		<param name="execDir" value="${workingDirectory}/Eclipse.app/Contents/Resources" />
-		<param name="linkFile" value="Java" />
-		<param name="originalFile" value="../../.." />
-	</antcall>
-
 	<chmod dir="${workingDirectory}/Eclipse.app/Contents/MacOS/" perm="ugo+rx" includes="eclipse"/>
+
+	<antcall target="makeSymbolicLink">
+		<param name="execDir" value="${workingDirectory}" />
+		<param name="linkFile" value="eclipse" />
+		<param name="originalFile" value="Eclipse.app/Contents/MacOS/eclipse" />
+	</antcall>
 	
 	<antcall target="macosxCreateTar" />
 
