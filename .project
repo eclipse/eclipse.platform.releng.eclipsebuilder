@@ -2,19 +2,4 @@
 <projectDescription>
 	<name>org.eclipse.releng.eclipsebuilder</name>
 	<comment></comment>
-	<projects>
-		<project>org.apache.ant</project>
-		<project>org.apache.xerces</project>
-		<project>org.eclipse.releng.basebuilder</project>
-	</projects>
-	<buildSpec>
-		<buildCommand>
-			<name>org.eclipse.jdt.core.javabuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-	</buildSpec>
-	<natures>
-		<nature>org.eclipse.jdt.core.javanature</nature>
-	</natures>
 </projectDescription>

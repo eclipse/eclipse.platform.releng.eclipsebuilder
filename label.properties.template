@@ -1,5 +1,0 @@
-builddate=@builddate@
-buildtype=@buildtype@
-buildid=@buildid@
-timestamp=@ds@
-buildlabel=@buildtype@-@buildid@-@ds@

@@ -1,5 +1,0 @@
-<project name="Eclipse Test Configuration" default="all" basedir=".">
-
-<!--placeholder file-->
-<target name="all" />
-</project>
