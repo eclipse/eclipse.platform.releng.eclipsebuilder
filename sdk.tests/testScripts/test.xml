@@ -1,5 +1,8 @@
 <project name="Automated Eclipse Testing" default="all"  basedir="." >
 
+	<!--set a 2 hour timeout on running each test class-->
+	<property name="timeout" value="7200000" />
+	
 	<!--properties file containing the plugin directory name including version number-->
 	<property file="test.properties" />
 
