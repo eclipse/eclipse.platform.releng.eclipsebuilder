@@ -231,7 +231,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 <!-- Steps to do before running the build.xmls for the elements being built. -->
 <!-- ===================================================================== -->
 <target name="preProcess">
-	<replace dir="${buildDirectory}/plugins" value="${timestamp}" token="@build@">
+	<replace dir="${buildDirectory}/plugins" value="${buildId}" token="@build@">
 		<include name="**/about.mappings" />
 	</replace>
 	<replace dir="${buildDirectory}/features/org.eclipse.platform" value="${buildId}" token="@build@">
