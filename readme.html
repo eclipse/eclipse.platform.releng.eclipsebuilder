@@ -1,44 +1,48 @@
 <title>org.eclipse.releng.eclipsebuilder README</title> 
-<p>Last Updated: July 24, 2003<br>
-  <br>
+<p><b><font size="+2">README</font></b></p>
+<p>Last Updated: July 28, 2003</p>
+<p>This document describes how to build Eclipse components using the Ant scripts 
+  in this project.</p>
+<p><br>
   <b>Table of Contents</b><br>
   <br>
   <a href="#description">Description</a><br>
   <a href="#prereq">Prerequisites</a><br>
-  <a href="#setup">Initial Setup</a><br>
-  <a href="#run">Run the Build</a><br>
-  <a href="#antbuildproperties">Ant properties used in the build</a><br>
-  <a href="#buildconfigs">Build Configurations</a><br>
+  <a href="#setup">Setup</a><br>
+  <a href="#components">Run the Build</a><br>
+  <a href="#antbuildproperties">Ant properties defined build.properties</a><br>
+  <a href="#buildconfigs">Eclipse Configurations</a><br>
   <a href="#examples">Examples</a><br>
   <br>
 </p>
 <p><b><a name="description"></a>Description</b></p>
-<p>This document describes how to build eclipse components using this project.</p>
 <p>org.eclipse.releng.eclipsebuilder contains Ant scripts that use the script 
-  generation facilities in org.eclipse.pde.build to build all shipped components 
-  of Eclipse: SDK, platform jdt, examples, tests and team extras. A wrapper script, 
-  org.eclipse.releng.eclipsebuilder/build.xml, is provided to build a specified 
-  component and provides default settings of necessary Ant properties used in 
-  the build. <br>
+  generators in org.eclipse.pde.build to build all shipped <a href="#components">components 
+  of Eclipse:</a> SDK, Platform JDT, examples, tests and Team Extras. A wrapper 
+  script, org.eclipse.releng.eclipsebuilder/build.xml, is provided to build a 
+  specified component. This script in combination with the build.properties for 
+  a component provide default settings of necessary Ant properties used in the 
+  build. <br>
   <br>
 </p>
 <p><b><a name="prereq"></a>Prerequisites</b><br>
 </p>
 <p>1. <a href="http://www.cvshome.org/">CVS</a> version 1.10 or higher.<br>
   2. <a href="http://java.sun.com/j2se/1.3/download.html">1.3.1 level JDK</a>.<br>
-  3. (optional) 1.4 level JDK for generating javadoc<br>
+  3. (optional) 1.4 level JDK for generating javadoc when building Eclipse SDK 
+  component only.<br>
   4. (When building Windows SDK, Platform or examples on non Windows systems only) 
   a 1.3 level Windows JRE<br>
   5. <a href="http://www.info-zip.org/pub/infozip/">Info-Zip zip and unzip</a><br>
-  6. (for building Mac OSX components) GNU tar and gzip.<br>
+  6. (for building Eclipse components for Mac OSX) GNU tar and gzip.<br>
   6. org.eclipse.releng.basebuilder and org.eclipse.releng.eclipsebuilder from 
   <a href="http://dev.eclipse.org/viewcvs/">dev.eclipse.org</a>.<br>
   <br>
 </p>
-<p><b><a name="setup"></a>Initial Setup<br>
+<p><b><a name="setup"></a>Setup<br>
   <br>
   </b>1. Add the zip, unzip, tar, gzip and cvs executables to your path as required.<br>
-  2. Add the JDK bin or jre/bin directory to your path.<b><br>
+  2. Add the jre/bin directory of the installed JDK to your path.<b><br>
   </b>3. Check out org.eclipse.releng.basebuilder and org.eclipse.releng.eclipsebuilder 
   into a directory.<b><br>
   <br>
@@ -48,32 +52,86 @@
   command (currently the build.xml script can only be executed in a headless eclipse 
   due to <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=35923">bug 35923</a>): 
 </p>
-<p><b>java -cp ../org.eclipse.releng.basebuilder/startup.jar org.eclipse.core.launcher.Main 
-  -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=sdk 
-  | platform | jdt | sdk.examples | sdk.tests [-DJAVADOC14_HOME=&lt;path to jdk 
-  bin directory containing javadoc tool&gt;] [<a href="#antbuildproperties">additional 
-  Ant property settings as per table below</a>]</b><br>
+<p>&quot;java -cp ../org.eclipse.releng.basebuilder/startup.jar org.eclipse.core.launcher.Main 
+  -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=<a href="#components">sdk 
+  | platform | jdt | sdk.examples | sdk.tests</a> [Ant properties to override 
+  in a <a href="#antbuildproperties">component's build.properties</a>] &quot;<br>
 </p>
 <p><br>
-  The component property value maps to the directory name which contains the scripts 
-  which will build the described Eclipse component. <br>
+  <b><a name="components"></a></b>The component property value sets the name of 
+  the directory in org.eclipse.releng.eclipsebuilder which contains the Ant scripts 
+  that build a given an Eclipse component as descibed below: <br>
   <br>
-  The JAVADOC14_HOME property is used in the *.doc.isv/buildDoc.xml scripts and 
-  must be set to the bin directory of a JDK containing the javadoc tool in order 
-  to generate javadoc in both org.eclipse.platform.doc.isv and org.eclipse.jdt.doc.isv. 
-  A 1.4 level JDK is recommended to generate javadoc with the correct separator 
-  character '/' in links to external classes (see <a href="http://developer.java.sun.com/developer/bugParade/bugs/4359874.html">http://developer.java.sun.com/developer/bugParade/bugs/4359874.html</a>). 
-  This property setting is not required if javadoc generation is not needed.</p>
+</p>
+<table width="100%" border="1">
+  <tr> 
+    <td width="20%">Component (directory name in org.eclipse.releng.eclipsebuilder)</td>
+    <td width="80%">Description</td>
+  </tr>
+  <tr> 
+    <td width="20%">sdk</td>
+    <td width="80%">This directory contains the scripts used to build any or all 
+      configurations of the Eclipse SDK. An Eclipse SDK is comprised of binaries, 
+      source, user and developer documentation for the Eclipse Platform, Java 
+      Development Tooling and Plug-in Development components.</td>
+  </tr>
+  <tr> 
+    <td width="20%">platform</td>
+    <td width="80%">This directory contains the scripts used to build any or all 
+      configurations of the Eclipse Platform runtime. The Eclipse Platform component 
+      contains binaries and user documentation only.</td>
+  </tr>
+  <tr> 
+    <td width="20%">jdt</td>
+    <td width="80%">This directory contains the scripts used to build the platform-independant 
+      and/or the Mac OSX configuration of the Eclipse Java Development Tooling 
+      runtime. The Eclipse JDT component contains binaries and user documentation 
+      only. </td>
+  </tr>
+  <tr> 
+    <td width="20%">sdk.examples</td>
+    <td width="80%">This directory contains the scripts used to build the platform-independant 
+      and/or the Windows configuration of the Eclipse Examples. The Eclipse Examples 
+      contain binaries and source. </td>
+  </tr>
+  <tr>
+    <td width="20%">sdk.tests</td>
+    <td width="80%">This directory contains the scripts used to build the Eclipse 
+      Automated testing environment. This test framework can be used to run JUnit 
+      plugin tests on an Eclipse SDK from the command line.</td>
+  </tr>
+</table>
 <p><br>
-  <b><a name="antbuildproperties"></a>Ant Properties used in the build<br>
+  <b><a name="antbuildproperties"></a>Ant Properties Settings in a component's 
+  build.properties<br>
   <br>
   </b>The following properties are pre-defined in the build.properties file for 
   the specified component. They can be overridden by setting them at the command 
-  line at build time or by changing them directly in the component's build.properties.</p>
+  line at build time or by changing them directly in the component's build.properties 
+  file.</p>
 <table width="100%" border="1">
   <tr> 
     <td>Name</td>
     <td>Description</td>
+  </tr>
+  <tr> 
+    <td>baseos,basews,basearch</td>
+    <td>The os, ws and arch values of a pre-built eclipse component being compiled 
+      against. See list of possible values in the table of <a href="#buildconfigs">build 
+      configurations</a>.</td>
+  </tr>
+  <tr> 
+    <td height="26">baseLocation</td>
+    <td height="26">A directory separate from buildDirectory which contains pre-built 
+      plugins and features against which to compile. The basedirectory must not 
+      contain any features, plugins or fragments which are already or will be 
+      located in the buildDirectory (see below).</td>
+  </tr>
+  <tr> 
+    <td>bootclasspath</td>
+    <td>Sets the value for the attribute &quot;bootclasspath&quot; in calls to 
+      the <a href="http://ant.apache.org/manual/CoreTasks/javac.html">Ant &lt;javac&gt; 
+      task</a> in a plugins' build.xml. Default set to ${java.home}/lib/rt.jar.</td>
   </tr>
   <tr> 
     <td height="36">buildDirectory</td>
@@ -93,13 +151,6 @@
       of the build. Default set to ${buildType}.${buildId}, ie.&quot;I.build&quot;. 
       This directoryn will be created inside the location specified by the ${buildDirectory} 
       property.</td>
-  </tr>
-  <tr> 
-    <td height="26">baseLocation</td>
-    <td height="26">A directory separate from buildDirectory which contains pre-built 
-      plugins and features against which to compile. The basedirectory must not 
-      contain any features, plugins or fragments which are already or will be 
-      located in the buildDirectory.</td>
   </tr>
   <tr> 
     <td>buildType</td>
@@ -135,21 +186,8 @@
         is specified as &lt;os&gt;,&lt;ws&gt;,&lt;arch&gt;.<br>
         ie.configs=&quot;win32,win32,x86 &amp; linux, motif, x86 &amp; linux, 
         gtk, x86&quot;. See list of <a href="#buildconfigs">build configurations</a> 
-        in the table below.</p>
+        in table 2 below.</p>
     </td>
-  </tr>
-  <tr> 
-    <td>bootclasspath</td>
-    <td>Sets the value for the attribute &quot;bootclasspath&quot; in calls to 
-      the <a href="http://ant.apache.org/manual/CoreTasks/javac.html">Ant &lt;javac&gt; 
-      task</a> in a plugins' build.xml. Default set to ${java.home}/lib/rt.jar.</td>
-  </tr>
-  <tr> 
-    <td>javacFailOnError</td>
-    <td>Sets the value for the attribute &quot;failonerror&quot; in calls to the 
-      <a href="http://ant.apache.org/manual/CoreTasks/javac.html">Ant &lt;javac&gt; 
-      task</a> in a plugins' build.xml. Build will continue even if there are 
-      compilation errors when this is set to false.</td>
   </tr>
   <tr> 
     <td>javacDebugInfo</td>
@@ -157,9 +195,11 @@
       &lt;javac&gt; task </a>in a plugins' build.xml. Default set to on.</td>
   </tr>
   <tr> 
-    <td>javacVerbose</td>
-    <td>Sets the value for the attribute &quot;verbose&quot; in calls to the <a href="http://ant.apache.org/manual/CoreTasks/javac.html">Ant 
-      &lt;javac&gt; task</a> in a plugins' build.xml. Default set to true.</td>
+    <td>javacFailOnError</td>
+    <td>Sets the value for the attribute &quot;failonerror&quot; in calls to the 
+      <a href="http://ant.apache.org/manual/CoreTasks/javac.html">Ant &lt;javac&gt; 
+      task</a> in a plugins' build.xml. Build will continue even if there are 
+      compilation errors when this is set to false.</td>
   </tr>
   <tr> 
     <td>javacSource</td>
@@ -170,6 +210,20 @@
     <td>javacTarget</td>
     <td>Sets the value for the attribute &quot;target&quot; in calls to the <a href="http://ant.apache.org/manual/CoreTasks/javac.html">Ant 
       &lt;javac&gt; task</a> in a plugins' build.xml. Default set to 1.1.</td>
+  </tr>
+  <tr> 
+    <td>javacVerbose</td>
+    <td>Sets the value for the attribute &quot;verbose&quot; in calls to the <a href="http://ant.apache.org/manual/CoreTasks/javac.html">Ant 
+      &lt;javac&gt; task</a> in a plugins' build.xml. Default set to true.</td>
+  </tr>
+  <tr> 
+    <td>JAVADOC14_HOME</td>
+    <td>The JAVADOC14_HOME property is used in the *.doc.isv/buildDoc.xml scripts 
+      and must be set to the bin directory of a JDK containing the javadoc tool 
+      in order to generate javadoc in both org.eclipse.platform.doc.isv and org.eclipse.jdt.doc.isv. 
+      This only needs to be set when building an Eclipse SDK component. A 1.4 
+      level JDK is recommended to generate javadoc with the correct separator 
+      character '/' in links to external classes (see <a href="http://developer.java.sun.com/developer/bugParade/bugs/4359874.html">http://developer.java.sun.com/developer/bugParade/bugs/4359874.html</a>).</td>
   </tr>
   <tr> 
     <td>mapVersionTag</td>
@@ -187,22 +241,16 @@
     </td>
   </tr>
   <tr> 
-    <td>zipargs</td>
-    <td>Arguments to send to the zip executable. ie. zipargs=-y on Linux preserves 
-      symbolic links.</td>
-  </tr>
-  <tr> 
-    <td>baseos,basews,basearch</td>
-    <td>The os, ws and arch values of a pre-built eclipse component which is being 
-      compiled against. See list of possible values in the table of <a href="#buildconfigs">build 
-      configurations</a>.</td>
-  </tr>
-  <tr> 
     <td>timestamp</td>
     <td>A timestamp used to fill in value for buildid in about.mappings files. 
       The timestamp is also used to tag the org.eclipse.releng project on dev.eclipse.org 
       only when an appropriate value for mapCvsRoot is provided and when the tagMaps 
       Ant property is set. </td>
+  </tr>
+  <tr> 
+    <td>zipargs</td>
+    <td>Arguments to send to the zip executable. ie. zipargs=-y on Linux preserves 
+      symbolic links.</td>
   </tr>
 </table>
 <p><br>
@@ -270,7 +318,7 @@
 <p><b><br>
   <a name="examples"></a>Examples<br>
   </b></p>
-<p><a href="#ex1">Build Windows SDK javadoc generated on Windows</a><br>
+<p><a href="#ex1">Build Windows SDK including javadoc on Windows</a><br>
   <a href="#ex2">Build Linux GTK and Motif SDK on Linux</a><b><br>
   </b><a href="#ex3">Build Windows SDK component on Linux</a><b><br>
   </b><a href="#ex4">Build Linux Motif platform component on Linux</a><b><br>
@@ -308,7 +356,7 @@
   &quot;-Dzipargs=-y&quot; is used here to preserve the symbolic links libXm.so 
   and libXm.so.2 in the Linux Motif root directory of eclipse. The symbolic links 
   will only be created at build time if the build is run on a Linux operating 
-  system. <br>
+  system. No javadoc is generated here since JAVADOC14_HOME is not set.<br>
   <br>
   <br>
   <b><a name="ex3"></a>Build Windows SDK component on Linux</b></p>
@@ -328,7 +376,7 @@
   -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=platform 
   -Dconfigs=&quot;linux,motif,x86&quot; -DbuildDirectory=/builds/platform</b></p>
 <p>This builds an eclipse platform runtime for the linux motif configuration. 
-  The buildDirectory will be set &quot;/builds/platform&quot;.<br>
+  The buildDirectory will be set &quot;/builds/platform&quot;. <br>
   <br>
 </p>
 <p><b><a name="ex5"></a>Build JDT component against a pre-built Windows Platform 
@@ -343,6 +391,7 @@
   must not contain any JDT features or plugins or the build will fail. &quot;baseos&quot;, 
   &quot;basews&quot; and &quot;basearch&quot; should be specified in order to 
   find the correct location of platform specific jars (i.e. swt.jar) on the classpath.<br>
+  <br>
 </p>
 <p><b><a name="ex5.1"></a>Build JDT component in a directory containing a previous 
   Windows Platform buildDirectory</b></p>
@@ -355,8 +404,8 @@
   platform configuration was previously built. The build will fail if there are 
   compile errors. &quot;baseos&quot;, &quot;basews&quot; and &quot;basearch&quot; 
   should be specified in order to find the correct location of platform specific 
-  jars (i.e. swt.jar) on the classpath.</p>
-<p><br>
+  jars (i.e. swt.jar) on the classpath.<br>
+  <br>
   <b><br>
   <a name="ex6"></a>Building Eclipse FTP-WebDAV against an installed Eclipse SDK 
   on Linux</b></p>
