@@ -209,6 +209,9 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<copy file="${buildDirectory}/plugins/org.eclipse.platform.doc.isv/doc.bin.log" tofile="${buildDirectory}/${buildLabel}/compilelogs/platform.doc.isv.javadoc.txt" failonerror="false"/>
 	<copy file="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv/doc.bin.log" tofile="${buildDirectory}/${buildLabel}/compilelogs/jdt.doc.isv.javadoc.txt" failonerror="false"/>
 	<copy file="${buildDirectory}/plugins/org.eclipse.pde.doc.user/doc.bin.log" tofile="${buildDirectory}/${buildLabel}/compilelogs/pde.doc.user.javadoc.txt" failonerror="false"/>
+	<copy file="${buildDirectory}/plugins/org.eclipse.platform.doc.isv/platformconvert.txt" tofile="${buildDirectory}/${buildLabel}/compilelogs/platform.doc.isv.schema.txt" failonerror="false"/>
+	<copy file="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv/jdtconvert.txt" tofile="${buildDirectory}/${buildLabel}/compilelogs/jdt.doc.isv.schema.txt" failonerror="false"/>
+	<copy file="${buildDirectory}/plugins/org.eclipse.pde.doc.user/pdeconvert.txt" tofile="${buildDirectory}/${buildLabel}/compilelogs/pde.doc.user.schema.txt" failonerror="false"/>
 </target>
 
 
