@@ -1,10 +1,9 @@
 <project default="main">
-	<!--WORK IN PROGRESS-->
+
 	<property name="pde.build.scripts" value="../org.eclipse.releng.basebuilder/plugins/org.eclipse.pde.build_2.1.0/scripts" />
-	<property name="eclipse.build.scripts" value="${basedir}" />
 	
 	<target name="main">
-		<antcall target="cvspass" />
+		<touch file="${user.home}/.cvspass" />
 		
 		<property name="buildDirectory" value="${basedir}/src" />
 		<property name="bootclasspath" value="${java.home}/lib/rt.jar" />
@@ -12,18 +11,8 @@
 		<property name="buildId" value="build" />
 
 		<ant antfile="build.xml" dir="${pde.build.scripts}">
-			<property name="builder" value="${eclipse.build.scripts}/${component}" />
+			<property name="builder" value="${basedir}/${component}" />
 		</ant>
 	</target>
 	
-	<target name="cvspass" depends="init">
-		<antcall target="wincvspass" />
-		<antcall target="unixcvspass" />
-	</target>
-	<target name="wincvspass"  if="win">
-		<touch file="c:\.cvspass" />
-	</target>
-	<target name="unixcvspass"  if="unix">
-		<touch file="${user.home}/.cvspass" />
-	</target>
 </project>
