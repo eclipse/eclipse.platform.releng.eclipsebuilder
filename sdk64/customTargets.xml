@@ -106,7 +106,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 <!-- Steps to do after generating the build scripts -->
 <!-- ===================================================================== -->
 <target name="postGenerate">
-	<antcall target="clean" />
 </target>
 
 <!-- ===================================================================== -->
