@@ -102,7 +102,7 @@
 	<target name="jdttext" description="Runs the  org.eclipse.jdt.text.tests test.xml">
 		<antcall target="runtests">
 			<param name="testPlugin" value="${org.eclipse.jdt.text.tests}" />
-			<param name="report" value=" org.eclipse.jdt.text.tests" />
+			<param name="report" value="org.eclipse.jdt.text.tests" />
 		</antcall>	
 	</target>
 	<target name="relEng" description="Runs the org.eclipse.releng.tests test.xml">
