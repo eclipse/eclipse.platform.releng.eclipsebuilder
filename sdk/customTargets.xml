@@ -57,9 +57,10 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 
 
 <target name="assemble.org.eclipse.sdk.qnx.photon.x86">
-	<ant antfile="${assembleScriptName}">
+	<!--do not assemble this drop for now-->
+	<!--ant antfile="${assembleScriptName}">
 		<property name="archiveName" value="eclipse-SDK-${buildId}-qnx-photon.zip"/>
-	</ant>
+	</ant-->
 </target>
 
 <target name="assemble.org.eclipse.sdk.aix.motif.ppc">
