@@ -1,6 +1,0 @@
-<project name="Eclipse Custom Testing" default="all">
-
-	<!--placeholder file-->
-	<target name="all">
-
-</project>
