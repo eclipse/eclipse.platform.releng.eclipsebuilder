@@ -289,11 +289,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<property name="tempDir" value="${basedir}/temp" />
 			<mkdir dir="${tempDir}/buildScripts" />
 
-			<copy file="${buildDirectory}/label.properties" todir="${tempDir}/buildScripts" />
-
-			<copy todir="${tempDir}/buildScripts" flatten="true">
-				<fileset dir="${base.builder}/plugins" includes="org.eclipse.jdt.core*/**/jdtcore.jar,org.eclipse.jdt.core*/**/jdtCompilerAdapter.jar" />
-			</copy>
+			<copy file="${buildDirectory}/label.properties" todir="${tempDir}/buildScripts" />		
 
 			<copy todir="${tempDir}/buildScripts" flatten="true" overwrite="true">
 				<fileset dir="${eclipse.build.scripts}/sdk/srcBuild" excludes="incl/**,fetch,jdtcoresrc/**" />

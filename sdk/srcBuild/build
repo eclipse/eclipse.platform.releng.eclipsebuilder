@@ -56,12 +56,9 @@ if [ "$os-$ws-$arch" = "linux-motif-x86" ] || [ "$os-$ws-$arch" = "linux-gtk-x86
 then
         ORIGCLASSPATH=$CLASSPATH
         ant -q -buildfile jdtcoresrc/compilejdtcorewithjavac.xml
-        echo "!!ORIGCLASSPATH $ORIGCLASSPATH!!"
         CLASSPATH=jdtcoresrc/jdtcore.jar:$CLASSPATH;export CLASSPATH
-        echo "!!CLASSPATH $CLASSPATH!!"
         ant -q -buildfile jdtcoresrc/compilejdtcore.xml
         CLASSPATH=jdtcore.jar:$ORIGCLASSPATH;export CLASSPATH
-        echo "!!CLASSPATH $CLASSPATH!!"
 		ant -q -buildfile build.xml $target -DinstallOs=$os -DinstallWs=$ws -DinstallArch=$arch $compilelibs $bootclasspath 
 else
 	echo "The os-ws-arch combination of $os-$ws-$arch is not valid."
