@@ -4,6 +4,7 @@
    xsi:schemaLocation="http://eclipse.org/component ../component.xsd "
    name="J2SE 1.4 (subset used by Eclipse Platform)">
 
+ <package name="java.awt" /> 
  <package name="java.beans" /> 
  <package name="java.io" /> 
  <package name="java.lang" /> 
@@ -12,6 +13,7 @@
  <package name="java.math" /> 
  <package name="java.net" /> 
  <package name="java.nio" /> 
+ <package name="java.security" /> 
  <package name="java.text" /> 
  <package name="java.util" /> 
  <package name="java.util.jar" /> 
