@@ -1118,7 +1118,7 @@
 </target>
 
 <!-- ===================================================================== -->
-<!-- Target with empty implementation                                      -->
+<!-- Target with intentional empty implementation.                         -->
 <!-- Designed to be called in assembly phase when the following properties -->
 <!-- have not been set:  preAssemblyTarget, postAssemblyTarget, preClean   -->
 <!-- ===================================================================== -->
