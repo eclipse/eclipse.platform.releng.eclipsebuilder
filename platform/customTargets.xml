@@ -1,321 +1,251 @@
 <project name="Build specific targets and properties" default="noDefault" basedir=".">
 
-	<property name="postingDirectory" value="${buildDirectory}" />
+<property name="postingDirectory" value="${buildDirectory}" />
 
-	<!-- ===================================================================== -->
-	<!-- Run a given ${target} on all elements being built -->
-	<!-- ===================================================================== -->
-	<target name="allElements">
-		<ant antfile="${genericTargets}" target="${target}" >
-			<property name="type" value="feature" />
-			<property name="id" value="org.eclipse.platform" />
-		</ant>
-	</target>
+<!-- ===================================================================== -->
+<!-- Run a given ${target} on all elements being built -->
+<!-- ===================================================================== -->
+<target name="allElements">
+	<ant antfile="${genericTargets}" target="${target}" >
+		<property name="type" value="feature" />
+		<property name="id" value="org.eclipse.platform" />
+	</ant>
+</target>
 
-	<!-- ===================================================================== -->
-	<!-- Targets to assemble the built elements for particular configurations  -->
-	<!-- These generally call the generated assemble scripts (named in -->
-	<!-- ${assembleScriptName}) but may also add pre and post processing -->
-	<!-- Add one target for each root element and each configuration -->
-	<!-- ===================================================================== -->
+<!-- ===================================================================== -->
+<!-- Targets to assemble the built elements for particular configurations  -->
+<!-- These generally call the generated assemble scripts (named in -->
+<!-- ${assembleScriptName}) but may also add pre and post processing -->
+<!-- Add one target for each root element and each configuration -->
+<!-- ===================================================================== -->
 
-	<target name="assemble.org.eclipse.platform.win32.win32.x86">
-		<property name="archiveName" value="eclipse-platform-${buildId}-win32.zip"/>
-		<antcall target="assemble" />
-	</target>
+<target name="assemble.org.eclipse.platform.win32.win32.x86">
+	<property name="archiveName" value="eclipse-platform-${buildId}-win32.zip"/>
+	<antcall target="assemble" />
+</target>
 
-	<target name="assemble.org.eclipse.platform.linux.motif.x86">
-		<property name="archiveName" value="eclipse-platform-${buildId}-linux-motif.tar.gz"/>
-		<antcall target="assemble" />
-	</target>
+<target name="assemble.org.eclipse.platform.linux.motif.x86">
+	<property name="archiveName" value="eclipse-platform-${buildId}-linux-motif.tar.gz"/>
+	<antcall target="assemble" />
+</target>
 
-	<target name="assemble.org.eclipse.platform.linux.gtk.x86">
-		<property name="archiveName" value="eclipse-platform-${buildId}-linux-gtk.tar.gz"/>
-		<antcall target="assemble" />
-	</target>
+<target name="assemble.org.eclipse.platform.linux.gtk.x86">
+	<property name="archiveName" value="eclipse-platform-${buildId}-linux-gtk.tar.gz"/>
+	<antcall target="assemble" />
+</target>
 
-	<target name="assemble.org.eclipse.platform.linux.gtk.amd64">
-		<property name="archiveName" value="eclipse-platform-${buildId}-linux-gtk-amd64.tar.gz"/>
-		<antcall target="assemble" />
-	</target>
+<target name="assemble.org.eclipse.platform.linux.gtk.amd64">
+	<property name="archiveName" value="eclipse-platform-${buildId}-linux-gtk-amd64.tar.gz"/>
+	<antcall target="assemble" />
+</target>
+	
+<target name="assemble.org.eclipse.platform.solaris.motif.sparc">
+	<property name="archiveName" value="eclipse-platform-${buildId}-solaris-motif.tar.gz"/>
+	<antcall target="assemble" />
+</target>
+	
+<target name="assemble.org.eclipse.platform.solaris.gtk.sparc">
+	<property name="archiveName" value="eclipse-platform-${buildId}-solaris-gtk.tar.gz"/>
+	<antcall target="assemble" />
+</target>
+	
+<target name="assemble.org.eclipse.platform.qnx.photon.x86">
+	<property name="archiveName" value="eclipse-platform-${buildId}-qnx-photon.tar.gz"/>
+	<antcall target="assemble" />
+</target>
 
-	<target name="assemble.org.eclipse.platform.linux.gtk.ia64">
-		<condition property="skip.assembly">
-			<not>
-				<equals arg1="${configs}" arg2="linux,gtk,ia64" />
-			</not>
-		</condition>
-		<antcall target="compilelibs">
-			<param name="ws" value="gtk" />
-			<param name="os" value="linux" />
-			<param name="arch" value="ia64"/>
-		</antcall>
-		<property name="archiveName" value="eclipse-platform-${buildId}-linux-gtk-ia64.tar.gz"/>
-		<antcall target="assemble" />
-	</target>
-
-	<target name="assemble.org.eclipse.platform.solaris.motif.sparc">
-		<property name="archiveName" value="eclipse-platform-${buildId}-solaris-motif.tar.gz"/>
-		<antcall target="assemble" />
-	</target>
-
-	<target name="assemble.org.eclipse.platform.solaris.gtk.sparc">
-		<property name="archiveName" value="eclipse-platform-${buildId}-solaris-gtk.tar.gz"/>
-		<antcall target="assemble" />
-	</target>
-
-	<target name="assemble.org.eclipse.platform.qnx.photon.x86">
-		<property name="archiveName" value="eclipse-platform-${buildId}-qnx-photon.tar.gz"/>
-		<antcall target="assemble" />
-	</target>
-
-	<target name="assemble.org.eclipse.platform.aix.motif.ppc">
-		<property name="archiveName" value="eclipse-platform-${buildId}-aix-motif.tar.gz"/>
-		<antcall target="assemble" />
-	</target>
+<target name="assemble.org.eclipse.platform.aix.motif.ppc">
+	<property name="archiveName" value="eclipse-platform-${buildId}-aix-motif.tar.gz"/>
+	<antcall target="assemble" />
+</target>
 
 
-	<target name="assemble.org.eclipse.platform.hpux.motif.PA_RISC">
-		<property name="archiveName" value="eclipse-platform-${buildId}-hpux-motif.tar.gz"/>
-		<antcall target="assemble" />
-	</target>
+<target name="assemble.org.eclipse.platform.hpux.motif.PA_RISC">
+	<property name="archiveName" value="eclipse-platform-${buildId}-hpux-motif.tar.gz"/>
+	<antcall target="assemble" />
+</target>
 
-	<target name="assemble.org.eclipse.platform.macosx.carbon.ppc">
-		<property name="archiveName" value="eclipse-platform-${buildId}-macosx-carbon.tar.gz"/>
-		<antcall target="assemble" />
-	</target>
+<target name="assemble.org.eclipse.platform.macosx.carbon.ppc">
+	<property name="archiveName" value="eclipse-platform-${buildId}-macosx-carbon.tar.gz"/>
+	<antcall target="assemble" />
+</target>
 
-	<target name="assemble" unless="skip.assembly">
-		<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
-		<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
-		<ant antfile="${assembleScriptName}" />
-		<checksum file="${archiveFullPath}" property="md5"/>
-		<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5"/>
-	</target>
+<target name="assemble">
+	<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
+	<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
+	<ant antfile="${assembleScriptName}" />
+	<checksum file="${archiveFullPath}" property="md5"/>
+	<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5"/>
+</target>
 
-	<!-- ===================================================================== -->
-	<!-- Check out map files from correct repository -->
-	<!-- Replace values for cvsRoot, package and mapVersionTag as desired. -->
-	<!-- ===================================================================== -->
-	<target name="checkLocal">
-		<available property="mapsLocal" file="${buildDirectory}/maps/org.eclipse.releng" />
-	</target>
-	<target name="getMapFiles" depends="checkLocal" unless="mapsLocal">
+<!-- ===================================================================== -->
+<!-- Check out map files from correct repository -->
+<!-- Replace values for cvsRoot, package and mapVersionTag as desired. -->
+<!-- ===================================================================== -->
+<target name="checkLocal">
+	<available property="mapsLocal" file="${buildDirectory}/maps/org.eclipse.releng" />
+</target>
+<target name="getMapFiles" depends="checkLocal" unless="mapsLocal">
 
-		<!-- ***  change the repo info -->
-		<property name="mapCvsRoot" value=":pserver:anonymous@dev.eclipse.org:/home/eclipse" />
-		<property name="mapVersionTag" value="HEAD" />
-		<cvs cvsRoot="${mapCvsRoot}"
+	<!-- ***  change the repo info -->
+	<property name="mapCvsRoot" value=":pserver:anonymous@dev.eclipse.org:/home/eclipse" />
+	<property name="mapVersionTag" value="HEAD" />
+	<cvs cvsRoot="${mapCvsRoot}"
 		package="org.eclipse.releng"
 		dest="${buildDirectory}/maps"
 		tag="${mapVersionTag}"
 	/>
-		<!--tag the map files project-->
-		<antcall target="tagMapFiles" />
-	</target>
+	<!--tag the map files project-->
+	<antcall target="tagMapFiles" />
+</target>
 
-	<target name="tagMapFiles" if="tagMaps">
-		<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag v${timestamp}" />
-	</target>
+<target name="tagMapFiles" if="tagMaps">
+	<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag ${buildId}" />
+</target>
 
-	<!-- ===================================================================== -->
-	<!-- Steps to do before setup -->
-	<!-- ===================================================================== -->
-	<target name="preSetup">
-	</target>
+<!-- ===================================================================== -->
+<!-- Steps to do before setup -->
+<!-- ===================================================================== -->
+<target name="preSetup">
+</target>
 
-	<!-- ===================================================================== -->
-	<!-- Steps to do after setup but before starting the build proper -->
-	<!-- ===================================================================== -->
-	<target name="postSetup">
-		<!--fetch the additional pieces to build swt gtk64-->
-		<property name="featureOnly" value="false"/>
-		<property name="featureAndPlugins" value="true"/>
-		<property name="featuresRecursively" value="false"/>
-		<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
-			<property name="type" value="fragment" />
-			<property name="id" value="org.eclipse.swt.gtk64" />
-		</ant>
-	</target>
+<!-- ===================================================================== -->
+<!-- Steps to do after setup but before starting the build proper -->
+<!-- ===================================================================== -->
+<target name="postSetup">
+	<!--fetch the additional pieces to build swt gtk64-->
+	<property name="featureOnly" value="false"/>
+	<property name="featureAndPlugins" value="true"/>
+	<property name="featuresRecursively" value="false"/>
+	<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
+		<property name="type" value="fragment" />
+		<property name="id" value="org.eclipse.swt.gtk64" />
+	</ant>
+</target>
 
-	<!-- ===================================================================== -->
-	<!-- Steps to do before fetching the build elements -->
-	<!-- ===================================================================== -->
-	<target name="preFetch">
-	</target>
+<!-- ===================================================================== -->
+<!-- Steps to do before fetching the build elements -->
+<!-- ===================================================================== -->
+<target name="preFetch">
+</target>
 
-	<!-- ===================================================================== -->
-	<!-- Steps to do after the fetch -->
-	<!-- ===================================================================== -->
-	<target name="postFetch">
-		<ant antfile="${genericTargets}" target="fetchElement">
-			<property name="type" value="feature" />
-			<property name="id" value="org.eclipse.launchers" />
-		</ant>
-		<zip zipfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/features/org.eclipse.launchers" includes="library/**" />
+<!-- ===================================================================== -->
+<!-- Steps to do after the fetch -->
+<!-- ===================================================================== -->
+<target name="postFetch">
+	<ant antfile="${genericTargets}" target="fetchElement">
+		<property name="type" value="feature" />
+		<property name="id" value="org.eclipse.launchers" />
+	</ant>
+	<!--create launchersrc.zip and copy to org.eclipse.platform plugin (fix for bug #49237) -->
+	<zip destfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/features/org.eclipse.launchers" includes="library/**" />
+	
+	<!--fetch and compile swt tools-->
+	<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
+		<property name="type" value="plugin" />
+		<property name="id" value="org.eclipse.swt.tools" />
+	</ant>
+	<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="generateScript">
+		<property name="type" value="plugin" />
+		<property name="id" value="org.eclipse.swt.tools" />
+	</ant>
+	<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.win32" target="build.jars">
+		<property name="type" value="plugin" />
+		<property name="id" value="org.eclipse.swt.win32" />
+	</ant>
+	<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.tools" target="build.jars">
+		<property name="type" value="plugin" />
+		<property name="id" value="org.eclipse.swt.tools" />
+		<property name="baseos" value="win32" />
+		<property name="basews" value="win32" />
+		<property name="basearch" value="x86" />
+	</ant>
 
-		<!--fetch and compile swt tools-->
-		<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
-			<property name="type" value="plugin" />
-			<property name="id" value="org.eclipse.swt.tools" />
-		</ant>
-		<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="generateScript">
-			<property name="type" value="plugin" />
-			<property name="id" value="org.eclipse.swt.tools" />
-		</ant>
-		<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.gtk64" target="build.jars">
-			<property name="type" value="plugin" />
-			<property name="id" value="org.eclipse.swt.gtk64" />
-		</ant>
-		<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.tools" target="build.jars">
-			<property name="baseos" value="linux" />
-			<property name="basews" value="gtk" />
-			<property name="basearch" value="ia64" />
-		</ant>
-	</target>
+</target>
 
-	<!-- ===================================================================== -->
-	<!-- Steps to do before generating build scripts -->
-	<!-- ===================================================================== -->
-	<target name="preGenerate">
-	</target>
+<!-- ===================================================================== -->
+<!-- Steps to do before generating build scripts -->
+<!-- ===================================================================== -->
+<target name="preGenerate">
+</target>
 
-	<!-- ===================================================================== -->
-	<!-- Steps to do after generating the build scripts -->
-	<!-- ===================================================================== -->
-	<target name="postGenerate">
-		<antcall target="clean" />
-	</target>
+<!-- ===================================================================== -->
+<!-- Steps to do after generating the build scripts -->
+<!-- ===================================================================== -->
+<target name="postGenerate">
+	<antcall target="clean" />
+</target>
 
-	<!-- ===================================================================== -->
-	<!-- Steps to do before assembling -->
-	<!-- ===================================================================== -->
-	<target name="preAssemble">
-	</target>
+<!-- ===================================================================== -->
+<!-- Steps to do before assembling -->
+<!-- ===================================================================== -->
+<target name="preAssemble">
 
-	<!-- ===================================================================== -->
-	<!-- Steps to do after assembling-->
-	<!-- ===================================================================== -->
-	<target name="postAssemble">
-	</target>
+</target>
+
+<!-- ===================================================================== -->
+<!-- Steps to do after assembling-->
+<!-- ===================================================================== -->
+<target name="postAssemble">
+</target>
 
 
 
-	<!-- ===================================================================== -->
-	<!-- Steps to do before running the build.xmls for the elements being built. -->
-	<!-- ===================================================================== -->
-	<target name="preProcess">
-		<replace dir="${buildDirectory}/plugins" value="${buildId}" token="@build@">
-			<include name="**/about.mappings" />
-		</replace>
-		<replace dir="${buildDirectory}/features/org.eclipse.platform" value="${buildId}" token="@build@">
-			<include name="**/config.ini" />
-		</replace>
-	</target>
+<!-- ===================================================================== -->
+<!-- Steps to do before running the build.xmls for the elements being built. -->
+<!-- ===================================================================== -->
+<target name="preProcess">
+	<replace dir="${buildDirectory}/plugins" value="${buildId}" token="@build@">
+		<include name="**/about.mappings" />
+	</replace>
+	<replace dir="${buildDirectory}/features/org.eclipse.platform" value="${buildId}" token="@build@">
+		<include name="**/config.ini" />
+	</replace>
+</target>
 
-	<!-- ===================================================================== -->
-	<!-- Steps to do after running the build.xmls for the elements being built. -->
-	<!-- ===================================================================== -->
-	<target name="postProcess">
-		<condition property="logsAvailable">
-			<istrue value="${javacVerbose}"/>
-		</condition>
-		<antcall target="gatherLogs" />
-	</target>
+<!-- ===================================================================== -->
+<!-- Steps to do after running the build.xmls for the elements being built. -->
+<!-- ===================================================================== -->
+<target name="postProcess">
+	<condition property="logsAvailable">
+		<istrue value="${javacVerbose}"/> 
+	</condition>
+	<antcall target="gatherLogs" />
+</target>
 
-	<!-- ===================================================================== -->
-	<!-- Steps to do after everything is built and assembled -->
-	<!-- (e.g., testing, posting, emailing, ...) -->
-	<!-- ===================================================================== -->
-	<target name="postBuild">
-	</target>
+<!-- ===================================================================== -->
+<!-- Steps to do after everything is built and assembled -->
+<!-- (e.g., testing, posting, emailing, ...) -->
+<!-- ===================================================================== -->
+<target name="postBuild">
+</target>
 
-	<!-- ===================================================================== -->
-	<!-- Helper targets -->
-	<!-- ===================================================================== -->
-	<target name="gatherLogs" if="logsAvailable">
+<!-- ===================================================================== -->
+<!-- Helper targets -->
+<!-- ===================================================================== -->
+<target name="gatherLogs" if="logsAvailable">
 
-		<mkdir dir="${postingDirectory}/${buildLabel}/compilelogs" />
-		<antcall target="allElements">
-			<param name="target" value="gatherLogs" />
-		</antcall>
+	<mkdir dir="${postingDirectory}/${buildLabel}/compilelogs" />
+	<antcall target="allElements">
+		<param name="target" value="gatherLogs" />
+	</antcall>
 
-		<unzip dest="${postingDirectory}/${buildLabel}/compilelogs" overwrite="true">
-			<fileset dir="${buildDirectory}/features/org.eclipse.platform">
-				<include name="*.log.zip" />
-			</fileset>
-		</unzip>
-	</target>
-
-	<target name="clean" unless="noclean">
-		<antcall target="allElements">
-			<param name="target" value="cleanElement" />
-		</antcall>
-	</target>
-
-	<target name="compilelibs" unless="skip.assembly">
-		<property name="swtlibs" value="${buildDirectory}/swttmp"/>
-		<mkdir dir="${swtlibs}"/>
-		<condition property="wsType" value="gtk64">
-			<or>
-				<equals arg1="${os}-${ws}-${arch}"
-                               arg2="linux-gtk-ppc64"/>
-				<equals arg1="${os}-${ws}-${arch}"
-                               arg2="linux-gtk-ia64"/>
-				<equals arg1="${os}-${ws}-${arch}"
-                               arg2="linux-gtk-amd64"/>
-			</or>
-		</condition>
-		<condition property="wsType" value="gtk">
-			<or>
-				<equals arg1="${os}-${ws}-${arch}"
-                           arg2="linux-gtk-ppc"/>
-				<equals arg1="${os}-${ws}-${arch}"
-                           arg2="linux-gtk-x86"/>
-			</or>
-		</condition>
-		<condition property="wsType" value="motif">
-			<or>
-				<equals arg1="${os}-${ws}-${arch}"
-                           arg2="linux-motif-x86"/>
-				<equals arg1="${os}-${ws}-${arch}"
-                           arg2="hpux-motif-ia64"/>
-			</or>
-		</condition>
-
-		<!-- gather source required to build swt libraries -->
-		<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.${wsType}" target="build.sources" />
-		<unzip  dest="${swtlibs}">
-			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.${wsType}">
-				<include name ="**/*.zip"/>
-			</fileset>
-		</unzip>
-		<exec dir="${swtlibs}" executable="sh" failonerror="true">
-			<arg line="build.sh"/>
-		</exec>
-		<property name="swtdir" value="${buildDirectory}/plugins/org.eclipse.swt.${wsType}/os/${os}/${arch}"/>
-		<delete dir="${swtdir}"/>
-		<mkdir dir="${swtdir}"/>
-		<move todir="${swtdir}/">
-			<fileset dir="${swtlibs}">
-				<include name="**/*.so"/>
-			</fileset>
-		</move>
-
-		<!--compile launcher -->
-		<property name="launcherlibs" value="${buildDirectory}/launchertmp"/>
-		<delete dir="${launcherlibs}"/>
-		<exec dir="${buildDirectory}/features/org.eclipse.launchers/library/${ws}/" executable="sh" os="Linux" failonerror="true">
-			<arg line="build.sh"/>
-		</exec>
-		<move file="${buildDirectory}/features/org.eclipse.launchers/library/${ws}/eclipse" todir="${launcherlibs}/">
-		</move>
-	</target>
-	<!-- ===================================================================== -->
-	<!-- Default target                                                        -->
-	<!-- ===================================================================== -->
-	<target name="noDefault">
-		<echo message="You must specify a target when invoking this file" />
-	</target>
+	<unzip dest="${postingDirectory}/${buildLabel}/compilelogs" overwrite="true">
+		<fileset dir="${buildDirectory}/features/org.eclipse.platform">
+			<include name="*.log.zip" />
+		</fileset>
+	</unzip>
+</target>
+<target name="clean" unless="noclean">
+	<antcall target="allElements">
+		<param name="target" value="cleanElement" />
+	</antcall>
+</target>
+<!-- ===================================================================== -->
+<!-- Default target                                                        -->
+<!-- ===================================================================== -->
+<target name="noDefault">
+	<echo message="You must specify a target when invoking this file" />
+</target>
 
 </project>

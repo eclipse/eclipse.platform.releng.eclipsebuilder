@@ -52,7 +52,7 @@
 </target>
 
 <target name="tagMapFiles" if="tagMaps">
-	<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag v${timestamp}" />
+	<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag ${buildId}" />
 </target>
 
 <!-- ===================================================================== -->
@@ -184,7 +184,7 @@
 	<copy file="${buildDirectory}/label.properties" tofile="${workingDirectory}/eclipse-testing/label.properties" />
 		
     <java classname="TestVersionTracker" fork="yes">
-         <arg line="${buildDirectory}/features/org.eclipse.sdk.tests/build.xml  ${buildDirectory} ${workingDirectory}/eclipse-testing/test.properties" /> 
+         <arg line="${buildDirectory}/features/org.eclipse.sdk.tests/build.xml  ${workingDirectory}/eclipse-testing/test.properties" /> 
          <classpath>
             	<pathelement path="${builderDirectory}/tools" />
          </classpath>

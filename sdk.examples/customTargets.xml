@@ -76,9 +76,9 @@
 <target name="tagMapFiles" if="tagMaps">
     <!-- Stores tag on the filesystem so map files can be compared -->
 	<echo file="${mapTag.properties}">
-		lastMapTag=v${timestamp}
+		lastMapTag=${buildId}
 	</echo>
-	<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag v${timestamp}" />
+	<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag ${buildId}" />
 </target>
 
 

@@ -35,10 +35,10 @@
 			<property name="time" value="${TSTAMP}" />
 			<property name="timestamp" value="${date}${time}" />
 			<property name="buildType" value="I" />
-			<property name="buildId" value="${buildType}${date}-${time}" />
+			<property name="buildId" value="${buildType}${date}" />
 
 			<!--this naming convention used by php scripts on download server-->
-			<property name="buildLabel" value="${buildId}" />
+			<property name="buildLabel" value="${buildType}-${buildId}-${timestamp}" />
 
 			<!--store the build label information in a file-->
 			<echo file="${buildDirectory}/label.properties" append="true" >
