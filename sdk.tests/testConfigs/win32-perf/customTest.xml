@@ -3,9 +3,8 @@
 	<target name="customSetup">
 		<antcall target="installVm" />
 		<!--copy the script which sets up environment and invokes the tests on test machine-->
-		<chmod file="${tester}/testAll.sh" perm="755" />
 		<exec dir="." executable="${copyClient}">
-			<arg line="${tester}/testAll.sh ${testMachine}:${executionDir}" />
+			<arg line="${tester}/testAll.bat ${testMachine}:${executionDir}" />
 		</exec>
 		
 		<!--copy in test script modified for running Team CVS tests-->
@@ -31,14 +30,12 @@
         	 command="export -r ${testVmTag} ${vmUrl}"
         	 dest="${tester}"
   		/>
-	
+  		
 		<exec dir="${tester}" executable="${copyClient}">
 			<arg line="${vmUrl} ${testMachine}:${testDir}" />
 		</exec>
-	
 		<exec dir="." executable="${loginClient}">
 			<arg line="${testMachine} ${vmInstallCommand}" />
 		</exec>
 	</target>
-
 </project>
