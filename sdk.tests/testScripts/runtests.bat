@@ -52,7 +52,7 @@ REM ***************************************************************************
 REM	Run tests by running Ant in Eclipse on the test.xml script
 REM ***************************************************************************
 
-%vm% -cp eclipse\startup.jar -Dosgi.ws=%ws% -Dosgi.os=%os% -Dosgi.arch=%arch% org.eclipse.core.launcher.Main -application org.eclipse.ant.core.antRunner -file test.xml %tests% -Dws=%ws% -Dos=%os% -Darch=%arch% %properties%  "-D%installmode%=true" -logger org.apache.tools.ant.DefaultLogger
+%vm% -cp eclipse\startup.jar -Dosgi.ws=%ws% -Dosgi.os=%os% -Dosgi.arch=%arch% org.eclipse.core.launcher.Main -application org.eclipse.ant.core.antRunner -file test.xml -v %tests% -Dws=%ws% -Dos=%os% -Darch=%arch% %properties%  "-D%installmode%=true" -logger org.apache.tools.ant.DefaultLogger
 goto end
 
 :end
