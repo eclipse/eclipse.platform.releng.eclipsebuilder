@@ -48,7 +48,7 @@
 </target>
 
 <target name="testWinXPPerf">
-	<property name="testResults" value="${postingDirectory}/${buildLabel}/performance/win" />
+	<property name="testResults" value="${postingDirectory}/${buildLabel}/performance" />
 	<mkdir dir="${testResults}"/>
 	<property name="markerName" value="eclipse30-winxp-perf-${timestamp}" />
 	<findMachine cfg="${cfg}" markerContainer="${markerContainer}" cfgKey="eclipse30WinXPTestPerf" markerName="${markerName}" waitInterval="30"/>
@@ -62,7 +62,7 @@
 </target>
 	
 <target name="testLinuxGTKPerf">
-	<property name="testResults" value="${postingDirectory}/${buildLabel}/performance/linux" />
+	<property name="testResults" value="${postingDirectory}/${buildLabel}/performance" />
 	<mkdir dir="${testResults}"/>
 	<property name="markerName" value="eclipse30-linux-gtk-perf-${timestamp}" />
 	<findMachine cfg="${cfg}" markerContainer="${markerContainer}" cfgKey="eclipse30LinuxGtkTestPerf" markerName="${markerName}" waitInterval="30"/>
