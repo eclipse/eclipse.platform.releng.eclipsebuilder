@@ -28,6 +28,20 @@
 		<exec dir="." executable="${copyClient}">
 			<arg line="-r ${extraBinariesDir} ${testMachine}:${testDir}" />
 		</exec>
+		
+		<!--add Cloudscape to junit test zip if it is available-->
+		<available file="${internalPlugins}/Cloudscape" type="dir" property="Cloudscape.available" />
+		<antcall target="installCloudscape" />
+	</target>
+	
+	<target name="installCloudscape" if="Cloudscape.available">
+		<mkdir dir="${tester}/eclipse/plugins" />
+		<copy todir="${tester}/eclipse/plugins">
+			<fileset dir="${internalPlugins}" includes="Cloudscape/**" />
+		</copy>
+		<exec dir="${tester}" executable="${copyClient}">
+				<arg line="-r eclipse ${testMachine}:${executionDir}" />
+		</exec>
 	</target>
 	
 	<target name="installVm">
