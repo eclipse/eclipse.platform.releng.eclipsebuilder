@@ -1,0 +1,99 @@
+<project default="main" basedir=".">
+
+<target name="compileSrc">
+    <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+    <javac verbose="true" failonerror="false"  srcdir="${builderDirectory}\tools" destdir="${builderDirectory}\tools" />     
+    <available classname="ReadFile" classpath="${builderDirectory}\tools" property="compileSrc"/>
+</target>
+  
+<property name="jdt.doc.isv" value= "org.eclipse.jdt.doc.isv_3.0.0"/>
+<property name="jdt.doc.user" value="org.eclipse.jdt.doc.user_3.0.0"/>
+<property name="pde.doc.user" value="org.eclipse.pde.doc.user_3.0.0"/>
+<property name="platform.doc.isv" value="org.eclipse.platform.doc.isv_3.0.0"/>
+<property name="platform.doc.user" value="org.eclipse.platform.doc.user_3.0.0"/>
+<property name="doczipfile" value="doc.zip"/>
+<property name="scriptName" value="test.sh"/>
+<property name="fileRegexp" value="doc"/>
+<property name="xmlFileName" value="toc.xml"/>
+<property name="htmlFileName" value="toc.html"/>
+<property name="styleSheet" value="${builderDirectory}/tools/toc.xsl"/>
+
+
+<target name="unzipDoc" if = "compileSrc">
+<unzip src="${buildDirectory}/${jdt.doc.isv}/${doczipfile}" dest="${buildDirectory}/${jdt.doc.isv}/"></unzip>
+<unzip src="${buildDirectory}/${jdt.doc.user}/${doczipfile}" dest="${buildDirectory}/${jdt.doc.user}/"></unzip>
+<unzip src="${buildDirectory}/${pde.doc.user}/${doczipfile}" dest="${buildDirectory}/${pde.doc.user}/"></unzip>
+<unzip src="${buildDirectory}/${platform.doc.isv}/${doczipfile}" dest="${buildDirectory}/${platform.doc.isv}/"></unzip>
+<unzip src="${buildDirectory}/${platform.doc.user}/${doczipfile}" dest="${buildDirectory}/${platform.doc.user}/"></unzip>
+<property name="unzipDoc" value="true"/>
+</target>
+
+
+<target name="parseFiles" if = "unzipDoc">
+<taskdef name="ReadFile" classname="ReadFile" classpath="${builderDirectory}\tools" />
+    <ReadFile xmlFileName="${xmlFileName}" initialPath="${buildDirectory}" htmlFileName="${htmlFileName}" docDir="${buildDirectory}/${jdt.doc.isv}" ScriptName="${scriptName}" scriptParam="htmldoc --book -f" styleSheet="${styleSheet}" />
+    <ReadFile xmlFileName="${xmlFileName}" initialPath="${buildDirectory}" htmlFileName="${htmlFileName}" docDir="${buildDirectory}/${jdt.doc.user}" ScriptName="${scriptName}" scriptParam="htmldoc --book -f" styleSheet="${styleSheet}" />
+    <ReadFile xmlFileName="${xmlFileName}" initialPath="${buildDirectory}" htmlFileName="${htmlFileName}" docDir="${buildDirectory}/${pde.doc.user}" ScriptName="${scriptName}" scriptParam="htmldoc --book -f" styleSheet="${styleSheet}" />
+    <ReadFile xmlFileName="${xmlFileName}" initialPath="${buildDirectory}" htmlFileName="${htmlFileName}" docDir="${buildDirectory}/${platform.doc.isv}" ScriptName="${scriptName}" scriptParam="htmldoc --book -f" styleSheet="${styleSheet}" />
+    <ReadFile xmlFileName="${xmlFileName}" initialPath="${buildDirectory}" htmlFileName="${htmlFileName}" docDir="${buildDirectory}/${platform.doc.user}" ScriptName="${scriptName}" scriptParam="htmldoc --book -f" styleSheet="${styleSheet}" />
+    <property name="parseFiles" value="true"/>
+</target>
+
+<target name="genDoc" if = "parseFiles">
+   <!--generate the doc in pdf format -->      
+   <chmod file="${buildDirectory}/plugins/${jdt.doc.isv}/${scriptName}" perm="700"/>
+      <chmod file="${buildDirectory}/plugins/${jdt.doc.user}/${scriptName}" perm="700"/>
+      <chmod file="${buildDirectory}/plugins/${pde.doc.user}/${scriptName}" perm="700"/>
+      <chmod file="${buildDirectory}/plugins/${platform.doc.isv}/${scriptName}" perm="700"/>
+      <chmod file="${buildDirectory}/plugins/${platform.doc.user}/${scriptName}" perm="700"/>
+     <exec dir="${buildDirectory}/plugins/${jdt.doc.isv}"  executable="${buildDirectory}/plugins/${jdt.doc.isv}/${scriptName}"/>
+     <exec dir="${buildDirectory}/plugins/${jdt.doc.user}" executable="${buildDirectory}/plugins/${jdt.doc.user}/${scriptName}"/>
+     <exec dir="${buildDirectory}/plugins/${pde.doc.user}" executable="${buildDirectory}/plugins/${pde.doc.user}/${scriptName}"/>
+     <exec dir="${buildDirectory}/plugins/${platform.doc.isv}" executable="${buildDirectory}/plugins/${platform.doc.isv}/${scriptName}"/>
+     <exec dir="${buildDirectory}/plugins/${platform.doc.user}" executable="${buildDirectory}/plugins/${platform.doc.user}/${scriptName}"/>
+      <property name="genDoc" value="true"/>
+  </target>
+     
+ <target name="assemble" if = "genDoc">    
+      <zip destfile="${buildDirectory}/${jdt.doc.isv}.zip"
+       basedir="${buildDirectory}/plugins/${jdt.doc.isv}/"
+       includes="*.pdf"
+     />
+       <zip destfile="${buildDirectory}/${jdt.doc.user}.zip"
+       basedir="${buildDirectory}/plugins/${jdt.doc.user}"
+       includes="*.pdf"
+     />
+     <zip destfile="${buildDirectory}/${pde.doc.user}.zip"
+       basedir="${buildDirectory}/${pde.doc.user}"
+       includes="*.pdf"
+     />
+     <zip destfile="${buildDirectory}/${platform.doc.isv}.zip"
+       basedir="${buildDirectory}/plugins/${platform.doc.isv}"
+       includes="*.pdf"
+     />
+      <zip destfile="${buildDirectory}/${platform.doc.user}.zip"
+       basedir="${buildDirectory}/plugins/${platform.doc.user}"
+       includes="*.pdf"
+     />     
+     <property name="assemble" value="true"/>
+ </target>
+  
+ <target name="cleanUp" if = "assemble">
+ <delete>
+    <fileset dir="${builderDir}" includes="**/*.xml.2"/>
+    <fileset dir="${builderDir}" includes="**/*.pdf"/>
+     <fileset dir="${builderDir}" includes="**/${scriptName}"/>
+  </delete>
+   <property name="cleanUp" value="true"/>
+ </target>
+ 
+
+<target name="main" depends = "compileSrc">
+  <antcall target = "unzipDoc"/>
+  <antcall target = "parseFiles"/>
+  <antcall target = "genDoc"/> 
+  <antcall target = "assemble"/> 
+  <antcall target = "cleanUp"/>
+</target>
+     
+</project>
