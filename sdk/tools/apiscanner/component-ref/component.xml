@@ -34,6 +34,7 @@
  <package name="org.apache.lucene" /> 
  <package name="org.apache.lucene.analysis" /> 
  <package name="org.apache.lucene.demo" /> 
+ <package name="org.apache.lucene.demo.html" /> 
  <package name="org.apache.lucene.document" /> 
  <package name="org.apache.lucene.index" /> 
  <package name="org.apache.lucene.search" />
@@ -46,7 +47,7 @@
  <package name="org.eclipse.core.commands.contexts" />
  <package name="org.eclipse.core.commands.operations" />
  <package name="org.eclipse.core.commands" />
- <package name="org.eclipse.core.runtime.dynamic.Helpers" />
+ <package name="org.eclipse.core.runtime.dynamicHelpers" />
  <package name="org.eclipse.jface.bindings" />
  <package name="org.eclipse.jface.bindings.keys" />
  <package name="org.eclipse.ui.operations" />
