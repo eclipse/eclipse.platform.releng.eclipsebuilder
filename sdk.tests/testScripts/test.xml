@@ -34,6 +34,13 @@
 		<exec dir="." executable="unzip">
 			<arg line="-o -qq eclipse-junit-tests-*.zip -d ${install}"/>
     	</exec>
+		
+		<!-- Fill in cvs repository information -->
+		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@user@" value="@cvs_user@"/>
+		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@password@" value="@cvs_password@"/>
+		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@host@" value="@cvs_host@"/>
+		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@root@" value="@cvs_root@"/>
+	
   	</target>
 
 	<target name="junit" depends="setup">
@@ -224,24 +231,11 @@
 
 
 	<target name="teamcvs" description="Runs the org.eclipse.team.tests.cvs.core test.xml.  This test requires additional setup.  See documentation in org.eclipse.team.tests.cvs.core">
-		<!--  Need to setup Eclipse first because of text replacement in a properties file  -->
-		<antcall target="setup" />
-
-		<!-- Fill in cvs repository information -->
-		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@user@" value="@cvs_user@"/>
-		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@password@" value="@cvs_password@"/>
-		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@host@" value="@cvs_host@"/>
-		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@root@" value="@cvs_root@"/>
-	
-	
-		<antcall target="${test.target}">
+		<antcall target="runtests">
 	  		<param name="testPlugin" value="${org.eclipse.team.tests.cvs.core}" />
 			<param name="output-file" value="org.eclipse.team.tests.cvs.xml" />
 			<param name="report" value="org.eclipse.team.tests.cvs" />
     		</antcall>
-    	
-		<copy file="${eclipse-home}/org.eclipse.team.tests.cvs.xml" tofile="${results}/xml/org.eclipse.team.tests.cvs_${platform}.xml" failonerror="false" />
-		<antcall target="genHtml" />
    	</target>
 
 
