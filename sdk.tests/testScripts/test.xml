@@ -277,8 +277,7 @@
       		</antcall>
 	</target>
 
-
-	<target name="all">
+	<target name="all2">
 		<antcall target="jdttext" />
 		<antcall target="antui" />
 		<antcall target="pdeui" />
@@ -308,6 +307,10 @@
 		<antcall target="uieditors" />
 		<antcall target="uiworkbenchtexteditor" />
 		<antcall target="swt" />
+	</target>
+	<target name="all">
+		<antcall target="antui" />
+		<antcall target="pdeui" />
 	</target>
 	
 	<target name="genHtml" description="Generates HTML results with provided JUNIT.XSL provided">
