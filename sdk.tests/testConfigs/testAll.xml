@@ -17,7 +17,7 @@
 
 <target name="performanceTests">
 	<condition property="213">
-		<equals arg1="${mapVersionTag}" value="perf_213" />
+		<equals arg1="${mapVersionTag}" arg2="perf_213" />
 	</condition>
 	<antcall target="testWinXPPerf" />
 	<antcall target="testWinXPPerf213" />
