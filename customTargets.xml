@@ -1053,7 +1053,9 @@
 
 <target name="postCompile">
 	<ant antfile="verifyCompile.xml" />
-	<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.win32" />
+	<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.win32">
+		<property name="destination" value="${basedir}/${buildLabel}" />
+	</ant>
 </target>
 
 
