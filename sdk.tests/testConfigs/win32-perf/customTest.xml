@@ -14,12 +14,12 @@
 		<condition property="buildRelease" value="3.0_200406251208">
 			<equals arg1="${mapVersionTag}" arg2="perf_30"/>
 		</condition>
-		<!--condition property="buildRelease" value="3.0.1_200409161125">
-			<equals arg1="${mapVersionTag}" arg2="perf_301"/>
-		</condition-->
-		<condition property="buildRelease" value="3.0.2RC2">
+		<condition property="buildRelease" value="3.0.1_200409161125">
 			<equals arg1="${mapVersionTag}" arg2="perf_301"/>
 		</condition>
+		<!--condition property="buildRelease" value="3.0.2RC2">
+			<equals arg1="${mapVersionTag}" arg2="perf_301"/>
+		</condition-->
 		<condition property="buildRelease" value="2.1.3_200403101828">
 			<equals arg1="${mapVersionTag}" arg2="perf_213"/>
 		</condition>
