@@ -47,7 +47,7 @@
 </target>
 
 <target name="tagMapFiles" if="tagMaps">
-	<cvs dest="org.eclipse.releng" command="tag v${timestamp}" />
+	<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag v${timestamp}" />
 </target>
 
 <!-- ===================================================================== -->
