@@ -275,7 +275,7 @@
 
 
 	<target name="all">
-		<antcall target="uircp" />
+
 		<antcall target="jdtdebug" />
 		<antcall target="jdtui" />
 		<antcall target="jdtuirefactoring" />
@@ -304,6 +304,7 @@
 		<antcall target="ui" />
 		<antcall target="uieditors" />
 		<antcall target="uiworkbenchtexteditor" />
+		<antcall target="uircp" />
 	</target>
 	
 
