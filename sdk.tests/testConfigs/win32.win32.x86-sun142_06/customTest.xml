@@ -1,6 +1,7 @@
 <project name="Customized testing instructions" default="customSetup">
 
 	<target name="customSetup">
+
 		<antcall target="installVm" />
 		<!--copy the script which sets up environment and invokes the tests on test machine-->
 		<exec dir="." executable="${copyClient}">

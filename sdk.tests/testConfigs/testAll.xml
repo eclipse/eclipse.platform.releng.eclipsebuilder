@@ -34,6 +34,7 @@
 	</target>
 
 	<target name="runtest">
+		<property file="${basedir}/${testconfig}/testing.properties" />
 		<property name="testResults" value="${postingDirectory}/${buildLabel}/testresults" />
 		<mkdir dir="${testResults}" />
 
@@ -42,11 +43,12 @@
 		<findMachine cfg="${cfg}" markerContainer="${markerContainer}" cfgKey="${testconfig}" markerName="${markerName}" waitInterval="30" />
 		<property file="${markerContainer}/${markerName}.marker" />
 		<property name="testMachine" value="${0}" />
-
+		
+		<property name="consolelog" value="${target}.${testconfig}.txt" />
 		<!--run the test-->
 		<ant antfile="${test.xml}">
 			<property name="tester" value="${basedir}/${testconfig}" />
-			<property name="args" value="${executionDir} ${target} ${target}.${testconfig}.txt" />
+			<property name="args" value="${executionDir} ${target} ${consolelog}" />
 		</ant>
 		<delete file="${markerContainer}/${markerName}.marker" />
 	</target>
