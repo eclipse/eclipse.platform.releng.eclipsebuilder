@@ -17,21 +17,6 @@
 <!-- Add one target for each root element and each configuration -->
 <!-- ===================================================================== -->
 
-<target name="assemble.org.eclipse.releng.tools">
-	<property name="archiveName" value="org.eclipse.releng.tools_${buildId}.zip"/>
-	<ant antfile="build.xml" dir="${buildDirectory}/src/plugins/org.eclipse.releng.tools">
-		<property name="plugin.destination" value="${buildDirectory}/${buildLabel}" />
-	</ant>
-	<move tofile="${buildDirectory}/${buildLabel}/${archiveName}">
-    <fileset dir="${buildDirectory}/${buildLabel}">
-      <include name="*org.eclipse.releng.tools*.zip"/>
-    </fileset>
-  </move>
-
-</target>
-
-
-
 <!-- ===================================================================== -->
 <!-- Check out map files from correct repository -->
 <!-- Replace values for cvsRoot, package and mapVersionTag as desired. -->
@@ -130,6 +115,15 @@
 <!-- (e.g., testing, posting, emailing, ...) -->
 <!-- ===================================================================== -->
 <target name="postBuild">
+	<property name="archiveName" value="org.eclipse.releng.tools_${buildId}.zip"/>
+	<ant antfile="build.xml" dir="${buildDirectory}/src/plugins/org.eclipse.releng.tools">
+		<property name="plugin.destination" value="${buildDirectory}/${buildLabel}" />
+	</ant>
+	<move tofile="${buildDirectory}/${buildLabel}/${archiveName}">
+    <fileset dir="${buildDirectory}/${buildLabel}">
+      <include name="*org.eclipse.releng.tools*.zip"/>
+    </fileset>
+  </move>
 </target>
 
 <!-- ===================================================================== -->
