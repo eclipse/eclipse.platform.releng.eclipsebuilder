@@ -157,7 +157,9 @@
          </classpath>
     </java>
 
+	<!--load the property file created with the directory names for all test plugins-->
 	<property file="${workingDirectory}/eclipse-testing/test.properties" />
+
 	<!-- Remove the plugin version number appended to the org.eclipse.test plugin directory.
    	     This is so that contributors of test.xml's do not have to update their paths to 
    	     library.xml in org.eclipse.test whenever its version is updated.
@@ -174,14 +176,16 @@
 			<arg line="-r -q eclipse-junit-tests-${buildId}.zip eclipse"/>
 	</exec>	
  
- 
-     
 	<delete dir="${workingDirectory}/eclipse" includeEmptyDirs="true" />
  	
     <copy todir="${workingDirectory}/eclipse-testing">
-     	<fileset dir="${buildDirectory}/plugins/org.eclipse.test" includes="readme.html,testframework.html,JUNIT.XSL,runtests*,test.xml" />
+     	<fileset dir="${buildDirectory}/plugins/org.eclipse.test" includes="testframework.html,JUNIT.XSL" />
     </copy>
-   
+
+    <copy todir="${workingDirectory}/eclipse-testing">
+     	<fileset dir="${builderDirectory}/testScripts" />
+    </copy>
+
     <move file="${workingDirectory}/eclipse-junit-tests-${buildId}.zip" todir="${workingDirectory}/eclipse-testing"/>
 
 	<!--set execute permission on shell script-->
