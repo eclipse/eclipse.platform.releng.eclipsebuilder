@@ -23,6 +23,8 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<ant antfile="${assembleScriptName}">
 		<property name="archiveName" value="eclipse-SDK-${buildId}-win32.zip"/>		
 	</ant>
+	<ant antfile="${builderDirectory}/tools/build.xml">
+	</ant>
 </target>
 
 <target name="assemble.org.eclipse.sdk.linux.motif.x86">
