@@ -312,6 +312,8 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<copy todir="${tempDir}/buildScripts">
 				<fileset dir="${buildDirectory}" excludes="features/*example*/**,plugins/*example*/**" includes="features/*/build.xml,features/*.source*/**,plugins/*/build.xml,plugins/*.source*/**,fetch_*.xml,assemble*.xml,plugins/org.eclipse.swt.tools/**,plugins/*doc*/**" />
 			</copy>
+			<!--ensure *nix drops are created as .tar.gz files -->
+		    <replace dir="${tempDir}/buildScripts" includes="assemble*" excludes="*win32*" token=".zip" value=".tar.gz"/>
 			
 			<!-- create drop containing the fetch scripts, no source -->
 			<exec dir="${tempDir}" executable="zip">
