@@ -17,9 +17,17 @@
 <!-- Add one target for each root element and each configuration -->
 <!-- ===================================================================== -->
 
-<target name="assemble.org.eclipse.jdt">
+<target name="assemble.org.eclipse.releng.tools">
 	<property name="archiveName" value="org.eclipse.releng.tools_${buildId}.zip"/>
-	<ant antfile="${assembleScriptName}"/>
+	<ant antfile="build.xml" dir="${buildDirectory}/src/plugins/org.eclipse.releng.tools">
+		<property name="plugin.destination" value="${buildDirectory}/${buildLabel}" />
+	</ant>
+	<move tofile="${buildDirectory}/${buildLabel}/${archiveName}">
+    <fileset dir="${buildDirectory}/${buildLabel}">
+      <include name="*org.eclipse.releng.tools*.zip"/>
+    </fileset>
+  </move>
+
 </target>
 
 
