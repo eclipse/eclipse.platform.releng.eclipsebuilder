@@ -390,12 +390,12 @@ public class ReadFile extends Task {
 		 			if (verifyUrl(path+"/"+url)) {		 			
 		 				boolean upLevel = url.startsWith("../");
 		 		 	 	if (upLevel) {		 		 			     
-		 		 	 	 	int indexLastDirPath = path.lastIndexOf(File.Separator);		 		 		 		 		 		 
+		 		 	 	 	int indexLastDirPath = path.lastIndexOf('/');		 		 		 		 		 		 
 		 		 		 	String shorterPath = path.substring(0,indexLastDirPath);
 		 		 		 	url = url.replaceFirst("..","");
 		 		 		 	nextUrl = shorterPath + url;		 		 		 		 		 
 		 		 	 	 } else {
-		 		 			     nextUrl = path + File.separator + url;
+		 		 			     nextUrl = path + "/" + url;
 		 		 		 }
 		 		 	 		if (addLink(nextUrl)) {
 		 		 	 			if (nextUrl.matches("(?i).*samples.*")) {		 		 		 	 //  
@@ -443,7 +443,7 @@ public class ReadFile extends Task {
 		 		 int startDoc = path.lastIndexOf("/");
 		 		 int endDoc = path.lastIndexOf("_");
 		 		 
-		 		 String docFileName = path + File.separator + path.substring(startDoc+1,endDoc+6) + ".pdf";
+		 		 String docFileName = path + "/" + path.substring(startDoc+1,endDoc+6) + ".pdf";
 		
 		 		 return(docFileName);
 		 }
@@ -471,7 +471,7 @@ public class ReadFile extends Task {
 		 
 		  void writeDocGenScript(String path, String docName, String scriptName, String docParam) {
 		 		 		 		 
-		 		String docGenScript = path + File.separator + scriptName;	    	 		 
+		 		String docGenScript = path + "/" + scriptName;	    	 		 
 		 		 
      	 		  try {
 		         BufferedWriter outfile = new BufferedWriter(new FileWriter(docGenScript));
@@ -479,8 +479,7 @@ public class ReadFile extends Task {
 		         for (Iterator i = listLinks.iterator(); i.hasNext();) {
 		 		 		     outfile.write((String)(i.next())+" ");		 		 		     
 		 		 		 }
-		         String eol = System.getProperty("line.separator");					
-		         outfile.write(eol);
+		         outfile.write("\n");
 		         outfile.close();    
 		     } catch (IOException ex) {
 		     		 ex.printStackTrace();
@@ -500,7 +499,7 @@ public class ReadFile extends Task {
 		        String path = docDir;
 		        listLinks = new ArrayList();
 		  		//Update xml if required
-		 		htmlFile = path + File.separator + htmlFileName;		 	
+		 		htmlFile = path + "/" + htmlFileName;		 	
 		 		//fix xml and generate html as required
 		 		verifySourceFiles(path,xmlFileName,styleSheet,htmlFileName);	    	 			 		 	 			
 		 		//add the first link to the array		 		 		 
