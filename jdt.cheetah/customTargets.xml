@@ -6,7 +6,7 @@
 <target name="allElements">
 	<ant antfile="${genericTargets}" target="${target}" >
 		<property name="type" value="feature" />
-		<property name="id" value="org.eclipse.jdt.cheetah05" />
+		<property name="id" value="org.eclipse.jdt.cheetah06" />
 	</ant>
 </target>
 
@@ -17,12 +17,12 @@
 <!-- Add one target for each root element and each configuration -->
 <!-- ===================================================================== -->
 
-<target name="assemble.org.eclipse.jdt.cheetah05">
+<target name="assemble.org.eclipse.jdt.cheetah06">
 	<!--property name="archiveName" value="eclipse-JDT-Cheetah-${buildId}.zip"/>
 	<ant antfile="${assembleScriptName}"/-->
 	<mkdir dir="${buildDirectory}/${buildLabel}/plugins" />
 	<mkdir dir="${buildDirectory}/${buildLabel}/features" />
-	<ant antfile="build.xml" dir="${buildDirectory}/features/org.eclipse.jdt.cheetah05">
+	<ant antfile="build.xml" dir="${buildDirectory}/features/org.eclipse.jdt.cheetah06">
 		<property name="plugin.destination" value="${buildDirectory}/${buildLabel}/plugins" />
 		<property name="feature.destination" value="${buildDirectory}/${buildLabel}/features" />
 	</ant>
@@ -34,15 +34,15 @@
 <!-- Replace values for cvsRoot, package and mapVersionTag as desired. -->
 <!-- ===================================================================== -->
 <target name="checkLocal">
-	<available property="mapsLocal" file="${buildDirectory}/maps/org.eclipse.jdt.core.cheetah.map" />
+	<available property="mapsLocal" file="${buildDirectory}/maps/org.eclipse.jdt.cheetah.map" />
 </target>
 <target name="getMapFiles" depends="checkLocal" unless="mapsLocal">
 
 	<!-- ***  change the repo info -->
-	<property name="mapCvsRoot" value=":pserver:anonymous@ottcvs1.ott.oti.com:/home/cvs/releng" />
+	<property name="mapCvsRoot" value=":pserver:anonymous@snz1f.parislab.fr.ibm.com:/data/cvs/eclipse" />
 	<property name="mapVersionTag" value="HEAD" />
 	<cvs cvsRoot="${mapCvsRoot}"
-		package="org.eclipse.jdt.core.cheetah.map"
+		package="org.eclipse.jdt.cheetah.map"
 		dest="${buildDirectory}/maps"
 		tag="${mapVersionTag}"
 	/>
@@ -51,11 +51,11 @@
 </target>
 
 <target name="tagMapFiles" if="tagMaps">
-	<cvs dest="${buildDirectory}/maps/org.eclipse.jdt.core.cheetah.map" command="tag v${timestamp}" />
+	<cvs dest="${buildDirectory}/maps/org.eclipse.jdt.cheetah.map" command="tag v${timestamp}" />
 </target>
 
 <target name="getBaseEclipse">
-	<property file="${buildDirectory}/maps/org.eclipse.jdt.core.cheetah.map/maps/build.cfg"/>
+	<property file="${buildDirectory}/maps/org.eclipse.jdt.cheetah.map/maps/build.cfg"/>
 	<get src="${eclipseURL}/eclipse-SDK-${eclipseBuildID}-win32.zip" dest="${buildDirectory}/eclipse-SDK.zip" usetimestamp="true"/>
 		<exec dir="${buildDirectory}" executable="unzip">
 			<arg line="-o -qq eclipse-SDK.zip"/>
@@ -151,7 +151,7 @@
 	</antcall>
 
 	<unzip dest="${buildDirectory}/${buildLabel}/compilelogs" overwrite="true">
-		<fileset dir="${buildDirectory}/features/org.eclipse.jdt.cheetah05">
+		<fileset dir="${buildDirectory}/features/org.eclipse.jdt.cheetah06">
 			<include name="*.log.zip" />
 		</fileset>
 	</unzip>
