@@ -173,7 +173,7 @@
     <!--eclipse.home is relative to the scripts directory in the org.eclipse.pde.build plugin.  Assume the plugins used in the classpath are in the same directory as org.eclipse.pde.build-->
     <property name="eclipse.home" value="../../.." />
 
-    <java classname="TestVersionTracker" >
+    <java classname="TestVersionTracker" fork="yes">
          <arg line="${workingDirectory}/eclipse/features/org.eclipse.sdk.tests_3.0.0/feature.xml  ${buildDirectory} ${workingDirectory}/eclipse-testing/test.properties" /> 
          <classpath>
             	<pathelement path="${eclipse.home}/plugins/org.apache.xerces_4.0.13/xercesImpl.jar" />
