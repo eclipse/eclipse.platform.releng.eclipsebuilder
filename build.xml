@@ -1,7 +1,7 @@
 <project default="main">
 
 	<property name="pde.build.scripts" value="../org.eclipse.releng.basebuilder/plugins/org.eclipse.pde.build_2.1.0/scripts" />
-	
+
 	<target name="main">
 		<touch file="${user.home}/.cvspass" />
 		
