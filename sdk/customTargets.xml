@@ -97,7 +97,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 <property file="${mapTag.properties}"/>
 	 <property name="cvsDiffFile" value="${buildDirectory}/cvsDiff.txt" />
      <cvs cvsRoot="${mapCvsRoot}" dest="${buildDirectory}/maps" command="diff -w -r ${lastMapTag}" output="${cvsDiffFile}" />
-     <modifiedMaps mapDiffFile="${cvsDiffFile}" mapOwnerProperties="${buildDirectory}/maps/org.eclipse.releng/component.properties" />
+     <modifiedMaps mapDiffFile="${cvsDiffFile}" />
 </target>
 
 <target name="tagMapFiles" if="tagMaps">
