@@ -349,6 +349,14 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<delete dir="${tempDir}/" />
 		</target>
 	
+	<target name="getSdkExamplesPlugins">
+		    <ant antfile="build.xml" dir="${pde.build.scripts}" target="preBuild">
+				<property name="builder" value="${eclipse.build.scripts}/sdk.examples" />
+			</ant>
+			<ant antfile="build.xml" dir="${pde.build.scripts}" target="fetch">
+				<property name="builder" value="${eclipse.build.scripts}/sdk.examples" />
+			</ant>
+		</target>
 
 <!-- ===================================================================== -->
 <!-- Default target                                                        -->
