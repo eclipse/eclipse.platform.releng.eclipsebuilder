@@ -2,44 +2,43 @@
 <topLevel>
 <zipTypes>
 	<zipType name="Eclipse SDK">
-		<platform id="SW" name="Windows 98/ME/2000/XP" fileName='eclipse-SDK-@build@-win32.zip&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;download.php?dropFile=eclipse-SDK-@build@-win32.zip&quot;>http&lt;/a>)&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;@ftpdir@/eclipse-SDK-@build@-win32.zip&quot;>ftp&lt;/a>)'></platform>
-		<platform id="SLM" name="Linux RH 7.1/SuSE 7.1 (x86/Motif)" fileName='eclipse-SDK-@build@-linux-motif.zip&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;download.php?dropFile=eclipse-SDK-@build@-linux-motif.zip&quot;>http&lt;/a>)&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;@ftpdir@/eclipse-SDK-@build@-linux-motif.zip&quot;>ftp&lt;/a>)'></platform>
-		<platform id="SLG2" name="Linux RH 7.1/SuSE 7.1 (x86/GTK 2)" fileName='eclipse-SDK-@build@-linux-gtk.zip&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;download.php?dropFile=eclipse-SDK-@build@-linux-gtk.zip&quot;>http&lt;/a>)&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;@ftpdir@/eclipse-SDK-@build@-linux-gtk.zip&quot;>ftp&lt;/a>)'></platform>
-		<platform id="SSM" name="Solaris 8 (SPARC/Motif)" fileName='eclipse-SDK-@build@-solaris-motif.zip&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;download.php?dropFile=eclipse-SDK-@build@-solaris-motif.zip&quot;>http&lt;/a>)&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;@ftpdir@/eclipse-SDK-@build@-solaris-motif.zip&quot;>ftp&lt;/a>)'></platform>
-		<platform id="SNP" name="QNX (x86/Photon)" fileName='eclipse-SDK-@build@-qnx-photon.zip&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;download.php?dropFile=eclipse-SDK-@build@-qnx-photon.zip&quot;>http&lt;/a>)&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;@ftpdir@/eclipse-SDK-@build@-qnx-photon.zip&quot;>ftp&lt;/a>)'></platform>
-		<platform id="SAM" name="AIX (PPC/Motif)" fileName='eclipse-SDK-@build@-aix-motif.zip&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;download.php?dropFile=eclipse-SDK-@build@-aix-motif.zip&quot;>http&lt;/a>)&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;@ftpdir@/eclipse-SDK-@build@-aix-motif.zip&quot;>ftp&lt;/a>)'></platform>
-		<platform id="SHM" name="HP-UX (HP9000/Motif)" fileName='eclipse-SDK-@build@-hpux-motif.zip&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;download.php?dropFile=eclipse-SDK-@build@-hpux-motif.zip&quot;>http&lt;/a>)&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;@ftpdir@/eclipse-SDK-@build@-hpux-motif.zip&quot;>ftp&lt;/a>)'></platform>
-		<platform id="SMC" name="Mac OSX (Mac/Carbon)" fileName='eclipse-SDK-@build@-macosx-carbon.zip&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;download.php?dropFile=eclipse-SDK-@build@-macosx-carbon.zip&quot;>http&lt;/a>)&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;@ftpdir@/eclipse-SDK-@build@-macosx-carbon.zip&quot;>ftp&lt;/a>)'></platform>
-		<platform id="SAA2" name='Source Build (Source in .zip) (&lt;a href="srcIncludedBuildInstructions.html">instructions&lt;/a>)' fileName='eclipse-sourceBuild-srcIncluded-@build@.zip&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;download.php?dropFile=eclipse-sourceBuild-srcIncluded-@build@.zip&quot;>http&lt;/a>)&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;@ftpdir@/eclipse-sourceBuild-srcIncluded-@build@.zip&quot;>ftp&lt;/a>)'></platform>
-		<platform id="SAA" name='Source Build (Source fetched via CVS) (&lt;a href="srcFetchBuildInstructions.html">instructions&lt;/a>)' fileName='eclipse-sourceBuild-srcFetch-@build@.zip&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;download.php?dropFile=eclipse-sourceBuild-srcFetch-@build@.zip&quot;>http&lt;/a>)&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;@ftpdir@/eclipse-sourceBuild-srcFetch-@build@.zip&quot;>ftp&lt;/a>)'></platform>
+		<platform id="SW" name="Windows 98/ME/2000/XP" fileName='&lt;a href="download.php?dropFile=eclipse-SDK-@build@-win32.zip">eclipse-SDK-@build@-win32.zip&lt;/a>'></platform>
+		<platform id="SLM" name="Linux RH 7.1/SuSE 7.1 (x86/Motif)" fileName='&lt;a href="download.php?dropFile=eclipse-SDK-@build@-linux-motif.zip">eclipse-SDK-@build@-linux-motif.zip&lt;/a>'></platform>
+		<platform id="SLG2" name="Linux RH 7.1/SuSE 7.1 (x86/GTK 2)" fileName='&lt;a href="download.php?dropFile=eclipse-SDK-@build@-linux-gtk.zip">eclipse-SDK-@build@-linux-gtk.zip&lt;/a>'></platform>
+		<platform id="SSM" name="Solaris 8 (SPARC/Motif)" fileName='&lt;a href="download.php?dropFile=eclipse-SDK-@build@-solaris-motif.zip">eclipse-SDK-@build@-solaris-motif.zip&lt;/a>'></platform>
+		<platform id="SNP" name="QNX (x86/Photon)" fileName='&lt;a href="download.php?dropFile=eclipse-SDK-@build@-qnx-photon.zip">eclipse-SDK-@build@-qnx-photon.zip&lt;/a>'></platform>
+		<platform id="SAM" name="AIX (PPC/Motif)" fileName='&lt;a href="download.php?dropFile=eclipse-SDK-@build@-aix-motif.zip">eclipse-SDK-@build@-aix-motif.zip&lt;/a>'></platform>
+		<platform id="SHM" name="HP-UX (HP9000/Motif)" fileName='&lt;a href="download.php?dropFile=eclipse-SDK-@build@-hpux-motif.zip">eclipse-SDK-@build@-hpux-motif.zip&lt;/a>'></platform>
+		<platform id="SMC" name="Mac OSX (Mac/Carbon)" fileName='&lt;a href="download.php?dropFile=eclipse-SDK-@build@-macosx-carbon.zip">eclipse-SDK-@build@-macosx-carbon.zip&lt;/a>'></platform>
+		<platform id="SAA2" name='Source Build (Source in .zip) (&lt;a href="srcIncludedBuildInstructions.html">instructions&lt;/a>)' fileName='&lt;a href="download.php?dropFile=eclipse-sourceBuild-srcIncluded-@build@.zip">eclipse-sourceBuild-srcIncluded-@build@.zip&lt;/a>'></platform>
+		<platform id="SAA" name='Source Build (Source fetched via CVS) (&lt;a href="srcFetchBuildInstructions.html">instructions&lt;/a>)' fileName='&lt;a href="download.php?dropFile=eclipse-sourceBuild-srcFetch-@build@.zip">eclipse-sourceBuild-srcFetch-@build@.zip&lt;/a>'></platform>
 	</zipType>
 
 	<zipType name="JUnit test plug-ins">
-		<platform id="JT" name="All" fileName='eclipse-Automated-Tests-@build@.zip&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;download.php?dropFile=eclipse-Automated-Tests-@build@.zip&quot;>http&lt;/a>)&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;@ftpdir@/eclipse-Automated-Tests-@build@.zip&quot;>ftp&lt;/a>)'></platform>
+		<platform id="JT" name="All" fileName='&lt;a href="download.php?dropFile=eclipse-Automated-Tests-@build@.zip">eclipse-Automated-Tests-@build@.zip&lt;/a>'></platform>
 	</zipType>
 
 	<zipType name="Example plug-ins">
-		<platform id="EW" name="Windows 98/ME/2000/XP" fileName='eclipse-examples-@build@-win32.zip&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;download.php?dropFile=eclipse-examples-@build@-win32.zip&quot;>http&lt;/a>)&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;@ftpdir@/eclipse-examples-@build@-win32.zip&quot;>ftp&lt;/a>)'></platform>
-		<platform id="EA" name="All Other Platforms" fileName='eclipse-examples-@build@.zip&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;download.php?dropFile=eclipse-examples-@build@.zip&quot;>http&lt;/a>)&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;@ftpdir@/eclipse-examples-@build@.zip&quot;>ftp&lt;/a>)'></platform>
+		<platform id="EW" name="Windows 98/ME/2000/XP" fileName='&lt;a href="download.php?dropFile=eclipse-examples-@build@-win32.zip">eclipse-examples-@build@-win32.zip&lt;/a>'></platform>
+		<platform id="EA" name="All Other Platforms" fileName='&lt;a href="download.php?dropFile=eclipse-examples-@build@.zip">eclipse-examples-@build@.zip&lt;/a>'></platform>
 	</zipType>
 
 	<zipType name="Platform Runtime Binary">
-		<platform id="PW" name="Windows 98/ME/2000/XP" fileName='eclipse-platform-@build@-win32.zip&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;download.php?dropFile=eclipse-platform-@build@-win32.zip&quot;>http&lt;/a>)&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;@ftpdir@/eclipse-platform-@build@-win32.zip&quot;>ftp&lt;/a>)'></platform>
-		<platform id="PLM" name="Linux RH 7.1/SuSE 7.1 (x86/Motif)" fileName='eclipse-platform-@build@-linux-motif.zip&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;download.php?dropFile=eclipse-platform-@build@-linux-motif.zip&quot;>http&lt;/a>)&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;@ftpdir@/eclipse-platform-@build@-linux-motif.zip&quot;>ftp&lt;/a>)'></platform>
-		<platform id="PLG2" name="Linux RH 7.1/SuSE 7.1 (x86/GTK 2)" fileName='eclipse-platform-@build@-linux-gtk.zip&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;download.php?dropFile=eclipse-platform-@build@-linux-gtk.zip&quot;>http&lt;/a>)&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;@ftpdir@/eclipse-platform-@build@-linux-gtk.zip&quot;>ftp&lt;/a>)'></platform>
-		<platform id="PSM" name="Solaris 8 (SPARC/Motif)" fileName='eclipse-platform-@build@-solaris-motif.zip&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;download.php?dropFile=eclipse-platform-@build@-solaris-motif.zip&quot;>http&lt;/a>)&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;@ftpdir@/eclipse-platform-@build@-solaris-motif.zip&quot;>ftp&lt;/a>)'></platform>
-		<platform id="PNP" name="QNX (x86/Photon)" fileName='eclipse-platform-@build@-qnx-photon.zip&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;download.php?dropFile=eclipse-platform-@build@-qnx-photon.zip&quot;>http&lt;/a>)&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;@ftpdir@/eclipse-platform-@build@-qnx-photon.zip&quot;>ftp&lt;/a>)'></platform>
-		<platform id="PAM" name="AIX (PPC/Motif)" fileName='eclipse-platform-@build@-aix-motif.zip&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;download.php?dropFile=eclipse-platform-@build@-aix-motif.zip&quot;>http&lt;/a>)&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;@ftpdir@/eclipse-platform-@build@-aix-motif.zip&quot;>ftp&lt;/a>)'></platform>
-		<platform id="PHM" name="HP-UX (HP9000/Motif)" fileName='eclipse-platform-@build@-hpux-motif.zip&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;download.php?dropFile=eclipse-platform-@build@-hpux-motif.zip&quot;>http&lt;/a>)&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;@ftpdir@/eclipse-platform-@build@-hpux-motif.zip&quot;>ftp&lt;/a>)'></platform>
-		<platform id="PMC" name="Mac OSX (Mac/Carbon)" fileName='eclipse-platform-@build@-macosx-carbon.zip&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;download.php?dropFile=eclipse-platform-@build@-macosx-carbon.zip&quot;>http&lt;/a>)&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;@ftpdir@/eclipse-platform-@build@-macosx-carbon.zip&quot;>ftp&lt;/a>)'></platform>
+		<platform id="PW" name="Windows 98/ME/2000/XP" fileName='&lt;a href="download.php?dropFile=eclipse-platform-@build@-win32.zip">eclipse-platform-@build@-win32.zip&lt;/a>'></platform>
+		<platform id="PLM" name="Linux RH 7.1/SuSE 7.1 (x86/Motif)" fileName='&lt;a href="download.php?dropFile=eclipse-platform-@build@-linux-motif.zip">eclipse-platform-@build@-linux-motif.zip&lt;/a>'></platform>
+		<platform id="PLG2" name="Linux RH 7.1/SuSE 7.1 (x86/GTK 2)" fileName='&lt;a href="download.php?dropFile=eclipse-platform-@build@-linux-gtk.zip">eclipse-platform-@build@-linux-gtk.zip&lt;/a>'></platform>
+		<platform id="PSM" name="Solaris 8 (SPARC/Motif)" fileName='&lt;a href="download.php?dropFile=eclipse-platform-@build@-solaris-motif.zip">eclipse-platform-@build@-solaris-motif.zip&lt;/a>'></platform>
+		<platform id="PNP" name="QNX (x86/Photon)" fileName='&lt;a href="download.php?dropFile=eclipse-platform-@build@-qnx-photon.zip">eclipse-platform-@build@-qnx-photon.zip&lt;/a>'></platform>
+		<platform id="PAM" name="AIX (PPC/Motif)" fileName='&lt;a href="download.php?dropFile=eclipse-platform-@build@-aix-motif.zip">eclipse-platform-@build@-aix-motif.zip&lt;/a>'></platform>
+		<platform id="PHM" name="HP-UX (HP9000/Motif)" fileName='&lt;a href="download.php?dropFile=eclipse-platform-@build@-hpux-motif.zip">eclipse-platform-@build@-hpux-motif.zip&lt;/a>'></platform>
+		<platform id="PMC" name="Mac OSX (Mac/Carbon)" fileName='&lt;a href="download.php?dropFile=eclipse-platform-@build@-macosx-carbon.zip">eclipse-platform-@build@-macosx-carbon.zip&lt;/a>'></platform>
 	</zipType>
-
 	<zipType name="JDT Runtime Binary">
-		<platform id="JA" name="All" fileName='eclipse-JDT-@build@.zip&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;download.php?dropFile=eclipse-JDT-@build@.zip&quot;>http&lt;/a>)&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;@ftpdir@/eclipse-JDT-@build@.zip&quot;>ftp&lt;/a>)'></platform>
+		<platform id="JA" name="All" fileName='&lt;a href="download.php?dropFile=eclipse-JDT-@build@.zip">eclipse-JDT-@build@.zip&lt;/a>'></platform>
 	</zipType>
 	
 	<zipType name="FTP-WebDAV plug-ins">
-		<platform id="FW" name="All" fileName='eclipse-FTP-WebDAV-@build@.zip&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;download.php?dropFile=eclipse-FTP-WebDAV-@build@.zip&quot;>http&lt;/a>)&amp;nbsp;&amp;nbsp;(&lt;a href=&quot;@ftpdir@/eclipse-FTP-WebDAV-@build@.zip&quot;>ftp&lt;/a>)'></platform>
+		<platform id="FW" name="All" fileName='&lt;a href="download.php?dropFile=eclipse-FTP-WebDAV-@build@.zip">eclipse-FTP-WebDAV-@build@.zip&lt;/a>'></platform>
 	</zipType>
 	
 </zipTypes>
