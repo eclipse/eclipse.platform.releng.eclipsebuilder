@@ -29,17 +29,16 @@
   plugins and fragments. The script generation functions are made available via 
   custom Ant tasks (see <a href="http://dev.eclipse.org/viewcvs/index.cgi/%7Echeckout%7E/org.eclipse.pde.build/notes/usingPDEBuild.html?rev=HEAD&content-type=text/html">documentation 
   on PDE-BUILD</a>). Calls to these tasks are contained in static Ant scripts 
-  provided in the projects noted above.</p>
-<p>The JDT Core compiler is used for compiling the java source code in Ant javac 
-  calls.</p>
-<p>The Ant technology in Eclipse is used to run both static and generated Ant 
-  scripts.</p>
-<p>&nbsp; </p>
+  provided in the projects noted above. The JDT Core compiler is used for compiling 
+  the java source code in Ant javac calls. The Ant technology in Eclipse is used 
+  to run both static and generated Ant scripts.</p>
+<p>This is the mechanism used by Eclipse Release Engineering.</p>
+<p>&nbsp;</p>
 <p><a name="systemrequirements"></a><b>System Requirements</b></p>
 <ol>
-  <li><a href="http://java.sun.com/j2se/1.3/download.html">JDK 1.3</a> or higher</li>
-  <li>(Unix only) Windows version of the rt.jar (bootstrap classes, classes that 
-    comprise the Java platform), version 1.3 or higher</li>
+  <li>Sun or IBM JDK 1.3 or higher</li>
+  <li> (On Unix only) Windows version of the rt.jar (bootstrap classes, classes 
+    that comprise the Java platform), version 1.3.* or higher</li>
   <li><a href="http://ccvs.cvshome.org/servlets/ProjectDownloadList">CVS 1.10 
     </a> or higher</li>
   <li>Info-ZIP Zip version 2.3 or higher</li>
@@ -53,8 +52,8 @@
 <p>&nbsp;</p>
 <p><a name="setup"></a><b>Initial Setup</b></p>
 <ol>
-  <li>Add the CVS executable and the JDK bin directories to your path.</li>
-  <li> Set the HOME environment variable to ('c:' not 'c:\')</li>
+  <li>Install the JDK, cvs client, Info-ZIP Zip and Unzip, GNU tar as per each 
+    program's instructions.</li>
   <li>Set the JAVA_HOME environment variable to the JDK installation directory.</li>
   <li>(Windows 98) Increase the default environment space as specified <a href="http://support.microsoft.com/default.aspx?scid=kb;EN-US;q230205">here</a>.</li>
   <li>Export the projects org.eclipse.releng.basebuilder and org.eclipse.releng.eclipsebuilder 
@@ -64,25 +63,70 @@
     <blockquote> 
       <p>cvs -d :pserver:anonymous@dev.eclipse.org:/home/eclipse export -r &lt;tag&gt; 
         -d &lt;builderDirectory&gt; org.eclipse.releng.basebuilder</p>
-    </blockquote>
-    <blockquote> 
       <p>cvs -d :pserver:anonymous@dev.eclipse.org:/home/eclipse export -r &lt;tag&gt; 
         -d &lt;builderDirectory&gt; org.eclipse.releng.eclipsebuilder</p>
       <p>The files from both projects <u>must</u> be in the same directory for 
         path calculations.</p>
-      <p>&nbsp;</p>
     </blockquote>
   </li>
+  <li>(Unix) set execute permission on the buildEclipse shell script, &quot;chmod 
+    755 buildEclipse&quot; .</li>
+</ol>
+<ol>
+  <blockquote> 
+    <p>&nbsp;</p>
+  </blockquote>
 </ol>
 <h4><a name="running"></a>Run the Build</h4>
-<blockquote>
-  <p>execute the following command from the directory containing the build scripts:</p>
-  <p>buildEclipse [-mail] [-bootclasspath path][-mapVersionTag tag][buildid name][buildLabel 
-    name][postingDirectory path][-buildType I|N]</p>
+<blockquote> 
+  <p>The scripts buildEclipse.bat and buildEclipse are included in the org.eclipse.releng.eclipsebuilder 
+    project to invoke the Eclipse AntRunner on the Ant build scripts.</p>
+  <p>To execute, use the following command from the directory containing the build 
+    scripts specifying any of the optional parameters described below:</p>
+  <p>buildEclipse [buildid name][buildLabel name][-buildType I|N|S|M][-bootclasspath 
+    path][-mail] [-mapVersionTag tag][postingDirectory path]</p>
   <table width="75%" border="1">
     <tr> 
       <td width="24%">Parameter</td>
       <td width="76%">Description</td>
+    </tr>
+    <tr> 
+      <td width="24%">buildid</td>
+      <td width="76%">Default set to&lt;buildType&gt;&lt;datestamp&gt;, i.e. I20021217, 
+        but can be set to any String value.</td>
+    </tr>
+    <tr> 
+      <td width="24%">buildLabel</td>
+      <td width="76%">The name of the directory that will contain all the products 
+        of the build. Default set to &lt;buildType&gt;-&lt;buildid&gt;-&lt;timestamp&gt;, 
+        ie. I-I20021217-200212170800. This particular nomenclature is used internally 
+        for php scripts web, but can be set to any String value.</td>
+    </tr>
+    <tr> 
+      <td width="24%">buildType</td>
+      <td width="76%"> 
+        <p>The buildType specification is used to identify the build as one of 
+          the following:</p>
+        I = Integration<br>
+        N= Nightly<br>
+        M=Maintenance<br>
+        R=Release<br>
+        T=Test<br>
+        <p>Specifying 'N' as the buildType will retrieve the HEAD stream of all 
+          plugins, fragments and features listed in the *.map files instead of 
+          using the specified tags.</p>
+      </td>
+    </tr>
+    <tr> 
+      <td width="24%">bootclasspath</td>
+      <td width="76%">Absolute path to the classes that implement the Java 2 Platform, 
+        also known as bootstrap classes. These are typically contained in an rt.jar, 
+        inluded with a JRE or JDK. The default value set to the rt.jar included 
+        with the installed JDK. If building on a Unix operating system, the bootclasspath 
+        should be set to a Windows version of the rt.jar. The Windows version 
+        allows all os specific plugins and fragments to compile, whereas the Unix 
+        versions will not allow the Windows specific plugins and fragments to 
+        compile cleanly.</td>
     </tr>
     <tr> 
       <td width="24%" height="173">mail</td>
@@ -91,190 +135,33 @@
           this flag will require a monitor.properties file created in the same 
           directory containing the exported build scripts. At a minimum, the file 
           will require key value entries for the following:</p>
-        <p>host: smtp server used to send mail</p>
-        <p>sender: email address of sender</p>
+        <p>host: smtp server used to send mail, i.e. host=aserver.ca.ibm.com</p>
+        <p>sender: email address of sender, i.e. sender=myname@ca.ibm.com</p>
         <p>recipients: single e-mail address or comma-separated list of email 
-          addresses of recipients.</p>
+          addresses of recipients, i.e. recipients=foo1@bar1.com, foo2@bar2.com,...</p>
       </td>
     </tr>
     <tr> 
       <td width="24%">mapVersionTag</td>
       <td width="76%">The tag of the org.eclipse.releng project to checkout from 
-        dev.eclipse.org. Default value set to HEAD.</td>
+        dev.eclipse.org. The default value is set to HEAD. Use a specific tag 
+        to build an integration build previously posted on downloads.eclipse.org. 
+        The tag names match the date and time of the desired build with a 'v' 
+        prefix, i.e. v200203071430.</td>
     </tr>
     <tr> 
       <td width="24%">postingDirectory</td>
-      <td width="76%">The directory to which the product of the build should be 
-        copied. The product of the build being a directory containing the zip 
-        files of the SDK and runtime products and web pages. If the build is not 
-        to be copied, set this value to be the same as that of buildLabel</td>
-    </tr>
-    <tr> 
-      <td width="24%">bootclasspath</td>
-      <td width="76%">Absolute path to the classes that implement the Java 2 Platform, 
-        also known as bootstrap classes. These are typically contained in an rt.jar, 
-        inluded with all JRE or JDK. Default value set to the rt.jar included 
-        with the installed JDK. The rt.jar used <b>must</b> be a windows version.</td>
-    </tr>
-    <tr> 
-      <td width="24%">buildType</td>
-      <td width="76%">The values I and N are typically used. I indicates that 
-        the build uses the tags are specified in the org.eclipse.releng map files. 
-        N indicates that tag entries in the map files should be replaced with 
-        &quot;HEAD&quot;. </td>
-    </tr>
-    <tr> 
-      <td width="24%">buildid</td>
-      <td width="76%">Typically, &lt;buildType&gt;&lt;datestamp&gt;, i.e. I20021217, 
-        but can be set to any value.</td>
-    </tr>
-    <tr> 
-      <td width="24%">buildLabel</td>
-      <td width="76%">The name of the directory that will contain all the products 
-        of the build. Typically, &lt;buildType&gt;-&lt;buildid&gt;-&lt;timestamp&gt;, 
-        ie. I-I20021217-200212170800. This particular nomenclature is used internally 
-        for php scripts web, but can be set to any value.</td>
-    </tr>
-  </table>
-  <p>&nbsp;</p>
-  <p>java [vmargs] -cp startup.jar org.eclipse.core.launcher.Main -os &lt;os&gt; 
-    -ws &lt;ws&gt;-arch &lt;arch&gt; -noupdate -application org.eclipse.ant.core.antRunner 
-    -buildfile build.xml [$mail] -DmapVersionTag=&lt;$mapVersionTag&gt; -Dinstall=&lt;$buildDirectory&gt; 
-    -DbuildDirectory=&lt;$buildDirectory&gt; -DpostingDirectory=&lt;$postingDirectory&gt; 
-    -Drt=&lt;$bootclasspath&gt;-Dbootclasspath=&lt;$bootclasspath&gt; -DbuildType=&lt;$buildType&gt; 
-    -D$buildType=true -Dbuildid=&lt;$buildid&gt; -DbuildLabel=&lt;$buildLabel&gt; 
-    -Dtimestamp=&lt;$timestamp&gt; [-DcvsRoot=:ext:sdimitro@dev.eclipse.org:/home/eclipse] 
-    [$tag] -DJAVADOC14_HOME=&lt;$JAVADOC14_HOME&gt; &quot;-DzipArgs= &quot;</p>
-  <p>Required Ant Properties</p>
-  <table width="75%" border="1">
-    <tr> 
-      <td width="24%">Property Name</td>
-      <td width="76%">Description</td>
-    </tr>
-    <tr> 
-      <td width="24%" height="173">noMail</td>
-      <td width="76%" height="173">
-        Setting this property will not send mail when a build starts. It is 
-          used in the conditional test when executing the &quot;mail&quot; target 
-          in customTargets.xml.
-        </td>
-    </tr>
-    <tr> 
-      <td width="24%">host</td>
-      <td width="76%">required only if the noMail property is not set. The name 
-        of the mail server.</td>
-    </tr>
-    <tr>
-      <td width="24%">sender</td>
-      <td width="76%">the email address of the sender.</td>
-    </tr>
-    <tr>
-      <td width="24%">recipients</td>
-      <td width="76%">a comma separated list of email addresses of recipients.</td>
-    </tr>
-    <tr> 
-      <td width="24%">mapVersionTag</td>
-      <td width="76%">Set value to the tag of the org.eclipse.releng project to 
-        checkout from dev.eclipse.org.</td>
-    </tr>
-    <tr> 
-      <td width="24%">install</td>
-      <td width="76%">*Duplicate of buildDirectory property. Requirement for this 
-        property will be removed in the near future.</td>
-    </tr>
-    <tr> 
-      <td width="24%" height="22">buildDirectory</td>
-      <td width="76%" height="22">The directory in which to check out feature 
-        and plugin projects.</td>
-    </tr>
-    <tr> 
-      <td width="24%">postingDirectory</td>
-      <td width="76%">The directory to which the product of the build should be 
-        copied. The product of the build being a directory containing the zip 
-        files of the SDK and runtime products and web pages. If the build is not 
-        to be copied, set this value to be the same as that of buildLabel</td>
-    </tr>
-    <tr> 
-      <td width="24%">rt</td>
-      <td width="76%">*Duplicate of bootclasspath property. Requirement for this 
-        property will be removed in the near future.</td>
-    </tr>
-    <tr> 
-      <td width="24%">bootclasspath</td>
-      <td width="76%">Absolute path to the classes that implement the Java 2 Platform, 
-        also known as bootstrap classes. These are typically contained in an rt.jar, 
-        inluded with all JRE or JDK. The rt.jar used <b>must</b> be a windows 
-        version.</td>
-    </tr>
-    <tr> 
-      <td width="24%">buildType</td>
-      <td width="76%">The values I and N are typically used. I indicates that 
-        the build uses the tags are specified in the org.eclipse.releng map files. 
-        N indicates that tag entries in the map files should be replaced with 
-        &quot;HEAD&quot;. </td>
-    </tr>
-    <tr> 
-      <td width="24%">I</td>
-      <td width="76%">Ant property used for conditional testing. Also used as 
-        target name in publish.xml.</td>
-    </tr>
-    <tr> 
-      <td width="24%">N</td>
-      <td width="76%">Ant property used for conditional testing. Used as target 
-        name in publish.xml.</td>
-    </tr>
-    <tr> 
-      <td width="24%">buildid</td>
-      <td width="76%">Typically, &lt;buildType&gt;&lt;datestamp&gt;, i.e. I20021217, 
-        but can be set to any value.</td>
-    </tr>
-    <tr> 
-      <td width="24%">buildLabel</td>
-      <td width="76%">The name of the directory that will contain all the products 
-        of the build. Typically, &lt;buildType&gt;-&lt;buildid&gt;-&lt;timestamp&gt;, 
-        ie. I-I20021217-200212170800. This particular nomenclature is used internally 
-        for php scripts web, but can be set to any value.</td>
-    </tr>
-    <tr> 
-      <td width="24%">timestamp</td>
-      <td width="76%">In this context, the timestamp includes both date and time, 
-        i.e. 200212170800.</td>
-    </tr>
-    <tr> 
-      <td width="24%">cvsRoot</td>
-      <td width="76%"> 
-        <p>The CVS repository connection string to use to check out the org.eclipse.releng 
-          project. This has been used internally to check out the project with 
-          a set user who has commit rights to the project and to tag the project 
-          with the datestamp for integration builds.</p>
-        <p> Default value: :pserver:anonymous@dev.eclipse.org:/home/eclipse</p>
-      </td>
-    </tr>
-    <tr> 
-      <td width="24%">tag</td>
-      <td width="76%">Property set for conditional execution of the customTargets.xml::tagMapFiles 
-        target.</td>
-    </tr>
-    <tr> 
-      <td width="24%">JAVADOC14_HOME</td>
-      <td width="76%">Absolute path to the bin directory of an installed JDK, 
-        i.e. d:\jdk_1.3.1\bin</td>
-    </tr>
-    <tr> 
-      <td width="24%">zipArgs (windows only)</td>
-      <td width="76%"> 
-        <p>This property must be set and the value must be set to an empty string. 
-          ie. &quot;-DzipArgs= &quot;</p>
-        <p>This is required on Windows to prevent the creation of linux motif 
-          zip files to occur with the &quot;-y&quot; option being passed to the 
-          zip executable to preserve symbolic links. This need for this setting 
-          will be removed in the near future.</p>
-      </td>
+      <td width="76%">The directory to which the products of the build should 
+        be copied. The product of the build is a directory, named with the buildLabel 
+        (see description below), containing the zip files of the SDK and runtime 
+        products and web pages. Default value set to current directory.</td>
     </tr>
   </table>
   <p>&nbsp;</p>
 </blockquote>
-<h2><b><a name="build_platforms"></a></b><b>Supported Build Platforms</b> </h2>
+<blockquote>
+  <p><b><a name="build_platforms"></a></b><b>Supported Build Platforms</b> </p>
+</blockquote>
 <p>Eclipse can be built on any of the following platforms. With some <a href="#limitations">limitations</a> 
   any platform can be used to build Eclipse for any or all supported platforms.</p>
 <table width="40%" border="1">
@@ -316,15 +203,14 @@
 <p>&nbsp;</p>
 <h2><a name="limitations"></a>Known Limitations </h2>
 <ol>
-  <li>This mechanism has only been tested on Redhat Linux 7.2 and Windows 2000\XP 
-    using both IBM and Sun JDK 1.3.1.</li>
+  <li>This mechanism has only been tested on Redhat Linux 7.2 and Windows 2000\XP.</li>
   <li>Building unix flavours of Eclipse on Windows will result in incorrect file 
     permissions. The *.so, *.sl, and Eclipse executable files will not have execute 
     permissions. In addition, linux-motif builds will not have symbolic links 
     (libXm.so and libXm.so.2) to libXm.so.2.1 in the installation root directory. 
     In these cases you would have to write an install or post install script to 
     set permissionss properly. (UNIX builds built on UNIX systems will set sufficient 
-    permissions and make the appropriate soft links).
+    permissions and make the appropriate soft links). 
   <li>When the Mac port of Eclipse is built on a Windows operating system, a soft 
     link to the root of the eclipse installation directory will be missing. The 
     following post-installation steps will be required: </li>
@@ -341,6 +227,8 @@
   <li>This process builds all Eclipse runtime and SDK products requiring &gt; 
     1 gig of hard disk space on the build machine. Future releases may contain 
     targets which can be used for building specific products in isolation.</li>
+  <li>Dependencies on InfoZIP Zip and Unzip. Future releases should use Ant tasks 
+    for creating archives.</li>
 </ol>
 
 </body>
