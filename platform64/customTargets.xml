@@ -91,10 +91,7 @@
 		<property name="basews" value="win32" />
 		<property name="basearch" value="x86" />
 	</ant>
-	<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.win32" target="clean">
-		<property name="type" value="plugin" />
-		<property name="id" value="org.eclipse.swt.win32" />
-	</ant>
+
 </target>
 
 <!-- ===================================================================== -->
