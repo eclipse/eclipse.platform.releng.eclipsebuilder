@@ -41,7 +41,7 @@ do
 		-noclean) installmode="noclean";;
 		-properties) properties="-propertyfile $2";shift;;
 		-vm) vm="$2";shift;;
-		-noupdate) update=-noupdate
+		-noupdate) update=-noupdate;;
 		*) tests=$tests\ $1;;
 	esac
 	shift
