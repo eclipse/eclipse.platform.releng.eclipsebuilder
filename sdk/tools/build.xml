@@ -1,6 +1,12 @@
 <project default="main" basedir=".">
 	
-<target name="compileSrc">
+	<property name="builderDirectory" value="c:\plugins"/>
+	
+<target name="checkBinary">
+	<exec executable="htmldoc" failonerror="false"/>		
+</target>
+	
+<target name="compileSrc" depends="checkBinary">
     <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
     <javac verbose="true" failonerror="false"  srcdir="${builderDirectory}\tools" destdir="${builderDirectory}\tools" />     
     <available classname="ReadFile" classpath="${builderDirectory}\tools" property="compileSrc"/>
@@ -12,8 +18,8 @@
 <property name="fileRegexp" value="doc"/>
 <property name="xmlFileName" value="toc.xml"/>
 <property name="htmlFileName" value="toc.html"/>
-<property name="styleSheet" value="${builderDirectory}/tools/toc.xsl"/>
-
+<property name="styleSheet" value="${builderDirectory}/tools/toc.xsl"/>	
+	
 <target name="main" depends="compileSrc" if="compileSrc">
 		<antcall target="genPdf">
 			<param name="docPlugin" value="org.eclipse.jdt.doc.isv" />
