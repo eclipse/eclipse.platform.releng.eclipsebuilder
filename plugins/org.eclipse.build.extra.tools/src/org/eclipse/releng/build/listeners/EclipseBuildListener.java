@@ -26,10 +26,8 @@ public class EclipseBuildListener implements BuildListener {
 	private void openPrintWriter(boolean append) {
 		try {
 			out = new PrintWriter(new FileWriter(logFile, append));
-		} catch (IOException e) {
-			System.out.println("Unable to write to build log.");
-			e.printStackTrace();
-		}
+		} catch (IOException e) {}
+	
 	}
 
 	public EclipseBuildListener() {
@@ -38,9 +36,8 @@ public class EclipseBuildListener implements BuildListener {
 		logFile = buildProperties.getLogFile();
 		try {
 			mailer = new Mailer();
-		} catch (NoClassDefFoundError e) {
-			System.out.println("j2ee.jar may not be on the Ant classpath.");
-		}
+		} catch (NoClassDefFoundError e) {}
+		
 	}
 
 	public void targetStarted(BuildEvent event) {

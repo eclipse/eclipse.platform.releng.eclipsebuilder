@@ -728,14 +728,6 @@
 		<param name="linkFile" value="libXm.so.2" />
 	</antcall>
 	
-	<!--
-	<exec dir="${workingDirectory}" executable="ln">
-		<arg line="-s libXm.so.2.1 libXm.so"/>
-	</exec>
-	<exec dir="${workingDirectory}" executable="ln">
-		<arg line="-s libXm.so.2.1 libXm.so.2"/>
-	</exec>
-	-->
 </target>
 
 
@@ -1124,6 +1116,7 @@
       		tolist="${recipients}"
       		subject="[eclipse-build] ${buildid} (Timestamp: ${timestamp}): ${subject}"
       		message="${message}"
+      		failonerror="false"
 	/>
 </target>
 
