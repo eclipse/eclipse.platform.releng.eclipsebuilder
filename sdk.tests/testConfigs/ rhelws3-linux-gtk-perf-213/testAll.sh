@@ -11,7 +11,7 @@ ulimit -c unlimited
 
 export LD_LIBRARY_PATH USERNAME DISPLAY
 
-REM add Cloudscape plugin to junit tests zip file
+#add Cloudscape plugin to junit tests zip file
 zip eclipse-junit-tests-$1.zip -rm eclipse
 
 #execute command to run tests
