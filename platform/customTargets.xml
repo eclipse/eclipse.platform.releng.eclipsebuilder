@@ -283,14 +283,14 @@
 			</or>
 		</condition>
 
-		<!-- HACK create then unzip swt zips -->
+		<!-- gather source required to build swt libraries -->
 		<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.${wsType}" target="build.sources" />
 		<unzip  dest="${swtlibs}">
 			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.${wsType}">
 				<include name ="**/*.zip"/>
 			</fileset>
 		</unzip>
-		<exec dir="${swtlibs}" executable="sh" failonerror="false">
+		<exec dir="${swtlibs}" executable="sh" failonerror="true">
 			<arg line="build.sh"/>
 		</exec>
 		<property name="swtdir" value="${buildDirectory}/plugins/org.eclipse.swt.${wsType}/os/${os}/${arch}"/>
@@ -305,7 +305,7 @@
 		<!--compile launcher -->
 		<property name="launcherlibs" value="${buildDirectory}/launchertmp"/>
 		<delete dir="${launcherlibs}"/>
-		<exec dir="${buildDirectory}/features/org.eclipse.launchers/library/${ws}/" executable="sh" os="Linux" failonerror="false">
+		<exec dir="${buildDirectory}/features/org.eclipse.launchers/library/${ws}/" executable="sh" os="Linux" failonerror="true">
 			<arg line="build.sh"/>
 		</exec>
 		<move file="${buildDirectory}/features/org.eclipse.launchers/library/${ws}/eclipse" todir="${launcherlibs}/">

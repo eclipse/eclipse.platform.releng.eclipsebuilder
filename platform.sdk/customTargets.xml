@@ -285,7 +285,7 @@
 				<include name ="org.eclipse.swt.${wsType}_*/ws/${ws}/**/*.zip"/>
 			</fileset>
 		</unzip>
-		<exec dir="${swtlibs}/" executable="sh" failonerror="false">
+		<exec dir="${swtlibs}/" executable="sh" failonerror="true">
 			<arg line="build.sh"/>
 		</exec>
 		<property name="swtdir" value="${buildDirectory}/plugins/org.eclipse.swt.${wsType}/os/${os}/${arch}"/>
@@ -300,7 +300,7 @@
 		<!--compile launcher -->
 		<property name="launcherlibs" value="${buildDirectory}/launchertmp"/>
 		<delete dir="${launcherlibs}"/>
-		<exec dir="${buildDirectory}/features/org.eclipse.launchers/library/${ws}/" executable="sh" os="Linux" failonerror="false">
+		<exec dir="${buildDirectory}/features/org.eclipse.launchers/library/${ws}/" executable="sh" os="Linux" failonerror="true">
 			<arg line="build.sh"/>
 		</exec>
 		<move file="${buildDirectory}/features/org.eclipse.launchers/library/${ws}/eclipse" todir="${launcherlibs}/">
