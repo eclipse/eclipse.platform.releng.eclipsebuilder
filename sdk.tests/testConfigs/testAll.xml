@@ -16,36 +16,25 @@
 </target>
 
 <target name="performanceTests">
+	<condition property="213">
+		<equals arg1="${mapVersionTag}" value="perf_213" />
+	</condition>
 	<antcall target="testWinXPPerf" />
+	<antcall target="testWinXPPerf213" />
 	<echo message="Performance testing complete." />
 </target>
-	
-<target name="testLinuxGTK">
-	<property name="markerName" value="eclipse30-linux-gtk-${timestamp}" />
-	<findMachine cfg="${cfg}" markerContainer="${markerContainer}" cfgKey="eclipse30LinuxGtkTest" markerName="${markerName}" waitInterval="30"/>
-	<property file="${markerContainer}/${markerName}.marker" />
-	<property name="testMachine" value="${0}" />
-	
-	<ant antfile="${test.xml}">
-		<property name="tester" value="${basedir}/rhelws3-linux-gtk" />
-	</ant>
-	
-	<delete file="${markerContainer}/${markerName}.marker" />
+<target name="testWinXPPerf213" if="213">
+		<property name="markerName" value="eclipse30-winxp-perf-${timestamp}" />
+		<findMachine cfg="${cfg}" markerContainer="${markerContainer}" cfgKey="eclipse30WinXPTestPerf" markerName="${markerName}" waitInterval="30"/>
+		<property file="${markerContainer}/${markerName}.marker" />
+		<property name="testMachine" value="${0}" />
+			
+		<ant antfile="${test.xml}">
+			<property name="tester" value="${basedir}/win32-perf-213" />
+		</ant>
+		<delete file="${markerContainer}/${markerName}.marker" />
 </target>
-
-<target name="testWinXP">
-	<property name="markerName" value="eclipse30-winxp-${timestamp}" />
-	<findMachine cfg="${cfg}" markerContainer="${markerContainer}" cfgKey="eclipse30WinXPTest" markerName="${markerName}" waitInterval="30"/>
-	<property file="${markerContainer}/${markerName}.marker" />
-	<property name="testMachine" value="${0}" />
-	
-	<ant antfile="${test.xml}">
-		<property name="tester" value="${basedir}/win32" />
-	</ant>
-	<delete file="${markerContainer}/${markerName}.marker" />
-</target>
-
-<target name="testWinXPPerf">
+<target name="testWinXPPerf" unless="213">
 	<property name="markerName" value="eclipse30-winxp-perf-${timestamp}" />
 	<findMachine cfg="${cfg}" markerContainer="${markerContainer}" cfgKey="eclipse30WinXPTestPerf" markerName="${markerName}" waitInterval="30"/>
 	<property file="${markerContainer}/${markerName}.marker" />
