@@ -13,7 +13,7 @@
 	<property name="eclipse-home" value="${install}/eclipse" />
 
 	<!-- The path to libary.xml -->
-	<property name="library-file" value="${eclipse-home}/plugins/${org.eclipse.test}/library.xml" />
+	<!--property name="library-file" value="${eclipse-home}/plugins/${org.eclipse.test}/library.xml" /-->
 
 	<!-- The directory that will contain the xml and html results from the tests that are run -->
  	<property name="results" value="${basedir}/results" />
