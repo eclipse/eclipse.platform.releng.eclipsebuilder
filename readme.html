@@ -1,15 +1,28 @@
 <title>org.eclipse.releng.eclipsebuilder README</title> 
-<p>Last Updated: July 24, 2003</p>
-<p><b>Description</b></p>
+<p>Last Updated: July 24, 2003<br>
+  <br>
+  <b>Table of Contents</b><br>
+  <br>
+  <a href="#description">Description</a><br>
+  <a href="#prereq">Prerequisites</a><br>
+  <a href="#setup">Initial Setup</a><br>
+  <a href="#run">Run the Build</a><br>
+  <a href="#antbuildproperties">Ant properties used in the build</a><br>
+  <a href="#buildconfigs">Build Configurations</a><br>
+  <a href="#examples">Examples</a><br>
+  <br>
+  <br>
+</p>
+<p><b><a name="description"></a>Description</b></p>
 <p>org.eclipse.releng.eclipsebuilder contains Ant scripts that use the script 
   generation facilities in org.eclipse.pde.build to build all shipped components 
   of Eclipse: SDK, platform jdt, examples, tests and team extras. A wrapper script, 
   org.eclipse.releng.eclipsebuilder/build.xml, is provided to build a specified 
   component and provides default settings of necessary Ant properties used in 
-  the build.<br>
+  the build. This document describes how to run a build with this project.<br>
   <br>
 </p>
-<p><b>Prerequisites</b><br>
+<p><b><a name="prereq"></a>Prerequisites</b><br>
 </p>
 <p>1. CVS version 1.10 or higher.<br>
   2. <a href="http://java.sun.com/j2se/1.3/download.html">1.3.1 level JDK</a>.<br>
@@ -22,7 +35,7 @@
   <a href="http://dev.eclipse.org/viewcvs/">dev.eclipse.org</a>.<br>
   <br>
 </p>
-<p><b>Initial Setup<br>
+<p><b><a name="setup"></a>Initial Setup<br>
   <br>
   </b>1. Add the zip, unzip, tar, gzip and cvs executables to your path as required.<br>
   2. Add the JDK bin or jre/bin directory to your path.<b><br>
@@ -30,7 +43,7 @@
   into a directory.<b><br>
   <br>
   <br>
-  Run the Build</b></p>
+  <a name="run"></a>Run the Build</b></p>
 <p> cd to org.eclipse.releng.eclipsebuilder directory and execute the following 
   command (currently the build.xml script can only be executed in a headless eclipse 
   due to <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=35923">bug 35923</a>): 
@@ -38,7 +51,7 @@
 <p><b>java -cp ../org.eclipse.releng.basebuilder/startup.jar org.eclipse.core.launcher.Main 
   -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=sdk 
   | platform | jdt | sdk.examples | sdk.tests [-DJAVADOC14_HOME=&lt;path to jdk 
-  bin directory containing javadoc tool&gt;] [<a href="#properties">additional 
+  bin directory containing javadoc tool&gt;] [<a href="#antbuildproperties">additional 
   Ant property settings as per table below</a>]</b><br>
 </p>
 <p><br>
@@ -52,7 +65,7 @@
   character '/' in links to external classes (see <a href="http://developer.java.sun.com/developer/bugParade/bugs/4359874.html">http://developer.java.sun.com/developer/bugParade/bugs/4359874.html</a>). 
   This property setting is not required if javadoc generation is not needed.</p>
 <p><br>
-  <b><a name="Parameters"></a>Additional Ant Properties used in the build<br>
+  <b><a name="antbuildproperties"></a>Ant Properties used in the build<br>
   <br>
   </b>The following properties are set in a build.properties for the specified 
   component. They can be overridden by setting them at the command line at build 
@@ -192,89 +205,7 @@
       Ant property is set. </td>
   </tr>
 </table>
-<p><b><br>
-  Examples<br>
-  <br>
-  <br>
-  Build Windows SDK component on Windows with javadoc generation</b></p>
-<p><b>java -cp ..\org.eclipse.releng.basebuilder\startup.jar org.eclipse.core.launcher.Main 
-  -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=sdk 
-  -Dconfigs=&quot;win32,win32,x86&quot; -Djavacfailonerror=true -DjavacVerbose=false 
-  -DbuildDirectory=c:\mybuild</b> -<b>DJAVADOC14_HOME=c:\jdk141\bin</b><br>
-  <br>
-  This builds an eclipse SDK for the windows configuration only in the directory 
-  c:\mybuild. &quot;-DjavaVerbose=false&quot; indicates that no compile logs will 
-  be generated and &quot;-Djavacfailonerror=true&quot; will cause the build to 
-  fail if there are any compile errors. <b></b> By setting the value of &quot;-DJAVA14_HOME&quot;, 
-  javadoc will be generated in plugins org.eclipse.platform.doc.isv and org.eclipse.jdt.doc.isv.<br>
-  <br>
-  <br>
-  <b>Build Linux GTK and Motif SDK components on Linux</b><br>
-  <br>
-  <b>java -cp ../org.eclipse.releng.basebuilder/startup.jar org.eclipse.core.launcher.Main 
-  -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=sdk 
-  -Dconfigs=&quot;linux,gtk,x86 &amp; linux,motif,x86&quot; -Dzipargs=-y</b><br>
-  <br>
-  This builds an eclipse SDK for the linux gtk and linux motif configurations. 
-  By default the buildDirectory will be set &quot;src&quot; in eclipse.releng.eclipsebuilder. 
-  &quot;-Dzipargs=-y&quot; is used here to preserve the symbolic links libXm.so 
-  and libXm.so.2 in the Linux Motif root directory of eclipse.<br>
-  <br>
-  <br>
-  <b>Build Windows SDK component on Linux</b></p>
-<p><b>java -cp ../org.eclipse.releng.basebuilder/startup.jar org.eclipse.core.launcher.Main 
-  -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=sdk 
-  -Dconfigs=&quot;win32,win32,x86&quot; -Dbootclasspath=/builds/windows/jre/lib/rt.jar</b><br>
-  <br>
-  This is a command that can be used to build an eclipse SDK for the windows configuration 
-  on a *nix system. A bootclasspath pointing to a Windows rt.jar is explicitly 
-  specified so that bootstrap classes not available in the *nux virtual machine 
-  are available to compile windows specific classes in Eclipse. By default the 
-  buildDirectory will be set &quot;src&quot; in eclipse.releng.eclipsebuilder.<br>
-  <br>
-</p>
-<p><b>Build Linux Motif platform component on Linux</b></p>
-<p><b>java -cp ../org.eclipse.releng.basebuilder/startup.jar org.eclipse.core.launcher.Main 
-  -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=platform 
-  -Dconfigs=&quot;linux,motif,x86&quot; -DbuildDirectory=/builds/platform</b></p>
-<p>This builds an eclipse platform runtime for the linux motif configuration. 
-  The buildDirectory will be set &quot;/builds/platform&quot;.<br>
-  <br>
-</p>
-<p><b>Build platform-independant JDT component against a pre-built Windows Platform 
-  component on Windows</b></p>
-<p><b>java -cp ..\org.eclipse.releng.basebuilder\startup.jar org.eclipse.core.launcher.Main 
-  -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=jdt 
-  -Dconfigs=&quot;*,*,*&quot; -DbuildDirectory=c:\builds\jdt -DbaseLocation=c:\builds\platform 
-  -Dbaseos=win32 -Dbasews=win32 -Dbasearch=x86 -Djavacfailonerror=true</b></p>
-<p></p>
-<p>This builds an Eclipse JDT component against a pre-built eclipse platform plugins. 
-  The build will fail if there are compile errors. The value specified for baseLocation 
-  must not contain any JDT features or plugins or the build will fail. &quot;baseos&quot;, 
-  &quot;basews&quot; and &quot;basearch&quot; should be specified in order to 
-  find the correct location of platform specific jars (i.e. swt.jar) on the classpath.<br>
-  <br>
-  <b><br>
-  Building Eclipse FTP-WebDAV against a pre-built Eclipse SDK on Linux</b></p>
-<p><b>java -cp ../org.eclipse.releng.basebuilder/startup.jar org.eclipse.core.launcher.Main 
-  -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=team.extras 
-  -DbuildDirectory=/builds/team.extras -DbaseLocation=/home/user/fred/eclipse 
-  -Dbaseos=linux -Dbasews=motif -Dbasearch=x86 -Djavacfailonerror=true</b></p>
-<p></p>
-<p>This builds an Eclipse FTP-WebDAV component against an eclipse SDK installed 
-  in directory /home/user/fred/eclipse. The build will fail if there are compile 
-  errors. The build output will be located in /builds/team.extras.</p>
 <p><br>
-  <b>Building Eclipse JUnit Plugin tests against a pre-built Eclipse SDK on Windows</b></p>
-<p><b>java -cp ..\org.eclipse.releng.basebuilder\startup.jar org.eclipse.core.launcher.Main 
-  -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=sdk.tests 
-  -DbuildDirectory=c:\tests -DbaseLocation=c:\eclipse -Dbaseos=win32 -Dbasews=win32 
-  -Dbasearch=x86 -Djavacfailonerror=true</b></p>
-<p></p>
-<p>This builds an Eclipse SDK tests component in the directory c:\tests against 
-  an eclipse installed in the directory c:\. The build will fail if there are 
-  compile errors.<br>
-  <br>
 </p>
 <p><font size="+1"><b><a name="buildconfigs"></a>Eclipse Build Configurations</b></font></p>
 <p><b></b>One or more build configurations can be specified to build any of the 
@@ -336,4 +267,99 @@
     <td width="34%">Intel x86</td>
   </tr>
 </table>
+<p><b><br>
+  <a name="examples"></a>Examples<br>
+  </b></p>
+<p><a href="#ex1">Build Windows SDK on Windows with javadoc generated on Windows</a><br>
+  <a href="#ex2">Build Linux GTK and Motif SDK on Linux</a><b><br>
+  </b><a href="#ex3">Build Windows SDK component on Linux</a><b><br>
+  </b><a href="#ex4">Build Linux Motif platform component on Linux</a><b><br>
+  </b><a href="#ex5">Build platform-independant JDT component against a pre-built 
+  Windows Platform component on Windows</a><br>
+  <a href="#ex6">Building Eclipse FTP-WebDAV against a pre-built Eclipse SDK on 
+  Linux </a><br>
+  <a href="#ex7">Building Eclipse JUnit Plugin tests against a pre-built Eclipse 
+  SDK on Windows </a> </p>
+<p><b><br>
+  <a name="ex1"></a>Build Windows SDK component with javadoc generation on Windows</b></p>
+<p><b>java -cp ..\org.eclipse.releng.basebuilder\startup.jar org.eclipse.core.launcher.Main 
+  -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=sdk 
+  -Dconfigs=&quot;win32,win32,x86&quot; -Djavacfailonerror=true -DjavacVerbose=false 
+  -DbuildDirectory=c:\mybuild</b> -<b>DJAVADOC14_HOME=c:\jdk141\bin</b><br>
+  <br>
+  This builds an eclipse SDK for the windows configuration only in the directory 
+  c:\mybuild. &quot;-DjavaVerbose=false&quot; indicates that no compile logs will 
+  be generated and &quot;-Djavacfailonerror=true&quot; will cause the build to 
+  fail if there are any compile errors. <b></b> By setting the value of &quot;-DJAVA14_HOME&quot;, 
+  javadoc will be generated in plugins org.eclipse.platform.doc.isv and org.eclipse.jdt.doc.isv.<br>
+  <br>
+  <br>
+  <b><a name="ex2"></a>Build Linux GTK and Motif SDK components on Linux</b><br>
+  <br>
+  <b>java -cp ../org.eclipse.releng.basebuilder/startup.jar org.eclipse.core.launcher.Main 
+  -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=sdk 
+  -Dconfigs=&quot;linux,gtk,x86 &amp; linux,motif,x86&quot; -Dzipargs=-y</b><br>
+  <br>
+  This builds an eclipse SDK for the linux gtk and linux motif configurations. 
+  By default the buildDirectory will be set &quot;src&quot; in eclipse.releng.eclipsebuilder. 
+  &quot;-Dzipargs=-y&quot; is used here to preserve the symbolic links libXm.so 
+  and libXm.so.2 in the Linux Motif root directory of eclipse.<br>
+  <br>
+  <br>
+  <b><a name="ex3"></a>Build Windows SDK component on Linux</b></p>
+<p><b>java -cp ../org.eclipse.releng.basebuilder/startup.jar org.eclipse.core.launcher.Main 
+  -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=sdk 
+  -Dconfigs=&quot;win32,win32,x86&quot; -Dbootclasspath=/builds/windows/jre/lib/rt.jar</b><br>
+  <br>
+  This is a command that can be used to build an eclipse SDK for the windows configuration 
+  on a *nix system. A bootclasspath pointing to a Windows rt.jar is explicitly 
+  specified so that bootstrap classes not available in the *nux virtual machine 
+  are available to compile windows specific classes in Eclipse. By default the 
+  buildDirectory will be set &quot;src&quot; in eclipse.releng.eclipsebuilder.<br>
+  <br>
+</p>
+<p><b><a name="ex4"></a>Build Linux Motif platform component on Linux</b></p>
+<p><b>java -cp ../org.eclipse.releng.basebuilder/startup.jar org.eclipse.core.launcher.Main 
+  -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=platform 
+  -Dconfigs=&quot;linux,motif,x86&quot; -DbuildDirectory=/builds/platform</b></p>
+<p>This builds an eclipse platform runtime for the linux motif configuration. 
+  The buildDirectory will be set &quot;/builds/platform&quot;.<br>
+  <br>
+</p>
+<p><b><a name="ex5"></a>Build platform-independant JDT component against a pre-built 
+  Windows Platform component on Windows</b></p>
+<p><b>java -cp ..\org.eclipse.releng.basebuilder\startup.jar org.eclipse.core.launcher.Main 
+  -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=jdt 
+  -Dconfigs=&quot;*,*,*&quot; -DbuildDirectory=c:\builds\jdt -DbaseLocation=c:\builds\platform 
+  -Dbaseos=win32 -Dbasews=win32 -Dbasearch=x86 -Djavacfailonerror=true</b></p>
+<p></p>
+<p>This builds an Eclipse JDT component against a pre-built eclipse platform plugins. 
+  The build will fail if there are compile errors. The value specified for baseLocation 
+  must not contain any JDT features or plugins or the build will fail. &quot;baseos&quot;, 
+  &quot;basews&quot; and &quot;basearch&quot; should be specified in order to 
+  find the correct location of platform specific jars (i.e. swt.jar) on the classpath.<br>
+  <br>
+  <b><br>
+  <a name="ex6"></a>Building Eclipse FTP-WebDAV against a pre-built Eclipse SDK 
+  on Linux</b></p>
+<p><b>java -cp ../org.eclipse.releng.basebuilder/startup.jar org.eclipse.core.launcher.Main 
+  -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=team.extras 
+  -DbuildDirectory=/builds/team.extras -DbaseLocation=/home/user/fred/eclipse 
+  -Dbaseos=linux -Dbasews=motif -Dbasearch=x86 -Djavacfailonerror=true</b></p>
+<p></p>
+<p>This builds an Eclipse FTP-WebDAV component against an eclipse SDK installed 
+  in directory /home/user/fred/eclipse. The build will fail if there are compile 
+  errors. The build output will be located in /builds/team.extras.</p>
+<p><br>
+  <b><a name="ex7"></a>Building Eclipse JUnit Plugin tests against a pre-built 
+  Eclipse SDK on Windows</b></p>
+<p><b>java -cp ..\org.eclipse.releng.basebuilder\startup.jar org.eclipse.core.launcher.Main 
+  -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=sdk.tests 
+  -DbuildDirectory=c:\tests -DbaseLocation=c:\eclipse -Dbaseos=win32 -Dbasews=win32 
+  -Dbasearch=x86 -Djavacfailonerror=true</b></p>
+<p></p>
+<p>This builds an Eclipse SDK tests component in the directory c:\tests against 
+  an eclipse installed in the directory c:\. The build will fail if there are 
+  compile errors.<br>
+</p>
 <p>&nbsp;</p>
