@@ -1077,16 +1077,9 @@
 	<copy file="${buildDirectory}/plugins/org.eclipse.test/testframework.html" tofile="${buildLabel}/testframework.html" />
 
  	<ant antfile="publish.xml" target="countFiles" />
- 	<ant antfile="publish.xml" target="generateIndex" >
- 		<property name="useNewFormat" value="true" />
- 		<property name="isBuildTested" value="true" />
-		<property name="dropTokenList" value="%sdk%,%tests%,%example%,%runtime%,%jdt%,%teamextras%" />	
- 	</ant>
- 	
- 	<!--  Insert ftp url for drop directory  -->
-	<replace file="${buildLabel}/index.php" token="@buildlabel@" value="${buildLabel}"/>
-
+	<antcall target="generateEclipseIndex" />
  	<ant antfile="publish.xml" target="getStaticFiles" />
+	<antcall target="generateMD5Checksum" />
   	<ant antfile="publish.xml" target="copyBuild" />
  	 	
 </target>
@@ -1096,18 +1089,10 @@
 <!-- ===================================================================== -->
 
 <target name="test">
+
 	<echo message="Starting tests." />
 	<ant antfile="customTest.xml" />
-	
-	<!--regenerate the index page with links to test results-->
-	<ant antfile="publish.xml" target="generateIndex">
- 		<property name="useNewFormat" value="true" />
-		<property name="isBuildTested" value="true" />
-		<property name="dropTokenList" value="%sdk%,%tests%,%example%,%runtime%,%jdt%,%teamextras%" />
-	</ant>
-	
- 	<!--  Insert ftp url for drop directory  -->
-	<replace file="${buildLabel}/index.php" token="@buildlabel@" value="${buildLabel}"/>
+	<antcall target="generateEclipseIndex" />
 
 	<!--copy the test results and new index page to the posting location-->
 	<copy todir="${postingDirectory}/${buildLabel}" overwrite="true">
@@ -1125,6 +1110,23 @@
 	</exec>
 </target>
 
+<target name="generateEclipseIndex">
+	<available classname="org.eclipse.releng.internal.generators.EclipseTestResultsGenerator" property="class" value="org.eclipse.releng.generators.EclipseTestResultsGenerator" />
+	<property name="class" value="org.eclipse.releng.generators.TestResultsGenerator" />
+
+	<!--regenerate the index page with links to test results-->
+	<ant antfile="publish.xml" target="generateIndex">
+ 		<property name="useNewFormat" value="true" />
+		<property name="isBuildTested" value="true" />
+		<property name="dropTokenList" value="%sdk%,%tests%,%example%,%runtime%,%jdt%,%teamextras%" />
+		<property name="class" value="${class}" />
+	</ant>
+	
+ 	<!--  Insert ftp url for drop directory  -->
+	<replace file="${buildLabel}/index.php" token="@buildlabel@" value="${buildLabel}"/>
+
+</target>
+
 <target name="mail" unless="noMail">
 <!-- helper target for sending email messages related to build. -->
 	<mail mailhost="${host}" from="${sender}"
@@ -1133,6 +1135,24 @@
       		message="${message}"
       		failonerror="false"
 	/>
+</target>
+
+<target name="generateMD5Checksum">
+	<!--use attached script instead of Ant checksum so that files formatted properly
+		for command md5sum -c filename.md5
+	-->
+	<exec dir="${buildLabel}" executable="sh" os="Linux">
+		<arg line="${basedir}/produceChecksum `ls *.zip`" />
+	</exec>
+	
+	<mdkir dir="${buildLabel}/checksum" />
+	
+	<move todir="${buildLabel}/checksum">
+		<fileset dir="${buildLabel}">
+			<include nam="*.md5" />
+		</fileset>
+	</move>
+	
 </target>
 
 <!-- ===================================================================== -->
