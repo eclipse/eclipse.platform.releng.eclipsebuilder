@@ -198,8 +198,6 @@
 		<antcall target="ant" />
 		<antcall target="core" />
 		<antcall target="coreexpressions" />
-		<antcall target="ltkuirefactoringtests" />
-		<antcall target="ltkcorerefactoringtests" />
 		<antcall target="help" />
 		<antcall target="update" />
 		<antcall target="teamcore" />
@@ -213,6 +211,8 @@
 		<antcall target="jdtdebug" />
 		<antcall target="jdtui" />
 		<antcall target="jdtuirefactoring" />
+		<antcall target="ltkuirefactoringtests" />
+		<antcall target="ltkcorerefactoringtests" />
 	</target>
 	
 
