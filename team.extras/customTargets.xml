@@ -20,9 +20,14 @@
 
 <target name="assemble.org.eclipse.team.extras">
 	<property name="archiveName" value="eclipse-FTP-WebDAV-${buildId}.zip"/>
-	<ant antfile="${assembleScriptName}"/>
+	<antcall target="assemble" />
 </target>
 
+<target name="assemble">
+	<property name="postingDirectory" value="${buildDirectory}" />
+	<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
+	<ant antfile="${assembleScriptName}" />
+</target>
 <!-- ===================================================================== -->
 <!-- Check out map files from correct repository -->
 <!-- Replace values for cvsRoot, package and mapVersionTag as desired. -->

@@ -20,10 +20,12 @@
 
 <target name="assemble.org.eclipse.sdk.tests">
 	<property name="archiveName" value="eclipse-junit-tests-${buildId}.zip"/>
-	<ant antfile="${assembleScriptName}"/>
-<!-- ADD POST STEPS -->
+	<antcall target="assemble" />
 </target>
 
+<target name="assemble">
+	<ant antfile="${assembleScriptName}" />
+</target>
 <!-- ===================================================================== -->
 <!-- Check out map files from correct repository -->
 <!-- Replace values for cvsRoot, package and mapVersionTag as desired. -->
@@ -194,7 +196,7 @@
    	     library.xml in org.eclipse.test whenever its version is updated.
    	 -->
    	<move todir="${workingDirectory}/eclipse/plugins/org.eclipse.test">
-    		<fileset dir="${workingDirectory}/eclipse/plugins/${org.eclipse.test}" />
+    		<fileset dir="${workingDirectory}/eclipse/plugins/org.eclipse.test_3.1.0" />
   	</move>
   	
   	<!--the Ant move task leaves behind an empty directory-->
@@ -218,10 +220,11 @@
 
 	<!--set execute permission on *nix shell script-->
 	<chmod file="${workingDirectory}/eclipse-testing/runtests" perm="755"/>
+	<property name="postingDirectory" value="${buildDirectory}/${buildLabel}" />
 
 	<!--create zip file of the automated testing framework-->	
 	<exec dir="${workingDirectory}" executable="zip">
-		<arg line="-r -q ${buildDirectory}/${buildLabel}/eclipse-Automated-Tests-${buildId}.zip eclipse-testing"/>
+		<arg line="-r -q ${postingDirectory}/${buildLabel}/eclipse-Automated-Tests-${buildId}.zip eclipse-testing"/>
 	</exec>
 	
 	<delete file="${buildDirectory}/${buildLabel}/eclipse-junit-tests-${buildId}.zip"  />

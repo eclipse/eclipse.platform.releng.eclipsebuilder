@@ -207,7 +207,6 @@ public class ReadFile extends Task {
 		 	 	BufferedWriter outfile = new BufferedWriter(new FileWriter(path+"/"+xmlFileName+".2"));
 		 	 	for (Iterator i = fileContents.iterator(); i.hasNext();) {
 		 	 		String currentLine = ((String)(i.next()));
-		 	 		//System.out.println("currentLine "+currentLine);
                    if ((currentLine.matches("(?i).*topic label=.*")) && (! currentLine.matches("(?i).*href=\".*"))) {
 		 	 			//if the xml file doesn't have the appropriate link
                    	

@@ -20,49 +20,41 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 
 <!-- this section is unfinished************** -->
 <target name="assemble.org.eclipse.sdk.win32.win32.x86">
-	<ant antfile="${assembleScriptName}">
-		<property name="archiveName" value="eclipse-SDK-${buildId}-win32.zip"/>		
-	</ant>
+	<property name="archiveName" value="eclipse-SDK-${buildId}-win32.zip"/>		
+	<antcall target="assemble" />
 	<ant antfile="${builderDirectory}/tools/build.xml">
 	</ant>
 </target>
 
 <target name="assemble.org.eclipse.sdk.linux.motif.x86">
-	<ant antfile="${assembleScriptName}">
-		<property name="archiveName" value="eclipse-SDK-${buildId}-linux-motif.zip"/>
-	</ant>
+	<property name="archiveName" value="eclipse-SDK-${buildId}-linux-motif.zip"/>
+	<antcall target="assemble" />
 </target>
 
 <target name="assemble.org.eclipse.sdk.macosx.carbon.ppc">
-	<ant antfile="${assembleScriptName}">
-		<property name="archiveName" value="eclipse-SDK-${buildId}-macosx-carbon.tar.gz"/>
-	</ant>
+	<property name="archiveName" value="eclipse-SDK-${buildId}-macosx-carbon.tar.gz"/>
+	<antcall target="assemble" />
 </target>
 
 <target name="assemble.org.eclipse.sdk.linux.gtk.x86">
-	<ant antfile="${assembleScriptName}">
-		<property name="archiveName" value="eclipse-SDK-${buildId}-linux-gtk.zip"/>
-	</ant>
+	<property name="archiveName" value="eclipse-SDK-${buildId}-linux-gtk.zip"/>
+	<antcall target="assemble" />
 </target>
 
 <target name="assemble.org.eclipse.sdk.linux.gtk.amd64">
-	<ant antfile="${assembleScriptName}">
-		<property name="archiveName" value="eclipse-SDK-${buildId}-linux-gtk-amd64.zip"/>
-	</ant>
+	<property name="archiveName" value="eclipse-SDK-${buildId}-linux-gtk-amd64.zip"/>
+	<antcall target="assemble" />
 </target>
 	
 <target name="assemble.org.eclipse.sdk.solaris.motif.sparc">
-	<ant antfile="${assembleScriptName}">
-		<property name="archiveName" value="eclipse-SDK-${buildId}-solaris-motif.zip"/>
-	</ant>
+	<property name="archiveName" value="eclipse-SDK-${buildId}-solaris-motif.zip"/>
+	<antcall target="assemble" />
 </target>
 
 <target name="assemble.org.eclipse.sdk.hpux.motif.PA_RISC">
-	<ant antfile="${assembleScriptName}">
-		<property name="archiveName" value="eclipse-SDK-${buildId}-hpux-motif.zip"/>
-	</ant>
+	<property name="archiveName" value="eclipse-SDK-${buildId}-hpux-motif.zip"/>
+	<antcall target="assemble" />
 </target>
-
 
 <target name="assemble.org.eclipse.sdk.qnx.photon.x86">
 	<!--do not assemble this drop for now-->
@@ -72,13 +64,20 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 </target>
 
 <target name="assemble.org.eclipse.sdk.linux.gtk.ppc" />
+<target name="assemble.org.eclipse.sdk.linux.gtk.ia64" />
 
 <target name="assemble.org.eclipse.sdk.aix.motif.ppc">
-	<ant antfile="${assembleScriptName}">
-		<property name="archiveName" value="eclipse-SDK-${buildId}-aix-motif.zip"/>
-	</ant>
+	<property name="archiveName" value="eclipse-SDK-${buildId}-aix-motif.zip"/>
+	<antcall target="assemble" />
 </target>
 
+	<target name="assemble">
+		<property name="postingDirectory" value="${buildDirectory}" />
+		<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
+		<ant antfile="${assembleScriptName}" />
+	</target>
+
+	
 <!-- ===================================================================== -->
 <!-- Check out map files from correct repository -->
 <!-- Replace values for cvsRoot, package and mapVersionTag as desired. -->

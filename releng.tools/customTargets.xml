@@ -115,9 +115,9 @@
 <!-- (e.g., testing, posting, emailing, ...) -->
 <!-- ===================================================================== -->
 <target name="postBuild">
-	<!--property name="archiveName" value="org.eclipse.releng.tools_${buildId}.zip"/-->
+	<property name="postingDirectory" value="${buildDirectory}}" />
 	<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.releng.tools" target="zip.plugin">
-		<property name="plugin.destination" value="${buildDirectory}/${buildLabel}" />
+		<property name="plugin.destination" value="${postingDirectory}/${buildLabel}" />
 	</ant>
 </target>
 

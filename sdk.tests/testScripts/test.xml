@@ -21,29 +21,36 @@
 	<!-- The directory that will contain the xml and html results from the tests that are run -->
  	<property name="results" value="${basedir}/results" />
 
+	<!--override the value of this property with performance if the tests run on performance machine-->
+	<property name="test.target" value="junit" />
+
 	<target name="setup" if="clean" description="Reinstall the test Eclipse installation if specified by user">
 		<delete dir="${install}" />
 		<mkdir dir="${install}" />
 		<exec dir="." executable="unzip">
 			<arg line="-o -qq eclipse-SDK-*.zip -d ${install}"/>
-	    </exec>
-	
-		<exec dir="." executable="unzip">
+	      </exec>
+	      <exec dir="." executable="unzip">
 			<arg line="-o -qq eclipse-junit-tests-*.zip -d ${install}"/>
-    	</exec>
+    		</exec>
   	</target>
 
-	<target name="runtests" depends="setup" description="Runs ant on the test.xml for a specified plugin.  Requires a property value setting for testPlugin only if test.properties is not available.  The property testPlugin represents a directory name made up of the plugin id and plugin version.  This directory must contain a valid test.xml.">
+	<target name="junit">
 		<ant antfile="${eclipse-home}/plugins/${testPlugin}/test.xml" dir="${eclipse-home}" />
+	</target>
+
+	<target name="performance">
+		<ant antfile="${eclipse-home}/plugins/${testPlugin}/test.xml" dir="${eclipse-home}" target="performance" />
+	</target>
+
+	<target name="runtests" depends="setup" description="Runs ant on the test.xml for a specified plugin.  Requires a property value setting for testPlugin only if test.properties is not available.  The property testPlugin represents a directory name made up of the plugin id and plugin version.  This directory must contain a valid test.xml.">
+		<antcall target="${test.target}"/>
 		<copy file="${eclipse-home}/${report}.xml" tofile="${results}/xml/${report}_${platform}.xml" failonerror="false" />
+		<antcall target="genHtml" />
 		<copy todir="${results}/performance">
 			<fileset dir="${eclipse-home}" includes="timer.xml*" />
 			<mapper type="glob" from="*" to="*_${report}"/>
 		</copy>
-		<copy todir="${results}/performance">
-			<fileset dir="${eclipse-home}" includes="timer-*" />
-		</copy>
-		<antcall target="genHtml" />
 	</target>
 
 	<target name="ant" description="Runs the org.eclipse.ant.tests.core test.xml">
@@ -152,6 +159,13 @@
 		</antcall>
 	</target>
 
+	<target name="jdtcoreperf">
+		<antcall target="runtests" >
+			<param name="testPlugin" value="${org.eclipse.jdt.core.tests.performance}" />
+			<param name="report" value="org.eclipse.jdt.core.tests.performance" />
+		</antcall>
+	</target>
+	
 	<target name="jdtdebug" description="Runs the org.eclipse.jdt.debug.tests test.xml">
 		<antcall target="runtests" >
 			<param name="testPlugin" value="${org.eclipse.jdt.debug.tests}" />
@@ -200,11 +214,16 @@
 		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@password@" value="@cvs_password@"/>
 		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@host@" value="@cvs_host@"/>
 		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@root@" value="@cvs_root@"/>
-
-		<ant antfile="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/test.xml" dir="${eclipse-home}" />
-
-		<copy file="${eclipse-home}/org.eclipse.team.tests.cvs.xml" tofile="${results}/xml/org.eclipse.team.tests.cvs_${platform}.xml" />
-
+	
+	
+		<antcall target="${test.target}">
+	  		<param name="testPlugin" value="${org.eclipse.team.tests.cvs.core}" />
+			<param name="output-file" value="org.eclipse.team.tests.cvs.xml" />
+			<param name="report" value="org.eclipse.team.tests.cvs" />
+    		</antcall>
+    	
+		<copy file="${eclipse-home}/org.eclipse.team.tests.cvs.xml" tofile="${results}/xml/org.eclipse.team.tests.cvs_${platform}.xml" failonerror="false" />
+		<antcall target="genHtml" />
    	</target>
 
 
@@ -237,10 +256,10 @@
 	</target>
 
 	<target name="update" description="Runs the org.eclipse.update.tests.core test.xml">
-	    	<antcall target="runtests" >
+	    <antcall target="runtests" >
 			<param name="testPlugin" value="${org.eclipse.update.tests.core}" />
 			<param name="report" value="org.eclipse.update.tests.core" />
-      		</antcall>
+      	</antcall>
 	</target>
 
 
@@ -255,6 +274,7 @@
 		<antcall target="swt" />
 		<antcall target="antui" />
 		<antcall target="teamcvs" />
+		<antcall target="jdtcoreperf" />
 		<antcall target="jdtcorebuilder" />
 		<antcall target="jdtcorecompiler" />
 		<antcall target="jdtcoremodel" />
@@ -277,6 +297,5 @@
 	<target name="genHtml" description="Generates HTML results with provided JUNIT.XSL provided">
 		<style style="JUNIT.XSL" basedir="${results}/xml" destdir="${results}/html" />
 	</target>
-
 
 </project>

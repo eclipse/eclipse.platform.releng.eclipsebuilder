@@ -1,9 +1,6 @@
 <project default="main" basedir=".">
 	
-	<property name="builderDirectory" value="/home/kmoir/plugins"/> 
-	<property name="buildDirectory" value="/home/kmoir"/> 
-	<property name="buildId" value="20040623"/>
-	<property name="buildLabel" value="I-I20040623-I200406231200"/>
+	<property name="builderDirectory" value="c:\plugins"/>
 	
 <target name="checkBinary">
 	<exec executable="htmldoc" failonerror="false" failifexecutionfails="false"/>		
@@ -67,7 +64,8 @@
 </target>
      
  <target name="assemble" if = "genDoc">    
-      <zip destfile="${buildDirectory}/${buildLabel}/${docPlugin}.${buildId}.pdf.zip"
+      <property name="postingDirectory" value="${buildDirectory}" />
+      <zip destfile="${postingDirectory}/${buildLabel}/${docPlugin}.${buildId}.pdf.zip"
        basedir="${buildDirectory}/plugins/${docPlugin}/"
        includes="*.pdf"
      />

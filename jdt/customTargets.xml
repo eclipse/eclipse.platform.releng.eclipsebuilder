@@ -19,15 +19,19 @@
 
 <target name="assemble.org.eclipse.jdt">
 	<property name="archiveName" value="eclipse-JDT-${buildId}.zip"/>
-	<ant antfile="${assembleScriptName}"/>
+	<antcall target="assemble" />
 </target>
 
 <target name="assemble.org.eclipse.jdt.macosx.carbon.ppc">
-        <property name="archiveName" value="eclipse-JDT-${buildId}-macosx-carbon.tar.gz"/>
-        <ant antfile="${assembleScriptName}"/>
+	<property name="archiveName" value="eclipse-JDT-${buildId}-macosx-carbon.tar.gz"/>
+	<antcall target="assemble" />
 </target>
 
-
+<target name="assemble">
+	<property name="postingDirectory" value="${buildDirectory}" />
+	<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
+	<ant antfile="${assembleScriptName}" />
+</target>
 
 <!-- ===================================================================== -->
 <!-- Check out map files from correct repository -->

@@ -3,7 +3,6 @@
 <!--
 	Ant properties for buildId, buildLabel, timestamp and buildDirectory must be set before running this script.
 -->
-
 <property name="markerContainer" value="/home/users/releng/buildTools/markers" />
 <property name="cfg" value="${markerContainer}/machine.cfg" />
 <property name="test.xml" value="${basedir}/../../../org.eclipse.releng.basebuilder/plugins/org.eclipse.build.tools/scripts/test.xml" />
@@ -55,9 +54,6 @@
 		<property name="tester" value="${basedir}/win32-perf" />
 	</ant>
 	<property file="${basedir}/win32-perf/testing.properties" />
-	<exec dir="." executable="rcp">
-		<arg line="${testMachine}:${executionDir}/results/performance/* /builds/transfer/files/eclipseperf/${buildType}${timestamp}"/>
-	</exec>
 	<delete file="${markerContainer}/${markerName}.marker" />
 </target>
 </project>

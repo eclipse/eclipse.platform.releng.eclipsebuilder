@@ -5,5 +5,12 @@ REM test script
 REM add the extra binaries to the system path
 set PATH=%PATH%;%1\..\windowsBin
 
+mkdir results\xml
+mkdir results\html
+mkdir results\performance
+
+REM add Cloudscape plugin to junit tests zip file
+zip eclipse-junit-tests-%3%.zip -rm eclipse
+
 REM run all tests
-call runtests.bat -vm ..\jre\bin\java -properties vm.properties "-Dperformance=true" "-Dplatform=winxp_perf" "-Dperf.host=eclipseperf.torolab.ibm.com" "-Dperf.port=9080" "-Dperf.id=sdimitro" >> %2
+call runtests.bat -vm ..\jdk1.4.2_05\jre\bin\java -properties vm.properties "-Dtest.target=performance" "-Dplatform=win32perf">> %2
