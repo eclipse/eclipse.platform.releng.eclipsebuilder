@@ -475,6 +475,7 @@
 		<property name="launcherFilesDir" value="macosx" />
 		<property name="workingDirectory" value="${basedir}/temp/eclipse" />
 		<property name="zipRootDir" value="${basedir}/temp" />
+		<property name="preCleanTarget" value="macosxPreClean" />
 	</ant>
 	
 	<ant antfile="assemble.xml" target="${target}" >
@@ -642,6 +643,7 @@
 		<property name="workingDirectory" value="${basedir}/temp/eclipse" />
 		<property name="launcherFilesDir" value="macosx" />
 		<property name="zipRootDir" value="${basedir}/temp" />
+		<property name="preCleanTarget" value="macosxPreClean" />
 	</ant>
 
 	<ant antfile="assemble.xml" target="${target}" >
@@ -793,8 +795,6 @@
 	<copy file="${buildDirectory}/plugins/org.eclipse.platform.macosx.carbon/legal.html" todir="${workingDirectory}" />
 	
 	<!--fix for #23918-->
-	
-	<!--getting OutOfMemory exception when trying to create zip file of this-->
 	<antcall target="makeSymbolicLink">
 		<param name="execDir" value="${workingDirectory}/Eclipse.app/Contents/Resources" />
 		<param name="linkFile" value="Java" />
@@ -808,8 +808,9 @@
 
 <target name="macosxCreateTar">
 	<!--The Ant task does not work as expected.  Must use exec of tar-->
-
-	<!-- This does not work.  We lose the symbolic link.
+	<!-- The symbolic link Eclipse.app/Contents/Resources/Java is not included if
+	this command is used:
+	
 	<tar longfile="gnu" tarfile="${workingDirectory}/../${productTarName}" >
 
     	<tarfileset dir="${workingDirectory}/.." mode="755" followsymlinks="false">
@@ -840,6 +841,15 @@
 	<exec dir="${workingDirectory}" executable="rm">
 		<arg line="Eclipse.app/Contents/Resources/Java" />
 	</exec>
+</target>
+
+<target name="macosxPreClean">
+	<delete file="${zipRootDir}/${productTarName}" />
+	
+	<!--This directory was deleted in an earlier step.  The build fails if this directory does not exist
+		in the clean step.
+	-->
+	<mkdir dir="${workingDirectory}" />
 </target>
 
 <target name="examplesPostAssembly">
