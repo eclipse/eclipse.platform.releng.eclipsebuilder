@@ -166,9 +166,7 @@
 		<!--set the compiler and compiler arguments-->
 		<!--the default compiler is set to the one used by eclipse rel. eng. -->
 		<condition property="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter">
-			<and>
-				<available file="${basedir}/jdtcore.jar" />				
-			</and>
+				<available file="${basedir}/jdtcore.jar" />					
 		</condition>
 		<condition property="compilerArg" value="-enableJavadoc -encoding ISO-8859-1">
 			<equals arg1="${build.compiler}" arg2="org.eclipse.jdt.core.JDTCompilerAdapter" />
