@@ -62,6 +62,12 @@
 <!-- Steps to do before fetching the build elements -->
 <!-- ===================================================================== -->
 <target name="preFetch">
+	<!--HACK for bug in pde 53934-->
+	<delete dir="${buildDirectory}/plugins/org.eclipse.swt.gkt64" />
+	<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
+		<property name="type" value="fragment" />
+		<property name="id" value="org.eclipse.swt.gtk64" />
+	</ant>
 </target>
 
 <!-- ===================================================================== -->
