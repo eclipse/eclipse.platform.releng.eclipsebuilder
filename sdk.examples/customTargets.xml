@@ -1,5 +1,7 @@
 <project name="Build specific targets and properties" default="noDefault" basedir=".">
 
+<property name="postingDirectory" value="${buildDirectory}" />
+
 <!-- ===================================================================== -->
 <!-- Run a given ${target} on all elements being built -->
 <!-- ===================================================================== -->
@@ -19,12 +21,20 @@
 
 <target name="assemble.org.eclipse.sdk.examples">
 	<property name="archiveName" value="eclipse-examples-${buildId}.zip"/>
-	<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
+	<antcall target="assemble" />
 </target>
 
 <target name="assemble.org.eclipse.sdk.examples.win32.win32.x86">
 	<property name="archiveName" value="eclipse-examples-${buildId}-win32.zip"/>
-	<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
+	<antcall target="assemble" />
+</target>
+
+<target name="assemble">
+	<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
+	<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
+	<ant antfile="${assembleScriptName}" />
+	<checksum file="${archiveFullPath}" property="md5"/>
+	<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5"/>
 </target>
 
 <!-- ===================================================================== -->
@@ -136,12 +146,12 @@
 <!-- ===================================================================== -->
 <target name="gatherLogs" if="logsAvailable">
 
-	<mkdir dir="${buildDirectory}/${buildLabel}/compilelogs" />
+	<mkdir dir="${postingDirectory}/${buildLabel}/compilelogs" />
 	<antcall target="allElements">
 		<param name="target" value="gatherLogs" />
 	</antcall>
 
-	<unzip dest="${buildDirectory}/${buildLabel}/compilelogs" overwrite="true">
+	<unzip dest="${postingDirectory}/${buildLabel}/compilelogs" overwrite="true">
 		<fileset dir="${buildDirectory}/features/org.eclipse.sdk.examples">
 			<include name="*.log.zip" />
 		</fileset>

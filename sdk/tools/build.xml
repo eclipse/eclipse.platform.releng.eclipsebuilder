@@ -64,7 +64,8 @@
 </target>
      
  <target name="assemble" if = "genDoc">    
-      <zip destfile="${buildDirectory}/${buildLabel}/${docPlugin}.${buildId}.pdf.zip"
+      <property name="postingDirectory" value="${buildDirectory}" />
+      <zip destfile="${postingDirectory}/${buildLabel}/${docPlugin}.${buildId}.pdf.zip"
        basedir="${buildDirectory}/plugins/${docPlugin}/"
        includes="*.pdf"
      />

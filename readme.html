@@ -24,13 +24,13 @@ the following command (currently the build.xml script can only be executed in
 a headless eclipse due to <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=35923">bug 
 35923</a>): </p><p>&quot;java -cp ../org.eclipse.releng.basebuilder/startup.jar 
 org.eclipse.core.launcher.Main -application org.eclipse.ant.core.antRunner -buildfile 
-build.xml -Dcomponent=<a href="#components">sdk | platform | jdt | sdk.examples 
-| sdk.tests</a> [Ant properties to override in a <a href="#antbuildproperties">component's 
-build.properties</a>] &quot;<br></p><p><b><a name="components"></a></b>The component 
-property value sets the name of the directory in org.eclipse.releng.eclipsebuilder 
-which contains the Ant scripts that build a given an Eclipse component as descibed 
-below: <br> <br> </p><table width="100%" border="1"> <tr> <td width="20%">Component 
-(directory name in org.eclipse.releng.eclipsebuilder)</td><td width="80%">Description</td></tr> 
+build.xml -Dcomponent=&lt;component name specified in table below&gt; [Ant properties 
+to override in a <a href="#antbuildproperties">component's build.properties</a>] 
+&quot;<br></p><p><b><a name="components"></a></b>The component property value 
+sets the name of the directory in org.eclipse.releng.eclipsebuilder which contains 
+the Ant scripts that build a given an Eclipse component as descibed below: <br> 
+<br> </p><table width="100%" border="1"> <tr> <td width="20%">Component (directory 
+name in org.eclipse.releng.eclipsebuilder)</td><td width="80%">Description</td></tr> 
 <tr> <td width="20%">sdk</td><td width="80%">This directory contains the scripts 
 used to build any or all configurations of the Eclipse SDK. An Eclipse SDK is 
 comprised of binaries, source, user and developer documentation for the Eclipse 
