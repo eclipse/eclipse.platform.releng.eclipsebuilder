@@ -246,9 +246,7 @@ public class ReadFile extends Task {
 		 	 				outfile.write(newLine+"\n");
 		 	 				} else {
 		 	 					outfile.write(currentLine+"\n");
-		 	 					outfile.write(nextLine+"\n");
-		 	 					System.out.println("currentLine in else "+currentLine);
-		 	 					System.out.println("nextLine in else "+nextLine);
+		 	 					outfile.write(nextLine+"\n");		 	 					
 		 	 				}
                         
 		 	 				//add the xml link to the list of files that needs to be constructed via xslt
@@ -522,7 +520,8 @@ public class ReadFile extends Task {
 		 		//add the first link to the array		 		 		 
 		 		listLinks.add(htmlFile);		 		 		
 		 		parseLinks(htmlFile);		 		 	
-		 		writeDocGenScript(path,docName,scriptName,scriptParam);		 
+		 		writeDocGenScript(path,docName,scriptName,scriptParam);	
+		 			 		
 		 }
 		 
 		 public static void main(String args[]) {
