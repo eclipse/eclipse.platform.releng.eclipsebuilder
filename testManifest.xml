@@ -44,6 +44,49 @@
 </zipTypes>
 
 <logFiles>
+
+	<logFile name="org.eclipse.releng.tests_linux.motif.xml">
+		
+		<effectedFile id="SW"></effectedFile>
+		<effectedFile id="SLM"></effectedFile>
+		<effectedFile id="SLG2"></effectedFile>
+		<effectedFile id="SSM"></effectedFile>
+		<effectedFile id="SNP"></effectedFile>
+		<effectedFile id="SAM"></effectedFile>
+		<effectedFile id="SHM"></effectedFile>
+		<effectedFile id="SMC"></effectedFile>
+		
+		<effectedFile id="PW"></effectedFile>
+		<effectedFile id="PLM"></effectedFile>
+		<effectedFile id="PLG2"></effectedFile>
+		<effectedFile id="PSM"></effectedFile>
+		<effectedFile id="PNP"></effectedFile>
+		<effectedFile id="PAM"></effectedFile>
+		<effectedFile id="PHM"></effectedFile>
+		<effectedFile id="PMC"></effectedFile>
+	</logFile>
+	
+	<logFile name="org.eclipse.releng.tests_win32.xml">
+		
+		<effectedFile id="SW"></effectedFile>
+		<effectedFile id="SLM"></effectedFile>
+		<effectedFile id="SLG2"></effectedFile>
+		<effectedFile id="SSM"></effectedFile>
+		<effectedFile id="SNP"></effectedFile>
+		<effectedFile id="SAM"></effectedFile>
+		<effectedFile id="SHM"></effectedFile>
+		<effectedFile id="SMC"></effectedFile>
+		
+		<effectedFile id="PW"></effectedFile>
+		<effectedFile id="PLM"></effectedFile>
+		<effectedFile id="PLG2"></effectedFile>
+		<effectedFile id="PSM"></effectedFile>
+		<effectedFile id="PNP"></effectedFile>
+		<effectedFile id="PAM"></effectedFile>
+		<effectedFile id="PHM"></effectedFile>
+		<effectedFile id="PMC"></effectedFile>
+	</logFile>
+	
 	<logFile name="org.eclipse.ant.tests.core_linux.motif.xml">
 		<effectedFile id="SLM"></effectedFile>
 		<effectedFile id="SLG2"></effectedFile>
