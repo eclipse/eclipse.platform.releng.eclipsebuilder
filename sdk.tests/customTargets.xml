@@ -73,6 +73,9 @@
 	<condition property="eclipse.base" value="http://download.eclipse.org/downloads/drops/R-3.0.1-200409161125/eclipse-SDK-3.0.1-win32.zip" >
 		<equals arg1="${mapVersionTag}" arg2="perf_301" />
 	</condition>	
+	<condition property="eclipse.base" value="http://download.eclipse.org/downloads/drops/R-2.1.3-200403101828/eclipse-SDK-2.1.3-win32.zip" >
+		<equals arg1="${mapVersionTag}" arg2="perf_213" />
+	</condition>
 	<get src="${eclipse.base}" dest="sdk.zip" usetimestamp="true" />
 	<unzip src="sdk.zip" dest="${buildDirectory}" />
 </target>
