@@ -1141,8 +1141,8 @@
 </target>
 
 <target name="generateMD5Checksum">
-	<!--use attached script instead of Ant checksum so that files formatted properly
-		for command md5sum -c filename.md5
+	<!--use attached script instead of Ant checksum task so that files are properly formatted
+		for command md5sum -c <filename>.md5
 	-->
 	<exec dir="${buildLabel}" executable="sh" os="Linux">
 		<arg line="${basedir}/produceChecksum" />
