@@ -15,15 +15,6 @@
 	<!-- The directory that will contain the xml and html results from the tests that are run -->
  	<property name="results" value="${basedir}/results" />
 
-	<target name="init">
-	<!--  necessary condition for running org.eclipse.swt.tests--> 
-	 <condition property="win32">
-		<and>
-			<os family="windows" />
-    	</and>
-     </condition>
-	</target>
-
 	<target name="setup" if="clean" description="Reinstall the test Eclipse installation if specified by user">
 		<delete dir="${install}" />
 		<mkdir dir="${install}" />
@@ -86,21 +77,21 @@
        		</antcall>
 	</target>
 	
-	<target name="jdtcorecompiler" depends="init">
+	<target name="jdtcorecompiler">
 		<antcall target="runtests" >
 			<param name="testPlugin" value="${org.eclipse.jdt.core.tests.compiler}" />
 			<param name="report" value="org.eclipse.jdt.core.tests.compiler" />
 		</antcall>
 	</target>
 	
-   <target name="jdtcorebuilder" depends="init">
+   <target name="jdtcorebuilder">
 		<antcall target="runtests" >
 			<param name="testPlugin" value="${org.eclipse.jdt.core.tests.builder}" />
 			<param name="report" value="org.eclipse.jdt.core.tests.builder" />
 		</antcall>
 	</target>
 
-	<target name="jdtcoremodel" depends="init">
+	<target name="jdtcoremodel">
 		<antcall target="runtests" >
 			<param name="testPlugin" value="${org.eclipse.jdt.core.tests.model}" />
 			<param name="report" value="org.eclipse.jdt.core.tests.model" />
@@ -131,8 +122,7 @@
 	</target>
 
 	
-	<target name="swt" depends="init" if="win32" description="Runs the org.eclipse.swt.tests test.xml but only on windows.">
-		<!--run swt automated tests on windows only-->
+	<target name="swt" description="Runs the org.eclipse.swt.tests test.xml">
        		<antcall target="runtests" >
        			<param name="testPlugin" value="${org.eclipse.swt.tests}" />
 			<param name="report" value="org.eclipse.swt.tests" />
