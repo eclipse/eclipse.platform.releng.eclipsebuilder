@@ -95,7 +95,7 @@ goto run
 REM run the build.  Command to invoke the Eclipse AntRunner headless.
 :run
 
-java -cp startup.jar org.eclipse.core.launcher.Main -os win32 -ws win32 -arch x86 -noupdate -application org.eclipse.ant.core.antRunner -buildfile build.xml %mail% -Dinstall=%buildDirectory% -DbuildDirectory=%buildDirectory% -DpostingDirectory=%postingDirectory% -Drt=%bootclasspath% -Dbootclasspath=%bootclasspath% -DbuildType=%buildType% "-D%buildType%=true" -Dbuildid=%buildid% -DbuildLabel=%buildLabel% -Dtimestamp=%timestamp% -DJAVADOC14_HOME=%javadoc14_home% -DmapVersionTag=%mapVersionTag% "-DzipArgs= "
+java -Xmx256m -cp startup.jar org.eclipse.core.launcher.Main -os win32 -ws win32 -arch x86 -noupdate -application org.eclipse.ant.core.antRunner -buildfile build.xml %mail% -Dinstall=%buildDirectory% -DbuildDirectory=%buildDirectory% -DpostingDirectory=%postingDirectory% -Drt=%bootclasspath% -Dbootclasspath=%bootclasspath% -DbuildType=%buildType% "-D%buildType%=true" -Dbuildid=%buildid% -DbuildLabel=%buildLabel% -Dtimestamp=%timestamp% -DJAVADOC14_HOME=%javadoc14_home% -DmapVersionTag=%mapVersionTag% "-DzipArgs= "
 
 :end
 pause

@@ -104,7 +104,7 @@ fi
 if [ "$os-$ws-$arch" = "linux-motif-x86" ] || [ "$os-$ws-$arch" = "linux-gtk-x86" ] || [ "$os-$ws-$arch" = "solaris-motif-sparc" ] || [ "$os-$ws" = "aix-motif-ppc" ] || [ "$os-$ws" = "hpux-motif-PA_RISC" ] || [ "$os-$ws" = "qnx-photon-x86" ]
 then
 #run the build
-java -cp startup.jar org.eclipse.core.launcher.Main -os $os -ws $ws -arch $arch -noupdate -application org.eclipse.ant.core.antRunner -buildfile  build.xml $mail -DmapVersionTag=$mapVersionTag -Dinstall=$buildDirectory -DbuildDirectory=$buildDirectory -DpostingDirectory=$postingDirectory -Drt=$bootclasspath -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -Dbuildid=$buildid -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DJAVADOC14_HOME=$JAVADOC14_HOME
+java -Xmx256m -cp startup.jar org.eclipse.core.launcher.Main -os $os -ws $ws -arch $arch -noupdate -application org.eclipse.ant.core.antRunner -buildfile  build.xml $mail -DmapVersionTag=$mapVersionTag -Dinstall=$buildDirectory -DbuildDirectory=$buildDirectory -DpostingDirectory=$postingDirectory -Drt=$bootclasspath -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -Dbuildid=$buildid -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DJAVADOC14_HOME=$JAVADOC14_HOME
 
 else
 	echo "The os, ws, arch combination of os=$os, ws=$ws, arch=$arch is not valid."

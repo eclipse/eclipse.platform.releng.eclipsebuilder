@@ -83,14 +83,14 @@
     project to invoke the Eclipse AntRunner on the Ant build scripts.</p>
   <p>To execute, use the following command from the directory containing the build 
     scripts specifying any of the optional parameters described below:</p>
-  <p>On Windows:</p>
+  <p><b>On Windows:</b></p>
   <p>buildEclipse [buildid name][buildLabel name][-buildType I|N|S|M][-bootclasspath 
     path][-mail] [-mapVersionTag tag][postingDirectory path]</p>
-  <p>On *nix:</p>
+  <p><b>On *nix:</b></p>
   <p>buildEclipse [-os os][-ws ws][-arch arch][buildid name][buildLabel name][-buildType 
     I|N|S|M][-bootclasspath path][-mail] [-mapVersionTag tag][postingDirectory 
     path]</p>
-  <table width="75%" border="1">
+  <table width="86%" border="1">
     <tr> 
       <td width="24%">Parameter</td>
       <td width="76%">Description</td>
@@ -136,12 +136,12 @@
       <td width="24%">bootclasspath</td>
       <td width="76%">Absolute path to the classes that implement the Java 2 Platform, 
         also known as bootstrap classes. These are typically contained in an rt.jar, 
-        inluded with a JRE or JDK. The default value set to the rt.jar included 
-        with the installed JDK. If building on a Unix operating system, the bootclasspath 
-        should be set to a Windows version of the rt.jar. The Windows version 
-        allows all os specific plugins and fragments to compile, whereas the Unix 
-        versions will not allow the Windows specific plugins and fragments to 
-        compile cleanly.</td>
+        inluded with a JRE or JDK. The default value set to the location of the 
+        rt.jar included with the installed JDK. If building on a Unix operating 
+        system, the bootclasspath should be set to a Windows version of the rt.jar. 
+        The Windows version allows all os specific plugins and fragments to compile, 
+        whereas the Unix versions will not allow the Windows specific plugins 
+        and fragments to compile cleanly.</td>
     </tr>
     <tr> 
       <td width="24%" height="173">mail</td>
