@@ -163,6 +163,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 <!-- Steps to do after running the build.xmls for the elements being built. -->
 <!-- ===================================================================== -->
 <target name="postProcess">
+	<antcall target="gatherLogs" />
 </target>
 
 <!-- ===================================================================== -->
