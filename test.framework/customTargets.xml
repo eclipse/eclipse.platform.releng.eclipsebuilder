@@ -18,7 +18,7 @@
 <!-- Add one target for each root element and each configuration -->
 <!-- ===================================================================== -->
 
-<target name="assemble.org.eclipse.sdk.tests">
+<target name="assemble.org.eclipse.test">
 	<property name="archiveName" value="eclipse-test-framework-${buildId}.zip"/>
 	<ant antfile="${assembleScriptName}"/>
 <!-- ADD POST STEPS -->
