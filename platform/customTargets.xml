@@ -58,7 +58,6 @@
 	<property name="archiveName" value="eclipse-platform-${buildId}-hpux-motif.zip"/>
 	<ant antfile="${assembleScriptName}"/>
 </target>
-
 <target name="assemble.org.eclipse.platform.macosx.carbon.ppc">
 	<property name="archiveName" value="eclipse-platform-${buildId}-macosx-carbon.tar.gz"/>
 	<ant antfile="${assembleScriptName}"/>

@@ -15,6 +15,9 @@
 	<!-- The root of the eclipse installation -->
 	<property name="eclipse-home" value="${install}/eclipse" />
 
+	<!-- The path to libary.xml -->
+	<!--property name="library-file" value="${eclipse-home}/plugins/${org.eclipse.test}/library.xml" /-->
+
 	<!-- The directory that will contain the xml and html results from the tests that are run -->
  	<property name="results" value="${basedir}/results" />
 
@@ -26,11 +29,10 @@
 		<mkdir dir="${install}" />
 		<exec dir="." executable="unzip">
 			<arg line="-o -qq eclipse-SDK-*.zip -d ${install}"/>
-	    </exec>
-	
-		<exec dir="." executable="unzip">
+	      </exec>
+	      <exec dir="." executable="unzip">
 			<arg line="-o -qq eclipse-junit-tests-*.zip -d ${install}"/>
-    	</exec>
+    		</exec>
   	</target>
 
 	<target name="junit" depends="setup">
@@ -67,6 +69,13 @@
 		</antcall>
 	</target>
 
+	<target name="compare" description="Runs the org.eclipse.compare.tests test.xml">
+		<antcall target="runtests">
+			<param name="testPlugin" value="${org.eclipse.compare.tests}" />
+			<param name="report" value="org.eclipse.compare.tests" />
+		</antcall>
+	</target>
+		
 	<target name="core" description="Runs the org.eclipse.core.tests.harness test.xml">
 		<antcall target="runtests">
 			<param name="testPlugin" value="${org.eclipse.core.tests.harness}" />
@@ -159,6 +168,13 @@
 		</antcall>
 	</target>
 
+	<target name="jdtcoreperf">
+		<antcall target="runtests" >
+			<param name="testPlugin" value="${org.eclipse.jdt.core.tests.performance}" />
+			<param name="report" value="org.eclipse.jdt.core.tests.performance" />
+		</antcall>
+	</target>
+	
 	<target name="jdtdebug" description="Runs the org.eclipse.jdt.debug.tests test.xml">
 		<antcall target="runtests" >
 			<param name="testPlugin" value="${org.eclipse.jdt.debug.tests}" />
@@ -182,6 +198,13 @@
 		</antcall>
 	</target>
 
+
+	<target name="pdeui">
+       		<antcall target="runtests" >
+       			<param name="testPlugin" value="${org.eclipse.pde.ui.tests}" />
+			<param name="report" value="org.eclipse.pde.ui.tests" />
+       		</antcall>
+ 	</target>
 	
 	<target name="swt" description="Runs the org.eclipse.swt.tests test.xml">
        		<antcall target="runtests" >
@@ -198,7 +221,6 @@
     		</antcall>
 	</target>
 
-
 	<target name="teamcvs" description="Runs the org.eclipse.team.tests.cvs.core test.xml.  This test requires additional setup.  See documentation in org.eclipse.team.tests.cvs.core">
 		<!--  Need to setup Eclipse first because of text replacement in a properties file  -->
 		<antcall target="setup" />
@@ -208,11 +230,16 @@
 		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@password@" value="@cvs_password@"/>
 		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@host@" value="@cvs_host@"/>
 		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@root@" value="@cvs_root@"/>
-
-		<ant antfile="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/test.xml" dir="${eclipse-home}" />
-
-		<copy file="${eclipse-home}/org.eclipse.team.tests.cvs.xml" tofile="${results}/xml/org.eclipse.team.tests.cvs_${platform}.xml" />
-
+	
+	
+		<antcall target="${test.target}">
+	  		<param name="testPlugin" value="${org.eclipse.team.tests.cvs.core}" />
+			<param name="output-file" value="org.eclipse.team.tests.cvs.xml" />
+			<param name="report" value="org.eclipse.team.tests.cvs" />
+    		</antcall>
+    	
+		<copy file="${eclipse-home}/org.eclipse.team.tests.cvs.xml" tofile="${results}/xml/org.eclipse.team.tests.cvs_${platform}.xml" failonerror="false" />
+		<antcall target="genHtml" />
    	</target>
 
 
@@ -223,17 +250,40 @@
 		</antcall>
 	</target>
 
+	<target name="uircp" description="Runs the org.eclipse.ui.tests.rcp test.xml">
+		<antcall target="runtests">
+			<param name="testPlugin" value="${org.eclipse.ui.tests.rcp}" />
+			<param name="report" value="org.eclipse.ui.tests.rcp" />
+		</antcall>
+	</target>
+
+	<target name="uieditors" description="Runs the org.eclipse.ui.editors.tests test.xml">
+		<antcall target="runtests">
+			<param name="testPlugin" value="${org.eclipse.ui.editors.tests}" />
+			<param name="report" value="org.eclipse.ui.editors.tests" />
+		</antcall>
+	</target>
+	
+	<target name="uiworkbenchtexteditor" description="Runs the org.eclipse.ui.workbench.texteditor.tests test.xml">
+		<antcall target="runtests">
+			<param name="testPlugin" value="${org.eclipse.ui.workbench.texteditor.tests}" />
+			<param name="report" value="org.eclipse.ui.workbench.texteditor.tests" />
+		</antcall>
+	</target>
+
 	<target name="update" description="Runs the org.eclipse.update.tests.core test.xml">
-	    	<antcall target="runtests" >
+	    <antcall target="runtests" >
 			<param name="testPlugin" value="${org.eclipse.update.tests.core}" />
 			<param name="report" value="org.eclipse.update.tests.core" />
-      		</antcall>
+      	</antcall>
 	</target>
 
 
 	<target name="all">
 		<antcall target="relEng" />
+		<antcall target="pdeui" />
 		<antcall target="ant" />
+		<antcall target="compare" />
 		<antcall target="core" />
 		<antcall target="coreexpressions" />
 		<antcall target="help" />
@@ -242,10 +292,14 @@
 		<antcall target="swt" />
 		<antcall target="antui" />
 		<antcall target="teamcvs" />
+		<antcall target="jdtcoreperf" />
 		<antcall target="jdtcorebuilder" />
 		<antcall target="jdtcorecompiler" />
 		<antcall target="jdtcoremodel" />
 		<antcall target="ui" />
+		<antcall target="uieditors" />
+		<antcall target="uiworkbenchtexteditor" />
+		<antcall target="uircp" />
 		<antcall target="jdtdebug" />
 		<antcall target="jdtui" />
 		<antcall target="jdtuirefactoring" />
@@ -261,6 +315,5 @@
 	<target name="genHtml" description="Generates HTML results with provided JUNIT.XSL provided">
 		<style style="JUNIT.XSL" basedir="${results}/xml" destdir="${results}/html" />
 	</target>
-
 
 </project>

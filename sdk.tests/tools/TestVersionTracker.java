@@ -103,7 +103,7 @@ public class TestVersionTracker{
     					//check for test.xml
     					File testXml=new File(buildDirectory+File.separator+"plugins"+File.separator+element+File.separator+"test.xml");
     					if (testXml.exists())
-        					testElements.put(element,testXml);
+        					testElements.put(elementAndVersion,testXml);
     				} 								
     			} catch (Exception e){
     				e.printStackTrace();
