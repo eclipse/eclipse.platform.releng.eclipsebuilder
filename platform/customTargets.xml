@@ -34,8 +34,8 @@
 	<antcall target="assemble" />
 </target>
 
-<target name="assemble.org.eclipse.platform.linux.gtk.amd64">
-	<property name="archiveName" value="eclipse-platform-${buildId}-linux-gtk-amd64.tar.gz"/>
+<target name="assemble.org.eclipse.platform.linux.gtk.x86_64">
+	<property name="archiveName" value="eclipse-platform-${buildId}-linux-gtk-x86_64.tar.gz"/>
 	<antcall target="assemble" />
 </target>
 	

@@ -43,8 +43,8 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<antcall target="assemble" />
 </target>
 
-<target name="assemble.org.eclipse.sdk.linux.gtk.amd64">
-	<property name="archiveName" value="eclipse-SDK-${buildId}-linux-gtk-amd64.tar.gz"/>
+<target name="assemble.org.eclipse.sdk.linux.gtk.x86_64">
+	<property name="archiveName" value="eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz"/>
 	<antcall target="assemble" />
 </target>
 	
@@ -54,12 +54,12 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 </target>
 
 <target name="assemble.org.eclipse.sdk.solaris.gtk.sparc">
-	<property name="archiveName" value="eclipse-SDK-${buildId}-solaris-gtk.tar.gz"/>
+	<property name="archiveName" value="eclipse-SDK-${buildId}-solaris-gtk.tar.gz"/>	
 	<antcall target="assemble" />
 </target>
 	
 <target name="assemble.org.eclipse.sdk.hpux.motif.PA_RISC">
-	<property name="archiveName" value="eclipse-SDK-${buildId}-hpux-motif.tar.gz"/>
+	<property name="archiveName" value="eclipse-SDK-${buildId}-hpux-motif.tar.gz"/>	
 	<antcall target="assemble" />
 </target>
 
@@ -76,7 +76,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 <target name="assemble.org.eclipse.sdk.linux.gtk.ia64" />
 
 <target name="assemble.org.eclipse.sdk.aix.motif.ppc">
-	<property name="archiveName" value="eclipse-SDK-${buildId}-aix-motif.tar.gz"/>
+	<property name="archiveName" value="eclipse-SDK-${buildId}-aix-motif.tar.gz"/>	
 	<antcall target="assemble" />
 </target>
 
@@ -134,6 +134,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 <target name="preSetup">
 </target>
 
+	
 
 <!-- ===================================================================== -->
 <!-- Steps to do after setup but before starting the build proper -->
@@ -191,7 +192,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	</ant>
 
 
-</target>
+</target>	
 
 <!-- ===================================================================== -->
 <!-- Steps to do before generating build scripts -->
@@ -204,6 +205,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 <!-- ===================================================================== -->
 <target name="postGenerate">
 	<antcall target="clean" />
+	<antcall target="buildSourceDrops" />
 </target>
 
 <!-- ===================================================================== -->
@@ -294,7 +296,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			</copy>
 
 			<copy todir="${tempDir}/buildScripts" flatten="true" overwrite="true">
-				<fileset dir="srcBuild" excludes="incl/**,fetch" />
+				<fileset dir="${eclipse.build.scripts}/sdk/srcBuild" excludes="incl/**,fetch" />
 			</copy>
 
 			<!--  set correct permissions on linux script -->
@@ -325,7 +327,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 				<fileset dir="${buildDirectory}" includes="features/,plugins/" excludes="features/*example*/**,plugins/*example*/**" />
 			</copy>
 			<copy todir="${tempDir}/buildScripts" flatten="true" overwrite="true">
-				<fileset dir="srcBuild" excludes="fetch/**,incl" />
+				<fileset dir="${eclipse.build.scripts}/sdk/srcBuild" excludes="fetch/**,incl" />
 			</copy>
 
 			<!-- fetch scripts are not when source already included in zip file -->
@@ -341,12 +343,20 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<checksum file="${postingDirectory}/${buildLabel}/eclipse-sourceBuild-srcIncluded-${buildId}.zip" property="md5.2"/>
 			<echo message="${md5.2} *eclipse-sourceBuild-srcIncluded-${buildId}.zip" file="${postingDirectory}/${buildLabel}/checksum/eclipse-sourceBuild-srcIncluded-${buildId}.zip.md5"/>
 
-			<copy file="srcBuild/incl/instructions.html" tofile="${postingDirectory}/${buildLabel}/srcIncludedBuildInstructions.html" />
-			<copy file="srcBuild/fetch/instructions.html" tofile="${postingDirectory}/${buildLabel}/srcFetchBuildInstructions.html" />
+			<copy file="${eclipse.build.scripts}/sdk/srcBuild/incl/instructions.html" tofile="${postingDirectory}/${buildLabel}/srcIncludedBuildInstructions.html" />
+			<copy file="${eclipse.build.scripts}/sdk/srcBuild/fetch/instructions.html" tofile="${postingDirectory}/${buildLabel}/srcFetchBuildInstructions.html" />
 
 			<delete dir="${tempDir}/" />
 		</target>
 	
+	<target name="getSdkExamplesPlugins">
+		    <ant antfile="build.xml" dir="${pde.build.scripts}" target="preBuild">
+				<property name="builder" value="${eclipse.build.scripts}/sdk.examples" />
+			</ant>
+			<ant antfile="build.xml" dir="${pde.build.scripts}" target="fetch">
+				<property name="builder" value="${eclipse.build.scripts}/sdk.examples" />
+			</ant>
+		</target>
 
 <!-- ===================================================================== -->
 <!-- Default target                                                        -->

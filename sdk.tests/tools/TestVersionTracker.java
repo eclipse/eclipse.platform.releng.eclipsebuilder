@@ -44,8 +44,6 @@ public class TestVersionTracker{
 	private String outputFilePath;
 	
 	public static void main(String[] args) {
-		//the first argument to this program should be the path to a test feature's build.xml in the buildDirectory.
-		//the top-level buildDirectory can be extrapolated from this assumption.
 		String buildDirectory=(args[0].substring(0,args[0].length()-10))+"/../..";
 		TestVersionTracker Tracker =
 		new TestVersionTracker(buildDirectory);
