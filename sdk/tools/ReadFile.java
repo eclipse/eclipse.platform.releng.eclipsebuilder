@@ -92,12 +92,6 @@ public class ReadFile extends Task {
 				this.docDir = docDir;
 			}
 		 
-		 /**
-			 * @param fileRegexp The fileRegexp to set.
-			 */
-	//		public void setFileRegexp(String fileRegexp) {
-	//			this.fileRegexp = fileRegexp;
-	//		}
 			/**
 			 * @param htmlFile The htmlFile to set.
 			 */
