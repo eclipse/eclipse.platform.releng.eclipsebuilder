@@ -44,6 +44,8 @@
 	
 	<zipType name="SWT">
 		<platform id="SWTW" name="Windows 98/ME/2000/XP" fileName="swt-@build@-win32.zip"></platform>
+		<platform id="SWTWCE" name="Windows CE (ARM PocketPC) (&lt;a href=&quot;http://dev.eclipse.org/viewcvs/index.cgi/~checkout~/platform-swt-home/faq.html#pocketpclibrary&quot;>Instructions&lt;/a>)" fileName="swt-@build@-win32-ce-arm-ppc.zip"></platform>
+		<platform id="SWTWCEJ" name="Windows CE (ARM PocketPC, J2ME profile) (&lt;a href=&quot;http://dev.eclipse.org/viewcvs/index.cgi/~checkout~/platform-swt-home/faq.html#pocketpclibrary&quot;>Instructions&lt;/a>)" fileName="swt-2.1-win32-ce-arm-ppc-j2me.zip"></platform>
 		<platform id="SWTLM" name="Linux (x86/Motif) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_2_1.html&quot;>Supported Versions&lt;/a>)" fileName="swt-@build@-linux-motif.zip"></platform>
 		<platform id="SWTLG2" name="Linux (x86/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_2_1.html&quot;>Supported Versions&lt;/a>)" fileName="swt-@build@-linux-gtk.zip"></platform>
 		<platform id="SWTSM" name="Solaris 8 (SPARC/Motif)" fileName="swt-@build@-solaris-motif.zip"></platform>
@@ -419,6 +421,8 @@
 		<effectedFile id="SW"></effectedFile>
 		<effectedFile id="PW"></effectedFile>
 		<effectedFile id="SWTW"></effectedFile>
+		<effectedFile id="SWTWCE"></effectedFile>
+		<effectedFile id="SWTWCEJ"></effectedFile>
 	</logFile>
 	
 	<logFile name="plugins\org.eclipse.jdt.ui.examples.projects_*\temp.folder\jdtexamples.jar.bin.log">
