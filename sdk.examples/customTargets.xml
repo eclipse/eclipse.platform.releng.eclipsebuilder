@@ -143,7 +143,7 @@
 		</fileset>
 	</unzip>
 </target>
-<target name="clean">
+<target name="clean" unless="noclean">
 	<antcall target="allElements">
 		<param name="target" value="cleanElement" />
 	</antcall>

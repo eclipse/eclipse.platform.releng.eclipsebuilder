@@ -121,19 +121,22 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<property name="id" value="platform-launcher" />
 	</ant>
 	<zip zipfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/plugins/platform-launcher" includes="library/" />
+
+
+
 </target>
 
 <!-- ===================================================================== -->
 <!-- Steps to do before generating build scripts -->
 <!-- ===================================================================== -->
 <target name="preGenerate">
-
 </target>
 
 <!-- ===================================================================== -->
 <!-- Steps to do after generating the build scripts -->
 <!-- ===================================================================== -->
 <target name="postGenerate">
+	<antcall target="clean" />
 </target>
 
 <!-- ===================================================================== -->
@@ -188,7 +191,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	</unzip>
 </target>
 
-<target name="clean">
+<target name="clean" unless="noclean">
 	<antcall target="allElements">
 		<param name="target" value="cleanElement" />
 	</antcall>
