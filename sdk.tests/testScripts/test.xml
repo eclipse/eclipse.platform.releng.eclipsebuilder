@@ -22,13 +22,6 @@
 			<os family="windows" />
     	</and>
      </condition>
-		
-	<!--  necessary condition for running jdt core tests  -->
-   	<condition property="jvm14">
-		<and>
-      		<equals arg1="${ant.java.version}" arg2="1.4" />
-   		</and>
-	</condition>
 	</target>
 
 	<target name="setup" if="clean" description="Reinstall the test Eclipse installation if specified by user">
@@ -93,21 +86,21 @@
        		</antcall>
 	</target>
 	
-	<target name="jdtcorecompiler" if="jvm14" depends="init">
+	<target name="jdtcorecompiler" if="win32" depends="init">
 		<antcall target="runtests" >
 			<param name="testPlugin" value="${org.eclipse.jdt.core.tests.compiler}" />
 			<param name="report" value="org.eclipse.jdt.core.tests.compiler" />
 		</antcall>
 	</target>
 	
-   <target name="jdtcorebuilder" if="jvm14" depends="init">
+   <target name="jdtcorebuilder" if="win32" depends="init">
 		<antcall target="runtests" >
 			<param name="testPlugin" value="${org.eclipse.jdt.core.tests.builder}" />
 			<param name="report" value="org.eclipse.jdt.core.tests.builder" />
 		</antcall>
 	</target>
 
-	<target name="jdtcoremodel" if="jvm14" depends="init">
+	<target name="jdtcoremodel" if="win32" depends="init">
 		<antcall target="runtests" >
 			<param name="testPlugin" value="${org.eclipse.jdt.core.tests.model}" />
 			<param name="report" value="org.eclipse.jdt.core.tests.model" />
@@ -188,6 +181,9 @@
 
 
 	<target name="all">
+		<antcall target="jdtcorebuilder" />
+		<antcall target="jdtcorecompiler" />
+		<antcall target="jdtcoremodel" />
 		<antcall target="jdtdebug" />
 		<antcall target="ant" />
 		<antcall target="antui" />
@@ -204,12 +200,6 @@
 		<antcall target="genHtml" />
 	</target>
 	
-	<target name="all14">
-		<antcall target="jdtcorebuilder" />
-		<antcall target="jdtcorecompiler" />
-		<antcall target="jdtcoremodel" />
-		<antcall target="genHtml" />
-	</target>
 
 	<target name="genHtml" description="Generates HTML results with provided JUNIT.XSL provided">
 		<style style="JUNIT.XSL" basedir="${results}/xml" destdir="${results}/html" />

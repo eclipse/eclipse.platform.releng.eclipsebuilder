@@ -23,7 +23,7 @@
   JUnit</a></p>
 
 <p><font size="+1">Requirements</font></p>
-<p>1. All test machines will require a java runtime environment (version 1.3 or 
+<p>1. All test machines will require a java runtime environment (version 1.4 or 
   higher) installed and optionally added to the path environment variable (see 
   <a href="#vm">-vm</a> parameter below).<br>
   2. <a href="http://www.info-zip.org/pub/infozip/UnZip.html">Info-ZIP UnZip</a> 
@@ -113,7 +113,7 @@
     <td>-vm</td>
     <td>The full path to the java executable with which to run the tests. Use 
       this to specify a specific virtual machine with which to run the tests. 
-      For example, &quot;-vm c:\sun131\jre\bin\java&quot;. Default set to &quot;java&quot; 
+      For example, &quot;-vm c:\jdk142\jre\bin\java&quot;. Default set to &quot;java&quot; 
       (i.e. java executable on system path). </td>
   </tr>
 </table>
@@ -126,14 +126,9 @@
 <table width="90%" border="1">
   <tr> 
     <td>all</td>
-    <td>Runs all the targets below excluding the JDT-Core components tests.</td>
+    <td>Runs all the targets below.</td>
   </tr>
   <tr> 
-    <td>all14</td>
-    <td>Runs all the JDT-Core component tests and genHtml. This target requires 
-      a 1.4 level java virtual machine on the path.</td>
-  </tr>
-  <tr>
     <td>ant</td>
     <td>Runs the JUnit plugin tests for the Platform-Ant component.</td>
   </tr>
@@ -147,15 +142,18 @@
   </tr>
   <tr> 
     <td>jdtcorebuilder</td>
-    <td>Runs the JUnit plugin tests for the JDT-Core component.</td>
+    <td>Runs the JUnit plugin tests for the JDT-Core component. This target is 
+      executed on Windows operating systems only.</td>
   </tr>
   <tr> 
     <td height="20">jdtcorecompiler</td>
-    <td height="20">Runs the JUnit plugin tests for the JDT-Core component.</td>
+    <td height="20">Runs the JUnit plugin tests for the JDT-Core component. This 
+      target is executed on Windows operating systems only.</td>
   </tr>
   <tr> 
     <td>jdtcoremodel</td>
-    <td>Runs the JUnit plugin tests for the JDT-Core component.</td>
+    <td>Runs the JUnit plugin tests for the JDT-Core component. This target is 
+      executed on Windows operating systems only.</td>
   </tr>
   <tr> 
     <td>jdtdebug</td>
