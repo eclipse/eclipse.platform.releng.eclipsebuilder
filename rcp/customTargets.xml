@@ -115,12 +115,6 @@
 <!-- Steps to do after the fetch -->
 <!-- ===================================================================== -->
 <target name="postFetch">
-	<ant antfile="${genericTargets}" target="fetchElement">
-		<property name="type" value="plugin" />
-		<property name="id" value="platform-launcher" />
-	</ant>
-	<!--create launchersrc.zip and copy to org.eclipse.rcp plugin (fix for bug #49237) -->
-	<zip destfile="${buildDirectory}/plugins/org.eclipse.rcp/launchersrc.zip" basedir="${buildDirectory}/plugins/platform-launcher" includes="library/**" />
 </target>
 
 <!-- ===================================================================== -->
@@ -133,7 +127,6 @@
 <!-- Steps to do after generating the build scripts -->
 <!-- ===================================================================== -->
 <target name="postGenerate">
-	<antcall target="clean" />
 </target>
 
 <!-- ===================================================================== -->

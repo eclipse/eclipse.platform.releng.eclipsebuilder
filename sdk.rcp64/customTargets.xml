@@ -1,8 +1,12 @@
-<project name="Build specific targets and properties" default="noDefault" basedir=".">
+<project name="Build specific targets and properties" default="noDefault" >
+
 
 <!-- ===================================================================== -->
 <!-- Run a given ${target} on all elements being built -->
 <!-- ===================================================================== -->
+
+<!-- ****** figure out how to build the platform, sdk, examples, ... from one compile"
+see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets  -->
 <target name="allElements">
 	<ant antfile="${genericTargets}" target="${target}" >
 		<property name="type" value="feature" />
@@ -12,53 +16,13 @@
 
 <!-- ===================================================================== -->
 <!-- Targets to assemble the built elements for particular configurations  -->
-<!-- These generally call the generated assemble scripts (named in -->
-<!-- ${assembleScriptName}) but may also add pre and post processing -->
-<!-- Add one target for each root element and each configuration -->
 <!-- ===================================================================== -->
 
-<!-- POST STEPS TO ADD -->
-<target name="assemble.org.eclipse.platform.win32.win32.x86">
-	<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-win32.zip"/>
-	<ant antfile="${assembleScriptName}"/>
+<target name="assemble.org.eclipse.rcp.sdk.linux.gtk.amd64">
+	<ant antfile="${assembleScriptName}">
+		<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-linux-gtk-amd64.zip"/>
+	</ant>
 </target>
-
-<target name="assemble.org.eclipse.rcp.sdk.linux.motif.x86">
-	<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-linux-motif.zip"/>
-	<ant antfile="${assembleScriptName}"/>
-</target>
-
-<target name="assemble.org.eclipse.rcp.sdk.linux.gtk.x86">
-	<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-linux-gtk.zip"/>
-	<ant antfile="${assembleScriptName}"/>
-</target>
-
-<target name="assemble.org.eclipse.rcp.sdk.solaris.motif.sparc">
-	<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-solaris-motif.zip"/>
-	<ant antfile="${assembleScriptName}"/>
-</target>
-
-<target name="assemble.org.eclipse.rcp.sdk.qnx.photon.x86">
-	<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-qnx-photon.zip"/>
-	<ant antfile="${assembleScriptName}"/>
-</target>
-
-<target name="assemble.org.eclipse.rcp.sdk.aix.motif.ppc">
-	<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-aix-motif.zip"/>
-	<ant antfile="${assembleScriptName}"/>
-</target>
-
-
-<target name="assemble.org.eclipse.rcp.sdk.hpux.motif.PA_RISC">
-	<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-hpux-motif.zip"/>
-	<ant antfile="${assembleScriptName}"/>
-</target>
-
-<target name="assemble.org.eclipse.rcp.sdk.macosx.carbon.ppc">
-	<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-macosx-carbon.tar.gz"/>
-	<ant antfile="${assembleScriptName}"/>
-</target>
-
 
 <!-- ===================================================================== -->
 <!-- Check out map files from correct repository -->
@@ -67,6 +31,7 @@
 <target name="checkLocal">
 	<available property="mapsLocal" file="${buildDirectory}/maps/org.eclipse.releng" />
 </target>
+
 <target name="getMapFiles" depends="checkLocal" unless="mapsLocal">
 
 	<!-- ***  change the repo info -->
@@ -77,11 +42,24 @@
 		dest="${buildDirectory}/maps"
 		tag="${mapVersionTag}"
 	/>
+	<!--compare the map files project-->
+	<antcall target="compareMapFiles" />
 	<!--tag the map files project-->
 	<antcall target="tagMapFiles" />
 </target>
 
+<target name="compareMapFiles" if="compareMaps">
+<property file="${mapTag.properties}"/>
+	 <property name="cvsDiffFile" value="${buildDirectory}/cvsDiff.txt" />
+     <cvs cvsRoot="${mapCvsRoot}" dest="${buildDirectory}/maps" command="diff -w -r ${lastMapTag}" output="${cvsDiffFile}" />
+     <modifiedMaps mapDiffFile="${cvsDiffFile}" />
+</target>
+
 <target name="tagMapFiles" if="tagMaps">
+    <!-- Stores tag on the filesystem so map files can be compared -->
+	<echo file="${mapTag.properties}">
+		lastMapTag=v${timestamp}
+	</echo>
 	<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag v${timestamp}" />
 </target>
 
@@ -91,17 +69,27 @@
 <target name="preSetup">
 </target>
 
+
 <!-- ===================================================================== -->
 <!-- Steps to do after setup but before starting the build proper -->
 <!-- ===================================================================== -->
-<target name="postSetup">
+<target name="postSetup" >
 	<!--fetch the additional pieces to build swt gtk64-->
 	<property name="featureOnly" value="false"/>
 	<property name="featureAndPlugins" value="true"/>
 	<property name="featuresRecursively" value="false"/>
+
 	<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
-		<property name="type" value="fragment" />
-		<property name="id" value="org.eclipse.swt.gtk64" />
+		<property name="type" value="plugin" />
+		<property name="id" value="org.eclipse.swt.tools" />
+	</ant>
+	<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="generateScript">
+		<property name="type" value="plugin" />
+		<property name="id" value="org.eclipse.swt.tools" />
+	</ant>
+	<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.tools" target="build.jars">
+		<property name="type" value="plugin" />
+		<property name="id" value="org.eclipse.swt.tools" />
 	</ant>
 </target>
 
@@ -143,7 +131,6 @@
 </target>
 
 
-
 <!-- ===================================================================== -->
 <!-- Steps to do before running the build.xmls for the elements being built. -->
 <!-- ===================================================================== -->
@@ -179,23 +166,25 @@
 	<antcall target="allElements">
 		<param name="target" value="gatherLogs" />
 	</antcall>
-
 	<unzip dest="${buildDirectory}/${buildLabel}/compilelogs" overwrite="true">
 		<fileset dir="${buildDirectory}/features/org.eclipse.rcp.sdk">
 			<include name="*.log.zip" />
 		</fileset>
 	</unzip>
 </target>
+
 <target name="clean" unless="noclean">
 	<antcall target="allElements">
 		<param name="target" value="cleanElement" />
 	</antcall>
 </target>
+
 <!-- ===================================================================== -->
 <!-- Default target                                                        -->
 <!-- ===================================================================== -->
 <target name="noDefault">
 	<echo message="You must specify a target when invoking this file" />
 </target>
+
 
 </project>
