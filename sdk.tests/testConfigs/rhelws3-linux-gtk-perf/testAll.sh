@@ -17,10 +17,7 @@ mkdir -p results/html
 zip eclipse-junit-tests-$1.zip -rm eclipse
 
 #execute command to run tests
-#team cvs tests
-./runtests teamcvs -os linux -ws gtk -arch x86 -vm ../jdk1.4.2_06/jre/bin/java -properties team.properties -Dtest.target=performance -Dplatform=linux.gtk.perf> linux.gtk.perf_consolelog.txt
 
-#all tests
-./runtests -os linux -ws gtk -arch x86 -vm ../jdk1.4.2_06/jre/bin/java -properties vm.properties -Dtest.target=performance -Dplatform=linux.gtk.perf -Dexclude.teamcvs.test=true>> linux.gtk.perf_consolelog.txt
+./runtests -os linux -ws gtk -arch x86 -vm ../jdk1.4.2_06/jre/bin/java -properties vm.properties -Dtest.target=performance -Dplatform=linux.gtk.perf> linux.gtk.perf_consolelog.txt
 
 
