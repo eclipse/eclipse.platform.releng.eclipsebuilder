@@ -35,7 +35,7 @@
         <?php echo "<a href=\"ftp://$SERVER_NAME/@buildlabel@/\">link</a>"?>
         for ftp access to the entire build directory. You can also download builds 
         via anonymous ftp at download.eclipse.org.</p>
-      <p> Click <a href="verifyMD5.html">here</a> for instruction on how to verify 
+      <p> Click <a href="verifyMD5.html">here</a> for instructions on how to verify 
         the integrity of your downloads</p>
       </td>
   </tr>
