@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ASCII"?>
+<model:component xmlns:model="http://eclipse.org/wtp/releng/tools/component-model" name="JDT_Core">
+  <model:plugin fragment="false" id="org.eclipse.jdt.core"/>
+  <model:package name="org.eclipse.jdt.core.dom"/>
+  <model:package name="org.eclipse.jdt.core"/>
+  <model:package name="org.eclipse.jdt.core.jdom"/>
+  <model:package name="org.eclipse.jdt.core.util"/>
+  <model:package name="org.eclipse.jdt.core.search"/>
+  <model:package name="org.eclipse.jdt.core.dom.rewrite"/>
+  <model:package name="org.eclipse.jdt.core.compiler"/>
+  <model:package name="org.eclipse.jdt.core.eval"/>
+  <model:package name="org.eclipse.jdt.core.formatter"/>
+  <model:component-depends unrestricted="true"/>
+</model:component>

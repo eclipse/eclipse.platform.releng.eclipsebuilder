@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ASCII"?>
+<model:component xmlns:model="http://eclipse.org/wtp/releng/tools/component-model" name="Core_Filebuffers">
+  <model:plugin fragment="false" id="org.eclipse.core.filebuffers"/>
+  <model:package name="org.eclipse.core.filebuffers"/>
+  <model:package name="org.eclipse.core.filebuffers.manipulation"/>
+  <model:component-depends unrestricted="true"/>
+</model:component>

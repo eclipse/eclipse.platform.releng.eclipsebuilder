@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ASCII"?>
+<model:component xmlns:model="http://eclipse.org/wtp/releng/tools/component-model" name="UI_Forms">
+  <model:plugin fragment="false" id="org.eclipse.ui.forms"/>
+  <model:package name="org.eclipse.ui.forms"/>
+  <model:package name="org.eclipse.ui.forms.widgets"/>
+  <model:package name="org.eclipse.ui.forms.editor"/>
+  <model:package name="org.eclipse.ui.forms.events"/>
+  <model:component-depends unrestricted="true"/>
+</model:component>

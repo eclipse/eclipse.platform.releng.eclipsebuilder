@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ASCII"?>
+<model:component xmlns:model="http://eclipse.org/wtp/releng/tools/component-model" name="Platform_Debug_UI">
+  <model:plugin fragment="false" id="org.eclipse.debug.ui"/>
+  <model:package name="org.eclipse.debug.ui"/>
+  <model:package name="org.eclipse.debug.ui.actions"/>
+  <model:package name="org.eclipse.debug.ui.sourcelookup"/>
+  <model:package name="org.eclipse.debug.ui.console"/>
+  <model:component-depends unrestricted="true"/>
+</model:component>

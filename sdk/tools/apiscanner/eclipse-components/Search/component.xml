@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ASCII"?>
+<model:component xmlns:model="http://eclipse.org/wtp/releng/tools/component-model" name="Search">
+  <model:plugin fragment="false" id="org.eclipse.search"/>
+  <model:package name="org.eclipse.search.ui"/>
+  <model:package name="org.eclipse.search.ui.text"/>
+  <model:component-depends unrestricted="true"/>
+</model:component>

@@ -1,0 +1,2 @@
+#!/bin/bash		
+java -cp ./lib/apiscanner.jar;./lib/jdtcore.jar;./lib/resource.jar;./lib/runtime.jar;./lib/text.jar org.eclipse.wtp.releng.tools.component.violation.ComponentViolationEmitter -eclipseDir `pwd`/eclipse -compXMLDir D:/components -compRefDir d:/apiscanner -compVioDir d:/apiscanner/gef -xsl d:/apiscanner/xsl/component-violation.xsl -summaryXSL d:/apiscanner/xsl/component-violation-summary.xsl

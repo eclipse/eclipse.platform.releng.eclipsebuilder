@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ASCII"?>
+<model:component xmlns:model="http://eclipse.org/wtp/releng/tools/component-model" name="Ant">
+  <model:plugin fragment="false" id="org.eclipse.ant.core"/>
+  <model:plugin fragment="false" id="org.eclipse.ant.ui"/>
+  <model:package name="org.eclipse.ant.core"/>
+  <model:component-depends unrestricted="true"/>
+</model:component>
