@@ -25,6 +25,132 @@
 <p>examples:</p>
 <p>java -cp ../org.eclipse.releng.basebuilder/startup.jar org.eclipse.core.launcher.Main 
   -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=sdk 
-  -Dconfigs=linux,motif,x86 -Dzipargs=-y -Dbootclasspath=/builds/windows/jre/lib/rt.jar<br>
-  <br>
+  | platform | jdt | sdk.examples | sdk.tests | team.extras <br>
 </p>
+<p>Ant properties</p>
+<table width="100%" border="1">
+  <tr> 
+    <td>Property</td>
+    <td>Description</td>
+  </tr>
+  <tr> 
+    <td>mapVersionTag</td>
+    <td> 
+      <p>The tag to use when checking out the map file project org.eclipse.releng, 
+      </p>
+      <p>ie &quot;cvs -d :pserver:anonymous@dev.eclipse.org:/home/eclipse co -r 
+        ${mapVersionTag} org.eclipse.releng&quot;<br>
+        <br>
+        Can be set to a specific tag to download the map files used for a previous 
+        integration build. Typically, these tags are in the form &quot;v&lt;date 
+        and timestamp of build&gt;&quot; for example &quot;v200307110800&quot; 
+        will checkout the map files used to run the integration at the specified 
+        date/time. This mechanism will only work with builds &gt; 20030701.<br>
+      </p>
+    </td>
+  </tr>
+  <tr> 
+    <td>buildDirectory</td>
+    <td>The absolute path to a working directory where the source for the build 
+      will be checked, where scripts will be generated and where build results 
+      will be available.</td>
+  </tr>
+  <tr> 
+    <td>buildType</td>
+    <td> 
+      <p>Letters I, N, S, R or M are used in Eclipse builds to identify builds 
+        as being one of the following:<br>
+        <br>
+        I - Integration<br>
+        N - Nightly<br>
+        S - Stable<br>
+        R - Release<br>
+        M - Maintenance<br>
+      </p>
+      <p>Default set to I.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td>buildId</td>
+    <td>Refers to the build name. Default set to &quot;build&quot;.</td>
+  </tr>
+  <tr> 
+    <td>buildLabel</td>
+    <td>Refers to the name of the directory which will contain the results of 
+      the build. Default set to ${buildType}.${buildId}, ie.&quot;I.build&quot;. 
+      This directoryn will be created inside the location specified by the ${buildDirectory} 
+      property.</td>
+  </tr>
+  <tr> 
+    <td height="26">baseLocation</td>
+    <td height="26">A directory separate from buildDirectory whic contains pre-built 
+      plugins and features against which to compile. </td>
+  </tr>
+  <tr> 
+    <td>collPlace</td>
+    <td>The directory relative to ${buildLabel} in which built features and plugins 
+      are gathered. Default set to &quot;eclipse&quot;.</td>
+  </tr>
+  <tr> 
+    <td>collBase</td>
+    <td>The directory relative to ${buildLabel} in which to execute zip of the 
+      ${collPlace}directory and configuration specific root files.</td>
+  </tr>
+  <tr> 
+    <td>configs</td>
+    <td> 
+      <p>An ampersand separated list of configurations to build where a configuration 
+        is specified as &lt;os&gt;,&lt;ws&gt;,&lt;arch&gt;, ie. win32,win32,x86.<br>
+        Two configurations can be specified as follows: configs=win32,win32,x86 
+        &amp; linux, motif, x86</p>
+    </td>
+  </tr>
+  <tr> 
+    <td>bootclasspath</td>
+    <td>Sets the attribute &quot;bootclasspath&quot; in calls to the Ant &lt;javac&gt; 
+      task to the value set for this property. The absolute path to the java libraries 
+      against which to compile (typically the jre/lib/rt.jar of a jre or jdk).</td>
+  </tr>
+  <tr> 
+    <td>javacFailOnError</td>
+    <td>Sets the attribute &quot;failonerror&quot; in calls to the Ant &lt;javac&gt; 
+      task to the value set for this property. Build will continue even if there 
+      are compilation errors when this is set to false.</td>
+  </tr>
+  <tr> 
+    <td>javacDebugInfo</td>
+    <td>Sets the attribute &quot;debug&quot; in calls to the Ant &lt;javac&gt; 
+      task to the value set for this property. Default set to on.</td>
+  </tr>
+  <tr> 
+    <td>javacVerbose</td>
+    <td>Sets the attribute &quot;verbose&quot; in calls to the Ant &lt;javac&gt; 
+      task to the value set for this property. Default set to true.</td>
+  </tr>
+  <tr> 
+    <td>javacSource</td>
+    <td>Sets the attribute &quot;source&quot; in calls to the Ant &lt;javac&gt; 
+      task to the value set for this property. Default set to 1.3.</td>
+  </tr>
+  <tr> 
+    <td>javacTarget</td>
+    <td>Sets the attribute &quot;target&quot; in calls to the Ant &lt;javac&gt; 
+      task to the value set for this property. Default set to 1.1.</td>
+  </tr>
+  <tr> 
+    <td>zipargs</td>
+    <td>Arguments to send to the zip executable. ie. zipargs=-y on Linux requests 
+      zip to preserve symbolic links.</td>
+  </tr>
+  <tr> 
+    <td>baseos,basews,basearch</td>
+    <td>The os, ws and arch values of a pre-built eclipse SDK configuration which 
+      is being compiled against.</td>
+  </tr>
+  <tr>
+    <td>timestamp</td>
+    <td>A timestamp used in about.mappings files and to tag the org.eclipse.releng 
+      project on dev.eclipse.org (only available to folks with commit rights on 
+      this project.)</td>
+  </tr>
+</table>
