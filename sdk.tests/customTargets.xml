@@ -167,11 +167,7 @@
 	<!-- create top level testing directory-->    
     <mkdir dir="${workingDirectory}/eclipse-testing" />
 
-	<!-- store values for driver and driverlabel to use in performance testing -->
-	<echo file="${workingDirectory}/eclipse-testing/test.properties" append="true">!information used for performance measurements</echo>
-	<echo file="${workingDirectory}/eclipse-testing/test.properties" append="true">driver=${buildType}${timestamp}</echo>
-	<echo file="${workingDirectory}/eclipse-testing/test.properties" append="true">driverlabel=${buildId}</echo>
-			
+
 	<!--compile the tool used to generate the test.properties file, then run it.-->
 	<!--test.properties maps test plugin id's to the name of the plugin directory-->
     <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
