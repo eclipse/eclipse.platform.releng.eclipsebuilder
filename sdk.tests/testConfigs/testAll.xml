@@ -15,6 +15,11 @@
 	</parallel>
 </target>
 
+<target name="performanceTests">
+	<antcall target="testWinXPPerf" />
+	<echo message="Performance testing complete." />
+</target>
+	
 <target name="testLinuxGTK">
 	<property name="markerName" value="eclipse30-linux-gtk-${timestamp}" />
 	<findMachine cfg="${cfg}" markerContainer="${markerContainer}" cfgKey="eclipse30LinuxGtkTest" markerName="${markerName}" waitInterval="30"/>
