@@ -775,7 +775,7 @@
 	</copy>
 
 	<!-- set execute permission on files with the following extensions:  .so*, .sl, eclipse executable, .jnilib -->
-	<chmod dir="${workingDirectory}" perm="755" includes="**/eclipse,**/*.jnilib,**/*.so*,**/*.sl"/>
+	<chmod dir="${workingDirectory}" perm="755" includes="**/eclipse,**/*.jnilib,**/*.so*,**/*.sl,**/*.a"/>
 </target>
 
 <target name="macosxCarbonPostAssembly">

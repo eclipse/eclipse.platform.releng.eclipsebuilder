@@ -152,7 +152,7 @@
 	</target>
 	
 	<target name="setPermissions">
-		<chmod dir="${install}" perm="755" includes="**/eclipse,**/*.so*,**/*.sl"/>
+		<chmod dir="${install}" perm="755" includes="**/eclipse,**/*.so*,**/*.sl,**/*.a"/>
 	</target>
 
 	<target name="symlink" depends="init" if="linux.motif">
