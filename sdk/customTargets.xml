@@ -70,10 +70,10 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	</ant-->
 </target>
 
-<target name="assemble.org.eclipse.sdk.hpux.motif.ia64" />
+<!-- <target name="assemble.org.eclipse.sdk.hpux.motif.ia64" />
 <target name="assemble.org.eclipse.sdk.linux.gtk.ppc64" />
 <target name="assemble.org.eclipse.sdk.linux.gtk.ppc" />
-<target name="assemble.org.eclipse.sdk.linux.gtk.ia64" />
+<target name="assemble.org.eclipse.sdk.linux.gtk.ia64" /> -->
 
 <target name="assemble.org.eclipse.sdk.aix.motif.ppc">
 	<property name="archiveName" value="eclipse-SDK-${buildId}-aix-motif.tar.gz"/>	
