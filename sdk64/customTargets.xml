@@ -104,7 +104,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<property name="type" value="plugin" />
 		<property name="id" value="org.eclipse.swt.tools" />
 	</ant>
-	<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.tools" target="build.jars">
+	<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.win32" target="build.jars">
 		<property name="type" value="plugin" />
 		<property name="id" value="org.eclipse.swt.win32" />
 	</ant>
@@ -115,7 +115,10 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<property name="basews" value="win32" />
 		<property name="basearch" value="x86" />
 	</ant>
-
+	<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.win32" target="clean">
+		<property name="type" value="plugin" />
+		<property name="id" value="org.eclipse.swt.win32" />
+	</ant>
 </target>
 
 <!-- ===================================================================== -->
