@@ -284,7 +284,6 @@
 		<antcall target="help" />
 		<antcall target="update" />
 		<antcall target="teamcore" />
-		<antcall target="swt" />
 		<antcall target="antui" />
 		<!--antcall target="teamcvs" /-->
 		<antcall target="jdtcoreperf" />
@@ -305,6 +304,7 @@
 		<antcall target="uircp" />
 		<antcall target="uieditors" />
 		<antcall target="uiworkbenchtexteditor" />
+		<antcall target="swt" />
 	</target>
 	
 
