@@ -71,7 +71,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 
 <target name="assemble.org.eclipse.sdk.hpux.motif.ia64">
 	<ant antfile="${assembleScriptName}">
-		<property name="archiveName" value="eclipse-SDK-${buildId}-hpux-motif.zip"/>
+		<property name="archiveName" value="eclipse-SDK-${buildId}-hpux-motif-ia64.zip"/>
 	</ant>
 </target>
 	
