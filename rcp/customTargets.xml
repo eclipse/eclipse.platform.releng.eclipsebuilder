@@ -176,6 +176,9 @@
 	<replace dir="${buildDirectory}/plugins" value="${timestamp}" token="@build@">
 		<include name="**/about.mappings" />
 	</replace>
+	<replace dir="${buildDirectory}/features/org.eclipse.rcp" value="${buildType}${timestamp}" token="@build@">
+		<include name="**/config.ini" />
+	</replace>
 </target>
 
 <!-- ===================================================================== -->
