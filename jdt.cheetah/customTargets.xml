@@ -17,7 +17,7 @@
 <!-- Add one target for each root element and each configuration -->
 <!-- ===================================================================== -->
 
-<target name="assemble.org.eclipse.jdt.cheetah06">
+<target name="assemble.org.eclipse.jdt.cheetah05">
 	<property name="archiveName" value="eclipse-JDT-${buildId}.zip"/>
 	<ant antfile="${assembleScriptName}"/>
 </target>
@@ -136,7 +136,7 @@
 	</antcall>
 
 	<unzip dest="${buildDirectory}/${buildLabel}/compilelogs" overwrite="true">
-		<fileset dir="${buildDirectory}/features/org.eclipse.jdt.cheetah06">
+		<fileset dir="${buildDirectory}/features/org.eclipse.jdt.cheetah05">
 			<include name="*.log.zip" />
 		</fileset>
 	</unzip>
