@@ -160,8 +160,13 @@
 	<mkdir dir="${buildDirectory}/${buildLabel}/compilelogs" />
 	<antcall target="allElements">
 		<param name="target" value="gatherLogs" />
-		<param name="feature.temp.folder" value="${buildDirectory}/${buildLabel}/compilelogs" />
 	</antcall>
+
+	<unzip dest="${buildDirectory}/${buildLabel}/compilelogs" overwrite="true">
+		<fileset dir="${buildDirectory}/features/org.eclipse.platform">
+			<include name="*.log.zip" />
+		</fileset>
+	</unzip>
 </target>
 
 <!-- ===================================================================== -->
