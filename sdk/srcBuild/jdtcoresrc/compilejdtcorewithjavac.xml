@@ -6,6 +6,8 @@
 		<tstamp/>
 		<property name="srcdir" value="src" />
 		<property name="destdir" value="compiler" />
+		 <unzip src="${srcdir}/jdtcore.zip" dest="${srcdir}"/>
+	     <delete file="${srcdir}/jdtcore.zip"/>
 	</target>
 
 	<target name="compile" depends="init">
