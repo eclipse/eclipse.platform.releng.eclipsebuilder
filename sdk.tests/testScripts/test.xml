@@ -240,6 +240,13 @@
 		</antcall>
 	</target>
 
+	<target name="uircp" description="Runs the org.eclipse.ui.tests.rcp test.xml">
+		<antcall target="runtests">
+			<param name="testPlugin" value="${org.eclipse.ui.tests.rcp}" />
+			<param name="report" value="org.eclipse.ui.tests.rcp" />
+		</antcall>
+	</target>
+
 	<target name="uieditors" description="Runs the org.eclipse.ui.editors.tests test.xml">
 		<antcall target="runtests">
 			<param name="testPlugin" value="${org.eclipse.ui.editors.tests}" />
