@@ -283,7 +283,9 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 <!-- ===================================================================== -->
 		<!-- Targets called before extracting binary distributables.               -->
 		<!-- ===================================================================== -->
-		<target name="buildSourceDrops">
+	<target name="buildSourceDrops"/>
+
+	<target name="buildSourceDrops1">
 			<mkdir dir="${postingDirectory}/${buildLabel}" />
 			<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
 			<property name="tempDir" value="${basedir}/temp" />
