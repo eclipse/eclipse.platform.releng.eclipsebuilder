@@ -48,6 +48,18 @@
 <p></p>
 <table border=0 cellspacing=5 cellpadding=2 width="100%" >
   <tr> 
+    <td align=LEFT valign=TOP colspan="3" bgcolor="#0080C0"><b><font color="#FFFFFF" face="Arial,Helvetica">CHKPII 
+      (NLS) Logs 
+      <?php echo "$buildType $buildName"; ?>
+      </font></b></td>
+  </tr>
+</table>
+<br>
+These <a href="testresults/chkpii">logs</a> only need to be checked if the org.eclipse.releng.tests 
+above report a chkpii test failure. <br>
+<br>
+<table border=0 cellspacing=5 cellpadding=2 width="100%" >
+  <tr> 
     <td align=LEFT valign=TOP colspan="3" bgcolor="#0080C0"><b><font color="#FFFFFF" face="Arial,Helvetica">Plugins 
       containing compile errors </font></b></td>
   </tr>
