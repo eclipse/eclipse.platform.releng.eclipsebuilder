@@ -12,10 +12,10 @@
 		plugin directory names including version.  These properties are
 		used to for file operations that involve built plugins.
 -->
-<property name="org.eclipse.sdk.examples.source.version" value="2.1.0" />
-<property name="org.eclipse.sdk.examples.win32.source.version" value="2.1.0" />
+<property name="org.eclipse.sdk.examples.source.version" value="2.1.1" />
+<property name="org.eclipse.sdk.examples.win32.source.version" value="2.1.1" />
 <property name="org.eclipse.test.version" value="2.1.0" />
-<property name="org.eclipse.sdk.tests.version" value="2.1.0" />
+<property name="org.eclipse.sdk.tests.version" value="2.1.1" />
 <property name="org.eclipse.team.extras.version" value="2.1.0" />
 <property name="org.eclipse.platform.version" value="2.1.1" />
 
