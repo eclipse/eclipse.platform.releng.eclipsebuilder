@@ -116,7 +116,7 @@
 <!-- ===================================================================== -->
 <target name="postBuild">
 	<!--property name="archiveName" value="org.eclipse.releng.tools_${buildId}.zip"/-->
-	<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.releng.tools">
+	<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.releng.tools" target="zip.plugin">
 		<property name="plugin.destination" value="${buildDirectory}/${buildLabel}" />
 	</ant>
 </target>
@@ -125,7 +125,7 @@
 <!-- Helper targets -->
 <!-- ===================================================================== -->
 <target name="gatherLogs" if="logsAvailable">
-	<property name="destination.temp.folder" value="${buildDirectory}/${buildLabel}/compilelogs" />
+	<property name="destination.temp.folder" value="${buildDirectory}/${buildLabel}/compilelogs/plugins" />
 	<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.releng.tools" target="gather.logs" />
 </target>
 <target name="clean" unless="noclean">
