@@ -3,7 +3,7 @@
 	<property name="builderDirectory" value="c:\plugins"/>
 	
 <target name="checkBinary">
-	<exec executable="htmldoc" failonerror="false"/>		
+	<exec executable="htmldoc" failonerror="false" failifexecutionfails="false"/>		
 </target>
 	
 <target name="compileSrc" depends="checkBinary">
