@@ -327,7 +327,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 				<fileset dir="${buildDirectory}" includes="features/,plugins/" excludes="features/*example*/**,plugins/*example*/**" />
 			</copy>
 			<copy todir="${tempDir}/buildScripts" flatten="true" overwrite="true">
-				<fileset dir="srcBuild" excludes="fetch/**,incl" />
+				<fileset dir="${eclipse.build.scripts}/sdk/srcBuild" excludes="fetch/**,incl" />
 			</copy>
 
 			<!-- fetch scripts are not when source already included in zip file -->
@@ -343,8 +343,8 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<checksum file="${postingDirectory}/${buildLabel}/eclipse-sourceBuild-srcIncluded-${buildId}.zip" property="md5.2"/>
 			<echo message="${md5.2} *eclipse-sourceBuild-srcIncluded-${buildId}.zip" file="${postingDirectory}/${buildLabel}/checksum/eclipse-sourceBuild-srcIncluded-${buildId}.zip.md5"/>
 
-			<copy file="srcBuild/incl/instructions.html" tofile="${postingDirectory}/${buildLabel}/srcIncludedBuildInstructions.html" />
-			<copy file="srcBuild/fetch/instructions.html" tofile="${postingDirectory}/${buildLabel}/srcFetchBuildInstructions.html" />
+			<copy file="${eclipse.build.scripts}/sdk/srcBuild/incl/instructions.html" tofile="${postingDirectory}/${buildLabel}/srcIncludedBuildInstructions.html" />
+			<copy file="${eclipse.build.scripts}/sdk/srcBuild/fetch/instructions.html" tofile="${postingDirectory}/${buildLabel}/srcFetchBuildInstructions.html" />
 
 			<delete dir="${tempDir}/" />
 		</target>
