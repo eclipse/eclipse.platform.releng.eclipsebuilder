@@ -1,0 +1,81 @@
+# !/bin/sh
+
+#This script requires that contents of the org.eclipse.releng.basebuilder project are copied into this project
+
+#Ant property values
+
+#default value of the bootclasspath property used in ant javac calls.  Value duplicated in rt property
+bootclasspath=/builds/tools/jdk/win32/jdk1.3.1-sr1/jre/lib/rt.jar
+
+#default value of the JAVADOC14_HOME property used for generating javadoc.
+#This is the directory containing 1.4 version of javadoc tool.
+JAVADOC14_HOME=/builds/tools/jdk/linux/jdk1.4/bin
+
+#flag indicating whether or not mail should be sent to indicate build has started
+mail=""
+
+#Value for the buildid property.
+buildid=""
+
+#The value of the buildLabel property, the name of the directory containing the products of the build
+buildLabel=""
+
+#The value for the mapVersionTag property.  Used to checkout the .map file project using the value set here.
+mapVersionTag=HEAD
+
+#the value for the buildDirectory property.
+#This is the directory relative to builddir where features and plugins will be compiled
+buildDirectory=src
+
+#The value for the buildtype property.  Determines whether map file tags are used as entered or are replaced with HEAD
+buildType=I
+
+#The value for the postingDirectory property.  This is the directory where to copy build.
+postingDirectory=.
+
+# value used in buildLabel and for text replacement in index.php template file
+builddate=`date +%Y%m%d`
+timestamp=$builddate`date +%H%M`
+
+# Process command line arguments
+
+usage="usage: $0 [-noStartMail][-buildid name][-buildLabel directory name][-mapVersionTag tag][-bootclasspath path] M|N|I|S|R"
+
+if [ $# -lt 1 ]
+then
+	echo >&2 "$usage"
+	exit 1
+fi
+
+while [ $# -gt 0 ]
+do
+	case "$1" in
+		-buildid) buildid="$2"; shift;;
+		-buildLabel) buildLabel="$2"; shift;;
+		-bootclasspath) bootclasspath="$2"; shift;;
+		-mapVersionTag) mapVersionTag="$2"; shift;;
+		-noStartMail) mail="-DnoMail=true";;
+		-*)
+			echo >&2 $usage
+			exit 1;;
+		*) break;;	# terminate while loop
+	esac
+	shift
+done
+
+# After the above the build type is left in $1.
+buildType=$1
+
+# Set default buildid and buildLabel if none explicitly set
+if [ "$buildid" = "" ]
+then
+	buildid=$buildType$builddate
+fi
+
+if [ "$buildLabel" = "" ]
+then
+	buildLabel=$buildType-$buildid-$timestamp
+fi
+
+java -cp startup.jar org.eclipse.core.launcher.Main -os linux -ws motif -arch x86 -noupdate -application org.eclipse.ant.core.antRunner -buildfile  build.xml $mail -DmapVersionTag=$mapVersionTag -Dinstall=$buildDirectory -DbuildDirectory=$buildDirectory -DpostingDirectory=$postingDirectory -Drt=$bootclasspath -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -Dbuildid=$buildid -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DJAVADOC14_HOME=$JAVADOC14_HOME
+
