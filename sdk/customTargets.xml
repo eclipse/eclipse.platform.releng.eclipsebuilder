@@ -50,19 +50,16 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	
 <target name="assemble.org.eclipse.sdk.solaris.motif.sparc">
 	<property name="archiveName" value="eclipse-SDK-${buildId}-solaris-motif.tar.gz"/>
-	<property name="tarargs" value="--format=ustar"/>
 	<antcall target="assemble" />
 </target>
 
 <target name="assemble.org.eclipse.sdk.solaris.gtk.sparc">
-	<property name="archiveName" value="eclipse-SDK-${buildId}-solaris-gtk.tar.gz"/>
-	<property name="tarargs" value="--format=ustar"/>
+	<property name="archiveName" value="eclipse-SDK-${buildId}-solaris-gtk.tar.gz"/>	
 	<antcall target="assemble" />
 </target>
 	
 <target name="assemble.org.eclipse.sdk.hpux.motif.PA_RISC">
-	<property name="archiveName" value="eclipse-SDK-${buildId}-hpux-motif.tar.gz"/>
-	<property name="tarargs" value="--format=ustar"/>
+	<property name="archiveName" value="eclipse-SDK-${buildId}-hpux-motif.tar.gz"/>	
 	<antcall target="assemble" />
 </target>
 
@@ -79,8 +76,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 <target name="assemble.org.eclipse.sdk.linux.gtk.ia64" />
 
 <target name="assemble.org.eclipse.sdk.aix.motif.ppc">
-	<property name="archiveName" value="eclipse-SDK-${buildId}-aix-motif.tar.gz"/>
-	<property name="tarargs" value="--format=ustar"/>
+	<property name="archiveName" value="eclipse-SDK-${buildId}-aix-motif.tar.gz"/>	
 	<antcall target="assemble" />
 </target>
 
