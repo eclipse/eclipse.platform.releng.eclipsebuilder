@@ -55,6 +55,7 @@
  <package name="org.xml.sax" /> 
  <package name="org.xml.sax.ext" /> 
  <package name="org.xml.sax.helpers" />
+<package name="javax.swing" />
 
  <component-depends />
 </component>
