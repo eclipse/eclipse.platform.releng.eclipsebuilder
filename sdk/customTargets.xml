@@ -113,7 +113,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 <target name="tagMapFiles" if="tagMaps">
     <!-- Stores tag on the filesystem so map files can be compared -->
 	<echo file="${mapTag.properties}">
-		lastMapTag=v${timestamp}
+		lastMapTag=r301_v${timestamp}
 	</echo>
 	<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag r301_v${timestamp}" />
 </target>
