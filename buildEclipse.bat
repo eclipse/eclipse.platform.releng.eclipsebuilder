@@ -78,8 +78,8 @@ if %buildLabel% == "" set buildLabel=%buildType%-%buildid%-%timestamp%
 
 REM verify existance of rt.jar, javadoc tool and JAVA_HOME environment variable settings.
 if x%JAVA_HOME%=="x%JAVA_HOME%" echo The JAVA_HOME environment variable has not been set && goto end
-if NOT EXIST %bootclasspath% echo rt.jar does not exist at this location: %bootclasspath% && goto end
-if NOT EXIST %JAVADOC14_HOME%\javadoc.exe echo javadoc.exe not found in %JAVADOC14_HOME% && goto end
+if NOT EXIST %bootclasspath% echo rt.jar does not exist at this location: %bootclasspath%. Please verify your bootclasspath setting. && goto end
+if NOT EXIST %JAVADOC14_HOME%\javadoc.exe echo javadoc.exe not found in %JAVADOC14_HOME%.  Please verify your JAVA_HOME setting. && goto end
 goto run
 
 

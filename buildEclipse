@@ -74,20 +74,20 @@ fi
 
 if [ "`echo $JAVA_HOME`" = "" ]
 then
-	echo "The JAVA_HOME environment variable has been set."
-	exit
+	echo "The JAVA_HOME environment variable has not been set."
+	exit 1;;
 fi
 
 if ! -e $bootclasspath
 then
 	echo rt.jar does not exist at this location:  $bootclasspath.  Please verify your bootclasspath setting.
-	exit
+	exit;;
 fi
 
 if ! -e $JAVADOC14_HOME/javadoc
 then
-	echo javadoc does not exist at this location:  $JAVADOC14_HOME.  Please verify your bootclasspath setting.
-	exit
+	echo javadoc does not exist at this location:  $JAVADOC14_HOME.  Please verify your JAVA_HOME setting.
+	exit 1;;
 fi
 
 #run the build
