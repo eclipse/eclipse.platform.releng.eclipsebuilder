@@ -86,21 +86,21 @@
        		</antcall>
 	</target>
 	
-	<target name="jdtcorecompiler" if="win32" depends="init">
+	<target name="jdtcorecompiler" depends="init">
 		<antcall target="runtests" >
 			<param name="testPlugin" value="${org.eclipse.jdt.core.tests.compiler}" />
 			<param name="report" value="org.eclipse.jdt.core.tests.compiler" />
 		</antcall>
 	</target>
 	
-   <target name="jdtcorebuilder" if="win32" depends="init">
+   <target name="jdtcorebuilder" depends="init">
 		<antcall target="runtests" >
 			<param name="testPlugin" value="${org.eclipse.jdt.core.tests.builder}" />
 			<param name="report" value="org.eclipse.jdt.core.tests.builder" />
 		</antcall>
 	</target>
 
-	<target name="jdtcoremodel" if="win32" depends="init">
+	<target name="jdtcoremodel" depends="init">
 		<antcall target="runtests" >
 			<param name="testPlugin" value="${org.eclipse.jdt.core.tests.model}" />
 			<param name="report" value="org.eclipse.jdt.core.tests.model" />
