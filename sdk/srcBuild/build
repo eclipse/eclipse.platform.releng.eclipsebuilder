@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 
 ANT_OPTS=-Xmx1000M;export ANT_OPTS
 os=""
