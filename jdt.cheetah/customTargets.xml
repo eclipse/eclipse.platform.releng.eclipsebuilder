@@ -66,6 +66,7 @@
 <!-- Steps to do after setup but before starting the build proper -->
 <!-- ===================================================================== -->
 <target name="postSetup">
+	<antcall target="getBaseEclipse" />
 </target>
 
 <!-- ===================================================================== -->
