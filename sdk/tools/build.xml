@@ -20,11 +20,11 @@
 
 
 <target name="unzipDoc" if = "compileSrc">
-<unzip src="${buildDirectory}/${jdt.doc.isv}/${doczipfile}" dest="${buildDirectory}/${jdt.doc.isv}/"></unzip>
-<unzip src="${buildDirectory}/${jdt.doc.user}/${doczipfile}" dest="${buildDirectory}/${jdt.doc.user}/"></unzip>
-<unzip src="${buildDirectory}/${pde.doc.user}/${doczipfile}" dest="${buildDirectory}/${pde.doc.user}/"></unzip>
-<unzip src="${buildDirectory}/${platform.doc.isv}/${doczipfile}" dest="${buildDirectory}/${platform.doc.isv}/"></unzip>
-<unzip src="${buildDirectory}/${platform.doc.user}/${doczipfile}" dest="${buildDirectory}/${platform.doc.user}/"></unzip>
+<unzip src="${buildDirectory}/plugins/${jdt.doc.isv}/${doczipfile}" dest="${buildDirectory}/plugins/${jdt.doc.isv}/"></unzip>
+<unzip src="${buildDirectory}/plugins/${jdt.doc.user}/${doczipfile}" dest="${buildDirectory}/plugins/${jdt.doc.user}/"></unzip>
+<unzip src="${buildDirectory}/plugins/${pde.doc.user}/${doczipfile}" dest="${buildDirectory}/plugins/${pde.doc.user}/"></unzip>
+<unzip src="${buildDirectory}/plugins/${platform.doc.isv}/${doczipfile}" dest="${buildDirectory}/plugins/${platform.doc.isv}/"></unzip>
+<unzip src="${buildDirectory}/plugins/${platform.doc.user}/${doczipfile}" dest="${buildDirectory}/plugins/${platform.doc.user}/"></unzip>
 <property name="unzipDoc" value="true"/>
 </target>
 
