@@ -50,7 +50,7 @@
                            <equals arg1="${installOs}-${installWs}-${installArch}"
                                         arg2="linux-gtk-ia64"/>
                            <equals arg1="${installOs}-${installWs}-${installArch}"
-                                        arg2="linux-gtk-amd64"/>
+                                        arg2="linux-gtk-x86_64"/>
 		                </or>
 		         </condition>
                 <condition property="wsType" value="gtk">
