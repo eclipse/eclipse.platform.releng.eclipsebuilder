@@ -819,17 +819,7 @@
 	</exec>
 	
 	<!--delete the eclipse directory so it is not included in the product zip file-->
-	<antcall target="macosxDeleteSymbolicLink" />
 	<delete dir="${workingDirectory}" />
-</target>
-
-<target name="macosxDeleteSymbolicLink" if="onUnix">
-	<!--This symbolic link cannot be deleted using the Ant delete task because
-		it is linked to a directory.
-	-->
-	<exec dir="${workingDirectory}" executable="rm">
-		<arg line="Eclipse.app/Contents/Resources/Java" />
-	</exec>
 </target>
 
 <target name="macosxPreClean">
