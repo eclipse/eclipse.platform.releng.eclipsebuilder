@@ -1,16 +1,13 @@
  
-<p>Description</p>
+<p><b>Description</b></p>
 <p>org.eclipse.releng.eclipsebuilder contains Ant scripts that use the java and 
   non-java resources in org.eclipse.pde.build to build all shipped components 
-  of Eclipse: SDK, platform jdt, examples, tests and team extras. A convenience 
-  script, org.eclipse.releng.eclipsebuilder/build.xml, is provided to build any 
-  specified component with default settings of necessary Ant properties.</p>
-<p>&nbsp;</p>
-<p>Prerequisites<br>
+  of Eclipse: SDK, platform jdt, examples, tests and team extras. A wrapper script, 
+  rg.eclipse.releng.eclipsebuilder/build.xml, is provided to build any specified 
+  component with default settings of necessary Ant properties.</p>
+<p><b>Prerequisites</b><br>
 </p>
-<p>** work in progress **</p>
-<p><br>
-  1. cvs executable installed and on system path variable.<br>
+<p>1. cvs executable installed and on system path variable.<br>
   2. 1.3.1 level jre installed and jre/bin directory added to system path variable.<br>
   3. 1.4 level JDK installed (for generating javadoc with working links)<br>
   4. (on non Windows systems only) - a 1.3.1 level windows java runtime environment 
@@ -18,20 +15,20 @@
   5. Info-Zip zip and unzip executables on system path.<br>
   6. (for Mac OSX only) tar and gzip<br>
   7. org.eclipse.releng.basebuilder and org.eclipse.releng.eclipsebuilder checked 
-  out into a directory<br>
+  out into a directory.<br>
 </p>
 <p> cd to org.eclipse.releng.eclipsebuilder directory and execute the following 
   command: </p>
 <p>java -cp ../org.eclipse.releng.basebuilder/startup.jar org.eclipse.core.launcher.Main 
   -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=sdk 
-  | platform | jdt | sdk.examples | sdk.tests [-Dconfigs=&lt;configuration list&gt;] 
+  | platform | jdt | sdk.examples | sdk.tests [-Dconfigs=&lt;configurationst&gt;] 
   [-Djavacfailonerror=true |false ] [-DjavacVerbose=true | false][-Dzipargs=&lt;arguments 
-  to zip executable&gt;] [ -Dbootclasspath=&lt;absolute path to rt.jar to compile 
-  against&gt;]<br>
+  to zip executable&gt;] [ -Dbootclasspath=&lt;absolute path to bootstrap classes 
+  (i.e. rt.jar) to compile against&gt;] [-DbaseLocation=&lt;path&gt;][-Dbaseos=&lt;os&gt;][-Dbasews=&lt;ws&gt;][-Dbasearch=&lt;arch&gt;][-DbuildDirectory=&lt;path&gt;]<br>
   <br>
   NB. currently the build.xml script cannot be executed interactively in eclipse 
   due to <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=35923">bug 35923</a>.</p>
-<p>Parameters (Ant properties)</p>
+<p><b>Parameters (Ant properties)</b></p>
 <table width="100%" border="1">
   <tr> 
     <td>Name</td>
@@ -41,7 +38,9 @@
     <td height="36">buildDirectory</td>
     <td height="36">The absolute path to a working directory where the source 
       for the build will be exported, where scripts will be generated and where 
-      the end products of the build will be located.</td>
+      the end products of the build will be located. On Windows systems, the path 
+      length should not exceed thirty characters due to path length limitations 
+      when compiling some classes in eclipse.</td>
   </tr>
   <tr> 
     <td>buildId</td>
@@ -57,7 +56,9 @@
   <tr> 
     <td height="26">baseLocation</td>
     <td height="26">A directory separate from buildDirectory which contains pre-built 
-      plugins and features against which to compile. </td>
+      plugins and features against which to compile. The basedirectory must not 
+      contain any features, plugins or fragments which are already or will be 
+      located in the buildDirectory.</td>
   </tr>
   <tr> 
     <td>buildType</td>
@@ -71,8 +72,9 @@
         R - Release<br>
         M - Maintenance<br>
       </p>
-      <p>Default set to I. This value is used by programs internal to OTI Labs, 
-        IBM Canada (ie. web page generation, automated e-mail notices).</p>
+      <p> If set to N, all source will be checked out from the HEAD stream. In 
+        all other cases, tags as specifed in map files will be used when exporting 
+        plugins to the buildDirectory. </p>
     </td>
   </tr>
   <tr> 
@@ -150,8 +152,8 @@
   </tr>
   <tr> 
     <td>baseos,basews,basearch</td>
-    <td>The os, ws and arch values of a pre-built eclipse SDK configuration which 
-      is being compiled against. See list of possible values in the table of <a href="#buildconfigs">build 
+    <td>The os, ws and arch values of a pre-built eclipse component which is being 
+      compiled against. See list of possible values in the table of <a href="#buildconfigs">build 
       configurations</a>.</td>
   </tr>
   <tr> 
@@ -161,11 +163,89 @@
       this project.)</td>
   </tr>
 </table>
-<p>&nbsp;</p>
+<p><b><br>
+  Examples<br>
+  <br>
+  <br>
+  Building Eclipse SDK</b></p>
+<p><b>java -cp ../org.eclipse.releng.basebuilder/startup.jar org.eclipse.core.launcher.Main 
+  -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=sdk 
+  -Dconfigs=&quot;win32,win32,x86&quot; -Djavacfailonerror=true -DjavacVerbose=false 
+  -DbuildDirectory=c:\mybuild</b> -<b>DJAVA14_HOME=c:\jdk141\bin</b><br>
+  <br>
+  This builds an eclipse SDK for the windows configuration only in the directory 
+  c:\mybuild. &quot;-DjavaVerbose=false&quot; indicates that no compile logs will 
+  be generated and &quot;-Djavacfailonerror=true&quot; will cause the build to 
+  fail if there are any compile errors. <b></b> By setting the value of &quot;-DJAVA14_HOME&quot; 
+  to a 1.4 level JDK bin directory, generated javadoc will have links to external 
+  classes with the correct separator character, '/' (see <a href="http://developer.java.sun.com/developer/bugParade/bugs/4359874.html">http://developer.java.sun.com/developer/bugParade/bugs/4359874.html</a>). 
+  If this is not set, the links will work on Windows but not on *nix systems.<br>
+  <br>
+  <br>
+  <b>java -cp ../org.eclipse.releng.basebuilder/startup.jar org.eclipse.core.launcher.Main 
+  -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=sdk 
+  -Dconfigs=&quot;linux,gtk,x86 &amp; linux,motif,x86&quot; -Dzipargs=-y</b><br>
+  <br>
+  This builds an eclipse SDK for the linux gtk and linux motif configurations. 
+  By default the buildDirectory will be set &quot;src&quot; in eclipse.releng.eclipsebuilder. 
+  &quot;-Dzipargs=-y&quot; is used here to preserve the symbolic links in the 
+  Linux Motif configuration located in the root directory of eclipse.<br>
+  <br>
+</p>
+<p><b>java -cp ../org.eclipse.releng.basebuilder/startup.jar org.eclipse.core.launcher.Main 
+  -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=sdk 
+  -Dconfigs=&quot;win32,win32,x86&quot; -Dbootclasspath=/builds/windows/jre/lib/rt.jar</b><br>
+  <br>
+  This builds an eclipse SDK for the windows configuration. A bootclasspath pointing 
+  to a Windows rt.jar is explicitly specified so that bootstrap classes not available 
+  in the linux virtual machine are available to compile windows specific classes 
+  in Eclipse. By default the buildDirectory will be set &quot;src&quot; in eclipse.releng.eclipsebuilder.<br>
+  <br>
+</p>
+<p><b>Building Eclipse Platform</b></p>
+<p><b>java -cp ../org.eclipse.releng.basebuilder/startup.jar org.eclipse.core.launcher.Main 
+  -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=platform 
+  -Dconfigs=&quot;linux,motif,x86&quot; -DbuildDirectory=/builds/platform</b></p>
+<p>This builds an eclipse platform runtime for the linux motif configuration. 
+  The buildDirectory will be set &quot;/builds/platform&quot;.<br>
+  <br>
+</p>
+<p><b>Building Eclipse JDT against a pre-built Eclipse Platform</b></p>
+<p><b>java -cp ../org.eclipse.releng.basebuilder/startup.jar org.eclipse.core.launcher.Main 
+  -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=jdt 
+  -Dconfigs=&quot;*,*,*&quot; -DbuildDirectory=/builds/jdt -DbaseLocation=/builds/platform 
+  -Dbaseos=linux -Dbasews=motif -Dbasearch=x86 -Djavacfailonerror=true</b></p>
+<p></p>
+<p>This builds an Eclipse JDT against a pre-built eclipse platform plugins. The 
+  build will fail if there are compile errors. The value specified for baseLocation 
+  must not contain any JDT features or plugins or the build will fail. &quot;baseos&quot;, 
+  &quot;basews&quot; and &quot;basearch&quot; should be specified in order to 
+  find the correct location of platform specific jars (i.e. swt.jar) on the classpath.<br>
+  <br>
+  <b><br>
+  Building Eclipse FTP-WebDAV against a pre-built Eclipse SDK</b></p>
+<p><b>java -cp ../org.eclipse.releng.basebuilder/startup.jar org.eclipse.core.launcher.Main 
+  -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=team.extras 
+  -DbuildDirectory=/builds/team.extras -DbaseLocation=/home/user/fred/eclipse 
+  -Dbaseos=linux -Dbasews=motif -Dbasearch=x86 -Djavacfailonerror=true</b></p>
+<p></p>
+<p>This builds an Eclipse FTP-WebDAV component against an eclipse SDK installed 
+  in directory /home/user/fred/eclipse. The build will fail if there are compile 
+  errors.</p>
+<p><br>
+  <b>Building Eclipse JUnit Plugin tests against a pre-built Eclipse SDK</b></p>
+<p><b>java -cp ../org.eclipse.releng.basebuilder/startup.jar org.eclipse.core.launcher.Main 
+  -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=sdk.tests 
+  -DbuildDirectory=c:\tests -DbaseLocation=c:\eclipse -Dbaseos=win32 -Dbasews=win32 
+  -Dbasearch=x86 -Djavacfailonerror=true</b></p>
+<p></p>
+<p>This builds an Eclipse SDK tests component in the directory c:\tests against 
+  an eclipse installed in the directory c:\. The build will fail if there are 
+  compile errors.</p>
 <p><font size="+1"><b><a name="buildconfigs"></a>Eclipse Build Configurations</b></font></p>
-<p><b></b>One or more build configurations can be specified to build a runtime 
-  version of any of the Eclipse components. If these are omitted, all configurations 
-  available will be built.</p>
+<p><b></b>One or more build configurations can be specified to build any of the 
+  Eclipse components. Default values for each component are specified in the build.properties 
+  for the component. </p>
 <table width="100%" border="1">
   <tr> 
     <td width="25%" height="24">Build Configuration (os, ws, arch)</td>
