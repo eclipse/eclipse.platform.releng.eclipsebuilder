@@ -6,7 +6,7 @@
 </head>
 
 <body bgcolor="#FFFFFF" text="#000000">
-<h1><a name="eclipseinant"></a>Building Eclipse</h1>
+<h1>Building Eclipse Products</h1>
 <h1><font size="+1">** work in progress **</font></h1>
 <h1>Table of Contents</h1>
 <ol>
@@ -21,9 +21,10 @@
 <h4><a name="description"></a>Description</h4>
 <p>This document describes how to run a build from the command line which produces 
   all Eclipse SDK and runtime products. The PDE-BUILD, Ant and the JDT Core Eclipse 
-  components are the techologies used in this process. These along with scripts 
-  that drive the process are contained in the combined resources of two projects, 
-  org.eclipse.releng.basebuilder and org.eclipse.releng.eclipsebuilder.</p>
+  components are the techologies used in this process. These, along with scripts 
+  that drive the process, are contained in the combined resources of <a href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.releng.basebuilder/">org.eclipse.releng.basebuilder</a> 
+  and <a href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.releng.eclipsebuilder/">org.eclipse.releng.eclipsebuilder</a>, 
+  two projects available from the dev.eclipse.org Eclipse repository.</p>
 <p>PDE-BUILD is a technology in Eclipse which generates build scripts for features, 
   plugins and fragments. The script generation functions are made available via 
   custom Ant tasks (see <a href="http://dev.eclipse.org/viewcvs/index.cgi/%7Echeckout%7E/org.eclipse.pde.build/notes/usingPDEBuild.html?rev=HEAD&content-type=text/html">documentation 
@@ -31,25 +32,29 @@
   provided in the projects noted above.</p>
 <p>The JDT Core compiler is used for compiling the java source code in Ant javac 
   calls.</p>
-<p>The Ant technology in Eclipse is used to run both static and generated scripts.</p>
+<p>The Ant technology in Eclipse is used to run both static and generated Ant 
+  scripts.</p>
 <p>&nbsp; </p>
 <p><a name="systemrequirements"></a><b>System Requirements</b></p>
 <ol>
   <li><a href="http://java.sun.com/j2se/1.3/download.html">JDK 1.3</a> or higher</li>
+  <li>(Unix only) Windows version of the rt.jar (bootstrap classes, classes that 
+    comprise the Java platform), version 1.3 or higher</li>
   <li><a href="http://ccvs.cvshome.org/servlets/ProjectDownloadList">CVS 1.10 
     </a> or higher</li>
   <li>Info-ZIP Zip version 2.3 or higher</li>
   <li>Info-ZIP UnZip version 5.41 or higher</li>
   <li>GNU tar version 1.12 or higher</li>
-  <li>&gt;1 Gigabyte free disk space. Currently, this process only builds ALL 
-    products for all eclipse platforms.</li>
-  <li>org.eclipse.releng.basebuilder</li>
-  <li>org.eclipse.releng.eclipsebuilder</li>
+  <li>&gt;1 Gigabyte free disk space (this process builds ALL Eclipse products, 
+    23 zip files, 6-67 meg in size)</li>
+  <li><a href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.releng.basebuilder/">org.eclipse.releng.basebuilder</a></li>
+  <li><a href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.releng.eclipsebuilder/">org.eclipse.releng.eclipsebuilder</a></li>
 </ol>
+<p>&nbsp;</p>
 <p><a name="setup"></a><b>Initial Setup</b></p>
 <ol>
   <li>Add the CVS executable and the JDK bin directories to your path.</li>
-  <li> Set the HOME environment variable to 'c:' not 'c:\'</li>
+  <li> Set the HOME environment variable to ('c:' not 'c:\')</li>
   <li>(Windows 98) Increase the default environment space as specified <a href="http://support.microsoft.com/default.aspx?scid=kb;EN-US;q230205">here</a>.</li>
   <li>Export the projects org.eclipse.releng.basebuilder and org.eclipse.releng.eclipsebuilder 
     to an empty directory created near the root of a drive to keep path lengths 
@@ -88,9 +93,9 @@
     <tr> 
       <td width="24%" height="173">noMail</td>
       <td width="76%" height="173">
-        <p>Setting this property will not send mail when a build starts. It is 
+        Setting this property will not send mail when a build starts. It is 
           used in the conditional test when executing the &quot;mail&quot; target 
-          in customTargets.xml. This will require the additional property settings:</p>
+          in customTargets.xml.
         </td>
     </tr>
     <tr> 
@@ -135,7 +140,10 @@
     </tr>
     <tr> 
       <td width="24%">bootclasspath</td>
-      <td width="76%">Absolute path to the rt.jar against which to compile.</td>
+      <td width="76%">Absolute path to the classes that implement the Java 2 Platform, 
+        also known as bootstrap classes. These are typically contained in an rt.jar, 
+        inluded with all JRE or JDK. The rt.jar used <b>must</b> be a windows 
+        version.</td>
     </tr>
     <tr> 
       <td width="24%">buildType</td>
@@ -205,7 +213,7 @@
   </table>
   <p>&nbsp;</p>
 </blockquote>
-<h2><b><a name="build_platforms"></a></b><b>Supported Platforms</b> </h2>
+<h2><b><a name="build_platforms"></a></b><b>Supported Build Platforms</b> </h2>
 <p>Eclipse can be built on any of the following platforms. With some <a href="#limitations">limitations</a> 
   any platform can be used to build Eclipse for any or all supported platforms.</p>
 <table width="40%" border="1">
@@ -252,27 +260,27 @@
   <li>Building unix flavours of Eclipse on Windows will result in incorrect file 
     permissions. The *.so, *.sl, and Eclipse executable files will not have execute 
     permissions. In addition, linux-motif builds will not have symbolic links 
-    to libXm.so.2.1 in the installation root directory (libXm.so and libXm.so.2). 
+    (libXm.so and libXm.so.2) to libXm.so.2.1 in the installation root directory. 
     In these cases you would have to write an install or post install script to 
     set permissionss properly. (UNIX builds built on UNIX systems will set sufficient 
-    permissions and make the appropriate soft links).</li>
-  <li>When the Mac port of Eclipse is built on a Windows operating system, the 
-    following post-installation steps will be required: 
-    <ul>
-      <li>cd to Eclipse.app/Contents/Resources</li>
-      <li> create a symbolic link to the eclipse installation directory by executing 
-        the following command: &quot;ln -s Java ../../..&quot;</li>
-      <li>cd to ../Contents/MacOS</li>
-      <li>set execute permission on the eclipse file by executing this command: 
-        &quot;chmod 555 eclipse</li>
-    </ul>
-  </li>
+    permissions and make the appropriate soft links).
+  <li>When the Mac port of Eclipse is built on a Windows operating system, a soft 
+    link to the root of the eclipse installation directory will be missing. The 
+    following post-installation steps will be required: </li>
+  <ul>
+    <li>cd to Eclipse.app/Contents/Resources</li>
+    <li> create a symbolic link to the eclipse installation directory by executing 
+      the following command: &quot;ln -s Java ../../..&quot;</li>
+    <li>cd to ../Contents/MacOS</li>
+    <li>set execute permission on the eclipse file by executing this command: 
+      &quot;chmod 555 eclipse&quot;</li>
+  </ul>
   <li>Only Java source code is compiled. *.dll, *so, *sl and Eclipse executables 
-    are all checked out of dev.eclipse.org prebuilt in this build process. </li>
-  <blockquote> 
-    <p>&nbsp;</p>
-  </blockquote>
+    are all checked out of dev.eclipse.org prebuilt in this build process.</li>
+  <li>This process builds all Eclipse runtime and SDK products requiring &gt; 
+    1 gig of hard disk space on the build machine. Future releases may contain 
+    targets which can be used for building specific products in isolation.</li>
 </ol>
-<p>&nbsp;</p>
+
 </body>
 </html>
