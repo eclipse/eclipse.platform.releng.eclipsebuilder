@@ -5,7 +5,6 @@
 	<target name="main">
 		<touch file="${user.home}/.cvspass" />
 
-
 		<!--Default values for required properties-->
 		<property name="buildDirectory" value="${basedir}/src" />
 		<condition property="baseLocation" value="${buildDirectory}/eclipse">
@@ -14,12 +13,6 @@
 		<available file="${buildDirectory}/label.properties" property="label.properties.exists" />
 		<antcall target="create.label.properties" />
 		<property file="${buildDirectory}/label.properties" />
-
-		<!--fetch the HEAD stream of all projects if build type specified as N-->
-		<condition property="fetchTag" value="HEAD">
-			<equals arg1="${buildType}" arg2="N" />
-		</condition>
-		<property name="fetchTag" value="" />
 
 		<!--set the compiler and compiler arguments-->
 		<!--the default compiler is set to the one used by eclipse rel. eng. -->
@@ -47,7 +40,9 @@
 	    </condition>
 		<property name="bootclasspath" refid="default.bootclasspath" />
 
-		<!--this property required as of Eclipse 3.0 stream builds > 20031126 -->
+		<condition property="buildingOSGi" value="false" >
+	     		<equals arg1="${mapVersionTag}" arg2="perf_213"/>
+	    </condition>
 		<property name="buildingOSGi" value="true" />
 
 		<!--run the build for the specified component-->
