@@ -68,22 +68,11 @@ cd $dir
 # verify os, ws and arch values passed in are valid before running tests
 if [ "$os-$ws-$arch" = "linux-motif-x86" ] || [ "$os-$ws-$arch" = "linux-gtk-x86" ] || [ "$os-$ws-$arch" = "solaris-motif-sparc" ] || [ "$os-$ws-$arch" = "aix-motif-sparc" ] || [ "$os-$ws-$arch" = "hpux-motif-ppc" ] || [ "$os-$ws-$arch" = "qnx-photon-x86" ]
 then
-	rm -r eclipse
-	rm -r workspace
-	unzip -qq -o eclipse-SDK-*.zip
-	unzip -qq -o -C eclipse-junit-tests-*.zip */plugins/org.eclipse.test*
-	
-	if [ "$installmode" = "noclean" ]
-	then		
-		# if tests are to run without reinstalling eclipse, only install the test eclipse if it does not exist
-		# If the test-eclipse directory is in a partially installed state, it should be deleted manually
-
-		if [ ! -r test-eclipse/eclipse ]
-		then
-			 $vm -cp eclipse/startup.jar org.eclipse.core.launcher.Main -noupdate -ws $ws -os $os -arch $arch -application org.eclipse.ant.core.antRunner -file test.xml setup -Dws=$ws -Dos=$os -Darch=$arch -Dclean=true -logger org.apache.tools.ant.DefaultLogger
-		fi
+	if [ ! -r eclipse ]
+		unzip -qq -o eclipse-SDK-*.zip
+		unzip -qq -o -C eclipse-junit-tests-*.zip */plugins/org.eclipse.test*
 	fi
-
+	
 # run tests
 $vm -cp eclipse/startup.jar org.eclipse.core.launcher.Main -noupdate -ws $ws -os $os -arch $arch -application org.eclipse.ant.core.antRunner -file test.xml $tests -Dws=$ws -Dos=$os -Darch=$arch -D$installmode=true $properties -logger org.apache.tools.ant.DefaultLogger
 

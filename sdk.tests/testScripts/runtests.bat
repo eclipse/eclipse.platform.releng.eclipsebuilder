@@ -22,20 +22,11 @@ set ANT_CMD_LINE_ARGS=
 
 REM ****************************************************************
 REM
-REM Delete previous Eclipse installation and workspace
+REM Install Eclipse if it does not exist
 REM
 REM ****************************************************************
-if EXIST eclipse rmdir /S /Q eclipse
-if EXIST workspace rmdir /s /Q workspace
+if NOT EXIST eclipse unzip -qq -o eclipse-SDK-*.zip && unzip -qq -o -C eclipse-junit-tests*.zip */plugins/org.eclipse.test*
 
-REM ****************************************************************
-REM
-REM Install Eclipse and org.eclipse.test plugin
-REM
-REM ****************************************************************
-
-unzip -qq -o eclipse-SDK-*.zip
-unzip -qq -o -C eclipse-junit-tests*.zip */plugins/org.eclipse.test*
 
 
 :processcmdlineargs
@@ -46,7 +37,7 @@ REM Process command line arguments
 REM
 REM ****************************************************************
 
-if x%1==x goto setup
+if x%1==x goto run
 if x%1==x-ws set ws=%2 && shift && shift && goto processcmdlineargs
 if x%1==x-os set os =%2 && shift && shift && goto processcmdlineargs
 if x%1==x-arch set arch=%2 && shift && shift && goto processcmdlineargs
@@ -55,24 +46,6 @@ if x%1==x-properties set properties=-propertyfile %2 && shift && shift && goto p
 if x%1==x-vm set vm=%2 && shift && shift && goto processcmdlineargs
 
 set tests=%tests% %1 && shift && goto processcmdlineargs
-
-
-:setup
-REM ****************************************************************
-REM
-REM	Setup up the test Eclipse
-REM
-REM	** if -noclean set, Eclipse will be re-installed only if the 
-REM	directory test-eclipse\eclipse does not exist.  If this directory
-REM	exists in a partially installed state, it should be deleted manually
-REM	and the script rerun with the same parameter settings. **
-REM
-REM ****************************************************************
-
-if NOT EXIST test-eclipse\eclipse %vm% -cp eclipse\startup.jar org.eclipse.core.launcher.Main -noupdate -ws %ws% -os %os% -arch %arch% -application org.eclipse.ant.core.antRunner -file test.xml setup -Dws=%ws% -Dos=%os% -Darch=%arch% -Dclean=true
-
-if %installmode%==noclean %vm% -cp eclipse\startup.jar org.eclipse.core.launcher.Main -noupdate -ws %ws% -os %os% -arch %arch% -application org.eclipse.ant.core.antRunner -file test.xml setup -Dws=%ws% -Dos=%os% -Darch=%arch% "-D%installmode%=true" -logger org.apache.tools.ant.DefaultLogger
-goto run
 
 
 :run
