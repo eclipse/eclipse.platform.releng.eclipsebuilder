@@ -23,7 +23,7 @@
 	</target>
 
 	<target name="assemble">
-		<property name="postingDirectory" value="${buildDirectory}/${buildLabel}" />
+		<property name="postingDirectory" value="${buildDirectory}" />
 		<property name="archiveFullPath" value="${postingDirectory}/${archiveName}" />
 		<ant antfile="${assembleScriptName}" />
 	</target>

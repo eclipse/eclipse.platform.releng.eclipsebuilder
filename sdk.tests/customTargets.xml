@@ -220,7 +220,7 @@
 
 	<!--set execute permission on *nix shell script-->
 	<chmod file="${workingDirectory}/eclipse-testing/runtests" perm="755"/>
-	<property name="postingDirectory" value="${buildDirectory}/${buildLabel}" />
+	<property name="postingDirectory" value="${buildDirectory}" />
 
 	<!--create zip file of the automated testing framework-->	
 	<exec dir="${workingDirectory}" executable="zip">

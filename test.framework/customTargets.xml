@@ -24,7 +24,7 @@
 
 <target name="assemble">
 	<property name="postingDirectory" value="${buildDirectory}" />
-	<property name="archiveFullPath" value="${postingDirectory}/${archiveName}" />
+	<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
 	<ant antfile="${assembleScriptName}" />
 </target>
 <!-- ===================================================================== -->
