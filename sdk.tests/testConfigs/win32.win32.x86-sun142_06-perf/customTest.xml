@@ -1,3 +1,4 @@
+
 <project name="Customized testing instructions" default="customSetup">
 
 	<target name="customSetup">
@@ -18,29 +19,32 @@
 		<replace file="${tester}/vm.properties" token="@buildType@@timestamp@" value="${buildId}"/>
 		<replace file="${tester}/vm.properties" token="@reference@" value="${eclipse.perf.ref}"/>
 		
-		<!--copy in the properties file for vm args-->	
+		<!--copy in the properties file for testing with J9 vm args-->	
 		<exec dir="." executable="${copyClient}">
 			<arg line="${tester}/vm.properties ${testMachine}:${executionDir}" />
 		</exec>
 		
-		<!--copy in the extra binaries needed to run tests-->	
-		<exec dir="." executable="${copyClient}">
-			<arg line="-r ${extraBinariesDir} ${testMachine}:${testDir}" />
-		</exec>
-		
-		<!--add Cloudscape to junit test zip if it is available-->
-		<available file="${internalPlugins}/Cloudscape" type="dir" property="Cloudscape.available" />
+		<!--add Cloudscape to junit tests unless rebuilt zip already exists-->
+		<available property="cloudscape.installed" file="${tester}/../eclipse-junit-tests-${buildId}.zip" />
 		<antcall target="installCloudscape" />
 		
 	</target>
-	
-	<target name="installCloudscape" if="Cloudscape.available">
-		<mkdir dir="${tester}/eclipse/plugins" />
-		<copy todir="${tester}/eclipse/plugins">
-			<fileset dir="${internalPlugins}" includes="Cloudscape/**" />
-		</copy>
-		<exec dir="${tester}" executable="${copyClient}">
-				<arg line="-r eclipse ${testMachine}:${executionDir}" />
+
+	<target name="installCloudscape" unless="cloudscape.installed">
+		<unzip dest="${tester}/..">
+			<patternset>
+				<include name="**/eclipse-junit-tests*.zip" />
+			</patternset>
+			<fileset dir="${postingDirectory}/${buildId}">
+				<include name="eclipse-Automated-Tests-*.zip" />
+			</fileset>
+		</unzip>
+		<zip destfile="${tester}/../eclipse-junit-tests-${buildId}.zip" update="true">
+			<zipgroupfileset dir="${tester}/../eclipse-testing" includes="eclipse-junit-tests-${buildId}.zip"/>
+			<zipfileset dir="${internalPlugins}" includes="Cloudscape/**" prefix="eclipse/plugins" />
+		</zip>
+		<exec dir="${tester}/../eclipse-testing" executable="${copyClient}">
+			<arg line="eclipse-junit-tests-${buildId}.zip ${testMachine}:${executionDir}" />
 		</exec>
 	</target>
 	
@@ -57,22 +61,6 @@
 		</exec>
 		<exec dir="." executable="${loginClient}">
 			<arg line="${testMachine} ${vmInstallCommand}" />
-		</exec>
-	</target>
-	
-	<target name="getJxe">
-		<property name="testVmTag" value="HEAD" />
-		<!--get and install the vm to test with-->
-		<cvs cvsRoot="${cvsRoot}"
-        	 command="export -r ${testVmTag} ${jxeUrl}"
-        	 dest="${tester}"
-  		/>
-  		
-		<exec dir="${tester}" executable="${copyClient}">
-			<arg line="${jxeUrl} ${testMachine}:${testDir}" />
-		</exec>
-		<exec dir="." executable="${loginClient}">
-			<arg line="${testMachine} ${jxeInstallCommand}" />
 		</exec>
 	</target>
 </project>

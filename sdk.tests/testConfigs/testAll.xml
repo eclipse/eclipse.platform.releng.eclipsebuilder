@@ -1,78 +1,146 @@
-<project name="Eclipse Test Configuration" default="all" basedir=".">
+<project default="default">
 
-<!--
-	Ant properties for buildId, buildLabel, timestamp and buildDirectory must be set before running this script.
--->
-<property name="markerContainer" value="/home/users/releng/buildTools/markers" />
-<property name="cfg" value="${markerContainer}/machine.cfg" />
-<property name="test.xml" value="${basedir}/../../../org.eclipse.releng.basebuilder/plugins/org.eclipse.build.tools/scripts/test.xml" />
-		
-<target name="all">
-	<parallel>
-		<antcall target="testLinuxGTK"/>
-		<antcall target="testWinXP" />
-	</parallel>
-</target>
+	<!--
+	A common directory to all running builds which stores files called markers.
+	marker files contain a key value which hold the name of a test machine which is in use.
+	marker files are read by the <findMachine> custom Ant task in conjunction with the testmachines.cfg
+	file to find an free test machine.
+	-->
+	<property name="markerContainer" value="/home/users/releng/buildTools/markers" />
+	<property name="cfg" value="testmachines.cfg" />
+	<property name="test.xml" value="${basedir}/../../../org.eclipse.releng.basebuilder/plugins/org.eclipse.build.tools/scripts/test.xml" />
 
-<target name="performanceTests">
-	<parallel>
-		<antcall target="testWinXPPerf" />
-		<antcall target="testLinuxGTKPerf" />
-	</parallel>
-	<echo message="Performance testing complete." />
-</target>
-	
-<target name="testLinuxGTK">
-	<property name="markerName" value="eclipse30-linux-gtk-${timestamp}" />
-	<findMachine cfg="${cfg}" markerContainer="${markerContainer}" cfgKey="eclipse30LinuxGtkTest" markerName="${markerName}" waitInterval="30"/>
-	<property file="${markerContainer}/${markerName}.marker" />
-	<property name="testMachine" value="${0}" />
-	
-	<ant antfile="${test.xml}">
-		<property name="tester" value="${basedir}/rhelws3-linux-gtk" />
-	</ant>
-	
-	<delete file="${markerContainer}/${markerName}.marker" />
-</target>
+	<target name="default">
+		<parallel>
+			<antcall target="runtests">
+				<param name="testconfig" value="linux.gtk.x86-sun142_06" />
+			</antcall>
+			<antcall target="runtests">
+				<param name="testconfig" value="win32.win32.x86-sun142_06" />
+			</antcall>
+		</parallel>
+	</target>
 
-<target name="testWinXP">
-	<property name="markerName" value="eclipse30-winxp-${timestamp}" />
-	<findMachine cfg="${cfg}" markerContainer="${markerContainer}" cfgKey="eclipse30WinXPTest" markerName="${markerName}" waitInterval="30"/>
-	<property file="${markerContainer}/${markerName}.marker" />
-	<property name="testMachine" value="${0}" />
-	
-	<ant antfile="${test.xml}">
-		<property name="tester" value="${basedir}/win32" />
-	</ant>
-	<delete file="${markerContainer}/${markerName}.marker" />
-</target>
+	<target name="performanceTests">
+		<property name="testresults" value="${postingDirectory}/${buildId}/performance" />
+		<parallel>
+			<antcall target="runtests">
+				<param name="testconfig" value="linux.gtk.x86-sun142_06-perf" />
+			</antcall>
+			<antcall target="runtests">
+				<param name="testconfig" value="win32.win32.x86-sun142_06-perf" />
+			</antcall>
+		</parallel>
+	</target>
 
-<target name="testWinXPPerf">
-	<property name="testResults" value="${postingDirectory}/${buildLabel}/performance" />
-	<mkdir dir="${testResults}"/>
-	<property name="markerName" value="eclipse30-winxp-perf-${timestamp}" />
-	<findMachine cfg="${cfg}" markerContainer="${markerContainer}" cfgKey="eclipse30WinXPTestPerf" markerName="${markerName}" waitInterval="30"/>
-	<property file="${markerContainer}/${markerName}.marker" />
-	<property name="testMachine" value="${0}" />
-	<ant antfile="${test.xml}">
-		<property name="tester" value="${basedir}/win32-perf" />
-	</ant>
-	<property file="${basedir}/win32-perf/testing.properties" />
-	<delete file="${markerContainer}/${markerName}.marker" />
-</target>
-	
-<target name="testLinuxGTKPerf">
-	<property name="testResults" value="${postingDirectory}/${buildLabel}/performance" />
-	<mkdir dir="${testResults}"/>
-	<property name="markerName" value="eclipse30-linux-gtk-perf-${timestamp}" />
-	<findMachine cfg="${cfg}" markerContainer="${markerContainer}" cfgKey="eclipse30LinuxGtkTestPerf" markerName="${markerName}" waitInterval="30"/>
-	<property file="${markerContainer}/${markerName}.marker" />
-	<property name="testMachine" value="${0}" />
-		
-	<ant antfile="${test.xml}">
-		<property name="tester" value="${basedir}/rhelws3-linux-gtk-perf" />
-	</ant>
-		
-	<delete file="${markerContainer}/${markerName}.marker" />
-</target>
+	<target name="runtest">
+		<property name="testResults" value="${postingDirectory}/${buildLabel}/testresults" />
+		<mkdir dir="${testResults}" />
+
+		<property name="markerName" value="${buildId}.${testconfig}.${target}" />
+		<!--find a free machine to use for testing-->
+		<findMachine cfg="${cfg}" markerContainer="${markerContainer}" cfgKey="${testconfig}" markerName="${markerName}" waitInterval="30" />
+		<property file="${markerContainer}/${markerName}.marker" />
+		<property name="testMachine" value="${0}" />
+
+		<!--run the test-->
+		<ant antfile="${test.xml}">
+			<property name="tester" value="${basedir}/${testconfig}" />
+			<property name="args" value="${executionDir} ${target} ${target}.${testconfig}.txt" />
+		</ant>
+		<delete file="${markerContainer}/${markerName}.marker" />
+	</target>
+
+	<target name="runtests">
+		<!--list tests to run in parallel here-->
+		<parallel>
+			<antcall target="runtest">
+				<property name="target" value="ant" />
+			</antcall>
+			<!--antcall target="runtest">
+				<property name="target" value="antui" />
+			</antcall>
+			<antcall target="runtest">
+				<property name="target" value="compare" />
+			</antcall>
+			<antcall target="runtest">
+				<property name="target" value="core" />
+			</antcall>
+			<antcall target="runtest">
+				<property name="target" value="coreexpressions" />
+			</antcall>
+			<antcall target="runtest">
+				<property name="target" value="filebuffers" />
+			</antcall>
+			<antcall target="runtest">
+				<property name="target" value="help" />
+			</antcall>
+			<antcall target="runtest">
+				<property name="target" value="jdtcorebuilder" />
+			</antcall>
+			<antcall target="runtest">
+				<property name="target" value="jdtcorecompiler" />
+			</antcall>
+			<antcall target="runtest">
+				<property name="target" value="jdtcoremodel" />
+			</antcall>
+			<antcall target="runtest">
+				<property name="target" value="jdtcoreperf" />
+			</antcall>
+			<antcall target="runtest">
+				<property name="target" value="jdtdebug" />
+			</antcall>
+			<antcall target="runtest">
+				<property name="target" value="jdttext" />
+			</antcall>
+			<antcall target="runtest">
+				<property name="target" value="jdtui" />
+			</antcall>
+			<antcall target="runtest">
+				<property name="target" value="jdtuirefactoring" />
+			</antcall>
+			<antcall target="runtest">
+				<property name="target" value="jface" />
+			</antcall>
+			<antcall target="runtest">
+				<property name="target" value="ltkcorerefactoringtests" />
+			</antcall>
+			<antcall target="runtest">
+				<property name="target" value="ltkuirefactoringtests" />
+			</antcall>
+			<antcall target="runtest">
+				<property name="target" value="pdeui" />
+			</antcall>
+			<antcall target="runtest">
+				<property name="target" value="relEng" />
+			</antcall>
+			<antcall target="runtest">
+				<property name="target" value="swt" />
+			</antcall>
+			<antcall target="runtest">
+				<property name="target" value="teamcore" />
+			</antcall>
+			<antcall target="runtest">
+				<property name="target" value="teamcvs" />
+			</antcall>
+			<antcall target="runtest">
+				<property name="target" value="text" />
+			</antcall>
+			<antcall target="runtest">
+				<property name="target" value="uieditors" />
+			</antcall>
+			<antcall target="runtest">
+				<property name="target" value="ui" />
+			</antcall>
+			<antcall target="runtest">
+				<property name="target" value="uircp" />
+			</antcall>
+			<antcall target="runtest">
+				<property name="target" value="uiworkbenchtexteditor" />
+			</antcall-->
+			<antcall target="runtest">
+				<property name="target" value="update" />
+			</antcall>
+		</parallel>
+	</target>
 </project>

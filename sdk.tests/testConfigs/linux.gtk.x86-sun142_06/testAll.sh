@@ -1,5 +1,5 @@
 # !/bin/sh
-cd .
+cd $1
 #environment variables
 PATH=.:/bin:/usr/bin:/usr/bin/X11:/usr/local/bin:/usr/X11R6/bin:`pwd`/../linux;export PATH
 xhost +$HOSTNAME
@@ -10,14 +10,9 @@ DISPLAY=$HOSTNAME:0.0
 ulimit -c unlimited
 
 export LD_LIBRARY_PATH USERNAME DISPLAY
-mkdir -p results/xml
-mkdir -p results/html
-
-# add Cloudscape plugin to junit tests zip file
-zip eclipse-junit-tests-$1.zip -rm eclipse
 
 #execute command to run tests
 
-./runtests -os linux -ws gtk -arch x86 -vm ../jdk1.4.2_06/jre/bin/java -properties vm.properties -Dtest.target=performance -Dplatform=linux.gtk.perf> linux.gtk.perf_consolelog.txt
+./runtests -os linux -ws gtk -arch x86 -Dplatform=linux.gtk -vm ../jdk1.4.2_06/jre/bin/java $2> $3
 
 
