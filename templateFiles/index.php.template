@@ -54,8 +54,11 @@
     <td align=RIGHT valign=TOP width="7%"> 
       <div align="left"><b>Status</b></div>
     </td>
-    <td width="34%"><b>Platform</b></td>
-    <td width="59%"><b>Download</b></td>
+    <td width="36%"><b>Platform</b></td>
+    <td width="12%"> 
+      <div align="center"><b>Download</b></div>
+    </td>
+    <td width="47%"><b>File</b></td>
  %sdk%
   </tr>
  </table>
@@ -85,8 +88,11 @@
     <td align=RIGHT valign=TOP width="7%"> 
       <div align="left"><b>Status</b></div>
     </td>
-    <td width="34%"><b>Platform</b></td>
-    <td width="59%"><b>Download</b></td>
+    <td width="36%"><b>Platform</b></td>
+    <td width="12%"> 
+      <div align="center"><b>Download</b></div>
+    </td>
+    <td width="47%"><b>File</b></td>
   </tr>
   %tests% 
 </table>
@@ -121,8 +127,11 @@
     <td align=RIGHT valign=TOP width="7%"> 
       <div align="left"><b>Status</b></div>
     </td>
-    <td width="34%"><b>Platform</b></td>
-    <td width="59%"><b>Download</b></td>
+    <td width="36%"><b>Platform</b></td>
+    <td width="12%"> 
+      <div align="center"><b>Download</b></div>
+    </td>
+    <td width="47%"><b>File</b></td>
   </tr>
  %example%
 </table>
@@ -151,8 +160,11 @@
     <td align=RIGHT valign=TOP width="7%"> 
       <div align="left"><b>Status</b></div>
     </td>
-    <td width="34%"><b>Platform</b></td>
-    <td width="59%"><b>Download</b></td>
+    <td width="36%"><b>Platform</b></td>
+    <td width="12%"> 
+      <div align="center"><b>Download</b></div>
+    </td>
+    <td width="47%"><b>File</b></td>
   </tr>
  %runtime%
 </table>
@@ -181,8 +193,12 @@
     <td align=RIGHT valign=TOP width="7%"> 
       <div align="left"><b>Status</b></div>
     </td>
-    <td width="34%"><b>Platform</b></td>
-    <td width="59%"><b>Download</b></td>
+    <td width="36%"><b>Platform</b></td>
+    <td width="12%"> 
+      <div align="center"><b>Download</b></div>
+    </td>
+    <td width="47%"><b>File</b></td>
+
   </tr>
 %jdt%
 </table>
@@ -209,8 +225,11 @@
     <td align=RIGHT valign=TOP width="7%"> 
       <div align="left"><b>Status</b></div>
     </td>
-    <td width="34%"><b>Platform</b></td>
-    <td width="59%"><b>Download</b></td>
+    <td width="36%"><b>Platform</b></td>
+    <td width="12%"> 
+      <div align="center"><b>Download</b></div>
+    </td>
+    <td width="47%"><b>File</b></td>
   </tr>
   %teamextras% 
 </table>
