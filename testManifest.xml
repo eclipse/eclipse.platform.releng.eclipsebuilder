@@ -44,6 +44,24 @@
 </zipTypes>
 
 <logFiles>
+	<logFile name="org.eclipse.ant.tests.core_linux.motif.xml">
+		<effectedFile id="SLM"></effectedFile>
+		<effectedFile id="SLG2"></effectedFile>
+		<effectedFile id="SSM"></effectedFile>
+		<effectedFile id="SAM"></effectedFile>
+		<effectedFile id="SHM"></effectedFile>
+		<effectedFile id="PLM"></effectedFile>
+		<effectedFile id="PLG2"></effectedFile>
+		<effectedFile id="PSM"></effectedFile>
+		<effectedFile id="PAM"></effectedFile>
+		<effectedFile id="PHM"></effectedFile>
+	</logFile>
+	
+	<logFile name="org.eclipse.ant.tests.core_win32.xml">
+		<effectedFile id="SW"></effectedFile>
+		<effectedFile id="PW"></effectedFile>
+	</logFile>
+
 	<logFile name="org.eclipse.core.tests_linux.motif.xml">
 		<effectedFile id="SLM"></effectedFile>
 		<effectedFile id="SLG2"></effectedFile>
@@ -55,7 +73,6 @@
 		<effectedFile id="PSM"></effectedFile>
 		<effectedFile id="PAM"></effectedFile>
 		<effectedFile id="PHM"></effectedFile>
-
 	</logFile>
 
 	<logFile name="org.eclipse.core.tests_win32.xml">
@@ -127,6 +144,21 @@
 		<effectedFile id="PW"></effectedFile>
 	</logFile>
 
+	<logFile name="org.eclipse.jdt.core.tests.builder_win32.xml">
+		<effectedFile id="SW"></effectedFile>
+		<effectedFile id="JA"></effectedFile>
+	</logFile>
+
+	<logFile name="org.eclipse.jdt.core.tests.compiler_win32.xml">
+		<effectedFile id="SW"></effectedFile>
+		<effectedFile id="JA"></effectedFile>
+	</logFile>
+
+	<logFile name="org.eclipse.jdt.core.tests.model_win32.xml">
+		<effectedFile id="SW"></effectedFile>
+		<effectedFile id="JA"></effectedFile>
+	</logFile>
+	
 	<logFile name="org.eclipse.ui.tests_linux.motif.xml">
 		<effectedFile id="SLM"></effectedFile>
 		<effectedFile id="SLG2"></effectedFile>
@@ -149,6 +181,20 @@
 	<logFile name="org.eclipse.update.tests.core_win32.xml">
 		<effectedFile id="SW"></effectedFile>
 		<effectedFile id="PW"></effectedFile>
+	</logFile>
+	
+	<logFile name="org.eclipse.update.tests.core_linux.motif.xml">
+		<effectedFile id="SLM"></effectedFile>
+		<effectedFile id="SLG2"></effectedFile>
+		<effectedFile id="SSM"></effectedFile>
+		<effectedFile id="SAM"></effectedFile>
+		<effectedFile id="SHM"></effectedFile>
+		
+		<effectedFile id="PLM"></effectedFile>
+		<effectedFile id="PLG2"></effectedFile>
+		<effectedFile id="PSM"></effectedFile>
+		<effectedFile id="PAM"></effectedFile>
+		<effectedFile id="PHM"></effectedFile>
 	</logFile>
 
 	<logFile name="org.eclipse.team.tests.cvs_linux.motif.xml">
