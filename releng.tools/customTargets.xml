@@ -115,15 +115,10 @@
 <!-- (e.g., testing, posting, emailing, ...) -->
 <!-- ===================================================================== -->
 <target name="postBuild">
-	<property name="archiveName" value="org.eclipse.releng.tools_${buildId}.zip"/>
+	<!--property name="archiveName" value="org.eclipse.releng.tools_${buildId}.zip"/-->
 	<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.releng.tools">
 		<property name="plugin.destination" value="${buildDirectory}/${buildLabel}" />
 	</ant>
-	<move tofile="${buildDirectory}/${buildLabel}/${archiveName}">
-    <fileset dir="${buildDirectory}/${buildLabel}">
-      <include name="*org.eclipse.releng.tools*.zip"/>
-    </fileset>
-  </move>
 </target>
 
 <!-- ===================================================================== -->
