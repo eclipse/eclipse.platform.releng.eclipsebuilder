@@ -126,7 +126,7 @@
 <!-- (e.g., testing, posting, emailing, ...) -->
 <!-- ===================================================================== -->
 <target name="postBuild">
-     <ant file="${pde.build.scripts}/package.xml>
+     <ant file="${pde.build.scripts}/package.xml">
          <property name="packagingInfo" value="${builder}/scripts"/>
          <property name="buildingOSGi" value="true"/>
      </ant>
