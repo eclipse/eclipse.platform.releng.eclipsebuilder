@@ -474,7 +474,7 @@
 		<property name="launcherFilesDir" value="macosx" />
 		<property name="workingDirectory" value="${basedir}/temp/eclipse" />
 		<property name="zipRootDir" value="${basedir}/temp" />
-		<property name="zipArgs" value="-y" />
+		<!--property name="zipArgs" value="-y" /-->
 	</ant>
 	
 	<ant antfile="assemble.xml" target="${target}" >
@@ -641,7 +641,7 @@
 		<property name="workingDirectory" value="${basedir}/temp/eclipse" />
 		<property name="launcherFilesDir" value="macosx" />
 		<property name="zipRootDir" value="${basedir}/temp" />
-		<property name="zipArgs" value="-y" />
+		<!--property name="zipArgs" value="-y" /-->
 	</ant>
 
 	<ant antfile="assemble.xml" target="${target}" >
@@ -798,22 +798,25 @@
 	<copy file="${buildDirectory}/plugins/org.eclipse.platform.macosx.carbon/legal.html" todir="${workingDirectory}" />
 	
 	<!--fix for #23918-->
+	
+	<!--
+	getting OutOfMemory exception when trying to create zip file of this
 	<antcall target="makeSymbolicLink">
 		<param name="execDir" value="${workingDirectory}/Eclipse.app/Contents/Resources" />
 		<param name="linkFile" value="Java" />
 		<param name="originalFile" value="../../.." />
 	</antcall>
+	-->
 	
-	<!--
 	<move todir="${workingDirectory}/Eclipse.app/Contents/Resources/Java/" overwrite="true" includeEmptyDirs="true">
 		<fileset dir="${workingDirectory}" includes="plugins/**,features/**,*" excludes="Eclipse.app/, cpl-v10.html, notice.html, readme/,legal.html" />
 	</move>
-	-->
+	
 	
 	<!-- Delete empty directories left behind by Ant move task  -->
-	<!--delete includeEmptyDirs="true">
+	<delete includeEmptyDirs="true">
 		<fileset dir="${workingDirectory}" includes="plugins/,features/" />
-	</delete-->
+	</delete>
 
 	<chmod dir="${workingDirectory}" perm="755" includes="**/eclipse,**/*.jnilib,**/*.so*,**/*.sl"/>
 </target>
