@@ -148,7 +148,7 @@ you will need the following environment variables set.
 <ol>
   <li><a href="http://ccvs.cvshome.org/servlets/ProjectDownloadList">CVS 1.10</a> 
     or higher.</li>
-  <li><a href="http://www.eclipse.org/downloads/index.php">Eclipse</a> build F3 
+  <li><a href="http://www.eclipse.org/downloads/index.php">Eclipse</a> build 2.1M5 
     or later installed and running. i.e. installed with a JDK or JRE (version 
     1.3 required).</li>
   <li>A source build zip file from eclipse.org</li>
@@ -171,7 +171,7 @@ path. On Windows 98, the HOME environment variable should be set to c:.
     eclipse-sourceBuild installation directory. Click Finish. </li>
   <li>Select build.xml and select the &quot;Run Ant&quot; context menu item.</li>
   <li> 
-    <div align="left">Set properties as follows:</div>
+    <div align="left">Set the following Ant properties:</div>
   </li>
   <blockquote> 
     <blockquote> 
@@ -179,7 +179,11 @@ path. On Windows 98, the HOME environment variable should be set to c:.
     </blockquote>
   </blockquote>
 </ol>
-<blockquote> -Dos=<i>&lt;osType</i>&gt;,-Dws=&lt;<i>windowingSystemType&gt;</i>,[-Dinstall=<i>&lt;install</i>&gt;],[-Dbootclasspath=&lt;bootclasspath&gt;] 
+<blockquote> 
+  <p>os=<i>&lt;osType</i>&gt;<br>
+    ws=&lt;<i>windowingSystemType&gt;<br>
+    </i>install=<i>&lt;install</i>&gt;<br>
+    bootclasspath=&lt;bootclasspath&gt;</p>
   <p> Where: </p>
 </blockquote>
 <ol>
@@ -217,10 +221,12 @@ path. On Windows 98, the HOME environment variable should be set to c:.
       </ol>
     </blockquote>
     <p>&nbsp;</p>
-    <p>For example: <i>Dos=win32,-Dws=win32,-Dinstall=c:\sourcebuild\foo</i></p>
+    <p>For example: </p>
+    <p><i>os=win32<br>
+      ws=win32<br>
+      install=c:\sourcebuild\foo</i></p>
   </blockquote>
-  <li value=9>Deselect&quot;Show execution log in console&quot;. Building is pathologically 
-    slow if you leave this option selected (see bug 19520)</li>
+  <li value=9>Deselect&quot;Show execution log in console&quot;.</li>
   <li>Click &quot;Finish&quot;.</li>
   <li>(Optional) To update source from dev.eclipse.org, edit the relevant fetch_*xml 
     scripts. Change the tag attribute values to fetch the desired CVS tag or branch 
