@@ -1163,7 +1163,7 @@
 	<ant antfile="publish.xml" target="generateIndex">
  		<property name="useNewFormat" value="true" />
 		<property name="isBuildTested" value="true" />
-		<property name="dropTokenList" value="%sdk%,%tests%,%example%,%runtime%,%jdt%,%teamextras%" />
+		<property name="dropTokenList" value="%sdk%,%tests%,%example%,%runtime%,%jdt%,%teamextras%,%swt%" />
 		<property name="class" value="${class}" />
 	</ant>
 	
