@@ -70,6 +70,13 @@
 		</antcall>
 	</target>
 
+	<target name="compare" description="Runs the org.eclipse.compare.tests test.xml">
+		<antcall target="runtests">
+			<param name="testPlugin" value="${org.eclipse.compare.tests}" />
+			<param name="report" value="org.eclipse.compare.tests" />
+		</antcall>
+	</target>
+		
 	<target name="core" description="Runs the org.eclipse.core.tests.harness test.xml">
 		<antcall target="runtests">
 			<param name="testPlugin" value="${org.eclipse.core.tests.harness}" />
@@ -271,6 +278,7 @@
 		<antcall target="relEng" />
 		<antcall target="pdeui" />
 		<antcall target="ant" />
+		<antcall target="compare" />
 		<antcall target="core" />
 		<antcall target="coreexpressions" />
 		<antcall target="help" />
