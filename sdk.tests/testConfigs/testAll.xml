@@ -20,8 +20,8 @@
 		<equals arg1="${mapVersionTag}" arg2="perf_213" />
 	</condition>
 	<parallel>
-		<!--antcall target="testWinXPPerf" />
-		<antcall target="testWinXPPerf213" /-->
+		<antcall target="testWinXPPerf" />
+		<antcall target="testWinXPPerf213" />
 		<antcall target="testLinuxGTKPerf" />
 		<antcall target="testLinuxGTKPerf213" />
 	</parallel>
