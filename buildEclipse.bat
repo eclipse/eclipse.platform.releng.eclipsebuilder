@@ -1,6 +1,11 @@
 @echo off
 REM This script requires that contents of the org.eclipse.releng.basebuilder project are copied into this project
 
+REM this environment variable required by CVS client
+set HOME=c:
+
+set usage="usage: %0 [-mail][-buildid name][-buildLabel directory][-postingDirectory directory][-mapVersionTag tag][-bootclasspath path] [-buildType M|N|I|S|R]"
+
 REM  Create the date and time elements.
 For /f "tokens=1-7 delims=:/-, " %%i in ('echo exit^|cmd /q /k"prompt $D $T"') do (
 	For /f "tokens=2-4 delims=/-,() skip=1" %%a in ('echo.^|date') do (
@@ -28,12 +33,6 @@ set JAVADOC14_HOME=%JAVA_HOME%\bin
 REM flag indicating whether or not mail should be sent to indicate build has started
 set mail="-DnoMail=true"
 
-REM Value for the buildid property.
-set buildid=""
-
-REM The value of the buildLabel property, the name of the directory containing the products of the build
-set buildLabel=""
-
 REM The value for the mapVersionTag property.  Used to checkout the .map file project using the value set here.
 set mapVersionTag=HEAD
 
@@ -44,6 +43,12 @@ set buildDirectory=src
 REM The default value for the buildtype property.  Determines whether map file tags are used as entered or are replaced with HEAD
 set buildType=I
 
+REM The default value for the buildtype property.  Determines whether map file tags are used as entered or are replaced with HEAD
+set "buildid= "
+
+REM The default value for the buildtype property.  Determines whether map file tags are used as entered or are replaced with HEAD
+set "buildLabel= "
+
 REM The default value for the postingDirectory property.  This is the directory where to copy build.
 set postingDirectory=.
 
@@ -51,44 +56,46 @@ set postingDirectory=.
 REM process all command line parameters
 :loop
 if x%1==x goto checkvars
-if x%1==x-? goto usage
-if x%1==x-mail set mail="" && goto checkMailProperties
-if x%1==x-buildid set buildid=%2
-if x%1==x-bootclasspath set bootclasspath=%2
-if x%1==x-buildLabel set buildLabel=%2
-if x%1==x-postingDirectory set postingDirectory=%2
-if x%1==x-mapVersionTag set mapVersionTag=%2
-if x%1==x-buildType set buildType=%2
+if x%1==x-? echo %usage% && goto end
+if x%1==x-mail set "mail= " && goto checkMailProperties
+if x%1==x-buildid set "buildid=%2" && goto shift
+if x%1==x-bootclasspath set bootclasspath=%2 && goto shift
+if x%1==x-buildLabel set buildLabel=%2 && goto shift
+if x%1==x-postingDirectory set postingDirectory=%2 && goto shift
+if x%1==x-mapVersionTag set mapVersionTag=%2 && goto shift
+if x%1==x-buildType set "buildType=%2" && goto shift
 
-shift
-goto loop
+if NOT x%1==x echo %usage% && goto end
+:shift
+shift && shift && goto loop
 
-goto checkvars
-
-goto end
 REM  verify that a monitor.properties file exists with host, sender and recipients information for sending notification that build has started.
 :checkMailProperties
 if NOT EXIST monitor.properties echo A monitor.properties file will be required in this directory in order to send email notification that build has started.  Please see instructions.
-goto end
+shift && goto loop
 
 :checkvars
+
 REM  Set default buildid and buildLabel if none explicitly set
-if %buildid% == "" set buildid=%buildType%%builddate%
-if %buildLabel% == "" set buildLabel=%buildType%-%buildid%-%timestamp%
+if x%buildid%==x set buildid=%buildType%%builddate%
+if x%buildLabel%==x set buildLabel=%buildType%-%buildid%-%timestamp%
+
+REM verify buildType setting
+if x%buildType%==x echo %usage% && goto end
 
 REM verify existance of rt.jar, javadoc tool and JAVA_HOME environment variable settings.
-if x%JAVA_HOME%=="x%JAVA_HOME%" echo The JAVA_HOME environment variable has not been set && goto end
-if NOT EXIST %bootclasspath% echo rt.jar does not exist at this location: %bootclasspath%. Please verify your bootclasspath setting. && goto end
-if NOT EXIST %JAVADOC14_HOME%\javadoc.exe echo javadoc.exe not found in %JAVADOC14_HOME%.  Please verify your JAVA_HOME setting. && goto end
+if x%JAVA_HOME%==x echo The JAVA_HOME environment variable has not been set.  See System Requirements in eclipsebuilder_readme.html. && goto end
+if NOT EXIST %bootclasspath% echo rt.jar does not exist at this location: %bootclasspath%. See System Requirements in eclipsebuilder_readme.html. && goto end
+if NOT EXIST %JAVADOC14_HOME%\javadoc.exe echo javadoc.exe not found in %JAVADOC14_HOME%.  See System Requirements in eclipsebuilder_readme.html. && goto end
+
+REM start the build if above variables set
 goto run
 
 
 REM run the build.  Command to invoke the Eclipse AntRunner headless.
 :run
-java -cp startup.jar org.eclipse.core.launcher.Main -os win32 -ws win32 -arch x86 -noupdate -application org.eclipse.ant.core.antRunner -buildfile build.xml %mail% -Dinstall=%buildDirectory% -DbuildDirectory=%buildDirectory% -DpostingDirectory=%postingDirectory% -Drt=%bootclasspath% -Dbootclasspath=%bootclasspath% -DbuildType=%buildType% -D%buildType%=true -Dbuildid=%buildid% -DbuildLabel=%buildLabel% -Dtimestamp=%timestamp% -DJAVADOC14_HOME=%javadoc14_home% -DmapVersionTag=%mapVersionTag% "-DzipArgs= "
 
-:usage
-echo "usage: %0 [-mail][-buildid name][-buildLabel directory][-postingDirectory directory][-mapVersionTag tag][-bootclasspath path] M|N|I|S|R"
+java -cp startup.jar org.eclipse.core.launcher.Main -os win32 -ws win32 -arch x86 -noupdate -application org.eclipse.ant.core.antRunner -buildfile build.xml %mail% -Dinstall=%buildDirectory% -DbuildDirectory=%buildDirectory% -DpostingDirectory=%postingDirectory% -Drt=%bootclasspath% -Dbootclasspath=%bootclasspath% -DbuildType=%buildType% "-D%buildType%=true" -Dbuildid=%buildid% -DbuildLabel=%buildLabel% -Dtimestamp=%timestamp% -DJAVADOC14_HOME=%javadoc14_home% -DmapVersionTag=%mapVersionTag% "-DzipArgs= "
 
 :end
 pause
