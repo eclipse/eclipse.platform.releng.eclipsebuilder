@@ -275,7 +275,17 @@
 
 
 	<target name="all">
-		<!--antcall target="relEng" />
+		<antcall target="uircp" />
+		<antcall target="jdtdebug" />
+		<antcall target="jdtui" />
+		<antcall target="jdtuirefactoring" />
+		<antcall target="ltkuirefactoringtests" />
+		<antcall target="ltkcorerefactoringtests" />
+		<antcall target="text" />
+		<antcall target="jface" />
+		<antcall target="filebuffers" />
+		<antcall target="jdttext" />
+		<antcall target="relEng" />
 		<antcall target="pdeui" />
 		<antcall target="ant" />
 		<antcall target="compare" />
@@ -293,17 +303,7 @@
 		<antcall target="jdtcoremodel" />
 		<antcall target="ui" />
 		<antcall target="uieditors" />
-		<antcall target="uiworkbenchtexteditor" /-->
-		<antcall target="uircp" />
-		<antcall target="jdtdebug" />
-		<antcall target="jdtui" />
-		<antcall target="jdtuirefactoring" />
-		<antcall target="ltkuirefactoringtests" />
-		<antcall target="ltkcorerefactoringtests" />
-		<antcall target="text" />
-		<antcall target="jface" />
-		<antcall target="filebuffers" />
-		<antcall target="jdttext" />
+		<antcall target="uiworkbenchtexteditor" />
 	</target>
 	
 
