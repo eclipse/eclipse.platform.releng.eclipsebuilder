@@ -1,6 +1,18 @@
+/*******************************************************************************
+ * Copyright (c) 2000, 2003 IBM Corporation and others.
+ * All rights reserved. This program and the accompanying materials 
+ * are made available under the terms of the Common Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/cpl-v10.html
+ * 
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *******************************************************************************/
 /**
- * This class finds the version of a feature, plugin, or fragment in a given
- * build source tree.
+ * This class finds the version of a plug-in, or fragment listed in a feature
+ * and writes <element>=<element>_<version> for each in a properties file.
+ * The file produced from this task can be loaded by an Ant script to find files in the
+ * binary versions of plugins and fragments.
  */
 
 import org.xml.sax.Attributes;
@@ -13,23 +25,38 @@ import org.xml.sax.SAXException;
 import java.io.*;
 import java.util.Hashtable;
 import java.util.Enumeration;
+import java.util.StringTokenizer;
+import java.util.Vector;
 
-public class TestVersionTracker extends DefaultHandler {
+public class TestVersionTracker{
 
-	private String installDirectory;
+	private String buildDirectory;
 	private Hashtable elements;
 	private SAXParser parser;
+	//private Vector allElements;
+	private Hashtable testElements;
 	
-	//test
+	//the feature to from which to collect version information
+	private String featurePath;
+	
+	//the path to the file in which to write the results
+	private String outputFilePath;
+	
 	public static void main(String[] args) {
 		TestVersionTracker Tracker =
-			new TestVersionTracker(args[1]);
-		Tracker.parse(args[0]);
-			Tracker.writeProperties(args[2], true);
+		new TestVersionTracker(args[1]);
+		Tracker.parse(args[0],Tracker.new FeatureHandler());
+		//Tracker.parse(Tracker.new PluginHandler());
+		Tracker.writeProperties(args[2], true);
 	}
 
+	public TestVersionTracker(){
+	}
+	
 	public TestVersionTracker(String install) {
-		//  Create a Xerces SAX Parser
+		elements = new Hashtable();
+		testElements=new Hashtable();
+		
 		SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
 		try {
 			parser = saxParserFactory.newSAXParser();
@@ -40,48 +67,85 @@ public class TestVersionTracker extends DefaultHandler {
 		}
         
        	// directory containing the source for a given build
-		installDirectory = install;
-
-		//  instantiate hashtable that will hold directory names with versions for elements
-		elements = new Hashtable();
+		buildDirectory = install;
 	}
 
-    public void parse(String xmlFile){
-			
-	    //  Parse the Document      
-        try {
-            parser.parse(xmlFile,this);
+    public void parse(String xmlFile,DefaultHandler handler){
+         try {
+          parser.parse(xmlFile,handler);
         } catch (SAXException e) {
             System.err.println (e);
         } catch (IOException e) {
-            System.err.println (e);
-          
-        }
+            System.err.println (e);    
+        } 
     }
 
-	//  Start Element Event Handler
-	public void startElement(
-		String uri,
-		String local,
-		String qName,
-		Attributes atts) {
+    private class FeatureHandler extends DefaultHandler{
+    	//  Start Element Event Handler
+    	public void startElement(
+		 String uri,
+		 String local,
+			String qName,
+			Attributes atts) {
 
-		String element = atts.getValue("id");
-		String version = atts.getValue("version");
+    		//need to parse the plugin.xml or fragment.xml for the correct version value since the 3.0 features may list these as "0.0.0"
+    		if (qName.equals("eclipse.idReplacer")) {
+    			try{
+    				String pluginIds = atts.getValue("pluginIds");
+    				
+    				//parse value of pluginIDs
+    				StringTokenizer tokenizer= new StringTokenizer(pluginIds,",");
+    				while (tokenizer.hasMoreTokens()){
+    					String element=tokenizer.nextToken();
+    					String elementAndVersion=element+"_"+tokenizer.nextToken();
+    					elements.put(element,elementAndVersion);
+    					
+    					//check for test.xml
+    					File testXml=new File(buildDirectory+File.separator+"plugins"+File.separator+element+File.separator+"test.xml");
+    					if (testXml.exists())
+        					testElements.put(element,testXml);
+    				} 								
+    			} catch (Exception e){
+    				e.printStackTrace();
+       			}
+ 			} 
+    	}
+    }
+ 
+    private class TestXmlHandler extends DefaultHandler{
+    	String element;
+    	
+    	public TestXmlHandler(String element){
+    		this.element=element;
+    	}
+    	//  Start Element Event Handler
+    	public void startElement(
+								 String uri,
+								 String local,
+								 String qName,
+								 Attributes atts) {
 
-		if (qName.equals("plugin") || qName.equals("fragment")) {
-				elements.put(element,element+"_"+version);
-		} else if (qName.equals("feature"))
-				elements.put(element+"-feature",element+"_"+version);
-	}
-
+    		String name=atts.getValue("name");
+    		boolean isPerformanceTarget = false;
+    		if (name!=null)
+    			isPerformanceTarget= name.equals("performance");
+    		    		
+    		if (qName.equals("target") && isPerformanceTarget){
+    				elements.put(element+".has.performance.target","true");
+    		}
+    	}
+    }
+    
 	public void writeProperties(String propertiesFile,boolean append){
+		
+		identifyPerformancePlugins();
+		
 		try{
 			
 		PrintWriter writer = new PrintWriter(new FileWriter(propertiesFile,append));
 				
 			Enumeration keys = elements.keys();
-
+			
 			while (keys.hasMoreElements()){
 				Object key = keys.nextElement();
 				writer.println(key.toString()+"="+elements.get(key).toString());
@@ -94,6 +158,57 @@ public class TestVersionTracker extends DefaultHandler {
 		}
 		
 		
+	}
+
+	private void identifyPerformancePlugins() {
+		Enumeration testElement=testElements.keys();
+		while (testElement.hasMoreElements()){
+			Object testPlugin=testElement.nextElement();
+			String testXml=testElements.get(testPlugin).toString();
+			parse(testXml,new TestXmlHandler(testPlugin.toString()));
+		}
+	}
+
+	/**
+	 * @return Returns the featurePath.
+	 */
+	public String getFeaturePath() {
+		return featurePath;
+	}
+
+	/**
+	 * @param featurePath The featurePath to set.
+	 */
+	public void setFeaturePath(String featurePath) {
+		this.featurePath = featurePath;
+	}
+
+	/**
+	 * @return Returns the installDirectory.
+	 */
+	public String getBuildDirectory() {
+		return buildDirectory;
+	}
+
+	/**
+	 * @param installDirectory The installDirectory to set.
+	 */
+	public void setBuildDirectory(String buildDirectory) {
+		this.buildDirectory = buildDirectory;
+	}
+
+	/**
+	 * @return Returns the outputFilePath.
+	 */
+	public String getOutputFilePath() {
+		return outputFilePath;
+	}
+
+	/**
+	 * @param outputFilePath The outputFilePath to set.
+	 */
+	public void setOutputFilePath(String outputFilePath) {
+		this.outputFilePath = outputFilePath;
 	}
 
 }
