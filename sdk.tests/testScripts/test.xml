@@ -283,7 +283,7 @@
 
 	<target name="all">
 		<antcall target="pdeui" />
-		<!--antcall target="ant" />
+		<antcall target="ant" />
 		<antcall target="compare" />
 		<antcall target="core" />
 		<antcall target="coreexpressions" />
@@ -310,7 +310,7 @@
 		<antcall target="ui" />
 		<antcall target="uircp" />
 		<antcall target="uieditors" />
-		<antcall target="uiworkbenchtexteditor" /-->
+		<antcall target="uiworkbenchtexteditor" />
 	</target>
 	
 
