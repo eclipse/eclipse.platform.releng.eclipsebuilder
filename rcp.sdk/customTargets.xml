@@ -67,9 +67,11 @@
 	</target>
 
 	<target name="assemble">
-		<property name="postingDirectory" value="${buildDirectory}" />
+		<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
 		<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
 		<ant antfile="${assembleScriptName}" />
+		<checksum file="${archiveFullPath}" property="md5"/>
+		<echo message="${md5} *archiveName" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5"/>
 	</target>
 
 	<!-- ===================================================================== -->
