@@ -25,13 +25,15 @@
 	</target>
 	
 	<target name="installVm">
+		<property name="testVmTag" value="HEAD" />
 		<!--get and install the vm to test with-->
 		<cvs cvsRoot="${cvsRoot}"
-        	 command="co -d ${tester} ${vmUrl}"
+        	 command="export -r ${testVmTag} ${vmUrl}"
+        	 dest="${tester}"
   		/>
 	
-		<exec dir="." executable="${copyClient}">
-			<arg line="${vmDest} ${testMachine}:${testDir}" />
+		<exec dir="${tester}" executable="${copyClient}">
+			<arg line="${vmUrl} ${testMachine}:${testDir}" />
 		</exec>
 	
 		<exec dir="." executable="${loginClient}">
