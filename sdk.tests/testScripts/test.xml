@@ -280,7 +280,7 @@
 
 	<target name="all">
 		<antcall target="jdttext" />
-		<antcall target="swt" />
+		<antcall target="antui" />
 		<antcall target="pdeui" />
 		<antcall target="ant" />
 		<antcall target="compare" />
@@ -289,7 +289,7 @@
 		<antcall target="help" />
 		<antcall target="update" />
 		<antcall target="teamcore" />
-		<!--antcall target="teamcvs" /-->
+		<antcall target="teamcvs" />
 		<antcall target="jdtcoreperf" />
 		<antcall target="jdtcorebuilder" />
 		<antcall target="jdtcorecompiler" />
@@ -307,7 +307,7 @@
 		<antcall target="uircp" />
 		<antcall target="uieditors" />
 		<antcall target="uiworkbenchtexteditor" />
-		<antcall target="antui" />
+		<antcall target="swt" />
 	</target>
 	
 	<target name="genHtml" description="Generates HTML results with provided JUNIT.XSL provided">
