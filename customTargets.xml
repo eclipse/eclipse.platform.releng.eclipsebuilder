@@ -1097,6 +1097,7 @@
 	
 	<!--regenerate the index page with links to test results-->
 	<ant antfile="publish.xml" target="generateIndex">
+ 		<property name="useNewFormat" value="true" />
 		<property name="isBuildTested" value="true" />
 		<property name="dropTokenList" value="%sdk%,%tests%,%example%,%runtime%,%jdt%,%teamextras%" />
 	</ant>
