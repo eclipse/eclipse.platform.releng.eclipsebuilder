@@ -19,8 +19,12 @@
 	<condition property="213">
 		<equals arg1="${mapVersionTag}" arg2="perf_213" />
 	</condition>
-	<antcall target="testWinXPPerf" />
-	<antcall target="testWinXPPerf213" />
+	<parallel>
+		<antcall target="testWinXPPerf" />
+		<antcall target="testWinXPPerf213" />
+		<antcall target="testLinuxGTKPerf" />
+		<antcall target="testLinuxGTKPerf213" />
+	</parallel>
 	<echo message="Performance testing complete." />
 </target>
 <target name="testWinXPPerf213" if="213">
@@ -42,6 +46,28 @@
 		
 	<ant antfile="${test.xml}">
 		<property name="tester" value="${basedir}/win32-perf" />
+	</ant>
+	<delete file="${markerContainer}/${markerName}.marker" />
+</target>
+	<target name="testLinuxGTKPerf" unless="213">
+		<property name="markerName" value="eclipse30-linux-perf-${timestamp}" />
+		<findMachine cfg="${cfg}" markerContainer="${markerContainer}" cfgKey="eclipse30LinuxGtkTestPerf" markerName="${markerName}" waitInterval="30"/>
+		<property file="${markerContainer}/${markerName}.marker" />
+		<property name="testMachine" value="${0}" />
+			
+		<ant antfile="${test.xml}">
+			<property name="tester" value="${basedir}/ rhelws3-linux-gtk-perf" />
+		</ant>
+		<delete file="${markerContainer}/${markerName}.marker" />
+</target>
+<target name="testLinuxGTKPerf213" if="213">
+	<property name="markerName" value="eclipse30-linux-perf-${timestamp}" />
+	<findMachine cfg="${cfg}" markerContainer="${markerContainer}" cfgKey="eclipse30LinuxGtkTestPerf" markerName="${markerName}" waitInterval="30"/>
+	<property file="${markerContainer}/${markerName}.marker" />
+	<property name="testMachine" value="${0}" />
+			
+	<ant antfile="${test.xml}">
+		<property name="tester" value="${basedir}/ rhelws3-linux-gtk-perf-213" />
 	</ant>
 	<delete file="${markerContainer}/${markerName}.marker" />
 </target>
