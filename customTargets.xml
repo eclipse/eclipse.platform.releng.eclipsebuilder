@@ -1049,10 +1049,8 @@
 	<!--where SWT zip files are created-->
 	<property name="destination" value="${basedir}/${buildLabel}" />
 
-	<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.win32">
-		<property name="os" value="win32" />
-		<property name="ws" value="win32" />
-	</ant>
+	<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.win32" />
+
 	<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.motif">
 		<property name="os" value="linux" />
 		<property name="ws" value="motif" />
