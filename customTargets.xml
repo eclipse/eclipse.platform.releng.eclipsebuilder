@@ -1053,9 +1053,6 @@
 
 <target name="postCompile">
 	<ant antfile="verifyCompile.xml" />
-	<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.win32">
-		<property name="destination" value="${basedir}/${buildLabel}" />
-	</ant>
 </target>
 
 
@@ -1065,8 +1062,49 @@
 <!-- called from the org.eclipse.releng.basebuilder/publish.xml            -->
 <!-- ===================================================================== -->
 
+<target name="buildStandAloneSWT">
+	<!--where SWT zip files are created-->
+	<property name="destination" value="${basedir}/${buildLabel}" />
+
+	<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.win32">
+		<property name="os" value="win32" />
+		<property name="ws" value="win32" />
+	</ant>
+	<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.motif">
+		<property name="os" value="linux" />
+		<property name="ws" value="motif" />
+	</ant>
+	<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.motif">
+		<property name="os" value="aix" />
+		<property name="ws" value="motif" />
+	</ant>
+	<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.motif">
+		<property name="os" value="hpux" />
+		<property name="ws" value="motif" />
+	</ant>
+	<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.motif">
+		<property name="os" value="solaris" />
+		<property name="ws" value="motif" />
+	</ant>
+	<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.photon">
+		<property name="os" value="qnx" />
+		<property name="ws" value="photon" />
+	</ant>
+	<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.gtk">
+		<property name="os" value="linux" />
+		<property name="ws" value="gtk" />
+	</ant>
+		<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.carbon">
+		<property name="os" value="macosx" />
+		<property name="ws" value="carbon" />
+	</ant>
+</target>
+
 <target name="postBuild" description="Preparing to post the build...">
 <!-- required -->
+
+	<antcall target="buildStandAloneSWT" />
+
 	<!--post clickThroughs-->
 	<copy todir="${buildLabel}">
 		<fileset dir="org.eclipse.releng" includes="clickThroughs/" />
