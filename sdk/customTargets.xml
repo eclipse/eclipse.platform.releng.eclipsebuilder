@@ -292,7 +292,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<copy file="${buildDirectory}/label.properties" todir="${tempDir}/buildScripts" />		
 
 			<copy todir="${tempDir}/buildScripts" flatten="true" overwrite="true">
-				<fileset dir="${eclipse.build.scripts}/sdk/srcBuild" excludes="incl/**,fetch/**,jdtcoresrc/**" />
+				<fileset dir="${eclipse.build.scripts}/sdk/srcBuild" excludes="incl,fetch/**,jdtcoresrc/**" />
 			</copy>
 			<mkdir dir="${tempDir}/buildScripts/jdtcoresrc"/>
 			<copy todir="${tempDir}/buildScripts/jdtcoresrc">
@@ -327,7 +327,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 				<fileset dir="${buildDirectory}" includes="features/,plugins/" excludes="features/*example*/**,plugins/*example*/**" />
 			</copy>
 			<copy todir="${tempDir}/buildScripts" flatten="true" overwrite="true">
-				<fileset dir="${eclipse.build.scripts}/sdk/srcBuild" excludes="fetch/**,incl" />
+				<fileset dir="${eclipse.build.scripts}/sdk/srcBuild" excludes="fetch/**,incl,jdtcoresrc/**" />
 			</copy>
 
 			<!-- fetch scripts are not when source already included in zip file -->
