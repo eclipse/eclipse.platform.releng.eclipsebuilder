@@ -79,14 +79,14 @@
 
 		<!-- ***  change the repo info -->
 		<property name="mapCvsRoot" value=":pserver:anonymous@dev.eclipse.org:/home/eclipse" />
-		<property name="mapVersionTag" value="HEAD" />
+		<property name="mapVersionTag" value="R3_0_maintenance" />
 		<cvs cvsRoot="${mapCvsRoot}" package="org.eclipse.releng" dest="${buildDirectory}/maps" tag="${mapVersionTag}" />
 		<!--tag the map files project-->
 		<antcall target="tagMapFiles" />
 	</target>
 
 	<target name="tagMapFiles" if="tagMaps">
-		<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag v${timestamp}" />
+		<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag r301_v${timestamp}" />
 	</target>
 
 	<!-- ===================================================================== -->
