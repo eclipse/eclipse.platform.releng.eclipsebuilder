@@ -4,15 +4,15 @@
 
 #Ant property values
 
-#default value of the bootclasspath property used in ant javac calls.  Value duplicated in rt property
-bootclasspath=/builds/tools/jdk/win32/jdk1.3.1-sr1/jre/lib/rt.jar
+#default value of the bootclasspath property used in Ant javac calls.  Value duplicated in rt property
+bootclasspath=$JAVA_HOME/jre/lib/rt.jar
 
 #default value of the JAVADOC14_HOME property used for generating javadoc.
 #This is the directory containing 1.4 version of javadoc tool.
-JAVADOC14_HOME=/builds/tools/jdk/linux/jdk1.4/bin
+JAVADOC14_HOME=$JAVA_HOME/bin
 
 #flag indicating whether or not mail should be sent to indicate build has started
-mail=""
+mail="-DnoMail=true"
 
 #Value for the buildid property.
 buildid=""
@@ -39,22 +39,17 @@ timestamp=$builddate`date +%H%M`
 
 # Process command line arguments
 
-usage="usage: $0 [-noStartMail][-buildid name][-buildLabel directory name][-mapVersionTag tag][-bootclasspath path] M|N|I|S|R"
-
-if [ $# -lt 1 ]
-then
-	echo >&2 "$usage"
-	exit 1
-fi
+usage="usage: $0 [-mail][-buildid name][-buildLabel directory name][-mapVersionTag tag][-bootclasspath path] M|N|I|S|R"
 
 while [ $# -gt 0 ]
 do
 	case "$1" in
 		-buildid) buildid="$2"; shift;;
 		-buildLabel) buildLabel="$2"; shift;;
+		-postingDirectory) postingDirectory="$2"; shift;;
 		-bootclasspath) bootclasspath="$2"; shift;;
 		-mapVersionTag) mapVersionTag="$2"; shift;;
-		-noStartMail) mail="-DnoMail=true";;
+		-mail) mail="";;
 		-*)
 			echo >&2 $usage
 			exit 1;;
@@ -77,5 +72,24 @@ then
 	buildLabel=$buildType-$buildid-$timestamp
 fi
 
+if [ "`echo $JAVA_HOME`" = "" ]
+then
+	echo "The JAVA_HOME environment variable has been set."
+	exit
+fi
+
+if ! -e $bootclasspath
+then
+	echo rt.jar does not exist at this location:  $bootclasspath.  Please verify your bootclasspath setting.
+	exit
+fi
+
+if ! -e $JAVADOC14_HOME/javadoc
+then
+	echo javadoc does not exist at this location:  $JAVADOC14_HOME.  Please verify your bootclasspath setting.
+	exit
+fi
+
+#run the build
 java -cp startup.jar org.eclipse.core.launcher.Main -os linux -ws motif -arch x86 -noupdate -application org.eclipse.ant.core.antRunner -buildfile  build.xml $mail -DmapVersionTag=$mapVersionTag -Dinstall=$buildDirectory -DbuildDirectory=$buildDirectory -DpostingDirectory=$postingDirectory -Drt=$bootclasspath -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -Dbuildid=$buildid -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DJAVADOC14_HOME=$JAVADOC14_HOME
 
