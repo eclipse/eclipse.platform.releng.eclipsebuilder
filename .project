@@ -2,10 +2,4 @@
 <projectDescription>
 	<name>org.eclipse.releng.eclipsebuilder</name>
 	<comment></comment>
-	<projects>
-	</projects>
-	<buildSpec>
-	</buildSpec>
-	<natures>
-	</natures>
 </projectDescription>
