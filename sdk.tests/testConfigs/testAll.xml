@@ -10,6 +10,7 @@
 	<property name="cfg" value="testmachines.cfg" />
 	<property name="test.xml" value="${basedir}/../../../org.eclipse.releng.basebuilder/plugins/org.eclipse.build.tools/scripts/test.xml" />
 
+
 	<target name="default">
 		<parallel>
 			<antcall target="runtests">
@@ -23,6 +24,7 @@
 
 	<target name="performanceTests">
 		<property name="testresults" value="${postingDirectory}/${buildId}/performance" />
+		<property name="performance.test" value="true"/>
 		<parallel>
 			<antcall target="runtests">
 				<param name="testconfig" value="linux.gtk.x86-sun142_06-perf" />
@@ -31,6 +33,9 @@
 				<param name="testconfig" value="win32.win32.x86-sun142_06-perf" />
 			</antcall>
 		</parallel>
+		<antcall target="generatePerformanceResults">
+			<param name="resultType" value="-fingerprints" />
+		</antcall>
 	</target>
 
 	<target name="runtest">
@@ -43,7 +48,7 @@
 		<findMachine cfg="${cfg}" markerContainer="${markerContainer}" cfgKey="${testconfig}" markerName="${markerName}" waitInterval="30" />
 		<property file="${markerContainer}/${markerName}.marker" />
 		<property name="testMachine" value="${0}" />
-		
+
 		<property name="consolelog" value="${target}.${testconfig}.txt" />
 		<!--run the test-->
 		<ant antfile="${test.xml}">
@@ -51,6 +56,9 @@
 			<property name="args" value="${executionDir} ${target} ${consolelog}" />
 		</ant>
 		<delete file="${markerContainer}/${markerName}.marker" />
+		<antcall target="generatePerformanceResults">
+			<param name="resultType" value="-dimensiongraphs -dimensiontables" />
+		</antcall>
 	</target>
 
 	<target name="runtests">
@@ -130,19 +138,56 @@
 			</antcall>
 			<antcall target="runtest">
 				<param name="target" value="uieditors" />
-			</antcall>
+			</antcall-->
 			<antcall target="runtest">
 				<param name="target" value="ui" />
 			</antcall>
 			<antcall target="runtest">
 				<param name="target" value="uircp" />
 			</antcall>
-			<antcall target="runtest">
+			<!--antcall target="runtest">
 				<param name="target" value="uiworkbenchtexteditor" />
 			</antcall-->
 			<antcall target="runtest">
 				<param name="target" value="update" />
 			</antcall>
 		</parallel>
+	</target>
+
+	<target name="generatePerformanceResults" if="performance.test">
+		<!--location of properties file containing last 
+		performance reference test information and performance config desciptions.
+		See win32.win32.x86-sun142_06-perf/perf.config.sample for example.-->
+		<property name="config.properties" value="/home/users/releng/buildTools/eclipse.perf/config.properties" />
+		<property file="${config.properties}" />
+
+		<!--default scenarioFilter-->
+		<property name="scenarioFilter" value="org.eclipse.%.test" />
+
+		<java classname="org.eclipse.test.performance.ui.Main" fork="true" maxmemory="256m">
+			<arg line="
+					 -baseline ${eclipse.perf.ref}
+					 -current ${buildId}
+					 -jvm ${eclipse.perf.jvm}
+					 -fp.output ${fp.output}
+					 -config ${config}
+					 -config.properties ${eclipse.perf.config.descriptors}
+					 -scenario.filter ${scenarioFilter}
+				     ${resultType}" />
+
+			<classpath>
+				<fileset dir="${basedir}">
+					<include name="plugins/Cloudscape/*.jar" />
+				</fileset>
+				<fileset dir="${basedir}/..">
+					<include name="org.eclipse.releng.basebuilder/plugins/**/*.jar" />
+					<exclude name="org.eclipse.releng.basebuilder/plugins/*swt.win32*/**/*.jar" />
+				</fileset>
+			</classpath>
+
+			<env key="LD_LIBRARY_PATH" value="${basedir}/../org.eclipse.releng.basebuilder" />
+			<sysproperty key="java.library.path" value="${basedir}/../org.eclipse.releng.basebuilder/plugins/org.eclipse.swt.motif_3.1.0/os/linux/x86" />
+			<sysproperty key="eclipse.perf.dbloc" value="${dbloc}" />
+		</java>
 	</target>
 </project>
