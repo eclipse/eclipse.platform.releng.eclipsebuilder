@@ -55,9 +55,6 @@
 		<property name="tester" value="${basedir}/win32-perf" />
 	</ant>
 	<property file="${basedir}/win32-perf/testing.properties" />
-	<exec dir="." executable="rcp">
-		<arg line="${testMachine}:${executionDir}/results/performance/* /builds/transfer/files/eclipseperf/${buildType}${timestamp}"/>
-	</exec>
 	<delete file="${markerContainer}/${markerName}.marker" />
 </target>
 </project>
