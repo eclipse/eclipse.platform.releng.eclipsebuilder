@@ -22,6 +22,7 @@
 	<ant antfile="${assembleScriptName}"/-->
 	<mkdir dir="${buildDirectory}/${buildLabel}/plugins" />
 	<mkdir dir="${buildDirectory}/${buildLabel}/features" />
+	<!--build the update jars-->
 	<ant antfile="build.xml" dir="${buildDirectory}/features/org.eclipse.jdt.cheetah06">
 		<property name="plugin.destination" value="${buildDirectory}/${buildLabel}/plugins" />
 		<property name="feature.destination" value="${buildDirectory}/${buildLabel}/features" />
