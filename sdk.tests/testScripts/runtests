@@ -73,7 +73,6 @@ then
 		unzip -qq -o eclipse-SDK-*.zip
 		unzip -qq -o -C eclipse-junit-tests-*.zip */plugins/org.eclipse.test*
 	fi
-fi
 	
 # run tests
 $vm -cp eclipse/startup.jar org.eclipse.core.launcher.Main -noupdate -ws $ws -os $os -arch $arch -application org.eclipse.ant.core.antRunner -file test.xml $tests -Dws=$ws -Dos=$os -Darch=$arch -D$installmode=true $properties -logger org.apache.tools.ant.DefaultLogger
