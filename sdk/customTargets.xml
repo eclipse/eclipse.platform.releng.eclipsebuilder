@@ -43,10 +43,10 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<antcall target="assemble" />
 </target>
 
-<!-- <target name="assemble.org.eclipse.sdk.linux.gtk.x86_64">
+<target name="assemble.org.eclipse.sdk.linux.gtk.x86_64">
 	<property name="archiveName" value="eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz"/>
 	<antcall target="assemble" />
-</target> -->
+</target>
 	
 <target name="assemble.org.eclipse.sdk.solaris.motif.sparc">
 	<property name="archiveName" value="eclipse-SDK-${buildId}-solaris-motif.tar.gz"/>
@@ -70,10 +70,10 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	</ant-->
 </target>
 
-<!-- <target name="assemble.org.eclipse.sdk.hpux.motif.ia64" />
+<target name="assemble.org.eclipse.sdk.hpux.motif.ia64" />
 <target name="assemble.org.eclipse.sdk.linux.gtk.ppc64" />
 <target name="assemble.org.eclipse.sdk.linux.gtk.ppc" />
-<target name="assemble.org.eclipse.sdk.linux.gtk.ia64" /> -->
+<target name="assemble.org.eclipse.sdk.linux.gtk.ia64" />
 
 <target name="assemble.org.eclipse.sdk.aix.motif.ppc">
 	<property name="archiveName" value="eclipse-SDK-${buildId}-aix-motif.tar.gz"/>	
@@ -141,13 +141,13 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 <!-- ===================================================================== -->
 <target name="postSetup" >
 <!--fetch projects required to build swt gtk64-->
-<!--	<property name="featureOnly" value="false"/>
+	<property name="featureOnly" value="false"/>
 	<property name="featureAndPlugins" value="true"/>
 	<property name="featuresRecursively" value="false"/>
 	<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
 		<property name="type" value="fragment" />
 		<property name="id" value="org.eclipse.swt.gtk64" />
-	</ant> -->
+	</ant>
 	<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
 		<property name="type" value="fragment" />
 		<property name="id" value="org.eclipse.swt.win32" />

@@ -7,4 +7,4 @@ eclipse-SDK-${buildId}-aix-motif.tar.gz=file:${postingDirectory}/${buildLabel}/ 
 eclipse-SDK-${buildId}-hpux-motif.tar.gz=file:${postingDirectory}/${buildLabel}/  |  | | sdk |  eclipse
 eclipse-SDK-${buildId}-solaris-gtk.tar.gz=file:${postingDirectory}/${buildLabel}/  |  | | sdk |  eclipse
 eclipse-SDK-${buildId}-macosx-carbon.tar.gz=file:${postingDirectory}/${buildLabel}/  |  | | sdk |  eclipse
-#eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz=file:${postingDirectory}/${buildLabel}/  |  | | sdk |  eclipse
+eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz=file:${postingDirectory}/${buildLabel}/  |  | | sdk |  eclipse
