@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ASCII"?>
+<model:component xmlns:model="http://eclipse.org/wtp/releng/tools/component-model" name="PDE">
+  <model:plugin fragment="false" id="org.eclipse.pde.core"/>
+  <model:plugin fragment="false" id="org.eclipse.pde.ui"/>
+  <model:plugin fragment="false" id="org.eclipse.pde.build"/>
+  <model:package name="org.eclipse.pde.core"/>
+  <model:package name="org.eclipse.pde.core.plugin"/>
+  <model:package name="org.eclipse.pde.core.build"/>
+  <model:package name="org.eclipse.pde.ui"/>
+  <model:package name="org.eclipse.pde.ui.templates"/>
+  <model:component-depends unrestricted="true"/>
+</model:component>

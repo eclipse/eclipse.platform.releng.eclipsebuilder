@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<model:component xmlns:model="http://eclipse.org/wtp/releng/tools/component-model" name="Platform_Runtime">
+  <model:plugin fragment="false" id="org.eclipse.core.runtime"/>
+  <model:plugin fragment="false" id="org.eclipse.core.boot"/>
+  <model:package name="org.eclipse.core.runtime"/>
+  <model:package name="org.eclipse.core.runtime.content"/>
+  <model:package name="org.eclipse.core.runtime.jobs"/>
+  <model:package name="org.eclipse.core.runtime.preferences"/>
+  <model:package name="org.osgi.service.prefs"/>
+  <model:component-depends unrestricted="true"/>
+</model:component>

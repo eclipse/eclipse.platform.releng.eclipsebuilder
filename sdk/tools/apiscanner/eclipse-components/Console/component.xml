@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ASCII"?>
+<model:component xmlns:model="http://eclipse.org/wtp/releng/tools/component-model" name="Console">
+  <model:plugin fragment="false" id="org.eclipse.ui.console"/>
+  <model:package name="org.eclipse.ui.console"/>
+  <model:package name="org.eclipse.ui.console.actions"/>
+  <model:component-depends unrestricted="true"/>
+</model:component>

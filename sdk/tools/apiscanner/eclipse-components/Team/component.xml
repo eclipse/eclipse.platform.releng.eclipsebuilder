@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ASCII"?>
+<model:component xmlns:model="http://eclipse.org/wtp/releng/tools/component-model" name="Team">
+  <model:plugin fragment="false" id="org.eclipse.team.core"/>
+  <model:plugin fragment="false" id="org.eclipse.team.ui"/>
+  <model:package name="org.eclipse.team.core"/>
+  <model:package name="org.eclipse.team.core.variants"/>
+  <model:package name="org.eclipse.team.core.synchronize"/>
+  <model:package name="org.eclipse.team.core.subscribers"/>
+  <model:package name="org.eclipse.team.ui.synchronize"/>
+  <model:package name="org.eclipse.team.ui"/>
+  <model:component-depends unrestricted="true"/>
+</model:component>

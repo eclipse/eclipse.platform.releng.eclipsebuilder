@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ASCII"?>
+<model:component xmlns:model="http://eclipse.org/wtp/releng/tools/component-model" name="LTK_Core">
+  <model:plugin fragment="false" id="org.eclipse.ltk.core.refactoring"/>
+  <model:package name="org.eclipse.ltk.core.refactoring.participants"/>
+  <model:package name="org.eclipse.ltk.core.refactoring"/>
+  <model:component-depends unrestricted="true"/>
+</model:component>

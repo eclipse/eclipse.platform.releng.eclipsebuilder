@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ASCII"?>
+<model:component xmlns:model="http://eclipse.org/wtp/releng/tools/component-model" name="JDT_UI">
+  <model:plugin fragment="false" id="org.eclipse.jdt.ui"/>
+  <model:plugin fragment="false" id="org.eclipse.jdt.junit"/>
+  <model:package name="org.eclipse.jdt.ui.actions"/>
+  <model:package name="org.eclipse.jdt.ui.search"/>
+  <model:package name="org.eclipse.jdt.ui.jarpackager"/>
+  <model:package name="org.eclipse.jdt.ui.text.java"/>
+  <model:package name="org.eclipse.jdt.ui"/>
+  <model:package name="org.eclipse.jdt.ui.wizards"/>
+  <model:package name="org.eclipse.jdt.ui.text"/>
+  <model:package name="org.eclipse.jdt.ui.text.folding"/>
+  <model:package name="org.eclipse.jdt.ui.refactoring"/>
+  <model:package name="org.eclipse.jdt.ui.text.java.hover"/>
+  <model:package name="org.eclipse.jdt.junit"/>
+  <model:component-depends unrestricted="true"/>
+</model:component>

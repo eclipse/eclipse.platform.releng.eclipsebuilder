@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component xmlns="http://eclipse.org/component"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://eclipse.org/component ../component.xsd "
+   name="J2SE 1.4 (subset used by Eclipse Platform)">
+
+ <package name="java.awt" /> 
+ <package name="java.awt.event" /> 
+ <package name="java.beans" /> 
+ <package name="java.io" /> 
+ <package name="java.lang" /> 
+ <package name="java.lang.ref" /> 
+ <package name="java.lang.reflect" /> 
+ <package name="java.math" /> 
+ <package name="java.net" /> 
+ <package name="java.nio" /> 
+ <package name="java.nio.channels" />
+ <package name="java.nio.charset" /> 
+ <package name="java.security" /> 
+ <package name="java.security.cert" /> 
+ <package name="java.text" /> 
+ <package name="java.util" /> 
+ <package name="java.util.jar" /> 
+ <package name="java.util.logging" /> 
+ <package name="java.util.prefs" /> 
+ <package name="java.util.regex" /> 
+ <package name="java.util.zip" /> 
+ <package name="javax.servlet" /> 
+ <package name="javax.xml.parsers" /> 
+ <package name="javax.xml.transform" /> 
+ <package name="javax.xml.transform.dom" /> 
+ <package name="javax.xml.transform.sax" /> 
+ <package name="javax.xml.transform.stream" /> 
+ <package name="org.apache.lucene" /> 
+ <package name="org.apache.lucene.analysis" /> 
+ <package name="org.apache.lucene.demo" /> 
+ <package name="org.apache.lucene.demo.html" /> 
+ <package name="org.apache.lucene.document" /> 
+ <package name="org.apache.lucene.index" /> 
+ <package name="org.apache.lucene.search" />
+ <package name="org.apache.tools.ant" /> 
+ <package name="org.apache.tools.ant.helper" />
+ <package name="org.apache.tools.ant.taskdefs" />
+ <package name="org.apache.tools.ant.types" />
+ <package name="org.apache.tools.ant.util" />
+ <package name="org.eclipse.core.commands.common" />
+ <package name="org.eclipse.core.commands.contexts" />
+ <package name="org.eclipse.core.commands.operations" />
+ <package name="org.eclipse.core.commands" />
+ <package name="org.eclipse.core.runtime.dynamicHelpers" />
+ <package name="org.eclipse.jface.bindings" />
+ <package name="org.eclipse.jface.bindings.keys" />
+ <package name="org.eclipse.ui.operations" />
+ <package name="org.w3c.dom" /> 
+ <package name="org.xml.sax" /> 
+ <package name="org.xml.sax.ext" /> 
+ <package name="org.xml.sax.helpers" />
+
+ <component-depends />
+</component>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ASCII"?>
+<model:component xmlns:model="http://eclipse.org/wtp/releng/tools/component-model" name="Update">
+  <model:plugin fragment="false" id="org.eclipse.update.core"/>
+  <model:plugin fragment="true" id="org.eclipse.update.core.win32"/>
+  <model:plugin fragment="false" id="org.eclipse.update.configurator"/>
+  <model:plugin fragment="false" id="org.eclipse.update.scheduler"/>
+  <model:plugin fragment="false" id="org.eclipse.update.ui"/>
+  <model:package name="org.eclipse.update.search"/>
+  <model:package name="org.eclipse.update.operations"/>
+  <model:package name="org.eclipse.update.core"/>
+  <model:package name="org.eclipse.update.core.model"/>
+  <model:package name="org.eclipse.update.standalone"/>
+  <model:package name="org.eclipse.update.configuration"/>
+  <model:package name="org.eclipse.update.configurator"/>
+  <model:package name="org.eclipse.update.ui"/>
+  <model:component-depends unrestricted="true"/>
+</model:component>

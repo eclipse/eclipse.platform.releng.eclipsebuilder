@@ -1,0 +1,1 @@
+java -cp ./lib/apiscanner.jar;./lib/jdtcore.jar;./lib/resource.jar;./lib/runtime.jar;./lib/text.jar org.eclipse.wtp.releng.tools.component.violation.ComponentViolationEmitter %*

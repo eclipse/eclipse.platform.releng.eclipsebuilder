@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ASCII"?>
+<model:component xmlns:model="http://eclipse.org/wtp/releng/tools/component-model" name="JFace">
+  <model:plugin fragment="false" id="org.eclipse.jface"/>
+  <model:plugin fragment="false" id="org.eclipse.jface.text"/>
+  <model:package name="org.eclipse.jface.resource"/>
+  <model:package name="org.eclipse.jface.action"/>
+  <model:package name="org.eclipse.jface.window"/>
+  <model:package name="org.eclipse.jface.preference"/>
+  <model:package name="org.eclipse.jface.dialogs"/>
+  <model:package name="org.eclipse.jface.operation"/>
+  <model:package name="org.eclipse.jface.util"/>
+  <model:package name="org.eclipse.jface.viewers"/>
+  <model:package name="org.eclipse.jface.wizard"/>
+  <model:package name="org.eclipse.jface.text"/>
+  <model:package name="org.eclipse.jface.text.contentassist"/>
+  <model:package name="org.eclipse.jface.text.link"/>
+  <model:package name="org.eclipse.jface.text.source"/>
+  <model:package name="org.eclipse.jface.text.formatter"/>
+  <model:package name="org.eclipse.jface.text.source.projection"/>
+  <model:package name="org.eclipse.jface.contentassist"/>
+  <model:package name="org.eclipse.jface.text.reconciler"/>
+  <model:package name="org.eclipse.jface.text.information"/>
+  <model:package name="org.eclipse.jface.text.rules"/>
+  <model:package name="org.eclipse.jface.text.templates"/>
+  <model:package name="org.eclipse.jface.text.hyperlink"/>
+  <model:package name="org.eclipse.jface.text.presentation"/>
+  <model:package name="org.eclipse.jface.text.templates.persistence"/>
+  <model:component-depends unrestricted="true"/>
+</model:component>
