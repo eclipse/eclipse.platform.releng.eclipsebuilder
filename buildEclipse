@@ -73,22 +73,24 @@ then
 	buildLabel=$buildType-$buildid-$timestamp
 fi
 
-if [ "`echo $JAVA_HOME`" = "" ]
+java_home=`echo $JAVA_HOME`
+
+if [ "$java_home" = "" ]
 then
 	echo "The JAVA_HOME environment variable has not been set."
-	exit 1;;
+	exit 1
 fi
 
-if ! -e $bootclasspath
+if ! [ -e $bootclasspath ]
 then
 	echo rt.jar does not exist at this location:  $bootclasspath.  Please verify your bootclasspath setting.
-	exit 1;;
+	exit 1
 fi
 
-if ! -e $JAVADOC14_HOME/javadoc
+if ! [ -e $JAVADOC14_HOME/javadoc ]
 then
 	echo javadoc does not exist at this location:  $JAVADOC14_HOME.  Please verify your JAVA_HOME setting.
-	exit 1;;
+	exit 1
 fi
 
 #run the build
