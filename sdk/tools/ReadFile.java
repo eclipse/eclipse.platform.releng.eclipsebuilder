@@ -28,16 +28,14 @@ public class ReadFile extends Task {
 		  */
 	 
      	 ArrayList listLinks = new ArrayList();
+     	 ArrayList tempList = new ArrayList();
  		
 		 String xmlFileName = "toc.xml";
-		 String tempFileName = xmlFileName +".2";
-		 //generate the html from xml
-		 //java org.apache.xalan.xslt.Process -in toc2.xml -xsl ~kmoir/toc3.xsl -out toc.html
+		 String tempFileName = xmlFileName +".2";		
 		 	
 		 String initialPath = "";
 		 String htmlFileName = "toc.html";
-		 String htmlFile = initialPath + htmlFileName;	
-	//	 String fileRegexp = "doc";
+		 String htmlFile = initialPath + htmlFileName;	 
 		 String docDir;
 		 String scriptName = "test.sh";
 		 String scriptParam = "htmldoc --book -f";
@@ -57,11 +55,7 @@ public class ReadFile extends Task {
 						 
 		 public String getInitialPath() {		 	
 		 	return initialPath;
-		 }
-		 
-	//	 public String getFileRegexp() {
-	//	 	return fileRegexp;
-	//	 }
+		 }		 
 		 
 		 public String getHtmlFileName() {
 		 	return htmlFileName;
@@ -121,6 +115,12 @@ public class ReadFile extends Task {
 			 */
 			public void setListLinks(ArrayList listLinks) {
 				this.listLinks = listLinks;
+			}
+			/**
+			 * @param tempList The tempList to set.
+			 */
+			public void settempList(ArrayList tempList) {
+				this.tempList = tempList;
 			}
 			/**
 			 * @param path The path to set.
@@ -205,6 +205,7 @@ public class ReadFile extends Task {
 		 	  	 	 
 		 	 try {
 		 	 	BufferedWriter outfile = new BufferedWriter(new FileWriter(path+"/"+xmlFileName+".2"));
+		 	 	
 		 	 	for (Iterator i = fileContents.iterator(); i.hasNext();) {
 		 	 		String currentLine = ((String)(i.next()));
                    if ((currentLine.matches("(?i).*topic label=.*")) && (! currentLine.matches("(?i).*href=\".*"))) {
@@ -265,7 +266,9 @@ public class ReadFile extends Task {
 		 for (Enumeration e = convertFiles.propertyNames(); e.hasMoreElements();) {
 		 		  	   Object n = e.nextElement();		  	
 		  		  	   String x = n.toString();
-		  		  	   String h = convertFiles.getProperty(x);
+		  		  	   String h = convertFiles.getProperty(x);		  		  
+		  		  	   tempList.add(h);	
+		  		  	   
 		  		  	   transformXML(x,path,styleSheet,h);
 		 }
         } 
@@ -520,6 +523,13 @@ public class ReadFile extends Task {
 		 		listLinks.add(htmlFile);		 		 		
 		 		parseLinks(htmlFile);		 		 	
 		 		writeDocGenScript(path,docName,scriptName,scriptParam);	
+		 		//Clean up temporary files
+		 		for (Iterator f = tempList.iterator(); f.hasNext();) {
+		 			//System.out.println("f "+f.next());
+		 			boolean success = new File (f.next().toString()).delete();
+		 			//boolean success = (new File(f).delete());		 			 
+		 		}
+		 		    
 		 			 		
 		 }
 		 
