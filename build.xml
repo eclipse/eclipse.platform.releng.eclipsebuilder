@@ -3,8 +3,10 @@
 	<property name="pde.build.scripts" value="../org.eclipse.releng.basebuilder/plugins/org.eclipse.pde.build_2.1.0/scripts" />
 
 	<target name="main">
+		<tstamp/>
 		<touch file="${user.home}/.cvspass" />
-		
+
+		<property name="timestamp" value="${DSTAMP}${TSTAMP}" />
 		<property name="buildDirectory" value="${basedir}/src" />
 		<property name="bootclasspath" value="${java.home}/lib/rt.jar" />
 		<property name="buildType" value="I" />
