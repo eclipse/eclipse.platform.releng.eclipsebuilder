@@ -741,7 +741,7 @@
 		Eclipse for a given platform.
 	-->
 	<copy todir="${workingDirectory}">
-		<fileset dir="${buildDirectory}/plugins/platform-launcher/bin/${launcherFilesDir}" includes="*"  />
+		<fileset dir="${buildDirectory}/plugins/platform-launcher/bin/${launcherFilesDir}" includes="*/**"  />
 	</copy>
 	
 	<copy todir="${workingDirectory}">
@@ -790,14 +790,7 @@
 		<param name="originalFile" value="../../.." />
 	</antcall>
 
-	<antcall target="makeSymbolicLink">
-		<param name="execDir" value="${workingDirectory}" />
-		<param name="linkFile" value="eclipse" />
-		<param name="originalFile" value="${workingDirectory}/Eclipse.app/Contents/MacOS/eclipse" />
-	</antcall>
-	
-	<chmod dir="${workingDirectory}/Eclipse.app/Contents/MacOS/" perm="ugo+rx" includes="JavaApplicationStub,eclipse"/>
-	<chmod file="${workingDirectory}/eclipse" perm="ugo+rx"/>
+	<chmod dir="${workingDirectory}/Eclipse.app/Contents/MacOS/" perm="ugo+rx" includes="eclipse"/>
 	
 	<antcall target="macosxCreateTar" />
 
