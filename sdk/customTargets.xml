@@ -29,7 +29,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 </target>
 
 <target name="assemble.org.eclipse.sdk.linux.motif.x86">
-	<property name="archiveName" value="eclipse-SDK-${buildId}-linux-motif.zip"/>
+	<property name="archiveName" value="eclipse-SDK-${buildId}-linux-motif.tar.gz"/>
 	<antcall target="assemble" />
 </target>
 
@@ -39,7 +39,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 </target>
 
 <target name="assemble.org.eclipse.sdk.linux.gtk.x86">
-	<property name="archiveName" value="eclipse-SDK-${buildId}-linux-gtk.zip"/>
+	<property name="archiveName" value="eclipse-SDK-${buildId}-linux-gtk.tar.gz"/>
 	<antcall target="assemble" />
 </target>
 
