@@ -44,7 +44,7 @@ public class TestVersionTracker{
 	private String outputFilePath;
 	
 	public static void main(String[] args) {
-		String buildDirectory=args[0].substring(0,args[0].length()-10+"/../..");
+		String buildDirectory=(args[0].substring(0,args[0].length()-10+)+"/../..";
 		TestVersionTracker Tracker =
 		new TestVersionTracker(buildDirectory);
 		Tracker.parse(args[0],Tracker.new FeatureHandler());
