@@ -18,8 +18,9 @@
 <!-- ===================================================================== -->
 
 <target name="assemble.org.eclipse.jdt.cheetah05">
-	<property name="archiveName" value="eclipse-JDT-Cheetah-${buildId}.zip"/>
-	<ant antfile="${assembleScriptName}"/>
+	<!--property name="archiveName" value="eclipse-JDT-Cheetah-${buildId}.zip"/>
+	<ant antfile="${assembleScriptName}"/-->
+	<ant antfile="build.xml" dir="${buildDirectory}/features/org.eclipse.jdt.cheetah05" />
 </target>
 
 
