@@ -102,9 +102,9 @@
 		<chmod dir="${install}" perm="755" includes="**/eclipse,**/*.so*,**/*.sl"/>
 	</target>
 
-	<target name="symlink" depends="init" if="linux">
+	<target name="symlink" depends="init" if="linux.motif">
 		<!--  Copy libXm.so.2.1 from plugin to root of install and set permission -->
-		<copy file="${install}/plugins/org.eclipse.platform.${platformId}/os/linux/x86/libXm.so.2.1" todir="${install}" />
+		<copy file="${install}/plugins/org.eclipse.platform.linux.motif/os/linux/x86/libXm.so.2.1" todir="${install}" />
 		<chmod file="${install}/libXm.so.2.1" perm="755"/>
 		<exec dir="${install}" executable="ln">
 			<arg line="-s libXm.so.2.1 libXm.so"/>
@@ -129,9 +129,9 @@
 				<equals arg1="${os}" arg2="${ws}" />
 			</and>
 		</condition>
-		<condition property="linux">
+		<condition property="linux.motif">
 			<and>
-				<equals arg1="${os}" arg2="linux" />
+				<equals arg1="${os}.${ws}" arg2="linux.motif" />
 				<os family="unix" />
 			</and>
 		</condition>
