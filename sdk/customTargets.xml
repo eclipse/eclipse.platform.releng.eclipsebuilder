@@ -76,6 +76,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 <target name="checkLocal">
 	<available property="mapsLocal" file="${buildDirectory}/maps/org.eclipse.releng" />
 </target>
+
 <target name="getMapFiles" depends="checkLocal" unless="mapsLocal">
 
 	<!-- ***  change the repo info -->
@@ -86,11 +87,22 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		dest="${buildDirectory}/maps"
 		tag="${mapVersionTag}"
 	/>
+	<!--compare the map files project-->
+	<antcall target="compareMapFiles" />	
 	<!--tag the map files project-->
 	<antcall target="tagMapFiles" />
 </target>
 
+<target name="compareMapFiles" if="compareMaps">
+<property file="${mapTag.properties}"/>
+     <cvs cvsRoot="${mapCvsRoot}" dest="c:/temp/mapfiles" command="diff -d -r ${lastMapTag}" output="${buildDirectory}/compareMaps" />
+</target>
+
 <target name="tagMapFiles" if="tagMaps">
+    <!-- Stores tag on the filesystem so map files can be compared -->
+	<echo file="${mapTag.properties}" 
+	>lastMapTag=v${timestamp}
+		</echo>
 	<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag v${timestamp}" />
 </target>
 
