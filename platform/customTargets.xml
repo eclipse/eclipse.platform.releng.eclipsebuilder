@@ -154,6 +154,9 @@
 <!-- Steps to do after running the build.xmls for the elements being built. -->
 <!-- ===================================================================== -->
 <target name="postProcess">
+	<condition property="logsAvailable">
+		<istrue value="${javacVerbose}"/> 
+	</condition>
 	<antcall target="gatherLogs" />
 </target>
 
@@ -167,7 +170,8 @@
 <!-- ===================================================================== -->
 <!-- Helper targets -->
 <!-- ===================================================================== -->
-<target name="gatherLogs">
+<target name="gatherLogs" if="logsAvailable">
+
 	<mkdir dir="${buildDirectory}/${buildLabel}/compilelogs" />
 	<antcall target="allElements">
 		<param name="target" value="gatherLogs" />
