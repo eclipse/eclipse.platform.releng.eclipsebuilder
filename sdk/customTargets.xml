@@ -164,10 +164,10 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 <!-- ===================================================================== -->
 <target name="postFetch">
 	<ant antfile="${genericTargets}" target="fetchElement">
-		<property name="type" value="plugin" />
-		<property name="id" value="platform-launcher" />
+		<property name="type" value="feature" />
+		<property name="id" value="org.eclipse.launchers" />
 	</ant>
-	<zip zipfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/plugins/platform-launcher" includes="library/" />
+	<zip zipfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/feature/org.eclipse.launchers" includes="library/" />
 
 		<!--fetch and compile swt tools-->
 	<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
