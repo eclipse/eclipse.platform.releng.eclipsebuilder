@@ -33,6 +33,11 @@
 	<ant antfile="${assembleScriptName}"/>
 </target>
 
+<target name="assemble.org.eclipse.rcp.sdk.linux.gtk.amd64">
+	<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-linux-gtk-amd64.zip"/>
+	<ant antfile="${assembleScriptName}"/>
+</target>
+	
 <target name="assemble.org.eclipse.rcp.sdk.solaris.motif.sparc">
 	<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-solaris-motif.zip"/>
 	<ant antfile="${assembleScriptName}"/>
@@ -115,6 +120,26 @@
 <!-- Steps to do after the fetch -->
 <!-- ===================================================================== -->
 <target name="postFetch">
+	<!--fetch and compile swt tools-->
+	<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
+		<property name="type" value="plugin" />
+		<property name="id" value="org.eclipse.swt.tools" />
+	</ant>
+	<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="generateScript">
+		<property name="type" value="plugin" />
+		<property name="id" value="org.eclipse.swt.tools" />
+	</ant>
+	<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.win32" target="build.jars">
+		<property name="type" value="plugin" />
+		<property name="id" value="org.eclipse.swt.win32" />
+	</ant>
+	<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.tools" target="build.jars">
+		<property name="type" value="plugin" />
+		<property name="id" value="org.eclipse.swt.tools" />
+		<property name="baseos" value="win32" />
+		<property name="basews" value="win32" />
+		<property name="basearch" value="x86" />
+	</ant>
 </target>
 
 <!-- ===================================================================== -->
