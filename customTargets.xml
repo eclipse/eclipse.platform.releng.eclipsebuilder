@@ -465,6 +465,19 @@
 	
 	<!-- SDK Products -->
 	<ant antfile="assemble.xml" target="${target}" >
+		<property name="featureTargetList" value="macosxCarbonSdkFeatures" />
+		<property name="os" value="macosx" />
+		<property name="ws" value="carbon" />
+		<property name="productZipName" value="${basedir}/${buildLabel}/eclipse-SDK-${buildid}-macosx-carbon.zip" />
+		<property name="productIsSDK" value="true" />
+		<property name="postAssemblyTarget" value="macosxCarbonPostAssembly" />
+		<property name="launcherFilesDir" value="macosx" />
+		<property name="workingDirectory" value="${basedir}/temp/eclipse" />
+		<property name="zipRootDir" value="${basedir}/temp" />
+		<property name="zipArgs" value="-y" />
+	</ant>
+	
+	<ant antfile="assemble.xml" target="${target}" >
 		<property name="featureTargetList" value="sdkFeatures" />
 		<property name="os" value="aix" />
 		<property name="ws" value="motif" />
@@ -536,19 +549,6 @@
 		<property name="zipRootDir" value="${basedir}/temp" />
 		<property name="launcherFilesDir" value="solaris" />
 		<property name="postAssemblyTarget" value="sdkAndPlatformPostAssembly" />
-	</ant>
-
-	<ant antfile="assemble.xml" target="${target}" >
-		<property name="featureTargetList" value="macosxCarbonSdkFeatures" />
-		<property name="os" value="macosx" />
-		<property name="ws" value="carbon" />
-		<property name="productZipName" value="${basedir}/${buildLabel}/eclipse-SDK-${buildid}-macosx-carbon.zip" />
-		<property name="productIsSDK" value="true" />
-		<property name="postAssemblyTarget" value="macosxCarbonPostAssembly" />
-		<property name="launcherFilesDir" value="macosx" />
-		<property name="workingDirectory" value="${basedir}/temp/eclipse" />
-		<property name="zipRootDir" value="${basedir}/temp" />
-		<property name="zipArgs" value="-y" />
 	</ant>
 	
 	<ant antfile="assemble.xml" target="${target}" >
