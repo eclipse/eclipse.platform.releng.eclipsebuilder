@@ -46,7 +46,7 @@
 
 <target name="parseFiles" if = "unzipDoc">
 <taskdef name="ReadFile" classname="ReadFile" classpath="${builderDirectory}\tools" />
-    <ReadFile xmlFileName="${xmlFileName}" initialPath="${buildDirectory}" htmlFileName="${htmlFileName}" docDir="${buildDirectory}/${docPlugin}" ScriptName="${scriptName}" scriptParam="htmldoc --book -f" styleSheet="${styleSheet}" docName="${docPlugin}.${buildId}.pdf" />
+    <ReadFile xmlFileName="${xmlFileName}" initialPath="${buildDirectory}" htmlFileName="${htmlFileName}" docDir="${buildDirectory}/plugins/${docPlugin}" ScriptName="${scriptName}" scriptParam="htmldoc --book -f" styleSheet="${styleSheet}" docName="${docPlugin}.${buildId}.pdf" />
      <property name="parseFiles" value="true"/>
 </target>
 
