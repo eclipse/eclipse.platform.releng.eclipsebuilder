@@ -249,7 +249,7 @@
 </table>
 <table border=0 cellspacing=5 cellpadding=2 width="100%" >
   <tr> 
-    <td align=LEFT valign=TOP colspan="3" bgcolor="#999999"><b><font color="#FFFFFF" face="Arial,Helvetica">SWT 
+    <td align=LEFT valign=TOP colspan="3" bgcolor="#999999"><b><font color="#FFFFFF" face="Arial,Helvetica"><a name="SWT"></a>SWT 
       Binary and Source</font></b></td>
   </tr>
   <tr> 
