@@ -2,8 +2,6 @@
 
 
 <property name="postingDirectory" value="${buildDirectory}" />
-<!--- set this for downstream projects who use our builds scripts -->
-<property name="eclipse.build.scripts"	value="${basedir}/../org.eclipse.releng.eclipsebuilder" />
 	
 <!-- ===================================================================== -->
 <!-- Run a given ${target} on all elements being built -->
