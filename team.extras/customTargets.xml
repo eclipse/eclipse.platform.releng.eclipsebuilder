@@ -34,7 +34,8 @@
 <target name="getMapFiles" depends="checkLocal" unless="mapsLocal">
 
 	<!-- ***  change the repo info -->
-	<property name="cvsRoot" value=":pserver:anonymous@ottcvs1.ott.oti.com:/home/cvs/featuretest" />
+	<property name="${mapCvsRoot}" value=":pserver:anonymous@dev.eclipse.org:/home/eclipse" />
+
 	<property name="mapVersionTag" value="HEAD" />
 	<cvs cvsRoot="${mapCvsRoot}"
 		package="org.eclipse.releng"
