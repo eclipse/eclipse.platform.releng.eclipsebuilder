@@ -86,6 +86,13 @@
 <!-- Steps to do after the fetch -->
 <!-- ===================================================================== -->
 <target name="postFetch">
+<!--	slam plug-in ids.
+-->
+	<property file="${buildDirectory}/maps/org.eclipse.jdt.cheetah.map/maps/build.cfg"/>
+	
+	<eclipse.versionReplacer path="${buildDirectory}/plugins/org.eclipse.jdt.core" version="${cheetah.version}" />
+	<eclipse.versionReplacer path="${buildDirectory}/plugins/org.eclipse.jdt.ui" version="${cheetah.version}" />
+	<eclipse.versionReplacer path="${buildDirectory}/plugins/org.eclipse.jdt.debug" version="${cheetah.version}" />
 </target>
 
 <!-- ===================================================================== -->
