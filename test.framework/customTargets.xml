@@ -81,7 +81,7 @@
 <!-- Steps to do after the fetch -->
 <!-- ===================================================================== -->
 <target name="postFetch">
-	<replace dir="${buildDirectory}/plugins" value="${timestamp}" token="@build@">
+	<replace dir="${buildDirectory}/plugins" value="${buildId}" token="@build@">
 		<include name="**/about.mappings" />
 	</replace>
 </target>
@@ -118,7 +118,7 @@
 <!-- Steps to do before running the build.xmls for the elements being built. -->
 <!-- ===================================================================== -->
 <target name="preProcess">
-	<replace dir="${buildDirectory}/plugins" value="${timestamp}" token="@build@">
+	<replace dir="${buildDirectory}/plugins" value="${buildId}" token="@build@">
 		<include name="**/about.mappings" />
 	</replace>
 </target>

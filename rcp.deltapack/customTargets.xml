@@ -8,7 +8,7 @@
 <target name="allElements">
 	<ant antfile="${genericTargets}" target="${target}" >
 		<property name="type" value="feature" />
-		<property name="id" value="org.eclipse.sdk.examples" />
+		<property name="id" value="org.eclipse.launchers" />
 	</ant>
 </target>
 
@@ -19,22 +19,26 @@
 <!-- Add one target for each root element and each configuration -->
 <!-- ===================================================================== -->
 
-<target name="assemble.org.eclipse.sdk.examples">
-	<property name="archiveName" value="eclipse-examples-${buildId}.zip"/>
-	<antcall target="assemble" />
-</target>
-
-<target name="assemble.org.eclipse.sdk.examples.win32.win32.x86">
-	<property name="archiveName" value="eclipse-examples-${buildId}-win32.zip"/>
-	<antcall target="assemble" />
+<!-- POST STEPS TO ADD -->
+<target name="assemble.org.eclipse.launchers">
+		 <property name="feature.destination" value="${buildDirectory}/features/org.eclipse.launchers"/>
+		 <antcall target="assemble" />
 </target>
 
 <target name="assemble">
-	<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
-	<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
-	<ant antfile="${assembleScriptName}" />
-	<checksum file="${archiveFullPath}" property="md5"/>
-	<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5"/>
+	<property name="archiveName" value="eclipse-RCP-${buildId}-delta-pack.zip"/>
+    <ant target="zip.distribution" antfile="build.xml" dir="${buildDirectory}/features/org.eclipse.launchers"/>
+    <ant antfile="package.xml" dir="${pde.build.scripts}" inheritAll="false">
+      <property name="buildDirectory" value="${buildDirectory}"/>
+      <property name="postingDirectory" value="${postingDirectory}"/>
+      <property name="buildLabel" value="${buildLabel}"/>
+      <property name="buildId" value="${buildId}"/>
+      <property name="packagingInfo" value="${builder}/scripts"/>
+    </ant>
+    <move file="${buildDirectory}/deltapacktmp/temp/${archiveName}" todir="${postingDirectory}/${buildLabel}"/>            
+    <mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
+	<checksum file="${postingDirectory}/${buildLabel}/${archiveName}" property="md5"/>
+	<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5"/>    
 </target>
 
 <!-- ===================================================================== -->
@@ -54,34 +58,13 @@
 		dest="${buildDirectory}/maps"
 		tag="${mapVersionTag}"
 	/>
-
-	<!--compare the map files project-->
-	<antcall target="compareMapFiles" />
 	<!--tag the map files project-->
 	<antcall target="tagMapFiles" />
 </target>
 
-<!-- <target name="tagMapFiles" if="tagMaps">
-	<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag v${timestamp}" />
-</target> -->
-
-
-<target name="compareMapFiles" if="compareMaps">
-<property file="${mapTag.properties}"/>
-	 <property name="cvsDiffFile" value="${buildDirectory}/cvsDiff.txt" />
-     <cvs cvsRoot="${mapCvsRoot}" dest="${buildDirectory}/maps" command="diff -w -r ${lastMapTag}" output="${cvsDiffFile}" />
-     <modifiedMaps mapDiffFile="${cvsDiffFile}" />
-</target>
-
 <target name="tagMapFiles" if="tagMaps">
-    <!-- Stores tag on the filesystem so map files can be compared -->
-	<echo file="${mapTag.properties}">
-		lastMapTag=v${timestamp}
-	</echo>
 	<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag v${timestamp}" />
 </target>
-
-
 
 <!-- ===================================================================== -->
 <!-- Steps to do before setup -->
@@ -102,24 +85,21 @@
 </target>
 
 <!-- ===================================================================== -->
-<!-- Steps to do after fetching the build elements -->
+<!-- Steps to do after the fetch -->
 <!-- ===================================================================== -->
 <target name="postFetch">
-
 </target>
 
 <!-- ===================================================================== -->
 <!-- Steps to do before generating build scripts -->
 <!-- ===================================================================== -->
 <target name="preGenerate">
-
 </target>
 
 <!-- ===================================================================== -->
 <!-- Steps to do after generating the build scripts -->
 <!-- ===================================================================== -->
 <target name="postGenerate">
-	<antcall target="clean" />
 </target>
 
 <!-- ===================================================================== -->
@@ -136,48 +116,29 @@
 </target>
 
 
+
 <!-- ===================================================================== -->
 <!-- Steps to do before running the build.xmls for the elements being built. -->
 <!-- ===================================================================== -->
 <target name="preProcess">
-	<replace dir="${buildDirectory}/plugins" value="${buildId}" token="@build@">
-		<include name="**/about.mappings" />
-	</replace>
 </target>
 
 <!-- ===================================================================== -->
 <!-- Steps to do after running the build.xmls for the elements being built. -->
 <!-- ===================================================================== -->
 <target name="postProcess">
-	<condition property="logsAvailable">
-		<istrue value="${javacVerbose}"/> 
-	</condition>
-	<antcall target="gatherLogs" />
 </target>
 
 <!-- ===================================================================== -->
 <!-- Steps to do after everything is built and assembled -->
 <!-- (e.g., testing, posting, emailing, ...) -->
 <!-- ===================================================================== -->
-<target name="postBuild">
-</target>
+<target name="postBuild">    
+       </target>
 
 <!-- ===================================================================== -->
 <!-- Helper targets -->
 <!-- ===================================================================== -->
-<target name="gatherLogs" if="logsAvailable">
-
-	<mkdir dir="${postingDirectory}/${buildLabel}/compilelogs" />
-	<antcall target="allElements">
-		<param name="target" value="gatherLogs" />
-	</antcall>
-
-	<unzip dest="${postingDirectory}/${buildLabel}/compilelogs" overwrite="true">
-		<fileset dir="${buildDirectory}/features/org.eclipse.sdk.examples">
-			<include name="*.log.zip" />
-		</fileset>
-	</unzip>
-</target>
 <target name="clean" unless="noclean">
 	<antcall target="allElements">
 		<param name="target" value="cleanElement" />

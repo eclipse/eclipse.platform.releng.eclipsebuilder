@@ -26,43 +26,43 @@
 	</target>
 
 	<target name="assemble.org.eclipse.platform.sdk.linux.motif.x86">
-		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-linux-motif.zip" />
+		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-linux-motif.tar.gz" />
 		<antcall target="assemble" />
 	</target>
 
 	<target name="assemble.org.eclipse.platform.sdk.linux.gtk.x86">
-		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-linux-gtk.zip" />
+		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-linux-gtk.tar.gz" />
 		<antcall target="assemble" />
 	</target>
 
 	<target name="assemble.org.eclipse.platform.sdk.linux.gtk.amd64">
-		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-linux-gtk-amd64.zip" />
+		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-linux-gtk-amd64.tar.gz" />
 		<antcall target="assemble" />
 	</target>
 
 	<target name="assemble.org.eclipse.platform.sdk.solaris.motif.sparc">
-		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-solaris-motif.zip" />
+		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-solaris-motif.tar.gz" />
 		<antcall target="assemble" />
 	</target>
 
 	<target name="assemble.org.eclipse.platform.sdk.solaris.gtk.sparc">
-		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-solaris-gtk.zip" />
+		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-solaris-gtk.tar.gz" />
 		<antcall target="assemble" />
 	</target>
 	
 	<target name="assemble.org.eclipse.platform.sdk.qnx.photon.x86">
-		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-qnx-photon.zip" />
+		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-qnx-photon.tar.gz" />
 		<antcall target="assemble" />
 	</target>
 
 	<target name="assemble.org.eclipse.platform.sdk.aix.motif.ppc">
-		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-aix-motif.zip" />
+		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-aix-motif.tar.gz" />
 		<antcall target="assemble" />
 	</target>
 
 
 	<target name="assemble.org.eclipse.platform.sdk.hpux.motif.PA_RISC">
-		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-hpux-motif.zip" />
+		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-hpux-motif.tar.gz" />
 		<antcall target="assemble" />
 	</target>
 
@@ -192,7 +192,7 @@
 	<!-- Steps to do before running the build.xmls for the elements being built. -->
 	<!-- ===================================================================== -->
 	<target name="preProcess">
-		<replace dir="${buildDirectory}/plugins" value="${timestamp}" token="@build@">
+		<replace dir="${buildDirectory}/plugins" value="${buildId}" token="@build@">
 			<include name="**/about.mappings" />
 		</replace>
 		<replace dir="${buildDirectory}/features/org.eclipse.platform" value="${buildId}" token="@build@">
