@@ -3,17 +3,17 @@
 	<target name="customSetup">
 		<!--copy the script which sets up environment and invokes the tests on test machine-->
 		<exec dir="." executable="${copyClient}">
-			<arg line="testAll.bat ${testMachine}:${executionDir}" />
+			<arg line="${tester}/testAll.bat ${testMachine}:${executionDir}" />
 		</exec>
 		
-		<!--copy in test script modified for running Team CVS tests-->
+	<!--copy in test script modified for running Team CVS tests-->
 		<exec dir="." executable="${copyClient}">
-			<arg line="${eclipse.build.scripts}/sdk.tests/testScripts/test.xml ${testMachine}:${executionDir}" />
+			<arg line="${tester}/../../testScripts/test.xml ${testMachine}:${executionDir}" />
 		</exec>
 		
 		<!--copy in the properties file for testing with J9 vm args-->	
 		<exec dir="." executable="${copyClient}">
-			<arg line="vm.properties ${testMachine}:${testDir}/${executionDir}" />
+			<arg line="vm.properties ${testMachine}:${executionDir}" />
 		</exec>
 		
 		<!--copy in the extra binaries needed to run tests-->	
