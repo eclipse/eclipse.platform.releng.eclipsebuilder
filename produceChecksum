@@ -1,0 +1,12 @@
+# !/bin/sh
+
+#array of zipfiles
+zipfiles=`ls *.zip`
+
+for zipfile in ${zipfiles}
+do 
+	echo [md5] ${zipfile}
+	md5sum -b ${zipfile} > ${zipfile}.md5
+done
+
+
