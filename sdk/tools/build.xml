@@ -1,16 +1,22 @@
 <project default="main" basedir=".">
-
+	
 <target name="compileSrc">
     <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
     <javac verbose="true" failonerror="false"  srcdir="${builderDirectory}\tools" destdir="${builderDirectory}\tools" />     
     <available classname="ReadFile" classpath="${builderDirectory}\tools" property="compileSrc"/>
 </target>
   
-<property name="jdt.doc.isv" value= "org.eclipse.jdt.doc.isv_3.0.0"/>
-<property name="jdt.doc.user" value="org.eclipse.jdt.doc.user_3.0.0"/>
-<property name="pde.doc.user" value="org.eclipse.pde.doc.user_3.0.0"/>
-<property name="platform.doc.isv" value="org.eclipse.platform.doc.isv_3.0.0"/>
-<property name="platform.doc.user" value="org.eclipse.platform.doc.user_3.0.0"/>
+<property name="jdt.doc.isv" value= "org.eclipse.jdt.doc.isv"/>
+<property name="jdt.doc.user" value="org.eclipse.jdt.doc.user"/>
+<property name="pde.doc.user" value="org.eclipse.pde.doc.user"/>
+<property name="platform.doc.isv" value="org.eclipse.platform.doc.isv"/>
+<property name="platform.doc.user" value="org.eclipse.platform.doc.user"/>
+<property name="jdt.doc.isv.pdf" value= "org.eclipse.jdt.doc.isv.${buildId}.pdf"/>
+<property name="jdt.doc.user.pdf" value="org.eclipse.jdt.doc.user.${buildId}.pdf"/>
+<property name="pde.doc.user.pdf" value="org.eclipse.pde.doc.user.${buildId}.pdf"/>
+<property name="platform.doc.isv.pdf" value="org.eclipse.platform.doc.isv.${buildId}.pdf"/>
+<property name="platform.doc.user.pdf" value="org.eclipse.platform.doc.user.${buildId}.pdf"/>
+		
 <property name="doczipfile" value="doc.zip"/>
 <property name="scriptName" value="test.sh"/>
 <property name="fileRegexp" value="doc"/>
@@ -31,11 +37,11 @@
 
 <target name="parseFiles" if = "unzipDoc">
 <taskdef name="ReadFile" classname="ReadFile" classpath="${builderDirectory}\tools" />
-    <ReadFile xmlFileName="${xmlFileName}" initialPath="${buildDirectory}" htmlFileName="${htmlFileName}" docDir="${buildDirectory}/${jdt.doc.isv}" ScriptName="${scriptName}" scriptParam="htmldoc --book -f" styleSheet="${styleSheet}" />
-    <ReadFile xmlFileName="${xmlFileName}" initialPath="${buildDirectory}" htmlFileName="${htmlFileName}" docDir="${buildDirectory}/${jdt.doc.user}" ScriptName="${scriptName}" scriptParam="htmldoc --book -f" styleSheet="${styleSheet}" />
-    <ReadFile xmlFileName="${xmlFileName}" initialPath="${buildDirectory}" htmlFileName="${htmlFileName}" docDir="${buildDirectory}/${pde.doc.user}" ScriptName="${scriptName}" scriptParam="htmldoc --book -f" styleSheet="${styleSheet}" />
-    <ReadFile xmlFileName="${xmlFileName}" initialPath="${buildDirectory}" htmlFileName="${htmlFileName}" docDir="${buildDirectory}/${platform.doc.isv}" ScriptName="${scriptName}" scriptParam="htmldoc --book -f" styleSheet="${styleSheet}" />
-    <ReadFile xmlFileName="${xmlFileName}" initialPath="${buildDirectory}" htmlFileName="${htmlFileName}" docDir="${buildDirectory}/${platform.doc.user}" ScriptName="${scriptName}" scriptParam="htmldoc --book -f" styleSheet="${styleSheet}" />
+    <ReadFile xmlFileName="${xmlFileName}" initialPath="${buildDirectory}" htmlFileName="${htmlFileName}" docDir="${buildDirectory}/${jdt.doc.isv}" ScriptName="${scriptName}" scriptParam="htmldoc --book -f" styleSheet="${styleSheet}" docName="${jdt.doc.isv.pdf}" />
+    <ReadFile xmlFileName="${xmlFileName}" initialPath="${buildDirectory}" htmlFileName="${htmlFileName}" docDir="${buildDirectory}/${jdt.doc.user}" ScriptName="${scriptName}" scriptParam="htmldoc --book -f" styleSheet="${styleSheet}" docName="${jdt.doc.user.pdf}"/>
+    <ReadFile xmlFileName="${xmlFileName}" initialPath="${buildDirectory}" htmlFileName="${htmlFileName}" docDir="${buildDirectory}/${pde.doc.user}" ScriptName="${scriptName}" scriptParam="htmldoc --book -f" styleSheet="${styleSheet}" docName="${pde.doc.user.pdf}"/>
+    <ReadFile xmlFileName="${xmlFileName}" initialPath="${buildDirectory}" htmlFileName="${htmlFileName}" docDir="${buildDirectory}/${platform.doc.isv}" ScriptName="${scriptName}" scriptParam="htmldoc --book -f" styleSheet="${styleSheet}" docName="${platform.doc.isv.pdf}"/>
+    <ReadFile xmlFileName="${xmlFileName}" initialPath="${buildDirectory}" htmlFileName="${htmlFileName}" docDir="${buildDirectory}/${platform.doc.user}" ScriptName="${scriptName}" scriptParam="htmldoc --book -f" styleSheet="${styleSheet}" docName="${platform.doc.user.pdf}"/>
     <property name="parseFiles" value="true"/>
 </target>
 

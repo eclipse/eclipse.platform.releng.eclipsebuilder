@@ -34,14 +34,15 @@ public class ReadFile extends Task {
 		 //generate the html from xml
 		 //java org.apache.xalan.xslt.Process -in toc2.xml -xsl ~kmoir/toc3.xsl -out toc.html
 		 	
-		 String initialPath = "/home/kmoir/eclipse/plugins";
+		 String initialPath = "";
 		 String htmlFileName = "toc.html";
 		 String htmlFile = initialPath + htmlFileName;	
 	//	 String fileRegexp = "doc";
 		 String docDir;
 		 String scriptName = "test.sh";
 		 String scriptParam = "htmldoc --book -f";
-		 String styleSheet = "/home/kmoir/toc3.xsl"; 
+		 String styleSheet = ""; 
+		 String docName = "";
 		 	
 	
 	 public ReadFile() {
@@ -156,7 +157,18 @@ public class ReadFile extends Task {
 			 */
 			public void setStyleSheet(String styleSheet) {
 				this.styleSheet = styleSheet;
+			}			
+			
+			public void setdocName(String docName) {
+				this.docName = docName;
 			}
+			/**
+			 * @param styleSheet The styleSheet to set.
+			 */
+						
+			public String getdocName() {
+			 	return docName;
+			 }
 		 
 		 void verifySourceFiles(String path, String xmlFileName, String styleSheet, String htmlFileName) {
 		 	
@@ -493,7 +505,7 @@ public class ReadFile extends Task {
 		 		//add the first link to the array		 		 		 
 		 		listLinks.add(htmlFile);		 		 		
 		 		parseLinks(htmlFile);		 		 	
-		 		writeDocGenScript(path,findDocName(path),scriptName,scriptParam);		 
+		 		writeDocGenScript(path,docName,scriptName,scriptParam);		 
 		 }
 		 
 		 public static void main(String args[]) {
