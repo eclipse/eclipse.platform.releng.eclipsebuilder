@@ -29,13 +29,13 @@
 <p>&nbsp;</p>
 <p><a name="systemrequirements"></a><b>System Requirements</b></p>
 <p>The Eclipse plugins and fragments for this mechanism were taken from Windows 
-  and Linux-Motif installations of the Eclipse 2.1 M3 build. It is recommended 
-  that the builds are conducted on one of these two operating systems.</p>
+  and Linux-Motif installations of the Eclipse 2.1 M3 build. However, it should 
+  be possible to run the build on any supported Eclipse platform.</p>
 <p>The following will also be required:</p>
 <ol>
   <li>Sun or IBM JDK 1.3 or higher</li>
-  <li> (On Linux only) Windows version of the rt.jar (bootstrap classes, classes 
-    that comprise the Java platform), version 1.3.* or higher</li>
+  <li> (On non-Windows systems only) Windows version of the rt.jar (bootstrap 
+    classes, classes that comprise the Java platform), version 1.3.* or higher</li>
   <li><a href="http://ccvs.cvshome.org/servlets/ProjectDownloadList">CVS 1.10 
     </a> or higher</li>
   <li>Info-ZIP Zip version 2.3 or higher</li>
@@ -67,15 +67,55 @@
         path calculations.</p>
     </blockquote>
   </li>
-  <li>(Linux) set execute permission on the buildEclipse shell script, &quot;chmod 
-    755 buildEclipse&quot;. </li>
+  <li>(*nux) set execute permission on the buildEclipse shell script, &quot;chmod 
+    755 buildEclipse&quot;. If building on a system other that Linux Motif, edit 
+    the last line of the script to run Eclipse with appropriate values for -os, 
+    -ws and -arch parameters.</li>
 </ol>
-<ol>
-  <blockquote> 
-    <p>&nbsp;</p>
-  </blockquote>
-</ol>
-<h4><a name="running"></a>Run the Build</h4>
+<p>i.e. replace linux, motif and x86 in the following line with the values appropriate 
+  to the system on which you are running the build. See table below for other 
+  supported values.</p>
+<p>&quot;java -cp startup.jar org.eclipse.core.launcher.Main -os linux -ws motif 
+  -arch x86 ...&quot; <br>
+</p>
+<table width="50%" border="1">
+  <tr> 
+    <td width="48%">Operating System (os)</td>
+    <td width="52%">Windowing System (ws)</td>
+    <td width="52%">Architecture (arch)</td>
+  </tr>
+  <tr> 
+    <td width="48%">linux</td>
+    <td width="52%">gtk</td>
+    <td width="52%">x86</td>
+  </tr>
+  <tr> 
+    <td width="48%">solaris</td>
+    <td width="52%">motif</td>
+    <td width="52%">sparc</td>
+  </tr>
+  <tr> 
+    <td width="48%">aix</td>
+    <td width="52%">motif</td>
+    <td width="52%">ppc</td>
+  </tr>
+  <tr> 
+    <td width="48%">hpux</td>
+    <td width="52%">motif</td>
+    <td width="52%">PA_RISC</td>
+  </tr>
+  <tr> 
+    <td width="48%">qnx</td>
+    <td width="52%">photon</td>
+    <td width="52%">x86</td>
+  </tr>
+  <tr> 
+    <td width="48%">macosx</td>
+    <td width="52%">carbon</td>
+    <td width="52%">ppc</td>
+  </tr>
+</table>
+<p>&nbsp;</p><h4><a name="running"></a>Run the Build</h4>
 <blockquote> 
   <p>The scripts buildEclipse.bat and buildEclipse are included in the org.eclipse.releng.eclipsebuilder 
     project to invoke the Eclipse AntRunner on the Ant build scripts.</p>
