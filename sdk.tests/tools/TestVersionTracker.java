@@ -5,7 +5,10 @@
 
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
-import org.apache.xerces.parsers.SAXParser;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.SAXException;
 import java.io.*;
 import java.util.Hashtable;
@@ -27,12 +30,16 @@ public class TestVersionTracker extends DefaultHandler {
 
 	public TestVersionTracker(String install) {
 		//  Create a Xerces SAX Parser
-        parser = new SAXParser();
+		SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
+		try {
+			parser = saxParserFactory.newSAXParser();
+		} catch (ParserConfigurationException e) {
+		  	e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		}
         
-        //  Set Content Handler
-        parser.setContentHandler (this);
-		
-		// directory containing the source for a given build
+       	// directory containing the source for a given build
 		installDirectory = install;
 
 		//  instantiate hashtable that will hold directory names with versions for elements
@@ -43,7 +50,7 @@ public class TestVersionTracker extends DefaultHandler {
 			
 	    //  Parse the Document      
         try {
-            parser.parse(xmlFile);
+            parser.parse(xmlFile,this);
         } catch (SAXException e) {
             System.err.println (e);
         } catch (IOException e) {
@@ -62,9 +69,9 @@ public class TestVersionTracker extends DefaultHandler {
 		String element = atts.getValue("id");
 		String version = atts.getValue("version");
 
-		if (local.equals("plugin") || local.equals("fragment")) {
+		if (qName.equals("plugin") || qName.equals("fragment")) {
 				elements.put(element,element+"_"+version);
-		} else if (local.equals("feature"))
+		} else if (qName.equals("feature"))
 				elements.put(element+"-feature",element+"_"+version);
 	}
 
