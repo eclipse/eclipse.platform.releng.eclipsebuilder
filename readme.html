@@ -1,0 +1,30 @@
+ 
+<p>Prerequisites<br>
+</p>
+<p>** work in progress **</p>
+<p><br>
+  1. cvs executable installed and on system path variable.<br>
+  2. 1.3.1 level jre installed and jre/bin directory added to system path variable.<br>
+  3. 1.4 level JDK installed (for generating javadoc with working links)<br>
+  4. (on non Windows systems only) - a 1.3.1 level windows java runtime environment.<br>
+  5. Info-Zip zip and unzip executables on system path.<br>
+  6. (for Mac OSX only) tar and gzip<br>
+  7. org.eclipse.releng.basebuilder and org.eclipse.releng.eclipsebuilder checked 
+  out into a directory<br>
+</p>
+<p> cd to org.eclipse.releng.eclipsebuilder directory and execute the following 
+  command: </p>
+<p>java -cp ../org.eclipse.releng.basebuilder/startup.jar org.eclipse.core.launcher.Main 
+  -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=sdk 
+  | platform | jdt | sdk.examples | sdk.tests [-Dconfigs=&lt;configuration list&gt;] 
+  [javacfailonerror=true |false ] [javacVerbose=true | false][zipargs=&lt;arguments 
+  to zip executable&gt;] [ -Dbootclasspath=&lt;absolute path to rt.jar to compile 
+  against&gt;]<br>
+</p>
+<p>&nbsp;</p>
+<p>examples:</p>
+<p>java -cp ../org.eclipse.releng.basebuilder/startup.jar org.eclipse.core.launcher.Main 
+  -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=sdk 
+  -Dconfigs=linux,motif,x86 -Dzipargs=-y -Dbootclasspath=/builds/windows/jre/lib/rt.jar<br>
+  <br>
+</p>
