@@ -130,8 +130,33 @@
 <!-- (e.g., testing, posting, emailing, ...) -->
 <!-- ===================================================================== -->
 <target name="postBuild">
+	<antcall target="packageTestFramework" />	
+</target>
 
+<!-- ===================================================================== -->
+<!-- Helper targets -->
+<!-- ===================================================================== -->
+<target name="gatherLogs" if="logsAvailable">
+	<mkdir dir="${buildDirectory}/${buildLabel}/compilelogs" />
+	<antcall target="allElements">
+		<param name="target" value="gatherLogs" />
+	</antcall>
+
+	<unzip dest="${buildDirectory}/${buildLabel}/compilelogs" overwrite="true">
+		<fileset dir="${buildDirectory}/features/org.eclipse.sdk.tests">
+			<include name="*.log.zip" />
+		</fileset>
+	</unzip>
+</target>
+<target name="clean" unless="noclean">
+	<antcall target="allElements">
+		<param name="target" value="cleanElement" />
+	</antcall>
+</target>
+
+<target name="packageTestFramework">
 	<!--package automated test framework used in Eclipse builds-->
+
 	<property name="workingDirectory" value="${buildDirectory}/test.assembly" />
 
 	<!--unzip the junit tests-->
@@ -197,27 +222,6 @@
 	</exec>
 	
 	<delete file="${buildDirectory}/${buildLabel}/eclipse-junit-tests-${buildId}.zip"  />
-</target>
-
-<!-- ===================================================================== -->
-<!-- Helper targets -->
-<!-- ===================================================================== -->
-<target name="gatherLogs" if="logsAvailable">
-	<mkdir dir="${buildDirectory}/${buildLabel}/compilelogs" />
-	<antcall target="allElements">
-		<param name="target" value="gatherLogs" />
-	</antcall>
-
-	<unzip dest="${buildDirectory}/${buildLabel}/compilelogs" overwrite="true">
-		<fileset dir="${buildDirectory}/features/org.eclipse.sdk.tests">
-			<include name="*.log.zip" />
-		</fileset>
-	</unzip>
-</target>
-<target name="clean" unless="noclean">
-	<antcall target="allElements">
-		<param name="target" value="cleanElement" />
-	</antcall>
 </target>
 
 <!-- ===================================================================== -->
