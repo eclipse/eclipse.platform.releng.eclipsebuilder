@@ -70,6 +70,16 @@
 <!-- Steps to do before fetching the build elements -->
 <!-- ===================================================================== -->
 <target name="preFetch">
+	<!--create a dummy fetch script-->
+	<echo file="${buildDirectory}/fetch_org.eclipse.jdt.source.xml" append="true">
+		&lt;project default="none" &gt;
+	</echo>
+	<echo file="${buildDirectory}/fetch_org.eclipse.jdt.source.xml" append="true">
+		&lt;target name="none" /&gt;
+	</echo>
+	<echo file="${buildDirectory}/fetch_org.eclipse.jdt.source.xml" append="true">
+		&lt;/project&gt;
+	</echo>
 </target>
 
 <!-- ===================================================================== -->
