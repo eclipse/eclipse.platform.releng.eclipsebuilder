@@ -20,6 +20,8 @@
 <target name="assemble.org.eclipse.jdt.cheetah05">
 	<!--property name="archiveName" value="eclipse-JDT-Cheetah-${buildId}.zip"/>
 	<ant antfile="${assembleScriptName}"/-->
+	<mkdir dir="${buildDirectory}/${buildLabel}/plugins" />
+	<mkdir dir="${buildDirectory}/${buildLabel}/features" />
 	<ant antfile="build.xml" dir="${buildDirectory}/features/org.eclipse.jdt.cheetah05">
 		<property name="plugin.destination" value="${buildDirectory}/${buildLabel}/plugins" />
 		<property name="feature.destination" value="${buildDirectory}/${buildLabel}/features" />
