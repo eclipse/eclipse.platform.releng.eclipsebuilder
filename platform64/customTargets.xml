@@ -76,6 +76,10 @@
 		<property name="type" value="plugin" />
 		<property name="id" value="org.eclipse.swt.tools" />
 	</ant>
+	<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.tools" target="build.jars">
+		<property name="type" value="plugin" />
+		<property name="id" value="org.eclipse.swt.win32" />
+	</ant>
 	<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="generateScript">
 		<property name="type" value="plugin" />
 		<property name="id" value="org.eclipse.swt.tools" />

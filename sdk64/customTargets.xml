@@ -106,6 +106,10 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	</ant>
 	<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.tools" target="build.jars">
 		<property name="type" value="plugin" />
+		<property name="id" value="org.eclipse.swt.win32" />
+	</ant>
+	<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.tools" target="build.jars">
+		<property name="type" value="plugin" />
 		<property name="id" value="org.eclipse.swt.tools" />
 	</ant>
 
