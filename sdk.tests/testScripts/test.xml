@@ -189,6 +189,13 @@
 		</antcall>
 	</target>
 
+
+	<target name="pdeui">
+       		<antcall target="runtests" >
+       			<param name="testPlugin" value="${org.eclipse.pde.ui.tests}" />
+			<param name="report" value="org.eclipse.pde.ui.tests" />
+       		</antcall>
+ 	</target>
 	
 	<target name="swt" description="Runs the org.eclipse.swt.tests test.xml">
        		<antcall target="runtests" >
@@ -265,6 +272,7 @@
 
 	<target name="all">
 		<antcall target="relEng" />
+		<antcall target="pdeui" />
 		<antcall target="ant" />
 		<antcall target="core" />
 		<antcall target="coreexpressions" />
