@@ -48,7 +48,7 @@
 		<property name="bootclasspath" refid="default.bootclasspath" />
 
 		<!--this property required as of Eclipse 3.0 stream builds > 20031126 -->
-		<property name="buildingOSGi" value="true" />
+		<property name="buildingOSGi" value="false" />
 
 		<!--run the build for the specified component-->
 		<ant antfile="build.xml" dir="${pde.build.scripts}">
