@@ -286,7 +286,7 @@
 		<antcall target="teamcore" />
 		<antcall target="swt" />
 		<antcall target="antui" />
-		<antcall target="teamcvs" />
+		<!--antcall target="teamcvs" /-->
 		<antcall target="jdtcoreperf" />
 		<antcall target="jdtcorebuilder" />
 		<antcall target="jdtcorecompiler" />
