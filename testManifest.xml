@@ -3,8 +3,8 @@
 <zipTypes>
 	<zipType name="Eclipse SDK">
 		<platform id="SW" name="Windows 98/ME/2000/XP" fileName="eclipse-SDK-@build@-win32.zip"></platform>
-		<platform id="SLM" name="Linux (x86/Motif) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_2_1.html&quot;>Supported Versions&lt;/a>)" fileName="eclipse-SDK-@build@-linux-motif.zip"></platform>
-		<platform id="SLG2" name="Linux (x86/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_2_1.html&quot;>Supported Versions&lt;/a>)" fileName="eclipse-SDK-@build@-linux-gtk.zip"></platform>
+		<platform id="SLM" name="Linux (x86/Motif) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_2_2.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-SDK-@build@-linux-motif.zip"></platform>
+		<platform id="SLG2" name="Linux (x86/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_2_2.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-SDK-@build@-linux-gtk.zip"></platform>
 		<platform id="SSM" name="Solaris 8 (SPARC/Motif)" fileName="eclipse-SDK-@build@-solaris-motif.zip"></platform>
 		<platform id="SNP" name="QNX (x86/Photon)" fileName="eclipse-SDK-@build@-qnx-photon.zip"></platform>
 		<platform id="SAM" name="AIX (PPC/Motif)" fileName="eclipse-SDK-@build@-aix-motif.zip"></platform>
@@ -25,8 +25,8 @@
 
 	<zipType name="Platform Runtime Binary">
 		<platform id="PW" name="Windows 98/ME/2000/XP" fileName="eclipse-platform-@build@-win32.zip"></platform>
-		<platform id="PLM" name="Linux (x86/Motif) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_2_1.html&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-@build@-linux-motif.zip"></platform>
-		<platform id="PLG2" name="Linux (x86/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_2_1.html&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-@build@-linux-gtk.zip"></platform>
+		<platform id="PLM" name="Linux (x86/Motif) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_2_2.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-@build@-linux-motif.zip"></platform>
+		<platform id="PLG2" name="Linux (x86/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_2_2.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-@build@-linux-gtk.zip"></platform>
 		<platform id="PSM" name="Solaris 8 (SPARC/Motif)" fileName="eclipse-platform-@build@-solaris-motif.zip"></platform>
 		<platform id="PNP" name="QNX (x86/Photon)" fileName="eclipse-platform-@build@-qnx-photon.zip"></platform>
 		<platform id="PAM" name="AIX (PPC/Motif)" fileName="eclipse-platform-@build@-aix-motif.zip"></platform>
@@ -46,8 +46,8 @@
 		<platform id="SWTW" name="Windows 98/ME/2000/XP" fileName="swt-@build@-win32.zip"></platform>
 		<platform id="SWTWCE" name="Windows CE (ARM PocketPC) (&lt;a href=&quot;http://dev.eclipse.org/viewcvs/index.cgi/~checkout~/platform-swt-home/faq.html#pocketpclibrary&quot;>Instructions&lt;/a>)" fileName="swt-@build@-win32-ce-arm-ppc.zip"></platform>
 		<platform id="SWTWCEJ" name="Windows CE (ARM PocketPC, J2ME profile) (&lt;a href=&quot;http://dev.eclipse.org/viewcvs/index.cgi/~checkout~/platform-swt-home/faq.html#pocketpclibrary&quot;>Instructions&lt;/a>)" fileName="swt-2.1-win32-ce-arm-ppc-j2me.zip"></platform>
-		<platform id="SWTLM" name="Linux (x86/Motif) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_2_1.html&quot;>Supported Versions&lt;/a>)" fileName="swt-@build@-linux-motif.zip"></platform>
-		<platform id="SWTLG2" name="Linux (x86/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_2_1.html&quot;>Supported Versions&lt;/a>)" fileName="swt-@build@-linux-gtk.zip"></platform>
+		<platform id="SWTLM" name="Linux (x86/Motif) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_2_2.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="swt-@build@-linux-motif.zip"></platform>
+		<platform id="SWTLG2" name="Linux (x86/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_2_2.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="swt-@build@-linux-gtk.zip"></platform>
 		<platform id="SWTSM" name="Solaris 8 (SPARC/Motif)" fileName="swt-@build@-solaris-motif.zip"></platform>
 		<platform id="SWTNP" name="QNX (x86/Photon)" fileName="swt-@build@-qnx-photon.zip"></platform>
 		<platform id="SWTAM" name="AIX (PPC/Motif)" fileName="swt-@build@-aix-motif.zip"></platform>
