@@ -55,91 +55,91 @@
 		<!--list tests to run in parallel here-->
 		<parallel>
 			<antcall target="runtest">
-				<property name="target" value="ant" />
+				<param name="target" value="ant" />
 			</antcall>
 			<!--antcall target="runtest">
-				<property name="target" value="antui" />
+				<param name="target" value="antui" />
 			</antcall>
 			<antcall target="runtest">
-				<property name="target" value="compare" />
+				<param name="target" value="compare" />
 			</antcall>
 			<antcall target="runtest">
-				<property name="target" value="core" />
+				<param name="target" value="core" />
 			</antcall>
 			<antcall target="runtest">
-				<property name="target" value="coreexpressions" />
+				<param name="target" value="coreexpressions" />
 			</antcall>
 			<antcall target="runtest">
-				<property name="target" value="filebuffers" />
+				<param name="target" value="filebuffers" />
 			</antcall>
 			<antcall target="runtest">
-				<property name="target" value="help" />
+				<param name="target" value="help" />
 			</antcall>
 			<antcall target="runtest">
-				<property name="target" value="jdtcorebuilder" />
+				<param name="target" value="jdtcorebuilder" />
 			</antcall>
 			<antcall target="runtest">
-				<property name="target" value="jdtcorecompiler" />
+				<param name="target" value="jdtcorecompiler" />
 			</antcall>
 			<antcall target="runtest">
-				<property name="target" value="jdtcoremodel" />
+				<param name="target" value="jdtcoremodel" />
 			</antcall>
 			<antcall target="runtest">
-				<property name="target" value="jdtcoreperf" />
+				<param name="target" value="jdtcoreperf" />
 			</antcall>
 			<antcall target="runtest">
-				<property name="target" value="jdtdebug" />
+				<param name="target" value="jdtdebug" />
 			</antcall>
 			<antcall target="runtest">
-				<property name="target" value="jdttext" />
+				<param name="target" value="jdttext" />
 			</antcall>
 			<antcall target="runtest">
-				<property name="target" value="jdtui" />
+				<param name="target" value="jdtui" />
 			</antcall>
 			<antcall target="runtest">
-				<property name="target" value="jdtuirefactoring" />
+				<param name="target" value="jdtuirefactoring" />
 			</antcall>
 			<antcall target="runtest">
-				<property name="target" value="jface" />
+				<param name="target" value="jface" />
 			</antcall>
 			<antcall target="runtest">
-				<property name="target" value="ltkcorerefactoringtests" />
+				<param name="target" value="ltkcorerefactoringtests" />
 			</antcall>
 			<antcall target="runtest">
-				<property name="target" value="ltkuirefactoringtests" />
+				<param name="target" value="ltkuirefactoringtests" />
 			</antcall-->
 			<antcall target="runtest">
-				<property name="target" value="pdeui" />
+				<param name="target" value="pdeui" />
 			</antcall>
 			<!--antcall target="runtest">
-				<property name="target" value="relEng" />
+				<param name="target" value="relEng" />
 			</antcall>
 			<antcall target="runtest">
-				<property name="target" value="swt" />
+				<param name="target" value="swt" />
 			</antcall>
 			<antcall target="runtest">
-				<property name="target" value="teamcore" />
+				<param name="target" value="teamcore" />
 			</antcall>
 			<antcall target="runtest">
-				<property name="target" value="teamcvs" />
+				<param name="target" value="teamcvs" />
 			</antcall>
 			<antcall target="runtest">
-				<property name="target" value="text" />
+				<param name="target" value="text" />
 			</antcall>
 			<antcall target="runtest">
-				<property name="target" value="uieditors" />
+				<param name="target" value="uieditors" />
 			</antcall>
 			<antcall target="runtest">
-				<property name="target" value="ui" />
+				<param name="target" value="ui" />
 			</antcall>
 			<antcall target="runtest">
-				<property name="target" value="uircp" />
+				<param name="target" value="uircp" />
 			</antcall>
 			<antcall target="runtest">
-				<property name="target" value="uiworkbenchtexteditor" />
+				<param name="target" value="uiworkbenchtexteditor" />
 			</antcall-->
 			<antcall target="runtest">
-				<property name="target" value="update" />
+				<param name="target" value="update" />
 			</antcall>
 		</parallel>
 	</target>
