@@ -1,4 +1,4 @@
-@decho off
+@echo off
 cd %1
 REM test script
 
