@@ -163,6 +163,19 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 <!-- Steps to do after running the build.xmls for the elements being built. -->
 <!-- ===================================================================== -->
 <target name="postProcess">
+</target>
+
+<!-- ===================================================================== -->
+<!-- Steps to do after everything is built and assembled -->
+<!-- (e.g., testing, posting, emailing, ...) -->
+<!-- ===================================================================== -->
+<target name="postBuild">
+</target>
+
+<!-- ===================================================================== -->
+<!-- Helper targets -->
+<!-- ===================================================================== -->
+<target name="gatherLogs">
 	<mkdir dir="${buildDirectory}/${buildLabel}/compilelogs" />
 	<antcall target="allElements">
 		<param name="target" value="gatherLogs" />
@@ -178,12 +191,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<antcall target="allElements">
 		<param name="target" value="cleanElement" />
 	</antcall>
-</target>
-<!-- ===================================================================== -->
-<!-- Steps to do after everything is built and assembled -->
-<!-- (e.g., testing, posting, emailing, ...) -->
-<!-- ===================================================================== -->
-<target name="postBuild">
 </target>
 
 <!-- ===================================================================== -->

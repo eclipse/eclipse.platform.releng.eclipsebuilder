@@ -119,15 +119,6 @@
 <!-- Steps to do after running the build.xmls for the elements being built. -->
 <!-- ===================================================================== -->
 <target name="postProcess">
-	<mkdir dir="${buildDirectory}/${buildLabel}/compilelogs" />
-	<antcall target="allElements">
-		<param name="target" value="gatherLogs" />
-	</antcall>
-	<unzip dest="${buildDirectory}/${buildLabel}/compilelogs" overwrite="true">
-		<fileset dir="${buildDirectory}/features/org.eclipse.sdk.tests">
-			<include name="*.log.zip" />
-		</fileset>
-	</unzip>
 </target>
 
 <!-- ===================================================================== -->
@@ -136,11 +127,28 @@
 <!-- ===================================================================== -->
 <target name="postBuild">
 </target>
+
+<!-- ===================================================================== -->
+<!-- Helper targets -->
+<!-- ===================================================================== -->
+<target name="gatherLogs">
+	<mkdir dir="${buildDirectory}/${buildLabel}/compilelogs" />
+	<antcall target="allElements">
+		<param name="target" value="gatherLogs" />
+	</antcall>
+
+	<unzip dest="${buildDirectory}/${buildLabel}/compilelogs" overwrite="true">
+		<fileset dir="${buildDirectory}/features/org.eclipse.sdk.tests">
+			<include name="*.log.zip" />
+		</fileset>
+	</unzip>
+</target>
 <target name="clean">
 	<antcall target="allElements">
 		<param name="target" value="cleanElement" />
 	</antcall>
 </target>
+
 <!-- ===================================================================== -->
 <!-- Default target                                                        -->
 <!-- ===================================================================== -->

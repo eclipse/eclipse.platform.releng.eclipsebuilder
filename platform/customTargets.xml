@@ -138,11 +138,7 @@
 <target name="postAssemble">
 </target>
 
-<target name="clean">
-	<antcall target="allElements">
-		<param name="target" value="cleanElement" />
-	</antcall>
-</target>
+
 
 <!-- ===================================================================== -->
 <!-- Steps to do before running the build.xmls for the elements being built. -->
@@ -157,6 +153,19 @@
 <!-- Steps to do after running the build.xmls for the elements being built. -->
 <!-- ===================================================================== -->
 <target name="postProcess">
+</target>
+
+<!-- ===================================================================== -->
+<!-- Steps to do after everything is built and assembled -->
+<!-- (e.g., testing, posting, emailing, ...) -->
+<!-- ===================================================================== -->
+<target name="postBuild">
+</target>
+
+<!-- ===================================================================== -->
+<!-- Helper targets -->
+<!-- ===================================================================== -->
+<target name="gatherLogs">
 	<mkdir dir="${buildDirectory}/${buildLabel}/compilelogs" />
 	<antcall target="allElements">
 		<param name="target" value="gatherLogs" />
@@ -168,14 +177,11 @@
 		</fileset>
 	</unzip>
 </target>
-
-<!-- ===================================================================== -->
-<!-- Steps to do after everything is built and assembled -->
-<!-- (e.g., testing, posting, emailing, ...) -->
-<!-- ===================================================================== -->
-<target name="postBuild">
+<target name="clean">
+	<antcall target="allElements">
+		<param name="target" value="cleanElement" />
+	</antcall>
 </target>
-
 <!-- ===================================================================== -->
 <!-- Default target                                                        -->
 <!-- ===================================================================== -->
