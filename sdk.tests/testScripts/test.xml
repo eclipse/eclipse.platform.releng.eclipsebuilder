@@ -127,11 +127,6 @@
 			<param name="testPlugin" value="${org.eclipse.releng.tests}" />
 			<param name="report" value="org.eclipse.releng.tests" />
 		</antcall>
-
-		<move todir="${results}/chkpii" includeEmptyDirs="no" failonerror="false">
-		    <fileset dir="${results}/chkpii"/>
-		    <mapper type="glob" from="*" to="${platform}_*"/>
-  		</move>
 	</target>
 	
 	<target name="help" description="Runs the org.eclipse.help.tests test.xml">      
