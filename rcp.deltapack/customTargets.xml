@@ -26,7 +26,7 @@
 </target>
 
 <target name="assemble">
-	<property name="archiveName" value="eclipse-${buildId}-RCP-delta-pack.zip"/>
+	<property name="archiveName" value="eclipse-RCP$-{buildId}-delta-pack.zip"/>
     <ant target="zip.distribution" antfile="build.xml" dir="${buildDirectory}/features/org.eclipse.launchers"/>
     <ant antfile="package.xml" dir="${pde.build.scripts}" inheritAll="false">
       <property name="buildDirectory" value="${buildDirectory}"/>
