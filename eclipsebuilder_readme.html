@@ -1,0 +1,264 @@
+<html>
+<head>
+<title>Building Eclipse</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../../../default_style.css" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<h1><a name="eclipseinant"></a>Building Eclipse</h1>
+<h1><font size="+1">** work in progress **</font></h1>
+<h1>Table of Contents</h1>
+<ol>
+  <li><a href="#description">Description</a></li>
+  <li><a href="#systemrequirements">System Requirements</a></li>
+  <li><a href="#setup">Setup</a></li>
+  <li><a href="#running">Running the build</a></li>
+  <li><a href="#build_platforms">Supported build platforms</a></li>
+  <li><a href="#limitations">Known limitations</a></li>
+</ol>
+<h4><a name="description"></a>Description</h4>
+<p>This document describes how to run a build which produces all Eclipse products 
+  in a downloadable, runnable format. This process closely mirrors that used by 
+  Eclipse Release Engineering..</p>
+<p> The technology used is contained in the combined resources of two projects, 
+  org.eclipse.releng.basebuilder and org.eclipse.releng.eclipsebuilder. Both are 
+  available from dev.eclipse.org.</p>
+<p> The org.eclipse.releng.basebuilder project contains the minimal set of Eclipse 
+  resources required to run classes in PDE BUILD, JDT Core and Ant headless. PDE 
+  Build is used to generate Ant build scripts for plug-ins and features, the Eclipse 
+  AntRunner is used to run these generated scripts, and the JDT Core compiler 
+  is used to compile Java source and generating compile logs. This project also 
+  provides a generic set of Ant scripts that are executed in a specific order. 
+  Build customization information and resources are supplied through the Ant targets 
+  and properties in customTargets.xml in org.eclipse.releng.eclipsebuilder.</p>
+<p>&nbsp;</p>
+<p><a name="systemrequirements"></a><b>System Requirements</b></p>
+<ol>
+  <li><a href="http://java.sun.com/j2se/1.3/download.html">JDK 1.3</a> or higher</li>
+  <li><a href="http://ccvs.cvshome.org/servlets/ProjectDownloadList">CVS 1.10 
+    </a> or higher</li>
+  <li>Info-zip version 2.3 or higher</li>
+  <li>tar</li>
+  <li>&gt;1 Gigabyte free disk space. Currently, this process only builds ALL 
+    products for all eclipse platforms.</li>
+  <li>org.eclipse.releng.basebuilder exported to a directory from <a href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.releng.basebuilder/">dev.eclipse.org</a> 
+    (see setup instructions below). </li>
+  <li>org.eclipse.releng.eclipsebuilder exported to a directory from <a href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.releng.eclipsebuilder/">dev.eclipse.org</a> 
+    (see setup instructions below). </li>
+</ol>
+<p><a name="setup"></a><b>Initial Setup</b></p>
+<ol>
+  <li>Add the CVS executable and the JDK bin directories to your path.</li>
+  <li> Set the HOME environment variable to c:</li>
+  <li>(Windows 98) Increase the default environment space as specified <a href="http://support.microsoft.com/default.aspx?scid=kb;EN-US;q230205">here</a>.</li>
+  <li>Export the projects org.eclipse.releng.basebuilder and org.eclipse.releng.eclipsebuilder 
+    to an empty directory, &lt;builderDirectory&gt;: 
+    <blockquote> 
+      <p>cvs -d :pserver:anonymous@dev.eclipse.org:/home/eclipse export -r &lt;tag&gt; 
+        -d &lt;builderDirectory&gt; org.eclipse.releng.basebuilder</p>
+    </blockquote>
+    <blockquote> 
+      <p>cvs -d :pserver:anonymous@dev.eclipse.org:/home/eclipse export -r &lt;tag&gt; 
+        -d &lt;builderDirectory&gt; org.eclipse.releng.eclipsebuilder</p>
+      <p>The files from both projects must be in the same directory for path calculations. 
+        The HEAD stream contents for both projects should always work together.</p>
+      <p>&nbsp;</p>
+    </blockquote>
+  </li>
+</ol>
+<h4><a name="running"></a>Run the Build</h4>
+<blockquote>
+<p>execute the following command from the directory containing the build scripts:</p>
+  <p>java [vmargs] -cp startup.jar org.eclipse.core.launcher.Main -os &lt;os&gt; 
+    -ws &lt;ws&gt;-arch &lt;arch&gt; -noupdate -application org.eclipse.ant.core.antRunner 
+    -buildfile build.xml [$mail] -DmapVersionTag=&lt;$mapVersionTag&gt; -Dinstall=&lt;$buildDirectory&gt; 
+    -DbuildDirectory=&lt;$buildDirectory&gt; -DpostingDirectory=&lt;$postingDirectory&gt; 
+    -Drt=&lt;$bootclasspath&gt;-Dbootclasspath=&lt;$bootclasspath&gt; -DbuildType=&lt;$buildType&gt; 
+    -D$buildType=true -Dbuildid=&lt;$buildid&gt; -DbuildLabel=&lt;$buildLabel&gt; 
+    -Dtimestamp=&lt;$timestamp&gt; [-DcvsRoot=:ext:sdimitro@dev.eclipse.org:/home/eclipse] 
+    [$tag] -DJAVADOC14_HOME=&lt;$JAVADOC14_HOME&gt; &quot;-DzipArgs= &quot;</p>
+  <p>Required Ant Properties</p>
+  <table width="75%" border="1">
+    <tr> 
+      <td width="24%">Property Name</td>
+      <td width="76%">Description</td>
+    </tr>
+    <tr> 
+      <td width="24%">noMail</td>
+      <td width="76%">
+        <p>Setting this property will not send mail when a build starts. It is 
+          used in the conditional test when executing the &quot;mail&quot; target 
+          in customTargets.xml. This will require the additional property settings:</p>
+        <p>host: the name of the mail server</p>
+        <p>sender: the email address of the sender</p>
+        <p>recipients: a comma separated list of email addresses of recipients</p>
+        </td>
+    </tr>
+    <tr> 
+      <td width="24%">mapVersionTag</td>
+      <td width="76%">Set value to the tag of the org.eclipse.releng project to 
+        checkout from dev.eclipse.org.</td>
+    </tr>
+    <tr> 
+      <td width="24%">install</td>
+      <td width="76%">*Duplicate of buildDirectory property. Requirement for this 
+        property will be removed in the near future.</td>
+    </tr>
+    <tr> 
+      <td width="24%" height="22">buildDirectory</td>
+      <td width="76%" height="22">The directory in which to check out feature 
+        and plugin projects.</td>
+    </tr>
+    <tr> 
+      <td width="24%">postingDirectory</td>
+      <td width="76%">The directory to which the product of the build should be 
+        copied. The product of the build being a directory containing the zip 
+        files of the SDK and runtime products and web pages. If the build is not 
+        to be copied, set this value to be the same as that of buildLabel</td>
+    </tr>
+    <tr> 
+      <td width="24%">rt</td>
+      <td width="76%">*Duplicate of bootclasspath property. Requirement for this 
+        property will be removed in the near future.</td>
+    </tr>
+    <tr> 
+      <td width="24%">bootclasspath</td>
+      <td width="76%">Absolute path to the rt.jar against which to compile.</td>
+    </tr>
+    <tr> 
+      <td width="24%">buildType</td>
+      <td width="76%">The values I and N are typically used. I indicates that 
+        the build uses the tags are specified in the org.eclipse.releng map files. 
+        N indicates that tag entries in the map files should be replaced with 
+        &quot;HEAD&quot;. </td>
+    </tr>
+    <tr> 
+      <td width="24%">I</td>
+      <td width="76%">Ant property used for conditional testing. Also used as 
+        target name in publish.xml.</td>
+    </tr>
+    <tr> 
+      <td width="24%">N</td>
+      <td width="76%">Ant property used for conditional testing. Used as target 
+        name in publish.xml.</td>
+    </tr>
+    <tr> 
+      <td width="24%">buildid</td>
+      <td width="76%">Typically, &lt;buildType&gt;&lt;datestamp&gt;, i.e. I20021217, 
+        but can be set to any value.</td>
+    </tr>
+    <tr> 
+      <td width="24%">buildLabel</td>
+      <td width="76%">The name of the directory that will contain all the products 
+        of the build. Typically, &lt;buildType&gt;-&lt;buildid&gt;-&lt;timestamp&gt;, 
+        ie. I-I20021217-200212170800. This particular nomenclature is used internally 
+        for php scripts web, but can be set to any value.</td>
+    </tr>
+    <tr> 
+      <td width="24%">timestamp</td>
+      <td width="76%">In this context, the timestamp includes both date and time, 
+        i.e. 200212170800.</td>
+    </tr>
+    <tr> 
+      <td width="24%">cvsRoot</td>
+      <td width="76%">
+        <p>The CVS repository connection string to use to check out the org.eclipse.releng 
+          project. This has been used internally to check out the project with 
+          a set user who has commit rights to the project and to tag the project 
+          with the datestamp for integration builds.</p>
+        <p> Default value: :pserver:anonymous@dev.eclipse.org:/home/eclipse</p>
+      </td>
+    </tr>
+    <tr> 
+      <td width="24%">tag</td>
+      <td width="76%">Property set for conditional execution of the customTargets.xml::tagMapFiles 
+        target.</td>
+    </tr>
+    <tr> 
+      <td width="24%">JAVADOC14_HOME</td>
+      <td width="76%">Absolute path to the bin directory of an installed JDK, 
+        i.e. d:\jdk_1.3.1\bin</td>
+    </tr>
+    <tr> 
+      <td width="24%">zipArgs (windows only)</td>
+      <td width="76%"> 
+        <p>This property must be set and the value must be set to an empty string. 
+          ie. &quot;-DzipArgs= &quot;</p>
+        <p>This is required on Windows to prevent the creation of linux motif 
+          zip files to occur with the &quot;-y&quot; option being passed to the 
+          zip executable to preserve symbolic links. This need for this setting 
+          will be removed in the near future.</p>
+      </td>
+    </tr>
+  </table>
+  <p>&nbsp;</p>
+</blockquote>
+<h2><b><a name="build_platforms"></a></b><b>Supported Platforms</b> </h2>
+<p>Eclipse can be built on any of the following platforms. With some <a href="#limitations">limitations</a> 
+  any platform can be used to build Eclipse for any or all supported platforms.</p>
+<table width="40%" border="1">
+  <tr> 
+    <td width="48%">Operating System (OS)</td>
+    <td width="52%">Windowing System (WS)</td>
+  </tr>
+  <tr> 
+    <td width="48%">win32</td>
+    <td width="52%">win32</td>
+  </tr>
+  <tr> 
+    <td width="48%">linux</td>
+    <td width="52%">motif</td>
+  </tr>
+  <tr> 
+    <td width="48%">linux</td>
+    <td width="52%">gtk</td>
+  </tr>
+  <tr> 
+    <td width="48%">solaris</td>
+    <td width="52%">motif</td>
+  </tr>
+  <tr> 
+    <td width="48%">aix</td>
+    <td width="52%"> 
+      <p>motif</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="48%">hpux</td>
+    <td width="52%">motif</td>
+  </tr>
+  <tr> 
+    <td width="48%">qnx</td>
+    <td width="52%">photon</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<h2><a name="limitations"></a>Known Limitations </h2>
+<ol>
+  <li>This mechanism has only been tested on Redhat Linux 7.2 and Windows XP. 
+    Instructions may vary for other operating systems.</li>
+  <li>Building unix flavours of Eclipse on Windows will result in incorrect file 
+    permissions. The *.so, *.sl, and Eclipse executable files will not have execute 
+    permissions. In addition, linux-motif builds will not have soft links to libXm.so.2.1 
+    in the installation root directory. In these cases you would have to write 
+    an install or post install script to set permissions properly. (UNIX builds 
+    built on UNIX systems will set sufficient permissions and make the appropriate 
+    soft links).</li>
+  <li>Only Java source code is compiled. *.dll, *so, *sl and Eclipse executables 
+    are all checked out of dev.eclipse.org prebuilt in this build process.</li>
+  <li>When building Mac on windows, the following post-installation steps will 
+    be required: 
+    <ul>
+      <li>create a symbolic link as follows: cd to Eclipse.app/Contents/Resources</li>
+      <li> execute the following command: ln -s Java ../../..</li>
+      <li>cd to ../Contents/MacOS</li>
+      <li>chmod </li>
+    </ul>
+  </li>
+</ol>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp; </p>
+</body>
+</html>
