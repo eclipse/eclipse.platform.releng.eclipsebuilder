@@ -60,7 +60,7 @@ public class EclipseBuildListener implements BuildListener {
 		if (event.getException() != null && mailer != null) {
 			mailer.sendMessage(
 				" Build failed",
-				event.getException().getMessage());
+				event.getException().getMessage()+"\n\n"+buildProperties.getDownloadUrl()+"/"+buildProperties.getBuildLabel());
 		} 
 	}
 
