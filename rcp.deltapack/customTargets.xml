@@ -21,7 +21,7 @@
 
 <!-- POST STEPS TO ADD -->
 <target name="assemble.org.eclipse.launchers">
-		 <property name="feature.destination" value="${buildDirectory}/feature/org.eclipse.launchers"/>
+		 <property name="feature.destination" value="${buildDirectory}/features/org.eclipse.launchers"/>
 		 <antcall target="assemble" />
 </target>
 
