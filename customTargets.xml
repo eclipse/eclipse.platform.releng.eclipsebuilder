@@ -1164,7 +1164,6 @@
  		<property name="useNewFormat" value="true" />
 		<property name="isBuildTested" value="true" />
 		<property name="dropTokenList" value="%sdk%,%tests%,%example%,%runtime%,%jdt%,%teamextras%,%swt%" />
-		<property name="class" value="${class}" />
 	</ant>
 	
  	<!--  Insert ftp url for drop directory  -->
