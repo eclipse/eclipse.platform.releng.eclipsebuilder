@@ -171,21 +171,21 @@
 
 
 	<target name="all">
+		<antcall target="relEng" />
+		<antcall target="ant" />
+		<antcall target="core" />
+		<antcall target="help" />
+		<antcall target="update" />
+		<antcall target="teamcore" />
+		<antcall target="swt" />
+		<antcall target="antui" />
+		<antcall target="teamcvs" />
 		<antcall target="jdtcorebuilder" />
 		<antcall target="jdtcorecompiler" />
 		<antcall target="jdtcoremodel" />
-		<antcall target="jdtdebug" />
-		<antcall target="ant" />
-		<antcall target="antui" />
-		<antcall target="core" />
-		<antcall target="relEng" />
-		<antcall target="help" />
-		<antcall target="jdtui" />
-		<antcall target="swt" />
-		<antcall target="teamcvs" />
-		<antcall target="teamcore" />
 		<antcall target="ui" />
-		<antcall target="update" />
+		<antcall target="jdtdebug" />
+		<antcall target="jdtui" />
 		<antcall target="jdtuirefactoring" />
 		<antcall target="genHtml" />
 	</target>
