@@ -12,8 +12,8 @@
 
 	$remoteName = strtolower(gethostbyaddr($REMOTE_ADDR));
 	
-	if (strstr($remoteName, "oti.com")) {
-		$jre = "http://eclipsedrops.ott.oti.com/downloads/hubba/downloads/index.html";
+	if (strstr($remoteName, "oti.com") || strstr($remoteName, "ibm.com")) {
+		$jre = "http://home.ott.oti.com/teams/wswb/anon/out/vms/index.html";
 	} else {
 		$jre = "java-runtimes.html";
 	}
