@@ -50,6 +50,12 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<property name="archiveName" value="eclipse-SDK-${buildId}-linux-gtk-amd64.zip"/>
 	</ant>
 </target>
+
+<target name="assemble.org.eclipse.sdk.linux.gtk.ia64">
+	<ant antfile="${assembleScriptName}">
+		<property name="archiveName" value="eclipse-SDK-${buildId}-linux-gtk-ia64.zip"/>
+	</ant>
+</target>
 	
 <target name="assemble.org.eclipse.sdk.solaris.motif.sparc">
 	<ant antfile="${assembleScriptName}">
