@@ -296,7 +296,11 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			</copy>
 
 			<copy todir="${tempDir}/buildScripts" flatten="true" overwrite="true">
-				<fileset dir="${eclipse.build.scripts}/sdk/srcBuild" excludes="incl/**,fetch" />
+				<fileset dir="${eclipse.build.scripts}/sdk/srcBuild" excludes="incl/**,fetch,jdtcoresrc/**" />
+			</copy>
+			<mkdir name="${tempDir}/buildScripts/jdtcoresrc"/>
+			<copy todir="${tempDir}/buildScripts/jdtcoresrc" overwrite="true">
+				<fileset dir="${eclipse.build.scripts}/sdk/srcBuild/jdtcoresrc/*"/>
 			</copy>
 
 			<!--  set correct permissions on linux script -->
