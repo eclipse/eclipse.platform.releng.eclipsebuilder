@@ -54,7 +54,7 @@
 	<ant antfile="${test.xml}">
 		<property name="tester" value="${basedir}/win32-perf" />
 	</ant>
-	<poperty file="../win32-perf/testing.properties" />
+	<property file="../win32-perf/testing.properties" />
 	<exec dir="." executable="rcp">
 		<arg line="${testMachine}:${executionDir}/results/performance/* /builds/transfer/files/eclipseperf/${buildType}${timestamp}"/>
 	</exec>
