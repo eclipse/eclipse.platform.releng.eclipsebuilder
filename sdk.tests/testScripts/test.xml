@@ -303,7 +303,11 @@
 	
 
 	<target name="genHtml" description="Generates HTML results with provided JUNIT.XSL provided">
-		<style style="JUNIT.XSL" basedir="${results}/xml" destdir="${results}/html" />
+		<condition property="junit.xsl" value="JUNIT_perf.XSL">
+			<equals arg1="${test.target}" arg2="performance" />
+		</condition>
+		<property name="junit.xsl" value="JUNIT.XSL" />
+		<style style="${junit.xsl}" basedir="${results}/xml" destdir="${results}/html" />
 	</target>
 
 </project>
