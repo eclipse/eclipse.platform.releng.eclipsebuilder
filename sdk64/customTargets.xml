@@ -74,8 +74,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 <!-- Steps to do after setup but before starting the build proper -->
 <!-- ===================================================================== -->
 <target name="postSetup" >
-	<!--HACK for bug in pde 53934-->
-	<delete dir="${buildDirectory}/plugins/org.eclipse.swt.gkt64" />
 	<!--fetch the additional pieces to build swt gtk64-->
 	<property name="featureOnly" value="false"/>
 	<property name="featureAndPlugins" value="true"/>
@@ -84,10 +82,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
 		<property name="type" value="plugin" />
 		<property name="id" value="org.eclipse.swt.tools" />
-	</ant>
-	<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
-		<property name="type" value="fragment" />
-		<property name="id" value="org.eclipse.swt.gtk64" />
 	</ant>
 	<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="generateScript">
 		<property name="type" value="plugin" />
