@@ -46,7 +46,7 @@
 		<delete dir="${install}" />
 		<mkdir dir="${install}" />
 		<exec dir="${install}" executable="tar">
-			<arg line="-xvzf ${currentDir}/eclipse-SDK-*.tar.gz"/>
+			<arg line="-xzf ${currentDir}/eclipse-SDK-*.tar.gz"/>
 	    </exec>
 	    <exec dir="." executable="unzip">
 			<arg line="-o -qq eclipse-junit-tests-*.zip -d ${install}"/>
