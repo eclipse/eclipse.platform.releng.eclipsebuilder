@@ -164,8 +164,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 <!-- Steps to do after the fetch -->
 <!-- ===================================================================== -->
 <target name="postFetch">
-	<!--examples needed to build doc.isv plug-ins-->
-	<antcall target="getSdkExamplesPlugins" />
 	<ant antfile="${genericTargets}" target="fetchElement">
 		<property name="type" value="feature" />
 		<property name="id" value="org.eclipse.launchers" />
