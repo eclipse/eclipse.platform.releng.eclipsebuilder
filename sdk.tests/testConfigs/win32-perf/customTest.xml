@@ -21,6 +21,17 @@
 		<exec dir="." executable="${copyClient}">
 			<arg line="-r ${extraBinariesDir} ${testMachine}:${testDir}" />
 		</exec>
+		
+		<replace dir="${startupFiles}" value="${executionDir}\\test-eclipse\\eclipse" token="$eclipse-home$">
+			<include name="**/setCommon.bat,apt.properties" />
+		</replace>
+
+		
+		<!--copy in the extra files needed to run startup tests-->		
+		<exec dir="." executable="${copyClient}">
+			<arg line="-r ${startupFiles} ${testMachine}:${executionDir}" />
+		</exec>
+
 	</target>
 	
 	<target name="installVm">
