@@ -127,13 +127,17 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 <!-- Steps to do after setup but before starting the build proper -->
 <!-- ===================================================================== -->
 <target name="postSetup" >
-<!--fetch the additional pieces to build swt gtk64-->
+<!--fetch projects required to build swt gtk64-->
 	<property name="featureOnly" value="false"/>
 	<property name="featureAndPlugins" value="true"/>
 	<property name="featuresRecursively" value="false"/>
 	<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
 		<property name="type" value="fragment" />
 		<property name="id" value="org.eclipse.swt.gtk64" />
+	</ant>
+	<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
+		<property name="type" value="fragment" />
+		<property name="id" value="org.eclipse.swt.win32" />
 	</ant>
 </target>
 
