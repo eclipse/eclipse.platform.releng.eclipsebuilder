@@ -119,6 +119,9 @@
 <!-- Steps to do after running the build.xmls for the elements being built. -->
 <!-- ===================================================================== -->
 <target name="postProcess">
+	<condition property="logsAvailable">
+		<istrue value="${javacVerbose}"/> 
+	</condition>
 	<antcall target="gatherLogs" />
 </target>
 
@@ -127,12 +130,75 @@
 <!-- (e.g., testing, posting, emailing, ...) -->
 <!-- ===================================================================== -->
 <target name="postBuild">
+
+	<!--package automated test framework-->
+	<property name="workingDirectory" value="${buildDirectory}/test.assembly" />
+
+	<!--unzip the junit tests-->
+	<exec dir="${buildDirectory}/${buildLabel}" executable="unzip">
+		<arg line="-o -qq eclipse*junit*.zip -d ${workingDirectory}" />
+	</exec>
+	
+	<!-- create top level testing directory and test scripts-->    
+    <mkdir dir="${workingDirectory}/eclipse-testing" />
+	
+	<!--compile the tool used to generate the test.properties file then run it-->
+    <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+    
+    <!--eclipse.home is relative to the scripts directory in org.eclipse.pde.build-->
+    <property name="eclipse.home" value="../../.." />
+    <javac verbose="true" failonerror="true" srcdir="${builderDirectory}/tools" destdir="${builderDirectory}/tools" classpath="${eclipse.home}/plugins/org.apache.xerces_4.0.13/xercesImpl.jar:${eclipse.home}/plugins/org.apache.xerces_4.0.13/xmlParserAPIs.jar"/>
+   		
+    <!--generate the test.properties file containing the directory names of the test plugins-->
+    <java classname="TestVersionTracker" >
+         <arg line="${workingDirectory}/eclipse/features/org.eclipse.sdk.tests_3.0.0/feature.xml  ${buildDirectory} ${workingDirectory}/eclipse-testing/test.properties" /> 
+         <classpath>
+            	<pathelement path="${eclipse.home}/plugins/org.apache.xerces_4.0.13/xercesImpl.jar:${eclipse.home}/plugins/org.apache.xerces_4.0.13/xmlParserAPIs.jar:${builderDirectory}/tools" />
+         </classpath>
+    </java>
+
+	<property file="${workingDirectory}/eclipse-testing/test.properties" />
+	<!-- Remove the plugin version number appended to the org.eclipse.test plugin directory.
+   	     This is so that contributors of test.xml's do not have to update their paths to 
+   	     library.xml in org.eclipse.test whenever its version is updated.
+   	 -->
+   	<move todir="${workingDirectory}/eclipse/plugins/org.eclipse.test">
+    		<fileset dir="${workingDirectory}/eclipse/plugins/${org.eclipse.test}" />
+  	</move>
+  	
+  	<!--the Ant move task leaves behind an empty directory-->
+  	<delete dir="${workingDirectory}/eclipse/plugins/${org.eclipse.test}" includeEmptyDirs="true" />
+	
+ 	<!-- Create zip file containing built JUnit plugin tests -->
+	<exec dir="${workingDirectory}" executable="zip">
+			<arg line="-r -q eclipse-junit-tests-${buildId}.zip eclipse"/>
+	</exec>	
+ 
+ 
+     
+	<delete dir="${workingDirectory}/eclipse" includeEmptyDirs="true" />
+ 	
+    <copy todir="${workingDirectory}/eclipse-testing">
+     	<fileset dir="${buildDirectory}/plugins/org.eclipse.test" includes="readme.html,testframework.html,JUNIT.XSL,runtests*,test.xml" />
+    </copy>
+   
+    <move file="${workingDirectory}/eclipse-junit-tests-${buildId}.zip" todir="${workingDirectory}/eclipse-testing"/>
+
+	<!--set execute permission on shell script-->
+	<chmod file="${workingDirectory}/eclipse-testing/runtests" perm="755"/>
+	
+	<exec dir="${workingDirectory}" executable="zip">
+		<arg line="-r -q ${buildDirectory}/${buildLabel}/eclipse-Automated-Tests-${buildId}.zip eclipse-testing"/>
+	</exec>
+	
+	<delete file="${buildDirectory}/${buildLabel}/eclipse-junit-tests-${buildId}.zip"  />
+
 </target>
 
 <!-- ===================================================================== -->
 <!-- Helper targets -->
 <!-- ===================================================================== -->
-<target name="gatherLogs">
+<target name="gatherLogs" if="logsAvailable">
 	<mkdir dir="${buildDirectory}/${buildLabel}/compilelogs" />
 	<antcall target="allElements">
 		<param name="target" value="gatherLogs" />
