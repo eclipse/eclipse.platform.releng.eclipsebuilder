@@ -475,7 +475,6 @@
 		<property name="launcherFilesDir" value="macosx" />
 		<property name="workingDirectory" value="${basedir}/temp/eclipse" />
 		<property name="zipRootDir" value="${basedir}/temp" />
-		<property name="preCleanTarget" value="macosxDeleteSymbolicLink" />
 	</ant>
 	
 	<ant antfile="assemble.xml" target="${target}" >
@@ -643,7 +642,6 @@
 		<property name="workingDirectory" value="${basedir}/temp/eclipse" />
 		<property name="launcherFilesDir" value="macosx" />
 		<property name="zipRootDir" value="${basedir}/temp" />
-		<property name="preCleanTarget" value="macosxDeleteSymbolicLink" />
 	</ant>
 
 	<ant antfile="assemble.xml" target="${target}" >
