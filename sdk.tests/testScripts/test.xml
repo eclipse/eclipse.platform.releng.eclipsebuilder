@@ -15,16 +15,22 @@
 	<!-- The root of the eclipse installation -->
 	<property name="eclipse-home" value="${install}/eclipse" />
 
-	<!-- The path to libary.xml -->
-	<!--property name="library-file" value="${eclipse-home}/plugins/${org.eclipse.test}/library.xml" /-->
-
 	<!-- The directory that will contain the xml and html results from the tests that are run -->
  	<property name="results" value="${basedir}/results" />
-
-	<!--override the value of this property with performance if the tests run on performance machine-->
-	<property name="test.target" value="junit" />
-
-	<target name="setup" if="clean" description="Reinstall the test Eclipse installation if specified by user">
+	
+	<target name="setup" unless="clean">
+		<condition property="tar.gz">
+			<not>
+   				<equals arg1="${os}" arg2="win32" />
+			</not>
+		</condition>
+		<antcall target="setup-zip" />
+		<antcall target="setup-tar.gz" />
+		<antcall target="configureTeamTest" />
+	</target>
+	
+	<!--use zip if not testing on Linux-->
+	<target name="setup-zip" unless="tar.gz" description="Reinstall the test Eclipse installation if specified by user">
 		<delete dir="${install}" />
 		<mkdir dir="${install}" />
 		<exec dir="." executable="unzip">
@@ -33,15 +39,28 @@
 	    <exec dir="." executable="unzip">
 			<arg line="-o -qq eclipse-junit-tests-*.zip -d ${install}"/>
     	</exec>
-		
+  	</target>
+	<!--use tar if testing on Linux-->
+	<target name="setup-tar.gz" if="tar.gz" description="Reinstall the test Eclipse installation if specified by user">
+		<property name="currentDir" value="${basedir}"/>
+		<delete dir="${install}" />
+		<mkdir dir="${install}" />
+		<exec dir="${install}" executable="tar">
+			<arg line="-xvzf ${currentDir}/eclipse-SDK-*.tar.gz"/>
+	    </exec>
+	    <exec dir="." executable="unzip">
+			<arg line="-o -qq eclipse-junit-tests-*.zip -d ${install}"/>
+    	</exec>	
+  	</target>
+
+	<target name="configureTeamTest">
 		<!-- Fill in cvs repository information -->
 		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@user@" value="@cvs_user@"/>
 		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@password@" value="@cvs_password@"/>
 		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@host@" value="@cvs_host@"/>
 		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@root@" value="@cvs_root@"/>
+	</target>
 	
-  	</target>
-
 	<target name="junit" depends="setup">
 		<ant antfile="${eclipse-home}/plugins/${testPlugin}/test.xml" dir="${eclipse-home}" />
 		<copy file="${eclipse-home}/${report}.xml" tofile="${results}/xml/${report}_${platform}.xml" failonerror="false" />
@@ -59,6 +78,9 @@
 		<condition property="performance.target.present" value="true">
 			<isset property="${testPlugin}.has.performance.target"/>
 		</condition>
+		
+		<!--override the value of this property with performance if the tests run on performance machine-->
+		<property name="test.target" value="junit" />
 		<antcall target="${test.target}"/>
 	</target>
 
