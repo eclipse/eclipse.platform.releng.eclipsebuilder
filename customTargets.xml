@@ -17,7 +17,7 @@
 <property name="org.eclipse.test.version" value="2.1.0" />
 <property name="org.eclipse.sdk.tests.version" value="2.1.0" />
 <property name="org.eclipse.team.extras.version" value="2.1.0" />
-<property name="org.eclipse.platform.version" value="2.1.0" />
+<property name="org.eclipse.platform.version" value="2.1.1" />
 
 
 <!-- ===================================================================== -->
