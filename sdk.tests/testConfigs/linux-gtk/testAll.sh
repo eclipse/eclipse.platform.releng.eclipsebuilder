@@ -2,6 +2,7 @@
 
 #environment variables
 PATH=.:/bin:/usr/bin:/usr/bin/X11:/usr/local/bin:/usr/X11R6/bin:`pwd`/../linux;export PATH
+xhost +$HOSTNAME
 LD_ASSUME_KERNEL=2.2.5
 LD_LIBRARY_PATH=.
 USERNAME=`whoami`
