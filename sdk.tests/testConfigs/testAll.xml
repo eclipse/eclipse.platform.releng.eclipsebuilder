@@ -107,11 +107,11 @@
 			</antcall>
 			<antcall target="runtest">
 				<property name="target" value="ltkuirefactoringtests" />
-			</antcall>
+			</antcall-->
 			<antcall target="runtest">
 				<property name="target" value="pdeui" />
 			</antcall>
-			<antcall target="runtest">
+			<!--antcall target="runtest">
 				<property name="target" value="relEng" />
 			</antcall>
 			<antcall target="runtest">
