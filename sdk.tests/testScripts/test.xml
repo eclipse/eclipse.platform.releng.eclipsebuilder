@@ -275,7 +275,7 @@
 
 
 	<target name="all">
-		<antcall target="relEng" />
+		<!--antcall target="relEng" />
 		<antcall target="pdeui" />
 		<antcall target="ant" />
 		<antcall target="compare" />
@@ -293,7 +293,7 @@
 		<antcall target="jdtcoremodel" />
 		<antcall target="ui" />
 		<antcall target="uieditors" />
-		<antcall target="uiworkbenchtexteditor" />
+		<antcall target="uiworkbenchtexteditor" /-->
 		<antcall target="uircp" />
 		<antcall target="jdtdebug" />
 		<antcall target="jdtui" />
