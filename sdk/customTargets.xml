@@ -125,7 +125,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<echo file="${mapTag.properties}">
 		lastMapTag=${buildId}
 	</echo>
-	<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag v${timestamp}" />
+	<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag ${buildId}" />
 </target>
 
 <!-- ===================================================================== -->
