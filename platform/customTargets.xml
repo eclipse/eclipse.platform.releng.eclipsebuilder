@@ -283,13 +283,14 @@
 			</or>
 		</condition>
 
-		<!-- unzip swt zips -->
+		<!-- HACK create then unzip swt zips -->
+		<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.${wsType}" target="build.sources" />
 		<unzip  dest="${swtlibs}">
-			<fileset dir="${buildDirectory}/plugins/org.eclipse.platform.source.${os}.${ws}.${arch}/src/">
-				<include name ="org.eclipse.swt.${wsType}_*/ws/${ws}/**/*.zip"/>
+			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.${wsType}">
+				<include name ="**/*.zip"/>
 			</fileset>
 		</unzip>
-		<exec dir="${swtlibs}/" executable="sh" failonerror="false">
+		<exec dir="${swtlibs}" executable="sh" failonerror="false">
 			<arg line="build.sh"/>
 		</exec>
 		<property name="swtdir" value="${buildDirectory}/plugins/org.eclipse.swt.${wsType}/os/${os}/${arch}"/>
