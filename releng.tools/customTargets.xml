@@ -1,6 +1,8 @@
 <project name="Build specific targets and properties" default="noDefault" basedir=".">
 
-<!-- ===================================================================== -->
+<property name="postingDirectory" value="${buildDirectory}" />
+
+	<!-- ===================================================================== -->
 <!-- Run a given ${target} on all elements being built -->
 <!-- ===================================================================== -->
 <target name="allElements">
@@ -125,7 +127,7 @@
 <!-- Helper targets -->
 <!-- ===================================================================== -->
 <target name="gatherLogs" if="logsAvailable">
-	<property name="destination.temp.folder" value="${buildDirectory}/${buildLabel}/compilelogs/plugins" />
+	<property name="destination.temp.folder" value="${postingDirectory}/${buildLabel}/compilelogs/plugins" />
 	<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.releng.tools" target="gather.logs" />
 </target>
 <target name="clean" unless="noclean">

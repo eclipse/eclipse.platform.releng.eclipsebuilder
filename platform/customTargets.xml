@@ -57,7 +57,7 @@
 
 <target name="assemble.org.eclipse.platform.hpux.motif.PA_RISC">
 	<property name="archiveName" value="eclipse-platform-${buildId}-hpux-motif.zip"/>
-	<ant antfile="${assembleScriptName}"/>
+	<antcall target="assemble" />
 </target>
 
 <target name="assemble.org.eclipse.platform.macosx.carbon.ppc">
