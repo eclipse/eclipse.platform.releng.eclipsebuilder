@@ -22,7 +22,7 @@
 	<property name="testMachine" value="${0}" />
 	
 	<ant antfile="${test.xml}">
-		<property name="tester" value="${basedir}/linux-gtk" />
+		<property name="tester" value="${basedir}/rhelws3-linux-gtk" />
 	</ant>
 	
 	<delete file="${markerContainer}/${markerName}.marker" />
