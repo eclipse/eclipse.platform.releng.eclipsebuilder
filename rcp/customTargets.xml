@@ -26,43 +26,43 @@
 </target>
 
 <target name="assemble.org.eclipse.rcp.linux.motif.x86">
-	<property name="archiveName" value="eclipse-RCP-${buildId}-linux-motif.zip"/>
+	<property name="archiveName" value="eclipse-RCP-${buildId}-linux-motif.tar.gz"/>
 	<antcall target="assemble" />
 </target>
 
 <target name="assemble.org.eclipse.rcp.linux.gtk.x86">
-	<property name="archiveName" value="eclipse-RCP-${buildId}-linux-gtk.zip"/>
+	<property name="archiveName" value="eclipse-RCP-${buildId}-linux-gtk.tar.gz"/>
 	<antcall target="assemble" />
 </target>
 
 <target name="assemble.org.eclipse.rcp.linux.gtk.amd64">
-	<property name="archiveName" value="eclipse-RCP-${buildId}-linux-gtk-amd64.zip"/>
+	<property name="archiveName" value="eclipse-RCP-${buildId}-linux-gtk-amd64.tar.gz"/>
 	<antcall target="assemble" />
 </target>	
 
 <target name="assemble.org.eclipse.rcp.solaris.motif.sparc">
-	<property name="archiveName" value="eclipse-RCP-${buildId}-solaris-motif.zip"/>
+	<property name="archiveName" value="eclipse-RCP-${buildId}-solaris-motif.tar.gz"/>
 	<antcall target="assemble" />
 </target>
 
 <target name="assemble.org.eclipse.rcp.solaris.gtk.sparc">
-	<property name="archiveName" value="eclipse-RCP-${buildId}-solaris-gtk.zip"/>
+	<property name="archiveName" value="eclipse-RCP-${buildId}-solaris-gtk.tar.gz"/>
 	<antcall target="assemble" />
 </target>
 	
 <target name="assemble.org.eclipse.rcp.qnx.photon.x86">
-	<property name="archiveName" value="eclipse-RCP-${buildId}-qnx-photon.zip"/>
+	<property name="archiveName" value="eclipse-RCP-${buildId}-qnx-photon.tar.gz"/>
 	<antcall target="assemble" />
 </target>
 
 <target name="assemble.org.eclipse.rcp.aix.motif.ppc">
-	<property name="archiveName" value="eclipse-RCP-${buildId}-aix-motif.zip"/>
+	<property name="archiveName" value="eclipse-RCP-${buildId}-aix-motif.tar.gz"/>
 	<antcall target="assemble" />
 </target>
 
 
 <target name="assemble.org.eclipse.rcp.hpux.motif.PA_RISC">
-	<property name="archiveName" value="eclipse-RCP-${buildId}-hpux-motif.zip"/>
+	<property name="archiveName" value="eclipse-RCP-${buildId}-hpux-motif.tar.gz"/>
 	<antcall target="assemble" />
 </target>
 
