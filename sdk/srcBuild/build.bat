@@ -53,11 +53,6 @@ ECHO "usage %0 -os <osType> -ws <windowingSystem> -arch <architecture> [-bc boot
 goto end
 
 :run
-set ORIGCLASSPATH=%CLASSPATH
-ant -q -buildfile jdtcoresrc/compilejdtcorewithjavac.xml
-set CLASSPATH=jdtcoresrc/jdtcore.jar;%CLASSPATH
-ant -q -buildfile jdtcoresrc/compilejdtcore.xml
-set CLASSPATH=jdtcore.jar;%ORIGCLASSPATH
 ant -q -buildfile build.xml %target% -DinstallOs=%os% -DinstallWs=%ws% -DinstallArch=%arch% %compilelibs%  %bootclasspath%
 goto end
 
