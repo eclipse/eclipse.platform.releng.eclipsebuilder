@@ -1099,12 +1099,13 @@
 	</exec>
 </target>
 
-<target name="mail" unless="noMail" failonerror="false">
+<target name="mail" unless="noMail">
 <!-- helper target for sending email messages related to build. -->
 	<mail mailhost="${host}" from="${sender}"
       		tolist="${recipients}"
       		subject="[eclipse-build] ${buildid} (Timestamp: ${timestamp}): ${subject}"
       		message="${message}"
+      		failonerror="false"
 	/>
 </target>
 
