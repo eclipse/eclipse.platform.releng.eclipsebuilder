@@ -232,11 +232,10 @@
         &lt;cvs&gt; task </a>to check out org.eclipse.releng, the map file project 
         on dev.eclipse.org used in the build.</p>
       <p>Can be set to a specific tag to download the map files used for a previous 
-        integration build. Typically, these tags are in the form &quot;v&lt;date 
-        and timestamp of build&gt;&quot; for example &quot;v200307110800&quot; 
-        will checkout the map files used to run the integration at the specified 
-        date/time. This mechanism will only work with 3.0 + stream builds &gt; 
-        20030701.<br>
+        integration build. Typically, these tags are in the form &quot;v&lt;build 
+        id in About dialog&gt;&quot; for example &quot;v200307110800&quot; will 
+        checkout the map files used to run the integration at the specified date/time. 
+        These scripts work with 3.0 stream builds &gt; 20030701.<br>
       </p>
     </td>
   </tr>
@@ -318,11 +317,11 @@
   </tr>
 </table>
 <p><br>
-  The available configurations for a component is specified in its' build.properties. 
-  If no configurations are specified, all configurations listed in the build.properties 
-  for the component will be built.<br>
+  The component's build.properties lists the configurations that apply to the 
+  component. If no configurations are specified, all configurations listed in 
+  the build.properties for the component will be built. <br>
   <br>
-  For example, the build.properties for the Platform component contains the following:
+  For example, the build.properties for the Platform component contains the following: 
 <p>configs= \<br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;win32, win32, x86 &amp;\<br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;linux, gtk, x86 &amp; \<br>
@@ -334,7 +333,8 @@
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;macosx, carbon, ppc<br>
   <br>
   So by default, all eight configurations of the Eclipse Platform will be built 
-  if the &quot;configs&quot; property is not overwritten at the command line.<br>
+  if the &quot;configs&quot; property is not overwritten at the command line. 
+  <br>
   <br>
   Although it is possible to build for all configurations on one machine, building 
   Unix flavours of Eclipse on Windows will result in missing execute permissions 
