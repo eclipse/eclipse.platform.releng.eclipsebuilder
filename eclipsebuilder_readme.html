@@ -83,12 +83,22 @@
     project to invoke the Eclipse AntRunner on the Ant build scripts.</p>
   <p>To execute, use the following command from the directory containing the build 
     scripts specifying any of the optional parameters described below:</p>
+  <p>On Windows:</p>
   <p>buildEclipse [buildid name][buildLabel name][-buildType I|N|S|M][-bootclasspath 
     path][-mail] [-mapVersionTag tag][postingDirectory path]</p>
+  <p>On *nix:</p>
+  <p>buildEclipse [-os os][-ws ws][-arch arch][buildid name][buildLabel name][-buildType 
+    I|N|S|M][-bootclasspath path][-mail] [-mapVersionTag tag][postingDirectory 
+    path]</p>
   <table width="75%" border="1">
     <tr> 
       <td width="24%">Parameter</td>
       <td width="76%">Description</td>
+    </tr>
+    <tr>
+      <td width="24%">arch (on *nix only)</td>
+      <td width="76%">System architecture. See <a href="#build_platforms">Supported 
+        Build Platforms</a> for list of values. Default set to x86.</td>
     </tr>
     <tr> 
       <td width="24%">buildid</td>
@@ -107,14 +117,19 @@
       <td width="76%"> 
         <p>The buildType specification is used to identify the build as one of 
           the following:</p>
-        I = Integration<br>
-        N= Nightly<br>
-        M=Maintenance<br>
-        R=Release<br>
-        T=Test<br>
+        <p>I = Integration<br>
+          N= Nightly<br>
+          M= Maintenance<br>
+          R= Release</p>
+        <p>S= Stable<br>
+          T= Test<br>
+        </p>
         <p>Specifying 'N' as the buildType will retrieve the HEAD stream of all 
           plugins, fragments and features listed in the *.map files instead of 
-          using the specified tags.</p>
+          using the specified tags. Typically, I and N are used for building the 
+          latest development stream of Eclipse. M is used when a maintenance stream 
+          of Eclipse is being built. Integration builds are usually promoted to 
+          being Release or Stable builds.</p>
       </td>
     </tr>
     <tr> 
@@ -150,60 +165,80 @@
         prefix, i.e. v200203071430.</td>
     </tr>
     <tr> 
+      <td width="24%">os (on *nix only)</td>
+      <td width="76%">The operating system. See <a href="#build_platforms">Supported 
+        Build Platforms</a> for list of values. Default set to linux.</td>
+    </tr>
+    <tr> 
       <td width="24%">postingDirectory</td>
       <td width="76%">The directory to which the products of the build should 
         be copied. The product of the build is a directory, named with the buildLabel 
         (see description below), containing the zip files of the SDK and runtime 
         products and web pages. Default value set to current directory.</td>
     </tr>
+    <tr> 
+      <td width="24%">ws (on *nix only)</td>
+      <td width="76%">The windowing system. See <a href="#build_platforms">Supported 
+        Build Platforms</a> for list of values. Default set to motif.</td>
+    </tr>
   </table>
   <p>&nbsp;</p>
 </blockquote>
-<blockquote>
-  <p><b><a name="build_platforms"></a></b><b>Supported Build Platforms</b> </p>
-</blockquote>
+<p><b><font size="+1"><a name="build_platforms"></a></font></b><font size="+1"><b>Supported 
+  Build Platforms</b> </font></p>
 <p>Eclipse can be built on any of the following platforms. With some <a href="#limitations">limitations</a> 
   any platform can be used to build Eclipse for any or all supported platforms.</p>
-<table width="40%" border="1">
+<table width="58%" border="1">
   <tr> 
-    <td width="48%">Operating System (OS)</td>
-    <td width="52%">Windowing System (WS)</td>
+    <td width="48%">Operating System (os)</td>
+    <td width="52%">Windowing System (ws)</td>
+    <td width="52%">
+      Architecture(arch)
+      </td>
   </tr>
   <tr> 
     <td width="48%">win32</td>
     <td width="52%">win32</td>
+    <td width="52%">x86</td>
   </tr>
   <tr> 
     <td width="48%">linux</td>
     <td width="52%">motif</td>
+    <td width="52%">x86</td>
   </tr>
   <tr> 
     <td width="48%">linux</td>
     <td width="52%">gtk</td>
+    <td width="52%">x86</td>
   </tr>
   <tr> 
     <td width="48%">solaris</td>
     <td width="52%">motif</td>
+    <td width="52%">sparc</td>
   </tr>
   <tr> 
     <td width="48%">aix</td>
     <td width="52%"> 
       <p>motif</p>
     </td>
+    <td width="52%">ppc</td>
   </tr>
   <tr> 
     <td width="48%">hpux</td>
     <td width="52%">motif</td>
+    <td width="52%">PA_RISC</td>
   </tr>
   <tr> 
     <td width="48%">qnx</td>
     <td width="52%">photon</td>
+    <td width="52%">x86</td>
   </tr>
 </table>
 <p>&nbsp;</p>
 <h2><a name="limitations"></a>Known Limitations </h2>
 <ol>
-  <li>This mechanism has only been tested on Redhat Linux 7.2 and Windows 2000\XP.</li>
+  <li>This mechanism has only been tested on Redhat Linux 7.2 (Motif) and Windows 
+    2000\XP.</li>
   <li>Building unix flavours of Eclipse on Windows will result in incorrect file 
     permissions. The *.so, *.sl, and Eclipse executable files will not have execute 
     permissions. In addition, linux-motif builds will not have symbolic links 
@@ -225,10 +260,10 @@
   <li>Only Java source code is compiled. *.dll, *so, *sl and Eclipse executables 
     are all checked out of dev.eclipse.org prebuilt in this build process.</li>
   <li>This process builds all Eclipse runtime and SDK products requiring &gt; 
-    1 gig of hard disk space on the build machine. Future releases may contain 
-    targets which can be used for building specific products in isolation.</li>
-  <li>Dependencies on InfoZIP Zip and Unzip. Future releases should use Ant tasks 
-    for creating archives.</li>
+    1 gig of hard disk space on the build machine.</li>
+  <li> InfoZIP Zip and Unzip are used to preserve file permissions when extracting 
+    or creating zip files. The dependency on using these should be removed in 
+    future releases by using the Ant tar and zip/unzip tasks instead.</li>
 </ol>
 
 </body>

@@ -2,6 +2,10 @@
 
 #This script requires that contents of the org.eclipse.releng.basebuilder project are copied into this project
 
+os=linux
+ws=motif
+arch=x86
+
 #Ant property values
 
 #default value of the bootclasspath property used in Ant javac calls.  Value duplicated in rt property
@@ -39,7 +43,7 @@ timestamp=$builddate`date +%H%M`
 
 # Process command line arguments
 
-usage="usage: $0 [-mail][-buildid name][-buildLabel directory name][-mapVersionTag tag][-bootclasspath path] M|N|I|S|R"
+usage="usage: $0 [-os os][-ws ws][-arch arch][-mail][-buildid name][-buildLabel directory name][-mapVersionTag tag][-bootclasspath path] M|N|I|S|R"
 
 while [ $# -gt 0 ]
 do
@@ -54,6 +58,10 @@ do
 		-bootclasspath) bootclasspath="$2"; shift;;
 		-mapVersionTag) mapVersionTag="$2"; shift;;
 		-mail) mail="";;
+		-os) os="$2"; shift;;
+		-ws) ws="$2"; shift;;
+		-arch) arch="$2"; shift;;
+		-ws) ws="$2"; shift;;
 		-*)
 			echo >&2 $usage
 			exit 1;;
@@ -93,6 +101,14 @@ then
 	exit 1
 fi
 
+if [ "$os-$ws-$arch" = "linux-motif-x86" ] || [ "$os-$ws-$arch" = "linux-gtk-x86" ] || [ "$os-$ws-$arch" = "solaris-motif-sparc" ] || [ "$os-$ws" = "aix-motif-ppc" ] || [ "$os-$ws" = "hpux-motif-PA_RISC" ] || [ "$os-$ws" = "qnx-photon-x86" ]
+then
 #run the build
-java -cp startup.jar org.eclipse.core.launcher.Main -os linux -ws motif -arch x86 -noupdate -application org.eclipse.ant.core.antRunner -buildfile  build.xml $mail -DmapVersionTag=$mapVersionTag -Dinstall=$buildDirectory -DbuildDirectory=$buildDirectory -DpostingDirectory=$postingDirectory -Drt=$bootclasspath -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -Dbuildid=$buildid -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DJAVADOC14_HOME=$JAVADOC14_HOME
+java -cp startup.jar org.eclipse.core.launcher.Main -os $os -ws $ws -arch $arch -noupdate -application org.eclipse.ant.core.antRunner -buildfile  build.xml $mail -DmapVersionTag=$mapVersionTag -Dinstall=$buildDirectory -DbuildDirectory=$buildDirectory -DpostingDirectory=$postingDirectory -Drt=$bootclasspath -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -Dbuildid=$buildid -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DJAVADOC14_HOME=$JAVADOC14_HOME
+
+else
+	echo "The os, ws, arch combination of os=$os, ws=$ws, arch=$arch is not valid."
+	exit 1
+fi
+
 
