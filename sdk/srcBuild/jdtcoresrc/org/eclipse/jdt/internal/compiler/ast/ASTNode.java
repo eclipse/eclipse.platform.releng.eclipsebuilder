@@ -30,7 +30,7 @@ public abstract class ASTNode implements BaseTypes, CompilerModifiers, TypeConst
 	public final static int Bit5 = 0x10; 						// value for return (expression) | has all method bodies (unit) | supertype ref (type ref)
 	public final static int Bit6 = 0x20; 						// depth (name ref, msg) | only value required (binary expression) | ignore need cast check (cast expression)
 	public final static int Bit7 = 0x40; 						// depth (name ref, msg) | operator (operator) | need runtime checkcast (cast expression)
-	public final static int Bit8 = 0x80; 						// depth (name ref, msg) | operator (operator) 
+	public final static int Bit8 = 0x80; 						// depth (name ref, msg) | operator (operator) | unsafe cast (cast expression)
 	public final static int Bit9 = 0x100; 					// depth (name ref, msg) | operator (operator) | is local type (type decl)
 	public final static int Bit10= 0x200; 					// depth (name ref, msg) | operator (operator) | is anonymous type (type decl)
 	public final static int Bit11 = 0x400; 					// depth (name ref, msg) | operator (operator) | is member type (type decl)
@@ -94,9 +94,10 @@ public abstract class ASTNode implements BaseTypes, CompilerModifiers, TypeConst
 	public static final int OnlyValueRequiredMASK = Bit6; 
 
 	// for cast expressions
-	public static final int UnnecessaryCastMask = Bit15;
-	public static final int NeedRuntimeCheckCastMASK = Bit7;
+	public static final int UnnecessaryCastMASK = Bit15;
 	public static final int IgnoreNeedForCastCheckMASK = Bit6;
+	public static final int NeedRuntimeCheckCastMASK = Bit7;
+	public static final int UnsafeCastMask = Bit8;
 	
 	// for name references 
 	public static final int RestrictiveFlagMASK = Bit1|Bit2|Bit3;	
@@ -163,11 +164,17 @@ public abstract class ASTNode implements BaseTypes, CompilerModifiers, TypeConst
 	private static boolean checkInvocationArgument(BlockScope scope, Expression argument, TypeBinding parameterType, TypeBinding argumentType) {
 		argument.computeConversion(scope, parameterType, argumentType);
 
-		if (argumentType != NullBinding && parameterType.isWildcard() && ((WildcardBinding) parameterType).kind != Wildcard.SUPER)
-		    return true; // unsafeWildcardInvocation
-		if (argumentType != parameterType && argumentType.isRawType())
-	        if (parameterType.isBoundParameterizedType() || parameterType.isGenericType())
-				scope.problemReporter().unsafeRawConversion(argument, argumentType, parameterType);
+		if (argumentType != NullBinding && parameterType.isWildcard()) {
+			WildcardBinding wildcard = (WildcardBinding) parameterType;
+			if (wildcard.kind != Wildcard.SUPER && wildcard.otherBounds == null) // lub wildcards are tolerated
+		    	return true; // unsafeWildcardInvocation
+		}
+		if (argumentType != parameterType) {
+			if (argumentType.needsUncheckedConversion(parameterType)) {
+//			if (argumentType.isRawType() && (parameterType.isBoundParameterizedType() || parameterType.isGenericType())) {
+				scope.problemReporter().unsafeTypeConversion(argument, argumentType, parameterType);
+			}
+		}
 		return false;
 	}
 	public static void checkInvocationArguments(BlockScope scope, Expression receiver, TypeBinding receiverType, MethodBinding method, Expression[] arguments, TypeBinding[] argumentTypes, boolean argsContainCast, InvocationSite invocationSite) {
@@ -216,7 +223,7 @@ public abstract class ASTNode implements BaseTypes, CompilerModifiers, TypeConst
 		}
 		if (unsafeWildcardInvocation) {
 		    scope.problemReporter().wildcardInvocation((ASTNode)invocationSite, receiverType, method, argumentTypes);
-		} else if (!receiverType.isUnboundWildcard() && method.declaringClass.isRawType() && method.hasSubstitutedParameters()) {
+		} else if (!method.isStatic() && !receiverType.isUnboundWildcard() && method.declaringClass.isRawType() && method.hasSubstitutedParameters()) {
 		    scope.problemReporter().unsafeRawInvocation((ASTNode)invocationSite, method);
 		}
 	}
@@ -358,7 +365,7 @@ public abstract class ASTNode implements BaseTypes, CompilerModifiers, TypeConst
 	 * Resolve annotations, and check duplicates, answers combined tagBits 
 	 * for recognized standard annotations
 	 */
-	public void resolveAnnotations(BlockScope scope, Annotation[] annotations, Binding recipient) {
+	public static void resolveAnnotations(BlockScope scope, Annotation[] annotations, Binding recipient) {
 		if (recipient != null) {
 			switch (recipient.kind()) {
 				case Binding.PACKAGE :

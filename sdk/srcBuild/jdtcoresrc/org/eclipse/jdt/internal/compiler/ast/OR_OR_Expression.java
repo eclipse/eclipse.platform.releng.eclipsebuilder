@@ -153,7 +153,8 @@ public class OR_OR_Expression extends BinaryExpression {
 				}
 				if (trueLabel.hasForwardReferences()) {
 					if ((bits & ValueForReturnMASK) != 0) {
-						codeStream.ireturn();
+						codeStream.generateImplicitConversion(this.implicitConversion);
+						codeStream.generateReturnBytecode(this);
 						trueLabel.place();
 						codeStream.iconst_1();
 					} else {

@@ -134,7 +134,10 @@ public class FieldReference extends Reference implements InvocationSite {
 			if (originalBinding != this.binding) {
 			    // extra cast needed if method return type has type variable
 			    if ((originalBinding.type.tagBits & TagBits.HasTypeVariable) != 0 && runtimeTimeType.id != T_JavaLangObject) {
-			        this.genericCast = originalBinding.type.genericCast(scope.boxing(runtimeTimeType)); // runtimeType could be base type in boxing case
+			    	TypeBinding targetType = (!compileTimeType.isBaseType() && runtimeTimeType.isBaseType()) 
+			    		? compileTimeType  // unboxing: checkcast before conversion
+			    		: runtimeTimeType;
+			        this.genericCast = originalBinding.type.genericCast(targetType);
 			    }
 			}
 		} 	
@@ -152,10 +155,12 @@ public class FieldReference extends Reference implements InvocationSite {
 		Assignment assignment,
 		boolean valueRequired) {
 
+		int pc = codeStream.position;
 		receiver.generateCode(
 			currentScope,
 			codeStream,
 			!this.codegenBinding.isStatic());
+		codeStream.recordPositionsFrom(pc, this.sourceStart);
 		assignment.expression.generateCode(currentScope, codeStream, true);
 		fieldStore(
 			codeStream,
@@ -187,11 +192,26 @@ public class FieldReference extends Reference implements InvocationSite {
 			}
 		} else {
 			boolean isStatic = this.codegenBinding.isStatic();
-			receiver.generateCode(currentScope, codeStream, !isStatic);
-			if (valueRequired) {
-				if (!this.codegenBinding.isConstantValue()) {
+			if (this.codegenBinding.isConstantValue()) {
+				receiver.generateCode(currentScope, codeStream, !isStatic);
+				if (!isStatic){
+					codeStream.invokeObjectGetClass();
+					codeStream.pop();
+				}
+				if (valueRequired) {
+					codeStream.generateConstant(this.codegenBinding.constant(), implicitConversion);
+				}
+			} else {
+				receiver.generateCode(currentScope, codeStream, !isStatic);
+				if (valueRequired || currentScope.environment().options.complianceLevel >= ClassFileConstants.JDK1_4) {
 					if (this.codegenBinding.declaringClass == null) { // array length
 						codeStream.arraylength();
+						if (valueRequired) {
+							codeStream.generateImplicitConversion(implicitConversion);
+						} else {
+							// could occur if !valueRequired but compliance >= 1.4
+							codeStream.pop();
+						}
 					} else {
 						if (syntheticAccessors == null || syntheticAccessors[READ] == null) {
 							if (isStatic) {
@@ -202,20 +222,26 @@ public class FieldReference extends Reference implements InvocationSite {
 						} else {
 							codeStream.invokestatic(syntheticAccessors[READ]);
 						}
+						if (valueRequired) {
+							if (this.genericCast != null) codeStream.checkcast(this.genericCast);			
+							codeStream.generateImplicitConversion(implicitConversion);
+						} else {
+							// could occur if !valueRequired but compliance >= 1.4
+							switch (this.codegenBinding.type.id) {
+								case T_long :
+								case T_double :
+									codeStream.pop2();
+									break;
+								default :
+									codeStream.pop();
+							}
+						}
 					}
-					if (this.genericCast != null) codeStream.checkcast(this.genericCast);			
-					codeStream.generateImplicitConversion(implicitConversion);
 				} else {
-					if (!isStatic) {
+					if (!isStatic){
 						codeStream.invokeObjectGetClass(); // perform null check
 						codeStream.pop();
 					}
-					codeStream.generateConstant(this.codegenBinding.constant(), implicitConversion);
-				}
-			} else {
-				if (!isStatic){
-					codeStream.invokeObjectGetClass(); // perform null check
-					codeStream.pop();
 				}
 			}
 		}

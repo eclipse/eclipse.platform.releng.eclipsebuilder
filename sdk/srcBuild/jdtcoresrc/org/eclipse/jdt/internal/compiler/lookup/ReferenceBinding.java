@@ -25,6 +25,9 @@ null is NOT a valid value for a non-public field... it just means the field is n
 */
 
 abstract public class ReferenceBinding extends TypeBinding implements IDependent {
+	
+	public static ReferenceBinding LUB_GENERIC = new ReferenceBinding() { /* used for lub computation */};
+	
 	public char[][] compoundName;
 	public char[] sourceName;
 	public int modifiers;
@@ -77,11 +80,13 @@ public final boolean canBeSeenBy(ReferenceBinding receiverType, SourceTypeBindin
 
 		ReferenceBinding currentType = invocationType;
 		ReferenceBinding declaringClass = enclosingType(); // protected types always have an enclosing one
+		if (declaringClass == invocationType) return true;
+
+		ReferenceBinding declaringErasure = (ReferenceBinding) declaringClass.erasure();
 		if (declaringClass == null) return false; // could be null if incorrect top-level protected type
 		//int depth = 0;
 		do {
-			if (declaringClass == invocationType) return true;
-			if (declaringClass.isSuperclassOf(currentType)) return true;
+			if (currentType.findSuperTypeErasingTo(declaringErasure) != null) return true;
 			//depth++;
 			currentType = currentType.enclosingType();
 		} while (currentType != null);
@@ -191,6 +196,26 @@ public final boolean canBeSeenBy(Scope scope) {
 
 	// isDefault()
 	return invocationType.fPackage == fPackage;
+}
+public char[] computeGenericTypeSignature(TypeVariableBinding[] typeVariables) {
+    if (typeVariables == NoTypeVariables) {
+        return signature();
+    } else {
+	    char[] typeSig = signature();
+	    StringBuffer sig = new StringBuffer(10);
+	    for (int i = 0; i < typeSig.length-1; i++) { // copy all but trailing semicolon
+	    	sig.append(typeSig[i]);
+	    }
+	    sig.append('<');
+	    for (int i = 0, length = typeVariables.length; i < length; i++) {
+	        sig.append(typeVariables[i].genericTypeSignature());
+	    }
+	    sig.append(">;"); //$NON-NLS-1$
+		int sigLength = sig.length();
+		char[] result = new char[sigLength];
+		sig.getChars(0, sigLength, result, 0);
+		return result;
+    }
 }
 public void computeId() {
 	
@@ -386,12 +411,12 @@ public FieldBinding[] fields() {
  */
 public ReferenceBinding findSuperTypeErasingTo(int erasureId, boolean erasureIsClass) {
 
-    if (erasure().id == erasureId) return this;
+    if (this.id == erasureId || erasure().id == erasureId) return this;
     ReferenceBinding currentType = this;
     // iterate superclass to avoid recording interfaces if searched supertype is class
     if (erasureIsClass) {
 		while ((currentType = currentType.superclass()) != null) { 
-			if (currentType.erasure().id == erasureId) return currentType;
+			if (currentType.id == erasureId || currentType.erasure().id == erasureId) return currentType;
 		}    
 		return null;
     }
@@ -409,7 +434,7 @@ public ReferenceBinding findSuperTypeErasingTo(int erasureId, boolean erasureIsC
 	for (int i = 0; i <= lastPosition; i++) {
 		ReferenceBinding[] interfaces = interfacesToVisit[i];
 		for (int j = 0, length = interfaces.length; j < length; j++) {
-			if ((currentType = interfaces[j]).erasure().id == erasureId)
+			if ((currentType = interfaces[j]).id == erasureId || currentType.erasure().id == erasureId)
 				return currentType;
 
 			ReferenceBinding[] itsInterfaces = currentType.superInterfaces();
@@ -427,11 +452,11 @@ public ReferenceBinding findSuperTypeErasingTo(int erasureId, boolean erasureIsC
  */
 public ReferenceBinding findSuperTypeErasingTo(ReferenceBinding erasure) {
 
-    if (erasure() == erasure) return this;
+    if (this == erasure || erasure() == erasure) return this;
     ReferenceBinding currentType = this;
-    if (erasure.isClass()) {
+    if ((erasure.modifiers & AccInterface) == 0) {
 		while ((currentType = currentType.superclass()) != null) {
-			if (currentType.erasure() == erasure) return currentType;
+			if (currentType == erasure || currentType.erasure() == erasure) return currentType;
 		}
 		return null;
     }
@@ -449,7 +474,7 @@ public ReferenceBinding findSuperTypeErasingTo(ReferenceBinding erasure) {
 	for (int i = 0; i <= lastPosition; i++) {
 		ReferenceBinding[] interfaces = interfacesToVisit[i];
 		for (int j = 0, length = interfaces.length; j < length; j++) {
-			if ((currentType = interfaces[j]).erasure() == erasure)
+			if ((currentType = interfaces[j]) == erasure || currentType.erasure() == erasure)
 				return currentType;
 
 			ReferenceBinding[] itsInterfaces = currentType.superInterfaces();
@@ -466,6 +491,14 @@ public ReferenceBinding findSuperTypeErasingTo(ReferenceBinding erasure) {
 public final int getAccessFlags() {
 	return modifiers & AccJustFlag;
 }
+
+/**
+ * @see org.eclipse.jdt.internal.compiler.lookup.Binding#getAnnotationTagBits()
+ */
+public long getAnnotationTagBits() {
+	return this.tagBits;
+}
+
 public MethodBinding getExactConstructor(TypeBinding[] argumentTypes) {
 	return null;
 }
@@ -597,8 +630,10 @@ public boolean isHierarchyBeingConnected() {
 */
 public boolean isCompatibleWith(TypeBinding otherType) {
     
-	if (otherType == this)
+	if (otherType == this) {
+		if (isWildcard()) return false;
 		return true;
+	}
 	if (otherType.id == T_JavaLangObject)
 		return true;
 	if (!(otherType instanceof ReferenceBinding))
@@ -608,9 +643,9 @@ public boolean isCompatibleWith(TypeBinding otherType) {
 	if (otherReferenceType.isWildcard()) {
 		return false; // should have passed equivalence check above if wildcard
 	}
-	if (otherReferenceType.isInterface())
+	if ((otherReferenceType.modifiers & AccInterface) != 0)
 		return implementsInterface(otherReferenceType, true);
-	if (isInterface())  // Explicit conversion from an interface to a class is not allowed
+	if ((this.modifiers & AccInterface) != 0)  // Explicit conversion from an interface to a class is not allowed
 		return false;
 	return otherReferenceType.isSuperclassOf(this);
 }
@@ -696,25 +731,6 @@ public final boolean isViewedAsDeprecated() {
 }
 public ReferenceBinding[] memberTypes() {
 	return NoMemberTypes;
-}
-
-/**
- * Meant to be invoked on compatible types, to figure if unchecked conversion is necessary
- */
-public boolean needsUncheckedConversion(TypeBinding targetType) {
-	if (this == targetType) return false;
-	if (!this.isPartOfRawType()) return false;
-	if (!(targetType instanceof ReferenceBinding)) 
-		return false;
-	TypeBinding compatible = this.findSuperTypeErasingTo((ReferenceBinding)targetType.erasure());
-	if (compatible == null) 
-		return false;
-	do {
-		if (compatible.isRawType() && (targetType.isBoundParameterizedType() || targetType.isGenericType())) {
-			return true;
-		}
-	} while ((compatible = compatible.enclosingType()) != null && (targetType = targetType.enclosingType()) != null);
-	return false;
 }
 
 public MethodBinding[] methods() {

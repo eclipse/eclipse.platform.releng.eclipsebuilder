@@ -72,7 +72,7 @@ public boolean canBeInstantiated() {
  * Collect the substitutes into a map for certain type variables inside the receiver type
  * e.g.   Collection<T>.findSubstitute(T, Collection<List<X>>):   T --> List<X>
  */
-public void collectSubstitutes(TypeBinding otherType, Map substitutes) {
+public void collectSubstitutes(Scope scope, TypeBinding otherType, Map substitutes, int constraint) {
     // no substitute by default
 }
 /*
@@ -225,7 +225,7 @@ public boolean isPartOfRawType() {
 
 /**
  * Returns true if the two types are statically known to be different at compile-time,
- * e.g. a type variable is not probably known to be distinct from another type
+ * e.g. a type variable is not provably known to be distinct from another type
  */
 public boolean isProvablyDistinctFrom(TypeBinding otherType, int depth) {
 	if (this == otherType) return false;
@@ -330,6 +330,7 @@ public boolean isTypeArgumentContainedBy(TypeBinding otherArgument) {
 	}
 	if (otherArgument.isWildcard()) {
 		WildcardBinding otherWildcard = (WildcardBinding) otherArgument;
+		if (otherWildcard.otherBounds != null) return false; // not a true wildcard (intersection type)
 		switch(otherWildcard.kind) {
 			case Wildcard.EXTENDS:
 				return upperBound != null && upperBound.isCompatibleWith(otherWildcard.bound);
@@ -368,6 +369,25 @@ public boolean isWildcard() {
  * Meant to be invoked on compatible types, to figure if unchecked conversion is necessary
  */
 public boolean needsUncheckedConversion(TypeBinding targetType) {
+
+	if (this == targetType) return false;
+	targetType = targetType.leafComponentType();
+	if (!(targetType instanceof ReferenceBinding)) 
+		return false;
+
+	TypeBinding currentType = this.leafComponentType();
+	if (!(currentType instanceof ReferenceBinding))
+		return false;
+	
+	ReferenceBinding compatible = ((ReferenceBinding)currentType).findSuperTypeErasingTo((ReferenceBinding)targetType.erasure());
+	if (compatible == null) 
+		return false;
+	if (!compatible.isPartOfRawType()) return false;
+	do {
+		if (compatible.isRawType() && (targetType.isBoundParameterizedType() || targetType.isGenericType())) {
+			return true;
+		}
+	} while ((compatible = compatible.enclosingType()) != null && (targetType = targetType.enclosingType()) != null);
 	return false;
 }
 

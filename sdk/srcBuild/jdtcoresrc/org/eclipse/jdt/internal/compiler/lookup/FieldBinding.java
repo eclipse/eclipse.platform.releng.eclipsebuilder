@@ -11,7 +11,9 @@
 package org.eclipse.jdt.internal.compiler.lookup;
 
 import org.eclipse.jdt.core.compiler.CharOperation;
+import org.eclipse.jdt.internal.compiler.ast.ASTNode;
 import org.eclipse.jdt.internal.compiler.ast.FieldDeclaration;
+import org.eclipse.jdt.internal.compiler.ast.TypeDeclaration;
 import org.eclipse.jdt.internal.compiler.impl.Constant;
 
 public class FieldBinding extends VariableBinding {
@@ -80,8 +82,10 @@ public final boolean canBeSeenBy(TypeBinding receiverType, InvocationSite invoca
 		
 		ReferenceBinding currentType = invocationType;
 		int depth = 0;
+		ReferenceBinding receiverErasure = (ReferenceBinding)receiverType.erasure();
+		ReferenceBinding declaringErasure = (ReferenceBinding) declaringClass.erasure();
 		do {
-			if (declaringClass.isSuperclassOf(currentType)) {
+			if (currentType.findSuperTypeErasingTo(declaringErasure) != null) {
 				if (invocationSite.isSuperAccess()){
 					return true;
 				}
@@ -93,7 +97,7 @@ public final boolean canBeSeenBy(TypeBinding receiverType, InvocationSite invoca
 					if (depth > 0) invocationSite.setDepth(depth);
 					return true; // see 1FMEPDL - return invocationSite.isTypeAccess();
 				}
-				if (currentType == receiverType || currentType.isSuperclassOf((ReferenceBinding) receiverType)){
+				if (currentType == receiverErasure || receiverErasure.findSuperTypeErasingTo(currentType) != null){
 					if (depth > 0) invocationSite.setDepth(depth);
 					return true;
 				}
@@ -174,6 +178,21 @@ public char[] genericSignature() {
 
 public final int getAccessFlags() {
 	return modifiers & AccJustFlag;
+}
+
+/**
+ * Compute the tagbits for standard annotations. For source types, these could require
+ * lazily resolving corresponding annotation nodes, in case of forward references.
+ * @see org.eclipse.jdt.internal.compiler.lookup.Binding#getAnnotationTagBits()
+ */
+public long getAnnotationTagBits() {
+	FieldBinding originalField = this.original();
+	if ((originalField.tagBits & TagBits.AnnotationResolved) == 0 && originalField.declaringClass instanceof SourceTypeBinding) {
+		TypeDeclaration typeDecl = ((SourceTypeBinding)originalField.declaringClass).scope.referenceContext;
+		FieldDeclaration fieldDecl = typeDecl.declarationOf(originalField);
+		ASTNode.resolveAnnotations(isStatic() ? typeDecl.staticInitializerScope : typeDecl.initializerScope, fieldDecl.annotations, originalField);
+	}
+	return originalField.tagBits;
 }
 
 /* Answer true if the receiver has default visibility

@@ -162,7 +162,7 @@ public class QualifiedAllocationExpression extends AllocationExpression {
 		if (!flowInfo.isReachable()) return;
 		ReferenceBinding allocatedTypeErasure = (ReferenceBinding) binding.declaringClass.erasure();
 
-		// perform some emulation work in case there is some and we are inside a local type only
+		// perform some extra emulation work in case there is some and we are inside a local type only
 		if (allocatedTypeErasure.isNestedType()
 			&& currentScope.enclosingSourceType().isLocalType()) {
 
@@ -231,6 +231,23 @@ public class QualifiedAllocationExpression extends AllocationExpression {
 				receiverType = scope.enclosingSourceType();
 			} else {
 				receiverType = this.type.resolveType(scope, true /* check bounds*/);
+				checkParameterizedAllocation: {
+					if (this.type instanceof ParameterizedQualifiedTypeReference) { // disallow new X<String>.Y<Integer>()
+						ReferenceBinding currentType = (ReferenceBinding)receiverType;
+						do {
+							// isStatic() is answering true for toplevel types
+							if ((currentType.modifiers & AccStatic) != 0) break checkParameterizedAllocation;
+							if (currentType.isRawType()) break checkParameterizedAllocation;
+						} while ((currentType = currentType.enclosingType())!= null);
+						ParameterizedQualifiedTypeReference qRef = (ParameterizedQualifiedTypeReference) this.type;
+						for (int i = qRef.typeArguments.length - 2; i >= 0; i--) {
+							if (qRef.typeArguments[i] != null) {
+								scope.problemReporter().illegalQualifiedParameterizedTypeAllocation(this.type, receiverType);
+								break;
+							}
+						}
+					}
+				}				
 			}			
 		}
 		if (receiverType == null) {
@@ -307,6 +324,9 @@ public class QualifiedAllocationExpression extends AllocationExpression {
 			receiverType = new ProblemReferenceBinding(receiverType.sourceName(), (ReferenceBinding)receiverType, ProblemReasons.IllegalSuperTypeVariable);
 			scope.problemReporter().invalidType(this, receiverType);
 			return null;
+		} else if (type != null && receiverType.isEnum()) { // tolerate enum constant body
+			scope.problemReporter().cannotInstantiate(type, receiverType);
+			return this.resolvedType = receiverType;
 		}
 		// anonymous type scenario
 		// an anonymous class inherits from java.lang.Object when declared "after" an interface

@@ -193,7 +193,10 @@ public class SingleNameReference extends NameReference implements OperatorIds {
 			if (originalBinding != this.binding) {
 			    // extra cast needed if method return type has type variable
 			    if ((originalBinding.type.tagBits & TagBits.HasTypeVariable) != 0 && runtimeTimeType.id != T_JavaLangObject) {
-			        this.genericCast = originalBinding.type.genericCast(scope.boxing(runtimeTimeType)); // runtimeType could be base type in boxing case
+			    	TypeBinding targetType = (!compileTimeType.isBaseType() && runtimeTimeType.isBaseType()) 
+			    		? compileTimeType  // unboxing: checkcast before conversion
+			    		: runtimeTimeType;
+			        this.genericCast = originalBinding.type.genericCast(scope.boxing(targetType));
 			    }
 			} 	
 		}
@@ -208,7 +211,7 @@ public class SingleNameReference extends NameReference implements OperatorIds {
 			SingleNameReference variableReference;
 			if ((operation.left instanceof SingleNameReference) && ((variableReference = (SingleNameReference) operation.left).binding == binding)) {
 				// i = i + value, then use the variable on the right hand side, since it has the correct implicit conversion
-				variableReference.generateCompoundAssignment(currentScope, codeStream, syntheticAccessors == null ? null : syntheticAccessors[WRITE], operation.right, (operation.bits & OperatorMASK) >> OperatorSHIFT, operation.left.implicitConversion /*should be equivalent to no conversion*/, valueRequired);
+				variableReference.generateCompoundAssignment(currentScope, codeStream, syntheticAccessors == null ? null : syntheticAccessors[WRITE], operation.right, (operation.bits & OperatorMASK) >> OperatorSHIFT, operation.implicitConversion, valueRequired);
 				return;
 			}
 			int operator = (operation.bits & OperatorMASK) >> OperatorSHIFT;
@@ -219,13 +222,14 @@ public class SingleNameReference extends NameReference implements OperatorIds {
 				&& (((operation.left.implicitConversion & IMPLICIT_CONVERSION_MASK) >> 4) != T_JavaLangString) // exclude string concatenation which would occur backwards
 				&& (((operation.right.implicitConversion & IMPLICIT_CONVERSION_MASK) >> 4) != T_JavaLangString)) { // exclude string concatenation which would occur backwards
 				// i = value + i, then use the variable on the right hand side, since it has the correct implicit conversion
-				variableReference.generateCompoundAssignment(currentScope, codeStream, syntheticAccessors == null ? null : syntheticAccessors[WRITE], operation.left, operator, operation.right.implicitConversion /*should be equivalent to no conversion*/, valueRequired);
+				variableReference.generateCompoundAssignment(currentScope, codeStream, syntheticAccessors == null ? null : syntheticAccessors[WRITE], operation.left, operator, operation.implicitConversion, valueRequired);
 				return;
 			}
 		}
 		switch (bits & RestrictiveFlagMASK) {
 			case Binding.FIELD : // assigning to a field
 				FieldBinding fieldBinding;
+				int pc = codeStream.position;
 				if (!(fieldBinding = (FieldBinding) this.codegenBinding).isStatic()) { // need a receiver?
 					if ((bits & DepthMASK) != 0) {
 						ReferenceBinding targetType = currentScope.enclosingSourceType().enclosingTypeAt((bits & DepthMASK) >> DepthSHIFT);
@@ -235,6 +239,7 @@ public class SingleNameReference extends NameReference implements OperatorIds {
 						this.generateReceiver(codeStream);
 					}
 				}
+				codeStream.recordPositionsFrom(pc, this.sourceStart);
 				assignment.expression.generateCode(currentScope, codeStream, true);
 				fieldStore(codeStream, fieldBinding, syntheticAccessors == null ? null : syntheticAccessors[WRITE], valueRequired);
 				if (valueRequired) {
@@ -296,11 +301,16 @@ public class SingleNameReference extends NameReference implements OperatorIds {
 		} else {
 			switch (bits & RestrictiveFlagMASK) {
 				case Binding.FIELD : // reading a field
-					FieldBinding fieldBinding;
-					if (valueRequired) {
-						if (!(fieldBinding = (FieldBinding) this.codegenBinding).isConstantValue()) { // directly use inlined value for constant fields
-							boolean isStatic;
-							if (!(isStatic = fieldBinding.isStatic())) {
+					FieldBinding fieldBinding = (FieldBinding) this.codegenBinding;
+					if (fieldBinding.isConstantValue()) {
+						// directly use inlined value for constant fields
+						if (valueRequired) {
+							codeStream.generateConstant(fieldBinding.constant(), implicitConversion);
+						}
+					} else {
+						if (valueRequired || currentScope.environment().options.complianceLevel >= ClassFileConstants.JDK1_4) {
+							boolean isStatic = fieldBinding.isStatic();
+							if (!isStatic) {
 								if ((bits & DepthMASK) != 0) {
 									ReferenceBinding targetType = currentScope.enclosingSourceType().enclosingTypeAt((bits & DepthMASK) >> DepthSHIFT);
 									Object[] emulationPath = currentScope.getEmulationPath(targetType, true /*only exact match*/, false/*consider enclosing arg*/);
@@ -319,10 +329,20 @@ public class SingleNameReference extends NameReference implements OperatorIds {
 							} else {
 								codeStream.invokestatic(syntheticAccessors[READ]);
 							}
-							if (this.genericCast != null) codeStream.checkcast(this.genericCast);
-							codeStream.generateImplicitConversion(implicitConversion);
-					} else { // directly use the inlined value
-							codeStream.generateConstant(fieldBinding.constant(), implicitConversion);
+							if (valueRequired) {
+								if (this.genericCast != null) codeStream.checkcast(this.genericCast);			
+								codeStream.generateImplicitConversion(implicitConversion);
+							} else {
+								// could occur if !valueRequired but compliance >= 1.4
+								switch (fieldBinding.type.id) {
+									case T_long :
+									case T_double :
+										codeStream.pop2();
+										break;
+									default :
+										codeStream.pop();
+								}
+							}							
 						}
 					}
 					break;
@@ -552,7 +572,6 @@ public class SingleNameReference extends NameReference implements OperatorIds {
 	}
 	
 	public void generateReceiver(CodeStream codeStream) {
-		
 		codeStream.aload_0();
 	}
 

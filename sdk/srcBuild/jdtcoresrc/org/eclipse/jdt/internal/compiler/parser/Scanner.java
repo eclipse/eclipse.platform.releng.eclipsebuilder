@@ -104,7 +104,8 @@ public class Scanner implements TerminalTokens {
 	public static final String UNTERMINATED_STRING = "Unterminated_String"; //$NON-NLS-1$
 	public static final String UNTERMINATED_COMMENT = "Unterminated_Comment"; //$NON-NLS-1$
 	public static final String INVALID_CHAR_IN_STRING = "Invalid_Char_In_String"; //$NON-NLS-1$
-	public static final String INVALID_DIGIT = "Invalid_Digit"; //$NON-NLS-1$	
+	public static final String INVALID_DIGIT = "Invalid_Digit"; //$NON-NLS-1$
+	private static final int[] EMPTY_LINE_ENDS = new int[0];
 
 	//----------------optimized identifier managment------------------
 	static final char[] charArray_a = new char[] {'a'}, 
@@ -385,6 +386,21 @@ public final char[] getCurrentTokenSource() {
 	}
 	return result;
 }
+public final String getCurrentTokenString() {
+	// Return current token as a string
+
+	if (this.withoutUnicodePtr != 0) {
+		// 0 is used as a fast test flag so the real first char is in position 1
+		return new String(
+			this.withoutUnicodeBuffer, 
+			1, 
+			this.withoutUnicodePtr);
+	}
+	return new String(
+		this.source, 
+		this.startPosition, 
+		this.currentPosition - this.startPosition); 
+}
 public final char[] getCurrentTokenSourceString() {
 	//return the token REAL source (aka unicodes are precomputed).
 	//REMOVE the two " that are at the beginning and the end.
@@ -434,7 +450,7 @@ public int getCurrentTokenStartPosition(){
  */
 public final int getLineEnd(int lineNumber) {
 
-	if (this.lineEnds == null) 
+	if (this.lineEnds == null || this.linePtr == -1) 
 		return -1;
 	if (lineNumber > this.lineEnds.length+1) 
 		return -1;
@@ -446,8 +462,10 @@ public final int getLineEnd(int lineNumber) {
 }
 
 public final int[] getLineEnds() {
-	//return a bounded copy of this.lineEnds 
-
+	//return a bounded copy of this.lineEnds
+	if (this.linePtr == -1) {
+		return EMPTY_LINE_ENDS;
+	}
 	int[] copy;
 	System.arraycopy(this.lineEnds, 0, copy = new int[this.linePtr + 1], 0, this.linePtr + 1);
 	return copy;
@@ -468,7 +486,7 @@ public final int[] getLineEnds() {
  */
 public final int getLineStart(int lineNumber) {
 
-	if (this.lineEnds == null) 
+	if (this.lineEnds == null || this.linePtr == -1) 
 		return -1;
 	if (lineNumber > this.lineEnds.length + 1) 
 		return -1;
@@ -2061,12 +2079,12 @@ final char[] optimizedCurrentTokenSource2() {
 final char[] optimizedCurrentTokenSource3() {
 	//try to return the same char[] build only once
 
-	char c0, c1, c2;
-	int hash = 
-		(((c0 = this.source[this.startPosition]) << 12)
-			+ ((c1 = this.source[this.startPosition + 1]) << 6)
-			+ (c2 = this.source[this.startPosition + 2]))
-			% TableSize; 
+	char[] src = this.source;
+	int start = this.startPosition;
+	char c0 = src[start];
+	char c1 = src[start+1];
+	char c2 = src[start+2];
+	int hash = ((c0 << 12) + (c1<< 6) + c2) % TableSize; 
 	char[][] table = this.charArray_length[1][hash];
 	int i = newEntry3;
 	while (++i < InternalTableSize) {
@@ -2583,7 +2601,7 @@ public int scanIdentifierOrKeyword() {
 							&& (data[++index] == 'n')
 							&& (data[++index] == 's')
 							&& (data[++index] == 't'))
-							return TokenNameERROR; //const is not used in java ???????
+							return TokenNameconst; //const is not used in java ???????
 						else
 							return TokenNameIdentifier;
 				case 8 :
@@ -2711,7 +2729,7 @@ public int scanIdentifierOrKeyword() {
 				if ((data[++index] == 'o')
 					&& (data[++index] == 't')
 					&& (data[++index] == 'o')) {
-					return TokenNameERROR;
+					return TokenNamegoto;
 				}
 			} //no goto in java are allowed, so why java removes this keyword ???
 			return TokenNameIdentifier;

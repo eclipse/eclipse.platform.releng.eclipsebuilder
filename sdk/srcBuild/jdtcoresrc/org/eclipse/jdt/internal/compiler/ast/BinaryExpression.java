@@ -306,7 +306,8 @@ public class BinaryExpression extends OperatorExpression {
 							if (valueRequired) {
 								codeStream.iconst_1();
 								if ((bits & ValueForReturnMASK) != 0) {
-									codeStream.ireturn();
+									codeStream.generateImplicitConversion(this.implicitConversion);
+									codeStream.generateReturnBytecode(this);
 									falseLabel.place();
 									codeStream.iconst_0();
 								} else {
@@ -377,7 +378,8 @@ public class BinaryExpression extends OperatorExpression {
 							if (valueRequired) {
 								codeStream.iconst_1();
 								if ((bits & ValueForReturnMASK) != 0) {
-									codeStream.ireturn();
+									codeStream.generateImplicitConversion(this.implicitConversion);
+									codeStream.generateReturnBytecode(this);
 									falseLabel.place();
 									codeStream.iconst_0();
 								} else {
@@ -448,7 +450,8 @@ public class BinaryExpression extends OperatorExpression {
 							if (valueRequired) {
 								codeStream.iconst_1();
 								if ((bits & ValueForReturnMASK) != 0) {
-									codeStream.ireturn();
+									codeStream.generateImplicitConversion(this.implicitConversion);
+									codeStream.generateReturnBytecode(this);
 									falseLabel.place();
 									codeStream.iconst_0();
 								} else {
@@ -519,7 +522,8 @@ public class BinaryExpression extends OperatorExpression {
 				if (valueRequired) {
 					codeStream.iconst_1();
 					if ((bits & ValueForReturnMASK) != 0) {
-						codeStream.ireturn();
+						codeStream.generateImplicitConversion(this.implicitConversion);
+						codeStream.generateReturnBytecode(this);
 						falseLabel.place();
 						codeStream.iconst_0();
 					} else {
@@ -541,7 +545,8 @@ public class BinaryExpression extends OperatorExpression {
 				if (valueRequired) {
 					codeStream.iconst_1();
 					if ((bits & ValueForReturnMASK) != 0) {
-						codeStream.ireturn();
+						codeStream.generateImplicitConversion(this.implicitConversion);
+						codeStream.generateReturnBytecode(this);
 						falseLabel.place();
 						codeStream.iconst_0();
 					} else {
@@ -563,7 +568,8 @@ public class BinaryExpression extends OperatorExpression {
 				if (valueRequired) {
 					codeStream.iconst_1();
 					if ((bits & ValueForReturnMASK) != 0) {
-						codeStream.ireturn();
+						codeStream.generateImplicitConversion(this.implicitConversion);
+						codeStream.generateReturnBytecode(this);
 						falseLabel.place();
 						codeStream.iconst_0();
 					} else {
@@ -585,7 +591,8 @@ public class BinaryExpression extends OperatorExpression {
 				if (valueRequired) {
 					codeStream.iconst_1();
 					if ((bits & ValueForReturnMASK) != 0) {
-						codeStream.ireturn();
+						codeStream.generateImplicitConversion(this.implicitConversion);
+						codeStream.generateReturnBytecode(this);
 						falseLabel.place();
 						codeStream.iconst_0();
 					} else {

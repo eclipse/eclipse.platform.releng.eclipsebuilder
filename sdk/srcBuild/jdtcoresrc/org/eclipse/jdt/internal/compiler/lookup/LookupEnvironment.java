@@ -270,8 +270,6 @@ public TypeBinding computeBoxingType(TypeBinding type) {
 			return IntBinding;
 		case TypeIds.T_JavaLangLong :
 			return LongBinding;
-		case TypeIds.T_JavaLangVoid :
-			return VoidBinding;
 
 		case TypeIds.T_int :
 			boxedType = getType(JAVA_LANG_INTEGER);
@@ -305,10 +303,6 @@ public TypeBinding computeBoxingType(TypeBinding type) {
 			boxedType = getType(JAVA_LANG_BOOLEAN);
 			if (boxedType != null) return boxedType;
 			return new ProblemReferenceBinding(	JAVA_LANG_BOOLEAN, NotFound);				
-		case TypeIds.T_void :
-			boxedType = getType(JAVA_LANG_VOID);
-			if (boxedType != null) return boxedType;
-			return new ProblemReferenceBinding(	JAVA_LANG_VOID, NotFound);				
 	}
 	return type;
 }	
@@ -428,27 +422,8 @@ PackageBinding createPackage(char[][] compoundName) {
 	return packageBinding;
 }
 
-public ParameterizedTypeBinding createParameterizedType(ReferenceBinding genericType, TypeBinding[] originalArguments, ReferenceBinding enclosingType) {
+public ParameterizedTypeBinding createParameterizedType(ReferenceBinding genericType, TypeBinding[] typeArguments, ReferenceBinding enclosingType) {
 
-	// relocalize wildcard onto genericType (could come from other types)
-	TypeBinding[] typeArguments = originalArguments;
-	for (int i = 0, length = typeArguments == null ? 0 : typeArguments.length; i < length; i++) {
-		TypeBinding argument = originalArguments[i];
-		if (argument.isWildcard()) {
-			WildcardBinding wildcard = (WildcardBinding) argument;
-			if (wildcard.genericType != genericType) { // wildcard comes from different type
-				if (typeArguments == originalArguments) {
-					System.arraycopy(originalArguments, 0, typeArguments = new TypeBinding[length], 0, i);
-				}
-				typeArguments[i] = createWildcard(genericType, i, wildcard.bound, wildcard.kind);
-			} else if (typeArguments != originalArguments) {
-				typeArguments[i] = argument;
-			}
-		} else if (typeArguments != originalArguments) {
-			typeArguments[i] = argument;
-		}
-	}
-	
 	// cached info is array of already created parameterized types for this type
 	ParameterizedTypeBinding[] cachedInfo = (ParameterizedTypeBinding[])this.uniqueParameterizedTypeBindings.get(genericType);
 	int argLength = typeArguments == null ? 0: typeArguments.length;
@@ -518,9 +493,11 @@ public RawTypeBinding createRawType(ReferenceBinding genericType, ReferenceBindi
 	
 }
 
-public WildcardBinding createWildcard(ReferenceBinding genericType, int rank, TypeBinding bound, int kind) {
+public WildcardBinding createWildcard(ReferenceBinding genericType, int rank, TypeBinding bound, TypeBinding[] otherBounds, int kind) {
 	
 	// cached info is array of already created wildcard  types for this type
+	if (genericType == null) // pseudo wildcard denoting composite bounds for lub computation
+		genericType = ReferenceBinding.LUB_GENERIC;
 	WildcardBinding[] cachedInfo = (WildcardBinding[])this.uniqueWildcardBindings.get(genericType);
 	boolean needToGrow = false;
 	if (cachedInfo != null){
@@ -532,6 +509,14 @@ public WildcardBinding createWildcard(ReferenceBinding genericType, int rank, Ty
 			    if (cachedType.rank != rank) continue nextCachedType;
 			    if (cachedType.kind != kind) continue nextCachedType;
 			    if (cachedType.bound != bound) continue nextCachedType;
+			    if (cachedType.otherBounds != otherBounds) {
+			    	int cachedLength = cachedType.otherBounds == null ? 0 : cachedType.otherBounds.length;
+			    	int length = otherBounds == null ? 0 : otherBounds.length;
+			    	if (cachedLength != length) continue nextCachedType;
+			    	for (int j = 0; j < length; j++) {
+			    		if (cachedType.otherBounds[j] != otherBounds[j]) continue nextCachedType;
+			    	}
+			    }
 				// all match, reuse current
 				return cachedType;
 		}
@@ -547,7 +532,7 @@ public WildcardBinding createWildcard(ReferenceBinding genericType, int rank, Ty
 		this.uniqueWildcardBindings.put(genericType, cachedInfo);
 	}
 	// add new binding
-	WildcardBinding wildcard = new WildcardBinding(genericType, rank, bound, kind, this);
+	WildcardBinding wildcard = new WildcardBinding(genericType, rank, bound, otherBounds, kind, this);
 	cachedInfo[cachedInfo.length-1] = wildcard;
 	return wildcard;
 }
@@ -834,16 +819,16 @@ TypeBinding getTypeFromVariantTypeSignature(
 			// ? super aType
 			wrapper.start++;
 			TypeBinding bound = getTypeFromTypeSignature(wrapper, staticVariables, enclosingType);
-			return createWildcard(genericType, rank, bound, Wildcard.SUPER);
+			return createWildcard(genericType, rank, bound, null /*no extra bound*/, Wildcard.SUPER);
 		case '+' :
 			// ? extends aType
 			wrapper.start++;
 			bound = getTypeFromTypeSignature(wrapper, staticVariables, enclosingType);
-			return createWildcard(genericType, rank, bound, Wildcard.EXTENDS);
+			return createWildcard(genericType, rank, bound, null /*no extra bound*/, Wildcard.EXTENDS);
 		case '*' :
 			// ?
 			wrapper.start++;
-			return createWildcard(genericType, rank, null, Wildcard.UNBOUND);
+			return createWildcard(genericType, rank, null, null /*no extra bound*/, Wildcard.UNBOUND);
 		default :
 			return getTypeFromTypeSignature(wrapper, staticVariables, enclosingType);
 	}
@@ -866,9 +851,9 @@ boolean isPackage(char[][] compoundName, char[] name) {
 
 public MethodVerifier methodVerifier() {
 	if (verifier == null)
-		verifier = this.options.sourceLevel < ClassFileConstants.JDK1_5
+		verifier = this.options.complianceLevel < ClassFileConstants.JDK1_5
 			? new MethodVerifier(this)
-			: new MethodVerifier15(this);
+			: new MethodVerifier15(this); // check for covariance even if sourceLevel is < 1.5
 	return verifier;
 }
 public void reset() {

@@ -246,19 +246,17 @@ public abstract class Expression extends Statement {
 					return true;
 					
 				}
-			} else if (use15specifics) { // unboxing - only exact match is allowed
-				if (env.computeBoxingType(expressionType) == castType) {
-					// TODO (philippe) could tagAsUnnecessaryCast(scope, castType);  
-					return true;
-				}
-			}
-			reportIllegalCast(scope, castType, expressionType);
-			return false;
-		} else if (use15specifics && expressionType.isBaseType()) { // boxing - only exact match is allowed
-			if (env.computeBoxingType(castType) == expressionType) {
-				// TODO (philippe) could tagAsUnnecessaryCast(scope, castType);  
+			} else if (use15specifics 
+								&& env.computeBoxingType(expressionType).isCompatibleWith(castType)) { // unboxing - only widening match is allowed
+				tagAsUnnecessaryCast(scope, castType);  
 				return true;
 			}
+			return false;
+		} else if (use15specifics 
+							&& expressionType.isBaseType() 
+							&& env.computeBoxingType(expressionType).isCompatibleWith(castType)) { // boxing - only widening match is allowed
+			tagAsUnnecessaryCast(scope, castType);  
+			return true;
 		}
 	
 		//-----------cast to something which is NOT a base type--------------------------	
@@ -267,7 +265,6 @@ public abstract class Expression extends Statement {
 			return true; //null is compatible with every thing
 		}
 		if (expressionType.isBaseType()) {
-			reportIllegalCast(scope, castType, expressionType);
 			return false;
 		}
 	
@@ -286,18 +283,23 @@ public abstract class Expression extends Statement {
 						tagAsNeedCheckCast();
 						return true;
 					} else {
-						reportIllegalCast(scope, castType, expressionType);
 						return false;
 					}
 				}
 				// recursively on the elements...
-				return checkCastTypesCompatibility(
-					scope,
-					((ArrayBinding) castType).elementsType(),
-					exprElementType,
-					expression);
-			} else if (
-				castType.isClass()) {
+				return checkCastTypesCompatibility(scope, ((ArrayBinding) castType).elementsType(), exprElementType, expression);
+			} else if (castType.isTypeVariable()) {
+				if (expressionType instanceof ReferenceBinding) {
+					ReferenceBinding match = ((ReferenceBinding)expressionType).findSuperTypeErasingTo((ReferenceBinding)castType);
+					if (match == null) {
+						checkUnsafeCast(scope, castType, expressionType, match, true);
+					}
+				} else {
+					checkUnsafeCast(scope, castType, expressionType, null, true);
+				}
+				// recursively on the type variable upper bound
+				return checkCastTypesCompatibility(scope, castType.erasure(), expressionType, expression);
+			} else if (castType.isClass()) {
 				//------(castType.isClass) expressionType.isArray ---------------	
 				if (castType.id == T_JavaLangObject) {
 					tagAsUnnecessaryCast(scope, castType);
@@ -309,10 +311,20 @@ public abstract class Expression extends Statement {
 					return true;
 				}
 			}
-			reportIllegalCast(scope, castType, expressionType);
 			return false;
 		}
-	
+		if (expressionType.isTypeVariable() || expressionType.isWildcard()) {
+			if (castType instanceof ReferenceBinding) {
+				TypeBinding match = ((ReferenceBinding)expressionType).findSuperTypeErasingTo((ReferenceBinding)castType);
+				if (match != null) {
+					tagAsUnnecessaryCast(scope, castType);
+					return true;
+				}
+			}
+			// recursively on the type variable upper bound
+			return checkCastTypesCompatibility(scope, castType, expressionType.erasure(), expression);
+		}
+		
 		if (expressionType.isClass()) {
 			if (castType.isArrayType()) {
 				// ---- (castType.isArray) expressionType.isClass -------
@@ -320,9 +332,15 @@ public abstract class Expression extends Statement {
 					tagAsNeedCheckCast();
 					return true;
 				}
+			} else if (castType.isTypeVariable()) {
+				TypeBinding match = ((ReferenceBinding)expressionType).findSuperTypeErasingTo((ReferenceBinding)castType);
+				if (match == null) {
+					checkUnsafeCast(scope, castType, expressionType, match, true);
+				}
+				// recursively on the type variable upper bound
+				return checkCastTypesCompatibility(scope, castType.erasure(), expressionType, expression);
 			} else if (castType.isClass()) { // ----- (castType.isClass) expressionType.isClass ------
-				
-				ReferenceBinding match = ((ReferenceBinding)expressionType).findSuperTypeErasingTo((ReferenceBinding)castType.erasure());
+				TypeBinding match = ((ReferenceBinding)expressionType).findSuperTypeErasingTo((ReferenceBinding)castType.erasure());
 				if (match != null) {
 					if (expression != null && castType.id == T_JavaLangString) this.constant = expression.constant; // (String) cst is still a constant
 					return checkUnsafeCast(scope, castType, expressionType, match, false);
@@ -334,7 +352,7 @@ public abstract class Expression extends Statement {
 				}
 			} else { // ----- (castType.isInterface) expressionType.isClass -------  
 
-				ReferenceBinding match = ((ReferenceBinding)expressionType).findSuperTypeErasingTo((ReferenceBinding)castType.erasure());
+				TypeBinding match = ((ReferenceBinding)expressionType).findSuperTypeErasingTo((ReferenceBinding)castType.erasure());
 				if (match != null) {
 					return checkUnsafeCast(scope, castType, expressionType, match, false);
 				}
@@ -349,7 +367,6 @@ public abstract class Expression extends Statement {
 				}
 				// no subclass for expressionType, thus compile-time check is valid
 			}
-			reportIllegalCast(scope, castType, expressionType);
 			return false;
 		}
 	
@@ -361,9 +378,15 @@ public abstract class Expression extends Statement {
 				tagAsNeedCheckCast();
 				return true;
 			} else {
-				reportIllegalCast(scope, castType, expressionType);
 				return false;
 			}
+		} else if (castType.isTypeVariable()) {
+			TypeBinding match = ((ReferenceBinding)expressionType).findSuperTypeErasingTo((ReferenceBinding)castType);
+			if (match == null) {
+				checkUnsafeCast(scope, castType, expressionType, match, true);
+			}
+			// recursively on the type variable upper bound
+			return checkCastTypesCompatibility(scope, castType.erasure(), expressionType, expression);
 		} else if (castType.isClass()) { // ----- (castType.isClass) expressionType.isInterface --------
 
 			if (castType.id == T_JavaLangObject) { // no runtime error
@@ -372,41 +395,42 @@ public abstract class Expression extends Statement {
 			}
 			if (((ReferenceBinding) castType).isFinal()) {
 				// no subclass for castType, thus compile-time check is valid
-				ReferenceBinding match = ((ReferenceBinding)castType).findSuperTypeErasingTo((ReferenceBinding)expressionType.erasure());
+				TypeBinding match = ((ReferenceBinding)castType).findSuperTypeErasingTo((ReferenceBinding)expressionType.erasure());
 				if (match == null) {
 					// potential runtime error
-					reportIllegalCast(scope, castType, expressionType);
 					return false;
 				}				
 			}
 		} else { // ----- (castType.isInterface) expressionType.isInterface -------
-
-			ReferenceBinding match = ((ReferenceBinding)expressionType).findSuperTypeErasingTo((ReferenceBinding)castType.erasure());
-			if (match != null) {
-				return checkUnsafeCast(scope, castType, expressionType, match, false);
-			}
-			
-			match = ((ReferenceBinding)castType).findSuperTypeErasingTo((ReferenceBinding)expressionType.erasure());
-			if (match != null) {
+				ReferenceBinding interfaceType = (ReferenceBinding) expressionType;
+				TypeBinding match = interfaceType.findSuperTypeErasingTo((ReferenceBinding)castType.erasure());
+				if (match != null) {
+					return checkUnsafeCast(scope, castType, interfaceType, match, false);
+				}
+				
 				tagAsNeedCheckCast();
-				return checkUnsafeCast(scope, castType, expressionType, match, true);
-			}  else {
+				match = ((ReferenceBinding)castType).findSuperTypeErasingTo((ReferenceBinding)interfaceType.erasure());
+				if (match != null) {
+					return checkUnsafeCast(scope, castType, interfaceType, match, true);
+				}
+				if (use15specifics) {
+					// a subclass may implement the interface ==> no check at compile time
+					return true;
+				}
+				// pre1.5 semantics - no covariance allowed (even if 1.5 compliant, but 1.4 source)
 				MethodBinding[] castTypeMethods = getAllInheritedMethods((ReferenceBinding) castType);
-				MethodBinding[] expressionTypeMethods =
-					getAllInheritedMethods((ReferenceBinding) expressionType);
+				MethodBinding[] expressionTypeMethods = getAllInheritedMethods((ReferenceBinding) expressionType);
 				int exprMethodsLength = expressionTypeMethods.length;
-				for (int i = 0, castMethodsLength = castTypeMethods.length; i < castMethodsLength; i++) {
+				for (int i = 0, castMethodsLength = castTypeMethods.length; i < castMethodsLength; i++)
 					for (int j = 0; j < exprMethodsLength; j++) {
 						if ((castTypeMethods[i].returnType != expressionTypeMethods[j].returnType)
 								&& (CharOperation.equals(castTypeMethods[i].selector, expressionTypeMethods[j].selector))
 								&& castTypeMethods[i].areParametersEqual(expressionTypeMethods[j])) {
-							reportIllegalCast(scope, castType, expressionType);
 							return false;
 
 						}
 					}
-				}
-			}
+				return true;
 		}
 		tagAsNeedCheckCast();
 		return true;
@@ -460,7 +484,6 @@ public abstract class Expression extends Statement {
 		}
 		if (castType.isBoundParameterizedType() || castType.isGenericType()) {
 			if (match.isProvablyDistinctFrom(isNarrowing ? expressionType : castType, 0)) {
-				reportIllegalCast(scope, castType, expressionType);
 				return false; 
 			}
 		}
@@ -483,8 +506,10 @@ public abstract class Expression extends Statement {
 		// or to become an int before boxed into an Integer
 		if (runtimeTimeType != NullBinding && runtimeTimeType.isBaseType()) {
 			if (!compileTimeType.isBaseType()) {
-				compileTimeType = scope.environment().computeBoxingType(compileTimeType);
+				TypeBinding unboxedType = scope.environment().computeBoxingType(compileTimeType);
 				this.implicitConversion = UNBOXING;
+				scope.problemReporter().autoboxing(this, compileTimeType, runtimeTimeType);
+				compileTimeType = unboxedType;
 			}
 		} else {
 			if (compileTimeType != NullBinding && compileTimeType.isBaseType()) {
@@ -492,6 +517,7 @@ public abstract class Expression extends Statement {
 				if (boxedType == runtimeTimeType) // Object o = 12;
 					boxedType = compileTimeType; 
 				this.implicitConversion = BOXING | (boxedType.id << 4) + compileTimeType.id;
+				scope.problemReporter().autoboxing(this, compileTimeType, scope.environment().computeBoxingType(boxedType));
 				return;
 			}
 		}
@@ -747,10 +773,6 @@ public abstract class Expression extends Statement {
 		return print(indent, output).append(";"); //$NON-NLS-1$
 	}
 
-	public void reportIllegalCast(Scope scope, TypeBinding castType, TypeBinding expressionType) {
-		// do nothing by default
-	}
-	
 	public void resolve(BlockScope scope) {
 		// drops the returning expression's type whatever the type is.
 

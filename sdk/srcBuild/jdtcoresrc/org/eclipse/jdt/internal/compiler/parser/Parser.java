@@ -1028,7 +1028,11 @@ protected void consumeAllocationHeader() {
 	this.restartRecovery = true; // request to restart from here on
 }
 protected void consumeAnnotationAsModifier() {
-	// nothing to do
+	Expression expression = this.expressionStack[this.expressionPtr];
+	int sourceStart = expression.sourceStart;
+	if (this.modifiersSourceStart < 0) {
+		this.modifiersSourceStart = sourceStart;
+	}
 }
 protected void consumeAnnotationName() {
 	// nothing to do
@@ -2699,19 +2703,7 @@ protected void consumeEnterVariable() {
 		declaration.type = type;
 	} else {
 		int dimension = typeDim + extendedDimension;
-		//on the this.identifierLengthStack there is the information about the type....
-		int baseType;
-		if ((baseType = this.identifierLengthStack[this.identifierLengthPtr + 1]) < 0) {
-			//it was a baseType
-			int typeSourceStart = type.sourceStart;
-			int typeSourceEnd = type.sourceEnd;
-			type = TypeReference.baseTypeReference(-baseType, dimension);
-			type.sourceStart = typeSourceStart;
-			type.sourceEnd = typeSourceEnd;
-			declaration.type = type;
-		} else {
-			declaration.type = this.copyDims(type, dimension);
-		}
+		declaration.type = this.copyDims(type, dimension);
 	}
 	this.variablesCounter[this.nestedType]++;
 	pushOnAstStack(declaration);
@@ -3627,12 +3619,6 @@ protected void consumeMarkerAnnotation() {
 		typeReference = new QualifiedTypeReference(tokens, positions);
 	}
 	markerAnnotation = new MarkerAnnotation(typeReference, this.intStack[this.intPtr--]);
-	int sourceStart = markerAnnotation.sourceStart;
-	if (this.modifiersSourceStart < 0) {
-		this.modifiersSourceStart = sourceStart;
-	} else if (this.modifiersSourceStart > sourceStart) {
-		this.modifiersSourceStart = sourceStart;
-	}
 	markerAnnotation.declarationSourceEnd = markerAnnotation.sourceEnd;
 	pushOnExpressionStack(markerAnnotation);
 	if(options.sourceLevel < ClassFileConstants.JDK1_5 &&
@@ -3794,18 +3780,7 @@ protected void consumeMethodHeaderExtendedDims() {
 		TypeReference returnType = md.returnType;
 		md.sourceEnd = this.endPosition;
 		int dims = returnType.dimensions() + extendedDims;
-		int baseType;
-		if ((baseType = this.identifierLengthStack[this.identifierLengthPtr + 1]) < 0) {
-			//it was a baseType
-			int sourceStart = returnType.sourceStart;
-			int sourceEnd =  returnType.sourceEnd;
-			returnType = TypeReference.baseTypeReference(-baseType, dims);
-			returnType.sourceStart = sourceStart;
-			returnType.sourceEnd = sourceEnd;
-			md.returnType = returnType;
-		} else {
-			md.returnType = this.copyDims(md.returnType, dims);
-		}
+		md.returnType = this.copyDims(returnType, dims);
 		if (this.currentToken == TokenNameLBRACE){ 
 			md.bodyStart = this.endPosition + 1;
 		}
@@ -4163,12 +4138,6 @@ protected void consumeNormalAnnotation() {
 			normalAnnotation.memberValuePairs = new MemberValuePair[length], 
 			0, 
 			length); 
-	}
-	int sourceStart = normalAnnotation.sourceStart;
-	if (this.modifiersSourceStart < 0) {
-		this.modifiersSourceStart = sourceStart;
-	} else if (this.modifiersSourceStart > sourceStart) {
-		this.modifiersSourceStart = sourceStart;
 	}
 	normalAnnotation.declarationSourceEnd = this.rParenPos;
 	pushOnExpressionStack(normalAnnotation);
@@ -6154,12 +6123,6 @@ protected void consumeSingleMemberAnnotation() {
 	singleMemberAnnotation = new SingleMemberAnnotation(typeReference, this.intStack[this.intPtr--]);
 	singleMemberAnnotation.memberValue = this.expressionStack[this.expressionPtr--];
 	this.expressionLengthPtr--;
-	int sourceStart = singleMemberAnnotation.sourceStart;
-	if (this.modifiersSourceStart < 0) {
-		this.modifiersSourceStart = sourceStart;
-	} else if (this.modifiersSourceStart > sourceStart) {
-		this.modifiersSourceStart = sourceStart;
-	}
 	singleMemberAnnotation.declarationSourceEnd = this.rParenPos;
 	pushOnExpressionStack(singleMemberAnnotation);
 	if(options.sourceLevel < ClassFileConstants.JDK1_5 &&

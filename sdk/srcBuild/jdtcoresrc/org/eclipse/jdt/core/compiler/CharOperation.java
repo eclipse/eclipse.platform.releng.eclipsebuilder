@@ -900,6 +900,7 @@ public final class CharOperation {
 	 * @param array the array in which the search is done
 	 * @return true if the array contains an occurrence of one of the characters, false otherwise.
 	 * @throws NullPointerException if array is null.
+	 * @since 3.1
 	 */
 	public static final boolean contains(char[] characters, char[] array) {
 		for (int i = array.length; --i >= 0;)
@@ -2222,6 +2223,35 @@ public final class CharOperation {
 					array[i] = replacementChar;
 			}
 		}
+	}
+
+	/**
+	 * Replace all occurrence of characters to be replaced with the remplacement character in the
+	 * given array.
+	 * <br>
+	 * <br>
+	 * For example:
+	 * <ol>
+	 * <li><pre>
+	 *    array = { 'a' , 'b', 'b', 'c', 'a', 'b', 'c', 'a' }
+	 *    toBeReplaced = { 'b', 'c' }
+	 *    replacementChar = 'a'
+	 *    result => No returned value, but array is now equals to { 'a' , 'a', 'a', 'a', 'a', 'a', 'a', 'a' }
+	 * </pre>
+	 * </li>
+	 * </ol>
+	 * 
+	 * @param array the given array
+	 * @param toBeReplaced characters to be replaced
+	 * @param replacementChar the replacement character
+	 * @throws NullPointerException if arrays are null.
+	 * @since 3.1
+	 */
+	public static final void replace(char[] array, char[] toBeReplaced, char replacementChar) {
+		for (int i = array.length; --i >= 0;)
+			for (int j = toBeReplaced.length; --j >= 0;)
+				if (array[i] == toBeReplaced[j])
+					array[i] = replacementChar;
 	}
 
 	/**

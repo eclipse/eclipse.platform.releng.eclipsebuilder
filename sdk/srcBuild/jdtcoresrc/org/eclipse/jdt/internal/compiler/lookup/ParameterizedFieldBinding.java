@@ -25,11 +25,12 @@ public class ParameterizedFieldBinding extends FieldBinding {
 	public ParameterizedFieldBinding(ParameterizedTypeBinding parameterizedDeclaringClass, FieldBinding originalField) {
 	    super (
 	            originalField.name, 
-	            originalField.isStatic() ? originalField.type : parameterizedDeclaringClass.substitute(originalField.type), 
+	            originalField.isStatic() ? originalField.type : Scope.substitute(parameterizedDeclaringClass, originalField.type), 
 	            originalField.modifiers, 
 	            parameterizedDeclaringClass, 
 	            null);
 	    this.originalField = originalField;
+	    this.id = originalField.id;
 	}
 	/**
 	 * @see org.eclipse.jdt.internal.compiler.lookup.VariableBinding#constant()

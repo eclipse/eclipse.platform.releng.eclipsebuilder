@@ -16,6 +16,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.eclipse.jdt.core.compiler.CharOperation;
+import org.eclipse.jdt.internal.compiler.ast.ASTNode;
 import org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.AbstractVariableDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.AnnotationMethodDeclaration;
@@ -183,17 +184,28 @@ public FieldBinding addSyntheticFieldForInnerclass(ReferenceBinding enclosingTyp
 		synthetics[FIELD_EMUL].put(enclosingType, synthField);
 	}
 	// ensure there is not already such a field defined by the user
-	FieldBinding existingField;
-	if ((existingField = this.getField(synthField.name, true /*resolve*/)) != null) {
-		TypeDeclaration typeDecl = scope.referenceContext;
-		for (int i = 0, max = typeDecl.fields.length; i < max; i++) {
-			FieldDeclaration fieldDecl = typeDecl.fields[i];
-			if (fieldDecl.binding == existingField) {
-				scope.problemReporter().duplicateFieldInType(this, fieldDecl);
-				break;
+	boolean needRecheck;
+	do {
+		needRecheck = false;
+		FieldBinding existingField;
+		if ((existingField = this.getField(synthField.name, true /*resolve*/)) != null) {
+			TypeDeclaration typeDecl = scope.referenceContext;
+			for (int i = 0, max = typeDecl.fields.length; i < max; i++) {
+				FieldDeclaration fieldDecl = typeDecl.fields[i];
+				if (fieldDecl.binding == existingField) {
+					if (this.scope.environment().options.complianceLevel >= ClassFileConstants.JDK1_5) {
+						synthField.name = CharOperation.concat(
+							synthField.name,
+							"$".toCharArray()); //$NON-NLS-1$
+						needRecheck = true;
+					} else {
+						scope.problemReporter().duplicateFieldInType(this, fieldDecl);
+					}
+					break;
+				}
 			}
 		}
-	}		
+	} while (needRecheck);
 	return synthField;
 }
 /* Add a new synthetic field for a class literal access.
@@ -417,10 +429,11 @@ public SyntheticMethodBinding addSyntheticMethod(MethodBinding targetMethod, boo
 /* 
  * Record the fact that bridge methods need to be generated to override certain inherited methods
  */
-public SyntheticMethodBinding addSyntheticBridgeMethod(MethodBinding inheritedMethodToBridge, MethodBinding localTargetMethod) {
-	if (!isClass()) return null; // only classes get bridge methods
-	if (inheritedMethodToBridge.returnType.erasure() == localTargetMethod.returnType.erasure()
-		&& inheritedMethodToBridge.areParameterErasuresEqual(localTargetMethod)) {
+public SyntheticMethodBinding addSyntheticBridgeMethod(MethodBinding inheritedMethodToBridge, MethodBinding targetMethod) {
+	if (isInterface()) return null; // only classes & enums get bridge methods
+	// targetMethod may be inherited
+	if (inheritedMethodToBridge.returnType.erasure() == targetMethod.returnType.erasure()
+		&& inheritedMethodToBridge.areParameterErasuresEqual(targetMethod)) {
 			return null; // do not need bridge method
 	}
 	if (synthetics == null) {
@@ -447,12 +460,12 @@ public SyntheticMethodBinding addSyntheticBridgeMethod(MethodBinding inheritedMe
 	SyntheticMethodBinding accessMethod = null;
 	SyntheticMethodBinding[] accessors = (SyntheticMethodBinding[]) synthetics[METHOD_EMUL].get(inheritedMethodToBridge);
 	if (accessors == null) {
-		accessMethod = new SyntheticMethodBinding(inheritedMethodToBridge, localTargetMethod);
+		accessMethod = new SyntheticMethodBinding(inheritedMethodToBridge, targetMethod, this);
 		synthetics[METHOD_EMUL].put(inheritedMethodToBridge, accessors = new SyntheticMethodBinding[2]);
 		accessors[1] = accessMethod;		
 	} else {
 		if ((accessMethod = accessors[1]) == null) {
-			accessMethod = new SyntheticMethodBinding(inheritedMethodToBridge, localTargetMethod);
+			accessMethod = new SyntheticMethodBinding(inheritedMethodToBridge, targetMethod, this);
 			accessors[1] = accessMethod;
 		}
 	}
@@ -461,51 +474,61 @@ public SyntheticMethodBinding addSyntheticBridgeMethod(MethodBinding inheritedMe
 
 /**
  * Collect the substitutes into a map for certain type variables inside the receiver type
- * e.g.   Collection<T>.findSubstitute(T, Collection<List<X>>):   T --> List<X>
+ * e.g.   Collection<T>.collectSubstitutes(Collection<List<X>>, Map), will populate Map with: T --> List<X>
  */
-public void collectSubstitutes(TypeBinding otherType, Map substitutes) {
-	if (otherType instanceof ReferenceBinding) {
-		TypeVariableBinding[] variables = this.typeVariables;
-		if (variables == NoTypeVariables) return;
-		// generic type is acting as parameterized type with its own parameters as arguments
-		
-		// allow List<T> to match with LinkedList<String>
-		ReferenceBinding equivalent = this;
-        ReferenceBinding otherEquivalent = ((ReferenceBinding)otherType).findSuperTypeErasingTo(this);
-        if (otherEquivalent == null) {
-        	// allow LinkedList<String> to match List<T> (downcast scenario)
-	    	equivalent = this.findSuperTypeErasingTo((ReferenceBinding)otherType.erasure());
-        	if (equivalent == null) return;
-        	otherEquivalent = (ReferenceBinding)otherType;
-        }
-        TypeBinding[] elements;
-        switch (equivalent.kind()) {
-        	case Binding.GENERIC_TYPE :
-        		elements = equivalent.typeVariables();
-        		break;
-        	case Binding.PARAMETERIZED_TYPE :
-        		elements = ((ParameterizedTypeBinding)equivalent).arguments;
-        		break;
-        	default :
-        		return;
-        }
-        TypeBinding[] otherElements;
-        switch (otherEquivalent.kind()) {
-        	case Binding.GENERIC_TYPE :
-        		otherElements = otherEquivalent.typeVariables();
-        		break;
-        	case Binding.PARAMETERIZED_TYPE :
-        		otherElements = ((ParameterizedTypeBinding)otherEquivalent).arguments;
-        		break;
-        	case Binding.RAW_TYPE :
-        		substitutes.clear(); // clear all variables to indicate raw generic method in the end
-        		return;
-        	default :
-        		return;
-        }
-        for (int i = 0, length = elements.length; i < length; i++) {
-            elements[i].collectSubstitutes(otherElements[i], substitutes);
-        }
+public void collectSubstitutes(Scope currentScope, TypeBinding otherType, Map substitutes, int constraint) {
+	
+	if (otherType == NullBinding) return;
+	if (!(otherType instanceof ReferenceBinding)) return;
+	TypeVariableBinding[] variables = this.typeVariables;
+	if (variables == NoTypeVariables) return;
+	// generic type is acting as parameterized type with its own parameters as arguments
+	
+	ReferenceBinding equivalent, otherEquivalent;
+	switch (constraint) {
+		case CONSTRAINT_EQUAL :
+		case CONSTRAINT_EXTENDS :
+			equivalent = this;
+	        otherEquivalent = ((ReferenceBinding)otherType).findSuperTypeErasingTo(this);
+	        if (otherEquivalent == null) return;
+	        break;
+		case CONSTRAINT_SUPER :
+        default:
+	        equivalent = this.findSuperTypeErasingTo((ReferenceBinding)(otherType.erasure()));
+	        if (equivalent == null) return;
+	        otherEquivalent = (ReferenceBinding) otherType;
+	        break;
+	}
+    TypeBinding[] elements;
+    switch (equivalent.kind()) {
+    	case Binding.GENERIC_TYPE :
+    		elements = equivalent.typeVariables();
+    		break;
+    	case Binding.PARAMETERIZED_TYPE :
+    		elements = ((ParameterizedTypeBinding)equivalent).arguments;
+    		break;
+    	case Binding.RAW_TYPE :
+    		substitutes.clear(); // clear all variables to indicate raw generic method in the end
+    	default :
+    		return;
+    }
+    TypeBinding[] otherElements;
+    switch (otherEquivalent.kind()) {
+    	case Binding.GENERIC_TYPE :
+    		otherElements = otherEquivalent.typeVariables();
+    		break;
+    	case Binding.PARAMETERIZED_TYPE :
+    		otherElements = ((ParameterizedTypeBinding)otherEquivalent).arguments;
+    		break;
+    	case Binding.RAW_TYPE :
+    		substitutes.clear(); // clear all variables to indicate raw generic method in the end
+    		return;
+    	default :
+    		return;
+    }
+    for (int i = 0, length = elements.length; i < length; i++) {
+    	TypeBinding otherElement = otherElements[i];
+        elements[i].collectSubstitutes(scope, otherElements[i], substitutes, otherElement.isWildcard() ? constraint : CONSTRAINT_EQUAL);
     }
 }
 	
@@ -513,6 +536,38 @@ public int kind() {
 	if (this.typeVariables != NoTypeVariables) return Binding.GENERIC_TYPE;
 	return Binding.TYPE;
 }	
+
+public char[] computeUniqueKey() {
+	char[] uniqueKey = super.computeUniqueKey();
+	if (uniqueKey.length == 2) return uniqueKey; // problem type's unique key is "L;"
+	int start = CharOperation.lastIndexOf('/', this.fileName) + 1;
+	int end = CharOperation.lastIndexOf('.', this.fileName);
+	if (end != -1) {
+		char[] mainTypeName = CharOperation.subarray(this.fileName, start, end);
+		start = CharOperation.lastIndexOf('/', uniqueKey) + 1;
+		if (start == 0)
+			start = 1; // start after L
+		end = CharOperation.indexOf('$', uniqueKey, start);
+		if (end == -1)
+			end = CharOperation.indexOf('<', uniqueKey, start);
+		if (end == -1)
+			end = CharOperation.indexOf(';', uniqueKey, start);
+		char[] topLevelType = CharOperation.subarray(uniqueKey, start, end);
+		if (!CharOperation.equals(topLevelType, mainTypeName)) {
+			StringBuffer buffer = new StringBuffer();
+			buffer.append(CharOperation.subarray(uniqueKey, 0, start));
+			buffer.append(mainTypeName);
+			buffer.append('~');
+			buffer.append(topLevelType);
+			buffer.append(CharOperation.subarray(uniqueKey, end, uniqueKey.length));
+			int length = buffer.length();
+			uniqueKey = new char[length];
+			buffer.getChars(0, length, uniqueKey, 0);
+			return uniqueKey;
+		}
+	}
+	return uniqueKey;
+}
 
 void faultInTypesForFieldsAndMethods() {
 	fields();
@@ -553,23 +608,7 @@ public FieldBinding[] fields() {
  */
 public char[] genericTypeSignature() {
     if (this.genericReferenceTypeSignature == null) {
-        if (this.typeVariables == NoTypeVariables) {
-	        this.genericReferenceTypeSignature = this.signature();
-        } else {
-		    char[] typeSig = this.signature();
-		    StringBuffer sig = new StringBuffer(10);
-		    for (int i = 0; i < typeSig.length-1; i++) { // copy all but trailing semicolon
-		    	sig.append(typeSig[i]);
-		    }
-		    sig.append('<');
-		    for (int i = 0, length = this.typeVariables.length; i < length; i++) {
-		        sig.append(this.typeVariables[i].genericTypeSignature());
-		    }
-		    sig.append(">;"); //$NON-NLS-1$
-			int sigLength = sig.length();
-			this.genericReferenceTypeSignature = new char[sigLength];
-			sig.getChars(0, sigLength, this.genericReferenceTypeSignature, 0);		    
-	    }
+    	this.genericReferenceTypeSignature = computeGenericTypeSignature(this.typeVariables);
     }
     return this.genericReferenceTypeSignature;
 }
@@ -607,10 +646,15 @@ public char[] genericSignature() {
     }
 	return sig.toString().toCharArray();
 }
+/**
+ * Compute the tagbits for standard annotations. For source types, these could require
+ * lazily resolving corresponding annotation nodes, in case of forward references.
+ * @see org.eclipse.jdt.internal.compiler.lookup.Binding#getAnnotationTagBits()
+ */
 public long getAnnotationTagBits() {
 	if ((this.tagBits & AnnotationResolved) == 0) {
 		TypeDeclaration typeDecl = this.scope.referenceContext;
-		typeDecl.resolveAnnotations(typeDecl.staticInitializerScope, typeDecl.annotations, this);
+		ASTNode.resolveAnnotations(typeDecl.staticInitializerScope, typeDecl.annotations, this);
 	}
 	return this.tagBits;
 }
@@ -1012,7 +1056,8 @@ private FieldBinding resolveTypeFor(FieldBinding field) {
 					fieldDecls[f].binding = null;
 					return null;
 				}
-				if (fieldType instanceof ReferenceBinding && (((ReferenceBinding)fieldType).modifiers & AccGenericSignature) != 0) {
+				TypeBinding leafType = fieldType.leafComponentType();
+				if (leafType instanceof ReferenceBinding && (((ReferenceBinding)leafType).modifiers & AccGenericSignature) != 0) {
 					field.modifiers |= AccGenericSignature;
 				}				
 			} finally {
@@ -1084,7 +1129,8 @@ private MethodBinding resolveTypesFor(MethodBinding method) {
 				methodDecl.scope.problemReporter().argumentTypeCannotBeVoidArray(this, methodDecl, arg);
 				foundArgProblem = true;
 			} else {
-			    if (parameterType instanceof ReferenceBinding && (((ReferenceBinding)parameterType).modifiers & AccGenericSignature) != 0) {
+				TypeBinding leafType = parameterType.leafComponentType();
+			    if (leafType instanceof ReferenceBinding && (((ReferenceBinding)leafType).modifiers & AccGenericSignature) != 0) {
 					method.modifiers |= AccGenericSignature;
 				}
 				method.parameters[i] = parameterType;
@@ -1110,7 +1156,8 @@ private MethodBinding resolveTypesFor(MethodBinding method) {
 				foundReturnTypeProblem = true;
 			} else {
 				method.returnType = methodType;
-				if (methodType instanceof ReferenceBinding && (((ReferenceBinding)methodType).modifiers & AccGenericSignature) != 0) {
+				TypeBinding leafType = methodType.leafComponentType();
+				if (leafType instanceof ReferenceBinding && (((ReferenceBinding)leafType).modifiers & AccGenericSignature) != 0) {
 					method.modifiers |= AccGenericSignature;
 				}
 			}

@@ -145,7 +145,8 @@ public class EqualExpression extends BinaryExpression {
 				// comparison is TRUE 
 				codeStream.iconst_1();
 				if ((bits & ValueForReturnMASK) != 0){
-					codeStream.ireturn();
+					codeStream.generateImplicitConversion(this.implicitConversion);
+					codeStream.generateReturnBytecode(this);
 					// comparison is FALSE
 					falseLabel.place();
 					codeStream.iconst_0();
@@ -461,8 +462,10 @@ public class EqualExpression extends BinaryExpression {
 	
 		// Object references 
 		// spec 15.20.3
-		if (this.checkCastTypesCompatibility(scope, leftType, rightType, null) 
-				|| this.checkCastTypesCompatibility(scope, rightType, leftType, null)) {
+		if ((!leftType.isBaseType() || leftType == NullBinding) // cannot compare: Object == (int)0
+				&& (!rightType.isBaseType() || rightType == NullBinding)
+				&& (this.checkCastTypesCompatibility(scope, leftType, rightType, null) 
+						|| this.checkCastTypesCompatibility(scope, rightType, leftType, null))) {
 
 			// (special case for String)
 			if ((rightType.id == T_JavaLangString) && (leftType.id == T_JavaLangString)) {
@@ -474,8 +477,8 @@ public class EqualExpression extends BinaryExpression {
 			left.computeConversion(scope, objectType, leftType);
 			right.computeConversion(scope, objectType, rightType);
 			// check need for operand cast
-			boolean unnecessaryLeftCast = (left.bits & UnnecessaryCastMask) != 0;
-			boolean unnecessaryRightCast = (right.bits & UnnecessaryCastMask) != 0;
+			boolean unnecessaryLeftCast = (left.bits & UnnecessaryCastMASK) != 0;
+			boolean unnecessaryRightCast = (right.bits & UnnecessaryCastMASK) != 0;
 			if (unnecessaryLeftCast || unnecessaryRightCast) {
 				TypeBinding alternateLeftType = unnecessaryLeftCast ? ((CastExpression)left).expression.resolvedType : leftType;
 				TypeBinding alternateRightType = unnecessaryRightCast ? ((CastExpression)right).expression.resolvedType : rightType;

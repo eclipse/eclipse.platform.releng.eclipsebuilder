@@ -49,6 +49,7 @@ public class TypeVariableBinding extends ReferenceBinding {
 	 * Returns true if the argument type satisfies all bounds of the type parameter
 	 */
 	public boolean boundCheck(Substitution substitution, TypeBinding argumentType) {
+
 		if (argumentType == NullBinding || this == argumentType) 
 			return true;
 		if (!(argumentType instanceof ReferenceBinding || argumentType.isArrayType()))
@@ -69,11 +70,11 @@ public class TypeVariableBinding extends ReferenceBinding {
 //		if (this == argumentType) 
 //			return true;
 		boolean hasSubstitution = substitution != null;
-		if (this.superclass.id != T_JavaLangObject && !argumentType.isCompatibleWith(hasSubstitution ? substitution.substitute(this.superclass) : this.superclass)) {
+		if (this.superclass.id != T_JavaLangObject && !argumentType.isCompatibleWith(hasSubstitution ? Scope.substitute(substitution, this.superclass) : this.superclass)) {
 		    return false;
 		}
 	    for (int i = 0, length = this.superInterfaces.length; i < length; i++) {
-	        if (!argumentType.isCompatibleWith(hasSubstitution ? substitution.substitute(this.superInterfaces[i]) : this.superInterfaces[i])) {
+	        if (!argumentType.isCompatibleWith(hasSubstitution ? Scope.substitute(substitution, this.superInterfaces[i]) : this.superInterfaces[i])) {
 				return false;
 	        }
 	    }
@@ -88,27 +89,57 @@ public class TypeVariableBinding extends ReferenceBinding {
 	}
 	/**
 	 * Collect the substitutes into a map for certain type variables inside the receiver type
-	 * e.g.   Collection<T>.findSubstitute(T, Collection<List<X>>):   T --> List<X>
+	 * e.g.   Collection<T>.collectSubstitutes(Collection<List<X>>, Map), will populate Map with: T --> List<X>
 	 */
-	public void collectSubstitutes(TypeBinding otherType, Map substitutes) {
+	public void collectSubstitutes(Scope scope, TypeBinding otherType, Map substitutes, int constraint) {
+		
 		// cannot infer anything from a null type
 		if (otherType == NullBinding) return;
+	
+		if (otherType.isBaseType()) {
+			TypeBinding boxedType = scope.environment().computeBoxingType(otherType);
+			if (boxedType == otherType) return;
+			otherType = boxedType;
+		}
 		
-	    TypeBinding[] variableSubstitutes = (TypeBinding[])substitutes.get(this);
+		// reverse constraint, to reflect variable on rhs:   A << T --> T >: A
+		int variableConstraint;
+		switch(constraint) {
+			case CONSTRAINT_EQUAL :
+				variableConstraint = CONSTRAINT_EQUAL;
+				break;
+			case CONSTRAINT_EXTENDS :
+				variableConstraint = CONSTRAINT_SUPER;
+				break;
+			default:
+			//case CONSTRAINT_SUPER :
+				variableConstraint = CONSTRAINT_EXTENDS;
+				break;
+		}
+	    TypeBinding[][] variableSubstitutes = (TypeBinding[][])substitutes.get(this);
 	    if (variableSubstitutes != null) {
-	        int length = variableSubstitutes.length;
-	        for (int i = 0; i < length; i++) {
-	        	TypeBinding substitute = variableSubstitutes[i];
-	            if (substitute == otherType) return; // already there
-	            if (substitute == null) {
-	                variableSubstitutes[i] = otherType;
-	                return;
-	            }
-	        }
-	        // no free spot found, need to grow
-	        System.arraycopy(variableSubstitutes, 0, variableSubstitutes = new TypeBinding[2*length], 0, length);
-	        variableSubstitutes[length] = otherType;
-	        substitutes.put(this, variableSubstitutes);
+		    insertLoop: {
+		    	TypeBinding[] constraintSubstitutes = variableSubstitutes[variableConstraint];
+		    	int length;
+		    	if (constraintSubstitutes == null) {
+		    		length = 0;
+		    		constraintSubstitutes = new TypeBinding[1];
+		    	} else {
+		    		length = constraintSubstitutes.length;
+			        for (int i = 0; i < length; i++) {
+			        	TypeBinding substitute = constraintSubstitutes[i];
+			            if (substitute == otherType) return; // already there
+			            if (substitute == null) {
+			                constraintSubstitutes[i] = otherType;
+			                break insertLoop;
+			            }
+			        }
+			        // no free spot found, need to grow
+			        System.arraycopy(constraintSubstitutes, 0, constraintSubstitutes = new TypeBinding[2*length], 0, length);
+		    	}
+		        constraintSubstitutes[length] = otherType;
+		        variableSubstitutes[variableConstraint] = constraintSubstitutes;
+		    }
 	    }
 	}
 	
@@ -160,7 +191,7 @@ public ReferenceBinding findSuperTypeErasingTo(int erasureId, boolean erasureIsC
     // iterate superclass to avoid recording interfaces if searched supertype is class
     if (erasureIsClass) {
 		while ((currentType = currentType.superclass()) != null) { 
-			if (currentType.erasure().id == erasureId) return currentType;
+			if (currentType.id == erasureId || currentType.erasure().id == erasureId) return currentType;
 		}    
 		return null;
     }
@@ -178,7 +209,7 @@ public ReferenceBinding findSuperTypeErasingTo(int erasureId, boolean erasureIsC
 	for (int i = 0; i <= lastPosition; i++) {
 		ReferenceBinding[] interfaces = interfacesToVisit[i];
 		for (int j = 0, length = interfaces.length; j < length; j++) {
-			if ((currentType = interfaces[j]).erasure().id == erasureId)
+			if ((currentType = interfaces[j]).id == erasureId || currentType.erasure().id == erasureId)
 				return currentType;
 
 			ReferenceBinding[] itsInterfaces = currentType.superInterfaces();
@@ -199,9 +230,9 @@ public ReferenceBinding findSuperTypeErasingTo(ReferenceBinding erasure) {
 
     if (this == erasure) return this;
     ReferenceBinding currentType = this;
-    if (erasure.isClass()) {
+    if ((erasure.modifiers & AccInterface) == 0) {
 		while ((currentType = currentType.superclass()) != null) {
-			if (currentType.erasure() == erasure) return currentType;
+			if (currentType == erasure || currentType.erasure() == erasure) return currentType;
 		}
 		return null;
     }
@@ -219,7 +250,7 @@ public ReferenceBinding findSuperTypeErasingTo(ReferenceBinding erasure) {
 	for (int i = 0; i <= lastPosition; i++) {
 		ReferenceBinding[] interfaces = interfacesToVisit[i];
 		for (int j = 0, length = interfaces.length; j < length; j++) {
-			if ((currentType = interfaces[j]).erasure() == erasure)
+			if ((currentType = interfaces[j]) == erasure || currentType.erasure() == erasure)
 				return currentType;
 
 			ReferenceBinding[] itsInterfaces = currentType.superInterfaces();
@@ -279,6 +310,28 @@ public ReferenceBinding findSuperTypeErasingTo(ReferenceBinding erasure) {
 	public boolean isTypeVariable() {
 	    return true;
 	}
+	
+	/** 
+	 * Returns the original type variable for a given variable.
+	 * Only different from receiver for type variables of generic methods of parameterized types
+	 * e.g. X<U> {   <V1 extends U> U foo(V1)   } --> X<String> { <V2 extends String> String foo(V2)  }  
+	 *         and V2.original() --> V1
+	 */
+	public TypeVariableBinding original() {
+		if (this.declaringElement.kind() == Binding.METHOD) {
+			MethodBinding originalMethod = ((MethodBinding)this.declaringElement).original();
+			if (originalMethod != this.declaringElement) {
+				return originalMethod.typeVariables[this.rank];
+			}
+		} else {
+			ReferenceBinding originalType = (ReferenceBinding)((ReferenceBinding)this.declaringElement).erasure();
+			if (originalType != this.declaringElement) {
+				return originalType.typeVariables()[this.rank];
+			}
+		}
+		return this;
+	}
+	
 	/**
      * @see org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding#readableName()
      */

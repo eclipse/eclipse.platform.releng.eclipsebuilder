@@ -66,15 +66,16 @@ public class MethodScope extends BlockScope {
 	private void checkAndSetModifiersForConstructor(MethodBinding methodBinding) {
 		
 		int modifiers = methodBinding.modifiers;
+		final ReferenceBinding declaringClass = methodBinding.declaringClass;
 		if ((modifiers & AccAlternateModifierProblem) != 0)
-			problemReporter().duplicateModifierForMethod(
-				methodBinding.declaringClass,
-				(AbstractMethodDeclaration) referenceContext);
+			problemReporter().duplicateModifierForMethod(declaringClass, (AbstractMethodDeclaration) referenceContext);
 
 		if (((ConstructorDeclaration) referenceContext).isDefaultConstructor) {
-			if (methodBinding.declaringClass.isPublic())
+			if (declaringClass.isEnum())
+				modifiers = AccPrivate;
+			else if (declaringClass.isPublic())
 				modifiers |= AccPublic;
-			else if (methodBinding.declaringClass.isProtected())
+			else if (declaringClass.isProtected())
 				modifiers |= AccProtected;
 		}
 
@@ -82,38 +83,37 @@ public class MethodScope extends BlockScope {
 		int realModifiers = modifiers & AccJustFlag;
 
 		// check for abnormal modifiers
-		int unexpectedModifiers =
-			~(AccPublic | AccPrivate | AccProtected | AccStrictfp);
-		if ((realModifiers & unexpectedModifiers) != 0)
+		int unexpectedModifiers = ~(AccPublic | AccPrivate | AccProtected | AccStrictfp);
+		if (declaringClass.isEnum() && !((ConstructorDeclaration) referenceContext).isDefaultConstructor) {
+			unexpectedModifiers = ~AccPrivate;
+			if ((realModifiers & unexpectedModifiers) != 0)
+				problemReporter().illegalModifierForEnumConstructor((AbstractMethodDeclaration) referenceContext);
+		} else if ((realModifiers & unexpectedModifiers) != 0) {
 			problemReporter().illegalModifierForMethod((AbstractMethodDeclaration) referenceContext);
-		else if (
-			(((AbstractMethodDeclaration) referenceContext).modifiers & AccStrictfp) != 0)
+		} else if ((((AbstractMethodDeclaration) referenceContext).modifiers & AccStrictfp) != 0) {
 			// must check the parse node explicitly
 			problemReporter().illegalModifierForMethod((AbstractMethodDeclaration) referenceContext);
+		}
 
 		// check for incompatible modifiers in the visibility bits, isolate the visibility bits
 		int accessorBits = realModifiers & (AccPublic | AccProtected | AccPrivate);
 		if ((accessorBits & (accessorBits - 1)) != 0) {
-			problemReporter().illegalVisibilityModifierCombinationForMethod(
-				methodBinding.declaringClass,
-				(AbstractMethodDeclaration) referenceContext);
+			problemReporter().illegalVisibilityModifierCombinationForMethod(declaringClass, (AbstractMethodDeclaration) referenceContext);
 
-			// need to keep the less restrictive
+			// need to keep the less restrictive so disable Protected/Private as necessary
 			if ((accessorBits & AccPublic) != 0) {
 				if ((accessorBits & AccProtected) != 0)
 					modifiers &= ~AccProtected;
 				if ((accessorBits & AccPrivate) != 0)
 					modifiers &= ~AccPrivate;
+			} else if ((accessorBits & AccProtected) != 0 && (accessorBits & AccPrivate) != 0) {
+				modifiers &= ~AccPrivate;
 			}
-			if ((accessorBits & AccProtected) != 0)
-				if ((accessorBits & AccPrivate) != 0)
-					modifiers &= ~AccPrivate;
 		}
 
 		// if the receiver's declaring class is a private nested type, then make sure the receiver is not private (causes problems for inner type emulation)
-		if (methodBinding.declaringClass.isPrivate())
-			if ((modifiers & AccPrivate) != 0)
-				modifiers &= ~AccPrivate;
+		if (declaringClass.isPrivate() && (modifiers & AccPrivate) != 0)
+			modifiers &= ~AccPrivate;
 
 		methodBinding.modifiers = modifiers;
 	}
@@ -123,72 +123,53 @@ public class MethodScope extends BlockScope {
 	private void checkAndSetModifiersForMethod(MethodBinding methodBinding) {
 		
 		int modifiers = methodBinding.modifiers;
+		final ReferenceBinding declaringClass = methodBinding.declaringClass;
 		if ((modifiers & AccAlternateModifierProblem) != 0)
-			problemReporter().duplicateModifierForMethod(
-				methodBinding.declaringClass,
-				(AbstractMethodDeclaration) referenceContext);
+			problemReporter().duplicateModifierForMethod(declaringClass, (AbstractMethodDeclaration) referenceContext);
 
 		// after this point, tests on the 16 bits reserved.
 		int realModifiers = modifiers & AccJustFlag;
 
 		// set the requested modifiers for a method in an interface/annotation
-		if ((methodBinding.declaringClass.modifiers & AccInterface) != 0) {
+		if ((declaringClass.modifiers & AccInterface) != 0) {
 			if ((realModifiers & ~(AccPublic | AccAbstract)) != 0) {
-				if ((methodBinding.declaringClass.modifiers & AccAnnotation) != 0) {
+				if ((declaringClass.modifiers & AccAnnotation) != 0)
 					problemReporter().illegalModifierForAnnotationMember((AbstractMethodDeclaration) referenceContext);
-				} else {
+				else
 					problemReporter().illegalModifierForInterfaceMethod((AbstractMethodDeclaration) referenceContext);
-				}
 			}
 			return;
 		}
 
 		// check for abnormal modifiers
-		int unexpectedModifiers =
-			~(
-				AccPublic
-					| AccPrivate
-					| AccProtected
-					| AccAbstract
-					| AccStatic
-					| AccFinal
-					| AccSynchronized
-					| AccNative
-					| AccStrictfp);
+		int unexpectedModifiers = ~(AccPublic | AccPrivate | AccProtected
+			| AccAbstract | AccStatic | AccFinal | AccSynchronized | AccNative | AccStrictfp);
 		if ((realModifiers & unexpectedModifiers) != 0)
 			problemReporter().illegalModifierForMethod((AbstractMethodDeclaration) referenceContext);
 
 		// check for incompatible modifiers in the visibility bits, isolate the visibility bits
 		int accessorBits = realModifiers & (AccPublic | AccProtected | AccPrivate);
 		if ((accessorBits & (accessorBits - 1)) != 0) {
-			problemReporter().illegalVisibilityModifierCombinationForMethod(
-				methodBinding.declaringClass,
-				(AbstractMethodDeclaration) referenceContext);
+			problemReporter().illegalVisibilityModifierCombinationForMethod(declaringClass, (AbstractMethodDeclaration) referenceContext);
 
-			// need to keep the less restrictive
+			// need to keep the less restrictive so disable Protected/Private as necessary
 			if ((accessorBits & AccPublic) != 0) {
 				if ((accessorBits & AccProtected) != 0)
 					modifiers &= ~AccProtected;
 				if ((accessorBits & AccPrivate) != 0)
 					modifiers &= ~AccPrivate;
+			} else if ((accessorBits & AccProtected) != 0 && (accessorBits & AccPrivate) != 0) {
+				modifiers &= ~AccPrivate;
 			}
-			if ((accessorBits & AccProtected) != 0)
-				if ((accessorBits & AccPrivate) != 0)
-					modifiers &= ~AccPrivate;
 		}
 
 		// check for modifiers incompatible with abstract modifier
 		if ((modifiers & AccAbstract) != 0) {
-			int incompatibleWithAbstract =
-				AccPrivate | AccStatic | AccFinal | AccSynchronized | AccNative | AccStrictfp;
+			int incompatibleWithAbstract = AccPrivate | AccStatic | AccFinal | AccSynchronized | AccNative | AccStrictfp;
 			if ((modifiers & incompatibleWithAbstract) != 0)
-				problemReporter().illegalAbstractModifierCombinationForMethod(
-					methodBinding.declaringClass,
-					(AbstractMethodDeclaration) referenceContext);
+				problemReporter().illegalAbstractModifierCombinationForMethod(declaringClass, (AbstractMethodDeclaration) referenceContext);
 			if (!methodBinding.declaringClass.isAbstract())
-				problemReporter().abstractMethodInAbstractClass(
-					(SourceTypeBinding) methodBinding.declaringClass,
-					(AbstractMethodDeclaration) referenceContext);
+				problemReporter().abstractMethodInAbstractClass((SourceTypeBinding) declaringClass, (AbstractMethodDeclaration) referenceContext);
 		}
 
 		/* DISABLED for backward compatibility with javac (if enabled should also mark private methods as final)
@@ -198,17 +179,11 @@ public class MethodScope extends BlockScope {
 		*/
 		// native methods cannot also be tagged as strictfp
 		if ((modifiers & AccNative) != 0 && (modifiers & AccStrictfp) != 0)
-			problemReporter().nativeMethodsCannotBeStrictfp(
-				methodBinding.declaringClass,
-				(AbstractMethodDeclaration) referenceContext);
+			problemReporter().nativeMethodsCannotBeStrictfp(declaringClass, (AbstractMethodDeclaration) referenceContext);
 
 		// static members are only authorized in a static member or top level type
-		if (((realModifiers & AccStatic) != 0)
-			&& methodBinding.declaringClass.isNestedType()
-			&& !methodBinding.declaringClass.isStatic())
-			problemReporter().unexpectedStaticModifierForMethod(
-				methodBinding.declaringClass,
-				(AbstractMethodDeclaration) referenceContext);
+		if (((realModifiers & AccStatic) != 0) && declaringClass.isNestedType() && !declaringClass.isStatic())
+			problemReporter().unexpectedStaticModifierForMethod(declaringClass, (AbstractMethodDeclaration) referenceContext);
 
 		methodBinding.modifiers = modifiers;
 	}

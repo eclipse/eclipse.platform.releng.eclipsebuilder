@@ -1723,7 +1723,36 @@ public void generateOuterAccess(Object[] mappingSequence, ASTNode invocationSite
 		}
 	}
 }
-
+public void generateReturnBytecode(Expression expression) {
+	
+	if (expression == null) {
+		this.return_();
+	} else {
+		final int implicitConversion = expression.implicitConversion;
+		if ((implicitConversion & BOXING) != 0) {
+			this.areturn();
+			return;
+		}
+		int runtimeType = (implicitConversion & IMPLICIT_CONVERSION_MASK) >> 4;
+		switch (runtimeType) {
+			case T_boolean :
+			case T_int :
+				this.ireturn();
+				break;
+			case T_float :
+				this.freturn();
+				break;
+			case T_long :
+				this.lreturn();
+				break;
+			case T_double :
+				this.dreturn();
+				break;
+			default :
+				this.areturn();
+		}
+	}
+}
 /**
  * The equivalent code performs a string conversion:
  *
@@ -1841,6 +1870,7 @@ public void generateSyntheticBodyForConstructorAccess(SyntheticMethodBinding acc
 	if (declaringClass.erasure().id == T_JavaLangEnum || declaringClass.isEnum()) {
 		this.aload_1(); // pass along name param as name arg
 		this.iload_2(); // pass along ordinal param as ordinal arg
+        resolvedPosition += 2;
 	}	
 	if (declaringClass.isNestedType()) {
 		NestedTypeBinding nestedType = (NestedTypeBinding) declaringClass;

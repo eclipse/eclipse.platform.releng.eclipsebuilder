@@ -173,12 +173,14 @@ public class FieldDeclaration extends AbstractVariableDeclaration {
 					Scope outerScope = classScope.parent;
 					// only corner case is: lookup of outer field through static declaringType, which isn't detected by #getBinding as lookup starts
 					// from outer scope. Subsequent static contexts are detected for free.
-					Binding existingVariable = outerScope.getBinding(this.name, Binding.VARIABLE, this, false /*do not resolve hidden field*/);
-					if (existingVariable != null && this.binding != existingVariable && existingVariable.isValidBinding()
-							&& (!(existingVariable instanceof FieldBinding)
-									|| ((FieldBinding) existingVariable).isStatic() 
-									|| !declaringType.isStatic())) {
-						initializationScope.problemReporter().fieldHiding(this, existingVariable);
+					if (outerScope.kind != Scope.COMPILATION_UNIT_SCOPE) {
+						Binding existingVariable = outerScope.getBinding(this.name, Binding.VARIABLE, this, false /*do not resolve hidden field*/);
+						if (existingVariable != null && this.binding != existingVariable && existingVariable.isValidBinding()
+								&& (!(existingVariable instanceof FieldBinding)
+										|| ((FieldBinding) existingVariable).isStatic() 
+										|| !declaringType.isStatic())) {
+							initializationScope.problemReporter().fieldHiding(this, existingVariable);
+						}
 					}
 				}
 			}
@@ -218,7 +220,7 @@ public class FieldDeclaration extends AbstractVariableDeclaration {
 								|| initializationType.isCompatibleWith(fieldType)) {
 							this.initialization.computeConversion(initializationScope, fieldType, initializationType);
 							if (initializationType.needsUncheckedConversion(fieldType)) {
-								    initializationScope.problemReporter().unsafeRawConversion(this.initialization, initializationType, fieldType);
+								    initializationScope.problemReporter().unsafeTypeConversion(this.initialization, initializationType, fieldType);
 							}									
 						} else if (initializationScope.environment().options.sourceLevel >= JDK1_5 // autoboxing
 										&& (initializationScope.isBoxingCompatibleWith(initializationType, fieldType) 

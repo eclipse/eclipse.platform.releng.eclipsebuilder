@@ -166,7 +166,9 @@ public class ParameterizedQualifiedTypeReference extends ArrayQualifiedTypeRefer
 						argTypes[j] = argType;
 					}			    
 				}
-				if (argHasError) return null;
+				if (argHasError) {
+					return null;
+				}
 // TODO (philippe)	if ((this.bits & ASTNode.IsSuperType) != 0)
 				if (isClassScope)
 					if (((ClassScope) scope).detectHierarchyCycle(currentType, this, argTypes))
@@ -186,13 +188,27 @@ public class ParameterizedQualifiedTypeReference extends ArrayQualifiedTypeRefer
 							this, scope.environment().createRawType((ReferenceBinding)currentType.erasure(), qualifiedType), argTypes);
 					typeIsConsistent = false;				
 				}
-				ParameterizedTypeBinding parameterizedType = scope.createParameterizedType((ReferenceBinding)currentType.erasure(), argTypes, qualifiedType);
-				// check argument type compatibility
-				if (checkBounds) // otherwise will do it in Scope.connectTypeVariables() or generic method resolution
-					for (int j = 0; j < argLength; j++)
-					    if (!typeVariables[j].boundCheck(parameterizedType, argTypes[j]))
-							scope.problemReporter().typeMismatchError(argTypes[j], typeVariables[j], currentType, args[j]);
-				qualifiedType = parameterizedType;
+				// if generic type X<T> is referred to as parameterized X<T>, then answer itself
+				boolean isIdentical = (qualifiedType == null) || (qualifiedType instanceof SourceTypeBinding);
+				if (isIdentical) {
+				    for (int j = 0; j < argLength; j++) {
+						if (typeVariables[j] != argTypes[j]) {
+							isIdentical = false;
+						    break;
+						}
+					}
+				}
+			    if (isIdentical) {
+			    	qualifiedType = (ReferenceBinding) currentType.erasure();
+			    } else {
+					ParameterizedTypeBinding parameterizedType = scope.createParameterizedType((ReferenceBinding)currentType.erasure(), argTypes, qualifiedType);
+					// check argument type compatibility
+					if (checkBounds) // otherwise will do it in Scope.connectTypeVariables() or generic method resolution
+						for (int j = 0; j < argLength; j++)
+						    if (!typeVariables[j].boundCheck(parameterizedType, argTypes[j]))
+								scope.problemReporter().typeMismatchError(argTypes[j], typeVariables[j], currentType, args[j]);
+					qualifiedType = parameterizedType;
+			    }
 		    } else {
 // TODO (philippe)	if ((this.bits & ASTNode.IsSuperType) != 0)
 				if (isClassScope)

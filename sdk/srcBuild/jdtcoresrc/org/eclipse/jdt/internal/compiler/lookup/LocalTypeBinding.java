@@ -20,6 +20,7 @@ public final class LocalTypeBinding extends NestedTypeBinding {
 	private InnerEmulationDependency[] dependents;
 	public ArrayBinding[] localArrayBindings; // used to cache array bindings of various dimensions for this local type
 	public CaseStatement switchCase; // from 1.4 on, local types should not be accessed across switch case blocks (52221)
+	private int sourceStart; // used by computeUniqueKey to uniquely identify this binding
 	
 public LocalTypeBinding(ClassScope scope, SourceTypeBinding enclosingType, CaseStatement switchCase) {
 	super(
@@ -32,6 +33,7 @@ public LocalTypeBinding(ClassScope scope, SourceTypeBinding enclosingType, CaseS
 	else
 		this.tagBits |= LocalTypeMask;
 	this.switchCase = switchCase;
+	this.sourceStart = scope.referenceContext.sourceStart;
 }
 /* Record a dependency onto a source target type which may be altered
 * by the end of the innerclass emulation. Later on, we will revisit
@@ -52,6 +54,20 @@ public void addInnerEmulationDependent(BlockScope dependentScope, boolean wasEnc
 	}
 	dependents[index] = new InnerEmulationDependency(dependentScope, wasEnclosingInstanceSupplied);
 	//  System.out.println("Adding dependency: "+ new String(scope.enclosingType().readableName()) + " --> " + new String(this.readableName()));
+}
+public char[] computeUniqueKey() {
+	ReferenceBinding enclosing = enclosingType();
+	ReferenceBinding temp;
+	while ((temp = enclosing.enclosingType()) != null)
+		enclosing = temp;
+	StringBuffer buffer = new StringBuffer();
+	buffer.append(enclosing.computeUniqueKey());
+	buffer.insert(buffer.length()-1, '$');
+	buffer.insert(buffer.length()-1, this.sourceStart);
+	int length = buffer.length();
+	char[] uniqueKey = new char[length];
+	buffer.getChars(0, length, uniqueKey, 0);
+	return uniqueKey;
 }
 /* Answer the receiver's constant pool name.
 *
