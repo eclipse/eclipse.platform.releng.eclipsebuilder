@@ -35,7 +35,7 @@
 			<fileset dir="${internalPlugins}" includes="Cloudscape/**" />
 		</copy>
 		<exec dir="${tester}" executable="${copyClient}">
-				<arg line="-r eclipse ${testMachine}:${testDir}" />
+				<arg line="-r eclipse ${testMachine}:${executionDir}" />
 		</exec>
 	</target>
 	
