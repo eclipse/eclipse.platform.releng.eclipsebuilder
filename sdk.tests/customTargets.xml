@@ -184,7 +184,7 @@
 	<copy file="${buildDirectory}/label.properties" tofile="${workingDirectory}/eclipse-testing/label.properties" />
 		
     <java classname="TestVersionTracker" fork="yes">
-         <arg line="${workingDirectory}/eclipse/features/org.eclipse.sdk.tests_3.1.0/feature.xml  ${buildDirectory} ${workingDirectory}/eclipse-testing/test.properties" /> 
+         <arg line="${buildDirectory}/features/org.eclipse.sdk.tests/build.xml  ${buildDirectory} ${workingDirectory}/eclipse-testing/test.properties" /> 
          <classpath>
             	<pathelement path="${builderDirectory}/tools" />
          </classpath>
@@ -198,7 +198,7 @@
    	     library.xml in org.eclipse.test whenever its version is updated.
    	 -->
    	<move todir="${workingDirectory}/eclipse/plugins/org.eclipse.test">
-    		<fileset dir="${workingDirectory}/eclipse/plugins/org.eclipse.test_3.1.0" />
+    		<fileset dir="${workingDirectory}/eclipse/plugins/${org.eclipse.test}" />
   	</move>
   	
   	<!--the Ant move task leaves behind an empty directory-->
