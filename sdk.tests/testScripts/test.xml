@@ -33,24 +33,33 @@
 	      <exec dir="." executable="unzip">
 			<arg line="-o -qq eclipse-junit-tests-*.zip -d ${install}"/>
     		</exec>
+		
+		<!-- Fill in cvs repository information -->
+		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@user@" value="@cvs_user@"/>
+		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@password@" value="@cvs_password@"/>
+		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@host@" value="@cvs_host@"/>
+		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@root@" value="@cvs_root@"/>
+	
   	</target>
 
-	<target name="junit">
+	<target name="junit" depends="setup">
 		<ant antfile="${eclipse-home}/plugins/${testPlugin}/test.xml" dir="${eclipse-home}" />
-	</target>
-
-	<target name="performance">
-		<ant antfile="${eclipse-home}/plugins/${testPlugin}/test.xml" dir="${eclipse-home}" target="performance" />
-	</target>
-
-	<target name="runtests" depends="setup" description="Runs ant on the test.xml for a specified plugin.  Requires a property value setting for testPlugin only if test.properties is not available.  The property testPlugin represents a directory name made up of the plugin id and plugin version.  This directory must contain a valid test.xml.">
-		<antcall target="${test.target}"/>
 		<copy file="${eclipse-home}/${report}.xml" tofile="${results}/xml/${report}_${platform}.xml" failonerror="false" />
 		<antcall target="genHtml" />
-		<copy todir="${results}/performance">
-			<fileset dir="${eclipse-home}" includes="timer.xml*" />
-			<mapper type="glob" from="*" to="*_${report}"/>
-		</copy>
+	</target>
+
+	<target name="performance" if="performance.target.present">
+		<antcall target="setup" />
+		<ant antfile="${eclipse-home}/plugins/${testPlugin}/test.xml" dir="${eclipse-home}" target="performance" />
+		<copy file="${eclipse-home}/${report}.xml" tofile="${results}/xml/${report}_${platform}.xml" failonerror="false" />
+		<antcall target="genHtml" />
+	</target>
+
+	<target name="runtests">
+		<condition property="performance.target.present" value="true">
+			<isset property="${testPlugin}.has.performance.target"/>
+		</condition>
+		<antcall target="${test.target}"/>
 	</target>
 
 	<target name="ant" description="Runs the org.eclipse.ant.tests.core test.xml">
@@ -67,6 +76,13 @@
 		</antcall>
 	</target>
 
+	<target name="compare" description="Runs the org.eclipse.compare.tests test.xml">
+		<antcall target="runtests">
+			<param name="testPlugin" value="${org.eclipse.compare.tests}" />
+			<param name="report" value="org.eclipse.compare.tests" />
+		</antcall>
+	</target>
+		
 	<target name="core" description="Runs the org.eclipse.core.tests.harness test.xml">
 		<antcall target="runtests">
 			<param name="testPlugin" value="${org.eclipse.core.tests.harness}" />
@@ -206,33 +222,18 @@
 
 
 	<target name="teamcore" description="Runs the org.eclipse.team.tests.core test.xml">      
-    		<antcall target="runtests" >
-    	  		<param name="testPlugin" value="${org.eclipse.team.tests.core}" />
+    	<antcall target="runtests" >
+     		<param name="testPlugin" value="${org.eclipse.team.tests.core}" />
 			<param name="report" value="org.eclipse.team.tests.core" />
-    		</antcall>
+   		</antcall>
 	</target>
 
-	<target name="teamcvs" description="Runs the org.eclipse.team.tests.cvs.core test.xml.  This test requires additional setup.  See documentation in org.eclipse.team.tests.cvs.core">
-		<!--  Need to setup Eclipse first because of text replacement in a properties file  -->
-		<antcall target="setup" />
-
-		<!-- Fill in cvs repository information -->
-		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@user@" value="@cvs_user@"/>
-		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@password@" value="@cvs_password@"/>
-		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@host@" value="@cvs_host@"/>
-		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@root@" value="@cvs_root@"/>
-	
-	
-		<antcall target="${test.target}">
+	<target name="teamcvs" description="Runs the org.eclipse.team.tests.cvs.core test.xml.  This test requires additional setup.  See documentation in org.eclipse.team.tests.cvs.core">	
+		<antcall target="runtests">
 	  		<param name="testPlugin" value="${org.eclipse.team.tests.cvs.core}" />
-			<param name="output-file" value="org.eclipse.team.tests.cvs.xml" />
 			<param name="report" value="org.eclipse.team.tests.cvs" />
-    		</antcall>
-    	
-		<copy file="${eclipse-home}/org.eclipse.team.tests.cvs.xml" tofile="${results}/xml/org.eclipse.team.tests.cvs_${platform}.xml" failonerror="false" />
-		<antcall target="genHtml" />
+   		</antcall>
    	</target>
-
 
 	<target name="ui" description="Runs the org.eclipse.ui.tests test.xml">
 		<antcall target="runtests">
@@ -271,10 +272,11 @@
 
 
 	<target name="all">
-		<!--antcall target="relEng" />
-		<antcall target="pdeui" /-->
+		<antcall target="relEng" />
+		<antcall target="pdeui" />
 		<antcall target="ant" />
-		<!--antcall target="core" />
+		<antcall target="compare" />
+		<antcall target="core" />
 		<antcall target="coreexpressions" />
 		<antcall target="help" />
 		<antcall target="update" />
@@ -288,9 +290,9 @@
 		<antcall target="jdtcoremodel" />
 		<antcall target="ui" />
 		<antcall target="uieditors" />
-		<antcall target="uiworkbenchtexteditor" /-->
+		<antcall target="uiworkbenchtexteditor" />
 		<antcall target="uircp" />
-		<!--antcall target="jdtdebug" />
+		<antcall target="jdtdebug" />
 		<antcall target="jdtui" />
 		<antcall target="jdtuirefactoring" />
 		<antcall target="ltkuirefactoringtests" />
@@ -298,16 +300,12 @@
 		<antcall target="text" />
 		<antcall target="jface" />
 		<antcall target="filebuffers" />
-		<antcall target="jdttext" /-->
+		<antcall target="jdttext" />
 	</target>
 	
 
 	<target name="genHtml" description="Generates HTML results with provided JUNIT.XSL provided">
-		<condition property="junit.xsl" value="JUNIT_perf.XSL">
-			<equals arg1="${test.target}" arg2="performance" />
-		</condition>
-		<property name="junit.xsl" value="JUNIT.XSL" />
-		<style style="${junit.xsl}" basedir="${results}/xml" destdir="${results}/html" />
+		<style style="JUNIT.XSL" basedir="${results}/xml" destdir="${results}/html" />
 	</target>
 
 </project>

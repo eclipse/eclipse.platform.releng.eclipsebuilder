@@ -66,7 +66,7 @@ fi
 cd $dir
 
 # verify os, ws and arch values passed in are valid before running tests
-if [ "$os-$ws-$arch" = "linux-motif-x86" ] || [ "$os-$ws-$arch" = "linux-gtk-x86" ] || [ "$os-$ws-$arch" = "solaris-motif-sparc" ] || [ "$os-$ws-$arch" = "aix-motif-sparc" ] || [ "$os-$ws-$arch" = "hpux-motif-ppc" ] || [ "$os-$ws-$arch" = "qnx-photon-x86" ]
+if [ "$os-$ws-$arch" = "linux-motif-x86" ] || [ "$os-$ws-$arch" = "linux-gtk-x86" ] || [ "$os-$ws-$arch" = "solaris-motif-sparc" ] || [ "$os-$ws-$arch" = "solaris-gtk-sparc" ]|| [ "$os-$ws-$arch" = "aix-motif-sparc" ] || [ "$os-$ws-$arch" = "hpux-motif-ppc" ] || [ "$os-$ws-$arch" = "qnx-photon-x86" ]
 then
 	if [ ! -r eclipse ]
 	then
