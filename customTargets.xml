@@ -950,7 +950,7 @@
 <target name="preCompile">
 	<antcall target="fetchPlatformLauncher"/>
 	<ant antfile="verifyFetch.xml" />
-	<!--antcall target="buildSourceDrops" /-->
+	<antcall target="buildSourceDrops" />
 	<antcall target="compileSwtWin32Fragment" />
 </target>
 
