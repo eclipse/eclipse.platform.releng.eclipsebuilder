@@ -1099,8 +1099,8 @@
 		<property name="dropTokenList" value="%sdk%,%tests%,%example%,%runtime%,%jdt%,%teamextras%" />
 	</ant>
 	
- 	<!--  Insert Build Label  -->
-	<replace file="${buildLabel}/index.php" token="@buildlabel@" value="${buildLabel}"/>
+ 	<!--  Insert ftp url for drop directory  -->
+	<replace file="${buildLabel}/index.php" token="@ftpdir@" value="ftp://download.eclipse.org/${buildLabel}"/>
 
 	<!--copy the test results and new index page to the posting location-->
 	<copy todir="${postingDirectory}/${buildLabel}" overwrite="true">
