@@ -279,6 +279,76 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 </target>
 
 <!-- ===================================================================== -->
+		<!-- Targets called before extracting binary distributables.               -->
+		<!-- ===================================================================== -->
+		<target name="buildSourceDrops">
+			<mkdir dir="${postingDirectory}/${buildLabel}" />
+			<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
+			<property name="tempDir" value="${basedir}/temp" />
+			<mkdir dir="${tempDir}/buildScripts" />
+
+			<copy file="${buildDirectory}/label.properties" todir="${tempDir}/buildScripts" />
+
+			<copy todir="${tempDir}/buildScripts" flatten="true">
+				<fileset dir="${base.builder}/plugins" includes="org.eclipse.jdt.core*/**/jdtcore.jar,org.eclipse.jdt.core*/**/jdtCompilerAdapter.jar" />
+			</copy>
+
+			<copy todir="${tempDir}/buildScripts" flatten="true" overwrite="true">
+				<fileset dir="srcBuild" excludes="incl/**,fetch" />
+			</copy>
+
+			<!--  set correct permissions on linux script -->
+			<chmod file="${tempDir}/buildScripts/build" perm="755" />
+
+			<!--copy example doc and generate extension-point doc-->
+			<ant antfile="buildDoc.xml" target="convertSchemaToHtml" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.isv"/>
+			<ant antfile="buildDoc.xml" target="examplesDocCopy" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.isv"/>
+			<ant antfile="buildDoc.xml" target="convertSchemaToHtml" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv"/>
+			<ant antfile="buildDoc.xml" target="examplesDocCopy" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv"/>
+			<ant antfile="buildDoc.xml" target="convertSchemaToHtml" dir="${buildDirectory}/plugins/org.eclipse.pde.doc.user"/>
+
+			<copy todir="${tempDir}/buildScripts">
+				<fileset dir="${buildDirectory}" excludes="features/*example*/**,plugins/*example*/**" includes="features/*/build.xml,features/*.source*/**,plugins/*/build.xml,plugins/*.source*/**,fetch_*.xml,assemble*.xml,plugins/org.eclipse.swt.tools/**,plugins/*doc*/**" />
+			</copy>
+			
+			<!-- create drop containing the fetch scripts, no source -->
+			<exec dir="${tempDir}" executable="zip">
+				<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-sourceBuild-srcFetch-${buildId}.zip -r ." />
+			</exec>
+
+			<!--generate md5-->
+			<checksum file="${postingDirectory}/${buildLabel}/eclipse-sourceBuild-srcFetch-${buildId}.zip" property="md5"/>
+			<echo message="${md5} *eclipse-sourceBuild-srcFetch-${buildId}.zip" file="${postingDirectory}/${buildLabel}/checksum/eclipse-sourceBuild-srcFetch-${buildId}.zip.md5"/>
+
+			<!--  create zip with all source for an Eclipse SDK  -->
+			<copy todir="${tempDir}/buildScripts">
+				<fileset dir="${buildDirectory}" includes="features/,plugins/" excludes="features/*example*/**,plugins/*example*/**" />
+			</copy>
+			<copy todir="${tempDir}/buildScripts" flatten="true" overwrite="true">
+				<fileset dir="srcBuild" excludes="fetch/**,incl" />
+			</copy>
+
+			<!-- fetch scripts are not when source already included in zip file -->
+			<delete>
+				<fileset dir="${tempDir}/buildScripts" includes="fetch*.xml" />
+			</delete>
+
+			<!--  set correct permissions on linux script -->
+			<chmod file="${tempDir}/buildScripts/build" perm="755" />
+			<exec dir="${tempDir}/buildScripts" executable="zip">
+				<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-sourceBuild-srcIncluded-${buildId}.zip -r ." />
+			</exec>
+			<checksum file="${postingDirectory}/${buildLabel}/eclipse-sourceBuild-srcIncluded-${buildId}.zip" property="md5.2"/>
+			<echo message="${md5.2} *eclipse-sourceBuild-srcIncluded-${buildId}.zip" file="${postingDirectory}/${buildLabel}/checksum/eclipse-sourceBuild-srcIncluded-${buildId}.zip.md5"/>
+
+			<copy file="srcBuild/incl/instructions.html" tofile="${postingDirectory}/${buildLabel}/srcIncludedBuildInstructions.html" />
+			<copy file="srcBuild/fetch/instructions.html" tofile="${postingDirectory}/${buildLabel}/srcFetchBuildInstructions.html" />
+
+			<delete dir="${tempDir}/" />
+		</target>
+	
+
+<!-- ===================================================================== -->
 <!-- Default target                                                        -->
 <!-- ===================================================================== -->
 <target name="noDefault">

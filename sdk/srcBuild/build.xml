@@ -1,0 +1,209 @@
+<project name="Eclipse SDK Source Build" default="run" basedir=".">
+
+	<!--  default target that runs complete build  -->
+	<target name="run" depends="fetch,insertBuildId,compile,compilelibs,install" />
+	
+	<!--  all features required to build eclipse sdk and javadoc  -->
+	<target name="allElements">
+		<ant antfile="${buildDirectory}/features/org.eclipse.sdk/build.xml" target="${target}" dir="${buildDirectory}/features/org.eclipse.sdk" />
+	</target>
+	
+	<target name="fetch" depends="init" if="srcFetch">
+		<touch file="${cvspass}" />
+		<property name="featureOnly" value="true"/>
+		<property name="featureAndPlugins" value="true"/>
+		<property name="featuresRecursively" value="true"/>
+		<ant antfile="fetch_org.eclipse.launchers.xml"/>
+		<ant antfile="fetch_org.eclipse.sdk.xml" />
+	</target>
+	
+	<!--     Fill in values for original timestamp in all about.mappings files  -->
+	<target name="insertBuildId" depends="init">
+		<replace dir="${buildDirectory}/plugins" value="${buildId}" token="@build@">
+			<include name="**/about.mappings" />
+		</replace>
+		<replace dir="${buildDirectory}" value="${buildId}" token="@build@">
+			<include name="**/configuration/config.ini" />
+		</replace>
+	</target>
+
+	<!--  
+		  Compiles jars for all sdk plugins, and generates javadoc.
+		  Deletes previously compiled jars first.
+	-->
+		 <target name="compile" depends="init,clean">
+		 		 <echo message="Compiling..." />
+		 		 <record name="compilelog.txt" action="start" />
+  		 		 <antcall target="allElements">
+		 		 		 <param name="target" value="build.jars" />
+		 		 </antcall>
+		 		 <record name="compilelog.txt" action="stop" /> 
+		 </target>
+		 
+		 <target name="compilelibs" depends="init,clean,compile" if="libsconfig">
+		         <property name="swtlibs" value="${buildDirectory}/swttmp"/>
+		 		 		  <mkdir dir="${swtlibs}"/>
+		         <condition property="wsType" value="gtk64">
+		                <or>
+                           <equals arg1="${installOs}-${installWs}-${installArch}"
+                                        arg2="linux-gtk-ppc64"/>
+                           <equals arg1="${installOs}-${installWs}-${installArch}"
+                                        arg2="linux-gtk-ia64"/>
+                           <equals arg1="${installOs}-${installWs}-${installArch}"
+                                        arg2="linux-gtk-amd64"/>
+		                </or>
+		         </condition>
+                <condition property="wsType" value="gtk">
+                     <or>
+                        <equals arg1="${installOs}-${installWs}-${installArch}"
+                                    arg2="linux-gtk-ppc"/>
+                        <equals arg1="${installOs}-${installWs}-${installArch}"
+                                    arg2="linux-gtk-x86"/>
+                     </or>
+                 </condition>
+		         <condition property="wsType" value="motif">
+                     <or>
+                        <equals arg1="${installOs}-${installWs}-${installArch}"
+                                    arg2="linux-motif-x86"/>
+                        <equals arg1="${installOs}-${installWs}-${installArch}"
+                                    arg2="hpux-motif-ia64"/>
+                     </or>
+                 </condition>
+
+	        <!-- unzip swt zips -->
+	        <unzip  dest="${swtlibs}">
+	          <fileset dir="${buildDirectory}/plugins/org.eclipse.platform.source.${installOs}.${installWs}.${installArch}/src/">              <include name ="org.eclipse.swt.${wsType}_*/ws/${installWs}/**/*.zip"/>
+	          </fileset>
+	        </unzip> 	      
+	        <exec dir="${swtlibs}/" executable="sh" failonerror="true">
+	            <arg line="build.sh"/>
+	        </exec>
+	       <property name="swtdir" value="${buildDirectory}/plugins/org.eclipse.swt.${wsType}/os/${installOs}/${installArch}"/>
+	       <mkdir dir="${swtdir}"/>
+	       <move todir="${swtdir}/">
+	            <fileset dir="${swtlibs}">
+	                <include name="**/*.so"/>
+	            </fileset> 
+	        </move>  
+	          <!--unzip launcher -->
+	        <property name="launcherlibs" value="${buildDirectory}/launchertmp"/>
+			 <mkdir dir="${launcherlibs}"/>
+	        <unzip dest="${launcherlibs}">
+	          <fileset dir="${buildDirectory}/plugins/org.eclipse.platform.source/src/">
+	              <include name ="org.eclipse.platform_*/launchersrc.zip"/>
+	          </fileset>
+	        </unzip>
+	        <exec dir="${launcherlibs}/library/${installWs}/" executable="sh" os="Linux" failonerror="true">
+	            <arg line="build.sh"/>
+	        </exec>
+	        <move file="${launcherlibs}/library/${installWs}/eclipse" todir="${launcherlibs}/">
+	        </move>
+	        </target>
+
+
+	<!--create an installable eclipse runtime-->
+	<target name="install" depends="init">
+		<echo message="Assembling..." />
+		<!--task used in the gather.bin.parts target for features-->
+		<!--the defining class must be built in compile target-->
+		<taskdef name="eclipse.idReplacer" classname="org.eclipse.pde.internal.build.tasks.IdReplaceTask" classpath="${buildDirectory}/plugins/org.eclipse.pde.build/lib/pdebuild-ant.jar" />
+		
+		<!--root directory of zip file-->
+		<property name="collectingFolder" value="eclipse" />
+		<property name="archivePrefix" value="eclipse" />
+
+		<!--zip executable flags to use on unix, mac -->
+		<condition property="zipargs" value="-y -qq">
+			<or>
+		     <os family="unix" />
+		     <os family="mac" />
+      		</or>
+		</condition>
+
+		<!--default zip executable flags-->
+		<property name="zipargs" value="-qq" />
+	
+		<!--run the PDE BUILD generated assembly script for specified configuration -->		
+		<ant antfile="assemble.org.eclipse.sdk.${installOs}.${installWs}.${installArch}.xml" />
+		<echo message="Done." />
+	</target>
+
+	<!--  Deletes jars that are to be recompiled  -->	
+	<target name="clean" depends="init">
+		<echo message="Deleting jars to recompile..." />
+		<antcall target="allElements">
+			<param name="target" value="clean" />
+		</antcall>
+	</target>
+	
+	<target name="init">
+		<!--directory in which to collect installable eclipse-->
+		<property name="buildLabel" value="result" />
+		
+		<!--  directory where to perform the build  -->
+		<property name="buildDirectory" value="${basedir}" />
+		
+		<!--  identifies build type and original build date  -->
+		<property file="${basedir}/label.properties" />
+		
+		<!--location of .cvspass file-->
+		<condition property="cvspass" value="c:\.cvspass">
+		     <os family="windows" />
+		</condition>
+		<property name="cvspass" value="${user.home}/.cvspass" />
+		
+		<!--bootclasspath-->
+		<path id="default.bootclasspath">
+			<fileset dir="${java.home}/lib">
+				<include name="*.jar" />
+			</fileset>
+		</path>
+		<path id="mac.bootclasspath">
+		    <fileset dir="${java.home}/..">
+		        <include name="Classes/**/*.jar"/>
+		    </fileset>
+		</path>
+		<property name="mac.bootclasspath" refid="mac.bootclasspath" />
+		<condition property="bootclasspath" value="${mac.bootclasspath}" >
+	     		<os family="mac"/>
+	    </condition>
+		<property name="bootclasspath" refid="default.bootclasspath" />
+
+		<!--set the compiler and compiler arguments-->
+		<!--the default compiler is set to the one used by eclipse rel. eng. -->
+		<condition property="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter">
+			<and>
+				<available file="${basedir}/jdtcore.jar" />
+				<available file="${basedir}/jdtCompilerAdapter.jar" />
+			</and>
+		</condition>
+		<condition property="compilerArg" value="-enableJavadoc -encoding ISO-8859-1">
+			<equals arg1="${build.compiler}" arg2="org.eclipse.jdt.core.JDTCompilerAdapter" />
+		</condition>
+		<property name="compilerArg" value="-encoding ISO-8859-1" />
+		<property name="javacSource" value="1.3" />
+		<property name="javacTarget" value="1.2" />
+		<property name="javacDebugInfo" value="true" />
+		<property name="javacFailOnError" value="true" />
+		
+		<!--required property setting to build bundles in Eclipse 3.x stream builds -->
+		<property name="buildingOSGi" value="true" />
+
+		<!--indentifies this as a srcFetch build-->
+		<available file="fetch_org.eclipse.launchers.xml" property="srcFetch" />
+		
+		 <!-- determines if libraries need to be recompiled for specific platforms -->
+				 		 <condition property="libsconfig">
+		                <or>
+		                    <equals arg1="${installOs}-${installWs}-${installArch}"
+		                        arg2="linux-gtk-ppc"/>
+		                     <equals arg1="${installOs}-${installWs}-${installArch}"
+		                        arg2="linux-gtk-ppc64"/>
+		                     <equals arg1="${installOs}-${installWs}-${installArch}"
+		                        arg2="linux-gtk-ia64"/>
+                   	        <equals arg1="${installOs}-${installWs}-${installArch}"
+	                           arg2="hpux-motif-ia64"/>		               
+		               </or>
+		            </condition> 
+	</target>
+</project>
