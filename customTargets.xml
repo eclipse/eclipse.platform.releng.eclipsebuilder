@@ -1073,18 +1073,22 @@
 	<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.motif">
 		<property name="os" value="linux" />
 		<property name="ws" value="motif" />
+		<property name="arch" value="x86" />
 	</ant>
 	<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.motif">
 		<property name="os" value="aix" />
 		<property name="ws" value="motif" />
+		<property name="arch" value="ppc" />
 	</ant>
 	<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.motif">
 		<property name="os" value="hpux" />
 		<property name="ws" value="motif" />
+		<property name="arch" value="PA_RISC" />
 	</ant>
 	<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.motif">
 		<property name="os" value="solaris" />
 		<property name="ws" value="motif" />
+		<property name="arch" value="sparc" />
 	</ant>
 	<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.photon">
 		<property name="os" value="qnx" />
