@@ -16,13 +16,9 @@
   <br>
 </p>
 <p><b><a name="description"></a>Description</b></p>
-<p>org.eclipse.releng.eclipsebuilder contains Ant scripts that use the script 
-  generators in org.eclipse.pde.build to build all shipped <a href="#components">components 
-  of Eclipse:</a> SDK, Platform JDT, examples, tests and Team Extras. A wrapper 
-  script, org.eclipse.releng.eclipsebuilder/build.xml, is provided to build a 
-  specified component. This script in combination with the build.properties for 
-  a component provide default settings of necessary Ant properties used in the 
-  build. <br>
+<p>org.eclipse.releng.eclipsebuilder contains Ant scripts that invoke script generators 
+  in org.eclipse.pde.build to build all shipped <a href="#components">components 
+  of Eclipse:</a> SDK, Platform JDT, examples, tests and Team Extras.<br>
   <br>
 </p>
 <p><b><a name="prereq"></a>Prerequisites</b><br>
@@ -149,7 +145,7 @@
     <td>buildLabel</td>
     <td>Refers to the name of the directory which will contain the end result 
       of the build. Default set to ${buildType}.${buildId}, ie.&quot;I.build&quot;. 
-      This directoryn will be created inside the location specified by the ${buildDirectory} 
+      This directory will be created inside the location specified by the ${buildDirectory} 
       property.</td>
   </tr>
   <tr> 
