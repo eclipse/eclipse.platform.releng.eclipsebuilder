@@ -44,7 +44,11 @@ usage="usage: $0 [-mail][-buildid name][-buildLabel directory name][-mapVersionT
 while [ $# -gt 0 ]
 do
 	case "$1" in
+		-?)
+			echo >&2 $usage
+			exit 1;;
 		-buildid) buildid="$2"; shift;;
+		-buildType) buildType="$2"; shift;;
 		-buildLabel) buildLabel="$2"; shift;;
 		-postingDirectory) postingDirectory="$2"; shift;;
 		-bootclasspath) bootclasspath="$2"; shift;;
@@ -57,9 +61,6 @@ do
 	esac
 	shift
 done
-
-# After the above the build type is left in $1.
-buildType=$1
 
 # Set default buildid and buildLabel if none explicitly set
 if [ "$buildid" = "" ]
@@ -81,7 +82,7 @@ fi
 if ! -e $bootclasspath
 then
 	echo rt.jar does not exist at this location:  $bootclasspath.  Please verify your bootclasspath setting.
-	exit;;
+	exit 1;;
 fi
 
 if ! -e $JAVADOC14_HOME/javadoc
