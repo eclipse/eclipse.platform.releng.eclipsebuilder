@@ -300,7 +300,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			</copy>
 			<mkdir dir="${tempDir}/buildScripts/jdtcoresrc"/>
 			<copy todir="${tempDir}/buildScripts/jdtcoresrc" overwrite="true">
-				<fileset dir="${eclipse.build.scripts}/sdk/srcBuild/jdtcoresrc/*"/>
+				<fileset dir="${eclipse.build.scripts}/sdk/srcBuild/jdtcoresrc"/>
 			</copy>
 
 			<!--  set correct permissions on linux script -->
