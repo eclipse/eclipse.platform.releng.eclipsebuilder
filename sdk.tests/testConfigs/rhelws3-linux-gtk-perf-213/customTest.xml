@@ -1,9 +1,6 @@
 <project name="Customized testing instructions" default="customSetup">
 
 	<target name="customSetup">
-		<!--property file containing key value pair for ${eclipse.perf.ref}-->
-		<property file="${ref.properties}" />
-		
 		<antcall target="installVm" />
 		<!--copy the script which sets up environment and invokes the tests on test machine-->
 		<chmod file="${tester}/testAll.sh" perm="755" />
@@ -16,19 +13,21 @@
 			<arg line="${tester}/../../testScripts/test.xml ${testMachine}:${executionDir}" />
 		</exec>
 		<condition property="buildRelease" value="3.0_200406251208">
-			<equals arg1="${mapVersionTag}" arg2="perf_30"/>
+			<equals arg1="${testedBuildId}" arg2="3.0"/>
 		</condition>
 		<condition property="buildRelease" value="3.0.1_200409161125">
-			<equals arg1="${mapVersionTag}" arg2="perf_301"/>
+			<equals arg1="${testedBuildId}" arg2="3.0.1"/>
+		</condition>
+		<condition property="buildRelease" value="3.0.2_">
+			<equals arg1="${mapVersionTag}" arg2="3.0.2_200503110845"/>
 		</condition>
 		<condition property="buildRelease" value="2.1.3_200403101828">
-			<equals arg1="${mapVersionTag}" arg2="perf_213"/>
+			<equals arg1="${testedBuildId}" arg2="2.1.3"/>
 		</condition>
 
-		<replace file="${tester}/vm.properties" token="@buildType@@timestamp@" value="${buildType}${timestamp}"/>
-		<replace file="${tester}/vm.properties" token="@reference@" value="${eclipse.perf.ref}"/>		
+		<replace file="${tester}/vm.properties" token="@buildType@@timestamp@" value="${buildRelease}_${timestamp}" />
 
-		<!--copy in the properties file for testing with J9 vm args-->	
+		<!--copy in the properties file for testing with performance vm args-->	
 		<exec dir="." executable="${copyClient}">
 			<arg line="${tester}/vm.properties ${testMachine}:${executionDir}" />
 		</exec>

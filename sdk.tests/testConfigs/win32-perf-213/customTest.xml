@@ -12,13 +12,16 @@
 			<arg line="${tester}/../../testScripts/test.xml ${testMachine}:${executionDir}" />
 		</exec>
 		<condition property="buildRelease" value="3.0_200406251208">
-			<equals arg1="${mapVersionTag}" arg2="perf_30"/>
+			<equals arg1="${testedBuildId}" arg2="3.0"/>
 		</condition>
 		<condition property="buildRelease" value="3.0.1_200409161125">
-			<equals arg1="${mapVersionTag}" arg2="perf_301"/>
+			<equals arg1="${testedBuildId}" arg2="3.0.1"/>
+		</condition>
+		<condition property="buildRelease" value="3.0.2_">
+			<equals arg1="${mapVersionTag}" arg2="3.0.2_200503110845"/>
 		</condition>
 		<condition property="buildRelease" value="2.1.3_200403101828">
-			<equals arg1="${mapVersionTag}" arg2="perf_213"/>
+			<equals arg1="${testedBuildId}" arg2="2.1.3"/>
 		</condition>
 			
 		<replace file="${tester}/vm.properties" token="@buildType@@timestamp@" value="${buildRelease}_${timestamp}"/>
