@@ -98,7 +98,7 @@
 <!-- ===================================================================== -->
 <target name="postAssemble">
 <!--HACK to remove unnecessary org.eclipse.swt.gtk fragment-->
-	<exec executable="unzip" dir=".">
+	<!--exec executable="unzip" dir=".">
 		<arg line="-qq ${buildDirectory}/${buildLabel}/eclipse-platform-${buildId}-linux-gtk-amd64.zip -d ${buildDirectory}/amd64tmp" />
 	</exec>
 	<delete includeEmptyDirs="true">
@@ -108,7 +108,7 @@
 	<exec executable="zip" dir="${buildDirectory}/amd64tmp">
 		<arg line="-y ${buildDirectory}/${buildLabel}/eclipse-platform-${buildId}-linux-gtk-amd64.zip -r eclipse" />
 	</exec>
-	<delete dir="${buildDirectory}/amd64tmp" />
+	<delete dir="${buildDirectory}/amd64tmp" /-->
 </target>
 
 

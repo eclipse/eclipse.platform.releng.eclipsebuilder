@@ -137,7 +137,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 <!-- ===================================================================== -->
 <target name="postAssemble">
 <!--HACK to remove unnecessary org.eclipse.swt.gtk fragment-->
-	<exec executable="unzip" dir=".">
+	<!--exec executable="unzip" dir=".">
 		<arg line="-qq ${buildDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-amd64.zip -d ${buildDirectory}/amd64tmp" />
 	</exec>
 	<delete includeEmptyDirs="true">
@@ -147,7 +147,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<exec executable="zip" dir="${buildDirectory}/amd64tmp">
 		<arg line="-y ${buildDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-amd64.zip -r eclipse" />
 	</exec>
-	<delete dir="${buildDirectory}/amd64tmp" />
+	<delete dir="${buildDirectory}/amd64tmp" /-->
 </target>
 
 
