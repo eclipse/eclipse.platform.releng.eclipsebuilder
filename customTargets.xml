@@ -468,7 +468,7 @@
 		<property name="featureTargetList" value="macosxCarbonSdkFeatures" />
 		<property name="os" value="macosx" />
 		<property name="ws" value="carbon" />
-		<property name="productTarName" value="${basedir}/${buildLabel}/eclipse-platform-${buildid}-macosx-carbon.tar" />
+		<property name="productTarName" value="eclipse-SDK-${buildid}-macosx-carbon.tar" />
 		<property name="productZipName" value="${basedir}/${buildLabel}/eclipse-SDK-${buildid}-macosx-carbon.zip" />
 		<property name="productIsSDK" value="true" />
 		<property name="postAssemblyTarget" value="macosxCarbonPostAssembly" />
@@ -637,7 +637,7 @@
 		<property name="os" value="macosx" />
 		<property name="ws" value="carbon" />
 		<property name="productZipName" value="${basedir}/${buildLabel}/eclipse-platform-${buildid}-macosx-carbon.zip" />
-		<property name="productTarName" value="${basedir}/${buildLabel}/eclipse-platform-${buildid}-macosx-carbon.tar" />
+		<property name="productTarName" value="eclipse-platform-${buildid}-macosx-carbon.tar" />
 		<property name="postAssemblyTarget" value="macosxCarbonPostAssembly" />
 		<property name="workingDirectory" value="${basedir}/temp/eclipse" />
 		<property name="launcherFilesDir" value="macosx" />
