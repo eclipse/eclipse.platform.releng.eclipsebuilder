@@ -37,6 +37,11 @@
 	<property name="archiveName" value="eclipse-platform-${buildId}-linux-gtk-amd64.zip"/>
 	<ant antfile="${assembleScriptName}"/>
 </target>
+
+<target name="assemble.org.eclipse.platform.linux.gtk.ia64">
+	<property name="archiveName" value="eclipse-platform-${buildId}-linux-gtk-ia64.zip"/>
+	<ant antfile="${assembleScriptName}"/>
+</target>
 	
 <target name="assemble.org.eclipse.platform.solaris.motif.sparc">
 	<property name="archiveName" value="eclipse-platform-${buildId}-solaris-motif.zip"/>
