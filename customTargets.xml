@@ -1079,7 +1079,7 @@
  	</ant>
  	
  	<!--  Insert ftp url for drop directory  -->
-	<replace file="${buildLabel}/index.php" token="@ftpdir@" value="ftp://download.eclipse.org/${buildLabel}"/>
+	<replace file="${buildLabel}/index.php" token="@buildlabel@" value="${buildLabel}"/>
 
  	<ant antfile="publish.xml" target="getStaticFiles" />
   	<ant antfile="publish.xml" target="copyBuild" />
@@ -1101,7 +1101,7 @@
 	</ant>
 	
  	<!--  Insert ftp url for drop directory  -->
-	<replace file="${buildLabel}/index.php" token="@ftpdir@" value="ftp://download.eclipse.org/${buildLabel}"/>
+	<replace file="${buildLabel}/index.php" token="@buildlabel@" value="${buildLabel}"/>
 
 	<!--copy the test results and new index page to the posting location-->
 	<copy todir="${postingDirectory}/${buildLabel}" overwrite="true">
