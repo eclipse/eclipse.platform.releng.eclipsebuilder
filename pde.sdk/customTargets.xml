@@ -63,17 +63,6 @@
 <!-- Steps to do before fetching the build elements -->
 <!-- ===================================================================== -->
 <target name="preFetch">
-
-	<!--create a dummy fetch script-->
-	<echo file="${buildDirectory}/fetch_org.eclipse.pde.source.xml" append="true">
-		&lt;project default="fetch" &gt;
-	</echo>
-	<echo file="${buildDirectory}/fetch_org.eclipse.pde.source.xml" append="true">
-		&lt;target name="fetch" /&gt;
-	</echo>
-	<echo file="${buildDirectory}/fetch_org.eclipse.pde.source.xml" append="true">
-		&lt;/project&gt;
-	</echo>
 </target>
 
 <!-- ===================================================================== -->
