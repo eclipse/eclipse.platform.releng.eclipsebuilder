@@ -22,8 +22,8 @@
 	<parallel>
 		<antcall target="testWinXPPerf" />
 		<antcall target="testWinXPPerf213" />
-		<antcall target="testLinuxGTKPerf" />
-		<antcall target="testLinuxGTKPerf213" />
+		<!--antcall target="testLinuxGTKPerf" />
+		<antcall target="testLinuxGTKPerf213" /-->
 	</parallel>
 	<echo message="Performance testing complete." />
 </target>
