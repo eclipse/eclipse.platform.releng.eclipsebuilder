@@ -2,6 +2,9 @@
 <project name="Customized testing instructions" default="customSetup">
 
 	<target name="customSetup">
+		<!--property file containing key value pair for ${eclipse.perf.ref}-->
+		<property file="${ref.properties}" />
+				
 		<antcall target="installVm" />
 		<!--copy the script which sets up environment and invokes the tests on test machine-->
 		<exec dir="." executable="${copyClient}">
