@@ -135,6 +135,11 @@
 <!-- Steps to do after the fetch -->
 <!-- ===================================================================== -->
 <target name="postFetch">
+	<ant antfile="${genericTargets}" target="fetchElement">
+		<property name="type" value="feature" />
+		<property name="id" value="org.eclipse.launchers" />
+	</ant>
+
 	<!--fetch and compile swt tools-->
 	<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
 		<property name="type" value="plugin" />
