@@ -17,13 +17,16 @@
 		</exec>
 		
 		<replace file="${tester}/vm.properties" token="@buildType@@timestamp@" value="${buildId}"/>
+		<replace file="${tester}/team.properties" token="@buildType@@timestamp@" value="${buildId}"/>
 		<replace file="${tester}/vm.properties" token="@reference@" value="${eclipse.perf.ref}"/>
 		
-		<!--copy in the properties file for testing with J9 vm args-->	
+		<!--copy in the properties file for testing with performance vm args-->	
 		<exec dir="." executable="${copyClient}">
 			<arg line="${tester}/vm.properties ${testMachine}:${executionDir}" />
 		</exec>
-		
+		<exec dir="." executable="${copyClient}">
+			<arg line="${tester}/team.properties ${testMachine}:${executionDir}" />
+		</exec>
 		<!--copy in the extra binaries needed to run tests-->	
 		<exec dir="." executable="${copyClient}">
 			<arg line="-r ${extraBinariesDir} ${testMachine}:${testDir}" />
