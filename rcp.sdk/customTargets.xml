@@ -65,14 +65,9 @@
 	</target>
 
 	<target name="assemble">
-		<property name="${postingDirectory}" value="${buildDirectory}" />
-		<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
 		<ant antfile="${assembleScriptName}" />
-
-		<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
-		<checksum file="${postingDirectory}/${buildLabel}/${archiveName}" property="checksum" />
-		<echo file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5" message="${checksum} *${archiveName}" />
 	</target>
+
 	<!-- ===================================================================== -->
 	<!-- Check out map files from correct repository -->
 	<!-- Replace values for cvsRoot, package and mapVersionTag as desired. -->

@@ -1,7 +1,7 @@
 <project default="main">
 
 	<property name="pde.build.scripts" value="${basedir}/../org.eclipse.releng.basebuilder/plugins/org.eclipse.pde.build_3.0.0/scripts" />
-
+	
 	<target name="main">
 		<touch file="${user.home}/.cvspass" />
 
@@ -25,34 +25,34 @@
 		<ant antfile="build.xml" dir="${pde.build.scripts}">
 			<property name="builder" value="${basedir}/${component}" />
 		</ant>
-
+		
 	</target>
-
+	
 	<target name="create.label.properties" unless="label.properties.exists">
-		<mkdir dir="${buildDirectory}" />
-		<tstamp />
-		<property name="date" value="${DSTAMP}" />
-		<property name="time" value="${TSTAMP}" />
-		<property name="timestamp" value="${date}${time}" />
-		<property name="buildType" value="I" />
-		<property name="buildId" value="${buildType}${date}" />
+			<mkdir dir="${buildDirectory}" />
+			<tstamp/>
+			<property name="date" value="${DSTAMP}" />
+			<property name="time" value="${TSTAMP}" />
+			<property name="timestamp" value="${date}${time}" />
+			<property name="buildType" value="I" />
+			<property name="buildId" value="${buildType}${date}" />
 
-		<!--this naming convention used by php scripts on download server-->
-		<property name="buildLabel" value="${buildType}-${buildId}-${timestamp}" />
+			<!--this naming convention used by php scripts on download server-->
+			<property name="buildLabel" value="${buildType}-${buildId}-${timestamp}" />
 
-		<!--store the build label information in a file-->
-		<echo file="${buildDirectory}/label.properties" append="true">
+			<!--store the build label information in a file-->
+			<echo file="${buildDirectory}/label.properties" append="true" >
 			buildType=${buildType}
 			</echo>
-		<echo file="${buildDirectory}/label.properties" append="true">
+			<echo file="${buildDirectory}/label.properties" append="true" >
 			buildId=${buildId}
 			</echo>
-		<echo file="${buildDirectory}/label.properties" append="true">
+			<echo file="${buildDirectory}/label.properties" append="true" >
 			timestamp=${timestamp}
 			</echo>
-		<echo file="${buildDirectory}/label.properties" append="true">
+			<echo file="${buildDirectory}/label.properties" append="true" >
 			buildLabel=${buildLabel}
 			</echo>
-	</target>
+		</target>
 
 </project>

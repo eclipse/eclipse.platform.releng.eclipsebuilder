@@ -50,10 +50,14 @@
 	<findMachine cfg="${cfg}" markerContainer="${markerContainer}" cfgKey="eclipse30WinXPTestPerf" markerName="${markerName}" waitInterval="30"/>
 	<property file="${markerContainer}/${markerName}.marker" />
 	<property name="testMachine" value="${0}" />
-		
+	<mkdir dir="/builds/transfer/files/eclipseperf/${buildType}${timestamp}" />
 	<ant antfile="${test.xml}">
 		<property name="tester" value="${basedir}/win32-perf" />
 	</ant>
+	<property file="${basedir}/win32-perf/testing.properties" />
+	<exec dir="." executable="rcp">
+		<arg line="${testMachine}:${executionDir}/results/performance/* /builds/transfer/files/eclipseperf/${buildType}${timestamp}"/>
+	</exec>
 	<delete file="${markerContainer}/${markerName}.marker" />
 </target>
 </project>

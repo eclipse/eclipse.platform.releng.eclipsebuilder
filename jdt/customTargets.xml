@@ -16,26 +16,18 @@
 <!-- ${assembleScriptName}) but may also add pre and post processing -->
 <!-- Add one target for each root element and each configuration -->
 <!-- ===================================================================== -->
+
 <target name="assemble.org.eclipse.jdt">
 	<property name="archiveName" value="eclipse-JDT-${buildId}.zip"/>
-	<antcall target="assemble" />
+	<ant antfile="${assembleScriptName}"/>
 </target>
 
 <target name="assemble.org.eclipse.jdt.macosx.carbon.ppc">
-    <property name="archiveName" value="eclipse-JDT-${buildId}-macosx-carbon.tar.gz"/>
-	<antcall target="assemble" />
+        <property name="archiveName" value="eclipse-JDT-${buildId}-macosx-carbon.tar.gz"/>
+        <ant antfile="${assembleScriptName}"/>
 </target>
 
-<target name="assemble">
-	<property name="${postingDirectory}" value="${buildDirectory}" />
-	<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
-	<ant antfile="${assembleScriptName}"/>
-	
-	<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
-	<checksum file="${postingDirectory}/${buildLabel}/${archiveName}" property="checksum"/>
-	<echo file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5"
-		message="${checksum} *${archiveName}" />
-</target>
+
 
 <!-- ===================================================================== -->
 <!-- Check out map files from correct repository -->
