@@ -38,7 +38,7 @@
 		<copy file="${eclipse-home}/${report}.xml" tofile="${results}/xml/${report}_${platform}.xml" failonerror="false" />
 		<copy todir="${results}/performance">
 			<fileset dir="${eclipse-home}" includes="timer.xml*" />
-			<mapper type="glob" from="*" to="*_${report"/>
+			<mapper type="glob" from="*" to="*_${report}"/>
 		</copy>
 		<antcall target="genHtml" />
 	</target>
