@@ -1,12 +1,13 @@
 <project name="Customized testing instructions" default="customSetup">
 
 	<target name="customSetup">
+		<antcall target="installVm" />
 		<!--copy the script which sets up environment and invokes the tests on test machine-->
 		<exec dir="." executable="${copyClient}">
 			<arg line="${tester}/testAll.bat ${testMachine}:${executionDir}" />
 		</exec>
 		
-	<!--copy in test script modified for running Team CVS tests-->
+		<!--copy in test script modified for running Team CVS tests-->
 		<exec dir="." executable="${copyClient}">
 			<arg line="${tester}/../../testScripts/test.xml ${testMachine}:${executionDir}" />
 		</exec>
@@ -21,5 +22,19 @@
 			<arg line="-r ${extraBinariesDir} ${testMachine}:${testDir}" />
 		</exec>
 	</target>
-
+	
+	<target name="installVm">
+		<!--get and install the vm to test with-->
+		<cvs cvsRoot="${cvsRoot}"
+        	 command="co -d ${tester} ${vmUrl}"
+  		/>
+	
+		<exec dir="." executable="${copyClient}">
+			<arg line="${vmDest} ${testMachine}:${testDir}" />
+		</exec>
+	
+		<exec dir="." executable="${loginClient}">
+			<arg line="${testMachine} ${vmInstallCommand}" />
+		</exec>
+	</target>
 </project>
