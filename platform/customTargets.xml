@@ -34,10 +34,10 @@
 	<antcall target="assemble" />
 </target>
 
-<target name="assemble.org.eclipse.platform.linux.gtk.x86_64">
+<!-- <target name="assemble.org.eclipse.platform.linux.gtk.x86_64">
 	<property name="archiveName" value="eclipse-platform-${buildId}-linux-gtk-x86_64.tar.gz"/>
 	<antcall target="assemble" />
-</target>
+</target> -->
 	
 <target name="assemble.org.eclipse.platform.solaris.motif.sparc">
 	<property name="archiveName" value="eclipse-platform-${buildId}-solaris-motif.tar.gz"/>
