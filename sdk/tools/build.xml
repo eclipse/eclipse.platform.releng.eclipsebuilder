@@ -36,7 +36,7 @@
 		<antcall target="genPdf">
 			<param name="docPlugin" value="org.eclipse.pde.doc.user" />
 		</antcall>	
-	  <antcall target = "cleanUp"/>
+	
 </target>
 
 <target name="genPdf" depends="unzipDoc,parseFiles,genDoc,assemble" />
@@ -69,13 +69,15 @@
        includes="*.pdf"
      />
      <property name="assemble" value="true"/>
+ 	  <antcall target = "cleanUp"/>
  </target>
   
  <target name="cleanUp" if = "assemble">
  <delete>
-    <fileset dir="${builderDir}" includes="**/*.xml.2"/>
-    <fileset dir="${builderDir}" includes="**/*.pdf"/>
-     <fileset dir="${builderDir}" includes="**/${scriptName}"/>
+    <fileset dir="${builderDirectory}" includes="**/*.xml.2"/>
+    <fileset dir="${builderDirectory}" includes="**/*${buildId}.pdf"/>
+     <fileset dir="${builderDirectory}" includes="**/${scriptName}"/>
+ 	<fileset dir="${builderDirectory}" includes="**/toc.html"/>
   </delete>
    <property name="cleanUp" value="true"/>
  </target>
