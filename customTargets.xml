@@ -1062,8 +1062,51 @@
 <!-- called from the org.eclipse.releng.basebuilder/publish.xml            -->
 <!-- ===================================================================== -->
 
+<target name="buildStandAloneSWT">
+	<!--where SWT zip files are created-->
+	<property name="destination" value="${basedir}/${buildLabel}" />
+
+	<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.win32" />
+
+	<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.motif">
+		<property name="os" value="linux" />
+		<property name="ws" value="motif" />
+		<property name="arch" value="x86" />
+	</ant>
+	<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.motif">
+		<property name="os" value="aix" />
+		<property name="ws" value="motif" />
+		<property name="arch" value="ppc" />
+	</ant>
+	<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.motif">
+		<property name="os" value="hpux" />
+		<property name="ws" value="motif" />
+		<property name="arch" value="PA_RISC" />
+	</ant>
+	<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.motif">
+		<property name="os" value="solaris" />
+		<property name="ws" value="motif" />
+		<property name="arch" value="sparc" />
+	</ant>
+	<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.photon">
+		<property name="os" value="qnx" />
+		<property name="ws" value="photon" />
+	</ant>
+	<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.gtk">
+		<property name="os" value="linux" />
+		<property name="ws" value="gtk" />
+	</ant>
+		<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.carbon">
+		<property name="os" value="macosx" />
+		<property name="ws" value="carbon" />
+	</ant>
+</target>
+
 <target name="postBuild" description="Preparing to post the build...">
 <!-- required -->
+
+	<antcall target="buildStandAloneSWT" />
+
 	<!--post clickThroughs-->
 	<copy todir="${buildLabel}">
 		<fileset dir="org.eclipse.releng" includes="clickThroughs/" />
@@ -1080,13 +1123,14 @@
  	<ant antfile="publish.xml" target="generateIndex" >
  		<property name="useNewFormat" value="true" />
  		<property name="isBuildTested" value="true" />
-		<property name="dropTokenList" value="%sdk%,%tests%,%example%,%runtime%,%jdt%,%teamextras%" />	
+		<property name="dropTokenList" value="%sdk%,%tests%,%example%,%runtime%,%jdt%,%teamextras%,%swt%" />	
  	</ant>
  	
  	<!--  Insert ftp url for drop directory  -->
 	<replace file="${buildLabel}/index.php" token="@buildlabel@" value="${buildLabel}"/>
 
  	<ant antfile="publish.xml" target="getStaticFiles" />
+	<antcall target="generateMD5Checksum" />
   	<ant antfile="publish.xml" target="copyBuild" />
  	 	
 </target>
@@ -1096,6 +1140,7 @@
 <!-- ===================================================================== -->
 
 <target name="test">
+
 	<echo message="Starting tests." />
 	<ant antfile="customTest.xml" />
 	
@@ -1103,7 +1148,7 @@
 	<ant antfile="publish.xml" target="generateIndex">
  		<property name="useNewFormat" value="true" />
 		<property name="isBuildTested" value="true" />
-		<property name="dropTokenList" value="%sdk%,%tests%,%example%,%runtime%,%jdt%,%teamextras%" />
+		<property name="dropTokenList" value="%sdk%,%tests%,%example%,%runtime%,%jdt%,%teamextras%,%swt%" />
 	</ant>
 	
  	<!--  Insert ftp url for drop directory  -->
@@ -1133,6 +1178,24 @@
       		message="${message}"
       		failonerror="false"
 	/>
+</target>
+
+<target name="generateMD5Checksum">
+	<!--use attached script instead of Ant checksum task so that files are properly formatted
+		for command md5sum -c <filename>.md5
+	-->
+	<exec dir="${buildLabel}" executable="sh" os="Linux">
+		<arg line="${basedir}/produceChecksum" />
+	</exec>
+	
+	<mkdir dir="${buildLabel}/checksum" />
+	
+	<move todir="${buildLabel}/checksum">
+		<fileset dir="${buildLabel}">
+			<include name="*.md5" />
+		</fileset>
+	</move>
+	
 </target>
 
 <!-- ===================================================================== -->

@@ -28,13 +28,16 @@
       <p>To view the build notes for this build click <a href="buildNotes.php">here</a>.<br>
         To view the test results for this build click <a href="testResults.php">here</a>.<br>
         To view the map file entries for this build click <a href="directory.txt">here</a>.<br>
-        <br>To download a file via HTTP click on its corresponding http link below.
-		  To download a file via FTP click on its corresponding FTP link.
-		  If you have problems ftping a file directly try this <?php echo "<a href=\"ftp://$SERVER_NAME/@buildlabel@/\">link</a>"?>
-		  for ftp access to the entire build directory.  You can also download builds
-		   via anonymous ftp at download.eclipse.org.<br>
-      </p> 
-    </td>
+        <br>
+        To download a file via HTTP click on its corresponding http link below. 
+        To download a file via FTP click on its corresponding FTP link. If you 
+        have problems ftping a file directly try this 
+        <?php echo "<a href=\"ftp://$SERVER_NAME/@buildlabel@/\">link</a>"?>
+        for ftp access to the entire build directory. You can also download builds 
+        via anonymous ftp at download.eclipse.org.</p>
+      <p> Click <a href="verifyMD5.html">here</a> for instructions on how to verify 
+        the integrity of your downloads.</p>
+      </td>
   </tr>
 </table>
 <table BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" >
@@ -238,6 +241,45 @@
     <td width="47%"><b>File</b></td>
   </tr>
   %teamextras% 
+</table>
+<table border=0 cellspacing=5 cellpadding=2 width="100%" >
+  <tr> 
+    <td colspan="2">&nbsp;</td>
+  </tr>
+</table>
+<table border=0 cellspacing=5 cellpadding=2 width="100%" >
+  <tr> 
+    <td align=LEFT valign=TOP colspan="3" bgcolor="#999999"><b><font color="#FFFFFF" face="Arial,Helvetica"><a name="SWT"></a>SWT 
+      Binary and Source</font></b></td>
+  </tr>
+  <tr> 
+    <td height="48" colspan="2"> 
+      <p>These drops contain the SWT libraries and source for standalone SWT application 
+        development. For examples of standalone SWT applications refer to the 
+        <a href="http://dev.eclipse.org/viewcvs/index.cgi/%7Echeckout%7E/platform-swt-home/dev.html#snippets">snippets</a> 
+        section of the SWT Component page. </p>
+      <p>To run a standalone SWT application, add the swt jar(s) to the classpath 
+        and add the directory/folder for the SWT JNI library to the java.library.path. 
+        For example, if you extract the download below to C:\SWT you would launch 
+        the HelloWorld application with the following command: </p>
+      <pre><code>
+	java -classpath C:\SWT\swt.jar;C:\MyApp\helloworld.jar -Djava.library.path=C:\SWT  HelloWorld
+      </code></pre>
+    </td>
+  </tr>
+</table>
+<table border=0 cellspacing=2 cellpadding=0 width="100%" bordercolor="#999999" >
+  <tr> 
+    <td align=RIGHT valign=TOP width="7%"> 
+      <div align="left"><b>Status</b></div>
+    </td>
+    <td width="36%"><b>Platform</b></td>
+    <td width="12%"> 
+      <div align="center"><b>Download</b></div>
+    </td>
+    <td width="47%"><b>File</b></td>
+  </tr>
+  %swt% 
 </table>
 <table border=0 cellspacing=5 cellpadding=2 width="100%" >
   <tr> 
