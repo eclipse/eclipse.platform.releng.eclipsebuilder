@@ -276,10 +276,13 @@
   </b><a href="#ex4">Build Linux Motif platform component on Linux</a><b><br>
   </b><a href="#ex5">Build JDT component against a pre-built Windows Platform 
   component on Windows</a><br>
+  <a href="#ex5.1">Build JDT component in a directory containing a previous Windows 
+  Platform buildDirectory</a> <br>
   <a href="#ex6">Building Eclipse FTP-WebDAV against an installed Eclipse SDK 
   on Linux </a><br>
   <a href="#ex7">Building Eclipse JUnit Plugin tests against an installed Eclipse 
-  SDK on Windows </a> </p>
+  SDK on Windows </a><br>
+</p>
 <p><b><br>
   <a name="ex1"></a>Build Windows SDK component with javadoc generation on Windows</b></p>
 <p><b>java -cp ..\org.eclipse.releng.basebuilder\startup.jar org.eclipse.core.launcher.Main 
@@ -303,7 +306,9 @@
   This builds an eclipse SDK for the linux gtk and linux motif configurations. 
   By default the buildDirectory will be set &quot;src&quot; in eclipse.releng.eclipsebuilder. 
   &quot;-Dzipargs=-y&quot; is used here to preserve the symbolic links libXm.so 
-  and libXm.so.2 in the Linux Motif root directory of eclipse.<br>
+  and libXm.so.2 in the Linux Motif root directory of eclipse. The symbolic links 
+  will only be created at build time if the build is run on a Linux operating 
+  system. <br>
   <br>
   <br>
   <b><a name="ex3"></a>Build Windows SDK component on Linux</b></p>
@@ -338,7 +343,20 @@
   must not contain any JDT features or plugins or the build will fail. &quot;baseos&quot;, 
   &quot;basews&quot; and &quot;basearch&quot; should be specified in order to 
   find the correct location of platform specific jars (i.e. swt.jar) on the classpath.<br>
-  <br>
+</p>
+<p><b><a name="ex5.1"></a>Build JDT component in a directory containing a previous 
+  Windows Platform buildDirectory</b></p>
+<p><b>java -cp ..\org.eclipse.releng.basebuilder\startup.jar org.eclipse.core.launcher.Main 
+  -application org.eclipse.ant.core.antRunner -buildfile build.xml -Dcomponent=jdt 
+  -Dconfigs=&quot;*,*,*&quot; -DbuildDirectory=c:\builds\platform -Dbaseos=win32 
+  -Dbasews=win32 -Dbasearch=x86 -Djavacfailonerror=true</b></p>
+<p></p>
+<p>This builds an Eclipse JDT component in the same directory where a Windows 
+  platform configuration was previously built. The build will fail if there are 
+  compile errors. &quot;baseos&quot;, &quot;basews&quot; and &quot;basearch&quot; 
+  should be specified in order to find the correct location of platform specific 
+  jars (i.e. swt.jar) on the classpath.</p>
+<p><br>
   <b><br>
   <a name="ex6"></a>Building Eclipse FTP-WebDAV against an installed Eclipse SDK 
   on Linux</b></p>
