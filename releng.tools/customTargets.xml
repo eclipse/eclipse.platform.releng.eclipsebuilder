@@ -129,7 +129,7 @@
 <!-- ===================================================================== -->
 <target name="gatherLogs" if="logsAvailable">
 	<property name="destination.temp.folder" value="${buildDirectory}/${buildLabel}/compilelogs" />
-	<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipose.releng.tools" target="gather.logs" />
+	<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.releng.tools" target="gather.logs" />
 </target>
 <target name="clean" unless="noclean">
 	<antcall target="allElements">
