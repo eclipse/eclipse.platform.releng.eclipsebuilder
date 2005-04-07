@@ -40,28 +40,28 @@
 </target>
 	
 <target name="assemble.org.eclipse.platform.solaris.motif.sparc">
-	<property name="archiveName" value="eclipse-platform-${buildId}-solaris-motif.tar.gz"/>
+	<property name="archiveName" value="eclipse-platform-${buildId}-solaris-motif.zip"/>
 	<antcall target="assemble" />
 </target>
 	
 <target name="assemble.org.eclipse.platform.solaris.gtk.sparc">
-	<property name="archiveName" value="eclipse-platform-${buildId}-solaris-gtk.tar.gz"/>
+	<property name="archiveName" value="eclipse-platform-${buildId}-solaris-gtk.zip"/>
 	<antcall target="assemble" />
 </target>
 	
 <target name="assemble.org.eclipse.platform.qnx.photon.x86">
-	<property name="archiveName" value="eclipse-platform-${buildId}-qnx-photon.tar.gz"/>
+	<property name="archiveName" value="eclipse-platform-${buildId}-qnx-photon.zip"/>
 	<antcall target="assemble" />
 </target>
 
 <target name="assemble.org.eclipse.platform.aix.motif.ppc">
-	<property name="archiveName" value="eclipse-platform-${buildId}-aix-motif.tar.gz"/>
+	<property name="archiveName" value="eclipse-platform-${buildId}-aix-motif.zip"/>
 	<antcall target="assemble" />
 </target>
 
 
 <target name="assemble.org.eclipse.platform.hpux.motif.PA_RISC">
-	<property name="archiveName" value="eclipse-platform-${buildId}-hpux-motif.tar.gz"/>
+	<property name="archiveName" value="eclipse-platform-${buildId}-hpux-motif.zip"/>
 	<antcall target="assemble" />
 </target>
 

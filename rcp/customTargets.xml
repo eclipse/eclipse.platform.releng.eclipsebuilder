@@ -41,28 +41,28 @@
 </target>	
 
 <target name="assemble.org.eclipse.rcp.solaris.motif.sparc">
-	<property name="archiveName" value="eclipse-RCP-${buildId}-solaris-motif.tar.gz"/>
+	<property name="archiveName" value="eclipse-RCP-${buildId}-solaris-motif.zip"/>
 	<antcall target="assemble" />
 </target>
 
 <target name="assemble.org.eclipse.rcp.solaris.gtk.sparc">
-	<property name="archiveName" value="eclipse-RCP-${buildId}-solaris-gtk.tar.gz"/>
+	<property name="archiveName" value="eclipse-RCP-${buildId}-solaris-gtk.zip"/>
 	<antcall target="assemble" />
 </target>
 	
 <target name="assemble.org.eclipse.rcp.qnx.photon.x86">
-	<property name="archiveName" value="eclipse-RCP-${buildId}-qnx-photon.tar.gz"/>
+	<property name="archiveName" value="eclipse-RCP-${buildId}-qnx-photon.zip"/>
 	<antcall target="assemble" />
 </target>
 
 <target name="assemble.org.eclipse.rcp.aix.motif.ppc">
-	<property name="archiveName" value="eclipse-RCP-${buildId}-aix-motif.tar.gz"/>
+	<property name="archiveName" value="eclipse-RCP-${buildId}-aix-motif.zip"/>
 	<antcall target="assemble" />
 </target>
 
 
 <target name="assemble.org.eclipse.rcp.hpux.motif.PA_RISC">
-	<property name="archiveName" value="eclipse-RCP-${buildId}-hpux-motif.tar.gz"/>
+	<property name="archiveName" value="eclipse-RCP-${buildId}-hpux-motif.zip"/>
 	<antcall target="assemble" />
 </target>
 
