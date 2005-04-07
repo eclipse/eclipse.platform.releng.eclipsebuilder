@@ -6,8 +6,7 @@
 		<tstamp/>
 		<property name="srcdir" value="src" />
 		<property name="destdir" value="compiler" />
-		 <unzip src="${srcdir}/jdtcore.zip" dest="${srcdir}"/>
-	     <delete file="${srcdir}/jdtcore.zip"/>
+   	    <unzip src="${srcdir}/jdtcore.zip" dest="${srcdir}"/>
 	</target>
 
 	<target name="compile" depends="init">
@@ -33,6 +32,7 @@
                         <fileset dir="${srcdir}">
                              <include name="**/*.properties"/>
                              <include name="**/*.rsc"/>
+                             <exclude name="**/jdtcore.zip"/>
                         </fileset> 
                         </copy> 
                 <jar jarfile="jdtcore.jar">
