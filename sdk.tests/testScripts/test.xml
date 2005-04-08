@@ -278,6 +278,7 @@
 	</target>
 
 	<target name="all">
+		<antcall target="teamcvs" />
 		<antcall target="jdttext" />
 		<antcall target="antui" />
 		<antcall target="pdeui" />
