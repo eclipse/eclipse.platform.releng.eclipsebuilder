@@ -116,7 +116,7 @@
 		<property name="featuresRecursively" value="false" />
 		<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
 			<property name="type" value="fragment" />
-			<property name="id" value="org.eclipse.swt.linux.gtk.x86_64" />
+			<property name="id" value="org.eclipse.swt.gtk.linux.x86_64" />
 		</ant>
 	</target>
 
