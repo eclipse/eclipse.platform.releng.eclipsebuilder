@@ -1,4 +1,4 @@
-org.eclipse.launchers_3.1.0.bin.dist.zip=file:${buildDirectory}/features/org.eclipse.launchers/ | | eclipse/ | runtime | launchers
+org.eclipse.platform.launchers_3.1.0.bin.dist.zip=file:${buildDirectory}/features/org.eclipse.platform.launchers/ | | eclipse/ | runtime | launchers
 eclipse-SDK-${buildId}-win32.zip=file:${postingDirectory}/${buildLabel}/ |  | | sdk | eclipse
 eclipse-SDK-${buildId}-linux-gtk.tar.gz=file:${postingDirectory}/${buildLabel}/ |  | | sdk | eclipse
 eclipse-SDK-${buildId}-linux-motif.tar.gz=file:${postingDirectory}/${buildLabel}/ | | | sdk | eclipse

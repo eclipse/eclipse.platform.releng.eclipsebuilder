@@ -13,7 +13,7 @@
 		<property name="featureOnly" value="true"/>
 		<property name="featureAndPlugins" value="true"/>
 		<property name="featuresRecursively" value="true"/>
-		<ant antfile="fetch_org.eclipse.launchers.xml"/>
+		<ant antfile="fetch_org.eclipse.platform.launchers.xml"/>
 		<ant antfile="fetch_org.eclipse.sdk.xml" />
 	</target>
 	
@@ -181,7 +181,7 @@
 		<property name="buildingOSGi" value="true" />
 
 		<!--indentifies this as a srcFetch build-->
-		<available file="fetch_org.eclipse.launchers.xml" property="srcFetch" />
+		<available file="fetch_org.eclipse.platform.launchers.xml" property="srcFetch" />
 		
 		<!-- determines if libraries need to be recompiled for specific platforms -->
 		<condition property="libsconfig">
