@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- build script to create a batch compiler from org.eclipse.jdt.core -->
-<project name="Compile jdtcore" default="compile">
+<project name="Compile ecj" default="compile">
 	<target name="init">
 		<tstamp/>
 		<property name="destdir" value="compiler2" />
@@ -17,7 +17,7 @@
 
                <condition property="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter">
                         <and>
-                                <available file="jdtcore.jar" />
+                                <available file="ecj.jar" />
                         </and>
                 </condition> 
                 <condition property="compilerArg" value="-encoding ISO-8859-1">
@@ -40,7 +40,7 @@
 
                 <javac verbose="true" srcdir="${srcdir}" destdir="${destdir}"/>  
 
-                <echo message="UPDATE jdtcore.jar" />
+                <echo message="UPDATE ecj.jar" />
                 <copy todir="${destdir}">
                         <fileset dir="${srcdir}">
                              <include name="**/*.properties"/>
@@ -48,12 +48,12 @@
                         </fileset>
                         </copy>
 
-                <jar jarfile="../jdtcore.jar" basedir="${destdir}">
+                <jar jarfile="../ecj.jar" basedir="${destdir}">
                         <fileset dir="${destdir}"/>
                 </jar>
  
-                <!-- delete first jdtcore compiler -->
-                 <delete file="jdtcore.jar"/> 
+                <!-- delete first ecj compiler -->
+                 <delete file="ecj.jar"/> 
                  
 
 	</target>

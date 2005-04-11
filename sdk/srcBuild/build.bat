@@ -10,7 +10,6 @@ set bootclasspath=
 set compiler=
 set compilelibs=
 set ANT_OPTS=-Xmx768m
-set CLASSPATH=jdtcore.jar;jdtCompilerAdapter.jar;%CLASSPATH%
 if x%1==x goto usage
 
 REM process all command line parameters
@@ -55,9 +54,9 @@ goto end
 :run
 set ORIGCLASSPATH=%CLASSPATH
 ant -q -buildfile jdtcoresrc/compilejdtcorewithjavac.xml
-set CLASSPATH=jdtcoresrc/jdtcore.jar;%CLASSPATH
+set CLASSPATH=jdtcoresrc/ecj.jar;%CLASSPATH
 ant -q -buildfile jdtcoresrc/compilejdtcore.xml
-set CLASSPATH=jdtcore.jar;%ORIGCLASSPATH
+set CLASSPATH=ecj.jar;%ORIGCLASSPATH
 ant -q -buildfile build.xml %target% -DinstallOs=%os% -DinstallWs=%ws% -DinstallArch=%arch% %compilelibs%  %bootclasspath%
 goto end
 

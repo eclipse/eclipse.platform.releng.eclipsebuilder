@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- build script to create a batch compiler from org.eclipse.jdt.core -->
-<project name="Compile jdtcore with javac" default="compile">
+<project name="Compile ecj with javac" default="compile">
 	<target name="init">
 		<tstamp/>
 		<property name="srcdir" value="src" />
 		<property name="destdir" value="compiler" />
-   	    <unzip src="${srcdir}/jdtcore.zip" dest="${srcdir}"/>
+   	    <unzip src="${srcdir}/ecj.zip" dest="${srcdir}"/>
 	</target>
 
 	<target name="compile" depends="init">
@@ -27,15 +27,15 @@
                 <javac verbose="true" srcdir="${srcdir}" destdir="${destdir}"/>
                 <record name="../compilelog.txt" action="stop" />   
 
-                <echo message="UPDATE jdtcore.jar" />
+                <echo message="UPDATE ecj.jar" />
                         <copy todir="${destdir}">
                         <fileset dir="${srcdir}">
                              <include name="**/*.properties"/>
                              <include name="**/*.rsc"/>
-                             <exclude name="**/jdtcore.zip"/>
+                             <exclude name="**/ecj.zip"/>
                         </fileset> 
                         </copy> 
-                <jar jarfile="jdtcore.jar">
+                <jar jarfile="ecj.jar">
                         <fileset dir="${destdir}"/>
                 </jar> 
 
