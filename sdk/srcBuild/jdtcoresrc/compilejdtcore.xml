@@ -5,8 +5,7 @@
 	<target name="init">
 		<tstamp/>
 		<property name="destdir" value="compiler2" />
-                <property name="srcdir" value="src" />
-
+        <property name="srcdir" value="src" />
 	</target>
 
 	<target name="compile" depends="init">
@@ -15,16 +14,21 @@
 		<delete dir="${destdir}"/>
 		<mkdir dir="${destdir}"/>
 
-               <condition property="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter">
-                        <and>
-                                <available file="ecj.jar" />
-                        </and>
+                <condition property="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter">
+                        <available file="ecj.jar" />
                 </condition> 
+				<fail message="The Eclipse compiler (ecj.jar) cannot be found.">
+					<condition>
+						<not>
+							<equals arg1="${build.compiler}" arg2="org.eclipse.jdt.core.JDTCompilerAdapter" />
+						</not>
+					</condition>
+				</fail>
+		
                 <condition property="compilerArg" value="-encoding ISO-8859-1">
                         <equals arg1="${build.compiler}" arg2="org.eclipse.jdt.core.JDTCompilerAdapter" />
-                </condition>  
-
-
+	            </condition>  
+		
                 <echo message="compilerArg ${compilerArg}"/>
                 <echo message="build compiler ${build.compiler}"/>
 
@@ -48,7 +52,7 @@
                         </fileset>
                         </copy>
 
-                <jar jarfile="../ecj.jar" basedir="${destdir}">
+                <jar jarfile="../ecj.jar">
                         <fileset dir="${destdir}"/>
                 </jar>
  

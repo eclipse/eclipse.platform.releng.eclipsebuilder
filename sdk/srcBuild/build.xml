@@ -171,6 +171,13 @@
 		<condition property="compilerArg" value="-enableJavadoc -encoding ISO-8859-1">
 			<equals arg1="${build.compiler}" arg2="org.eclipse.jdt.core.JDTCompilerAdapter" />
 		</condition>
+		<fail message="The Eclipse compiler (ecj.jar) cannot be found.">
+				<condition>
+					<not>
+						<equals arg1="${build.compiler}" arg2="org.eclipse.jdt.core.JDTCompilerAdapter" />
+					</not>
+				</condition>
+		</fail>
 		<property name="compilerArg" value="-encoding ISO-8859-1" />
 		<property name="javacSource" value="1.3" />
 		<property name="javacTarget" value="1.2" />
