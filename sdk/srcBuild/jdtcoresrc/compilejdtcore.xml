@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- build script to create a batch compiler from org.eclipse.jdt.core -->
-<project name="Compile jdtcore" default="compile">
+<project name="Compile ecj" default="compile">
 	<target name="init">
 		<tstamp/>
 		<property name="destdir" value="compiler2" />
-                <property name="srcdir" value="src" />
-
+        <property name="srcdir" value="src" />
 	</target>
 
 	<target name="compile" depends="init">
@@ -15,16 +14,21 @@
 		<delete dir="${destdir}"/>
 		<mkdir dir="${destdir}"/>
 
-               <condition property="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter">
-                        <and>
-                                <available file="jdtcore.jar" />
-                        </and>
+                <condition property="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter">
+                        <available file="ecj.jar" />
                 </condition> 
+				<fail message="The Eclipse compiler (ecj.jar) cannot be found.">
+					<condition>
+						<not>
+							<equals arg1="${build.compiler}" arg2="org.eclipse.jdt.core.JDTCompilerAdapter" />
+						</not>
+					</condition>
+				</fail>
+		
                 <condition property="compilerArg" value="-encoding ISO-8859-1">
                         <equals arg1="${build.compiler}" arg2="org.eclipse.jdt.core.JDTCompilerAdapter" />
-                </condition>  
-
-
+	            </condition>  
+		
                 <echo message="compilerArg ${compilerArg}"/>
                 <echo message="build compiler ${build.compiler}"/>
 
@@ -40,7 +44,7 @@
 
                 <javac verbose="true" srcdir="${srcdir}" destdir="${destdir}"/>  
 
-                <echo message="UPDATE jdtcore.jar" />
+                <echo message="UPDATE ecj.jar" />
                 <copy todir="${destdir}">
                         <fileset dir="${srcdir}">
                              <include name="**/*.properties"/>
@@ -48,12 +52,12 @@
                         </fileset>
                         </copy>
 
-                <jar jarfile="../jdtcore.jar" basedir="${destdir}">
+                <jar jarfile="../ecj.jar">
                         <fileset dir="${destdir}"/>
                 </jar>
  
-                <!-- delete first jdtcore compiler -->
-                 <delete file="jdtcore.jar"/> 
+                <!-- delete first ecj compiler -->
+                 <delete file="ecj.jar"/> 
                  
 
 	</target>

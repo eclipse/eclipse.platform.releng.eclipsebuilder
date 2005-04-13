@@ -43,14 +43,6 @@
  <package name="org.apache.tools.ant.taskdefs" />
  <package name="org.apache.tools.ant.types" />
  <package name="org.apache.tools.ant.util" />
- <package name="org.eclipse.core.commands.common" />
- <package name="org.eclipse.core.commands.contexts" />
- <package name="org.eclipse.core.commands.operations" />
- <package name="org.eclipse.core.commands" />
- <package name="org.eclipse.core.runtime.dynamicHelpers" />
- <package name="org.eclipse.jface.bindings" />
- <package name="org.eclipse.jface.bindings.keys" />
- <package name="org.eclipse.ui.operations" />
  <package name="org.w3c.dom" /> 
  <package name="org.xml.sax" /> 
  <package name="org.xml.sax.ext" /> 

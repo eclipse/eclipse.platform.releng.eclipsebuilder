@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<model:component xmlns:model="http://eclipse.org/wtp/releng/tools/component-model" name="Cheatsheets">
-  <model:plugin fragment="false" id="org.eclipse.ui.cheatsheets"/>
-  <model:package name="org.eclipse.ui.cheatsheets"/>
-  <model:component-depends unrestricted="true"/>
-</model:component>

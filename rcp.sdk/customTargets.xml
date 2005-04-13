@@ -41,28 +41,28 @@
 	</target>
 
 	<target name="assemble.org.eclipse.rcp.sdk.solaris.motif.sparc">
-		<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-solaris-motif.tar.gz" />
+		<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-solaris-motif.zip" />
 		<antcall target="assemble" />
 	</target>
 
 	<target name="assemble.org.eclipse.rcp.sdk.solaris.gtk.sparc">
-		<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-solaris-gtk.tar.gz" />
+		<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-solaris-gtk.zip" />
 		<antcall target="assemble" />
 	</target>
 	
 	<target name="assemble.org.eclipse.rcp.sdk.qnx.photon.x86">
-		<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-qnx-photon.tar.gz" />
+		<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-qnx-photon.zip" />
 		<antcall target="assemble" />
 	</target>
 
 	<target name="assemble.org.eclipse.rcp.sdk.aix.motif.ppc">
-		<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-aix-motif.tar.gz" />
+		<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-aix-motif.zip" />
 		<antcall target="assemble" />
 	</target>
 
 
 	<target name="assemble.org.eclipse.rcp.sdk.hpux.motif.PA_RISC">
-		<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-hpux-motif.tar.gz" />
+		<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-hpux-motif.zip" />
 		<antcall target="assemble" />
 	</target>
 
@@ -116,7 +116,7 @@
 		<property name="featuresRecursively" value="false" />
 		<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
 			<property name="type" value="fragment" />
-			<property name="id" value="org.eclipse.swt.gtk64" />
+			<property name="id" value="org.eclipse.swt.gtk.linux.x86_64" />
 		</ant>
 	</target>
 
@@ -132,7 +132,7 @@
 	<target name="postFetch">
 		<ant antfile="${genericTargets}" target="fetchElement">
 			<property name="type" value="feature" />
-			<property name="id" value="org.eclipse.launchers" />
+			<property name="id" value="org.eclipse.platform.launchers" />
 		</ant>
 		<!--fetch and compile swt tools-->
 		<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
@@ -143,9 +143,9 @@
 			<property name="type" value="plugin" />
 			<property name="id" value="org.eclipse.swt.tools" />
 		</ant>
-		<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.win32" target="build.jars">
+		<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.win32.win32.x86" target="build.jars">
 			<property name="type" value="plugin" />
-			<property name="id" value="org.eclipse.swt.win32" />
+			<property name="id" value="org.eclipse.swt.win32.win32.x86" />
 		</ant>
 		<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.tools" target="build.jars">
 			<property name="type" value="plugin" />
@@ -172,7 +172,7 @@
 	<!-- Steps to do before assembling -->
 	<!-- ===================================================================== -->
 	<target name="preAssemble">
-		<zip zipfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/features/org.eclipse.launchers" includes="library/" />
+		<zip zipfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/features/org.eclipse.platform.launchers" includes="library/" />
 	</target>
 
 	<!-- ===================================================================== -->

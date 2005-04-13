@@ -40,28 +40,28 @@
 </target>
 	
 <target name="assemble.org.eclipse.platform.solaris.motif.sparc">
-	<property name="archiveName" value="eclipse-platform-${buildId}-solaris-motif.tar.gz"/>
+	<property name="archiveName" value="eclipse-platform-${buildId}-solaris-motif.zip"/>
 	<antcall target="assemble" />
 </target>
 	
 <target name="assemble.org.eclipse.platform.solaris.gtk.sparc">
-	<property name="archiveName" value="eclipse-platform-${buildId}-solaris-gtk.tar.gz"/>
+	<property name="archiveName" value="eclipse-platform-${buildId}-solaris-gtk.zip"/>
 	<antcall target="assemble" />
 </target>
 	
 <target name="assemble.org.eclipse.platform.qnx.photon.x86">
-	<property name="archiveName" value="eclipse-platform-${buildId}-qnx-photon.tar.gz"/>
+	<property name="archiveName" value="eclipse-platform-${buildId}-qnx-photon.zip"/>
 	<antcall target="assemble" />
 </target>
 
 <target name="assemble.org.eclipse.platform.aix.motif.ppc">
-	<property name="archiveName" value="eclipse-platform-${buildId}-aix-motif.tar.gz"/>
+	<property name="archiveName" value="eclipse-platform-${buildId}-aix-motif.zip"/>
 	<antcall target="assemble" />
 </target>
 
 
 <target name="assemble.org.eclipse.platform.hpux.motif.PA_RISC">
-	<property name="archiveName" value="eclipse-platform-${buildId}-hpux-motif.tar.gz"/>
+	<property name="archiveName" value="eclipse-platform-${buildId}-hpux-motif.zip"/>
 	<antcall target="assemble" />
 </target>
 
@@ -119,7 +119,7 @@
 	<property name="featuresRecursively" value="false"/>
 	<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
 		<property name="type" value="fragment" />
-		<property name="id" value="org.eclipse.swt.gtk64" />
+		<property name="id" value="org.eclipse.swt.gtk.linux.x86_64" />
 	</ant>
 </target>
 
@@ -135,10 +135,10 @@
 <target name="postFetch">
 	<ant antfile="${genericTargets}" target="fetchElement">
 		<property name="type" value="feature" />
-		<property name="id" value="org.eclipse.launchers" />
+		<property name="id" value="org.eclipse.platform.launchers" />
 	</ant>
 	<!--create launchersrc.zip and copy to org.eclipse.platform plugin (fix for bug #49237) -->
-	<zip destfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/features/org.eclipse.launchers" includes="library/**" />
+	<zip destfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/features/org.eclipse.platform.launchers" includes="library/**" />
 	
 	<!--fetch and compile swt tools-->
 	<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
@@ -149,9 +149,9 @@
 		<property name="type" value="plugin" />
 		<property name="id" value="org.eclipse.swt.tools" />
 	</ant>
-	<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.win32" target="build.jars">
+	<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.win32.win32.x86" target="build.jars">
 		<property name="type" value="plugin" />
-		<property name="id" value="org.eclipse.swt.win32" />
+		<property name="id" value="org.eclipse.swt.win32.win32.x86" />
 	</ant>
 	<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.tools" target="build.jars">
 		<property name="type" value="plugin" />

@@ -49,17 +49,17 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 </target>
 	
 <target name="assemble.org.eclipse.sdk.solaris.motif.sparc">
-	<property name="archiveName" value="eclipse-SDK-${buildId}-solaris-motif.tar.gz"/>
+	<property name="archiveName" value="eclipse-SDK-${buildId}-solaris-motif.zip"/>
 	<antcall target="assemble" />
 </target>
 
 <target name="assemble.org.eclipse.sdk.solaris.gtk.sparc">
-	<property name="archiveName" value="eclipse-SDK-${buildId}-solaris-gtk.tar.gz"/>	
+	<property name="archiveName" value="eclipse-SDK-${buildId}-solaris-gtk.zip"/>	
 	<antcall target="assemble" />
 </target>
 	
 <target name="assemble.org.eclipse.sdk.hpux.motif.PA_RISC">
-	<property name="archiveName" value="eclipse-SDK-${buildId}-hpux-motif.tar.gz"/>	
+	<property name="archiveName" value="eclipse-SDK-${buildId}-hpux-motif.zip"/>	
 	<antcall target="assemble" />
 </target>
 
@@ -76,7 +76,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 <target name="assemble.org.eclipse.sdk.linux.gtk.ia64" />
 
 <target name="assemble.org.eclipse.sdk.aix.motif.ppc">
-	<property name="archiveName" value="eclipse-SDK-${buildId}-aix-motif.tar.gz"/>	
+	<property name="archiveName" value="eclipse-SDK-${buildId}-aix-motif.zip"/>	
 	<antcall target="assemble" />
 </target>
 
@@ -146,11 +146,11 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<property name="featuresRecursively" value="false"/>
 	<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
 		<property name="type" value="fragment" />
-		<property name="id" value="org.eclipse.swt.gtk64" />
+		<property name="id" value="org.eclipse.swt.gtk.linux.x86_64" />
 	</ant>
 	<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
 		<property name="type" value="fragment" />
-		<property name="id" value="org.eclipse.swt.win32" />
+		<property name="id" value="org.eclipse.swt.win32.win32.x86" />
 	</ant>
 </target>
 
@@ -166,9 +166,9 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 <target name="postFetch">
 	<ant antfile="${genericTargets}" target="fetchElement">
 		<property name="type" value="feature" />
-		<property name="id" value="org.eclipse.launchers" />
+		<property name="id" value="org.eclipse.platform.launchers" />
 	</ant>
-	<zip zipfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/features/org.eclipse.launchers" includes="library/" />
+	<zip zipfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/features/org.eclipse.platform.launchers" includes="library/" />
 
 		<!--fetch and compile swt tools-->
 	<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
@@ -179,9 +179,9 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<property name="type" value="plugin" />
 		<property name="id" value="org.eclipse.swt.tools" />
 	</ant>
-	<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.win32" target="build.jars">
+	<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.win32.win32.x86" target="build.jars">
 		<property name="type" value="plugin" />
-		<property name="id" value="org.eclipse.swt.win32" />
+		<property name="id" value="org.eclipse.swt.win32.win32.x86" />
 	</ant>
 	<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.tools" target="build.jars">
 		<property name="type" value="plugin" />
@@ -283,9 +283,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 <!-- ===================================================================== -->
 		<!-- Targets called before extracting binary distributables.               -->
 		<!-- ===================================================================== -->
-	<target name="buildSourceDrops"/>
-
-	<target name="buildSourceDrops1">
+		<target name="buildSourceDrops">
 			<mkdir dir="${postingDirectory}/${buildLabel}" />
 			<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
 			<property name="tempDir" value="${basedir}/temp" />

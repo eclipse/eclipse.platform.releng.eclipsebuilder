@@ -13,7 +13,7 @@
 		<property name="featureOnly" value="true"/>
 		<property name="featureAndPlugins" value="true"/>
 		<property name="featuresRecursively" value="true"/>
-		<ant antfile="fetch_org.eclipse.launchers.xml"/>
+		<ant antfile="fetch_org.eclipse.platform.launchers.xml"/>
 		<ant antfile="fetch_org.eclipse.sdk.xml" />
 	</target>
 	
@@ -66,7 +66,7 @@
 		<!-- unzip swt zips -->
 		<unzip  dest="${swtlibs}">
 			<fileset dir="${buildDirectory}/plugins/org.eclipse.platform.source.${installOs}.${installWs}.${installArch}/src/">
-				<include name ="org.eclipse.swt.${wsType}_*/*.zip"/>
+				<include name ="org.eclipse.swt.${wsType}.${installOs}.${installArch}_*/*.zip"/>
 			</fileset>
 		</unzip>
 		<exec dir="${swtlibs}/" executable="sh" failonerror="true">
@@ -166,11 +166,18 @@
 		<!--set the compiler and compiler arguments-->
 		<!--the default compiler is set to the one used by eclipse rel. eng. -->
 		<condition property="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter">
-				<available file="${basedir}/jdtcore.jar" />					
+				<available file="${basedir}/ecj.jar" />					
 		</condition>
 		<condition property="compilerArg" value="-enableJavadoc -encoding ISO-8859-1">
 			<equals arg1="${build.compiler}" arg2="org.eclipse.jdt.core.JDTCompilerAdapter" />
 		</condition>
+		<fail message="The Eclipse compiler (ecj.jar) cannot be found.">
+				<condition>
+					<not>
+						<equals arg1="${build.compiler}" arg2="org.eclipse.jdt.core.JDTCompilerAdapter" />
+					</not>
+				</condition>
+		</fail>
 		<property name="compilerArg" value="-encoding ISO-8859-1" />
 		<property name="javacSource" value="1.3" />
 		<property name="javacTarget" value="1.2" />
@@ -181,7 +188,7 @@
 		<property name="buildingOSGi" value="true" />
 
 		<!--indentifies this as a srcFetch build-->
-		<available file="fetch_org.eclipse.launchers.xml" property="srcFetch" />
+		<available file="fetch_org.eclipse.platform.launchers.xml" property="srcFetch" />
 		
 		<!-- determines if libraries need to be recompiled for specific platforms -->
 		<condition property="libsconfig">
