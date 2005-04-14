@@ -162,7 +162,7 @@
 	</ant>
 	
 	<!--place linux motif about.html in temp location where it will be copied into root of eclipse at assembly time-->
-	<property name="linux.motif.rootfiles" value="${buildDirectory}/features/org.eclipse.plaform/linux.motif" />
+	<property name="linux.motif.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/linux.motif" />
 	<mkdir dir="${linux.motif.rootfiles}" />
 	<copy tofile="${linux.motif.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86/about_open_motif.html" failonerror="false"/>
 	<copy todir="${linux.motif.rootfiles}">
