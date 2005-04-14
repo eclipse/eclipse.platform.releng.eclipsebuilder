@@ -167,7 +167,7 @@
 	<copy tofile="${linux.motif.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86/about_open_motif.html" failonerror="false"/>
 	<copy todir="${linux.motif.rootfiles}">
 		<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86">
-			<includes name="about_files/**"/>
+			<include name="about_files/**"/>
 		</fileset>
 	</copy>
 </target>
