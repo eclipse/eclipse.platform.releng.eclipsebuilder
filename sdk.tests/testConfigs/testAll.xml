@@ -18,6 +18,8 @@
 	<parallel>
 		<antcall target="testWinXPPerf" />
 		<antcall target="testLinuxGTKPerf" />
+		<antcall target="testWinXPPerf2" />
+		<antcall target="testLinuxGTKPerf2" />
 	</parallel>
 	<echo message="Performance testing complete." />
 </target>
@@ -75,4 +77,33 @@
 		
 	<delete file="${markerContainer}/${markerName}.marker" />
 </target>
+
+	<target name="testWinXPPerf2">
+		<property name="testResults" value="${postingDirectory}/${buildLabel}/performance" />
+		<mkdir dir="${testResults}"/>
+		<property name="markerName" value="eclipse30-winxp-perf2-${timestamp}" />
+		<findMachine cfg="${cfg}" markerContainer="${markerContainer}" cfgKey="eclipse30WinXPTestPerf2" markerName="${markerName}" waitInterval="30"/>
+		<property file="${markerContainer}/${markerName}.marker" />
+		<property name="testMachine" value="${0}" />
+		<ant antfile="${test.xml}">
+			<property name="tester" value="${basedir}/win32-perf2" />
+		</ant>
+		<property file="${basedir}/win32-perf2/testing.properties" />
+		<delete file="${markerContainer}/${markerName}.marker" />
+	</target>
+		
+	<target name="testLinuxGTKPerf2">
+		<property name="testResults" value="${postingDirectory}/${buildLabel}/performance" />
+		<mkdir dir="${testResults}"/>
+		<property name="markerName" value="eclipse30-linux-gtk-perf2-${timestamp}" />
+		<findMachine cfg="${cfg}" markerContainer="${markerContainer}" cfgKey="eclipse30LinuxGtkTestPerf2" markerName="${markerName}" waitInterval="30"/>
+		<property file="${markerContainer}/${markerName}.marker" />
+		<property name="testMachine" value="${0}" />
+			
+		<ant antfile="${test.xml}">
+			<property name="tester" value="${basedir}/rhelws3-linux-gtk-perf2" />
+		</ant>
+			
+		<delete file="${markerContainer}/${markerName}.marker" />
+	</target>
 </project>
