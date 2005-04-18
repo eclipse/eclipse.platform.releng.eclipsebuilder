@@ -1,7 +1,7 @@
 <project name="Eclipse Test Configuration" default="performanceTests" basedir=".">
 
 	<property name="markerContainer" value="/home/users/releng/buildTools/markers" />
-	<property name="cfg" value="${markerContainer}/machine.cfg" />
+	<property name="cfg" value="${markerContainer}/machinetest.cfg" />
 	<property name="test.xml" value="${basedir}/../../../org.eclipse.releng.basebuilder/plugins/org.eclipse.build.tools/scripts/test.xml" />
 
 	<target name="test">
