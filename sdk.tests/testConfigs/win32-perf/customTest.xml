@@ -18,6 +18,7 @@
 		
 		<replace file="${tester}/vm.properties" token="@buildType@@timestamp@" value="${buildId}"/>
 		<replace file="${tester}/vm.properties" token="@reference@" value="${eclipse.perf.ref}"/>
+		<replace file="${tester}/vm.properties" token="@testMachine@" value="${testMachine}"/>
 		
 		<!--copy in the properties file for testing with performance vm args-->	
 		<exec dir="." executable="${copyClient}">
