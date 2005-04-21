@@ -287,6 +287,14 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<antcall target="allElements">
 		<param name="target" value="cleanElement" />
 	</antcall>
+	<!-- delete some jars that are not used during the build -->
+		<delete>
+			<fileset file="${buildDirectory}/plugins/org.eclipse.osgi/osgi/collx.jar" />
+			<fileset file="${buildDirectory}/plugins/org.eclipse.osgi/osgi/ee.foundation.jar" />
+			<fileset file="${buildDirectory}/plugins/org.eclipse.osgi/osgi/ee.minimum.jar" /> 
+			<fileset file="${buildDirectory}/plugins/org.eclipse.osgi/osgi/exceptions.jar" />
+			<fileset file="${buildDirectory}/plugins/org.eclipse.osgi/osgi/xmlParserAPIs.jar" />
+		</delete>
 </target>
 
 <!-- ===================================================================== -->
