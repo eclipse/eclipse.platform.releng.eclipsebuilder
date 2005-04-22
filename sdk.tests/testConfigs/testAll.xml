@@ -9,7 +9,7 @@
 		<property file="${markerContainer}/${markerName}.marker" />
 		<property name="testMachine" value="${0}" />
 		<ant antfile="${test.xml}">
-			<property name="tester" value="${tester}" />
+			<property name="tester" value="{basedir}/${testConfigInfo}" />
 		</ant>
 		<delete file="${markerContainer}/${markerName}.marker" />
 	</target>
@@ -29,23 +29,23 @@
 		<parallel>
 			<!--slow machines-->
 			<antcall target="test">
-				<param name="tester" value="${basedir}/win32-perf" />
+				<param name="testConfigInfo" value="win32-perf" />
 				<param name="cfgKey" value="eclipse30WinXPTestPerf" />
 				<param name="markerName" value="eclipse213-winxp-perf-${timestamp}" />
 			</antcall>
 			<antcall target="test">
-				<param name="tester" value="${basedir}/rhelws3-linux-gtk-perf" />
+				<param name="testConfigInfo" value="rhelws3-linux-gtk-perf" />
 				<param name="cfgKey" value="eclipse30LinuxGtkTestPerf" />
 				<param name="markerName" value="eclipse213-linux-perf-${timestamp}" />
 			</antcall>
 			<!--fast machines-->
 			<!--antcall target="test">
-				<param name="tester" value="${basedir}/win32-perf" />
+				<param name="testConfigInfo" value="win32-perf" />
 				<param name="cfgKey" value="eclipse30WinXPTestPerf2" />
 				<param name="markerName" value="eclipse213-winxp-perf2-${timestamp}" />
 			</antcall>
 			<antcall target="test">
-				<param name="tester" value="${basedir}/rhelws3-linux-gtk-perf" />
+				<param name="testConfigInfo" value="rhelws3-linux-gtk-perf" />
 				<param name="cfgKey" value="eclipse30LinuxGtkTestPerf2" />
 				<param name="markerName" value="eclipse213-linux-perf2-${timestamp}" />
 			</antcall-->
@@ -56,23 +56,23 @@
 		<parallel>
 			<!--slow machines-->
 			<antcall target="test">
-				<param name="tester" value="${basedir}/win32-perf" />
+				<param name="testConfigInfo" value="win32-perf" />
 				<param name="cfgKey" value="eclipse30WinXPTestPerf" />
 				<param name="markerName" value="eclipse30-winxp-perf-${timestamp}" />
 			</antcall>
 			<antcall target="test">
-				<param name="tester" value="${basedir}/rhelws3-linux-gtk-perf" />
+				<param name="testConfigInfo" value="rhelws3-linux-gtk-perf" />
 				<param name="cfgKey" value="eclipse30LinuxGtkTestPerf" />
 				<param name="markerName" value="eclipse30-linux-perf-${timestamp}" />
 			</antcall>
 			<!--fast machines - not available yet.-->
 			<!--antcall target="test">
-				<param name="tester" value="${basedir}/win32-perf" />
+				<param name="testConfigInfo" value="win32-perf" />
 				<param name="cfgKey" value="eclipse30WinXPTestPerf2" />
 				<param name="markerName" value="eclipse30-winxp-perf2-${timestamp}" />
 			</antcall>
 			<antcall target="test">
-				<param name="tester" value="${basedir}/rhelws3-linux-gtk-perf" />
+				<param name="testConfigInfo" value="rhelws3-linux-gtk-perf" />
 				<param name="cfgKey" value="eclipse30LinuxGtkTestPerf2" />
 				<param name="markerName" value="eclipse30-linux-perf2-${timestamp}" />
 			</antcall-->
