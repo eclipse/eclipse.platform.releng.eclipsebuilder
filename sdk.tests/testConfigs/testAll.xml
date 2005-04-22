@@ -37,7 +37,7 @@
 				<param name="markerName" value="eclipse213-linux-perf-${timestamp}" />
 			</antcall>
 			<!--fast machines-->
-			<antcall target="test">
+			<!--antcall target="test">
 				<param name="tester" value="${basedir}/win32-perf" />
 				<param name="cfgKey" value="eclipse30WinXPTestPerf2" />
 				<param name="markerName" value="eclipse213-winxp-perf2-${timestamp}" />
@@ -46,7 +46,7 @@
 				<param name="tester" value="${basedir}/rhelws3-linux-gtk-perf" />
 				<param name="cfgKey" value="eclipse30LinuxGtkTestPerf2" />
 				<param name="markerName" value="eclipse213-linux-perf2-${timestamp}" />
-			</antcall>
+			</antcall-->
 		</parallel>
 	</target>
 
