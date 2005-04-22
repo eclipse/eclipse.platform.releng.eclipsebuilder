@@ -9,7 +9,7 @@
 		<property file="${markerContainer}/${markerName}.marker" />
 		<property name="testMachine" value="${0}" />
 		<ant antfile="${test.xml}">
-			<property name="tester" value="{basedir}/${testConfigInfo}" />
+			<property name="tester" value="${basedir}/${testConfigInfo}" />
 		</ant>
 		<delete file="${markerContainer}/${markerName}.marker" />
 	</target>
