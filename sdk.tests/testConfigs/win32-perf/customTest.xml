@@ -9,7 +9,7 @@
 
 		<!--copy the script which sets up environment and invokes the tests on test machine-->
 		<exec dir="." executable="${copyClient}">
-			<arg line="${tester}/${testScript} ${testMachine}:${executionDir}/testAll.bat" />
+			<arg line="${tester}/${testScript} ${testMachine}:${executionDir}" />
 		</exec>
 			
 		<!--copy in test script modified for running Team CVS tests-->
@@ -22,8 +22,8 @@
 		<condition property="buildRelease" value="3.0.1_200409161125">
 			<equals arg1="${testedBuildId}" arg2="3.0.1"/>
 		</condition>
-		<condition property="buildRelease" value="3.0.2_">
-			<equals arg1="${testedBuildId}" arg2="3.0.2_200503110845"/>
+		<condition property="buildRelease" value="3.0.2_200503110845">
+			<equals arg1="${testedBuildId}" arg2="3.0.2"/>
 		</condition>
 		<condition property="buildRelease" value="2.1.3_200403101828">
 			<equals arg1="${testedBuildId}" arg2="2.1.3"/>
