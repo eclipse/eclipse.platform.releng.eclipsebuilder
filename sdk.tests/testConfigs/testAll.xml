@@ -51,7 +51,6 @@
 	</target>
 
 	<target name="testAll">
-		<parallel>
 			<!--slow machines-->
 			<antcall target="test">
 				<param name="tester" value="${basedir}/win32-perf" />
@@ -74,7 +73,7 @@
 				<param name="cfgKey" value="eclipse30LinuxGtkTestPerf2" />
 				<param name="markerName" value="eclipse30-linux-perf2-${timestamp}" />
 			</antcall-->
-		</parallel>
+
 	</target>
 
 </project>
