@@ -70,10 +70,10 @@
 	<mkdir dir="${buildDirectory}/${buildLabel}"/>
 	<property name="eclipse.base" value="${downloadUrl}/eclipse-SDK-${testedBuildId}-win32.zip" />
 	<property name="linux.base" value="${downloadUrl}/eclipse-SDK-${testedBuildId}-linux-gtk.zip" />
-	<get src="${eclipse.base}" dest="${buildDirectory}/${buildLabel}/eclipse-SDK-${mapVersionTag}-win32.zip" usetimestamp="true" />
+	<get src="${eclipse.base}" dest="${buildDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" usetimestamp="true" />
 	<parallel>
-		<get src="${linux.base}" dest="${buildDirectory}/${buildLabel}/eclipse-SDK-${mapVersionTag}-linux-gtk.zip" usetimestamp="true" />
-		<unzip src="${buildDirectory}/${buildLabel}/eclipse-SDK-${mapVersionTag}-win32.zip" dest="${buildDirectory}" />
+		<get src="${linux.base}" dest="${buildDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk.zip" usetimestamp="true" />
+		<unzip src="${buildDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" dest="${buildDirectory}" />
 	</parallel>
 </target>
 
