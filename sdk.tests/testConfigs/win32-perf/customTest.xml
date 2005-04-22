@@ -8,13 +8,13 @@
 		<property name="testScript" value="testAll.bat" />
 
 		<!--copy the script which sets up environment and invokes the tests on test machine-->
-		<exec dir="." executable="${copyClient}">
-			<arg line="${tester}/${testScript} ${testMachine}:${executionDir}" />
+		<exec dir="${tester}" executable="${copyClient}">
+			<arg line="${testScript} ${testMachine}:${executionDir}" />
 		</exec>
 			
 		<!--copy in test script modified for running Team CVS tests-->
-		<exec dir="." executable="${copyClient}">
-			<arg line="${tester}/../../testScripts/test.xml ${testMachine}:${executionDir}" />
+		<exec dir="${tester}" executable="${copyClient}">
+			<arg line="../../testScripts/test.xml ${testMachine}:${executionDir}" />
 		</exec>
 		<condition property="buildRelease" value="3.0_200406251208">
 			<equals arg1="${testedBuildId}" arg2="3.0"/>
@@ -33,8 +33,8 @@
 		<replace file="${tester}/vm.properties" token="@testMachine@" value="${testMachine}"/>
 		
 		<!--copy in the properties file for testing with performance vm args-->	
-		<exec dir="." executable="${copyClient}">
-			<arg line="${tester}/vm.properties ${testMachine}:${executionDir}" />
+		<exec dir="${tester}" executable="${copyClient}">
+			<arg line="vm.properties ${testMachine}:${executionDir}" />
 		</exec>
 		
 		<!--add Cloudscape to junit test zip if it is available-->
