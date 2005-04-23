@@ -56,15 +56,16 @@
 		<parallel>
 			<!--slow machines-->
 			<antcall target="test">
-				<param name="testConfigInfo" value="win32-perf" />
-				<param name="cfgKey" value="eclipse30WinXPTestPerf" />
-				<param name="markerName" value="eclipse30-winxp-perf-${timestamp}" />
-			</antcall>
-			<antcall target="test">
 				<param name="testConfigInfo" value="rhelws3-linux-gtk-perf" />
 				<param name="cfgKey" value="eclipse30LinuxGtkTestPerf" />
 				<param name="markerName" value="eclipse30-linux-perf-${timestamp}" />
 			</antcall>
+			<antcall target="test">
+				<param name="testConfigInfo" value="win32-perf" />
+				<param name="cfgKey" value="eclipse30WinXPTestPerf" />
+				<param name="markerName" value="eclipse30-winxp-perf-${timestamp}" />
+			</antcall>
+
 			<!--fast machines - not available yet.-->
 			<!--antcall target="test">
 				<param name="testConfigInfo" value="win32-perf" />
