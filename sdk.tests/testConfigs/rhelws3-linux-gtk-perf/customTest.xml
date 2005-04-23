@@ -4,14 +4,14 @@
 		<antcall target="installVm" />
 		<!--copy the script which sets up environment and invokes the tests on test machine-->
 
-		<condition property="testScript" value="213/testAll.sh">
+		<condition property="testScriptLocation" value="213/testAll.sh">
 			<equals arg1="${testedBuildId}" arg2="2.1.3"/>
 		</condition>
-		<property name="testScript" value="testAll.sh" />
+		<property name="testScriptLocation" value="testAll.sh" />
 		<chmod file="${tester}/${testScript}" perm="755" />
 
 		<exec dir="${tester}" executable="${copyClient}">
-			<arg line="${testScript} ${testMachine}:${executionDir}" />
+			<arg line="${testScriptLocation} ${testMachine}:${executionDir}" />
 		</exec>
 		
 		<!--copy in test script modified for running Team CVS tests-->
