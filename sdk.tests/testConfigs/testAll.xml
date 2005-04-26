@@ -11,9 +11,8 @@
 		<findMachine cfg="${cfg}" markerContainer="${markerContainer}" cfgKey="${cfgKey}" markerName="${markerName}" waitInterval="30" />
 		<property file="${markerContainer}/${markerName}.marker" />
 		<property name="testMachine" value="${0}" />
-		<ant antfile="${test.xml}">
-			<property name="tester" value="${basedir}/${tester}" />
-		</ant>
+		<ant antfile="${test.xml}"/>
+
 		<delete file="${markerContainer}/${markerName}.marker" />
 	</target>
 
