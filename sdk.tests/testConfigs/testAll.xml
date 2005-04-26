@@ -1,7 +1,7 @@
 <project name="Eclipse Test Configuration" default="performanceTests" basedir=".">
 
 	<property name="markerContainer" value="/home/users/releng/buildTools/markers" />
-	<property name="cfg" value="${markerContainer}/machine.cfg" />
+	<property name="cfg" value="${markerContainer}/machinetest.cfg" />
 	<property name="test.xml" value="${basedir}/../../../org.eclipse.releng.basebuilder/plugins/org.eclipse.build.tools/scripts/test.xml" />
 
 	<target name="test">
@@ -28,7 +28,7 @@
 	<target name="testAll213" if="213">
 		<parallel>
 			<!--slow machines-->
-			<antcall target="test">
+			<!--antcall target="test">
 				<param name="testConfigInfo" value="win32-perf" />
 				<param name="cfgKey" value="eclipse30WinXPTestPerf" />
 				<param name="markerName" value="eclipse213-winxp-perf-${timestamp}" />
@@ -37,9 +37,9 @@
 				<param name="testConfigInfo" value="rhelws3-linux-gtk-perf" />
 				<param name="cfgKey" value="eclipse30LinuxGtkTestPerf" />
 				<param name="markerName" value="eclipse213-linux-perf-${timestamp}" />
-			</antcall>
+			</antcall-->
 			<!--fast machines-->
-			<!--antcall target="test">
+			<antcall target="test">
 				<param name="testConfigInfo" value="win32-perf" />
 				<param name="cfgKey" value="eclipse30WinXPTestPerf2" />
 				<param name="markerName" value="eclipse213-winxp-perf2-${timestamp}" />
@@ -48,14 +48,14 @@
 				<param name="testConfigInfo" value="rhelws3-linux-gtk-perf" />
 				<param name="cfgKey" value="eclipse30LinuxGtkTestPerf2" />
 				<param name="markerName" value="eclipse213-linux-perf2-${timestamp}" />
-			</antcall-->
+			</antcall>
 		</parallel>
 	</target>
 
 	<target name="testAll">
 		<parallel>
 			<!--slow machines-->
-			<antcall target="test">
+			<!--antcall target="test">
 				<param name="testConfigInfo" value="rhelws3-linux-gtk-perf" />
 				<param name="cfgKey" value="eclipse30LinuxGtkTestPerf" />
 				<param name="markerName" value="eclipse30-linux-perf-${timestamp}" />
@@ -64,10 +64,10 @@
 				<param name="testConfigInfo" value="win32-perf" />
 				<param name="cfgKey" value="eclipse30WinXPTestPerf" />
 				<param name="markerName" value="eclipse30-winxp-perf-${timestamp}" />
-			</antcall>
+			</antcall-->
 
-			<!--fast machines - not available yet.-->
-			<!--antcall target="test">
+			<!--fast machines -->
+			<antcall target="test">
 				<param name="testConfigInfo" value="win32-perf" />
 				<param name="cfgKey" value="eclipse30WinXPTestPerf2" />
 				<param name="markerName" value="eclipse30-winxp-perf2-${timestamp}" />
@@ -76,7 +76,7 @@
 				<param name="testConfigInfo" value="rhelws3-linux-gtk-perf" />
 				<param name="cfgKey" value="eclipse30LinuxGtkTestPerf2" />
 				<param name="markerName" value="eclipse30-linux-perf2-${timestamp}" />
-			</antcall-->
+			</antcall>
 		</parallel>
 	</target>
 
