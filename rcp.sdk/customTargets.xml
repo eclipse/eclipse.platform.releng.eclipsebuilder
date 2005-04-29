@@ -39,6 +39,11 @@
 		<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-linux-gtk-x86_64.tar.gz" />
 		<antcall target="assemble" />
 	</target>
+	
+	<target name="assemble.org.eclipse.rcp.sdk.linux.gtk.ppc">
+			<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-linux-gtk-ppc.tar.gz" />
+			<antcall target="assemble" />
+		</target>
 
 	<target name="assemble.org.eclipse.rcp.sdk.solaris.motif.sparc">
 		<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-solaris-motif.zip" />

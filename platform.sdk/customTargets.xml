@@ -40,6 +40,11 @@
 		<antcall target="assemble" />
 	</target>
 
+	<target name="assemble.org.eclipse.platform.sdk.linux.gtk.ppc">
+		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-linux-gtk-ppc.tar.gz" />
+		<antcall target="assemble" />
+	</target>
+	
 	<target name="assemble.org.eclipse.platform.sdk.solaris.motif.sparc">
 		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-solaris-motif.zip" />
 		<antcall target="assemble" />

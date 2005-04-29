@@ -48,6 +48,11 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<antcall target="assemble" />
 </target>
 	
+<target name="assemble.org.eclipse.sdk.linux.gtk.ppc">
+		<property name="archiveName" value="eclipse-SDK-${buildId}-linux-gtk-ppc.tar.gz"/>
+		<antcall target="assemble" />
+</target>
+	
 <target name="assemble.org.eclipse.sdk.solaris.motif.sparc">
 	<property name="archiveName" value="eclipse-SDK-${buildId}-solaris-motif.zip"/>
 	<antcall target="assemble" />
@@ -72,7 +77,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 
 <target name="assemble.org.eclipse.sdk.hpux.motif.ia64" />
 <target name="assemble.org.eclipse.sdk.linux.gtk.ppc64" />
-<target name="assemble.org.eclipse.sdk.linux.gtk.ppc" />
+	
 <target name="assemble.org.eclipse.sdk.linux.gtk.ia64" />
 
 <target name="assemble.org.eclipse.sdk.aix.motif.ppc">
