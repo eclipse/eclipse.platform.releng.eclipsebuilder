@@ -8,9 +8,11 @@
 	<property name="test.xml" value="${basedir}/../../../org.eclipse.releng.basebuilder/plugins/org.eclipse.build.tools/scripts/test.xml" />
 
 	<target name="test">
+		<property name="sleep" value="0"/>
 		<findMachine cfg="${cfg}" markerContainer="${markerContainer}" cfgKey="${cfgKey}" markerName="${markerName}" waitInterval="30" />
 		<property file="${markerContainer}/${markerName}.marker" />
 		<property name="testMachine" value="${0}" />
+		<sleep seconds="${sleep}"/>
 		<ant antfile="${test.xml}"/>
 
 		<delete file="${markerContainer}/${markerName}.marker" />
@@ -50,11 +52,13 @@
 			<!--fast machines-->
 			<antcall target="test">
 				<param name="tester" value="${basedir}/win32-perf2" />
+				<param name="sleep" value="240" />
 				<param name="cfgKey" value="eclipse30WinXPTestPerf2" />
 				<param name="markerName" value="eclipse30-winxp-perf2-${timestamp}" />
 			</antcall>
 			<antcall target="test">
 				<param name="tester" value="${basedir}/rhelws3-linux-gtk-perf2" />
+				<param name="sleep" value="120" />
 				<param name="cfgKey" value="eclipse30LinuxGtkTestPerf2" />
 				<param name="markerName" value="eclipse30-linux-gtk-perf2-${timestamp}" />
 			</antcall>
