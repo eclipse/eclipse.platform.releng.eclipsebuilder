@@ -276,8 +276,11 @@
 			<param name="report" value="org.eclipse.update.tests.core" />
       		</antcall>
 	</target>
-
 	<target name="all">
+		<antcall target="swt" />
+	</target>
+
+	<target name="all1">
 		<antcall target="jdttext" />
 		<antcall target="antui" />
 		<antcall target="pdeui" />
