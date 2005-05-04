@@ -10,5 +10,6 @@ REM add Cloudscape plugin to junit tests zip file
 zip eclipse-junit-tests-%3%.zip -rm eclipse
 
 REM run all tests
-call runtests.bat -noupdate -vm ..\jdk1.4.2_06\jre\bin\java -properties vm.properties "-Dtest.target=performance" "-Dplatform=win32perf">> %2
+call runtests.bat -noupdate -vm ..\jdk1.4.2_08\jre\bin\java -properties vm.properties "-Dtest.target=performance" "-Dplatform=win32perf">> %2
 
+exit
