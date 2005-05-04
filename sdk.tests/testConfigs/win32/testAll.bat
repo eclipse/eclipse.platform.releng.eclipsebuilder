@@ -7,3 +7,4 @@ set PATH=%PATH%;%1\..\windowsBin
 
 REM run all tests
 call runtests.bat -vm ..\jdk1.4.2_08\jre\bin\java "-Dplatform=winxp">> %2
+exit
