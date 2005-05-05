@@ -39,8 +39,8 @@
                 <property name="javacFailOnError" value="true" />
                 <record name="../compilelog.txt" action="start" />
                 <javac verbose="true" srcdir="${srcdir}" destdir="${destdir}"/>
-                <record name="../compilelog.txt" action="stop" />
-                                                                                                                          
+                <record name="../compilelog.txt" action="stop" />                                                                                                                  
+            
                 <echo message="UPDATE ecj.jar" />
                 <copy todir="${destdir}">
                         <fileset dir="${srcdir}">

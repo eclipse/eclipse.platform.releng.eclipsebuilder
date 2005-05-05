@@ -34,6 +34,11 @@
 	<property name="archiveName" value="eclipse-RCP-${buildId}-linux-gtk.tar.gz"/>
 	<antcall target="assemble" />
 </target>
+	
+<target name="assemble.org.eclipse.rcp.linux.gtk.ppc">
+		<property name="archiveName" value="eclipse-RCP-${buildId}-linux-ppc.tar.gz"/>
+		<antcall target="assemble" />
+</target>
 
 <target name="assemble.org.eclipse.rcp.linux.gtk.x86_64">
 	<property name="archiveName" value="eclipse-RCP-${buildId}-linux-gtk-x86_64.tar.gz"/>

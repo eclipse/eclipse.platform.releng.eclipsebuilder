@@ -42,37 +42,18 @@
 		 
 	<target name="compilelibs" depends="init,clean,compile" if="libsconfig">
 		<property name="swtlibs" value="${buildDirectory}/swttmp"/>
-		<mkdir dir="${swtlibs}"/>
-		<condition property="wsType" value="gtk64">
-			<or>
-				<equals arg1="${installOs}-${installWs}-${installArch}"	arg2="linux-gtk-ppc64"/>
-				<equals arg1="${installOs}-${installWs}-${installArch}"	arg2="linux-gtk-ia64"/>
-				<equals arg1="${installOs}-${installWs}-${installArch}"	arg2="linux-gtk-x86_64"/>
-			</or>
-		</condition>
-		<condition property="wsType" value="gtk">
-			<or>
-				<equals arg1="${installOs}-${installWs}-${installArch}"	arg2="linux-gtk-ppc"/>
-				<equals arg1="${installOs}-${installWs}-${installArch}"	arg2="linux-gtk-x86"/>
-			</or>
-		</condition>
-		<condition property="wsType" value="motif">
-			<or>
-				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="linux-motif-x86"/>
-				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="hpux-motif-ia64"/>
-			</or>
-		</condition>
+		<mkdir dir="${swtlibs}"/>		
 
 		<!-- unzip swt zips -->
 		<unzip  dest="${swtlibs}">
 			<fileset dir="${buildDirectory}/plugins/org.eclipse.platform.source.${installOs}.${installWs}.${installArch}/src/">
-				<include name ="org.eclipse.swt.${wsType}.${installOs}.${installArch}_*/*.zip"/>
+				<include name ="org.eclipse.swt.${installWs}.${installOs}.${installArch}_*/*.zip"/>
 			</fileset>
 		</unzip>
 		<exec dir="${swtlibs}/" executable="sh" failonerror="true">
 			<arg line="build.sh"/>
 		</exec>
-		<property name="swtdir" value="${buildDirectory}/plugins/org.eclipse.swt.${wsType}/os/${installOs}/${installArch}"/>
+		<property name="swtdir" value="${buildDirectory}/plugins/org.eclipse.swt.${installWs}.{installOs}.{installArch}"/>
 		<mkdir dir="${swtdir}"/>
 		<move todir="${swtdir}/">
 			<fileset dir="${swtlibs}">
