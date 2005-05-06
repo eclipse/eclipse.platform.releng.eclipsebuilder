@@ -315,8 +315,8 @@
 		<antcall target="uiworkbenchtexteditor" />
 		<antcall target="uircp" />
 		<antcall target="jdtdebug" />
-		<antcall target="jdtui" />
-		<antcall target="jdtuirefactoring" />
+		<!--antcall target="jdtui" />
+		<antcall target="jdtuirefactoring" /-->
 		<antcall target="ltkuirefactoringtests" />
 		<antcall target="ltkcorerefactoringtests" />
 		<antcall target="text" />
