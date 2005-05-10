@@ -73,7 +73,7 @@
 <target name="preFetch" if="performance.base">
 	<mkdir dir="${buildDirectory}/${buildLabel}"/>
 	<property name="eclipse.base" value="${downloadUrl}/eclipse-SDK-${testedBuildId}-win32.zip" />
-	<property name="linux.base" value="${downloadUrl}/eclipse-SDK-${testedBuildId}-linux-gtk.zip" />
+	<property name="linux.base" value="${downloadUrl}/eclipse-SDK-${testedBuildId}-linux-gtk.tar.gz" />
 	<get src="${eclipse.base}" dest="${buildDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" usetimestamp="true" />
 	<parallel>
 		<get src="${linux.base}" dest="${buildDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk.tar.gz" usetimestamp="true" />
