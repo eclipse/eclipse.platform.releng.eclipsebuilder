@@ -16,8 +16,6 @@
 			<arg line="${tester}/../../testScripts/test.xml ${testMachine}:${executionDir}" />
 		</exec>
 
-		<antcall target="replaceBuildId"/>
-		
 		<replace file="${tester}/vm.properties" token="@buildType@@timestamp@" value="${buildId}"/>
 		<replace file="${tester}/vm.properties" token="@reference@" value="${eclipse.perf.ref}"/>		
 		<replace file="${tester}/vm.properties" token="@testMachine@" value="${testMachine}"/>
@@ -40,10 +38,6 @@
 		<exec dir="${tester}" executable="${copyClient}">
 				<arg line="-r eclipse ${testMachine}:${executionDir}" />
 		</exec>
-	</target>
-
-	<target name="replaceBuildId" if="performance.base">
-		<replace file="${tester}/vm.properties" token="@buildType@@timestamp@" value="${testedBuildIdDBLabel}"/>
 	</target>
 	
 	<target name="installVm">
