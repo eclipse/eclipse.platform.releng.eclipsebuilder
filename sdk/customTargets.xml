@@ -317,9 +317,9 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 
 			<!--build doc.zips-->
 			<ant antfile="buildDoc.xml" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.isv"/>
-			<ant antfile="buildDoc.xml" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.user"/>
+			<ant antfile="build.xml" target="build.doc.zip" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.user"/>
 			<ant antfile="buildDoc.xml" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv"/>
-			<ant antfile="buildDoc.xml" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.user"/>
+			<ant antfile="build.xml" target="build.doc.zip" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.user"/>
 			<ant antfile="buildDoc.xml" dir="${buildDirectory}/plugins/org.eclipse.pde.doc.user"/>
 			
    			<copy todir="${tempDir}/buildScripts">
