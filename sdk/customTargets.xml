@@ -315,21 +315,14 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<!--  set correct permissions on linux script -->
 			<chmod file="${tempDir}/buildScripts/build" perm="755" />
 
-			<!--copy example doc and generate extension-point doc-->
-			<ant antfile="buildDoc.xml" target="convertSchemaToHtml" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.isv"/>
-			<ant antfile="buildDoc.xml" target="examplesDocCopy" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.isv"/>
-			<ant antfile="buildDoc.xml" target="convertSchemaToHtml" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv"/>
-			<ant antfile="buildDoc.xml" target="examplesDocCopy" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv"/>
-			<ant antfile="buildDoc.xml" target="convertSchemaToHtml" dir="${buildDirectory}/plugins/org.eclipse.pde.doc.user"/>
+			<!--build doc.zips-->
+			<ant antfile="buildDoc.xml" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.isv"/>
+			<ant antfile="buildDoc.xml" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.user"/>
+			<ant antfile="buildDoc.xml" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv"/>
+			<ant antfile="buildDoc.xml" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.user"/>
+			<ant antfile="buildDoc.xml" dir="${buildDirectory}/plugins/org.eclipse.pde.doc.user"/>
 			
-			<!--copy help indexes -->
-			<ant antfile="build.xml" target="build.index" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.isv"/>
-			<ant antfile="build.xml" target="build.index" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.isv"/>
-			<ant antfile="build.xml" target="build.index" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv"/>
-			<ant antfile="build.xml" target="build.index" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv"/>
-			<ant antfile="build.xml" target="build.index" dir="${buildDirectory}/plugins/org.eclipse.pde.doc.user"/>			
-
-			<copy todir="${tempDir}/buildScripts">
+   			<copy todir="${tempDir}/buildScripts">
 				<fileset dir="${buildDirectory}" excludes="features/*example*/**,plugins/*example*/**" includes="features/*/build.xml,features/*.source*/**,plugins/*/build.xml,plugins/*.source*/**,fetch_*.xml,assemble*.xml,plugins/org.eclipse.swt.tools/**,plugins/*doc*/**" />
 			</copy>
 			<!--ensure linux drops are created as .tar.gz files -->
