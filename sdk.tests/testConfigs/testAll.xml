@@ -6,7 +6,7 @@
 	<property name="markerContainer" value="/home/users/releng/buildTools/markers" />
 	<property name="cfg" value="${markerContainer}/machine.cfg" />
 	<property name="test.xml" value="${basedir}/../../../org.eclipse.releng.basebuilder/plugins/org.eclipse.build.tools/scripts/test.xml" />
-
+	
 	<target name="test">
 		<property name="sleep" value="0"/>
 		<findMachine cfg="${cfg}" markerContainer="${markerContainer}" cfgKey="${cfgKey}" markerName="${markerName}" waitInterval="30" />
@@ -34,6 +34,11 @@
 	</target>
 
 	<target name="performanceTests">
+		
+		<condition property="internalPlugins" value="../../../eclipsePerformanceBuildTools/plugins">
+			<isset property="performance.base"/>
+		</condition>
+
 		<property name="testResults" value="${postingDirectory}/${buildLabel}/performance" />
 		<mkdir dir="${testResults}" />
 

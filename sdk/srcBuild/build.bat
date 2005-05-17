@@ -53,9 +53,9 @@ goto end
 
 :run
 set ORIGCLASSPATH=%CLASSPATH
-ant -q -buildfile jdtcoresrc/compilejdtcorewithjavac.xml
+call ant -q -buildfile jdtcoresrc/compilejdtcorewithjavac.xml
 set CLASSPATH=jdtcoresrc/ecj.jar;%CLASSPATH
-ant -q -buildfile jdtcoresrc/compilejdtcore.xml
+call ant -q -buildfile jdtcoresrc/compilejdtcore.xml
 set CLASSPATH=ecj.jar;%ORIGCLASSPATH
 ant -q -buildfile build.xml %target% -DinstallOs=%os% -DinstallWs=%ws% -DinstallArch=%arch% %compilelibs%  %bootclasspath%
 goto end

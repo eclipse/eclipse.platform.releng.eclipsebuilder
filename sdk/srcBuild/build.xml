@@ -79,6 +79,12 @@
 	<target name="install" depends="init">
 		<echo message="Assembling..." />
 		
+		<!--the defining class must be built in compile target-->
+		<taskdef name="eclipse.idReplacer" classname="org.eclipse.pde.internal.build.tasks.IdReplaceTask" 
+			classpath="${buildDirectory}/plugins/org.eclipse.pde.build/lib/pdebuild-ant.jar" />
+		<taskdef name="eclipse.brand" classname="org.eclipse.pde.internal.build.tasks.BrandTask" 
+			classpath="${buildDirectory}/plugins/org.eclipse.pde.build/lib/pdebuild-ant.jar" />
+
 		<!--root directory of zip file-->
 		<property name="collectingFolder" value="eclipse" />
 		<property name="archivePrefix" value="eclipse" />
@@ -94,11 +100,8 @@
 		<!--default zip executable flags-->
 		<property name="zipargs" value="-qq" />
 	
-		<!--use bootstrap mechanism to build doc and replace ids-->
-		<copy file="${buildDirectory}/plugins/org.eclipse.platform/startup.jar" todir="${buildDirectory}"/>
-		<java jar="startup.jar" fork="true" dir="${buildDirectory}">
-			<arg line="-application org.eclipse.ant.core.antRunner -f assemble.org.eclipse.sdk.${installOs}.${installWs}.${installArch}.xml" />
-		</java>
+		<ant antfile="assemble.org.eclipse.sdk.${installOs}.${installWs}.${installArch}.xml" />
+			
 		<echo message="Done." />
 	</target>
 
