@@ -79,6 +79,22 @@
 	<target name="install" depends="init">
 		<echo message="Assembling..." />
 		
+	    <path id="eclipse.customTasks.path">
+	      <fileset dir="${buildDirectory}/plugins">
+	      	<include name="**/@dot"/>
+	      	<include name="**/*.jar"/>
+	      </fileset>
+	    </path>
+
+		<!--task used in the assembly and doc generation-->
+		<!--the defining class must be built in compile target-->
+		<taskdef name="eclipse.idReplacer" classname="org.eclipse.pde.internal.build.tasks.IdReplaceTask" 
+			classpathref="eclipse.customTasks.path" />
+		<taskdef name="help.buildHelpIndex" classname="org.eclipse.help.base.ant.BuildHelpIndex" 
+			classpathref="eclipse.customTasks.path" />
+		<taskdef name="pde.convertSchemaToHTML" classname="org.eclipse.pde.ant.ConvertSchemaToHTML" 
+			classpathref="eclipse.customTasks.path" />
+		
 		<!--root directory of zip file-->
 		<property name="collectingFolder" value="eclipse" />
 		<property name="archivePrefix" value="eclipse" />
@@ -94,11 +110,9 @@
 		<!--default zip executable flags-->
 		<property name="zipargs" value="-qq" />
 	
-		<!--use bootstrap mechanism to build doc and replace ids-->
-		<copy file="${buildDirectory}/plugins/org.eclipse.platform/startup.jar" todir="${buildDirectory}"/>
-		<java jar="startup.jar" fork="true" dir="${buildDirectory}">
-			<arg line="-application org.eclipse.ant.core.antRunner -f assemble.org.eclipse.sdk.${installOs}.${installWs}.${installArch}.xml" />
-		</java>
+		<ant antfile="assemble.org.eclipse.sdk.${installOs}.${installWs}.${installArch}.xml">
+			<property name="eclipse.running" value="true"/>
+		</ant>
 		<echo message="Done." />
 	</target>
 
