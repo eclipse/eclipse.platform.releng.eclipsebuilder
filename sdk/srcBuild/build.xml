@@ -79,13 +79,6 @@
 	<target name="install" depends="init">
 		<echo message="Assembling..." />
 		
-	    <path id="eclipse.customTasks.path">
-	      <fileset dir="${buildDirectory}/plugins">
-	      	<include name="**/@dot"/>
-	      	<include name="**/*.jar"/>
-	      </fileset>
-	    </path>
-
 		<!--the defining class must be built in compile target-->
 		<taskdef name="eclipse.idReplacer" classname="org.eclipse.pde.internal.build.tasks.IdReplaceTask" 
 			classpath="${buildDirectory}/plugins/org.eclipse.pde.build/lib/pdebuild-ant.jar" />
