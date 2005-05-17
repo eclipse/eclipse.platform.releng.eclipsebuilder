@@ -86,15 +86,12 @@
 	      </fileset>
 	    </path>
 
-		<!--task used in the assembly and doc generation-->
 		<!--the defining class must be built in compile target-->
 		<taskdef name="eclipse.idReplacer" classname="org.eclipse.pde.internal.build.tasks.IdReplaceTask" 
-			classpathref="eclipse.customTasks.path" />
-		<taskdef name="help.buildHelpIndex" classname="org.eclipse.help.base.ant.BuildHelpIndex" 
-			classpathref="eclipse.customTasks.path" />
-		<taskdef name="pde.convertSchemaToHTML" classname="org.eclipse.pde.ant.ConvertSchemaToHTML" 
-			classpathref="eclipse.customTasks.path" />
-		
+			classpath="${buildDirectory}/plugins/org.eclipse.pde.build/lib/pdebuild-ant.jar" />
+		<taskdef name="eclipse.brand" classname="org.eclipse.pde.internal.build.tasks.BrandTask" 
+			classpath="${buildDirectory}/plugins/org.eclipse.pde.build/lib/pdebuild-ant.jar" />
+
 		<!--root directory of zip file-->
 		<property name="collectingFolder" value="eclipse" />
 		<property name="archivePrefix" value="eclipse" />
@@ -110,9 +107,8 @@
 		<!--default zip executable flags-->
 		<property name="zipargs" value="-qq" />
 	
-		<ant antfile="assemble.org.eclipse.sdk.${installOs}.${installWs}.${installArch}.xml">
-			<property name="eclipse.running" value="true"/>
-		</ant>
+		<ant antfile="assemble.org.eclipse.sdk.${installOs}.${installWs}.${installArch}.xml" />
+			
 		<echo message="Done." />
 	</target>
 
