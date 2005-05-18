@@ -52,7 +52,7 @@
 		</parallel>
 	</target>
 
-	<target name="testAll">
+	<target name="testAll" unless="213">
 		<parallel>
 			<!--slow machines-->
 			<antcall target="test">
