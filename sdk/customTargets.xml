@@ -315,12 +315,9 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<!--  set correct permissions on linux script -->
 			<chmod file="${tempDir}/buildScripts/build" perm="755" />
 
-			<!--TODO:  add support to do this at source build time.-->
-			<!--ant antfile="buildDoc.xml" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.isv"/>
-			<ant antfile="build.xml" target="build.doc.zip" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.user"/>
-			<ant antfile="buildDoc.xml" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv"/>
-			<ant antfile="build.xml" target="build.doc.zip" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.user"/>
-			<ant antfile="buildDoc.xml" dir="${buildDirectory}/plugins/org.eclipse.pde.doc.user"/-->
+			<!--copy example doc -->
+			<ant antfile="buildDoc.xml" target="examplesDocCopy" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.isv"/>
+			<ant antfile="buildDoc.xml" target="examplesDocCopy" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv"/>
 			
    			<copy todir="${tempDir}/buildScripts">
 				<fileset dir="${buildDirectory}" excludes="features/*example*/**,plugins/*example*/**" includes="features/*/build.xml,features/*.source*/**,plugins/*/build.xml,plugins/*.source*/**,fetch_*.xml,assemble*.xml,plugins/org.eclipse.swt.tools/**,plugins/*doc*/**" />
