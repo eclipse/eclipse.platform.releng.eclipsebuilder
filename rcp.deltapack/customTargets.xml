@@ -36,6 +36,9 @@
       <property name="packagingInfo" value="${builder}/scripts"/>
     </ant>
 
+	<zip destfile="${buildDirectory}/deltapacktmp/workingPlace/${buildId}/${archiveName}" update="true">
+			 fileset dir="${buildDirectory}/features/org.eclipse.platform.launchers_*/bin/startup.jar"/>	
+	</zip>
     <move file="${buildDirectory}/deltapacktmp/workingPlace/${buildId}/${archiveName}" todir="${postingDirectory}/${buildLabel}"/>            
     <mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
 	<checksum file="${postingDirectory}/${buildLabel}/${archiveName}" property="md5"/>
