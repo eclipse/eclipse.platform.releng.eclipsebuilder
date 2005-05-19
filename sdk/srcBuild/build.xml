@@ -103,7 +103,8 @@
 		<property name="zipargs" value="-qq" />
 
 		<ant antfile="assemble.org.eclipse.sdk.${installOs}.${installWs}.${installArch}.xml">
-			<!--set property to delay building of doc.zips to later-->
+			<!--set property to delay building of doc.zips to later.  Doc built in this step would be missing extension point doc
+			and help indeces.-->
 			<property name="doc.zip.present" value="true" />
 		</ant>
 		<antcall target="build.doc.plugins" />
@@ -111,23 +112,24 @@
 	</target>
 
 	<target name="build.doc.plugins">
-		<!--build doc plug-ins using Ant tasks in eclipse so that extension-point doc, javadoc and help indeces are complete.-->
+		<!--Build doc plug-ins using antRunner in eclipse to gain access to classpath required for
+		 pde.convertSchemaToHTML and help.buildHelpIndex tasks which are used when generating extension-point and help indeces.-->
 		<antcall target="install.eclipse.${archive.format}" />
 
 		<java fork="true" jar="${buildDirectory}/eclipse/startup.jar" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.isv" output="platform.doc.isv.txt">
-			<arg line="-application org.eclipse.ant.core.antRunner gather.bin.parts -Ddestination.temp.folder=${buildDirectory}/tmp/eclipse/plugins/" />
+			<arg line="-data ${buildDirectory}/workspace -application org.eclipse.ant.core.antRunner gather.bin.parts -Ddestination.temp.folder=${buildDirectory}/tmp/eclipse/plugins/" />
 		</java>
 		<java fork="true" jar="${buildDirectory}/eclipse/startup.jar" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.user" output="platform.doc.user.txt">
-			<arg line="-application org.eclipse.ant.core.antRunner gather.bin.parts -Ddestination.temp.folder=${buildDirectory}/tmp/eclipse/plugins/" />
+			<arg line="-data ${buildDirectory}/workspace -application org.eclipse.ant.core.antRunner gather.bin.parts -Ddestination.temp.folder=${buildDirectory}/tmp/eclipse/plugins/" />
 		</java>
 		<java fork="true" jar="${buildDirectory}/eclipse/startup.jar" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv" output="jdt.doc.isv.txt">
-			<arg line="-application org.eclipse.ant.core.antRunner gather.bin.parts -Ddestination.temp.folder=${buildDirectory}/tmp/eclipse/plugins/" />
+			<arg line="-data ${buildDirectory}/workspace -application org.eclipse.ant.core.antRunner gather.bin.parts -Ddestination.temp.folder=${buildDirectory}/tmp/eclipse/plugins/" />
 		</java>
 		<java fork="true" jar="${buildDirectory}/eclipse/startup.jar" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.user" output="jdt.doc.user.txt">
-			<arg line="-application org.eclipse.ant.core.antRunner gather.bin.parts -Ddestination.temp.folder=${buildDirectory}/tmp/eclipse/plugins/" />
+			<arg line="-data ${buildDirectory}/workspace -application org.eclipse.ant.core.antRunner gather.bin.parts -Ddestination.temp.folder=${buildDirectory}/tmp/eclipse/plugins/" />
 		</java>
 		<java fork="true" jar="${buildDirectory}/eclipse/startup.jar" dir="${buildDirectory}/plugins/org.eclipse.pde.doc.user" output="pde.doc.user.txt">
-			<arg line="-application org.eclipse.ant.core.antRunner gather.bin.parts -Ddestination.temp.folder=${buildDirectory}/tmp/eclipse/plugins/" />
+			<arg line="-data ${buildDirectory}/workspace -application org.eclipse.ant.core.antRunner gather.bin.parts -Ddestination.temp.folder=${buildDirectory}/tmp/eclipse/plugins/" />
 		</java>
 
 		<!--remove files created by running eclipse and incomplete doc plugins before adding in rebuilt doc plugins-->
