@@ -52,10 +52,6 @@
                 <jar jarfile="../ecj.jar">
                         <fileset dir="${destdir}"/>
                 </jar>
- 
-                <!-- delete first ecj compiler -->
-                 <delete file="ecj.jar"/> 
-                 
 
 	</target>
 </project>
