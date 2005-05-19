@@ -154,15 +154,15 @@
 	</target>
 
 	<!--helper targets used to build and include doc plug-ins-->
-	<target name="install.eclipse.tar">	
-		<apply executable="tar" failonerr="true">
-	    	<arg value="-xzf"/>
-	    	<fileset dir="${buildDirectory}/${buildLabel}">
-			<patternset>
-				<include name="**/*.tar.gz"/>
-			</patternset>
-		 	</fileset>
-		</apply>		
+	<target name="install.eclipse.tar">
+		<apply executable="tar" dir="${buildDirectory}">
+			<arg value="-xzf" />
+			<fileset dir="${buildDirectory}/${buildLabel}">
+				<patternset>
+					<include name="**/*.tar.gz" />
+				</patternset>
+			</fileset>
+		</apply>
 	</target>
 
 	<target name="install.eclipse.zip">
