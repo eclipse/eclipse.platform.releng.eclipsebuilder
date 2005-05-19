@@ -166,7 +166,7 @@
 	</target>
 
 	<target name="install.eclipse.zip">
-		<exec dir="${buildDirectory}" executable="unzip" failonerr="true">
+		<exec dir="${buildDirectory}" executable="unzip" failonerror="true">
 			<arg line="-qq ${buildDirectory}/${buildLabel}/*.zip" />
 		</exec>
 	</target>
