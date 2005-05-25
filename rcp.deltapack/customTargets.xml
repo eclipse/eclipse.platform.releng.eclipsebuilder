@@ -38,7 +38,7 @@
 
 	<!-- get startup.jar from org.eclipse.platform of current build -->
 	<unzip src="${buildDirectory}/deltapacktmp/workingPlace/${buildId}/${archiveName}" dest="${buildDirectory}/deltapacktmp/workingPlace/${buildId}"/>
-    <copy file="${buildDirectory}/plugins/org.eclipse.platform/startup.jar" todir="${buildDirectory}/deltapacktmp/workingPlace/${buildId}/eclipse/features/org.eclipse.platform_launchers_3.1.0/bin"/>
+    <copy file="${buildDirectory}/plugins/org.eclipse.platform/startup.jar" todir="${buildDirectory}/deltapacktmp/workingPlace/${buildId}/eclipse/features/org.eclipse.platform.launchers_3.1.0/bin"/>
     <exec dir="${buildDirectory}/deltapacktmp/workingPlace/${buildId}" executable="zip">
 	    <arg line="-u ${buildDirectory}/deltapacktmp/workingPlace/${buildId}/${archiveName} -r ."/>
     </exec> 
