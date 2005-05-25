@@ -310,8 +310,8 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<mkdir dir="${tempDir}/buildScripts/jdtcoresrc"/>
 			<copy todir="${tempDir}/buildScripts/jdtcoresrc">
 				<fileset dir="${eclipse.build.scripts}/sdk/srcBuild/jdtcoresrc"/>
-			</copy>
-
+			</copy>			
+						
 			<!--  set correct permissions on linux script -->
 			<chmod file="${tempDir}/buildScripts/build" perm="755" />
 
@@ -345,7 +345,14 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<!-- fetch scripts are not when source already included in zip file -->
 			<delete>
 				<fileset dir="${tempDir}/buildScripts" includes="fetch*.xml" />
-			</delete>
+				<!-- delete some jars that are not needed to build Eclipse -->
+				<fileset file="${tempDir}/buildScripts/plugins/org.eclipse.osgi/osgi/collx.jar" />
+				<fileset file="${tempDir}/buildScripts/plugins/org.eclipse.osgi/osgi/ee.foundation.jar" />
+				<fileset file="${tempDir}/buildScripts/plugins/org.eclipse.osgi/osgi/ee.minimum.jar" /> 
+				<fileset file="${tempDir}/buildScripts/plugins/org.eclipse.osgi/osgi/exceptions.jar" />
+				<fileset file="${tempDir}/buildScripts/plugins/org.eclipse.osgi/osgi/xmlParserAPIs.jar" />
+				<fileset file="${tempDir}/buildScripts/plugins/org.eclipse.osgi/osgi/osgi-r3-jdk131-notsigned.jar" />			
+			</delete>			
 
 			<!--  set correct permissions on linux script -->
 			<chmod file="${tempDir}/buildScripts/build" perm="755" />
