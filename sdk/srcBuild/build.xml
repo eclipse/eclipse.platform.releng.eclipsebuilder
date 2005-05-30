@@ -256,10 +256,7 @@
 
 		<!-- determines if libraries need to be recompiled for specific platforms -->
 		<condition property="libsconfig">
-			<or>
-				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="linux-gtk-ppc64" />
 				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="hpux-motif-ia64" />
-			</or>
 		</condition>
 
 		<!--used to add doc plug-ins to result after initial assembly-->
