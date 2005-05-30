@@ -173,16 +173,16 @@
 
 	<target name="archive.eclipse.tar">
 		<exec dir="${buildDirectory}" executable="tar" failonerror="true">
-			<arg line="-cf ${buildDirectory}/${buildLabel}/eclipse-SDK.tar eclipse" />
+			<arg line="-cf ${buildDirectory}/${buildLabel}/eclipse-SDK-${buildLabel}-${installOs}-${installWs}-${installArch}.tar eclipse" />
 		</exec>
 		<exec dir="${buildDirectory}" executable="gzip" failonerror="true">
-			<arg line="${buildDirectory}/${buildLabel}/eclipse-SDK.tar" />
+			<arg line="${buildDirectory}/${buildLabel}/eclipse-SDK$-{buildLabel}-${installOs}-${installWs}-${installArch}.tar" />
 		</exec>
 	</target>
 
 	<target name="archive.eclipse.zip">
 		<exec dir="${buildDirectory}" executable="zip" failonerror="true">
-			<arg line="-qq ${buildDirectory}/${buildLabel}/eclipse-SDK -r eclipse" />
+			<arg line="-qq ${buildDirectory}/${buildLabel}/eclipse-SDK-${buildLabel}-${installOs}-${installWs}-${installArch} -r eclipse" />
 		</exec>
 	</target>
 
