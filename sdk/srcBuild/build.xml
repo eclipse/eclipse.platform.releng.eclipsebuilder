@@ -173,16 +173,16 @@
 
 	<target name="archive.eclipse.tar">
 		<exec dir="${buildDirectory}" executable="tar" failonerror="true">
-			<arg line="-cf ${buildDirectory}/${buildLabel}/eclipse-SDK-${buildLabel}-${installOs}-${installWs}-${installArch}.tar eclipse" />
+			<arg line="-cf ${buildDirectory}/${buildLabel}/${buildLabel}-${installOs}-${installWs}-${installArch}-sdk.tar eclipse" />
 		</exec>
 		<exec dir="${buildDirectory}" executable="gzip" failonerror="true">
-			<arg line="${buildDirectory}/${buildLabel}/eclipse-SDK$-{buildLabel}-${installOs}-${installWs}-${installArch}.tar" />
+			<arg line="${buildDirectory}/${buildLabel}/${buildLabel}-${installOs}-${installWs}-${installArch}-sdk.tar" />
 		</exec>
 	</target>
 
 	<target name="archive.eclipse.zip">
 		<exec dir="${buildDirectory}" executable="zip" failonerror="true">
-			<arg line="-qq ${buildDirectory}/${buildLabel}/eclipse-SDK-${buildLabel}-${installOs}-${installWs}-${installArch} -r eclipse" />
+			<arg line="-qq ${buildDirectory}/${buildLabel}/${buildLabel}-${installOs}-${installWs}-${installArch}-sdk -r eclipse" />
 		</exec>
 	</target>
 
@@ -259,6 +259,7 @@
 			<or>
 				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="linux-gtk-ppc64" />
 				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="hpux-motif-ia64" />
+			</or>
 		</condition>
 
 		<!--used to add doc plug-ins to result after initial assembly-->
