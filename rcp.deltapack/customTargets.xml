@@ -36,6 +36,16 @@
       <property name="packagingInfo" value="${builder}/scripts"/>
     </ant>
 
+	<!-- get startup.jar from org.eclipse.platform of current build -->
+	<unzip src="${buildDirectory}/deltapacktmp/workingPlace/${buildId}/${archiveName}" dest="${buildDirectory}/deltapacktmp/workingPlace/${buildId}"/>
+    <copy file="${buildDirectory}/plugins/org.eclipse.platform/startup.jar" todir="${buildDirectory}/deltapacktmp/workingPlace/${buildId}/eclipse/features/org.eclipse.platform.launchers_3.1.0/bin"/>
+    <exec dir="${buildDirectory}/deltapacktmp/workingPlace/${buildId}" executable="zip">
+	    <arg line="-u ${buildDirectory}/deltapacktmp/workingPlace/${buildId}/${archiveName} -r ."/>
+    </exec> 
+	<delete includeemptydirs="true">
+	   <fileset dir="${buildDirectory}/deltapacktmp/workingPlace/${buildId}" excludes="*.zip"/>
+	</delete>
+	
     <move file="${buildDirectory}/deltapacktmp/workingPlace/${buildId}/${archiveName}" todir="${postingDirectory}/${buildLabel}"/>            
     <mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
 	<checksum file="${postingDirectory}/${buildLabel}/${archiveName}" property="md5"/>

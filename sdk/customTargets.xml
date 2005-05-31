@@ -310,17 +310,14 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<mkdir dir="${tempDir}/buildScripts/jdtcoresrc"/>
 			<copy todir="${tempDir}/buildScripts/jdtcoresrc">
 				<fileset dir="${eclipse.build.scripts}/sdk/srcBuild/jdtcoresrc"/>
-			</copy>
-
+			</copy>			
+						
 			<!--  set correct permissions on linux script -->
 			<chmod file="${tempDir}/buildScripts/build" perm="755" />
 
-			<!--TODO:  add support to do this at source build time.-->
-			<!--ant antfile="buildDoc.xml" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.isv"/>
-			<ant antfile="build.xml" target="build.doc.zip" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.user"/>
-			<ant antfile="buildDoc.xml" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv"/>
-			<ant antfile="build.xml" target="build.doc.zip" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.user"/>
-			<ant antfile="buildDoc.xml" dir="${buildDirectory}/plugins/org.eclipse.pde.doc.user"/-->
+			<!--copy example doc -->
+			<ant antfile="buildDoc.xml" target="examplesDocCopy" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.isv"/>
+			<ant antfile="buildDoc.xml" target="examplesDocCopy" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv"/>
 			
    			<copy todir="${tempDir}/buildScripts">
 				<fileset dir="${buildDirectory}" excludes="features/*example*/**,plugins/*example*/**" includes="features/*/build.xml,features/*.source*/**,plugins/*/build.xml,plugins/*.source*/**,fetch_*.xml,assemble*.xml,plugins/org.eclipse.swt.tools/**,plugins/*doc*/**" />
@@ -348,7 +345,14 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<!-- fetch scripts are not when source already included in zip file -->
 			<delete>
 				<fileset dir="${tempDir}/buildScripts" includes="fetch*.xml" />
-			</delete>
+				<!-- delete some jars that are not needed to build Eclipse -->
+				<fileset file="${tempDir}/buildScripts/plugins/org.eclipse.osgi/osgi/collx.jar" />
+				<fileset file="${tempDir}/buildScripts/plugins/org.eclipse.osgi/osgi/ee.foundation.jar" />
+				<fileset file="${tempDir}/buildScripts/plugins/org.eclipse.osgi/osgi/ee.minimum.jar" /> 
+				<fileset file="${tempDir}/buildScripts/plugins/org.eclipse.osgi/osgi/exceptions.jar" />
+				<fileset file="${tempDir}/buildScripts/plugins/org.eclipse.osgi/osgi/xmlParserAPIs.jar" />
+				<fileset file="${tempDir}/buildScripts/plugins/org.eclipse.osgi/osgi/osgi-r3-jdk131-notsigned.jar" />			
+			</delete>			
 
 			<!--  set correct permissions on linux script -->
 			<chmod file="${tempDir}/buildScripts/build" perm="755" />
