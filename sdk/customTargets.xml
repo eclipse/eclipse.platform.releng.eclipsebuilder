@@ -252,6 +252,9 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<replace dir="${buildDirectory}/features/org.eclipse.platform" value="${buildId}" token="@build@">
 		<include name="**/config.ini" />
 	</replace>
+	<replace dir="${buildDirectory}/features/org.eclipse.sdk" value="${buildId}" token="@build@">
+		<include name="**/config.ini" />
+	</replace>
 </target>
 
 <!-- ===================================================================== -->
