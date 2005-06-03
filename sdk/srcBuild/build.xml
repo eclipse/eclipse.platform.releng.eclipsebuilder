@@ -46,7 +46,7 @@
 
 		<!-- unzip swt zips -->
 		<unzip dest="${swtlibs}">
-			<fileset dir="${buildDirectory}/plugins/org.eclipse.platform.source.${installOs}.${installWs}.${installArch}/src/">
+			<fileset dir="${buildDirectory}/plugins/org.eclipse.rcp.source.${installOs}.${installWs}.${installArch}/src/">
 				<include name="org.eclipse.swt.${installWs}.${installOs}.${installArch}_*/*.zip" />
 			</fileset>
 		</unzip>
