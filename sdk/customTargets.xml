@@ -76,6 +76,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	</target>
 
 	<target name="assemble.org.eclipse.sdk.hpux.motif.ia64" />
+	<target name="assemble.org.eclipse.sdk.hpux.motif.ia64_32" />
 	<target name="assemble.org.eclipse.sdk.linux.gtk.ia64" />
 	<target name="assemble.org.eclipse.sdk.linux.gtk.ppc64" />
 
