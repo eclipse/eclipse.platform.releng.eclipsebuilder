@@ -14,17 +14,24 @@
 	 	<echo message="TARGET: ${destdir}" />
 		<delete dir="${destdir}"/>
 		<mkdir dir="${destdir}"/>
-		
-        <property name="build.compiler" value="modern"/>
+
         <property name="compilerArg" value="-encoding ISO-8859-1" />
         <property name="javacSource" value="1.3" />
         <property name="javacTarget" value="1.2" />
-        <property name="javacDebugInfo" value="true" />
+        <property name="javacDebugInfo" value="on" />
         <property name="javacFailOnError" value="true" />
-
-        <record name="../compilelog.txt" action="start" />
-        <javac verbose="true" srcdir="${srcdir}" destdir="${destdir}"/>
-        <record name="../compilelog.txt" action="stop" />   
+		
+        <record name="compilelog.txt" action="start" />
+        <javac verbose="true" 
+               target="${javacTarget}" 
+               source="${javacSource}"
+               srcdir="${srcdir}" 
+               destdir="${destdir}"
+               debug="${javacDebugInfo}"
+               failonerror="${javacFailOnError}">
+	    	   <compilerarg line="${compilerArg}"/>
+        </javac>
+        <record name="compilelog.txt" action="stop" />   
 
         <echo message="UPDATE ecj.jar" />
              <copy todir="${destdir}">

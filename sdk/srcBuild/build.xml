@@ -46,7 +46,7 @@
 
 		<!-- unzip swt zips -->
 		<unzip dest="${swtlibs}">
-			<fileset dir="${buildDirectory}/plugins/org.eclipse.platform.source.${installOs}.${installWs}.${installArch}/src/">
+			<fileset dir="${buildDirectory}/plugins/org.eclipse.rcp.source.${installOs}.${installWs}.${installArch}/src/">
 				<include name="org.eclipse.swt.${installWs}.${installOs}.${installArch}_*/*.zip" />
 			</fileset>
 		</unzip>
@@ -173,16 +173,16 @@
 
 	<target name="archive.eclipse.tar">
 		<exec dir="${buildDirectory}" executable="tar" failonerror="true">
-			<arg line="-cf ${buildDirectory}/${buildLabel}/${buildLabel}-${installOs}-${installWs}-${installArch}-sdk.tar eclipse" />
+			<arg line="-cf ${buildDirectory}/${buildLabel}/${installOs}-${installWs}-${installArch}-sdk.tar eclipse" />
 		</exec>
 		<exec dir="${buildDirectory}" executable="gzip" failonerror="true">
-			<arg line="${buildDirectory}/${buildLabel}/${buildLabel}-${installOs}-${installWs}-${installArch}-sdk.tar" />
+			<arg line="${buildDirectory}/${buildLabel}/${installOs}-${installWs}-${installArch}-sdk.tar" />
 		</exec>
 	</target>
 
 	<target name="archive.eclipse.zip">
 		<exec dir="${buildDirectory}" executable="zip" failonerror="true">
-			<arg line="-qq ${buildDirectory}/${buildLabel}/${buildLabel}-${installOs}-${installWs}-${installArch}-sdk -r eclipse" />
+			<arg line="-qq ${buildDirectory}/${buildLabel}/${installOs}-${installWs}-${installArch}-sdk -r eclipse" />
 		</exec>
 	</target>
 
@@ -259,6 +259,7 @@
 			<or>
 				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="linux-gtk-ppc64" />
 				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="hpux-motif-ia64" />
+				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="hpux-motif-ia64_32" />
 			</or>
 		</condition>
 
@@ -268,10 +269,5 @@
 		</condition>
 		<property name="archive.format" value="zip" />
 	</target>
-
-	<!-- temporary fix until https://bugs.eclipse.org/bugs/show_bug.cgi?id=86571 is fixed -->
-	<property name="tarargs" value="" />
-
-
 
 </project>

@@ -42,6 +42,7 @@ if %os%-%ws%-%arch%==solaris-gtk-sparc goto run
 if %os%-%ws%-%arch%==aix-motif-ppc goto run
 if %os%-%ws%-%arch%==hpux-motif-PA_RISC goto run
 if %os%-%ws%-%arch%==qnx-photon-x86 goto run
+if %os%-%ws%-%arch%==hpux-motif-ia64_32 goto run
 if %os%-%ws%-%arch%==macosx-carbon-ppc goto run
 
 ECHO The ws os arch combination entered is not valid.
