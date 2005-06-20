@@ -166,12 +166,29 @@
 		<property name="basearch" value="x86" />
 	</ant>
 	
-	<!--place linux motif about.html in temp location where it will be copied into root of eclipse at assembly time-->
-	<property name="linux.motif.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/linux.motif" />
+	<!--copy linux motif about_files to in temp location where it will be copied into root of eclipse at assembly time-->
+	<property name="linux.motif.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.motif.x86" />
 	<mkdir dir="${linux.motif.rootfiles}" />
-	<copy tofile="${linux.motif.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86/about_open_motif.html" failonerror="false"/>
 	<copy todir="${linux.motif.rootfiles}">
 		<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86">
+			<include name="about_files/**"/>
+		</fileset>
+	</copy>
+	
+	<!--copy linux gtk x86 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
+	<property name="linux.gtk.x86.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.x86" />
+	<mkdir dir="${linux.gtk.x86.rootfiles}" />
+	<copy todir="${linux.gtk.x86.rootfiles}">
+		<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86">
+			<include name="about_files/**"/>
+		</fileset>
+	</copy>
+	
+	<!--copy linux gtk x86_64 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
+	<property name="linux.gtk.x86_64.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.x86_64" />
+	<mkdir dir="${linux.gtk.x86_64.rootfiles}" />
+	<copy todir="${linux.gtk.x86_64.rootfiles}">
+		<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64">
 			<include name="about_files/**"/>
 		</fileset>
 	</copy>
