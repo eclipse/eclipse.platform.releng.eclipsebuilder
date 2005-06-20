@@ -68,7 +68,7 @@
 				<include name="org.eclipse.platform_*/launchersrc.zip" />
 			</fileset>
 		</unzip>
-		<exec dir="${launcherlibs}/library/${installWs}/" executable="sh" os="Linux" failonerror="true">
+		<exec dir="${launcherlibs}/library/${installWs}/" executable="sh" failonerror="true">
 			<arg line="build.sh" />
 		</exec>
 		<move file="${launcherlibs}/library/${installWs}/eclipse" todir="${launcherlibs}/" />
