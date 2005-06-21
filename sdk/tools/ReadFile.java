@@ -178,9 +178,8 @@ public class ReadFile extends Task {
 		 	
 		// 	verify that the contents of the xml file are valid		 			 			 	
 		 	 
-		 	 ArrayList fileContents = new ArrayList();
-		 	 ArrayList updatedFileContents = new ArrayList();
-		 	 Properties convertFiles = new Properties();		 	 		 	 
+		    ArrayList fileContents = new ArrayList();		 
+		 	Properties convertFiles = new Properties();		 	 		 	 
 		 	convertFiles.put(path+"/"+xmlFileName+".2",path+"/"+htmlFileName);
 		 	 
 		 	 try {
@@ -255,8 +254,7 @@ public class ReadFile extends Task {
                         
 		 	 				//add the xml link to the list of files that needs to be constructed via xslt
                     
-                } else {
-                    //updatedFileContents.add(currentLine);
+                } else {                   
                     outfile.write(currentLine+"\n");
                 }
 		 	 }
@@ -281,132 +279,116 @@ public class ReadFile extends Task {
 		 
 		 boolean addLink(String url) {
 		 		 		 		 
-		 		 //If the string is legal related then add it automatically
-		 		 //if (url.matches("(?i).*legal.*")) {
-		 		 //		 listLinks.add(url);		 		 		 
-		 		 //} else {
-		 		 		 //check if the link already exists in the array
-		 		 		 if (! listLinks.contains(url)) {
-		 		 		 		 listLinks.add(url);
-		 		 		 		 return true;
-		 		 		 } else {
-		 		 		 	return false;
-		 		 		 }
-		 		 //}		 		 		 
+		 //If the string is legal related then add it automatically
+		 //check if the link already exists in the array
+		     if (! listLinks.contains(url)) {
+		 		 listLinks.add(url);
+		 		 return true;
+		 	 } else {
+		 	 	return false;
+		 	 }	 			 		 		 
 		 }
 		 		 		 		  
 		 
 		 String findUrl(String line) {
 		 		 
-		 		 int length = line.length();
-		 		 int indexStart = line.indexOf("href=\"");
-		 		 String url="";
-		 		 if (indexStart > 0) {
-		 		    url = line.substring(indexStart+6,line.length());
-		 		 }
-		 		 int indexEnd = url.indexOf("\">");
-		 		 if (indexEnd > 0) {
-		 		 	url = url.substring(0,indexEnd);   
-		 		 } else {
-		 		 	url = "";	 		 	
-		 		 }
-		 		     return(url);		 
-		 		    
-		 
+		 int indexStart = line.indexOf("href=\"");
+		 String url="";
+		 if (indexStart > 0) {
+		     url = line.substring(indexStart+6,line.length());
+		 }
+		 int indexEnd = url.indexOf("\">");
+		 if (indexEnd > 0) {
+		     url = url.substring(0,indexEnd);   
+		 } else {
+		  	url = "";	 		 	
+		 }
+		    return(url);		 	    
 		 }
 		 
 		 boolean verifyUrl(String url) {	
 		 	
-		 	     // System.out.println("in verify url "+url);
-		  		 
-		 		 //verify that the link is valid and return a boolean value
-			     //verify that the link doesn't start with #
-	 		     if (url.matches("(?i).*#.*")){		 		 
-	 		  	     return false;		 		 
-	 		     }  
-		 		 //verify that the link ends in .htm
-		 		 if (!(url.matches("(?i).*.htm.*"))) {		 		 	
-		 		 		   return false;
-		 		 }
-		 		 if (!(url.matches("(?i).*/*"))) {		 		 	
-	 		 		   return false;
-	 		     } 
-		 		 //verify that the link doesn't start with ../..
-		 		 if (url.startsWith("../..")){
-		 		 	
-		 		 	  //   System.out.println("url .."+url);
-		 		 		 return false;		 		 
-		 		 }  
-		 		if (url.matches("../..")){
-		 		 	   //  System.out.println("url .."+url);
-		 		 		 return false;		 		 
-		 		 }  
-		 		//verify url doesn't have multiple ../.. strings
-		 		int indexS = url.indexOf("../");
-		 		int indexE = url.lastIndexOf("../");
-		 	    if (indexE > indexS) {
-		 	    	return(false);
-		 	    }
-		 		 if (listLinks.contains(url)) {
-		 		 	return(false);
-		 		 }
-//		 				 	
-		 		 //verify that the url doesn't refer to the api reference
-		 		 if (url.matches("(?i).*/reference/api.*")) {
-		 	//	 if	 (url.matches("(?i).*/api/.*")) {
-		 			// 	System.out.println("url api"+url);
-		 		 		 return false;
-		 		 } 
-		 		
-		 		if (url.matches("(?i).*platform_whatsnew.html.*")) {
-				 	//	 if	 (url.matches("(?i).*/api/.*")) {
-				 			// 	System.out.println("url api"+url);
-				 		 		 return false;
-				 		 } 
-		 		 //verify that the url doesn't refer to the api reference
-		 		 //if (url.matches("(?i).*/reference/api.*")) {
-		 		 if	 (url.matches("(?i).*http://.*")) {
-		 			 //	System.out.println("url samples"+url);
-		 		 		 return false;
-		 		 } 
-		 		
+		 	  		 
+		 //verify that the link is valid and return a boolean value
+		 //verify that the link doesn't start with #
+	 	 if (url.matches("(?i).*#.*")){		 		 
+	 	     return false;		 		 
+	 	 }  
+		 //verify that the link ends in .htm
+		 if (!(url.matches("(?i).*.htm.*"))) {		 		 	
+		     return false;
+		 }
+		 if (!(url.matches("(?i).*/*"))) {		 		 	
+	 		  return false;
+	 	 } 
+		 //verify that the link doesn't start with ../..
+		 if (url.startsWith("../..")){
+		 	 return false;		 		 
+		 }  
+		 if (url.matches("../..")){		 		 	  
+		 	 return false;		 		 
+		 }  
+		 //verify url doesn't have multiple ../.. strings
+		 int indexS = url.indexOf("../");
+		 int indexE = url.lastIndexOf("../");
+		 if (indexE > indexS) {
+		   	return(false);
+		 }
+		 if (listLinks.contains(url)) {
+		     return(false);
+		 }
+		 				 	
+		 //verify that the url doesn't refer to the api reference
+		 if (url.matches("(?i).*/reference/api/.*")) {                        
+		 	 return false;
+		 } 
+         if (url.matches("(?i).*/reference/.*/../api/.*")) {                        
+            return false;
+         } 
+		 if (url.matches("(?i).*platform_whatsnew.html.*")) {
+		 	 return false;
+		 } 
+		 //verify that the url doesn't refer to the api reference	
+		 if	 (url.matches("(?i).*http://.*")) {
+		     return false;
+		 }                               
   		     		     return true;
-		 	 }
+	 }
 		 
 	
 			 
 		 public void parseLinks(String fileName) {
 		 	
-		 	try {
-		 		File myFile = new File(fileName);
-		 		if (!myFile.exists()) {
-		 			 return;
-		 		}
-		 		if	 (fileName.matches("(?i).*hglegal.*")) {
-		 		 		 return;
-		 		 } 
+		 try {
+		     File myFile = new File(fileName);
+		 	 if (!myFile.exists()) {
+		 		 return;
+		 	 }
+		 	 if	 (fileName.matches("(?i).*hglegal.*")) {
+		 	 		 return;
+		 	} 
 
-		 		FileReader fileReader = new FileReader(myFile);
-		 		BufferedReader reader = new BufferedReader(fileReader);		 		 		 		 		 
+		 	FileReader fileReader = new FileReader(myFile);
+		 	BufferedReader reader = new BufferedReader(fileReader);		 		 		 		 		 
 		 		 		 		 
-		 		String line = null;
-		 		ArrayList fileContents = new ArrayList();
+		 	String line = null;
+		 	ArrayList fileContents = new ArrayList();
 		 	
-		 		//put file contents into array
-		 		while ((line = reader.readLine()) != null) {
-		 			fileContents.add(line);
-		 		}
-		 		reader.close();
-		 		for (Iterator i = fileContents.iterator(); i.hasNext();) {
-		 	 		// parse the file for lines with links
-		 			    String l = (String)(i.next());
-		 		       if (l.matches("(?).*href=.*")) {
+		 	//put file contents into array
+		 	while ((line = reader.readLine()) != null) {
+		 		fileContents.add(line);
+		 	}
+		 	reader.close();
+		 	    for (Iterator i = fileContents.iterator(); i.hasNext();) {
+		 	 	// parse the file for lines with links
+		 		    String l = (String)(i.next());
+		 		    if (l.matches("(?).*href=.*")) {
 		 		 			 		 		 		 		 
-		 		        	int indexPathStart = fileName.indexOf("/");
-		 		        	int indexPathEnd = fileName.lastIndexOf("/");
-		 			        String path = fileName.substring(indexPathStart,indexPathEnd);
-		 	   	            String nextUrl;
-		 	   	            String url = findUrl(l);		 			
+		 		        int indexPathStart = fileName.indexOf("/");
+		 		        int indexPathEnd = fileName.lastIndexOf("/");
+		 			    String path = fileName.substring(indexPathStart,indexPathEnd);
+		 	   	        String nextUrl;
+		 	   	        String url = findUrl(l);		 			
 		 			 
 		 			if (verifyUrl(path+"/"+url)) {		 			
 		 				boolean upLevel = url.startsWith("../");
@@ -424,14 +406,12 @@ public class ReadFile extends Task {
 		 		 		 	   parseLinks(nextUrl);	
 		 		 	 		}
 		 		 		 }
-		 		 	 }
-		 		
+		 		 	 }		 		
 		 		  }		 		 
 		  		 } catch (Exception ex) {
 		 		 		   ex.printStackTrace();
 		 		 }
-		 	}
-		 
+		 	}		 
 		 
 		 	String findFiles(String path, final String re) {
 		 		 		 		 		 		 
@@ -455,51 +435,49 @@ public class ReadFile extends Task {
 		     }		   
 		     return docfiles;       
 		 }
-	 
-
 		 	
 		 String findDocName(String path) {
 
-		 		 //construct the name of the doc from the path
-		 		 int startDoc = path.lastIndexOf("/");
-		 		 int endDoc = path.lastIndexOf("_");
+ 		 //construct the name of the doc from the path
+ 		 int startDoc = path.lastIndexOf("/");
+	 	 int endDoc = path.lastIndexOf("_");
 		 		 
-		 		 String docFileName = path + "/" + path.substring(startDoc+1,endDoc+6) + ".pdf";
+		 String docFileName = path + "/" + path.substring(startDoc+1,endDoc+6) + ".pdf";
 		
-		 		 return(docFileName);
+		 	 return(docFileName);
 		 }
 		 
 		 void transformXML(String fileName, String path, String styleSheet, String outputFile) {
 		 			
-		 	    String[] command;
-		 		command = new String[6];			 			
+		     String[] command;
+		     command = new String[6];			 			
 		 		
-		 		command[0] = "-in";
-		 		command[1] = fileName;
-		 		command[2] = "-xsl";
-		 		command[3] = styleSheet; 
-		 		command[4] = "-out";
-		 		command[5] = outputFile;
+		     command[0] = "-in";
+		     command[1] = fileName;
+		     command[2] = "-xsl";
+		     command[3] = styleSheet; 
+		     command[4] = "-out";
+		     command[5] = outputFile;
 				 		
- 		 		try {
- 		 	        org.apache.xalan.xslt.Process.main(command);	 	      
-		 	    } catch (Exception ex) {		 		 	    
+ 		 	try {
+ 		 	    org.apache.xalan.xslt.Process.main(command);	 	      
+		 	} catch (Exception ex) {		 		 	    
  		 	    	ex.printStackTrace();
- 		 	    }
+ 		 	}
 
 		 	
 		 }
 		 
 		  void writeDocGenScript(String path, String docName, String scriptName, String docParam) {
 		 		 		 		 
-		 		String docGenScript = path + "/" + scriptName;	    	 		 
+		      String docGenScript = path + "/" + scriptName;	    	 		 
 		 		 
-     	 		  try {
-		         BufferedWriter outfile = new BufferedWriter(new FileWriter(docGenScript));
-		         outfile.write(docParam + " " + docName+" ");
-		         for (Iterator i = listLinks.iterator(); i.hasNext();) {
-		 		 		     outfile.write((String)(i.next())+" ");		 		 		     
-		 		 		 }
+		      try {
+		          BufferedWriter outfile = new BufferedWriter(new FileWriter(docGenScript));
+		          outfile.write(docParam + " " + docName+" ");
+		          for (Iterator i = listLinks.iterator(); i.hasNext();) {
+		              outfile.write((String)(i.next())+" ");		 		 		     
+		 		 }
 		         outfile.write("\n");
 		         outfile.close();    
 		     } catch (IOException ex) {
@@ -507,8 +485,8 @@ public class ReadFile extends Task {
 		     }  
 		     
 		     try {
-		        String command = "sh " + docGenScript;
-		        Process child = Runtime.getRuntime().exec(command);
+		         String command = "sh " + docGenScript;
+		         Process child = Runtime.getRuntime().exec(command);
 		    } catch (IOException ex) {
 		    	 ex.printStackTrace();
 		    }
@@ -516,36 +494,29 @@ public class ReadFile extends Task {
 		 
 		 
 		 		 
-		 public void execute() {		  	     
-		        String path = docDir;
-		        listLinks = new ArrayList();
-		  		//Update xml if required
-		 		htmlFile = path + "/" + htmlFileName;		 	
-		 		//fix xml and generate html as required
-		 		verifySourceFiles(path,xmlFileName,styleSheet,htmlFileName);	    	 			 		 	 			
-		 		//add the first link to the array		 		 		 
-		 		listLinks.add(htmlFile);		 		 		
-		 		parseLinks(htmlFile);		 		 	
-		 		writeDocGenScript(path,docName,scriptName,scriptParam);	
-		 		//Clean up temporary files
-		 		for (Iterator f = tempList.iterator(); f.hasNext();) {
-		 			//System.out.println("f "+f.next());
-		 			boolean success = new File (f.next().toString()).delete();
-		 			//boolean success = (new File(f).delete());		 			 
-		 		}
-		 		    
-		 			 		
+		 public void execute() {
+             
+		 String path = docDir;
+		 listLinks = new ArrayList();
+		 //Update xml if required
+		 htmlFile = path + "/" + htmlFileName;		 	
+		 //fix xml and generate html as required
+		 verifySourceFiles(path,xmlFileName,styleSheet,htmlFileName);	    	 			 		 	 			
+		 //add the first link to the array		 		 		 
+		 listLinks.add(htmlFile);		 		 		
+		 parseLinks(htmlFile);		 		 	
+		 writeDocGenScript(path,docName,scriptName,scriptParam);	
+		 //Clean up temporary files
+		 for (Iterator f = tempList.iterator(); f.hasNext();) {		 			
+		 		boolean success = new File (f.next().toString()).delete(); 
+		     }	 		
 		 }
 		 
-		 public static void main(String args[]) {
-		 			 	
+		 public static void main(String args[]) {		 			 	
 		 		
 		 	ReadFile instance = new ReadFile();
-		 	instance.execute();
- 	
-		 
-		 }
-			
+		 	instance.execute();	
+		 }			
 	
 }
 
