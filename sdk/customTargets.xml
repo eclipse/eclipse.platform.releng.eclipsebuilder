@@ -201,9 +201,14 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<mkdir dir="${linux.motif.rootfiles}" />
 		<copy tofile="${linux.motif.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86/about_launcher_libraries.html" />
 		<copy todir="${linux.motif.rootfiles}">
-			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86">
-				<include name="about_files/about_cairo.html,about_files/about_open_motif.html,about_files/mlpl-v10.html,about_files/mlpl-v11.txt,about_files/pixman-licenses.txt"/>
-			</fileset>
+			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86"
+				includes="
+				about_files/about_cairo.html,
+				about_files/about_open_motif.html,
+				about_files/mlpl-v10.html,
+				about_files/mlpl-v11.txt,
+				about_files/pixman-licenses.txt"
+			/>
 		</copy>
 		
 		<!--copy linux gtk x86 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
@@ -212,9 +217,12 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<copy tofile="${linux.gtk.x86.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86/about_launcher_libraries.html" />
 
 		<copy todir="${linux.gtk.x86.rootfiles}">
-			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86">
-				<include name="about_files/about_cairo.html,about_files/pixman-licenses.txt,about_files/mpl-v11.txt"/>
-			</fileset>
+			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86"
+				includes="
+				about_files/about_cairo.html,
+				about_files/pixman-licenses.txt,
+				about_files/mpl-v11.txt"
+			/>
 		</copy>
 		
 		<!--copy linux gtk x86_64 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
@@ -223,9 +231,12 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<copy tofile="${linux.gtk.x86_64.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64/about_launcher_libraries.html" />
 
 		<copy todir="${linux.gtk.x86_64.rootfiles}">
-			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64">
-				<include name="about_files/about_cairo.html,about_files/pixman-licenses.txt,about_files/mpl-v11.txt"/>
-			</fileset>
+			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64"
+				includes="
+				about_files/about_cairo.html,
+				about_files/pixman-licenses.txt,
+				about_files/mpl-v11.txt"
+			/>
 		</copy>
 
 		<!--gather component.xml files-->
