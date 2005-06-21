@@ -206,7 +206,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 				about_files/about_cairo.html,
 				about_files/about_open_motif.html,
 				about_files/mlpl-v10.html,
-				about_files/mlpl-v11.txt,
+				about_files/mpl-v11.txt,
 				about_files/pixman-licenses.txt"
 			/>
 		</copy>
