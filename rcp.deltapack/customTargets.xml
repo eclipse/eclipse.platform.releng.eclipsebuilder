@@ -39,9 +39,15 @@
 	<!-- get startup.jar from org.eclipse.platform of current build -->
 	<unzip src="${buildDirectory}/deltapacktmp/workingPlace/${buildId}/${archiveName}" dest="${buildDirectory}/deltapacktmp/workingPlace/${buildId}"/>
     <copy file="${buildDirectory}/plugins/org.eclipse.platform/startup.jar" todir="${buildDirectory}/deltapacktmp/workingPlace/${buildId}/eclipse/features/org.eclipse.platform.launchers_3.1.0/bin"/>
+	<!--HACK to workaround bug 100460.  Add legal root files.-->
+    <copy todir="${buildDirectory}/deltapacktmp/workingPlace/${buildId}/eclipse">
+    	<fileset dir="${builder}/scripts" includes="epl-v10.html,notice.html" />
+    </copy>
+
     <exec dir="${buildDirectory}/deltapacktmp/workingPlace/${buildId}" executable="zip">
 	    <arg line="-u ${buildDirectory}/deltapacktmp/workingPlace/${buildId}/${archiveName} -r ."/>
-    </exec> 
+    </exec>
+			
 	<delete includeemptydirs="true">
 	   <fileset dir="${buildDirectory}/deltapacktmp/workingPlace/${buildId}" excludes="*.zip"/>
 	</delete>
