@@ -23,10 +23,7 @@
 <target name="main" depends="compileSrc" if="compileSrc">
 		<antcall target="genPdf">
 			<param name="docPlugin" value="org.eclipse.jdt.doc.isv" />
-		</antcall>
-		<antcall target="genPdf">
-			<param name="docPlugin" value="org.eclipse.platform.doc.isv" />
-		</antcall>
+		</antcall>	
 			<antcall target="genPdf">
 			<param name="docPlugin" value="org.eclipse.jdt.doc.user" />
 		</antcall>
@@ -35,7 +32,10 @@
 		</antcall>
 		<antcall target="genPdf">
 			<param name="docPlugin" value="org.eclipse.pde.doc.user" />
-		</antcall>	
+		</antcall>
+	    <antcall target="genPdf">
+			<param name="docPlugin" value="org.eclipse.platform.doc.isv" />
+		</antcall>
 	
 </target>
 
