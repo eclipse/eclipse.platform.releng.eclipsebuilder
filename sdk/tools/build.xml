@@ -33,9 +33,9 @@
 		<antcall target="genPdf">
 			<param name="docPlugin" value="org.eclipse.pde.doc.user" />
 		</antcall>
-	    <antcall target="genPdf">
+	 <!--   <antcall target="genPdf">
 			<param name="docPlugin" value="org.eclipse.platform.doc.isv" />
-		</antcall>
+		</antcall> -->
 	
 </target>
 
