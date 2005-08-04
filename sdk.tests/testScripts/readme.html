@@ -6,7 +6,7 @@
 
 <body bgcolor="#FFFFFF" text="#000000">
 <font size="+2"> Automated Testing of Eclipse Builds</font>
-<p>last updated: August 25, 2003</p>
+<p>last updated: August 4, 2005</p>
 <p><font size="+1">Description</font></p>
 <p>This document describes how to run JUnit test plugins in Eclipse from the command 
   line using Eclipse JUnit test plugins (see <a href="#appendixa">Appendix A</a> 
@@ -67,10 +67,14 @@
 <p><b>runtests [-os &lt;operating system&gt;] [-ws &lt;windowing system&gt;] [-arch 
   &lt;architecture&gt;] [-noclean] [&lt;testTarget&gt;][-properties &lt;path&gt;][-vm 
   &lt;path to java executable&gt;]</b></p>
-<p>All parameters and targets are optional on windows systems. Just running &quot;runtests&quot; 
-  will run <b>ALL</b> tests on Windows, installing a clean Eclipse between each 
-  test target. On *nix systems, the os, ws and arch parameters must be specified. 
-</p>
+<p>Please note that for 3.1 and higher stream builds, there are two targets are
+  required to run all tests. The <strong>all</strong> test target runs tests
+  we run with a 1.4 vm. The <strong>all5.0</strong> target runs tests that require
+  a 1.5 vm. </p>
+<p>All parameters and targets are optional on windows systems. Just running &quot;runtests &quot; will
+  run the <strong>all</strong> test target on Windows, installing a clean
+  Eclipse between each test target. On *nix systems, the os, ws and arch parameters
+  must be specified.</p>
 <p>Test results are produced in an individual xml files for each component. These 
   results are copied to the eclipse-testing\results\xml directory. These results 
   can be converted into html by running the &quot;genHtml&quot; target as described 
@@ -119,58 +123,83 @@
 </table>
   
 <p><font size="+1">Test Targets</font></p>
-<p>Specifies which ant target to run in the main test.xml. Typically this corresponds 
-  to a test project's tests. If you do not specify a test target then the <b>all</b> 
-  test target is run.</p>
-
+<p>Specifies which ant target to run in the main test.xml. Typically this corresponds
+   to a test project's tests. If you do not specify a test target then the <b>all</b> 
+  test target is run. The <strong>all5.0</strong> test target must be run with
+  a 1.5 vm to complete successfully.</p>
 <table width="90%" border="1">
   <tr> 
     <td>all</td>
-    <td>Runs all the targets below.</td>
+    <td>Runs all the targets below until all5.0</td>
   </tr>
-  <tr> 
+  <tr>
     <td>ant</td>
     <td>Runs the JUnit plugin tests for the Platform-Ant component.</td>
+  </tr>
+  <tr> 
+    <td>ant-ui</td>
+    <td>Runs the JUnit plugin tests for the Ant-UI component.</td>
+  </tr>
+  <tr>
+    <td>compare</td>
+    <td>Runs the JUnit plugin tests for the Platform-Compare component</td>
   </tr>
   <tr> 
     <td>core</td>
     <td>Runs the JUnit plugin tests for the Platform-Core component.</td>
   </tr>
+  <tr>
+    <td>coreexpressions</td>
+    <td>Runs additional JUnit plugin tests for the Platform-Core component.</td>
+  </tr>
+  <tr>
+    <td>filebuffers</td>
+    <td>Runs additional JUnit plugin tests for the Platform-Core component.</td>
+  </tr>
   <tr> 
     <td>help</td>
     <td>Runs the JUnit plugin tests for the Platform-Help component.</td>
   </tr>
-  <tr> 
-    <td>jdtcorebuilder</td>
-    <td>Runs the JUnit plugin tests for the JDT-Core component. This target is 
-      executed on Windows operating systems only.</td>
-  </tr>
-  <tr> 
-    <td height="20">jdtcorecompiler</td>
-    <td height="20">Runs the JUnit plugin tests for the JDT-Core component. This 
-      target is executed on Windows operating systems only.</td>
-  </tr>
-  <tr> 
-    <td>jdtcoremodel</td>
-    <td>Runs the JUnit plugin tests for the JDT-Core component. This target is 
-      executed on Windows operating systems only.</td>
+  <tr>
+    <td>jface</td>
+    <td>Runs additional JUnit plugin tests for the Platform-UI component.</td>
   </tr>
   <tr> 
     <td>jdtdebug</td>
     <td>Runs the JUnit plugin tests for the JDT-Debug component.</td>
   </tr>
+  <tr>
+    <td>jdttext</td>
+    <td>Runs the JUnit plugin tests for the JDT-Text component</td>
+  </tr>
   <tr> 
     <td>jdtui</td>
     <td>Runs the JUnit plugin tests for the JDT-UI component.</td>
   </tr>
+  <tr>
+    <td>pdeui</td>
+    <td>Runs additional JUnit plugin tests for the PDE-ui component</td>
+  </tr>
+  <tr>
+    <td>releng</td>
+    <td>Runs the JUNit plugin tests for the releng component. Note, if you don't
+    have the chkpii executable, this portion of the tests will fail.</td>
+  </tr>
   <tr> 
-    <td>jdtuirefactoring</td>
-    <td>Rruns additional JUnit plugin tests for the JDT-UI component.</td>
+    <td height="24">jdtuirefactoring</td>
+    <td>Runs additional JUnit plugin tests for the JDT-UI component.</td>
+  </tr>
+  <tr>
+    <td>ltkcorerefactoringtests</td>
+    <td>Runs additional JUnit plugin tests for the JDT-UI component.</td>
+  </tr>
+  <tr>
+    <td>ltkuirefactoringtests</td>
+    <td>Runs additional JUnit plugin tests for the JDT-UI component.</td>
   </tr>
   <tr> 
     <td>swt</td>
-    <td>Runs the JUnit plugin tests for the Platform-SWT component. This target 
-      is executed on Windows operating systems only.</td>
+    <td>Runs the JUnit plugin tests for the Platform-SWT component. </td>
   </tr>
   <tr> 
     <td>teamcore</td>
@@ -178,20 +207,51 @@
   </tr>
   <tr> 
     <td>teamcvs</td>
-    <td>Runs additional JUnit plugin tests for the Platform-VCM component.</td>
+    <td>Runs additional JUnit plugin tests for the Platform-Team component.</td>
+  </tr>
+  <tr>
+    <td>text</td>
+    <td>Runs the JUnit plugin tests for the Platform-Text component.</td>
   </tr>
   <tr> 
     <td>ui</td>
     <td>Runs the JUnit plugin tests for the Platform-UI component.</td>
   </tr>
+  <tr>
+    <td>uieditors</td>
+    <td>Runs additional JUnit plugin tests for the Platform-UI component.</td>
+  </tr>
+  <tr>
+    <td>uiworkbenchtexteditor</td>
+    <td>Runs additional JUnit plugin tests for the Platform-UI component.</td>
+  </tr>
+  <tr>
+    <td>uircp</td>
+    <td>Runs additional JUnit plugin tests for the Platform-UI component.</td>
+  </tr>
   <tr> 
     <td>update</td>
     <td>Runs the JUnit plugin tests for the Platform-Update component.</td>
   </tr>
-  <tr> 
-    <td>genHtml</td>
-    <td>Converts xml test results in the &quot;eclipse-testing\results&quot; directory 
-      to html.</td>
+  <tr>
+    <td>all5.0</td>
+    <td><p>Runs the following test suites which require a 1.5 vm to run sucessfully</p>
+    </td>
+  </tr>
+  <tr>
+    <td>jdtcorebuilder</td>
+    <td>Runs the JUnit plugin tests for the JDT-Core component. This target must
+      be run with a with a 1.5 vm.</td>
+  </tr>
+  <tr>
+    <td height="20">jdtcorecompiler</td>
+    <td height="20">Runs the JUnit plugin tests for the JDT-Core component. This
+      target must be run with a with a 1.5 vm.</td>
+  </tr>
+  <tr>
+    <td>jdtcoremodel</td>
+    <td>Runs the JUnit plugin tests for the JDT-Core component. This target must
+      be run with a with a 1.5 vm.</td>
   </tr>
 </table>
 <p><br>
@@ -232,7 +292,7 @@
       <p>org.eclipse.core.tests.harness *<br>
         org.eclipse.core.tests.runtime<br>
         org.eclipse.core.tests.resources</p>
-      </td>
+    </td>
   </tr>
   <tr> 
     <td>Platform-Help</td>
@@ -284,15 +344,30 @@
     <td>gtk</td>
     <td>x86</td>
   </tr>
+  <tr>
+    <td>linux</td>
+    <td>gtk</td>
+    <td>x86_64</td>
+  </tr>
+  <tr>
+    <td>linux</td>
+    <td>gtk</td>
+    <td>ppc</td>
+  </tr>
   <tr> 
     <td>linux</td>
     <td>motif</td>
     <td>x86</td>
   </tr>
-  <tr> 
-    <td height="24">qnx</td>
-    <td height="24">photon</td>
-    <td height="24">x86</td>
+  <tr>
+    <td>macosx</td>
+    <td>carbox</td>
+    <td>ppc</td>
+  </tr>
+  <tr>
+    <td>solaris</td>
+    <td>gtk</td>
+    <td>sparc</td>
   </tr>
   <tr> 
     <td>solaris</td>
