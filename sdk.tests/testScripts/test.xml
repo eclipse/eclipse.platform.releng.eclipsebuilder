@@ -9,8 +9,8 @@
 	<!--default directory where test-eclipse will be installed-->
 	<property name="install" value="${basedir}/test-eclipse" />
 	
-	<!--name that can be added to report name to identify which platform tests results come from-->
-	<property name="platform" value="" />
+	<!--suffix added to report name to identify which platform tests results come from-->
+	<property name="platform" value="${os}.${ws}.${arch}" />
 
 	<!-- The root of the eclipse installation -->
 	<property name="eclipse-home" value="${install}/eclipse" />
@@ -18,35 +18,106 @@
 	<!-- The directory that will contain the xml and html results from the tests that are run -->
  	<property name="results" value="${basedir}/results" />
 	
-	<target name="setup" unless="noclean">
-		<condition property="tar.gz">
-			<not>
-   				<equals arg1="${os}" arg2="win32" />
-			</not>
+	<target name="setup" unless="noclean">	
+		<condition property="runtimeArchive" value="eclipse-SDK-${buildId}-win32.zip">
+			<and>
+				<equals arg1="os" arg2="win32" />
+				<equals arg1="ws" arg2="win32" />
+				<equals arg1="arch" arg2="x86" />				
+			</and>
 		</condition>
-		<antcall target="setup-zip" />
-		<antcall target="setup-tar.gz" />
+		<condition property="runtimeArchive" value="eclipse-SDK-${buildId}-linux-gtk.tar.gz">
+			<and>
+				<equals arg1="os" arg2="linux" />
+				<equals arg1="ws" arg2="gtk" />
+				<equals arg1="arch" arg2="x86" />				
+			</and>
+		</condition>
+		<condition property="runtimeArchive" value="eclipse-SDK-${buildId}-linux-motif.tar.gz">
+			<and>
+				<equals arg1="os" arg2="linux" />
+				<equals arg1="ws" arg2="motif" />
+				<equals arg1="arch" arg2="x86" />				
+			</and>
+		</condition>
+		<condition property="runtimeArchive" value="eclipse-SDK-${buildId}-linux-gtk-ppc.tar.gz">
+			<and>
+				<equals arg1="os" arg2="linux" />
+				<equals arg1="ws" arg2="gtk" />
+				<equals arg1="arch" arg2="ppc" />				
+			</and>
+		</condition>
+		<condition property="runtimeArchive" value="eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz">
+			<and>
+				<equals arg1="os" arg2="linux" />
+				<equals arg1="ws" arg2="gtk" />
+				<equals arg1="arch" arg2="ppc" />				
+			</and>
+		</condition>
+		<condition property="runtimeArchive" value="eclipse-SDK-${buildId}-macosx-carbon.tar.gz">
+			<and>
+				<equals arg1="os" arg2="macosx" />
+				<equals arg1="ws" arg2="carbon" />
+				<equals arg1="arch" arg2="ppc" />				
+			</and>
+		</condition>
+		<condition property="runtimeArchive" value="eclipse-SDK-${buildId}-hpux-motif.zip">
+			<and>
+				<equals arg1="os" arg2="hpux" />
+				<equals arg1="ws" arg2="motif" />
+				<equals arg1="arch" arg2="PA_RISC" />				
+			</and>
+		</condition>
+		<condition property="runtimeArchive" value="eclipse-SDK-${buildId}-solaris-motif.zip">
+			<and>
+				<equals arg1="os" arg2="solaris" />
+				<equals arg1="ws" arg2="motif" />
+				<equals arg1="arch" arg2="sparc" />				
+			</and>
+		</condition>
+		<condition property="runtimeArchive" value="eclipse-SDK-${buildId}-solaris-gtk.zip">
+			<and>
+				<equals arg1="os" arg2="solaris" />
+				<equals arg1="ws" arg2="gtk" />
+				<equals arg1="arch" arg2="sparc" />				
+			</and>
+		</condition>
+		<condition property="runtimeArchive" value="eclipse-SDK-${buildId}-aix-motif.zip">
+			<and>
+				<equals arg1="os" arg2="aix" />
+				<equals arg1="ws" arg2="motif" />
+				<equals arg1="arch" arg2="ppc" />				
+			</and>
+		</condition>
+		<condition property="setupTarget" value="setup-zip">
+   				<contains string="${runtimeArchive}" substring=".zip" />
+		</condition>
+		<condition property="setupTarget" value="setup-tar.gz">
+   				<contains string="${runtimeArchive}" substring=".tar.gz" />
+		</condition>
+		<antcall target="${setupTarget}" />
 		<antcall target="configureTeamTest" />
 	</target>
 	
-	<!--use zip if not testing on Linux-->
-	<target name="setup-zip" unless="tar.gz" description="Reinstall the test Eclipse installation if specified by user">
+	<!--setup for zip archives-->
+	<target name="setup-zip" description="Reinstall the test Eclipse installation if specified by user">
 		<delete dir="${install}" />
 		<mkdir dir="${install}" />
 		<exec dir="." executable="unzip">
-			<arg line="-o -qq eclipse-SDK-*.zip -d ${install}"/>
+			<arg line="-o -qq ${runtimeArchive} -d ${install}"/>
 	    </exec>
 	    <exec dir="." executable="unzip">
 			<arg line="-o -qq eclipse-junit-tests-*.zip -d ${install}"/>
     	</exec>
   	</target>
-	<!--use tar if testing on Linux-->
-	<target name="setup-tar.gz" if="tar.gz" description="Reinstall the test Eclipse installation if specified by user">
+
+	<!--setup for tar.gz archives-->
+	<target name="setup-tar.gz" description="Reinstall the test Eclipse installation if specified by user">
 		<property name="currentDir" value="${basedir}"/>
 		<delete dir="${install}" />
 		<mkdir dir="${install}" />
 		<exec dir="${install}" executable="tar">
-			<arg line="-xzf ${currentDir}/eclipse-SDK-${buildId}-linux-gtk.tar.gz"/>
+			<arg line="-xzf ${currentDir}/${runtimeArchive}"/>
 	    </exec>
 	    <exec dir="." executable="unzip">
 			<arg line="-o -qq eclipse-junit-tests-*.zip -d ${install}"/>
@@ -157,7 +228,7 @@
 			<param name="report" value="org.eclipse.jdt.text.tests" />
 		</antcall>	
 	</target>
-	<target name="relEng" description="Runs the org.eclipse.releng.tests test.xml">
+	<target name="relEng" unless="macosx" description="Runs the org.eclipse.releng.tests test.xml">
 		<antcall target="runtests">
 			<param name="testPlugin" value="${org.eclipse.releng.tests}" />
 			<param name="report" value="org.eclipse.releng.tests" />
@@ -293,7 +364,6 @@
 			<param name="report" value="org.eclipse.update.tests.core" />
       	</antcall>
 	</target>
-
 
 	<target name="all">
 		<antcall target="jdttext" />
