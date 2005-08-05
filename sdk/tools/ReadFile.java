@@ -474,6 +474,7 @@ public class ReadFile extends Task {
 		 		 
 		      try {
 		          BufferedWriter outfile = new BufferedWriter(new FileWriter(docGenScript));
+                  outfile.write("#!/bin/sh\n");
 		          outfile.write(docParam + " " + docName+" ");
 		          for (Iterator i = listLinks.iterator(); i.hasNext();) {
 		              outfile.write((String)(i.next())+" ");		 		 		     
