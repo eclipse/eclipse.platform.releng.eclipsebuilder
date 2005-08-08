@@ -18,7 +18,13 @@
 	<!-- The directory that will contain the xml and html results from the tests that are run -->
  	<property name="results" value="${basedir}/results" />
 	
-	<target name="init">	
+	<target name="init">
+		<!--Unlock locked files on the Mac before starting tests.
+		  Required to delete some workspace directories (org.eclipse.core.filebuffers.tests and Team CVS tests).-->
+		<exec dir="${basedir}" executable="chflags" os="Mac OS X">
+		  <arg line="-R nouchg ${install}"/>
+		</exec>
+		
 		<condition property="runtimeArchive" value="eclipse-SDK-${buildId}-win32.zip">
 			<and>
 				<equals arg1="${os}" arg2="win32" />
@@ -117,6 +123,10 @@
 	<!--setup for tar.gz archives-->
 	<target name="setup-tar.gz" description="Reinstall the test Eclipse installation if specified by user">
 		<property name="currentDir" value="${basedir}"/>
+		<exec dir="${basedir}" executable="chflags" os="Mac OS X" output="dir.txt">
+		  <arg line="-R nouchg ${install}"/>
+		</exec>
+
 		<delete dir="${install}" />
 		<mkdir dir="${install}" />
 		<exec dir="${install}" executable="tar">
