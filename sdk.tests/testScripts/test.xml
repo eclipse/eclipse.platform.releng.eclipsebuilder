@@ -123,10 +123,6 @@
 	<!--setup for tar.gz archives-->
 	<target name="setup-tar.gz" description="Reinstall the test Eclipse installation if specified by user">
 		<property name="currentDir" value="${basedir}"/>
-		<exec dir="${basedir}" executable="chflags" os="Mac OS X" output="dir.txt">
-		  <arg line="-R nouchg ${install}"/>
-		</exec>
-
 		<delete dir="${install}" />
 		<mkdir dir="${install}" />
 		<exec dir="${install}" executable="tar">
