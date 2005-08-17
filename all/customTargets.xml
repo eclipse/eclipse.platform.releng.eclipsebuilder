@@ -19,7 +19,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- ===================================================================== -->
 	<!-- Targets to assemble the built elements for particular configurations  -->
 	<!-- ===================================================================== -->
-	<target name="assemble.master.all.all.all">
+	<target name="assemble.master">
 		<property name="archiveName" value="eclipse-master-${buildId}.zip"/>
 		<antcall target="assemble" />
 	</target>
@@ -96,14 +96,9 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Steps to do after setup but before starting the build proper -->
 	<!-- ===================================================================== -->
 	<target name="postSetup" >
-		<!--fetch projects required to build swt gtk64-->
 		<property name="featureOnly" value="false"/>
 		<property name="featureAndPlugins" value="true"/>
 		<property name="featuresRecursively" value="false"/>
-		<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
-			<property name="type" value="fragment" />
-			<property name="id" value="org.eclipse.swt.gtk.linux.x86_64" />
-		</ant>
 		<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
 			<property name="type" value="fragment" />
 			<property name="id" value="org.eclipse.swt.win32.win32.x86" />
@@ -125,16 +120,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<property name="id" value="org.eclipse.platform.launchers" />
 		</ant>
 		<zip zipfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/features/org.eclipse.platform.launchers" includes="library/" />
-
-		<!--fetch and compile swt tools-->
-		<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
-			<property name="type" value="plugin" />
-			<property name="id" value="org.eclipse.swt.tools" />
-		</ant>
-		<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="generateScript">
-			<property name="type" value="plugin" />
-			<property name="id" value="org.eclipse.swt.tools" />
-		</ant>
 		<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.win32.win32.x86" target="build.jars">
 			<property name="type" value="plugin" />
 			<property name="id" value="org.eclipse.swt.win32.win32.x86" />
@@ -205,14 +190,12 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- ===================================================================== -->
 	<target name="postGenerate">
 		<antcall target="clean" />
-		<antcall target="buildSourceDrops" />
 	</target>
 
 	<!-- ===================================================================== -->
 	<!-- Steps to do before assembling -->
 	<!-- ===================================================================== -->
 	<target name="preAssemble">
-
 	</target>
 
 	<!-- ===================================================================== -->
@@ -282,82 +265,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<param name="target" value="cleanElement" />
 		</antcall>
 	</target>
-
-	<!-- ===================================================================== -->
-	<!-- Targets called before extracting binary distributables.               -->
-	<!-- ===================================================================== -->
-	<target name="buildSourceDrops">
-		<mkdir dir="${postingDirectory}/${buildLabel}" />
-		<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
-		<property name="tempDir" value="${basedir}/temp" />
-		<mkdir dir="${tempDir}/buildScripts" />
-
-		<copy file="${buildDirectory}/label.properties" todir="${tempDir}/buildScripts" />
-
-		<copy todir="${tempDir}/buildScripts" flatten="true" overwrite="true">
-			<fileset dir="${eclipse.build.scripts}/sdk/srcBuild" excludes="incl,fetch/**,jdtcoresrc/**" />
-		</copy>
-		<mkdir dir="${tempDir}/buildScripts/jdtcoresrc"/>
-		<copy todir="${tempDir}/buildScripts/jdtcoresrc">
-			<fileset dir="${eclipse.build.scripts}/sdk/srcBuild/jdtcoresrc"/>
-		</copy>
-
-		<!--  set correct permissions on linux script -->
-		<chmod file="${tempDir}/buildScripts/build" perm="755" />
-
-		<!--copy example doc -->
-		<ant antfile="buildDoc.xml" target="examplesDocCopy" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.isv"/>
-		<ant antfile="buildDoc.xml" target="examplesDocCopy" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv"/>
-
-		<copy todir="${tempDir}/buildScripts">
-			<fileset dir="${buildDirectory}" excludes="features/*example*/**,plugins/*example*/**" includes="features/*/build.xml,features/*.source*/**,plugins/*/build.xml,plugins/*.source*/**,fetch_*.xml,assemble*.xml,plugins/org.eclipse.swt.tools/**,plugins/*doc*/**" />
-		</copy>
-		<!--ensure linux drops are created as .tar.gz files -->
-		<replace dir="${tempDir}/buildScripts" includes="assemble*" excludes="*win32*,*hpux*,*solaris*,*aix*" token=".zip" value=".tar.gz"/>
-
-		<!-- create drop containing the fetch scripts, no source -->
-		<exec dir="${tempDir}" executable="zip">
-			<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-sourceBuild-srcFetch-${buildId}.zip -r ." />
-		</exec>
-
-		<!--generate md5-->
-		<checksum file="${postingDirectory}/${buildLabel}/eclipse-sourceBuild-srcFetch-${buildId}.zip" property="md5"/>
-		<echo message="${md5} *eclipse-sourceBuild-srcFetch-${buildId}.zip" file="${postingDirectory}/${buildLabel}/checksum/eclipse-sourceBuild-srcFetch-${buildId}.zip.md5"/>
-
-		<!--  create zip with all source for an Eclipse SDK  -->
-		<copy todir="${tempDir}/buildScripts">
-			<fileset dir="${buildDirectory}" includes="features/,plugins/" excludes="features/*example*/**,plugins/*example*/**" />
-		</copy>
-		<copy todir="${tempDir}/buildScripts" flatten="true" overwrite="true">
-			<fileset dir="${eclipse.build.scripts}/sdk/srcBuild" excludes="fetch/**,incl,jdtcoresrc/**" />
-		</copy>
-
-		<!-- fetch scripts are not when source already included in zip file -->
-		<delete>
-			<fileset dir="${tempDir}/buildScripts" includes="fetch*.xml" />
-			<!-- delete some jars that are not needed to build Eclipse -->
-			<fileset file="${tempDir}/buildScripts/plugins/org.eclipse.osgi/osgi/collx.jar" />
-			<fileset file="${tempDir}/buildScripts/plugins/org.eclipse.osgi/osgi/ee.foundation.jar" />
-			<fileset file="${tempDir}/buildScripts/plugins/org.eclipse.osgi/osgi/ee.minimum.jar" />
-			<fileset file="${tempDir}/buildScripts/plugins/org.eclipse.osgi/osgi/exceptions.jar" />
-			<fileset file="${tempDir}/buildScripts/plugins/org.eclipse.osgi/osgi/xmlParserAPIs.jar" />
-			<fileset file="${tempDir}/buildScripts/plugins/org.eclipse.osgi/osgi/osgi-r3-jdk131-notsigned.jar" />
-		</delete>
-
-		<!--  set correct permissions on linux script -->
-		<chmod file="${tempDir}/buildScripts/build" perm="755" />
-		<exec dir="${tempDir}/buildScripts" executable="zip">
-			<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-sourceBuild-srcIncluded-${buildId}.zip -r ." />
-		</exec>
-		<checksum file="${postingDirectory}/${buildLabel}/eclipse-sourceBuild-srcIncluded-${buildId}.zip" property="md5.2"/>
-		<echo message="${md5.2} *eclipse-sourceBuild-srcIncluded-${buildId}.zip" file="${postingDirectory}/${buildLabel}/checksum/eclipse-sourceBuild-srcIncluded-${buildId}.zip.md5"/>
-
-		<copy file="${eclipse.build.scripts}/sdk/srcBuild/incl/instructions.html" tofile="${postingDirectory}/${buildLabel}/srcIncludedBuildInstructions.html" />
-		<copy file="${eclipse.build.scripts}/sdk/srcBuild/fetch/instructions.html" tofile="${postingDirectory}/${buildLabel}/srcFetchBuildInstructions.html" />
-
-		<delete dir="${tempDir}/" />
-	</target>
-
 
 	<!-- ===================================================================== -->
 	<!-- Default target                                                        -->
