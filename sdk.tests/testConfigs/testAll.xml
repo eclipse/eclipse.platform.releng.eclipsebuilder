@@ -19,11 +19,11 @@
 
 	<target name="JUnitTests">
 		<parallel>
-			<!--antcall target="test">
+			<antcall target="test">
 				<param name="tester" value="${basedir}/macosx-carbon" />
 				<param name="cfgKey" value="eclipse31MacOSXCarbonTest" />
 				<param name="markerName" value="eclipse31-macosx-carbon-${timestamp}" />
-			</antcall-->
+			</antcall>
 			<antcall target="test">
 				<param name="tester" value="${basedir}/rhelws3-linux-gtk" />
 				<param name="cfgKey" value="eclipse30LinuxGtkTest" />
