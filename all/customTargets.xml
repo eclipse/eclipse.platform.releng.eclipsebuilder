@@ -19,7 +19,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- ===================================================================== -->
 	<!-- Targets to assemble the built elements for particular configurations  -->
 	<!-- ===================================================================== -->
-	<target name="assemble.master">
+	<target name="assemble.master.group.group.group">
 		<property name="archiveName" value="eclipse-master-${buildId}.zip"/>
 		<antcall target="assemble" />
 	</target>
