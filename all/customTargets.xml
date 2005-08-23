@@ -48,7 +48,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		</exec>
 		
 		<!--capture original file attributes-->
-		<exec dir="." executable="ssh" outputProperty="originalAttribs" errorProperty="attribError">
+		<exec dir="." executable="ssh" outputProperty="originalAttribs">
 		  <arg line="download1.eclipse.org &quot;cd /home/data/httpd/download-staging.priv/eclipse/downloads/;ls -l ${archiveName}&quot;"/>
 		</exec>
 		
@@ -56,7 +56,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<exec dir="." executable="ssh" output="signing.txt" append="true">
 		  <arg line="download1.eclipse.org &quot;cd /home/data/httpd/download-staging.priv/eclipse/downloads;sign ${archiveName} mail&quot;"/>
 		</exec>
-		
 		<antcall target="waitForChangedAttribs" />
 		
 		<!--copy zip back to build machine-->
@@ -72,7 +71,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		</antcall>
 	</target>
 
-	<target name="compareAttribs" unless="attribError">
+	<target name="compareAttribs">
 		<!--poll file for change in attributes-->
 		<exec dir="." executable="ssh" outputProperty="polledAttribs">
 		  <arg line="download1.eclipse.org &quot;cd /home/data/httpd/download-staging.priv/eclipse/downloads/;ls -l ${archiveName}&quot;"/>
