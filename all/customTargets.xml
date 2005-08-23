@@ -28,22 +28,24 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="assemble">
 		<property name="archiveFullPath" value="${buildDirectory}/${buildLabel}/${archiveName}" />
 		<ant antfile="${assembleScriptName}" />
-		
-		<!--push drop to staging area-->
-		<!--TODO-->		
-		
-		<!--invoke script that digital signs-->
-		<!--TODO-->		
-
-		<!--copy zip back to build machine-->
-		<!--TODO-->
+		<antcall target="sign" />
 
 		<!--run packagers for all distributables in parallel and start tests-->
 		<!--TODO-->
 		<parallel>
 		</parallel>
 	</target>
+	
+	<target name="sign">
+		<!--push drop to staging area-->
+		<!--TODO-->
 
+		<!--invoke script that digital signs and wait-->
+		<!--TODO-->
+
+		<!--copy zip back to build machine-->
+		<!--TODO-->
+	</target>
 
 	<!-- ===================================================================== -->
 	<!-- Check out map files from correct repository -->
@@ -120,6 +122,21 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<property name="id" value="org.eclipse.platform.launchers" />
 		</ant>
 		<zip zipfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/features/org.eclipse.platform.launchers" includes="library/" />
+
+		<!--HACK:  copy modified swt scripts to plug-ins directory-->
+		<copy todir="${buildDirectory}/plugins">
+			<fileset dir="${builder}/swt"/>
+		</copy>
+		
+		<!--fetch and compile swt tools-->
+		<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
+			<property name="type" value="plugin" />
+			<property name="id" value="org.eclipse.swt.tools" />
+		</ant>
+		<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="generateScript">
+			<property name="type" value="plugin" />
+			<property name="id" value="org.eclipse.swt.tools" />
+		</ant>
 		<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.win32.win32.x86" target="build.jars">
 			<property name="type" value="plugin" />
 			<property name="id" value="org.eclipse.swt.win32.win32.x86" />
@@ -146,7 +163,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 				about_files/pixman-licenses.txt"
 			/>
 		</copy>
-		
+
 		<!--copy linux gtk x86 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
 		<property name="linux.gtk.x86.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.x86" />
 		<mkdir dir="${linux.gtk.x86.rootfiles}" />
@@ -160,7 +177,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 				about_files/mpl-v11.txt"
 			/>
 		</copy>
-		
+
 		<!--copy linux gtk x86_64 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
 		<property name="linux.gtk.x86_64.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.x86_64" />
 		<mkdir dir="${linux.gtk.x86_64.rootfiles}" />
