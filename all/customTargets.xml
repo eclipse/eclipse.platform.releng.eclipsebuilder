@@ -40,11 +40,11 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<!--push drop to staging directory-->
 		<property name="stagingDirectory" value="/home/data/httpd/download-staging.priv/eclipse/downloads" />
 		
-		<exec dir="${buildDirectory}${buildLabel}" executable="scp" output="signing.txt">
+		<exec dir="${buildDirectory}/${buildLabel}" executable="scp" output="signing.txt">
 		  <arg line="${archiveName} download1.eclipse.org:${stagingDirectory}"/>
 		</exec>
-		<exec dir="." executable="chmod" output="signing.txt" append="true">
-		  <arg line="ugo+rw download1.eclipse.org:${stagingDirectory}/${archiveName} "/>
+		<exec dir="." executable="ssh" output="signing.txt" append="true">
+		  <arg line="chmod ugo+rw download1.eclipse.org:${stagingDirectory}/${archiveName} "/>
 		</exec>
 		
 		<!--capture original file attributes-->
