@@ -47,9 +47,14 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		  <arg line="download1.eclipse.org chmod ugo+rw ${stagingDirectory}/${archiveName} "/>
 		</exec>
 		
+		<!--timestamp on download server-->
+        <exec dir="." executable="ssh" output="signing.txt" append="true">
+          <arg line="download1.eclipse.org touch -t ${timestamp} ${stagingDirectory}/${archiveName}"/>
+        </exec>
+
 		<!--capture original file attributes-->
 		<exec dir="." executable="ssh" outputProperty="originalAttribs">
-		  <arg line="download1.eclipse.org &quot;cd /home/data/httpd/download-staging.priv/eclipse/downloads/;ls -l ${archiveName}&quot;"/>
+		  <arg line="download1.eclipse.org &quot;cd /home/data/httpd/download-staging.priv/eclipse/downloads/;ls -gG ${archiveName}&quot;"/>
 		</exec>
 		
 		<!--invoke script that digital signs and wait-->
@@ -74,7 +79,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="compareAttribs">
 		<!--poll file for change in attributes-->
 		<exec dir="." executable="ssh" outputProperty="polledAttribs">
-		  <arg line="download1.eclipse.org &quot;cd /home/data/httpd/download-staging.priv/eclipse/downloads/;ls -l ${archiveName}&quot;"/>
+		  <arg line="download1.eclipse.org &quot;cd /home/data/httpd/download-staging.priv/eclipse/downloads/;ls -gG ${archiveName}&quot;"/>
 		</exec>
 		<echo message="original:  ${originalAttribs}" />
 		<condition property="attribChanged">
