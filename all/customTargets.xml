@@ -28,6 +28,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<property name="archiveFullPath" value="${buildDirectory}/${buildLabel}/${archiveName}" />
 		<ant antfile="${assembleScriptName}" />
 		<antcall target="sign" />
+		 <replace file="${builder}/packagers/common.map" token="@buildId@" value="${buildId}"/>
 	</target>
 
 	<!-- ===================================================================== -->
@@ -203,7 +204,9 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Steps to do after assembling-->
 	<!-- ===================================================================== -->
 	<target name="postAssemble">
+		<!--grouped configs not required to do packaging of all distributables-->
 		<sysprop key="GROUP_CONFIG" value="false" />
+		
 		<!--copy javadoc logs to posting directory, verify compilation-->
 		<copy file="${buildDirectory}/plugins/org.eclipse.platform.doc.isv/doc.bin.log" tofile="${postingDirectory}/${buildLabel}/compilelogs/platform.doc.isv.javadoc.txt" failonerror="false"/>
 		<copy file="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv/doc.bin.log" tofile="${postingDirectory}/${buildLabel}/compilelogs/jdt.doc.isv.javadoc.txt" failonerror="false"/>
@@ -213,7 +216,10 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<copy file="${buildDirectory}/plugins/org.eclipse.pde.doc.user/pdeconvert.txt" tofile="${postingDirectory}/${buildLabel}/compilelogs/pde.doc.user.schema.txt" failonerror="false"/>
 		
 		<!--package all distributables and start tests when all files are available-->
-		<antcall target="packageAll"/>
+		<parallel>
+			<ant antfile="${builder}/packagers/packageAll.xml"/>
+			<!--ant antfile="${builder}/../testAll.xml"/-->
+		</parallel>
 	</target>
 
 

@@ -1,0 +1,63 @@
+<project default="run">
+	<target name="run">
+		<parallel>
+			<antcall target="package">
+				<param name="packagingInfo" value="${builder}/packagers/sdk" />
+			</antcall>
+			<antcall target="package">
+				<param name="packagingInfo" value="${builder}/packagers/junit.tests" />
+			</antcall>
+			<antcall target="package">
+				<param name="packagingInfo" value="${builder}/packagers/test.framework" />
+			</antcall>
+			<antcall target="package">
+				<param name="packagingInfo" value="${builder}/packagers/junit.tests" />
+			</antcall>
+			<antcall target="package">
+				<param name="packagingInfo" value="${builder}/packagers/examples" />
+			</antcall>
+			<antcall target="package">
+				<param name="packagingInfo" value="${builder}/packagers/jdt" />
+			</antcall>
+			<antcall target="package">
+				<param name="packagingInfo" value="${builder}/packagers/jdt.sdk" />
+			</antcall>
+			<antcall target="package">
+				<param name="packagingInfo" value="${builder}/packagers/pde" />
+			</antcall>
+			<antcall target="package">
+				<param name="packagingInfo" value="${builder}/packagers/pde.sdk" />
+			</antcall>
+			<antcall target="package">
+				<param name="packagingInfo" value="${builder}/packagers/platform" />
+			</antcall>
+			<antcall target="package">
+				<param name="packagingInfo" value="${builder}/packagers/platform.sdk" />
+			</antcall>
+			<antcall target="package">
+				<param name="packagingInfo" value="${builder}/packagers/rcp" />
+			</antcall>
+			<antcall target="package">
+				<param name="packagingInfo" value="${builder}/packagers/rcp.sdk" />
+			</antcall>
+			<antcall target="package">
+				<param name="packagingInfo" value="${builder}/packagers/team.extras" />
+			</antcall>
+			<antcall target="package">
+				<param name="packagingInfo" value="${builder}/packagers/test.framework" />
+			</antcall>
+			<!--missing delta pack, Automated zip, source, swt standalone,releng tools-->
+		</parallel>
+	</target>
+	
+	<target name="package">
+		<ant antfile="package.xml" dir="${pde.build.scripts}" inheritAll="false">
+			<property name="packagingInfo" value="${packagingInfo}" />
+			<property name="archiveName" value="${archiveName}" />
+			<property name="buildId" value="${buildId}" />
+			<property name="buildDirectory" value="${buildDirectory}" />
+			<property name="postingDirectory" value="${postingDirectory}" />
+		</ant>
+	</target>
+
+</project>
