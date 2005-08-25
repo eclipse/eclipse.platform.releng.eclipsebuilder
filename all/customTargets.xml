@@ -29,8 +29,8 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="assemble">
 		<property name="archiveFullPath" value="${buildDirectory}/${buildLabel}/${archiveName}" />
 		<ant antfile="${assembleScriptName}" />
-		<antcall target="sign" />
-		 <replace file="${builder}/packagers/common.map" token="@buildId@" value="${buildId}"/>
+		<!--antcall target="sign" /-->
+		<replace file="${builder}/packagers/common.map" token="@buildId@" value="${buildId}"/>
 	</target>
 
 	<!-- ===================================================================== -->

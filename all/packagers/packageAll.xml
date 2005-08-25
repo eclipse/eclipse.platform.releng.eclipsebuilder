@@ -1,6 +1,5 @@
 <project default="run">
 	<target name="run">
-		<parallel>
 			<antcall target="package">
 				<param name="packagingInfo" value="${builder}/packagers/sdk" />
 			</antcall>
@@ -47,7 +46,6 @@
 				<param name="packagingInfo" value="${builder}/packagers/test.framework" />
 			</antcall>
 			<!--missing delta pack, Automated zip, source, swt standalone,releng tools-->
-		</parallel>
 	</target>
 	
 	<target name="package">
