@@ -184,7 +184,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Steps to do before generating build scripts -->
 	<!-- ===================================================================== -->
 	<target name="preGenerate">
-		<sysprop key="GROUP_CONFIG" value="true" />
+		<sysProp key="GROUP_CONFIG" value="true" />
 	</target>
 
 	<!-- ===================================================================== -->
@@ -205,7 +205,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- ===================================================================== -->
 	<target name="postAssemble">
 		<!--grouped configs not required to do packaging of all distributables-->
-		<sysprop key="GROUP_CONFIG" value="false" />
+		<sysProp key="GROUP_CONFIG" value="false" />
 		
 		<!--copy javadoc logs to posting directory, verify compilation-->
 		<copy file="${buildDirectory}/plugins/org.eclipse.platform.doc.isv/doc.bin.log" tofile="${postingDirectory}/${buildLabel}/compilelogs/platform.doc.isv.javadoc.txt" failonerror="false"/>
