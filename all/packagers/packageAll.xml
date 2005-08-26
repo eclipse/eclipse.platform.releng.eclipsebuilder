@@ -1,14 +1,10 @@
 <project default="run">
+	
 	<target name="run">
+			<!--missing delta pack, Automated zip, source, swt standalone,releng tools-->
 			<antcall target="package">
 				<param name="packagingInfo" value="${builder}/packagers/sdk" />
-			</antcall>
-			<antcall target="package">
-				<param name="packagingInfo" value="${builder}/packagers/junit.tests" />
-			</antcall>
-			<antcall target="package">
-				<param name="packagingInfo" value="${builder}/packagers/test.framework" />
-			</antcall>
+			</antcall>	
 			<antcall target="package">
 				<param name="packagingInfo" value="${builder}/packagers/junit.tests" />
 			</antcall>
@@ -45,7 +41,6 @@
 			<antcall target="package">
 				<param name="packagingInfo" value="${builder}/packagers/test.framework" />
 			</antcall>
-			<!--missing delta pack, Automated zip, source, swt standalone,releng tools-->
 	</target>
 	
 	<target name="package">
