@@ -65,7 +65,7 @@
 		</antcall>
 	</target>
 	
-	<target name="assemble.hpux.motif.ppc.xml">
+	<target name="assemble.hpux.motif.PA_RISC.xml">
 		<antcall target="assembler">
 			<param name="archiveName" value="${archiveRoot}-hpux-motif.zip"/>
 		</antcall>
