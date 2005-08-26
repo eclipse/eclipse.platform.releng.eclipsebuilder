@@ -29,7 +29,12 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="assemble">
 		<property name="archiveFullPath" value="${buildDirectory}/${buildLabel}/${archiveName}" />
 		<ant antfile="${assembleScriptName}" />
-		<!--antcall target="sign" /-->
+		<!--add swt stand-alone drops to the zip to include in signing-->
+		<!--build root file drops in parallel-->
+		<parallel>
+			<antcall target="sign" />
+			<!--TODO:  add call to build root file drops for each-->
+		</parallel>
 		<replace file="${builder}/packagers/common.map" token="@buildId@" value="${buildId}"/>
 	</target>
 
@@ -114,27 +119,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<fileset dir="${builder}/swt"/>
 		</copy>
 		
-		<!--fetch and compile swt tools-->
-		<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
-			<property name="type" value="plugin" />
-			<property name="id" value="org.eclipse.swt.tools" />
-		</ant>
-		<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="generateScript">
-			<property name="type" value="plugin" />
-			<property name="id" value="org.eclipse.swt.tools" />
-		</ant>
-		<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.win32.win32.x86" target="build.jars">
-			<property name="type" value="plugin" />
-			<property name="id" value="org.eclipse.swt.win32.win32.x86" />
-		</ant>
-		<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.tools" target="build.jars">
-			<property name="type" value="plugin" />
-			<property name="id" value="org.eclipse.swt.tools" />
-			<property name="baseos" value="win32" />
-			<property name="basews" value="win32" />
-			<property name="basearch" value="x86" />
-		</ant>
-
 		<!--copy linux motif about_files to in temp location where it will be copied into root of eclipse at assembly time-->
 		<property name="linux.motif.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.motif.x86" />
 		<mkdir dir="${linux.motif.rootfiles}" />
@@ -332,7 +316,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		</condition>
 		<echo message="polled:  ${polledAttribs}" />
 		<antcall target="writeDiffResult" />
-		<sleep seconds="10" />
+		<sleep seconds="120" />
 		<available property="attribs.changed" file="${builder}/attribDiff.txt" />
 		<antcall target="waitForChangedAttribs" />
 	</target>
