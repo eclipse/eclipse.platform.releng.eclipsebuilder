@@ -33,7 +33,10 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<!--build root file drops in parallel-->
 		<parallel>
 			<antcall target="sign" />
-			<!--TODO:  add call to build root file drops for each-->
+			<!--build root file drops-->
+			<ant antfile="build.xml" dir="${pde.build.scripts}" target="main">
+				<property name="builder" value="${eclipse.build.scripts}/all/master-root" />
+			</ant>
 		</parallel>
 		<replace file="${builder}/packagers/common.map" token="@buildId@" value="${buildId}"/>
 	</target>
