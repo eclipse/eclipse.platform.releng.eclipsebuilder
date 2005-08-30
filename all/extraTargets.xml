@@ -1,0 +1,70 @@
+<project default="noDefault" basedir=".">
+
+	<target name="cvsUp">
+		<exec dir="." executable="/home/users/releng/cvsup/upload_snz.pl"/>
+		<cvsUp flagString="http://dev.eclipse.org/builds/snz_complete.flag" />
+		<echo message="cvsUp complete." />
+	</target>
+
+	<target name="rSyncWithSnzZrh" unless="test">
+		<antcall target="zrhBuilds" />
+		<antcall target="snzBuilds" />
+	</target>
+
+	<target name="snzBuilds" unless="N">
+		<!--copy drops to local directory for rsync with snz-->
+		<copy todir="/builds/transfer/files/snz">
+			<fileset dir="${postingDirectory}" includes ="${buildLabel}/eclipse-SDK-*-win32.zip" excludes="${buildLabel}/eclipse-SDK-examples-*-win32.zip" />
+		</copy>
+	</target>
+
+	<target name="zrhBuilds">
+		<!--copy drops to local directory for rsync with zrh-->
+		<copy todir="/builds/transfer/files/zrh">
+			<fileset dir="${postingDirectory}" includes ="${buildLabel}/eclipse-SDK-*-macosx-carbon.tar.gz,${buildLabel}/eclipse-SDK-*-win32.zip,${buildLabel}/eclipse-SDK-*-linux-*.tar.gz" excludes="${buildLabel}/eclipse-SDK-examples-*-win32.zip,${buildLabel}/eclipse-SDK-*-linux-gtk-x86_64.tar.gz" />
+		</copy>
+	</target>
+
+	<target name="buildUpdateJars">
+		<ant antfile="buildUpdateJars.xml" />
+	</target>
+
+	<target name="noDefault">
+		<echo message="Please specify a target." />
+	</target>
+
+	<target name="cleanSites">
+		<cleanSite ageInMinutes="1440" directoryName="/builds/transfer/files/master/downloads/drops" realDelete="true" />
+		<cleanSite ageInMinutes="1440" directoryName="/builds/transfer/files/bogus/downloads/drops" realDelete="true" />
+		<cleanSite ageInMinutes="1440" directoryName="/builds/transfer/files/zrh" realDelete="true" />
+		<cleanSite ageInMinutes="1440" directoryName="/builds/transfer/files/snz" realDelete="true" />
+	</target>
+
+	<target name="generatePerformanceResults">
+		<condition property="configArgs" value="-ws gtk -arch ppc">
+			<not>
+				<equals arg1="{os.arch}" arg2="i386" />
+			</not>
+		</condition>
+		
+		<property name="configArgs" value="" />
+		
+		<java jar="${basedir}/../org.eclipse.releng.basebuilder/startup.jar" fork="true" maxmemory="256m">
+			<arg line="${configArgs} -application org.eclipse.test.performance.ui.resultGenerator
+				-baseline ${baseline}
+				-baseline.prefix 3.1_200506271435
+				-current ${buildId}
+				-jvm ${jvm}
+				-output ${fp.output}
+				-config ${config}
+				-config.properties ${config.properties}
+				-highlight.latest 3.0.2_,2.1.3_
+				-scenario.pattern ${scenario.filter}"
+			/>
+			<env key="LD_LIBRARY_PATH" value="${basedir}/../org.eclipse.releng.basebuilder" />
+			<sysproperty key="eclipse.perf.dbloc" value="${dbloc}" />
+		</java>
+	</target>
+
+
+</project>

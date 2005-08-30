@@ -1,4 +1,5 @@
 eclipse-master-@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | | | runtime | full
+org.eclipse.platform.launchers_3.1.0.zip=file:${packagingInfo}/ | | eclipse/ | runtime | launchers
 
 master-root-@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | | | runtime | root
 master-root-launcher-@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | | | runtime | root-launcher
