@@ -37,5 +37,4 @@ master-root-platform-aix.motif.ppc.@buildId@.zip=file:${buildDirectory}/${buildL
 master-root-platform-hpux.motif.PA_RISC.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | hpux,motif,PA_RISC | | runtime | root-platform
 master-root-platform-macosx.carbon.ppc.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | macosx,carbon,ppc| | runtime | root-platform
 
-master-root-rcp-macosx.carbon.ppc.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | macosx,carbon,ppc| | runtime | root-rcp
 master-root-rcp-@buildId@.zip=file:${buildDirectory}/${buildLabel}/ ||| runtime | root-rcp

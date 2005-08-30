@@ -153,10 +153,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<property name="archiveName" value="master-root-rcp-${buildId}.zip"/>
 		<antcall target="assemble" />
 	</target>
-	<target name="assemble.master-root.rcp-macosx.carbon.ppc">
-		<property name="archiveName" value="master-root-rcp-macosx.carbon.ppc.${buildId}.zip"/>
-		<antcall target="assemble" />
-	</target>	
 	<target name="assemble">	
 		<property name="archiveFullPath" value="${buildDirectory}/${buildLabel}/${archiveName}" />
 		<ant antfile="${assembleScriptName}" />
