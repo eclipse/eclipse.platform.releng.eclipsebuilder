@@ -31,6 +31,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<ant antfile="${assembleScriptName}" />
 		<!--add swt stand-alone drops to the zip to include in signing-->
 		<!--build root file drops in parallel-->
+		<sysProp key="GROUP_CONFIG" value="false" />
 		<parallel>
 			<antcall target="sign" />
 			<!--build root file drops-->
@@ -195,9 +196,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Steps to do after assembling-->
 	<!-- ===================================================================== -->
 	<target name="postAssemble">
-		<!--grouped configs not required to do packaging of all distributables-->
-		<sysProp key="GROUP_CONFIG" value="false" />
-		
+		<!--grouped configs not required to do packaging of all distributables-->	
 		<!--copy javadoc logs to posting directory, verify compilation-->
 		<copy file="${buildDirectory}/plugins/org.eclipse.platform.doc.isv/doc.bin.log" tofile="${postingDirectory}/${buildLabel}/compilelogs/platform.doc.isv.javadoc.txt" failonerror="false"/>
 		<copy file="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv/doc.bin.log" tofile="${postingDirectory}/${buildLabel}/compilelogs/jdt.doc.isv.javadoc.txt" failonerror="false"/>
