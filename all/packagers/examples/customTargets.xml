@@ -11,7 +11,7 @@
 	<copy file="${packagingInfo}/../common.map" tofile="${downloadDirectory}/common.map" />
 </target>
 
-<target name="assemble">
+<target name="assemble.common.common.common.xml">
 	<antcall target="assembler">
 		<param name="archiveName" value="${archiveRoot}.zip"/>
 	</antcall>
