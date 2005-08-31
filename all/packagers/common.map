@@ -4,6 +4,7 @@ org.eclipse.platform.launchers_3.1.0.zip=file:${packagingInfo}/ | | eclipse/ | r
 master-root-@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | | | runtime | root
 master-root-launcher-@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | | | runtime | root-launcher
 
+#eclipse launcher, startup.jar
 master-root-launcher-win32.win32.x86.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | win32,win32,x86 | | runtime | root-launcher
 master-root-launcher-linux.gtk.x86.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | linux,gtk,x86 | | runtime | root-launcher
 master-root-launcher-linux.gtk.x86_64.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | linux,gtk,x86_64 | | runtime | root-launcher
@@ -15,6 +16,7 @@ master-root-launcher-aix.motif.ppc.@buildId@.zip=file:${buildDirectory}/${buildL
 master-root-launcher-hpux.motif.PA_RISC.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | hpux,motif,PA_RISC | | runtime | root-launcher
 master-root-launcher-macosx.carbon.ppc.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | macosx,carbon,ppc| | runtime | root-launcher
 
+#primarily contain configuration directories
 master-root-sdk-win32.win32.x86.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | win32,win32,x86 | | runtime | root-sdk
 master-root-sdk-linux.gtk.x86.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | linux,gtk,x86 | | runtime | root-sdk
 master-root-sdk-linux.gtk.x86_64.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | linux,gtk,x86_64 | | runtime | root-sdk
