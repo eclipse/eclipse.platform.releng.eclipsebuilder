@@ -5,7 +5,7 @@
 		<property name="ws" value="win32"/>
 		<property name="os" value="wce_ppc"/>
 		<property name="arch" value="arm"/>
-		<property name="fragment" value="org.eclipse.swt.win32.wcp_ppc.arm"/>
+		<property name="fragment" value="org.eclipse.swt.win32.wce_ppc.arm"/>
 		<property name="version.suffix" value="_3.1.0"/>
 		<property name="full.name" value="${fragment}${version.suffix}"/>
 		<property name="temp.folder" value="${basedir}/temp.folder"/>
