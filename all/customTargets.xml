@@ -29,7 +29,13 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="assemble">
 		<property name="archiveFullPath" value="${buildDirectory}/${buildLabel}/${archiveName}" />
 		<ant antfile="${assembleScriptName}" />
-		<!--add swt stand-alone drops to the zip to include in signing-->
+		<!--add swt stand-alone jars to the zip to include in signing-->
+		<zip destfile="${archiveFullPath}"
+			basedir="${buildDirectory}/plugins"
+			update="true"
+			includes="org.eclipse.swt.win32.*/**/*.jar,org.eclipse.swt.gtk.*/**/*.jar,org.eclipse.swt.carbon*/**/*.jar,org.eclipse.swt.motif*/**/*.jar"
+			/>
+		
 		<!--build root file drops in parallel-->
 		<sysProp key="GROUP_CONFIG" value="false" />
 		<parallel>
@@ -41,6 +47,15 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 				<property file="${buildDirectory}/label.properties" />
 			</ant>
 		</parallel>
+		
+		<!--replace existing swt.jars with signed versions-->
+		<delete dir="${buildDirectory}/plugins">
+			<fileset dir="plugins" includes="org.eclipse.swt.win32.*/**/*.jar,org.eclipse.swt.gtk.*/**/*.jar,org.eclipse.swt.carbon*/**/*.jar,org.eclipse.swt.motif*/**/*.jar" />
+		</delete>
+		<exec executable="unzip" dir="${buildDirectory}">
+			<arg line="-qqo ${archiveFullPath} -d plugins org.eclipse.swt*" />
+		</exec>
+			
 		<replace file="${builder}/packagers/common.map" token="@buildId@" value="${buildId}"/>
 	</target>
 
@@ -207,8 +222,9 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		
 		<!--package all distributables and start tests when all files are available-->
 		<parallel>
+			<ant antfile="${builder}/helper.xml" target="buildStandAloneSWT" />
 			<ant antfile="${builder}/packagers/packageAll.xml"/>
-			<!--ant antfile="${builder}/../testAll.xml"/-->
+			<!--ant antfile="${builder}/../sdk.tests/testConfigs/testAll.xml"/-->
 		</parallel>
 	</target>
 
