@@ -49,7 +49,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		</parallel>
 		
 		<!--replace existing swt.jars with signed versions-->
-		<delete dir="${buildDirectory}/plugins">
+		<delete dir="${buildDirectory}">
 			<fileset dir="plugins" includes="org.eclipse.swt.win32.*/**/*.jar,org.eclipse.swt.gtk.*/**/*.jar,org.eclipse.swt.carbon*/**/*.jar,org.eclipse.swt.motif*/**/*.jar" />
 		</delete>
 		<exec executable="unzip" dir="${buildDirectory}">

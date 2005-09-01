@@ -2,66 +2,68 @@
 	<property name="postingDirectory" value="${buildDirectory}" />
 
 	<target name="buildStandAloneSWT">
-		<antcall target="packageSwtStandalone">
-			<param name="ws" value="win32" />
-			<param name="os" value="win32" />
-			<param name="arch" value="x86" />
-		</antcall>
-		<antcall target="packageSwtStandalone">
-			<param name="os" value="linux" />
-			<param name="ws" value="motif" />
-			<param name="arch" value="x86" />
-		</antcall>
-		<antcall target="packageSwtStandalone">
-			<param name="os" value="aix" />
-			<param name="ws" value="motif" />
-			<param name="arch" value="ppc" />
-		</antcall>
-		<antcall target="packageSwtStandalone">
-			<param name="os" value="hpux" />
-			<param name="ws" value="motif" />
-			<param name="arch" value="PA_RISC" />
-		</antcall>
-		<antcall target="packageSwtStandalone">
-			<param name="os" value="solaris" />
-			<param name="ws" value="motif" />
-			<param name="arch" value="sparc" />
-		</antcall>
-		<antcall target="packageSwtStandalone">
-			<param name="os" value="solaris" />
-			<param name="ws" value="gtk" />
-			<param name="arch" value="sparc" />
-		</antcall>
-		<antcall target="packageSwtStandalone">
-			<param name="os" value="qnx" />
-			<param name="ws" value="photon" />
-			<param name="arch" value="x86" />
-		</antcall>
-		<antcall target="packageSwtStandalone">
-			<param name="os" value="linux" />
-			<param name="ws" value="gtk" />
-			<param name="arch" value="x86" />
-		</antcall>
-		<antcall target="packageSwtStandalone">
-			<param name="os" value="macosx" />
-			<param name="ws" value="carbon" />
-			<param name="arch" value="ppc" />
-		</antcall>
-		<antcall target="packageSwtStandalone">
-			<param name="os" value="linux" />
-			<param name="ws" value="gtk" />
-			<param name="arch" value="x86_64" />
-		</antcall>
-		<antcall target="packageSwtStandalone">
-			<param name="os" value="linux" />
-			<param name="ws" value="gtk" />
-			<param name="arch" value="ppc" />
-		</antcall>
-		<antcall target="packageSwtStandalone">
-			<param name="ws" value="win32" />
-			<param name="os" value="wce_ppc" />
-			<param name="arch" value="arm" />
-		</antcall>
+		<parallel>
+			<antcall target="packageSwtStandalone">
+				<param name="ws" value="win32" />
+				<param name="os" value="win32" />
+				<param name="arch" value="x86" />
+			</antcall>
+			<antcall target="packageSwtStandalone">
+				<param name="os" value="linux" />
+				<param name="ws" value="motif" />
+				<param name="arch" value="x86" />
+			</antcall>
+			<antcall target="packageSwtStandalone">
+				<param name="os" value="aix" />
+				<param name="ws" value="motif" />
+				<param name="arch" value="ppc" />
+			</antcall>
+			<antcall target="packageSwtStandalone">
+				<param name="os" value="hpux" />
+				<param name="ws" value="motif" />
+				<param name="arch" value="PA_RISC" />
+			</antcall>
+			<antcall target="packageSwtStandalone">
+				<param name="os" value="solaris" />
+				<param name="ws" value="motif" />
+				<param name="arch" value="sparc" />
+			</antcall>
+			<antcall target="packageSwtStandalone">
+				<param name="os" value="solaris" />
+				<param name="ws" value="gtk" />
+				<param name="arch" value="sparc" />
+			</antcall>
+			<antcall target="packageSwtStandalone">
+				<param name="os" value="qnx" />
+				<param name="ws" value="photon" />
+				<param name="arch" value="x86" />
+			</antcall>
+			<antcall target="packageSwtStandalone">
+				<param name="os" value="linux" />
+				<param name="ws" value="gtk" />
+				<param name="arch" value="x86" />
+			</antcall>
+			<antcall target="packageSwtStandalone">
+				<param name="os" value="macosx" />
+				<param name="ws" value="carbon" />
+				<param name="arch" value="ppc" />
+			</antcall>
+			<antcall target="packageSwtStandalone">
+				<param name="os" value="linux" />
+				<param name="ws" value="gtk" />
+				<param name="arch" value="x86_64" />
+			</antcall>
+			<antcall target="packageSwtStandalone">
+				<param name="os" value="linux" />
+				<param name="ws" value="gtk" />
+				<param name="arch" value="ppc" />
+			</antcall>
+			<antcall target="packageSwtStandalone">
+				<param name="ws" value="win32" />
+				<param name="os" value="wce_ppc" />
+				<param name="arch" value="arm" />
+			</antcall>
+		</parallel>
 	</target>
 
 	<target name="packageSwtStandalone">
@@ -69,8 +71,8 @@
 		<property name="destination" value="${postingDirectory}/${buildLabel}" />
 		<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.${ws}.${os}.${arch}">
 		</ant>
-		<checksum file="${archiveFullPath}" property="md5"/>
-		<echo message="${md5} *${downloadFile}" file="${postingDirectory}/${buildLabel}/checksum/${downloadFile}.md5"/>
+		<checksum file="${archiveFullPath}" property="md5" />
+		<echo message="${md5} *${downloadFile}" file="${postingDirectory}/${buildLabel}/checksum/${downloadFile}.md5" />
 	</target>
 
 	<target name="publish" description="Preparing to post the build...">
@@ -116,8 +118,8 @@
 	<target name="test-performance" unless="skip.performance.tests">
 		<echo message="Starting performance tests." />
 		<property name="dropLocation" value="${postingDirectory}" />
-		<ant antfile="testAll.xml" dir="${eclipse.build.scripts}/sdk.tests/testConfigs" target="performanceTests"/>
-		<antcall target="generatePerformanceResults" >
+		<ant antfile="testAll.xml" dir="${eclipse.build.scripts}/sdk.tests/testConfigs" target="performanceTests" />
+		<antcall target="generatePerformanceResults">
 			<param name="configList" value="eclipseperfwin1_R3.2,eclipseperflnx1_R3.2,eclipseperfwin2_R3.2,eclipseperflnx2_R3.2" />
 		</antcall>
 	</target>
@@ -128,7 +130,7 @@
 	<target name="test-internalReferences">
 		<property name="apiscanner" value="${eclipse.build.scripts}/sdk/tools/apiscanner" />
 		<property name="workingDir" value="${buildDirectory}/internalReference" />
-		<mkdir dir="${workingDir}"/>
+		<mkdir dir="${workingDir}" />
 		<unzip src="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" dest="${workingDir}" />
 
 		<java classname="org.eclipse.wtp.releng.tools.component.violation.ComponentViolationEmitter" fork="true" dir="${apiscanner}">
@@ -138,9 +140,9 @@
          	-compRefDir component-ref
          	-compVioDir ${postingDirectory}/${buildLabel}/internalReference
          	-xsl xsl/component-violation.xsl
-         	-summaryXSL xsl/component-violation-summary.xsl"/>
+         	-summaryXSL xsl/component-violation-summary.xsl" />
 			<classpath>
-				<fileset dir="${apiscanner}/lib"/>
+				<fileset dir="${apiscanner}/lib" />
 			</classpath>
 		</java>
 	</target>
@@ -176,8 +178,8 @@
 	</target>
 
 	<target name="generatePerformanceResults">
-		<mkdir dir="${buildDirectory}/${buildLabel}/performance"/>
-		<mkdir dir="${postingDirectory}/${buildLabel}/performance"/>
+		<mkdir dir="${buildDirectory}/${buildLabel}/performance" />
+		<mkdir dir="${postingDirectory}/${buildLabel}/performance" />
 
 		<taskdef name="performanceResults" classname="org.eclipse.releng.performance.PerformanceResultHtmlGenerator" />
 		<ant antfile="extraTargets.xml" target="generatePerformanceResults">
