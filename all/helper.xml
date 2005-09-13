@@ -62,15 +62,31 @@
 				<param name="ws" value="win32" />
 				<param name="os" value="wce_ppc" />
 				<param name="arch" value="arm" />
+				<param name="skipChecksum" value="true" />
 			</antcall>
 		</parallel>
+		<antcall target="generateChecksum">
+			<param name="downloadFile" value="swt-${buildId}-win32-wce_ppc-arm-j2se.zip" />
+			<param name="archiveFullPath" value="${postingDirectory}/${buildLabel}/swt-${buildId}-win32-wce_ppc-arm-j2se.zip" />
+		</antcall>
+		<antcall target="generateChecksum">
+			<param name="downloadFile" value="swt-${buildId}-win32-wce_ppc-arm-j2me.zip" />
+			<param name="archiveFullPath" value="${postingDirectory}/${buildLabel}/swt-${buildId}-win32-wce_ppc-arm-j2me.zip" />
+		</antcall>
+
 	</target>
 
 	<target name="packageSwtStandalone">
 		<property name="downloadFile" value="swt-${buildid}-${ws}-${os}-${arch}.zip" />
 		<property name="destination" value="${postingDirectory}/${buildLabel}" />
+		<property name="archiveFullPath" value="${destination}/${downloadFile}" />
+
 		<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.${ws}.${os}.${arch}">
 		</ant>
+		<antcall target="generateChecksum" />
+	</target>
+	
+	<target name="generateChecksum" unless="skipChecksum">
 		<checksum file="${archiveFullPath}" property="md5" />
 		<echo message="${md5} *${downloadFile}" file="${postingDirectory}/${buildLabel}/checksum/${downloadFile}.md5" />
 	</target>

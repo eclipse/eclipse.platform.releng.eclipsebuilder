@@ -218,6 +218,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<!--package all distributables and start tests when all files are available-->
 		<parallel>
 			<ant antfile="${builder}/helper.xml" target="buildStandAloneSWT" />
+			<ant antfile="${builder}/helper.xml" target="verifyCompile" />
 			<ant antfile="${builder}/packagers/packageAll.xml"/>
 			<!--ant antfile="${builder}/../sdk.tests/testConfigs/testAll.xml"/-->
 		</parallel>
