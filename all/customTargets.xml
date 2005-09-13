@@ -30,16 +30,14 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<property name="archiveFullPath" value="${buildDirectory}/${buildLabel}/${archiveName}" />
 		<ant antfile="${assembleScriptName}" />
 		<!--add swt stand-alone jars to the zip to include in signing-->
-		<zip destfile="${archiveFullPath}"
-			basedir="${buildDirectory}/plugins"
-			update="true"
-			includes="org.eclipse.swt.win32.*/**/*.jar,org.eclipse.swt.gtk.*/**/*.jar,org.eclipse.swt.carbon*/**/*.jar,org.eclipse.swt.motif*/**/*.jar"
-			/>
+		<exec executable="zip" dir="${buildDirectory}">
+			<arg line="-qqo ${archiveFullPath} -ru plugins -i *swt*.jar -x *test* *example*" />
+		</exec>
 		
 		<!--build root file drops in parallel-->
 		<sysProp key="GROUP_CONFIG" value="false" />
 		<parallel>
-			<antcall target="sign" />
+			<!--antcall target="sign" /-->
 			<!--build root file drops-->
 			<ant antfile="build.xml" dir="${pde.build.scripts}" target="main" inheritAll="false">
 				<property name="builder" value="${eclipse.build.scripts}/all/master-root" />
@@ -49,9 +47,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		</parallel>
 		
 		<!--replace existing swt.jars with signed versions-->
-		<delete dir="${buildDirectory}">
-			<fileset dir="plugins" includes="org.eclipse.swt.win32.*/**/*.jar,org.eclipse.swt.gtk.*/**/*.jar,org.eclipse.swt.carbon*/**/*.jar,org.eclipse.swt.motif*/**/*.jar" />
-		</delete>
 		<exec executable="unzip" dir="${buildDirectory}">
 			<arg line="-qqo ${archiveFullPath} -d plugins org.eclipse.swt*" />
 		</exec>
