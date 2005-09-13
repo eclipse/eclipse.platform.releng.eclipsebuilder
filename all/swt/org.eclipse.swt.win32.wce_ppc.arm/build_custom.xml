@@ -181,7 +181,6 @@
 		<property name="EXCLUDE CUSTOM" value="true"/>
 		<delete dir="${temp.folder}"/>
 		<mkdir dir="${temp.folder}/swtdownload"/>
-		<antcall target="build.jars"/>
 		<copy file="${build.result.folder}/swt.jar" todir="${temp.folder}/swtdownload"/>
 		<antcall target="build.sources"/>
 		<copy file="${build.result.folder}/swtsrc.zip" todir="${temp.folder}/swtdownload"/>
