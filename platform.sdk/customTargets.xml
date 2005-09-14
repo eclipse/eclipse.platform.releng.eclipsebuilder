@@ -39,7 +39,8 @@
 		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-linux-gtk-x86_64.tar.gz" />
 		<antcall target="assemble" />
 	</target>
-
+	<target name="assemble.org.eclipse.platform.sdk.linux.gtk.ppc64"/>
+	<target name="assemble.org.eclipse.platform.sdk.linux.gtk.ia64"/>
 	<target name="assemble.org.eclipse.platform.sdk.linux.gtk.ppc">
 		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-linux-gtk-ppc.tar.gz" />
 		<antcall target="assemble" />
@@ -55,16 +56,14 @@
 		<antcall target="assemble" />
 	</target>
 	
-	<target name="assemble.org.eclipse.platform.sdk.qnx.photon.x86">
-		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-qnx-photon.zip" />
-		<antcall target="assemble" />
-	</target>
+	<target name="assemble.org.eclipse.platform.sdk.qnx.photon.x86" />
 
 	<target name="assemble.org.eclipse.platform.sdk.aix.motif.ppc">
 		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-aix-motif.zip" />
 		<antcall target="assemble" />
 	</target>
 
+	<target name="assemble.org.eclipse.platform.sdk.hpux.motif.ia64_32"/>
 
 	<target name="assemble.org.eclipse.platform.sdk.hpux.motif.PA_RISC">
 		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-hpux-motif.zip" />

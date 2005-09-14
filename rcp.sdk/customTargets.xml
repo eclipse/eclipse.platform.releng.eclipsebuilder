@@ -59,16 +59,14 @@
 		<antcall target="assemble" />
 	</target>
 	
-	<target name="assemble.org.eclipse.rcp.sdk.qnx.photon.x86">
-		<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-qnx-photon.zip" />
-		<antcall target="assemble" />
-	</target>
-
+	<target name="assemble.org.eclipse.rcp.sdk.qnx.photon.x86"/>
+	
 	<target name="assemble.org.eclipse.rcp.sdk.aix.motif.ppc">
 		<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-aix-motif.zip" />
 		<antcall target="assemble" />
 	</target>
 
+	<target name="assemble.org.eclipse.rcp.sdk.hpux.motif.ia64_32" />
 
 	<target name="assemble.org.eclipse.rcp.sdk.hpux.motif.PA_RISC">
 		<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-hpux-motif.zip" />
