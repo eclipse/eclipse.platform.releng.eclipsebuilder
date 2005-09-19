@@ -203,8 +203,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="preSetup">
 	</target>
 
-
-
 	<!-- ===================================================================== -->
 	<!-- Steps to do after setup but before starting the build proper -->
 	<!-- ===================================================================== -->
@@ -221,6 +219,9 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Steps to do after the fetch -->
 	<!-- ===================================================================== -->
 	<target name="postFetch">
+		<copy file="${buildDirectory}/plugins/org.eclipse.platform/startup.jar" todir="${buildDirectory}/features/org.eclipse.platform.launchers_3.1.0/bin"/>
+		<!--build delta pack bits-->
+	    <ant target="zip.distribution" antfile="build.xml" dir="${buildDirectory}/features/org.eclipse.platform.launchers"/>
 	</target>
 
 	<!-- ===================================================================== -->
@@ -246,7 +247,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- ===================================================================== -->
 	<target name="postAssemble">
 	</target>
-
 
 	<!-- ===================================================================== -->
 	<!-- Steps to do before running the build.xmls for the elements being built. -->
