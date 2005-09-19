@@ -75,7 +75,7 @@
 			<fileset dir="${buildDirectory}/plugins/org.eclipse.test" includes="testframework.html,JUNIT.XSL" />
 		</copy>
 		<copy todir="${workingDirectory}/eclipse-testing">
-			<fileset dir="${packagingInfo}/testScripts" />
+			<fileset dir="${packagingInfo}/../../../sdk.tests/testScripts" />
 		</copy>
 		<move file="${workingDirectory}/eclipse-junit-tests-${buildId}.zip" todir="${workingDirectory}/eclipse-testing"/>
 

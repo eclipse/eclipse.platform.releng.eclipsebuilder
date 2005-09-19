@@ -21,8 +21,8 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- ===================================================================== -->
 	<target name="assemble.master.group.group.group">
 		<property name="archiveName" value="eclipse-master-${buildId}.zip"/>
-	    <!--HACK to build grouped config-->
-        <mkdir dir="${buildDirectory}/tmp/eclipse/group.group.group"/>
+		<!--HACK to build grouped config-->
+		<mkdir dir="${buildDirectory}/tmp/eclipse/group.group.group"/>
 		<antcall target="assemble" />
 	</target>
 
@@ -33,27 +33,17 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<exec executable="zip" dir="${buildDirectory}">
 			<arg line="-qqo ${archiveFullPath} -ru plugins -i *swt*.jar -x *test* *example*" />
 		</exec>
-		
-		<!--build root file drops in parallel-->
-		<sysProp key="GROUP_CONFIG" value="false" />
-		<parallel>
-			<!--antcall target="sign" /-->
-			<!--build root file drops-->
-			<ant antfile="build.xml" dir="${pde.build.scripts}" target="main" inheritAll="false">
-				<property name="builder" value="${eclipse.build.scripts}/all/master-root" />
-				<property name="buildDirectory" value="${buildDirectory}" />
-				<property file="${buildDirectory}/label.properties" />
-			</ant>
-		</parallel>
-		
-		<!--replace existing swt.jars with signed versions-->
-		<exec executable="unzip" dir="${buildDirectory}">
-			<arg line="-qqo ${archiveFullPath} -d plugins org.eclipse.swt*" />
-		</exec>
-			
-		<replace file="${builder}/packagers/common.map" token="@buildId@" value="${buildId}"/>
 	</target>
 
+	<target name="build.master.root">
+		<!--build root file drops-->
+		<ant antfile="build.xml" dir="${pde.build.scripts}" target="main" inheritAll="false">
+			<property name="builder" value="${eclipse.build.scripts}/all/master-root" />
+			<property name="buildDirectory" value="${buildDirectory}" />
+			<property file="${buildDirectory}/label.properties" />
+		</ant>
+	</target>
+	
 	<!-- ===================================================================== -->
 	<!-- Check out map files from correct repository -->
 	<!-- Replace values for cvsRoot, package and mapVersionTag as desired. -->
@@ -88,8 +78,8 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="tagMapFiles" if="tagMaps">
 		<!-- Stores tag on the filesystem so map files can be compared -->
 		<echo file="${mapTag.properties}">
-		lastMapTag=${buildId}
-	</echo>
+			lastMapTag=${buildId}
+		</echo>
 		<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag ${buildId}" />
 	</target>
 
@@ -105,13 +95,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Steps to do after setup but before starting the build proper -->
 	<!-- ===================================================================== -->
 	<target name="postSetup" >
-		<property name="featureOnly" value="false"/>
-		<property name="featureAndPlugins" value="true"/>
-		<property name="featuresRecursively" value="false"/>
-		<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
-			<property name="type" value="fragment" />
-			<property name="id" value="org.eclipse.swt.win32.win32.x86" />
-		</ant>
 	</target>
 
 	<!-- ===================================================================== -->
@@ -134,7 +117,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<copy todir="${buildDirectory}/plugins">
 			<fileset dir="${builder}/swt"/>
 		</copy>
-		
+
 		<!--copy linux motif about_files to in temp location where it will be copied into root of eclipse at assembly time-->
 		<property name="linux.motif.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.motif.x86" />
 		<mkdir dir="${linux.motif.rootfiles}" />
@@ -206,15 +189,19 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Steps to do after assembling-->
 	<!-- ===================================================================== -->
 	<target name="postAssemble">
-		<!--grouped configs not required to do packaging of all distributables-->	
-		<!--copy javadoc logs to posting directory, verify compilation-->
-		<copy file="${buildDirectory}/plugins/org.eclipse.platform.doc.isv/doc.bin.log" tofile="${postingDirectory}/${buildLabel}/compilelogs/platform.doc.isv.javadoc.txt" failonerror="false"/>
-		<copy file="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv/doc.bin.log" tofile="${postingDirectory}/${buildLabel}/compilelogs/jdt.doc.isv.javadoc.txt" failonerror="false"/>
-		<copy file="${buildDirectory}/plugins/org.eclipse.pde.doc.user/doc.bin.log" tofile="${postingDirectory}/${buildLabel}/compilelogs/pde.doc.user.javadoc.txt" failonerror="false"/>
-		<copy file="${buildDirectory}/plugins/org.eclipse.platform.doc.isv/platformconvert.txt" tofile="${postingDirectory}/${buildLabel}/compilelogs/platform.doc.isv.schema.txt" failonerror="false"/>
-		<copy file="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv/jdtconvert.txt" tofile="${postingDirectory}/${buildLabel}/compilelogs/jdt.doc.isv.schema.txt" failonerror="false"/>
-		<copy file="${buildDirectory}/plugins/org.eclipse.pde.doc.user/pdeconvert.txt" tofile="${postingDirectory}/${buildLabel}/compilelogs/pde.doc.user.schema.txt" failonerror="false"/>
-		
+		<!--build root file drops while jars are being signed-->
+		<sysProp key="GROUP_CONFIG" value="false" />
+		<parallel>
+			<!--antcall target="sign" /-->
+			<antcall target="build.master.root" />
+		</parallel>
+
+		<!--replace existing swt.jars with signed versions-->
+		<exec executable="unzip" dir="${buildDirectory}">
+			<arg line="-qqo ${archiveFullPath} -d plugins org.eclipse.swt*" />
+		</exec>
+		<replace file="${builder}/packagers/common.map" token="@buildId@" value="${buildId}"/>
+
 		<!--package all distributables and start tests when all files are available-->
 		<parallel>
 			<ant antfile="${builder}/helper.xml" target="buildStandAloneSWT" />
@@ -222,6 +209,14 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<ant antfile="${builder}/packagers/packageAll.xml"/>
 			<!--ant antfile="${builder}/../sdk.tests/testConfigs/testAll.xml"/-->
 		</parallel>
+
+		<!--copy javadoc logs to posting directory, verify compilation-->
+		<copy file="${buildDirectory}/plugins/org.eclipse.platform.doc.isv/doc.bin.log" tofile="${postingDirectory}/${buildLabel}/compilelogs/platform.doc.isv.javadoc.txt" failonerror="false"/>
+		<copy file="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv/doc.bin.log" tofile="${postingDirectory}/${buildLabel}/compilelogs/jdt.doc.isv.javadoc.txt" failonerror="false"/>
+		<copy file="${buildDirectory}/plugins/org.eclipse.pde.doc.user/doc.bin.log" tofile="${postingDirectory}/${buildLabel}/compilelogs/pde.doc.user.javadoc.txt" failonerror="false"/>
+		<copy file="${buildDirectory}/plugins/org.eclipse.platform.doc.isv/platformconvert.txt" tofile="${postingDirectory}/${buildLabel}/compilelogs/platform.doc.isv.schema.txt" failonerror="false"/>
+		<copy file="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv/jdtconvert.txt" tofile="${postingDirectory}/${buildLabel}/compilelogs/jdt.doc.isv.schema.txt" failonerror="false"/>
+		<copy file="${buildDirectory}/plugins/org.eclipse.pde.doc.user/pdeconvert.txt" tofile="${postingDirectory}/${buildLabel}/compilelogs/pde.doc.user.schema.txt" failonerror="false"/>
 	</target>
 
 
@@ -282,33 +277,33 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="sign" if="signJars">
 		<!--push drop to staging directory-->
 		<property name="stagingDirectory" value="/home/data/httpd/download-staging.priv/eclipse/downloads" />
-		
+
 		<exec dir="${buildDirectory}/${buildLabel}" executable="scp" output="signing.txt">
-		  <arg line="${archiveName} download1.eclipse.org:${stagingDirectory}"/>
+			<arg line="${archiveName} download1.eclipse.org:${stagingDirectory}"/>
 		</exec>
 		<exec dir="." executable="ssh" output="signing.txt" append="true">
-		  <arg line="download1.eclipse.org chmod ugo+rw ${stagingDirectory}/${archiveName} "/>
+			<arg line="download1.eclipse.org chmod ugo+rw ${stagingDirectory}/${archiveName} "/>
 		</exec>
-		
+
 		<!--timestamp on download server-->
-        <exec dir="." executable="ssh" output="signing.txt" append="true">
-          <arg line="download1.eclipse.org touch -t ${timestamp} ${stagingDirectory}/${archiveName}"/>
-        </exec>
+		<exec dir="." executable="ssh" output="signing.txt" append="true">
+			<arg line="download1.eclipse.org touch -t ${timestamp} ${stagingDirectory}/${archiveName}"/>
+		</exec>
 
 		<!--capture original file attributes-->
 		<exec dir="." executable="ssh" outputProperty="originalAttribs">
-		  <arg line="download1.eclipse.org &quot;cd /home/data/httpd/download-staging.priv/eclipse/downloads/;ls -gG ${archiveName}&quot;"/>
+			<arg line="download1.eclipse.org &quot;cd /home/data/httpd/download-staging.priv/eclipse/downloads/;ls -gG ${archiveName}&quot;"/>
 		</exec>
-		
+
 		<!--invoke script that digital signs and wait-->
 		<exec dir="." executable="ssh" output="signing.txt" append="true">
-		  <arg line="download1.eclipse.org &quot;cd /home/data/httpd/download-staging.priv/eclipse/downloads;sign ${archiveName} mail&quot;"/>
+			<arg line="download1.eclipse.org &quot;cd /home/data/httpd/download-staging.priv/eclipse/downloads;sign ${archiveName} mail&quot;"/>
 		</exec>
 		<antcall target="waitForChangedAttribs" />
-		
+
 		<!--copy zip back to build machine-->
 		<exec dir="." executable="scp" output="signing.txt" append="true">
-		  <arg line="download1.eclipse.org:${stagingDirectory}/${archiveName} ${buildDirectory}/${buildLabel}"/>
+			<arg line="download1.eclipse.org:${stagingDirectory}/${archiveName} ${buildDirectory}/${buildLabel}"/>
 		</exec>
 
 	</target>
@@ -322,7 +317,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="compareAttribs">
 		<!--poll file for change in attributes-->
 		<exec dir="." executable="ssh" outputProperty="polledAttribs">
-		  <arg line="download1.eclipse.org &quot;cd /home/data/httpd/download-staging.priv/eclipse/downloads/;ls -gG ${archiveName}&quot;"/>
+			<arg line="download1.eclipse.org &quot;cd /home/data/httpd/download-staging.priv/eclipse/downloads/;ls -gG ${archiveName}&quot;"/>
 		</exec>
 		<echo message="original:  ${originalAttribs}" />
 		<condition property="attribChanged">
@@ -338,10 +333,10 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	</target>
 
 	<target name="writeDiffResult" if="attribChanged">
-		<echo message="original: ${originalAttribs}" file="${builder}/attribDiff.txt" />	
+		<echo message="original: ${originalAttribs}" file="${builder}/attribDiff.txt" />
 		<echo message="new: ${polledAttribs}" file="${builder}/attribDiff.txt" append="true" />
-	</target>	
-	
+	</target>
+
 	<!-- ===================================================================== -->
 	<!-- Default target                                                        -->
 	<!-- ===================================================================== -->
