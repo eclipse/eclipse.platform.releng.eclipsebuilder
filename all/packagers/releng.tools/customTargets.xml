@@ -1,14 +1,12 @@
 <project default="assemble">
 
 	<target name="assemble">
-		<unzip src="${archiveFullPath}" dest="${builder}/packagers/releng.tools/tmp">
-			<patternset dir=".">
-				<include name="**/plugins/org.eclipse.releng.tools*.jar" />
-			</patternset>
-		</unzip>
+		<exec executable="unzip" dir="${basedir}">
+			<arg line="unzip -qq ${buildDirectory}/${buildLabel}/eclipse-master-${buildID}.zip eclipse/plugins/org.eclipse.releng.tools* -d tmp" />
+		</exec>
 		<property name="relengToolsArchive" value="org.eclipse.releng.tools-${buildId}.zip" />
-		<zip destfile="${postingDirectory}/${buildLabel}/${relengToolsArchive}" basedir="${builder}/packagers/releng.tools/tmp" />
-		<checksum file="${archiveFullPath}" property="md5" />
+		<zip destfile="${postingDirectory}/${buildLabel}/${relengToolsArchive}" basedir="${basedir}/tmp" />
+		<checksum file="${postingDirectory}/${buildLabel}/${relengToolsArchive}" property="md5" />
 		<echo message="${md5} *${relengToolsArchive}" file="${postingDirectory}/${buildLabel}/checksum/${relengToolsArchive}.md5" />
 	</target>
 
