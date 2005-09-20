@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="org.eclipse.swt.motif.hpux.ia64_32" default="build.jars" basedir=".">
+<project name="org.eclipse.swt.motif.solaris.sparc" default="build.jars" basedir=".">
 
 	<target name="init" depends="properties">
 		<property name="ws" value="motif"/>
-		<property name="os" value="hpux"/>
-		<property name="arch" value="ia64_32"/>
-		<property name="fragment" value="org.eclipse.swt.motif.hpux.ia64_32"/>
+		<property name="os" value="solaris"/>
+		<property name="arch" value="sparc"/>
+		<property name="fragment" value="org.eclipse.swt.motif.solaris.sparc"/>
 		<property name="version.suffix" value="_3.1.0"/>
 		<property name="full.name" value="${fragment}${version.suffix}"/>
 		<property name="temp.folder" value="${basedir}/temp.folder"/>

@@ -35,15 +35,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		</exec>
 	</target>
 
-	<target name="build.master.root">
-		<!--build root file drops-->
-		<ant antfile="build.xml" dir="${pde.build.scripts}" target="main" inheritAll="false">
-			<property name="builder" value="${eclipse.build.scripts}/all/master-root" />
-			<property name="buildDirectory" value="${buildDirectory}" />
-			<property file="${buildDirectory}/label.properties" />
-		</ant>
-	</target>
-	
 	<!-- ===================================================================== -->
 	<!-- Check out map files from correct repository -->
 	<!-- Replace values for cvsRoot, package and mapVersionTag as desired. -->
@@ -257,6 +248,15 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- ===================================================================== -->
 	<!-- Helper targets -->
 	<!-- ===================================================================== -->
+	<target name="build.master.root">
+		<!--build root file drops-->
+		<ant antfile="build.xml" dir="${pde.build.scripts}" target="main" inheritAll="false">
+			<property name="builder" value="${eclipse.build.scripts}/all/master-root" />
+			<property name="buildDirectory" value="${buildDirectory}" />
+			<property file="${buildDirectory}/label.properties" />
+		</ant>
+	</target>
+	
 	<target name="gatherLogs" if="logsAvailable">
 
 		<mkdir dir="${postingDirectory}/${buildLabel}/compilelogs" />
