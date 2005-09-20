@@ -12,5 +12,9 @@
 			<property name="archiveName" value="eclipse-RCP-${buildId}-delta-pack.zip" />
 		</ant>
 	</target>
-
+	<target name="assemble.group.group.group.xml">
+		<ant antfile="${assembleScriptName}">
+			<property name="archiveName" value="eclipse-RCP-${buildId}-grouped-delta-pack.zip" />
+		</ant>
+	</target>
 </project>
