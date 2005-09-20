@@ -2,7 +2,7 @@
 
 	<target name="assemble">
 		<exec executable="unzip" dir="${basedir}">
-			<arg line="-qq ${buildDirectory}/${buildLabel}/eclipse-master-${buildID}.zip eclipse/plugins/org.eclipse.releng.tools* -d tmp" />
+			<arg line="-qq ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip eclipse/plugins/org.eclipse.releng.tools* -d tmp" />
 		</exec>
 		<property name="relengToolsArchive" value="org.eclipse.releng.tools-${buildId}.zip" />
 		<zip destfile="${postingDirectory}/${buildLabel}/${relengToolsArchive}" basedir="${basedir}/tmp" />
