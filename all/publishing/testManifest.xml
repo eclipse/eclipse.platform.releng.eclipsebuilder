@@ -591,7 +591,9 @@
 		<effectedFile id="RCPSDKMC"></effectedFile>
 	</logFile>
 
-	<!--logFile name="org.eclipse.jdt.core.tests.builder_macosx.carbon.ppc.xml">
+
+	
+	<logFile name="org.eclipse.jdt.core.tests.builder_macosx.carbon.ppc.xml">
 		<effectedFile id="SMC"></effectedFile>
 		<effectedFile id="JA"></effectedFile>
 		<effectedFile id="JMC"></effectedFile>
@@ -613,7 +615,7 @@
 		<effectedFile id="JMC"></effectedFile>
 		<effectedFile id="JASDK"></effectedFile>
 		<effectedFile id="JMCSDK"></effectedFile>
-	</logFile-->
+	</logFile>
 	
 	<logFile name="org.eclipse.ui.tests_macosx.carbon.ppc.xml">
 		<effectedFile id="SMC"></effectedFile>

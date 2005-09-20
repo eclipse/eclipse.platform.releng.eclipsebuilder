@@ -193,6 +193,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<exec executable="unzip" dir="${buildDirectory}">
 			<arg line="-qqo ${archiveFullPath} -d plugins org.eclipse.swt*" />
 		</exec>
+		
 		<replace file="${builder}/packagers/common.map" token="@buildId@" value="${buildId}"/>
 
 		<!--package all distributables and start tests when all files are available-->
@@ -200,16 +201,16 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<ant antfile="${builder}/helper.xml" target="buildStandAloneSWT" />
 			<ant antfile="${builder}/helper.xml" target="verifyCompile" />
 			<ant antfile="${builder}/packagers/packageAll.xml"/>
-			<!--ant antfile="${builder}/../sdk.tests/testConfigs/testAll.xml"/-->
+			<ant antfile="${builder}/helper.xml" target="testAll" />
+			<ant antfile="${builder}/helper.xml" target="test-internalReferences" />
+			<copy file="${buildDirectory}/plugins/org.eclipse.platform.doc.isv/doc.bin.log" tofile="${postingDirectory}/${buildLabel}/compilelogs/platform.doc.isv.javadoc.txt" failonerror="false"/>
+			<copy file="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv/doc.bin.log" tofile="${postingDirectory}/${buildLabel}/compilelogs/jdt.doc.isv.javadoc.txt" failonerror="false"/>
+			<copy file="${buildDirectory}/plugins/org.eclipse.pde.doc.user/doc.bin.log" tofile="${postingDirectory}/${buildLabel}/compilelogs/pde.doc.user.javadoc.txt" failonerror="false"/>
+			<copy file="${buildDirectory}/plugins/org.eclipse.platform.doc.isv/platformconvert.txt" tofile="${postingDirectory}/${buildLabel}/compilelogs/platform.doc.isv.schema.txt" failonerror="false"/>
+			<copy file="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv/jdtconvert.txt" tofile="${postingDirectory}/${buildLabel}/compilelogs/jdt.doc.isv.schema.txt" failonerror="false"/>
+			<copy file="${buildDirectory}/plugins/org.eclipse.pde.doc.user/pdeconvert.txt" tofile="${postingDirectory}/${buildLabel}/compilelogs/pde.doc.user.schema.txt" failonerror="false"/>
 		</parallel>
 
-		<!--copy javadoc logs to posting directory, verify compilation-->
-		<copy file="${buildDirectory}/plugins/org.eclipse.platform.doc.isv/doc.bin.log" tofile="${postingDirectory}/${buildLabel}/compilelogs/platform.doc.isv.javadoc.txt" failonerror="false"/>
-		<copy file="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv/doc.bin.log" tofile="${postingDirectory}/${buildLabel}/compilelogs/jdt.doc.isv.javadoc.txt" failonerror="false"/>
-		<copy file="${buildDirectory}/plugins/org.eclipse.pde.doc.user/doc.bin.log" tofile="${postingDirectory}/${buildLabel}/compilelogs/pde.doc.user.javadoc.txt" failonerror="false"/>
-		<copy file="${buildDirectory}/plugins/org.eclipse.platform.doc.isv/platformconvert.txt" tofile="${postingDirectory}/${buildLabel}/compilelogs/platform.doc.isv.schema.txt" failonerror="false"/>
-		<copy file="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv/jdtconvert.txt" tofile="${postingDirectory}/${buildLabel}/compilelogs/jdt.doc.isv.schema.txt" failonerror="false"/>
-		<copy file="${buildDirectory}/plugins/org.eclipse.pde.doc.user/pdeconvert.txt" tofile="${postingDirectory}/${buildLabel}/compilelogs/pde.doc.user.schema.txt" failonerror="false"/>
 	</target>
 
 

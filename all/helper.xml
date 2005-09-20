@@ -1,5 +1,41 @@
 <project name="Helper targets" default="noDefault">
 	<property name="postingDirectory" value="${buildDirectory}" />
+	<!-- ===================================================================== -->
+	<!-- Set of helper targets for building the Eclipse SDK -->
+	<!-- ===================================================================== -->
+	<target name="discoverOS">
+		<condition property="onUnix">
+			<and>
+				<os family="unix" />
+			</and>
+		</condition>
+		<condition property="onWindows">
+			<and>
+				<os family="windows" />
+			</and>
+		</condition>
+	</target>
+
+	<target name="printWarnings" if="onWindows" depends="discoverOS">
+		<echo message="The UNIX versions of your build output will be invalid.  Windows will not preserve symbolic links and permissions on executable files." />
+	</target>
+
+	<target name="setLabels">
+		<!--required-->
+		<!-- setup the label.properties file packaged in the source builds. -->
+		<!--Set this property to empty string-->
+		<property name="buildType" value="" />
+		<tstamp>
+			<format property="TODAY" pattern="MMMM d, yyyy" />
+			<format property="TSTAMP" pattern="HHmm" />
+		</tstamp>
+		<copy file="label.properties.template" tofile="${buildDirectory}/label.properties" overwrite="true" />
+		<replace file="${buildDirectory}/label.properties" token="@builddate@" value="${TODAY}" />
+		<replace file="${buildDirectory}/label.properties" token="@buildtype@" value="${buildType}" />
+		<replace file="${buildDirectory}/label.properties" token="@ds@" value="${timestamp}" />
+		<replace file="${buildDirectory}/label.properties" token="@buildid@" value="${buildId}" />
+	</target>
+
 
 	<target name="buildStandAloneSWT">
 		<parallel>
@@ -85,7 +121,7 @@
 		</ant>
 		<antcall target="generateChecksum" />
 	</target>
-	
+
 	<target name="generateChecksum" unless="skipChecksum">
 		<checksum file="${archiveFullPath}" property="md5" />
 		<echo message="${md5} *${downloadFile}" file="${postingDirectory}/${buildLabel}/checksum/${downloadFile}.md5" />
@@ -105,15 +141,34 @@
 		<copy file="${buildDirectory}/plugins/org.eclipse.test/testframework.html" tofile="${postingDirectory}/${buildLabel}/testframework.html" />
 
 		<antcall target="generateEclipseIndex" />
-		<ant antfile="publish.xml" target="getStaticFiles" />
-		<antcall target="generateMD5Checksum" />
+		<!--get static files required in the buildLabel directory-->
+		<copy todir="${postingDirectory}/${buildLabel}">
+			<fileset dir="${builder}/publishing/staticDropFiles" />
+		</copy>
+
+		<!--copy buildnotes from plugin directories-->
+		<mkdir dir="${postingDirectory}/${buildLabel}/buildnotes" />
+		<copy todir="${postingDirectory}/${buildLabel}/buildnotes" flatten="true">
+			<fileset dir="${buildDirectory}/plugins" includes="**/buildnotes_*.html,**/jdt_core_style.css" />
+		</copy>
 	</target>
 
 
 	<!-- ===================================================================== -->
 	<!-- Target used to test the build                                         -->
 	<!-- ===================================================================== -->
-	<target name="test">
+	<target name="testAll">
+		<antcall target="configure.team.cvs.test"/>
+		<waitfor maxwait="300" maxwaitunit="minute" checkevery="2" checkeveryunit="minute">
+			<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-Automated-Tests-${buildId}.zip.md5" />
+		</waitfor>
+		<parallel>
+			<antcall target="test-JUnit" />
+			<antcall target="test-performance" />
+		</parallel>
+	</target>
+
+	<target name="test-JUnit">
 		<echo message="Starting tests." />
 		<property name="dropLocation" value="${postingDirectory}" />
 		<ant antfile="testAll.xml" dir="${eclipse.build.scripts}/sdk.tests/testConfigs" />
@@ -173,21 +228,23 @@
 
 	<target name="configure.team.cvs.test" unless="test.xml.tmp">
 		<copy file="${eclipse.build.scripts}/sdk.tests/testScripts/test.xml" tofile="${eclipse.build.scripts}/sdk.tests/testScripts/test.xml.tmp" />
-		<replace file="${eclipse.build.scripts}/sdk.tests/testScripts/test.xml" token="@cvs_user@" value="cvstests" />
-		<replace file="${eclipse.build.scripts}/sdk.tests/testScripts/test.xml" token="@cvs_password@" value="goteam4e" />
-		<replace file="${eclipse.build.scripts}/sdk.tests/testScripts/test.xml" token="@cvs_host@" value="fiji" />
-		<replace file="${eclipse.build.scripts}/sdk.tests/testScripts/test.xml" token="@cvs_root@" value="/home/sdimitro/repo" />
+		<replace file="${eclipse.build.scripts}/sdk.tests/testScripts/test.xml" token="@cvs_user@" value="${cvs_user}" />
+		<replace file="${eclipse.build.scripts}/sdk.tests/testScripts/test.xml" token="@cvs_password@" value="${cvs_password}" />
+		<replace file="${eclipse.build.scripts}/sdk.tests/testScripts/test.xml" token="@cvs_host@" value="${cvs_host}" />
+		<replace file="${eclipse.build.scripts}/sdk.tests/testScripts/test.xml" token="@cvs_root@" value="${cvs_root}" />
 		<delete file="${eclipse.build.scripts}/sdk.tests/testScripts/test.xml.tmp" />
 	</target>
 
 	<target name="generateEclipseIndex">
 		<available classname="org.eclipse.releng.generators.EclipseTestResultsGenerator" property="class" value="org.eclipse.releng.generators.EclipseTestResultsGenerator" />
-		<!--property name="class" value="org.eclipse.releng.generators.TestResultsGenerator" /-->
 
 		<!--regenerate the index page with links to test results-->
-		<ant antfile="publish.xml" target="generateIndex">
+		<ant antfile="${base.builder}/org.eclipse.build.tools/scripts/publish.xml" dir="${builder}/publishing" target="generateIndex">
 			<property name="isBuildTested" value="true" />
 			<property name="dropTokenList" value="%sdk%,%tests%,%example%,%rcpruntime%,%rcpsdk%,%runtime%,%platformsdk%,%jdt%,%jdtsdk%,%pde%,%pdesdk%,%teamextras%,%swt%,%relengtools%" />
+			<property name="result" value="${postingDirectory}/${buildLabel}" />
+			<property name="testResultsTemplateFileName" value="${basedir}/templateFiles/testResults.php.template" />
+			<property name="dropTemplateFileName" value="${basedir}/templateFiles/index.html.template" />
 		</ant>
 		<!--  Insert ftp url for drop directory  -->
 		<replace file="${postingDirectory}/${buildLabel}/index.php" token="@buildlabel@" value="${buildLabel}" />
@@ -207,12 +264,11 @@
 			<property name="scenario.filter" value="org.eclipse.%.test" />
 		</ant>
 
-		<performanceResults xmlDirectoryName="${postingDirectory}/${buildLabel}/performance/xml" dropDirectoryName="${postingDirectory}/${buildLabel}" testResultsTemplateFileName="${basedir}/templateFiles/performance.php.template" testResultsHtmlFileName="performance/performance.php" hrefTestResultsTargetPath="html" testManifestFileName="${basedir}/performanceTestManifest.xml" />
+		<performanceResults xmlDirectoryName="${postingDirectory}/${buildLabel}/performance/xml" dropDirectoryName="${postingDirectory}/${buildLabel}" testResultsTemplateFileName="${builder}/publishing/templateFiles/performance.php.template" testResultsHtmlFileName="performance/performance.php" hrefTestResultsTargetPath="html" testManifestFileName="${builder}/publishing/performanceTestManifest.xml" />
 		<replace file="${postingDirectory}/${buildLabel}/performance/performance.php" token="@buildType@" value="${buildType}" />
 	</target>
 
 	<target name="verifyCompile" if="eclipse.running">
-		<property file="${basedir}/monitor.properties" />
 		<echo message="Checking for compile errors..." />
 		<!-- Sends email to recipient list in monitor.properties with compile logs attached if errors found-->
 		<verifyCompile install="${postingDirectory}/${buildLabel}/compilelogs" />
