@@ -58,13 +58,13 @@
 				<param name="ws" value="gtk" />
 				<param name="arch" value="ppc" />
 			</antcall>
-			<antcall target="packageSwtStandalone">
-				<param name="ws" value="win32" />
-				<param name="os" value="wce_ppc" />
-				<param name="arch" value="arm" />
-				<param name="skipChecksum" value="true" />
-			</antcall>
 		</parallel>
+		<antcall target="packageSwtStandalone">
+			<param name="ws" value="win32" />
+			<param name="os" value="wce_ppc" />
+			<param name="arch" value="arm" />
+			<param name="skipChecksum" value="true" />
+		</antcall>
 		<antcall target="generateChecksum">
 			<param name="downloadFile" value="swt-${buildId}-win32-wce_ppc-arm-j2se.zip" />
 			<param name="archiveFullPath" value="${postingDirectory}/${buildLabel}/swt-${buildId}-win32-wce_ppc-arm-j2se.zip" />
