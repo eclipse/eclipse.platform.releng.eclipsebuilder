@@ -117,7 +117,9 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<copy todir="${buildDirectory}/plugins">
 			<fileset dir="${builder}/swt"/>
 		</copy>
-
+		<mkdir dir="${buildDirectory}/features/org.eclipse.platform/launchertmp" />
+		<mkdir dir="${buildDirectory}/launchertmp" />
+		
 		<!--copy linux motif about_files to in temp location where it will be copied into root of eclipse at assembly time-->
 		<property name="linux.motif.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.motif.x86" />
 		<mkdir dir="${linux.motif.rootfiles}" />
