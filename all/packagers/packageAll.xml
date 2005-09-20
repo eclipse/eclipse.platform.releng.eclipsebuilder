@@ -44,7 +44,6 @@
 			<param name="packagingInfo" value="${builder}/packagers/rcp.deltapack" />
 		</antcall>
 		<ant antfile="customTargets.xml" dir="${builder}/packagers/releng.tools" />
-		<antcall target="packageSourceDrops" inheritall="false" />
 	</target>
 
 	<target name="package">
@@ -58,14 +57,4 @@
 		</ant>
 	</target>
 	
-	<target name="packageSourceDrops">
-		<ant antfile="build.xml" dir="${pde.build.scripts}" target="generate">
-			<property name="builder" value="${eclipse.build.scripts}/all/packagers/sdk-source" />
-			<property name="buildId" value="${buildId}" />
-			<property name="buildDirectory" value="${buildDirectory}" />
-			<property name="postingDirectory" value="${postingDirectory}" />
-
-		</ant>
-	</target>
-
 </project>
