@@ -49,7 +49,6 @@
 	<target name="package">
 		<ant antfile="package.xml" dir="${pde.build.scripts}" inheritAll="false">
 			<property name="packagingInfo" value="${packagingInfo}" />
-			<property name="archiveName" value="${archiveName}" />
 			<property name="buildId" value="${buildId}" />
 			<property name="buildDirectory" value="${buildDirectory}" />
 			<property name="postingDirectory" value="${postingDirectory}" />
