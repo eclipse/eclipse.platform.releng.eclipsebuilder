@@ -159,7 +159,7 @@
 	<!-- ===================================================================== -->
 	<target name="testAll">
 		<antcall target="configure.team.cvs.test"/>
-		<waitfor maxwait="300" maxwaitunit="minute" checkevery="2" checkeveryunit="minute">
+		<waitfor maxwait="300" maxwaitunit="minute" checkevery="1" checkeveryunit="minute">
 			<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-Automated-Tests-${buildId}.zip.md5" />
 		</waitfor>
 		<parallel>
