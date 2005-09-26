@@ -84,7 +84,7 @@
 			<globmapper from="*eclipse" to="*launcher" />
 		</copy>
 		<copy todir="${feature.base}/features/org.eclipse.platform.launchers_3.1.0/bin" failonerror="true">
-			<fileset dir="${launcher-bin}" includes="**/eclipse.exe"/>
+			<fileset dir="${basedir}/bin" includes="**/eclipse.exe"/>
 			<globmapper from="*eclipse.exe" to="*launcher.exe" />
 		</copy>
 	</target>
