@@ -38,61 +38,61 @@
 
 
 	<target name="buildStandAloneSWT">
-			<antcall target="packageSwtStandalone">
-				<param name="ws" value="win32" />
-				<param name="os" value="win32" />
-				<param name="arch" value="x86" />
-			</antcall>
-			<antcall target="packageSwtStandalone">
-				<param name="os" value="linux" />
-				<param name="ws" value="motif" />
-				<param name="arch" value="x86" />
-			</antcall>
-			<antcall target="packageSwtStandalone">
-				<param name="os" value="aix" />
-				<param name="ws" value="motif" />
-				<param name="arch" value="ppc" />
-			</antcall>
-			<antcall target="packageSwtStandalone">
-				<param name="os" value="hpux" />
-				<param name="ws" value="motif" />
-				<param name="arch" value="PA_RISC" />
-			</antcall>
-			<antcall target="packageSwtStandalone">
-				<param name="os" value="solaris" />
-				<param name="ws" value="motif" />
-				<param name="arch" value="sparc" />
-			</antcall>
-			<antcall target="packageSwtStandalone">
-				<param name="os" value="solaris" />
-				<param name="ws" value="gtk" />
-				<param name="arch" value="sparc" />
-			</antcall>
-			<antcall target="packageSwtStandalone">
-				<param name="os" value="qnx" />
-				<param name="ws" value="photon" />
-				<param name="arch" value="x86" />
-			</antcall>
-			<antcall target="packageSwtStandalone">
-				<param name="os" value="linux" />
-				<param name="ws" value="gtk" />
-				<param name="arch" value="x86" />
-			</antcall>
-			<antcall target="packageSwtStandalone">
-				<param name="os" value="macosx" />
-				<param name="ws" value="carbon" />
-				<param name="arch" value="ppc" />
-			</antcall>
-			<antcall target="packageSwtStandalone">
-				<param name="os" value="linux" />
-				<param name="ws" value="gtk" />
-				<param name="arch" value="x86_64" />
-			</antcall>
-			<antcall target="packageSwtStandalone">
-				<param name="os" value="linux" />
-				<param name="ws" value="gtk" />
-				<param name="arch" value="ppc" />
-			</antcall>
+		<antcall target="packageSwtStandalone">
+			<param name="ws" value="win32" />
+			<param name="os" value="win32" />
+			<param name="arch" value="x86" />
+		</antcall>
+		<antcall target="packageSwtStandalone">
+			<param name="os" value="linux" />
+			<param name="ws" value="motif" />
+			<param name="arch" value="x86" />
+		</antcall>
+		<antcall target="packageSwtStandalone">
+			<param name="os" value="aix" />
+			<param name="ws" value="motif" />
+			<param name="arch" value="ppc" />
+		</antcall>
+		<antcall target="packageSwtStandalone">
+			<param name="os" value="hpux" />
+			<param name="ws" value="motif" />
+			<param name="arch" value="PA_RISC" />
+		</antcall>
+		<antcall target="packageSwtStandalone">
+			<param name="os" value="solaris" />
+			<param name="ws" value="motif" />
+			<param name="arch" value="sparc" />
+		</antcall>
+		<antcall target="packageSwtStandalone">
+			<param name="os" value="solaris" />
+			<param name="ws" value="gtk" />
+			<param name="arch" value="sparc" />
+		</antcall>
+		<antcall target="packageSwtStandalone">
+			<param name="os" value="qnx" />
+			<param name="ws" value="photon" />
+			<param name="arch" value="x86" />
+		</antcall>
+		<antcall target="packageSwtStandalone">
+			<param name="os" value="linux" />
+			<param name="ws" value="gtk" />
+			<param name="arch" value="x86" />
+		</antcall>
+		<antcall target="packageSwtStandalone">
+			<param name="os" value="macosx" />
+			<param name="ws" value="carbon" />
+			<param name="arch" value="ppc" />
+		</antcall>
+		<antcall target="packageSwtStandalone">
+			<param name="os" value="linux" />
+			<param name="ws" value="gtk" />
+			<param name="arch" value="x86_64" />
+		</antcall>
+		<antcall target="packageSwtStandalone">
+			<param name="os" value="linux" />
+			<param name="ws" value="gtk" />
+			<param name="arch" value="ppc" />
+		</antcall>
 		<antcall target="packageSwtStandalone">
 			<param name="ws" value="win32" />
 			<param name="os" value="wce_ppc" />
@@ -188,9 +188,7 @@
 		<echo message="Starting performance tests." />
 		<property name="dropLocation" value="${postingDirectory}" />
 		<ant antfile="testAll.xml" dir="${eclipse.build.scripts}/sdk.tests/testConfigs" target="performanceTests" />
-		<antcall target="generatePerformanceResults">
-			<param name="configList" value="eclipseperfwin1_R3.2,eclipseperflnx1_R3.2,eclipseperfwin2_R3.2,eclipseperflnx2_R3.2" />
-		</antcall>
+		<antcall target="generatePerformanceResults" />
 	</target>
 
 	<!-- ===================================================================== -->
@@ -241,8 +239,8 @@
 			<property name="isBuildTested" value="true" />
 			<property name="dropTokenList" value="%sdk%,%tests%,%example%,%rcpruntime%,%rcpsdk%,%runtime%,%platformsdk%,%jdt%,%jdtsdk%,%pde%,%pdesdk%,%teamextras%,%swt%,%relengtools%" />
 			<property name="result" value="${postingDirectory}/${buildLabel}" />
-			<property name="testResultsTemplateFileName" value="${basedir}/templateFiles/testResults.php.template" />
-			<property name="dropTemplateFileName" value="${basedir}/templateFiles/index.html.template" />
+			<property name="testResultsTemplateFileName" value="${builder}/publishing/templateFiles/testResults.php.template" />
+			<property name="dropTemplateFileName" value="$${builder}/publishing/templateFiles/index.html.template" />
 		</ant>
 		<!--  Insert ftp url for drop directory  -->
 		<replace file="${postingDirectory}/${buildLabel}/index.php" token="@buildlabel@" value="${buildLabel}" />
@@ -251,18 +249,39 @@
 	<target name="generatePerformanceResults">
 		<mkdir dir="${buildDirectory}/${buildLabel}/performance" />
 		<mkdir dir="${postingDirectory}/${buildLabel}/performance" />
-
 		<taskdef name="performanceResults" classname="org.eclipse.releng.performance.PerformanceResultHtmlGenerator" />
-		<ant antfile="extraTargets.xml" target="generatePerformanceResults">
-			<property name="baseline" value="${eclipse.perf.ref}" />
-			<property name="jvm" value="${eclipse.perf.jvm}" />
-			<property name="fp.output" value="${postingDirectory}/${buildLabel}/performance/" />
-			<property name="config" value="${configList}" />
-			<property name="config.properties" value="${eclipse.perf.config.descriptors}" />
-			<property name="scenario.filter" value="org.eclipse.%.test" />
-		</ant>
+		<condition property="configArgs" value="-ws gtk -arch ppc">
+			<not>
+				<equals arg1="{os.arch}" arg2="i386" />
+			</not>
+		</condition>
+		<property name="configArgs" value="" />
 
-		<performanceResults xmlDirectoryName="${postingDirectory}/${buildLabel}/performance/xml" dropDirectoryName="${postingDirectory}/${buildLabel}" testResultsTemplateFileName="${builder}/publishing/templateFiles/performance.php.template" testResultsHtmlFileName="performance/performance.php" hrefTestResultsTargetPath="html" testManifestFileName="${builder}/publishing/performanceTestManifest.xml" />
+		<java jar="${basedir}/../org.eclipse.releng.basebuilder/startup.jar" fork="true" maxmemory="256m">
+			<arg line="${configArgs} -application org.eclipse.test.performance.ui.resultGenerator
+					-baseline ${eclipse.perf.ref}
+					-baseline.prefix 3.1_200506271435
+					-current ${buildId}
+					-jvm ${eclipse.perf.jvm}
+					-output ${postingDirectory}/${buildLabel}/performance/
+					-config eclipseperfwin1_R3.2,eclipseperflnx1_R3.2,eclipseperfwin2_R3.2,eclipseperflnx2_R3.2
+					-config.properties ${eclipse.perf.config.descriptors}
+					-highlight.latest 3.0.2_,2.1.3_
+					-scenario.pattern org.eclipse.%.test"
+				/>
+			<env key="LD_LIBRARY_PATH" value="${basedir}/../org.eclipse.releng.basebuilder" />
+			<sysproperty key="eclipse.perf.dbloc" value="${dbloc}" />
+		</java>
+
+		<performanceResults
+			xmlDirectoryName="${postingDirectory}/${buildLabel}/performance/xml"
+			dropDirectoryName="${postingDirectory}/${buildLabel}"
+			testResultsTemplateFileName="${builder}/publishing/templateFiles/performance.php.template"
+			testResultsHtmlFileName="performance/performance.php"
+			hrefTestResultsTargetPath="html"
+			testManifestFileName="${builder}/publishing/performanceTestManifest.xml" 
+		/>
+		
 		<replace file="${postingDirectory}/${buildLabel}/performance/performance.php" token="@buildType@" value="${buildType}" />
 	</target>
 
@@ -272,6 +291,27 @@
 		<verifyCompile install="${postingDirectory}/${buildLabel}/compilelogs" />
 	</target>
 
+	<target name="rSyncWithSnzZrh" unless="test">
+		<waitfor maxwait="300" maxwaitunit="minute" checkevery="1" checkeveryunit="minute">
+			<available file="${postingDirectory}/${buildLabel}/eclipse-Automated-Tests-${buildId}.zip" />
+		</waitfor>
+		<antcall target="zrhBuilds" />
+		<antcall target="snzBuilds" />
+	</target>
+
+	<target name="snzBuilds" unless="N">
+		<!--copy drops to local directory for rsync with snz-->
+		<copy todir="/builds/transfer/files/snz">
+			<fileset dir="${postingDirectory}" includes ="${buildLabel}/eclipse-SDK-*-win32.zip" excludes="${buildLabel}/eclipse-SDK-examples-*-win32.zip" />
+		</copy>
+	</target>
+
+	<target name="zrhBuilds">
+		<!--copy drops to local directory for rsync with zrh-->
+		<copy todir="/builds/transfer/files/zrh">
+			<fileset dir="${postingDirectory}" includes ="${buildLabel}/eclipse-SDK-*-macosx-carbon.tar.gz,${buildLabel}/eclipse-SDK-*-win32.zip,${buildLabel}/eclipse-SDK-*-linux-*.tar.gz" excludes="${buildLabel}/eclipse-SDK-examples-*-win32.zip,${buildLabel}/eclipse-SDK-*-linux-gtk-x86_64.tar.gz" />
+		</copy>
+	</target>
 	<!-- ===================================================================== -->
 	<!-- Default target                                                        -->
 	<!-- ===================================================================== -->

@@ -202,6 +202,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<ant antfile="${builder}/helper.xml" target="verifyCompile" />
 			<ant antfile="${builder}/packagers/packageAll.xml"/>
 			<ant antfile="${builder}/helper.xml" target="testAll" />
+			<ant antfile="${builder}/helper.xml" target="rSyncWithSnzZrh" />
 			<ant antfile="${builder}/helper.xml" target="test-internalReferences" />
 			<copy file="${buildDirectory}/plugins/org.eclipse.platform.doc.isv/doc.bin.log" tofile="${postingDirectory}/${buildLabel}/compilelogs/platform.doc.isv.javadoc.txt" failonerror="false"/>
 			<copy file="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv/doc.bin.log" tofile="${postingDirectory}/${buildLabel}/compilelogs/jdt.doc.isv.javadoc.txt" failonerror="false"/>
