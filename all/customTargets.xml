@@ -105,7 +105,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<zip zipfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/features/org.eclipse.platform.launchers" includes="library/" />
 
 		<!--HACK:  copy modified swt scripts to plug-ins directory-->
-		<copy todir="${buildDirectory}">
+		<copy todir="${buildDirectory}" overwrite="true">
 			<fileset dir="${builder}/swt"/>
 		</copy>
 		<mkdir dir="${buildDirectory}/features/org.eclipse.platform/launchertmp" />
