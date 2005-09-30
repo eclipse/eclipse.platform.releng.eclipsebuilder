@@ -203,8 +203,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<copy tofile="${linux.motif.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86/about_launcher_libraries.html" />
 		<copy todir="${linux.motif.rootfiles}">
 			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86"
-				includes="
-				about_files/about_cairo.html,
+				includes="			
 				about_files/about_open_motif.html,
 				about_files/mlpl-v10.html,
 				about_files/mpl-v11.txt,
@@ -219,9 +218,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 
 		<copy todir="${linux.gtk.x86.rootfiles}">
 			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86"
-				includes="
-				about_files/about_cairo.html,
-				about_files/pixman-licenses.txt,
+				includes="				
 				about_files/mpl-v11.txt"
 			/>
 		</copy>
@@ -234,8 +231,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<copy todir="${linux.gtk.x86_64.rootfiles}">
 			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64"
 				includes="
-				about_files/about_cairo.html,
-				about_files/pixman-licenses.txt,
 				about_files/mpl-v11.txt"
 			/>
 		</copy>
