@@ -238,7 +238,7 @@
 		<available classname="org.eclipse.releng.generators.EclipseTestResultsGenerator" property="class" value="org.eclipse.releng.generators.EclipseTestResultsGenerator" />
 
 		<!--regenerate the index page with links to test results-->
-		<ant antfile="${base.builder}/org.eclipse.build.tools/scripts/publish.xml" dir="${builder}/publishing" target="generateIndex">
+		<ant antfile="${base.builder}/plugins/org.eclipse.build.tools/scripts/publish.xml" dir="${builder}/publishing" target="generateIndex">
 			<property name="isBuildTested" value="true" />
 			<property name="dropTokenList" value="%sdk%,%tests%,%example%,%rcpruntime%,%rcpsdk%,%runtime%,%platformsdk%,%jdt%,%jdtsdk%,%pde%,%pdesdk%,%teamextras%,%swt%,%relengtools%" />
 			<property name="result" value="${postingDirectory}/${buildLabel}" />
