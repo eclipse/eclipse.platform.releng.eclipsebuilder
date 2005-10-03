@@ -19,7 +19,7 @@
 </target>
 <target name="assemble.macosx.carbon.ppc.xml">
 	<antcall target="assembler">
-		<param name="archiveName" value="${archiveRoot}-macosx-carbon.zip"/>
+		<param name="archiveName" value="${archiveRoot}-macosx-carbon.tar.gz"/>
 	</antcall>
 </target>
 
