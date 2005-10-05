@@ -24,7 +24,7 @@
 					<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86"
 						includes="						
 						about_files/mlpl-v10.html,
-						about_files/mpl-v11.txt						
+						about_files/mpl-v11.txt"						
 					/>
 				</copy>
 				
