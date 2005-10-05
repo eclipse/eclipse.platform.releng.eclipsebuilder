@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export ANT_OPTS=-Xmx1000M
+ANT_OPTS=-Xmx1000M; export ANT_OPTS
 os=""
 ws=""
 arch=""
