@@ -97,6 +97,15 @@
 	<!-- Steps to do after the fetch -->
 	<!-- ===================================================================== -->
 	<target name="postFetch">
+		<antcall target="updateTestManifest">
+			<param name="bundle.id" value="org.eclipse.osgi" />
+		</antcall>
+		<antcall target="updateTestManifest">
+			<param name="bundle.id" value="org.eclipse.osgi.util" />
+		</antcall>
+		<antcall target="updateTestManifest">
+			<param name="bundle.id" value="org.eclipse.osgi.services" />
+		</antcall>
 	</target>
 
 	<!-- ===================================================================== -->
@@ -144,12 +153,49 @@
 	<!-- (e.g., testing, posting, emailing, ...) -->
 	<!-- ===================================================================== -->
 	<target name="postBuild">
+		<available classname="org.eclipse.releng.generators.EclipseTestResultsGenerator" property="class" value="org.eclipse.releng.generators.EclipseTestResultsGenerator" />
+		<!--post clickThroughs-->
+		<copy todir="${equinoxpostingDirectory}/${buildLabel}">
+			<fileset dir="${buildDirectory}/maps/org.eclipse.releng" includes="clickThroughs/" />
+		</copy>
+
+		<copy todir="${equinoxpostingDirectory}/${buildLabel}">
+			<fileset dir="${postingDirectory}/${buildLabel}" includes="compilelogs/plugins/org.eclipse.osgi/**" />
+		</copy>
+
+		<!--post directory.txt-->
+		<copy file="${buildDirectory}/directory.txt" todir="${equinoxpostingDirectory}/${buildLabel}" />
+
+		<!--regenerate the index page with links to test results-->
+		<ant antfile="${base.builder}/org.eclipse.build.tools/scripts/publish.xml" target="generateIndex">
+			<property name="isBuildTested" value="false" />
+			<property name="dropTokenList" value="%bundles%,%launchers%" />
+			<property name="result" value="${equinoxpostingDirectory}/${buildLabel}" />
+			<property name="compileLogsDirectoryName" value="${equinoxpostingDirectory}/${buildLabel}/compilelogs" />
+			<property name="indexFileName" value="index.php" />
+			<property name="xmlDirectoryName" value="${postingDirectory}/testresults/xml" />
+			<property name="dropDirectoryName" value="${equinoxpostingDirectory}/${buildLabel}" />
+			<property name="testResultsTemplateFileName" value="${builder}/publishing/templateFiles/testResults.php.template" />
+			<property name="dropTemplateFileName" value="${builder}/publishing/templateFiles/index.html.template" />
+			<property name="testResultsHtmlFileName" value="testResults.php" />
+			<property name="hrefTestResultsTargetPath" value="testresults/html" />
+			<property name="hrefCompileLogsTargetPath" value="../../../../../downloads/drops/${buildLabel}/compilelogs" />
+			<property name="compileLogsDirectoryName" value="${result}/compilelogs" />
+			<property name="testManifestFileName" value="${builder}/publishing/testManifest.xml" />
+		</ant>
+		<!--  Insert ftp url for drop directory  -->
+		<replace file="${equinoxpostingDirectory}/${buildLabel}/index.php" token="@buildlabel@" value="${buildLabel}" />
 	</target>
 
 	<!-- ===================================================================== -->
 	<!-- Helper targets -->
 	<!-- ===================================================================== -->
-
+	<target name="updateTestManifest">
+		<!--update bundle names in the testManifest-->
+		<property file="${buildDirectory}/plugins/${bundle.id}/META-INF/MANIFEST.MF"/>
+		<replace file="${builder}/../publishing/testManifest.xml" token="@${bundle.id}@" value="org.eclipse.osgi_${Bundle-Version}"/>
+	</target>
+	
 	<!-- ===================================================================== -->
 	<!-- Default target                                                        -->
 	<!-- ===================================================================== -->
