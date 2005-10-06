@@ -162,7 +162,7 @@
 		<!--post directory.txt-->
 		<copy file="${buildDirectory}/directory.txt" todir="${equinoxPostingDirectory}/${buildLabel}" />
 		
-		<copy todir="${equinoxPostingDirectory}/${buildLabel">
+		<copy todir="${equinoxPostingDirectory}/${buildLabel}">
 			<fileset dir="${builder}/../publishing/staticDropFiles" />
 		</copy>
 		
