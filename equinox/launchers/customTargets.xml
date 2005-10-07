@@ -154,6 +154,8 @@
 	<!-- ===================================================================== -->
 	<target name="postBuild">
 		<available classname="org.eclipse.releng.generators.EclipseTestResultsGenerator" property="class" value="org.eclipse.releng.generators.EclipseTestResultsGenerator" />
+		<taskdef name="indexResults" classname="${class}" />
+
 		<!--post clickThroughs-->
 		<copy todir="${equinoxPostingDirectory}/${buildLabel}">
 			<fileset dir="${buildDirectory}/maps/org.eclipse.releng" includes="clickThroughs/" />
