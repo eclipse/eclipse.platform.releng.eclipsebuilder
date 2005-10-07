@@ -11,7 +11,7 @@
 <center>
 	<p><font class=indextop>equinox osgi downloads</font><br>
 	<font class=indexsub>getting running with equinox</font></p></center><table BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > <tr> <td ALIGN=LEFT width="80%"> 
-<p><b><FONT FACE="Verdana" SIZE="+2">@type@ Build: @build@</FONT></b><br> @date@. 
+<p><b><FONT FACE="Verdana" SIZE="+2">@type@ Build: @buildid@</FONT></b><br> @date@. 
 These downloads are provided under the <a href="http://www.eclipse.org/legal/epl/notice.html">
 Eclipse Foundation Software User Agreement</a>.</p><p>
 
