@@ -163,7 +163,7 @@
 
 		<!--copy compile logs to this posting directory-->
 		<copy todir="${equinoxPostingDirectory}/${buildLabel}">
-			<fileset dir="${postingDirectory}/${buildLabel}" includes="compilelogs/org.eclipse.osgi*/**" excludes="compilelogs/org.eclipse.osgi.test*/**" />
+			<fileset dir="${postingDirectory}/${buildLabel}" includes="compilelogs/**/plugins/org.eclipse.osgi*/**" excludes="compilelogs/**/plugins/org.eclipse.osgi.test*/**" />
 		</copy>
 		
 		<!--post directory.txt-->
