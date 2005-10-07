@@ -161,6 +161,11 @@
 			<fileset dir="${buildDirectory}/maps/org.eclipse.releng" includes="clickThroughs/" />
 		</copy>
 
+		<!--copy compile logs to this posting directory-->
+		<copy todir="${equinoxPostingDirectory}/${buildLabel}">
+			<fileset dir="${postingDirectory}/${buildLabel}" includes="compilelogs/org.eclipse.osgi*/**" excludes="compilelogs/org.eclipse.osgi.test*/**" />
+		</copy>
+		
 		<!--post directory.txt-->
 		<copy file="${buildDirectory}/directory.txt" todir="${equinoxPostingDirectory}/${buildLabel}" />
 		
@@ -180,8 +185,8 @@
 		    testResultsHtmlFileName="testResults.php"
 		    dropHtmlFileName="index.php"
 		    hrefTestResultsTargetPath="../../../downloads/drops/${buildLabel}/testresults/html"
-		    hrefCompileLogsTargetPath="../../../downloads/drops/${buildLabel}/compilelogs"
-		    compileLogsDirectoryName="${postingDirectory}/${buildLabel}/compilelogs"
+		    hrefCompileLogsTargetPath="compilelogs"
+		    compileLogsDirectoryName="${equinoxPostingDirectory}/${buildLabel}/compilelogs"
 		    testManifestFileName="${builder}/../publishing/testManifest.xml"
 		  />
 		<tstamp>
