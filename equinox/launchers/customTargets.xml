@@ -179,9 +179,9 @@
 		    dropTemplateFileName="${builder}/../publishing/templateFiles/index.php.template"
 		    testResultsHtmlFileName="testResults.php"
 		    dropHtmlFileName="index.php"
-		    hrefTestResultsTargetPath="../../../../../downloads/drops/${buildLabel}/testresults/html"
-		    hrefCompileLogsTargetPath="${hrefCompileLogsTargetPath}"
-		    compileLogsDirectoryName="../../../../../downloads/drops/${buildLabel}/compilelogs"
+		    hrefTestResultsTargetPath="../../../downloads/drops/${buildLabel}/testresults/html"
+		    hrefCompileLogsTargetPath="../../../downloads/drops/${buildLabel}/compilelogs"
+		    compileLogsDirectoryName="${postingDirectory}/${buildLabel}/compilelogs"
 		    testManifestFileName="${builder}/../publishing/testManifest.xml"
 		  />
 		<tstamp>
