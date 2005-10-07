@@ -214,7 +214,7 @@
 		<replace file="${equinoxPostingDirectory}/${buildLabel}/index.php" token="@date@" value="${TODAY}"/>
 		
 	  	<!--  Insert Build Name  -->
-		<replace file="${equinoxPostingDirectory}/${buildLabel}/index.php" token="@buildid@" value="${buildId}"/>
+		<replace file="${equinoxPostingDirectory}/${buildLabel}/index.php" token="@build@" value="${buildId}"/>
 
 	  	<!--  Update timestamp on file to permit overwrite through Ant copy task  -->
 		<touch file="${equinoxPostingDirectory}/${buildLabel}/index.php" />
