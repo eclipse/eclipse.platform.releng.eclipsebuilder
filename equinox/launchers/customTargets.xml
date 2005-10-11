@@ -176,7 +176,6 @@
 		<!--regenerate the index page with links to test results-->
 		  <indexResults 
 		    isBuildTested="false"
-		  	sendMail="false"
 		  	mailRecipients=""
 		  	buildType="${buildType}"
 		    dropTokenList="%framework%,%extrabundles%,%launchers%"
