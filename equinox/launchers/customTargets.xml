@@ -177,6 +177,7 @@
 		  <indexResults 
 		    isBuildTested="false"
 		  	sendMail="false"
+		  	mailRecipients=""
 		  	buildType="${buildType}"
 		    dropTokenList="%framework%,%extrabundles%,%launchers%"
 		    xmlDirectoryName="${postingDirectory}/testresults/xml"
