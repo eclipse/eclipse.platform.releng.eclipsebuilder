@@ -56,23 +56,9 @@ if [ "$os-$ws-$arch" = "linux-motif-x86" ] || [ "$os-$ws-$arch" = "linux-gtk-x86
 then
 		 ORIGCLASSPATH=$CLASSPATH;export ORIGCLASSPATH		 
 		 ant -q -buildfile jdtcoresrc/compilejdtcorewithjavac.xml
- 		 if  [ -f /etc/debian_version ] || [ -f /etc/gentoo-release ] ;  then 
-        		 		  LOCALCLASSPATH=$PWD/jdtcoresrc/ecj.jar:$CLASSPATH;export LOCALCLASSPATH
- 		 elif [ -f /etc/redhat-release ] ; then
- 		          CLASSPATH=$PWD/jdtcoresrc/ecj.jar:$CLASSPATH;export CLASSPATH
-		 else 
- 		          echo "Assuming RHEL CLASSPATH compatible."
- 		          CLASSPATH=$PWD/jdtcoresrc/ecj.jar:$CLASSPATH; export CLASSPATH
- 		 fi		 
+         CLASSPATH=$PWD/jdtcoresrc/ecj.jar:$CLASSPATH;export CLASSPATH		
  		 ant -q -buildfile jdtcoresrc/compilejdtcore.xml
- 		 if  [ -f /etc/debian_version ] || [ -f /etc/gentoo-release ] ;  then
-		  		  LOCALCLASSPATH=$PWD/ecj.jar:$ORIGCLASSPATH;export LOCALCLASSPATH
-         elif [ -f /etc/redhat-release ] ; then
-		   		  CLASSPATH=$PWD/ecj.jar:$ORIGCLASSPATH;export CLASSPATH
-         else 
- 		          echo "Assuming RHEL CLASSPATH compatible."
- 		          CLASSPATH=$PWD/ecj.jar:$CLASSPATH;export CLASSPATH
-         fi
+ 		 CLASSPATH=$PWD/ecj.jar:$ORIGCLASSPATH;export CLASSPATH
  		 ant -q -buildfile build.xml $target -DinstallOs=$os -DinstallWs=$ws -DinstallArch=$arch $compilelibs $bootclasspath 
 		 else
 		 		 echo "The os-ws-arch combination of $os-$ws-$arch is not valid."
