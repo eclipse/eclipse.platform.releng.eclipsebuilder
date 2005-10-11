@@ -44,6 +44,8 @@
 			<param name="packagingInfo" value="${builder}/packagers/rcp.deltapack" />
 		</antcall>
 		<ant antfile="customTargets.xml" dir="${builder}/packagers/releng.tools" />
+		<ant antfile="customTargets.xml" dir="${builder}/packagers/equinox" />
+
 	</target>
 
 	<target name="package">
