@@ -134,9 +134,6 @@
 		<exec executable="unzip" dir="${basedir}">
 			<arg line="-j ${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-win32.zip eclipse/plugins/org.eclipse.osgi* -d ${equinoxPostingDirectory}/${buildLabel}"/>			
 		</exec>
-		<exec executable="zip" dir="${basedir}">
-			<arg line="*.jar -d ${equinoxPostingDirectory}/${buildLabel}"/>
-		</exec>
 	</target>
 
 	<!-- ===================================================================== -->
