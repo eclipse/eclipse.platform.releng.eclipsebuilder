@@ -178,24 +178,28 @@
 	
 	<!-- create top level testing directory-->    
     <mkdir dir="${workingDirectory}/eclipse-testing" />
-   
+
+
+	<!--compile the tool used to generate the test.properties file, then run it.-->
+	<!--test.properties maps test plugin id's to the name of the plugin directory-->
+    <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+    <javac verbose="true" failonerror="true" srcdir="${builderDirectory}/tools" destdir="${builderDirectory}/tools" />
+    
     <!--eclipse.home is relative to the scripts directory in the org.eclipse.pde.build plugin.  Assume the plugins used in the classpath are in the same directory as org.eclipse.pde.build-->
     <property name="eclipse.home" value="../../.." />
 		
 	<!--copy label.properties file for use in performance testing-->
 	<copy file="${buildDirectory}/label.properties" tofile="${workingDirectory}/eclipse-testing/label.properties" />
-
-	<property name="test.properties" value="${workingDirectory}/eclipse-testing/test.properties"/>
-	
-	<!--generate test.properties.  Custom Ant task contributed by org.eclipse.build.tools in org.eclipse.releng.basebuilder.-->
-	<generateTestProperties
-		buildDirectory="${buildDirectory}"
-		featureId="org.eclipse.sdk.tests"
-		outputFile="${test.properties}"
-	/>
+		
+    <java classname="TestVersionTracker" fork="yes">
+         <arg line="${buildDirectory}/features/org.eclipse.sdk.tests/build.xml  ${workingDirectory}/eclipse-testing/test.properties" /> 
+         <classpath>
+            	<pathelement path="${builderDirectory}/tools" />
+         </classpath>
+    </java>
 
 	<!--load the property file created with the directory names for all test plugins-->
-	<property file="${test.properties}" />
+	<property file="${workingDirectory}/eclipse-testing/test.properties" />
 
 	<!-- Remove the plugin version number appended to the org.eclipse.test plugin directory.
    	     This is so that contributors of test.xml's do not have to update their paths to 

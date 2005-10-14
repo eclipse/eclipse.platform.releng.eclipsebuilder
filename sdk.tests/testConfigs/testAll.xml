@@ -14,25 +14,21 @@
 		<property name="testMachine" value="${0}" />
 		<sleep seconds="${sleep}"/>
 		<ant antfile="${test.xml}"/>
+
 		<delete file="${markerContainer}/${markerName}.marker" />
 	</target>
 
 	<target name="JUnitTests">
 		<parallel>
 			<antcall target="test">
-				<param name="tester" value="${basedir}/macosx-carbon" />
-				<param name="cfgKey" value="eclipse31MacOSXCarbonTest" />
-				<param name="markerName" value="eclipse31-macosx-carbon-${timestamp}" />
-			</antcall>
-			<antcall target="test">
 				<param name="tester" value="${basedir}/rhelws3-linux-gtk" />
 				<param name="cfgKey" value="eclipse30LinuxGtkTest" />
-				<param name="markerName" value="eclipse31-linux-gtk-${timestamp}" />
+				<param name="markerName" value="eclipse30-linux-gtk-${timestamp}" />
 			</antcall>
 			<antcall target="test">
 				<param name="tester" value="${basedir}/win32" />
 				<param name="cfgKey" value="eclipse30WinXPTest" />
-				<param name="markerName" value="eclipse31-winxp-${timestamp}" />
+				<param name="markerName" value="eclipse30-winxp-${timestamp}" />
 			</antcall>
 		</parallel>
 	</target>

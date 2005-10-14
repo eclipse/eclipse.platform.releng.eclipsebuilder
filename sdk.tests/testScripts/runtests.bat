@@ -41,7 +41,7 @@ if x%1==x-ws set ws=%2 && shift && shift && goto processcmdlineargs
 if x%1==x-os set os =%2 && shift && shift && goto processcmdlineargs
 if x%1==x-arch set arch=%2 && shift && shift && goto processcmdlineargs
 if x%1==x-noclean set installmode=noclean&& shift && goto processcmdlineargs
-if x%1==x-properties set properties=-propertyfile %2&& shift && shift && goto processcmdlineargs
+if x%1==x-properties set properties=-propertyfile %2 && shift && shift && goto processcmdlineargs
 if x%1==x-vm set vm=%2 && shift && shift && goto processcmdlineargs
 
 set tests=%tests% %1 && shift && goto processcmdlineargs
@@ -52,7 +52,7 @@ REM ***************************************************************************
 REM	Run tests by running Ant in Eclipse on the test.xml script
 REM ***************************************************************************
 
-%vm% -cp eclipse\startup.jar -Dosgi.ws=%ws% -Dosgi.os=%os% -Dosgi.arch=%arch% org.eclipse.core.launcher.Main -data workspace -application org.eclipse.ant.core.antRunner -file test.xml %tests% -Dws=%ws% -Dos=%os% -Darch=%arch% -D%installmode%=true %properties% -logger org.apache.tools.ant.DefaultLogger
+%vm% -cp eclipse\startup.jar -Dosgi.ws=%ws% -Dosgi.os=%os% -Dosgi.arch=%arch% org.eclipse.core.launcher.Main -data workspace -application org.eclipse.ant.core.antRunner -file test.xml %tests% -Dws=%ws% -Dos=%os% -Darch=%arch% %properties%  -D%installmode%=true -logger org.apache.tools.ant.DefaultLogger
 goto end
 
 :end

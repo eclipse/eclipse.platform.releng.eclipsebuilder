@@ -13,8 +13,8 @@ export LD_LIBRARY_PATH USERNAME DISPLAY
 
 #execute command to run tests
 
-./runtests -os linux -ws gtk -arch x86 -vm ../jdk1.4.2_08/jre/bin/java> linux.gtk_consolelog.txt
+./runtests -os linux -ws gtk -arch x86 -Dplatform=linux.gtk -vm ../jdk1.4.2_08/jre/bin/java> linux.gtk_consolelog.txt
 
 #run JDT Core tests on 1.5 vm
-./runtests -os linux -ws gtk -arch x86 -vm ../jdk1.5.0_03/jre/bin/java all5.0>> linux.gtk_consolelog.txt
+./runtests -os linux -ws gtk -arch x86 -Dplatform=linux.gtk -vm ../jdk1.5.0_03/jre/bin/java all5.0>> linux.gtk_consolelog.txt
 
