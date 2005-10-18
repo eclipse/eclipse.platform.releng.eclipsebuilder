@@ -132,7 +132,7 @@
 	<!-- ===================================================================== -->
 	<target name="postAssemble">
 		<exec executable="unzip" dir="${basedir}">
-			<arg line="-j ${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-win32.zip eclipse/plugins/org.eclipse.osgi* -d ${equinoxPostingDirectory}/${buildLabel}"/>
+			<arg line="-j ${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-win32.zip eclipse/plugins/org.eclipse.osgi* -d ${equinoxPostingDirectory}/${buildLabel}"/>			
 		</exec>
 	</target>
 

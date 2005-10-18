@@ -32,7 +32,7 @@
         if (strstr($_SERVER['SERVER_NAME'],"eclipse.org")) {
 #       if (strstr($_SERVER['SERVER_NAME'],"ibm.com")) {
         	$mirror=false;
-        	$eclipselink="http://www.eclipse.org/downloads/download.php?file=/eclipse/downloads/drops/$buildLabel/$dropFile";
+        	$eclipselink="http://www.eclipse.org/downloads/download.php?file=/eclipse/equinox/drops/$buildLabel/$dropFile";
         } else {
         	$mirrorlink  = "http://$servername$path/$dropFile";
         }

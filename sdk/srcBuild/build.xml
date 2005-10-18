@@ -15,6 +15,40 @@
 		<property name="featuresRecursively" value="true" />
 		<ant antfile="fetch_org.eclipse.platform.launchers.xml" />
 		<ant antfile="fetch_org.eclipse.sdk.xml" />
+		
+		<!--copy linux motif about_files to in temp location where it will be copied into root of eclipse at assembly time-->
+				<property name="linux.motif.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.motif.x86" />
+				<mkdir dir="${linux.motif.rootfiles}" />
+				<copy tofile="${linux.motif.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86/about_launcher_libraries.html" />
+				<copy todir="${linux.motif.rootfiles}">
+					<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86"
+						includes="						
+						about_files/mlpl-v10.html,
+						about_files/mpl-v11.txt"						
+					/>
+				</copy>
+				
+				<!--copy linux gtk x86 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
+				<property name="linux.gtk.x86.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.x86" />
+				<mkdir dir="${linux.gtk.x86.rootfiles}" />
+				<copy tofile="${linux.gtk.x86.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86/about_launcher_libraries.html" />
+
+				<copy todir="${linux.gtk.x86.rootfiles}">
+					<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86"
+						includes="about_files/mpl-v11.txt"
+					/>
+				</copy>
+				
+				<!--copy linux gtk x86_64 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
+				<property name="linux.gtk.x86_64.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.x86_64" />
+				<mkdir dir="${linux.gtk.x86_64.rootfiles}" />
+				<copy tofile="${linux.gtk.x86_64.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64/about_launcher_libraries.html" />
+
+				<copy todir="${linux.gtk.x86_64.rootfiles}">
+					<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64"
+						includes="about_files/mpl-v11.txt"
+					/>
+				</copy>		
 	</target>
 
 	<!--     Fill in values for original timestamp in all about.mappings files  -->

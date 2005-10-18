@@ -40,10 +40,6 @@
 		<antcall target="assemble" />
 </target>
 
-<target name="assemble.org.eclipse.rcp.linux.gtk.ppc64" />
-	
-<target name="assemble.org.eclipse.rcp.linux.gtk.ia64" />
-	
 <target name="assemble.org.eclipse.rcp.linux.gtk.x86_64">
 	<property name="archiveName" value="eclipse-RCP-${buildId}-linux-gtk-x86_64.tar.gz"/>
 	<antcall target="assemble" />
@@ -59,10 +55,10 @@
 	<antcall target="assemble" />
 </target>
 	
-<target name="assemble.org.eclipse.rcp.qnx.photon.x86">
-	<property name="archiveName" value="eclipse-RCP-${buildId}-qnx-photon.zip"/>
-	<antcall target="assemble" />
-</target>
+<target name="assemble.org.eclipse.rcp.qnx.photon.x86"/>
+<target name="assemble.org.eclipse.rcp.hpux.motif.ia64_32"/>
+<target name="assemble.org.eclipse.rcp.linux.gtk.ia64" />
+<target name="assemble.org.eclipse.rcp.linux.gtk.ppc64" />
 
 <target name="assemble.org.eclipse.rcp.aix.motif.ppc">
 	<property name="archiveName" value="eclipse-RCP-${buildId}-aix-motif.zip"/>
@@ -176,8 +172,7 @@
 	<copy tofile="${linux.motif.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86/about_launcher_libraries.html" />
 	<copy todir="${linux.motif.rootfiles}">
 		<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86"
-			includes="
-			about_files/about_cairo.html,
+			includes="		
 			about_files/about_open_motif.html,
 			about_files/mlpl-v10.html,
 			about_files/mlpl-v11.txt,
@@ -193,8 +188,6 @@
 	<copy todir="${linux.gtk.x86.rootfiles}">
 		<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86"
 			includes="
-			about_files/about_cairo.html,
-			about_files/pixman-licenses.txt,
 			about_files/mpl-v11.txt"
 		/>
 	</copy>
@@ -206,9 +199,7 @@
 
 	<copy todir="${linux.gtk.x86_64.rootfiles}">
 		<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64"
-			includes="
-			about_files/about_cairo.html,
-			about_files/pixman-licenses.txt,
+			includes="	
 			about_files/mpl-v11.txt"
 		/>
 	</copy>
