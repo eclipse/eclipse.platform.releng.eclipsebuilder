@@ -57,6 +57,9 @@
 	<!-- Steps to do before setup -->
 	<!-- ===================================================================== -->
 	<target name="preSetup">
+		<condition property="forceContextQualifier" value="${buildId}">
+			<equals arg1="${buildType}" arg2="N" />
+		</condition>
 	</target>
 
 	<!-- ===================================================================== -->
