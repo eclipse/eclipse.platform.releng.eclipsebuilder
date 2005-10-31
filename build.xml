@@ -1,6 +1,6 @@
 <project default="main">
 
-	<property name="pde.build.scripts" value="${basedir}/../org.eclipse.releng.basebuilder/plugins/org.eclipse.pde.build_3.2.0.200510181009/scripts" />
+	<property name="pde.build.scripts" value="${basedir}/../org.eclipse.releng.basebuilder/plugins/org.eclipse.pde.build/scripts" />
 	<!-- value below is for people using basebuilder from the command line as described in the org.eclipse.releng.eclipsebuilder readme -->
 	<property name="eclipse.build.scripts" value="${basedir}"/>
 	

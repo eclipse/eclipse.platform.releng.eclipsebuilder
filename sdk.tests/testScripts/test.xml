@@ -349,6 +349,13 @@
 		</antcall>
 	</target>
 
+	<target name="uinavigator" description="Runs the org.eclipse.ui.tests.navigator test.xml">
+		<antcall target="runtests">
+			<param name="testPlugin" value="${org.eclipse.ui.tests.navigator}" />
+			<param name="report" value="org.eclipse.ui.tests.navigator" />
+		</antcall>
+	</target>
+			
 	<target name="uircp" description="Runs the org.eclipse.ui.tests.rcp test.xml">
 		<antcall target="runtests">
 			<param name="testPlugin" value="${org.eclipse.ui.tests.rcp}" />
@@ -394,6 +401,7 @@
 		<antcall target="jdtcoremodel" />
 		<antcall target="ui" />
 		<antcall target="uieditors" />
+		<antcall target="uinavigator" />
 		<antcall target="uiworkbenchtexteditor" />
 		<antcall target="uircp" />
 		<antcall target="jdtdebug" />
