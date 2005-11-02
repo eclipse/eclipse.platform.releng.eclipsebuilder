@@ -1,5 +1,7 @@
 <project name="Helper targets" default="noDefault">
 	<property name="postingDirectory" value="${buildDirectory}" />
+    <property name="publishingContent" value="${basedir}/../org.eclipse.releng.eclipsebuilder/all/publishing"/>
+	
 	<!-- ===================================================================== -->
 	<!-- Set of helper targets for building the Eclipse SDK -->
 	<!-- ===================================================================== -->
@@ -141,7 +143,7 @@
 		<antcall target="generateEclipseIndex" />
 		<!--get static files required in the buildLabel directory-->
 		<copy todir="${postingDirectory}/${buildLabel}">
-			<fileset dir="${builder}/publishing/staticDropFiles" />
+			<fileset dir="${publishingContent}/staticDropFiles" />
 		</copy>
 
 		<!--copy buildnotes from plugin directories-->
@@ -238,14 +240,14 @@
 		<available classname="org.eclipse.releng.generators.EclipseTestResultsGenerator" property="class" value="org.eclipse.releng.generators.EclipseTestResultsGenerator" />
 
 		<!--regenerate the index page with links to test results-->
-		<ant antfile="${base.builder}/plugins/org.eclipse.build.tools/scripts/publish.xml" dir="${builder}/publishing" target="generateIndex">
+		<ant antfile="${base.builder}/plugins/org.eclipse.build.tools/scripts/publish.xml" dir="${publishingContent}" target="generateIndex">
 			<property name="isBuildTested" value="true" />
 			<property name="indexFileName" value="index.php" />
             <property name="buildType" value="${buildType}" />
 			<property name="dropTokenList" value="%sdk%,%tests%,%example%,%rcpruntime%,%rcpsdk%,%runtime%,%platformsdk%,%jdt%,%jdtsdk%,%pde%,%pdesdk%,%teamextras%,%swt%,%relengtools%" />
 			<property name="result" value="${postingDirectory}/${buildLabel}" />
-			<property name="testResultsTemplateFileName" value="${builder}/publishing/templateFiles/testResults.php.template" />
-			<property name="dropTemplateFileName" value="${builder}/publishing/templateFiles/index.php.template" />
+			<property name="testResultsTemplateFileName" value="${publishingContent}/templateFiles/testResults.php.template" />
+			<property name="dropTemplateFileName" value="${publishingContent}/templateFiles/index.php.template" />
 		</ant>
 		<!--  Insert ftp url for drop directory  -->
 		<replace file="${postingDirectory}/${buildLabel}/index.php" token="@buildlabel@" value="${buildLabel}" />
@@ -281,10 +283,10 @@
 		<performanceResults
 			xmlDirectoryName="${postingDirectory}/${buildLabel}/performance/xml"
 			dropDirectoryName="${postingDirectory}/${buildLabel}"
-			testResultsTemplateFileName="${builder}/publishing/templateFiles/performance.php.template"
+			testResultsTemplateFileName="${publishingContent}/templateFiles/performance.php.template"
 			testResultsHtmlFileName="performance/performance.php"
 			hrefTestResultsTargetPath="html"
-			testManifestFileName="${builder}/publishing/performanceTestManifest.xml" 
+			testManifestFileName="${publishingContent}/performanceTestManifest.xml" 
 		/>
 		
 		<replace file="${postingDirectory}/${buildLabel}/performance/performance.php" token="@buildType@" value="${buildType}" />
