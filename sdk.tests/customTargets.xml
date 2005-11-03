@@ -202,7 +202,7 @@
    	     library.xml in org.eclipse.test whenever its version is updated.
    	 -->
    	<move todir="${workingDirectory}/eclipse/plugins/org.eclipse.test">
-    	<fileset dir="${workingDirectory}/eclipse/plugins/${org.eclipse.test}" />
+    	<fileset dir="${workingDirectory}/eclipse/plugins/org.eclipse.test_3.1.0" />
   	</move>
   	
   	<!--the Ant move task leaves behind an empty directory-->
