@@ -159,6 +159,13 @@
 	<!-- ===================================================================== -->
 	<target name="testAll">
 		<antcall target="configure.team.cvs.test"/>
+		
+		<!--replace buildid in vm.properties for JVM location settings-->
+		<replace dir="${eclipse.build.scripts}/sdk.tests/testConfigs"
+			token="@buildid@"
+			value="${buildId}"
+			includes="**/vm.properties"/>
+
 		<waitfor maxwait="300" maxwaitunit="minute" checkevery="1" checkeveryunit="minute">
 			<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-Automated-Tests-${buildId}.zip.md5" />
 		</waitfor>
