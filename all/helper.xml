@@ -1,7 +1,7 @@
 <project name="Helper targets" default="noDefault">
 	<property name="postingDirectory" value="${buildDirectory}" />
-    <property name="publishingContent" value="${basedir}/../org.eclipse.releng.eclipsebuilder/all/publishing"/>
-	
+	<property name="publishingContent" value="${basedir}/../org.eclipse.releng.eclipsebuilder/all/publishing"/>
+
 	<!-- ===================================================================== -->
 	<!-- Set of helper targets for building the Eclipse SDK -->
 	<!-- ===================================================================== -->
@@ -159,7 +159,7 @@
 	<!-- ===================================================================== -->
 	<target name="testAll">
 		<antcall target="configure.team.cvs.test"/>
-		
+
 		<!--replace buildid in vm.properties for JVM location settings-->
 		<replace dir="${eclipse.build.scripts}/sdk.tests/testConfigs"
 			token="@buildid@"
@@ -236,10 +236,12 @@
 
 	<target name="configure.team.cvs.test" unless="test.xml.tmp">
 		<copy file="${eclipse.build.scripts}/sdk.tests/testScripts/test.xml" tofile="${eclipse.build.scripts}/sdk.tests/testScripts/test.xml.tmp" />
-		<replace file="${eclipse.build.scripts}/sdk.tests/testScripts/test.xml" token="@cvs_user@" value="${cvs_user}" />
-		<replace file="${eclipse.build.scripts}/sdk.tests/testScripts/test.xml" token="@cvs_password@" value="${cvs_password}" />
-		<replace file="${eclipse.build.scripts}/sdk.tests/testScripts/test.xml" token="@cvs_host@" value="${cvs_host}" />
-		<replace file="${eclipse.build.scripts}/sdk.tests/testScripts/test.xml" token="@cvs_root@" value="${cvs_root}" />
+		<replace file="test.xml" propertyFile="${eclipse.build.scripts}/../eclipseInternalBuildTools/cvstest.properties">
+			<replacefilter token="${cvs_user}" property="cvs_user" />
+			<replacefilter token="${cvs_password}" property="cvs_password" />
+			<replacefilter token="${cvs_host}" property="cvs_host" />
+			<replacefilter token="${cvs_root}" property="cvs_root" />
+		</replace>
 		<delete file="${eclipse.build.scripts}/sdk.tests/testScripts/test.xml.tmp" />
 	</target>
 
@@ -250,7 +252,7 @@
 		<ant antfile="${base.builder}/plugins/org.eclipse.build.tools/scripts/publish.xml" dir="${publishingContent}" target="generateIndex">
 			<property name="isBuildTested" value="true" />
 			<property name="indexFileName" value="index.php" />
-            <property name="buildType" value="${buildType}" />
+			<property name="buildType" value="${buildType}" />
 			<property name="dropTokenList" value="%sdk%,%tests%,%example%,%rcpruntime%,%rcpsdk%,%runtime%,%platformsdk%,%jdt%,%jdtsdk%,%pde%,%pdesdk%,%teamextras%,%swt%,%relengtools%" />
 			<property name="result" value="${postingDirectory}/${buildLabel}" />
 			<property name="testResultsTemplateFileName" value="${publishingContent}/templateFiles/testResults.php.template" />
@@ -295,7 +297,7 @@
 			hrefTestResultsTargetPath="html"
 			testManifestFileName="${publishingContent}/performanceTestManifest.xml" 
 		/>
-		
+
 		<replace file="${postingDirectory}/${buildLabel}/performance/performance.php" token="@buildType@" value="${buildType}" />
 	</target>
 
