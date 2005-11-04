@@ -237,7 +237,7 @@
 
 	<target name="configure.team.cvs.test" unless="test.xml.tmp" if="teamcvstest.properties.available">
 		<copy file="${eclipse.build.scripts}/sdk.tests/testScripts/test.xml" tofile="${eclipse.build.scripts}/sdk.tests/testScripts/test.xml.tmp" />
-		<replace file="test.xml" propertyFile="${eclipse.build.scripts}/../eclipseInternalBuildTools/cvstest.properties">
+		<replace file="${eclipse.build.scripts}/sdk.tests/testScripts/test.xml" propertyFile="${eclipse.build.scripts}/../eclipseInternalBuildTools/cvstest.properties">
 			<replacefilter token="${cvs_user}" property="cvs_user" />
 			<replacefilter token="${cvs_password}" property="cvs_password" />
 			<replacefilter token="${cvs_host}" property="cvs_host" />
