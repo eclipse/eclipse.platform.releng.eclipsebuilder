@@ -158,6 +158,7 @@
 	<!-- Target used to test the build                                         -->
 	<!-- ===================================================================== -->
 	<target name="testAll">
+		<available file="${eclipse.build.scripts}/../eclipseInternalBuildTools/cvstest.properties" property="teamcvstest.properties.available" />
 		<antcall target="configure.team.cvs.test"/>
 
 		<!--replace buildid in vm.properties for JVM location settings-->
@@ -234,7 +235,7 @@
 		<mail mailhost="${host}" from="${sender}" tolist="${recipients}" subject="[eclipse-build] ${buildId}: ${subject}" message="${message}" failonerror="false" />
 	</target>
 
-	<target name="configure.team.cvs.test" unless="test.xml.tmp">
+	<target name="configure.team.cvs.test" unless="test.xml.tmp" if="teamcvstest.properties.available">
 		<copy file="${eclipse.build.scripts}/sdk.tests/testScripts/test.xml" tofile="${eclipse.build.scripts}/sdk.tests/testScripts/test.xml.tmp" />
 		<replace file="test.xml" propertyFile="${eclipse.build.scripts}/../eclipseInternalBuildTools/cvstest.properties">
 			<replacefilter token="${cvs_user}" property="cvs_user" />
