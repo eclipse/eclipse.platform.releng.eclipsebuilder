@@ -260,6 +260,7 @@
 		<antcall target="runtests" >
 			<param name="testPlugin" value="${org.eclipse.jdt.core.tests.compiler}" />
 			<param name="report" value="org.eclipse.jdt.core.tests.compiler" />
+			<param name="jvm" value="${J2SE-5.0}" />
 		</antcall>
 	</target>
 	
@@ -267,6 +268,7 @@
 		<antcall target="runtests" >
 			<param name="testPlugin" value="${org.eclipse.jdt.core.tests.builder}" />
 			<param name="report" value="org.eclipse.jdt.core.tests.builder" />
+			<param name="jvm" value="${J2SE-5.0}" />
 		</antcall>
 	</target>
 
@@ -274,6 +276,7 @@
 		<antcall target="runtests" >
 			<param name="testPlugin" value="${org.eclipse.jdt.core.tests.model}" />
 			<param name="report" value="org.eclipse.jdt.core.tests.model" />
+			<param name="jvm" value="${J2SE-5.0}" />
 		</antcall>
 	</target>
 
@@ -393,6 +396,9 @@
 		<antcall target="update" />
 		<antcall target="teamcore" />
 		<antcall target="jdtcoreperf" />
+		<antcall target="jdtcorebuilder" />
+		<antcall target="jdtcorecompiler" />
+		<antcall target="jdtcoremodel" />
 		<antcall target="ui" />
 		<antcall target="uieditors" />
 		<antcall target="uinavigator" />
@@ -411,12 +417,6 @@
 		<antcall target="teamcvs" />
 	</target>
 	
-	<target name="all5.0">
-		<antcall target="jdtcorebuilder" />
-		<antcall target="jdtcorecompiler" />
-		<antcall target="jdtcoremodel" />
-	</target>
-
 	<target name="genHtml" description="Generates HTML results with provided JUNIT.XSL provided">
 		<style style="JUNIT.XSL" basedir="${results}/xml" destdir="${results}/html" />
 	</target>

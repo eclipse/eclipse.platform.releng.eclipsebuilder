@@ -1,0 +1,24 @@
+<project default="noDefault">
+
+	<target name="noDefault" />
+
+	<!-- This goal of this target is to get the packaging map files of the things you care for 
+        The files must be fetched into the downloadDirectory folder -->
+	<target name="getMapFiles">
+		<mkdir dir="${assemblyTempDir}/eclipse/group.group.group/eclipse" />
+	</target>
+	
+	<target name="assemble.group.group.group.xml">
+		<antcall target="assembler">
+			<param name="archiveName" value="eclipse-RCP-${buildId}-delta-pack.zip" />
+		</antcall>
+	</target>
+	
+	<target name="assembler">
+		<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
+		<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
+		<ant antfile="${assembleScriptName}" />
+		<checksum file="${archiveFullPath}" property="md5"/>
+		<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5"/>
+	</target>
+</project>

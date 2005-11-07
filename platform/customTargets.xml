@@ -172,7 +172,7 @@
 	<copy todir="${linux.motif.rootfiles}">
 		<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86"
 			includes="
-		    about_files/about_open_motif.html,
+			about_files/about_open_motif.html,
 			about_files/mlpl-v10.html,
 			about_files/mlpl-v11.txt,
 			about_files/pixman-licenses.txt"
@@ -186,7 +186,7 @@
 
 	<copy todir="${linux.gtk.x86.rootfiles}">
 		<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86"
-			includes="		
+			includes="
 			about_files/mpl-v11.txt"
 		/>
 	</copy>
@@ -198,7 +198,7 @@
 
 	<copy todir="${linux.gtk.x86_64.rootfiles}">
 		<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64"
-			includes="			
+			includes="
 			about_files/mpl-v11.txt"
 		/>
 	</copy>

@@ -1,0 +1,356 @@
+<project name="Build specific targets and properties" default="noDefault" >
+
+
+	<property name="postingDirectory" value="${buildDirectory}" />
+
+	<!-- ===================================================================== -->
+	<!-- Run a given ${target} on all elements being built -->
+	<!-- ===================================================================== -->
+
+	<!-- ****** figure out how to build the platform, sdk, examples, ... from one compile"
+see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets  -->
+	<target name="allElements">
+		<ant antfile="${genericTargets}" target="${target}" >
+			<property name="type" value="feature" />
+			<property name="id" value="master" />
+		</ant>
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Targets to assemble the built elements for particular configurations  -->
+	<!-- ===================================================================== -->
+	<target name="assemble.master.group.group.group">
+		<property name="archiveName" value="eclipse-master-${buildId}.zip"/>
+		<!--HACK to build grouped config-->
+		<mkdir dir="${buildDirectory}/tmp/eclipse/group.group.group"/>
+		<antcall target="assemble" />
+	</target>
+
+	<target name="assemble">
+		<property name="archiveFullPath" value="${buildDirectory}/${buildLabel}/${archiveName}" />
+		<ant antfile="${assembleScriptName}" />
+		<!--add swt stand-alone jars to the zip to include in signing-->
+		<exec executable="zip" dir="${buildDirectory}">
+			<arg line="-qqo ${archiveFullPath} -ru plugins -i *swt*.jar -x *test* *example*" />
+		</exec>
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Check out map files from correct repository -->
+	<!-- Replace values for cvsRoot, package and mapVersionTag as desired. -->
+	<!-- ===================================================================== -->
+	<target name="checkLocal">
+		<available property="mapsLocal" file="${buildDirectory}/maps/org.eclipse.releng" />
+	</target>
+
+	<target name="getMapFiles" depends="checkLocal" unless="mapsLocal">
+
+		<!-- ***  change the repo info -->
+		<property name="mapCvsRoot" value=":pserver:anonymous@dev.eclipse.org:/home/eclipse" />
+		<property name="mapVersionTag" value="HEAD" />
+		<cvs cvsRoot="${mapCvsRoot}"
+		package="org.eclipse.releng"
+		dest="${buildDirectory}/maps"
+		tag="${mapVersionTag}"
+	/>
+		<!--compare the map files project-->
+		<antcall target="compareMapFiles" />
+		<!--tag the map files project-->
+		<antcall target="tagMapFiles" />
+	</target>
+
+	<target name="compareMapFiles" if="compareMaps">
+		<property file="${mapTag.properties}"/>
+		<property name="cvsDiffFile" value="${buildDirectory}/cvsDiff.txt" />
+		<cvs cvsRoot="${mapCvsRoot}" dest="${buildDirectory}/maps" command="diff -w -r ${lastMapTag}" output="${cvsDiffFile}" />
+		<modifiedMaps mapDiffFile="${cvsDiffFile}" />
+	</target>
+
+	<target name="tagMapFiles" if="tagMaps">
+		<!-- Stores tag on the filesystem so map files can be compared -->
+		<echo file="${mapTag.properties}">
+			lastMapTag=${buildId}
+		</echo>
+		<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag ${buildId}" />
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do before setup -->
+	<!-- ===================================================================== -->
+	<target name="preSetup">
+	</target>
+
+
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do after setup but before starting the build proper -->
+	<!-- ===================================================================== -->
+	<target name="postSetup" >
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do before fetching the build elements -->
+	<!-- ===================================================================== -->
+	<target name="preFetch">
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do after the fetch -->
+	<!-- ===================================================================== -->
+	<target name="postFetch">
+		<ant antfile="${genericTargets}" target="fetchElement">
+			<property name="type" value="feature" />
+			<property name="id" value="org.eclipse.platform.launchers" />
+		</ant>
+		<zip zipfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/features/org.eclipse.platform.launchers" includes="library/" />
+
+		<!--HACK:  copy modified swt scripts to plug-ins directory-->
+		<copy todir="${buildDirectory}" overwrite="true">
+			<fileset dir="${builder}/swt"/>
+		</copy>
+		<mkdir dir="${buildDirectory}/features/org.eclipse.platform/launchertmp" />
+		<mkdir dir="${buildDirectory}/launchertmp" />
+
+		<!--copy linux motif about_files to in temp location where it will be copied into root of eclipse at assembly time-->
+		<property name="linux.motif.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.motif.x86" />
+		<mkdir dir="${linux.motif.rootfiles}" />
+		<copy tofile="${linux.motif.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86/about_launcher_libraries.html" />
+		<copy todir="${linux.motif.rootfiles}">
+			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86"
+				includes="
+				about_files/about_cairo.html,
+				about_files/about_open_motif.html,
+				about_files/mlpl-v10.html,
+				about_files/mpl-v11.txt,
+				about_files/pixman-licenses.txt"
+			/>
+		</copy>
+
+		<!--copy linux gtk x86 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
+		<property name="linux.gtk.x86.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.x86" />
+		<mkdir dir="${linux.gtk.x86.rootfiles}" />
+		<copy tofile="${linux.gtk.x86.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86/about_launcher_libraries.html" />
+
+		<copy todir="${linux.gtk.x86.rootfiles}">
+			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86"
+				includes="
+				about_files/about_cairo.html,
+				about_files/pixman-licenses.txt,
+				about_files/mpl-v11.txt"
+			/>
+		</copy>
+
+		<!--copy linux gtk x86_64 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
+		<property name="linux.gtk.x86_64.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.x86_64" />
+		<mkdir dir="${linux.gtk.x86_64.rootfiles}" />
+		<copy tofile="${linux.gtk.x86_64.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64/about_launcher_libraries.html" />
+
+		<copy todir="${linux.gtk.x86_64.rootfiles}">
+			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64"
+				includes="
+				about_files/about_cairo.html,
+				about_files/pixman-licenses.txt,
+				about_files/mpl-v11.txt"
+			/>
+		</copy>
+
+		<!--gather component.xml files-->
+		<zip destfile="${postingDirectory}/${buildLabel}/component-xml-${buildId}.zip" basedir="${buildDirectory}" includes="**/component.xml" />
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do before generating build scripts -->
+	<!-- ===================================================================== -->
+	<target name="preGenerate">
+		<sysProp key="GROUP_CONFIG" value="true" />
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do after generating the build scripts -->
+	<!-- ===================================================================== -->
+	<target name="postGenerate">
+		<antcall target="clean" />
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do before assembling -->
+	<!-- ===================================================================== -->
+	<target name="preAssemble">
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do after assembling-->
+	<!-- ===================================================================== -->
+	<target name="postAssemble">
+		<!--build root file drops while jars are being signed-->
+		<sysProp key="GROUP_CONFIG" value="false" />
+		<parallel>
+			<!--antcall target="sign" /-->
+			<antcall target="build.master.root" />
+		</parallel>
+
+		<!--replace existing swt.jars with signed versions-->
+		<exec executable="unzip" dir="${buildDirectory}">
+			<arg line="-qqo ${archiveFullPath} -d plugins org.eclipse.swt*" />
+		</exec>
+
+		<replace file="${builder}/packagers/common.map" token="@buildId@" value="${buildId}"/>
+
+		<property name="publishingContent" value="${builder}/publishing" />
+		<!--package all distributables and start tests when all files are available-->
+		<parallel>
+			<ant antfile="${builder}/helper.xml" target="verifyCompile" />
+			<sequential>
+				<ant antfile="${builder}/packagers/packageAll.xml"/>
+				<ant antfile="${builder}/helper.xml" target="buildStandAloneSWT" />
+				<ant antfile="${builder}/helper.xml" target="publish" />
+			</sequential>
+			<ant antfile="${builder}/helper.xml" target="testAll" />
+			<ant antfile="${builder}/helper.xml" target="rSyncWithSnzZrh" />
+			<ant antfile="${builder}/helper.xml" target="test-internalReferences" />
+			<copy file="${buildDirectory}/plugins/org.eclipse.platform.doc.isv/doc.bin.log" tofile="${postingDirectory}/${buildLabel}/compilelogs/platform.doc.isv.javadoc.txt" failonerror="false"/>
+			<copy file="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv/doc.bin.log" tofile="${postingDirectory}/${buildLabel}/compilelogs/jdt.doc.isv.javadoc.txt" failonerror="false"/>
+			<copy file="${buildDirectory}/plugins/org.eclipse.pde.doc.user/doc.bin.log" tofile="${postingDirectory}/${buildLabel}/compilelogs/pde.doc.user.javadoc.txt" failonerror="false"/>
+			<copy file="${buildDirectory}/plugins/org.eclipse.platform.doc.isv/platformconvert.txt" tofile="${postingDirectory}/${buildLabel}/compilelogs/platform.doc.isv.schema.txt" failonerror="false"/>
+			<copy file="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv/jdtconvert.txt" tofile="${postingDirectory}/${buildLabel}/compilelogs/jdt.doc.isv.schema.txt" failonerror="false"/>
+			<copy file="${buildDirectory}/plugins/org.eclipse.pde.doc.user/pdeconvert.txt" tofile="${postingDirectory}/${buildLabel}/compilelogs/pde.doc.user.schema.txt" failonerror="false"/>
+		</parallel>
+
+	</target>
+
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do before running the build.xmls for the elements being built. -->
+	<!-- ===================================================================== -->
+	<target name="preProcess">
+		<replace dir="${buildDirectory}/plugins" value="${buildId}" token="@build@">
+			<include name="**/about.mappings" />
+		</replace>
+		<replace dir="${buildDirectory}/features/org.eclipse.platform" value="${buildId}" token="@build@">
+			<include name="**/config.ini" />
+		</replace>
+		<replace dir="${buildDirectory}/features/org.eclipse.sdk" value="${buildId}" token="@build@">
+			<include name="**/config.ini" />
+		</replace>
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do after running the build.xmls for the elements being built. -->
+	<!-- ===================================================================== -->
+	<target name="postProcess">
+		<condition property="logsAvailable">
+			<istrue value="${javacVerbose}"/>
+		</condition>
+		<antcall target="gatherLogs" />
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do after everything is built and assembled -->
+	<!-- (e.g., testing, posting, emailing, ...) -->
+	<!-- ===================================================================== -->
+	<target name="postBuild">
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Helper targets -->
+	<!-- ===================================================================== -->
+	<target name="build.master.root">
+		<!--build root file drops-->
+		<ant antfile="build.xml" dir="${pde.build.scripts}" target="main" inheritAll="false">
+			<property name="builder" value="${eclipse.build.scripts}/all/master-root" />
+			<property name="buildDirectory" value="${buildDirectory}" />
+			<property file="${buildDirectory}/label.properties" />
+		</ant>
+	</target>
+
+	<target name="gatherLogs" if="logsAvailable">
+
+		<mkdir dir="${postingDirectory}/${buildLabel}/compilelogs" />
+		<antcall target="allElements">
+			<param name="target" value="gatherLogs" />
+		</antcall>
+		<unzip dest="${postingDirectory}/${buildLabel}/compilelogs" overwrite="true">
+			<fileset dir="${buildDirectory}/features/master">
+				<include name="*.log.zip" />
+			</fileset>
+		</unzip>
+	</target>
+
+	<target name="clean" unless="noclean">
+		<antcall target="allElements">
+			<param name="target" value="cleanElement" />
+		</antcall>
+	</target>
+
+	<target name="sign" if="signJars">
+		<!--push drop to staging directory-->
+		<property name="stagingDirectory" value="/home/data/httpd/download-staging.priv/eclipse/downloads" />
+
+		<exec dir="${buildDirectory}/${buildLabel}" executable="scp" output="signing.txt">
+			<arg line="${archiveName} download1.eclipse.org:${stagingDirectory}"/>
+		</exec>
+		<exec dir="." executable="ssh" output="signing.txt" append="true">
+			<arg line="download1.eclipse.org chmod ugo+rw ${stagingDirectory}/${archiveName} "/>
+		</exec>
+
+		<!--timestamp on download server-->
+		<exec dir="." executable="ssh" output="signing.txt" append="true">
+			<arg line="download1.eclipse.org touch -t ${timestamp} ${stagingDirectory}/${archiveName}"/>
+		</exec>
+
+		<!--capture original file attributes-->
+		<exec dir="." executable="ssh" outputProperty="originalAttribs">
+			<arg line="download1.eclipse.org &quot;cd /home/data/httpd/download-staging.priv/eclipse/downloads/;ls -gG ${archiveName}&quot;"/>
+		</exec>
+
+		<!--invoke script that digital signs and wait-->
+		<exec dir="." executable="ssh" output="signing.txt" append="true">
+			<arg line="download1.eclipse.org &quot;cd /home/data/httpd/download-staging.priv/eclipse/downloads;sign ${archiveName} mail&quot;"/>
+		</exec>
+		<antcall target="waitForChangedAttribs" />
+
+		<!--copy zip back to build machine-->
+		<exec dir="." executable="scp" output="signing.txt" append="true">
+			<arg line="download1.eclipse.org:${stagingDirectory}/${archiveName} ${buildDirectory}/${buildLabel}"/>
+		</exec>
+
+	</target>
+
+	<target name="waitForChangedAttribs" unless="attribs.changed">
+		<antcall target="compareAttribs" inheritAll="false">
+			<param name="originalAttribs" value="${originalAttribs}" />
+		</antcall>
+	</target>
+
+	<target name="compareAttribs">
+		<!--poll file for change in attributes-->
+		<exec dir="." executable="ssh" outputProperty="polledAttribs">
+			<arg line="download1.eclipse.org &quot;cd /home/data/httpd/download-staging.priv/eclipse/downloads/;ls -gG ${archiveName}&quot;"/>
+		</exec>
+		<echo message="original:  ${originalAttribs}" />
+		<condition property="attribChanged">
+			<not>
+				<equals arg1="${originalAttribs}" arg2="${polledAttribs}" />
+			</not>
+		</condition>
+		<echo message="polled:  ${polledAttribs}" />
+		<antcall target="writeDiffResult" />
+		<sleep seconds="120" />
+		<available property="attribs.changed" file="${builder}/attribDiff.txt" />
+		<antcall target="waitForChangedAttribs" />
+	</target>
+
+	<target name="writeDiffResult" if="attribChanged">
+		<echo message="original: ${originalAttribs}" file="${builder}/attribDiff.txt" />
+		<echo message="new: ${polledAttribs}" file="${builder}/attribDiff.txt" append="true" />
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Default target                                                        -->
+	<!-- ===================================================================== -->
+	<target name="noDefault">
+		<echo message="You must specify a target when invoking this file" />
+	</target>
+
+
+</project>
