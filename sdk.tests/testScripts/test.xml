@@ -418,6 +418,7 @@
 		<antcall target="ltkcorerefactoringtests" />
 		<antcall target="text" />
 		<antcall target="jface" />
+		<antcall target="jfacedatabinding" />
 		<antcall target="filebuffers" />
 		<antcall target="antui" />
 		<antcall target="swt" />
