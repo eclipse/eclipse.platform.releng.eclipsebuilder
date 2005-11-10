@@ -225,6 +225,13 @@
 			<param name="report" value="org.eclipse.jface.text.tests" />
 		</antcall>	
 	</target>
+	<target name="jfacedatabinding" description="Runs the org.eclipse.jface.databinding test.xml">
+		<antcall target="runtests">
+			<param name="testPlugin" value="${org.eclipse.jface.tests.databinding}" />
+			<param name="report" value="org.eclipse.jface.tests.databinding" />
+		</antcall>	
+	</target>
+
 	<target name="filebuffers" description="Runs the org.eclipse.core.filebuffers.tests test.xml">
 		<antcall target="runtests">
 			<param name="testPlugin" value="${org.eclipse.core.filebuffers.tests}" />
