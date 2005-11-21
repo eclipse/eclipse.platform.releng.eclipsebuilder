@@ -119,7 +119,7 @@
 		<!--the defining class must be built in compile target-->
 		<taskdef name="eclipse.idReplacer" classname="org.eclipse.pde.internal.build.tasks.IdReplaceTask" classpath="${buildDirectory}/plugins/org.eclipse.pde.build/lib/pdebuild-ant.jar" />
 		<taskdef name="eclipse.brand" classname="org.eclipse.pde.internal.build.tasks.BrandTask" classpath="${buildDirectory}/plugins/org.eclipse.pde.build/lib/pdebuild-ant.jar;${buildDirectory}/plugins/org.eclipse.pde.build/pdebuild.jar" />
-
+		<taskdef name="eclipse.versionReplacer" classname="org.eclipse.pde.internal.build.tasks.GenericVersionReplacer" classpath="${buildDirectory}/plugins/org.eclipse.pde.build/lib/pdebuild-ant.jar;${buildDirectory}/plugins/org.eclipse.pde.build/pdebuild.jar" />
 
 		<!--root directory of zip file-->
 		<property name="collectingFolder" value="eclipse" />

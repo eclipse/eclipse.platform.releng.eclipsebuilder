@@ -95,6 +95,16 @@
 			<param name="ws" value="gtk" />
 			<param name="arch" value="ppc" />
 		</antcall>
+		
+		<!--need to check out -->
+		<property name="featureOnly" value="false"/>
+		<property name="featureAndPlugins" value="true"/>
+		<property name="featuresRecursively" value="false"/>
+		<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
+			<property name="type" value="fragment" />
+			<property name="id" value="org.eclipse.swt.win32.wce_ppc.arm" />
+		</ant>
+
 		<antcall target="packageSwtStandalone">
 			<param name="ws" value="win32" />
 			<param name="os" value="wce_ppc" />

@@ -258,6 +258,22 @@
 		<effectedFile id="RCPSDKW"></effectedFile>
 	</logFile>
 
+   <logFile name="org.eclipse.jface.tests.databinding_linux.gtk.x86.xml">
+		<effectedFile id="SLG2"></effectedFile>
+		<effectedFile id="PLG2"></effectedFile>
+		<effectedFile id="PLG2SDK"></effectedFile>
+		<effectedFile id="RCPLG2"></effectedFile>
+		<effectedFile id="RCPSDKLG2"></effectedFile>
+	</logFile>
+
+	<logFile name="org.eclipse.jface.tests.databinding_win32.win32.x86.xml">
+		<effectedFile id="SW"></effectedFile>
+		<effectedFile id="PW"></effectedFile>
+		<effectedFile id="PWSDK"></effectedFile>
+		<effectedFile id="RCPW"></effectedFile>
+		<effectedFile id="RCPSDKW"></effectedFile>
+	</logFile>
+
     <logFile name="org.eclipse.core.filebuffers.tests_linux.gtk.x86.xml">
 		<effectedFile id="SLG2"></effectedFile>
 		<effectedFile id="PLG2"></effectedFile>
@@ -534,7 +550,13 @@
 		<effectedFile id="RCPMC"></effectedFile>
 		<effectedFile id="RCPSDKMC"></effectedFile>
 	</logFile>
-
+   <logFile name="org.eclipse.jface.tests.databinding_macosx.carbon.ppc.xml">
+		<effectedFile id="SMC"></effectedFile>
+		<effectedFile id="PMC"></effectedFile>
+		<effectedFile id="PMCSDK"></effectedFile>
+		<effectedFile id="RCPMC"></effectedFile>
+		<effectedFile id="RCPSDKMC"></effectedFile>
+	</logFile>
 
     <logFile name="org.eclipse.core.filebuffers.tests_macosx.carbon.ppc.xml">
 		<effectedFile id="SMC"></effectedFile>
