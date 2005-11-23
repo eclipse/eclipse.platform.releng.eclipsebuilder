@@ -38,15 +38,31 @@ for ftp access to the entire build directory.";
     echo "<br>";
 } ?> You can also download builds via anonymous ftp at download.eclipse.org.</p><p> 
 Click <a href="verifyMD5.html">here</a> for instructions on how to verify the 
-integrity of your downloads.</p></td></tr> </table><?php function column($servername) {
+integrity of your downloads.</p></td></tr> </table>
+
+<?php 
+
+function column($servername) {
 
  if (! preg_match("/.eclipse.org/i",$servername)) {
-          echo "<td width=\"12%\"><b>Download</td>";
-          echo "<td width=\"40%\"><b>File</b></td>";
+     echo "<td width=\"12%\"><b>Download</td>";
+          echo "<td width=\"10%\"><b>Size</b></td>";
+		   echo "<td width=\"40%\"><b>File</b></td>";
       } else { 
           echo "<td width=\"40%\"><b>Download</td>";
+          echo "<td width=\"10%\"><b>Size</b></td>";
     }
     return;
+}
+
+function getDropSize($zipfile) {
+
+		 $filesize = "N/A";
+		 $filesizebytes  = filesize($zipfile);
+		 if($filesizebytes > 0) {
+        		 $filesize = floor($filesizebytes / 1048576) . " MB";
+		 }
+        return($filesize);
 }
 
 function genLinks($servername,$buildlabel,$zipfile) {
@@ -69,10 +85,12 @@ if (preg_match("/.eclipse.org/i",$servername)) {
     $ftpline =  "<a href=\"$ftplink\">$ftplabel</a>";
     $md5name = $zipfile;
 }
- 
+  $filesize = getDropSize($zipfile);
+    
   echo "$httpline"; 
   echo "&nbsp;&nbsp";
   echo "$ftpline";
+  echo "<td>$filesize</td>";
   echo "<td>$md5name  (<a href=\"http://download.eclipse.org/eclipse/downloads/drops/@buildlabel@/checksum/$zipfile.md5\">md5</a>)";
 
 }
