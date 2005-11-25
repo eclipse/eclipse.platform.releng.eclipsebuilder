@@ -36,7 +36,7 @@
 </target>
 	
 <target name="assemble.org.eclipse.rcp.linux.gtk.ppc">
-		<property name="archiveName" value="eclipse-RCP-${buildId}-linux-ppc.tar.gz"/>
+		<property name="archiveName" value="eclipse-RCP-${buildId}-linux-gtk-ppc.tar.gz"/>
 		<antcall target="assemble" />
 </target>
 
