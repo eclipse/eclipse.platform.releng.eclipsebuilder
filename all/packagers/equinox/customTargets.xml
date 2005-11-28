@@ -2,7 +2,7 @@
 
 	<target name="assemble">
 		<exec executable="unzip" dir="${basedir}">
-			<arg line="-j -qq ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip eclipse/plugins/org.eclipse.osgi* -x eclipse/plugins/org.eclipse.osgi*test* -d ${equinoxPostingDirectory}" />
+			<arg line="-j -qq ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip eclipse/plugins/org.eclipse.osgi* eclipse/plugins/org.eclipse.equinox* -x eclipse/plugins/org.eclipse.osgi*test* -d ${equinoxPostingDirectory}" />
 		</exec>
 
 		<mkdir dir="${equinoxPostingDirectory}/${buildLabel}/checksum" />

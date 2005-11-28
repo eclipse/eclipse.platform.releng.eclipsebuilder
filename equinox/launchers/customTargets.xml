@@ -106,6 +106,18 @@
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.osgi.services" />
 		</antcall>
+		<antcall target="updateTestManifest">
+					<param name="bundle.id" value="org.eclipse.equinox.registry" />
+	    </antcall>
+		<antcall target="updateTestManifest">
+					<param name="bundle.id" value="org.eclipse.equinox.preferences" />
+	    </antcall>
+		<antcall target="updateTestManifest">
+					<param name="bundle.id" value="org.eclipse.equinox.common" />
+	    </antcall>   
+		<antcall target="updateTestManifest">
+					<param name="bundle.id" value="org.eclipse.equinox.supplement" />
+	    </antcall>   
 	</target>
 
 	<!-- ===================================================================== -->
@@ -132,7 +144,7 @@
 	<!-- ===================================================================== -->
 	<target name="postAssemble">
 		<exec executable="unzip" dir="${basedir}">
-			<arg line="-j ${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-win32.zip eclipse/plugins/org.eclipse.osgi* -d ${equinoxPostingDirectory}/${buildLabel}"/>			
+			<arg line="-j ${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-win32.zip eclipse/plugins/org.eclipse.osgi* eclipse/plugins/org.eclipse.equinox* -d ${equinoxPostingDirectory}/${buildLabel}"/>						
 		</exec>
 	</target>
 
