@@ -66,6 +66,9 @@
 <!-- Steps to do after the fetch -->
 <!-- ===================================================================== -->
 <target name="postFetch">
+	<antcall target="updateTestManifest">
+			<param name="bundle.id" value="org.eclipse.equinox.supplement" />
+    </antcall>   
 </target>
 
 <!-- ===================================================================== -->
@@ -135,6 +138,17 @@
 		<param name="target" value="cleanElement" />
 	</antcall>
 </target>
+	
+<!-- ===================================================================== -->
+<!-- Helper targets -->
+<!-- ===================================================================== -->
+<target name="updateTestManifest">
+	<!--update bundle names in the testManifest-->
+	<property file="${buildDirectory}/plugins/${bundle.id}/META-INF/MANIFEST.MF"/>
+	<replace file="${builder}/../publishing/testManifest.xml" token="@${bundle.id}@" value="${bundle.id}_${Bundle-Version}"/>
+</target>
+	
+	
 <!-- ===================================================================== -->
 <!-- Default target                                                        -->
 <!-- ===================================================================== -->
