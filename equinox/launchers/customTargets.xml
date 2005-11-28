@@ -244,6 +244,7 @@
 		<!--update bundle names in the testManifest-->
 		<property file="${buildDirectory}/plugins/${bundle.id}/META-INF/MANIFEST.MF"/>
 		<replace file="${builder}/../publishing/testManifest.xml" token="@${bundle.id}@" value="${bundle.id}_${Bundle-Version}"/>
+		<replace file="${builder}/../publishing/testManifest.xml" token="qualifier" value="${versionQualifier}"/>
 	</target>
 	
 	<!-- ===================================================================== -->
