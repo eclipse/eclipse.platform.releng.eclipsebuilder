@@ -1,6 +1,7 @@
 <project name="Build specific targets and properties" default="noDefault" basedir=".">
 
 <property name="postingDirectory" value="${buildDirectory}" />
+<property name="equinoxPostingDirectory" value="${postingDirectory}/../../equinox/drops" />
 
 	<!-- ===================================================================== -->
 <!-- Run a given ${target} on all elements being built -->
@@ -122,7 +123,7 @@
 <target name="postBuild">
 	<property name="postingDirectory" value="${buildDirectory}}" />
 	<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.equinox.supplement" target="build.update.jar">
-		<property name="plugin.destination" value="${postingDirectory}/../../equinox/drops" />
+		<property name="plugin.destination" value="${equinoxPostingDirectory}/${buildLabel}" />
 	</ant>
 </target>
 
