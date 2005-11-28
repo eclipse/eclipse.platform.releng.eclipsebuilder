@@ -12,13 +12,13 @@
 			</platform>
 			<platform id="util" name="All" fileName="@org.eclipse.osgi.util@.jar">
 			</platform>
-			<platform id="util" name="All" fileName="@org.eclipse.equinox.registry@.jar">
+			<platform id="registry" name="All" fileName="@org.eclipse.equinox.registry@.jar">
 			</platform>
-			<platform id="util" name="All" fileName="@org.eclipse.equinox.preferences@.jar">
+			<platform id="preferences" name="All" fileName="@org.eclipse.equinox.preferences@.jar">
 			</platform>
-			<platform id="util" name="All" fileName="@org.eclipse.equinox.common@.jar">
+			<platform id="common" name="All" fileName="@org.eclipse.equinox.common@.jar">
 			</platform>
-			<platform id="util" name="All" fileName="@org.eclipse.equinox.supplement@.jar">
+			<platform id="supplement" name="All" fileName="@org.eclipse.equinox.supplement@.jar">
 			</platform>
 
 		</zipType>
