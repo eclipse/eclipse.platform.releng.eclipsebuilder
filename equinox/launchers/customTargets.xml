@@ -113,8 +113,11 @@
 					<param name="bundle.id" value="org.eclipse.equinox.preferences" />
 	    </antcall>
 		<antcall target="updateTestManifest">
-					<param name="bundle.id" value="org.eclipse.equinox.common" />
-	    </antcall>   				
+					<param name="bundle.id" value="org.eclipse.equinox.common" />			
+		</antcall> 
+		<antcall target="updateTestManifest">
+					<param name="bundle.id" value="org.eclipse.equinox.supplement" />
+		</antcall> 
 	</target>
 
 	<!-- ===================================================================== -->
