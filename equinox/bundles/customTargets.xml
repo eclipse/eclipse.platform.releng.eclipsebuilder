@@ -143,12 +143,21 @@
 <!-- ===================================================================== -->
 <!-- Helper targets -->
 <!-- ===================================================================== -->
-<target name="updateTestManifest">
-	<!--update bundle names in the testManifest-->
-	<property file="${buildDirectory}/plugins/${bundle.id}/META-INF/MANIFEST.MF"/>
-	<replace file="${builder}/../publishing/testManifest.xml" token="@${bundle.id}@" value="${bundle.id}_${Bundle-Version}"/>
-	<replace file="${builder}/../publishing/testManifest.xml" token="${bundle.id}_${Bundle-Version}.qualifier" value="${bundle.id}_${Bundle-Version}.${forceContextQualifier}"/>
-</target>
+	<target name="updateTestManifest">	                                                                          
+			<apply executable="ls" output="${buildDirectory}/${bundle.id}.txt" dir="${equinoxPostingDirectory}/${buildLabel}">
+			<fileset dir="${equinoxPostingDirectory}/${buildLabel}">
+			    <patternset>
+			      <include name="${bundle.id}_*.jar"/>
+			    </patternset>
+			  </fileset>
+			</apply>
+			<replaceregexp file="${buildDirectory}/${bundle.id}.txt" match="/.+/" replace=""/>
+			<replaceregexp file="${buildDirectory}/${bundle.id}.txt" match="\.jar" replace=""/>
+			<replaceregexp file="${buildDirectory}/${bundle.id}.txt" match="\n" replace=""/>
+			<loadfile property="bundle.jar" srcFile="${buildDirectory}/${bundle.id}.txt"/>
+			<delete file="${buildDirectory}/${bundle.id}.txt" failonerror="false"/>
+			<replace file="${builder}/../publishing/testManifest.xml" token="@${bundle.id}@" value="${bundle.jar}"/>                                                                                                                         
+		</target>
 	
 	
 <!-- ===================================================================== -->
