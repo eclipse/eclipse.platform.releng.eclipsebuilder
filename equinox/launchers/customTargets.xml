@@ -97,7 +97,7 @@
 	<!-- Steps to do after the fetch -->
 	<!-- ===================================================================== -->
 	<target name="postFetch">
-		<antcall target="buildEquinoxSupplement" />
+		<!-- <antcall target="buildEquinoxSupplement" /> -->
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.osgi" />
 		</antcall>
