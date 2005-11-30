@@ -67,9 +67,7 @@
 <!-- Steps to do after the fetch -->
 <!-- ===================================================================== -->
 <target name="postFetch">
-	<antcall target="updateTestManifest">
-			<param name="bundle.id" value="org.eclipse.equinox.supplement" />
-    </antcall>   
+	  
 </target>
 
 <!-- ===================================================================== -->
@@ -125,6 +123,9 @@
 	<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.equinox.supplement" target="build.update.jar">
 		<property name="plugin.destination" value="${equinoxPostingDirectory}/${buildLabel}" />
 	</ant>
+	<antcall target="updateTestManifest">
+				<param name="bundle.id" value="org.eclipse.equinox.supplement" />
+	    </antcall> 
 </target>
 
 <!-- ===================================================================== -->

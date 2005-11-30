@@ -98,24 +98,7 @@
 	<!-- ===================================================================== -->
 	<target name="postFetch">
 		<!-- <antcall target="buildEquinoxSupplement" /> -->
-		<antcall target="updateTestManifest">
-			<param name="bundle.id" value="org.eclipse.osgi" />
-		</antcall>
-		<antcall target="updateTestManifest">
-			<param name="bundle.id" value="org.eclipse.osgi.util" />
-		</antcall>
-		<antcall target="updateTestManifest">
-			<param name="bundle.id" value="org.eclipse.osgi.services" />
-		</antcall>
-		<antcall target="updateTestManifest">
-					<param name="bundle.id" value="org.eclipse.equinox.registry" />
-	    </antcall>
-		<antcall target="updateTestManifest">
-					<param name="bundle.id" value="org.eclipse.equinox.preferences" />
-	    </antcall>
-		<antcall target="updateTestManifest">
-					<param name="bundle.id" value="org.eclipse.equinox.common" />			
-		</antcall> 		
+		
 	</target>
 
 	<!-- ===================================================================== -->
@@ -163,6 +146,24 @@
 	<!-- (e.g., testing, posting, emailing, ...) -->
 	<!-- ===================================================================== -->
 	<target name="postBuild">
+		<antcall target="updateTestManifest">
+					<param name="bundle.id" value="org.eclipse.osgi" />
+				</antcall>
+				<antcall target="updateTestManifest">
+					<param name="bundle.id" value="org.eclipse.osgi.util" />
+				</antcall>
+				<antcall target="updateTestManifest">
+					<param name="bundle.id" value="org.eclipse.osgi.services" />
+				</antcall>
+				<antcall target="updateTestManifest">
+							<param name="bundle.id" value="org.eclipse.equinox.registry" />
+			    </antcall>
+				<antcall target="updateTestManifest">
+							<param name="bundle.id" value="org.eclipse.equinox.preferences" />
+			    </antcall>
+				<antcall target="updateTestManifest">
+							<param name="bundle.id" value="org.eclipse.equinox.common" />			
+				</antcall> 		
 		<available classname="org.eclipse.releng.generators.EclipseTestResultsGenerator" property="class" value="org.eclipse.releng.generators.EclipseTestResultsGenerator" />
 		<taskdef name="indexResults" classname="${class}" />
 
