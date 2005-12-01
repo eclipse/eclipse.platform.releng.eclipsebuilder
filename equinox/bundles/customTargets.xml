@@ -6,11 +6,7 @@
 	<!-- ===================================================================== -->
 <!-- Run a given ${target} on all elements being built -->
 <!-- ===================================================================== -->
-<target name="allElements">
-	<ant antfile="${genericTargets}" target="${target}" >
-		<property name="type" value="plugin" />
-		<property name="id" value="org.eclipse.equinox.supplement" />
-	</ant>
+<target name="allElements">	
 </target>
 
 <!-- ===================================================================== -->
@@ -118,14 +114,7 @@
 <!-- Steps to do after everything is built and assembled -->
 <!-- (e.g., testing, posting, emailing, ...) -->
 <!-- ===================================================================== -->
-<target name="postBuild">
-	<property name="postingDirectory" value="${buildDirectory}}" />
-	<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.equinox.supplement" target="build.update.jar">
-		<property name="plugin.destination" value="${equinoxPostingDirectory}/${buildLabel}" />
-	</ant>
-	<antcall target="updateTestManifest">
-				<param name="bundle.id" value="org.eclipse.equinox.supplement" />
-	    </antcall> 
+<target name="postBuild">	
 </target>
 
 <!-- ===================================================================== -->

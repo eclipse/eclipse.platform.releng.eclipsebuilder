@@ -11,6 +11,10 @@
 			<property name="type" value="feature" />
 			<property name="id" value="master-root" />
 		</ant>
+		<ant antfile="${genericTargets}" target="${target}" >
+				<property name="type" value="plugin" />
+				<property name="id" value="org.eclipse.equinox.supplement" />
+			</ant>
 	</target>
 
 	<!-- ===================================================================== -->
@@ -146,6 +150,10 @@
 	<!-- (e.g., testing, posting, emailing, ...) -->
 	<!-- ===================================================================== -->
 	<target name="postBuild">
+		<property name="postingDirectory" value="${buildDirectory}}" />
+			<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.equinox.supplement" target="build.update.jar">
+				<property name="plugin.destination" value="${equinoxPostingDirectory}/${buildLabel}" />
+			</ant>		
 		<antcall target="updateTestManifest">
 					<param name="bundle.id" value="org.eclipse.osgi" />
 				</antcall>
@@ -163,7 +171,10 @@
 			    </antcall>
 				<antcall target="updateTestManifest">
 							<param name="bundle.id" value="org.eclipse.equinox.common" />			
-				</antcall> 		
+				</antcall> 	
+				<antcall target="updateTestManifest">
+								<param name="bundle.id" value="org.eclipse.equinox.supplement" />			
+				</antcall> 	
 		<available classname="org.eclipse.releng.generators.EclipseTestResultsGenerator" property="class" value="org.eclipse.releng.generators.EclipseTestResultsGenerator" />
 		<taskdef name="indexResults" classname="${class}" />
 
@@ -241,39 +252,7 @@
 
 	<!-- ===================================================================== -->
 	<!-- Helper targets -->
-	<!-- ===================================================================== -->
-	<target name="buildEquinoxSupplement">
-			<antcall target="equinox.bundles">
-				<param name="target" value="preBuild" />
-			</antcall>
-			<antcall target="equinox.bundles">
-				<param name="target" value="fetch" />
-			</antcall>
-			<antcall target="equinox.bundles">
-				<param name="target" value="generate" />
-			</antcall>
-			<antcall target="equinox.bundles">
-				<param name="target" value="clean" />
-			</antcall>
-			
-			<antcall target="equinox.bundles">
-				<param name="target" value="process" />
-			</antcall>
-			
-			<antcall target="equinox.bundles">
-				<param name="target" value="postBuild" />
-			</antcall>
-		</target>
-	
-		<target name="equinox.bundles" >
-				<ant antfile="build.xml" dir="${pde.build.scripts}" target="${target}">
-					<property name="builder" value="${eclipse.build.scripts}/equinox/bundles" />
-				</ant>
-		</target>	
-
-	
-	
-	
+	<!-- ===================================================================== -->	
 	<target name="updateTestManifest">	                                                                          
 		<apply executable="ls" output="${buildDirectory}/${bundle.id}.txt" dir="${equinoxPostingDirectory}/${buildLabel}">
 		<fileset dir="${equinoxPostingDirectory}/${buildLabel}">
