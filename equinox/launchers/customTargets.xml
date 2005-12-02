@@ -127,8 +127,30 @@
 		<exec executable="unzip" dir="${basedir}">
 			<arg line="-j ${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-win32.zip eclipse/plugins/org.eclipse.osgi* eclipse/plugins/org.eclipse.equinox* -d ${equinoxPostingDirectory}/${buildLabel}"/>						
 		</exec>
+		<antcall target="buildBundles"/>
 	</target>
 
+	<target name="buildBundles">
+		<antcall target="buildBundle">
+			<param name="org.eclipse.equinox.supplement"/>
+		</antcall>
+	</target>
+
+	<target name="buildBundle">
+		<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
+			<property name="type" value="plugin" />
+			<property name="id" value="${bundle.id}" />
+		</ant>
+		<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="generateScript">
+			<property name="type" value="plugin" />
+			<property name="id" value="${bundle.id}" />
+		</ant>
+		<ant antfile="build.xml" dir="${buildDirectory}/plugins/${bundle.id}" target="build.update.jar">
+			<property name="type" value="plugin" />
+			<property name="id" value="${bundle.id}" />
+		</ant>
+		<antcall target="updateTestManifest"/>
+	</target>
 	<!-- ===================================================================== -->
 	<!-- Steps to do before running the build.xmls for the elements being built. -->
 	<!-- ===================================================================== -->
@@ -168,9 +190,7 @@
 				<antcall target="updateTestManifest">
 							<param name="bundle.id" value="org.eclipse.equinox.common" />			
 				</antcall> 	
-				<antcall target="updateTestManifest">
-								<param name="bundle.id" value="org.eclipse.equinox.supplement" />			
-				</antcall> 	
+				
 		<available classname="org.eclipse.releng.generators.EclipseTestResultsGenerator" property="class" value="org.eclipse.releng.generators.EclipseTestResultsGenerator" />
 		<taskdef name="indexResults" classname="${class}" />
 
