@@ -140,7 +140,11 @@
 
 		 </target>
 
-		 <target name="buildBundle">		
+		 <target name="buildBundle">
+			 	<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
+		 			 		 		 <property name="type" value="plugin" />
+		 			 		 		 <property name="id" value="${bundle.id}" />
+		 		 </ant>
 		 		 <ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="generateScript">
 		 		 		 <property name="type" value="plugin" />
 		 		 		 <property name="id" value="${bundle.id}" />
