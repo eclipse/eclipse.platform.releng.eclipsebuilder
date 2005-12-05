@@ -30,6 +30,11 @@
 				<param name="markerName" value="eclipse32-linux-gtk-${timestamp}" />
 			</antcall>
 			<antcall target="test">
+				<param name="tester" value="${basedir}/rhelws4-linux-gtk" />
+				<param name="cfgKey" value="eclipse32LinuxGtkTest2" />
+				<param name="markerName" value="eclipse32-linux-gtk-2-${timestamp}" />
+			</antcall>
+			<antcall target="test">
 				<param name="tester" value="${basedir}/win32" />
 				<param name="cfgKey" value="eclipse30WinXPTest" />
 				<param name="markerName" value="eclipse31-winxp-${timestamp}" />
