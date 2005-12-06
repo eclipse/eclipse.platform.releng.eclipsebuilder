@@ -123,7 +123,7 @@
 	</zipType>
 
 	<zipType name="RelEng Tool plug-in">
-		<platform id="RE" name="All" fileName="org.eclipse.releng.tools_3.1.0.zip"></platform>
+		<platform id="RE" name="All" fileName="org.eclipse.releng.tools_3.2.0.zip"></platform>
 	</zipType>
 
 </zipTypes>
