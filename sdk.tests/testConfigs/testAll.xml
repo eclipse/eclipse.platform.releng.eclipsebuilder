@@ -24,11 +24,16 @@
 				<param name="cfgKey" value="eclipse31MacOSXCarbonTest" />
 				<param name="markerName" value="eclipse31-macosx-carbon-${timestamp}" />
 			</antcall>
-			<antcall target="test">
+			<!-- <antcall target="test">
 				<param name="tester" value="${basedir}/rhelws3-linux-gtk" />
 				<param name="cfgKey" value="eclipse32LinuxGtkTest" />
 				<param name="markerName" value="eclipse32-linux-gtk-${timestamp}" />
-			</antcall>
+			</antcall> -->
+			 <antcall target="test">
+				<param name="tester" value="${basedir}/rhelws4-linux-gtk" />
+				<param name="cfgKey" value="eclipse32LinuxGtkTest2" />
+				<param name="markerName" value="eclipse32-linux-gtk-${timestamp}" />
+			</antcall> 
 			<antcall target="test">
 				<param name="tester" value="${basedir}/win32" />
 				<param name="cfgKey" value="eclipse30WinXPTest" />

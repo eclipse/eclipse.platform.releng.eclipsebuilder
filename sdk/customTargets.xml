@@ -166,6 +166,16 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="preFetch">
 	</target>
 
+	<target name="adjustIniFile">
+		<loadproperties srcfile="${buildDirectory}/pluginVersions.properties"/>
+		<condition property="newVersionQualifier" value="${forceContextQualifier}" else="${org.eclipse.jdt.debug}">
+			<isset property="forceContextQualifier"/>
+		</condition>
+		<replace file="${buildDirectory}/features/org.eclipse.platform.launchers/bin/carbon/macosx/ppc/Eclipse.app/Contents/MacOS/eclipse.ini" >
+			<replacefilter token="@qualifier@" value="${newVersionQualifier}"/>
+		</replace>
+	</target>
+	
 	<!-- ===================================================================== -->
 	<!-- Steps to do after the fetch -->
 	<!-- ===================================================================== -->
@@ -176,6 +186,9 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		</ant>
 		<zip zipfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/features/org.eclipse.platform.launchers" includes="library/" />
 
+		<!--adjust macosx eclipse.ini file -->
+		<antcall target="adjustIniFile"/>
+		
 		<!--fetch and compile swt tools-->
 		<ant antfile="genericTargets.xml" dir="${pde.build.scripts}" target="fetchElement">
 			<property name="type" value="plugin" />

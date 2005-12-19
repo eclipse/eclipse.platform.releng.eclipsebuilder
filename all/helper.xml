@@ -269,6 +269,22 @@
 			<property name="testResultsTemplateFileName" value="${publishingContent}/templateFiles/testResults.php.template" />
 			<property name="dropTemplateFileName" value="${publishingContent}/templateFiles/index.php.template" />
 		</ant>
+
+		<!-- replace qualifier of releng plugin -->
+		 <property name="bundle.id" value="org.eclipse.releng.tools" />
+		 <apply executable="ls" output="${buildDirectory}/${bundle.id}.txt" dir="${postingDirectory}/${buildLabel}">
+			 		 <fileset dir="${postingDirectory}/${buildLabel}">
+			 		     <patternset>
+			 		       <include name="${bundle.id}_*.jar"/>
+			 		     </patternset>
+			 		   </fileset>
+		 </apply>
+		 <replaceregexp file="${buildDirectory}/${bundle.id}.txt" match="/.+/" replace=""/>
+		 <replaceregexp file="${buildDirectory}/${bundle.id}.txt" match="\.jar" replace=""/>
+		 <replaceregexp file="${buildDirectory}/${bundle.id}.txt" match="\n" replace=""/>
+		 <loadfile property="bundle.jar" srcFile="${buildDirectory}/${bundle.id}.txt" failonerror="off"/>
+	     <delete file="${buildDirectory}/${bundle.id}.txt" failonerror="false"/>
+		 <replace file="${postingDirectory}/${buildLabel}/index.php" token="@${org.eclipse.releng.tools_3.2.0.zip}@" value="${bundle.jar}"/>                                                                                   
 		<!--  Insert ftp url for drop directory  -->
 		<replace file="${postingDirectory}/${buildLabel}/index.php" token="@buildlabel@" value="${buildLabel}" />
 	</target>

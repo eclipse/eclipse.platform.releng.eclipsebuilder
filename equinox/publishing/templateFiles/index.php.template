@@ -28,13 +28,27 @@ for ftp access to the entire build directory.";
 integrity of your downloads.</p></td></tr> </table><?php function column($servername) {
 
  if (! preg_match("/.eclipse.org/i",$servername)) {
-          echo "<td width=\"12%\"><b>Download</td>";
-          echo "<td width=\"40%\"><b>Platform</b></td>";
+            echo "<td width=\"12%\"><b>Download</td>";
+          echo "<td width=\"10%\"><b>Size</b></td>";
+		   echo "<td width=\"40%\"><b>File</b></td>";
       } else { 
           echo "<td width=\"40%\"><b>Download</td>";
+          echo "<td width=\"10%\"><b>Size</b></td>";
     }
-    return;
+    return;    
 }
+
+function getDropSize($zipfile) {
+
+		 $filesize = "N/A";
+		 $filesizebytes  = filesize($zipfile);
+		 if($filesizebytes > 0) {
+        		 $filesize = floor($filesizebytes / 1048576) . " MB";
+		 }
+        return($filesize);
+}
+
+
 
 function genLinks($servername,$buildlabel,$zipfile) {
 
@@ -56,10 +70,13 @@ if (preg_match("/.eclipse.org/i",$servername)) {
     $ftpline =  "<a href=\"$ftplink\">$ftplabel</a>";
     $md5name = $zipfile;
 }
- 
+
+$filesize = getDropSize($zipfile);
+  
   echo "$httpline"; 
   echo "&nbsp;&nbsp";
   echo "$ftpline";
+  echo "<td>$filesize</td>";
   echo "<td>$md5name  (<a href=\"http://download.eclipse.org/eclipse/downloads/equinox/downloads/drops/@buildlabel@/checksum/$zipfile.md5\">md5</a>)";
 
 }
