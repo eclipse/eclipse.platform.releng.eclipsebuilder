@@ -275,14 +275,14 @@
 		 <apply executable="ls" output="${buildDirectory}/${bundle.id}.txt" dir="${postingDirectory}/${buildLabel}">
 			 		 <fileset dir="${postingDirectory}/${buildLabel}">
 			 		     <patternset>
-			 		       <include name="${bundle.id}_*.jar"/>
+			 		       <include name="${bundle.id}_*.zip"/>
 			 		     </patternset>
 			 		   </fileset>
 		 </apply>
 		 <replaceregexp file="${buildDirectory}/${bundle.id}.txt" match="/.+/" replace=""/>
 		 <replaceregexp file="${buildDirectory}/${bundle.id}.txt" match="\.jar" replace=""/>
 		 <replaceregexp file="${buildDirectory}/${bundle.id}.txt" match="\n" replace=""/>
-		 <loadfile property="bundle.jar" srcFile="${buildDirectory}/${bundle.id}.txt" failonerror="off"/>
+		 <loadfile property="bundle.jar" srcFile="${buildDirectory}/${bundle.id}.txt" failonerror="false"/>
 	     <delete file="${buildDirectory}/${bundle.id}.txt" failonerror="false"/>
 		 <replace file="${postingDirectory}/${buildLabel}/index.php" token="@${org.eclipse.releng.tools_3.2.0.zip}@" value="${bundle.jar}"/>                                                                                   
 		<!--  Insert ftp url for drop directory  -->
