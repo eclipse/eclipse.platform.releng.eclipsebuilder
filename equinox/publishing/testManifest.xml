@@ -20,7 +20,22 @@
 			</platform>
 			<platform id="supplement" name="All" fileName="@org.eclipse.equinox.supplement@.jar">
 			</platform>
-
+			<platform id="device" name="All" fileName="@org.eclipse.equinox.device@.jar">
+			</platform>
+			<platform id="ds" name="All" fileName="@org.eclipse.equinox.ds@.jar">
+			</platform>
+			<platform id="event" name="All" fileName="@org.eclipse.equinox.event@.jar">
+			</platform>
+			<platform id="http" name="All" fileName="@org.eclipse.equinox.http@.jar">
+			</platform>
+			<platform id="log" name="All" fileName="@org.eclipse.equinox.log@.jar">
+			</platform>		
+			<platform id="metatype" name="All" fileName="@org.eclipse.equinox.metatype@.jar">
+			</platform>
+			<platform id="useradmin" name="All" fileName="@org.eclipse.equinox.useradmin@.jar">
+			</platform>
+			<platform id="wireadmin" name="All" fileName="@org.eclipse.equinox.wireadmin@.jar">
+			</platform>
 		</zipType>
 
 		<zipType name="Launchers">
