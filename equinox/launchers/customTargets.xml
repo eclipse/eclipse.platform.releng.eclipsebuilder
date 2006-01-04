@@ -200,7 +200,7 @@
 		 		 		 <property name="type" value="plugin" />
 		 		 		 <property name="id" value="${bundle.id}" />
 		 		 </ant>
-		 		  <copy todir="${equinoxPostingDirectory}/${buildLabel} failonerror=false">
+		 		  <copy todir="${equinoxPostingDirectory}/${buildLabel}" failonerror="false">
 		 		     <fileset dir="${buildDirectory}/plugins/${bundle.id}">
 		 		     		 <include name="${bundle.id}*.jar"/>
 		 		     </fileset>
