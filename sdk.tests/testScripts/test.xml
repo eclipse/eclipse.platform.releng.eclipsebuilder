@@ -415,6 +415,14 @@
 		</antcall>
 	</target>
 
+	<target name="uiperformance" description="Runs the org.eclipse.ui.tests.performance test.xml">
+		<antcall target="runtests">
+			<param name="testPlugin" value="${org.eclipse.ui.tests.performance}" />
+			<param name="report" value="org.eclipse.ui.tests.performance" />
+			<param name="testPluginsRequired" value="**/${org.eclipse.ui.tests.performance}/* ${org.eclipse.ui.tests.performance.prerequisite.testplugins}" />
+		</antcall>
+	</target>
+				
 	<target name="uiworkbenchtexteditor" description="Runs the org.eclipse.ui.workbench.texteditor.tests test.xml">
 		<antcall target="runtests">
 			<param name="testPlugin" value="${org.eclipse.ui.workbench.texteditor.tests}" />
@@ -449,6 +457,7 @@
 		<antcall target="ui" />
 		<antcall target="uieditors" />
 		<antcall target="uinavigator" />
+		<antcall target="uiperformance" />
 		<antcall target="uiworkbenchtexteditor" />
 		<antcall target="uircp" />
 		<antcall target="jdtdebug" />

@@ -136,8 +136,55 @@
 		 		 </antcall>
                  <antcall target="updateTestManifest">
 		 		 		 <param name="bundle.id" value="org.eclipse.equinox.supplement"/>
-                </antcall>
-
+                 </antcall>
+		 		 <antcall target="buildBundle">
+		 		 		 <param name="bundle.id" value="org.eclipse.equinox.device"/>
+		 		  </antcall>
+		 		 <antcall target="updateTestManifest">
+		 		 		 <param name="bundle.id" value="org.eclipse.equinox.device"/>
+		 		 </antcall>
+		 	     <antcall target="buildBundle">
+		 		 		 <param name="bundle.id" value="org.eclipse.equinox.ds"/>
+  		         </antcall>
+                 <antcall target="updateTestManifest">
+	 		 		 <param name="bundle.id" value="org.eclipse.equinox.ds"/>
+                 </antcall>
+		 		 <antcall target="buildBundle">
+		 			 <param name="bundle.id" value="org.eclipse.equinox.event"/>
+	        	 </antcall>
+	        	 <antcall target="updateTestManifest">
+		 		 	 <param name="bundle.id" value="org.eclipse.equinox.event"/>
+	        	 </antcall>
+		 		 <antcall target="buildBundle">
+		 			 <param name="bundle.id" value="org.eclipse.equinox.http"/>
+		 		 </antcall>
+		 		 <antcall target="updateTestManifest">
+		 		 	<param name="bundle.id" value="org.eclipse.equinox.http"/>
+		 		 </antcall>
+		 		 <antcall target="buildBundle">
+		 			 <param name="bundle.id" value="org.eclipse.equinox.log"/>
+		 	  	 </antcall>
+		 		 <antcall target="updateTestManifest">
+			 		 <param name="bundle.id" value="org.eclipse.equinox.log"/>
+		 		 </antcall>
+		 		 <antcall target="buildBundle">
+ 			 		 <param name="bundle.id" value="org.eclipse.equinox.metatype"/>
+		 		 </antcall>
+		 		 <antcall target="updateTestManifest">
+ 			 		 <param name="bundle.id" value="org.eclipse.equinox.metatype"/>
+		 		 </antcall>
+		 		 <antcall target="buildBundle">
+		 		 		 <param name="bundle.id" value="org.eclipse.equinox.useradmin"/>
+		 		 </antcall>
+		 		 <antcall target="updateTestManifest">
+			 		 <param name="bundle.id" value="org.eclipse.equinox.useradmin"/>
+		 		 </antcall>
+		 		 <antcall target="buildBundle">
+		 		 		 <param name="bundle.id" value="org.eclipse.equinox.wireadmin"/>
+		 		 </antcall>
+		 		 <antcall target="updateTestManifest">
+			 		 <param name="bundle.id" value="org.eclipse.equinox.wireadmin"/>
+		 		 </antcall>
 		 </target>
 
 		 <target name="buildBundle">
@@ -153,11 +200,16 @@
 		 		 		 <property name="type" value="plugin" />
 		 		 		 <property name="id" value="${bundle.id}" />
 		 		 </ant>
-		 		  <copy todir="${equinoxPostingDirectory}/${buildLabel}">
+		 		  <copy todir="${equinoxPostingDirectory}/${buildLabel}" failonerror="false">
 		 		     <fileset dir="${buildDirectory}/plugins/${bundle.id}">
 		 		     		 <include name="${bundle.id}*.jar"/>
 		 		     </fileset>
 		 		  </copy>
+			 	<copy todir="${postingDirectory}/${buildLabel}/compilelogs" overwrite="true" failonerror="false">
+		 			<fileset dir="${buildDirectory}/plugins/${bundle.id}/temp.folder">
+		 				<include name="*.log" />
+		 			</fileset>
+		 		</copy>
 		 </target>
 		 <!-- ===================================================================== -->
 		 <!-- Steps to do before running the build.xmls for the elements being built. -->
@@ -168,7 +220,7 @@
 		 <!-- ===================================================================== -->
 		 <!-- Steps to do after running the build.xmls for the elements being built. -->
 		 <!-- ===================================================================== -->
-		 <target name="postProcess">
+		 <target name="postProcess">			
 		 </target>
 
 		 <!-- ===================================================================== -->
