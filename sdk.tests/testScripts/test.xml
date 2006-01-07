@@ -134,7 +134,7 @@
 			<arg line="-xzf ${currentDir}/${runtimeArchive}"/>
 		</exec>
 		<exec dir="." executable="unzip">
-			<arg line="-o -qq eclipse-junit-tests-*.zip **/org.eclipse.test*/* **/org.eclipse.ant.optional.junit*/** ${testPluginsRequired} -d ${install}"/>
+			<arg line="-o -qq eclipse-junit-tests-*.zip **/Cloudscape** **/org.eclipse.test*/* **/org.eclipse.ant.optional.junit*/** ${testPluginsRequired} -d ${install}"/>
 		</exec>
 	</target>
 	
