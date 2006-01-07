@@ -20,6 +20,10 @@
 	<property name="results" value="${basedir}/results" />
 
 	<target name="init">
+		
+		<mkdir dir="${results}/xml" />
+		<mkdir dir="${results}/html" />
+		
 		<!--Unlock files on the Mac before starting tests.
 		  Required to delete some workspace directories (org.eclipse.core.filebuffers.tests and Team CVS tests).-->
 		<exec dir="${basedir}" executable="chflags" os="Mac OS X">
