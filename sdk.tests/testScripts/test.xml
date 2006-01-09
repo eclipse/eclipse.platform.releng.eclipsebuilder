@@ -120,9 +120,7 @@
 		<exec dir="." executable="unzip">
 			<arg line="-o -qq ${runtimeArchive} -d ${install}"/>
 		</exec>
-		<exec dir="." executable="unzip">
-			<arg line="-o -qq eclipse-junit-tests-*.zip **/org.eclipse.test*/* **/org.eclipse.ant.optional.junit*/** ${testPluginsRequired} -d ${install}"/>
-		</exec>
+		<antcall target="installTestPlugins"/>
 	</target>
 
 	<!--setup for tar.gz archives-->
@@ -133,14 +131,12 @@
 		<exec dir="${install}" executable="tar">
 			<arg line="-xzf ${currentDir}/${runtimeArchive}"/>
 		</exec>
-		<exec dir="." executable="unzip">
-			<arg line="-o -qq eclipse-junit-tests-*.zip **/Cloudscape** **/org.eclipse.test*/* **/org.eclipse.ant.optional.junit*/** ${testPluginsRequired} -d ${install}"/>
-		</exec>
+		<antcall target="installTestPlugins"/>
 	</target>
 	
 	<target name="installTestPlugins">
 		<exec dir="." executable="unzip">
-			<arg line="-o -qq eclipse-junit-tests-*.zip **/org.eclipse.test*/* **/org.eclipse.ant.optional.junit*/** ${testPluginsRequired} -d ${install}"/>
+			<arg line="-o -qq eclipse-junit-tests-*.zip ${derby} **/org.eclipse.test*/* **/org.eclipse.ant.optional.junit*/** ${testPluginsRequired} -d ${install}"/>
 		</exec>
 	</target>
 
@@ -159,6 +155,7 @@
 	</target>
 
 	<target name="performance" if="performance.target.present">
+		<property name="derby" value="**/Cloudscape*/* " />
 		<antcall target="setup" />
 		<ant antfile="${eclipse-home}/plugins/${testPlugin}/test.xml" dir="${eclipse-home}" target="performance" />
 		<copy file="${eclipse-home}/${report}.xml" tofile="${results}/xml/${report}_${platform}.xml" failonerror="false" />
@@ -200,11 +197,25 @@
 		</antcall>
 	</target>
 
-	<target name="core" description="Runs the org.eclipse.core.tests.harness test.xml">
+	<target name="coreresources" description="Runs the org.eclipse.core.tests.resources test.xml">
 		<antcall target="runtests">
-			<param name="testPlugin" value="${org.eclipse.core.tests.harness}" />
-			<param name="report" value="org.eclipse.core.tests" />
-			<param name="testPluginsRequired" value="**/${org.eclipse.core.tests.harness}/* ${org.eclipse.core.tests.harness.prerequisite.testplugins}" />
+			<param name="testPlugin" value="${org.eclipse.core.tests.resources}" />
+			<param name="report" value="org.eclipse.core.tests.resources" />
+			<param name="testPluginsRequired" value="**/${org.eclipse.core.tests.resources}/* ${org.eclipse.core.tests.resources.prerequisite.testplugins}" />
+		</antcall>
+	</target>
+	<target name="coreruntime" description="Runs the org.eclipse.core.tests.runtime test.xml">
+		<antcall target="runtests">
+			<param name="testPlugin" value="${org.eclipse.core.tests.runtime}" />
+			<param name="report" value="org.eclipse.core.tests.runtime" />
+			<param name="testPluginsRequired" value="**/${org.eclipse.core.tests.runtime}/* ${org.eclipse.core.tests.runtime.prerequisite.testplugins}" />
+		</antcall>
+	</target>
+	<target name="osgi" description="Runs the org.eclipse.osgi.tests test.xml">
+		<antcall target="runtests">
+			<param name="testPlugin" value="${org.eclipse.osgi.tests}" />
+			<param name="report" value="org.eclipse.osgi.tests" />
+			<param name="testPluginsRequired" value="**/${org.eclipse.osgi.tests}/* ${org.eclipse.osgi.tests.prerequisite.testplugins}" />
 		</antcall>
 	</target>
 
@@ -449,7 +460,9 @@
 		<antcall target="pdeui" />
 		<antcall target="ant" />
 		<antcall target="compare" />
-		<antcall target="core" />
+		<antcall target="coreruntime" />
+		<antcall target="coreresources" />
+		<antcall target="osgi" />
 		<antcall target="coreexpressions" />
 		<antcall target="help" />
 		<antcall target="update" />
@@ -459,9 +472,9 @@
 		<antcall target="jdtcorecompiler" />
 		<antcall target="jdtcoremodel" />
 		<antcall target="ui" />
+		<antcall target="uiperformance" />	
 		<antcall target="uieditors" />
 		<antcall target="uinavigator" />
-		<antcall target="uiperformance" />
 		<antcall target="uiworkbenchtexteditor" />
 		<antcall target="uircp" />
 		<antcall target="jdtdebug" />
