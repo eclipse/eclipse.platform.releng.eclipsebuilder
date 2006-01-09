@@ -174,7 +174,7 @@
 		<effectedFile id="JMCSDK"></effectedFile>
 	</logFile>
 
-	<logFile name="org.eclipse.core.tests_linux.gtk.x86.xml">
+	<logFile name="org.eclipse.core.tests.resources_linux.gtk.x86.xml">
 		<effectedFile id="SLG2"></effectedFile>
 		<effectedFile id="PLG2"></effectedFile>
 		<effectedFile id="PLG2SDK"></effectedFile>
@@ -182,13 +182,45 @@
 		<effectedFile id="RCPSDKLG2"></effectedFile>
 	</logFile>
 
-	<logFile name="org.eclipse.core.tests_win32.win32.x86.xml">
+	<logFile name="org.eclipse.core.tests.resources_win32.win32.x86.xml">
 		<effectedFile id="SW"></effectedFile>
 		<effectedFile id="PW"></effectedFile>
 		<effectedFile id="PWSDK"></effectedFile>
 		<effectedFile id="RCPW"></effectedFile>
 		<effectedFile id="RCPSDKW"></effectedFile>
 	</logFile>
+	<logFile name="org.eclipse.core.tests.runtime_linux.gtk.x86.xml">
+		<effectedFile id="SLG2"></effectedFile>
+		<effectedFile id="PLG2"></effectedFile>
+		<effectedFile id="PLG2SDK"></effectedFile>
+		<effectedFile id="RCPLG2"></effectedFile>
+		<effectedFile id="RCPSDKLG2"></effectedFile>
+	</logFile>
+
+	<logFile name="org.eclipse.core.tests.runtime_win32.win32.x86.xml">
+		<effectedFile id="SW"></effectedFile>
+		<effectedFile id="PW"></effectedFile>
+		<effectedFile id="PWSDK"></effectedFile>
+		<effectedFile id="RCPW"></effectedFile>
+		<effectedFile id="RCPSDKW"></effectedFile>
+	</logFile>
+
+	<logFile name="org.eclipse.osgi.tests_linux.gtk.x86.xml">
+		<effectedFile id="SLG2"></effectedFile>
+		<effectedFile id="PLG2"></effectedFile>
+		<effectedFile id="PLG2SDK"></effectedFile>
+		<effectedFile id="RCPLG2"></effectedFile>
+		<effectedFile id="RCPSDKLG2"></effectedFile>
+	</logFile>
+
+	<logFile name="org.eclipse.osgi.tests_win32.win32.x86.xml">
+		<effectedFile id="SW"></effectedFile>
+		<effectedFile id="PW"></effectedFile>
+		<effectedFile id="PWSDK"></effectedFile>
+		<effectedFile id="RCPW"></effectedFile>
+		<effectedFile id="RCPSDKW"></effectedFile>
+	</logFile>
+
 
 	<logFile name="org.eclipse.core.expressions.tests_linux.gtk.x86.xml">
 		<effectedFile id="SLG2"></effectedFile>
@@ -504,14 +536,27 @@
 		<effectedFile id="JMCSDK"></effectedFile>
 	</logFile>
 
-	<logFile name="org.eclipse.core.tests_macosx.carbon.ppc.xml">
+	<logFile name="org.eclipse.core.tests.resources_macosx.carbon.ppc.xml">
 		<effectedFile id="SMC"></effectedFile>
 		<effectedFile id="PMC"></effectedFile>
 		<effectedFile id="PMCSDK"></effectedFile>
 		<effectedFile id="RCPMC"></effectedFile>
 		<effectedFile id="RCPSDKMC"></effectedFile>
 	</logFile>
-
+	<logFile name="org.eclipse.core.tests.runtime_macosx.carbon.ppc.xml">
+		<effectedFile id="SMC"></effectedFile>
+		<effectedFile id="PMC"></effectedFile>
+		<effectedFile id="PMCSDK"></effectedFile>
+		<effectedFile id="RCPMC"></effectedFile>
+		<effectedFile id="RCPSDKMC"></effectedFile>
+	</logFile>
+	<logFile name="org.eclipse.osgi.tests_macosx.carbon.ppc.xml">
+		<effectedFile id="SMC"></effectedFile>
+		<effectedFile id="PMC"></effectedFile>
+		<effectedFile id="PMCSDK"></effectedFile>
+		<effectedFile id="RCPMC"></effectedFile>
+		<effectedFile id="RCPSDKMC"></effectedFile>
+	</logFile>
 
 	<logFile name="org.eclipse.core.expressions.tests_macosx.carbon.ppc.xml">
 		<effectedFile id="SMC"></effectedFile>
