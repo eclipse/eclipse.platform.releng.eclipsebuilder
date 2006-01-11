@@ -192,14 +192,29 @@
 		<antcall target="runtests">
 			<param name="testPlugin" value="${org.eclipse.compare.tests}" />
 			<param name="report" value="org.eclipse.compare.tests" />
+			<param name="testPluginsRequired" value="**/${org.eclipse.compare.tests}/* ${org.eclipse.compare.tests.prerequisite.testplugins}" />
 		</antcall>
 	</target>
 		
-	<target name="core" description="Runs the org.eclipse.core.tests.harness test.xml">
+	<target name="coreresources" description="Runs the org.eclipse.core.tests.resources test.xml">
 		<antcall target="runtests">
-			<param name="testPlugin" value="${org.eclipse.core.tests.harness}" />
-			<param name="report" value="org.eclipse.core.tests" />
-			<param name="testPluginsRequired" value="**/${org.eclipse.core.tests.harness}/* **/${org.eclipse.core.tests.resources}/* ${org.eclipse.core.tests.resources.prerequisite.testplugins} **/${org.eclipse.core.tests.runtime}/* ${org.eclipse.core.tests.runtime.prerequisite.testplugins} **/${org.eclipse.osgi.tests}/* ${org.eclipse.osgi.tests.prerequisite.testplugins}" />
+			<param name="testPlugin" value="${org.eclipse.core.tests.resources}" />
+			<param name="report" value="org.eclipse.core.tests.resources" />
+			<param name="testPluginsRequired" value="**/${org.eclipse.core.tests.resources}/* ${org.eclipse.core.tests.resources.prerequisite.testplugins}" />
+		</antcall>
+	</target>
+	<target name="coreruntime" description="Runs the org.eclipse.core.tests.runtime test.xml">
+		<antcall target="runtests">
+			<param name="testPlugin" value="${org.eclipse.core.tests.runtime}" />
+			<param name="report" value="org.eclipse.core.tests.runtime" />
+			<param name="testPluginsRequired" value="**/${org.eclipse.core.tests.runtime}/* ${org.eclipse.core.tests.runtime.prerequisite.testplugins}" />
+		</antcall>
+	</target>
+	<target name="osgi" description="Runs the org.eclipse.osgi.tests test.xml">
+		<antcall target="runtests">
+			<param name="testPlugin" value="${org.eclipse.osgi.tests}" />
+			<param name="report" value="org.eclipse.osgi.tests" />
+			<param name="testPluginsRequired" value="**/${org.eclipse.osgi.tests}/* ${org.eclipse.osgi.tests.prerequisite.testplugins}" />
 		</antcall>
 	</target>
 
@@ -419,7 +434,9 @@
 		<antcall target="pdeui" />
 		<antcall target="ant" />
 		<antcall target="compare" />
-		<antcall target="core" />
+		<antcall target="coreruntime" />
+		<antcall target="coreresources" />
+		<antcall target="osgi" />
 		<antcall target="coreexpressions" />
 		<antcall target="help" />
 		<antcall target="update" />
