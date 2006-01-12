@@ -148,8 +148,9 @@
 		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@root@" value="${cvs_root}"/>
 	</target>
 
-	<target name="junit" depends="setup">
+	<target name="junit">
 		<property name="derby" value="" />
+		<antcall target="setup" />
 		<ant antfile="${eclipse-home}/plugins/${testPlugin}/test.xml" dir="${eclipse-home}" />
 		<copy file="${eclipse-home}/${report}.xml" tofile="${results}/xml/${report}_${platform}.xml" failonerror="false" />
 		<antcall target="genHtml" />
