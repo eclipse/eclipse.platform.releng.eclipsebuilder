@@ -393,7 +393,7 @@
 	<target name="teamcvs" description="Runs the org.eclipse.team.tests.cvs.core test.xml.  This test requires additional setup.  See documentation in org.eclipse.team.tests.cvs.core">
 		<antcall target="runtests">
 			<param name="testPlugin" value="${org.eclipse.team.tests.cvs.core}" />
-			<param name="report" value="org.eclipse.team.tests.cvs.core" />
+			<param name="report" value="org.eclipse.team.tests.cvs" />
 			<param name="testPluginsRequired" value="**/${org.eclipse.team.tests.cvs.core}/* ${org.eclipse.team.tests.cvs.core.prerequisite.testplugins}" />
 			<param name="teamcvs" value="true"/>
 		</antcall>
