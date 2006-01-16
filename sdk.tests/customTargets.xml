@@ -49,7 +49,6 @@
 	/>
 	<!--tag the map files project-->
 	<antcall target="tagMapFiles" />
-	<sleep minutes="3"/>
 </target>
 
 <target name="tagMapFiles" if="tagMaps">
