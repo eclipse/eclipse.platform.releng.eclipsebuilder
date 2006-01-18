@@ -136,7 +136,15 @@
 	
 	<target name="installTestPlugins">
 		<exec dir="." executable="unzip">
-			<arg line="-o -qq eclipse-junit-tests-*.zip ${derby} **/org.eclipse.test*/* **/org.eclipse.ant.optional.junit*/** ${testPluginsRequired} -d ${install}"/>
+			<arg line="-o -qq eclipse-junit-tests-*.zip
+				${derby}
+				eclipse/plugins/org.eclipse.test/*
+				eclipse/plugins/${org.eclipse.test.performance}/*
+				eclipse/plugins/${org.eclipse.test.performance.win32}/*
+				eclipse/plugins/${org.eclipse.ant.optional.junit}/*
+				${testPluginsRequired}
+				-x eclipse/*/org.eclipse*test*source*/*
+				-d ${install}"/>
 		</exec>
 	</target>
 
@@ -157,7 +165,7 @@
 	</target>
 
 	<target name="performance" if="performance.target.present">
-		<property name="derby" value="**/Cloudscape*/* " />
+		<property name="derby" value="eclipse/plugins/Cloudscape*/* " />
 		<antcall target="setup" />
 		<ant antfile="${eclipse-home}/plugins/${testPlugin}/test.xml" dir="${eclipse-home}" target="performance" />
 		<copy file="${eclipse-home}/${report}.xml" tofile="${results}/xml/${report}_${platform}.xml" failonerror="false" />
@@ -310,6 +318,15 @@
 			<param name="jvm" value="${J2SE-5.0}" />
 		</antcall>
 	</target>
+		
+	<target name="jdtapt">
+		<antcall target="runtests" >
+			<param name="testPlugin" value="${org.eclipse.jdt.apt.tests}" />
+			<param name="report" value="org.eclipse.jdt.apt.tests" />
+			<param name="testPluginsRequired" value="**/${org.eclipse.jdt.apt.tests}/* ${org.eclipse.jdt.apt.tests.prerequisite.testplugins}" />
+			<param name="jvm" value="${J2SE-5.0}" />
+		</antcall>
+	</target>
 
 	<target name="jdtcorebuilder">
 		<antcall target="runtests" >
@@ -458,6 +475,7 @@
 
 	<target name="all">
 		<antcall target="jdttext" />
+		<antcall target="jdtapt" />
 		<antcall target="relEng" />
 		<antcall target="pdeui" />
 		<antcall target="ant" />
