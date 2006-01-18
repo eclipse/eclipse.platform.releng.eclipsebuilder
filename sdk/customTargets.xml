@@ -117,6 +117,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<antcall target="compareMapFiles" />
 		<!--tag the map files project-->
 		<antcall target="tagMapFiles" />
+		<antcall target="getPrebuiltElements" />
 	</target>
 
 	<target name="compareMapFiles" if="compareMaps">
@@ -134,6 +135,12 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag ${buildId}" />
 	</target>
 
+	<target name="getPrebuiltElements">
+		<generateBaseFetchScript
+			mapfile="${buildDirectory}/maps/org.eclipse.releng/maps/base.map"
+			outputfile="${buildDirectory}/fetchbase.xml"/>
+		<ant antfile="${buildDirectory}/fetchbase.xml" />
+	</target>
 	<!-- ===================================================================== -->
 	<!-- Steps to do before setup -->
 	<!-- ===================================================================== -->
