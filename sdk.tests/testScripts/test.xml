@@ -475,7 +475,6 @@
 
 	<target name="all">
 		<antcall target="jdttext" />
-		<antcall target="jdtapt" />
 		<antcall target="relEng" />
 		<antcall target="pdeui" />
 		<antcall target="ant" />
@@ -509,6 +508,7 @@
 		<antcall target="antui" />
 		<antcall target="swt" />
 		<antcall target="teamcvs" />
+		<antcall target="jdtapt" />
 	</target>
 
 	<target name="genHtml" description="Generates HTML results with provided JUNIT.XSL provided">
