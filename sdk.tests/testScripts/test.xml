@@ -144,7 +144,7 @@
 				eclipse/plugins/org.eclipse.test.performance.win32_*/*
 				eclipse/plugins/org.eclipse.ant.optional.junit_*/*
 				${testPluginsRequired}
-				-x eclipse/*/org.eclipse*test*source*/*
+				-x eclipse/*/org.eclipse.sdk.tests.source*/* eclipse/*/org.eclipse.test.source*/*
 				-d ${install}"/>
 		</exec>
 	</target>
@@ -184,7 +184,6 @@
 	</target>
 
 	<target name="ant" description="Runs the org.eclipse.ant.tests.core test.xml">
-		<property name="testPluginId" value="org.eclipse.ant.tests.core" />
 		<antcall target="runtests">
 			<param name="testPlugin" value="${org.eclipse.ant.tests.core}" />
 			<param name="report" value="org.eclipse.ant.tests.core" />
