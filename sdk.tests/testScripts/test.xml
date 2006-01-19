@@ -18,6 +18,7 @@
 
 	<!-- The directory that will contain the xml and html results from the tests that are run -->
 	<property name="results" value="${basedir}/results" />
+	<property name="org.eclipse.test" value="org.eclipse.test" />
 
 	<target name="init">
 		
@@ -136,7 +137,15 @@
 	
 	<target name="installTestPlugins">
 		<exec dir="." executable="unzip">
-			<arg line="-o -qq eclipse-junit-tests-*.zip ${derby} **/org.eclipse.test*/* **/org.eclipse.ant.optional.junit*/** ${testPluginsRequired} -d ${install}"/>
+			<arg line="-o -qq eclipse-junit-tests-*.zip
+				${derby}
+				eclipse/plugins/org.eclipse.test/*
+				eclipse/plugins/org.eclipse.test.performance_*/*
+				eclipse/plugins/org.eclipse.test.performance.win32_*/*
+				eclipse/plugins/org.eclipse.ant.optional.junit_*/*
+				${testPluginsRequired}
+				-x eclipse/*/org.eclipse*test*source*/*
+				-d ${install}"/>
 		</exec>
 	</target>
 
@@ -148,15 +157,16 @@
 		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@root@" value="${cvs_root}"/>
 	</target>
 
-	<target name="junit" depends="setup">
+	<target name="junit">
 		<property name="derby" value="" />
+		<antcall target="setup" />
 		<ant antfile="${eclipse-home}/plugins/${testPlugin}/test.xml" dir="${eclipse-home}" />
 		<copy file="${eclipse-home}/${report}.xml" tofile="${results}/xml/${report}_${platform}.xml" failonerror="false" />
 		<antcall target="genHtml" />
 	</target>
 
 	<target name="performance" if="performance.target.present">
-		<property name="derby" value="**/Cloudscape*/* " />
+		<property name="derby" value="eclipse/plugins/Cloudscape*/* " />
 		<antcall target="setup" />
 		<ant antfile="${eclipse-home}/plugins/${testPlugin}/test.xml" dir="${eclipse-home}" target="performance" />
 		<copy file="${eclipse-home}/${report}.xml" tofile="${results}/xml/${report}_${platform}.xml" failonerror="false" />
@@ -310,6 +320,15 @@
 		</antcall>
 	</target>
 
+	<target name="jdtapt">
+		<antcall target="runtests" >
+			<param name="testPlugin" value="${org.eclipse.jdt.apt.tests}" />
+			<param name="report" value="org.eclipse.jdt.apt.tests" />
+			<param name="testPluginsRequired" value="**/${org.eclipse.jdt.apt.tests}/* ${org.eclipse.jdt.apt.tests.prerequisite.testplugins}" />
+			<param name="jvm" value="${J2SE-5.0}" />
+		</antcall>
+	</target>
+
 	<target name="jdtcorebuilder">
 		<antcall target="runtests" >
 			<param name="testPlugin" value="${org.eclipse.jdt.core.tests.builder}" />
@@ -392,7 +411,7 @@
 	<target name="teamcvs" description="Runs the org.eclipse.team.tests.cvs.core test.xml.  This test requires additional setup.  See documentation in org.eclipse.team.tests.cvs.core">
 		<antcall target="runtests">
 			<param name="testPlugin" value="${org.eclipse.team.tests.cvs.core}" />
-			<param name="report" value="org.eclipse.team.tests.cvs.core" />
+			<param name="report" value="org.eclipse.team.tests.cvs" />
 			<param name="testPluginsRequired" value="**/${org.eclipse.team.tests.cvs.core}/* ${org.eclipse.team.tests.cvs.core.prerequisite.testplugins}" />
 			<param name="teamcvs" value="true"/>
 		</antcall>
@@ -490,6 +509,7 @@
 		<antcall target="antui" />
 		<antcall target="swt" />
 		<antcall target="teamcvs" />
+		<antcall target="jdtapt" />
 	</target>
 
 	<target name="genHtml" description="Generates HTML results with provided JUNIT.XSL provided">
