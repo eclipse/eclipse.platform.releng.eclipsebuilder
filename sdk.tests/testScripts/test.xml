@@ -144,7 +144,7 @@
 				eclipse/plugins/org.eclipse.test.performance.win32_*/*
 				eclipse/plugins/org.eclipse.ant.optional.junit_*/*
 				${testPluginsRequired}
-				-x eclipse/*/org.eclipse*test*source*/*
+				-x eclipse/*/org.eclipse.sdk.tests.source*/* eclipse/*/org.eclipse.test.source*/*
 				-d ${install}"/>
     	</exec>	
   	</target>
