@@ -140,9 +140,9 @@
 			<arg line="-o -qq eclipse-junit-tests-*.zip
 				${derby}
 				eclipse/plugins/org.eclipse.test/*
-				eclipse/plugins/${org.eclipse.test.performance}/*
-				eclipse/plugins/${org.eclipse.test.performance.win32}/*
-				eclipse/plugins/${org.eclipse.ant.optional.junit}/*
+				eclipse/plugins/org.eclipse.test.performance_*/*
+				eclipse/plugins/org.eclipse.test.performance.win32_*/*
+				eclipse/plugins/org.eclipse.ant.optional.junit_*/*
 				${testPluginsRequired}
 				-x eclipse/*/org.eclipse*test*source*/*
 				-d ${install}"/>
