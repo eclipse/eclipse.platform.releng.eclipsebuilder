@@ -218,6 +218,9 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 
 	</target>
 
+	<target name="prePackage" />
+	<target name="postPackage" />
+
 
 	<!-- ===================================================================== -->
 	<!-- Steps to do before running the build.xmls for the elements being built. -->

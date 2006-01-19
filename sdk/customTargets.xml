@@ -293,7 +293,8 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<copy file="${buildDirectory}/plugins/org.eclipse.pde.doc.user/pdeconvert.txt" tofile="${postingDirectory}/${buildLabel}/compilelogs/pde.doc.user.schema.txt" failonerror="false"/>
 	</target>
 
-
+	<target name="prePackage" />
+	<target name="postPackage" />
 	<!-- ===================================================================== -->
 	<!-- Steps to do before running the build.xmls for the elements being built. -->
 	<!-- ===================================================================== -->

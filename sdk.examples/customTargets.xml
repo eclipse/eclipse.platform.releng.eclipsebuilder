@@ -157,6 +157,9 @@
 	<antcall target="gatherLogs" />
 </target>
 
+	<target name="prePackage" />
+	<target name="postPackage" />
+
 <!-- ===================================================================== -->
 <!-- Steps to do after everything is built and assembled -->
 <!-- (e.g., testing, posting, emailing, ...) -->
