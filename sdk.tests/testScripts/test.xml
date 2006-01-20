@@ -309,6 +309,15 @@
 			<param name="testPluginsRequired" value="**/${org.eclipse.help.tests}/* ${org.eclipse.help.tests.prerequisite.testplugins}" />
 		</antcall>
 	</target>
+	
+	<target name="ua" description="Runs the org.eclipse.ua.tests test.xml">
+			<antcall target="runtests" >
+				<param name="testPlugin" value="${org.eclipse.ua.tests}" />
+				<param name="report" value="org.eclipse.ua.tests" />
+				<param name="testPluginsRequired" value="**/${org.eclipse.ua.tests}/* ${org.eclipse.ua.tests.prerequisite.testplugins}" />
+			</antcall>
+		</target>
+	
 
 	<target name="jdtcorecompiler">
 		<antcall target="runtests" >
@@ -509,6 +518,7 @@
 		<antcall target="swt" />
 		<antcall target="teamcvs" />
 		<antcall target="jdtapt" />
+		<antcall target="ua" />
 	</target>
 
 	<target name="genHtml" description="Generates HTML results with provided JUNIT.XSL provided">
