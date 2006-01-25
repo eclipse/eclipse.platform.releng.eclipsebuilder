@@ -411,6 +411,13 @@
 		<effectedFile id="RCPSDKLG2"></effectedFile>
 	</logFile>
 
+	<logFile name="org.eclipse.jdt.apt.tests_win32.win32.x86.xml">
+		<effectedFile id="SW"></effectedFile>
+		<effectedFile id="JA"></effectedFile>
+		<effectedFile id="JASDK"></effectedFile>
+		<effectedFile id="JMCSDK"></effectedFile>
+		<effectedFile id="JMC"></effectedFile>
+	</logFile>
 
 	<logFile name="org.eclipse.jdt.core.tests.builder_win32.win32.x86.xml">
 		<effectedFile id="SW"></effectedFile>
@@ -436,6 +443,14 @@
 		<effectedFile id="JMCSDK"></effectedFile>
 	</logFile>
 	
+	<logFile name="org.eclipse.jdt.apt.tests_linux.gtk.x86.xml">
+		<effectedFile id="SLG2"></effectedFile>
+		<effectedFile id="JA"></effectedFile>
+		<effectedFile id="JMC"></effectedFile>
+		<effectedFile id="JASDK"></effectedFile>
+		<effectedFile id="JMCSDK"></effectedFile>
+	</logFile>
+
 	<logFile name="org.eclipse.jdt.core.tests.builder_linux.gtk.x86.xml">
 		<effectedFile id="SLG2"></effectedFile>
 		<effectedFile id="JA"></effectedFile>
@@ -460,12 +475,28 @@
 		<effectedFile id="JMCSDK"></effectedFile>
 	</logFile>
 	
+	<logFile name="org.eclipse.ua.tests_linux.gtk.x86.xml">
+		<effectedFile id="SLG2"></effectedFile>
+		<effectedFile id="PLG2"></effectedFile>
+		<effectedFile id="RCPLG2"></effectedFile>
+		<effectedFile id="PLG2SDK"></effectedFile>
+		<effectedFile id="RCPSDKLG2"></effectedFile>
+	</logFile>
+
 	<logFile name="org.eclipse.ui.tests_linux.gtk.x86.xml">
 		<effectedFile id="SLG2"></effectedFile>
 		<effectedFile id="PLG2"></effectedFile>
 		<effectedFile id="RCPLG2"></effectedFile>
 		<effectedFile id="PLG2SDK"></effectedFile>
 		<effectedFile id="RCPSDKLG2"></effectedFile>
+	</logFile>
+
+	<logFile name="org.eclipse.ua.tests_win32.win32.x86.xml">
+		<effectedFile id="SW"></effectedFile>
+		<effectedFile id="PW"></effectedFile>
+		<effectedFile id="PWSDK"></effectedFile>
+		<effectedFile id="RCPW"></effectedFile>
+		<effectedFile id="RCPSDKW"></effectedFile>
 	</logFile>
 
 	<logFile name="org.eclipse.ui.tests_win32.win32.x86.xml">
@@ -658,6 +689,13 @@
 		<effectedFile id="RCPSDKMC"></effectedFile>
 	</logFile>
 
+	<logFile name="org.eclipse.jdt.apt.tests_macosx.carbon.ppc.xml">
+		<effectedFile id="SMC"></effectedFile>
+		<effectedFile id="JA"></effectedFile>
+		<effectedFile id="JMC"></effectedFile>
+		<effectedFile id="JASDK"></effectedFile>
+		<effectedFile id="JMCSDK"></effectedFile>
+	</logFile>
 
 	
 	<logFile name="org.eclipse.jdt.core.tests.builder_macosx.carbon.ppc.xml">
@@ -682,6 +720,14 @@
 		<effectedFile id="JMC"></effectedFile>
 		<effectedFile id="JASDK"></effectedFile>
 		<effectedFile id="JMCSDK"></effectedFile>
+	</logFile>
+	
+	<logFile name="org.eclipse.ua.tests_macosx.carbon.ppc.xml">
+		<effectedFile id="SMC"></effectedFile>
+		<effectedFile id="PMC"></effectedFile>
+		<effectedFile id="RCPMC"></effectedFile>
+		<effectedFile id="PMCSDK"></effectedFile>
+		<effectedFile id="RCPSDKMC"></effectedFile>
 	</logFile>
 	
 	<logFile name="org.eclipse.ui.tests_macosx.carbon.ppc.xml">
