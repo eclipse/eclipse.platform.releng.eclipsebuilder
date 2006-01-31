@@ -186,7 +186,7 @@
 		</parallel>
 	</target>
 
-	<target name="test-JUnit">
+	<target name="test-JUnit" unless="skip.tests">
 		<echo message="Starting tests." />
 		<property name="dropLocation" value="${postingDirectory}" />
 		<ant antfile="testAll.xml" dir="${eclipse.build.scripts}/sdk.tests/testConfigs" />

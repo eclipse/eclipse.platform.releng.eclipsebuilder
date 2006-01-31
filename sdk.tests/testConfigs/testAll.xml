@@ -76,6 +76,12 @@
 				<param name="cfgKey" value="eclipse30LinuxGtkTestPerf2" />
 				<param name="markerName" value="eclipse30-linux-gtk-perf2-${timestamp}" />
 			</antcall>
+			<antcall target="test">
+				<param name="tester" value="${basedir}/rhelws4-linux-gtk-perf" />
+				<param name="sleep" value="300" />
+				<param name="cfgKey" value="eclipse31LinuxGtkTestPerf3" />
+				<param name="markerName" value="eclipse31-linux-gtk-perf3-${timestamp}" />
+			</antcall>
 		</parallel>
 	</target>
 </project>
