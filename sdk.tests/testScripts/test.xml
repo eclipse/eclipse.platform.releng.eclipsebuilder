@@ -465,7 +465,15 @@
 			<param name="testPluginsRequired" value="**/${org.eclipse.ui.tests.performance}/* ${org.eclipse.ui.tests.performance.prerequisite.testplugins}" />
 		</antcall>
 	</target>
-				
+
+	<target name="uiviews" description="Runs the org.eclipse.ui.tests.views.properties.tabbed test.xml">
+		<antcall target="runtests">
+			<param name="testPlugin" value="${org.eclipse.ui.tests.views.properties.tabbed}" />
+			<param name="report" value="org.eclipse.ui.tests.views.properties.tabbed" />
+			<param name="testPluginsRequired" value="**/${org.eclipse.ui.tests.views.properties.tabbed}/* ${org.eclipse.ui.tests.views.properties.tabbed.prerequisite.testplugins}" />
+		</antcall>
+	</target>
+
 	<target name="uiworkbenchtexteditor" description="Runs the org.eclipse.ui.workbench.texteditor.tests test.xml">
 		<antcall target="runtests">
 			<param name="testPlugin" value="${org.eclipse.ui.workbench.texteditor.tests}" />
@@ -505,6 +513,7 @@
 		<antcall target="uinavigator" />
 		<antcall target="uiworkbenchtexteditor" />
 		<antcall target="uircp" />
+		<antcall target="uiviews" />
 		<antcall target="jdtdebug" />
 		<antcall target="jdtui" />
 		<antcall target="jdtuirefactoring" />
