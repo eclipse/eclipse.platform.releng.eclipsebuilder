@@ -113,6 +113,8 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		dest="${buildDirectory}/maps"
 		tag="${mapVersionTag}"
 	/>
+		
+		<sleep seconds="180" />
 		<!--compare the map files project-->
 		<antcall target="compareMapFiles" />
 		<!--tag the map files project-->
