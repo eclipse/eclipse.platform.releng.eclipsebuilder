@@ -40,7 +40,7 @@
 <h4>System Requirements</h4>
 <ol>
   <li><a href="http://ant.apache.org/">Ant 1.6.1</a> or higher</li>
-  <li><a href="http://java.sun.com/j2se/1.4/download.html">JDK 1.4</a></li>
+  <li><a href="http://java.sun.com/j2se/1.5.0/download.jsp">JDK 1.5</a></li>
   <li><a target="extra" href="http://www.info-zip.org/pub/infozip/">Info-Zip</a> 
     zip and unzip executables on system path. Tar for *nix distributions</li>
   <li>1 GB free disk space</li>
@@ -88,9 +88,8 @@ the following environment variables set.
         <td width="70%">The list of bootclasspath jars to compile against using 
           either a colon or semi-colon as separators. The jars that make up a 
           bootclasspath are part of any JDK or JRE. Typically this parameter is 
-          only specified if you are cross compiling Eclipse or using a JDK which 
-          does not use a &quot;rt.jar&quot; to contain the java libraries. The 
-          default is the rt.jar on your path.</td>
+          only specified if you are cross compiling Eclipse. The 
+          default is set to the list of jars under JAVA_HOME.</td>
       </tr>
 	   <tr> 
         <td width="30%">compilelibs</td>
@@ -226,7 +225,6 @@ If you are building for Linux or Mac, there will be a tar.gz file. </p>
     the swt libraries</a>  available in the <a href="http://dev.eclipse.org/viewcvs/index.cgi/%7Echeckout%7E/platform-swt-home/faq.html">SWT
     FAQ</a> are also a useful reference. This document also includes a list of the prerequisites <a href="http://dev.eclipse.org/viewcvs/index.cgi/%7Echeckout%7E/platform-swt-home/faq.html#gtkstartup">for
     running  SWT on Linux GTK</a> </li>
-	<li>If you wish to use a 1.5 JDK to build Eclipse, change the value for javacSource to 1.4 in the build.xml of your source build.</li>
 
 <property name="javacSource" value="1.4" /></li>
 </ol>
