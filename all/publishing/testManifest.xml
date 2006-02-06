@@ -512,15 +512,17 @@
 		<effectedFile id="PW"></effectedFile>
 		<effectedFile id="PWSDK"></effectedFile>
 	</logFile>
-	<logFile name="org.eclipse.ui.tests.views.properties.tabbed_win32.win32.x86.xml">
-		<effectedFile id="SW"></effectedFile>
-		<effectedFile id="PW"></effectedFile>
-		<effectedFile id="PWSDK"></effectedFile>
+
+	<logFile name="org.eclipse.ui.tests.views.properties.tabbed_linux.gtk.x86.xml">
+		<effectedFile id="SLG"></effectedFile>
+		<effectedFile id="PLG"></effectedFile>
+		<effectedFile id="PLG2SDK"></effectedFile>
 	</logFile>
-	<logFile name="org.eclipse.ui.tests.views.properties.tabbed_win32.win32.x86.xml">
-		<effectedFile id="SW"></effectedFile>
-		<effectedFile id="PW"></effectedFile>
-		<effectedFile id="PWSDK"></effectedFile>
+
+	<logFile name="org.eclipse.ui.tests.views.properties.tabbed_macosx.carbon.ppc.xml">
+		<effectedFile id="SMC"></effectedFile>
+		<effectedFile id="PMC"></effectedFile>
+		<effectedFile id="PMCSDK"></effectedFile>
 	</logFile>
 
 
