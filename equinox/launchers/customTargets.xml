@@ -185,6 +185,12 @@
 		 		 <antcall target="updateTestManifest">
 			 		 <param name="bundle.id" value="org.eclipse.equinox.wireadmin"/>
 		 		 </antcall>
+			 	<antcall target="buildBundle">
+	 		 		 <param name="bundle.id" value="org.eclipse.equinox.servlet.api"/>
+		 		 </antcall>
+		 		 <antcall target="updateTestManifest">
+    			 	  <param name="bundle.id" value="org.eclipse.equinox.servlet.api"/>
+		 		 </antcall>
 		 </target>
 
 		 <target name="buildBundle">
@@ -229,25 +235,27 @@
 		 <!-- ===================================================================== -->
 		 <target name="postBuild">
 		 		 <property name="postingDirectory" value="${buildDirectory}}" />
-		 		 <antcall target="updateTestManifest">
-		 		 		 		 		 <param name="bundle.id" value="org.eclipse.osgi" />
-		 		 		 		 </antcall>
-		 		 		 		 <antcall target="updateTestManifest">
-		 		 		 		 		 <param name="bundle.id" value="org.eclipse.osgi.util" />
-		 		 		 		 </antcall>
-		 		 		 		 <antcall target="updateTestManifest">
-		 		 		 		 		 <param name="bundle.id" value="org.eclipse.osgi.services" />
-		 		 		 		 </antcall>
-		 		 		 		 <antcall target="updateTestManifest">
-		 		 		 		 		 		 		 <param name="bundle.id" value="org.eclipse.equinox.registry" />
-		 		 		     </antcall>
-		 		 		 		 <antcall target="updateTestManifest">
-		 		 		 		 		 		 		 <param name="bundle.id" value="org.eclipse.equinox.preferences" />
-		 		 		     </antcall>
-		 		 		 		 <antcall target="updateTestManifest">
-		 		 		 		 		 		 		 <param name="bundle.id" value="org.eclipse.equinox.common" />		 		 		 
-		 		 		 		 </antcall> 		 
-		 		 		 		 
+		 		 		 <antcall target="updateTestManifest">
+		 		 		 	 <param name="bundle.id" value="org.eclipse.osgi" />
+ 			 			 </antcall>
+ 		 		 		 <antcall target="updateTestManifest">
+ 		 			 		 <param name="bundle.id" value="org.eclipse.osgi.util" />
+ 			 			 </antcall>
+ 		 		 		 <antcall target="updateTestManifest">
+ 		 			 		 <param name="bundle.id" value="org.eclipse.osgi.services" />
+	 		 	 		 </antcall>
+ 		 		 		 <antcall target="updateTestManifest">
+			 		 		 <param name="bundle.id" value="org.eclipse.equinox.registry" />
+		 	 		     </antcall>
+		 		 		 <antcall target="updateTestManifest">
+			 		 		 <param name="bundle.id" value="org.eclipse.equinox.preferences" />
+	 		 		     </antcall>
+ 		 		 		 <antcall target="updateTestManifest">
+	 		 		 		 <param name="bundle.id" value="org.eclipse.equinox.common" />		 		 		 
+ 		 		 		 </antcall> 						
+		 				 <antcall target="updateTestManifest">
+		 		 	 		 <param name="bundle.id" value="org.eclipse.equinox.servlet.api" />		 		 		 
+		 		 		 </antcall> 			 			 		 		 		 
 		 		 <available classname="org.eclipse.releng.generators.EclipseTestResultsGenerator" property="class" value="org.eclipse.releng.generators.EclipseTestResultsGenerator" />
 		 		 <taskdef name="indexResults" classname="${class}" />
 

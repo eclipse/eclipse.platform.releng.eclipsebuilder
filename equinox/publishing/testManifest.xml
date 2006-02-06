@@ -36,6 +36,8 @@
 			</platform>
 			<platform id="wireadmin" name="All" fileName="@org.eclipse.equinox.wireadmin@.jar">
 			</platform>
+			<platform id="servletapi" name="All" fileName="@org.eclipse.equinox.servlet.api@.jar">
+			</platform>
 			<platform id="EBF" name="All" fileName="eclipse-equinox-@buildid@.zip">
 			</platform>
 		</zipType>
