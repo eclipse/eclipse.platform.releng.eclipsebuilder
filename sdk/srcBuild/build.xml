@@ -246,7 +246,7 @@
 
 		<!--bootclasspath-->
 		<!--determine if 1.5 libraries are available-->
-		<echo message="ant.java.version is ${ant.java.version}" />
+		<echo message="java.version is ${ant.java.version}" />
 		<condition property="java5.home" value="${java.home}">
 			<equals arg1="${ant.java.version}" arg2="1.5" />
 		</condition>
