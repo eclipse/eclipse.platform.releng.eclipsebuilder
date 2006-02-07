@@ -185,6 +185,12 @@
 		 		 <antcall target="updateTestManifest">
 			 		 <param name="bundle.id" value="org.eclipse.equinox.wireadmin"/>
 		 		 </antcall>
+			 	<antcall target="buildBundle">
+	 		 		 <param name="bundle.id" value="org.eclipse.equinox.servlet.api"/>
+		 		 </antcall>
+		 		 <antcall target="updateTestManifest">
+    			 	  <param name="bundle.id" value="org.eclipse.equinox.servlet.api"/>
+		 		 </antcall>
 		 </target>
 
 		 <target name="buildBundle">

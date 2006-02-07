@@ -159,7 +159,7 @@
 		<!--copy buildnotes from plugin directories-->
 		<mkdir dir="${postingDirectory}/${buildLabel}/buildnotes" />
 		<copy todir="${postingDirectory}/${buildLabel}/buildnotes" flatten="true">
-			<fileset dir="${buildDirectory}/plugins" includes="**/buildnotes_*.html,**/jdt_core_style.css" />
+			<fileset dir="${buildDirectory}/plugins" includes="**/buildnotes_*.html,**/buildnotes_*.htm,**/jdt_core_style.css" />
 		</copy>
 	</target>
 
@@ -307,9 +307,9 @@
 					-current ${buildId}
 					-jvm ${eclipse.perf.jvm}
 					-output ${postingDirectory}/${buildLabel}/performance/
-					-config eclipseperfwin1_R3.2,eclipseperflnx1_R3.2,eclipseperfwin2_R3.2,eclipseperflnx2_R3.2
+					-config eclipseperfwin1_R3.2,eclipseperflnx1_R3.2,eclipseperfwin2_R3.2,eclipseperflnx2_R3.2,eclipseperflnx3_R3.2
 					-config.properties ${eclipse.perf.config.descriptors}
-					-highlight.latest 3.0.2_,2.1.3_
+					-highlight.latest 3.0.2_,2.1.3_,3.2M1_,3.2M2_,3.2M3_,3.2M4_
 					-scenario.pattern org.eclipse.%.test"
 				/>
 			<env key="LD_LIBRARY_PATH" value="${basedir}/../org.eclipse.releng.basebuilder" />
