@@ -252,7 +252,7 @@
 		</condition>
 
 		<fail unless="java5.home" message="JAVA 1.5 libaries are required to compile the JDT APT plug-ins in the Eclipse SDK.
-		  Please set your JAVA_HOME environment variable to a 1.5 java install.">
+		  Please set the -java5home command line argument to the root of a 1.5 java install.">
 		</fail>
 		
 		<path id="default.bootclasspath">
