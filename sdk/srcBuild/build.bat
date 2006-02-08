@@ -32,7 +32,7 @@ REM verify that ws and os values and combinations are valid
 if x%os%==x goto usage
 if x%ws%==x goto usage 
 if x%arch%==x goto usage
-if x%java5-home%=x goto usage
+if x%java5home%==x goto usage
 if %os%-%ws%-%arch%==win32-win32-x86 goto run
 if %os%-%ws%-%arch%==linux-motif-x86 goto run
 if %os%-%ws%-%arch%==linux-gtk-x86 goto run
