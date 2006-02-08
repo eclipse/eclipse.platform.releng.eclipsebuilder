@@ -6,8 +6,9 @@ ws=""
 arch=""
 target=""
 bootclasspath=""
+set java5home=""
 
-usage="usage: $0 -os <osType> -ws <windowingSystemType> -arch <architecture> [-bc <bootclasspath>] [-compilelibs] [-target <target>]"
+usage="usage: $0 -os <osType> -ws <windowingSystemType> -arch <architecture> -java5home <path to root of 1.5 JDK or JRE install> [-bc <bootclasspath>] [-compilelibs] [-target <target>]"
 
 compilelibs=""
 
@@ -23,6 +24,7 @@ do
 		-os) os="$2"; shift;;
 		-ws) ws="$2"; shift;;		 
 		-arch) arch="$2";shift;;
+		-java5home) bootclasspath="-Djava5.home=$2"; shift;;  
 		-bc) bootclasspath="-Dbootclasspath=$2"; shift;;  
 	    -compilelibs) compilelibs="-Dlibsconfig=true";;    
 		-target) target="$2"; shift;;
@@ -33,6 +35,12 @@ do
 	esac
 	shift
 done
+
+if [ "x$java5home" = "x" ]
+then
+	echo >&2 "$usage"
+	exit 1
+fi
 
 if [ "x$os" = "x" ]
 then

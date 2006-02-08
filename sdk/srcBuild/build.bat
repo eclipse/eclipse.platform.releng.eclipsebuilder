@@ -7,6 +7,7 @@ set arch=x86
 set target=
 set ANT_CMD_LINE_ARGS=
 set bootclasspath=
+set java5home=
 set compiler=
 set compilelibs=
 set ANT_OPTS=-Xmx768m
@@ -17,9 +18,9 @@ REM process all command line parameters
 if x%1==x goto checkvars
 if x%1==x-os set os=%2
 if x%1==x-ws set ws=%2
+if x%1==x-java5home set java5home="-Djava5.home=%2"
 if x%1==x-bc set bootclasspath="-Dbootclasspath=%2"
 if x%1==x-compilelibs set compilelibs="-Dlibsconfig=true"
-
 if x%1==x-target set target=%2
 if x%1==x-arch set arch=%2
 shift
@@ -30,7 +31,7 @@ REM verify that ws and os values and combinations are valid
 if x%os%==x goto usage
 if x%ws%==x goto usage 
 if x%arch%==x goto usage
-
+if x%java5-home%=x goto usage
 if %os%-%ws%-%arch%==win32-win32-x86 goto run
 if %os%-%ws%-%arch%==linux-motif-x86 goto run
 if %os%-%ws%-%arch%==linux-gtk-x86 goto run
@@ -49,7 +50,7 @@ ECHO The ws os arch combination entered is not valid.
 goto end
 
 :usage
-ECHO "usage %0 -os <osType> -ws <windowingSystem> -arch <architecture> [-bc bootclasspath]  [-compilelibs] [-target target]"
+ECHO "usage %0 -os <osType> -ws <windowingSystem> -arch <architecture> -java5home <path to root of 1.5 JDK or JRE install>[-bc bootclasspath]  [-compilelibs] [-target target]"
 goto end
 
 :run
@@ -58,7 +59,7 @@ call ant -q -buildfile jdtcoresrc/compilejdtcorewithjavac.xml
 set CLASSPATH=jdtcoresrc/ecj.jar;%CLASSPATH
 call ant -q -buildfile jdtcoresrc/compilejdtcore.xml
 set CLASSPATH=ecj.jar;%ORIGCLASSPATH
-ant -q -buildfile build.xml %target% -DinstallOs=%os% -DinstallWs=%ws% -DinstallArch=%arch% %compilelibs%  %bootclasspath%
+ant -q -buildfile build.xml %target% -DinstallOs=%os% -DinstallWs=%ws% -DinstallArch=%arch% %compilelibs%  %bootclasspath% %java5home%
 goto end
 
 :end

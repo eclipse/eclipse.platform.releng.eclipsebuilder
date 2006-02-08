@@ -90,8 +90,8 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
 		<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
 		<ant antfile="${assembleScriptName}" />
-		<checksum file="${archiveFullPath}" property="md5"/>
-		<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5"/>
+		<!--checksum file="${archiveFullPath}" property="md5"/>
+		<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5"/-->
 	</target>
 
 
@@ -357,12 +357,19 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
 		<property name="tempDir" value="${basedir}/temp" />
 		<mkdir dir="${tempDir}/buildScripts" />
+		<mkdir dir="${tempDir}/buildScripts/baseLocation" />
+
 
 		<copy file="${buildDirectory}/label.properties" todir="${tempDir}/buildScripts" />
 
 		<copy todir="${tempDir}/buildScripts" flatten="true" overwrite="true">
 			<fileset dir="${eclipse.build.scripts}/sdk/srcBuild" excludes="incl,fetch/**,jdtcoresrc/**" />
 		</copy>
+
+		<copy todir="${tempDir}/buildScripts/baseLocation">
+			<fileset dir="${baseLocation}" />
+		</copy>
+		
 		<mkdir dir="${tempDir}/buildScripts/jdtcoresrc"/>
 		<copy todir="${tempDir}/buildScripts/jdtcoresrc">
 			<fileset dir="${eclipse.build.scripts}/sdk/srcBuild/jdtcoresrc"/>
@@ -376,7 +383,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<ant antfile="buildDoc.xml" target="examplesDocCopy" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv"/>
 
 		<copy todir="${tempDir}/buildScripts">
-			<fileset dir="${buildDirectory}" excludes="features/*example*/**,plugins/*example*/**" includes="features/*/build.xml,features/*.source*/**,plugins/*/build.xml,plugins/*.source*/**,fetch_*.xml,assemble*.xml,plugins/org.eclipse.swt.tools/**,plugins/*doc*/**" />
+			<fileset dir="${buildDirectory}" excludes="features/*example*/**,plugins/*example*/**" includes="features/*/build.xml,features/*.source*/**,plugins/*/build.xml,plugins/*.source*/**,fetch_*.xml,assemble*.xml,package*.xml,plugins/org.eclipse.swt.tools/**,plugins/*doc*/**" />
 		</copy>
 		<!--ensure linux drops are created as .tar.gz files -->
 		<replace dir="${tempDir}/buildScripts" includes="assemble*" excludes="*win32*,*hpux*,*solaris*,*aix*" token=".zip" value=".tar.gz"/>
