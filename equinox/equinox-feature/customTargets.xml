@@ -38,6 +38,8 @@
 			<fileset dir="${buildDirectory}/${buildLabel}" />
 		</move>
 	</target>
+	
+	<target name="prePackage"/>
 	<!-- ===================================================================== -->
 	<!-- Check out map files from correct repository -->
 	<!-- Replace values for cvsRoot, package and mapVersionTag as desired. -->
