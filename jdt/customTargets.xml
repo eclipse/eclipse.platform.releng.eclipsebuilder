@@ -30,13 +30,18 @@
 </target>
 
 <target name="assemble">
-	<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
-	<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
+	<property name="archiveFullPath" value="${buildDirectory}/${buildLabel}/${archiveName}" />
 	<ant antfile="${assembleScriptName}" />
-	<checksum file="${archiveFullPath}" property="md5"/>
-	<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5"/>
 </target>
-
+	<target name="postPackage">
+		<mkdir dir="${buildDirectory}/${buildLabel}/checksum"/>
+		<exec executable="sh" dir="${buildDirectory}/${buildLabel}">
+			<arg line="${builder}/../all/produceChecksum" />
+		</exec>
+		<move todir="${postingDirectory}/${buildLabel}">
+			<fileset dir="${buildDirectory}/${buildLabel}" />
+		</move>
+	</target>
 <!-- ===================================================================== -->
 <!-- Check out map files from correct repository -->
 <!-- Replace values for cvsRoot, package and mapVersionTag as desired. -->
@@ -152,7 +157,7 @@
 </target>
 
 	<target name="prePackage" />
-	<target name="postPackage" />
+	
 
 <!-- ===================================================================== -->
 <!-- Steps to do after everything is built and assembled -->
