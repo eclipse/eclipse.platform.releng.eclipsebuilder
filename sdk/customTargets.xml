@@ -88,10 +88,8 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 
 	<target name="assemble">
 		<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
-		<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
+		<property name="archiveFullPath" value="${buildDirectory}/${buildLabel}/${archiveName}" />
 		<ant antfile="${assembleScriptName}" />
-		<checksum file="${archiveFullPath}" property="md5"/>
-		<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5"/>
 	</target>
 
 
@@ -117,6 +115,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<antcall target="compareMapFiles" />
 		<!--tag the map files project-->
 		<antcall target="tagMapFiles" />
+		<antcall target="getPrebuiltElements" />
 	</target>
 
 	<target name="compareMapFiles" if="compareMaps">
@@ -134,6 +133,12 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag ${buildId}" />
 	</target>
 
+	<target name="getPrebuiltElements">
+		<generateBaseFetchScript
+			mapfile="${buildDirectory}/maps/org.eclipse.releng/maps/base.map"
+			outputfile="${buildDirectory}/fetchbase.xml"/>
+		<ant antfile="${buildDirectory}/fetchbase.xml" />
+	</target>
 	<!-- ===================================================================== -->
 	<!-- Steps to do before setup -->
 	<!-- ===================================================================== -->
@@ -286,6 +291,16 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<copy file="${buildDirectory}/plugins/org.eclipse.pde.doc.user/pdeconvert.txt" tofile="${postingDirectory}/${buildLabel}/compilelogs/pde.doc.user.schema.txt" failonerror="false"/>
 	</target>
 
+	<target name="prePackage" />
+	<target name="postPackage">
+		<mkdir dir="${buildDirectory}/${buildLabel}/checksum"/>
+		<exec executable="sh" dir="${buildDirectory}/${buildLabel}">
+			<arg line="${builder}/../all/produceChecksum" />
+		</exec>
+		<move todir="${postingDirectory}/${buildLabel}">
+			<fileset dir="${buildDirectory}/${buildLabel}" />
+		</move>
+	</target>
 
 	<!-- ===================================================================== -->
 	<!-- Steps to do before running the build.xmls for the elements being built. -->
@@ -349,12 +364,18 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
 		<property name="tempDir" value="${basedir}/temp" />
 		<mkdir dir="${tempDir}/buildScripts" />
+		<mkdir dir="${tempDir}/buildScripts/baseLocation" />
 
 		<copy file="${buildDirectory}/label.properties" todir="${tempDir}/buildScripts" />
 
 		<copy todir="${tempDir}/buildScripts" flatten="true" overwrite="true">
 			<fileset dir="${eclipse.build.scripts}/sdk/srcBuild" excludes="incl,fetch/**,jdtcoresrc/**" />
 		</copy>
+
+		<copy todir="${tempDir}/buildScripts/baseLocation">
+			<fileset dir="${baseLocation}" />
+		</copy>
+		
 		<mkdir dir="${tempDir}/buildScripts/jdtcoresrc"/>
 		<copy todir="${tempDir}/buildScripts/jdtcoresrc">
 			<fileset dir="${eclipse.build.scripts}/sdk/srcBuild/jdtcoresrc"/>
@@ -368,7 +389,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<ant antfile="buildDoc.xml" target="examplesDocCopy" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv"/>
 
 		<copy todir="${tempDir}/buildScripts">
-			<fileset dir="${buildDirectory}" excludes="features/*example*/**,plugins/*example*/**" includes="features/*/build.xml,features/*.source*/**,plugins/*/build.xml,plugins/*.source*/**,features/*/javaCompiler*args,plugins/*/javaCompiler*args,fetch_*.xml,assemble*.xml,plugins/org.eclipse.swt.tools/**,plugins/*doc*/**" />
+			<fileset dir="${buildDirectory}" excludes="features/*example*/**,plugins/*example*/**" includes="features/*/build.xml,features/*.source*/**,plugins/*/build.xml,plugins/*.source*/**,fetch_*.xml,assemble*.xml,package*.xml,plugins/org.eclipse.swt.tools/**,plugins/*doc*/**" />
 		</copy>
 		<!--ensure linux drops are created as .tar.gz files -->
 		<replace dir="${tempDir}/buildScripts" includes="assemble*" excludes="*win32*,*hpux*,*solaris*,*aix*" token=".zip" value=".tar.gz"/>

@@ -61,13 +61,23 @@
 		 </target>
 
 		 <target name="assemble">
-		 		 <mkdir dir="${equinoxPostingDirectory}/${buildLabel}/checksum" />
-		 		 <property name="archiveFullPath" value="${equinoxPostingDirectory}/${buildLabel}/${archiveName}" />
+		 		 <property name="archiveFullPath" value="${buildDirectory}/${buildLabel}/${archiveName}" />
 		 		 <ant antfile="${assembleScriptName}" />
-		 		 <checksum file="${archiveFullPath}" property="md5" />
-		 		 <echo message="${md5} *${archiveName}" file="${equinoxPostingDirectory}/${buildLabel}/checksum/${archiveName}.md5" />
 		 </target>
+	<target name="postPackage">
+		 <exec executable="unzip" dir="${basedir}">
+		 		 <arg line="-j ${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-win32.zip eclipse/plugins/org.eclipse.osgi* eclipse/plugins/org.eclipse.equinox* -d ${equinoxPostingDirectory}/${buildLabel}"/>		 		 		 		 		 		 
+		 </exec>
+		 <antcall target="buildBundles"/>
 
+		<mkdir dir="${buildDirectory}/${buildLabel}/checksum"/>
+		<exec executable="sh" dir="${buildDirectory}/${buildLabel}">
+			<arg line="${builder}/../all/produceChecksum" />
+		</exec>
+		<move todir="${equinoxPostingDirectory}/${buildLabel}">
+			<fileset dir="${buildDirectory}/${buildLabel}" />
+		</move>
+	</target>
 		 <!-- ===================================================================== -->
 		 <!-- Check out map files from correct repository -->
 		 <!-- Replace values for cvsRoot, package and mapVersionTag as desired. -->
@@ -124,10 +134,6 @@
 		 <!-- Steps to do after assembling-->
 		 <!-- ===================================================================== -->
 		 <target name="postAssemble">
-		 		 <exec executable="unzip" dir="${basedir}">
-		 		 		 <arg line="-j ${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-win32.zip eclipse/plugins/org.eclipse.osgi* eclipse/plugins/org.eclipse.equinox* -d ${equinoxPostingDirectory}/${buildLabel}"/>		 		 		 		 		 		 
-		 		 </exec>
-		 		 <antcall target="buildBundles"/>
 		 </target>
 
 		 <target name="buildBundles">
@@ -206,7 +212,7 @@
 		 		 		 <property name="type" value="plugin" />
 		 		 		 <property name="id" value="${bundle.id}" />
 		 		 </ant>
-		 		  <copy todir="${equinoxPostingDirectory}/${buildLabel}" failonerror="false">
+		 		  <copy todir="${buildDirectory}/${buildLabel}" failonerror="false">
 		 		     <fileset dir="${buildDirectory}/plugins/${bundle.id}">
 		 		     		 <include name="${bundle.id}*.jar"/>
 		 		     </fileset>
@@ -229,6 +235,8 @@
 		 <target name="postProcess">			
 		 </target>
 
+		<target name="prePackage" />
+		
 		 <!-- ===================================================================== -->
 		 <!-- Steps to do after everything is built and assembled -->
 		 <!-- (e.g., testing, posting, emailing, ...) -->
@@ -335,8 +343,8 @@
 		 <!-- Helper targets -->
 		 <!-- ===================================================================== -->		 
 		 <target name="updateTestManifest">		                                                                           
-		 		 <apply executable="ls" output="${buildDirectory}/${bundle.id}.txt" dir="${equinoxPostingDirectory}/${buildLabel}">
-		 		 <fileset dir="${equinoxPostingDirectory}/${buildLabel}">
+		 		 <apply executable="ls" output="${buildDirectory}/${bundle.id}.txt" dir="${buildDirectory}/${buildLabel}">
+		 		 <fileset dir="${buildDirectory}/${buildLabel}">
 		 		     <patternset>
 		 		       <include name="${bundle.id}_*.jar"/>
 		 		     </patternset>

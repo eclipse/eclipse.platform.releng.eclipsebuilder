@@ -141,6 +141,11 @@
 			and help indeces.-->
 			<property name="doc.zip.present" value="true" />
 		</ant>
+		<ant antfile="package.org.eclipse.sdk.${installOs}.${installWs}.${installArch}.xml">
+			<!--set property to delay building of doc.zips to later.  Doc built in this step would be missing extension point doc
+			and help indeces.-->
+			<property name="doc.zip.present" value="true" />
+		</ant>
 		<antcall target="build.doc.plugins" />
 		<echo message="Done." />
 	</target>
@@ -234,6 +239,9 @@
 
 		<!--  directory where to perform the build  -->
 		<property name="buildDirectory" value="${basedir}" />
+
+		<!--  directory which includes elements which are not to be recompiled  -->
+		<property name="baseLocation" value="${buildDirectory}/baseLocation" />
 
 		<!--  identifies build type and original build date  -->
 		<property file="${basedir}/label.properties" />

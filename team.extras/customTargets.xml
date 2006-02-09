@@ -26,12 +26,18 @@
 </target>
 
 <target name="assemble">
-	<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
-	<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
+		<property name="archiveFullPath" value="${buildDirectory}/${buildLabel}/${archiveName}" />
 	<ant antfile="${assembleScriptName}" />
-	<checksum file="${archiveFullPath}" property="md5"/>
-	<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5"/>
 </target>
+		<target name="postPackage">
+			<mkdir dir="${buildDirectory}/${buildLabel}/checksum"/>
+			<exec executable="sh" dir="${buildDirectory}/${buildLabel}">
+				<arg line="${builder}/../all/produceChecksum" />
+			</exec>
+			<move todir="${postingDirectory}/${buildLabel}">
+				<fileset dir="${buildDirectory}/${buildLabel}" />
+			</move>
+		</target>
 
 <!-- ===================================================================== -->
 <!-- Check out map files from correct repository -->
@@ -54,10 +60,29 @@
 	/>
 	<!--tag the map files project-->
 	<antcall target="tagMapFiles" />
+	<antcall target="getPrebuiltElements" />
+</target>
+
+<target name="compareMapFiles" if="compareMaps">
+	<property file="${mapTag.properties}"/>
+	<property name="cvsDiffFile" value="${buildDirectory}/cvsDiff.txt" />
+	<cvs cvsRoot="${mapCvsRoot}" dest="${buildDirectory}/maps" command="diff -w -r ${lastMapTag}" output="${cvsDiffFile}" />
+	<modifiedMaps mapDiffFile="${cvsDiffFile}" />
 </target>
 
 <target name="tagMapFiles" if="tagMaps">
+	<!-- Stores tag on the filesystem so map files can be compared -->
+	<echo file="${mapTag.properties}">
+	lastMapTag=${buildId}
+</echo>
 	<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag ${buildId}" />
+</target>
+
+<target name="getPrebuiltElements">
+	<generateBaseFetchScript
+		mapfile="${buildDirectory}/maps/org.eclipse.releng/maps/base.map"
+		outputfile="${buildDirectory}/fetchbase.xml"/>
+	<ant antfile="${buildDirectory}/fetchbase.xml" />
 </target>
 
 <!-- ===================================================================== -->
@@ -133,6 +158,8 @@
 	</condition>
 	<antcall target="gatherLogs" />
 </target>
+
+	<target name="prePackage" />
 
 <!-- ===================================================================== -->
 <!-- Steps to do after everything is built and assembled -->

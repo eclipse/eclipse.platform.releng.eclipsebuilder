@@ -202,11 +202,8 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	</target>
 	
 	<target name="assemble.equinox">
-		<mkdir dir="${equinoxPostingDirectory}/${buildLabel}/checksum" />
-		<property name="archiveFullPath" value="${equinoxPostingDirectory}/${buildLabel}/${archiveName}" />
+		<property name="archiveFullPath" value="${buildDirectory}/${buildLabel}/${archiveName}" />
 		<ant antfile="${assembleScriptName}" />
-		<checksum file="${archiveFullPath}" property="md5" />
-		<echo message="${md5} *${archiveName}" file="${equinoxPostingDirectory}/${buildLabel}/checksum/${archiveName}.md5" />
 	</target>
 	<!-- ===================================================================== -->
 	<!-- Check out map files from correct repository -->
@@ -308,6 +305,17 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Steps to do after running the build.xmls for the elements being built. -->
 	<!-- ===================================================================== -->
 	<target name="postProcess">
+	</target>
+
+	<target name="prePackage" />
+	<target name="postPackage">
+		<mkdir dir="${buildDirectory}/${buildLabel}/checksum"/>
+		<exec executable="sh" dir="${buildDirectory}/${buildLabel}">
+			<arg line="${builder}/../all/produceChecksum" />
+		</exec>
+		<move todir="${equinoxPostingDirectory}/${buildLabel}">
+			<fileset dir="${buildDirectory}/${buildLabel}" />
+		</move>
 	</target>
 
 	<!-- ===================================================================== -->
