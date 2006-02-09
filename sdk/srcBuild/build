@@ -67,7 +67,7 @@ then
          CLASSPATH=$PWD/jdtcoresrc/ecj.jar:$CLASSPATH;export CLASSPATH		
  		 ant -q -buildfile jdtcoresrc/compilejdtcore.xml
  		 CLASSPATH=$PWD/ecj.jar:$ORIGCLASSPATH;export CLASSPATH
- 		 ant -q -buildfile build.xml $target -DinstallOs=$os -DinstallWs=$ws -DinstallArch=$arch $compilelibs $bootclasspath 
+ 		 ant -q -buildfile build.xml $target -DinstallOs=$os -DinstallWs=$ws -DinstallArch=$arch $compilelibs $bootclasspath $java5home
 		 else
 		 		 echo "The os-ws-arch combination of $os-$ws-$arch is not valid."
  		 exit 1
