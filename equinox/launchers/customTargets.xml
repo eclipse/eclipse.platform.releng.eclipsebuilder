@@ -341,8 +341,8 @@
 		 <!-- Helper targets -->
 		 <!-- ===================================================================== -->		 
 		 <target name="updateTestManifest">		                                                                           
-		 		 <apply executable="ls" output="${buildDirectory}/${bundle.id}.txt" dir="${equinoxPostingDirectory}/${buildLabel}">
-		 		 <fileset dir="${equinoxPostingDirectory}/${buildLabel}">
+		 		 <apply executable="ls" output="${buildDirectory}/${bundle.id}.txt" dir="${buildDirectory}/${buildLabel}">
+		 		 <fileset dir="${buildDirectory}/${buildLabel}">
 		 		     <patternset>
 		 		       <include name="${bundle.id}_*.jar"/>
 		 		     </patternset>
