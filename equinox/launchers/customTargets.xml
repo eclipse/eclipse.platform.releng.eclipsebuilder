@@ -66,7 +66,7 @@
 		 </target>
 	<target name="postPackage">
 		 <exec executable="unzip" dir="${basedir}">
-		 		 <arg line="-j ${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-win32.zip eclipse/plugins/org.eclipse.osgi* eclipse/plugins/org.eclipse.equinox* -d ${equinoxPostingDirectory}/${buildLabel}"/>		 		 		 		 		 		 
+		 		 <arg line="-j ${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-win32.zip eclipse/plugins/org.eclipse.osgi* eclipse/plugins/org.eclipse.equinox* -d ${buildDirectory}/${buildLabel}"/>		 		 		 		 		 		 
 		 </exec>
 		 <antcall target="buildBundles"/>
 
@@ -74,9 +74,6 @@
 		<exec executable="sh" dir="${buildDirectory}/${buildLabel}">
 			<arg line="${builder}/../all/produceChecksum" />
 		</exec>
-		<move todir="${equinoxPostingDirectory}/${buildLabel}">
-			<fileset dir="${buildDirectory}/${buildLabel}" />
-		</move>
 	</target>
 		 <!-- ===================================================================== -->
 		 <!-- Check out map files from correct repository -->
@@ -263,7 +260,10 @@
  		 		 		 </antcall> 						
 		 				 <antcall target="updateTestManifest">
 		 		 	 		 <param name="bundle.id" value="org.eclipse.equinox.servlet.api" />		 		 		 
-		 		 		 </antcall> 			 			 		 		 		 
+		 		 		 </antcall>
+					<move todir="${equinoxPostingDirectory}/${buildLabel}">
+						<fileset dir="${buildDirectory}/${buildLabel}" />
+					</move>
 		 		 <available classname="org.eclipse.releng.generators.EclipseTestResultsGenerator" property="class" value="org.eclipse.releng.generators.EclipseTestResultsGenerator" />
 		 		 <taskdef name="indexResults" classname="${class}" />
 
