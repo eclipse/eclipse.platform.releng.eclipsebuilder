@@ -15,40 +15,40 @@
 		<property name="featuresRecursively" value="true" />
 		<ant antfile="fetch_org.eclipse.platform.launchers.xml" />
 		<ant antfile="fetch_org.eclipse.sdk.xml" />
-		
+
 		<!--copy linux motif about_files to in temp location where it will be copied into root of eclipse at assembly time-->
-				<property name="linux.motif.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.motif.x86" />
-				<mkdir dir="${linux.motif.rootfiles}" />
-				<copy tofile="${linux.motif.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86/about_launcher_libraries.html" />
-				<copy todir="${linux.motif.rootfiles}">
-					<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86"
+		<property name="linux.motif.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.motif.x86" />
+		<mkdir dir="${linux.motif.rootfiles}" />
+		<copy tofile="${linux.motif.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86/about_launcher_libraries.html" />
+		<copy todir="${linux.motif.rootfiles}">
+			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86"
 						includes="						
 						about_files/mlpl-v10.html,
 						about_files/mpl-v11.txt"						
 					/>
-				</copy>
-				
-				<!--copy linux gtk x86 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
-				<property name="linux.gtk.x86.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.x86" />
-				<mkdir dir="${linux.gtk.x86.rootfiles}" />
-				<copy tofile="${linux.gtk.x86.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86/about_launcher_libraries.html" />
+		</copy>
 
-				<copy todir="${linux.gtk.x86.rootfiles}">
-					<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86"
+		<!--copy linux gtk x86 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
+		<property name="linux.gtk.x86.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.x86" />
+		<mkdir dir="${linux.gtk.x86.rootfiles}" />
+		<copy tofile="${linux.gtk.x86.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86/about_launcher_libraries.html" />
+
+		<copy todir="${linux.gtk.x86.rootfiles}">
+			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86"
 						includes="about_files/mpl-v11.txt"
 					/>
-				</copy>
-				
-				<!--copy linux gtk x86_64 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
-				<property name="linux.gtk.x86_64.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.x86_64" />
-				<mkdir dir="${linux.gtk.x86_64.rootfiles}" />
-				<copy tofile="${linux.gtk.x86_64.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64/about_launcher_libraries.html" />
+		</copy>
 
-				<copy todir="${linux.gtk.x86_64.rootfiles}">
-					<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64"
+		<!--copy linux gtk x86_64 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
+		<property name="linux.gtk.x86_64.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.x86_64" />
+		<mkdir dir="${linux.gtk.x86_64.rootfiles}" />
+		<copy tofile="${linux.gtk.x86_64.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64/about_launcher_libraries.html" />
+
+		<copy todir="${linux.gtk.x86_64.rootfiles}">
+			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64"
 						includes="about_files/mpl-v11.txt"
 					/>
-				</copy>		
+		</copy>
 	</target>
 
 	<!--     Fill in values for original timestamp in all about.mappings files  -->
@@ -155,34 +155,39 @@
 		 pde.convertSchemaToHTML and help.buildHelpIndex tasks which are used when generating extension-point and help indeces.-->
 		<antcall target="install.eclipse.${archive.format}" />
 
-		<java fork="true" jar="${buildDirectory}/eclipse/startup.jar" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.isv" output="platform.doc.isv.txt">
-			<arg line="-data ${buildDirectory}/workspace -application org.eclipse.ant.core.antRunner build.update.jar -Ddestination.temp.folder=${buildDirectory}/tmp/eclipse/plugins/" />
-		</java>
-		<java fork="true" jar="${buildDirectory}/eclipse/startup.jar" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.user" output="platform.doc.user.txt">
-			<arg line="-data ${buildDirectory}/workspace -application org.eclipse.ant.core.antRunner build.update.jar -Ddestination.temp.folder=${buildDirectory}/tmp/eclipse/plugins/" />
-		</java>
-		<java fork="true" jar="${buildDirectory}/eclipse/startup.jar" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv" output="jdt.doc.isv.txt">
-			<arg line="-data ${buildDirectory}/workspace -application org.eclipse.ant.core.antRunner build.update.jar -Ddestination.temp.folder=${buildDirectory}/tmp/eclipse/plugins/" />
-		</java>
-		<java fork="true" jar="${buildDirectory}/eclipse/startup.jar" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.user" output="jdt.doc.user.txt">
-			<arg line="-data ${buildDirectory}/workspace -application org.eclipse.ant.core.antRunner build.update.jar -Ddestination.temp.folder=${buildDirectory}/tmp/eclipse/plugins/" />
-		</java>
-		<java fork="true" jar="${buildDirectory}/eclipse/startup.jar" dir="${buildDirectory}/plugins/org.eclipse.pde.doc.user" output="pde.doc.user.txt">
-			<arg line="-data ${buildDirectory}/workspace -application org.eclipse.ant.core.antRunner build.update.jar -Ddestination.temp.folder=${buildDirectory}/tmp/eclipse/plugins/" />
-		</java>
-
-		<!--remove files created by running eclipse and incomplete doc plugins before adding in rebuilt doc plugins-->
-		<delete includeemptydirs="true">
-			<fileset dir="${buildDirectory}/eclipse/configuration" excludes="config.ini" />
-		</delete>
 		<delete includeemptydirs="true">
 			<fileset dir="${buildDirectory}/eclipse/plugins" includes="*doc*/**" />
 		</delete>
 
-		<!--copy in newly built doc plugins-->
-		<copy todir="${buildDirectory}/eclipse/plugins">
-			<fileset dir="${buildDirectory}/tmp/eclipse/plugins" includes="*doc*/**" />
-		</copy>
+		<java fork="true" jar="${buildDirectory}/eclipse/startup.jar" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.isv">
+			<arg line="-data ${buildDirectory}/workspace
+			 -application org.eclipse.ant.core.antRunner build.update.jar
+			  -Dplugin.destination=${buildDirectory}/eclipse/plugins" />
+		</java>
+		<java fork="true" jar="${buildDirectory}/eclipse/startup.jar" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv">
+			<arg line="-data ${buildDirectory}/workspace
+			 -application org.eclipse.ant.core.antRunner build.update.jar
+			 -Dplugin.destination=${buildDirectory}/eclipse/plugins" />
+		</java>
+		<java fork="true" jar="${buildDirectory}/eclipse/startup.jar" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.user">
+			<arg line="-data ${buildDirectory}/workspace
+			 -application org.eclipse.ant.core.antRunner build.update.jar
+			 -Dplugin.destination=${buildDirectory}/eclipse/plugins" />
+		</java>
+		<java fork="true" jar="${buildDirectory}/eclipse/startup.jar" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.user">
+			<arg line="-data ${buildDirectory}/workspace
+			 -application org.eclipse.ant.core.antRunner build.update.jar
+			 -Dplugin.destination=${buildDirectory}/eclipse/plugins" />
+		</java>
+		<java fork="true" jar="${buildDirectory}/eclipse/startup.jar" dir="${buildDirectory}/plugins/org.eclipse.pde.doc.user">
+			<arg line="-data ${buildDirectory}/workspace
+			 -application org.eclipse.ant.core.antRunner build.update.jar
+			 -Dplugin.destination=${buildDirectory}/eclipse/plugins" />
+		</java>
+		<!--remove files created by running eclipse-->
+		<delete includeemptydirs="true">
+			<fileset dir="${buildDirectory}/eclipse/configuration" excludes="config.ini" />
+		</delete>
 
 		<move todir="${buildDirectory}/${buildLabel}-old">
 			<fileset dir="${buildDirectory}/${buildLabel}" />
@@ -262,7 +267,7 @@
 		<fail unless="java5.home" message="JAVA 1.5 libaries are required to compile the JDT APT plug-ins in the Eclipse SDK.
 		  Please set the -java5home command line argument to the root of a 1.5 java install.">
 		</fail>
-		
+
 		<path id="default.bootclasspath">
 			<fileset dir="${java.home}/lib">
 				<include name="*.jar" />
