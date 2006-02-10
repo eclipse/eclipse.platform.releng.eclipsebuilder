@@ -8,6 +8,10 @@
 		</zipType>
 
 		<zipType name="ExtraBundles">
+			<platform id="EBF" name="All" fileName="eclipse-equinox-@buildid@.zip">
+			</platform>
+			<platform id="EBF" name="All" fileName="eclipse-equinox-SDK-@buildid@.zip">
+			</platform>
 			<platform id="services" name="All" fileName="@org.eclipse.osgi.services@.jar">
 			</platform>
 			<platform id="util" name="All" fileName="@org.eclipse.osgi.util@.jar">
