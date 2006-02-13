@@ -92,7 +92,8 @@
 		<antcall target="clean" />
 	</target>
 
-
+	<target name="prePackage"/>
+	<target name="postPackage"/>
 	<!-- ===================================================================== -->
 	<!-- Steps to do before assembling -->
 	<!-- ===================================================================== -->
