@@ -61,20 +61,13 @@
 	</target>
 
 	<target name="assemble">
-		<property name="archiveFullPath" value="${buildDirectory}/${buildLabel}/${archiveName}" />
+		 		 <mkdir dir="${equinoxPostingDirectory}/${buildLabel}/checksum" />
+		 		 <property name="archiveFullPath" value="${equinoxPostingDirectory}/${buildLabel}/${archiveName}" />
 		<ant antfile="${assembleScriptName}" />
+		 		 <checksum file="${archiveFullPath}" property="md5" />
+		 		 <echo message="${md5} *${archiveName}" file="${equinoxPostingDirectory}/${buildLabel}/checksum/${archiveName}.md5" />
 	</target>
-	<target name="postPackage">
-		<exec executable="unzip" dir="${basedir}">
-			<arg line="-j ${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-win32.zip eclipse/plugins/org.eclipse.osgi* eclipse/plugins/org.eclipse.equinox* -d ${buildDirectory}/${buildLabel}"/>
-		</exec>
-		<antcall target="buildBundles"/>
 
-		<mkdir dir="${buildDirectory}/${buildLabel}/checksum"/>
-		<exec executable="sh" dir="${buildDirectory}/${buildLabel}">
-			<arg line="${builder}/../all/produceChecksum" />
-		</exec>
-	</target>
 	<!-- ===================================================================== -->
 	<!-- Check out map files from correct repository -->
 	<!-- Replace values for cvsRoot, package and mapVersionTag as desired. -->
@@ -131,6 +124,10 @@
 	<!-- Steps to do after assembling-->
 	<!-- ===================================================================== -->
 	<target name="postAssemble">
+		 		 <exec executable="unzip" dir="${basedir}">
+		 		 		 <arg line="-j ${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-win32.zip eclipse/plugins/org.eclipse.osgi* eclipse/plugins/org.eclipse.equinox* -d ${equinoxPostingDirectory}/${buildLabel}"/>		 		 		 		 		 		 
+		 		 </exec>
+		 		 <antcall target="buildBundles"/>
 	</target>
 
 	<target name="buildBundles">
@@ -194,27 +191,6 @@
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.servlet.api"/>
 		</antcall>
-		<antcall target="updateTestManifest">
-			<param name="bundle.id" value="org.eclipse.osgi" />
-		</antcall>
-		<antcall target="updateTestManifest">
-			<param name="bundle.id" value="org.eclipse.osgi.util" />
-		</antcall>
-		<antcall target="updateTestManifest">
-			<param name="bundle.id" value="org.eclipse.osgi.services" />
-		</antcall>
-		<antcall target="updateTestManifest">
-			<param name="bundle.id" value="org.eclipse.equinox.registry" />
-		</antcall>
-		<antcall target="updateTestManifest">
-			<param name="bundle.id" value="org.eclipse.equinox.preferences" />
-		</antcall>
-		<antcall target="updateTestManifest">
-			<param name="bundle.id" value="org.eclipse.equinox.common" />
-		</antcall>
-		<antcall target="updateTestManifest">
-			<param name="bundle.id" value="org.eclipse.equinox.servlet.api" />
-		</antcall>
 	</target>
 
 	<target name="buildBundle">
@@ -230,7 +206,7 @@
 			<property name="type" value="plugin" />
 			<property name="id" value="${bundle.id}" />
 		</ant>
-		<copy todir="${buildDirectory}/${buildLabel}" failonerror="false">
+		 		  <copy todir="${equinoxPostingDirectory}/${buildLabel}" failonerror="false">
 			<fileset dir="${buildDirectory}/plugins/${bundle.id}">
 				<include name="${bundle.id}*.jar" />
 			</fileset>
@@ -253,15 +229,33 @@
 	<target name="postProcess">
 	</target>
 
-	<target name="prePackage" />
-
 	<!-- ===================================================================== -->
 	<!-- Steps to do after everything is built and assembled -->
 	<!-- (e.g., testing, posting, emailing, ...) -->
 	<!-- ===================================================================== -->
 	<target name="postBuild">
 		<property name="postingDirectory" value="${buildDirectory}}" />
-
+		 		 		 <antcall target="updateTestManifest">
+		 		 		 	 <param name="bundle.id" value="org.eclipse.osgi" />
+ 			 			 </antcall>
+ 		 		 		 <antcall target="updateTestManifest">
+ 		 			 		 <param name="bundle.id" value="org.eclipse.osgi.util" />
+ 			 			 </antcall>
+ 		 		 		 <antcall target="updateTestManifest">
+ 		 			 		 <param name="bundle.id" value="org.eclipse.osgi.services" />
+	 		 	 		 </antcall>
+ 		 		 		 <antcall target="updateTestManifest">
+			 		 		 <param name="bundle.id" value="org.eclipse.equinox.registry" />
+		 	 		     </antcall>
+		 		 		 <antcall target="updateTestManifest">
+			 		 		 <param name="bundle.id" value="org.eclipse.equinox.preferences" />
+	 		 		     </antcall>
+ 		 		 		 <antcall target="updateTestManifest">
+	 		 		 		 <param name="bundle.id" value="org.eclipse.equinox.common" />		 		 		 
+ 		 		 		 </antcall> 						
+		 				 <antcall target="updateTestManifest">
+		 		 	 		 <param name="bundle.id" value="org.eclipse.equinox.servlet.api" />		 		 		 
+		 		 		 </antcall> 			 			 		 		 		 
 		<available classname="org.eclipse.releng.generators.EclipseTestResultsGenerator" property="class" value="org.eclipse.releng.generators.EclipseTestResultsGenerator" />
 		<taskdef name="indexResults" classname="${class}" />
 
@@ -341,8 +335,8 @@
 	<!-- Helper targets -->
 	<!-- ===================================================================== -->
 	<target name="updateTestManifest">
-		<apply executable="ls" output="${buildDirectory}/${bundle.id}.txt" dir="${buildDirectory}/${buildLabel}">
-			<fileset dir="${buildDirectory}/${buildLabel}">
+		 		 <apply executable="ls" output="${buildDirectory}/${bundle.id}.txt" dir="${equinoxPostingDirectory}/${buildLabel}">
+		 		 <fileset dir="${equinoxPostingDirectory}/${buildLabel}">
 				<patternset>
 					<include name="${bundle.id}_*.jar"/>
 				</patternset>
