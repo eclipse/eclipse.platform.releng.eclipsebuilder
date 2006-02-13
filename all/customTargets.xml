@@ -157,7 +157,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Steps to do before generating build scripts -->
 	<!-- ===================================================================== -->
 	<target name="preGenerate">
-		<sysProp key="GROUP_CONFIG" value="true" />
 	</target>
 
 	<!-- ===================================================================== -->
@@ -178,7 +177,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- ===================================================================== -->
 	<target name="postAssemble">
 		<!--build root file drops while jars are being signed-->
-		<sysProp key="GROUP_CONFIG" value="false" />
 		<parallel>
 			<!--antcall target="sign" /-->
 			<antcall target="build.master.root" />
