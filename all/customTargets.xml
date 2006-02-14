@@ -175,7 +175,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- ===================================================================== -->
 	<!-- Steps to do after assembling-->
 	<!-- ===================================================================== -->
-	<target name="postAssemble">
+	<target name="postPackage">
 		<!--build root file drops while jars are being signed-->
 		<parallel>
 			<!--antcall target="sign" /-->
@@ -212,7 +212,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	</target>
 
 	<target name="prePackage" />
-	<target name="postPackage" />
+	<target name="postAssemble" />
 
 
 	<!-- ===================================================================== -->
