@@ -22,7 +22,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="assemble.master.group.group.group">
 		<property name="archiveName" value="eclipse-master-${buildId}.zip"/>
 		<!--HACK to build grouped config-->
-		<mkdir dir="${buildDirectory}/tmp/eclipse/group.group.group"/>
+		<mkdir dir="${buildDirectory}/tmp/eclipse/group.group.group/eclipse"/>
 		<antcall target="assemble" />
 	</target>
 
