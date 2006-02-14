@@ -16,7 +16,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<property name="id" value="master-root" />
 		</ant>
 	</target>
-
+	<target name="postBuild" />
 	<!-- ===================================================================== -->
 	<!-- Targets to assemble the built elements for particular configurations  -->
 	<!-- ===================================================================== -->
