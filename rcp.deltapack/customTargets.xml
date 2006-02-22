@@ -43,7 +43,7 @@
 			<replaceregexp file="${tempfile}" match="\n" replace=""/>
 			<loadfile property="launcher.feature" srcFile="${tempfile}" failonerror="off"/>
 			<delete file="${tempfile}" failonerror="false"/>
-			<replace file="${builder}/scripts/deltapack.map" token="@${launcherFeature}@" value="${launcher.feature}"/>
+			<replace file="${builder}/scripts/deltapack.map" token="@launcherFeature@" value="${launcher.feature}"/>
 		
     <ant antfile="package.xml" dir="${pde.build.scripts}" inheritAll="false">
       <property name="buildDirectory" value="${buildDirectory}"/>
