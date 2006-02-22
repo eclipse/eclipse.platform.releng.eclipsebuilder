@@ -262,7 +262,7 @@
 		<!-- generate md5s for bundle -->
  		<mkdir dir="${equinoxPostingDirectory}/${buildLabel}/checksum"/>
 		<exec executable="sh" dir="${equinoxPostingDirectory}/${buildLabel}">
-			<arg line="${builder}/../all/produceChecksum" />
+			<arg line="${builder}/../../all/produceChecksum" />
 		</exec>		
 
 		<!--post clickThroughs-->
