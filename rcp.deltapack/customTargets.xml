@@ -28,23 +28,6 @@
 <target name="assemble">
 	<property name="archiveName" value="eclipse-RCP-${buildId}-delta-pack.zip"/>
     <ant target="zip.distribution" antfile="build.xml" dir="${buildDirectory}/features/org.eclipse.platform.launchers"/>
-	<!-- hack to determine the name of the org.eclipse.platform.launchers feature because now it uses a qualifier  -->
-	<!-- and update the deltapack.map -->
-    <property name="tempfile" value="${buildDirectory}/launcherversion.txt"/>
-	 <apply executable="ls" output="${tempfile}" dir="${buildDirectory}">
-			 		 <fileset dir="${buildDirectory}/features/org.eclipse.platform.launchers">
-					<patternset>
-						<include name="*.zip"/>
-					</patternset>
-				</fileset>
-			</apply>
-
-			<replaceregexp file="${tempfile}" match="/.+/" replace=""/>
-			<replaceregexp file="${tempfile}" match="\n" replace=""/>
-			<loadfile property="launcher.feature" srcFile="${tempfile}" failonerror="off"/>
-			<delete file="${tempfile}" failonerror="false"/>
-			<replace file="${builder}/scripts/deltapack.map" token="@launcherFeature@" value="${launcher.feature}"/>
-		
     <ant antfile="package.xml" dir="${pde.build.scripts}" inheritAll="false">
       <property name="buildDirectory" value="${buildDirectory}"/>
       <property name="postingDirectory" value="${postingDirectory}"/>
