@@ -312,7 +312,7 @@
 					-output ${postingDirectory}/${buildLabel}/performance/
 					-config eclipseperfwin1_R3.2,eclipseperflnx1_R3.2,eclipseperfwin2_R3.2,eclipseperflnx2_R3.2,eclipseperflnx3_R3.2
 					-config.properties ${eclipse.perf.config.descriptors}
-					-highlight.latest 3.0.2_,2.1.3_,3.2M1_,3.2M2_,3.2M3_,3.2M4_
+					-highlight.latest 3.0.2_,2.1.3_,3.2M1_,3.2M2_,3.2M3_,3.2M4_,3.2M5_,3.2M5a_
 					-scenario.pattern org.eclipse.%.test"
 				/>
 			<env key="LD_LIBRARY_PATH" value="${basedir}/../org.eclipse.releng.basebuilder" />
