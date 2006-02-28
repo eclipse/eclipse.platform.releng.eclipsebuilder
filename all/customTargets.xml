@@ -161,6 +161,12 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Steps to do before generating build scripts -->
 	<!-- ===================================================================== -->
 	<target name="preGenerate">
+		<!--need to delete generated source features and plug-ins due to bug
+		https://bugs.eclipse.org/bugs/show_bug.cgi?id=128139 -->
+		<delete>
+			<fileset dir="${buildDirectory}/features" includes="*.source*/**" />
+			<fileset dir="${buildDirectory}/plugins" includes="*.source*/**" />
+		</delete>
 	</target>
 
 	<!-- ===================================================================== -->
