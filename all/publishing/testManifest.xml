@@ -1028,6 +1028,11 @@
 		<effectedFile id="EA"></effectedFile>
 	</logFile>
 
+	<logFile name="plugins\org.eclipse.ui.examples.fieldassist_*\@dot.bin.log">
+		<effectedFile id="EW"></effectedFile>
+		<effectedFile id="EA"></effectedFile>
+	</logFile>
+
 	<logFile name="plugins\org.eclipse.ui.examples.propertysheet_*\propertysheet.jar.bin.log">
 		<effectedFile id="EW"></effectedFile>
 		<effectedFile id="EA"></effectedFile>

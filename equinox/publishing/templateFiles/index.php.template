@@ -77,7 +77,7 @@ $filesize = getDropSize($zipfile);
   echo "&nbsp;&nbsp";
   echo "$ftpline";
   echo "<td>$filesize</td>";
-  echo "<td>$md5name  (<a href=\"http://download.eclipse.org/eclipse/downloads/equinox/downloads/drops/@buildlabel@/checksum/$zipfile.md5\">md5</a>)";
+  echo "<td>$md5name  (<a href=\"http://download.eclipse.org/equinox/drops/@buildlabel@/checksum/$zipfile.md5\">md5</a>)";
 
 }
 ?> <TABLE BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > <TR> <TD ALIGN=LEFT VALIGN=TOP COLSPAN="3" BGCOLOR="#0080C0"><B><FONT FACE="Arial,Helvetica" COLOR="#FFFFFF">Framework</FONT></B></TD></TR> <TR> <TD HEIGHT="48" COLSPAN="2"> <P>The Equinox OSGi R4 <a href="http://eclipse.org/equinox/framework">framework</a> implementation includes all optional parts of the R4 spec as well as several additional mechanisms (e.g., x-internal, platform filters, ...) that are generally useful in a standalone package.  See the <A HREF="http://eclipse.org/equinox/quickstart.html">Quick Start Guide</A> for details on how to use this JAR.</P></TD></TR> </TABLE><TABLE BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="100%" BORDERCOLOR="#999999" > 
