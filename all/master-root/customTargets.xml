@@ -309,13 +309,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 
 	<target name="prePackage" />
 	<target name="postPackage">
-		<mkdir dir="${buildDirectory}/${buildLabel}/checksum"/>
-		<exec executable="sh" dir="${buildDirectory}/${buildLabel}">
-			<arg line="${builder}/../all/produceChecksum" />
-		</exec>
-		<move todir="${equinoxPostingDirectory}/${buildLabel}">
-			<fileset dir="${buildDirectory}/${buildLabel}" />
-		</move>
 	</target>
 
 	<!-- ===================================================================== -->

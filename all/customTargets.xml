@@ -1,7 +1,8 @@
 <project name="Build specific targets and properties" default="noDefault" >
 
-
 	<property name="postingDirectory" value="${buildDirectory}" />
+	<property name="archiveName" value="eclipse-master-${buildId}.zip"/>
+	<property name="archiveFullPath" value="${buildDirectory}/${buildLabel}/${archiveName}" />
 
 	<!-- ===================================================================== -->
 	<!-- Run a given ${target} on all elements being built -->
@@ -20,14 +21,12 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Targets to assemble the built elements for particular configurations  -->
 	<!-- ===================================================================== -->
 	<target name="assemble.master.group.group.group">
-		<property name="archiveName" value="eclipse-master-${buildId}.zip"/>
 		<!-- workaround for Bug 127747 Grouped config build failing on missing group.group.group folder-->
 		<mkdir dir="${buildDirectory}/tmp/eclipse/group.group.group/eclipse"/>
 		<antcall target="assemble" />
 	</target>
 
 	<target name="assemble">
-		<property name="archiveFullPath" value="${buildDirectory}/${buildLabel}/${archiveName}" />
 		<ant antfile="${assembleScriptName}" />
 		<!--add swt stand-alone jars to the zip to include in signing-->
 		<exec executable="zip" dir="${buildDirectory}">
@@ -190,11 +189,13 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<parallel>
 			<!--antcall target="sign" /-->
 			<antcall target="build.master.root" />
+			<!--TODO-->
+			<!--antcall target="build.update.jars" /-->
 		</parallel>
 
 		<!--replace existing swt.jars with signed versions-->
 		<exec executable="unzip" dir="${buildDirectory}">
-			<arg line="-qqo ${archiveFullPath} -d plugins org.eclipse.swt*" />
+			<arg line="-qqo ${archiveFullPath} plugins/org.eclipse.swt*" />
 		</exec>
 
 		<replace file="${builder}/packagers/common.map" token="@buildId@" value="${buildId}"/>
@@ -204,7 +205,10 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<parallel>
 			<ant antfile="${builder}/helper.xml" target="verifyCompile" />
 			<sequential>
-				<ant antfile="${builder}/packagers/packageAll.xml"/>
+				<ant antfile="${builder}/packagers/packageAll.xml" inheritAll="false">
+					<property name="buildDirectory" value="${buildDirectory}" />
+					<property file="${buildDirectory}/label.properties" />
+				</ant>
 				<ant antfile="${builder}/helper.xml" target="buildStandAloneSWT" />
 				<ant antfile="${builder}/helper.xml" target="publish" />
 			</sequential>
