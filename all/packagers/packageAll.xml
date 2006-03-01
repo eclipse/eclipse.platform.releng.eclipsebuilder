@@ -53,6 +53,7 @@
 			<property name="packagingInfo" value="${packagingInfo}" />
 			<property name="buildId" value="${buildId}" />
 			<property name="buildDirectory" value="${buildDirectory}" />
+			<property name="baseLocation" value="${tempDirectory}/${featurePaths}" />
 			<property name="postingDirectory" value="${postingDirectory}" />
 			<property name="assemblyTempDir" value="${packagingInfo}/jartmp" />
 		</ant>
