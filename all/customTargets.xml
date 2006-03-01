@@ -208,6 +208,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 				<ant antfile="${builder}/packagers/packageAll.xml" inheritAll="false">
 					<property name="buildDirectory" value="${buildDirectory}" />
 					<property file="${buildDirectory}/label.properties" />
+					<property name="pde.build.scripts" value="${pde.build.scripts}" />
 				</ant>
 				<ant antfile="${builder}/helper.xml" target="buildStandAloneSWT" />
 				<ant antfile="${builder}/helper.xml" target="publish" />
