@@ -8,11 +8,11 @@
 		<mkdir dir="${assemblyTempDir}/eclipse/group.group.group/eclipse" />
 	</target>
 	
-	<target name="assemble.group.group.group.xml">
-		<antcall target="assembler">
-			<param name="archiveName" value="eclipse-RCP-${buildId}-delta-pack.zip" />
-		</antcall>
-	</target>
+	<target name="assemble.delta.delta.delta.xml">
+                <antcall target="assembler">
+                        <param name="archiveName" value="eclipse-RCP-${buildId}-delta-pack.zip" />
+                </antcall>
+        </target>
 	
 	<target name="assembler">
 		<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
