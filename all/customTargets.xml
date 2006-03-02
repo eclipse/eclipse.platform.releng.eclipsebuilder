@@ -202,27 +202,25 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 
 		<property name="publishingContent" value="${builder}/publishing" />
 		<!--package all distributables and start tests when all files are available-->
-		<parallel>
-			<ant antfile="${builder}/helper.xml" target="verifyCompile" />
-			<sequential>
-				<ant antfile="${builder}/packagers/packageAll.xml" inheritAll="false">
-					<property name="buildDirectory" value="${buildDirectory}" />
-					<property file="${buildDirectory}/label.properties" />
-					<property name="pde.build.scripts" value="${pde.build.scripts}" />
-				</ant>
-				<ant antfile="${builder}/helper.xml" target="buildStandAloneSWT" />
-				<ant antfile="${builder}/helper.xml" target="publish" />
-			</sequential>
-			<ant antfile="${builder}/helper.xml" target="testAll" />
-			<ant antfile="${builder}/helper.xml" target="rSyncWithSnzZrh" />
-			<ant antfile="${builder}/helper.xml" target="test-internalReferences" />
-			<copy file="${buildDirectory}/plugins/org.eclipse.platform.doc.isv/doc.bin.log" tofile="${postingDirectory}/${buildLabel}/compilelogs/platform.doc.isv.javadoc.txt" failonerror="false"/>
-			<copy file="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv/doc.bin.log" tofile="${postingDirectory}/${buildLabel}/compilelogs/jdt.doc.isv.javadoc.txt" failonerror="false"/>
-			<copy file="${buildDirectory}/plugins/org.eclipse.pde.doc.user/doc.bin.log" tofile="${postingDirectory}/${buildLabel}/compilelogs/pde.doc.user.javadoc.txt" failonerror="false"/>
-			<copy file="${buildDirectory}/plugins/org.eclipse.platform.doc.isv/platformconvert.txt" tofile="${postingDirectory}/${buildLabel}/compilelogs/platform.doc.isv.schema.txt" failonerror="false"/>
-			<copy file="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv/jdtconvert.txt" tofile="${postingDirectory}/${buildLabel}/compilelogs/jdt.doc.isv.schema.txt" failonerror="false"/>
-			<copy file="${buildDirectory}/plugins/org.eclipse.pde.doc.user/pdeconvert.txt" tofile="${postingDirectory}/${buildLabel}/compilelogs/pde.doc.user.schema.txt" failonerror="false"/>
-		</parallel>
+		<ant antfile="${builder}/helper.xml" target="verifyCompile" />
+		<ant antfile="${builder}/packagers/packageAll.xml" inheritAll="false">
+			<property name="buildDirectory" value="${buildDirectory}" />
+			<property file="${buildDirectory}/label.properties" />
+			<property name="pde.build.scripts" value="${pde.build.scripts}" />
+		</ant>
+		<ant antfile="${builder}/helper.xml" target="testAll" />
+		<ant antfile="${builder}/helper.xml" target="rSyncWithSnzZrh" />
+		<ant antfile="${builder}/helper.xml" target="test-internalReferences" />
+		<ant antfile="${builder}/helper.xml" target="buildStandAloneSWT" />
+		<ant antfile="${builder}/helper.xml" target="publish" />
+
+		<copy file="${buildDirectory}/plugins/org.eclipse.platform.doc.isv/doc.bin.log" tofile="${postingDirectory}/${buildLabel}/compilelogs/platform.doc.isv.javadoc.txt" failonerror="false" />
+		<copy file="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv/doc.bin.log" tofile="${postingDirectory}/${buildLabel}/compilelogs/jdt.doc.isv.javadoc.txt" failonerror="false" />
+		<copy file="${buildDirectory}/plugins/org.eclipse.pde.doc.user/doc.bin.log" tofile="${postingDirectory}/${buildLabel}/compilelogs/pde.doc.user.javadoc.txt" failonerror="false" />
+		<copy file="${buildDirectory}/plugins/org.eclipse.platform.doc.isv/platformconvert.txt" tofile="${postingDirectory}/${buildLabel}/compilelogs/platform.doc.isv.schema.txt" failonerror="false" />
+		<copy file="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv/jdtconvert.txt" tofile="${postingDirectory}/${buildLabel}/compilelogs/jdt.doc.isv.schema.txt" failonerror="false" />
+		<copy file="${buildDirectory}/plugins/org.eclipse.pde.doc.user/pdeconvert.txt" tofile="${postingDirectory}/${buildLabel}/compilelogs/pde.doc.user.schema.txt" failonerror="false" />
+
 
 	</target>
 

@@ -177,9 +177,6 @@
 			value="${buildId}"
 			includes="**/vm.properties"/>
 
-		<waitfor maxwait="300" maxwaitunit="minute" checkevery="1" checkeveryunit="minute">
-			<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-Automated-Tests-${buildId}.zip.md5" />
-		</waitfor>
 		<parallel>
 			<antcall target="test-JUnit" />
 			<antcall target="test-performance" />
@@ -218,9 +215,6 @@
 		<property name="apiscanner" value="${eclipse.build.scripts}/sdk/tools/apiscanner" />
 		<property name="workingDir" value="${buildDirectory}/internalReference" />
 		<mkdir dir="${workingDir}" />
-		<waitfor maxwait="300" maxwaitunit="minute" checkevery="1" checkeveryunit="minute">
-			<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-SDK-${buildId}-win32.zip.md5" />
-		</waitfor>
 		<unzip src="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" dest="${workingDir}" />
 
 		<java classname="org.eclipse.wtp.releng.tools.component.violation.ComponentViolationEmitter" fork="true" dir="${apiscanner}">
