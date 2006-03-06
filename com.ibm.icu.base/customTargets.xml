@@ -19,7 +19,7 @@
 	<!-- Add one target for each root element and each configuration -->
 	<!-- ===================================================================== -->
 
-	<target name="assemble.org.eclipse.pde">
+	<target name="assemble.com.ibm.icu.base">
 		<property name="archiveName" value="com.ibm.icu.base-${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
