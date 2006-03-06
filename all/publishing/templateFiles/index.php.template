@@ -38,9 +38,7 @@ for ftp access to the entire build directory.";
     echo "<br>";
 } ?> You can also download builds via anonymous ftp at download.eclipse.org.</p><p> 
 Click <a href="verifyMD5.html">here</a> for instructions on how to verify the 
-integrity of your downloads.</p></td></tr> </table>
-
-<?php 
+integrity of your downloads.</p></td></tr> </table><?php 
 
 function column($servername) {
 
@@ -195,7 +193,11 @@ and the platform and is used for cross-platform exports of RCP applications.</p>
 </table><table border=0 cellspacing=2 cellpadding=0 width="100%" bordercolor="#999999" > 
 <tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %rcpsdk% </table><table border=0 cellspacing=5 cellpadding=2 width="100%" > 
-<tr> <td colspan="2">&nbsp;</td></tr> </table><table border=0 cellspacing=5 cellpadding=2 width="100%" > 
+<tr> <td colspan="2">&nbsp;</td></tr> </table><TABLE BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > 
+<TR> <TD ALIGN=LEFT VALIGN=TOP COLSPAN="3" BGCOLOR="#999999"><B><FONT COLOR="#FFFFFF" FACE="Arial,Helvetica">com.ibm.icu.base binary and source Plug-ins</FONT></B></TD></TR> <TR> </TR> </TABLE><TABLE BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="100%" BORDERCOLOR="#999999" > 
+<TR> <TD ALIGN=RIGHT VALIGN=TOP WIDTH="7%"> <DIV ALIGN="left"><B>Status</B></DIV></TD><TD WIDTH="36%"><B>Platform</B></TD><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+</TR> %icubase% </TABLE><TABLE BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > 
+<TR> <TD COLSPAN="2">&nbsp;</TD></TR> </TABLE><table border=0 cellspacing=5 cellpadding=2 width="100%" > 
 <tr> <td align=LEFT valign=TOP colspan="3" bgcolor="#999999"><b><font color="#FFFFFF" face="Arial,Helvetica">Platform 
 Runtime Binary</font></b></td></tr> <tr> <td height="56" colspan="2"> <p>These 
 drops contain only the Eclipse Platform with user documentation and no source 
