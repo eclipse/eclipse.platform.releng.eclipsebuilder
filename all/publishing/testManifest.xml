@@ -56,6 +56,10 @@
 		<platform id="RCPSDKDP" name="RCP delta pack" fileName="eclipse-RCP-@build@-delta-pack.zip"></platform>
 	</zipType>
 
+	<zipType name="com.ibm.icu.base plug-in">
+		<platform id="ICUBASE" name="All" fileName="com.ibm.icu.base-@build@.zip"></platform>
+	</zipType>
+
 	<zipType name="Platform Runtime Binary">
 		<platform id="PW" name="Windows (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_2.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-@build@-win32.zip"></platform>
 		<platform id="PLG2" name="Linux (x86/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_2.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-@build@-linux-gtk.tar.gz"></platform>
