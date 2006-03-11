@@ -1,0 +1,276 @@
+<project default="main">
+
+	<!--
+		Steps
+		
+		1.  Create Eclipse SDK source drops.
+		2.  Build master feature which includes all features and plug-ins in eclipse and equinox projects, with exception of tests.
+		3.  Sign master zip, build root file drops and SDK tests in parallel.
+		4.  Repackage signed master.zip into eclipse and equinox distributables.  Start JUnit and performance tests as soon as JUnit test plug-ins
+			are packaged.
+		5.  Post drops to eclipse and equinox download areas.
+	
+	 	Ant properties available at runtime: 
+	
+	 - eclipse.pdebuild.scripts: the org.eclipse.eclipse.pdebuild.scripts folder
+	 - eclipse.pdebuild.home: the root folder of pde build
+	 - eclipse.pdebuild.templates: the  templates folder
+
+	-->
+
+	<!--build monitoring information:  e-mail, smtp server, build label-->
+	<property file="monitor.properties"/>
+
+	<!--location of PDE Build configuration files for builder and packager-->
+	<property name="eclipse.build.configs" value="${basedir}/eclipse/buildConfigs" />
+	<property name="equinox.build.configs" value="${basedir}/equinox/buildConfigs" />
+	
+	<property name="sdkHelper" location="${eclipse.build.configs}/eclipse/helper.xml"/>
+	<property name="base.builder" value="${basedir}/../org.eclipse.releng.basebuilder" />
+
+	<!--location of properties file containing last tag used for integration build-->
+	<property name="mapTag.properties" value="/home/users/releng/buildTools/eclipse30/mapTag.properties"/>
+
+	<!--location of properties file containing last performance reference test information-->
+	<property name="ref.properties" value="/home/users/releng/buildTools/eclipse.perf/ref32.properties"/>
+	<property file="${ref.properties}"/>
+
+	<!--default buildDirectory-->
+	<property name="buildDirectory" value="${basedir}/../src" />
+
+	<!--default location for build output, parent to ${buildLabel}-->
+	<property name="postingDirectory" value="${buildDirectory}" />
+	<property name="equinoxPostingDirectory" value="${postingDirectory}/../../equinox/drops" />
+
+	<target name="main">
+		<ant antfile="build.xml" target="init" />
+		<antcall target="buildEclipseSourceDrops" />
+		<antcall target="buildMasterFeature" />
+		<antcall target="buildMasterUpdateJars" />
+		<parallel failonany="true">
+			<!--antcall target="signMasterFeature" /-->
+			<sequential>
+				<antcall target="buildMasterRootFeature" />
+				<antcall target="buildSdkTestFeature" />
+				<ant antfile="${eclipse.build.configs}/../helper.xml" target="verifyCompile" />
+			</sequential>
+		</parallel>
+		<parallel failonany="true">
+			<sequential>
+				<antcall target="packageEclipseDistributables" />
+				<antcall target="packageEquinoxDistributables" />
+				<antcall target="publishEclipse" />
+				<antcall target="publishEquinox" />
+			</sequential>
+			<!--TODO assemble update site here.-->
+			<antcall target="testEclipse" />
+		</parallel>
+	</target>
+
+	<target name="buildMasterFeature">
+		<ant antfile="build.xml" dir="${basedir}">
+			<property name="component" value="${eclipse.build.configs}/master" />
+		</ant>
+	</target>
+
+	<target name="buildMasterUpdateJars">
+		<ant antfile="${eclipse.build.configs}/../helper.xml" target="buildUpdateJars" />
+	</target>
+	
+	<target name="buildMasterRootFeature">
+		<ant antfile="build.xml" dir="${basedir}" target="main">
+			<property name="component" value="${eclipse.build.configs}/master-root" />
+		</ant>
+	</target>
+
+	<target name="buildSdkTestFeature">
+		<ant antfile="build.xml" dir="${basedir}" target="main">
+			<property name="component" value="${eclipse.build.configs}/sdk.tests" />
+		</ant>
+		<ant antfile="build.xml" dir="${basedir}" target="main">
+			<property name="component" value="${eclipse.build.configs}/test.framework" />
+		</ant>
+	</target>
+
+	<target name="buildEclipseSourceDrops">
+		<property name="buildSourceDrops" value="true"/>
+		<!--examples are required to pull sample doc into SDK doc plug-ins-->
+	    <ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="preBuild">
+			<property name="builder" value="${eclipse.build.configs}/sdk.examples" />
+		</ant>
+		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="fetch">
+			<property name="builder" value="${eclipse.build.configs}/sdk.examples" />
+		</ant>
+		<!--fetch source and generate scripts for eclipse SDK-->
+		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="preBuild">
+			<property name="builder" value="${eclipse.build.configs}/sdk" />
+		</ant>
+		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="fetch">
+			<property name="builder" value="${eclipse.build.configs}/sdk" />
+		</ant>
+		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="generate">
+			<property name="builder" value="${eclipse.build.configs}/sdk" />
+		</ant>
+	</target>
+
+	<target name="signMasterFeature" if="signJars">
+		<property name="archiveName" value="eclipse-master-${buildId}.zip" />
+		
+		<!--push drop to staging directory-->
+		<property name="stagingDirectory" value="/home/data/httpd/download-staging.priv/eclipse/downloads" />
+
+		<exec dir="${buildDirectory}/${buildLabel}" executable="scp" output="signing.txt">
+			<arg line="${archiveName} download1.eclipse.org:${stagingDirectory}"/>
+		</exec>
+		<exec dir="." executable="ssh" output="signing.txt" append="true">
+			<arg line="download1.eclipse.org chmod ugo+rw ${stagingDirectory}/${archiveName} "/>
+		</exec>
+
+		<!--timestamp on download server-->
+		<exec dir="." executable="ssh" output="signing.txt" append="true">
+			<arg line="download1.eclipse.org touch -t ${timestamp} ${stagingDirectory}/${archiveName}"/>
+		</exec>
+
+		<!--capture original file attributes-->
+		<exec dir="." executable="ssh" outputProperty="originalAttribs">
+			<arg line="download1.eclipse.org &quot;cd /home/data/httpd/download-staging.priv/eclipse/downloads/;ls -gG ${archiveName}&quot;"/>
+		</exec>
+
+		<!--invoke sign script and wait-->
+		<exec dir="." executable="ssh" output="signing.txt" append="true">
+			<arg line="download1.eclipse.org &quot;cd /home/data/httpd/download-staging.priv/eclipse/downloads;sign ${archiveName} mail&quot;"/>
+		</exec>
+		<antcall target="waitForChangedAttribs" />
+
+		<!--copy zip back to build machine-->
+		<exec dir="." executable="scp" output="signing.txt" append="true">
+			<arg line="download1.eclipse.org:${stagingDirectory}/${archiveName} ${buildDirectory}/${buildLabel}"/>
+		</exec>
+
+		<!--replace existing swt.jars with signed versions-->
+		<exec executable="unzip" dir="${buildDirectory}">
+			<arg line="-qqo ${archiveFullPath} plugins/org.eclipse.swt*" />
+		</exec>
+
+	</target>
+
+	<target name="waitForChangedAttribs" unless="attribs.changed">
+		<antcall target="compareAttribs" inheritAll="false">
+			<param name="originalAttribs" value="${originalAttribs}" />
+		</antcall>
+	</target>
+
+	<target name="compareAttribs">
+		<!--poll file for change in attributes-->
+		<exec dir="." executable="ssh" outputProperty="polledAttribs">
+			<arg line="download1.eclipse.org &quot;cd /home/data/httpd/download-staging.priv/eclipse/downloads/;ls -gG ${archiveName}&quot;"/>
+		</exec>
+		<echo message="original:  ${originalAttribs}" />
+		<condition property="attribChanged">
+			<not>
+				<equals arg1="${originalAttribs}" arg2="${polledAttribs}" />
+			</not>
+		</condition>
+		<echo message="polled:  ${polledAttribs}" />
+		<antcall target="writeDiffResult" />
+		<sleep seconds="120" />
+		<available property="attribs.changed" file="${builder}/attribDiff.txt" />
+		<antcall target="waitForChangedAttribs" />
+	</target>
+
+	<target name="writeDiffResult" if="attribChanged">
+		<echo message="original: ${originalAttribs}" file="${builder}/attribDiff.txt" />
+		<echo message="new: ${polledAttribs}" file="${builder}/attribDiff.txt" append="true" />
+	</target>
+
+
+	<target name="testEclipse">
+		<parallel>
+			<ant antfile="eclipse/helper.xml" target="testAll" />
+			<ant antfile="eclipse/helper.xml" target="test-internalReferences" />
+		</parallel>
+	</target>
+
+	<target name="publishEclipse">
+		<parallel>
+			<ant antfile="eclipse/helper.xml" target="rSyncWithSnzZrh" />
+			<sequential>
+				<ant antfile="eclipse/helper.xml" target="buildStandAloneSWT" />
+				<ant antfile="eclipse/helper.xml" target="publish" />
+			</sequential>
+		</parallel>
+	</target>
+
+	<target name="publishEquinox">
+		<ant antfile="${equinox.build.configs}/../helper.xml" target="publish" />
+	</target>
+
+	<target name="packageEclipseDistributables">
+		<replace file="packaging.map" token="@buildId@" value="${buildId}"/>
+
+		<antcall target="package">
+			<param name="packagingInfo" value="${eclipse.build.configs}/sdk/packager" />
+		</antcall>
+		<antcall target="package">
+			<param name="packagingInfo" value="${eclipse.build.configs}/sdk.examples/packager" />
+		</antcall>
+		<antcall target="package">
+			<param name="packagingInfo" value="${eclipse.build.configs}/jdt/packager" />
+		</antcall>
+		<antcall target="package">
+			<param name="packagingInfo" value="${eclipse.build.configs}/jdt.sdk/packager" />
+		</antcall>
+		<antcall target="package">
+			<param name="packagingInfo" value="${eclipse.build.configs}/pde/packager" />
+		</antcall>
+		<antcall target="package">
+			<param name="packagingInfo" value="${eclipse.build.configs}/pde.sdk/packager" />
+		</antcall>
+		<antcall target="package">
+			<param name="packagingInfo" value="${eclipse.build.configs}/platform/packager" />
+		</antcall>
+		<antcall target="package">
+			<param name="packagingInfo" value="${eclipse.build.configs}/platform.sdk/packager" />
+		</antcall>
+		<antcall target="package">
+			<param name="packagingInfo" value="${eclipse.build.configs}/rcp/packager" />
+		</antcall>
+		<antcall target="package">
+			<param name="packagingInfo" value="${eclipse.build.configs}/rcp.sdk/packager" />
+		</antcall>
+		<antcall target="package">
+			<param name="packagingInfo" value="${eclipse.build.configs}/team.extras/packager" />
+		</antcall>
+		<antcall target="package">
+			<param name="packagingInfo" value="${eclipse.build.configs}/rcp.deltapack/packager" />
+		</antcall>
+		<antcall target="package">
+			<param name="packagingInfo" value="${eclipse.build.configs}/com.ibm.icu.base/packager" />
+		</antcall>
+		<antcall target="package">
+			<param name="packagingInfo" value="${eclipse.build.configs}/releng.tools/packager" />
+		</antcall>
+	</target>
+
+	<target name="packageEquinoxDistributables">
+		<antcall target="package">
+			<param name="packagingInfo" value="${equinox.build.configs}/equinox/packager" />
+		</antcall>
+		<antcall target="package">
+			<param name="packagingInfo" value="${equinox.build.configs}/equinox.sdk/packager" />
+		</antcall>
+		<antcall target="package">
+			<param name="packagingInfo" value="${equinox.build.configs}/master-equinox/packager" />
+		</antcall>
+		<ant antfile="build.xml" dir="${basedir}">
+			<property name="component" value="${equinox.build.configs}/equinox-launchers" />
+		</ant>
+	</target>
+
+	<target name="package">
+		<ant antfile="package.xml" dir="${eclipse.pdebuild.scripts}">
+			<property name="packagingInfo" value="${packagingInfo}" />
+			<property name="assemblyTempDir" value="${packagingInfo}/jartmp" />
+		</ant>
+	</target>
+</project>
