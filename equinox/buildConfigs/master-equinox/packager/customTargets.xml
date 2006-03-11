@@ -27,6 +27,10 @@
 		<exec executable="unzip" dir="${buildDirectory}/${buildLabel}">
 			<arg line="-j ${archiveName} eclipse/plugins/*.jar -d ${equinoxPostingDirectory}/${buildLabel}" />
 		</exec>
+		<!--HACK extract supplement bundle from eclipse master because it is missing in master-equinox zip-->
+		<exec executable="unzip" dir="${buildDirectory}/${buildLabel}">
+			<arg line="-j ${archiveName} eclipse/plugins/org.eclipse.equinox.supplement_*.jar -d ${equinoxPostingDirectory}/${buildLabel}" />
+		</exec>
 	</target>
 
 </project>
