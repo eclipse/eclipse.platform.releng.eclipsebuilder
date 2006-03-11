@@ -140,7 +140,7 @@ if [ "$tagMaps" == "-DtagMaps=true" ]; then
 fi
 
 #check out org.eclipse.releng.eclipsebuilder
-cvs -d sdimitro@dev.eclipse.org:/cvsrooteclipse co -r $customBuilderTag org.eclipse.releng.eclipsebuilder
+cvs -d sdimitro@dev.eclipse.org:/cvsroot/eclipse co -r $customBuilderTag org.eclipse.releng.eclipsebuilder
 if [ "$tagMaps" == "-DtagMaps=true" ]; then  
   cvs -d sdimitro@dev.eclipse.org:/cvsroot/eclipse rtag -r $customBuilderTag v$buildId  org.eclipse.releng.eclipsebuilder;
 fi
