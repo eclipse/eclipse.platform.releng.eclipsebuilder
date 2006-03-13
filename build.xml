@@ -19,7 +19,7 @@
 
 		<!--compiler args-->
 		<property name="compilerArg" value="-enableJavadoc -encoding ISO-8859-1 -warn:-discouraged,forbidden" />
-		<property name="javacSource" value="foobar" />
+		<property name="javacSource" value="1.3" />
 		<property name="javacTarget" value="1.2" />
 		<property name="javacDebugInfo" value="true" />
 		<property name="javacFailOnError" value="false" />
