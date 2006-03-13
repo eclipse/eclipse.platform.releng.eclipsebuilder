@@ -112,6 +112,12 @@ then
 		 buildLabel=$buildId
 fi
 
+#Set the tag to HEAD for Nightly builds
+if [ "$buildType" = "N" ]
+then
+        tag="-DfetchTag=HEAD"
+        versionQualifier="-DforceContextQualifier=$buildId"
+fi
 
 # tag for eclipseInternalBuildTools on ottcvs1
 internalToolsTag=$buildProjectTags
@@ -218,12 +224,6 @@ echo $buildCommand>command.txt
 #run the build
 $buildCommand
 retCode=$?
-
-#build update jars
-#if [ "$update" != "" ]
-#then
-#		 $antRunner -buildfile extraTargets.xml buildUpdateJars $update -Dsite=/builds/transfer/files/testUpdates -DbuildId=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DpostingDirectory=$postingDirectory 
-#fi
 
 if [ $retCode != 0 ]
 then
