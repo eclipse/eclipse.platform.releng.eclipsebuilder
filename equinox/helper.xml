@@ -38,7 +38,7 @@
 		     isBuildTested="false"
 	   		 sendMail="false"
 	   		 buildType="${buildType}"
-		     dropTokenList="%framework%,%extrabundles%,%launchers%"
+		     dropTokenList="%framework%,%extrabundles%,%launchers%,%incubator%"
 		     xmlDirectoryName="${postingDirectory}/testresults/xml"
 		     dropDirectoryName="${equinoxPostingDirectory}/${buildLabel}"
 		     testResultsTemplateFileName="${publishingContent}/templateFiles/testResults.php.template"
@@ -141,6 +141,15 @@
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.servlet.api" />
 		</antcall>
+		<antcall target="updateTestManifest">
+			<param name="bundle.id" value="org.eclipse.equinox.http.registry" />
+		</antcall>
+		<antcall target="updateTestManifest">
+					<param name="bundle.id" value="org.eclipse.equinox.servlet.bridge.http" />
+		</antcall>
+		<antcall target="updateTestManifest">
+					<param name="bundle.id" value="org.eclipse.equinox.servlet.bridge.launcher" />
+    	</antcall>		
 	</target>
 
 
