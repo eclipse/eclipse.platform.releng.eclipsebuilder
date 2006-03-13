@@ -24,6 +24,9 @@ skipTest=""
 
 tagMaps=""
 
+#sets fetchTag="HEAD" for nightly builds if required
+tag=""
+
 buildProjectTags=v20060210a
 
 #update property setting
@@ -40,9 +43,6 @@ buildId=""
 
 #buildLabel - name parsed in php scripts <buildType>-<buildId>-<datestamp>
 buildLabel=""
-
-#packaged - use packager to package all drops
-packaged=
 
 # tag for build contribution project containing .map files
 mapVersionTag=HEAD
@@ -216,7 +216,7 @@ echo bootclasspath=$bootclasspath
 echo bootclasspath_15=$bootclasspath_15
 
 #full command with args
-buildCommand="$antRunner -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:ext:sdimitro@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $tagMaps -DJ2SE-1.5=$bootclasspath_15 $packaged -listener org.eclipse.releng.build.listeners.EclipseBuildListener"
+buildCommand="$antRunner -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:ext:sdimitro@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $tagMaps -DJ2SE-1.5=$bootclasspath_15 $tag -listener org.eclipse.releng.build.listeners.EclipseBuildListener"
 
 #capture command used to run the build
 echo $buildCommand>command.txt
