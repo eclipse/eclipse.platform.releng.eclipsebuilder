@@ -44,6 +44,8 @@
 
 	<target name="main">
 		<ant antfile="build.xml" target="init" />
+		<property file="${buildDirectory}/label.properties" />
+
 		<antcall target="buildEclipseSourceDrops" />
 		<antcall target="buildMasterFeature" />
 		<antcall target="buildMasterUpdateJars" />
