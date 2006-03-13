@@ -42,8 +42,32 @@
 	<property name="postingDirectory" value="${buildDirectory}" />
 	<property name="equinoxPostingDirectory" value="${postingDirectory}/../../equinox/drops" />
 
-	<target name="main">
+	<target name="init">
 		<ant antfile="build.xml" target="init" />
+		<property file="${buildDirectory}/label.properties" />
+		<condition property="fetchTag" value="HEAD">
+			<equals arg1="${buildType}" arg2="N" />
+		</condition>
+		<property name="fetchTag" value="" />
+		<condition property="forceContextQualifier" value="${buildId}">
+			<equals arg1="${buildType}" arg2="N" />
+		</condition>
+		<!--compiler args-->
+		<property name="compilerArg" value="-enableJavadoc -encoding ISO-8859-1 -warn:-discouraged,forbidden" />
+		<property name="javacSource" value="1.3" />
+		<property name="javacTarget" value="1.2" />
+		<property name="javacDebugInfo" value="true" />
+		<property name="javacFailOnError" value="false" />
+		<property name="javacVerbose" value="true" />
+		<!--this property required as of Eclipse 3.0 stream builds > 20031126 -->
+		<property name="buildingOSGi" value="true" />
+		<!--zip args-->
+		<property name="zipargs" value="-y -qq" />
+		<!--unzip args-->
+		<property name="unzipArgs" value="-qq" />
+	</target>
+	
+	<target name="main" depends="init">
 		<antcall target="buildEclipseSourceDrops" />
 		<antcall target="buildMasterFeature" />
 		<antcall target="buildMasterUpdateJars" />
