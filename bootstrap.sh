@@ -24,9 +24,6 @@ skipTest=""
 
 tagMaps=""
 
-#sets fetchTag="HEAD" for nightly builds if required
-tag=""
-
 buildProjectTags=v20060210a
 
 #update property setting
@@ -110,13 +107,6 @@ fi
 if [ "$buildLabel" = "" ]
 then
 		 buildLabel=$buildId
-fi
-
-#Set the tag to HEAD for Nightly builds
-if [ "$buildType" = "N" ]
-then
-        tag="-DfetchTag=HEAD"
-        versionQualifier="-DforceContextQualifier=$buildId"
 fi
 
 # tag for eclipseInternalBuildTools on ottcvs1
@@ -216,7 +206,7 @@ echo bootclasspath=$bootclasspath
 echo bootclasspath_15=$bootclasspath_15
 
 #full command with args
-buildCommand="$antRunner -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:ext:sdimitro@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $tagMaps -DJ2SE-1.5=$bootclasspath_15 $tag -listener org.eclipse.releng.build.listeners.EclipseBuildListener"
+buildCommand="$antRunner -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:ext:sdimitro@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $tagMaps -DJ2SE-1.5=$bootclasspath_15 -listener org.eclipse.releng.build.listeners.EclipseBuildListener"
 
 #capture command used to run the build
 echo $buildCommand>command.txt
