@@ -50,7 +50,7 @@
 			<property name="date" value="${DSTAMP}" />
 			<property name="time" value="${TSTAMP}" />
 			<property name="timestamp" value="${date}-${time}" />
-			<property name="buildType" value="I" />
+			<property name="buildType" value="${buildType}" />
 			<property name="buildId" value="${buildType}${timestamp}" />
 
 			<!--this naming convention used by php scripts on download server-->
