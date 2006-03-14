@@ -339,6 +339,8 @@
 
 	<target name="verifyCompile" if="eclipse.running">
 		<echo message="Checking for compile errors..." />
+		<!--create html output for compile logs-->
+		<eclipse.convert input="${postingDirectory}/${buildLabel}/compilelogs" validation="true"/>
 		<!-- Sends email to recipient list in monitor.properties with compile logs attached if errors found-->
 		<verifyCompile install="${postingDirectory}/${buildLabel}/compilelogs" />
 	</target>

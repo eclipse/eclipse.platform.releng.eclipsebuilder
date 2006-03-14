@@ -46,7 +46,10 @@
 		<antcall target="buildEclipseSourceDrops" />
 		<antcall target="buildMasterFeature" />
 		<parallel failonany="true">
-			<!--antcall target="signMasterFeature" /-->
+			<sequential>
+				<!--antcall target="signMasterFeature" /-->
+				<antcall target="unpackUpdateJarsForPackaging" />
+			</sequential>
 			<sequential>
 				<antcall target="buildMasterRootFeature" />
 				<antcall target="buildSdkTestFeature" />
@@ -55,7 +58,6 @@
 		</parallel>
 		<parallel failonany="true">
 			<sequential>
-				<antcall target="unpackUpdateJarsForPackaging" />
 				<antcall target="packageEclipseDistributables" />
 				<antcall target="packageEquinoxDistributables" />
 				<antcall target="publishEclipse" />
