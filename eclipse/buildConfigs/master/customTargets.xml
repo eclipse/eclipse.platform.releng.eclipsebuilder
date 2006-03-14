@@ -28,15 +28,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 
 	<target name="assemble">
 		<ant antfile="${assembleScriptName}" />
-		<!--add swt stand-alone jars to the zip to include in signing-->
-		<!--exec executable="zip" dir="${buildDirectory}">
-			<arg line="-qqo ${archiveFullPath} -ru plugins -i *swt*.jar -x *test* *example*" />
-		</exec-->
-		
-		<!--remove all root files-->
-		<exec executable="zip" dir="${buildDirectory}">
-					<arg line="-qqo ${archiveFullPath} -ru plugins -i *swt*.jar -x *test* *example*" />
-				</exec>
 	</target>
 
 	<!-- ===================================================================== -->
@@ -266,69 +257,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<antcall target="allElements">
 			<param name="target" value="cleanElement" />
 		</antcall>
-	</target>
-
-	<target name="sign" if="signJars">
-		<!--push drop to staging directory-->
-		<property name="stagingDirectory" value="/home/data/httpd/download-staging.priv/eclipse/downloads" />
-
-		<exec dir="${buildDirectory}/${buildLabel}" executable="scp" output="signing.txt">
-			<arg line="${archiveName} download1.eclipse.org:${stagingDirectory}"/>
-		</exec>
-		<exec dir="." executable="ssh" output="signing.txt" append="true">
-			<arg line="download1.eclipse.org chmod ugo+rw ${stagingDirectory}/${archiveName} "/>
-		</exec>
-
-		<!--timestamp on download server-->
-		<exec dir="." executable="ssh" output="signing.txt" append="true">
-			<arg line="download1.eclipse.org touch -t ${timestamp} ${stagingDirectory}/${archiveName}"/>
-		</exec>
-
-		<!--capture original file attributes-->
-		<exec dir="." executable="ssh" outputProperty="originalAttribs">
-			<arg line="download1.eclipse.org &quot;cd /home/data/httpd/download-staging.priv/eclipse/downloads/;ls -gG ${archiveName}&quot;"/>
-		</exec>
-
-		<!--invoke script that digital signs and wait-->
-		<exec dir="." executable="ssh" output="signing.txt" append="true">
-			<arg line="download1.eclipse.org &quot;cd /home/data/httpd/download-staging.priv/eclipse/downloads;sign ${archiveName} mail&quot;"/>
-		</exec>
-		<antcall target="waitForChangedAttribs" />
-
-		<!--copy zip back to build machine-->
-		<exec dir="." executable="scp" output="signing.txt" append="true">
-			<arg line="download1.eclipse.org:${stagingDirectory}/${archiveName} ${buildDirectory}/${buildLabel}"/>
-		</exec>
-
-	</target>
-
-	<target name="waitForChangedAttribs" unless="attribs.changed">
-		<antcall target="compareAttribs" inheritAll="false">
-			<param name="originalAttribs" value="${originalAttribs}" />
-		</antcall>
-	</target>
-
-	<target name="compareAttribs">
-		<!--poll file for change in attributes-->
-		<exec dir="." executable="ssh" outputProperty="polledAttribs">
-			<arg line="download1.eclipse.org &quot;cd /home/data/httpd/download-staging.priv/eclipse/downloads/;ls -gG ${archiveName}&quot;"/>
-		</exec>
-		<echo message="original:  ${originalAttribs}" />
-		<condition property="attribChanged">
-			<not>
-				<equals arg1="${originalAttribs}" arg2="${polledAttribs}" />
-			</not>
-		</condition>
-		<echo message="polled:  ${polledAttribs}" />
-		<antcall target="writeDiffResult" />
-		<sleep seconds="120" />
-		<available property="attribs.changed" file="${builder}/attribDiff.txt" />
-		<antcall target="waitForChangedAttribs" />
-	</target>
-
-	<target name="writeDiffResult" if="attribChanged">
-		<echo message="original: ${originalAttribs}" file="${builder}/attribDiff.txt" />
-		<echo message="new: ${polledAttribs}" file="${builder}/attribDiff.txt" append="true" />
 	</target>
 
 	<!-- ===================================================================== -->

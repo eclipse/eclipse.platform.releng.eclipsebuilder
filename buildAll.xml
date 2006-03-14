@@ -45,7 +45,6 @@
 	<target name="main" depends="init">
 		<antcall target="buildEclipseSourceDrops" />
 		<antcall target="buildMasterFeature" />
-		<antcall target="buildMasterUpdateJars" />
 		<parallel failonany="true">
 			<!--antcall target="signMasterFeature" /-->
 			<sequential>
@@ -56,6 +55,7 @@
 		</parallel>
 		<parallel failonany="true">
 			<sequential>
+				<antcall target="unpackUpdateJarsForPackaging" />
 				<antcall target="packageEclipseDistributables" />
 				<antcall target="packageEquinoxDistributables" />
 				<antcall target="publishEclipse" />
@@ -229,9 +229,23 @@
 		<ant antfile="${equinox.build.configs}/../helper.xml" target="publish" />
 	</target>
 
+	<target name="unpackUpdateJarsForPackaging">
+		<property name="tmpsite" value="${buildDirectory}/tmpsite" />
+		<exec executable="unzip" dir="${buildDirectory}/${buildLabel}">
+			<arg line="-q eclipse-master-${buildId}.zip -d ${tmpsite}" />
+		</exec>
+		<unpackUpdateJars site="${tmpsite}/eclipse" />
+		<exec executable="unzip" dir="${buildDirectory}/${buildLabel}">
+			<arg line="-q eclipse-master-${buildId}.zip -d ${tmpsite}" />
+		</exec>
+		<move file="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip" tofile="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip.org" />
+		<exec executable="zip" dir="${tmpsite}">
+			<arg line="-q ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -r eclipse" />
+		</exec>
+	</target>
+		
 	<target name="packageEclipseDistributables">
 		<replace file="packaging.map" token="@buildId@" value="${buildId}"/>
-
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/sdk/packager" />
 		</antcall>
