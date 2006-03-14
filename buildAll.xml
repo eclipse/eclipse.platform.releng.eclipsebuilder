@@ -42,6 +42,30 @@
 	<property name="postingDirectory" value="${buildDirectory}" />
 	<property name="equinoxPostingDirectory" value="${postingDirectory}/../../equinox/drops" />
 
+	<target name="main" depends="init">
+		<antcall target="buildEclipseSourceDrops" />
+		<antcall target="buildMasterFeature" />
+		<antcall target="buildMasterUpdateJars" />
+		<parallel failonany="true">
+			<!--antcall target="signMasterFeature" /-->
+			<sequential>
+				<antcall target="buildMasterRootFeature" />
+				<antcall target="buildSdkTestFeature" />
+				<ant antfile="${eclipse.build.configs}/../helper.xml" target="verifyCompile" />
+			</sequential>
+		</parallel>
+		<parallel failonany="true">
+			<sequential>
+				<antcall target="packageEclipseDistributables" />
+				<antcall target="packageEquinoxDistributables" />
+				<antcall target="publishEclipse" />
+				<antcall target="publishEquinox" />
+			</sequential>
+			<!--TODO assemble update site here.-->
+			<antcall target="testEclipse" />
+		</parallel>
+	</target>
+
 	<target name="init">
 		<ant antfile="build.xml" target="init" />
 		<property file="${buildDirectory}/label.properties" />
@@ -67,30 +91,6 @@
 		<property name="unzipArgs" value="-qq" />
 	</target>
 	
-	<target name="main" depends="init">
-		<antcall target="buildEclipseSourceDrops" />
-		<antcall target="buildMasterFeature" />
-		<antcall target="buildMasterUpdateJars" />
-		<parallel failonany="true">
-			<!--antcall target="signMasterFeature" /-->
-			<sequential>
-				<antcall target="buildMasterRootFeature" />
-				<antcall target="buildSdkTestFeature" />
-				<ant antfile="${eclipse.build.configs}/../helper.xml" target="verifyCompile" />
-			</sequential>
-		</parallel>
-		<parallel failonany="true">
-			<sequential>
-				<antcall target="packageEclipseDistributables" />
-				<antcall target="packageEquinoxDistributables" />
-				<antcall target="publishEclipse" />
-				<antcall target="publishEquinox" />
-			</sequential>
-			<!--TODO assemble update site here.-->
-			<antcall target="testEclipse" />
-		</parallel>
-	</target>
-
 	<target name="buildMasterFeature">
 		<ant antfile="build.xml" dir="${basedir}">
 			<property name="component" value="${eclipse.build.configs}/master" />
