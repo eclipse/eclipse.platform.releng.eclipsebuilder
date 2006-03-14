@@ -223,9 +223,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Steps to do after running the build.xmls for the elements being built. -->
 	<!-- ===================================================================== -->
 	<target name="postProcess">
-		<condition property="logsAvailable">
-			<istrue value="${javacVerbose}"/>
-		</condition>
 		<antcall target="gatherLogs" />
 	</target>
 
