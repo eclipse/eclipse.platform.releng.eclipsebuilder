@@ -82,7 +82,7 @@
 		<property name="javacTarget" value="1.2" />
 		<property name="javacDebugInfo" value="true" />
 		<property name="javacFailOnError" value="false" />
-		<property name="javacVerbose" value="true" />
+		<property name="javacVerbose" value="false" />
 		<!--this property required as of Eclipse 3.0 stream builds > 20031126 -->
 		<property name="buildingOSGi" value="true" />
 		<!--zip args-->
@@ -234,12 +234,12 @@
 		<exec executable="unzip" dir="${buildDirectory}/${buildLabel}">
 			<arg line="-q eclipse-master-${buildId}.zip -d ${tmpsite}" />
 		</exec>
-		<unpackUpdateJars site="${tmpsite}/eclipse" />
+		<unpackUpdateJars site="${tmpsite}/eclipse" output="${tmpsite}/new/eclipse"/>
 		<exec executable="unzip" dir="${buildDirectory}/${buildLabel}">
 			<arg line="-q eclipse-master-${buildId}.zip -d ${tmpsite}" />
 		</exec>
 		<move file="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip" tofile="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip.org" />
-		<exec executable="zip" dir="${tmpsite}">
+		<exec executable="zip" dir="${tmpsite}/new">
 			<arg line="-q ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -r eclipse" />
 		</exec>
 	</target>
