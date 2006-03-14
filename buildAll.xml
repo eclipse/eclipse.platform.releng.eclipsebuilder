@@ -233,6 +233,8 @@
 
 	<target name="unpackUpdateJarsForPackaging">
 		<property name="tmpsite" value="${buildDirectory}/tmpsite" />
+		<mkdir dir="${tmpsite}/new/eclipse/features" />
+		<mkdir dir="${tmpsite}/new/eclipse/plugins" />
 		<exec executable="unzip" dir="${buildDirectory}/${buildLabel}">
 			<arg line="-q eclipse-master-${buildId}.zip -d ${tmpsite}" />
 		</exec>
