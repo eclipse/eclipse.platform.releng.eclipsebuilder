@@ -154,7 +154,10 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<property name="archiveName" value="master-root-rcp-${buildId}.zip"/>
 		<antcall target="assemble" />
 	</target>
-
+	<target name="assemble.examples-common.common.common">
+		<property name="archiveName" value="master-root-examples-${buildId}.zip"/>
+		<antcall target="assemble" />
+	</target>
 	<target name="assemble.master-root.equinox-launcher-linux.gtk.x86">
 		<property name="archiveName" value="launchers-linux.gtk.x86.${buildId}.tar.gz" />
 		<antcall target="assemble.equinox" />

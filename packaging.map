@@ -40,3 +40,5 @@ master-root-platform-hpux.motif.PA_RISC.@buildId@.zip=file:${buildDirectory}/${b
 master-root-platform-macosx.carbon.ppc.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | macosx,carbon,ppc| eclipse/ | runtime | root-platform
 
 master-root-rcp-@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | | eclipse/ | runtime | root-rcp
+
+master-root-examples-@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | | eclipse/ | runtime | root-examples
