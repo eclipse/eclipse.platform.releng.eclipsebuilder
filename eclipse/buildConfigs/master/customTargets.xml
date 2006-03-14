@@ -27,7 +27,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	</target>
 
 	<target name="assemble">
-		<ant anthfile="${assembleScriptName}" />
+		<ant antfile="${assembleScriptName}" />
 		<!--add swt stand-alone jars to the zip to include in signing-->
 		<!--exec executable="zip" dir="${buildDirectory}">
 			<arg line="-qqo ${archiveFullPath} -ru plugins -i *swt*.jar -x *test* *example*" />
