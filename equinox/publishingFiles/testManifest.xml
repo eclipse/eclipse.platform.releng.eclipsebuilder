@@ -79,7 +79,7 @@
 	</zipTypes>
 
 	<logFiles>
-		<logFile name="plugins\org.eclipse.osgi_*\@dot.bin.log">
+		<logFile name="plugins\org.eclipse.osgi_*\@dot.bin.xml">
 			<effectedFile id="system"></effectedFile>
 		</logFile>
 	</logFiles>
