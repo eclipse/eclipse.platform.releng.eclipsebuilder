@@ -154,7 +154,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<property name="archiveName" value="master-root-rcp-${buildId}.zip"/>
 		<antcall target="assemble" />
 	</target>
-	<target name="assemble.examples-common.common.common">
+	<target name="assemble.master-root.examples-common.common.common">
 		<property name="archiveName" value="master-root-examples-${buildId}.zip"/>
 		<antcall target="assemble" />
 	</target>
