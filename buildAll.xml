@@ -85,6 +85,7 @@
 		<property name="javacDebugInfo" value="true" />
 		<property name="javacFailOnError" value="false" />
 		<property name="javacVerbose" value="false" />
+		<property name="logExtension" value=".xml" />
 		<!--this property required as of Eclipse 3.0 stream builds > 20031126 -->
 		<property name="buildingOSGi" value="true" />
 		<!--zip args-->
