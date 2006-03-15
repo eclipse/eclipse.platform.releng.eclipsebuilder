@@ -167,7 +167,7 @@
 	<!-- ===================================================================== -->
 	<!-- Helper targets -->
 	<!-- ===================================================================== -->
-	<target name="gatherLogs" if="logsAvailable">
+	<target name="gatherLogs">
 		<mkdir dir="${postingDirectory}/${buildLabel}/compilelogs" />
 		<antcall target="allElements">
 			<param name="target" value="gatherLogs" />

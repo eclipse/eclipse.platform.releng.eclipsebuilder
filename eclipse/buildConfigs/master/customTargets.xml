@@ -237,7 +237,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Helper targets -->
 	<!-- ===================================================================== -->
 
-	<target name="gatherLogs" if="logsAvailable">
+	<target name="gatherLogs">
 
 		<mkdir dir="${postingDirectory}/${buildLabel}/compilelogs" />
 		<antcall target="allElements">
