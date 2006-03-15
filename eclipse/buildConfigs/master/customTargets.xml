@@ -158,6 +158,9 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<fileset dir="${buildDirectory}/features" includes="*.source*/**" />
 			<fileset dir="${buildDirectory}/plugins" includes="*.source*/**" />
 		</delete>
+		<exec executable="unzip" dir="${builder}/custom.zip">
+			<arg line="-qo custom.zip -r ${buildDirectory}/plugins" />
+		</exec>
 	</target>
 
 	<!-- ===================================================================== -->
