@@ -238,8 +238,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- ===================================================================== -->
 
 	<target name="gatherLogs">
-
-		<mkdir dir="${postingDirectory}/${buildLabel}/compilelogs" />
+		<mkdir dir="${postingDirectory}/${buildLabel}/compilelogs/plugins" />
 		<antcall target="allElements">
 			<param name="target" value="gatherLogs" />
 		</antcall>
@@ -248,6 +247,17 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 				<include name="*.log.zip" />
 			</fileset>
 		</unzip>
+		<!--HACK:  copy logs from features which nest others
+		because they are not included in the zip created above.-->
+		<copy todir="${postingDirectory}/${buildLabel}/compilelogs" overwrite="true">
+			<fileset dir="${buildDirectory}/features/master-equinox/feature.temp.folder" />
+		</copy>
+		<copy todir="${postingDirectory}/${buildLabel}/compilelogs" overwrite="true">
+			<fileset dir="${buildDirectory}/features/org.eclipse.platform/feature.temp.folder" />
+		</copy>
+		<copy todir="${postingDirectory}/${buildLabel}/compilelogs" overwrite="true">
+			<fileset dir="${buildDirectory}/features/org.eclipse.sdk/feature.temp.folder" />
+		</copy>
 	</target>
 
 	<target name="clean" unless="noclean">
