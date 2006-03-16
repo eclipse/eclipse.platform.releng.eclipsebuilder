@@ -778,7 +778,7 @@
 		<effectedFile id="PMCSDK"></effectedFile>
 	</logFile>
 
-	<logFile name="plugins\org.eclipse.jdt.core_*\jdtcore.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.jdt.core_*\jdtcore.jar.bin.xml" type="compile">
 		<effectedFile id="SW"></effectedFile>
 		<effectedFile id="SLM"></effectedFile>
 		<effectedFile id="SLG2"></effectedFile>
@@ -794,7 +794,7 @@
 		<effectedFile id="JMCSDK"></effectedFile>
 	</logFile>
 
-	<logFile name="plugins\org.eclipse.jdt.debug_*\jdimodel.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.jdt.debug_*\jdimodel.jar.bin.xml" type="compile">
 		<effectedFile id="SW"></effectedFile>
 		<effectedFile id="SLM"></effectedFile>
 		<effectedFile id="SLG2"></effectedFile>
@@ -810,7 +810,7 @@
 		<effectedFile id="JMCSDK"></effectedFile>
 	</logFile>
 	
-	<logFile name="plugins\org.eclipse.jdt.debug.ui_*\jdiui.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.jdt.debug.ui_*\jdiui.jar.bin.xml" type="compile">
 		<effectedFile id="SW"></effectedFile>
 		<effectedFile id="SLM"></effectedFile>
 		<effectedFile id="SLG2"></effectedFile>
@@ -826,7 +826,7 @@
 		<effectedFile id="JMCSDK"></effectedFile>
 	</logFile>
 
-	<logFile name="plugins\org.eclipse.jdt.launching_*\launching.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.jdt.launching_*\launching.jar.bin.xml" type="compile">
 		<effectedFile id="SW"></effectedFile>
 		<effectedFile id="SLM"></effectedFile>
 		<effectedFile id="SLG2"></effectedFile>
@@ -843,7 +843,7 @@
 		<effectedFile id="JMCSDK"></effectedFile>
 	</logFile>
 
-	<logFile name="plugins\org.eclipse.jdt.ui_*\jdt.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.jdt.ui_*\jdt.jar.bin.xml" type="compile">
 		<effectedFile id="SW"></effectedFile>
 		<effectedFile id="SLM"></effectedFile>
 		<effectedFile id="SLG2"></effectedFile>
@@ -859,7 +859,7 @@
 		<effectedFile id="JMCSDK"></effectedFile>
 	</logFile>
 	
-	<logFile name="plugins\org.eclipse.jdt.junit_*\junitsupport.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.jdt.junit_*\junitsupport.jar.bin.xml" type="compile">
 		<effectedFile id="SW"></effectedFile>
 		<effectedFile id="SLM"></effectedFile>
 		<effectedFile id="SLG2"></effectedFile>
@@ -875,7 +875,7 @@
 		<effectedFile id="JMCSDK"></effectedFile>
 	</logFile>
 
-	<logFile name="plugins\org.eclipse.jdt.ui.vcm_*\jdtvcm.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.jdt.ui.vcm_*\jdtvcm.jar.bin.xml" type="compile">
 		<effectedFile id="SW"></effectedFile>
 		<effectedFile id="SLM"></effectedFile>
 		<effectedFile id="SLG2"></effectedFile>
@@ -891,7 +891,7 @@
 		<effectedFile id="JMCSDK"></effectedFile>
 	</logFile>
 
-	<logFile name="plugins\org.eclipse.swt.carbon_*\ws\carbon\swt.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.swt.carbon_*\ws\carbon\swt.jar.bin.xml" type="compile">
 		<effectedFile id="SMC"></effectedFile>
 		<effectedFile id="PMC"></effectedFile>
 		<effectedFile id="PMCSDK"></effectedFile>
@@ -900,13 +900,13 @@
 		<effectedFile id="RCPSDKMC"></effectedFile>
 	</logFile>
 
-	<logFile name="plugins\org.eclipse.swt.photon_*\ws\photon\swt.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.swt.photon_*\ws\photon\swt.jar.bin.xml" type="compile">
 		<!--effectedFile id="SNP"></effectedFile>
 		<effectedFile id="PNP"></effectedFile-->
 		<effectedFile id="SWTNP"></effectedFile>
 	</logFile>
 
-	<logFile name="plugins\org.eclipse.swt.gtk_*\ws\gtk\swt.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.swt.gtk_*\ws\gtk\swt.jar.bin.xml" type="compile">
 		<effectedFile id="SLG2"></effectedFile>
 		<effectedFile id="PLG2"></effectedFile>
 		<effectedFile id="PLG2SDK"></effectedFile>
@@ -915,7 +915,7 @@
 		<effectedFile id="RCPSDKLG2"></effectedFile>
 	</logFile>
 
-	<logFile name="plugins\org.eclipse.swt.gtk_*\ws\gtk\swt-pi.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.swt.gtk_*\ws\gtk\swt-pi.jar.bin.xml" type="compile">
 		<effectedFile id="SLG2"></effectedFile>
 		<effectedFile id="PLG2"></effectedFile>
 		<effectedFile id="PLG2SDK"></effectedFile>
@@ -924,7 +924,7 @@
 		<effectedFile id="RCPSDKLG2"></effectedFile>
 	</logFile>
 	
-	<logFile name="plugins\org.eclipse.swt.gtk64_*\ws\gtk\swt.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.swt.gtk64_*\ws\gtk\swt.jar.bin.xml" type="compile">
 		<effectedFile id="SLG264"></effectedFile>
 		<effectedFile id="PLG264"></effectedFile>
 		<effectedFile id="PLG264SDK"></effectedFile>
@@ -933,7 +933,7 @@
 		<effectedFile id="RCPSDKLG264"></effectedFile>
 	</logFile>
 
-	<logFile name="plugins\org.eclipse.swt.gtk64_*\ws\gtk\swt-pi.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.swt.gtk64_*\ws\gtk\swt-pi.jar.bin.xml" type="compile">
 		<effectedFile id="SLG264"></effectedFile>
 		<effectedFile id="PLG264"></effectedFile>
 		<effectedFile id="PLG264SDK"></effectedFile>
@@ -942,7 +942,7 @@
 		<effectedFile id="RCPSDKLG264"></effectedFile>
 	</logFile>
 	
-	<logFile name="plugins\org.eclipse.swt.gtk64_*\ws\gtk\swt-mozilla.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.swt.gtk64_*\ws\gtk\swt-mozilla.jar.bin.xml" type="compile">
 		<effectedFile id="SLG264"></effectedFile>
 		<effectedFile id="PLG264"></effectedFile>
 		<effectedFile id="PLG264SDK"></effectedFile>
@@ -951,7 +951,7 @@
 		<effectedFile id="RCPSDKLG264"></effectedFile>
 	</logFile>
 	
-	<logFile name="plugins\org.eclipse.swt.motif_*\ws\motif\swt.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.swt.motif_*\ws\motif\swt.jar.bin.xml" type="compile">
 		<effectedFile id="SLM"></effectedFile>
 		<effectedFile id="PLM"></effectedFile>
 		<effectedFile id="PLMSDK"></effectedFile>
@@ -977,7 +977,7 @@
 
 	</logFile>
 
-	<logFile name="plugins\org.eclipse.swt.win32_*\ws\win32\swt.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.swt.win32_*\ws\win32\swt.jar.bin.xml" type="compile">
 		<effectedFile id="SW"></effectedFile>
 		<effectedFile id="PW"></effectedFile>
 		<effectedFile id="PWSDK"></effectedFile>
@@ -988,126 +988,126 @@
 		<effectedFile id="RCPSDKW"></effectedFile>
 	</logFile>
 	
-	<logFile name="plugins\org.eclipse.jdt.ui.examples.projects_*\jdtexamples.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.jdt.ui.examples.projects_*\jdtexamples.jar.bin.xml" type="compile">
 		<effectedFile id="EW"></effectedFile>
 		<effectedFile id="EA"></effectedFile>
 	</logFile>
 	
-	<logFile name="plugins\org.eclipse.scripting.examples_*\scriptex1.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.scripting.examples_*\scriptex1.jar.bin.xml" type="compile">
 		<effectedFile id="EW"></effectedFile>
 		<effectedFile id="EA"></effectedFile>
 	</logFile>
 
-	<logFile name="plugins\org.eclipse.swt.examples_*\swtexamples.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.swt.examples_*\swtexamples.jar.bin.xml" type="compile">
 		<effectedFile id="EW"></effectedFile>
 		<effectedFile id="EA"></effectedFile>
 	</logFile>
 
-	<logFile name="plugins\org.eclipse.swt.examples.controls_*\controls.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.swt.examples.controls_*\controls.jar.bin.xml" type="compile">
 		<effectedFile id="EW"></effectedFile>
 		<effectedFile id="EA"></effectedFile>
 	</logFile>
 
-	<logFile name="plugins\org.eclipse.swt.examples.launcher_*\launcher.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.swt.examples.launcher_*\launcher.jar.bin.xml" type="compile">
 		<effectedFile id="EW"></effectedFile>
 		<effectedFile id="EA"></effectedFile>
 	</logFile>
 
-	<logFile name="plugins\org.eclipse.swt.examples.ole.win32_*\olewin32.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.swt.examples.ole.win32_*\olewin32.jar.bin.xml" type="compile">
 		<effectedFile id="EW"></effectedFile>
 	</logFile>
 
-	<logFile name="plugins\org.eclipse.swt.examples.paint_*\paint.jar.bin.xml">
-		<effectedFile id="EW"></effectedFile>
-		<effectedFile id="EA"></effectedFile>
-	</logFile>
-
-	<logFile name="plugins\org.eclipse.ui.examples.javaeditor_*\javaeditorexample.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.swt.examples.paint_*\paint.jar.bin.xml" type="compile">
 		<effectedFile id="EW"></effectedFile>
 		<effectedFile id="EA"></effectedFile>
 	</logFile>
 
-	<logFile name="plugins\org.eclipse.ui.examples.multipageeditor_*\multipageeditor.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.ui.examples.javaeditor_*\javaeditorexample.jar.bin.xml" type="compile">
 		<effectedFile id="EW"></effectedFile>
 		<effectedFile id="EA"></effectedFile>
 	</logFile>
 
-	<logFile name="plugins\org.eclipse.ui.examples.fieldassist_*\@dot.bin.xml">
+	<logFile name="plugins\org.eclipse.ui.examples.multipageeditor_*\multipageeditor.jar.bin.xml" type="compile">
 		<effectedFile id="EW"></effectedFile>
 		<effectedFile id="EA"></effectedFile>
 	</logFile>
 
-	<logFile name="plugins\org.eclipse.ui.examples.propertysheet_*\propertysheet.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.ui.examples.fieldassist_*\@dot.bin.xml" type="compile">
 		<effectedFile id="EW"></effectedFile>
 		<effectedFile id="EA"></effectedFile>
 	</logFile>
 
-	<logFile name="plugins\org.eclipse.ui.examples.readmetool_*\readmetool.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.ui.examples.propertysheet_*\propertysheet.jar.bin.xml" type="compile">
+		<effectedFile id="EW"></effectedFile>
+		<effectedFile id="EA"></effectedFile>
+	</logFile>
+
+	<logFile name="plugins\org.eclipse.ui.examples.readmetool_*\readmetool.jar.bin.xml" type="compile">
 		<effectedFile id="EW"></effectedFile>
 		<effectedFile id="EA"></effectedFile>
 	</logFile>
 	
-	<logFile name="plugins\org.eclipse.core.tests.harness_*\testharness.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.core.tests.harness_*\testharness.jar.bin.xml" type="compile">
 		<effectedFile id="JT"></effectedFile>
 	</logFile>
 
-	<logFile name="plugins\org.eclipse.core.tests.runtime_*\runtimetests.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.core.tests.runtime_*\runtimetests.jar.bin.xml" type="compile">
 		<effectedFile id="JT"></effectedFile>
 	</logFile>
 	
-	<logFile name="plugins\org.eclipse.core.tests.resources_*\resourcestests.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.core.tests.resources_*\resourcestests.jar.bin.xml" type="compile">
 		<effectedFile id="JT"></effectedFile>
 	</logFile>
 	
-	<logFile name="plugins\org.eclipse.jdt.debug.tests_*\javadebugtests.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.jdt.debug.tests_*\javadebugtests.jar.bin.xml" type="compile">
 		<effectedFile id="JT"></effectedFile>
 	</logFile>
 	
-	<logFile name="plugins\org.eclipse.help.tests_*\helptests.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.help.tests_*\helptests.jar.bin.xml" type="compile">
 		<effectedFile id="JT"></effectedFile>
 	</logFile>
 	
-	<logFile name="plugins\org.eclipse.jdt.ui.tests_*\javauitests.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.jdt.ui.tests_*\javauitests.jar.bin.xml" type="compile">
 		<effectedFile id="JT"></effectedFile>
 	</logFile>
 	
-	<logFile name="plugins\org.eclipse.jdt.ui.tests.refactoring_*\refactoringtests.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.jdt.ui.tests.refactoring_*\refactoringtests.jar.bin.xml" type="compile">
 		<effectedFile id="JT"></effectedFile>
 	</logFile>
 	
-	<logFile name="plugins\org.eclipse.swt.tests_*\swttests.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.swt.tests_*\swttests.jar.bin.xml" type="compile">
 		<effectedFile id="JT"></effectedFile>
 	</logFile>
 	
-	<logFile name="plugins\org.eclipse.ui.tests_*\uitests.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.ui.tests_*\uitests.jar.bin.xml" type="compile">
 		<effectedFile id="JT"></effectedFile>
 	</logFile>
 	
-	<logFile name="plugins\org.eclipse.update.tests.core_*\updatetests.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.update.tests.core_*\updatetests.jar.bin.xml" type="compile">
 		<effectedFile id="JT"></effectedFile>
 	</logFile>
 
-	<logFile name="plugins\org.eclipse.team.tests.core_*\teamtests.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.team.tests.core_*\teamtests.jar.bin.xml" type="compile">
 		<effectedFile id="JT"></effectedFile>
 	</logFile>
 
-	<logFile name="plugins\org.eclipse.team.tests.cvs.core_*\cvstests.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.team.tests.cvs.core_*\cvstests.jar.bin.xml" type="compile">
 		<effectedFile id="JT"></effectedFile>
 	</logFile>
 	
-	<logFile name="plugins\org.eclipse.jdt.core.tests.builder_*\jdtcoretestsbuilder.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.jdt.core.tests.builder_*\jdtcoretestsbuilder.jar.bin.xml" type="compile">
 		<effectedFile id="JT"></effectedFile>
 	</logFile>
 	
-	<logFile name="plugins\org.eclipse.jdt.core.tests.compiler_*\jdtcoretestscompiler.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.jdt.core.tests.compiler_*\jdtcoretestscompiler.jar.bin.xml" type="compile">
 		<effectedFile id="JT"></effectedFile>
 	</logFile>
 
-	<logFile name="plugins\org.eclipse.jdt.core.tests.model_*\jdtcoretestsmodel.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.jdt.core.tests.model_*\jdtcoretestsmodel.jar.bin.xml" type="compile">
 		<effectedFile id="JT"></effectedFile>
 	</logFile>
 
-    <logFile name="plugins\org.eclipse.ui.carbon_*\carbon.jar.bin.xml">
+    <logFile name="plugins\org.eclipse.ui.carbon_*\carbon.jar.bin.xml" type="compile">
         <effectedFile id="SMC"></effectedFile>    
 		<effectedFile id="RCPMC"></effectedFile>
 		<effectedFile id="RCPSDKMC"></effectedFile>
@@ -1116,7 +1116,7 @@
 		<effectedFile id="SWTMC"></effectedFile>
     </logFile>
 
-	<logFile name="plugins\org.eclipse.perfmsr.core_*\perfmsr.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.perfmsr.core_*\perfmsr.jar.bin.xml" type="compile">
 		<effectedFile id="SW"></effectedFile>
 		<effectedFile id="PW"></effectedFile>
 		<effectedFile id="PWSDK"></effectedFile>
@@ -1124,10 +1124,10 @@
 		<effectedFile id="RCPSDKW"></effectedFile>
 	</logFile>
 
-	<logFile name="plugins\org.eclipse.test_*\automated.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.test_*\automated.jar.bin.xml" type="compile">
 		<effectedFile id="JT"></effectedFile>
 	</logFile>
-	<logFile name="plugins\org.eclipse.releng.tools_*\tools.jar.bin.xml">
+	<logFile name="plugins\org.eclipse.releng.tools_*\tools.jar.bin.xml" type="compile">
 		<effectedFile id="RE"></effectedFile>
 	</logFile>
 
