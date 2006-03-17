@@ -27,7 +27,7 @@ tagMaps=""
 #sets fetchTag="HEAD" for nightly builds if required
 tag=""
 
-buildProjectTags=v20060315
+buildProjectTags=v20060317
 
 #update property setting
 update=""
