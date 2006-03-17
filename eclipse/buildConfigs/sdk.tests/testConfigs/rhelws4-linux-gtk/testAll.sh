@@ -13,5 +13,5 @@ export LD_LIBRARY_PATH USERNAME DISPLAY
 
 #execute command to run tests
 
-./runtests -os linux -ws gtk -arch x86 -vm ../jdk1.4.2_08/jre/bin/java -properties vm.properties> linux.gtk_consolelog.txt
+./runtests -os linux -ws gtk -arch x86 -vm ../jdk1.4.2_10/jre/bin/java -properties vm.properties> linux.gtk_consolelog.txt
 
