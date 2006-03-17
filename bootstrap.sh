@@ -190,12 +190,12 @@ bootclasspath_15="$builderDir/jdk/win32_15/jdk1.5.0_06/jre/lib/rt.jar"
 
 if [ "$HOSTNAME" == "eclipsebuildserv" ]
 then
-    PATH=$BASE_PATH:$builderDir/eclipseInternalBuildTools/bin/linux/:$builderDir/jdk/linuxppc/IBMJava2-ppc-150/jre/bin;export PATH
+    PATH=$BASE_PATH:$builderDir/eclipseInternalBuildTools/bin/linux/:$builderDir/jdk/linuxppc/ibm-java2-ppc-50/jre/bin;export PATH
 else
     PATH=$BASE_PATH:$builderDir/eclipseInternalBuildTools/bin/linux/:$builderDir/jdk/linux/jdk1.5.0_06/jre/bin;export PATH
 fi
 
-cd org.eclipse.releng.eclipsebuilder
+cd $builderDir/org.eclipse.releng.eclipsebuilder
 
 echo buildId=$buildId >> monitor.properties 
 echo timestamp=$timestamp >> monitor.properties 
@@ -207,7 +207,7 @@ echo log=$postingDirectory/$buildLabel/index.php >> monitor.properties
 antRunner="`which java` -Xmx500m -jar ../org.eclipse.releng.basebuilder/startup.jar -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=ppc -application org.eclipse.ant.core.antRunner"
 
 #clean drop directories
-		 $antRunner -buildfile eclipse/helper.xml cleanSites
+	$antRunner -buildfile eclipse/helper.xml cleanSites
 
 echo recipients=$recipients
 echo postingDirectory=$postingDirectory
@@ -234,3 +234,4 @@ fi
 
 #clean up
 #rm -rf $builderDir
+
