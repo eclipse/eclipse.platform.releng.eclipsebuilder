@@ -160,7 +160,7 @@ cp -r eclipseInternalBuildTools/plugins org.eclipse.releng.basebuilder
 
 #The URLs and filenames of vms used in build
 linuxJdkArchive=jdks/jdk-1_5_0_06-fcs-bin-b05-linux-i586-10_nov_2005.zip
-linuxppcJdkArchive=jdks/ibm-java2-sdk-50-linux-ppc.tgz
+linuxppcJdkArchive=jdks/IBMJava2-SDK-ppc-142.zip
 windowsJreArchive=jdks/jdk-1_4_2_10-fcs-bin-b03-windows-i586-10_oct_2005.zip
 windows15JdkArchive=jdks/jdk-1_5_0_06-fcs-bin-b05-windows-i586-10_nov_2005.zip
 
@@ -177,7 +177,7 @@ mkdir -p jdk/win32_15; cvs -d :pserver:anonymous@ottcvs1:/home/cvs/releng co $wi
 if [ "$HOSTNAME" == "eclipsebuildserv" ]
 then
     #get then install the Linuxppc vm used for running the build
-    mkdir -p jdk/linuxppc; cd jdk/linuxppc; cvs -d :pserver:anonymous@ottcvs1:/home/cvs/releng co $linuxppcJdkArchive; tar -xzf $linuxppcJdkArchive; rm $linuxppcJdkArchive
+    mkdir -p jdk/linuxppc; cvs -d :pserver:anonymous@ottcvs1:/home/cvs/releng co $linuxppcJdkArchive; unzip $linuxppcJdkArchive -d jdk/linuxppc; rm $linuxppcJdkArchive
 fi
 
 mkdir -p $postingDirectory/$buildLabel
@@ -190,7 +190,7 @@ bootclasspath_15="$builderDir/jdk/win32_15/jdk1.5.0_06/jre/lib/rt.jar"
 
 if [ "$HOSTNAME" == "eclipsebuildserv" ]
 then
-    PATH=$BASE_PATH:$builderDir/eclipseInternalBuildTools/bin/linux/:$builderDir/jdk/linuxppc/ibm-java2-ppc-50/jre/bin;export PATH
+    PATH=$BASE_PATH:$builderDir/eclipseInternalBuildTools/bin/linux/:$builderDir/jdk/linuxppc/IBMJava2-ppc-142/jre/bin;export PATH
 else
     PATH=$BASE_PATH:$builderDir/eclipseInternalBuildTools/bin/linux/:$builderDir/jdk/linux/jdk1.5.0_06/jre/bin;export PATH
 fi
