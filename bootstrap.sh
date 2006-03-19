@@ -184,7 +184,7 @@ mkdir -p $postingDirectory/$buildLabel
 chmod -R 755 $builderDir
 
 #default value of the bootclasspath attribute used in ant javac calls.  
-bootclasspath="$builderDir/jdk/win32/jdk1.4.2_10/jre/lib/rt.jar:$builderDir/jdk/win32/jdk1.5.0_10/jre/lib/jsse.jar"
+bootclasspath="$builderDir/jdk/win32/jdk1.4.2_10/jre/lib/rt.jar:$builderDir/jdk/win32/jdk1.4.2_10/jre/lib/jsse.jar"
 
 bootclasspath_15="$builderDir/jdk/win32_15/jdk1.5.0_06/jre/lib/rt.jar"
 
