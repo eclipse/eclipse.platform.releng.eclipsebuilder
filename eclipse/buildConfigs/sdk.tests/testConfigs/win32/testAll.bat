@@ -6,6 +6,6 @@ REM add the extra binaries to the system path
 set PATH=%PATH%;%1\..\windowsBin
 
 REM run all tests
-call runtests.bat -vm ..\jdk1.4.2_08\jre\bin\java -properties vm.properties > %2
+call runtests.bat -vm ..\jdk1.4.2_10\jre\bin\java -properties vm.properties > %2
 
 exit
