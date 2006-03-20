@@ -27,7 +27,7 @@ tagMaps=""
 #sets fetchTag="HEAD" for nightly builds if required
 tag=""
 
-buildProjectTags=v20060317
+buildProjectTags=v20060320
 
 #update property setting
 update=""
@@ -233,5 +233,5 @@ then
 fi
 
 #clean up
-#rm -rf $builderDir
+rm -rf $builderDir
 
