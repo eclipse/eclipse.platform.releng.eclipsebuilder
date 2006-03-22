@@ -386,25 +386,25 @@
 		<unzip src="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip" dest="${updateJarWorkingDir}" />
 
 		<delete includeemptydirs="true">
-			<fileset dir="${updateJarWorkingDir}/eclipse/features" includes="com.ibm.icu.base*/**,master-equinox*/**" />
+			<fileset dir="${updateJarWorkingDir}/eclipse/features" includes="com.ibm.icu.base*/**,master-equinox*/**,org.eclipse.sdk_*/**" />
 		</delete>
 		
 		<!--operation on creates update jars for features and for plug-ins which are to be unpacked when installed-->
 		<java classname="org.eclipse.releng.generators.UpdateBuilder" >
-			<arg line="-add4thPart -root ${updateJarWorkingDir}/eclipse -directory ${buildDirectory}/directory.txt -build ${timestamp} -site ${updateJarWorkingDir}/site -sitexml ${eclipse.build.configs}/../../extras/site.xml" />
+			<arg line="-root ${updateJarWorkingDir}/eclipse -directory ${buildDirectory}/directory.txt -build ${timestamp} -site ${updateJarWorkingDir}/site -sitexml ${updateSite}/site.xml" />
 			<classpath>
 				<pathelement location="${base.builder}/plugins/org.eclipse.internal.build.tools/internalTools.jar"/>
 				<pathelement location="${base.builder}/plugins/org.eclipse.build.tools/buildTools.jar"/>
 				<pathelement location="${base.builder}/plugins/org.eclipse.osgi_3.2.0.v20060214.jar"/>
 			</classpath>
 		</java>
-
-
-		<!--add site to eclipse-master zip to be signed-->
-		<exec executable="zip" dir="${updateJarWorkingDir}">
-			<arg line="-u -q  ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -r site" />
-		</exec>
-		<delete dir="${updateJarWorkingDir}" />
+		
+		<!--store previous site.xml-->
+		<move file="${updateSite}/site.xml" tofile="${updateSite}/site.xml.bak" overwrite="true" />
+		<!--copy jars to update site-->
+		<copy todir="${updateSite}" overwrite="true">
+			<fileset dir="${updateJarWorkingDir}/site" />
+		</copy>
 	</target>
 
 	<target name="cleanSites">
