@@ -103,7 +103,7 @@
 		</ant>
 	</target>
 
-	<target name="buildUpdateSite">
+	<target name="buildUpdateSite" if="updateSite">
 		<ant antfile="${eclipse.build.configs}/../helper.xml" target="buildUpdateJars" />
 	</target>
 	
@@ -290,9 +290,9 @@
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/rcp.deltapack/packager" />
 		</antcall>
-		<antcall target="package">
+		<!--antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/com.ibm.icu.base/packager" />
-		</antcall>
+		</antcall-->
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/releng.tools/packager" />
 		</antcall>
