@@ -392,7 +392,7 @@
 		
 		<!--operation on creates update jars for features and for plug-ins which are to be unpacked when installed-->
 		<java classname="org.eclipse.releng.generators.UpdateBuilder" >
-			<arg line="-root ${updateJarWorkingDir}/eclipse -directory ${buildDirectory}/directory.txt -build ${timestamp} -site ${updateJarWorkingDir}/site -sitexml ${updateSite}/site.xml" />
+			<arg line="-root ${updateJarWorkingDir}/eclipse -directory ${buildDirectory}/directory.txt -build ${buildId} -site ${updateJarWorkingDir}/site -sitexml ${updateSite}/site.xml" />
 			<classpath>
 				<pathelement location="${base.builder}/plugins/org.eclipse.internal.build.tools/internalTools.jar"/>
 				<pathelement location="${base.builder}/plugins/org.eclipse.build.tools/buildTools.jar"/>
