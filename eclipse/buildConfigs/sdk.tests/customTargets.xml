@@ -237,6 +237,7 @@
 		<!--Copy javadoc logs to the testing directory for use by relEng tests-->
 		<copy file="${buildDirectory}/plugins/org.eclipse.platform.doc.isv/doc.bin.log" tofile="${workingDirectory}/eclipse-testing/org.eclipse.platform.doc.isv.javadoc.txt" failonerror="false"/>
 		<copy file="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv/doc.bin.log" tofile="${workingDirectory}/eclipse-testing/org.eclipse.jdt.doc.isv.javadoc.txt" failonerror="false"/>
+		<copy file="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv/jdtapt.doc.bin.log" tofile="${workingDirectory}/eclipse-testing/org.eclipse.jdt.apt.javadoc.txt" failonerror="false"/>
 		<copy file="${buildDirectory}/plugins/org.eclipse.pde.doc.user/doc.bin.log" tofile="${workingDirectory}/eclipse-testing/org.eclipse.pde.doc.user.javadoc.txt" failonerror="false"/>
 
 		<!--Copy scripts and doc used in the automated testing to the testing directory-->
