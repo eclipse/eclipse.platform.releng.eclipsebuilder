@@ -1,0 +1,28 @@
+<project name="Custom Targets MyTest" default="noDefault">
+
+<target name="noDefault" />
+	
+<!-- This goal of this target is to get the packaging map files of the things you care for 
+        The files must be fetched into the downloadDirectory folder -->
+<target name="getMapFiles" unless="mapsFetched">
+	<copy file="${packagingInfo}/../../../../packaging.map" tofile="${downloadDirectory}/packaging.map"/>
+</target>
+
+<target name="assemble.delta.delta.delta.xml">
+	<antcall target="assembler">
+		<param name="archiveName" value="eclipse-RCP-${buildId}-delta-pack.zip"/>
+	</antcall>
+</target>
+
+	
+<target name="assembler">
+	<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
+	<!-- get startup.jar from org.eclipse.platform of current build -->
+    <copy file="${buildDirectory}/plugins/org.eclipse.platform/startup.jar" todir="${tempDirectory}/eclipse/features/org.eclipse.platform.launchers_3.1.0/bin"/>
+	<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
+	<ant antfile="${assembleScriptName}" />
+	<checksum file="${archiveFullPath}" property="md5"/>
+	<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5"/>
+</target>
+	
+</project>
