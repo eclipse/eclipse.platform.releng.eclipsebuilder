@@ -51,8 +51,8 @@
 		<parallel failonany="true">
 			<sequential>
 				<!--antcall target="signMasterFeature" /-->
-				<antcall target="buildUpdateSite" />
 				<antcall target="unpackUpdateJarsForPackaging" />
+				<antcall target="buildUpdateSite" />
 			</sequential>
 			<sequential>
 				<antcall target="buildMasterRootFeature" />
@@ -246,7 +246,7 @@
 		<exec executable="unzip" dir="${buildDirectory}/${buildLabel}">
 			<arg line="-q eclipse-master-${buildId}.zip -d ${tmpsite}" />
 		</exec>
-		<move file="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip" tofile="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip.org" />
+		<move file="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip" tofile="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.bak.zip" />
 		<exec executable="zip" dir="${tmpsite}/new">
 			<arg line="-q ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -r eclipse" />
 		</exec>

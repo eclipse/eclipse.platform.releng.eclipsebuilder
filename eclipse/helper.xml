@@ -384,8 +384,10 @@
 		<property name="updateJarWorkingDir" value="${buildDirectory}/updateJars" />
 		<mkdir dir="${updateJarWorkingDir}" />
 		<mkdir dir="${updateJarWorkingDir}/site" />
-		<unzip src="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip" dest="${updateJarWorkingDir}" />
 
+		<!--eclipse-master-${buildId}.bak.zip contains the signed update jars. eclipse-master-${buildId}.zip contains the
+		features and plug-ins unpacked.  Need features in directory structures for tool to work. -->
+		<unzip src="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip" dest="${updateJarWorkingDir}" />
 		<delete includeemptydirs="true">
 			<fileset dir="${updateJarWorkingDir}/eclipse/features" includes="com.ibm.icu.base*/**,master-equinox*/**,org.eclipse.sdk_*/**" />
 		</delete>
@@ -402,11 +404,23 @@
 		
 		<!--store previous site.xml-->
 		<move file="${updateSite}/site.xml" tofile="${updateSite}/site.xml.bak" overwrite="true" />
-		<!--copy site.xml and jars to update site-->
+		<!--copy site.xml to update site-->
 		<copy todir="${updateSite}" overwrite="true">
-			<fileset dir="${updateJarWorkingDir}/site" />
-			<fileset dir="${updateJarWorkingDir}/eclipse" includes="features/*.jar,plugins/*.jar" />
+			<fileset dir="${updateJarWorkingDir}/site" includes="site.xml" />
 		</copy>
+		
+		<mkdir dir="${updateSite}/features" />
+		<mkdir dir="${updateSite}/plugins" />
+		
+		<exec executable="unzip" dir=".">
+			<arg line="-j ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.bak.zip -i */features/* -x */master-equinox* */org.eclipse.sdk_* */com.ibm.icu.base* -d ${updateSite}/features" />
+		</exec>
+		
+		<!--use original signed update jars-->
+		<exec executable="unzip" dir=".">
+			<arg line="-j ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.bak.zip -i */plugins/* -x */master-equinox* */org.eclipse.sdk_* */com.ibm.icu.base* -d ${updateSite}/plugins" />
+		</exec>
+
 	</target>
 
 	<target name="cleanSites">
