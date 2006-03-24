@@ -402,9 +402,10 @@
 		
 		<!--store previous site.xml-->
 		<move file="${updateSite}/site.xml" tofile="${updateSite}/site.xml.bak" overwrite="true" />
-		<!--copy jars to update site-->
+		<!--copy site.xml and jars to update site-->
 		<copy todir="${updateSite}" overwrite="true">
 			<fileset dir="${updateJarWorkingDir}/site" />
+			<fileset dir="${updateJarWorkingDir}/eclipse" includes="features/*.jar,plugins/*.jar" />
 		</copy>
 	</target>
 
