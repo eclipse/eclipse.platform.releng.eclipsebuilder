@@ -390,7 +390,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<ant antfile="buildDoc.xml" target="examplesDocCopy" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv"/>
 
 		<copy todir="${tempDir}/buildScripts">
-			<fileset dir="${buildDirectory}" excludes="features/*example*/**,plugins/*example*/**" includes="features/*/build.xml,features/*.source*/**,plugins/*/build.xml,plugins/*.source*/**,fetch_*.xml,assemble*.xml,package*.xml,plugins/org.eclipse.swt.tools/**,plugins/*doc*/**" />
+			<fileset dir="${buildDirectory}" excludes="features/*example*/**,plugins/*example*/**" includes="features/*/build.xml,features/*.source*/**,plugins/*/build.xml,plugins/*/javaCompiler.*.args,plugins/*.source*/**,fetch_*.xml,assemble*.xml,package*.xml,plugins/org.eclipse.swt.tools/**,plugins/*doc*/**" />
 		</copy>
 		<!--ensure linux drops are created as .tar.gz files -->
 		<replace dir="${tempDir}/buildScripts" includes="assemble*" excludes="*win32*,*hpux*,*solaris*,*aix*" token=".zip" value=".tar.gz"/>
@@ -412,7 +412,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<fileset dir="${eclipse.build.configs}/sdk/srcBuild" excludes="fetch/**,incl,jdtcoresrc/**" />
 		</copy>
 
-		<!-- fetch scripts are not when source already included in zip file -->
+		<!-- fetch scripts are not required when source already included in zip file -->
 		<delete>
 			<fileset dir="${tempDir}/buildScripts" includes="fetch*.xml" />
 			<!-- delete some jars that are not needed to build Eclipse -->
