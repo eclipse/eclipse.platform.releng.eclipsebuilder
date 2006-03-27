@@ -67,7 +67,6 @@
 				<antcall target="publishEclipse" />
 				<antcall target="publishEquinox" />
 			</sequential>
-			<!--TODO assemble update site here.-->
 			<antcall target="testEclipse" />
 		</parallel>
 	</target>
