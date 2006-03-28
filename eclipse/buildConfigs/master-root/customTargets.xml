@@ -13,6 +13,10 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="allElements">
 		<ant antfile="${genericTargets}" target="${target}" >
 			<property name="type" value="feature" />
+			<property name="id" value="org.eclipse.platform.launchers" />
+		</ant>
+		<ant antfile="${genericTargets}" target="${target}" >
+			<property name="type" value="feature" />
 			<property name="id" value="master-root" />
 		</ant>
 	</target>
@@ -20,7 +24,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- ===================================================================== -->
 	<!-- Targets to assemble the built elements for particular configurations  -->
 	<!-- ===================================================================== -->
-	<target name="assemble.master-root.*.*.*">
+	<target name="assemble.org.eclipse.platform.launchers">
 		<property name="archiveName" value="org.eclipse.platform.launchers-${buildId}.zip"/>
 		<antcall target="assemble" />
 	</target>
