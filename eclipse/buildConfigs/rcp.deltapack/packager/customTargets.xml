@@ -22,7 +22,7 @@
 	
 	<!--work-around for bug 132204-->
 	<exec executable="zip" dir="${tempDirectory}">
-		<arg line="-u ${archiveFullPath} -r eclipse/features/org.eclipse.platform.launchers**" />
+		<arg line="${archiveFullPath} -r . -i eclipse/features/org.eclipse.platform.launchers**" />
 	</exec>
 	<checksum file="${archiveFullPath}" property="md5"/>
 	<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5"/>
