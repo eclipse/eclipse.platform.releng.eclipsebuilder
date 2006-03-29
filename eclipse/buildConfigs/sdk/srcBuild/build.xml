@@ -154,21 +154,23 @@
 		<!--Build doc plug-ins using antRunner in eclipse to gain access to classpath required for
 		 pde.convertSchemaToHTML and help.buildHelpIndex tasks which are used when generating extension-point and help indeces.-->
 		<antcall target="install.eclipse.${archive.format}" />
-
+		<property name="plugin.destination" value="${buildDirectory}/tmp/eclipse/plugins" />
+		<mkdir dir="${plugin.destination}" />
+		
 		<java fork="true" jar="${buildDirectory}/eclipse/startup.jar" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.isv" output="platform.doc.isv.txt">
-			<arg line="-data ${buildDirectory}/workspace -application org.eclipse.ant.core.antRunner build.update.jar -Dplugin.destination=${buildDirectory}/tmp/eclipse/plugins" />
+			<arg line="-data ${buildDirectory}/workspace -application org.eclipse.ant.core.antRunner build.update.jar -Dplugin.destination=${plugin.destination}" />
 		</java>
 		<java fork="true" jar="${buildDirectory}/eclipse/startup.jar" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.user" output="platform.doc.user.txt">
-			<arg line="-data ${buildDirectory}/workspace -application org.eclipse.ant.core.antRunner build.update.jar -Dplugin.destination=${buildDirectory}/tmp/eclipse/plugins" />
+			<arg line="-data ${buildDirectory}/workspace -application org.eclipse.ant.core.antRunner build.update.jar -Dplugin.destination=${plugin.destination}" />
 		</java>
 		<java fork="true" jar="${buildDirectory}/eclipse/startup.jar" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv" output="jdt.doc.isv.txt">
-			<arg line="-data ${buildDirectory}/workspace -application org.eclipse.ant.core.antRunner build.update.jar -Dplugin.destination=${buildDirectory}/tmp/eclipse/plugins" />
+			<arg line="-data ${buildDirectory}/workspace -application org.eclipse.ant.core.antRunner build.update.jar -Dplugin.destination=${plugin.destination}" />
 		</java>
 		<java fork="true" jar="${buildDirectory}/eclipse/startup.jar" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.user" output="jdt.doc.user.txt">
-			<arg line="-data ${buildDirectory}/workspace -application org.eclipse.ant.core.antRunner build.update.jar -Dplugin.destination=${buildDirectory}/tmp/eclipse/plugins" />
+			<arg line="-data ${buildDirectory}/workspace -application org.eclipse.ant.core.antRunner build.update.jar -Dplugin.destination=${plugin.destination}" />
 		</java>
 		<java fork="true" jar="${buildDirectory}/eclipse/startup.jar" dir="${buildDirectory}/plugins/org.eclipse.pde.doc.user" output="pde.doc.user.txt">
-			<arg line="-data ${buildDirectory}/workspace -application org.eclipse.ant.core.antRunner build.update.jar -Dplugin.destination=${buildDirectory}/tmp/eclipse/plugins" />
+			<arg line="-data ${buildDirectory}/workspace -application org.eclipse.ant.core.antRunner build.update.jar -Dplugin.destination=${plugin.destination}" />
 		</java>
 
 		<!--remove files created by running eclipse and incomplete doc plugins before adding in rebuilt doc plugins-->
