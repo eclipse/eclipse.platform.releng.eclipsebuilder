@@ -97,6 +97,10 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Steps to do after the fetch -->
 	<!-- ===================================================================== -->
 	<target name="postFetch">
+		<ant antfile="${genericTargets}" target="fetchElement">
+			<property name="type" value="feature" />
+			<property name="id" value="org.eclipse.platform.launchers" />
+		</ant>
 		<zip zipfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/features/org.eclipse.platform.launchers" includes="library/" />
 		<mkdir dir="${buildDirectory}/features/org.eclipse.platform/launchertmp" />
 		<mkdir dir="${buildDirectory}/launchertmp" />
