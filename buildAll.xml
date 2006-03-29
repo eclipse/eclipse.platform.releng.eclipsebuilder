@@ -35,7 +35,6 @@
 	<property name="ref.properties" value="/home/users/releng/buildTools/eclipse.perf/ref32.properties"/>
 	
 	<!--location of test update site-->
-<!--	<property name="updateSite" value="/builds/transfer/files/testUpdates" /> -->
 	<property file="${ref.properties}"/>
 
 	<!--default buildDirectory-->
@@ -107,6 +106,9 @@
 	</target>
 	
 	<target name="buildMasterRootFeature">
+		<ant antfile="build.xml" dir="${basedir}" target="main">
+			<property name="component" value="${eclipse.build.configs}/org.eclipse.platform.launchers" />
+		</ant>
 		<ant antfile="build.xml" dir="${basedir}" target="main">
 			<property name="component" value="${eclipse.build.configs}/master-root" />
 		</ant>

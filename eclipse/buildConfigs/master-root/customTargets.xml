@@ -13,10 +13,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="allElements">
 		<ant antfile="${genericTargets}" target="${target}" >
 			<property name="type" value="feature" />
-			<property name="id" value="org.eclipse.platform.launchers" />
-		</ant>
-		<ant antfile="${genericTargets}" target="${target}" >
-			<property name="type" value="feature" />
 			<property name="id" value="master-root" />
 		</ant>
 	</target>
@@ -24,10 +20,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- ===================================================================== -->
 	<!-- Targets to assemble the built elements for particular configurations  -->
 	<!-- ===================================================================== -->
-	<target name="assemble.org.eclipse.platform.launchers">
-		<property name="archiveName" value="org.eclipse.platform.launchers_${buildId}.zip"/>
-		<antcall target="assemble" />
-	</target>
 	<target name="assemble.master-root.common.common.common">
 		<property name="archiveName" value="master-root-${buildId}.zip"/>
 		<antcall target="assemble" />
@@ -277,8 +269,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Steps to do after the fetch -->
 	<!-- ===================================================================== -->
 	<target name="postFetch">
-		<!--build delta pack bits-->
-		<ant target="zip.distribution" antfile="build.xml" dir="${buildDirectory}/features/org.eclipse.platform.launchers"/>
 	</target>
 
 	<!-- ===================================================================== -->
