@@ -17,8 +17,6 @@
 	
 <target name="assembler">
 	<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
-	<!-- get startup.jar from org.eclipse.platform of current build -->
-    <copy file="${buildDirectory}/plugins/org.eclipse.platform/startup.jar" todir="${tempDirectory}/eclipse/features/org.eclipse.platform.launchers_3.1.0/bin"/>
 	<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
 	<ant antfile="${assembleScriptName}" />
 	<checksum file="${archiveFullPath}" property="md5"/>
