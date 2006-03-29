@@ -35,7 +35,7 @@
 	<property name="ref.properties" value="/home/users/releng/buildTools/eclipse.perf/ref32.properties"/>
 	
 	<!--location of test update site-->
-	<property name="updateSite" value="/builds/transfer/files/testUpdates" />
+<!--	<property name="updateSite" value="/builds/transfer/files/testUpdates" /> -->
 	<property file="${ref.properties}"/>
 
 	<!--default buildDirectory-->
