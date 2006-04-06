@@ -125,7 +125,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<!--copy linux gtk x86_64 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
 		<property name="linux.gtk.x86_64.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.x86_64" />
 		<mkdir dir="${linux.gtk.x86_64.rootfiles}" />
-		<copy tofile="${linux.gtk.x86_64.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64/about_launcher_libraries.html" />
+		<copy tofile="${linux.gtk.x86_64.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64/about.html" />
 
 		<copy todir="${linux.gtk.x86_64.rootfiles}">
 			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64"
