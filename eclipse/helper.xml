@@ -354,7 +354,7 @@
 		<antcall target="snzBuilds" />
 	</target>
 
-	<target name="snzBuilds" unless="N">
+	<target name="snzBuilds">
 		<!--copy drops to local directory for rsync with snz-->
 		<copy todir="/builds/transfer/files/snz">
 			<fileset dir="${postingDirectory}" includes ="${buildLabel}/eclipse-SDK-*-win32.zip,${buildLabel}/eclipse-SDK-*-linux-gtk.tar.gz" excludes="${buildLabel}/eclipse-SDK-examples-*-win32.zip" />
