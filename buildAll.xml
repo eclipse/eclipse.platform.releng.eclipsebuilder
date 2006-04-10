@@ -49,7 +49,7 @@
 		<antcall target="buildMasterFeature" />
 		<parallel failonany="true">
 			<sequential>
-				<!--antcall target="signMasterFeature" /-->
+				<antcall target="signMasterFeature" />
 				<antcall target="unpackUpdateJarsForPackaging" />
 				<antcall target="buildUpdateSite" />
 			</sequential>
@@ -144,11 +144,11 @@
 		</ant>
 	</target>
 
-	<target name="signMasterFeature" if="signJars">
+	<target name="signMasterFeature" if="sign">
 		<property name="archiveName" value="eclipse-master-${buildId}.zip" />
 		
 		<!--push drop to staging directory-->
-		<property name="stagingDirectory" value="/home/data/users/johna/signing" />
+		<property name="stagingDirectory" value="/home/data/users/sdimitro/sign" />
 
 		<exec dir="${buildDirectory}/${buildLabel}" executable="scp" output="signing.txt">
 			<arg line="${archiveName} build.eclipse.org:${stagingDirectory}"/>
