@@ -46,11 +46,6 @@
 <target name="assemble.org.eclipse.platform.linux.gtk.ppc64"/>
 <target name="assemble.org.eclipse.platform.linux.gtk.ia64"/>
 	
-<target name="assemble.org.eclipse.platform.solaris.motif.sparc">
-	<property name="archiveName" value="eclipse-platform-${buildId}-solaris-motif.zip"/>
-	<antcall target="assemble" />
-</target>
-	
 <target name="assemble.org.eclipse.platform.solaris.gtk.sparc">
 	<property name="archiveName" value="eclipse-platform-${buildId}-solaris-gtk.zip"/>
 	<antcall target="assemble" />

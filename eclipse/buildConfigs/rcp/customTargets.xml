@@ -45,11 +45,6 @@
 	<antcall target="assemble" />
 </target>	
 
-<target name="assemble.org.eclipse.rcp.solaris.motif.sparc">
-	<property name="archiveName" value="eclipse-RCP-${buildId}-solaris-motif.zip"/>
-	<antcall target="assemble" />
-</target>
-
 <target name="assemble.org.eclipse.rcp.solaris.gtk.sparc">
 	<property name="archiveName" value="eclipse-RCP-${buildId}-solaris-gtk.zip"/>
 	<antcall target="assemble" />

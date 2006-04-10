@@ -47,11 +47,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="assemble.master-root.launcher-linux.motif.x86">
 		<property name="archiveName" value="master-root-launcher-linux.motif.x86.${buildId}.zip"/>
 		<antcall target="assemble" />
-	</target>
-	<target name="assemble.master-root.launcher-solaris.motif.sparc">
-		<property name="archiveName" value="master-root-launcher-solaris.motif.sparc.${buildId}.zip"/>
-		<antcall target="assemble" />
-	</target>
+	</target>	
 	<target name="assemble.master-root.launcher-solaris.gtk.sparc">
 		<property name="archiveName" value="master-root-launcher-solaris.gtk.sparc.${buildId}.zip"/>
 		<antcall target="assemble" />
@@ -88,11 +84,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="assemble.master-root.sdk-linux.motif.x86">
 		<property name="archiveName" value="master-root-sdk-linux.motif.x86.${buildId}.zip"/>
 		<antcall target="assemble" />
-	</target>
-	<target name="assemble.master-root.sdk-solaris.motif.sparc">
-		<property name="archiveName" value="master-root-sdk-solaris.motif.sparc.${buildId}.zip"/>
-		<antcall target="assemble" />
-	</target>
+	</target>	
 	<target name="assemble.master-root.sdk-solaris.gtk.sparc">
 		<property name="archiveName" value="master-root-sdk-solaris.gtk.sparc.${buildId}.zip"/>
 		<antcall target="assemble" />
@@ -129,11 +121,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="assemble.master-root.platform-linux.motif.x86">
 		<property name="archiveName" value="master-root-platform-linux.motif.x86.${buildId}.zip"/>
 		<antcall target="assemble" />
-	</target>
-	<target name="assemble.master-root.platform-solaris.motif.sparc">
-		<property name="archiveName" value="master-root-platform-solaris.motif.sparc.${buildId}.zip"/>
-		<antcall target="assemble" />
-	</target>
+	</target>	
 	<target name="assemble.master-root.platform-solaris.gtk.sparc">
 		<property name="archiveName" value="master-root-platform-solaris.gtk.sparc.${buildId}.zip"/>
 		<antcall target="assemble" />
@@ -177,11 +165,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="assemble.master-root.equinox-launcher-linux.motif.x86">
 		<property name="archiveName" value="launchers-linux.motif.x86.${buildId}.tar.gz" />
 		<antcall target="assemble.equinox" />
-	</target>
-	<target name="assemble.master-root.equinox-launcher-solaris.motif.sparc">
-		<property name="archiveName" value="launchers-solaris.motif.sparc.${buildId}.zip" />
-		<antcall target="assemble.equinox" />
-	</target>
+	</target>	
 	<target name="assemble.master-root.equinox-launcher-solaris.gtk.sparc">
 		<property name="archiveName" value="launchers-solaris.gtk.sparc.${buildId}.zip" />
 		<antcall target="assemble.equinox" />

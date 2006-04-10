@@ -54,11 +54,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<antcall target="assemble" />
 	</target>
 
-	<target name="assemble.org.eclipse.sdk.solaris.motif.sparc">
-		<property name="archiveName" value="eclipse-SDK-${buildId}-solaris-motif.zip"/>
-		<antcall target="assemble" />
-	</target>
-
 	<target name="assemble.org.eclipse.sdk.solaris.gtk.sparc">
 		<property name="archiveName" value="eclipse-SDK-${buildId}-solaris-gtk.zip"/>
 		<antcall target="assemble" />
