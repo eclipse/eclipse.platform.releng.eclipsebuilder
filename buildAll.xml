@@ -151,20 +151,20 @@
 		<property name="stagingDirectory" value="/home/data/users/johna/signing" />
 
 		<exec dir="${buildDirectory}/${buildLabel}" executable="scp" output="signing.txt">
-			<arg line="${archiveName} download1.eclipse.org:${stagingDirectory}"/>
+			<arg line="${archiveName} build.eclipse.org:${stagingDirectory}"/>
 		</exec>
 		<exec dir="." executable="ssh" output="signing.txt" append="true">
-			<arg line="download1.eclipse.org chmod ugo+rw ${stagingDirectory}/${archiveName} "/>
+			<arg line="build.eclipse.org chmod ugo+rw ${stagingDirectory}/${archiveName} "/>
 		</exec>
 
 		<!--invoke sign script and wait-->
 		<exec dir="." executable="ssh" output="signing.txt" append="true">
-			<arg line="download1.eclipse.org &quot;${stagingDirectory}/sign-forwarder.sh ${archiveName}&quot;"/>
+			<arg line="build.eclipse.org &quot;cd ${stagingDirectory};./sign-pack.sh ${archiveName}&quot;"/>
 		</exec>
 
 		<!--copy zip back to build machine-->
 		<exec dir="." executable="scp" output="signing.txt" append="true">
-			<arg line="download1.eclipse.org:${stagingDirectory}/out/${archiveName} ${buildDirectory}/${buildLabel}"/>
+			<arg line="build.eclipse.org:${stagingDirectory}/out/${archiveName} ${buildDirectory}/${buildLabel}"/>
 		</exec>
 	</target>
 
