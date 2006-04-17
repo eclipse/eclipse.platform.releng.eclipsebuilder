@@ -146,26 +146,18 @@
 
 	<target name="signMasterFeature" if="sign">
 		<property name="archiveName" value="eclipse-master-${buildId}.zip" />
-		
-		<!--push drop to staging directory-->
-		<property name="stagingDirectory" value="/home/data/users/sdimitro/sign" />
-
-		<exec dir="${buildDirectory}/${buildLabel}" executable="scp" output="signing.txt">
-			<arg line="${archiveName} build.eclipse.org:${stagingDirectory}"/>
-		</exec>
-		<exec dir="." executable="ssh" output="signing.txt" append="true">
-			<arg line="build.eclipse.org chmod ugo+rw ${stagingDirectory}/${archiveName} "/>
-		</exec>
-
-		<!--invoke sign script and wait-->
-		<exec dir="." executable="ssh" output="signing.txt" append="true">
-			<arg line="build.eclipse.org &quot;cd ${stagingDirectory};./sign-pack.sh ${archiveName}&quot;"/>
-		</exec>
-
-		<!--copy zip back to build machine-->
-		<exec dir="." executable="scp" output="signing.txt" append="true">
-			<arg line="build.eclipse.org:${stagingDirectory}/out/${archiveName} ${buildDirectory}/${buildLabel}"/>
-		</exec>
+	
+		<!--pack200-->
+		<java fork="true"
+			jvm="${java15-home}/bin/java"
+			classpath="${eclipse.home}/plugins/org.eclipse.update.core_3.1.100.v20060329a.jar"
+			classname="org.eclipse.update.internal.jarprocessor.Main"
+			dir="${buildDirectory}">
+			<arg line="-outputDir packOut -repack ${buildDirectory}/${buildLabel}/${archiveName}" />
+		</java>
+			
+		<move file="${buildDirectory}/packOut/${archiveName} ${buildDirectory}/${buildLabel}/${archiveName}" overwrite="true" />	
+	
 	</target>
 
 	<target name="testEclipse">
@@ -244,9 +236,9 @@
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/rcp.deltapack/packager" />
 		</antcall>
-		<!--antcall target="package">
+		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/com.ibm.icu.base/packager" />
-		</antcall-->
+		</antcall>
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/releng.tools/packager" />
 		</antcall>
