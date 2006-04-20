@@ -1,12 +1,16 @@
 <project name="Customized testing instructions" default="customSetup">
 
 	<target name="customSetup">
-		<!--install 1.4 vms for testing.-->
-		<antcall target="installVm" />
-		
+
+		<!--install 1.5 vm for this configuration-->
+		<parallel>
+			<antcall target="install5.0Vm" />
+		</parallel>
+
 		<!--copy the script which sets up environment and invokes the tests on test machine-->
+		<chmod file="${tester}/testAll.sh" perm="755" />
 		<exec dir="." executable="${copyClient}">
-			<arg line="${tester}/testAll.bat ${testMachine}:${executionDir}" />
+			<arg line="${tester}/testAll.sh ${testMachine}:${executionDir}" />
 		</exec>
 		
 		<!--copy in test script modified for running Team CVS tests-->
@@ -14,7 +18,7 @@
 			<arg line="${tester}/../../testScripts/test.xml ${testMachine}:${executionDir}" />
 		</exec>
 		
-		<!--copy in the properties file for testing with J9 vm args-->	
+		<!--copy in the properties file for testing with special vm args-->	
 		<exec dir="." executable="${copyClient}">
 			<arg line="${tester}/vm.properties ${testMachine}:${executionDir}" />
 		</exec>
@@ -25,20 +29,20 @@
 		</exec>
 	</target>
 	
-	<target name="installVm">
+	<target name="install5.0Vm">
 		<property name="testVmTag" value="HEAD" />
 		<!--get and install the vm to test with-->
 		<cvs cvsRoot="${cvsRoot}"
-        	 command="export -r ${testVmTag} ${vmUrl}"
+        	 command="export -r ${testVmTag} ${vmUrl5}"
         	 dest="${tester}"
   		/>
-  		
+	
 		<exec dir="${tester}" executable="${copyClient}">
-			<arg line="${vmUrl} ${testMachine}:${testDir}" />
+			<arg line="${vmUrl5} ${testMachine}:${testDir}" />
 		</exec>
+	
 		<exec dir="." executable="${loginClient}">
-			<arg line="${testMachine} ${vmInstallCommand}" />
+			<arg line="${testMachine} ${vmInstallCommand5}" />
 		</exec>
 	</target>
-	
 </project>

@@ -2,11 +2,9 @@
 
 	<target name="customSetup">
 
-		<!--install 1.4 and 1.5 vms used for testing.  1.5 only used by JDT Core.-->
-		<parallel>
-			<antcall target="installVm" />
-			<antcall target="install5.0Vm" />
-		</parallel>
+		<!--install 1.4 vms for testing.-->
+		<antcall target="installVm" />
+		<antcall target="install5.0Vm" />
 
 		<!--copy the script which sets up environment and invokes the tests on test machine-->
 		<chmod file="${tester}/testAll.sh" perm="755" />
@@ -47,20 +45,4 @@
 		</exec>
 	</target>
 
-	<target name="install5.0Vm">
-		<property name="testVmTag" value="HEAD" />
-		<!--get and install the vm to test with-->
-		<cvs cvsRoot="${cvsRoot}"
-        	 command="export -r ${testVmTag} ${vmUrl5}"
-        	 dest="${tester}"
-  		/>
-	
-		<exec dir="${tester}" executable="${copyClient}">
-			<arg line="${vmUrl5} ${testMachine}:${testDir}" />
-		</exec>
-	
-		<exec dir="." executable="${loginClient}">
-			<arg line="${testMachine} ${vmInstallCommand5}" />
-		</exec>
-	</target>
 </project>
