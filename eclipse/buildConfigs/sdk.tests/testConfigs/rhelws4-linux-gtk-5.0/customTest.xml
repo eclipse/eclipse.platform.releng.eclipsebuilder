@@ -3,9 +3,7 @@
 	<target name="customSetup">
 
 		<!--install 1.5 vm for this configuration-->
-		<parallel>
-			<antcall target="install5.0Vm" />
-		</parallel>
+		<antcall target="install5.0Vm" />
 
 		<!--copy the script which sets up environment and invokes the tests on test machine-->
 		<chmod file="${tester}/testAll.sh" perm="755" />

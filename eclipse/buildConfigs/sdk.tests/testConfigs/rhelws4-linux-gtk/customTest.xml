@@ -2,9 +2,8 @@
 
 	<target name="customSetup">
 
-		<!--install 1.4 vms for testing.-->
+		<!--install 1.4 for testing.-->
 		<antcall target="installVm" />
-		<antcall target="install5.0Vm" />
 
 		<!--copy the script which sets up environment and invokes the tests on test machine-->
 		<chmod file="${tester}/testAll.sh" perm="755" />
