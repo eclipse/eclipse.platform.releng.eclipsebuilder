@@ -17,10 +17,13 @@
 	
 <target name="assembler">
 	<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
-	<!-- get startup.jar from org.eclipse.platform of current build -->
-    <copy file="${buildDirectory}/plugins/org.eclipse.platform/startup.jar" todir="${tempDirectory}/eclipse/features/org.eclipse.platform.launchers_3.1.0/bin"/>
 	<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
 	<ant antfile="${assembleScriptName}" />
+	
+	<!--work-around for bug 132204-->
+	<exec executable="zip" dir="${tempDirectory}">
+		<arg line="${archiveFullPath} -r . -i eclipse/features/org.eclipse.platform.launchers**" />
+	</exec>
 	<checksum file="${archiveFullPath}" property="md5"/>
 	<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5"/>
 </target>

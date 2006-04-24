@@ -54,11 +54,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<antcall target="assemble" />
 	</target>
 
-	<target name="assemble.org.eclipse.sdk.solaris.motif.sparc">
-		<property name="archiveName" value="eclipse-SDK-${buildId}-solaris-motif.zip"/>
-		<antcall target="assemble" />
-	</target>
-
 	<target name="assemble.org.eclipse.sdk.solaris.gtk.sparc">
 		<property name="archiveName" value="eclipse-SDK-${buildId}-solaris-gtk.zip"/>
 		<antcall target="assemble" />
@@ -217,33 +212,24 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<!--copy linux motif about_files to in temp location where it will be copied into root of eclipse at assembly time-->
 		<property name="linux.motif.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.motif.x86" />
 		<mkdir dir="${linux.motif.rootfiles}" />
-		<copy tofile="${linux.motif.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86/about_launcher_libraries.html" />
+		<copy tofile="${linux.motif.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86/about.html" />
 		<copy todir="${linux.motif.rootfiles}">
-			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86"
-				includes="			
-				about_files/about_open_motif.html,
-				about_files/mlpl-v10.html,
-				about_files/mpl-v11.txt,
-				about_files/pixman-licenses.txt"
-			/>
+			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86"/>
 		</copy>
 		
 		<!--copy linux gtk x86 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
 		<property name="linux.gtk.x86.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.x86" />
 		<mkdir dir="${linux.gtk.x86.rootfiles}" />
-		<copy tofile="${linux.gtk.x86.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86/about_launcher_libraries.html" />
+		<copy tofile="${linux.gtk.x86.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86/about.html" />
 
 		<copy todir="${linux.gtk.x86.rootfiles}">
-			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86"
-				includes="				
-				about_files/mpl-v11.txt"
-			/>
+			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86"/>
 		</copy>
 		
 		<!--copy linux gtk x86_64 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
 		<property name="linux.gtk.x86_64.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.x86_64" />
 		<mkdir dir="${linux.gtk.x86_64.rootfiles}" />
-		<copy tofile="${linux.gtk.x86_64.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64/about_launcher_libraries.html" />
+		<copy tofile="${linux.gtk.x86_64.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64/about.html" />
 
 		<copy todir="${linux.gtk.x86_64.rootfiles}">
 			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64"
@@ -390,7 +376,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<ant antfile="buildDoc.xml" target="examplesDocCopy" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv"/>
 
 		<copy todir="${tempDir}/buildScripts">
-			<fileset dir="${buildDirectory}" excludes="features/*example*/**,plugins/*example*/**" includes="features/*/build.xml,features/*.source*/**,plugins/*/build.xml,plugins/*.source*/**,fetch_*.xml,assemble*.xml,package*.xml,plugins/org.eclipse.swt.tools/**,plugins/*doc*/**" />
+			<fileset dir="${buildDirectory}" excludes="features/*example*/**,plugins/*example*/**" includes="features/*/build.xml,features/*.source*/**,plugins/*/build.xml,plugins/*/javaCompiler.*.args,plugins/*.source*/**,fetch_*.xml,assemble*.xml,package*.xml,plugins/org.eclipse.swt.tools/**,plugins/*doc*/**" />
 		</copy>
 		<!--ensure linux drops are created as .tar.gz files -->
 		<replace dir="${tempDir}/buildScripts" includes="assemble*" excludes="*win32*,*hpux*,*solaris*,*aix*" token=".zip" value=".tar.gz"/>
@@ -412,7 +398,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<fileset dir="${eclipse.build.configs}/sdk/srcBuild" excludes="fetch/**,incl,jdtcoresrc/**" />
 		</copy>
 
-		<!-- fetch scripts are not when source already included in zip file -->
+		<!-- fetch scripts are not required when source already included in zip file -->
 		<delete>
 			<fileset dir="${tempDir}/buildScripts" includes="fetch*.xml" />
 			<!-- delete some jars that are not needed to build Eclipse -->

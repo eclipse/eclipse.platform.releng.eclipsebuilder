@@ -65,9 +65,7 @@
 			<platform id="SLM" name="Linux (x86/Motif) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_2.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="launchers-linux.motif.x86.@buildid@.tar.gz">
 			</platform>
 			<platform id="SSG" name="Solaris 8 (SPARC/GTK 2)" fileName="launchers-solaris.gtk.sparc.@buildid@.zip">
-			</platform>
-			<platform id="SSM" name="Solaris 8 (SPARC/Motif)" fileName="launchers-solaris.motif.sparc.@buildid@.zip">
-			</platform>
+			</platform>			
 			<platform id="SAM" name="AIX (PPC/Motif)" fileName="launchers-aix.motif.ppc.@buildid@.zip">
 			</platform>
 			<platform id="SHM" name="HP-UX (HP9000/Motif)" fileName="launchers-hpux.motif.PA_RISC.@buildid@.zip">

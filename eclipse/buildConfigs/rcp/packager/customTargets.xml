@@ -41,12 +41,6 @@
 		</antcall>
 	</target>
 
-	<target name="assemble.solaris.motif.sparc.xml">
-		<antcall target="assembler">
-			<param name="archiveName" value="${archiveRoot}-solaris-motif.zip"/>
-		</antcall>
-	</target>
-
 	<target name="assemble.solaris.gtk.sparc.xml">
 		<antcall target="assembler">
 			<param name="archiveName" value="${archiveRoot}-solaris-gtk.zip"/>

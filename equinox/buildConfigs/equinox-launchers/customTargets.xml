@@ -39,10 +39,6 @@
 		<property name="archiveName" value="launchers-linux.motif.x86.${buildId}.tar.gz" />
 		<antcall target="assemble" />
 	</target>
-	<target name="assemble.master-root.equinox-launcher-solaris.motif.sparc">
-		<property name="archiveName" value="launchers-solaris.motif.sparc.${buildId}.zip" />
-		<antcall target="assemble" />
-	</target>
 	<target name="assemble.master-root.equinox-launcher-solaris.gtk.sparc">
 		<property name="archiveName" value="launchers-solaris.gtk.sparc.${buildId}.zip" />
 		<antcall target="assemble" />
