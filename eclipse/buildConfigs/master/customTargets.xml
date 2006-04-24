@@ -178,7 +178,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			linux, gtk, x86_64 &\
 			linux, gtk, ia64 &\
 			linux, motif, x86 & \
-			solaris, motif, sparc & \
 			solaris, gtk, sparc & \
 			aix, motif, ppc & \
 			hpux, motif, PA_RISC & \

@@ -424,8 +424,7 @@
 	           failonerror="true"
 	           maxmemory="128m"
 			   dir="${buildDirectory}">
-	           >
-	         <arg line="-application org.eclipse.update.internal.provisional.SiteOptimizerApplication"/>
+	         <arg line="-application org.eclipse.update.core.siteOptimizer"/>
 	         <arg line="-digestBuilder -digestOutputDir=${updateSite} -siteXML=${updateSite}/site.xml"/>
 	       </java>
 	</target>
