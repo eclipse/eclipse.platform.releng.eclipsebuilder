@@ -151,13 +151,15 @@
 		<move file="${buildDirectory}/${buildLabel}/${archiveName}" tofile="${packtmp}/${archiveName}"/>
 		
 		<!--pack200-->
-		<java fork="true"
-			jvm="${java15-home}/bin/java"
-			classpath="${eclipse.home}/plugins/org.eclipse.update.core_3.1.100.v20060413.jar"
-			classname="org.eclipse.update.internal.jarprocessor.Main"
-			dir="${buildDirectory}">
-			<arg line="-outputDir ${buildLabel} -repack ${packtmp}/${archiveName}" />
-		</java>	
+	     <java jar="${eclipse.home}/startup.jar"
+	           fork="true"
+	           failonerror="true"
+	           maxmemory="128m"
+			   dir="${buildDirectory}">
+	           >
+	         <arg line="-application org.eclipse.update.internal.provisional.SiteOptimizerApplication"/>
+	         <arg line="-outputDir ${buildLabel} -repack ${packtmp}/${archiveName}"/>
+	       </java>
 	
 		<delete dir="${packtmp}" />
 	</target>
