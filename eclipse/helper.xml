@@ -420,7 +420,8 @@
 			<arg line="-j ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.bak.zip -i */plugins/* -x */master-equinox* */com.ibm.icu.base* -d ${updateSite}/plugins" />
 		</exec>
 	    <java jar="${eclipse.home}/startup.jar"
-	          fork="true"
+	           fork="true"
+     	       jvm="${java15-home}/bin/java"
 	           failonerror="true"
 	           maxmemory="128m"
 			   dir="${buildDirectory}">

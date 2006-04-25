@@ -153,6 +153,7 @@
 		<!--pack200-->
 	     <java jar="${eclipse.home}/startup.jar"
 	           fork="true"
+        	   jvm="${java15-home}/bin/java"
 	           failonerror="true"
 	           maxmemory="128m"
 			   dir="${buildDirectory}">
