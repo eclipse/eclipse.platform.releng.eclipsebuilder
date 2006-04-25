@@ -170,7 +170,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<condition property="newVersionQualifier" value="${forceContextQualifier}" else="${org.eclipse.jdt.debug}">
 			<isset property="forceContextQualifier"/>
 		</condition>
-		<replace file="${buildDirectory}/features/org.eclipse.platform.launchers/bin/carbon/macosx/ppc/Eclipse.app/Contents/MacOS/eclipse.ini" >
+		<replace file="${buildDirectory}/features/org.eclipse.platform.launchers/bin/carbon/macosx/Eclipse.app/Contents/MacOS/eclipse.ini" >
 			<replacefilter token="@qualifier@" value="${newVersionQualifier}"/>
 		</replace>
 	</target>
