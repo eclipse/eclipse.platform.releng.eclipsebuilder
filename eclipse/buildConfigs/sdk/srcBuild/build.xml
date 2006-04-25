@@ -307,6 +307,9 @@
 
 		<!--required property setting to build bundles in Eclipse 3.x stream builds -->
 		<property name="buildingOSGi" value="true" />
+		
+		<!--property to invoke the packager for baseLocation files -->
+		<property name="runPackager" value="true"/>
 
 		<!--indentifies this as a srcFetch build-->
 		<available file="fetch_org.eclipse.platform.launchers.xml" property="srcFetch" />
