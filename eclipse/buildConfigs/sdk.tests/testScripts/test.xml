@@ -21,12 +21,6 @@
 	<property name="org.eclipse.test" value="org.eclipse.test" />
 
 	<target name="init">
-		<!--set J2SE-5.0 property if ant.java.version is 1.5.
-		Used to enable JDT APT and additional JDT Core tests.-->
-		<condition property="J2SE-5.0" value="${java.home}/bin/java">
-			<equals arg1="${ant.java.version}" arg2="1.5" />
-		</condition>
-
 		<mkdir dir="${results}/xml" />
 		<mkdir dir="${results}/html" />
 		
@@ -178,7 +172,7 @@
 		<antcall target="genHtml" />
 	</target>
 
-	<target name="runtests" depends="init">
+	<target name="runtests" depends="init" unless="skip.test">
 		<condition property="performance.target.present" value="true">
 			<isset property="${testPlugin}.has.performance.target"/>
 		</condition>
@@ -327,17 +321,24 @@
 		<condition property="jvm" value="${J2SE-5.0}">
 			<isset property="J2SE-5.0"/>
 		</condition>
-		<property name="jvm" value="java" />
 		<antcall target="runtests" >
 			<param name="testPlugin" value="${org.eclipse.jdt.core.tests.compiler}" />
 			<param name="report" value="org.eclipse.jdt.core.tests.compiler" />
 			<param name="testPluginsRequired" value="**/${org.eclipse.jdt.core.tests.compiler}/* ${org.eclipse.jdt.core.tests.compiler.prerequisite.testplugins}" />
-			<param name="jvm" value="${jvm}" />
 		</antcall>
 	</target>
 
-	<target name="jdtapt" if="J2SE-5.0">
-		<antcall target="runtests" >
+	<target name="jdtapt">
+		<condition property="J2SE-5.0" value="${java.home}/bin/java">
+			<equals arg1="${ant.java.version}" arg2="1.5" />
+		</condition>
+		<!--only run test if J2SE-5.0 property  set-->
+		<condition property="skip.test">
+			<not>
+				<isset property="J2SE-5.0" />
+			</not>
+		</condition>
+		<antcall target="runtests">
 			<param name="testPlugin" value="${org.eclipse.jdt.apt.tests}" />
 			<param name="report" value="org.eclipse.jdt.apt.tests" />
 			<param name="testPluginsRequired" value="**/${org.eclipse.jdt.apt.tests}/* ${org.eclipse.jdt.apt.tests.prerequisite.testplugins}" />
@@ -346,15 +347,14 @@
 	</target>
 
 	<target name="jdtcorebuilder">
+		<!--Run with 1.5 vm if it is available-->
 		<condition property="jvm" value="${J2SE-5.0}">
 			<isset property="J2SE-5.0"/>
 		</condition>
-		<property name="jvm" value="java" />
 		<antcall target="runtests" >
 			<param name="testPlugin" value="${org.eclipse.jdt.core.tests.builder}" />
 			<param name="report" value="org.eclipse.jdt.core.tests.builder" />
 			<param name="testPluginsRequired" value="**/${org.eclipse.jdt.core.tests.builder}/* ${org.eclipse.jdt.core.tests.builder.prerequisite.testplugins}" />
-			<param name="jvm" value="${jvm}" />
 		</antcall>
 	</target>
 
@@ -362,12 +362,10 @@
 		<condition property="jvm" value="${J2SE-5.0}">
 			<isset property="J2SE-5.0"/>
 		</condition>
-		<property name="jvm" value="java" />
 		<antcall target="runtests" >
 			<param name="testPlugin" value="${org.eclipse.jdt.core.tests.model}" />
 			<param name="report" value="org.eclipse.jdt.core.tests.model" />
 			<param name="testPluginsRequired" value="**/${org.eclipse.jdt.core.tests.model}/* ${org.eclipse.jdt.core.tests.model.prerequisite.testplugins}" />
-			<param name="jvm" value="${jvm}" />
 		</antcall>
 	</target>
 
