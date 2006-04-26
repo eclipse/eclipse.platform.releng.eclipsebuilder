@@ -80,11 +80,12 @@
 			<param name="ws" value="gtk" />
 			<param name="arch" value="x86" />
 		</antcall>
+		<!--
 		<antcall target="packageSwtStandalone">
 			<param name="os" value="macosx" />
 			<param name="ws" value="carbon" />
-			<param name="arch" value="ppc" />
-		</antcall>
+			<param name="arch" value="ppc" /> 
+		</antcall>  -->
 		<antcall target="packageSwtStandalone">
 			<param name="os" value="linux" />
 			<param name="ws" value="gtk" />
