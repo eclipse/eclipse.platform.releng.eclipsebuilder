@@ -2,12 +2,8 @@
 
 	<target name="customSetup">
 
-		<!--install 1.4 and 1.5 vms used for testing.  1.5 only used by JDT Core.-->
-		<parallel>
-			<antcall target="installVm" />
-			<antcall target="install5.0Vm" />
-		</parallel>
-
+		<antcall target="installVm" />
+	
 		<!--copy the script which sets up environment and invokes the tests on test machine-->
 		<chmod file="${tester}/testAll.sh" perm="755" />
 		<exec dir="." executable="${copyClient}">

@@ -523,16 +523,6 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-
-
-<logFile name="org.eclipse.jdt.apt.tests_win32.win32.x86.xml">
-	<effectedFile id="JA"></effectedFile>
-	<effectedFile id="JASDK"></effectedFile>
-	<effectedFile id="PDE"></effectedFile>
-	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SW"></effectedFile>
-</logFile>
-
 <logFile name="org.eclipse.jdt.core.tests.builder_win32.win32.x86.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
@@ -595,14 +585,6 @@
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
 	<effectedFile id="SW"></effectedFile>
-</logFile>
-
-<logFile name="org.eclipse.jdt.apt.tests_linux.gtk.x86.xml">
-	<effectedFile id="JA"></effectedFile>
-	<effectedFile id="JASDK"></effectedFile>
-	<effectedFile id="PDE"></effectedFile>
-	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.jdt.core.tests.builder_linux.gtk.x86.xml">
@@ -1840,7 +1822,6 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<!--
 <logFile name="org.eclipse.core.tests.runtime_win32.win32.x86_5.0.xml">
 	<effectedFile id="RCPW"></effectedFile>
 	<effectedFile id="RCPWSDK"></effectedFile>
@@ -2178,9 +2159,6 @@
 	<effectedFile id="PDESDK"></effectedFile>
 	<effectedFile id="SW"></effectedFile>
 </logFile>
-
--->
-
 
 </logFiles>
 </topLevel>
