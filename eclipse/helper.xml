@@ -79,13 +79,12 @@
 			<param name="os" value="linux" />
 			<param name="ws" value="gtk" />
 			<param name="arch" value="x86" />
-		</antcall>
-		<!--
+		</antcall>		
 		<antcall target="packageSwtStandalone">
 			<param name="os" value="macosx" />
 			<param name="ws" value="carbon" />
-			<param name="arch" value="ppc" /> 
-		</antcall>  -->
+			<param name="arch" value="" /> 
+		</antcall>
 		<antcall target="packageSwtStandalone">
 			<param name="os" value="linux" />
 			<param name="ws" value="gtk" />
@@ -130,12 +129,21 @@
 	</target>
 
 	<target name="packageSwtStandalone">
+		<condition property="downloadFile" value="swt-${buildid}-${ws}-${os}.zip">
+			<equals arg1="${arch}" arg2=""/>
+		</condition>
 		<property name="downloadFile" value="swt-${buildid}-${ws}-${os}-${arch}.zip" />
 		<property name="destination" value="${postingDirectory}/${buildLabel}" />
 		<property name="archiveFullPath" value="${destination}/${downloadFile}" />
 
-		<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.${ws}.${os}.${arch}">
+		<condition property="swtdir" value="${buildDirectory}/plugins/org.eclipse.swt.${ws}.${os}">
+		<equals arg1="${arch}" arg2=""/>
+		</condition>
+
+		<property name="swtdir" value="${buildDirectory}/plugins/org.eclipse.swt.${ws}.${os}.${arch}"/>
+		<ant antfile="build.xml" target="swtdownload" dir="${swtdir}">			
 		</ant>
+		
 		<antcall target="generateChecksum" />
 	</target>
 

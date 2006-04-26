@@ -118,7 +118,7 @@
 		<platform id="SWTNP" name="QNX (x86/Photon)" fileName="swt-@build@-photon-qnx-x86.zip"></platform>
 		<platform id="SWTAM" name="AIX (PPC/Motif)" fileName="swt-@build@-motif-aix-ppc.zip"></platform>
 		<platform id="SWTHM" name="HP-UX (HP9000/Motif)" fileName="swt-@build@-motif-hpux-PA_RISC.zip"></platform>
-		<platform id="SWTMC" name="Mac OSX (Mac/Carbon) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_2.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="swt-@build@-carbon-macosx-ppc.zip"></platform>
+		<platform id="SWTMC" name="Mac OSX (Mac/Carbon) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_2.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="swt-@build@-carbon-macosx.zip"></platform>
 	</zipType>
 
 	<zipType name="RelEng Tool plug-in">
