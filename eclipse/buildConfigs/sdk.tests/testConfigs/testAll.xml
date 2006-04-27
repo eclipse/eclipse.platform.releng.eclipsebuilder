@@ -39,11 +39,11 @@
 				<param name="cfgKey" value="eclipse32LinuxGtkTest50" />
 				<param name="markerName" value="eclipse32-5.0-linux-gtk-${buildId}" />
 			</antcall> 
-			<antcall target="test">
+			<!--antcall target="test">
 				<param name="tester" value="${basedir}/win32-5.0" />
 				<param name="cfgKey" value="eclipse32WinXPTest50" />
 				<param name="markerName" value="eclipse32-5.0-winxp-${buildId}" />
-			</antcall>
+			</antcall-->
 
 		</parallel>
 	</target>
