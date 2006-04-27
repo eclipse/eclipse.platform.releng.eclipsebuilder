@@ -428,7 +428,7 @@
 		<exec executable="unzip" dir=".">
 			<arg line="-j ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.bak.zip -i */plugins/* -x */master-equinox* */com.ibm.icu.base* -d ${updateSite}/plugins" />
 		</exec>
-	    <!--java jar="${eclipse.home}/startup.jar"
+	    <java jar="${eclipse.home}/startup.jar"
 	           fork="true"
      	       jvm="${java15-home}/bin/java"
 	           failonerror="true"
@@ -436,7 +436,7 @@
 			   dir="${buildDirectory}">
 	         <arg line="-application org.eclipse.update.core.siteOptimizer"/>
 	         <arg line="-digestBuilder -digestOutputDir=${updateSite} -siteXML=${updateSite}/site.xml"/>
-	       </java-->
+	       </java>
 	</target>
 
 	<target name="cleanSites">
