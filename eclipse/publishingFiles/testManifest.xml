@@ -817,6 +817,14 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
+<logFile name="org.eclipse.ant.tests.ui_win32.win32.x86.xml">
+	<effectedFile id="JA"></effectedFile>
+	<effectedFile id="JASDK"></effectedFile>
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SLG2"></effectedFile>
+</logFile>
+
 <logFile name="org.eclipse.compare.tests_win32.win32.x86.xml">
 	<effectedFile id="PW"></effectedFile>
 	<effectedFile id="PWSDK"></effectedFile>
@@ -976,6 +984,15 @@
 	<effectedFile id="PDESDK"></effectedFile>
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
+
+<logFile name="org.eclipse.ant.tests.ui_linux.gtk.x86.xml">
+	<effectedFile id="JA"></effectedFile>
+	<effectedFile id="JASDK"></effectedFile>
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SLG2"></effectedFile>
+</logFile>
+
 
 <logFile name="org.eclipse.compare.tests_linux.gtk.x86.xml">
 	<effectedFile id="PLG2"></effectedFile>
@@ -1137,6 +1154,14 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
+<logFile name="org.eclipse.ant.tests.ui_macosx.carbon.ppc.xml">
+	<effectedFile id="JA"></effectedFile>
+	<effectedFile id="JASDK"></effectedFile>
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SMC"></effectedFile>
+</logFile>
+
 <logFile name="org.eclipse.compare.tests_macosx.carbon.ppc.xml">
 	<effectedFile id="PMC"></effectedFile>
 	<effectedFile id="PMCSDK"></effectedFile>
@@ -1290,6 +1315,14 @@
 <logFile name="org.eclipse.ant.tests.core_linux.gtk.x86_5.0.xml">
 	<effectedFile id="PLG2"></effectedFile>
 	<effectedFile id="PLG2SDK"></effectedFile>
+	<effectedFile id="JA"></effectedFile>
+	<effectedFile id="JASDK"></effectedFile>
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SLG2"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.ant.tests.ui_linux.gtk.x86_5.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -2014,6 +2047,14 @@
 <logFile name="org.eclipse.ant.tests.core_win32.win32.x86_5.0.xml">
 	<effectedFile id="PW"></effectedFile>
 	<effectedFile id="PWSDK"></effectedFile>
+	<effectedFile id="JA"></effectedFile>
+	<effectedFile id="JASDK"></effectedFile>
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SW"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.ant.tests.ui_win32.win32.x86_5.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
