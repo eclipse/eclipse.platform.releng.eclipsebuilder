@@ -121,39 +121,9 @@ need help finding a Java runtime.</p></td></tr> </table><table BORDER=0 CELLSPAC
 
 		 $buildType = $dropNames[$parts2[0]];
 
-		 echo "<title>Documentation for $buildType $buildName </title>";
-?> <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> <link rel="stylesheet" href="../../../default_style.css" type="text/css"> 
-<title></title><table border=0 cellspacing=5 cellpadding=2 width="100%" > <tr> 
-<td align=LEFT valign=TOP colspan="3" bgcolor="#999999"><b><font color="#FFFFFF" face="Arial,Helvetica">Documentation 
-in PDF form</font></b></td></tr> </table><table border="0"> <?php
-		 $hasNotes = false;
-
-		 $index = 0;
-
-        $maindir = "." ;
-        $mydir = opendir($maindir) ;
-        while($anEntry = readdir($mydir)) {
-            if (preg_match("/pdf/i",$anEntry)) {
-		         $entries[$index] = $anEntry;
-        		 $index++;
-            }
-        }
-        closedir($mydir);
-        if ($index > 0) { sort($entries); }
-
-		 for ($i = 0; $i < $index; $i++) {
-		 		 $anEntry = $entries[$i];
-		 		 $line = "<td><a href=\"$anEntry\">$anEntry</a></td>\n";
-		 		 echo "<tr>";
-		 		 echo "$line";
-		 		 echo "</tr>";
-		 		 $hasNotes = true;
-		 }
-		 
-		 if (!$hasNotes) {
-		 		 echo "<br>There is no documentation  for this build.";
-		 }
-?> </table><table border=0 cellspacing=5 cellpadding=2 width="100%" > <tr> <td align=LEFT valign=TOP colspan="3" bgcolor="#999999"><b><font color="#FFFFFF" face="Arial,Helvetica">JUnit 
+		
+?> 
+</table><table border=0 cellspacing=5 cellpadding=2 width="100%" > <tr> <td align=LEFT valign=TOP colspan="3" bgcolor="#999999"><b><font color="#FFFFFF" face="Arial,Helvetica">JUnit 
 Plugin Tests and Automated Testing Framework</font></b></td></tr> <tr> <td colspan="2"> 
 <p>These drops contain the framework and JUnit test plugins used to run JUnit 
 plug-in tests from the command line. Click <a href="automatedtesting.html">here</a> 
