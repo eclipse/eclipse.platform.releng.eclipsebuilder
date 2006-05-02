@@ -75,7 +75,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="assemble.org.eclipse.sdk.hpux.motif.ia64_32" />
 	<target name="assemble.org.eclipse.sdk.linux.gtk.ia64" />
 	<target name="assemble.org.eclipse.sdk.linux.gtk.ppc64" />
-	<target name="assemble.org.eclipse.platform.solaris.motif.sparc"/>
+	<target name="assemble.org.eclipse.sdk.solaris.motif.sparc"/>
 
 	<target name="assemble.org.eclipse.sdk.aix.motif.ppc">
 		<property name="archiveName" value="eclipse-SDK-${buildId}-aix-motif.zip"/>

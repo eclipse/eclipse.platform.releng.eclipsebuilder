@@ -47,7 +47,7 @@
 	
 	<target name="assemble.org.eclipse.rcp.sdk.linux.gtk.ppc64"/>
 	<target name="assemble.org.eclipse.rcp.sdk.linux.gtk.ia64"/>
-	<target name="assemble.org.eclipse.platform.solaris.motif.sparc"/>
+	<target name="assemble.org.eclipse.rcp.sdk.solaris.motif.sparc"/>
 	
 	<target name="assemble.org.eclipse.rcp.sdk.solaris.gtk.sparc">
 		<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-solaris-gtk.zip" />
