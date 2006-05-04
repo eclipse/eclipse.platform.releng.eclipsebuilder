@@ -128,12 +128,12 @@
 		<ant antfile="assemble.org.eclipse.sdk.${installOs}.${installWs}.${installArch}.xml">
 			<!--set property to delay building of doc.zips to later.  Doc built in this step would be missing extension point doc
 			and help indeces.-->
-			<property name="doc.zip.present" value="true" />
+			<property name="index.present" value="true" />
 		</ant>
 		<ant antfile="package.org.eclipse.sdk.${installOs}.${installWs}.${installArch}.xml">
 			<!--set property to delay building of doc.zips to later.  Doc built in this step would be missing extension point doc
 			and help indeces.-->
-			<property name="doc.zip.present" value="true" />
+			<property name="index.present" value="true" />
 		</ant>
 		<antcall target="build.doc.plugins" />
 		<echo message="Done." />
@@ -243,17 +243,7 @@
 		</condition>
 		<property name="cvspass" value="${user.home}/.cvspass" />
 
-		<!--bootclasspath-->
-		<!--determine if 1.5 libraries are available-->
-		<echo message="java.version is ${ant.java.version}" />
-		<condition property="java5.home" value="${java.home}">
-			<equals arg1="${ant.java.version}" arg2="1.5" />
-		</condition>
-
-		<fail unless="java5.home" message="JAVA 1.5 libaries are required to compile the JDT APT plug-ins in the Eclipse SDK.
-		  Please set the -java5home command line argument to the root of a 1.5 java install.">
-		</fail>
-		
+		<!--bootclasspath-->	
 		<path id="default.bootclasspath">
 			<fileset dir="${java.home}/lib">
 				<include name="*.jar" />
@@ -276,7 +266,7 @@
 		</condition>
 		<property name="bootclasspath" refid="default.bootclasspath" />
 		<property name="J2SE-1.5" refid="java5.bootclasspath" />
-
+		<property name="javadoc1.5" value="${java5.home}/bin/javadoc" />
 
 		<!--set the compiler and compiler arguments-->
 		<!--the default compiler is set to the one used by eclipse rel. eng. -->

@@ -50,7 +50,7 @@ ECHO The ws os arch combination entered is not valid.
 goto end
 
 :usage
-ECHO "usage %0 -os <osType> -ws <windowingSystem> -arch <architecture> -java5home <path to root of 1.5 JDK or JRE install>[-bc bootclasspath]  [-compilelibs] [-target target]"
+ECHO "usage %0 -os <osType> -ws <windowingSystem> -arch <architecture> -java5home <path to root of 1.5 JDK (parent to bin/javadoc)>[-bc bootclasspath]  [-compilelibs] [-target target]"
 goto end
 
 :run
