@@ -23,7 +23,7 @@
     zip and unzip executables on system path. Tar for *nix distributions</li><li>1 GB free disk space</li><li>Source build zip from <a href="http://www.eclipse.org/downloads">eclipse.org</a></li></ol><h4>Initial Setup</h4>Install Ant and a JDK as per each program's instructions. Minimally you will need 
 the following environment variables set. 
 <ol>
-  <li>Add the Ant bin directory to your path.</li><li>Set the JAVA_HOME environment variable to the root of your JDK installation.</li><li>Set the ANT_HOME environment variable to the root of your Ant installation.</li><li>(Windows 98) Increase the default environment space as specified <a href="http://support.microsoft.com/default.aspx?scid=kb;EN-US;q230205">here</a>.</li></ol><h4>Run the Build</h4><ol>
+  <li>Add the Ant bin directory to your path.</li><li>Set the JAVA_HOME environment variable to the root of your <B>1.4 JDK</B> installation.</li><li>Set the ANT_HOME environment variable to the root of your Ant installation.</li><li>(Windows 98) Increase the default environment space as specified <a href="http://support.microsoft.com/default.aspx?scid=kb;EN-US;q230205">here</a>.</li></ol><h4>Run the Build</h4><ol>
   <li>Extract the eclipse-sourceBuild-srcIncluded-*.zip to an empty directory. Extract using tar if using a *nix drop.</li><li>cd to the directory.</li><li>Execute <B>build -os &lt;osType&gt; -ws &lt;windowSystemType&gt; -arch &lt;architecture&gt; -java5home &lt;java 5 installation&gt; 
     [-bc &lt;bootclasspath&gt;] [-compilelibs] [-target &lt;target&gt;]</B></li><p>&nbsp;</p><ol>
     <table width="75%" border="1">
@@ -37,7 +37,7 @@ the following environment variables set.
           supported types</a>).</td></tr>
       <tr> 
         <td width="30%">architecture</td><td width="70%">Target system architecture (<a href="#build_platforms">See 
-          supported types</a>).</td></tr><TR><TD WIDTH="30%"> java 5 installation</TD><TD WIDTH="70%">Path to root directory of 1.5 JDK installation.  Libraries in install used to compile plug-ins in the eclipse SDK that require 1.5 compliance (currently only JDT APT).</TD></TR><TR> 
+          supported types</a>).</td></tr><TR><TD WIDTH="30%"> java 5 installation</TD><TD WIDTH="70%">Path to root directory of 1.5 JDK installation.  Libraries in install used to compile plug-ins in the eclipse SDK that require 1.5 compliance (currently only JDT APT).  This directory should contain  /bin/javadoc or /bin/javadoc.exe required to generate javadoc for JDT APT.</TD></TR><TR> 
         <TD WIDTH="30%">bootclasspath (optional)</TD><TD WIDTH="70%">The default  list of bootclasspath jars to compile against using 
           either a colon or semi-colon as separators. The jars that make up a 
           bootclasspath are part of any JDK or JRE. Typically this parameter is 
