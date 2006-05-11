@@ -153,9 +153,10 @@
 		<!--pack200-->
 	     <java jar="${eclipse.home}/startup.jar"
 	           fork="true"
+	     	   timeout="10800000"
         	   jvm="${java15-home}/bin/java"
 	           failonerror="true"
-	           maxmemory="128m"
+	           maxmemory="256m"
 			   dir="${buildDirectory}">
 	         <arg line="-application org.eclipse.update.core.siteOptimizer"/>
 	         <arg line="-jarProcessor -outputDir ${buildLabel} -processAll -pack -repack ${packtmp}/${archiveName}"/>
