@@ -40,6 +40,7 @@ if %os%-%ws%-%arch%==linux-gtk-x86_64 goto run
 if %os%-%ws%-%arch%==linux-gtk-ia64 goto run
 if %os%-%ws%-%arch%==solaris-motif-sparc goto run
 if %os%-%ws%-%arch%==solaris-gtk-sparc goto run
+if %os%-%ws%-%arch%==solaris-gtk-x86 goto run
 if %os%-%ws%-%arch%==aix-motif-ppc goto run
 if %os%-%ws%-%arch%==hpux-motif-PA_RISC goto run
 if %os%-%ws%-%arch%==qnx-photon-x86 goto run
