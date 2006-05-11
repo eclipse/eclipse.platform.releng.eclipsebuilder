@@ -1764,6 +1764,8 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
+
+
 <logFile name="org.eclipse.core.tests.runtime_linux.gtk.x86_5.0.xml">
 	<effectedFile id="RCPLG2"></effectedFile>
 	<effectedFile id="RCPLG2SDK"></effectedFile>
@@ -1859,6 +1861,8 @@
 	<effectedFile id="PDESDK"></effectedFile>
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
+
+<!--
 
 <logFile name="org.eclipse.core.tests.runtime_win32.win32.x86_5.0.xml">
 	<effectedFile id="RCPW"></effectedFile>
@@ -1965,6 +1969,7 @@
 	<effectedFile id="PDESDK"></effectedFile>
 	<effectedFile id="SW"></effectedFile>
 </logFile>
+
 
 <logFile name="org.eclipse.jdt.apt.tests_win32.win32.x86_5.0.xml">
 	<effectedFile id="JA"></effectedFile>
@@ -2204,7 +2209,7 @@
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
 	<effectedFile id="SW"></effectedFile>
-</logFile>
+</logFile> -->
 
 </logFiles>
 </topLevel>
