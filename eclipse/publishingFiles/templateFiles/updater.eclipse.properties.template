@@ -1,0 +1,39 @@
+# properties for RSSFeedAddEntryTask.java
+
+# one of 0|1|2
+debug=1
+
+# if file does not exist, it will be created; if it does, it will be modified
+file=../data/builds-eclipse.xml
+
+# required
+project=Eclipse
+branch=3.2.0
+buildID=${buildId}
+feedURL=http://download.eclipse.org/eclipse/downloads/builds.xml
+buildURL=http://download.eclipse.org/downloads/drops/${buildId}
+
+# optional build alias, like 2.2.0RC4
+buildAlias=
+
+# optional
+releaseNotesURL=http://download.eclipse.org/eclipse/downloads/drops/${buildId}/buildNotes.php
+updateManagerURL=http://download.eclipse.org/updates/testUpdates
+downloadsURL=http://download.eclipse.org/eclipse/downloads/${buildId}/index.php
+
+# one of UNSIGNED|SIGNREADY|BUILDREADY|SIGNED 
+jarSigningStatus=UNSIGNED
+
+# comma or space separated values
+dependencyURLs=
+
+#optional
+JUnitTestURL=http://download.eclipse.org/downloads/drops/@buildid@/testResults.php
+performanceTestURL=http://download.eclipse.org/downloads/drops/@buildid@/performance/performance.php
+APITestURL=
+
+# values to set for test results in triplets of os,ws,status,os,ws,status,... 
+JUnitTestResults=win32,win,PASS,linux,gtk,PASS,linux,gtk-x86_64,PASS,linux,gtk-ppc,PASS,linux,motif,PASS,solaris8,gtk,PASS,solaris8,motif,PASS,AIX,motif,PASS,HP-UX,motif,PASS,macosx,carbon,PASS
+performanceTestResults=RHEL4-3GHz-2.5GB,gtk,PENDING,win32-3GHz-2GB,winxp,PENDING,RHEL3-3GHz-2GB,gtk,PENDING,win32-2GHz-512MB,winxp,PENDING
+APITestResults=
+
