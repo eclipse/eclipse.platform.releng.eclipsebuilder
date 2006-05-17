@@ -203,7 +203,7 @@ the JDT Runtime binary with associated source and programmer documentation.</p><
 </tr> %jdtsdk% </table><table border=0 cellspacing=5 cellpadding=2 width="100%" > 
 <tr> <td colspan="2" height="2">&nbsp;</td></tr> </table><TABLE BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > 
 <TR> <TD ALIGN=LEFT VALIGN=TOP COLSPAN="3" BGCOLOR="#999999"><B><FONT COLOR="#FFFFFF" FACE="Arial,Helvetica">JDT 
-Core Batch Compiler</FONT></B></TD></TR> <TR> <TD HEIGHT="48" COLSPAN="2"> <P>These drops contain the standalone batch java compiler and source.  The batch compiler (ecj.jar) is extracted from the org.eclipse.jdt.core plug-in   as a 1.2MB download. For examples of usage, please refer to this help section: JDT Plug-in Developer Guide&gt;Programmer's Guide&gt;JDT Core&gt;Compiling Java code.<BR></P></TD></TR> 
+Core Batch Compiler</FONT></B></TD></TR> <TR> <TD HEIGHT="48" COLSPAN="2"> <P>These drops contain the standalone batch java compiler, Ant compiler adapter and associated source.  The batch compiler and Ant adapter (ecj.jar) are extracted from the org.eclipse.jdt.core plug-in   as a 1.2MB download. For examples of usage, please refer to this help section: JDT Plug-in Developer Guide&gt;Programmer's Guide&gt;JDT Core&gt;Compiling Java code.<BR></P></TD></TR> 
 </TABLE><TABLE BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="100%" BORDERCOLOR="#999999" > 
 <TR> <TD ALIGN=RIGHT VALIGN=TOP WIDTH="7%"> <DIV ALIGN="left"><B>Status</B></DIV></TD><TD WIDTH="36%"><B>Platform</B></TD><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </TR> %jdtc% </TABLE><TABLE BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > 
