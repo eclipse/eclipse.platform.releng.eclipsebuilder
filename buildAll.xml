@@ -68,6 +68,7 @@
 			</sequential>
 			<antcall target="testEclipse" />
 		</parallel>
+		<antcall target="publishRSS"/>
 	</target>
 
 	<target name="init">
@@ -270,4 +271,12 @@
 			<property name="assemblyTempDir" value="${packagingInfo}/jartmp" />
 		</ant>
 	</target>
+	
+	<target name="publishRSS">
+		<!--update the RSS properties file with the value of the buildID -->
+		<property name="rssproperties" value="updater.eclipse.properties"/>
+		<copy file="${eclipse.build.configs}/publishingFiles/templateFiles/${rssproperties}" tofile="{postingDirectory}/${buildLabel}/${rssproperties}" failonerror="false"/>        	 
+		<replace file="${postingDirectory}/${buildLabel}/${rssproperties}" token="@buildid@" value="${buildId}"/>
+	</target>
+	
 </project>
