@@ -68,7 +68,7 @@
 			</sequential>
 			<antcall target="testEclipse" />
 		</parallel>
-		<antcall target="publishRSS"/>
+		<!-- <antcall target="publishRSS"/> -->
 	</target>
 
 	<target name="init">
