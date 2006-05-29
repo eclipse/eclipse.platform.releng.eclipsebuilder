@@ -30,9 +30,14 @@ tagMaps=""
 #sets fetchTag="HEAD" for nightly builds if required
 tag=""
 
-#buildProjectTags=v20060410a
-#buildProjectTags=v20060418
-buildProjectTags=v20060419
+#buildProjectTags=v20060510
+#buildProjectTags=v20060511
+#buildProjectTags=v20060511a
+#buildProjectTags=v20060515
+#buildProjectTags=v20060516a
+#buildProjectTags=v20060518a
+#buildProjectTags=v20060524
+buildProjectTags=v20060529
 
 #updateSite property setting
 updateSite=""
@@ -233,7 +238,7 @@ echo bootclasspath=$bootclasspath
 echo bootclasspath_15=$bootclasspath_15
 
 #full command with args
-buildCommand="$antRunner -q -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:ext:sdimitro@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $tagMaps -DJ2SE-1.5=$bootclasspath_15 -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation -DlogExtension=.xml $javadoc $updateSite $sign -DgenerateFeatureVersionSuffix=true -Djava15-home=$builderDir/jdk/linuxppc/ibm-java2-ppc-50/jre -listener org.eclipse.releng.build.listeners.EclipseBuildListener"
+buildCommand="$antRunner -q -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:ext:sdimitro@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $tagMaps -DJ2SE-1.5=$bootclasspath_15 -DJ2SE-1.4=$bootclasspath -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation -DlogExtension=.xml $javadoc $updateSite $sign -DgenerateFeatureVersionSuffix=true -Djava15-home=$builderDir/jdk/linuxppc/ibm-java2-ppc-50/jre -listener org.eclipse.releng.build.listeners.EclipseBuildListener"
 
 #capture command used to run the build
 echo $buildCommand>command.txt
