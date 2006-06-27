@@ -45,6 +45,8 @@
 		</zipType>
 				
 		<zipType name="Incubator">
+ 	    	<platform id="cm" name="All" fileName="@org.eclipse.equinox.cm@.jar">
+			</platform>						
 			<platform id="httpregistry" name="All" fileName="@org.eclipse.equinox.http.registry@.jar">
     		</platform>		
 			<platform id="bridgehttp" name="All" fileName="@org.eclipse.equinox.servlet.bridge.http@.jar">

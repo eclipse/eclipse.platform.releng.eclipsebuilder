@@ -145,6 +145,9 @@
 			<param name="bundle.id" value="org.eclipse.equinox.http.registry" />
 		</antcall>
 		<antcall target="updateTestManifest">
+			<param name="bundle.id" value="org.eclipse.equinox.cm" />
+		</antcall>
+		<antcall target="updateTestManifest">
 					<param name="bundle.id" value="org.eclipse.equinox.servlet.bridge.http" />
 		</antcall>
 		<antcall target="updateTestManifest">
