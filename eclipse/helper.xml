@@ -79,11 +79,11 @@
 			<param name="os" value="linux" />
 			<param name="ws" value="gtk" />
 			<param name="arch" value="x86" />
-		</antcall>
+		</antcall>		
 		<antcall target="packageSwtStandalone">
 			<param name="os" value="macosx" />
 			<param name="ws" value="carbon" />
-			<param name="arch" value="ppc" />
+			<param name="arch" value="" /> 
 		</antcall>
 		<antcall target="packageSwtStandalone">
 			<param name="os" value="linux" />
@@ -129,12 +129,21 @@
 	</target>
 
 	<target name="packageSwtStandalone">
+		<condition property="downloadFile" value="swt-${buildid}-${ws}-${os}.zip">
+			<equals arg1="${arch}" arg2=""/>
+		</condition>
 		<property name="downloadFile" value="swt-${buildid}-${ws}-${os}-${arch}.zip" />
 		<property name="destination" value="${postingDirectory}/${buildLabel}" />
 		<property name="archiveFullPath" value="${destination}/${downloadFile}" />
 
-		<ant antfile="build.xml" target="swtdownload" dir="${buildDirectory}/plugins/org.eclipse.swt.${ws}.${os}.${arch}">
+		<condition property="swtdir" value="${buildDirectory}/plugins/org.eclipse.swt.${ws}.${os}">
+		<equals arg1="${arch}" arg2=""/>
+		</condition>
+
+		<property name="swtdir" value="${buildDirectory}/plugins/org.eclipse.swt.${ws}.${os}.${arch}"/>
+		<ant antfile="build.xml" target="swtdownload" dir="${swtdir}">			
 		</ant>
+		
 		<antcall target="generateChecksum" />
 	</target>
 
@@ -288,7 +297,7 @@
 			<property name="isBuildTested" value="true" />
 			<property name="indexFileName" value="index.php" />
 			<property name="buildType" value="${buildType}" />
-			<property name="dropTokenList" value="%sdk%,%tests%,%example%,%rcpruntime%,%rcpsdk%,%icubase%,%runtime%,%platformsdk%,%jdt%,%jdtsdk%,%pde%,%pdesdk%,%teamextras%,%swt%,%relengtools%" />
+			<property name="dropTokenList" value="%sdk%,%tests%,%example%,%rcpruntime%,%rcpsdk%,%icubase%,%runtime%,%platformsdk%,%jdt%,%jdtsdk%,%jdtc%,%pde%,%pdesdk%,%teamextras%,%swt%,%relengtools%" />
 			<property name="result" value="${postingDirectory}/${buildLabel}" />
 			<property name="testResultsTemplateFileName" value="${publishingContent}/templateFiles/testResults.php.template" />
 			<property name="dropTemplateFileName" value="${publishingContent}/templateFiles/index.php.template" />
@@ -398,7 +407,7 @@
 			<classpath>
 				<pathelement location="${base.builder}/plugins/org.eclipse.internal.build.tools/internalTools.jar"/>
 				<pathelement location="${base.builder}/plugins/org.eclipse.build.tools/buildTools.jar"/>
-				<pathelement location="${base.builder}/plugins/org.eclipse.osgi_3.2.0.v20060413-1200.jar"/>
+				<pathelement location="${base.builder}/plugins/org.eclipse.osgi_3.2.0.v20060601.jar"/>
 			</classpath>
 		</java>
 		
@@ -419,11 +428,20 @@
 		<exec executable="unzip" dir=".">
 			<arg line="-j ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.bak.zip -i */plugins/* -x */master-equinox* */com.ibm.icu.base* -d ${updateSite}/plugins" />
 		</exec>
-
+	    <java jar="${eclipse.home}/startup.jar"
+	           fork="true"
+     	       jvm="${java15-home}/bin/java"
+	           failonerror="true"
+	           maxmemory="128m"
+			   dir="${buildDirectory}">
+	         <arg line="-application org.eclipse.update.core.siteOptimizer"/>
+	         <arg line="-digestBuilder -digestOutputDir=${updateSite} -siteXML=${updateSite}/site.xml"/>
+	       </java>
 	</target>
 
 	<target name="cleanSites">
 		<cleanSite ageInMinutes="1440" directoryName="/builds/transfer/files/master/downloads/drops" realDelete="true" />
+		<cleanSite ageInMinutes="1440" directoryName="/builds/transfer/files/master/equinox/drops/" realDelete="true" />
 		<cleanSite ageInMinutes="1440" directoryName="/builds/transfer/files/bogus/downloads/drops" realDelete="true" />
 		<cleanSite ageInMinutes="1440" directoryName="/builds/transfer/files/zrh" realDelete="true" />
 		<cleanSite ageInMinutes="1440" directoryName="/builds/transfer/files/snz" realDelete="true" />

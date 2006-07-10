@@ -22,15 +22,25 @@ skipPerf=""
 #sets skip.tests Ant property
 skipTest=""
 
+#sets sign Ant property
+sign=""
+
 tagMaps=""
 
 #sets fetchTag="HEAD" for nightly builds if required
 tag=""
 
-buildProjectTags=v20060320
+#buildProjectTags=v20060510
+#buildProjectTags=v20060511
+#buildProjectTags=v20060511a
+#buildProjectTags=v20060515
+#buildProjectTags=v20060516a
+#buildProjectTags=v20060518a
+#buildProjectTags=v20060524
+buildProjectTags=v20060529
 
-#update property setting
-update=""
+#updateSite property setting
+updateSite=""
 
 #flag indicating whether or not mail should be sent to indicate build has started
 mail=""
@@ -59,6 +69,9 @@ postingDirectory=/builds/transfer/files/master/downloads/drops
 # flag to indicate if test build
 testBuild=""
 
+# path to javadoc executable
+javadoc=""
+
 # value used in buildLabel and for text replacement in index.php template file
 builddate=`date +%Y%m%d`
 buildtime=`date +%H%M`
@@ -66,7 +79,7 @@ timestamp=$builddate$buildtime
 
 
 # process command line arguments
-usage="usage: $0 [-notify emailaddresses][-test][-buildDirectory directory][-u3|u4][-buildId name][-buildLabel directory name][-tagMapFiles][-mapVersionTag tag][-builderTag tag][-bootclasspath path][-compareMaps][-skipPerf] [-skipTest] M|N|I|S|R"
+usage="usage: $0 [-notify emailaddresses][-test][-buildDirectory directory][-buildId name][-buildLabel directory name][-tagMapFiles][-mapVersionTag tag][-builderTag tag][-bootclasspath path][-compareMaps][-skipPerf] [-skipTest][-updateSite site][-sign] M|N|I|S|R"
 
 if [ $# -lt 1 ]
 then
@@ -77,8 +90,6 @@ fi
 while [ $# -gt 0 ]
 do
 		 case "$1" in
-		 		 -u3) update="-Dupdate=true";;
-		 		 -u4) update="-Dupdate=true -DversionParts=-add4thPart";;
 		 		 -buildId) buildId="$2"; shift;;
 		 		 -buildLabel) buildLabel="$2"; shift;;
 		 		 -mapVersionTag) mapVersionTag="$2"; shift;;
@@ -90,6 +101,8 @@ do
 		 		 -test) postingDirectory="/builds/transfer/files/bogus/downloads/drops";testBuild="-Dtest=true";;
 		 		 -builderTag) buildProjectTags="$2"; shift;;
 		 		 -compareMaps) compareMaps="-DcompareMaps=true";;
+		 		 -updateSite) updateSite="-DupdateSite=$2";shift;;
+		 		 -sign) sign="-Dsign=true";;
 		 		 -*)
 		 		 		 echo >&2 $usage
 		 		 		 exit 1;;
@@ -161,23 +174,30 @@ cp -r eclipseInternalBuildTools/plugins org.eclipse.releng.basebuilder
 #The URLs and filenames of vms used in build
 linuxJdkArchive=jdks/jdk-1_5_0_06-fcs-bin-b05-linux-i586-10_nov_2005.zip
 linuxppcJdkArchive=jdks/IBMJava2-SDK-ppc-142.zip
+linuxppcJdkArchive15=jdks/ibm-java2-sdk-50-linux-ppc.tgz
 windowsJreArchive=jdks/jdk-1_4_2_10-fcs-bin-b03-windows-i586-10_oct_2005.zip
 windows15JdkArchive=jdks/jdk-1_5_0_06-fcs-bin-b05-windows-i586-10_nov_2005.zip
+windows10FoundationArchive=jdks/weme-win-x86-foundation10_6.1.0.20060317-111429.zip
 
 #get then install the Linux vm used for running the build
-mkdir -p jdk/linux; cvs -d :pserver:anonymous@ottcvs1:/home/cvs/releng co $linuxJdkArchive; unzip $linuxJdkArchive -d jdk/linux; rm $linuxJdkArchive
+mkdir -p jdk/linux; cvs -d :pserver:anonymous@ottcvs1:/home/cvs/releng co $linuxJdkArchive; unzip -qq $linuxJdkArchive -d jdk/linux; rm $linuxJdkArchive
 
 #get the install the Windows jre containing the Java libraries against which to compile
-mkdir -p jdk/win32; cvs -d :pserver:anonymous@ottcvs1:/home/cvs/releng co $windowsJreArchive;unzip $windowsJreArchive -d jdk/win32; rm $windowsJreArchive
+mkdir -p jdk/win32; cvs -d :pserver:anonymous@ottcvs1:/home/cvs/releng co $windowsJreArchive;unzip -qq $windowsJreArchive -d jdk/win32; rm $windowsJreArchive
 
 #get and install the Windows 1.5 jre containing the 1.5 Java libraries against which to compile
-mkdir -p jdk/win32_15; cvs -d :pserver:anonymous@ottcvs1:/home/cvs/releng co $windows15JdkArchive;unzip $windows15JdkArchive -d jdk/win32_15/; rm $windows15JdkArchive
+mkdir -p jdk/win32_15; cvs -d :pserver:anonymous@ottcvs1:/home/cvs/releng co $windows15JdkArchive;unzip -qq $windows15JdkArchive -d jdk/win32_15/; rm $windows15JdkArchive
 
+#get and install the Windows Foundation jre containing the 1.0 Java libraries against which to compile
+mkdir -p jdk/win32_foundation; cvs -d :pserver:anonymous@ottcvs1:/home/cvs/releng co $windows10FoundationArchive;unzip -qq $windows10FoundationArchive -d jdk/win32_foundation/; rm $windows10FoundationArchive
 
 if [ "$HOSTNAME" == "eclipsebuildserv" ]
 then
     #get then install the Linuxppc vm used for running the build
-    mkdir -p jdk/linuxppc; cvs -d :pserver:anonymous@ottcvs1:/home/cvs/releng co $linuxppcJdkArchive; unzip $linuxppcJdkArchive -d jdk/linuxppc; rm $linuxppcJdkArchive
+    mkdir -p jdk/linuxppc; cvs -d :pserver:anonymous@ottcvs1:/home/cvs/releng co $linuxppcJdkArchive; unzip -qq $linuxppcJdkArchive -d jdk/linuxppc; rm $linuxppcJdkArchive
+    #get then install the Linuxppc 1.5 vm used for generating javadoc
+    cd jdk/linuxppc; cvs -d :pserver:anonymous@ottcvs1:/home/cvs/releng co $linuxppcJdkArchive15; tar -xzf $linuxppcJdkArchive15; rm -rf $linuxppcJdkArchive15; cd ../..
+    javadoc="-Djavadoc15=$builderDir/jdk/linuxppc/ibm-java2-ppc-50/bin/javadoc"
 fi
 
 mkdir -p $postingDirectory/$buildLabel
@@ -187,6 +207,7 @@ chmod -R 755 $builderDir
 bootclasspath="$builderDir/jdk/win32/jdk1.4.2_10/jre/lib/rt.jar:$builderDir/jdk/win32/jdk1.4.2_10/jre/lib/jsse.jar"
 
 bootclasspath_15="$builderDir/jdk/win32_15/jdk1.5.0_06/jre/lib/rt.jar"
+bootclasspath_foundation="$builderDir/jdk/win32_foundation/lib/jclFoundation10/classes.zip"
 
 if [ "$HOSTNAME" == "eclipsebuildserv" ]
 then
@@ -217,7 +238,7 @@ echo bootclasspath=$bootclasspath
 echo bootclasspath_15=$bootclasspath_15
 
 #full command with args
-buildCommand="$antRunner -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:ext:sdimitro@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $tagMaps -DJ2SE-1.5=$bootclasspath_15 -DlogExtension=.xml -listener org.eclipse.releng.build.listeners.EclipseBuildListener"
+buildCommand="$antRunner -q -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:ext:sdimitro@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $tagMaps -DJ2SE-1.5=$bootclasspath_15 -DJ2SE-1.4=$bootclasspath -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation -DlogExtension=.xml $javadoc $updateSite $sign -DgenerateFeatureVersionSuffix=true -Djava15-home=$builderDir/jdk/linuxppc/ibm-java2-ppc-50/jre -listener org.eclipse.releng.build.listeners.EclipseBuildListener"
 
 #capture command used to run the build
 echo $buildCommand>command.txt
@@ -234,4 +255,5 @@ fi
 
 #clean up
 rm -rf $builderDir
+
 

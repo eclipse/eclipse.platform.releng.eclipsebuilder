@@ -54,6 +54,7 @@
 <target name="assemble.org.eclipse.rcp.hpux.motif.ia64_32"/>
 <target name="assemble.org.eclipse.rcp.linux.gtk.ia64" />
 <target name="assemble.org.eclipse.rcp.linux.gtk.ppc64" />
+<target name="assemble.org.eclipse.platform.solaris.motif.sparc"/>
 
 <target name="assemble.org.eclipse.rcp.aix.motif.ppc">
 	<property name="archiveName" value="eclipse-RCP-${buildId}-aix-motif.zip"/>

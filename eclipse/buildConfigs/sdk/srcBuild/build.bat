@@ -40,6 +40,7 @@ if %os%-%ws%-%arch%==linux-gtk-x86_64 goto run
 if %os%-%ws%-%arch%==linux-gtk-ia64 goto run
 if %os%-%ws%-%arch%==solaris-motif-sparc goto run
 if %os%-%ws%-%arch%==solaris-gtk-sparc goto run
+if %os%-%ws%-%arch%==solaris-gtk-x86 goto run
 if %os%-%ws%-%arch%==aix-motif-ppc goto run
 if %os%-%ws%-%arch%==hpux-motif-PA_RISC goto run
 if %os%-%ws%-%arch%==qnx-photon-x86 goto run
@@ -50,7 +51,7 @@ ECHO The ws os arch combination entered is not valid.
 goto end
 
 :usage
-ECHO "usage %0 -os <osType> -ws <windowingSystem> -arch <architecture> -java5home <path to root of 1.5 JDK or JRE install>[-bc bootclasspath]  [-compilelibs] [-target target]"
+ECHO "usage %0 -os <osType> -ws <windowingSystem> -arch <architecture> -java5home <path to root of 1.5 JDK (parent to /bin/javadoc.exe)>[-bc bootclasspath]  [-compilelibs] [-target target]"
 goto end
 
 :run

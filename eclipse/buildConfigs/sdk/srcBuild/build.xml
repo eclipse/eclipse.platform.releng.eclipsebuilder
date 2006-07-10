@@ -17,32 +17,27 @@
 		<ant antfile="fetch_org.eclipse.sdk.xml" />
 		
 		<!--copy linux motif about_files to in temp location where it will be copied into root of eclipse at assembly time-->
-				<property name="linux.motif.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.motif.x86" />
-				<mkdir dir="${linux.motif.rootfiles}" />
-				<copy tofile="${linux.motif.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86/about.html" />
-				<copy todir="${linux.motif.rootfiles}">
-					<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86"/>
-				</copy>
-				
-				<!--copy linux gtk x86 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
-				<property name="linux.gtk.x86.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.x86" />
-				<mkdir dir="${linux.gtk.x86.rootfiles}" />
-				<copy tofile="${linux.gtk.x86.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86/about.html" />
+		<property name="linux.motif.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.motif.x86" />
+		<mkdir dir="${linux.motif.rootfiles}" />
+		<copy tofile="${linux.motif.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86/about.html" />
+		
+		<!--copy linux gtk x86 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
+		<property name="linux.gtk.x86.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.x86" />
+		<mkdir dir="${linux.gtk.x86.rootfiles}" />
+		<copy tofile="${linux.gtk.x86.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86/about.html" />
+		
+		<!--copy linux gtk x86_64 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
+		<property name="linux.gtk.x86_64.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.x86_64" />
+		<mkdir dir="${linux.gtk.x86_64.rootfiles}" />
+		<copy tofile="${linux.gtk.x86_64.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64/about.html" />
 
-				<copy todir="${linux.gtk.x86.rootfiles}">
-					<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86"/>
-				</copy>
-				
-				<!--copy linux gtk x86_64 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
-				<property name="linux.gtk.x86_64.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.x86_64" />
-				<mkdir dir="${linux.gtk.x86_64.rootfiles}" />
-				<copy tofile="${linux.gtk.x86_64.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64/about_launcher_libraries.html" />
+		<copy todir="${linux.gtk.x86_64.rootfiles}">
+			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64"
+				includes="
+				about_files/mpl-v11.txt"
+			/>
+		</copy>
 
-				<copy todir="${linux.gtk.x86_64.rootfiles}">
-					<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64"
-						includes="about_files/mpl-v11.txt"
-					/>
-				</copy>		
 	</target>
 
 	<!--     Fill in values for original timestamp in all about.mappings files  -->
@@ -133,12 +128,12 @@
 		<ant antfile="assemble.org.eclipse.sdk.${installOs}.${installWs}.${installArch}.xml">
 			<!--set property to delay building of doc.zips to later.  Doc built in this step would be missing extension point doc
 			and help indeces.-->
-			<property name="doc.zip.present" value="true" />
+			<property name="index.present" value="true" />
 		</ant>
 		<ant antfile="package.org.eclipse.sdk.${installOs}.${installWs}.${installArch}.xml">
 			<!--set property to delay building of doc.zips to later.  Doc built in this step would be missing extension point doc
 			and help indeces.-->
-			<property name="doc.zip.present" value="true" />
+			<property name="index.present" value="true" />
 		</ant>
 		<antcall target="build.doc.plugins" />
 		<echo message="Done." />
@@ -248,17 +243,7 @@
 		</condition>
 		<property name="cvspass" value="${user.home}/.cvspass" />
 
-		<!--bootclasspath-->
-		<!--determine if 1.5 libraries are available-->
-		<echo message="java.version is ${ant.java.version}" />
-		<condition property="java5.home" value="${java.home}">
-			<equals arg1="${ant.java.version}" arg2="1.5" />
-		</condition>
-
-		<fail unless="java5.home" message="JAVA 1.5 libaries are required to compile the JDT APT plug-ins in the Eclipse SDK.
-		  Please set the -java5home command line argument to the root of a 1.5 java install.">
-		</fail>
-		
+		<!--bootclasspath-->	
 		<path id="default.bootclasspath">
 			<fileset dir="${java.home}/lib">
 				<include name="*.jar" />
@@ -281,7 +266,7 @@
 		</condition>
 		<property name="bootclasspath" refid="default.bootclasspath" />
 		<property name="J2SE-1.5" refid="java5.bootclasspath" />
-
+		<property name="javadoc1.5" value="${java5.home}/bin/javadoc" />
 
 		<!--set the compiler and compiler arguments-->
 		<!--the default compiler is set to the one used by eclipse rel. eng. -->
@@ -307,6 +292,9 @@
 
 		<!--required property setting to build bundles in Eclipse 3.x stream builds -->
 		<property name="buildingOSGi" value="true" />
+		
+		<!--property to invoke the packager for baseLocation files -->
+		<property name="runPackager" value="true"/>
 
 		<!--indentifies this as a srcFetch build-->
 		<available file="fetch_org.eclipse.platform.launchers.xml" property="srcFetch" />
@@ -317,6 +305,7 @@
 				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="linux-gtk-ppc64" />
 				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="hpux-motif-ia64" />
 				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="hpux-motif-ia64_32" />
+				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="solaris-gtk-x86" />
 			</or>
 		</condition>
 

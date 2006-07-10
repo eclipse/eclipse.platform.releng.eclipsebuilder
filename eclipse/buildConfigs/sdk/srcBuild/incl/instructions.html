@@ -23,7 +23,7 @@
     zip and unzip executables on system path. Tar for *nix distributions</li><li>1 GB free disk space</li><li>Source build zip from <a href="http://www.eclipse.org/downloads">eclipse.org</a></li></ol><h4>Initial Setup</h4>Install Ant and a JDK as per each program's instructions. Minimally you will need 
 the following environment variables set. 
 <ol>
-  <li>Add the Ant bin directory to your path.</li><li>Set the JAVA_HOME environment variable to the root of your JDK installation.</li><li>Set the ANT_HOME environment variable to the root of your Ant installation.</li><li>(Windows 98) Increase the default environment space as specified <a href="http://support.microsoft.com/default.aspx?scid=kb;EN-US;q230205">here</a>.</li></ol><h4>Run the Build</h4><ol>
+  <li>Add the Ant bin directory to your path.</li><li>Set the JAVA_HOME environment variable to the root of your <B>1.4 JDK</B> installation.</li><li>Set the ANT_HOME environment variable to the root of your Ant installation.</li><li>(Windows 98) Increase the default environment space as specified <a href="http://support.microsoft.com/default.aspx?scid=kb;EN-US;q230205">here</a>.</li></ol><h4>Run the Build</h4><ol>
   <li>Extract the eclipse-sourceBuild-srcIncluded-*.zip to an empty directory. Extract using tar if using a *nix drop.</li><li>cd to the directory.</li><li>Execute <B>build -os &lt;osType&gt; -ws &lt;windowSystemType&gt; -arch &lt;architecture&gt; -java5home &lt;java 5 installation&gt; 
     [-bc &lt;bootclasspath&gt;] [-compilelibs] [-target &lt;target&gt;]</B></li><p>&nbsp;</p><ol>
     <table width="75%" border="1">
@@ -37,7 +37,7 @@ the following environment variables set.
           supported types</a>).</td></tr>
       <tr> 
         <td width="30%">architecture</td><td width="70%">Target system architecture (<a href="#build_platforms">See 
-          supported types</a>).</td></tr><TR><TD WIDTH="30%"> java 5 installation</TD><TD WIDTH="70%">Path to root directory of 1.5 JDK installation.  Libraries in install used to compile plug-ins in the eclipse SDK that require 1.5 compliance (currently only JDT APT).</TD></TR><TR> 
+          supported types</a>).</td></tr><TR><TD WIDTH="30%"> java 5 installation</TD><TD WIDTH="70%">Path to root directory of 1.5 JDK installation.  Libraries in install used to compile plug-ins in the eclipse SDK that require 1.5 compliance (currently only JDT APT).  This directory should contain  /bin/javadoc or /bin/javadoc.exe required to generate javadoc for JDT APT.</TD></TR><TR> 
         <TD WIDTH="30%">bootclasspath (optional)</TD><TD WIDTH="70%">The default  list of bootclasspath jars to compile against using 
           either a colon or semi-colon as separators. The jars that make up a 
           bootclasspath are part of any JDK or JRE. Typically this parameter is 
@@ -92,6 +92,8 @@ If you are building for Linux or Mac, there will be a tar.gz file. </p><p>Extrac
     <td width="48%">solaris</td><td width="52%">motif</td><td width="52%">sparc</td></tr>
    <tr> 
     <td width="48%">solaris</td><td width="52%">gtk</td><td width="52%">sparc</td></tr>
+    <tr> 
+    <td width="48%">solaris</td><td width="52%">gtk</td><td width="52%">x86</td></tr>
 </table><p>&nbsp;</p><h2><a name="limitations"></a>Known Limitations </h2><ol>
   <li>Building unix flavours of Eclipse on Windows will result in incorrect file 
     permissions. The *.so, *.sl, and Eclipse executable files will not have execute 
@@ -102,10 +104,10 @@ If you are building for Linux or Mac, there will be a tar.gz file. </p><p>Extrac
     the appropriate soft links).</li><li>Only Java source code is compiled. *.dll, *so, *sl and Eclipse executables
      are all provided prebuilt in this build process. The linux-gtk-ppc64, linux-gtk-ia64, hpux-motif-ia64_32 and hpux-motif-ia64 configurations will require 
 	a re-compilation of the eclipse executable and swt libaries and copying these files to the apppropriate directories.
-	This can be accomplished by using the -compilelibs flag when running the build.  The instructions on  <a href="http://dev.eclipse.org/viewcvs/index.cgi/%7Echeckout%7E/platform-swt-home/faq.html#buildeclipseexe">recompiling
-    the eclipse executable</a> and <a href="http://dev.eclipse.org/viewcvs/index.cgi/%7Echeckout%7E/platform-swt-home/faq.html#howbuilddll">recompiling
-    the swt libraries</a>  available in the <a href="http://dev.eclipse.org/viewcvs/index.cgi/%7Echeckout%7E/platform-swt-home/faq.html">SWT
-    FAQ</a> are also a useful reference. This document also includes a list of the prerequisites <a href="http://dev.eclipse.org/viewcvs/index.cgi/%7Echeckout%7E/platform-swt-home/faq.html#gtkstartup">for
+	This can be accomplished by using the -compilelibs flag when running the build.  The instructions on  <a href="http://www.eclipse.org/swt/faq.php#buildeclipseexe">recompiling
+    the eclipse executable</a> and <a href="http://www.eclipse.org/swt/faq.php#howbuilddll">recompiling
+    the swt libraries</a>  available in the <a href="http://www.eclipse.org/swt/faq.php">SWT
+    FAQ</a> are also a useful reference. This document also includes a list of the prerequisites <a href="http://www.eclipse.org/swt/faq.php#gtkstartup">for
     running  SWT on Linux GTK</a> </li><property name="javacSource" value="1.4" /></li>
 </ol><p>&nbsp;</p></p><h2><a name="port"></a>Using the source build to construct a new Eclipse
   port</h2><p>The Eclipse platform releng team has limited hardware, software and time to compile Eclipse on every conceivable platform. If you would like to enhance

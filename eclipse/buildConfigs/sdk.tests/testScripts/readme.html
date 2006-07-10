@@ -6,7 +6,7 @@
 
 <body bgcolor="#FFFFFF" text="#000000">
 <font size="+2"> Automated Testing of Eclipse Builds</font>
-<p>last updated: March 20, 2006</p><p><font size="+1">Description</font></p><p>This document describes how to run Eclipse JUnit plugin tests from the command 
+<p>last updated: May 18, 2006</p><p><font size="+1">Description</font></p><p>This document describes how to run Eclipse JUnit plugin tests from the command 
   line using Eclipse SDK  JUnit test plugins and a testing framework. This method of running tests is intended 
   for anyone who wishes to automate their testing process or reproduce the testing 
   mechanism used in Eclipse builds by the Eclipse Platform  Release Engineering team.</p><p>Click <a href="http://dev.eclipse.org/viewcvs/index.cgi/*checkout*/org.eclipse.test/testframework.html?rev=HEAD&content-type=text/html">here</a> for a description of the testing 
@@ -15,7 +15,7 @@
   Support in Eclipse</a><br>
 <a href="http://dev.eclipse.org:8080/help/content/help:/org.eclipse.jdt.doc.user/tasks/tasks-207.htm?resultof=%6a%75%6e%69%74%20&toc=%2Forg.eclipse.jdt.doc.user%2Ftoc.xml">Using 
   JUnit</a></p><p><font size="+1">Requirements</font></p><p>1. All test machines will require 1.4 and 1.5 java runtime environments installed to run all tests.  See <A HREF="#testtargets">test targets</A> 
-  for details on which tests require a 1.5 level jre.<BR>2.  A properties file containing the following   key-value pair: J2SE-5.0=&lt;path to 1.5  java executable&gt;.<br>
+  for details on which tests require a 1.5 level jre.  All other tests can be executed with either jre levels.<BR>2.  A properties file containing the following   key-value pair: J2SE-5.0=&lt;path to 1.5  java executable&gt;.    On Windows,  the path must be enclosed with double quotes if it contains any space characters, <BR>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i.e.  J2SE-5.0=&quot;c:/program files/jdk1.5.0/jre/bin/java&quot;<br>
   3. <a href="http://www.info-zip.org/pub/infozip/UnZip.html">Info-ZIP UnZip</a> 
   version 5.41 or later installed and added to the path.<br>
   4. The Automated Test feature from an Eclipse build (<a href="http://www.eclipse.org/downloads/index.php">http://www.eclipse.org/downloads/index.php</a>). 
@@ -40,9 +40,9 @@
       org.eclipse.team.tests.cvs.core/repository.properties. For more information 
       on how this file is used in the team CVS tests, click <a href="http://dev.eclipse.org/viewcvs/index.cgi/%7Echeckout%7E/org.eclipse.team.tests.cvs.core/readme.html?rev=HEAD&content-type=text/html">here</a>. 
     </p></li></ul><p><font size="+1">Running Tests</font></p><p>From a command prompt or terminal:</p><p>1. cd to the eclipse-testing directory<br>
-  2. Execute the following script:</p><p><b>runtests [-os &lt;operating system&gt;] [-ws &lt;windowing system&gt;] [-arch 
+  2. Execute the following script:</p><p><b>runtests -properties &lt;path to properties file&gt; [-os &lt;operating system&gt;] [-ws &lt;windowing system&gt;] [-arch 
   &lt;architecture&gt;] [-noclean] [-vm 
-  &lt;path to java executable&gt;][-Dtest.target=performance][<I>targetname1 targetname2 targetname3 etc...</I>] -properties &lt;path to properties file&gt;</b></p><p>All parameters and targets are optional on windows systems with the exception of  &quot;-properties&quot;.  On *nix systems, the os, ws and arch parameters
+  &lt;path to java executable&gt;][-Dtest.target=performance][<I>targetname1 targetname2 targetname3 etc...</I>] </b></p><p>All parameters and targets are optional on windows systems with the exception of  &quot;-properties&quot;.  On *nix systems, the os, ws and arch parameters
   must be specified in addition to the -properties parameter.</p><p>The JUnit test results are produced in individual xml files for each test plug-in with a test.xml. These 
   results are copied to the eclipse-testing\results\xml directory. These results 
   can be converted into html by running the &quot;genHtml&quot; target as described 
@@ -66,7 +66,7 @@
     <td>-properties</td><td><P>As per requirements noted above, this is used to reference a properties file containing additional Ant properties 
       used in running tests.Can be used to pass additional vm arguments to the 
       Java virtual machine running the tests by adding the entry &quot;extraVMargs=&lt;the 
-      args to pass to the vm&gt;&quot; to the specified properties file.<BR><BR>At a minimum, the property file must include a &quot;J2SE-5.0&quot; property which specifies a path to a 1.5 java executable, for example:<BR><BR><B>J2SE-5.0=c:/jdk1.5.0_06/jre/bin/java</B></P><P>This key-value pair is required to run JUnit plug-in tests that require a 1.5 level jvm.</P></td></tr>
+      args to pass to the vm&gt;&quot; to the specified properties file.<BR><BR>At a minimum, the property file must include a &quot;J2SE-5.0&quot; property which specifies a path to a 1.5 java executable, for example:<BR><BR><B>J2SE-5.0=&quot;c:/program files/jdk1.5.0_06/jre/bin/java&quot;</B></P><P>The path must be enclosed in double quotes if it contains spaces.  This key-value pair is required to run JUnit plug-in tests that require a 1.5 level jvm.</P></td></tr>
   <tr> 
     <td>-vm</td><td><P>When runtests is executed, two instances of eclipse are started:  one to invoke the org.eclipse.ant.core.antRunner application to run a test.xml script in a test plug-in (outer instance) and another in which the JUnit tests are being executed (inner).  By default, both will use the java executable on the system path.  The -vm property is used to specify an alternate java executable. 
       For example, &quot;-vm c:\jdk142\jre\bin\java&quot;.<BR><BR>    However, the -vm value is ignored by the inner vm for JUnit plug-in tests requiring a 1.5 JRE to execute (see <A HREF="#testtargets">test targets</A>).  This property must be used in conjunction with the -properties parameter described above at all times.</P></td></tr>
