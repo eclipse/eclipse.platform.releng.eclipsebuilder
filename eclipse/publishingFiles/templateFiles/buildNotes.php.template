@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <?php
 	$parts = explode("/", getcwd());
@@ -21,20 +22,85 @@
 	echo "<title>Build Notes for $buildType $buildName </title>";
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<link rel="stylesheet" href="../../../default_style.css" type="text/css">
+<meta name="author" content="Eclipse Foundation, Inc." />
+	<meta name="keywords" content="eclipse,project,plug-ins,plugins,java,ide,swt,refactoring,free java ide,tools,platform,open source,development environment,development,ide" />
+	<link rel="stylesheet" type="text/css" href="stylesheets/visual.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="stylesheets/layout.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+	<script type="text/javascript">
+
+sfHover = function() {
+	var sfEls = document.getElementById("leftnav").getElementsByTagName("LI");
+	for (var i=0; i<sfEls.length; i++) {
+		sfEls[i].onmouseover=function() {
+			this.className+=" sfhover";
+		}
+		sfEls[i].onmouseout=function() {
+			this.className=this.className.replace(new RegExp(" sfhover\\b"), "");
+		}
+	}
+}
+if (window.attachEvent) window.attachEvent("onload", sfHover);
+</script>
 </head>
 <body>
+<div id="header">
+	<a href="http://www.eclipse.org/"><img src="stylesheets/header_logo.gif" width="163" height="68" border="0" alt="Eclipse Logo" class="logo" /></a>
+	<div id="searchbar">
+		<img src="stylesheets/searchbar_transition.gif" width="92" height="26" class="transition" alt="" />
+		<img src="stylesheets/searchbar_header.gif" width="64" height="17" class="header" alt="Search" />
+		<form method="get" action="http://www.eclipse.org/search/search.cgi">
+			<input type="hidden" name="t" value="All" />
+			<input type="hidden" name="t" value="Doc" />
+			<input type="hidden" name="t" value="Downloads" />
+			<input type="hidden" name="t" value="Wiki" />
+			<input type="hidden" name="wf" value="574a74" />
+			<input type="text" name="q" value="" />
+			<input type="image" class="button" src="stylesheets/searchbar_submit.gif" alt="Submit" onclick="this.submit();" />
+		</form>
+	</div>
+	<ul id="headernav">
+		<li class="first"><a href="http://www.eclipse.org/org/foundation/contact.php">Contact</a></li>
+		<li><a href="http://www.eclipse.org/legal/">Legal</a></li>
+	</ul>
+</div><div id="topnav">
+	<ul>
+		<li><a>Downloads</a></li>
+		<li class="tabstart">&#160;&#160;&#160;</li>
+		<li><a class="" href="index.php" target="_self">All Platforms</a></li>
+		<li class="tabstart">&#160;&#160;&#160;</li>
+		<li><a class="" href="winPlatform.php" target="_self">Windows</a></li>
+		<li class="tabstart">&#160;&#160;&#160;</li>
+		<li><a class="" href="linPlatform.php" target="_self">Linux</a></li>
+		<li class="tabstart">&#160;&#160;&#160;</li>
+		<li><a class="" href="solPlatform.php" target="_self">Solaris</a></li>
+		<li class="tabstart">&#160;&#160;&#160;</li>
+		<li><a class="" href="aixPlatform.php" target="_self">AIX</a></li>
+		<li class="tabstart">&#160;&#160;&#160;</li>
+		<li><a class="" href="hpuxPlatform.php" target="_self">HP-UX</a></li>
+		<li class="tabstart">&#160;&#160;&#160;</li>
+		<li><a class="" href="macPlatform.php" target="_self">Macintosh</a></li>
+		<li class="tabseparator">&#160;&#160;&#160;</li>			
+	</ul>
+</div>
+<div id="topnavsep"></div>
+<div id="leftcol">
+ 
+  </li>
+  <li style="background-image: url(stylesheets/leftnav_fade.jpg); background-repeat: repeat-x; border-style: none;">
+			<br /><br /><br /><br /><br />
+  </li>
+</ul>
 
+</div>
+<div id="midcolumn">
 <p><b><font face="Verdana" size="+3">Build Notes</font></b> </p>
 
-<table border=0 cellspacing=5 cellpadding=2 width="100%" >
-  <tr> 
-    <td align=LEFT valign=TOP colspan="3" bgcolor="#0080C0"><b><font color="#FFFFFF" face="Arial,Helvetica">Eclipse 
-      Build Notes for <?php echo "$buildType $buildName"; ?></font></b></td>
-  </tr>
-</table>
-<table border="0">
+<div class="homeitem">
+<h3><a name="buildNotes"> Eclipse Build Notes for <?php echo "$buildType $buildName"; ?> </a></h3>
 
+<ul> <li>Component:</li>
+<ul>
 <?php
 	$hasNotes = false;
 	$aDirectory = dir("buildnotes");
@@ -44,19 +110,30 @@
 			$baseName = $parts[1];
 			$parts = explode(".", $baseName);
 			$component = $parts[0];
-			$line = "<td>Component: <a href=\"buildnotes/$anEntry\">$component</a></td>";
-			echo "<tr>";
+			$line = "<a href=\"buildnotes/$anEntry\">$component";
+			echo "<li>";
 			echo "$line";
-			echo "</tr>";
+			echo "</li>";
 			$hasNotes = true;
 		}
 	}
 	aDirectory.closedir();
 	if (!$hasNotes) {
-		echo "<br>There are no build notes for this build.";
+		echo "<li>There are no build notes for this build.</li>";
 	}
 ?>
 
-</table>
+</ul></ul>
+</div>
+</br></br>
+<div id="footer">
+	<ul id="footernav">
+		<li class="first"><a href="http://www.eclipse.org">Home</a></li>
+		<li><a href="http://www.eclipse.org/legal/privacy.php">Privacy Policy</a></li>
+		<li><a href="http://www.eclipse.org/legal/termsofuse.php">Terms of Use</a></li>
+	</ul>
+	<p>Copyright &copy; 2006 The Eclipse Foundation. All Rights
+Reserved</p>
+</div>
 </body>
 </html>

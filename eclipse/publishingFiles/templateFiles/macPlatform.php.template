@@ -53,20 +53,20 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 </div><div id="topnav">
 	<ul>
 		<li><a>Downloads</a></li>
-		<li class="tabstartselected">&#160;&#160;&#160;</li>
-		<li><a class="tabselected" href="index.php" target="_self">All Platforms</a></li>
-		<li class="tabseparatorselected">&#160;&#160;&#160;</li>
-		<li><a class="" href="winPlatform.php" target="_self">Windows</a></li>
 		<li class="tabstart">&#160;&#160;&#160;</li>
-		<li><a class="" href="linPlatform.php" target="_self">Linux</a></li>
+		<li><a class="" href="index.php" target="_self">All Platforms</a></li>
+		<li class="tabstart">&#160;&#160;&#160;</li>
+		<li><a class="" href="winPlatform.php" target="_self">Windows</a></li>
+		<li class="tabstart">&#160;&#160;&#160;</li>	
+		<li><a class="" href="solPlatform.php" target="_self">Linux</a></li>
 		<li class="tabstart">&#160;&#160;&#160;</li>
 		<li><a class="" href="solPlatform.php" target="_self">Solaris</a></li>
-		<li class="tabstart">&#160;&#160;&#160;</li>
+		<li class="tabstart">&#160;&#160;&#160;</li>		
 		<li><a class="" href="aixPlatform.php" target="_self">AIX</a></li>
 		<li class="tabstart">&#160;&#160;&#160;</li>
 		<li><a class="" href="hpuxPlatform.php" target="_self">HP-UX</a></li>
-		<li class="tabstart">&#160;&#160;&#160;</li>
-		<li><a class="" href="macPlatform.php" target="_self">Macintosh</a></li>
+		<li class="tabstartselected">&#160;&#160;&#160;</li>
+		<li><a class="tabselected" href="macPlatform.php" target="_self">Macintosh</a></li>
 		<li class="tabseparator">&#160;&#160;&#160;</li>			
 	</ul>
 </div>
@@ -113,54 +113,22 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 		<table BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > 
 		<tr> 
 			<td> 
-				<p><b><font face="Verdana" size="+2">@type@ Build: @build@</font></b><br> @date@. 
+				<p><b><font face="Verdana" size="+3">@type@ Build: @build@ - </font><font face="Verdana" size="+2">Macintosh</font></b><br> @date@. 
 				These downloads are provided under the <a href="http://www.eclipse.org/legal/epl/notice.html">
 				<b>Eclipse Foundation Software User Agreement</b></a>.</p>
 			</td><tr><tr>
 		<tr>
 				<td width="75%">
-		   			The page provides access to the various sections of this build along with details
-					relating to its results. Test results are provided below and performance results
-					are posted once they are available. You may access the download page specific to 
-					each platform by selecting one of the tabs in the platform navigator above.
+		   			This page provides all the downloads specific to the various Macintosh platforms. Test results 
+					are provided below and performance results are posted once they are available. 
+					You may navigate through the other platform pages by selecting a tab from the 
+					list of platform navigation tabs above.
 				</td>
 			</tr>
 		</table>
-
-		<?php
-				require_once("eclipse.org-common/system/app.class.php");
-				$App = new App();
-				$clientOS = $App->getClientOS();
-				if($clientOS == "win32") {
-					$clientOS = Windows;
-					$link = "winPlatform.php#EclipseSDK";
-
-					echo "<br /><br /><a href=\"$link\"><img align=\"left\" src=\"stylesheets/update_wiz.gif\" border=\"0\" alt=\"Download Eclipse SDK\" /></a>
-						&#160;&#160;<font size=\"+1\"><b>Download now: <a href=\"$link\">Eclipse SDK</a></b></font>, $clientOS<br /><br /> 
-						&#160;&#160;You are currently running on <a href=\"winPlatform.php\"><b>$clientOS</b></a>";
-				}
-				else if($clientOS == "mac") {
-					$clientOS = Macintosh;
-					$link = "macPlatform.php#EclipseSDK";
-					echo "<br /><br /><a href=\"$link\"><img align=\"left\" src=\"stylesheets/update_wiz.gif\" border=\"0\" alt=\"Download Eclipse SDK\" /></a>
-						&#160;&#160;<font size=\"+1\"><b>Download now: <a href=\"$link\">Eclipse SDK</a></b></font>, $clientOS<br /><br />
-						&#160;&#160;You are currently running on <a href=\"macPlatform.php\"><b>$clientOS</b></a>";
-				}
-				else if($clientOS == "linux") {
-					$clientOS = Linux;
-					$link = "linPlatform.php#EclipseSDK";
-					echo "<br /><br /><a href=\"$link\"><img align=\"left\" src=\"stylesheets/update_wiz.gif\" border=\"0\" alt=\"Download Eclipse SDK\" /></a>
-						&#160;&#160;<font size=\"+1\"><b>Download now: <a href=\"$link\">Eclipse SDK</a></b></font>, $clientOS<br /><br />
-						&#160;&#160;You are currently running on <a href=\"linPlatform.php\"><b>$clientOS</b></a>";
-					}
-				else {
-					$link = "index.php#EclipseSDK";
-					echo "<br /><br /><a href=\"$link\"><img align=\"left\" src=\"stylesheets/update_wiz.gif\" border=\"0\" alt=\"Download Eclipse SDK\" /></a>
-						&#160;&#160;<font size=\"+1\"><b>Download now: <a href=\"$link\">Eclipse SDK</a></b></font><br /><br />";
-				}
-				?>
-		<br /><br />
-		
+		<br /><br /><a href="#EclipseSDK"><img align="left" src="stylesheets/update_wiz.gif" border="0" alt="Download Eclipse SDK" /></a>
+						&#160;&#160;<font size="+1"><b>Download now: <a href="#EclipseSDK">Eclipse SDK</a></b></font>, Macintosh<br /><br /> 
+				<br /><br />
 		<div>
 		<table BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > </br>
 		<?php
@@ -211,7 +179,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				<li><a href="sourceBuilds.php#EclipseSDK">Source Builds</a></li>
 			</ul>
 		</div>
-		</br></br></br>
+		</br></br></br></br>
 		<div class="sideitem">
 			<h6>Downloads Integrity</h6>
 			<ul>
@@ -280,13 +248,13 @@ if (preg_match("/.eclipse.org/i",$servername)) {
   echo "<td>$md5name  (<a href=\"http://download.eclipse.org/eclipse/downloads/drops/@buildlabel@/checksum/$zipfile.md5\">md5</a>)";
 
 }
-?>	
+?>
 
 <div class="homeitem3col">
 <h3><a name="EclipseSDK"> Eclipse SDK&nbsp;<a href="details.php#EclipseSDK"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" > 
+<table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" >  
 <tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
-</tr> %sdk% </table><?php
+</tr> %sdk% </table> <?php
 		 $parts = explode("/", getcwd());
 		 $parts2 = explode("-", $parts[count($parts) - 1]);
 		 $buildName = $parts2[1];
@@ -308,7 +276,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 ?> 
 </table>
 </div>
-<p><br /><br /></p>
+<p><br /></p>
 
 <div class="homeitem3col">
 <h3><a name="JUnitPlugin"> JUnit Plugin Tests and Automated Testing Framework&nbsp;<a href="details.php#JUnitPlugin"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
@@ -320,7 +288,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 
 <div class="homeitem3col">
 <h3><a name="ExamplePlugins"> Example Plug-ins&nbsp;<a href="details.php#ExamplePlugins"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
+<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >  
 <tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %example% </table>
 </div>
@@ -433,3 +401,4 @@ Reserved</p>
 </div>
 </body>
 </html>
+

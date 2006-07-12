@@ -294,15 +294,23 @@
 
 		<!--regenerate the index page with links to test results-->
 		<ant antfile="${base.builder}/plugins/org.eclipse.build.tools/scripts/publish.xml" dir="${publishingContent}" target="generateIndex">
-			<property name="isBuildTested" value="true" />
-			<property name="indexFileName" value="index.php" />
-			<property name="buildType" value="${buildType}" />
-			<property name="dropTokenList" value="%sdk%,%tests%,%example%,%rcpruntime%,%rcpsdk%,%icubase%,%runtime%,%platformsdk%,%jdt%,%jdtsdk%,%jdtc%,%pde%,%pdesdk%,%teamextras%,%swt%,%relengtools%" />
-			<property name="result" value="${postingDirectory}/${buildLabel}" />
-			<property name="testResultsTemplateFileName" value="${publishingContent}/templateFiles/testResults.php.template" />
-			<property name="dropTemplateFileName" value="${publishingContent}/templateFiles/index.php.template" />
-			<property name="testManifestFileName" value="${publishingContent}/testManifest.xml" />
-		</ant>
+					<property name="isBuildTested" value="true" />
+					<property name="indexFileName" value="index.php" />
+					<property name="detailsFileName" value="details.php" />
+					<property name="buildType" value="${buildType}" />
+					<property name="dropTokenList" value="%sdk%,%tests%,%example%,%rcpruntime%,%rcpsdk%,%icubase%,%runtime%,%platformsdk%,%jdt%,%jdtsdk%,%pde%,%pdesdk%,%teamextras%,%swt%,%relengtools%" />
+					<property name="result" value="${postingDirectory}/${buildLabel}" />
+					<property name="testResultsTemplateFileName" value="${publishingContent}/templateFiles/testResults.php.template" />
+					<property name="dropTemplateFileName" value="${publishingContent}/templateFiles/index.php.template" />
+					<property name="windowsTemplateFileName" value="${publishingContent}/templateFiles/winPlatform.php.template" />
+					<property name="linuxTemplateFileName" value="${publishingContent}/templateFiles/linPlatform.php.template" />
+					<property name="solarisTemplateFileName" value="${publishingContent}/templateFiles/solPlatform.php.template" />
+					<property name="aixTemplateFileName" value="${publishingContent}/templateFiles/aixPlatform.php.template" />
+					<property name="hpuxTemplateFileName" value="${publishingContent}/templateFiles/hpuxPlatform.php.template" />
+					<property name="macTemplateFileName" value="${publishingContent}/templateFiles/macPlatform.php.template" />
+					<property name="sourceBuildsTemplateFileName" value="${publishingContent}/templateFiles/sourceBuilds.php.template" />
+					<property name="testManifestFileName" value="${publishingContent}/testManifest.xml" />
+				</ant>
 
 		<!--  Insert ftp url for drop directory  -->
 		<replace file="${postingDirectory}/${buildLabel}/index.php" token="@buildlabel@" value="${buildLabel}" />
