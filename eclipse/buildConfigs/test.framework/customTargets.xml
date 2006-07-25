@@ -29,7 +29,9 @@
 		<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
 		<ant antfile="${assembleScriptName}" />
 		<checksum file="${archiveFullPath}" property="md5"/>
+		<checksum file="${archiveFullPath}" algorithm="SHA" property="sha"/>
 		<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5"/>
+		<echo message="${sha} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.sha1"/>
 	</target>
 
 	<target name="postPackage">
