@@ -203,9 +203,8 @@
 			</and>
 		</waitfor>
 
-		<antcall target="configure.team.cvs.test">
-			<property name="cvstest.properties" value="${base.builder}/../eclipseInternalBuildTools/cvstest.properties" />
-		</antcall>
+		<property name="cvstest.properties" value="${base.builder}/../eclipseInternalBuildTools/cvstest.properties" />
+		<antcall target="configure.team.cvs.test"/>
 
 		<!--replace buildid in vm.properties for JVM location settings-->
 		<replace dir="${eclipse.build.configs}/sdk.tests/testConfigs"
