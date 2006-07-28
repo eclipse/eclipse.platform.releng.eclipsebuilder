@@ -34,7 +34,11 @@
 
 	<target name="main" depends="init">
 		<property name="component" value="${basedir}/eclipse/buildConfigs/sdk" />
+		
+		<echo message="component is ${component}" />
+		<sleep seconds="10" />
 		<!--run the build for the specified component-->
+		
 		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}">
 			<property name="builder" value="${component}" />
 		</ant>
