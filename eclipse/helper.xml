@@ -278,9 +278,9 @@
 		<mail mailhost="${host}" from="${sender}" tolist="${recipients}" subject="[eclipse-build] ${buildId}: ${subject}" message="${message}" failonerror="false" />
 	</target>
 
-	<target name="configure.team.cvs.test" unless="test.xml.tmp" if="teamcvstest.properties.available">
+	<target name="configure.team.cvs.test" unless="test.xml.tmp" if="cvstest.properties">
 		<copy file="${eclipse.build.configs}/sdk.tests/testScripts/test.xml" tofile="${eclipse.build.configs}/sdk.tests/testScripts/test.xml.tmp" />
-		<replace file="${eclipse.build.configs}/sdk.tests/testScripts/test.xml" propertyFile="${base.builder}/../eclipseInternalBuildTools/cvstest.properties">
+		<replace file="${eclipse.build.configs}/sdk.tests/testScripts/test.xml" propertyFile="${cvstest.properties}">
 			<replacefilter token="${cvs_user}" property="cvs_user" />
 			<replacefilter token="${cvs_password}" property="cvs_password" />
 			<replacefilter token="${cvs_host}" property="cvs_host" />
