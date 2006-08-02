@@ -281,7 +281,7 @@
 			<param name="testPluginsRequired" value="**/${org.eclipse.core.filebuffers.tests}/* ${org.eclipse.core.filebuffers.tests.prerequisite.testplugins}" />
 		</antcall>
 	</target>
-	<target name="jdttext" description="Runs the  org.eclipse.jdt.text.tests test.xml">
+	<target name="jdttext" description="Runs the  org.eclipse.jdt.text.tests test.xml" unless="skip.jdttext">
 		<antcall target="runtests">
 			<param name="testPlugin" value="${org.eclipse.jdt.text.tests}" />
 			<param name="report" value="org.eclipse.jdt.text.tests" />
