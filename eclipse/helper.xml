@@ -203,7 +203,7 @@
 			</and>
 		</waitfor>
 
-		<available file="${base.builder}/../eclipseInternalBuildTools/cvstest.properties" property="teamcvstest.properties.available" />
+		<property name="cvstest.properties" value="${base.builder}/../eclipseInternalBuildTools/cvstest.properties" />
 		<antcall target="configure.team.cvs.test"/>
 
 		<!--replace buildid in vm.properties for JVM location settings-->
@@ -278,9 +278,9 @@
 		<mail mailhost="${host}" from="${sender}" tolist="${recipients}" subject="[eclipse-build] ${buildId}: ${subject}" message="${message}" failonerror="false" />
 	</target>
 
-	<target name="configure.team.cvs.test" unless="test.xml.tmp" if="teamcvstest.properties.available">
+	<target name="configure.team.cvs.test" unless="test.xml.tmp" if="cvstest.properties">
 		<copy file="${eclipse.build.configs}/sdk.tests/testScripts/test.xml" tofile="${eclipse.build.configs}/sdk.tests/testScripts/test.xml.tmp" />
-		<replace file="${eclipse.build.configs}/sdk.tests/testScripts/test.xml" propertyFile="${base.builder}/../eclipseInternalBuildTools/cvstest.properties">
+		<replace file="${eclipse.build.configs}/sdk.tests/testScripts/test.xml" propertyFile="${cvstest.properties}">
 			<replacefilter token="${cvs_user}" property="cvs_user" />
 			<replacefilter token="${cvs_password}" property="cvs_password" />
 			<replacefilter token="${cvs_host}" property="cvs_host" />
@@ -322,15 +322,17 @@
 		<java jar="${basedir}/../org.eclipse.releng.basebuilder/startup.jar" fork="true" maxmemory="256m">
 			<arg line="${configArgs} -application org.eclipse.test.performance.ui.resultGenerator
 					-baseline ${eclipse.perf.ref}
-					-baseline.prefix 3.1_200506271435
+					-baseline.prefix 3.2_200606291905
 					-current ${buildId}
 					-jvm ${eclipse.perf.jvm}
 					-output ${postingDirectory}/${buildLabel}/performance/
-					-config eclipseperfwin1_R3.2,eclipseperflnx1_R3.2,eclipseperfwin2_R3.2,eclipseperflnx2_R3.2,eclipseperflnx3_R3.2
+					-config eclipseperfwin1_R3.3,eclipseperflnx1_R3.3,eclipseperfwin2_R3.3,eclipseperflnx2_R3.3,eclipseperflnx3_R3.3
 					-config.properties ${eclipse.perf.config.descriptors}
-					-highlight.latest 3.0.2_,2.1.3_,3.2M1_,3.2M2_,3.2M3_,3.2M4_,3.2M5_,3.2M5a_,3.2M6_
 					-scenario.pattern org.eclipse.%.test"
 				/>
+			<!-- add this argument to list above when there are milestone builds to highlight 
+			-highlight.latest 3.3M1_
+			-->
 			<env key="LD_LIBRARY_PATH" value="${basedir}/../org.eclipse.releng.basebuilder" />
 			<sysproperty key="eclipse.perf.dbloc" value="${dbloc}" />
 		</java>
