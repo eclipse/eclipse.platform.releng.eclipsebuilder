@@ -159,6 +159,7 @@
 	           failonerror="true"
 	           maxmemory="512m"
 			   dir="${buildDirectory}">
+	     	 <jvmarg value="${eclipse.build.configs}/../../extras"/>
 	         <arg line="-application org.eclipse.update.core.siteOptimizer"/>
 	         <arg line="-jarProcessor -outputDir ${buildLabel} -processAll -pack -repack ${packtmp}/${archiveName}"/>
 	       </java>
