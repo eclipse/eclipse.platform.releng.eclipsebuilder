@@ -151,18 +151,23 @@
 		<mkdir dir="${packtmp}" />	
 		<move file="${buildDirectory}/${buildLabel}/${archiveName}" tofile="${packtmp}/${archiveName}"/>
 		
+		
+	   <!-- update location of jvm arguments --> 
+        <chmod file="${eclipse.build.configs}/../../extras/pack200" perm="755"/>
+		<replace file="${eclipse.build.configs}/../../extras/pack200" token="@pack200@" value="${java15-home}/bin/pack200"/>
+
 		<!--pack200-->
-	     <java jar="${eclipse.home}/startup.jar"
-	           fork="true"
-	     	   timeout="10800000"
-        	   jvm="${java15-home}/bin/java"
-	           failonerror="true"
-	           maxmemory="512m"
-			   dir="${buildDirectory}">
-	     	 <jvmarg value="${eclipse.build.configs}/../../extras"/>
-	         <arg line="-application org.eclipse.update.core.siteOptimizer"/>
-	         <arg line="-jarProcessor -outputDir ${buildLabel} -processAll -pack -repack ${packtmp}/${archiveName}"/>
-	       </java>
+		<java jar="${eclipse.home}/startup.jar"
+		      fork="true"
+		      timeout="10800000"
+		   	  jvm="${java15-home}/bin/java"
+			  failonerror="true"
+			  maxmemory="512m"
+			  dir="${buildDirectory}">
+			  <jvmarg value="-Dorg.eclipse.update.jarprocessor.pack200=${eclipse.build.configs}/../../extras"/>
+			  <arg line="-application org.eclipse.update.core.siteOptimizer"/>
+			  <arg line="-jarProcessor -outputDir ${buildLabel} -processAll -pack -repack ${packtmp}/${archiveName}"/>
+	      </java>
 	
 		<delete dir="${packtmp}" />
 	</target>
