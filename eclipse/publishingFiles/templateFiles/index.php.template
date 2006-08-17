@@ -154,7 +154,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 		<table BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > 
 		<tr> 
 			<td> 
-				<p><b><font face="Verdana" size="+2">@type@ Build: @build@</font></b><br> @date@. 
+				<p><b><font face="Verdana" size="+3">@type@ Build: @build@</font></b><br> @date@. 
 				These downloads are provided under the <a href="http://www.eclipse.org/legal/epl/notice.html">
 				<b>Eclipse Foundation Software User Agreement</b></a>.</p>
 			</td><tr><tr>
@@ -299,12 +299,12 @@ if (preg_match("/.eclipse.org/i",$servername)) {
   echo "&nbsp;&nbsp";
   echo "$ftpline";
   echo "<td>$filesize</td>";
-  echo "<td>(<a href=\"http://download.eclipse.org/eclipse/downloads/drops/@buildlabel@/checksum/$zipfile.md5\">md5</a>)";
-  echo " (<a href=\"http://download.eclipse.org/eclipse/downloads/drops/@buildlabel@/checksum/$zipfile.sha1\">sha1</a>)";
+  echo "<td><a href=\"http://download.eclipse.org/eclipse/downloads/drops/@buildlabel@/checksum/$zipfile.md5\">(md5)</a>";
+  echo " <a href=\"http://download.eclipse.org/eclipse/downloads/drops/@buildlabel@/checksum/$zipfile.sha1\">(sha1)</a>";
 }
 ?>	
 
-<table BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="80%">
+<table align="left" BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="80%">
 <tr><td><div class="homeitem3col">
 <h3><a name="EclipseSDK"> Eclipse SDK&nbsp;<a href="details.php#EclipseSDK"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" > 

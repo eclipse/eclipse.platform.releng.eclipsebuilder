@@ -149,7 +149,9 @@
 
 	<target name="generateChecksum" unless="skipChecksum">
 		<checksum file="${archiveFullPath}" property="md5" />
+		<checksum file="${archiveFullPath}" property="sha" />
 		<echo message="${md5} *${downloadFile}" file="${postingDirectory}/${buildLabel}/checksum/${downloadFile}.md5" />
+		<echo message="${sha} *${downloadFile}" file="${postingDirectory}/${buildLabel}/checksum/${downloadFile}.sha1" />
 	</target>
 
 	<target name="publish" description="Preparing to post the build...">
@@ -308,6 +310,14 @@
 
 		<!--  Insert ftp url for drop directory  -->
 		<replace file="${postingDirectory}/${buildLabel}/index.php" token="@buildlabel@" value="${buildLabel}" />
+		<replace file="${postingDirectory}/${buildLabel}/winPlatform.php" token="@buildlabel@" value="${buildLabel}" />
+		<replace file="${postingDirectory}/${buildLabel}/linPlatform.php" token="@buildlabel@" value="${buildLabel}" />
+		<replace file="${postingDirectory}/${buildLabel}/solPlatform.php" token="@buildlabel@" value="${buildLabel}" />
+		<replace file="${postingDirectory}/${buildLabel}/aixPlatform.php" token="@buildlabel@" value="${buildLabel}" />
+		<replace file="${postingDirectory}/${buildLabel}/hpuxPlatform.php" token="@buildlabel@" value="${buildLabel}" />
+		<replace file="${postingDirectory}/${buildLabel}/macPlatform.php" token="@buildlabel@" value="${buildLabel}" />
+		<replace file="${postingDirectory}/${buildLabel}/sourceBuilds.php" token="@buildlabel@" value="${buildLabel}" />	
+		
 	</target>
 
 	<target name="generatePerformanceResults">

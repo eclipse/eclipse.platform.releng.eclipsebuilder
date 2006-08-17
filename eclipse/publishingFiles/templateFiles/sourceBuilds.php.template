@@ -1,3 +1,8 @@
+
+
+
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -46,53 +51,29 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 		<li><a href="http://www.eclipse.org/legal/">Legal</a></li>
 	</ul>
 </div><div id="topnav">
-
-<ul>
-		<li><a>Downloads</a></li>
+	<ul>
+		<li><a>Platform Navigation</a></li>
 		<li class="tabstart">&#160;&#160;&#160;</li>
 		<li><a class="" href="index.php" target="_self">All Platforms</a></li>
-<?php
-	$platform = "%platform%";
-	$platforms = array(1 => "Windows", "Linux", "Solaris", "AIX", "HP-UX", "Macintosh");
-	$files = array(1 => "winPlatform.php", "linPlatform.php", "solPlatform.php", "aixPlatform.php", "hpuxPlatform.php", "macPlatform.php");
-	$count = count($platforms);
-	for ($i = 1; $i <= $count; $i++) {
-		if($platform == $platforms[$i]) {
-			echo "<li class=\"tabstartselected\">&#160;&#160;&#160;</li>";
-			echo "<li><a class=\"tabselected\" href=\"$files[$i]\" target=\"_self\">$platforms[$i]</a></li>";
-			if($i < $count) {
-				echo "<li class=\"tabseparatorselected\">&#160;&#160;&#160;</li>";
-			}
-		}
-		else {
-			if($i==1 || $platforms[$i-1] != $platform) {
-				echo "<li class=\"tabstart\">&#160;&#160;&#160;</li>";
-			}
-			echo "<li><a class=\"\" href=\"$files[$i]\" target=\"_self\">$platforms[$i]</a></li>";
-		}
-	}	
-?>
-<li class="tabseparator">&#160;&#160;&#160;</li>	
+		<li class="tabstart">&#160;&#160;&#160;</li>
+		<li><a class="" href="winPlatform.php" target="_self">Windows</a></li>
+		<li class="tabstart">&#160;&#160;&#160;</li>	
+		<li><a class="" href="solPlatform.php" target="_self">Linux</a></li>
+		<li class="tabstart">&#160;&#160;&#160;</li>
+		<li><a class="" href="solPlatform.php" target="_self">Solaris</a></li>
+		<li class="tabstart">&#160;&#160;&#160;</li>		
+		<li><a class="" href="aixPlatform.php" target="_self">AIX</a></li>
+		<li class="tabstart">&#160;&#160;&#160;</li>
+		<li><a class="" href="hpuxPlatform.php" target="_self">HP-UX</a></li>
+		<li class="tabstart">&#160;&#160;&#160;</li>
+		<li><a class="" href="macPlatform.php" target="_self">Macintosh</a></li>
+		<li class="tabseparator">&#160;&#160;&#160;</li>			
 	</ul>
 </div>
 <div id="topnavsep"></div>
 <div id="leftcol">
 <ul id="leftnav">
 <li><a href="#EclipseSDK">Eclipse SDK</a></li>
-<li><a href="#JUnitPlugin">JUnit Plugin Tests and Automated Testing Framework</a></li>
-<li><a href="#ExamplePlugins">Example Plug-ins</a></li>
-<li><a href="#RCPRuntime">RCP Runtime Binary</a></li>
-<li><a href="#RCPSDK">RCP SDK</a></li>
-<li><a href="#com.ibm.icu">com.ibm.icu.base Binary and Source Plug-ins</a></li>
-<li><a href="#PlatformRuntime">Platform Runtime Binary</a></li>
-<li><a href="#PlatformSDK">Platform SDK</a></li>
-<li><a href="#JDTRuntime">JDT Runtime Binary</a></li>
-<li><a href="#JDTSDK">JDT SDK</a></li>
-<li><a href="#PDERuntime">PDE Runtime Binary</a></li>
-<li><a href="#PDESDK">PDE SDK</a></li>
-<li><a href="#FTP">FTP and WebDAV Support</a></li>
-<li><a href="#SWT">SWT binary and Source</a></li>
-<li><a href="#org.eclipse.releng">org.eclipse.releng.tools plug-in</a></li>
  
   </li>
   <li style="background-image: url(stylesheets/leftnav_fade.jpg); background-repeat: repeat-x; border-style: none;">
@@ -118,21 +99,21 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 		<table BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > 
 		<tr> 
 			<td> 
-				<p><b><font face="Verdana" size="+3">@type@ Build: @build@ - </font><font face="Verdana" size="+2"> <?php echo $platform; ?> </font></b><br> @date@. 
+				<p><b><font face="Verdana" size="+3">@type@ Build: @build@ - </font><font face="Verdana" size="+2">Source Builds</font></b><br> @date@. 
 				These downloads are provided under the <a href="http://www.eclipse.org/legal/epl/notice.html">
 				<b>Eclipse Foundation Software User Agreement</b></a>.</p>
 			</td><tr><tr>
 		<tr>
 				<td width="75%">
-		   			This page provides all the downloads specific to the various <?php echo $platform; ?> platform. Test results 
+		   			This page provides the source build Eclipse SDK downlaods. Test results 
 					are provided below and performance results are posted once they are available. 
-					You may navigate through the other platform pages by selecting a tab from the 
-					list of platform navigation tabs above. 
+					You may navigate through the platform pages by selecting a tab from the 
+					list of platform navigation tabs above.
 				</td>
 			</tr>
 		</table>
 		<br /><br /><a href="#EclipseSDK"><img align="left" src="stylesheets/update_wiz.gif" border="0" alt="Download Eclipse SDK" /></a>
-						&#160;&#160;<font size="+1"><b>Download now: <a href="#EclipseSDK">Eclipse SDK</a></b></font>, <?php echo $platform; ?> <br /><br /> 
+						&#160;&#160;<font size="+1"><b>Download now: <a href="#EclipseSDK">Eclipse SDK</a></b></font>, Source Build<br /><br /> 
 				<br /><br />
 		<div>
 		<table BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > </br>
@@ -160,15 +141,11 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				<li><a href="testResults.php">View the <b>test results</b> for the current build.</a></li>
 				<li><a href="directory.txt">View the <b>map file entries</b> for the current build.</a></li></ul>
 		</div>
-
-		<div class="homeitem">
-			<h3>Source Builds</h3>
-				<ul class="midlist">
-				<li><a href="sourceBuilds.php">Access the <b>Source Builds</b> page.</a></li></ul>
-		</div>
 	<hr class="clearer" />
 	</div>
+
 <div id="rightcolumn">
+
 		</br></br></br>
 		<div class="sideitem">
 			<h6>Eclipse SDK's</h6>
@@ -183,14 +160,15 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				<li><a href="sourceBuilds.php#EclipseSDK">Source Builds</a></li>
 			</ul>
 		</div>
-		</br></br></br>
+		</br></br></br></br>
 		<div class="sideitem">
 			<h6>Downloads Integrity</h6>
 			<ul>
 				<li><a href="verifyMD5.html">Click for instructions on how to verify the integrity of your downloads.</a></li>
 			</ul>
-		</div>		
+		</div>			
 </div>		
+
 <?php 
 
 function column($servername) {
@@ -220,7 +198,6 @@ function getDropSize($zipfile) {
         		 	$filesize = round($filesizebytes / 1048576, 0) . " MB";
 		 }
         return($filesize);
-
 }
 
 function genLinks($servername,$buildlabel,$zipfile) {
@@ -256,6 +233,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 }
 ?>
 
+
 <table align="left" BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="80%">
 <tr><td><div class="homeitem3col">
 <h3><a name="EclipseSDK"> Eclipse SDK&nbsp;<a href="details.php#EclipseSDK"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
@@ -281,117 +259,6 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 		
 ?--> 
 </div></td></tr>
-
-<tr><td><div class="homeitem3col">
-<h3><a name="JUnitPlugin"> JUnit Plugin Tests and Automated Testing Framework&nbsp;<a href="details.php#JUnitPlugin"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >   
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
-</tr> %tests% </table>
-</div></td></tr>
-
-
-<tr><td><div class="homeitem3col">
-<h3><a name="ExamplePlugins"> Example Plug-ins&nbsp;<a href="details.php#ExamplePlugins"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
-</tr> %example% </table>
-</div></td></tr>
-
-
-<tr><td><div class="homeitem3col">
-<h3><a name="RCPRuntime"> RCP Runtime Binary&nbsp;<a href="details.php#RCPRuntime"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >  
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
-</tr> %rcpruntime% </table>
-</div></td></tr>
-
-
-<tr><td><div class="homeitem3col">
-<h3><a name="RCPSDK"> RCP SDK&nbsp;<a href="details.php#RCPSDK"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
-</tr> %rcpsdk% </table>
-</div></td></tr>
-
-
-<tr><td><div class="homeitem3col">
-<h3><a name="com.ibm.icu"> com.ibm.icu.base binary and source Plug-ins&nbsp;<a href="details.php#com.ibm.icu"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<TABLE BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" BORDERCOLOR="#999999" >
-<TR> <TD ALIGN=RIGHT VALIGN=TOP WIDTH="7%"> <DIV ALIGN="left"><B>Status</B></DIV></TD><TD WIDTH="55%"><B>Platform</B></TD><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
-</TR> %icubase% </TABLE>
-</div></td></tr>
-
-
-<tr><td><div class="homeitem3col">
-<h3><a name="PlatformRuntime"> Platform Runtime Binary&nbsp;<a href="details.php#PlatformRuntime"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
-</tr> %runtime% </table>
-</div></td></tr>
-
-
-<tr><td><div class="homeitem3col">
-<h3><a name="PlatformSDK"> Platform SDK&nbsp;<a href="details.php#PlatformSDK"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
-</tr> %platformsdk% </table>
-</div></td></tr>
-
-
-<tr><td><div class="homeitem3col">
-<h3><a name="JDTRuntime"> JDT Runtime Binary&nbsp;<a href="details.php#JDTRuntime"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
-</tr> %jdt% </table>
-</div></td></tr>
-
-
-<tr><td><div class="homeitem3col">
-<h3><a name="JDTSDK"> JDT SDK &nbsp;<a href="details.php#JDTSDK"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
-</tr> %jdtsdk% </table>
-</div></td></tr>
-
-
-<tr><td><div class="homeitem3col">
-<h3><a name="PDERuntime"> PDE Runtime Binary&nbsp;<a href="details.php#PDERuntime"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >  
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
-</tr> %pde% </table>
-</div></td></tr>
-
-
-<tr><td><div class="homeitem3col">
-<h3><a name="PDESDK"> PDE SDK&nbsp;<a href="details.php#PDESDK"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
-%pdesdk% </table>
-</div></td></tr>
-
-
-<tr><td><div class="homeitem3col">
-<h3><a name="FTP"> FTP and WebDAV Support&nbsp;<a href="details.php#FTP"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >  
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
-</tr> %teamextras% </table>
-</div></td></tr>
-
-
-<tr><td><div class="homeitem3col">
-<h3><a name="SWT"> SWT Binary and Source&nbsp;<a href="details.php#SWT"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
-</tr> %swt% </table>
-</div></td></tr>
-
-
-<tr><td><div class="homeitem3col">
-<h3><a name="org.eclipse.releng"> org.eclipse.releng.tools plug-in&nbsp;<a href="details.php#org.eclipse.releng"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
-</tr> %relengtools% </table>
-</div></td></tr>
 </table>
 <p><br /></p>
 
@@ -406,3 +273,5 @@ Reserved</p>
 </div>
 </body>
 </html>
+
+
