@@ -153,8 +153,8 @@
 		
 		
 	   <!-- update location of jvm arguments --> 
-        <chmod file="${eclipse.build.configs}/../../extras/pack200" perm="755"/>
-		<replace file="${eclipse.build.configs}/../../extras/pack200" token="@pack200@" value="${java15-home}/bin/pack200"/>
+        <replace file="${eclipse.build.configs}/../../extras/pack200" token="@pack200@" value="${java15-home}/bin/pack200"/>
+		<chmod file="${eclipse.build.configs}/../../extras/pack200" perm="755"/>
 
 		<!--pack200-->
 		<java jar="${eclipse.home}/startup.jar"
