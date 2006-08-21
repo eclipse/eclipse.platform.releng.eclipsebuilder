@@ -6,13 +6,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>Eclipse Build Drop</title>
+	<title>Eclipse Project</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<meta name="author" content="Eclipse Foundation, Inc." />
 	<meta name="keywords" content="eclipse,project,plug-ins,plugins,java,ide,swt,refactoring,free java ide,tools,platform,open source,development environment,development,ide" />
-	<link rel="stylesheet" type="text/css" href="stylesheets/visual.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="stylesheets/layout.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+	<link rel="stylesheet" type="text/css" href="../../../eclipse.org-common/stylesheets/visual.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="../../../eclipse.org-common/stylesheets/layout.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="../../../eclipse.org-common/stylesheets/print.css" media="print" />
 	<script type="text/javascript">
 
 sfHover = function() {
@@ -32,10 +32,10 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 <body>
 
 <div id="header">
-	<a href="http://www.eclipse.org/"><img src="stylesheets/header_logo.gif" width="163" height="68" border="0" alt="Eclipse Logo" class="logo" /></a>
+	<a href="http://www.eclipse.org/"><img src="../../../eclipse.org-common/stylesheets/header_logo.gif" width="163" height="68" border="0" alt="Eclipse Logo" class="logo" /></a>
 	<div id="searchbar">
-		<img src="stylesheets/searchbar_transition.gif" width="92" height="26" class="transition" alt="" />
-		<img src="stylesheets/searchbar_header.gif" width="64" height="17" class="header" alt="Search" />
+		<img src="../../../eclipse.org-common/stylesheets/searchbar_transition.gif" width="92" height="26" class="transition" alt="" />
+		<img src="../../../eclipse.org-common/stylesheets/searchbar_header.gif" width="64" height="17" class="header" alt="Search" />
 		<form method="get" action="http://www.eclipse.org/search/search.cgi">
 			<input type="hidden" name="t" value="All" />
 			<input type="hidden" name="t" value="Doc" />
@@ -43,7 +43,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 			<input type="hidden" name="t" value="Wiki" />
 			<input type="hidden" name="wf" value="574a74" />
 			<input type="text" name="q" value="" />
-			<input type="image" class="button" src="stylesheets/searchbar_submit.gif" alt="Submit" onclick="this.submit();" />
+			<input type="image" class="button" src="../../../eclipse.org-common/stylesheets/searchbar_submit.gif" alt="Submit" onclick="this.submit();" />
 		</form>
 	</div>
 	<ul id="headernav">
@@ -76,7 +76,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 <li><a href="#EclipseSDK">Eclipse SDK</a></li>
  
   </li>
-  <li style="background-image: url(stylesheets/leftnav_fade.jpg); background-repeat: repeat-x; border-style: none;">
+  <li style="background-image: url(../../../eclipse.org-common/stylesheets/leftnav_fade.jpg); background-repeat: repeat-x; border-style: none;">
 			<br /><br /><br /><br /><br />
   </li>
 </ul>
@@ -112,7 +112,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				</td>
 			</tr>
 		</table>
-		<br /><br /><a href="#EclipseSDK"><img align="left" src="stylesheets/update_wiz.gif" border="0" alt="Download Eclipse SDK" /></a>
+		<br /><br /><a href="#EclipseSDK"><img align="left" src="../../../eclipse.org-common/stylesheets/update_wiz.gif" border="0" alt="Download Eclipse SDK" /></a>
 						&#160;&#160;<font size="+1"><b>Download now: <a href="#EclipseSDK">Eclipse SDK</a></b></font>, Source Build<br /><br /> 
 				<br /><br />
 		<div>
@@ -236,7 +236,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 
 <table align="left" BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="80%">
 <tr><td><div class="homeitem3col">
-<h3><a name="EclipseSDK"> Eclipse SDK&nbsp;<a href="details.php#EclipseSDK"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
+<h3><a name="EclipseSDK"> Eclipse SDK&nbsp;<a href="details.php#EclipseSDK"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" > 
 <tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %sdk% </table><!--?php

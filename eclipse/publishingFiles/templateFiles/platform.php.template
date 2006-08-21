@@ -1,13 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>Eclipse Build Drop</title>
+	<title>Eclipse Project</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<meta name="author" content="Eclipse Foundation, Inc." />
 	<meta name="keywords" content="eclipse,project,plug-ins,plugins,java,ide,swt,refactoring,free java ide,tools,platform,open source,development environment,development,ide" />
-	<link rel="stylesheet" type="text/css" href="stylesheets/visual.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="stylesheets/layout.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+	<link rel="stylesheet" type="text/css" href="../../../eclipse.org-common/stylesheets/visual.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="../../../eclipse.org-common/stylesheets/layout.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="../../../eclipse.org-common/stylesheets/print.css" media="print" />
 	<script type="text/javascript">
 
 sfHover = function() {
@@ -27,10 +27,10 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 <body>
 
 <div id="header">
-	<a href="http://www.eclipse.org/"><img src="stylesheets/header_logo.gif" width="163" height="68" border="0" alt="Eclipse Logo" class="logo" /></a>
+	<a href="http://www.eclipse.org/"><img src="../../../eclipse.org-common/stylesheets/header_logo.gif" width="163" height="68" border="0" alt="Eclipse Logo" class="logo" /></a>
 	<div id="searchbar">
-		<img src="stylesheets/searchbar_transition.gif" width="92" height="26" class="transition" alt="" />
-		<img src="stylesheets/searchbar_header.gif" width="64" height="17" class="header" alt="Search" />
+		<img src="../../../eclipse.org-common/stylesheets/searchbar_transition.gif" width="92" height="26" class="transition" alt="" />
+		<img src="../../../eclipse.org-common/stylesheets/searchbar_header.gif" width="64" height="17" class="header" alt="Search" />
 		<form method="get" action="http://www.eclipse.org/search/search.cgi">
 			<input type="hidden" name="t" value="All" />
 			<input type="hidden" name="t" value="Doc" />
@@ -38,7 +38,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 			<input type="hidden" name="t" value="Wiki" />
 			<input type="hidden" name="wf" value="574a74" />
 			<input type="text" name="q" value="" />
-			<input type="image" class="button" src="stylesheets/searchbar_submit.gif" alt="Submit" onclick="this.submit();" />
+			<input type="image" class="button" src="../../../eclipse.org-common/stylesheets/searchbar_submit.gif" alt="Submit" onclick="this.submit();" />
 		</form>
 	</div>
 	<ul id="headernav">
@@ -88,6 +88,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 <li><a href="#PlatformSDK">Platform SDK</a></li>
 <li><a href="#JDTRuntime">JDT Runtime Binary</a></li>
 <li><a href="#JDTSDK">JDT SDK</a></li>
+<li><a href="#JDTCORE">JDT Core Batch Compiler</a></li>
 <li><a href="#PDERuntime">PDE Runtime Binary</a></li>
 <li><a href="#PDESDK">PDE SDK</a></li>
 <li><a href="#FTP">FTP and WebDAV Support</a></li>
@@ -95,7 +96,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 <li><a href="#org.eclipse.releng">org.eclipse.releng.tools plug-in</a></li>
  
   </li>
-  <li style="background-image: url(stylesheets/leftnav_fade.jpg); background-repeat: repeat-x; border-style: none;">
+  <li style="background-image: url(../../../eclipse.org-common/stylesheets/leftnav_fade.jpg); background-repeat: repeat-x; border-style: none;">
 			<br /><br /><br /><br /><br />
   </li>
 </ul>
@@ -131,7 +132,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				</td>
 			</tr>
 		</table>
-		<br /><br /><a href="#EclipseSDK"><img align="left" src="stylesheets/update_wiz.gif" border="0" alt="Download Eclipse SDK" /></a>
+		<br /><br /><a href="#EclipseSDK"><img align="left" src="../../../eclipse.org-common/stylesheets/update_wiz.gif" border="0" alt="Download Eclipse SDK" /></a>
 						&#160;&#160;<font size="+1"><b>Download now: <a href="#EclipseSDK">Eclipse SDK</a></b></font>, <?php echo $platform; ?> <br /><br /> 
 				<br /><br />
 		<div>
@@ -258,7 +259,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 
 <table align="left" BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="80%">
 <tr><td><div class="homeitem3col">
-<h3><a name="EclipseSDK"> Eclipse SDK&nbsp;<a href="details.php#EclipseSDK"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
+<h3><a name="EclipseSDK"> Eclipse SDK&nbsp;<a href="details.php#EclipseSDK"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" > 
 <tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %sdk% </table><!--?php
@@ -283,7 +284,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 </div></td></tr>
 
 <tr><td><div class="homeitem3col">
-<h3><a name="JUnitPlugin"> JUnit Plugin Tests and Automated Testing Framework&nbsp;<a href="details.php#JUnitPlugin"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
+<h3><a name="JUnitPlugin"> JUnit Plugin Tests and Automated Testing Framework&nbsp;<a href="details.php#JUnitPlugin"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >   
 <tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %tests% </table>
@@ -291,7 +292,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 
 
 <tr><td><div class="homeitem3col">
-<h3><a name="ExamplePlugins"> Example Plug-ins&nbsp;<a href="details.php#ExamplePlugins"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
+<h3><a name="ExamplePlugins"> Example Plug-ins&nbsp;<a href="details.php#ExamplePlugins"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
 <tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %example% </table>
@@ -299,7 +300,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 
 
 <tr><td><div class="homeitem3col">
-<h3><a name="RCPRuntime"> RCP Runtime Binary&nbsp;<a href="details.php#RCPRuntime"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
+<h3><a name="RCPRuntime"> RCP Runtime Binary&nbsp;<a href="details.php#RCPRuntime"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >  
 <tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %rcpruntime% </table>
@@ -307,7 +308,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 
 
 <tr><td><div class="homeitem3col">
-<h3><a name="RCPSDK"> RCP SDK&nbsp;<a href="details.php#RCPSDK"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
+<h3><a name="RCPSDK"> RCP SDK&nbsp;<a href="details.php#RCPSDK"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
 <tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %rcpsdk% </table>
@@ -315,7 +316,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 
 
 <tr><td><div class="homeitem3col">
-<h3><a name="com.ibm.icu"> com.ibm.icu.base binary and source Plug-ins&nbsp;<a href="details.php#com.ibm.icu"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
+<h3><a name="com.ibm.icu"> com.ibm.icu.base binary and source Plug-ins&nbsp;<a href="details.php#com.ibm.icu"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <TABLE BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" BORDERCOLOR="#999999" >
 <TR> <TD ALIGN=RIGHT VALIGN=TOP WIDTH="7%"> <DIV ALIGN="left"><B>Status</B></DIV></TD><TD WIDTH="55%"><B>Platform</B></TD><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </TR> %icubase% </TABLE>
@@ -323,7 +324,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 
 
 <tr><td><div class="homeitem3col">
-<h3><a name="PlatformRuntime"> Platform Runtime Binary&nbsp;<a href="details.php#PlatformRuntime"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
+<h3><a name="PlatformRuntime"> Platform Runtime Binary&nbsp;<a href="details.php#PlatformRuntime"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
 <tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %runtime% </table>
@@ -331,7 +332,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 
 
 <tr><td><div class="homeitem3col">
-<h3><a name="PlatformSDK"> Platform SDK&nbsp;<a href="details.php#PlatformSDK"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
+<h3><a name="PlatformSDK"> Platform SDK&nbsp;<a href="details.php#PlatformSDK"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
 <tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %platformsdk% </table>
@@ -339,7 +340,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 
 
 <tr><td><div class="homeitem3col">
-<h3><a name="JDTRuntime"> JDT Runtime Binary&nbsp;<a href="details.php#JDTRuntime"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
+<h3><a name="JDTRuntime"> JDT Runtime Binary&nbsp;<a href="details.php#JDTRuntime"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
 <tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %jdt% </table>
@@ -347,15 +348,21 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 
 
 <tr><td><div class="homeitem3col">
-<h3><a name="JDTSDK"> JDT SDK &nbsp;<a href="details.php#JDTSDK"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
+<h3><a name="JDTSDK"> JDT SDK &nbsp;<a href="details.php#JDTSDK"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
 <tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %jdtsdk% </table>
 </div></td></tr>
 
+<tr><td><div class="homeitem3col">
+<h3><a name="JDTCORE"> JDT Core Batch Compiler &nbsp;<a href="details.php#JDTCORE"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
+<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
+<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+</tr> %jdtc% </table>
+</div></td></tr>
 
 <tr><td><div class="homeitem3col">
-<h3><a name="PDERuntime"> PDE Runtime Binary&nbsp;<a href="details.php#PDERuntime"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
+<h3><a name="PDERuntime"> PDE Runtime Binary&nbsp;<a href="details.php#PDERuntime"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >  
 <tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %pde% </table>
@@ -363,7 +370,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 
 
 <tr><td><div class="homeitem3col">
-<h3><a name="PDESDK"> PDE SDK&nbsp;<a href="details.php#PDESDK"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
+<h3><a name="PDESDK"> PDE SDK&nbsp;<a href="details.php#PDESDK"><img src="../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
 <tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 %pdesdk% </table>
@@ -371,7 +378,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 
 
 <tr><td><div class="homeitem3col">
-<h3><a name="FTP"> FTP and WebDAV Support&nbsp;<a href="details.php#FTP"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
+<h3><a name="FTP"> FTP and WebDAV Support&nbsp;<a href="details.php#FTP"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >  
 <tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %teamextras% </table>
@@ -379,7 +386,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 
 
 <tr><td><div class="homeitem3col">
-<h3><a name="SWT"> SWT Binary and Source&nbsp;<a href="details.php#SWT"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
+<h3><a name="SWT"> SWT Binary and Source&nbsp;<a href="details.php#SWT"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
 <tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %swt% </table>
@@ -387,7 +394,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 
 
 <tr><td><div class="homeitem3col">
-<h3><a name="org.eclipse.releng"> org.eclipse.releng.tools plug-in&nbsp;<a href="details.php#org.eclipse.releng"><img src="stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
+<h3><a name="org.eclipse.releng"> org.eclipse.releng.tools plug-in&nbsp;<a href="details.php#org.eclipse.releng"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
 <tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %relengtools% </table>
