@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 ulimit -c unlimited
 
 #execute command to run tests
