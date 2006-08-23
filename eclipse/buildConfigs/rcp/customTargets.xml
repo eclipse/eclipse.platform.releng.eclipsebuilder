@@ -50,11 +50,16 @@
 	<antcall target="assemble" />
 </target>
 	
+<target name="assemble.org.eclipse.rcp.solaris.motif.sparc">
+	<property name="archiveName" value="eclipse-RCP-${buildId}-solaris-motif.zip"/>
+	<antcall target="assemble" />
+</target>
+	
 <target name="assemble.org.eclipse.rcp.qnx.photon.x86"/>
 <target name="assemble.org.eclipse.rcp.hpux.motif.ia64_32"/>
 <target name="assemble.org.eclipse.rcp.linux.gtk.ia64" />
 <target name="assemble.org.eclipse.rcp.linux.gtk.ppc64" />
-<target name="assemble.org.eclipse.platform.solaris.motif.sparc"/>
+
 
 <target name="assemble.org.eclipse.rcp.aix.motif.ppc">
 	<property name="archiveName" value="eclipse-RCP-${buildId}-aix-motif.zip"/>
