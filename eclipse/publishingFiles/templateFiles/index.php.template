@@ -290,7 +290,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
     $httpline = "<div align=\"left\"><a title=\"$zipfile\" href=\"$httplink\">$httplabel</a>";
     $ftplink = "ftp://$servername/$buildlabel/$zipfile";
     $ftplabel = "(ftp)";
-    $ftpline =  "<a title=\"$httplink\" href=\"$ftplink\">$ftplabel</a>";
+    $ftpline =  "<a title=\"$zipfile\" href=\"$ftplink\">$ftplabel</a>";
     $md5name = $zipfile;
     $shaname = $zipfile;
 }

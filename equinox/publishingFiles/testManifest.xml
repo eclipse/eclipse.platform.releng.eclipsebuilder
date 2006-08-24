@@ -1,6 +1,13 @@
 <?xml version="1.0"?>
 <topLevel>
 	<zipTypes>
+		
+		<zipType name="Equinox">
+			<platform id="EBF" name="All" fileName="eclipse-equinox-@buildid@.zip">
+			</platform>
+			<platform id="EBS" name="All" fileName="eclipse-equinox-SDK-@buildid@.zip">
+			</platform>
+		</zipType>
 
 		<zipType name="Framework">
 			<platform id="system" name="All" fileName="@org.eclipse.osgi@.jar">
@@ -8,10 +15,6 @@
 		</zipType>
 
 		<zipType name="ExtraBundles">
-			<platform id="EBF" name="All" fileName="eclipse-equinox-@buildid@.zip">
-			</platform>
-			<platform id="EBS" name="All" fileName="eclipse-equinox-SDK-@buildid@.zip">
-			</platform>
 			<platform id="common" name="All" fileName="@org.eclipse.equinox.common@.jar">
 			</platform>
 			<platform id="device" name="All" fileName="@org.eclipse.equinox.device@.jar">
