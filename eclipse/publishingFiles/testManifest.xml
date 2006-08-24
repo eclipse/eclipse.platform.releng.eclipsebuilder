@@ -33,6 +33,7 @@
 		<platform id="RCPLG2PPC" name="Linux (PPC/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_2.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-@build@-linux-gtk-ppc.tar.gz"></platform>
 		<platform id="RCPLM" name="Linux (x86/Motif) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_2.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-@build@-linux-motif.tar.gz"></platform>
 		<platform id="RCPSG" name="Solaris 8 (SPARC/GTK 2)" fileName="eclipse-RCP-@build@-solaris-gtk.zip"></platform>
+		<platform id="RCPSM" name="Solaris 8 (SPARC/Motif)" fileName="eclipse-RCP-@build@-solaris-motif.zip"></platform>
 		<!--platform id="PNP" name="QNX (x86/Photon)" fileName="eclipse-RCP-@build@-qnx-photon.zip"></platform-->
 		<platform id="RCPAM" name="AIX (PPC/Motif)" fileName="eclipse-RCP-@build@-aix-motif.zip"></platform>
 		<platform id="RCPHM" name="HP-UX (HP9000/Motif)" fileName="eclipse-RCP-@build@-hpux-motif.zip"></platform>
@@ -46,6 +47,7 @@
 		<platform id="RCPLG2PPCSDK" name="Linux (PPC/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_2.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-SDK-@build@-linux-gtk-ppc.tar.gz"></platform>
 		<platform id="RCPLMSDK" name="Linux (x86/Motif) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_2.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-SDK-@build@-linux-motif.tar.gz"></platform>
 		<platform id="RCPSGSDK" name="Solaris 8 (SPARC/GTK 2)" fileName="eclipse-RCP-SDK-@build@-solaris-gtk.zip"></platform>
+		<platform id="RCPSMSDK" name="Solaris 8 (SPARC/Motif)" fileName="eclipse-RCP-SDK-@build@-solaris-motif.zip"></platform>
 		<!--platform id="PNP" name="QNX (x86/Photon)" fileName="eclipse-RCP-SDK-@build@-qnx-photon.zip"></platform-->
 		<platform id="RCPAMSDK" name="AIX (PPC/Motif)" fileName="eclipse-RCP-SDK-@build@-aix-motif.zip"></platform>
 		<platform id="RCPHMSDK" name="HP-UX (HP9000/Motif)" fileName="eclipse-RCP-SDK-@build@-hpux-motif.zip"></platform>
