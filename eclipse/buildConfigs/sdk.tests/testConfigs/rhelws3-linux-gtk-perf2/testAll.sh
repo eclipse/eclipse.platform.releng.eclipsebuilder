@@ -1,4 +1,4 @@
-#!/bin/sh
+# !/bin/sh
 cd .
 #environment variables
 PATH=.:/bin:/usr/bin:/usr/bin/X11:/usr/local/bin:/usr/X11R6/bin:`pwd`/../linux;export PATH
