@@ -73,7 +73,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 		<table BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > 
 		<tr> 
 			<td> 
-				<p><b><font face="Verdana" size="+2">@type@ Build: @build@</font></b><br> @date@. 
+				<p><b><font face="Verdana" size="+2">@type@ Build: @buildid@</font></b><br> @date@. 
 				These downloads are provided under the <a href="http://www.eclipse.org/legal/epl/notice.html">
 				Eclipse Foundation Software User Agreement</a>.</p>
 			</td><tr><tr>
@@ -93,18 +93,22 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 			</td>
 		</tr>
 		</table>
+</div>
 
-<?php
+<?php 
+
 function column($servername) {
 
  if (! preg_match("/.eclipse.org/i",$servername)) {
-     echo "<td width=\"14%\"><b>Download</b></td>";
-          echo "<td width=\"13%\"><b>Size</b></td>";
-		   echo "<td width=\"14%\"><b>Checksum</b></td>";
+      echo "<td width=\"7%\"><b>Download</b></td>";
+          echo "<td width=\"7%\"><b>Size</b></td>";
+                echo "<td width=\"37%\"><b>File</b></td>";
+                   echo "<td width=\"11%\"><b>Checksum</b></td>";
       } else { 
-          echo "<td width=\"14%\"><b>Download</b></td>";
-          echo "<td width=\"13%\"><b>Size</b></td>";
-	    echo "<td width=\"14%\"><b>Checksum</b></td>";
+           echo "<td width=\"7%\"><b>Download</b></td>";
+          echo "<td width=\"7%\"><b>Size</b></td>";
+                echo "<td width=\"37%\"><b>File</b></td>";
+                   echo "<td width=\"11%\"><b>Checksum</b></td>";
     }
     return;
 }
@@ -139,10 +143,10 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 } else {
     $httplink = "download.php?dropFile=$zipfile";
     $httplabel = "(http)";
-    $httpline = "<div align=\"left\"><a title=\"$zipfile\" href=\"$httplink\">$httplabel</a>";
+    $httpline = "<div align=\"left\"><a href=\"$httplink\">$httplabel</a>";
     $ftplink = "ftp://$servername/$buildlabel/$zipfile";
     $ftplabel = "(ftp)";
-    $ftpline =  "<a title=\"$zipfile\" href=\"$ftplink\">$ftplabel</a>";
+    $ftpline =  "<a href=\"$ftplink\">$ftplabel</a>";
     $md5name = $zipfile;
     $shaname = $zipfile;
 }
@@ -152,6 +156,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
   echo "&nbsp;&nbsp";
   echo "$ftpline";
   echo "<td>$filesize</td>";
+  echo "<td>$zipfile</td>";
   echo "<td><a href=\"http://download.eclipse.org/eclipse/downloads/drops/@buildlabel@/checksum/$zipfile.md5\">(md5)</a>";
   echo " <a href=\"http://download.eclipse.org/eclipse/downloads/drops/@buildlabel@/checksum/$zipfile.sha1\">(sha1)</a>";
 }
@@ -161,9 +166,9 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 <tr><td><div class="homeitem3col">
 <h3><a name="Equinox"> Eclipse Equinox</a></h3>
 <table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" > 
-<TR> <TD HEIGHT="48" COLSPAN="2"> <P>Listed below are the full Equinox zip and the Equinox SDK zip.</P></TD></TR></table>
+<TR> <TD> <P>Listed below are the full Equinox zip and the Equinox SDK zip.</P></TD></TR></table>
 <table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" >
-<tr> <td align=RIGHT valign=TOP width="9%"> <div align="left"><b>Status</b></div></td><td width="50%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %equinox% </table>
 </div></td></tr>
 
@@ -172,7 +177,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 <table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" > 
 <TR> <TD> <P>The Equinox OSGi R4 <a href="http://eclipse.org/equinox/framework">framework</a> implementation includes all optional parts of the R4 spec as well as several additional mechanisms (e.g., x-internal, platform filters, ...) that are generally useful in a standalone package.  See the <A HREF="http://eclipse.org/equinox/quickstart.html">Quick Start Guide</A> for details on how to use this JAR.</P></TD></TR></table>
 <table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" >
-<tr> <td align=RIGHT valign=TOP width="9%"> <div align="left"><b>Status</b></div></td><td width="50%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %framework% </table>
 </div></td></tr>
 
@@ -181,7 +186,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 <table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" > 
 <TR> <TD HEIGHT="48" COLSPAN="2"> <P>The drops listed here are individual <a href="http://eclipse.org/equinox/bundles">bundles</a> or sets of bundles that provide a single standalone service or mechanism.  This includes implementations of many of the OSGi specified services as well as additional mechanisms (e.g., the Eclipse extension registry) of interest to OSGi programmers.</P></TD></TR></table>
 <table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" >
-<tr> <td align=RIGHT valign=TOP width="9%"> <div align="left"><b>Status</b></div></td><td width="50%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %extrabundles% </table>
 </div></td></tr>
 
@@ -192,7 +197,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 different scenarios and environments (e.g., secure, server-side, ...). The downloads supplied below are made available as a convenience and, while some
 are quite complete, all should be considered experimental.</P></TD></TR></table>
 <table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" >
-<tr> <td align=RIGHT valign=TOP width="9%"> <div align="left"><b>Status</b></div></td><td width="50%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %incubator% </table>
 </div></td></tr>
 
@@ -201,7 +206,7 @@ are quite complete, all should be considered experimental.</P></TD></TR></table>
 <table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" > 
 <TR> <TD HEIGHT="48" COLSPAN="2"> <P>While it is possible to use the Equinox framework as a standalone JAR, it is often convenient to use the executable program launcher.  The platform-specific archives here include precompiled executables as well as some support files such as startup.jar and a configuration template.</P></TD></TR></table>
 <table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" >
-<tr> <td align=RIGHT valign=TOP width="9%"> <div align="left"><b>Status</b></div></td><td width="50%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %launchers% </table>
 </div></td></tr>
 </table>

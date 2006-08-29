@@ -181,7 +181,6 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				<li><a href="aixPlatform.php#EclipseSDK">AIX Platform</a></li>
 				<li><a href="hpuxPlatform.php#EclipseSDK">HP-UX Platform</a></li>
 				<li><a href="macPlatform.php#EclipseSDK">Macintosh Platform</a></li>
-				<li><a href="sourceBuilds.php#EclipseSDK">Source Builds</a></li>
 			</ul>
 		</div>
 		</br></br></br>
@@ -197,13 +196,15 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 function column($servername) {
 
  if (! preg_match("/.eclipse.org/i",$servername)) {
-     echo "<td width=\"14%\"><b>Download</b></td>";
-          echo "<td width=\"13%\"><b>Size</b></td>";
-		   echo "<td width=\"11%\"><b>Checksum</b></td>";
+      echo "<td width=\"7%\"><b>Download</b></td>";
+          echo "<td width=\"7%\"><b>Size</b></td>";
+                echo "<td width=\"37%\"><b>File</b></td>";
+                   echo "<td width=\"11%\"><b>Checksum</b></td>";
       } else { 
-          echo "<td width=\"14%\"><b>Download</b></td>";
-          echo "<td width=\"13%\"><b>Size</b></td>";
-	    echo "<td width=\"11%\"><b>Checksum</b></td>";
+           echo "<td width=\"7%\"><b>Download</b></td>";
+          echo "<td width=\"7%\"><b>Size</b></td>";
+                echo "<td width=\"37%\"><b>File</b></td>";
+                   echo "<td width=\"11%\"><b>Checksum</b></td>";
     }
     return;
 }
@@ -239,10 +240,10 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 } else {
     $httplink = "download.php?dropFile=$zipfile";
     $httplabel = "(http)";
-    $httpline = "<div align=\"left\"><a title=\"$zipfile\" href=\"$httplink\">$httplabel</a>";
+    $httpline = "<div align=\"left\"><a href=\"$httplink\">$httplabel</a>";
     $ftplink = "ftp://$servername/$buildlabel/$zipfile";
     $ftplabel = "(ftp)";
-    $ftpline =  "<a title=\"$zipfile\" href=\"$ftplink\">$ftplabel</a>";
+    $ftpline =  "<a href=\"$ftplink\">$ftplabel</a>";
     $md5name = $zipfile;
     $shaname = $zipfile;
 }
@@ -252,24 +253,25 @@ if (preg_match("/.eclipse.org/i",$servername)) {
   echo "&nbsp;&nbsp";
   echo "$ftpline";
   echo "<td>$filesize</td>";
+  echo "<td>$zipfile</td>";
   echo "<td><a href=\"http://download.eclipse.org/eclipse/downloads/drops/@buildlabel@/checksum/$zipfile.md5\">(md5)</a>";
   echo " <a href=\"http://download.eclipse.org/eclipse/downloads/drops/@buildlabel@/checksum/$zipfile.sha1\">(sha1)</a>";
 }
-?>
+?>	
 
-<table align="left" BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="80%">
+<table align="left" BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%">
 <tr><td><div class="homeitem3col">
 <h3><a name="EclipseSDK"> Eclipse SDK&nbsp;<a href="details.php#EclipseSDK"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
-</tr> %sdk% </table><!--?php
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+</tr> %sdk% </table><?php
 		 $parts = explode("/", getcwd());
 		 $parts2 = explode("-", $parts[count($parts) - 1]);
 		 $buildName = $parts2[1];
 		 
 		 // Get build type names
 
-		 $fileHandle = fopen("dlconfig2.txt", "r");
+		 $fileHandle = fopen("../../dlconfig2.txt", "r");
 		 while (!feof($fileHandle)) {
 		 		 
 		 		 $aLine = fgets($fileHandle, 4096); // Length parameter only optional after 4.2.0
@@ -280,13 +282,13 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 
 		 $buildType = $dropNames[$parts2[0]];
 		
-?--> 
+?> 
 </div></td></tr>
 
 <tr><td><div class="homeitem3col">
 <h3><a name="JUnitPlugin"> JUnit Plugin Tests and Automated Testing Framework&nbsp;<a href="details.php#JUnitPlugin"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >   
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %tests% </table>
 </div></td></tr>
 
@@ -294,7 +296,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 <tr><td><div class="homeitem3col">
 <h3><a name="ExamplePlugins"> Example Plug-ins&nbsp;<a href="details.php#ExamplePlugins"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %example% </table>
 </div></td></tr>
 
@@ -302,7 +304,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 <tr><td><div class="homeitem3col">
 <h3><a name="RCPRuntime"> RCP Runtime Binary&nbsp;<a href="details.php#RCPRuntime"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >  
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %rcpruntime% </table>
 </div></td></tr>
 
@@ -310,7 +312,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 <tr><td><div class="homeitem3col">
 <h3><a name="RCPSDK"> RCP SDK&nbsp;<a href="details.php#RCPSDK"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %rcpsdk% </table>
 </div></td></tr>
 
@@ -318,7 +320,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 <tr><td><div class="homeitem3col">
 <h3><a name="com.ibm.icu"> com.ibm.icu.base binary and source Plug-ins&nbsp;<a href="details.php#com.ibm.icu"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <TABLE BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" BORDERCOLOR="#999999" >
-<TR> <TD ALIGN=RIGHT VALIGN=TOP WIDTH="7%"> <DIV ALIGN="left"><B>Status</B></DIV></TD><TD WIDTH="55%"><B>Platform</B></TD><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<TR> <TD ALIGN=RIGHT VALIGN=TOP WIDTH="5%"> <DIV ALIGN="left"><B>Status</B></DIV></TD><TD WIDTH="36%"><B>Platform</B></TD><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </TR> %icubase% </TABLE>
 </div></td></tr>
 
@@ -326,7 +328,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 <tr><td><div class="homeitem3col">
 <h3><a name="PlatformRuntime"> Platform Runtime Binary&nbsp;<a href="details.php#PlatformRuntime"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %runtime% </table>
 </div></td></tr>
 
@@ -334,7 +336,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 <tr><td><div class="homeitem3col">
 <h3><a name="PlatformSDK"> Platform SDK&nbsp;<a href="details.php#PlatformSDK"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %platformsdk% </table>
 </div></td></tr>
 
@@ -342,7 +344,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 <tr><td><div class="homeitem3col">
 <h3><a name="JDTRuntime"> JDT Runtime Binary&nbsp;<a href="details.php#JDTRuntime"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %jdt% </table>
 </div></td></tr>
 
@@ -350,21 +352,21 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 <tr><td><div class="homeitem3col">
 <h3><a name="JDTSDK"> JDT SDK &nbsp;<a href="details.php#JDTSDK"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %jdtsdk% </table>
 </div></td></tr>
 
 <tr><td><div class="homeitem3col">
 <h3><a name="JDTCORE"> JDT Core Batch Compiler &nbsp;<a href="details.php#JDTCORE"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %jdtc% </table>
 </div></td></tr>
 
 <tr><td><div class="homeitem3col">
 <h3><a name="PDERuntime"> PDE Runtime Binary&nbsp;<a href="details.php#PDERuntime"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >  
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %pde% </table>
 </div></td></tr>
 
@@ -372,7 +374,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 <tr><td><div class="homeitem3col">
 <h3><a name="PDESDK"> PDE SDK&nbsp;<a href="details.php#PDESDK"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 %pdesdk% </table>
 </div></td></tr>
 
@@ -380,7 +382,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 <tr><td><div class="homeitem3col">
 <h3><a name="FTP"> FTP and WebDAV Support&nbsp;<a href="details.php#FTP"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >  
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %teamextras% </table>
 </div></td></tr>
 
@@ -388,7 +390,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 <tr><td><div class="homeitem3col">
 <h3><a name="SWT"> SWT Binary and Source&nbsp;<a href="details.php#SWT"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %swt% </table>
 </div></td></tr>
 
@@ -396,7 +398,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 <tr><td><div class="homeitem3col">
 <h3><a name="org.eclipse.releng"> org.eclipse.releng.tools plug-in&nbsp;<a href="details.php#org.eclipse.releng"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="55%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
 </tr> %relengtools% </table>
 </div></td></tr>
 </table>

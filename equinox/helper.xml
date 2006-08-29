@@ -9,7 +9,7 @@
 		<available classname="org.eclipse.releng.generators.EclipseTestResultsGenerator" property="class" value="org.eclipse.releng.generators.EclipseTestResultsGenerator" />
 		<taskdef name="indexResults" classname="${class}" />
 
-		<!-- generate md5s for bundle -->
+		<!-- generate md5s and sha1s for bundle -->
 		<mkdir dir="${equinoxPostingDirectory}/${buildLabel}/checksum"/>
 
 		<exec executable="sh" dir="${equinoxPostingDirectory}/${buildLabel}">
