@@ -158,7 +158,23 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 			<h3>Related Links</h3>
 				<ul class="midlist">
 				<li><a href="buildNotes.php">View the <b>build notes</b> for the current build.</a></li>
-				<li><a href="testResults.php">View the <b>test results</b> for the current build.</a></li>
+				
+				<?php
+				$testResultsStatus = "%testsStatus%";
+				if($testResultsStatus == "pending") {
+					echo "<li><a title=\"Tests are pending\" href=\"testResults.php\">View the <b>test results</b> for the current build.</a></li>";
+				}
+				else if($testResultsStatus == "successful") {
+					echo "<li><a title=\"Tests are successful\" href=\"testResults.php\">View the <b><font color=\"#00FF00\">test results</font></b> for the current build.</a></li>";	
+				}
+				else if($testResultsStatus == "failed") {
+					echo "<li><a title=\"Tests have failures\" href=\"testResults.php\">View the <b><font color=\"#FF0000\">test results</font></b> for the current build.</a></li>";	
+				}
+				else {
+					echo "<li><a href=\"testResults.php\">View the <b>test results</b> for the current build.</a></li>";
+				}
+				?>
+				
 				<li><a href="directory.txt">View the <b>map file entries</b> for the current build.</a></li></ul>
 		</div>
 
