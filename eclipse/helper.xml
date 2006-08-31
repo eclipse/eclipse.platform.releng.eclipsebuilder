@@ -309,7 +309,11 @@
 		</ant>
 
 		<!--  Replace build label in generated html files -->
-		<replace dir="${postingDirectory}/${buildLabel}" token="@buildlabel@" value="${buildLabel}" />	
+		<replace dir="${postingDirectory}/${buildLabel}"
+					token="@buildLabel@"
+					value="${buildLabel}"
+					includes="**/*.php"/>
+		
 	</target>
 
 	<target name="generatePerformanceResults">
