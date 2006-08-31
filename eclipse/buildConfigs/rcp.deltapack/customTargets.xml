@@ -55,7 +55,9 @@
     <move file="${buildDirectory}/deltapacktmp/workingPlace/${buildId}/${archiveName}" todir="${postingDirectory}/${buildLabel}"/>            
     <mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
 	<checksum file="${postingDirectory}/${buildLabel}/${archiveName}" property="md5"/>
-	<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5"/>    
+	<checksum file="${postingDirectory}/${buildLabel}/${archiveName}" algorithm="SHA" property="sha"/>
+	<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5"/>
+	<echo message="${sha} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.sha1"/>
 </target>
 
 <!-- ===================================================================== -->

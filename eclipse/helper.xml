@@ -149,7 +149,9 @@
 
 	<target name="generateChecksum" unless="skipChecksum">
 		<checksum file="${archiveFullPath}" property="md5" />
+		<checksum file="${archiveFullPath}" property="sha" />
 		<echo message="${md5} *${downloadFile}" file="${postingDirectory}/${buildLabel}/checksum/${downloadFile}.md5" />
+		<echo message="${sha} *${downloadFile}" file="${postingDirectory}/${buildLabel}/checksum/${downloadFile}.sha1" />
 	</target>
 
 	<target name="publish" description="Preparing to post the build...">
@@ -295,17 +297,19 @@
 		<!--regenerate the index page with links to test results-->
 		<ant antfile="${base.builder}/plugins/org.eclipse.build.tools/scripts/publish.xml" dir="${publishingContent}" target="generateIndex">
 			<property name="isBuildTested" value="true" />
-			<property name="indexFileName" value="index.php" />
 			<property name="buildType" value="${buildType}" />
 			<property name="dropTokenList" value="%sdk%,%tests%,%example%,%rcpruntime%,%rcpsdk%,%icubase%,%runtime%,%platformsdk%,%jdt%,%jdtsdk%,%jdtc%,%pde%,%pdesdk%,%teamextras%,%swt%,%relengtools%" />
+			<property name="platformIdentifierToken" value="%platform%" />
+			<property name="platformSpecificTemplateList" value="Windows,${publishingContent}/templateFiles/platform.php.template,winPlatform.php;Linux,${publishingContent}/templateFiles/platform.php.template,linPlatform.php;Solaris,${publishingContent}/templateFiles/platform.php.template,solPlatform.php;AIX,${publishingContent}/templateFiles/platform.php.template,aixPlatform.php;HP-UX,${publishingContent}/templateFiles/platform.php.template,hpuxPlatform.php;Macintosh,${publishingContent}/templateFiles/platform.php.template,macPlatform.php;Source Build,${publishingContent}/templateFiles/sourceBuilds.php.template,sourceBuilds.php" />
+			<property name="indexFileName" value="index.php" />
 			<property name="result" value="${postingDirectory}/${buildLabel}" />
 			<property name="testResultsTemplateFileName" value="${publishingContent}/templateFiles/testResults.php.template" />
 			<property name="dropTemplateFileName" value="${publishingContent}/templateFiles/index.php.template" />
 			<property name="testManifestFileName" value="${publishingContent}/testManifest.xml" />
 		</ant>
 
-		<!--  Insert ftp url for drop directory  -->
-		<replace file="${postingDirectory}/${buildLabel}/index.php" token="@buildlabel@" value="${buildLabel}" />
+		<!--  Replace build label in generated html files -->
+		<replace dir="${postingDirectory}/${buildLabel}" token="@buildlabel@" value="${buildLabel}" />	
 	</target>
 
 	<target name="generatePerformanceResults">

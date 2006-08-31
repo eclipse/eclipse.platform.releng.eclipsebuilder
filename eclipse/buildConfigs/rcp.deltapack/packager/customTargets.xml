@@ -25,7 +25,9 @@
 		<arg line="${archiveFullPath} -r . -i eclipse/features/org.eclipse.platform.launchers**" />
 	</exec>
 	<checksum file="${archiveFullPath}" property="md5"/>
+	<checksum file="${archiveFullPath}" algorithm="SHA" property="sha"/>
 	<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5"/>
+	<echo message="${sha} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.sha1"/>
 </target>
 	
 </project>

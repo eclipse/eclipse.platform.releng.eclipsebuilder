@@ -54,11 +54,11 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 </head>
 <body>
 <div id="header">
-	<a href="http://www.eclipse.org/"><img src="../../../eclipse.org-common/stylesheets/header_logo.gif" width="163" height="68" border="0" alt="Eclipse Logo" class="logo" /></a>
+	<a href="/"><img src="../../../eclipse.org-common/stylesheets/header_logo.gif" width="163" height="68" border="0" alt="Eclipse Logo" class="logo" /></a>
 	<div id="searchbar">
 		<img src="../../../eclipse.org-common/stylesheets/searchbar_transition.gif" width="92" height="26" class="transition" alt="" />
 		<img src="../../../eclipse.org-common/stylesheets/searchbar_header.gif" width="64" height="17" class="header" alt="Search" />
-		<form method="get" action="http://www.eclipse.org/search/search.cgi">
+		<form method="get" action="/search/search.cgi">
 			<input type="hidden" name="t" value="All" />
 			<input type="hidden" name="t" value="Doc" />
 			<input type="hidden" name="t" value="Downloads" />
@@ -69,12 +69,12 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 		</form>
 	</div>
 	<ul id="headernav">
-		<li class="first"><a href="http://www.eclipse.org/org/foundation/contact.php">Contact</a></li>
-		<li><a href="http://www.eclipse.org/legal/">Legal</a></li>
+		<li class="first"><a href="/org/foundation/contact.php">Contact</a></li>
+		<li><a href="/legal/">Legal</a></li>
 	</ul>
 </div><div id="topnav">
 	<ul>
-		<li><a>Downloads</a></li>
+		<li><a>Platform Navigation</a></li>
 		<li class="tabstart">&#160;&#160;&#160;</li>
 		<li><a class="" href="index.php" target="_self">All Platforms</a></li>
 		<li class="tabstart">&#160;&#160;&#160;</li>
@@ -95,10 +95,10 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 <div id="topnavsep"></div>
 <div id="leftcol">
 <ul id="leftnav">
-<li><a href="#Logs">Logs</a></li>
-<li><a href="#RefCheck">Internal References Check</a></li>
-<li><a href="#UnitTest">Unit Test Results</a></li>
-<li><a href="#PluginsErrors">Plugins Containing Compile Errors</a></li>
+<li><a href="testResults.php#Logs">Logs</a></li>
+<li><a href="testResults.php#RefCheck">Internal References Check</a></li>
+<li><a href="testResults.php#UnitTest">Unit Test Results</a></li>
+<li><a href="testResults.php#PluginsErrors">Plugins Containing Compile Errors</a></li>
  
   </li>
   <li style="background-image: url(../../../eclipse.org-common/stylesheets/leftnav_fade.jpg); background-repeat: repeat-x; border-style: none;">
@@ -109,59 +109,56 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 </div>
 
 <div id="midcolumn">
-<p><b><font face="Verdana" size="+3">Test Results</font></b> </p>
-<div class="homeitem">
-<h3><a name="Logs"> Logs <?php echo "$buildType $buildName"; ?> </a>&nbsp;<a href="buildLogs.php"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
+<p><b><font face="Verdana" size="+3">Logs <?php echo "$buildType $buildName"; ?> </font></b> </p>
+<div class="homeitem3col">
+<h3><a name="Logs"> Logs <?php echo "$buildType $buildName"; ?> </a></h3>
 <ul>
 <li> <a href="chkpiiResults.php"><b> RelEng Build Tests Logs </b></a>
+These logs only need to be checked if the org.eclipse.releng.tests above report a test failures. <?php if (! (preg_match("/N/i",$buildName))) { echo "<br><br>Cvs tag v$buildName of org.eclipse.releng.eclipsebuilder and org.eclipse.releng.basebuilder was used to create this build."; } ?> 
 </li>
 <li> <a href="consoleLogs.php"><b> Console Output Logs </b></a>
+These logs contain the console output captured while running the JUnit automated tests.
 </li>
 <li>
-<a href="buildLogs.php"><b> Doc Logs </b></a>
-</div>
+<b> Doc Logs </b>
+<ul><?php
+		 $hasNotes = false;
 
-<div class="homeitem">
-<h3><a name="RefCheck"> Internal References Check <?php echo "$buildType $buildName"; ?> </a></h3> 
-<ul>
-<li> 
-This <a href="internalReference/index.html"><b>report</b></a> contains the 
-result of running the <a href="http://eclipse.org/webtools/development/apiscanner/apiscanner.html"><b>Internal 
-reference check tool</b></a> with these Eclipse SDK <A HREF="component-xml-@build@.zip"><b>component.xml</b></A> 
-files.<td width="2%"></li>
-</div>
-</div>
+		 $index = 0;
 
-<div class="homeitem3col">
-<h3><a name="UnitTest"> Unit Test Results for <?php echo "$buildType $buildName"; ?> </a></h3> 
-</br>
-&nbsp;&nbsp;The table shows the test results of the build on the various platforms: Redhat and Windows. If errors occured,
-the number of errors is indicated in a red bold font and you may access the page specific to each component on
-a specific platform by clicking the cell link.</br></br>
-<table width="85%" border="1" bgcolor="#EEEEEE" rules="groups" align="center">
-<tr bgcolor="#9999CC"> <th rowspan="2" width="40%" align="center"> org.eclipse <br> Component </th><th colspan="4" align="center"> Test Configurations </th></tr> 
-<tr bgcolor="#9999CC"><th width="15%">REDHAT, SUN 1.4.2<th width="15%"> REDHAT, SUN 1.5.0 </th><th width="15%"> WIN XP, SUN 1.4.2 </th><th width="15%"> WIN XP, SUN 1.5.0 </th></tr>
-%testresults% </table>
-</br>
-</div>
+        $maindir = "compilelogs" ;
+        $mydir = opendir($maindir) ;
+        while($anEntry = readdir($mydir)) {
+            if ((preg_match("/javadoc/i",$anEntry)) ||(preg_match("/schema/i",$anEntry))) {
+		         $entries[$index] = $anEntry;
+        		 $index++;
+            }
+        }
+        closedir($mydir);
+        if ($index > 0) { sort($entries); }
 
-<div class="homeitem3col">
-<h3><a name="PluginsErrors"> Plugins containing compile errors </a></h3> 
-</br>
-&nbsp;&nbsp;The table below shows the plugins in which errors or warnings were encountered. Click on the jar file link to view its
-detailed report.
-</br></br>
-<table width="80%" border="1" bgcolor="#EEEEEE" align="center"> 
-<tr bgcolor="#9999CC"> <th width="90%"><b>Compile Logs (Jar Files)</b></th><th width = "5%"><b>Errors</b></th><th width ="5%"><b>Warnings</b></th></tr> 
-%compilelogs% </table>
-</br>
+		 for ($i = 0; $i < $index; $i++) {
+		 		 $anEntry = $entries[$i];
+		 		 $line = "<td><a href=\"$maindir/$anEntry\">$anEntry</a></td>\n";
+		 		 echo "<li>";
+		 		 echo "$line";
+		 		 echo "</li>";
+		 		 $hasNotes = true;
+		 }
+		 
+		 if (!$hasNotes) {
+		 		 echo "<br>There are no javadoc logs for this build.";
+		 }
+?></ul>
+</li>
 </div>
-</br></br>
+</div>
+</br></br></br>
 <div id="footer">
 	<ul id="footernav">
-		<li class="first"><a href="http://www.eclipse.org">Home</a></li>
-		<li><a href="http://www.eclipse.org/legal/privacy.php">Privacy Policy</a></li>
-		<li><a href="http://www.eclipse.org/legal/termsofuse.php">Terms of Use</a></li>
+		<li class="first"><a href="/">Home</a></li>
+		<li><a href="/legal/privacy.php">Privacy Policy</a></li>
+		<li><a href="/legal/termsofuse.php">Terms of Use</a></li>
 	</ul>
 	<p>Copyright &copy; 2006 The Eclipse Foundation. All Rights
 Reserved</p>

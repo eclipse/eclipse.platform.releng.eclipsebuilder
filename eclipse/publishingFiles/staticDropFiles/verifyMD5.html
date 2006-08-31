@@ -10,7 +10,7 @@
 <table BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" >
   <tr> 
     <td ALIGN=LEFT width="80%">
-      <p><b><font face="Verdana" size="+3">Verifying Downloads with md5sum</font></b></p>
+      <p><b><font face="Verdana" size="+3">Verifying Downloads with md5 and sha1sums</font></b></p>
       </td>
     <td WIDTH="20%">&nbsp;</td>
   </tr>
@@ -22,13 +22,13 @@
   <tr> 
     <td height="48" colspan="2"> 
       <p><br>
-        Downloads can be verified using md5sum, a Unix command line tool provided 
+        Downloads can be verified using md5sum or sha1sum, a Unix command line tool provided 
         in the <a href="http://www.gnu.org/software/textutils/textutils.html" target="_blank">GNU 
         Textutils</a> package. A Windows binary version is available <a href="http://www.etree.org/md5com.html" target="_blank">here</a>.</p>
       <p>1. Every download has an associated link &quot;(md5)&quot; to a *.md5 
-        file containing its MD5 checksum. Download this file from the <a href="http://download.eclipse.org/downloads/index.php">Main 
+        file containing its MD5 checksum and another link &quot;(sha1)&quot; to a *.sha1 file containing its SHA1 checksum. Download these files from the <a href="http://download.eclipse.org/downloads/index.php">Main 
         Eclipse download servers</a> into the same directory as the zip file.<br>
-        2. Execute the command &quot;md5sum -c &lt;zipfilename&gt;.md5&quot;. 
+        2. Execute the command &quot;md5sum -c &lt;zipfilename&gt;.md5&quot; or &quot;sha1sum -c &lt;zipfilename&gt;.sha1&quot;. 
         The result &quot;&lt;zipfilename&gt;: OK&quot; is indicative of an intact 
         download. <br>
       </p>
