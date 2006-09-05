@@ -285,11 +285,10 @@
 		<condition property="updateManagerURL" value="http://download.eclipse.org/eclipse/testUpdates">
 				<equals arg1="${buildType}" arg2="I"/>
 		</condition>
-		<property name="updateManagerURL" value="updateManagerURL="/>
-	    <replace file="${buildrssproperties}" token="updateManagerURL=" value="updateManagerURL=${updateManagerURL}"/> 
+	    <replace file="${buildrssproperties}" token="@updateManagerURL@" value="updateManagerURL=${updateManagerURL}"/> 
 	    <replace file="${buildrssproperties}" token="@buildid@" value="${buildId}"/>
-		<replace file="${buildrssproperties}" token="buildType=" value="${buildType}"/>
-		<condition property="feedFileValue" value="/builds/transfer/files/bogus/builds-eclipse.xml">
+		<replace file="${buildrssproperties}" token="@buildType@" value="${buildType}"/>
+		<condition property="feedFileValue" value="${base.builder}/plugins/org.eclipse.build.tools/data/builds-eclipse.xml">
 			<equals arg1="${test}" arg2="true"/>
 		</condition>
 		<condition property="feedFileValue" value="/builds/transfer/files/master/builds-eclipse.xml">
@@ -298,7 +297,8 @@
 		<condition property="feedFileValue" value="/builds/transfer/files/master/builds-eclipse-N.xml">
 				<equals arg1="${buildType}" arg2="N"/>
 		</condition>
-	    <replace file="${buildrssproperties}" token="file=" value="file=${feedFileValue}"/>				
+	    <replace file="${buildrssproperties}" token="@file@" value="file=${feedFileValue}"/>	
+		<copy file="${buildrssproperties}" tofile="${base.builder}/plugins/org.eclipse.build.tools/properties/${rssproperties}" overwrite="true" failonerror="true"/>	
 	</target>	
 	
 </project>
