@@ -146,7 +146,7 @@ a specific platform by clicking the cell link.</br></br>
 </div>
 
 <div class="homeitem3col">
-<h3><a name="PluginsErrors"> Plugins containing compile errors </a></h3> 
+<h3><a name="PluginsErrors"> Plugins containing compile errors or warnings</a></h3> 
 </br>
 &nbsp;&nbsp;The table below shows the plugins in which errors or warnings were encountered. Click on the jar file link to view its
 detailed report.
