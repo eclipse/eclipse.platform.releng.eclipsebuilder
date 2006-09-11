@@ -298,6 +298,16 @@
 				<equals arg1="${buildType}" arg2="N"/>
 		</condition>
 	    <replace file="${buildrssproperties}" token="@file@" value="file=${feedFileValue}"/>	
+		<condition property="feedURL" value="http://download.eclipse.org/eclipse/builds-eclipse-test.xml">
+					<equals arg1="${test}" arg2="true"/>
+				</condition>
+		<condition property="feedURL" value="http://download.eclipse.org/eclipse/builds-eclipse.xml">
+				<equals arg1="${buildType}" arg2="I"/>
+		</condition>
+		<condition property="feedURL" value="http://download.eclipse.org/eclipse/builds-eclipse-N.xml">
+				<equals arg1="${buildType}" arg2="N"/>
+		</condition>
+	    <replace file="${buildrssproperties}" token="@feedURL@" value="feedURL=${feedURL}"/>	
 		<copy file="${buildrssproperties}" tofile="${base.builder}/plugins/org.eclipse.build.tools/properties/${rssproperties}" overwrite="true" failonerror="true"/>	
 	</target>	
 	
