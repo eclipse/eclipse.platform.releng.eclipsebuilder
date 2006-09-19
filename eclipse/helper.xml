@@ -310,7 +310,7 @@
 
 		<!--  Replace build label in generated html files -->
 		<replace dir="${postingDirectory}/${buildLabel}"
-					token="@buildLabel@"
+					token="@buildlabel@"
 					value="${buildLabel}"
 					includes="**/*.php"/>
 		
