@@ -185,10 +185,6 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 		<div>
 		<table BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > </br>
 		<?php
-		if (file_exists("performance/performance.php")){
-			$line="<tr><A HREF=\"performance/performance.php\"><B>Performance results</B></A><B> now available</B></tr>";
-		} 
-		echo "$line";	
 		$servername = $_SERVER["SERVER_NAME"];
 		if (! preg_match("/.eclipse.org/i",$servername)) {
         		echo "<tr> To download a file via HTTP click on its corresponding http link below.
@@ -220,6 +216,9 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				else {
 					echo "<li><a href=\"testResults.php\">View the <b>test results</b> for the current build.</a></li>";
 				}
+				if (file_exists("performance/performance.php")) {
+                         echo "<li><a href=\"performance/performance.php\">View the <b>performance results</b> for the current build.</a></li>";
+                 }
 				?>
 				
 				<li><a href="directory.txt">View the <b>map file entries</b> for the current build.</a></li></ul>
