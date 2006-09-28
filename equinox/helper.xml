@@ -25,7 +25,12 @@
 		<copy todir="${equinoxPostingDirectory}/${buildLabel}" overwrite="true">
 			<fileset dir="${postingDirectory}/${buildLabel}" includes="compilelogs/**/plugins/org.eclipse.osgi*/**,compilelogs/**/plugins/org.eclipse.equinox*/**" excludes="compilelogs/**/plugins/org.eclipse.osgi.test*/**" />
 		</copy>
-
+		
+		<!--temporary hack to copy orbit files to equinox download directory -->
+		<copy todir="${equinoxPostingDirectory}/${buildLabel}" overwrite="true">
+		    <fileset dir="${buildDirectory}/plugins" includes="javax.servlet_*,org.apache.commons.logging_*,org.mortbay.jetty_*"/>
+		</copy>
+			
 		<!--post directory.txt-->
 		<copy file="${buildDirectory}/directory.txt" todir="${equinoxPostingDirectory}/${buildLabel}" />
 
@@ -86,6 +91,7 @@
 		<touch file="${equinoxPostingDirectory}/${buildLabel}/index.php" />
 		<!--  Insert ftp url for drop directory  -->
 		<replace file="${equinoxPostingDirectory}/${buildLabel}/index.php" token="@buildlabel@" value="${buildLabel}" />
+		
 	</target>
 
 
