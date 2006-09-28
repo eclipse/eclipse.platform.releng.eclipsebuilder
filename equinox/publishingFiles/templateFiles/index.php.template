@@ -191,6 +191,15 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 </div></td></tr>
 
 <tr><td><div class="homeitem3col">
+<h3><a name="Addon"> Add-on Bundles</a></h3>
+<table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" > 
+<TR> <TD HEIGHT="48" COLSPAN="2"> <P>The drops listed here are individual <a href="http://eclipse.org/equinox/bundles">bundles</a> from the <a href="http://eclipse.org/orbit">Orbit</a> project.</P></TD></TR></table>
+<table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" >
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="33%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+</tr> %orbit% </table>
+</div></td></tr>
+
+<tr><td><div class="homeitem3col">
 <h3><a name="Incubator"> Incubator</a></h3>
 <table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" > 
 <TR> <TD HEIGHT="48" COLSPAN="2"> <P>The Equinox Incubator is a place for exploring Eclipse and OSGi running in
