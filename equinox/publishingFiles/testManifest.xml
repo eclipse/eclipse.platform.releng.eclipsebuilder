@@ -45,7 +45,7 @@
 			</platform>
 			<platform id="equinoxservletbridge" name="All" fileName="@org.eclipse.equinox.servletbridge@.jar">
 			</platform>
-			<platform id="http" name="All" fileName="@org.eclipse.equinox.http.jar@">
+			<platform id="http" name="All" fileName="@org.eclipse.equinox.http@.jar">
 			</platform>
 			<platform id="httpjetty" name="All" fileName="@org.eclipse.equinox.http.jetty@.jar">
 			</platform>
