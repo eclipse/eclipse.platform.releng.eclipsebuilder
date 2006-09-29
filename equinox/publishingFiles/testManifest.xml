@@ -22,9 +22,7 @@
 			<platform id="ds" name="All" fileName="@org.eclipse.equinox.ds@.jar">
 			</platform>
 			<platform id="event" name="All" fileName="@org.eclipse.equinox.event@.jar">
-			</platform>
-			<platform id="http" name="All" fileName="@org.eclipse.equinox.http@.jar">
-			</platform>
+			</platform>		
 			<platform id="log" name="All" fileName="@org.eclipse.equinox.log@.jar">
 			</platform>		
 			<platform id="metatype" name="All" fileName="@org.eclipse.equinox.metatype@.jar">
@@ -59,7 +57,7 @@
 			 </platform>
 		</zipType>	
 
-		<zipType name="Orbit">
+		<zipType name="Other">
 			<platform id="javaxservlet" name="All" fileName="@javax.servlet@.jar">
 			</platform>										
 			<platform id="apachecomminglogging" name="All" fileName="@org.apache.commons.logging@.jar">
