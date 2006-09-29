@@ -166,6 +166,9 @@
 			<param name="bundle.id" value="org.eclipse.equinox.http.servletbridge" />
 	   	</antcall>
 		<antcall target="updateTestManifest">
+			<param name="bundle.id" value= "org.eclipse.equinox.servletbridge" />
+		</antcall>		
+		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="javax.servlet" />
 	   	</antcall>
 		<antcall target="updateTestManifest">
