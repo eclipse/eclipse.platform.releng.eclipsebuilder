@@ -69,7 +69,9 @@
 				
 		<zipType name="Incubator">
  	    	<platform id="cm" name="All" fileName="@org.eclipse.equinox.cm@.jar">
-			</platform>										
+			</platform>	
+		 	<platform id="cm" name="All" fileName="@org.eclipse.equinox.initializer@.jar">
+			</platform>			 									
     	</zipType>   	
     	
 
