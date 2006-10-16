@@ -33,7 +33,7 @@
 		<antcall target="assembler">
 			<param name="archiveName" value="${archiveRoot}-linux-gtk-ppc.tar.gz"/>
 		</antcall>
-	</target>
+	</target>	
 
 	<target name="assemble.linux.motif.x86.xml">
 		<antcall target="assembler">

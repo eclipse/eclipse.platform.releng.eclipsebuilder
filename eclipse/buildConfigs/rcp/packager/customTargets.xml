@@ -35,12 +35,6 @@
 		</antcall>
 	</target>
 
-	<target name="assemble.linux.motif.x86.xml">
-		<antcall target="assembler">
-			<param name="archiveName" value="${archiveRoot}-linux-motif.tar.gz"/>
-		</antcall>
-	</target>
-
 	<target name="assemble.solaris.gtk.sparc.xml">
 		<antcall target="assembler">
 			<param name="archiveName" value="${archiveRoot}-solaris-gtk.zip"/>
