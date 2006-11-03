@@ -210,7 +210,7 @@
 		<property name="outputFile"  value="${stagingDirectoryOutput}/${archiveName}"/>
 
 		<mkdir dir="${packtmp}" />		 		  
-		<copy file="${buildDirectory}/${buildLabel}/${archiveName}" tofile="${packtmp}/${archiveName}"/>
+		<move file="${buildDirectory}/${buildLabel}/${archiveName}" tofile="${packtmp}/${archiveName}"/>
 		<!-- add pack.properties file that specifies effort level -->
 		<exec dir="${eclipse.build.configs}/../../extras" executable="zip">
 			<arg line="-r ${packtmp}/${archiveName} pack.properties" />
