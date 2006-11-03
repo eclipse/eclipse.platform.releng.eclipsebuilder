@@ -212,8 +212,8 @@
 		<mkdir dir="${packtmp}" />		 		  
 		<copy file="${buildDirectory}/${buildLabel}/${archiveName}" tofile="${packtmp}/${archiveName}"/>
 		<!-- add pack.properties file that specifies effort level -->
-		<exec dir="${packtmp}" executable="zip">
-			<arg line="-r ${packtmp}/${archiveName} ${eclipse.build.configs}/../../extras/pack.properties" />
+		<exec dir="${eclipse.build.configs}/../../extras" executable="zip">
+			<arg line="-r ${packtmp}/${archiveName} pack.properties" />
 		</exec>
 
 		<!--push drop to staging directory-->
