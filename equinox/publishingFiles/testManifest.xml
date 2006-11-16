@@ -83,9 +83,7 @@
 			<platform id="SLG264" name="Linux (x86_64/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_2.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="launchers-linux.gtk.x86_64.@buildid@.tar.gz">
 			</platform>
 			<platform id="SLG2PPC" name="Linux (PPC/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_2.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="launchers-linux.gtk.ppc.@buildid@.tar.gz">
-			</platform>
-			<platform id="SLM" name="Linux (x86/Motif) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_2.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="launchers-linux.motif.x86.@buildid@.tar.gz">
-			</platform>
+			</platform>			
 			<platform id="SSG" name="Solaris 8 (SPARC/GTK 2)" fileName="launchers-solaris.gtk.sparc.@buildid@.zip">
 			</platform>			
 			<platform id="SAM" name="AIX (PPC/Motif)" fileName="launchers-aix.motif.ppc.@buildid@.zip">
