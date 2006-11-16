@@ -301,13 +301,13 @@
 		</move>
 	</target>
 
-	<target name="help" description="Runs the org.eclipse.help.tests test.xml">
+<!--	<target name="help" description="Runs the org.eclipse.help.tests test.xml">
 		<antcall target="runtests" >
 			<param name="testPlugin" value="${org.eclipse.help.tests}" />
 			<param name="report" value="org.eclipse.help.tests" />
 			<param name="testPluginsRequired" value="**/${org.eclipse.help.tests}/* ${org.eclipse.help.tests.prerequisite.testplugins}" />
 		</antcall>
-	</target>
+	</target> -->
 
 	<target name="ua" description="Runs the org.eclipse.ua.tests test.xml">
 			<antcall target="runtests" >
@@ -514,7 +514,7 @@
 		<antcall target="coreresources" />
 		<antcall target="osgi" />
 		<antcall target="coreexpressions" />
-		<antcall target="help" />
+	<!--	<antcall target="help" /> -->
 		<antcall target="update" />
 		<antcall target="teamcore" />
 		<antcall target="jdtcoreperf" />
