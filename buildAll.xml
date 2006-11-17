@@ -365,7 +365,7 @@
 	</target>
 
 	<target name="publishRSS" unless="skip.feed">
-    	<property name="rssproperties" value="updater.eclipse.properties"/> 
+    	<property name="rssproperties" value="feedPublish.eclipse.properties"/> 
    	    <property name="buildrssproperties" value="${postingDirectory}/${buildLabel}/${rssproperties}"/> 
     	<copy file="${eclipse.build.configs}/../publishingFiles/templateFiles/${rssproperties}" tofile="${buildrssproperties}" failonerror="true"/>			
 		<condition property="updateManagerURL" value="http://download.eclipse.org/eclipse/testUpdates">
@@ -377,7 +377,7 @@
 		<condition property="feedFileValue" value="${base.builder}/plugins/org.eclipse.build.tools/data/builds-eclipse.xml">
 			<equals arg1="${test}" arg2="true"/>
 		</condition>
-		<condition property="feedFileValue" value="/builds/transfer/files/master/downloads/builds-eclipse.xml">
+		<condition property="feedFileValue" value="/builds/transfer/files/master/downloads/builds-eclipse-3.3.xml">
 			<equals arg1="${buildType}" arg2="I"/>
 		</condition>
 		<condition property="feedFileValue" value="/builds/transfer/files/master/downloads/builds-eclipse-N.xml">
@@ -387,13 +387,18 @@
 		<condition property="feedURL" value="http://download.eclipse.org/eclipse/downloads/builds-eclipse-test.xml">
 					<equals arg1="${test}" arg2="true"/>
 				</condition>
-		<condition property="feedURL" value="http://download.eclipse.org/eclipse/downloads/builds-eclipse.xml">
+		<condition property="feedURL" value="http://download.eclipse.org/eclipse/downloads/builds-eclipse-3.3.xml">
 				<equals arg1="${buildType}" arg2="I"/>
 		</condition>
 		<condition property="feedURL" value="http://download.eclipse.org/eclipse/downloads/builds-eclipse-N.xml">
 				<equals arg1="${buildType}" arg2="N"/>
 		</condition>
 	    <replace file="${buildrssproperties}" token="@feedURL@" value="feedURL=${feedURL}"/>	
+		<condition property="signStatus" value="SIGNED">
+			<equals arg1="${sign}" arg2="true"/>
+		</condition>
+		<property name="signStatus" value="UNSIGNED"/>
+	    <replace file="${buildrssproperties}" token="@jarSigningStatus@" value="jarSigningStatus=${signStatus}"/>
 		<copy file="${buildrssproperties}" tofile="${base.builder}/plugins/org.eclipse.build.tools/properties/${rssproperties}" overwrite="true" failonerror="true"/>	
 	</target>	
 	
