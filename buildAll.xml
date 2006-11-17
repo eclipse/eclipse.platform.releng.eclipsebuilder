@@ -247,14 +247,14 @@
 		<!--copy zip back to build machine -->
 		<echo message="copy zip back to build machine"/>
 		<exec dir="." executable="scp" output="signing.txt" append="true">
-			<arg line="-v dev.eclipse.org:${stagingDirectory}/${buildId}-out/${archiveName} ${buildDirectory}/${buildLabel}"/>
+			<arg line="dev.eclipse.org:${stagingDirectory}/${buildId}-out/${archiveName} ${buildDirectory}/${buildLabel}"/>
         </exec> 
 
         <!--delete files on build.eclipse.org-->
-	 	<echo message="delete temp files on build.eclipse.org"/>
+	 <!--	<echo message="delete temp files on build.eclipse.org"/>
 	 	<exec dir="." executable="ssh" output="signing.txt" append="true">
 			<arg line="build.eclipse.org &quot;/bin/rm -rf ${stagingDirectory}/${buildId}-out ${stagingDirectory}/${archiveName}&quot;"/>
-		</exec> 
+		</exec> -->
 	</target>		 		 		  		 		  
 	
 	
