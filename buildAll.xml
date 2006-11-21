@@ -241,7 +241,7 @@
 		
 		<!--Wait for build to be available -->
 		<antcall target="waitForChangedAttribs">
-               <param name="sshline" value="build.eclipse.org &quot;cd ${stagingDirectoryOutput};ls ${archiveName}&quot;" />
+               <param name="sshline" value="dev.eclipse.org &quot;cd ${stagingDirectoryOutput};ls ${archiveName}&quot;" />
         </antcall>
 
 		<!--copy zip back to build machine -->
