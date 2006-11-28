@@ -101,7 +101,7 @@ does not include a Java runtime environment (JRE).</b> You will need a 1.4.2 lev
 or higher Java runtime or Java development kit (JDK) installed on your machine 
 in order to run Eclipse. <a href="<?php echo "$jre";?>">Click here</a> if you 
 need help finding a Java runtime.</p></td></tr> </table><table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="100%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
 </tr> %sdk% </table><table border=0 cellspacing=5 cellpadding=2 width="100%" > 
 <tr> <td colspan="2"> <p>&nbsp;</p></td></tr> </table><?php
 		 $parts = explode("/", getcwd());
@@ -129,7 +129,7 @@ Plugin Tests and Automated Testing Framework</font></b></td></tr> <tr> <td colsp
 plug-in tests from the command line. Click <a href="automatedtesting.html">here</a> 
 for more information and installation instructions. Includes both source code 
 and binary.</p></td></tr> </table><table border=0 cellspacing=2 cellpadding=0 width="100%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
 </tr> %tests% </table><table border=0 cellspacing=5 cellpadding=2 width="100%" > 
 <tr> <td colspan="2">&nbsp;</td></tr> </table><table border=0 cellspacing=5 cellpadding=2 width="100%" > 
 <tr> <td align=LEFT valign=TOP colspan="3" bgcolor="#999999"><b><font color="#FFFFFF" face="Arial,Helvetica">Example 
@@ -143,7 +143,7 @@ will be installed. For information on what the examples do and how to run them,
 look in the &quot;Examples Guide&quot; section of the &quot;Platform Plug-in Developer 
 Guide&quot;, by selecting Help Contents from the Help menu, and choosing &quot;Platform 
 Plug-in Developer Guide&quot; book from the combo box.<br> </p></td></tr> </table><table border=0 cellspacing=2 cellpadding=0 width="100%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
 </tr> %example% </table><table border=0 cellspacing=5 cellpadding=2 width="100%" > 
 <tr> <td colspan="2">&nbsp;</td></tr> </table><table border=0 cellspacing=5 cellpadding=2 width="100%" > 
 <tr> <td align=LEFT valign=TOP colspan="3" bgcolor="#999999"><b><font color="#FFFFFF" face="Arial,Helvetica">RCP 
@@ -152,7 +152,7 @@ drops contain the Eclipse Rich Client Platform base plug-ins and do not contain
 source or programmer documentation. These downloads are meant to be used as target 
 platforms when developing RCP applications, and are not executable, stand-alone 
 applications.</p></td></tr> </table><table border=0 cellspacing=2 cellpadding=0 width="100%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
 </tr> %rcpruntime% </table><table border=0 cellspacing=5 cellpadding=2 width="100%" > 
 <tr> <td colspan="2">&nbsp;</td></tr> </table><table border=0 cellspacing=5 cellpadding=2 width="100%" > 
 <tr> <td align=LEFT valign=TOP colspan="3" bgcolor="#999999"><b><font color="#FFFFFF" face="Arial,Helvetica">RCP 
@@ -161,12 +161,12 @@ of the Eclipse Rich Client Platform base plug-ins and their source and the RCP
 delta pack. The delta pack contains all the platform specific resources from RCP 
 and the platform and is used for cross-platform exports of RCP applications.</p></td></tr> 
 </table><table border=0 cellspacing=2 cellpadding=0 width="100%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
 </tr> %rcpsdk% </table><table border=0 cellspacing=5 cellpadding=2 width="100%" > 
 <tr> <td colspan="2">&nbsp;</td></tr> </table><TABLE BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > 
 <TR> <TD ALIGN=LEFT VALIGN=TOP COLSPAN="3" BGCOLOR="#999999"><B><FONT COLOR="#FFFFFF" FACE="Arial,Helvetica">com.ibm.icu.base binary and source Plug-ins</FONT></B></TD></TR> <TR> </TR> </TABLE><TABLE BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > <TR> <TD HEIGHT="48" COLSPAN="2"> <P>This plugin is a replacement plugin for the com.ibm.icu plugin.  If the size of your application overrides the need to adopt ICU4J, use this plugin *in place of* the ICU4J plugin (com.ibm.icu).  To install and use this plugin:<BR>1.  Extract the zip at the root of your Eclipse install directory<BR>2.  In the \eclipse\plugins directory, delete com.ibm.icu_&lt;version&gt;.jar and the directory com.ibm.icu.source_&lt;version&gt;<BR>3.  In \eclipse\features\org.eclipse.rcp_&lt;version&gt;\feature.xml, replace the id of the com.ibm.icu plugin entry with com.ibm.icu.base.</P></TD></TR> 
 </TABLE><TABLE BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="100%" BORDERCOLOR="#999999" > 
-<TR> <TD ALIGN=RIGHT VALIGN=TOP WIDTH="7%"> <DIV ALIGN="left"><B>Status</B></DIV></TD><TD WIDTH="36%"><B>Platform</B></TD><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<TR> <TD ALIGN=RIGHT VALIGN=TOP WIDTH="7%"> <DIV ALIGN="left"><B>Status</B></DIV></TD><TD WIDTH="36%"><B>Platform</B></TD><?php column($_SERVER["SERVER_NAME"]); ?> 
 </TR> %icubase% </TABLE><TABLE BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > 
 <TR> <TD COLSPAN="2">&nbsp;</TD></TR> </TABLE><table border=0 cellspacing=5 cellpadding=2 width="100%" > 
 <tr> <td align=LEFT valign=TOP colspan="3" bgcolor="#999999"><b><font color="#FFFFFF" face="Arial,Helvetica">Platform 
@@ -176,14 +176,14 @@ and no programmer documentation. The Java development tools and Plug-in Developm
 Environment are NOT included. You can use these drops to help you package your 
 tool plug-ins for redistribution when you don't want to ship the entire SDK.</p></td></tr> 
 </table><table border=0 cellspacing=2 cellpadding=0 width="100%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
 </tr> %runtime% </table><table border=0 cellspacing=5 cellpadding=2 width="100%" > 
 <tr> <td colspan="2">&nbsp;</td></tr> </table><table border=0 cellspacing=5 cellpadding=2 width="100%" > 
 <tr> <td align=LEFT valign=TOP colspan="3" bgcolor="#999999"><b><font color="#FFFFFF" face="Arial,Helvetica">Platform 
 SDK </font></b></td></tr> <tr> <td height="48" colspan="2"> <p>These drops contain 
 the Eclipse Platform Runtime binary with associated source and programmer documentation.</p></td></tr> 
 </table><table border=0 cellspacing=2 cellpadding=0 width="100%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
 </tr> %platformsdk% </table><table border=0 cellspacing=5 cellpadding=2 width="100%" > 
 <tr> <td colspan="2">&nbsp;</td></tr> </table><table border=0 cellspacing=5 cellpadding=2 width="100%" > 
 <tr> <td align=LEFT valign=TOP colspan="3" bgcolor="#999999"><b><font color="#FFFFFF" face="Arial,Helvetica">JDT 
@@ -192,20 +192,20 @@ drops contain the Java development tools plug-ins only, with user documentation
 and no source and no programmer documentation. The Eclipse platform and Plug-in 
 development environment are NOT included. You can combine this with the Platform 
 Runtime Binary if your tools rely on the JDT being present.</p></td></tr> </table><table border=0 cellspacing=2 cellpadding=0 width="100%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
 </tr> %jdt% </table><table border=0 cellspacing=5 cellpadding=2 width="100%" > 
 <tr> <td colspan="2" height="2">&nbsp;</td></tr> </table><table border=0 cellspacing=5 cellpadding=2 width="100%" > 
 <tr> <td align=LEFT valign=TOP colspan="3" bgcolor="#999999"><b><font color="#FFFFFF" face="Arial,Helvetica">JDT 
 SDK </font></b></td></tr> <tr> <td height="48" colspan="2"> <p>These drops contain 
 the JDT Runtime binary with associated source and programmer documentation.</p></td></tr> 
 </table><table border=0 cellspacing=2 cellpadding=0 width="100%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
 </tr> %jdtsdk% </table><table border=0 cellspacing=5 cellpadding=2 width="100%" > 
 <tr> <td colspan="2" height="2">&nbsp;</td></tr> </table><TABLE BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > 
 <TR> <TD ALIGN=LEFT VALIGN=TOP COLSPAN="3" BGCOLOR="#999999"><B><FONT COLOR="#FFFFFF" FACE="Arial,Helvetica">JDT 
 Core Batch Compiler</FONT></B></TD></TR> <TR> <TD HEIGHT="48" COLSPAN="2"> <P>These drops contain the standalone batch java compiler, Ant compiler adapter and associated source.  The batch compiler and Ant adapter (ecj.jar) are extracted from the org.eclipse.jdt.core plug-in   as a 1.2MB download. For examples of usage, please refer to this help section: JDT Plug-in Developer Guide&gt;Programmer's Guide&gt;JDT Core&gt;Compiling Java code.<BR></P></TD></TR> 
 </TABLE><TABLE BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="100%" BORDERCOLOR="#999999" > 
-<TR> <TD ALIGN=RIGHT VALIGN=TOP WIDTH="7%"> <DIV ALIGN="left"><B>Status</B></DIV></TD><TD WIDTH="36%"><B>Platform</B></TD><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<TR> <TD ALIGN=RIGHT VALIGN=TOP WIDTH="7%"> <DIV ALIGN="left"><B>Status</B></DIV></TD><TD WIDTH="36%"><B>Platform</B></TD><?php column($_SERVER["SERVER_NAME"]); ?> 
 </TR> %jdtc% </TABLE><TABLE BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > 
 <TR> <TD COLSPAN="2" HEIGHT="2">&nbsp;</TD></TR> </TABLE><table border=0 cellspacing=5 cellpadding=2 width="100%" > 
 <tr> <td align=LEFT valign=TOP colspan="3" bgcolor="#999999"><b><font color="#FFFFFF" face="Arial,Helvetica">PDE 
@@ -214,13 +214,13 @@ drops contain the Plug-in Development Enviroment plug-ins only, with user docume
 The Eclipse platform and Java development tools are NOT included. You can combine 
 this with the Platform and JDT Runtime Binary or SDK if your tools rely on the 
 PDE being present.</p></td></tr> </table><table border=0 cellspacing=2 cellpadding=0 width="100%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
 </tr> %pde% </table><table border=0 cellspacing=5 cellpadding=2 width="100%" > 
 <tr> <td colspan="2" height="2">&nbsp;</td></tr> </table><table border=0 cellspacing=5 cellpadding=2 width="100%" > 
 <tr> <td align=LEFT valign=TOP colspan="3" bgcolor="#999999"><b><font color="#FFFFFF" face="Arial,Helvetica">PDE 
 SDK </font></b></td></tr> <tr> <td height="48" colspan="2"> These drops contain 
 the PDE Runtime Binary with associated source. </td></tr> </table><table border=0 cellspacing=2 cellpadding=0 width="100%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
 %pdesdk% </table><table border=0 cellspacing=5 cellpadding=2 width="100%" > <tr> 
 <td colspan="2" height="2">&nbsp;</td></tr> </table><table border=0 cellspacing=5 cellpadding=2 width="100%" > 
 <tr> <td align=LEFT valign=TOP colspan="3" bgcolor="#999999"><b><font color="#FFFFFF" face="Arial,Helvetica">FTP 
@@ -228,7 +228,7 @@ and WebDAV Support</font></b></td></tr> <tr> <td colspan="2"> <p>These drops con
 the FTP and WebDAV target management support plug-ins. You can combine this with 
 the Platform Runtime Binary or Eclipse SDK. Includes both source code and binary.</p></td></tr> 
 </table><table border=0 cellspacing=2 cellpadding=0 width="100%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
 </tr> %teamextras% </table><table border=0 cellspacing=5 cellpadding=2 width="100%" > 
 <tr> <td colspan="2">&nbsp;</td></tr> </table><table border=0 cellspacing=5 cellpadding=2 width="100%" > 
 <tr> <td align=LEFT valign=TOP colspan="3" bgcolor="#999999"><b><font color="#FFFFFF" face="Arial,Helvetica"><A NAME="swt"></A>SWT 
@@ -241,7 +241,7 @@ library to the java.library.path. For example, if you extract the download below
 to C:\SWT you would launch the HelloWorld application with the following command: 
 </p><pre><code> java -classpath C:\SWT\swt.jar;C:\MyApp\helloworld.jar -Djava.library.path=C:\SWT 
 HelloWorld </code></pre></td></tr> </table><table border=0 cellspacing=2 cellpadding=0 width="100%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
 </tr> %swt% </table><table border=0 cellspacing=5 cellpadding=2 width="100%" > 
 <tr> <td colspan="2">&nbsp;</td></tr> </table><table border=0 cellspacing=5 cellpadding=2 width="100%" > 
 <tr> <td align=LEFT valign=TOP colspan="3" bgcolor="#999999"><b><font face="Arial,Helvetica" color="#FFFFFF">org.eclipse.releng.tools 
@@ -269,7 +269,7 @@ files. Copyrights will be updated automatically where the tool deems appropriate
 A copyright.log file will be written to the workspace directory noting odd conflicts 
 that need to be looked at. You need to commit the changes yourself. This is the 
 tool that was used to do the 2.1 Copyright pass.</li></ol></td></tr> </table><table border=0 cellspacing=2 cellpadding=0 width="100%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($HTTP_SERVER_VARS["SERVER_NAME"]); ?> 
+<tr> <td align=RIGHT valign=TOP width="7%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
 </tr> %relengtools% </table><table border=0 cellspacing=5 cellpadding=2 width="100%" > 
 <tr> <td colspan="2"> <p>&nbsp;</p></td></tr> </table><p>&nbsp;</p>
 
