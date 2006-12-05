@@ -120,7 +120,7 @@ These logs only need to be checked if the org.eclipse.releng.tests above report 
 These logs contain the console output captured while running the JUnit automated tests.
 </li>
 <li>
-<b> Doc Logs </b>
+<b> Javadoc Logs </b>
 <ul><?php
 		 $hasNotes = false;
 
@@ -149,7 +149,10 @@ These logs contain the console output captured while running the JUnit automated
 		 if (!$hasNotes) {
 		 		 echo "<br>There are no javadoc logs for this build.";
 		 }
-?></ul>
+?>
+<li> <a href="<a href=\"testresults/versionstool/results.xml"><b> Versioning Compare Tool Output Logs </b></a>
+This log contains the output of tool that compares this build with 3.2.1.
+</li></ul>
 </li>
 </div>
 </div>
