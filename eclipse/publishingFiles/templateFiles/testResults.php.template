@@ -119,8 +119,8 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 </li>
 <li>
 <a href="buildLogs.php"><b> Doc Logs </b></a></li>
-<li> <a href="<a href=\"testresults/versionstool/results.xml"><b> Versioning Compare Tool Output Logs </b></a>
-This log contains this build's versions with that of 3.2.1.
+<li><a href="testresults/versionstool/results.xml"><b> Versioning Compare Tool Output Logs </b></a>
+This log compares the build's plugin and features versions with 3.2.1.
 </li>
 </div>
 
