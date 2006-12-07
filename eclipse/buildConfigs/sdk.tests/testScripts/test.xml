@@ -298,8 +298,7 @@
 		<move todir="${results}/chkpii" includeEmptyDirs="no" failonerror="false">
 			<fileset dir="${results}/chkpii"/>
 			<mapper type="glob" from="*" to="${platform}_*"/>
-		</move>
-		<move todir="${results}/versionstool/results.xml" file="${results}/results.xml" failonerror="false"/>
+		</move>		
 	</target>
 
 	<target name="ua" description="Runs the org.eclipse.ua.tests test.xml">
