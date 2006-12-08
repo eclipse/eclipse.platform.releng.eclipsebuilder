@@ -150,7 +150,7 @@ These logs contain the console output captured while running the JUnit automated
 		 		 echo "<br>There are no javadoc logs for this build.";
 		 }
 ?>
-<li> <a href="<a href=\"testresults/versionstool/results.xml"><b> Versioning Compare Tool Output Logs </b></a>
+<li> <a href="<a href=\"testresults/versiontool/results.xml"><b> Versioning Compare Tool Output Logs </b></a>
 This log contains the output of tool that compares this build with 3.2.1.
 </li></ul>
 </li>
