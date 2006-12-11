@@ -151,8 +151,12 @@ These logs contain the console output captured while running the JUnit automated
 		 }
 ?>
 </ul>
-<li> <a href=\"testresults/versiontool/results.xml"><b> Versioning Compare Tool Output Logs </b></a>
-This log contains the output of tool that compares this build with 3.2.1.
+<?php if (! (preg_match("/N/i",$buildName))) {
+echo " <li><a href=\"testresults/versiontool/results.xml\"><b> Versioning Compare Tool Output Logs </b></a>";
+echo "This log compares the build's plugin and features versions with 3.2.1. </li> ";
+}
+?>
+
 </li>
 </li>
 </div>
