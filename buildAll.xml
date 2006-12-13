@@ -172,10 +172,11 @@
 			jvm="${java15-home}/bin/java"
 			failonerror="true"
 			maxmemory="512m"
-			dir="${buildDirectory}">
+			dir="${buildDirectory}"
+	   		logerror="true">
 			<jvmarg value="-Dorg.eclipse.update.jarprocessor.pack200=${eclipse.build.configs}/../../extras"/>
 			<arg line="-application org.eclipse.update.core.siteOptimizer"/>
-			<arg line="-jarProcessor -outputDir ${buildLabel} -processAll -pack ${repack} ${packtmp}/${archiveName}"/>
+			<arg line="-jarProcessor -verbose -outputDir ${buildLabel} -processAll -pack ${repack} ${packtmp}/${archiveName}"/>
        </java>
 	
 	<!--	<delete dir="${packtmp}" /> -->
