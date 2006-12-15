@@ -171,7 +171,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<condition property="newVersionQualifier" value="${forceContextQualifier}" else="${org.eclipse.jdt.debug}">
 			<isset property="forceContextQualifier"/>
 		</condition>
-		<replace file="${buildDirectory}/features/org.eclipse.platform.launchers/bin/carbon/macosx/ppc/Eclipse.app/Contents/MacOS/eclipse.ini" >
+		<replace file="${buildDirectory}/features/org.eclipse.equinox.executable/bin/carbon/macosx/ppc/Eclipse.app/Contents/MacOS/eclipse.ini" >
 			<replacefilter token="@qualifier@" value="${newVersionQualifier}"/>
 		</replace>
 	</target>
@@ -182,9 +182,9 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="postFetch">
 		<ant antfile="${genericTargets}" target="fetchElement">
 			<property name="type" value="feature" />
-			<property name="id" value="org.eclipse.platform.launchers" />
+			<property name="id" value="org.eclipse.equinox.executable" />
 		</ant>
-		<zip zipfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/features/org.eclipse.platform.launchers" includes="library/" />
+		<zip zipfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/features/org.eclipse.equinox.executable" includes="library/" />
 
 		<!--adjust macosx eclipse.ini file -->
 		<antcall target="adjustIniFile"/>

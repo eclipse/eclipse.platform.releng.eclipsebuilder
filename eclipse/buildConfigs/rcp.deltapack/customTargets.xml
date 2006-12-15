@@ -8,7 +8,7 @@
 <target name="allElements">
 	<ant antfile="${genericTargets}" target="${target}" >
 		<property name="type" value="feature" />
-		<property name="id" value="org.eclipse.platform.launchers" />
+		<property name="id" value="org.eclipse.equinox.executable" />
 	</ant>
 </target>
 
@@ -20,14 +20,14 @@
 <!-- ===================================================================== -->
 
 <!-- POST STEPS TO ADD -->
-<target name="assemble.org.eclipse.platform.launchers">
-		 <property name="feature.destination" value="${buildDirectory}/features/org.eclipse.platform.launchers"/>
+<target name="assemble.org.eclipse.equinox.executable">
+		 <property name="feature.destination" value="${buildDirectory}/features/org.eclipse.equinox.executable"/>
 		 <antcall target="assemble" />
 </target>
 
 <target name="assemble">
 	<property name="archiveName" value="eclipse-RCP-${buildId}-delta-pack.zip"/>
-    <ant target="zip.distribution" antfile="build.xml" dir="${buildDirectory}/features/org.eclipse.platform.launchers"/>
+    <ant target="zip.distribution" antfile="build.xml" dir="${buildDirectory}/features/org.eclipse.equinox.executable"/>
     <ant antfile="package.xml" dir="${eclipse.pdebuild.scripts}" inheritAll="false">
       <property name="buildDirectory" value="${buildDirectory}"/>
       <property name="postingDirectory" value="${postingDirectory}"/>
@@ -38,7 +38,7 @@
 
 	<!-- get startup.jar from org.eclipse.platform of current build -->
 	<unzip src="${buildDirectory}/deltapacktmp/workingPlace/${buildId}/${archiveName}" dest="${buildDirectory}/deltapacktmp/workingPlace/${buildId}"/>
-    <copy file="${tempDirectory}/plugins/org.eclipse.platform/startup.jar" todir="${buildDirectory}/deltapacktmp/workingPlace/${buildId}/eclipse/features/org.eclipse.platform.launchers_3.2.0/bin"/>
+ <!--   <copy file="${tempDirectory}/plugins/org.eclipse.platform/startup.jar" todir="${buildDirectory}/deltapacktmp/workingPlace/${buildId}/eclipse/features/org.eclipse.equinox.executable_1.0.0/bin"/>-->
 	<!--HACK to workaround bug 100460.  Add legal root files.-->
     <copy todir="${buildDirectory}/deltapacktmp/workingPlace/${buildId}/eclipse">
     	<fileset dir="${builder}/scripts" includes="epl-v10.html,notice.html" />

@@ -350,6 +350,23 @@
 		</antcall>
 	</target>
 
+	<target name="jdtcompilertool">
+		<condition property="jvm" value="${J2SE-6.0}">
+			<isset property="J2SE-6.0"/>
+		</condition>
+		<!--only run test if J2SE-6.0 property  set-->
+		<condition property="skip.test">
+			<not>
+				<isset property="J2SE-6.0" />
+			</not>
+		</condition>
+		<antcall target="runtests" >
+			<param name="testPlugin" value="${org.eclipse.jdt.compiler.tool.tests}" />
+			<param name="report" value="org.eclipse.jdt.compiler.tool.tests" />
+			<param name="testPluginsRequired" value="**/${org.eclipse.jdt.compiler.tool.tests}/* ${org.eclipse.jdt.compiler.tool.tests.prerequisite.testplugins}" />
+		</antcall>
+	</target>
+	
 	<target name="jdtcoremodel">
 		<condition property="jvm" value="${J2SE-5.0}">
 			<isset property="J2SE-5.0"/>
@@ -508,6 +525,7 @@
 		<antcall target="coreexpressions" />
 		<antcall target="update" />
 		<antcall target="teamcore" />
+		<antcall target="jdtcompilertool" />
 		<antcall target="jdtcoreperf" />
 		<antcall target="jdtcorebuilder" />
 		<antcall target="jdtcorecompiler" />

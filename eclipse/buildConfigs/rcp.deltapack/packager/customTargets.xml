@@ -22,7 +22,7 @@
 	
 	<!--work-around for bug 132204-->
 	<exec executable="zip" dir="${tempDirectory}">
-		<arg line="${archiveFullPath} -r . -i eclipse/features/org.eclipse.platform.launchers**" />
+		<arg line="${archiveFullPath} -r . -i eclipse/features/org.eclipse.equinox.executable**" />
 	</exec>
 	<checksum file="${archiveFullPath}" property="md5"/>
 	<checksum file="${archiveFullPath}" algorithm="SHA" property="sha"/>

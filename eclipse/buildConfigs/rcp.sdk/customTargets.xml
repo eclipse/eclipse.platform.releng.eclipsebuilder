@@ -163,7 +163,7 @@
 	<target name="postFetch">
 		<ant antfile="${genericTargets}" target="fetchElement">
 			<property name="type" value="feature" />
-			<property name="id" value="org.eclipse.platform.launchers" />
+			<property name="id" value="org.eclipse.equinox.executable" />
 		</ant>
 		<!--fetch and compile swt tools-->
 		<ant antfile="genericTargets.xml" dir="${eclipse.pdebuild.scripts}" target="fetchElement">
@@ -203,7 +203,7 @@
 	<!-- Steps to do before assembling -->
 	<!-- ===================================================================== -->
 	<target name="preAssemble">
-		<zip zipfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/features/org.eclipse.platform.launchers" includes="library/" />
+		<zip zipfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/features/org.eclipse.equinox.executable" includes="library/" />
 	</target>
 
 	<!-- ===================================================================== -->

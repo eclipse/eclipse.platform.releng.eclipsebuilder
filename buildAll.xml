@@ -109,7 +109,7 @@
 	
 	<target name="buildMasterRootFeature">
 		<ant antfile="build.xml" dir="${basedir}" target="main">
-			<property name="component" value="${eclipse.build.configs}/org.eclipse.platform.launchers" />
+			<property name="component" value="${eclipse.build.configs}/org.eclipse.equinox.executable" />
 		</ant>
 		<ant antfile="build.xml" dir="${basedir}" target="main">
 			<property name="component" value="${eclipse.build.configs}/master-root" />

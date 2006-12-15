@@ -13,7 +13,7 @@
 		<property name="featureOnly" value="true" />
 		<property name="featureAndPlugins" value="true" />
 		<property name="featuresRecursively" value="true" />
-		<ant antfile="fetch_org.eclipse.platform.launchers.xml" />
+		<ant antfile="fetch_org.eclipse.equinox.executable.xml" />
 		<ant antfile="fetch_org.eclipse.sdk.xml" />
 		
 		<!--copy linux motif about_files to in temp location where it will be copied into root of eclipse at assembly time-->
@@ -297,7 +297,7 @@
 		<property name="runPackager" value="true"/>
 
 		<!--indentifies this as a srcFetch build-->
-		<available file="fetch_org.eclipse.platform.launchers.xml" property="srcFetch" />
+		<available file="fetch_org.eclipse.equinox.executable.xml" property="srcFetch" />
 
 		<!-- determines if libraries need to be recompiled for specific platforms -->
 		<condition property="libsconfig">

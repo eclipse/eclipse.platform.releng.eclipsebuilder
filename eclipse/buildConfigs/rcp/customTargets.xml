@@ -168,7 +168,7 @@
 <target name="postFetch">
 	<ant antfile="${genericTargets}" target="fetchElement">
 		<property name="type" value="feature" />
-		<property name="id" value="org.eclipse.platform.launchers" />
+		<property name="id" value="org.eclipse.equinox.executable" />
 	</ant>
 
 	<!--fetch and compile swt tools-->

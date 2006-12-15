@@ -2,6 +2,7 @@
 
 	<target name="customSetup">
 		<antcall target="installVm" />
+		<antcall target="install1.6Vm" />
 		
 		<!--copy the script which sets up environment and invokes the tests on test machine-->
 		<exec dir="." executable="${copyClient}">
@@ -53,6 +54,22 @@
 		</exec>
 		<exec dir="." executable="${loginClient}">
 			<arg line="${testMachine} ${vmInstallCommand5}" />
+		</exec>
+	</target>
+	
+	<target name="install1.6Vm">
+		<property name="testVmTag" value="HEAD" />
+		<!--get and install the vm to test with-->
+		<cvs cvsRoot="${cvsRoot}"
+        	 command="export -r ${testVmTag} ${vmUrl6}"
+        	 dest="${tester}"
+  		/>
+  		
+		<exec dir="${tester}" executable="${copyClient}">
+			<arg line="${vmUrl6} ${testMachine}:${testDir}" />
+		</exec>
+		<exec dir="." executable="${loginClient}">
+			<arg line="${testMachine} ${vmInstallCommand6}" />
 		</exec>
 	</target>
 </project>
