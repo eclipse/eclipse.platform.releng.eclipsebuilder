@@ -227,7 +227,7 @@
 		<property file="${buildDirectory}/finalPluginsVersions.properties" />
 		
 		<!--HACK until https://bugs.eclipse.org/bugs/show_bug.cgi?id=167452 addressed -->
-		<zip destfile="${workingDirectory}/startup.jar">
+		<zip destfile="${workingDirectory}/eclipse/startup.jar">
 	        <fileset dir="${buildDirectory}/plugins/org.eclipse.equinox.launcher/@dot"/>
 	        <fileset dir="${buildDirectory}/plugins/org.eclipse.equinox.launcher" includes="META-INF/"/>
 	    </zip>
