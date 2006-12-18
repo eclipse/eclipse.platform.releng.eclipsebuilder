@@ -224,13 +224,10 @@
 			<fileset dir="${workingDirectory}/eclipse/plugins/org.eclipse.test_3.1.0" />
 		</move>
 
+		<property file="${buildDirectory}/finalPluginsVersions.properties" />
+		
 		<!--HACK until https://bugs.eclipse.org/bugs/show_bug.cgi?id=167452 addressed -->
-		<copy todir="${workingDirectory}/eclipse">
-		    <fileset dir="${workingDirectory}/eclipse/plugins" includes="org.eclipse.equinox.launcher_*.jar"/>
-		</copy>
-   	    <move tofile="${workingDirectory}/eclipse/startup.jar">
-		    <fileset dir="${workingDirectory}/eclipse" includes="org.eclipse.equinox.launcher_*.jar" />
-		</move>
+		<copy tofile="${workingDirectory}/eclipse/startup.jar" file="${workingDirectory}/eclipse/plugins/org.eclipse.equinox.launcher_${org.eclipse.equinox.launcher}.jar"/>
 		
 		<!--the Ant move task leaves behind an empty directory-->
 		<delete dir="${workingDirectory}/eclipse/plugins/${org.eclipse.test}" includeEmptyDirs="true" />
