@@ -227,7 +227,10 @@
 		<property file="${buildDirectory}/finalPluginsVersions.properties" />
 		
 		<!--HACK until https://bugs.eclipse.org/bugs/show_bug.cgi?id=167452 addressed -->
-		<copy tofile="${workingDirectory}/eclipse/startup.jar" file="${workingDirectory}/eclipse/plugins/org.eclipse.equinox.launcher_${org.eclipse.equinox.launcher}.jar"/>
+		<zip destfile="${workingDirectory}/startup.jar">
+	        <fileset dir="${buildDirectory}/plugins/org.eclipse.equinox.launcher/@dot"/>
+	        <fileset dir="${buildDirectory}/plugins/org.eclipse.equinox.launcher" includes="META-INF/"/>
+	    </zip>
 		
 		<!--the Ant move task leaves behind an empty directory-->
 		<delete dir="${workingDirectory}/eclipse/plugins/${org.eclipse.test}" includeEmptyDirs="true" />
