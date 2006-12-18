@@ -110,15 +110,7 @@
 			<contains string="${runtimeArchive}" substring=".tar.gz" />
 		</condition>
 		<antcall target="${setupTarget}" />
-		
-		<!--HACK until https://bugs.eclipse.org/bugs/show_bug.cgi?id=167452 addressed -->
-		<copy todir="${eclipse-home}">
-		    <fileset dir="${eclipse-home}/plugins" includes="org.eclipse.equinox.launcher_*.jar"/>
-		</copy>
-   	    <move tofile="${eclipse-home}/startup.jar">
-		    <fileset dir="${eclipse-home}" includes="org.eclipse.equinox.launcher_*.jar" />
-		</move>
-		
+				
 		<antcall target="configureTeamTest" />
 	</target>
 
