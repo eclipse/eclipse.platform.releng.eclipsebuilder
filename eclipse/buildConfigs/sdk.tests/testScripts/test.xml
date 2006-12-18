@@ -8,7 +8,7 @@
 	<property file="label.properties" />
 
 	<!--default directory where test-eclipse will be installed-->
-	<property name="install" value="${basedir}/test-eclipse" />
+	<property name="install" value="/N" />
 
 	<!--suffix added to report name to identify which platform tests results come from-->
 	<property name="platform" value="${os}.${ws}.${arch}" />
@@ -110,9 +110,27 @@
 			<contains string="${runtimeArchive}" substring=".tar.gz" />
 		</condition>
 		<antcall target="${setupTarget}" />
+		
+		<!--HACK until https://bugs.eclipse.org/bugs/show_bug.cgi?id=167452 addressed -->
+		<copy todir="${eclipse-home}">
+		    <fileset dir="${eclipse-home}/plugins" includes="org.eclipse.equinox.launcher_*.jar"/>
+		</copy>
+   	    <move tofile="${eclipse-home}/startup.jar">
+		    <fileset dir="${eclipse-home}" includes="org.eclipse.equinox.launcher_*.jar" />
+		</move>
+		
 		<antcall target="configureTeamTest" />
 	</target>
 
+	<target name="foo">
+		<copy todir="${eclipse-home}">
+		    <fileset dir="${eclipse-home}/plugins" includes="org.eclipse.equinox.launcher_*.jar"/>
+		</copy>
+   	    <move tofile="${eclipse-home}/startup.jar">
+		    <fileset dir="${eclipse-home}" includes="org.eclipse.equinox.launcher_*.jar" />
+		</move>
+	</target>
+	
 	<!--setup for zip archives-->
 	<target name="setup-zip" description="Reinstall the test Eclipse installation if specified by user">
 		<delete dir="${install}" />
