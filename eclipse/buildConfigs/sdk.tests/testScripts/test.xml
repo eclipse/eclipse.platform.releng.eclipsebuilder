@@ -122,15 +122,6 @@
 		<antcall target="configureTeamTest" />
 	</target>
 
-	<target name="foo">
-		<copy todir="${eclipse-home}">
-		    <fileset dir="${eclipse-home}/plugins" includes="org.eclipse.equinox.launcher_*.jar"/>
-		</copy>
-   	    <move tofile="${eclipse-home}/startup.jar">
-		    <fileset dir="${eclipse-home}" includes="org.eclipse.equinox.launcher_*.jar" />
-		</move>
-	</target>
-	
 	<!--setup for zip archives-->
 	<target name="setup-zip" description="Reinstall the test Eclipse installation if specified by user">
 		<delete dir="${install}" />
