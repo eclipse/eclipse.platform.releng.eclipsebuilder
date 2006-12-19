@@ -173,7 +173,8 @@
 			failonerror="true"
 			maxmemory="512m"
 			dir="${buildDirectory}"
-	   		logerror="true">
+	   		logerror="true"
+	   		output="${buildDirectory}/packlog.txt">
 			<jvmarg value="-Dorg.eclipse.update.jarprocessor.pack200=${eclipse.build.configs}/../../extras"/>
 			<arg line="-application org.eclipse.update.core.siteOptimizer"/>
 			<arg line="-jarProcessor -verbose -outputDir ${buildLabel} -processAll -pack ${repack} ${packtmp}/${archiveName}"/>
