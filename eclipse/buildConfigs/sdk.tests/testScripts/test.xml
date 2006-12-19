@@ -138,6 +138,7 @@
 		<exec dir="." executable="unzip">
 			<arg line="-o -qq eclipse-junit-tests-*.zip
 				${derby}
+				eclipse/startup.jar
 				eclipse/plugins/org.eclipse.test/*
 				eclipse/plugins/org.eclipse.test.performance_*/*
 				eclipse/plugins/org.eclipse.test.performance.win32_*/*
