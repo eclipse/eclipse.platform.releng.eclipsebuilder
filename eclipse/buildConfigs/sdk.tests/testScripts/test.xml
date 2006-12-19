@@ -526,7 +526,7 @@
 		<antcall target="coreexpressions" />
 		<antcall target="update" />
 		<antcall target="teamcore" />
-		<antcall target="jdtcompilertool" />
+		<!--antcall target="jdtcompilertool" /-->
 		<antcall target="jdtcoreperf" />
 		<antcall target="jdtcorebuilder" />
 		<antcall target="jdtcorecompiler" />
