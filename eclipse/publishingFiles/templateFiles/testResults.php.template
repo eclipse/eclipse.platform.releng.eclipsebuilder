@@ -43,9 +43,13 @@ captured while running the JUnit automated tests. <br><br>
 
 
 
+<br> <table border=0 cellspacing=5 cellpadding=2 width="100%" > 
+<tr> <td align=LEFT valign=TOP colspan="3" bgcolor="#0080C0"><b><font color="#FFFFFF" face="Arial,Helvetica"> 
+Versioning Compare Tool</font></b></td></tr> 
+</table><br>
 <?php if (! (preg_match("/N/i",$buildName))) {
-echo " <li><a href=\"testresults/versiontool/results.xml\"><b> Versioning Compare Tool Output Logs </b></a>";
-echo "This log compares the build's plugin and features versions with 3.2.1. </li> ";
+echo " <a href=\"testresults/versiontool/results.xml\"><b> Versioning Compare Tool Output Logs </b></a>";
+echo "This log compares the build's plugin and features versions with 3.2.1. ";
 }
 ?>
 
