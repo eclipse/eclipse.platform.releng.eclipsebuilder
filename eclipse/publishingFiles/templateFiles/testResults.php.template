@@ -39,7 +39,19 @@ if the org.eclipse.releng.tests above report a test failures. <?php if (! (preg_
 <br> <br> <table border=0 cellspacing=5 cellpadding=2 width="100%" > <tr> <td align=LEFT valign=TOP colspan="3" bgcolor="#0080C0"><b><font color="#FFFFFF" face="Arial,Helvetica"> 
 Console output logs <?php echo "$buildType $buildName"; ?> </font></b></td></tr> 
 </table><br> These <a href="consoleLogs.php">logs</a> contain the console output 
-captured while running the JUnit automated tests. <br><br> <br> <table border=0 cellspacing=5 cellpadding=2 width="100%" > 
+captured while running the JUnit automated tests. <br><br>
+
+
+
+<?php if (! (preg_match("/N/i",$buildName))) {
+echo " <li><a href=\"testresults/versiontool/results.xml\"><b> Versioning Compare Tool Output Logs </b></a>";
+echo "This log compares the build's plugin and features versions with 3.2.1. </li> ";
+}
+?>
+
+
+
+ <br> <table border=0 cellspacing=5 cellpadding=2 width="100%" > 
 <tr> <td align=LEFT valign=TOP colspan="3" bgcolor="#0080C0"><b><font color="#FFFFFF" face="Arial,Helvetica"> 
 Internal References Check <?php echo "$buildType $buildName"; ?> </font></b></td></tr> 
 </table><br> This <a href="internalReference/index.html">report</a> contains the 
