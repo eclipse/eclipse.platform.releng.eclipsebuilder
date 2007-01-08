@@ -15,6 +15,8 @@
 		</zipType>
 
 		<zipType name="ExtraBundles">
+			<platform id="common" name="All" fileName="@org.eclipse.equinox.app@.jar">
+			</platform>
 			<platform id="common" name="All" fileName="@org.eclipse.equinox.common@.jar">
 			</platform>
 			<platform id="device" name="All" fileName="@org.eclipse.equinox.device@.jar">

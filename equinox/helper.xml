@@ -97,6 +97,9 @@
 
 	<target name="updateTestManifests">
 		<antcall target="updateTestManifest">
+			<param name="bundle.id" value="org.eclipse.equinox.app"/>
+		</antcall>
+		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.supplement"/>
 		</antcall>
 		<antcall target="updateTestManifest">
