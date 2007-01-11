@@ -24,11 +24,7 @@
 						</not>
 					</condition>
 				</fail>
-		
-                <condition property="compilerArg" value="-encoding ISO-8859-1">
-                        <equals arg1="${build.compiler}" arg2="org.eclipse.jdt.core.JDTCompilerAdapter" />
-	            </condition>  
-		
+				
                 <echo message="compilerArg ${compilerArg}"/>
                 <echo message="build compiler ${build.compiler}"/>
 
