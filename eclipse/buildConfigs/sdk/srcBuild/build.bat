@@ -16,7 +16,7 @@ if x%1==x goto usage
 REM process all command line parameters
 :loop
 if x%1==x goto checkvars
-if x%1==x-installOs set installOs=%2
+if x%1==x-os set installOs=%2
 if x%1==x-ws set ws=%2
 if x%1==x-java5home set java5home="-Djava5.home=%2"
 if x%1==x-bc set bootclasspath="-Dbootclasspath=%2"
