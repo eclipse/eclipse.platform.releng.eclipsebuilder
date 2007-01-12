@@ -1,0 +1,144 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="http://dev.eclipse.org/default_style.css" type="text/css">
+<title>WTP automated testing</title>
+</head>
+
+<body>
+<table BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" >
+ <tr>
+  <td ALIGN=LEFT width="80%"> 
+   <p><b><font face="Verdana" size="+3">API Scanner</font></b><br>
+   Last Updated: Jan. 31, 2005</p>
+   <p>This is a how-to document for the API scanner. You can find the requirements document
+   <a href="http://dev.eclipse.org/viewcvs/index.cgi/working/apitools/api-usage-checking.html?rev=HEAD&content-type=text/plain&cvsroot=WebTools_Project">here</a>
+   and the design document <a href="http://dev.eclipse.org/viewcvs/index.cgi/working/apitools/api-usage-checking-design.html?rev=HEAD&content-type=text/plain&cvsroot=WebTools_Project">here</a>.</p>
+  </td>
+ </tr> 
+</table>
+
+<table border=0 cellspacing=5 cellpadding=2 width="100%" >
+ <tr>
+  <td align=LEFT valign=TOP colspan="3" bgcolor="#0080C0"> <b><font face="Arial,Helvetica" color="#FFFFFF">Running the API scanner</font></b></td>
+ </tr>
+ <TR>
+  <TD align="LEFT" valign="TOP">
+  <p>The goal of API scanner is to identify usages of internal APIs in any Eclipse-based products.
+  <p>Downloads:
+   <ul>
+    <li><a href="./apiscanner.zip">Download the API scanner.</a></li>
+    <li><a href="http://dev.eclipse.org/viewcvs/index.cgi/working/apitools/components/?cvsroot=WebTools_Project">Sample component.xml files for Eclipse, EMF, GEF, JEM and WTP.</a></li>
+   </ul>
+  </p>
+  <p>The API scanner has two required inputs:
+   <ol>
+    <li>Location of your Eclipse install directory.</li>
+    <li>Location of your component.xml files.</li>
+   </ol>
+   To generate a report of API violations:
+   <pre>
+genViolation.bat -eclipseDir &lt;eclipseDir> -compXMLDir &lt;compXMLDir> [-options]
+
+        -eclipseDir     space seperated list of directories containing Eclipse plugins
+        -compXMLDir     directories containing component.xml that will be checked for API violations
+
+where options include:
+        -compRefDir     &lt;compRefDir>    directories containing component.xml being referenced
+        -compVioDir     &lt;compVioDir>    output directory of component-violation.xml
+        -include        &lt;include>       space seperated packages to include
+        -exclude        &lt;exclude>       space seperated packages to exclude
+        -xsl            &lt;xsl>           use this stylesheet to transform component-violation.xml
+        -summaryXSL     &lt;summaryXSL>    use this stylesheet to transform violation summary
+        -genAPI                         generate component-api.xml
+        -genUsage                       generate component-use.xml
+   </pre>
+   Note: genViolation.bat uses a relative path. Therefore, if you want to run it out-of-the-box, we must "cd" to genViolation.bat's directory before running genViolation.bat
+  </p>
+  <p>
+   Here's an example:
+   <pre>
+genViolation.bat -eclipseDir D:/wtp_v10m2/eclipse -compXMLDir D:/temp/apiscanner/wtp-components -compRefDir D:/temp/apiscanner/wtp-component-refs -compVioDir D:/temp/apiscanner/output -include org.eclipse. -exclude org.eclipse.wst. org.eclipse.jst. sun. -xsl D:/temp/apiscanner/xsl/component-violation.xsl -summaryXSL D:/temp/apiscanner/xsl/component-violation-summary.xsl -genAPI -genUsage
+   </pre>
+  </p>
+  </TD>
+ </TR>
+</table>
+
+<table border=0 cellspacing=5 cellpadding=2 width="100%" >
+ <tr>
+  <td align=LEFT valign=TOP colspan="3" bgcolor="#0080C0"> <b><font face="Arial,Helvetica" color="#FFFFFF">Generating sample component.xml files</font></b></td>
+ </tr>
+ <TR>
+  <TD align="LEFT" valign="TOP">
+  <p>To get you started more quickly, the API scanner can help you create sample component.xml files.
+   <pre>
+genComponent.bat -eclipseDir D:/wtp_v10m2/eclipse -compXMLDir D:/temp/apiscanner/output-components
+   </pre>
+   If you don't specify the -props option, the API scanner will generate one component.xml file per plugin.
+   The -props option allows you to group plugins into a component using a properties file. Here's a sample properties file for this purpose:
+   <pre>
+emf=org.eclipse.emf.codegen.ecore.ui \
+ org.eclipse.emf.codegen.ecore \
+ org.eclipse.emf.codegen.ui \
+ org.eclipse.emf.codegen \
+ org.eclipse.emf.common.ui \
+ org.eclipse.emf.common \
+ org.eclipse.emf.ecore.change.edit \
+ org.eclipse.emf.ecore.change \
+ org.eclipse.emf.ecore.edit \
+ org.eclipse.emf.ecore.editor \
+ org.eclipse.emf.ecore.xmi \
+ org.eclipse.emf.ecore \
+ org.eclipse.emf.edit.ui \
+ org.eclipse.emf.edit \
+ org.eclipse.emf.mapping.ecore2ecore.editor \
+ org.eclipse.emf.mapping.ecore2ecore \
+ org.eclipse.emf.mapping.ui \
+ org.eclipse.emf.mapping.xsd2ecore.editor \
+ org.eclipse.emf.mapping.xsd2ecore \
+ org.eclipse.emf.mapping \
+ org.eclipse.emf
+
+sdo=org.eclipse.emf.commonj.sdo \
+ org.eclipse.emf.ecore.sdo.edit \
+ org.eclipse.emf.ecore.sdo.editor \
+ org.eclipse.emf.ecore.sdo \
+
+xsd=org.eclipse.xsd.edit \
+ org.eclipse.xsd.editor \
+ org.eclipse.xsd
+
+jem=com.ibm.etools.emf.event \
+ com.ibm.wtp.common.util \
+ com.ibm.wtp.emf.workbench \
+ org.eclipse.jem.beaninfo \
+ org.eclipse.jem.proxy \
+ org.eclipse.jem.ui \
+ org.eclipse.jem.workbench \
+ org.eclipse.jem
+   </pre>
+Here's an example of using the -props option:
+   <pre>
+genComponent.bat -eclipseDir D:/wtp_v10m2/eclipse -compXMLDir D:/temp/apiscanner/output-components -props D:/temp/apiscanner/data/wtp.properties
+   </pre>
+  </p>
+  </TD>
+ </TD>
+</table>
+
+<table border=0 cellspacing=5 cellpadding=2 width="100%" >
+ <tr>
+  <td align=LEFT valign=TOP colspan="3" bgcolor="#0080C0"> <b><font face="Arial,Helvetica" color="#FFFFFF">Contact</font></b></td>
+ </tr>
+ <TR>
+  <TD align="LEFT" valign="TOP">
+  <p>If you have any questions using this tool, please contact <a href="mailto:jeffliu@ca.ibm.com">Jeff Liu</a>.
+  </p>
+  </TD>
+ </TR>
+</table>
+
+</body>
+</html>
