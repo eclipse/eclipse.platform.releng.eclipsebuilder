@@ -97,11 +97,19 @@
 
 	<zipType name="PDE Runtime">
 		<platform id="PDE" name="All" fileName="eclipse-PDE-@build@.zip"></platform>
-	</zipType>
+	</zipType>	
 
 	<zipType name="PDE SDK">
 		<platform id="PDESDK" name="All" fileName="eclipse-PDE-SDK-@build@.zip"></platform>
 	</zipType>
+	
+	<zipType name="CVS Runtime">
+		<platform id="CVS" name="All" fileName="eclipse-CVS-Client-@build@.zip"></platform>
+	</zipType>
+		
+	<zipType name="CVS SDK">
+		<platform id="CVSSDK" name="All" fileName="eclipse-CVS-Client-SDK-@build@.zip"></platform>
+	</zipType>	
 	
 	<zipType name="FTP-WebDAV plug-ins">
 		<platform id="FW" name="All" fileName="eclipse-FTP-WebDAV-@build@.zip"></platform>

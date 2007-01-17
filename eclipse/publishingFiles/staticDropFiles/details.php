@@ -86,6 +86,8 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 <li><a href="#JDTCORE">JDT Core Batch Compiler</a></li>
 <li><a href="#PDERuntime">PDE Runtime Binary</a></li>
 <li><a href="#PDESDK">PDE SDK</a></li>
+<li><a href="#CVSRuntime">CVS Client Runtime Binary</a></li>
+<li><a href="#CVSSDK">CVS Client SDK</a></li>
 <li><a href="#FTP">FTP and WebDAV Support</a></li>
 <li><a href="#SWT">SWT binary and Source</a></li>
 <li><a href="#org.eclipse.releng">org.eclipse.releng.tools plug-in</a></li>
@@ -223,6 +225,20 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				<ul>
 				<li>
 				These drops contain the PDE Runtime Binary with associated source.</li></ul>
+				
+				<li><a name="CVSRuntime"> <b> CVS Client Runtime Binary </b> </a>
+				<ul>
+				<li>
+				These drops contain the CVS Client plug-ins only. 
+				The Eclipse platform, Java development, and Plug-in Development Environment tools are NOT included. You can combine 
+				this with the Platform and JDT Runtime Binary or SDK if your tools rely on the 
+				CVS client being present.</li></ul>
+
+				<li><a name="CVSSDK"> <b> CVS Client SDK </b> </a>
+				<ul>
+				<li>
+				These drops contain the CVS Runtime Binary with associated source.</li></ul>
+
 
 				<li><a name="FTP"> <b> FTP and WebDAV Support </b> </a>
 				<ul>

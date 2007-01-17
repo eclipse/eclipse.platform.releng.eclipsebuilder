@@ -342,6 +342,12 @@
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/releng.tools/packager" />
 		</antcall>
+		<antcall target="package">
+				<param name="packagingInfo" value="${eclipse.build.configs}/cvsfeature/packager" />
+		</antcall>
+		<antcall target="package">
+				<param name="packagingInfo" value="${eclipse.build.configs}/cvsfeature.sdk/packager" />
+		</antcall>
 	</target>
 
 	<target name="packageEquinoxDistributables">
