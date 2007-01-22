@@ -247,6 +247,7 @@
         </antcall>
 
 		<!--copy zip back to build machine -->
+		<sleep minutes="2"/>
 		<echo message="copy zip back to build machine"/>
 		<exec dir="." executable="scp" output="signing.txt" append="true">
 			<arg line="build.eclipse.org:${stagingDirectory}/${buildId}-out/${archiveName} ${buildDirectory}/${buildLabel}"/>
