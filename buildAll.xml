@@ -171,7 +171,7 @@
 			timeout="10800000"
 			jvm="${java15-home}/bin/java"
 			failonerror="true"
-			maxmemory="512m"
+			maxmemory="768m"
 			dir="${buildDirectory}"
 	   		logerror="true"
 	   		output="${buildDirectory}/jarprocessorlog.txt">

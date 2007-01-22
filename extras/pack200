@@ -1,6 +1,6 @@
 #!/bin/sh
 
-@pack200@ -v -l packlog.txt -E4 -J-Xmx512m $*
+@pack200@ -v -l packlog.txt -E4 -J-Xmx768m $*
 
 pack200retCode=$?
 
