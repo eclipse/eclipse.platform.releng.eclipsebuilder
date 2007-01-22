@@ -96,7 +96,7 @@
 			<param name="arch" value="ppc" />
 		</antcall>
 
-		<!-- <available property="org.eclipse.swt.win32.wce_ppc.arm.exists"
+	   <available property="org.eclipse.swt.win32.wce_ppc.arm.exists"
 			file="${buildDirectory}/plugins/org.eclipse.swt.win32.wce_ppc.arm" type="dir"/>
 		<antcall target="fetch_org.eclipse.swt.win32.wce_ppc.arm" />
 
@@ -113,7 +113,7 @@
 		<antcall target="generateChecksum">
 			<param name="downloadFile" value="swt-${buildId}-win32-wce_ppc-arm-j2me.zip" />
 			<param name="archiveFullPath" value="${postingDirectory}/${buildLabel}/swt-${buildId}-win32-wce_ppc-arm-j2me.zip" />
-		</antcall> -->
+		</antcall>
 
 	</target>
 
