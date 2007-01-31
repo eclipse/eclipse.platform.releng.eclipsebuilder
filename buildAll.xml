@@ -82,7 +82,7 @@
 			<equals arg1="${buildType}" arg2="N" />
 		</condition>
 		<!--compiler args-->
-		<property name="compilerArg" value="-inlineJSR -enableJavadoc -encoding ISO-8859-1 -warn:-discouraged,forbidden" />
+		<property name="compilerArg" value="-inlineJSR -enableJavadoc -encoding ISO-8859-1" />
 		<property name="javacSource" value="1.3" />
 		<property name="javacTarget" value="1.2" />
 		<property name="javacDebugInfo" value="true" />
@@ -175,9 +175,9 @@
 			dir="${buildDirectory}"
 	   		logerror="true"
 	   		output="${buildDirectory}/jarprocessorlog.txt">
-			<jvmarg value="-Dorg.eclipse.update.jarprocessor.pack200=${eclipse.build.configs}/../../extras"/>
-			<arg line="-application org.eclipse.update.core.siteOptimizer"/>
-			<arg line="-jarProcessor -verbose -outputDir ${buildLabel} -processAll -pack ${repack} ${packtmp}/${archiveName}"/>
+			<jvmarg value="-Dorg.eclipse.update.jarprocessor.pack200=${eclipse.build.configs}/../../extras"/>	   	    
+			<arg line="-consolelog -application org.eclipse.update.core.siteOptimizer"/>
+			<arg line="-jarProcessor -verbose -outputDir ${buildLabel} -processAll -pack ${repack} ${packtmp}/${archiveName}"/>	   	
        </java>
 	
 	<!--	<delete dir="${packtmp}" /> -->
