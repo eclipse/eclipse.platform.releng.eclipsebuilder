@@ -263,8 +263,7 @@
 	
 	<target name="testEclipse">
 		<parallel>
-			<ant antfile="eclipse/helper.xml" target="testAll" />
-			<ant antfile="eclipse/helper.xml" target="test-internalReferences" />
+			<ant antfile="eclipse/helper.xml" target="testAll" />		
 		</parallel>
 	</target>
 

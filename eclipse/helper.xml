@@ -243,34 +243,7 @@
 		<property name="dropLocation" value="${postingDirectory}" />
 		<ant antfile="testAll.xml" dir="${eclipse.build.configs}/sdk.tests/testConfigs" target="performanceTests" />
 		<antcall target="generatePerformanceResults" />
-	</target>
-
-	<!-- ===================================================================== -->
-	<!-- Target used to test the build for internal references                 -->
-	<!-- ===================================================================== -->
-	<target name="test-internalReferences">
-		<waitfor maxwait="4" maxwaitunit="hour" checkevery="1" checkeveryunit="minute">
-			<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-SDK-${buildId}-win32.zip.md5"/>
-		</waitfor>
-
-		<property name="apiscanner" value="${eclipse.build.configs}/sdk/tools/apiscanner" />
-		<property name="workingDir" value="${buildDirectory}/internalReference" />
-		<mkdir dir="${workingDir}" />
-		<unzip src="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" dest="${workingDir}" />
-
-		<java classname="org.eclipse.wtp.releng.tools.component.violation.ComponentViolationEmitter" fork="true" dir="${apiscanner}">
-			<arg line="
-         	-eclipseDir ${workingDir}/eclipse
-         	-compXMLDir ${buildDirectory}/plugins
-         	-compRefDir component-ref
-         	-compVioDir ${postingDirectory}/${buildLabel}/internalReference
-         	-xsl xsl/component-violation.xsl
-         	-summaryXSL xsl/component-violation-summary.xsl" />
-			<classpath>
-				<fileset dir="${apiscanner}/lib" />
-			</classpath>
-		</java>
-	</target>
+	</target>	
 
 	<!-- ===================================================================== -->
 	<!-- Helper targets                                                        -->

@@ -234,9 +234,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 				about_files/mpl-v11.txt"
 			/>
 		</copy>
-
-		<!--gather component.xml files-->
-		<zip destfile="${postingDirectory}/${buildLabel}/component-xml-${buildId}.zip" basedir="${buildDirectory}" includes="**/component.xml" />
+		
 	</target>
 
 	<!-- ===================================================================== -->

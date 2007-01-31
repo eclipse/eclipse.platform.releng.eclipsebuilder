@@ -127,17 +127,6 @@ echo "This log compares the build's plugin and features versions with 3.2.1. </l
 ?>
 </div>
 
-<div class="homeitem">
-<h3><a name="RefCheck"> Internal References Check <?php echo "$buildType $buildName"; ?> </a></h3> 
-<ul>
-<li> 
-This <a href="internalReference/index.html"><b>report</b></a> contains the 
-result of running the <a href="http://eclipse.org/webtools/development/apiscanner/apiscanner.html"><b>Internal 
-reference check tool</b></a> with these Eclipse SDK <A HREF="component-xml-@build@.zip"><b>component.xml</b></A> 
-files.<td width="2%"></li>
-</div>
-</div>
-
 <div class="homeitem3col">
 <h3><a name="UnitTest"> Unit Test Results for <?php echo "$buildType $buildName"; ?> </a></h3> 
 </br>
