@@ -165,20 +165,20 @@
 		</condition>
 		<property name="repack" value="" />
 		
-	   <!--pack200-->
+	   <!--pack200-->		
 	   <java jar="${eclipse.home}/startup.jar"
-	   		fork="true"
-			timeout="10800000"
-			jvm="${java15-home}/bin/java"
-			failonerror="true"
-			maxmemory="768m"
-			dir="${buildDirectory}"
-	   		logerror="true"
-	   		output="${buildDirectory}/jarprocessorlog.txt">
-			<jvmarg value="-Dorg.eclipse.update.jarprocessor.pack200=${eclipse.build.configs}/../../extras"/>	   	    
-			<arg line="-consolelog -application org.eclipse.update.core.siteOptimizer"/>
-			<arg line="-jarProcessor -verbose -outputDir ${buildLabel} -processAll -pack ${repack} ${packtmp}/${archiveName}"/>	   	
-       </java>
+	         fork="true"
+		     timeout="10800000"
+		     jvm="${java15-home}/bin/java"
+		     failonerror="true"
+		     maxmemory="768m"
+		     error="${buildDirectory}/errorlog.txt"
+		     dir="${buildDirectory}"
+		     output="${buildDirectory}/jarprocessorlog.txt">
+		     <jvmarg value="-Dorg.eclipse.update.jarprocessor.pack200=${eclipse.build.configs}/../../extras"/>
+		     <arg line="-consolelog -application org.eclipse.update.core.siteOptimizer"/>
+		     <arg line="-jarProcessor -verbose -outputDir ${buildLabel} -processAll -pack ${repack} ${packtmp}/${archiveName}"/>
+		</java>
 	
 	<!--	<delete dir="${packtmp}" /> -->
 	</target>
