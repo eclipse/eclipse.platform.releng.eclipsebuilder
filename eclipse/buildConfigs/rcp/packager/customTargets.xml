@@ -35,17 +35,17 @@
 		</antcall>
 	</target>
 
-	<target name="assemble.linux.motif.x86.xml">
-		<antcall target="assembler">
-			<param name="archiveName" value="${archiveRoot}-linux-motif.tar.gz"/>
-		</antcall>
-	</target>
-
 	<target name="assemble.solaris.gtk.sparc.xml">
 		<antcall target="assembler">
 			<param name="archiveName" value="${archiveRoot}-solaris-gtk.zip"/>
 		</antcall>
 	</target>
+	
+	<target name="assemble.solaris.motif.sparc.xml">
+		<antcall target="assembler">
+			<param name="archiveName" value="${archiveRoot}-solaris-motif.zip"/>
+				</antcall>
+	</target>	
 
 	<target name="assemble.aix.motif.ppc.xml">
 		<antcall target="assembler">
@@ -70,7 +70,9 @@
 	<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
 	<ant antfile="${assembleScriptName}" />
 	<checksum file="${archiveFullPath}" property="md5"/>
+	<checksum file="${archiveFullPath}" algorithm="SHA" property="sha"/>
 	<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5"/>
+	<echo message="${sha} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.sha1"/>
 </target>
 
 </project>

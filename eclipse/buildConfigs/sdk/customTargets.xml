@@ -171,7 +171,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<condition property="newVersionQualifier" value="${forceContextQualifier}" else="${org.eclipse.jdt.debug}">
 			<isset property="forceContextQualifier"/>
 		</condition>
-		<replace file="${buildDirectory}/features/org.eclipse.platform.launchers/bin/carbon/macosx/ppc/Eclipse.app/Contents/MacOS/eclipse.ini" >
+		<replace file="${buildDirectory}/features/org.eclipse.equinox.executable/bin/carbon/macosx/ppc/Eclipse.app/Contents/MacOS/eclipse.ini" >
 			<replacefilter token="@qualifier@" value="${newVersionQualifier}"/>
 		</replace>
 	</target>
@@ -182,9 +182,9 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="postFetch">
 		<ant antfile="${genericTargets}" target="fetchElement">
 			<property name="type" value="feature" />
-			<property name="id" value="org.eclipse.platform.launchers" />
+			<property name="id" value="org.eclipse.equinox.executable" />
 		</ant>
-		<zip zipfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/features/org.eclipse.platform.launchers" includes="library/" />
+		<zip zipfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/features/org.eclipse.equinox.executable" includes="library/" />
 
 		<!--adjust macosx eclipse.ini file -->
 		<antcall target="adjustIniFile"/>
@@ -234,9 +234,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 				about_files/mpl-v11.txt"
 			/>
 		</copy>
-
-		<!--gather component.xml files-->
-		<zip destfile="${postingDirectory}/${buildLabel}/component-xml-${buildId}.zip" basedir="${buildDirectory}" includes="**/component.xml" />
+		
 	</target>
 
 	<!-- ===================================================================== -->
@@ -383,9 +381,11 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-sourceBuild-srcFetch-${buildId}.zip -r ." />
 		</exec>
 
-		<!--generate md5-->
+		<!--generate md5 & sha1-->
 		<checksum file="${postingDirectory}/${buildLabel}/eclipse-sourceBuild-srcFetch-${buildId}.zip" property="md5"/>
+		<checksum file="${postingDirectory}/${buildLabel}/eclipse-sourceBuild-srcFetch-${buildId}.zip" algorithm="SHA" property="sha"/>
 		<echo message="${md5} *eclipse-sourceBuild-srcFetch-${buildId}.zip" file="${postingDirectory}/${buildLabel}/checksum/eclipse-sourceBuild-srcFetch-${buildId}.zip.md5"/>
+		<echo message="${sha} *$eclipse-sourceBuild-srcFetch-${buildId}.zip" file="${postingDirectory}/${buildLabel}/checksum/eclipse-sourceBuild-srcFetch-${buildId}.zip.sha1"/>
 
 		<!--  create zip with all source for an Eclipse SDK  -->
 		<copy todir="${tempDir}/buildScripts">
@@ -413,8 +413,10 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-sourceBuild-srcIncluded-${buildId}.zip -r ." />
 		</exec>
 		<checksum file="${postingDirectory}/${buildLabel}/eclipse-sourceBuild-srcIncluded-${buildId}.zip" property="md5.2"/>
+		<checksum file="${postingDirectory}/${buildLabel}/eclipse-sourceBuild-srcIncluded-${buildId}.zip" algorithm="SHA" property="sha.2"/>
 		<echo message="${md5.2} *eclipse-sourceBuild-srcIncluded-${buildId}.zip" file="${postingDirectory}/${buildLabel}/checksum/eclipse-sourceBuild-srcIncluded-${buildId}.zip.md5"/>
-
+		<echo message="${sha.2} *eclipse-sourceBuild-srcIncluded-${buildId}.zip" file="${postingDirectory}/${buildLabel}/checksum/eclipse-sourceBuild-srcIncluded-${buildId}.zip.sha1"/>
+		
 		<copy file="${eclipse.build.configs}/sdk/srcBuild/incl/instructions.html" tofile="${postingDirectory}/${buildLabel}/srcIncludedBuildInstructions.html" />
 		<copy file="${eclipse.build.configs}/sdk/srcBuild/fetch/instructions.html" tofile="${postingDirectory}/${buildLabel}/srcFetchBuildInstructions.html" />
 

@@ -22,10 +22,12 @@
 	
 	<!--work-around for bug 132204-->
 	<exec executable="zip" dir="${tempDirectory}">
-		<arg line="${archiveFullPath} -r . -i eclipse/features/org.eclipse.platform.launchers**" />
+		<arg line="${archiveFullPath} -r . -i eclipse/features/org.eclipse.equinox.executable**" />
 	</exec>
 	<checksum file="${archiveFullPath}" property="md5"/>
+	<checksum file="${archiveFullPath}" algorithm="SHA" property="sha"/>
 	<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5"/>
+	<echo message="${sha} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.sha1"/>
 </target>
 	
 </project>

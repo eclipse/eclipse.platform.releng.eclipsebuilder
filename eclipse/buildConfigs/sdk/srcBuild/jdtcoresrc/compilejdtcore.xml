@@ -24,21 +24,18 @@
 						</not>
 					</condition>
 				</fail>
-		
-                <condition property="compilerArg" value="-encoding ISO-8859-1">
-                        <equals arg1="${build.compiler}" arg2="org.eclipse.jdt.core.JDTCompilerAdapter" />
-	            </condition>  
-		
-                <echo message="compilerArg ${compilerArg}"/>
-                <echo message="build compiler ${build.compiler}"/>
+				
 
-                <property name="compilerArg" value="-encoding ISO-8859-1" />
+                <property name="compilerArg" value="-enableJavadoc -nowarn -encoding ISO-8859-1" />
                 <property name="javacSource" value="1.3" />
                 <property name="javacTarget" value="1.2" />
                 <property name="javacDebugInfo" value="on" />
                 <property name="javacFailOnError" value="true" />
+                <echo message="compilerArg ${compilerArg}"/>
+                <echo message="build compiler ${build.compiler}"/>
+
                 <record name="compilelog2.txt" action="start" />
-                <javac verbose="true"
+                <javac verbose="false"
                 	   target="${javacTarget}"
                        source="${javacSource}"
 					   srcdir="${srcdir}" 

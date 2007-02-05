@@ -160,10 +160,10 @@
 <target name="postFetch">
 	<ant antfile="${genericTargets}" target="fetchElement">
 		<property name="type" value="feature" />
-		<property name="id" value="org.eclipse.platform.launchers" />
+		<property name="id" value="org.eclipse.equinox.executable" />
 	</ant>
 	<!--create launchersrc.zip and copy to org.eclipse.platform plugin (fix for bug #49237) -->
-	<zip destfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/features/org.eclipse.platform.launchers" includes="library/**" />
+	<zip destfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/features/org.eclipse.equinox.executable" includes="library/**" />
 	
 	<!--fetch and compile swt tools-->
 	<ant antfile="genericTargets.xml" dir="${eclipse.pdebuild.scripts}" target="fetchElement">

@@ -2,7 +2,7 @@
 
 REM reset ant command line in environment and variables
 set ws=win32
-set os=win32
+set installOs=win32
 set arch=x86
 set target=
 set ANT_CMD_LINE_ARGS=
@@ -16,7 +16,7 @@ if x%1==x goto usage
 REM process all command line parameters
 :loop
 if x%1==x goto checkvars
-if x%1==x-os set os=%2
+if x%1==x-os set installOs=%2
 if x%1==x-ws set ws=%2
 if x%1==x-java5home set java5home="-Djava5.home=%2"
 if x%1==x-bc set bootclasspath="-Dbootclasspath=%2"
@@ -28,24 +28,24 @@ goto loop
 
 REM verify that ws and os values and combinations are valid
 :checkvars
-if x%os%==x goto usage
+if x%installOs%==x goto usage
 if x%ws%==x goto usage 
 if x%arch%==x goto usage
 if x%java5home%==x goto usage
-if %os%-%ws%-%arch%==win32-win32-x86 goto run
-if %os%-%ws%-%arch%==linux-motif-x86 goto run
-if %os%-%ws%-%arch%==linux-gtk-x86 goto run
-if %os%-%ws%-%arch%==linux-gtk-ppc goto run
-if %os%-%ws%-%arch%==linux-gtk-x86_64 goto run
-if %os%-%ws%-%arch%==linux-gtk-ia64 goto run
-if %os%-%ws%-%arch%==solaris-motif-sparc goto run
-if %os%-%ws%-%arch%==solaris-gtk-sparc goto run
-if %os%-%ws%-%arch%==solaris-gtk-x86 goto run
-if %os%-%ws%-%arch%==aix-motif-ppc goto run
-if %os%-%ws%-%arch%==hpux-motif-PA_RISC goto run
-if %os%-%ws%-%arch%==qnx-photon-x86 goto run
-if %os%-%ws%-%arch%==hpux-motif-ia64_32 goto run
-if %os%-%ws%-%arch%==macosx-carbon-ppc goto run
+if %installOs%-%ws%-%arch%==win32-win32-x86 goto run
+if %installOs%-%ws%-%arch%==linux-motif-x86 goto run
+if %installOs%-%ws%-%arch%==linux-gtk-x86 goto run
+if %installOs%-%ws%-%arch%==linux-gtk-ppc goto run
+if %installOs%-%ws%-%arch%==linux-gtk-x86_64 goto run
+if %installOs%-%ws%-%arch%==linux-gtk-ia64 goto run
+if %installOs%-%ws%-%arch%==solaris-motif-sparc goto run
+if %installOs%-%ws%-%arch%==solaris-gtk-sparc goto run
+if %installOs%-%ws%-%arch%==solaris-gtk-x86 goto run
+if %installOs%-%ws%-%arch%==aix-motif-ppc goto run
+if %installOs%-%ws%-%arch%==hpux-motif-PA_RISC goto run
+if %installOs%-%ws%-%arch%==qnx-photon-x86 goto run
+if %installOs%-%ws%-%arch%==hpux-motif-ia64_32 goto run
+if %installOs%-%ws%-%arch%==macosx-carbon-ppc goto run
 
 ECHO The ws os arch combination entered is not valid.
 goto end
@@ -60,7 +60,7 @@ call ant -q -buildfile jdtcoresrc/compilejdtcorewithjavac.xml
 set CLASSPATH=jdtcoresrc/ecj.jar;%CLASSPATH
 call ant -q -buildfile jdtcoresrc/compilejdtcore.xml
 set CLASSPATH=ecj.jar;%ORIGCLASSPATH
-ant -q -buildfile build.xml %target% -DinstallOs=%os% -DinstallWs=%ws% -DinstallArch=%arch% %compilelibs%  %bootclasspath% %java5home%
+ant -q -buildfile build.xml %target% -DinstallOs=%installOs% -DinstallWs=%ws% -DinstallArch=%arch% %compilelibs%  %bootclasspath% %java5home%
 goto end
 
 :end

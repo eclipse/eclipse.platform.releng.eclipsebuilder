@@ -34,11 +34,7 @@
 	<target name="assemble.master-root.equinox-launcher-linux.gtk.ppc">
 		<property name="archiveName" value="launchers-linux.gtk.ppc.${buildId}.tar.gz" />
 		<antcall target="assemble" />
-	</target>
-	<target name="assemble.master-root.equinox-launcher-linux.motif.x86">
-		<property name="archiveName" value="launchers-linux.motif.x86.${buildId}.tar.gz" />
-		<antcall target="assemble" />
-	</target>
+	</target>	
 	<target name="assemble.master-root.equinox-launcher-solaris.gtk.sparc">
 		<property name="archiveName" value="launchers-solaris.gtk.sparc.${buildId}.zip" />
 		<antcall target="assemble" />
@@ -61,7 +57,9 @@
 		 		 <property name="archiveFullPath" value="${equinoxPostingDirectory}/${buildLabel}/${archiveName}" />
 		<ant antfile="${assembleScriptName}" />
 		 		 <checksum file="${archiveFullPath}" property="md5" />
+				 <checksum file="${archiveFullPath}" property="sha" />
 		 		 <echo message="${md5} *${archiveName}" file="${equinoxPostingDirectory}/${buildLabel}/checksum/${archiveName}.md5" />
+	 			 <echo message="${sha} *${archiveName}" file="${equinoxPostingDirectory}/${buildLabel}/checksum/${archiveName}.sha1" />
 	</target>
 
 	<!-- ===================================================================== -->

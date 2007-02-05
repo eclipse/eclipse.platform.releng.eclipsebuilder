@@ -50,11 +50,16 @@
 	<antcall target="assemble" />
 </target>
 	
+<target name="assemble.org.eclipse.rcp.solaris.motif.sparc">
+	<property name="archiveName" value="eclipse-RCP-${buildId}-solaris-motif.zip"/>
+	<antcall target="assemble" />
+</target>
+	
 <target name="assemble.org.eclipse.rcp.qnx.photon.x86"/>
 <target name="assemble.org.eclipse.rcp.hpux.motif.ia64_32"/>
 <target name="assemble.org.eclipse.rcp.linux.gtk.ia64" />
 <target name="assemble.org.eclipse.rcp.linux.gtk.ppc64" />
-<target name="assemble.org.eclipse.platform.solaris.motif.sparc"/>
+
 
 <target name="assemble.org.eclipse.rcp.aix.motif.ppc">
 	<property name="archiveName" value="eclipse-RCP-${buildId}-aix-motif.zip"/>
@@ -163,7 +168,7 @@
 <target name="postFetch">
 	<ant antfile="${genericTargets}" target="fetchElement">
 		<property name="type" value="feature" />
-		<property name="id" value="org.eclipse.platform.launchers" />
+		<property name="id" value="org.eclipse.equinox.executable" />
 	</ant>
 
 	<!--fetch and compile swt tools-->

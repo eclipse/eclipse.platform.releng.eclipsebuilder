@@ -30,14 +30,13 @@ tagMaps=""
 #sets fetchTag="HEAD" for nightly builds if required
 tag=""
 
-#buildProjectTags=v20060510
-#buildProjectTags=v20060511
-#buildProjectTags=v20060511a
-#buildProjectTags=v20060515
-#buildProjectTags=v20060516a
-#buildProjectTags=v20060518a
-#buildProjectTags=v20060524
-buildProjectTags=v20060529
+#buildProjectTags=v20060707a
+#buildProjectTags=v20060728
+#buildProjectTags=v20060802
+#buildProjectTags=v20060824
+# tag v20060907 is the one that includes the new build page
+buildProjectTags=v20060907
+buildProjectTags=v20060908
 
 #updateSite property setting
 updateSite=""
@@ -66,6 +65,9 @@ buildType=N
 # directory where to copy build
 postingDirectory=/builds/transfer/files/master/downloads/drops
 
+#directory for rss feed - not used 
+#rssDirectory=/builds/transfer/files/master
+
 # flag to indicate if test build
 testBuild=""
 
@@ -79,36 +81,37 @@ timestamp=$builddate$buildtime
 
 
 # process command line arguments
-usage="usage: $0 [-notify emailaddresses][-test][-buildDirectory directory][-buildId name][-buildLabel directory name][-tagMapFiles][-mapVersionTag tag][-builderTag tag][-bootclasspath path][-compareMaps][-skipPerf] [-skipTest][-updateSite site][-sign] M|N|I|S|R"
+usage="usage: $0 [-notify emailaddresses][-test][-buildDirectory directory][-buildId name][-buildLabel directory name][-tagMapFiles][-mapVersionTag tag][-builderTag tag][-bootclasspath path][-compareMaps][-skipPerf] [-skipTest] [-skipRSS] [-updateSite site][-sign] M|N|I|S|R"
 
 if [ $# -lt 1 ]
 then
-		 echo >&2 "$usage"
-		 exit 1
+		 		  echo >&2 "$usage"
+		 		  exit 1
 fi
 
 while [ $# -gt 0 ]
 do
-		 case "$1" in
-		 		 -buildId) buildId="$2"; shift;;
-		 		 -buildLabel) buildLabel="$2"; shift;;
-		 		 -mapVersionTag) mapVersionTag="$2"; shift;;
-		 		 -tagMapFiles) tagMaps="-DtagMaps=true";;
-		 		 -skipPerf) skipPerf="-Dskip.performance.tests=true";;
-		 		 -skipTest) skipTest="-Dskip.tests=true";;
-		 		 -buildDirectory) builderDir="$2"; shift;;
-		 		 -notify) recipients="$2"; shift;;
-		 		 -test) postingDirectory="/builds/transfer/files/bogus/downloads/drops";testBuild="-Dtest=true";;
-		 		 -builderTag) buildProjectTags="$2"; shift;;
-		 		 -compareMaps) compareMaps="-DcompareMaps=true";;
-		 		 -updateSite) updateSite="-DupdateSite=$2";shift;;
-		 		 -sign) sign="-Dsign=true";;
-		 		 -*)
-		 		 		 echo >&2 $usage
-		 		 		 exit 1;;
-		 		 *) break;;		 # terminate while loop
-		 esac
-		 shift
+		 		  case "$1" in
+		 		  		 		  -buildId) buildId="$2"; shift;;
+		 		  		 		  -buildLabel) buildLabel="$2"; shift;;
+		 		  		 		  -mapVersionTag) mapVersionTag="$2"; shift;;
+		 		  		 		  -tagMapFiles) tagMaps="-DtagMaps=true";;
+		 		  		 		  -skipPerf) skipPerf="-Dskip.performance.tests=true";;
+		 		  		 		  -skipTest) skipTest="-Dskip.tests=true";;
+		 		  		 		  -skipRSS) skipRSS="-Dskip.feed=true";;
+		 		  		 		  -buildDirectory) builderDir="$2"; shift;;
+		 		  		 		  -notify) recipients="$2"; shift;;
+		 		  		 		  -test) postingDirectory="/builds/transfer/files/bogus/downloads/drops";testBuild="-Dtest=true";;
+		 		  		 		  -builderTag) buildProjectTags="$2"; shift;;
+		 		  		 		  -compareMaps) compareMaps="-DcompareMaps=true";;
+		 		  		 		  -updateSite) updateSite="-DupdateSite=$2";shift;;
+		 		  		 		  -sign) sign="-Dsign=true";;
+		 		  		 		  -*)
+		 		  		 		  		 		  echo >&2 $usage
+		 		  		 		  		 		  exit 1;;
+		 		  		 		  *) break;;		 		  # terminate while loop
+		 		  esac
+		 		  shift
 done
 
 # After the above the build type is left in $1.
@@ -117,12 +120,12 @@ buildType=$1
 # Set default buildId and buildLabel if none explicitly set
 if [ "$buildId" = "" ]
 then
-		 buildId=$buildType$builddate-$buildtime
+		 		  buildId=$buildType$builddate-$buildtime
 fi
 
 if [ "$buildLabel" = "" ]
 then
-		 buildLabel=$buildId
+		 		  buildLabel=$buildId
 fi
 
 #Set the tag to HEAD for Nightly builds
@@ -143,7 +146,7 @@ customBuilderTag=$buildProjectTags
 
 if [ -e $builderDir ]
 then
-		 builderDir=$builderDir$timestamp
+		 		  builderDir=$builderDir$timestamp
 fi
 
 # directory where features and plugins will be compiled
@@ -226,9 +229,10 @@ echo log=$postingDirectory/$buildLabel/index.php >> monitor.properties
 
 #the base command used to run AntRunner headless
 antRunner="`which java` -Xmx500m -jar ../org.eclipse.releng.basebuilder/startup.jar -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=ppc -application org.eclipse.ant.core.antRunner"
+antRunnerJDK15="$builderDir/jdk/linuxppc/ibm-java2-ppc-50/jre/bin/java -Xmx500m -jar ../org.eclipse.releng.basebuilder/startup.jar -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=ppc -application org.eclipse.ant.core.antRunner"
 
 #clean drop directories
-	$antRunner -buildfile eclipse/helper.xml cleanSites
+		 $antRunner -buildfile eclipse/helper.xml cleanSites
 
 echo recipients=$recipients
 echo postingDirectory=$postingDirectory
@@ -252,6 +256,16 @@ then
         echo "Build failed (error code $retCode)."
         exit -1
 fi
+
+if [ "$skip.feed" != "true" ]
+then
+$buildCommandRSS="$antRunnerJDK15 -buildfile $builderDir/org.eclipse.releng.basebuilder/plugins/org.eclipse.build.tools/scripts_rss/feedManipulation.xml"
+echo $buildCommandRSS>commandRSS.txt
+#run the RSS command
+$buildCommandRSS
+fi
+
+
 
 #clean up
 rm -rf $builderDir

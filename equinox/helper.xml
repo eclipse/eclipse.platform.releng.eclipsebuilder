@@ -9,7 +9,7 @@
 		<available classname="org.eclipse.releng.generators.EclipseTestResultsGenerator" property="class" value="org.eclipse.releng.generators.EclipseTestResultsGenerator" />
 		<taskdef name="indexResults" classname="${class}" />
 
-		<!-- generate md5s for bundle -->
+		<!-- generate md5s and sha1s for bundle -->
 		<mkdir dir="${equinoxPostingDirectory}/${buildLabel}/checksum"/>
 
 		<exec executable="sh" dir="${equinoxPostingDirectory}/${buildLabel}">
@@ -25,7 +25,12 @@
 		<copy todir="${equinoxPostingDirectory}/${buildLabel}" overwrite="true">
 			<fileset dir="${postingDirectory}/${buildLabel}" includes="compilelogs/**/plugins/org.eclipse.osgi*/**,compilelogs/**/plugins/org.eclipse.equinox*/**" excludes="compilelogs/**/plugins/org.eclipse.osgi.test*/**" />
 		</copy>
-
+		
+		<!--temporary hack to copy orbit files to equinox download directory -->
+		<copy todir="${equinoxPostingDirectory}/${buildLabel}" overwrite="true">
+		    <fileset dir="${buildDirectory}/plugins" includes="javax.servlet_*,org.apache.commons.logging_*,org.mortbay.jetty_*"/>
+		</copy>
+			
 		<!--post directory.txt-->
 		<copy file="${buildDirectory}/directory.txt" todir="${equinoxPostingDirectory}/${buildLabel}" />
 
@@ -38,7 +43,7 @@
 		     isBuildTested="false"
 	   		 sendMail="false"
 	   		 buildType="${buildType}"
-		     dropTokenList="%framework%,%extrabundles%,%incubator%,%launchers%"
+		     dropTokenList="%equinox%,%framework%,%extrabundles%,%other%,%incubator%,%launchers%"
 		     xmlDirectoryName="${postingDirectory}/testresults/xml"
 		     dropDirectoryName="${equinoxPostingDirectory}/${buildLabel}"
 		     testResultsTemplateFileName="${publishingContent}/templateFiles/testResults.php.template"
@@ -86,10 +91,14 @@
 		<touch file="${equinoxPostingDirectory}/${buildLabel}/index.php" />
 		<!--  Insert ftp url for drop directory  -->
 		<replace file="${equinoxPostingDirectory}/${buildLabel}/index.php" token="@buildlabel@" value="${buildLabel}" />
+		
 	</target>
 
 
 	<target name="updateTestManifests">
+		<antcall target="updateTestManifest">
+			<param name="bundle.id" value="org.eclipse.equinox.app"/>
+		</antcall>
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.supplement"/>
 		</antcall>
@@ -101,13 +110,13 @@
 		</antcall>
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.event"/>
-		</antcall>
-		<antcall target="updateTestManifest">
-			<param name="bundle.id" value="org.eclipse.equinox.http"/>
-		</antcall>
+		</antcall>		
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.log"/>
 		</antcall>
+		<antcall target="updateTestManifest">
+			<param name="bundle.id" value="org.eclipse.equinox.initializer"/>
+		</antcall>		
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.metatype"/>
 		</antcall>
@@ -140,22 +149,39 @@
 		</antcall>
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.servlet.api" />
-		</antcall>
-		<antcall target="updateTestManifest">
-			<param name="bundle.id" value="org.eclipse.equinox.http.registry" />
-		</antcall>
+		</antcall>		
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.cm" />
-		</antcall>
+		</antcall>			
 		<antcall target="updateTestManifest">
-					<param name="bundle.id" value="org.eclipse.equinox.servlet.bridge.http" />
-		</antcall>
+				<param name="bundle.id" value="org.eclipse.equinox.http" />
+    	</antcall>	
 		<antcall target="updateTestManifest">
-					<param name="bundle.id" value="org.eclipse.equinox.servlet.bridge.launcher" />
-    	</antcall>		
+				<param name="bundle.id" value="org.eclipse.equinox.http.jetty" />
+    	</antcall>
+		<antcall target="updateTestManifest">
+				<param name="bundle.id" value="org.eclipse.equinox.http.registry" />
+	   	</antcall>
+		<antcall target="updateTestManifest">
+				<param name="bundle.id" value="org.eclipse.equinox.http.servlet" />
+	   	</antcall>
+		<antcall target="updateTestManifest">
+			<param name="bundle.id" value="org.eclipse.equinox.http.servletbridge" />
+	   	</antcall>
+		<antcall target="updateTestManifest">
+			<param name="bundle.id" value= "org.eclipse.equinox.servletbridge" />
+		</antcall>		
+		<antcall target="updateTestManifest">
+			<param name="bundle.id" value="javax.servlet" />
+	   	</antcall>
+		<antcall target="updateTestManifest">
+			<param name="bundle.id" value="org.apache.commons.logging" />
+	   	</antcall>
+		<antcall target="updateTestManifest">
+			<param name="bundle.id" value="org.mortbay.jetty" />
+	   	</antcall>
 	</target>
-
-
+	 
 	<!-- ===================================================================== -->
 	<!-- Helper targets -->
 	<!-- ===================================================================== -->

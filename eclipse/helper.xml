@@ -96,7 +96,7 @@
 			<param name="arch" value="ppc" />
 		</antcall>
 
-		<available property="org.eclipse.swt.win32.wce_ppc.arm.exists"
+	   <available property="org.eclipse.swt.win32.wce_ppc.arm.exists"
 			file="${buildDirectory}/plugins/org.eclipse.swt.win32.wce_ppc.arm" type="dir"/>
 		<antcall target="fetch_org.eclipse.swt.win32.wce_ppc.arm" />
 
@@ -105,7 +105,7 @@
 			<param name="os" value="wce_ppc" />
 			<param name="arch" value="arm" />
 			<param name="skipChecksum" value="true" />
-		</antcall>
+		</antcall> 
 		<antcall target="generateChecksum">
 			<param name="downloadFile" value="swt-${buildId}-win32-wce_ppc-arm-j2se.zip" />
 			<param name="archiveFullPath" value="${postingDirectory}/${buildLabel}/swt-${buildId}-win32-wce_ppc-arm-j2se.zip" />
@@ -149,7 +149,9 @@
 
 	<target name="generateChecksum" unless="skipChecksum">
 		<checksum file="${archiveFullPath}" property="md5" />
+		<checksum file="${archiveFullPath}" property="sha" />
 		<echo message="${md5} *${downloadFile}" file="${postingDirectory}/${buildLabel}/checksum/${downloadFile}.md5" />
+		<echo message="${sha} *${downloadFile}" file="${postingDirectory}/${buildLabel}/checksum/${downloadFile}.sha1" />
 	</target>
 
 	<target name="publish" description="Preparing to post the build...">
@@ -241,34 +243,7 @@
 		<property name="dropLocation" value="${postingDirectory}" />
 		<ant antfile="testAll.xml" dir="${eclipse.build.configs}/sdk.tests/testConfigs" target="performanceTests" />
 		<antcall target="generatePerformanceResults" />
-	</target>
-
-	<!-- ===================================================================== -->
-	<!-- Target used to test the build for internal references                 -->
-	<!-- ===================================================================== -->
-	<target name="test-internalReferences">
-		<waitfor maxwait="4" maxwaitunit="hour" checkevery="1" checkeveryunit="minute">
-			<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-SDK-${buildId}-win32.zip.md5"/>
-		</waitfor>
-
-		<property name="apiscanner" value="${eclipse.build.configs}/sdk/tools/apiscanner" />
-		<property name="workingDir" value="${buildDirectory}/internalReference" />
-		<mkdir dir="${workingDir}" />
-		<unzip src="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" dest="${workingDir}" />
-
-		<java classname="org.eclipse.wtp.releng.tools.component.violation.ComponentViolationEmitter" fork="true" dir="${apiscanner}">
-			<arg line="
-         	-eclipseDir ${workingDir}/eclipse
-         	-compXMLDir ${buildDirectory}/plugins
-         	-compRefDir component-ref
-         	-compVioDir ${postingDirectory}/${buildLabel}/internalReference
-         	-xsl xsl/component-violation.xsl
-         	-summaryXSL xsl/component-violation-summary.xsl" />
-			<classpath>
-				<fileset dir="${apiscanner}/lib" />
-			</classpath>
-		</java>
-	</target>
+	</target>	
 
 	<!-- ===================================================================== -->
 	<!-- Helper targets                                                        -->
@@ -295,17 +270,23 @@
 		<!--regenerate the index page with links to test results-->
 		<ant antfile="${base.builder}/plugins/org.eclipse.build.tools/scripts/publish.xml" dir="${publishingContent}" target="generateIndex">
 			<property name="isBuildTested" value="true" />
-			<property name="indexFileName" value="index.php" />
 			<property name="buildType" value="${buildType}" />
-			<property name="dropTokenList" value="%sdk%,%tests%,%example%,%rcpruntime%,%rcpsdk%,%icubase%,%runtime%,%platformsdk%,%jdt%,%jdtsdk%,%jdtc%,%pde%,%pdesdk%,%teamextras%,%swt%,%relengtools%" />
+			<property name="dropTokenList" value="%sdk%,%tests%,%example%,%rcpruntime%,%rcpsdk%,%icubase%,%runtime%,%platformsdk%,%jdt%,%jdtsdk%,%jdtc%,%pde%,%pdesdk%,%cvs%,%cvssdk%,%teamextras%,%swt%,%relengtools%" />
+			<property name="platformIdentifierToken" value="%platform%" />
+			<property name="platformSpecificTemplateList" value="Windows,${publishingContent}/templateFiles/platform.php.template,winPlatform.php;Linux,${publishingContent}/templateFiles/platform.php.template,linPlatform.php;Solaris,${publishingContent}/templateFiles/platform.php.template,solPlatform.php;AIX,${publishingContent}/templateFiles/platform.php.template,aixPlatform.php;HP-UX,${publishingContent}/templateFiles/platform.php.template,hpuxPlatform.php;Macintosh,${publishingContent}/templateFiles/platform.php.template,macPlatform.php;Source Build,${publishingContent}/templateFiles/sourceBuilds.php.template,sourceBuilds.php" />
+			<property name="indexFileName" value="index.php" />
 			<property name="result" value="${postingDirectory}/${buildLabel}" />
 			<property name="testResultsTemplateFileName" value="${publishingContent}/templateFiles/testResults.php.template" />
 			<property name="dropTemplateFileName" value="${publishingContent}/templateFiles/index.php.template" />
 			<property name="testManifestFileName" value="${publishingContent}/testManifest.xml" />
 		</ant>
 
-		<!--  Insert ftp url for drop directory  -->
-		<replace file="${postingDirectory}/${buildLabel}/index.php" token="@buildlabel@" value="${buildLabel}" />
+		<!--  Replace build label in generated html files -->
+		<replace dir="${postingDirectory}/${buildLabel}"
+					token="@buildlabel@"
+					value="${buildLabel}"
+					includes="**/*.php"/>
+		
 	</target>
 
 	<target name="generatePerformanceResults">
@@ -409,7 +390,7 @@
 			<classpath>
 				<pathelement location="${base.builder}/plugins/org.eclipse.internal.build.tools/internalTools.jar"/>
 				<pathelement location="${base.builder}/plugins/org.eclipse.build.tools/buildTools.jar"/>
-				<pathelement location="${base.builder}/plugins/org.eclipse.osgi_3.2.100.v20060807.jar"/>
+				<pathelement location="${base.builder}/plugins/org.eclipse.osgi_3.3.0.v20061213.jar"/>
 			</classpath>
 		</java>
 		
