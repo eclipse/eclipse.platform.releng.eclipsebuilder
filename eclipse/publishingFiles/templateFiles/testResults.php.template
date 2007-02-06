@@ -147,12 +147,7 @@ a specific platform by clicking the cell link.</br></br>
 detailed report.
 </br></br>
 <table width="80%" border="1" bgcolor="#EEEEEE" align="center"> 
-<tr bgcolor="#9999CC"> 
-<th width="85%"><b>Compile Logs (Jar Files)</b></th>
-<th width = "5%"><b>Errors</b></th>
-<th width="5%"><b>Forbidden and Discouraged Access Warnings</b></th>
-<th width ="5%"><b>Warnings</b></th></tr>   
- 
+<tr bgcolor="#9999CC"> <th width="90%"><b>Compile Logs (Jar Files)</b></th><th width = "5%"><b>Errors</b></th><th width ="5%"><b>Warnings</b></th></tr> 
 %compilelogs% </table>
 </br>
 </div>
