@@ -20,15 +20,14 @@
 	<!-- The directory that will contain all files containing information on the tests that ran.-->
 	<property name="results" value="${basedir}/results" />
 
-	<!--Temp directory for JUnit report output, console log output and .log content.  
-		Value used from org.eclipse.test/library.xml-->
-	<property name="junit-report-output" value="${results}.tmp" />
+	<!--Directory for JUnit report output, console log output and .log content for each test suite.  
+		Overrides default in org.eclipse.test/library.xml-->
+	<property name="junit-report-output" value="${results}/${platform}" />
 
 	<!--Directory name of org.eclipse.test plug-in installed in ${eclipse-home}-->
 	<property name="org.eclipse.test" value="org.eclipse.test" />
 
 	<target name="init">
-		<mkdir dir="${results}" />
 		<mkdir dir="${junit-report-output}" />
 		
 		<!--Unlock files on the Mac before starting tests.
@@ -183,8 +182,7 @@
 			<antcall target="${test.target}">
 				<param name="testPlugin" value="${@{testPlugin}}" />
 				<param name="testPluginsRequired" value="@{testPluginsRequired}" />
-			</antcall>
-			<antcall target="collectResults" />
+			</antcall>			
 		</sequential>
 	</macrodef>
 
@@ -196,21 +194,6 @@
 	<target name="performance" if="performance.target.present" unless="skip.test">
 		<antcall target="setup" />
 		<ant antfile="${eclipse-home}/plugins/${testPlugin}/test.xml" dir="${eclipse-home}" target="performance" />
-	</target>
-
-	<target name="collectResults">
-		 <move todir="${results}">
-		    <fileset dir="${junit-report-output}" includes="*.xml"/>
-		    <globmapper from="*.xml" to="*_${platform}.xml"/>
-		  </move>
-		 <move todir="${results}">
-		    <fileset dir="${junit-report-output}" includes="*.html"/>
-		    <globmapper from="*.html" to="*_${platform}.html"/>
-		  </move>
-		<move todir="${results}">
-		    <fileset dir="${junit-report-output}" includes="*.txt"/>
-		    <globmapper from="*.txt" to="*_${platform}.txt"/>
-		</move>
 	</target>
 
 	<target name="ant">
@@ -397,6 +380,7 @@
 	</target>
 
 	<target name="all">
+		<!--antcall target="jdtcompilertool" /-->
 		<antcall target="jdttext" />
 		<antcall target="relEng" />
 		<antcall target="pdeui" />
@@ -408,7 +392,6 @@
 		<antcall target="coreexpressions" />
 		<antcall target="update" />
 		<antcall target="teamcore" />
-		<!--antcall target="jdtcompilertool" /-->
 		<antcall target="jdtcoreperf" />
 		<antcall target="jdtcorebuilder" />
 		<antcall target="jdtcorecompiler" />

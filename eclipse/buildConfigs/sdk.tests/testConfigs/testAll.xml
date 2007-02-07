@@ -1,48 +1,63 @@
 <project name="Eclipse Test Configuration" default="JUnitTests" basedir=".">
 
 	<!--
-	Ant properties for buildId, buildLabel, timestamp and buildDirectory must be set before running this script.
--->
+		Ant properties for buildId, buildLabel, timestamp and buildDirectory must be set before running this script.
+	-->
+	<!--A directory to look in for markers created from other running builds.-->
 	<property name="markerContainer" value="/home/users/releng/buildTools/markers" />
-	<property name="cfg" value="${markerContainer}/machine2.cfg" />
+	<property name="cfg" value="${basedir}/machine.cfg" />
 	<property name="test.xml" value="${base.builder}/plugins/org.eclipse.build.tools/scripts/test.xml" />
 	
 	<target name="test">
-		<property name="sleep" value="0"/>
+		<!--TODO  find a way to queue requests-->
 		<findMachine cfg="${cfg}" markerContainer="${markerContainer}" cfgKey="${cfgKey}" markerName="${markerName}" waitInterval="30" />
+
+		<!--The result of the findMachine task is a .marker files
+		 with a key-value pair identifying which machine has been assigned for testing.  
+		 The ${testMachine} property value is then used in the ${test.xml} script.
+		 The marker is also used by other builds that use <findMachine> to signal that the 
+		 specified test machine is in use.-->
 		<property file="${markerContainer}/${markerName}.marker" />
 		<property name="testMachine" value="${0}" />
+		
+		<!--A sleep in included here to avoid network timeouts if this target is called multiple times in parallel tasks.
+		  Default overidden by setting in calling targets.-->
+		<property name="sleep" value="0"/>
 		<sleep seconds="${sleep}"/>
+		
+		<!--Run all tests on the test machine-->
 		<ant antfile="${test.xml}"/>
+		
+		<!--Delete the marker to free up the host to run other tests.-->
 		<delete file="${markerContainer}/${markerName}.marker" />
 	</target>
 
 	<target name="JUnitTests">
 		<parallel>
 			<antcall target="test">
-				<param name="tester" value="${basedir}/macosx-carbon" />
-				<param name="cfgKey" value="eclipse31MacOSXCarbonTest" />
-				<param name="markerName" value="eclipse31-macosx-carbon-${buildId}" />
+				<param name="tester" value="${basedir}/macosxppc" />
+				<param name="cfgKey" value="macosxppc" />
+				<param name="markerName" value="eclipse-macosxppc-${buildId}" />
 			</antcall>
 			 <antcall target="test">
-				<param name="tester" value="${basedir}/rhelws4-linux-gtk" />
-				<param name="cfgKey" value="eclipse32LinuxGtkTest" />
-				<param name="markerName" value="eclipse32-linux-gtk-${buildId}" />
+				<param name="tester" value="${basedir}/rhelws4" />
+				<param name="cfgKey" value="rhelws4-gtk" />
+				<param name="markerName" value="eclipse-rhelws4-${buildId}" />
 			</antcall> 
 			<antcall target="test">
-				<param name="tester" value="${basedir}/win32" />
-				<param name="cfgKey" value="eclipse30WinXPTest" />
-				<param name="markerName" value="eclipse31-winxp-${buildId}" />
+				<param name="tester" value="${basedir}/win32xp" />
+				<param name="cfgKey" value="win32xp" />
+				<param name="markerName" value="eclipse-win32xp-${buildId}" />
 			</antcall>
 			 <antcall target="test">
-				<param name="tester" value="${basedir}/rhelws4-linux-gtk-5.0" />
-				<param name="cfgKey" value="eclipse32LinuxGtkTest50" />
-				<param name="markerName" value="eclipse32-5.0-linux-gtk-${buildId}" />
+				<param name="tester" value="${basedir}/rhelws4-5.0" />
+				<param name="cfgKey" value="rhelws4-5.0" />
+				<param name="markerName" value="eclipse-rhelws4-5.0-${buildId}" />
 			</antcall> 
 			<antcall target="test">
-				<param name="tester" value="${basedir}/win32-5.0" />
-				<param name="cfgKey" value="eclipse32WinXPTest50" />
-				<param name="markerName" value="eclipse32-5.0-winxp-${buildId}" />
+				<param name="tester" value="${basedir}/win32xp-5.0" />
+				<param name="cfgKey" value="win32-5.0" />
+				<param name="markerName" value="eclipse-win32xp-5.0-${buildId}" />
 			</antcall>
 		</parallel>
 	</target>
@@ -59,33 +74,33 @@
 		<parallel>
 			<!--slow machines-->
 			<antcall target="test">
-				<param name="tester" value="${basedir}/win32-perf" />
-				<param name="cfgKey" value="eclipse30WinXPTestPerf" />
-				<param name="markerName" value="eclipse30-winxp-perf-${timestamp}" />
+				<param name="tester" value="${basedir}/win32xp-perf" />
+				<param name="cfgKey" value="win32xp-perf" />
+				<param name="markerName" value="eclipse-win32xp-perf-${timestamp}" />
 			</antcall>
 			<antcall target="test">
-				<param name="tester" value="${basedir}/rhelws3-linux-gtk-perf" />
-				<param name="cfgKey" value="eclipse30LinuxGtkTestPerf" />
-				<param name="markerName" value="eclipse30-linux-gtk-perf-${timestamp}" />
+				<param name="tester" value="${basedir}/rhelws3-perf" />
+				<param name="cfgKey" value="rhelws3-perf" />
+				<param name="markerName" value="eclipse-rhelws3-perf-${timestamp}" />
 			</antcall>
 			<!--fast machines-->
 			<antcall target="test">
-				<param name="tester" value="${basedir}/win32-perf2" />
+				<param name="tester" value="${basedir}/win32xp-perf2" />
 				<param name="sleep" value="240" />
-				<param name="cfgKey" value="eclipse30WinXPTestPerf2" />
-				<param name="markerName" value="eclipse30-winxp-perf2-${timestamp}" />
+				<param name="cfgKey" value="win32xp-perf2" />
+				<param name="markerName" value="eclipse-win32xp-perf2-${timestamp}" />
 			</antcall>
 			<antcall target="test">
-				<param name="tester" value="${basedir}/rhelws3-linux-gtk-perf2" />
+				<param name="tester" value="${basedir}/rhelws3-perf2" />
 				<param name="sleep" value="120" />
-				<param name="cfgKey" value="eclipse30LinuxGtkTestPerf2" />
-				<param name="markerName" value="eclipse30-linux-gtk-perf2-${timestamp}" />
+				<param name="cfgKey" value="rhelws3-perf2" />
+				<param name="markerName" value="eclipse-rhelws3-perf2-${timestamp}" />
 			</antcall>
 			<antcall target="test">
-				<param name="tester" value="${basedir}/rhelws4-linux-gtk-perf" />
+				<param name="tester" value="${basedir}/rhelws4-perf" />
 				<param name="sleep" value="300" />
-				<param name="cfgKey" value="eclipse31LinuxGtkTestPerf3" />
-				<param name="markerName" value="eclipse31-linux-gtk-perf3-${timestamp}" />
+				<param name="cfgKey" value="rhelws4-perf" />
+				<param name="markerName" value="eclipse-rhelws4-perf-${timestamp}" />
 			</antcall>
 		</parallel>
 	</target>
