@@ -27,9 +27,57 @@
 	<!--Directory name of org.eclipse.test plug-in installed in ${eclipse-home}-->
 	<property name="org.eclipse.test" value="org.eclipse.test" />
 
+	<target name="setup" unless="noclean" depends="init">
+		<condition property="setupTarget" value="setup-zip">
+			<contains string="${runtimeArchive}" substring=".zip" />
+		</condition>
+		<condition property="setupTarget" value="setup-tar.gz">
+			<contains string="${runtimeArchive}" substring=".tar.gz" />
+		</condition>
+		<antcall target="${setupTarget}" />
+		<antcall target="configureTeamTest" />
+	</target>
+
+	<!--setup for zip archives-->
+	<target name="setup-zip" description="Reinstall the test Eclipse installation if specified by user">
+		<delete dir="${install}" />
+		<mkdir dir="${install}" />
+		<exec dir="." executable="unzip">
+			<arg line="-o -qq ${runtimeArchive} -d ${install}"/>
+		</exec>
+		<antcall target="installTestPlugins"/>
+	</target>
+
+	<!--setup for tar.gz archives-->
+	<target name="setup-tar.gz" description="Reinstall the test Eclipse installation if specified by user">
+		<property name="currentDir" value="${basedir}"/>
+		<delete dir="${install}" />
+		<mkdir dir="${install}" />
+		<exec dir="${install}" executable="tar">
+			<arg line="-xzf ${currentDir}/${runtimeArchive}"/>
+		</exec>
+		<antcall target="installTestPlugins"/>
+	</target>
+	
+	<target name="installTestPlugins">
+		<exec dir="." executable="unzip">
+			<arg line="-o -qq eclipse-junit-tests-*.zip
+				${derby}
+				eclipse/plugins/org.eclipse.test/*
+				eclipse/plugins/org.eclipse.test.performance_*
+				eclipse/plugins/org.eclipse.test.performance.win32_*
+				eclipse/plugins/org.eclipse.ant.optional.junit_*
+				${testPluginsRequired}
+				-x eclipse/*/org.eclipse.sdk.tests.source*/* eclipse/*/org.eclipse.test.source*/*
+				-d ${install}"/>
+		</exec>
+	</target>
+
 	<target name="init">
+		<mkdir dir="${results}/xml" />
+		<mkdir dir="${results}/html" />
 		<mkdir dir="${junit-report-output}" />
-		
+
 		<!--Unlock files on the Mac before starting tests.
 		  Required to delete some workspace directories (org.eclipse.core.filebuffers.tests and Team CVS tests).-->
 		<exec dir="${basedir}" executable="chflags" os="Mac OS X">
@@ -108,52 +156,6 @@
 		</condition>
 	</target>
 
-	<target name="setup" unless="noclean" depends="init">
-		<condition property="setupTarget" value="setup-zip">
-			<contains string="${runtimeArchive}" substring=".zip" />
-		</condition>
-		<condition property="setupTarget" value="setup-tar.gz">
-			<contains string="${runtimeArchive}" substring=".tar.gz" />
-		</condition>
-		<antcall target="${setupTarget}" />
-		<antcall target="configureTeamTest" />
-	</target>
-
-	<!--setup for zip archives-->
-	<target name="setup-zip" description="Reinstall the test Eclipse installation if specified by user">
-		<delete dir="${install}" />
-		<mkdir dir="${install}" />
-		<exec dir="." executable="unzip">
-			<arg line="-o -qq ${runtimeArchive} -d ${install}"/>
-		</exec>
-		<antcall target="installTestPlugins"/>
-	</target>
-
-	<!--setup for tar.gz archives-->
-	<target name="setup-tar.gz" description="Reinstall the test Eclipse installation if specified by user">
-		<property name="currentDir" value="${basedir}"/>
-		<delete dir="${install}" />
-		<mkdir dir="${install}" />
-		<exec dir="${install}" executable="tar">
-			<arg line="-xzf ${currentDir}/${runtimeArchive}"/>
-		</exec>
-		<antcall target="installTestPlugins"/>
-	</target>
-	
-	<target name="installTestPlugins">
-		<exec dir="." executable="unzip">
-			<arg line="-o -qq eclipse-junit-tests-*.zip
-				${derby}
-				eclipse/plugins/org.eclipse.test/*
-				eclipse/plugins/org.eclipse.test.performance_*
-				eclipse/plugins/org.eclipse.test.performance.win32_*
-				eclipse/plugins/org.eclipse.ant.optional.junit_*
-				${testPluginsRequired}
-				-x eclipse/*/org.eclipse.sdk.tests.source*/* eclipse/*/org.eclipse.test.source*/*
-				-d ${install}"/>
-		</exec>
-	</target>
-
 	<target name="configureTeamTest" if="teamcvs">
 		<!-- Fill in cvs repository information -->
 		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@user@" value="${cvs_user}"/>
@@ -180,9 +182,12 @@
 			</condition>
 			<property name="derby" value="" />
 			<antcall target="${test.target}">
+				<param name="report" value="@testPlugin" />
 				<param name="testPlugin" value="${@{testPlugin}}" />
 				<param name="testPluginsRequired" value="@{testPluginsRequired}" />
-			</antcall>			
+			</antcall>
+			<copy file="${eclipse-home}/@{report}.xml" tofile="${results}/xml/@{report}_${platform}.xml" failonerror="false" />
+			<style style="JUNIT.XSL" basedir="${results}/xml" destdir="${results}/html" />
 		</sequential>
 	</macrodef>
 
@@ -378,8 +383,8 @@
 	<target name="update">
 		<runTests testPlugin="org.eclipse.update.tests.core" />
 	</target>
-
-	<target name="all">
+	
+		<target name="all">
 		<!--antcall target="jdtcompilertool" /-->
 		<antcall target="jdttext" />
 		<antcall target="relEng" />
