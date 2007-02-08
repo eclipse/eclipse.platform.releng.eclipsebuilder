@@ -222,10 +222,10 @@
    	 -->
 		<property file="${buildDirectory}/finalPluginsVersions.properties" />
 		<move todir="${workingDirectory}/eclipse/plugins/org.eclipse.test">
-			<fileset dir="${workingDirectory}/eclipse/plugins/${org.eclipse.test}" />
+			<fileset dir="${workingDirectory}/eclipse/plugins/org.eclipse.test_${org.eclipse.test}" />
 		</move>
 		<!--the Ant move task leaves behind an empty directory-->
-		<delete dir="${workingDirectory}/eclipse/plugins/${org.eclipse.test}" includeEmptyDirs="true" />
+		<delete dir="${workingDirectory}/eclipse/plugins/org.eclipse.test_${org.eclipse.test}" includeEmptyDirs="true" />
 
 		<!-- rezip the JUnit plugin tests -->
 		<exec dir="${workingDirectory}" executable="zip">
