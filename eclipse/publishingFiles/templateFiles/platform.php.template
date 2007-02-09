@@ -54,7 +54,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 <?php
 	$platform = "%platform%";
 	$platforms = array(1 => "Windows", "Linux", "Solaris", "AIX", "HP-UX", "Macintosh");
-	$files = array(1 => "winPlatform.php", "linPlatform.php", "solPlatform.php", "aixPlatform.php", "hpuxPlatform.php", "macPlatform.php");
+	$files = array(1 => "winPlatform.php", "linPlatform.php", "solPlatform.php", "aixPlatform.php", "macPlatform.php");
 	$count = count($platforms);
 	for ($i = 1; $i <= $count; $i++) {
 		if($platform == $platforms[$i]) {
@@ -195,8 +195,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				<li><a href="winPlatform.php#EclipseSDK">Windows Platform</a></li>
 				<li><a href="linPlatform.php#EclipseSDK">Linux Platform</a></li>
 				<li><a href="solPlatform.php#EclipseSDK">Solaris Platform</a></li>
-				<li><a href="aixPlatform.php#EclipseSDK">AIX Platform</a></li>
-				<li><a href="hpuxPlatform.php#EclipseSDK">HP-UX Platform</a></li>
+				<li><a href="aixPlatform.php#EclipseSDK">AIX Platform</a></li>				
 				<li><a href="macPlatform.php#EclipseSDK">Macintosh Platform</a></li>
 			</ul>
 		</div>

@@ -42,11 +42,7 @@
 	<target name="assemble.master-root.equinox-launcher-aix.motif.ppc">
 		<property name="archiveName" value="launchers-aix.motif.ppc.${buildId}.zip" />
 		<antcall target="assemble" />
-	</target>
-	<target name="assemble.master-root.equinox-launcher-hpux.motif.PA_RISC">
-		<property name="archiveName" value="launchers-hpux.motif.PA_RISC.${buildId}.zip" />
-		<antcall target="assemble" />
-	</target>
+	</target>	
 	<target name="assemble.master-root.equinox-launcher-macosx.carbon.ppc">
 		<property name="archiveName" value="launchers-macosx.carbon.ppc.${buildId}.tar.gz" />
 		<antcall target="assemble" />

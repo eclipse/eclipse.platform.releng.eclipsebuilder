@@ -54,12 +54,7 @@
 			<param name="os" value="aix" />
 			<param name="ws" value="motif" />
 			<param name="arch" value="ppc" />
-		</antcall>
-		<antcall target="packageSwtStandalone">
-			<param name="os" value="hpux" />
-			<param name="ws" value="motif" />
-			<param name="arch" value="PA_RISC" />
-		</antcall>
+		</antcall>		
 		<antcall target="packageSwtStandalone">
 			<param name="os" value="solaris" />
 			<param name="ws" value="motif" />
@@ -273,7 +268,7 @@
 			<property name="buildType" value="${buildType}" />
 			<property name="dropTokenList" value="%sdk%,%tests%,%example%,%rcpruntime%,%rcpsdk%,%icubase%,%runtime%,%platformsdk%,%jdt%,%jdtsdk%,%jdtc%,%pde%,%pdesdk%,%cvs%,%cvssdk%,%teamextras%,%swt%,%relengtools%" />
 			<property name="platformIdentifierToken" value="%platform%" />
-			<property name="platformSpecificTemplateList" value="Windows,${publishingContent}/templateFiles/platform.php.template,winPlatform.php;Linux,${publishingContent}/templateFiles/platform.php.template,linPlatform.php;Solaris,${publishingContent}/templateFiles/platform.php.template,solPlatform.php;AIX,${publishingContent}/templateFiles/platform.php.template,aixPlatform.php;HP-UX,${publishingContent}/templateFiles/platform.php.template,hpuxPlatform.php;Macintosh,${publishingContent}/templateFiles/platform.php.template,macPlatform.php;Source Build,${publishingContent}/templateFiles/sourceBuilds.php.template,sourceBuilds.php" />
+			<property name="platformSpecificTemplateList" value="Windows,${publishingContent}/templateFiles/platform.php.template,winPlatform.php;Linux,${publishingContent}/templateFiles/platform.php.template,linPlatform.php;Solaris,${publishingContent}/templateFiles/platform.php.template,solPlatform.php;AIX,${publishingContent}/templateFiles/platform.php.template,aixPlatform.php;Macintosh,${publishingContent}/templateFiles/platform.php.template,macPlatform.php;Source Build,${publishingContent}/templateFiles/sourceBuilds.php.template,sourceBuilds.php" />
 			<property name="indexFileName" value="index.php" />
 			<property name="result" value="${postingDirectory}/${buildLabel}" />
 			<property name="testResultsTemplateFileName" value="${publishingContent}/templateFiles/testResults.php.template" />
@@ -390,7 +385,7 @@
 			<classpath>
 				<pathelement location="${base.builder}/plugins/org.eclipse.internal.build.tools/internalTools.jar"/>
 				<pathelement location="${base.builder}/plugins/org.eclipse.build.tools/buildTools.jar"/>
-				<pathelement location="${base.builder}/plugins/org.eclipse.osgi_3.3.0.v20061213.jar"/>
+				<pathelement location="${base.builder}/plugins/org.eclipse.osgi_3.3.0.v20070208.jar"/>
 			</classpath>
 		</java>
 		

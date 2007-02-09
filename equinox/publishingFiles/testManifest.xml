@@ -89,9 +89,7 @@
 			<platform id="SSG" name="Solaris 8 (SPARC/GTK 2)" fileName="launchers-solaris.gtk.sparc.@buildid@.zip">
 			</platform>			
 			<platform id="SAM" name="AIX (PPC/Motif)" fileName="launchers-aix.motif.ppc.@buildid@.zip">
-			</platform>
-			<platform id="SHM" name="HP-UX (HP9000/Motif)" fileName="launchers-hpux.motif.PA_RISC.@buildid@.zip">
-			</platform>
+			</platform>			
 			<platform id="SMC" name="Mac OSX (Mac/Carbon) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_2.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="launchers-macosx.carbon.ppc.@buildid@.tar.gz">
 			</platform>
 		</zipType>

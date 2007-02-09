@@ -304,7 +304,8 @@
 				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="hpux-motif-ia64" />
 				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="hpux-motif-ia64_32" />
 				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="solaris-gtk-x86" />
-			</or>
+				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="hpux-motif-PA_RISC" />	
+		    </or>
 		</condition>
 
 		<!--used to add doc plug-ins to result after initial assembly-->

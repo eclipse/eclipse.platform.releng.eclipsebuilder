@@ -12,7 +12,6 @@ master-root-launcher-linux.gtk.ppc.@buildId@.zip=file:${buildDirectory}/${buildL
 #master-root-launcher-linux.motif.x86.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | linux,motif,x86 | eclipse/ | runtime | root-launcher
 master-root-launcher-solaris.gtk.sparc.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | solaris,gtk,sparc | eclipse/ | runtime | root-launcher
 master-root-launcher-aix.motif.ppc.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | aix,motif,ppc | eclipse/ | runtime | root-launcher
-master-root-launcher-hpux.motif.PA_RISC.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | hpux,motif,PA_RISC | eclipse/ | runtime | root-launcher
 master-root-launcher-macosx.carbon.ppc.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | macosx,carbon,ppc| eclipse/ | runtime | root-launcher
 
 #primarily contain configuration directories
@@ -24,7 +23,6 @@ master-root-sdk-linux.gtk.ppc.@buildId@.zip=file:${buildDirectory}/${buildLabel}
 #master-root-sdk-solaris.motif.sparc.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | solaris,motif,sparc | eclipse/ | runtime | root-sdk
 master-root-sdk-solaris.gtk.sparc.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | solaris,gtk,sparc | eclipse/ | runtime | root-sdk
 master-root-sdk-aix.motif.ppc.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | aix,motif,ppc | eclipse/ | runtime | root-sdk
-master-root-sdk-hpux.motif.PA_RISC.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | hpux,motif,PA_RISC | eclipse/ | runtime | root-sdk
 master-root-sdk-macosx.carbon.ppc.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | macosx,carbon,ppc| eclipse/ | runtime | root-sdk
 
 master-root-platform-win32.win32.x86.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | win32,win32,x86 | eclipse/ | runtime | root-platform
@@ -35,7 +33,6 @@ master-root-platform-linux.gtk.ppc.@buildId@.zip=file:${buildDirectory}/${buildL
 #master-root-platform-solaris.motif.sparc.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | solaris,motif,sparc | eclipse/ | runtime | root-platform
 master-root-platform-solaris.gtk.sparc.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | solaris,gtk,sparc | eclipse/ | runtime | root-platform
 master-root-platform-aix.motif.ppc.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | aix,motif,ppc | eclipse/ | runtime | root-platform
-master-root-platform-hpux.motif.PA_RISC.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | hpux,motif,PA_RISC | eclipse/ | runtime | root-platform
 master-root-platform-macosx.carbon.ppc.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | macosx,carbon,ppc| eclipse/ | runtime | root-platform
 
 master-root-rcp-@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | | eclipse/ | runtime | root-rcp
