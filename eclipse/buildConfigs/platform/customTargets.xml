@@ -60,10 +60,7 @@
 </target>
 
 	<target name="assemble.org.eclipse.platform.hpux.motif.ia64_32" />
-<target name="assemble.org.eclipse.platform.hpux.motif.PA_RISC">
-	<property name="archiveName" value="eclipse-platform-${buildId}-hpux-motif.zip"/>
-	<antcall target="assemble" />
-</target>
+	<target name="assemble.org.eclipse.platform.hpux.motif.PA_RISC" />
 
 <target name="assemble.org.eclipse.platform.macosx.carbon.ppc">
 	<property name="archiveName" value="eclipse-platform-${buildId}-macosx-carbon.tar.gz"/>

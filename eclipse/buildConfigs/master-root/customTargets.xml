@@ -55,11 +55,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="assemble.master-root.launcher-aix.motif.ppc">
 		<property name="archiveName" value="master-root-launcher-aix.motif.ppc.${buildId}.zip"/>
 		<antcall target="assemble" />
-	</target>
-	<target name="assemble.master-root.launcher-hpux.motif.PA_RISC">
-		<property name="archiveName" value="master-root-launcher-hpux.motif.PA_RISC.${buildId}.zip"/>
-		<antcall target="assemble" />
-	</target>
+	</target>	
 	<target name="assemble.master-root.launcher-macosx.carbon.ppc">
 		<property name="archiveName" value="master-root-launcher-macosx.carbon.ppc.${buildId}.zip"/>
 		<antcall target="assemble" />
@@ -92,11 +88,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="assemble.master-root.sdk-aix.motif.ppc">
 		<property name="archiveName" value="master-root-sdk-aix.motif.ppc.${buildId}.zip"/>
 		<antcall target="assemble" />
-	</target>
-	<target name="assemble.master-root.sdk-hpux.motif.PA_RISC">
-		<property name="archiveName" value="master-root-sdk-hpux.motif.PA_RISC.${buildId}.zip"/>
-		<antcall target="assemble" />
-	</target>
+	</target>	
 	<target name="assemble.master-root.sdk-macosx.carbon.ppc">
 		<property name="archiveName" value="master-root-sdk-macosx.carbon.ppc.${buildId}.zip"/>
 		<antcall target="assemble" />
@@ -129,11 +121,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="assemble.master-root.platform-aix.motif.ppc">
 		<property name="archiveName" value="master-root-platform-aix.motif.ppc.${buildId}.zip"/>
 		<antcall target="assemble" />
-	</target>
-	<target name="assemble.master-root.platform-hpux.motif.PA_RISC">
-		<property name="archiveName" value="master-root-platform-hpux.motif.PA_RISC.${buildId}.zip"/>
-		<antcall target="assemble" />
-	</target>
+	</target>	
 	<target name="assemble.master-root.platform-macosx.carbon.ppc">
 		<property name="archiveName" value="master-root-platform-macosx.carbon.ppc.${buildId}.zip"/>
 		<antcall target="assemble" />
@@ -173,16 +161,11 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="assemble.master-root.equinox-launcher-aix.motif.ppc">
 		<property name="archiveName" value="launchers-aix.motif.ppc.${buildId}.zip" />
 		<antcall target="assemble.equinox" />
-	</target>
-	<target name="assemble.master-root.equinox-launcher-hpux.motif.PA_RISC">
-		<property name="archiveName" value="launchers-hpux.motif.PA_RISC.${buildId}.zip" />
-		<antcall target="assemble.equinox" />
-	</target>
+	</target>	
 	<target name="assemble.master-root.equinox-launcher-macosx.carbon.ppc">
 		<property name="archiveName" value="launchers-macosx.carbon.ppc.${buildId}.tar.gz" />
 		<antcall target="assemble.equinox" />
 	</target>
-
 	<target name="assemble">
 		<property name="archiveFullPath" value="${buildDirectory}/${buildLabel}/${archiveName}" />
 		<ant antfile="${assembleScriptName}" />

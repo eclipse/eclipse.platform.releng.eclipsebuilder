@@ -47,12 +47,6 @@
 		</antcall>
 	</target>
 	
-	<target name="assemble.hpux.motif.PA_RISC.xml">
-		<antcall target="assembler">
-			<param name="archiveName" value="${archiveRoot}-hpux-motif.zip"/>
-		</antcall>
-	</target>
-
 	<target name="assemble.macosx.carbon.ppc.xml">
 		<antcall target="assembler">
 			<param name="archiveName" value="${archiveRoot}-macosx-carbon.tar.gz"/>
