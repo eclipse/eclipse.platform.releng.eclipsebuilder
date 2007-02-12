@@ -144,9 +144,17 @@ a specific platform by clicking the cell link.</br></br>
 &nbsp;&nbsp;The table below shows the plugins in which errors or warnings were encountered. Click on the jar file link to view its
 detailed report.
 </br></br>
-<table width="80%" border="1" bgcolor="#EEEEEE" align="center"> 
-<tr bgcolor="#9999CC"> <th width="90%"><b>Compile Logs (Jar Files)</b></th><th width = "5%"><b>Errors</b></th><th width ="5%"><b>Warnings</b></th></tr> 
-%compilelogs% </table>
+<table width="77%" border="1">
+  <tr> 
+    <td><b>Compile Logs (Jar Files)</b></td>
+    <td><b>Errors</b></td>
+    <td><b>Forbidden and Discouraged Access Warnings</b></td>
+    <td><b>Other Warnings</b></td>
+  </tr>
+  
+  %compilelogs%
+  
+</table>
 </br>
 </div>
 </br></br>

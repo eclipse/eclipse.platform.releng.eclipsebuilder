@@ -26,11 +26,17 @@
 <link rel="stylesheet" title="default" href="http://eclipse.org/default_style.css" type="text/css">
 </head>
 <body>
-<table border=0 cellspacing=5 cellpadding=2 width="100%" > 
-<tr> <td align=LEFT valign=TOP colspan="3" bgcolor="#0080C0"><b><FONT COLOR="#FFFFFF" FACE="Arial,Helvetica">Bundles 
-containing compile errors </FONT></b></td></tr> </table><table width="77%" border="1"> 
-<tr> <td><b>Compile Logs</b></td><td><b>Errors</b></td><td><b>Warnings</b></td></tr> 
-%compilelogs% </table><P>&nbsp;</P>
+<table width="77%" border="1">
+  <tr> 
+    <td><b>Compile Logs (Jar Files)</b></td>
+    <td><b>Errors</b></td>
+    <td><b>Forbidden and Discouraged Access Warnings</b></td>
+    <td><b>Other Warnings</b></td>
+  </tr>
+  
+  %compilelogs%
+  
+</table><P>&nbsp;</P>
 
 
 
