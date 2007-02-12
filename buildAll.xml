@@ -166,7 +166,7 @@
 		<property name="repack" value="" />
 		
 	   <!--pack200-->		
-	   <java jar="${eclipse.home}/startup.jar"
+	   <java jar="${eclipse.home}/plugins/org.eclipse.equinox.launcher.jar"
 	         fork="true"
 		     timeout="10800000"
 		     jvm="${java15-home}/bin/java"

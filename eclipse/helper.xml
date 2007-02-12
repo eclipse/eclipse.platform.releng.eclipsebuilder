@@ -295,7 +295,7 @@
 		</condition>
 		<property name="configArgs" value="" />
 
-		<java jar="${basedir}/../org.eclipse.releng.basebuilder/startup.jar" fork="true" maxmemory="256m">
+		<java jar="${basedir}/../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar" fork="true" maxmemory="256m">
 			<arg line="${configArgs} -application org.eclipse.test.performance.ui.resultGenerator
 					-baseline ${eclipse.perf.ref}
 					-baseline.prefix 3.2_200606291905
