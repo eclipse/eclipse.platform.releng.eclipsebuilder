@@ -312,7 +312,20 @@
 		</condition>
 		<runTests testPlugin="org.eclipse.jdt.compiler.tool.tests" />
 	</target>
-	
+
+	<target name="jdtcompilerapt">
+		<condition property="jvm" value="${J2SE-6.0}">
+			<isset property="J2SE-6.0"/>
+		</condition>
+		<!--only run test if J2SE-6.0 property  set-->
+		<condition property="skip.test">
+			<not>
+				<isset property="J2SE-6.0" />
+			</not>
+		</condition>
+		<runTests testPlugin="org.eclipse.jdt.compiler.apt.tests" />
+	</target>
+			
 	<target name="jdtcoremodel">
 		<condition property="jvm" value="${J2SE-5.0}">
 			<isset property="J2SE-5.0"/>
@@ -385,7 +398,8 @@
 	</target>
 	
 		<target name="all">
-		<!--antcall target="jdtcompilertool" /-->
+		<antcall target="jdtcompilertool" />
+		<antcall target="jdtcompilerapt" />
 		<antcall target="jdttext" />
 		<antcall target="relEng" />
 		<antcall target="pdeui" />

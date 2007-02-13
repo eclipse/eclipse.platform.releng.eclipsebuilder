@@ -14,7 +14,7 @@
 			<arg line="${tester}/../../testScripts/test.xml ${testMachine}:${executionDir}" />
 		</exec>
 		
-		<!--copy in the properties file for testing with J9 vm args-->	
+		<replace file="${tester}/vm.properties" token="@buildid@" value="${buildId}"/>
 		<exec dir="." executable="${copyClient}">
 			<arg line="${tester}/vm.properties ${testMachine}:${executionDir}" />
 		</exec>
