@@ -182,12 +182,12 @@
 			</condition>
 			<property name="derby" value="" />
 			<antcall target="${test.target}">
-				<param name="report" value="@testPlugin" />
+				<param name="report" value="@{testPlugin}" />
 				<param name="testPlugin" value="${@{testPlugin}}" />
 				<param name="testPluginsRequired" value="@{testPluginsRequired}" />
 			</antcall>
-			<copy file="${eclipse-home}/@{report}.xml" tofile="${results}/xml/@{report}_${platform}.xml" failonerror="false" />
-			<style style="JUNIT.XSL" basedir="${results}/xml" destdir="${results}/html" />
+			<copy file="${eclipse-home}/@{testPlugin}.xml" tofile="${results}/xml/@{testPlugin}_${platform}.xml" failonerror="false" />
+			<style style="${eclipse-home}/plugins/org.eclipse.test/JUNIT.XSL" basedir="${results}/xml" destdir="${results}/html" />
 		</sequential>
 	</macrodef>
 
