@@ -186,19 +186,24 @@
 				<param name="testPlugin" value="${@{testPlugin}}" />
 				<param name="testPluginsRequired" value="@{testPluginsRequired}" />
 			</antcall>
-			<copy file="${eclipse-home}/@{testPlugin}.xml" tofile="${results}/xml/@{testPlugin}_${platform}.xml" failonerror="false" />
-			<style style="${eclipse-home}/plugins/org.eclipse.test/JUNIT.XSL" basedir="${results}/xml" destdir="${results}/html" />
 		</sequential>
 	</macrodef>
 
 	<target name="junit" unless="skip.test" depends="setup">
 		<antcall target="setup" />
 		<ant antfile="${eclipse-home}/plugins/${testPlugin}/test.xml" dir="${eclipse-home}" />
+		<antcall target="genResults" />
 	</target>
 
 	<target name="performance" if="performance.target.present" unless="skip.test">
 		<antcall target="setup" />
 		<ant antfile="${eclipse-home}/plugins/${testPlugin}/test.xml" dir="${eclipse-home}" target="performance" />
+		<antcall target="genResults" />
+	</target>
+	
+	<target name="genResults">
+		<copy file="${eclipse-home}/@{testPlugin}.xml" tofile="${results}/xml/@{testPlugin}_${platform}.xml" failonerror="false" />
+		<style style="${eclipse-home}/plugins/org.eclipse.test/JUNIT.XSL" basedir="${results}/xml" destdir="${results}/html" />
 	</target>
 
 	<target name="ant">
