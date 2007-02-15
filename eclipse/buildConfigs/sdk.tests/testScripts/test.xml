@@ -202,7 +202,7 @@
 	</target>
 	
 	<target name="genResults">
-		<copy file="${eclipse-home}/@{testPlugin}.xml" tofile="${results}/xml/@{testPlugin}_${platform}.xml" failonerror="false" />
+		<copy file="${eclipse-home}/${testPlugin}.xml" tofile="${results}/xml/${testPlugin}_${platform}.xml" failonerror="false" />
 		<style style="${eclipse-home}/plugins/org.eclipse.test/JUNIT.XSL" basedir="${results}/xml" destdir="${results}/html" />
 	</target>
 
