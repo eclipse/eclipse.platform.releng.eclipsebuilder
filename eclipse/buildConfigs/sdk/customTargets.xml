@@ -164,7 +164,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 
 	<target name="adjustIniFile">
 		<loadproperties srcfile="${buildDirectory}/pluginVersions.properties"/>
-		<condition property="newVersionQualifier" value="${forceContextQualifier}" else="${org.eclipse.jdt.debug}">
+		<condition property="newVersionQualifier" value="${forceContextQualifier}" else="${org.eclipse.jdt.debug.ui,0.0.0}">
 			<isset property="forceContextQualifier"/>
 		</condition>
 		<replace file="${buildDirectory}/features/org.eclipse.equinox.executable/bin/carbon/macosx/ppc/Eclipse.app/Contents/MacOS/eclipse.ini" >
