@@ -76,7 +76,7 @@ then
 fi
 
 # run tests
-eclipse/eclipse $vmcmd -data workspace -nosplash -suppressErrors -application org.eclipse.ant.core.antRunner -file `pwd`/test.xml $tests -Dws=$ws -Dos=$os -Darch=$arch $testvm -D$installmode=true $properties -logger org.apache.tools.ant.DefaultLogger
+eclipse/eclipse $vmcmd -data workspace -nosplash -suppressErrors -application org.eclipse.ant.core.antRunner -file `pwd`/test.xml $tests -Dws=$ws -Dos=$os -Darch=$arch $testvm -D$installmode=true $properties -logger org.apache.tools.ant.DefaultLogger -vmargs -Xmx512m
 
 # display message to user if os, ws and arch are invalid
 else

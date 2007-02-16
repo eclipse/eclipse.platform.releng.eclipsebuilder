@@ -52,7 +52,7 @@ set tests=%tests% %1 && shift && goto processcmdlineargs
 REM ***************************************************************************
 REM	Run tests by running Ant in Eclipse on the test.xml script
 REM ***************************************************************************
-eclipse\eclipse.exe %vmcmd% -data workspace -nosplash -suppressErrors -application org.eclipse.ant.core.antRunner -file test.xml %tests% %testvm% -Dws=%ws% -Dos=%os% -Darch=%arch% -D%installmode%=true %properties% -logger org.apache.tools.ant.DefaultLogger
+eclipse\eclipse.exe %vmcmd% -data workspace -nosplash -suppressErrors -application org.eclipse.ant.core.antRunner -file test.xml %tests% %testvm% -Dws=%ws% -Dos=%os% -Darch=%arch% -D%installmode%=true %properties% -logger org.apache.tools.ant.DefaultLogger -vmargs -Xmx512m
 goto end
 
 :end
