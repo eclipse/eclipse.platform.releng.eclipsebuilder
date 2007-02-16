@@ -170,19 +170,20 @@
 
 		<sequential>
 			<condition property="performance.target.present" value="true">
-				<isset property="${@{testPlugin}}.has.performance.target"/>
+				<isset property="@{testPlugin}.has.performance.target"/>
 			</condition>
 
 			<!--override the value of this property with performance if the tests run on performance machine-->
 			<property name="test.target" value="junit" />
-		
+
+			<property name="report" value="@{testPlugin}" />
+
 			<!--install Cloudscape plug-ins if running performance tests-->
 			<condition property="derby" value="eclipse/plugins/Cloudscape*/* ">
 				<equals arg1="${test.target}" arg2="${performance}"/>
 			</condition>
 			<property name="derby" value="" />
 			<antcall target="${test.target}">
-				<param name="report" value="@{testPlugin}" />
 				<param name="testPlugin" value="${@{testPlugin}}" />
 				<param name="testPluginsRequired" value="@{testPluginsRequired}" />
 			</antcall>
@@ -202,7 +203,7 @@
 	</target>
 	
 	<target name="genResults">
-		<copy file="${eclipse-home}/${testPlugin}.xml" tofile="${results}/xml/${testPlugin}_${platform}.xml" failonerror="false" />
+		<copy file="${eclipse-home}/${report}.xml" tofile="${results}/xml/${report}_${platform}.xml" failonerror="false" />
 		<style style="${eclipse-home}/plugins/org.eclipse.test/JUNIT.XSL" basedir="${results}/xml" destdir="${results}/html" />
 	</target>
 
