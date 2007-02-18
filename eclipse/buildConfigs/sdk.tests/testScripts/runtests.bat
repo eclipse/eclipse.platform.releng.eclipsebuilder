@@ -1,7 +1,7 @@
 @echo off
 
 REM default java executable for outer and test vm
-set vmcmd=
+set vmcmd=java
 set testvm=
 
 REM reset list of ant targets in test.xml to execute
