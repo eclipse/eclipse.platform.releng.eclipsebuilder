@@ -206,11 +206,11 @@
 		<sequential>
 
 			<!--alwasy use eclipse executable to launch tests with the exception of performance tests-->
-			<condition property="useEclipseExe" value="true">
+			<!--condition property="useEclipseExe" value="true">
 				<not>
 					<equals arg1="${test.target}" arg2="${performance}"/>
 				</not>
-			</condition>
+			</condition-->
 
 			<condition property="performance.target.present" value="true">
 				<isset property="@{testPlugin}.has.performance.target"/>
@@ -451,7 +451,7 @@
 	<target name="all">
 		<antcall target="jdtcompilertool" />
 		<antcall target="jdtcompilerapt" />
-		<!--antcall target="jdttext" />
+		<antcall target="jdttext" />
 		<antcall target="relEng" />
 		<antcall target="pdeui" />
 		<antcall target="ant" />
@@ -462,12 +462,12 @@
 		<antcall target="coreexpressions" />
 		<antcall target="update" />
 		<antcall target="teamcore" />
-		<antcall target="jdtcoreperf" /-->
+		<antcall target="jdtcoreperf" />
 		<antcall target="jdtcorebuilder" />
 		<antcall target="jdtcorecompiler" />
 		<antcall target="jdtcoremodel" />
 		<antcall target="ui" />
-		<!--antcall target="uiperformance" />
+		<antcall target="uiperformance" />
 		<antcall target="uieditors" />
 		<antcall target="uinavigator" />
 		<antcall target="uiworkbenchtexteditor" />
@@ -484,7 +484,7 @@
 		<antcall target="filebuffers" />
 		<antcall target="antui" />
 		<antcall target="swt" />
-		<antcall target="teamcvs" /-->
+		<antcall target="teamcvs" />
 		<antcall target="jdtapt" />
 		<antcall target="ua" />
 	</target>
