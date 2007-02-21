@@ -449,8 +449,8 @@
 	</target>
 
 	<target name="all">
-		<antcall target="jdtcompilertool" />
-		<antcall target="jdtcompilerapt" />
+		<!-- <antcall target="jdtcompilertool" />
+		<antcall target="jdtcompilerapt" /> -->
 		<antcall target="jdttext" />
 		<antcall target="relEng" />
 		<antcall target="pdeui" />
@@ -464,7 +464,7 @@
 		<antcall target="teamcore" />
 		<antcall target="jdtcoreperf" />
 		<antcall target="jdtcorebuilder" />
-		<antcall target="jdtcorecompiler" />
+		<antcall target="jdtcorecompiler" /> 
 		<antcall target="jdtcoremodel" />
 		<antcall target="ui" />
 		<antcall target="uiperformance" />
