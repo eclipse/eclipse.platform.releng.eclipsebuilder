@@ -447,8 +447,8 @@
 	</target>
 
 	<target name="all">
-		<!-- <antcall target="jdtcompilertool" />
-		<antcall target="jdtcompilerapt" /> -->
+		<antcall target="jdtcompilertool" />
+		<antcall target="jdtcompilerapt" />
 		<antcall target="jdttext" />
 		<antcall target="relEng" />
 		<antcall target="pdeui" />
