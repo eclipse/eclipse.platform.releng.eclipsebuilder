@@ -385,7 +385,7 @@
 			<classpath>
 				<pathelement location="${base.builder}/plugins/org.eclipse.internal.build.tools/internalTools.jar"/>
 				<pathelement location="${base.builder}/plugins/org.eclipse.build.tools/buildTools.jar"/>
-				<pathelement location="${base.builder}/plugins/org.eclipse.osgi_3.3.0.v20070208.jar"/>
+				<pathelement location="${base.builder}/plugins/org.eclipse.osgi_3.3.0.N20070223-0010.jar.jar"/>
 			</classpath>
 		</java>
 		
