@@ -3,6 +3,7 @@ cd .
 #environment variables
 PATH=$PATH:`pwd`/../linux;export PATH
 xhost +$HOSTNAME
+MOZILLA_FIVE_HOME=/usr/lib/mozilla-1.7.7;export MOZILLA_FIVE_HOME
 USERNAME=`whoami`
 DISPLAY=$HOSTNAME:0.0
 ulimit -c unlimited
