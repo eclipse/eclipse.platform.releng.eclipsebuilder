@@ -4,11 +4,12 @@ cd .
 PATH=$PATH:`pwd`/../linux;export PATH
 xhost +$HOSTNAME
 MOZILLA_FIVE_HOME=/usr/lib/mozilla-1.7.7;export MOZILLA_FIVE_HOME
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MOZILLA_FIVE_HOME
 USERNAME=`whoami`
 DISPLAY=$HOSTNAME:0.0
 ulimit -c unlimited
 
-export USERNAME DISPLAY
+export USERNAME DISPLAY LD_LIBRARY_PATH
 
 # add Cloudscape plugin to junit tests zip file
 zip eclipse-junit-tests-$1.zip -rm eclipse
