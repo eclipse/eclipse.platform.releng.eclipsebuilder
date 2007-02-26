@@ -2,7 +2,6 @@
 
 REM default java executable for outer and test vm
 set vmcmd=java
-set testvm=
 
 REM reset list of ant targets in test.xml to execute
 set tests=
@@ -43,7 +42,7 @@ if x%1==x-os set os =%2 && shift && shift && goto processcmdlineargs
 if x%1==x-arch set arch=%2 && shift && shift && goto processcmdlineargs
 if x%1==x-noclean set installmode=noclean&& shift && goto processcmdlineargs
 if x%1==x-properties set properties=-propertyfile %2 && shift && shift && goto processcmdlineargs
-if x%1==x-vm set vmcmd="%2" && set testvm="-Djvm=%2" && shift && shift && goto processcmdlineargs
+if x%1==x-vm set vmcmd="%2" && shift && shift && goto processcmdlineargs
 
 set tests=%tests% %1 && shift && goto processcmdlineargs
 
@@ -56,7 +55,7 @@ REM get name of org.eclipse.equinox.launcher_*.jar with version label
 dir /b eclipse\plugins\org.eclipse.equinox.launcher_*.jar>launcher-jar-name.txt
 set /p launcher-jar=<launcher-jar-name.txt
 
-%vmcmd% -Dosgi.os=%os% -Dosgi.ws=%ws% -Dosgi.arch=%arch% -jar eclipse\plugins\%launcher-jar% -data workspace -nosplash -suppressErrors -application org.eclipse.ant.core.antRunner -file test.xml %tests% %testvm% -Dws=%ws% -Dos=%os% -Darch=%arch% -D%installmode%=true %properties% -logger org.apache.tools.ant.DefaultLogger
+%vmcmd% -Dosgi.os=%os% -Dosgi.ws=%ws% -Dosgi.arch=%arch% -jar eclipse\plugins\%launcher-jar% -data workspace -application org.eclipse.ant.core.antRunner -file test.xml %tests% -Dws=%ws% -Dos=%os% -Darch=%arch% -D%installmode%=true %properties% -logger org.apache.tools.ant.DefaultLogger
 
 goto end
 
