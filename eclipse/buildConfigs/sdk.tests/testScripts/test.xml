@@ -304,7 +304,7 @@
 		<runTests testPlugin="org.eclipse.jdt.text.tests" />
 	</target>
 
-	<target name="relEng">
+	<target name="relEng" depends="setRuntimeArchive">
 		<runTests testPlugin="org.eclipse.releng.tests" />
 		<move todir="${results}/chkpii" includeEmptyDirs="no" failonerror="false">
 			<fileset dir="${results}/chkpii"/>
