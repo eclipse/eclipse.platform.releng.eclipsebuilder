@@ -399,7 +399,8 @@
 		<runTests testPlugin="org.eclipse.team.tests.core" />
 	</target>
 
-	<target name="teamcvs" depends="configureTeamTest" >
+	<target name="teamcvs">
+		<property name="teamcvs" value="true"/>		
 		<runTests testPlugin="org.eclipse.team.tests.cvs.core" />
 	</target>
 
