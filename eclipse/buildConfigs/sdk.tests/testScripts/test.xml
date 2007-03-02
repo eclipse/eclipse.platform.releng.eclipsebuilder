@@ -315,6 +315,10 @@
 	<target name="ua">
 		<runTests testPlugin="org.eclipse.ua.tests" />
 	</target>
+	
+	<target name="coretestsnet">
+			<runTests testPlugin="org.eclipse.core.tests.net" />
+		</target>
 
 	<target name="jdtcorecompiler" depends="setJVMProperties">
 		<condition property="jvm" value="${J2SE-5.0}">
@@ -475,5 +479,6 @@
 		<antcall target="teamcvs" />
 		<antcall target="jdtapt" />
 		<antcall target="ua" />
+		<antcall target="coretestsnet" />
 	</target>
 </project>
