@@ -479,6 +479,6 @@
 		<antcall target="teamcvs" />
 		<antcall target="jdtapt" />
 		<antcall target="ua" />
-		<antcall target="coretestsnet" />
+	<!--	<antcall target="coretestsnet" /> -->
 	</target>
 </project>
