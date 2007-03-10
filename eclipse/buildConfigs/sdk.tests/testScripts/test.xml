@@ -206,7 +206,7 @@
 			<!--alwasy use eclipse executable to launch tests with the exception of performance tests-->
 			<!--condition property="useEclipseExe" value="true">
 				<not>
-					<equals arg1="${test.target}" arg2="${performance}"/>
+					<equals arg1="${test.target}" arg2="performance"/>
 				</not>
 			</condition-->
 
