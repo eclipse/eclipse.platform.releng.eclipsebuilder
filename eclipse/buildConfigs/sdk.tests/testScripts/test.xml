@@ -221,7 +221,7 @@
 
 			<!--install Cloudscape plug-ins if running performance tests-->
 			<condition property="derby" value="eclipse/plugins/Cloudscape*/* ">
-				<equals arg1="${test.target}" arg2="${performance}"/>
+				<equals arg1="${test.target}" arg2="performance"/>
 			</condition>
 			<property name="derby" value="" />
 			<antcall target="${test.target}">
