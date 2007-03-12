@@ -29,13 +29,24 @@
 <table width="77%" border="1">
   <tr>
     <td><b>Compile Logs (Jar Files)</b></td>
-    <td><b>Errors</b></td>   
-    <td><b>Other Warnings</b></td>
+    <td><b>Errors</b></td>
+    <td><b>Warnings</b></td>
   </tr>
-  
+
   %compilelogs%
-  
-</table><P>&nbsp;</P>
+
+</table>
+
+<table width="77%" border="1">
+  <tr>
+    <td><b>Compile Logs (Jar Files)</b></td>
+    <td><b>Forbidden Access Warnings</b></td>
+    <td><b>Discouraged Access Warnings</b></td>
+  </tr>
+
+  %accesseslogs%
+
+</table>
 
 
 
