@@ -218,6 +218,7 @@
 			<property name="test.target" value="junit" />
 
 			<property name="report" value="@{testPlugin}" />
+			<property name="output-file" value="${report}.xml" />
 
 			<!--install Cloudscape plug-ins if running performance tests-->
 			<condition property="derby" value="eclipse/plugins/Cloudscape*/* ">
