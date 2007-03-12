@@ -147,8 +147,7 @@ detailed report.
 <table width="77%" border="1">
  <tr>
     <td><b>Compile Logs (Jar Files)</b></td>
-    <td><b>Errors</b></td>
-    <td><b>Forbidden and Discouraged Access Warnings (F/D)</b></td>
+    <td><b>Errors</b></td>    
     <td><b>Other Warnings</b></td>
   </tr>
   
