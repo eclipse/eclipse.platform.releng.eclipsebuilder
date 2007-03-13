@@ -216,10 +216,8 @@
 
 			<!--override the value of this property with performance if the tests run on performance machine-->
 			<property name="test.target" value="junit" />
-
 			<property name="report" value="@{testPlugin}" />
-			<property name="output-file" value="${report}.xml" />
-
+			
 			<!--install Cloudscape plug-ins if running performance tests-->
 			<condition property="derby" value="eclipse/plugins/Cloudscape*/* ">
 				<equals arg1="${test.target}" arg2="performance"/>
@@ -228,6 +226,7 @@
 			<antcall target="${test.target}">
 				<param name="testPlugin" value="${@{testPlugin}}" />
 				<param name="testPluginsRequired" value="@{testPluginsRequired}" />
+				<param name="output-file" value="@{testPlugin}.xml" />
 			</antcall>		
 		</sequential>
 	</macrodef>
