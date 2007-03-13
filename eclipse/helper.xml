@@ -46,6 +46,11 @@
 			<param name="arch" value="x86" />
 		</antcall>
 		<antcall target="packageSwtStandalone">
+				<param name="ws" value="wpf" />
+				<param name="os" value="win32" />
+				<param name="arch" value="x86" />
+			</antcall>
+		<antcall target="packageSwtStandalone">
 			<param name="os" value="linux" />
 			<param name="ws" value="motif" />
 			<param name="arch" value="x86" />
