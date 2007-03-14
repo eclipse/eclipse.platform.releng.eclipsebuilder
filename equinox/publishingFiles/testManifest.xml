@@ -26,7 +26,11 @@
 			<platform id="event" name="All" fileName="@org.eclipse.equinox.event@.jar">
 			</platform>		
 			<platform id="log" name="All" fileName="@org.eclipse.equinox.log@.jar">
-			</platform>		
+			</platform>			
+			<platform id="jspjasper" name="All" fileName="@org.eclipse.equinox.jsp.jasper@.jar">
+			</platform>			
+			<platform id="jspjasperregistry" name="All" fileName="@org.eclipse.equinox.jsp.jasper.registry@.jar">
+			</platform>					
 			<platform id="metatype" name="All" fileName="@org.eclipse.equinox.metatype@.jar">
 			</platform>
 			<platform id="preferences" name="All" fileName="@org.eclipse.equinox.preferences@.jar">
@@ -61,9 +65,13 @@
 
 		<zipType name="Other">
 			<platform id="javaxservlet" name="All" fileName="@javax.servlet@.jar">
-			</platform>										
+			</platform>
+			<platform id="javaxservletjsp" name="All" fileName="@javax.servlet.jsp@.jar">
+			</platform>
+			<platform id="apachecommonsel" name="All" fileName="@org.apache.commons.el@.jar">
+			</platform>					
 			<platform id="apachecomminglogging" name="All" fileName="@org.apache.commons.logging@.jar">
-			</platform>										
+			</platform>													
 			<platform id="mortbayjetty" name="All" fileName="@org.mortbay.jetty@.jar">
 			</platform>										
 		 </zipType>

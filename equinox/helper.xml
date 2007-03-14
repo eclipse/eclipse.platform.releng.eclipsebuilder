@@ -160,6 +160,12 @@
 				<param name="bundle.id" value="org.eclipse.equinox.http.jetty" />
     	</antcall>
 		<antcall target="updateTestManifest">
+				<param name="bundle.id" value="org.eclipse.equinox.jsp.jasper" />
+		</antcall>
+		<antcall target="updateTestManifest">
+				<param name="bundle.id" value="org.eclipse.equinox.jsp.jasper.registry" />
+		</antcall>
+		<antcall target="updateTestManifest">
 				<param name="bundle.id" value="org.eclipse.equinox.http.registry" />
 	   	</antcall>
 		<antcall target="updateTestManifest">
@@ -175,8 +181,14 @@
 			<param name="bundle.id" value="javax.servlet" />
 	   	</antcall>
 		<antcall target="updateTestManifest">
+			<param name="bundle.id" value="javax.servlet.jsp" />
+		</antcall>
+		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.apache.commons.logging" />
 	   	</antcall>
+		<antcall target="updateTestManifest">
+			 <param name="bundle.id" value="org.apache.commons.el" />
+		</antcall>
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.mortbay.jetty" />
 	   	</antcall>
