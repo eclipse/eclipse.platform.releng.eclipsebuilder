@@ -40,6 +40,12 @@
 			<param name="archiveName" value="${archiveRoot}-solaris-gtk.zip"/>
 		</antcall>
 	</target>
+	
+	<target name="assemble.linux.gtk.motif.xml">
+			<antcall target="assembler">
+				<param name="archiveName" value="${archiveRoot}-linux-motif.tar.gz"/>
+			</antcall>
+	</target>
 
 	<target name="assemble.aix.motif.ppc.xml">
 		<antcall target="assembler">
