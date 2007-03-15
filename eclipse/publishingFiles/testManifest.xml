@@ -112,7 +112,7 @@
 
 	<zipType name="SWT">
 		<platform id="SWTW" name="Windows (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="swt-@build@-win32-win32-x86.zip"></platform>
-		<platform id="SWTWPF" name="Windows Vista WPF (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="swt-@build@-wpf-win32-x86.zip"></platform>
+		<platform id="SWTWPF" name="Windows Vista WPF (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="swt-@build@-wpf-win32.zip"></platform>
 		<platform id="SWTWCE" name="Windows CE (ARM PocketPC) (&lt;a href=&quot;http://dev.eclipse.org/viewcvs/index.cgi/~checkout~/platform-swt-home/faq.html#pocketpclibrary&quot;>Instructions&lt;/a>)" fileName="swt-@build@-win32-wce_ppc-arm-j2se.zip"></platform>
 		<platform id="SWTWCEJ" name="Windows CE (ARM PocketPC, J2ME profile) (&lt;a href=&quot;http://dev.eclipse.org/viewcvs/index.cgi/~checkout~/platform-swt-home/faq.html#pocketpclibrary&quot;>Instructions&lt;/a>)" fileName="swt-@build@-win32-wce_ppc-arm-j2me.zip"></platform>
 		<platform id="SWTLG2" name="Linux (x86/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="swt-@build@-gtk-linux-x86.zip"></platform>
