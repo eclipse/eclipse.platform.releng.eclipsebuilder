@@ -16,6 +16,12 @@
 		<param name="archiveName" value="${archiveRoot}-win32.zip"/>
 	</antcall>
 </target>
+	
+<target name="assemble.win32.wpf.x86.xml">
+		<antcall target="assembler">
+			<param name="archiveName" value="${archiveRoot}-win32-wpf.zip"/>
+		</antcall>
+</target>	
 
 <target name="assemble.linux.gtk.x86.xml">
 		<antcall target="assembler">

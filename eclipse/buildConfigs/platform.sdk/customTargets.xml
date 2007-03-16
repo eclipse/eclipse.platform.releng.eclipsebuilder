@@ -25,6 +25,11 @@
 		<antcall target="assemble" />
 	</target>
 
+	<target name="assemble.org.eclipse.platform.sdk.win32.wpf.x86">
+			<property name="archiveName" value="eclipse-platform-SDK-${buildId}-win32-wpf.zip" />
+			<antcall target="assemble" />
+		</target>
+	
 	<target name="assemble.org.eclipse.platform.sdk.linux.motif.x86">
 		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-linux-motif.tar.gz" />
 		<antcall target="assemble" />
