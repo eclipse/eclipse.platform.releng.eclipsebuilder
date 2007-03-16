@@ -338,6 +338,18 @@
 		<runTests testPlugin="org.eclipse.jdt.apt.tests" />
 	</target>
 
+	<target name="jdtaptpluggable" depends="setJVMProperties">
+			<property name="jvm" value="${J2SE-5.0}"/>
+			<!--only run test if J2SE-5.0 property  set-->
+			<condition property="skip.test">
+				<not>
+					<isset property="J2SE-5.0" />
+				</not>
+			</condition>
+			<runTests testPlugin="org.eclipse.jdt.apt.pluggable.tests" />
+		</target>
+	
+	
 	<target name="jdtcorebuilder" depends="setJVMProperties">
 		<!--Run with 1.5 vm if it is available-->
 		<condition property="jvm" value="${J2SE-5.0}">
@@ -477,8 +489,9 @@
 		<antcall target="antui" />
 		<antcall target="swt" />
 		<antcall target="teamcvs" />
-		<antcall target="jdtapt" />
-		<antcall target="ua" />
 		<antcall target="coretestsnet" />
+		<antcall target="jdtapt" />
+		<!-- <antcall target="jdtaptpluggable" /> -->
+		<antcall target="ua" />		
 	</target>
 </project>
