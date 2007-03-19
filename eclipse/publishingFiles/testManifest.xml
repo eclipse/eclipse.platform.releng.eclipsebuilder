@@ -3,7 +3,6 @@
 <zipTypes>
 	<zipType name="Eclipse SDK">
 		<platform id="SW" name="Windows (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_2.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-SDK-@build@-win32.zip"></platform>
-		<platform id="SWPF" name="Windows Vista WPF (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_2.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-SDK-@build@-win32-wpf.zip"></platform>
 		<platform id="SLG2" name="Linux (x86/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_2.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-SDK-@build@-linux-gtk.tar.gz"></platform>
 		<platform id="SLG264" name="Linux (x86_64/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_2.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-SDK-@build@-linux-gtk-x86_64.tar.gz"></platform>
 	    <platform id="SLG2PPC" name="Linux (PPC/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-SDK-@build@-linux-gtk-ppc.tar.gz"></platform>		
@@ -26,8 +25,7 @@
 	</zipType>
 
 	<zipType name="RCP Runtime Binary">
-		platform id="RCPW" name="Windows (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-@build@-win32.zip"></platform>
-		<platform id="RCPWPF" name="Windows Vista WPF(&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-@build@-win32-wpf.zip"></platform>
+		<platform id="RCPW" name="Windows (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-@build@-win32.zip"></platform>
 		<platform id="RCPLG2" name="Linux (x86/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-@build@-linux-gtk.tar.gz"></platform>
 		<platform id="RCPLG264" name="Linux (x86_64/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-@build@-linux-gtk-x86_64.tar.gz"></platform>
 		<platform id="RCPLG2PPC" name="Linux (PPC/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-@build@-linux-gtk-ppc.tar.gz"></platform>		
@@ -40,7 +38,6 @@
 
 	<zipType name="RCP SDK">
 		<platform id="RCPWSDK" name="Windows (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-SDK-@build@-win32.zip"></platform>
-		<platform id="RCPWPF" name="Windows (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-SDK-@build@-win32-wpf.zip"></platform>
 		<platform id="RCPLG2SDK" name="Linux (x86/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-SDK-@build@-linux-gtk.tar.gz"></platform>
 		<platform id="RCPLG264SDK" name="Linux (x86_64/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-SDK-@build@-linux-gtk-x86_64.tar.gz"></platform>
 		<platform id="RCPLG2PPCSDK" name="Linux (PPC/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-SDK-@build@-linux-gtk-ppc.tar.gz"></platform>		
@@ -58,7 +55,6 @@
 
 	<zipType name="Platform Runtime Binary">
 		<platform id="PW" name="Windows (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-@build@-win32.zip"></platform>
-		<platform id="PWPF" name="Windows Vista WPF (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-@build@-win32-wpf.zip"></platform>
 		<platform id="PLG2" name="Linux (x86/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-@build@-linux-gtk.tar.gz"></platform>
 		<platform id="PLG264" name="Linux (x86_64/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-@build@-linux-gtk-x86_64.tar.gz"></platform>
 		<platform id="PLG2PPC" name="Linux (PPC/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-@build@-linux-gtk-ppc.tar.gz"></platform>
@@ -70,7 +66,6 @@
 
 	<zipType name="Platform SDK">
 		<platform id="PWSDK" name="Windows (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-SDK-@build@-win32.zip"></platform>
-		<platform id="PWPFSDK" name="Windows Vista WPF (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-SDK-@build@-win32-wpf.zip"></platform>
 		<platform id="PLG2SDK" name="Linux (x86/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-SDK-@build@-linux-gtk.tar.gz"></platform>
 		<platform id="PLG264SDK" name="Linux (x86_64 64/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-SDK-@build@-linux-gtk-x86_64.tar.gz"></platform>
 		<platform id="PLG2PPCSDK" name="Linux (PPC/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-SDK-@build@-linux-gtk-ppc.tar.gz"></platform>
@@ -116,8 +111,7 @@
 	</zipType>
 
 	<zipType name="SWT">
-		<platform id="SWTW" name="Windows (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="swt-@build@-win32-win32-x86.zip"></platform>
-		<platform id="SWTWPF" name="Windows Vista WPF (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="swt-@build@-wpf-win32-x86.zip"></platform>
+		<platform id="SWTW" name="Windows (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="swt-@build@-win32-win32-x86.zip"></platform>		
 		<platform id="SWTWCE" name="Windows CE (ARM PocketPC) (&lt;a href=&quot;http://dev.eclipse.org/viewcvs/index.cgi/~checkout~/platform-swt-home/faq.html#pocketpclibrary&quot;>Instructions&lt;/a>)" fileName="swt-@build@-win32-wce_ppc-arm-j2se.zip"></platform>
 		<platform id="SWTWCEJ" name="Windows CE (ARM PocketPC, J2ME profile) (&lt;a href=&quot;http://dev.eclipse.org/viewcvs/index.cgi/~checkout~/platform-swt-home/faq.html#pocketpclibrary&quot;>Instructions&lt;/a>)" fileName="swt-@build@-win32-wce_ppc-arm-j2me.zip"></platform>
 		<platform id="SWTLG2" name="Linux (x86/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="swt-@build@-gtk-linux-x86.zip"></platform>
