@@ -31,16 +31,14 @@
 		<platform id="RCPLG2" name="Linux (x86/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-@build@-linux-gtk.tar.gz"></platform>
 		<platform id="RCPLG264" name="Linux (x86_64/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-@build@-linux-gtk-x86_64.tar.gz"></platform>
 		<platform id="RCPLG2PPC" name="Linux (PPC/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-@build@-linux-gtk-ppc.tar.gz"></platform>		
-		<platform id="RCPSG" name="Solaris 8 (SPARC/GTK 2)" fileName="eclipse-RCP-@build@-solaris-gtk.zip"></platform>
-		<platform id="RCPSM" name="Solaris 8 (SPARC/Motif)" fileName="eclipse-RCP-@build@-solaris-motif.zip"></platform> 
+		<platform id="RCPSG" name="Solaris 8 (SPARC/GTK 2)" fileName="eclipse-RCP-@build@-solaris-gtk.zip"></platform>		 
 		<!--platform id="PNP" name="QNX (x86/Photon)" fileName="eclipse-RCP-@build@-qnx-photon.zip"></platform-->
 		<platform id="RCPAM" name="AIX (PPC/Motif)" fileName="eclipse-RCP-@build@-aix-motif.zip"></platform>	
 		<platform id="RCPMC" name="Mac OSX (Mac/Carbon) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-@build@-macosx-carbon.tar.gz"></platform>
 	</zipType>
 
 	<zipType name="RCP SDK">
-		<platform id="RCPWSDK" name="Windows (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-SDK-@build@-win32.zip"></platform>
-		<platform id="RCPWWPFSDK" name="Windows (x86/WPF)  **early access** (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-SDK-@build@-win32-wpf.zip"></platform>
+		<platform id="RCPWSDK" name="Windows (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-SDK-@build@-win32.zip"></platform>		
 		<platform id="RCPLG2SDK" name="Linux (x86/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-SDK-@build@-linux-gtk.tar.gz"></platform>
 		<platform id="RCPLG264SDK" name="Linux (x86_64/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-SDK-@build@-linux-gtk-x86_64.tar.gz"></platform>
 		<platform id="RCPLG2PPCSDK" name="Linux (PPC/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-SDK-@build@-linux-gtk-ppc.tar.gz"></platform>		
