@@ -19,7 +19,7 @@
 
 	<target name="assemble.win32.wpf.x86.xml">
 		<antcall target="assembler">
-			<param name="archiveName" value="${archiveRoot}-win32.zip" />
+			<param name="archiveName" value="${archiveRoot}-win32-wpf.zip" />
 		</antcall>
 	</target>
 
