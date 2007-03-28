@@ -495,7 +495,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.releng.tests_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.releng.tests_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
@@ -517,7 +517,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.pde.ui.tests_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.pde.ui.tests_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
 	<effectedFile id="SMC"></effectedFile>
@@ -657,7 +657,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.apt.tests_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.jdt.apt.tests_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="JMC"></effectedFile>
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -665,7 +665,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.core.tests.builder_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.jdt.core.tests.builder_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="JMC"></effectedFile>
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -673,7 +673,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.core.tests.compiler_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.jdt.core.tests.compiler_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="JMC"></effectedFile>
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -681,7 +681,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.core.tests.model_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.jdt.core.tests.model_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="JMC"></effectedFile>
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -689,7 +689,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.core.tests.performance_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.jdt.core.tests.performance_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="JMC"></effectedFile>
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -697,7 +697,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.debug.tests_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.jdt.debug.tests_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="JMC"></effectedFile>
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -705,7 +705,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.text.tests_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.jdt.text.tests_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="JMC"></effectedFile>
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -713,7 +713,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.ui.tests_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.jdt.ui.tests_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="JMC"></effectedFile>
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -721,7 +721,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.ui.tests.refactoring_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.jdt.ui.tests.refactoring_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="JMC"></effectedFile>
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -1160,7 +1160,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ant.tests.core_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.ant.tests.core_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="PMC"></effectedFile>
 	<effectedFile id="PMCSDK"></effectedFile>
 	<effectedFile id="JMC"></effectedFile>
@@ -1170,7 +1170,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ant.tests.ui_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.ant.tests.ui_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -1178,7 +1178,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.compare.tests_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.compare.tests_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="PMC"></effectedFile>
 	<effectedFile id="PMCSDK"></effectedFile>
 	<effectedFile id="JMC"></effectedFile>
@@ -1188,7 +1188,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.core.filebuffers.tests_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.core.filebuffers.tests_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="PMC"></effectedFile>
 	<effectedFile id="PMCSDK"></effectedFile>
 	<effectedFile id="JMC"></effectedFile>
@@ -1198,7 +1198,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.core.tests.resources_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.core.tests.resources_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="PMC"></effectedFile>
 	<effectedFile id="PMCSDK"></effectedFile>
 	<effectedFile id="JMC"></effectedFile>
@@ -1208,7 +1208,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jface.text.tests_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.jface.text.tests_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="PMC"></effectedFile>
 	<effectedFile id="PMCSDK"></effectedFile>
 	<effectedFile id="JMC"></effectedFile>
@@ -1218,7 +1218,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.team.tests.core_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.team.tests.core_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="PMC"></effectedFile>
 	<effectedFile id="PMCSDK"></effectedFile>
 	<effectedFile id="JMC"></effectedFile>
@@ -1228,7 +1228,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.team.tests.cvs.core_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.team.tests.cvs.core_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="PMC"></effectedFile>
 	<effectedFile id="PMCSDK"></effectedFile>
 	<effectedFile id="JMC"></effectedFile>
@@ -1238,7 +1238,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.core.tests.net_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.core.tests.net_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="PMC"></effectedFile>
 	<effectedFile id="PMCSDK"></effectedFile>
 	<effectedFile id="JMC"></effectedFile>
@@ -1248,7 +1248,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.text.tests_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.text.tests_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="PMC"></effectedFile>
 	<effectedFile id="PMCSDK"></effectedFile>
 	<effectedFile id="JMC"></effectedFile>
@@ -1258,7 +1258,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ua.tests_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.ua.tests_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="PMC"></effectedFile>
 	<effectedFile id="PMCSDK"></effectedFile>
 	<effectedFile id="JMC"></effectedFile>
@@ -1268,7 +1268,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ui.editors.tests_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.ui.editors.tests_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="PMC"></effectedFile>
 	<effectedFile id="PMCSDK"></effectedFile>
 	<effectedFile id="JMC"></effectedFile>
@@ -1278,7 +1278,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ui.tests.navigator_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.ui.tests.navigator_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="PMC"></effectedFile>
 	<effectedFile id="PMCSDK"></effectedFile>
 	<effectedFile id="JMC"></effectedFile>
@@ -1288,7 +1288,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ui.tests.views.properties.tabbed_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.ui.tests.views.properties.tabbed_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="PMC"></effectedFile>
 	<effectedFile id="PMCSDK"></effectedFile>
 	<effectedFile id="JMC"></effectedFile>
@@ -1298,7 +1298,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ui.workbench.texteditor.tests_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.ui.workbench.texteditor.tests_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="PMC"></effectedFile>
 	<effectedFile id="PMCSDK"></effectedFile>
 	<effectedFile id="JMC"></effectedFile>
@@ -1308,7 +1308,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.update.tests.core_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.update.tests.core_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="PMC"></effectedFile>
 	<effectedFile id="PMCSDK"></effectedFile>
 	<effectedFile id="JMC"></effectedFile>
@@ -1318,7 +1318,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ltk.core.refactoring.tests_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.ltk.core.refactoring.tests_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="PMC"></effectedFile>
 	<effectedFile id="PMCSDK"></effectedFile>
 	<effectedFile id="JMC"></effectedFile>
@@ -1328,7 +1328,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ltk.ui.refactoring.tests_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.ltk.ui.refactoring.tests_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="PMC"></effectedFile>
 	<effectedFile id="PMCSDK"></effectedFile>
 	<effectedFile id="JMC"></effectedFile>
@@ -1685,7 +1685,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.core.tests.runtime_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.core.tests.runtime_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="RCPMC"></effectedFile>
 	<effectedFile id="RCPMCSDK"></effectedFile>
 	<effectedFile id="PMC"></effectedFile>
@@ -1697,7 +1697,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ui.tests_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.ui.tests_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="RCPMC"></effectedFile>
 	<effectedFile id="RCPMCSDK"></effectedFile>
 	<effectedFile id="PMC"></effectedFile>
@@ -1709,7 +1709,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jface.tests.databinding_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.jface.tests.databinding_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="RCPMC"></effectedFile>
 	<effectedFile id="RCPMCSDK"></effectedFile>
 	<effectedFile id="PMC"></effectedFile>
@@ -1721,7 +1721,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.swt.tests_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.swt.tests_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="RCPMC"></effectedFile>
 	<effectedFile id="RCPMCSDK"></effectedFile>
 	<effectedFile id="PMC"></effectedFile>
@@ -1733,7 +1733,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.core.expressions.tests_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.core.expressions.tests_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="RCPMC"></effectedFile>
 	<effectedFile id="RCPMCSDK"></effectedFile>
 	<effectedFile id="PMC"></effectedFile>
@@ -1745,7 +1745,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.osgi.tests_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.osgi.tests_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="RCPMC"></effectedFile>
 	<effectedFile id="RCPMCSDK"></effectedFile>
 	<effectedFile id="PMC"></effectedFile>
@@ -1757,7 +1757,7 @@
 	<effectedFile id="SMC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ui.tests.rcp_macosx.carbon.ppc.xml">
+<logFile name="org.eclipse.ui.tests.rcp_macosx.carbon.ppc_5.0.xml">
 	<effectedFile id="RCPMC"></effectedFile>
 	<effectedFile id="RCPMCSDK"></effectedFile>
 	<effectedFile id="PMC"></effectedFile>
