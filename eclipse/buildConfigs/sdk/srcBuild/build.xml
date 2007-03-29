@@ -95,6 +95,15 @@
 			<arg line="build.sh" />
 		</exec>
 		<move file="${launcherlibs}/library/${installWs}/eclipse" todir="${launcherlibs}/" />
+
+		<!-- build liblocalfile -->
+		<exec dir="plugins/org.eclipse.core.filesystem/natives/unix/linux" executable="make" failonerror="true"/>
+		<move file="plugins/org.eclipse.core.filesystem/natives/unix/linux/liblocalfile_1_0_0.so" 
+			 todir="plugins/org.eclipse.core.filesystem.linux.${installArch}/os/linux/${installArch}">
+		</move>
+		<!-- build libupdate -->
+		<ant dir="plugins/org.eclipse.update.core.linux/src" antfile="build.xml" />
+
 	</target>
 
 
