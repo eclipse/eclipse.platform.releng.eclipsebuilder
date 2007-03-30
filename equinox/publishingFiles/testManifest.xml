@@ -38,9 +38,7 @@
 			<platform id="registry" name="All" fileName="@org.eclipse.equinox.registry@.jar">
 			</platform>
 			<platform id="services" name="All" fileName="@org.eclipse.osgi.services@.jar">
-			</platform>
-			<platform id="servletapi" name="All" fileName="@org.eclipse.equinox.servlet.api@.jar">
-			</platform>
+			</platform>			
 			<platform id="supplement" name="All" fileName="@org.eclipse.equinox.supplement@.jar">
 			</platform>
 			<platform id="useradmin" name="All" fileName="@org.eclipse.equinox.useradmin@.jar">

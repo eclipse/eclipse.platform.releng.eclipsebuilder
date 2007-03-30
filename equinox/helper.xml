@@ -125,10 +125,7 @@
 		</antcall>
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.wireadmin"/>
-		</antcall>
-		<antcall target="updateTestManifest">
-			<param name="bundle.id" value="org.eclipse.equinox.servlet.api"/>
-		</antcall>
+		</antcall>		
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.osgi" />
 		</antcall>
@@ -146,10 +143,7 @@
 		</antcall>
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.common" />
-		</antcall>
-		<antcall target="updateTestManifest">
-			<param name="bundle.id" value="org.eclipse.equinox.servlet.api" />
-		</antcall>		
+		</antcall>			
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.cm" />
 		</antcall>			
