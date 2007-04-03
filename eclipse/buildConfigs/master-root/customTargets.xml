@@ -32,6 +32,10 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<property name="archiveName" value="master-root-launcher-linux.gtk.x86.${buildId}.zip"/>
 		<antcall target="assemble" />
 	</target>
+	<target name="assemble.master-root.launcher-linux.motif.x86">
+			<property name="archiveName" value="master-root-launcher-linux.motif.x86.${buildId}.zip"/>
+			<antcall target="assemble" />
+	</target>
 	<target name="assemble.master-root.launcher-win32.win32.x86">
 		<property name="archiveName" value="master-root-launcher-win32.win32.x86.${buildId}.zip"/>
 		<antcall target="assemble" />
@@ -46,10 +50,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	</target>
 	<target name="assemble.master-root.launcher-linux.gtk.ppc">
 		<property name="archiveName" value="master-root-launcher-linux.gtk.ppc.${buildId}.zip"/>
-		<antcall target="assemble" />
-	</target>
-	<target name="assemble.master-root.launcher-linux.motif.x86">
-		<property name="archiveName" value="master-root-launcher-linux.motif.x86.${buildId}.zip"/>
 		<antcall target="assemble" />
 	</target>	
 	<target name="assemble.master-root.launcher-solaris.gtk.sparc">
@@ -69,6 +69,10 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<property name="archiveName" value="master-root-sdk-linux.gtk.x86.${buildId}.zip"/>
 		<antcall target="assemble" />
 	</target>
+	<target name="assemble.master-root.sdk-linux.motif.x86">
+			<property name="archiveName" value="master-root-sdk-linux.motif.x86.${buildId}.zip"/>
+			<antcall target="assemble" />
+		</target>
 	<target name="assemble.master-root.sdk-win32.wpf.x86">
 			<property name="archiveName" value="master-root-sdk-win32.wpf.x86.${buildId}.zip"/>
 			<antcall target="assemble"/>
@@ -84,11 +88,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="assemble.master-root.sdk-linux.gtk.ppc">
 		<property name="archiveName" value="master-root-sdk-linux.gtk.ppc.${buildId}.zip"/>
 		<antcall target="assemble" />
-	</target>
-	<target name="assemble.master-root.sdk-linux.motif.x86">
-		<property name="archiveName" value="master-root-sdk-linux.motif.x86.${buildId}.zip"/>
-		<antcall target="assemble" />
-	</target>	
+	</target>		
 	<target name="assemble.master-root.sdk-solaris.gtk.sparc">
 		<property name="archiveName" value="master-root-sdk-solaris.gtk.sparc.${buildId}.zip"/>
 		<antcall target="assemble" />
