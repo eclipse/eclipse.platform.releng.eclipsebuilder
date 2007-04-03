@@ -254,9 +254,9 @@
 
         <!--delete files on build.eclipse.org-->
 		<echo message="delete temp files on build.eclipse.org"/>
-	 <!--	<exec dir="." executable="ssh" output="signing.txt" append="true">
+		<exec dir="." executable="ssh" output="signing.txt" append="true">
 			<arg line="build.eclipse.org &quot;/bin/rm -rf ${stagingDirectory}/${buildId}-out ${stagingDirectory}/${archiveName}&quot;"/>
-		</exec> -->
+		</exec> 
 	</target>		 		 		  		 		  
 	
 	
