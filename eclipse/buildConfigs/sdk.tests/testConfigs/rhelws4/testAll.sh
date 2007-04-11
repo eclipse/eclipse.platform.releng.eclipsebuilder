@@ -3,7 +3,7 @@ cd .
 #environment variables
 PATH=$PATH:`pwd`/../linux;export PATH
 xhost +$HOSTNAME
-MOZILLA_FIVE_HOME=/usr/lib/mozilla-1.7.13;export MOZILLA_FIVE_HOME
+MOZILLA_FIVE_HOME=/usr/lib/mozilla-1.7.12;export MOZILLA_FIVE_HOME
 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MOZILLA_FIVE_HOME
 USERNAME=`whoami`
 DISPLAY=$HOSTNAME:0.0
