@@ -94,6 +94,10 @@
 		<platform id="ECJ" name="All" fileName="ecj.jar"></platform>
 		<platform id="ECJSRC" name="All" fileName="ecjsrc.zip"></platform>
 	</zipType>
+	
+	<zipType name="Jarprocessor">
+		<platform id="JARPROCESSOR" name="All" fileName="jarprocessor.jar"></platform>		
+	</zipType>
 
 	<zipType name="PDE Runtime">
 		<platform id="PDE" name="All" fileName="eclipse-PDE-@build@.zip"></platform>
