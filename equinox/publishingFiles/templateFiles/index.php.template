@@ -132,27 +132,20 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 #     $httplink = "http://www.eclipse.org/downloads/download.php?file=/eclipse/downloads/drops/$buildlabel/$zipfile";
      $httplink = "download.php?dropFile=$zipfile";
      $httplabel = $zipfile;
-     $httpline =  "<div align=\"left\"><a href=\"$httplink\">$httplabel</a>";
-     $ftplink = "";
-     $ftplabel = "";
-     $ftpline =  "";
+     $httpline =  "<div align=\"left\"><a href=\"$httplink\">$httplabel</a>"; 
      $md5name = "";
      $shaname = "";
 } else {
     $httplink = "download.php?dropFile=$zipfile";
     $httplabel = "(http)";
-    $httpline = "<div align=\"left\"><a href=\"$httplink\">$httplabel</a>";
-    $ftplink = "ftp://$servername/$buildlabel/$zipfile";
-    $ftplabel = "(ftp)";
-    $ftpline =  "<a href=\"$ftplink\">$ftplabel</a>";
+    $httpline = "<div align=\"left\"><a href=\"$httplink\">$httplabel</a>"; 
     $md5name = $zipfile;
     $shaname = $zipfile;
 }
   $filesize = getDropSize($zipfile);
     
   echo "$httpline"; 
-  echo "&nbsp;&nbsp";
-  echo "$ftpline";
+  echo "&nbsp;&nbsp"; 
   echo "<td>$filesize</td>";
   echo "<td>$zipfile</td>";
   echo "<td><a href=\"http://download.eclipse.org/eclipse/downloads/drops/@buildlabel@/checksum/$zipfile.md5\">(md5)</a>";
