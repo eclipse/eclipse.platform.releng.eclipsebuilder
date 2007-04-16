@@ -157,6 +157,9 @@
 				<param name="bundle.id" value="org.eclipse.equinox.jsp.jasper" />
 		</antcall>
 		<antcall target="updateTestManifest">
+				<param name="bundle.id" value="org.eclipse.equinox.launcher" />
+		</antcall>
+		<antcall target="updateTestManifest">
 				<param name="bundle.id" value="org.eclipse.equinox.jsp.jasper.registry" />
 		</antcall>
 		<antcall target="updateTestManifest">
