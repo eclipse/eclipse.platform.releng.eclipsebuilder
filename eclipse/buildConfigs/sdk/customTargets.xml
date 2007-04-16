@@ -363,7 +363,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<chmod file="${tempDir}/buildScripts/build" perm="755" />
 
 		<!--copy example doc -->
-		<ant antfile="buildDoc.xml" target="examplesDocCopy" dir="${buildDirectory}/plugins/rg.eclipse.platform.doc.isv" />
+		<ant antfile="buildDoc.xml" target="examplesDocCopy" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.isv" />
 		<ant antfile="buildDoc.xml" target="examplesDocCopy" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv" />
 
 		<copy todir="${tempDir}/buildScripts">
