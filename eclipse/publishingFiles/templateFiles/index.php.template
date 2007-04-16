@@ -179,13 +179,10 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 		<?php
 		$servername = $_SERVER["SERVER_NAME"];
 		if (! preg_match("/.eclipse.org/i",$servername)) {
-        		echo "<tr> To download a file via HTTP click on its corresponding http link below.
-			To download a file via FTP click on its corresponding FTP link. If you have problems
-			ftping a file directly try this <a href=\"ftp://$servername/@buildlabel@/\"><b>link</b></a>
-			for ftp access to the entire build directory.";
+        		echo "<tr> To download a file via HTTP click on its corresponding http link below.";			
 		} else {
     			echo "<tr>";
-		} ?> You can also download builds via anonymous ftp at download.eclipse.org. 
+		} ?>  
 		</table>
 		</div>
 		
