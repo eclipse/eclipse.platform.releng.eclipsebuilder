@@ -96,7 +96,8 @@
 	</zipType>
 	
 	<zipType name="Jarprocessor">
-		<platform id="JARPROCESSOR" name="All" fileName="jarprocessor.jar"></platform>		
+		<platform id="JARPROCESSOR" name="All" fileName="jarprocessor.jar"></platform>
+		<platform id="JARPROCESSORSRC" name="All" fileName="jarprocessorsrc.zip"></platform>		
 	</zipType>
 
 	<zipType name="PDE Runtime">
