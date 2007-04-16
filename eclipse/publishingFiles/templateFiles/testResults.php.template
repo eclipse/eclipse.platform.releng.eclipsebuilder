@@ -24,7 +24,7 @@
 ?>
 <STYLE TYPE="text/css">
 <!--
-P {text-indent: 30pt;}
+P {text-indent: 30pt; margin: inherit}
 -->
 </STYLE>
 
