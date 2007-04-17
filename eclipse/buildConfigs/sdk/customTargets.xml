@@ -371,10 +371,10 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		</copy>
 
 		<!--replace hard-coded location of Orbit bundles in generated packaging scripts to avoid bug 182331, 178869 -->
-		<replaceregexp match="/builds/(I\d*|N\d*|M\d*)/src" replace="${buildDirectory}" byline="true" >
+		<replaceregexp match="/builds/(I\d*|N\d*|M\d*)/src" replace="${buildDirectory}" byline="true">
 			<fileset dir="${tempDir}/buildScripts" includes="package*" />
 		</replaceregexp>
-		
+
 		<!--ensure linux drops are created as .tar.gz files -->
 		<replace dir="${tempDir}/buildScripts" includes="assemble*" excludes="*win32*,*hpux*,*solaris*,*aix*" token=".zip" value=".tar.gz" />
 
@@ -396,6 +396,24 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<copy todir="${tempDir}/buildScripts" flatten="true" overwrite="true">
 			<fileset dir="${eclipse.build.configs}/sdk/srcBuild" excludes="fetch/**,incl,jdtcoresrc/**" />
 		</copy>
+
+		<!--find the name of the equinox launcher for use with generating the doc indexes in the source builds -->
+		 <!-- <property name="equinoxlauncher" value="org.eclipse.equinox.launcher" />
+		<apply executable="ls" output="${buildDirectory}/${equinoxlauncher}.txt" dir="${buildDirectory}/eclipse/plugins">
+			<fileset dir="${buildDirectory}/eclipse/plugins">
+				<patternset>
+					<include name="${equinoxlauncher}_*.jar" />
+				</patternset>
+			</fileset>
+		</apply>
+
+		<replaceregexp file="${buildDirectory}/${equinoxlauncher}.txt" match="/.+/" replace="" />
+		<replaceregexp file="${buildDirectory}/${equinoxlauncher}.txt" match="\.jar" replace="" />
+		<replaceregexp file="${buildDirectory}/${equinoxlauncher}.txt" match="\n" replace="" />
+		<loadfile property="bundle.jar" srcFile="${buildDirectory}/${equinoxlauncher}.txt" failonerror="off" />
+		<delete file="${buildDirectory}/${equinoxlauncher}.txt" failonerror="false" />
+		<replace file="${equinox.build.configs}/../publishingFiles/testManifest.xml" token="@${equinoxlauncher}@" value="${bundle.jar}" /> -->
+
 
 		<!-- fetch scripts are not required when source already included in zip file -->
 		<delete>
