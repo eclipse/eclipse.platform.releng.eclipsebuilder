@@ -4,7 +4,7 @@ org.eclipse.equinox.executable_@buildId@.zip=file:${buildDirectory}/${buildLabel
 master-root-@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | | eclipse/ | runtime | root
 master-root-launcher-@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | | eclipse/ | runtime | root-launcher
 
-#eclipse launcher, startup.jar
+#eclipse launcher 
 master-root-launcher-win32.win32.x86.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | win32,win32,x86 | eclipse/ | runtime | root-launcher
 master-root-launcher-win32.wpf.x86.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | win32,wpf,x86 | eclipse/ | runtime | root-launcher
 master-root-launcher-linux.gtk.x86.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | linux,gtk,x86 | eclipse/ | runtime | root-launcher

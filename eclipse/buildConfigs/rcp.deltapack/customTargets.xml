@@ -37,7 +37,7 @@
     </ant>
 
 	<!-- get startup.jar from org.eclipse.platform of current build -->
-	<unzip src="${buildDirectory}/deltapacktmp/workingPlace/${buildId}/${archiveName}" dest="${buildDirectory}/deltapacktmp/workingPlace/${buildId}"/>
+	<!-- <unzip src="${buildDirectory}/deltapacktmp/workingPlace/${buildId}/${archiveName}" dest="${buildDirectory}/deltapacktmp/workingPlace/${buildId}"/> -->
  <!--   <copy file="${tempDirectory}/plugins/org.eclipse.platform/startup.jar" todir="${buildDirectory}/deltapacktmp/workingPlace/${buildId}/eclipse/features/org.eclipse.equinox.executable_1.0.0/bin"/>-->
 	<!--HACK to workaround bug 100460.  Add legal root files.-->
     <copy todir="${buildDirectory}/deltapacktmp/workingPlace/${buildId}/eclipse">

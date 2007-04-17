@@ -204,7 +204,7 @@ are quite complete, all should be considered experimental.</P></TD></TR></table>
 <tr><td><div class="homeitem3col">
 <h3><a name="Launchers"> Launchers</a></h3>
 <table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" > 
-<TR> <TD HEIGHT="48" COLSPAN="2"> <P>While it is possible to use the Equinox framework as a standalone JAR, it is often convenient to use the executable program launcher.  The platform-specific archives here include precompiled executables as well as some support files such as startup.jar and a configuration template.</P></TD></TR></table>
+<TR> <TD HEIGHT="48" COLSPAN="2"> <P>While it is possible to use the Equinox framework as a standalone JAR, it is often convenient to use the executable program launcher.  The platform-specific archives here include precompiled executables as well as some support files such as the equinox launcher and a configuration template.</P></TD></TR></table>
 <table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" >
 <tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="33%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
 </tr> %launchers% </table>
