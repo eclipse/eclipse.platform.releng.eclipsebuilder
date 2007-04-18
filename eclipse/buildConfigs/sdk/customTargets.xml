@@ -343,7 +343,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<mkdir dir="${tempDir}/buildScripts" />
 		<mkdir dir="${tempDir}/buildScripts/baseLocation" />
 
-
 		<copy file="${buildDirectory}/label.properties" todir="${tempDir}/buildScripts" />
 
 		<copy todir="${tempDir}/buildScripts" flatten="true" overwrite="true">
@@ -371,7 +370,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		</copy>
 
 		<!--replace hard-coded location of Orbit bundles in generated packaging scripts to avoid bug 182331, 178869 -->
-		<replaceregexp match="/builds/(I\d*|N\d*|M\d*)/src" replace="${buildDirectory}" byline="true">
+		<replaceregexp match="/builds/(I\d*|N\d*|M\d*)/org.eclipse.releng.eclipsebuilder/../src" replace="${buildDirectory}" byline="true">
 			<fileset dir="${tempDir}/buildScripts" includes="package*" />
 		</replaceregexp>
 
@@ -397,8 +396,13 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<fileset dir="${eclipse.build.configs}/sdk/srcBuild" excludes="fetch/**,incl,jdtcoresrc/**" />
 		</copy>
 
+		<!--replace hard-coded location of Orbit bundles in generated packaging scripts to avoid bug 182331, 178869 -->
+		<replaceregexp match="/builds/(I\d*|N\d*|M\d*)/org.eclipse.releng.eclipsebuilder/../src" replace="${buildDirectory}" byline="true">
+			<fileset dir="${tempDir}/buildScripts" includes="package*" />
+		</replaceregexp>
+
 		<!--find the name of the equinox launcher for use with generating the doc indexes in the source builds -->
-		 <!-- <property name="equinoxlauncher" value="org.eclipse.equinox.launcher" />
+		<!-- <property name="equinoxlauncher" value="org.eclipse.equinox.launcher" />
 		<apply executable="ls" output="${buildDirectory}/${equinoxlauncher}.txt" dir="${buildDirectory}/eclipse/plugins">
 			<fileset dir="${buildDirectory}/eclipse/plugins">
 				<patternset>
