@@ -83,7 +83,7 @@
 			featureList="master-root"
 			includeLaunchers="false" />
 		<!-- copy build.properties to generated feature -->		
-		<copy file="${equinox.build.configs/equinox-launchers-new/equinox-launchers-buildinfo/build.properties" todir="${buildDirectory}/features/org.eclipse.equinox.launchers-feature"/>		
+		<copy file="${equinox.build.configs}/equinox-launchers-new/equinox-launchers-buildinfo/build.properties" todir="${buildDirectory}/features/org.eclipse.equinox.launchers-feature"/>		
 	</target>
 
 	<!-- ===================================================================== -->
