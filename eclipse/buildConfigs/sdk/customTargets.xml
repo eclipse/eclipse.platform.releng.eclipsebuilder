@@ -370,7 +370,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		</copy>
 
 		<!--replace hard-coded location of Orbit bundles in generated packaging scripts to avoid bug 182331, 178869 -->
-		<replaceregexp match="/builds/(I\d*|N\d*|M\d*)/org.eclipse.releng.eclipsebuilder/../src" replace="${buildDirectory}" byline="true">
+		<replaceregexp match="/builds/(I\d*|N\d*|M\d*)/src" replace="$${buildDirectory}" byline="true">
 			<fileset dir="${tempDir}/buildScripts" includes="package*" />
 		</replaceregexp>
 
@@ -397,7 +397,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		</copy>
 
 		<!--replace hard-coded location of Orbit bundles in generated packaging scripts to avoid bug 182331, 178869 -->
-		<replaceregexp match="/builds/(I\d*|N\d*|M\d*)/org.eclipse.releng.eclipsebuilder/../src" replace="${buildDirectory}" byline="true">
+		<replaceregexp match="/builds/(I\d*|N\d*|M\d*)/src" replace="${buildDirectory}" byline="true">
 			<fileset dir="${tempDir}/buildScripts" includes="package*" />
 		</replaceregexp>
 
