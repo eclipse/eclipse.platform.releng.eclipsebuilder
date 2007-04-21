@@ -238,7 +238,7 @@
 		<property name="buildDirectory" value="${basedir}" />
 
 		<!--  directory which includes elements which are not to be recompiled  -->
-		<property name="baseLocation" value="${buildDirectory}/baseLocation" />
+		<!-- <property name="baseLocation" value="${buildDirectory}/baseLocation" /> -->
 
 		<!--  identifies build type and original build date  -->
 		<property file="${basedir}/label.properties" />
@@ -297,7 +297,7 @@
 		<property name="buildingOSGi" value="true" />
 
 		<!--property to invoke the packager for baseLocation files -->
-		<property name="runPackager" value="true" />
+<!--		<property name="runPackager" value="true" /> -->
 
 		<!--indentifies this as a srcFetch build-->
 		<available file="fetch_org.eclipse.equinox.executable.xml" property="srcFetch" />
