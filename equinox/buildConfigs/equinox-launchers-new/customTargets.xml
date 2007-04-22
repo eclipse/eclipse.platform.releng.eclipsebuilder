@@ -83,7 +83,7 @@
 			featureList="master-root"
 			includeLaunchers="false" />
 		<!-- copy build.properties to generated feature -->		
-		<copy file="${equinox.build.configs}/equinox-launchers-new/equinox-launchers-buildinfo/build.properties" todir="${buildDirectory}/features/org.eclipse.equinox.launchers-feature"/>		
+		
 	</target>
 
 	<!-- ===================================================================== -->
@@ -102,6 +102,8 @@
 	<!-- Steps to do before generating the build scripts. -->
 	<!-- ===================================================================== -->
 	<target name="preGenerate">
+		<copy file="${equinox.build.configs}/equinox-launchers-new/equinox-launchers-buildinfo/build.properties" todir="${buildDirectory}/features/org.eclipse.equinox.launchers-feature"/>
+		<echo message = "copy file!!"/>
 	</target>
 
 	<!-- ===================================================================== -->
