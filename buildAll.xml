@@ -359,12 +359,12 @@
 		<antcall target="package">
 			<param name="packagingInfo" value="${equinox.build.configs}/master-equinox/packager" />
 		</antcall>
-		<ant antfile="build.xml" dir="${basedir}">
-			<property name="component" value="${equinox.build.configs}/equinox-launchers" />
-		</ant> 
 		<!-- <ant antfile="build.xml" dir="${basedir}">
+			<property name="component" value="${equinox.build.configs}/equinox-launchers" />
+		</ant> --> 
+		<ant antfile="build.xml" dir="${basedir}">
 				<property name="component" value="${equinox.build.configs}/equinox-launchers-new" />
-		</ant> -->
+		</ant> 
 	</target>
 
 	<target name="package">
