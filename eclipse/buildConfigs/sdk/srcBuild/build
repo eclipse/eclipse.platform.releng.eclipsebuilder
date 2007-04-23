@@ -6,9 +6,8 @@ ws=""
 arch=""
 target=""
 bootclasspath=""
-java5home=""
 
-usage="usage: $0 -os <osType> -ws <windowingSystemType> -arch <architecture> -java5home <path to root of 1.5 JDK (parent to /bin/javadoc)> [-bc <bootclasspath>] [-compilelibs] [-target <target>]"
+usage="usage: $0 -os <osType> -ws <windowingSystemType> -arch <architecture> <path to root of 1.5 JDK (parent to /bin/javadoc)> [-bc <bootclasspath>] [-compilelibs] [-target <target>]"
 
 compilelibs=""
 
@@ -23,8 +22,7 @@ do
 	case "$1" in
 		-os) os="$2"; shift;;
 		-ws) ws="$2"; shift;;		 
-		-arch) arch="$2";shift;;
-		-java5home) java5home="-Djava5.home=$2"; shift;;  
+		-arch) arch="$2";shift;;	
 		-bc) bootclasspath="-Dbootclasspath=$2"; shift;;  
 	    -compilelibs) compilelibs="-Dlibsconfig=true";;    
 		-target) target="$2"; shift;;
@@ -35,12 +33,6 @@ do
 	esac
 	shift
 done
-
-if [ "x$java5home" = "x" ]
-then
-	echo >&2 "$usage"
-	exit 1
-fi
 
 if [ "x$os" = "x" ]
 then
@@ -67,8 +59,8 @@ then
 		CLASSPATH=$PWD/jdtcoresrc/ecj.jar:$CLASSPATH;export CLASSPATH		
 		ant -q -buildfile jdtcoresrc/compilejdtcore.xml
 		CLASSPATH=$PWD/ecj.jar:$ORIGCLASSPATH;export CLASSPATH
-		ant -q -buildfile build.xml $target -DinstallOs=$os -DinstallWs=$ws -DinstallArch=$arch $compilelibs $bootclasspath $java5home
-		 else
+		ant -q -buildfile build.xml $target -DinstallOs=$os -DinstallWs=$ws -DinstallArch=$arch $compilelibs $bootclasspath 
+				 else
 		 		 echo "The os-ws-arch combination of $os-$ws-$arch is not valid."
  		 exit 1
  fi
