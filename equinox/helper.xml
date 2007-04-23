@@ -110,7 +110,10 @@
 		</antcall>
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.event"/>
-		</antcall>		
+		</antcall>
+		<antcall target="updateTestManifest">
+					<param name="bundle.id" value="org.eclipse.equinox.launcher" />
+		</antcall>
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.log"/>
 		</antcall>

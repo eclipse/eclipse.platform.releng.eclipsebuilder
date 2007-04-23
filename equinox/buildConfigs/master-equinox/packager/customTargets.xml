@@ -31,6 +31,10 @@
 		<exec executable="unzip" dir="${buildDirectory}/${buildLabel}">
 			<arg line="-j ${archiveName} eclipse/plugins/org.eclipse.equinox.supplement_*.jar -d ${equinoxPostingDirectory}/${buildLabel}" />
 		</exec>
+		<!--HACK extract launcher from eclipse master because it is missing in master-equinox zip-->
+        <exec executable="unzip" dir="${basedir}">
+			<arg line="-j ${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip eclipse/plugins/org.eclipse.equinox.launcher_* -d ${equinoxPostingDirectory}/${buildLabel}"/>
+		</exec>
 	</target>
 
 </project>
