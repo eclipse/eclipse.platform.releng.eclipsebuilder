@@ -265,9 +265,7 @@
 			<os family="mac" />
 		</condition>
 		<property name="bootclasspath" refid="default.bootclasspath" />
-		<property name="J2SE-1.5" refid="java5.bootclasspath" />
-		<property name="javadoc1.5" value="${java5.home}/bin/javadoc" />
-
+	
 		<!--set the compiler and compiler arguments-->
 		<!--the default compiler is set to the one used by eclipse rel. eng. -->
 		<condition property="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter">
