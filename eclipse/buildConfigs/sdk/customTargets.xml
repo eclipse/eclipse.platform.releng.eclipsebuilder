@@ -341,7 +341,9 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
 		<property name="tempDir" value="${basedir}/temp" />
 		<mkdir dir="${tempDir}/buildScripts" />
+		<!--Hack until bug  183866 is solved -->
 		<mkdir dir="${tempDir}/buildScripts/baseLocation" />
+		<mkdir dir="${buildDirectory}/baseLocation"/>
 
 
 		<copy file="${buildDirectory}/label.properties" todir="${tempDir}/buildScripts" />
