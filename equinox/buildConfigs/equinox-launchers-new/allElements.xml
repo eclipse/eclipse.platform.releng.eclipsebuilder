@@ -32,15 +32,15 @@
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.org.eclipse.equinox.launchers-feature.linux.gtk.x86">
-		<property name="archiveName" value="launchers-linux.gtk.x86.${buildId}.tar.gz" />
+		<property name="archiveName" value="launchers-linux.gtk.x86.${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.org.eclipse.equinox.launchers-feature.linux.gtk.x86_64">
-		<property name="archiveName" value="launchers-linux.gtk.x86_64.${buildId}.tar.gz" />
+		<property name="archiveName" value="launchers-linux.gtk.x86_64.${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.org.eclipse.equinox.launchers-feature.linux.gtk.ppc">
-		<property name="archiveName" value="launchers-linux.gtk.ppc.${buildId}.tar.gz" />
+		<property name="archiveName" value="launchers-linux.gtk.ppc.${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.org.eclipse.equinox.launchers-feature.solaris.gtk.sparc">
@@ -52,7 +52,7 @@
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.org.eclipse.equinox.launchers-feature.macosx.carbon.ppc">
-		<property name="archiveName" value="launchers-macosx.carbon.ppc.${buildId}.tar.gz" />
+		<property name="archiveName" value="launchers-macosx.carbon.ppc.${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>	
 	
