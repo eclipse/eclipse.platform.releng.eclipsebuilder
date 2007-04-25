@@ -90,17 +90,17 @@
 			</platform>
 			<platform id="SWWPF" name="Windows WPF **early access** (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="launchers-win32.wpf.x86.@buildid@.zip">
 			</platform>
-			<platform id="SLG2" name="Linux (x86/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="launchers-linux.gtk.x86.@buildid@.zip">
+			<platform id="SLG2" name="Linux (x86/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="launchers-linux.gtk.x86.@buildid@.tar.gz">
 			</platform>
-			<platform id="SLG264" name="Linux (x86_64/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="launchers-linux.gtk.x86_64.@buildid@.zip">
+			<platform id="SLG264" name="Linux (x86_64/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="launchers-linux.gtk.x86_64.@buildid@.tar.gz">
 			</platform>
-			<platform id="SLG2PPC" name="Linux (PPC/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="launchers-linux.gtk.ppc.@buildid@.zip">
+			<platform id="SLG2PPC" name="Linux (PPC/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="launchers-linux.gtk.ppc.@buildid@.tar.gz">
 			</platform>			
 			<platform id="SSG" name="Solaris 8 (SPARC/GTK 2)" fileName="launchers-solaris.gtk.sparc.@buildid@.zip">
 			</platform>			
 			<platform id="SAM" name="AIX (PPC/Motif)" fileName="launchers-aix.motif.ppc.@buildid@.zip">
 			</platform>			
-			<platform id="SMC" name="Mac OSX (Mac/Carbon) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="launchers-macosx.carbon.ppc.@buildid@.zip">
+			<platform id="SMC" name="Mac OSX (Mac/Carbon) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="launchers-macosx.carbon.ppc.@buildid@.tar.gz">
 			</platform>
 		</zipType>
 
