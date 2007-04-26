@@ -261,7 +261,7 @@
 			</fileset>
 		</path>
 		<path id="java5.bootclasspath">
-			<fileset dir="${java5.home}">
+			<fileset dir="${java.home}">
 				<include name="**/*.jar" />
 			</fileset>
 		</path>
