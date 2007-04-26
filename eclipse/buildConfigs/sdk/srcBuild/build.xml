@@ -152,19 +152,25 @@
 		<property name="plugin.destination" value="${buildDirectory}/tmp/eclipse/plugins" />
 		<mkdir dir="${plugin.destination}" />
 
-		<java fork="true" jar="${buildDirectory}/eclipse/startup.jar" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.isv" output="platform.doc.isv.txt">
+		<pathconvert property="launcher">
+			<path>
+				<fileset dir="${buildDirectory}\eclipse\plugins" includes="**/*.jar" />
+			</path>
+			<regexpmapper from="(org\.eclipse\.equinox\.launcher)(_)(.*)\.jar" to="\0" />
+		</pathconvert>
+		<java fork="true" jar="${buildDirectory}/eclipse/plugins/${launcher}" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.isv" output="platform.doc.isv.txt">
 			<arg line="-data ${buildDirectory}/workspace -application org.eclipse.ant.core.antRunner build.update.jar -Dplugin.destination=${plugin.destination}" />
 		</java>
-		<java fork="true" jar="${buildDirectory}/eclipse/startup.jar" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.user" output="platform.doc.user.txt">
+		<java fork="true" jar="${buildDirectory}/eclipse/plugins/${launcher}" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.user" output="platform.doc.user.txt">
 			<arg line="-data ${buildDirectory}/workspace -application org.eclipse.ant.core.antRunner build.update.jar -Dplugin.destination=${plugin.destination}" />
 		</java>
-		<java fork="true" jar="${buildDirectory}/eclipse/startup.jar" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv" output="jdt.doc.isv.txt">
+		<java fork="true" jar="${buildDirectory}/eclipse/plugins/${launcher}" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv" output="jdt.doc.isv.txt">
 			<arg line="-data ${buildDirectory}/workspace -application org.eclipse.ant.core.antRunner build.update.jar -Dplugin.destination=${plugin.destination}" />
 		</java>
-		<java fork="true" jar="${buildDirectory}/eclipse/startup.jar" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.user" output="jdt.doc.user.txt">
+		<java fork="true" jar="${buildDirectory}/eclipse/plugins/${launcher}" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.user" output="jdt.doc.user.txt">
 			<arg line="-data ${buildDirectory}/workspace -application org.eclipse.ant.core.antRunner build.update.jar -Dplugin.destination=${plugin.destination}" />
 		</java>
-		<java fork="true" jar="${buildDirectory}/eclipse/startup.jar" dir="${buildDirectory}/plugins/org.eclipse.pde.doc.user" output="pde.doc.user.txt">
+		<java fork="true" jar="${buildDirectory}/eclipse/plugins/${launcher}" dir="${buildDirectory}/plugins/org.eclipse.pde.doc.user" output="pde.doc.user.txt">
 			<arg line="-data ${buildDirectory}/workspace -application org.eclipse.ant.core.antRunner build.update.jar -Dplugin.destination=${plugin.destination}" />
 		</java>
 
