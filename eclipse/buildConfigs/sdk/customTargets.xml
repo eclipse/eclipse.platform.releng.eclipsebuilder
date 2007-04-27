@@ -402,24 +402,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<fileset dir="${tempDir}/buildScripts" includes="package*" />
 		</replaceregexp>
 
-		<!--find the name of the equinox launcher for use with generating the doc indexes in the source builds -->
-		<!-- <property name="equinoxlauncher" value="org.eclipse.equinox.launcher" />
-		<apply executable="ls" output="${buildDirectory}/${equinoxlauncher}.txt" dir="${buildDirectory}/eclipse/plugins">
-			<fileset dir="${buildDirectory}/eclipse/plugins">
-				<patternset>
-					<include name="${equinoxlauncher}_*.jar" />
-				</patternset>
-			</fileset>
-		</apply>
-
-		<replaceregexp file="${buildDirectory}/${equinoxlauncher}.txt" match="/.+/" replace="" />
-		<replaceregexp file="${buildDirectory}/${equinoxlauncher}.txt" match="\.jar" replace="" />
-		<replaceregexp file="${buildDirectory}/${equinoxlauncher}.txt" match="\n" replace="" />
-		<loadfile property="bundle.jar" srcFile="${buildDirectory}/${equinoxlauncher}.txt" failonerror="off" />
-		<delete file="${buildDirectory}/${equinoxlauncher}.txt" failonerror="false" />
-		<replace file="${equinox.build.configs}/../publishingFiles/testManifest.xml" token="@${equinoxlauncher}@" value="${bundle.jar}" /> -->
-
-
 		<!-- fetch scripts are not required when source already included in zip file -->
 		<delete>
 			<fileset dir="${tempDir}/buildScripts" includes="fetch*.xml" />
