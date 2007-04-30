@@ -119,7 +119,6 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 <li><a href="#JDTCORE">JDT Core Batch Compiler</a></li>
 <li><a href="#PDERuntime">PDE Runtime Binary</a></li>
 <li><a href="#PDESDK">PDE SDK</a></li>
-<li><a href="#FTP">FTP and WebDAV Support</a></li>
 <li><a href="#SWT">SWT binary and Source</a></li>
 <li><a href="#org.eclipse.releng">org.eclipse.releng.tools plug-in</a></li>
  
@@ -445,13 +444,6 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 %cvssdk% </table>
 </div></td></tr>
 
-
-<tr><td><div class="homeitem3col">
-<h3><a name="FTP"> FTP and WebDAV Support&nbsp;<a href="details.php#FTP"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >  
-<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
-</tr> %teamextras% </table>
-</div></td></tr>
 
 
 <tr><td><div class="homeitem3col">

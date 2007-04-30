@@ -89,7 +89,6 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 <li><a href="#PDESDK">PDE SDK</a></li>
 <li><a href="#CVSRuntime">CVS Client Runtime Binary</a></li>
 <li><a href="#CVSSDK">CVS Client SDK</a></li>
-<li><a href="#FTP">FTP and WebDAV Support</a></li>
 <li><a href="#SWT">SWT binary and Source</a></li>
 <li><a href="#org.eclipse.releng">org.eclipse.releng.tools plug-in</a></li>
  
@@ -243,15 +242,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				<li><a name="CVSSDK"> <b> CVS Client SDK </b> </a>
 				<ul>
 				<li>
-				These drops contain the CVS Runtime Binary with associated source.</li></ul>
-
-
-				<li><a name="FTP"> <b> FTP and WebDAV Support </b> </a>
-				<ul>
-				<li>
-				These drops contain the FTP and WebDAV target management support plug-ins. You can combine 
-				this with the Platform Runtime Binary or Eclipse SDK. Includes both source code 
-				and binary.</li></ul>
+				These drops contain the CVS Runtime Binary with associated source.</li></ul>		
 
 				<li><a name="SWT"> <b> SWT Binary and Source </b> </a>
 				<ul>

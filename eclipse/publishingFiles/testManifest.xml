@@ -114,10 +114,6 @@
 		
 	<zipType name="CVS SDK">
 		<platform id="CVSSDK" name="All" fileName="eclipse-CVS-Client-SDK-@build@.zip"></platform>
-	</zipType>	
-	
-	<zipType name="FTP-WebDAV plug-ins">
-		<platform id="FW" name="All" fileName="eclipse-FTP-WebDAV-@build@.zip"></platform>
 	</zipType>
 
 	<zipType name="SWT">

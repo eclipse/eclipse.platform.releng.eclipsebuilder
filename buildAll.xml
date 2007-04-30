@@ -329,9 +329,9 @@
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/rcp.sdk/packager" />
 		</antcall>
-		<antcall target="package">
+		<!-- <antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/team.extras/packager" />
-		</antcall>
+		</antcall> -->
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/rcp.deltapack/packager" />
 		</antcall>
