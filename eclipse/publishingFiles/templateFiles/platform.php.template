@@ -53,7 +53,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 		<li><a class="" href="index.php" target="_self">All Platforms</a></li>
 <?php
 	$platform = "%platform%";
-	$platforms = array(1 => "Windows", "Linux", "Solaris", "AIX", "HP-UX", "Macintosh");
+	$platforms = array(1 => "Windows", "Linux", "Solaris", "AIX", "Macintosh");
 	$files = array(1 => "winPlatform.php", "linPlatform.php", "solPlatform.php", "aixPlatform.php", "macPlatform.php");
 	$count = count($platforms);
 	for ($i = 1; $i <= $count; $i++) {

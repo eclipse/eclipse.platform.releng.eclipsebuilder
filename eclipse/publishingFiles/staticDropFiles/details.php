@@ -63,9 +63,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 		<li><a class="" href="solPlatform.php" target="_self">Solaris</a></li>
 		<li class="tabstart">&#160;&#160;&#160;</li>
 		<li><a class="" href="aixPlatform.php" target="_self">AIX</a></li>
-		<li class="tabstart">&#160;&#160;&#160;</li>
-		<li><a class="" href="hpuxPlatform.php" target="_self">HP-UX</a></li>
-		<li class="tabstart">&#160;&#160;&#160;</li>
+		<li class="tabstart">&#160;&#160;&#160;</li>		
 		<li><a class="" href="macPlatform.php" target="_self">Macintosh</a></li>
 		<li class="tabseparator">&#160;&#160;&#160;</li>			
 	</ul>
@@ -297,8 +295,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				<li><a href="winPlatform.php#EclipseSDK">Windows Platform</a></li>
 				<li><a href="linPlatform.php#EclipseSDK">Linux Platform</a></li>
 				<li><a href="solPlatform.php#EclipseSDK">Solaris Platform</a></li>
-				<li><a href="aixPlatform.php#EclipseSDK">AIX Platform</a></li>
-				<li><a href="hpuxPlatform.php#EclipseSDK">HP-UX Platform</a></li>
+				<li><a href="aixPlatform.php#EclipseSDK">AIX Platform</a></li>				
 				<li><a href="macPlatform.php#EclipseSDK">Macintosh Platform</a></li>
 				<li><a href="sourceBuilds.php#EclipseSDK">Source Builds</a></li>
 			</ul>
