@@ -5,7 +5,7 @@
 		<platform id="SW" name="Windows (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-SDK-@build@-win32.zip"></platform>
 		<platform id="SWWPF" name="Windows (x86/WPF)  **early access** (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-SDK-@build@-win32-wpf.zip"></platform>
 		<platform id="SLG2" name="Linux (x86/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-SDK-@build@-linux-gtk.tar.gz"></platform>
-		<platform id="SLM" name="Linux (x86/Motif) **testing purpose only**" fileName="eclipse-SDK-@build@-linux-motif.tar.gz"></platform>
+		<platform id="SLM" name="Linux (x86/Motif) **testing only**" fileName="eclipse-SDK-@build@-linux-motif.tar.gz"></platform>
 		<platform id="SLG264" name="Linux (x86_64/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-SDK-@build@-linux-gtk-x86_64.tar.gz"></platform>
 	    <platform id="SLG2PPC" name="Linux (PPC/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-SDK-@build@-linux-gtk-ppc.tar.gz"></platform>		
 		<platform id="SSG" name="Solaris 8 (SPARC/GTK 2)" fileName="eclipse-SDK-@build@-solaris-gtk.zip"></platform>		
