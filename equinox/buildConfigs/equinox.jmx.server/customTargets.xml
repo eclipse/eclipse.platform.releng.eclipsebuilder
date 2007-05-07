@@ -20,7 +20,7 @@
 	<!-- Add one target for each root element and each configuration -->
 	<!-- ===================================================================== -->
 
-	<target name="assemble.org.eclipse.equinox">
+	<target name="assemble.org.eclipse.equinox.jmx.server.feature">
 		<property name="archiveName" value="eclipse-equinox-jmx-server-${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
