@@ -359,7 +359,7 @@
 		<ant antfile="build.xml" dir="${basedir}">
 			<property name="component" value="${equinox.build.configs}/equinox-launchers" />
 		</ant>
-	<!--	<ant antfile="build.xml" dir="${basedir}">
+		<ant antfile="build.xml" dir="${basedir}">
 			<property name="component" value="${equinox.build.configs}/equinox.jmx.common" />
 		</ant>
 		<ant antfile="build.xml" dir="${basedir}">
@@ -367,7 +367,7 @@
 		</ant>
 		<ant antfile="build.xml" dir="${basedir}">
 			<property name="component" value="${equinox.build.configs}/equinox.jmx.server" />
-		</ant> -->
+		</ant>
 	</target>
 
 	<target name="package">
