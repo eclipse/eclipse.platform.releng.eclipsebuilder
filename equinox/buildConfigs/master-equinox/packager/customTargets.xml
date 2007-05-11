@@ -25,7 +25,7 @@
 		<ant antfile="${assembleScriptName}" />
 		<!--unzip plug-ins to equinoxPostingDirectory-->
 		<exec executable="unzip" dir="${buildDirectory}/${buildLabel}">
-			<arg line="-j ${archiveName} eclipse/plugins/*.jar -d ${equinoxPostingDirectory}/${buildLabel}" />
+			<arg line="-j ${archiveName} eclipse/plugins/*.jar -x -x eclipse/plugins/*jmx* -d ${equinoxPostingDirectory}/${buildLabel}" />
 		</exec>
 		<!--HACK extract supplement bundle from eclipse master because it is missing in master-equinox zip-->
 		<exec executable="unzip" dir="${buildDirectory}/${buildLabel}">
