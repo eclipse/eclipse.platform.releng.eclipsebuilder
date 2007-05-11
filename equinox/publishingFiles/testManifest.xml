@@ -82,6 +82,12 @@
 			</platform>	
 		 	<platform id="initializer" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="@org.eclipse.equinox.initializer@.jar">
 			</platform>			 									
+			<platform id="equinoxjmxcommon" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="eclipse-equinox-jmx-common-@buildid@.zip">
+			</platform>
+			<platform id="equinoxjmxclient" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="eclipse-equinox-jmx-client-@buildid@.zip">
+			</platform>
+			<platform id="equinoxjmxserver" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="eclipse-equinox-jmx-server-@buildid@.zip">
+ 			</platform>			 									
     	</zipType>   	
     	
 
