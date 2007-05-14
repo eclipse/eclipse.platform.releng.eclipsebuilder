@@ -7,7 +7,7 @@ arch=""
 target=""
 bootclasspath=""
 
-usage="usage: $0 -os <osType> -ws <windowingSystemType> -arch <architecture> <path to root of 1.5 JDK (parent to /bin/javadoc)> [-bc <bootclasspath>] [-compilelibs] [-target <target>]"
+usage="usage: $0 -os <osType> -ws <windowingSystemType> -arch <architecture> [-bc <bootclasspath>] [-compilelibs] [-target <target>]"
 
 compilelibs=""
 
