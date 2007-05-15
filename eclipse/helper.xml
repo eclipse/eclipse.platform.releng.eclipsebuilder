@@ -300,13 +300,14 @@
 		</condition>
 		<property name="configArgs" value="" />
 
-		<java jar="${basedir}/../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar" fork="true" maxmemory="256m">
+		<java jar="${basedir}/../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar" fork="true" maxmemory="512m">
 			<arg line="${configArgs} -consolelog -nosplash -data ${buildDirectory}/perf-workspace -application org.eclipse.test.performance.ui.resultGenerator
 					-baseline ${eclipse.perf.ref}
 					-baseline.prefix 3.2_200606291905
 					-current ${buildId}
 					-jvm ${eclipse.perf.jvm}
 					-output ${postingDirectory}/${buildLabel}/performance/
+					-error=${buildDirectory}/errorlog.txt
 					-config eclipseperfwin1_R3.3,eclipseperflnx1_R3.3,eclipseperfwin2_R3.3,eclipseperflnx2_R3.3,eclipseperflnx3_R3.3
 					-config.properties ${eclipse.perf.config.descriptors}
 					-scenario.pattern org.eclipse.%.test"
