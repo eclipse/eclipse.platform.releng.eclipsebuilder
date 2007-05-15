@@ -145,7 +145,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		https://bugs.eclipse.org/bugs/show_bug.cgi?id=128139 -->
 		<delete>
 			<fileset dir="${buildDirectory}/features" includes="*.source*/**" />			
-			<fileset dir="${buildDirectory}/plugins" excludes="com.ibm.icu.base.source_*/**, com.ibm.icu.source__*/**" includes="*.source*/**" />
+			<fileset dir="${buildDirectory}/plugins" excludes="com.ibm.icu.base.source_*/**, com.ibm.icu.source_*/**" includes="*.source*/**" />
 		</delete> 
 	<!--need to exclude icu source from orbit-->
 	</target>
