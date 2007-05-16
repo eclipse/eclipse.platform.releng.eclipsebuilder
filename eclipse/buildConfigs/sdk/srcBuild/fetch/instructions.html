@@ -8,7 +8,9 @@
 <body bgcolor="#FFFFFF" text="#000000">
 
 <h1> Eclipse Source Builds (Source from CVS)</h1><h2>Table of Contents</h2><ol>
-  <li><a href="#whatis">What is an Eclipse source build?</a></li><li><a href="#gettingsource">Getting the source</a></li><li><a href="#eclipseinant">Building Eclipse</a></li><li><a href="#bootclasspath">Setting the bootclasspath</a></li><li><a href="#build_platforms">Supported build platforms</a></li><li><a href="#limitations">Known limitations</a></li></ol><p>&nbsp;</p><h2><a name="whatis"></a>What is an Eclipse Source Build?</h2><p>Eclipse source builds provide developers with an automated method for checking 
+  <li><a href="#whatis">What is an Eclipse source build?</a></li><li><a href="#gettingsource">Getting the source</a></li><li><a href="#eclipseinant">Building Eclipse</a></li><li><a href="#bootclasspath">Setting the bootclasspath</a></li><li><a href="#build_platforms">Supported build platforms</a></li>
+  <li><a href="#unsupported_build_platforms">Unsupported build platforms</a></li>
+  <li><a href="#limitations">Known limitations</a></li></ol><p>&nbsp;</p><h2><a name="whatis"></a>What is an Eclipse Source Build?</h2><p>Eclipse source builds provide developers with an automated method for checking 
   out source code and other required resources, compiling the Java code, generating 
   javadoc, and finally, creating a zip file of an Eclipse runtime from a downloaded 
   source tree. The end result of a source build is a runnable Eclipse.</p><p>&nbsp;</p><h2><a name="gettingsource"></a>Getting the Source</h2><p>A source build download contains shell and ant scripts that fetch and build 
@@ -59,49 +61,123 @@ you will need the following environment variables set.
 </p><p>Run Eclipse with the <a href="http://help.eclipse.org/help21/index.jsp?topic=/org.eclipse.platform.doc.user/tasks/running_eclipse.htm">desired 
   command line parameters</a>.</p><br>
 <h2><b><a name="build_platforms"></a></b><b>Supported Platforms</b> </h2><p>Eclipse can be built on any of the following platforms. With some <a href="#limitations">limitations</a> 
-  any platform can be used to build Eclipse for any or all supported platforms.</p><table width="40%" border="1">
+  any platform can be used to build Eclipse for any or all supported platforms.  To see the latest information on the platforms supported for a given release, refer to the latest <a href="http://www.eclipse.org/eclipse/development/">project plan</a></p>
+<table width="40%" border="1">
   <tr> 
-    <td width="48%">Operating System (os)</td><td width="52%">Windowing System (ws)</td><td width="52%">Archecture</td></tr>
+    <td width="48%">Operating System (os)</td>
+    <td width="52%">Windowing System (ws)</td>
+    <td width="52%">Archecture</td>
+  </tr>
   <tr> 
-    <td width="48%">win32</td><td width="52%">win32</td><td width="52%">x86</td></tr>
+    <td width="48%">win32</td>
+    <td width="52%">win32</td>
+    <td width="52%">x86</td>
+  </tr>
   <tr> 
-    <td width="48%">win32</td><td width="52%">wpf</td><td width="52%">x86</td></tr>
+    <td width="48%">win32</td>
+    <td width="52%">wpf</td>
+    <td width="52%">x86</td>
+  </tr>
   <tr> 
-    <td width="48%">linux</td><td width="52%">gtk</td><td width="52%">x86</td></tr>
+    <td width="48%">linux</td>
+    <td width="52%">gtk</td>
+    <td width="52%">x86</td>
+  </tr>
   <tr> 
-    <td width="48%">linux</td><td width="52%">gtk</td><td width="52%">x86_64</td></tr>
+    <td width="48%">linux</td>
+    <td width="52%">gtk</td>
+    <td width="52%">x86_64</td>
+  </tr>
   <tr> 
-    <td width="48%">linux</td><td width="52%">gtk</td><td width="52%">ppc</td></tr>
+    <td width="48%">linux</td>
+    <td width="52%">gtk</td>
+    <td width="52%">ppc</td>
+  </tr>
   <tr> 
-    <td width="48%">linux</td><td width="52%">gtk</td><td width="52%">ppc64</td></tr>
+    <td width="48%">macosx</td>
+    <td width="52%">carbon</td>
+    <td width="52%">ppc</td>
+  </tr>
   <tr> 
-    <td width="48%">linux</td><td width="52%">gtk</td><td width="52%">ia64</td></tr>
+    <td width="48%">aix</td>
+    <td width="52%"> <p>motif</p></td>
+    <td width="52%">ppc</td>
+  </tr>
   <tr> 
-    <td width="48%">linux</td><td width="52%">gtk</td><td width="52%">S390</td></tr>
+    <td width="48%">solaris</td>
+    <td width="52%">gtk</td>
+    <td width="52%">sparc</td>
+  </tr>
+</table>
+<p>
+<h2><a name="unsupported_build_platforms"></a>Unsupported platforms</h2>
+<p>In addition, it may be possible to use the source build to build eclipse for 
+  the following platforms. However, the libraries for these platforms are not 
+  actively maintained by committers, so there is no guarantee that they will compile. 
+  If you are interested in contributing these libraries, please follow the following 
+  <a href="http://www.eclipse.org/eclipse/platform-releng/contributingEclipsePorts.html">process</a>. 
+</p>
+
+<table width="40%" border="1">
   <tr> 
-    <td width="48%">linux</td><td width="52%">gtk</td><td width="52%">S390x</td></tr>
+    <td width="48%">Operating System (os)</td>
+    <td width="52%">Windowing System (ws)</td>
+    <td width="52%">Archecture</td>
+  </tr>
   <tr> 
-    <td width="48%">linux</td><td width="52%">motif</td><td width="52%">x86</td></tr>
+    <td width="48%">linux</td>
+    <td width="52%">gtk</td>
+    <td width="52%">ppc64</td>
+  </tr>
   <tr> 
-    <td width="48%">macosx</td><td width="52%">carbon</td><td width="52%">ppc</td></tr>
+    <td width="48%">linux</td>
+    <td width="52%">gtk</td>
+    <td width="52%">ia64</td>
+  </tr>
   <tr> 
-    <td width="48%">aix</td><td width="52%"> 
-      <p>motif</p></td><td width="52%">ppc</td></tr>
+    <td width="48%">linux</td>
+    <td width="52%">gtk</td>
+    <td width="52%">S390</td>
+  </tr>
   <tr> 
-    <td width="48%">hpux</td><td width="52%">motif</td><td width="52%">PA_RISC</td></tr>
+    <td width="48%">linux</td>
+    <td width="52%">gtk</td>
+    <td width="52%">S390x</td>
+  </tr>
   <tr> 
-    <td width="48%">hpux</td><td width="52%">motif</td><td width="52%">ia64_32</td></tr>
+    <td width="48%">hpux</td>
+    <td width="52%">motif</td>
+    <td width="52%">PA_RISC</td>
+  </tr>
   <tr> 
-    <td width="48%">qnx</td><td width="52%">photon</td><td width="52%">x86</td></tr>
+    <td width="48%">hpux</td>
+    <td width="52%">motif</td>
+    <td width="52%">ia64_32</td>
+  </tr>
   <tr> 
-    <td width="48%">solaris</td><td width="52%">motif</td><td width="52%">sparc</td></tr>
-    <tr> 
-    <td width="48%">solaris</td><td width="52%">gtk</td><td width="52%">x86</td></tr>
-   <tr> 
-    <td width="48%">solaris</td><td width="52%">gtk</td><td width="52%">sparc</td></tr>
-    <tr>
-    <td width="48%">solaris</td><td width="52%">gtk</td><td width="52%">x86</td></tr>
-</table><p>&nbsp;</p><h2><a name="limitations"></a>Known Limitations </h2><ol>
+    <td width="48%">qnx</td>
+    <td width="52%">photon</td>
+    <td width="52%">x86</td>
+  </tr>
+  <tr> 
+    <td width="48%">solaris</td>
+    <td width="52%">motif</td>
+    <td width="52%">sparc</td>
+  </tr>
+  <tr> 
+    <td width="48%">solaris</td>
+    <td width="52%">gtk</td>
+    <td width="52%">x86</td>
+  </tr>
+  <tr> 
+    <td width="48%">solaris</td>
+    <td width="52%">gtk</td>
+    <td width="52%">x86</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<h2><a name="limitations"></a>Known Limitations </h2><ol>
   <li>Building unix flavours of Eclipse on Windows will result in incorrect file
      permissions. The *.so, *.sl, and Eclipse executable files will not have
     execute 
