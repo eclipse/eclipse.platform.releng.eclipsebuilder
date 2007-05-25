@@ -143,13 +143,13 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="preGenerate">
 		<!--need to delete generated source features and plug-ins due to bug
 		https://bugs.eclipse.org/bugs/show_bug.cgi?id=128139 -->
-		<delete>
+		<!--	<delete>
 			<fileset dir="${buildDirectory}/features" includes="*.source*/**" />			
 			<fileset dir="${buildDirectory}/plugins" excludes="com.ibm.icu.base.source_*/**, com.ibm.icu.source_*/**, org.mortbay.jetty.source_*/**, org.apache.commons.logging.source_*/**, javax.servlet.source_*/**, org.apache.lucene.source_*/**, org.apache.lucene.analysis.source_*/**, javax.servlet.jsp.source_*/**, org.apache.jasper.source_*/**, org.apache.commons.el.source_*/**, org.junit.source_*/**, org.apache.ant.source_*/**" includes="*.source*/**" />
-		</delete> 
+		</delete> -->  
 	<!--need to exclude source bundles from orbit-->
 	</target>
-
+	
 	<!-- ===================================================================== -->
 	<!-- Steps to do after generating the build scripts -->
 	<!-- ===================================================================== -->
