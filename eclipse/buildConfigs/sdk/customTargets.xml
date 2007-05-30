@@ -165,16 +165,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<mkdir dir="${buildDirectory}/baseLocation"/>
 	</target>
 
-	<target name="adjustIniFile">
-		<loadproperties srcfile="${buildDirectory}/pluginVersions.properties" />
-		<condition property="newVersionQualifier" value="${forceContextQualifier}" else="${org.eclipse.jdt.debug.ui,0.0.0}">
-			<isset property="forceContextQualifier" />
-		</condition>
-		<replace file="${buildDirectory}/features/org.eclipse.equinox.executable/bin/carbon/macosx/ppc/Eclipse.app/Contents/MacOS/eclipse.ini">
-			<replacefilter token="@qualifier@" value="${newVersionQualifier}" />
-		</replace>
-	</target>
-
 	<!-- ===================================================================== -->
 	<!-- Steps to do after the fetch -->
 	<!-- ===================================================================== -->
@@ -184,9 +174,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<property name="id" value="org.eclipse.equinox.executable" />
 		</ant>
 		<zip zipfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/features/org.eclipse.equinox.executable" includes="library/" />
-
-		<!--adjust macosx eclipse.ini file -->
-		<antcall target="adjustIniFile" />
 
 		<!--fetch and compile swt tools-->
 		<ant antfile="genericTargets.xml" dir="${eclipse.pdebuild.scripts}" target="fetchElement">
