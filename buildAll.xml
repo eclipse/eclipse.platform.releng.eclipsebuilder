@@ -49,6 +49,7 @@
 		<antcall target="buildMasterFeature" />
 		<parallel failonany="true">
 			<sequential>
+				<antcall target="updatePackProperties" />
 				<antcall target="signMasterFeature" />
 				<antcall target="packMasterFeature" />
 				<antcall target="unpackUpdateJarsForPackaging" />
@@ -165,7 +166,7 @@
 		<property name="repack" value="" />
 
 		<!--pack200-->
-	   <java jar="${eclipse.home}/plugins/org.eclipse.equinox.launcher.jar"
+		<java jar="${eclipse.home}/plugins/org.eclipse.equinox.launcher.jar"
 	         fork="true"
 		     timeout="10800000"
 		     jvm="${java15-home}/bin/java"
@@ -210,6 +211,22 @@
 		<echo message="original: ${originalAttribs}" file="${buildDirectory}/attribDiff.txt" />
 		<echo message="new: ${polledAttribs}" file="${buildDirectory}/attribDiff.txt" append="true" />
 	</target>
+
+	  <target name="updatePackProperties">
+                <!--exclude pre-built Orbit bundles from being signed and packed-->
+                <property name="packproperties" value="${buildDirectory}/updatePackProperties.txt"/>
+                <apply executable="ls" output="${packproperties}" dir="${buildDirectory}/plugins" relative="true" parallel="true" append="true">
+                        <arg value="-d"/>
+                        <fileset dir="${buildDirectory}/plugins" includes="com.ibm.icu*, com.ibm.icu.*, com.jcraft.jsch*" />
+                </apply>                
+                <replaceregexp file="${packproperties}" match="\n+" replace=","/>
+                <replaceregexp file="${packproperties}" match="\s+" replace=","/>
+                <replaceregexp file="${packproperties}" match="\n+" replace=""/>
+                <loadfile property="pack.properties" srcFile="${packproperties}" />
+                <delete file="${packproperties}" failonerror="false" />
+                <replace file="${eclipse.build.configs}/../../extras/pack.properties" token="@excludejars@" value="${pack.properties}" />
+     </target>
+
 
 	<target name="signMasterFeature" if="sign">
 		<property name="archiveName" value="eclipse-master-${buildId}.zip" />
@@ -328,7 +345,7 @@
 		</antcall>
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/rcp.sdk/packager" />
-		</antcall>		
+		</antcall>
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/rcp.deltapack/packager" />
 		</antcall>
