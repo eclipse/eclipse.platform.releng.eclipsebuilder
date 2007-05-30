@@ -36,8 +36,8 @@ if %installOs%-%ws%-%arch%==linux-gtk-x86 goto run
 if %installOs%-%ws%-%arch%==linux-gtk-ppc goto run
 if %installOs%-%ws%-%arch%==linux-gtk-x86_64 goto run
 if %installOs%-%ws%-%arch%==linux-gtk-ia64 goto run
-if %installOs%-%ws%-%arch%==linux-gtk-S390 goto run
-if %installOs%-%ws%-%arch%==linux-gtk-S390x goto run
+if %installOs%-%ws%-%arch%==linux-gtk-s390 goto run
+if %installOs%-%ws%-%arch%==linux-gtk-s390x goto run
 if %installOs%-%ws%-%arch%==solaris-motif-sparc goto run
 if %installOs%-%ws%-%arch%==solaris-gtk-sparc goto run
 if %installOs%-%ws%-%arch%==solaris-gtk-x86 goto run
