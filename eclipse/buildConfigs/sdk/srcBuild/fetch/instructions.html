@@ -189,7 +189,7 @@ you will need the following environment variables set.
     and make 
     the appropriate soft links).</li><li>Only Java source code is compiled. *.dll, *so, *sl and Eclipse executables
     are all checked out of dev.eclipse.org prebuilt in this build process. The
-    linux-gtk-ppc64, linux-gtk-ia64, linux-gtk-ia64_32 and hpux-motif-ia64 configurations
+    linux-gtk-ppc64, linux-gtk-ia64, linux-gtk-ia64_32,linux-gtk-s390, linux-gtk-s390x and hpux-motif-ia64 configurations
     will require  a re-compilation of the eclipse executable and swt libaries
     and copying these files to the apppropriate directories.
 	This can be accomplished by using the -compilelibs flag when running the
@@ -198,7 +198,20 @@ you will need the following environment variables set.
     the swt libraries</a>  available in the <a href="http://www.eclipse.org/swt/faq.php">SWT
     FAQ</a> are also a useful reference. This document also includes a list of
     the prerequisites <a href="http://www.eclipse.org/swt/faq.php#gtkstartup">for
-    running  SWT on Linux GTK</a> </li></ol><p>&nbsp;</p></p><h2><a name="port"></a>Using the source build to construct a new Eclipse
+    running  SWT on Linux GTK</a> </li><li>For
+the platforms were JDK 1.6 support is not yet available e.g
+linux-gtk-s390, linux-gtk-s390x the Eclipse SDK can be built with JDK
+1.5 in place JDK 1.6. To do that, please follow the following steps:<p></p><ul><li>Edit
+the file build.xml: replacing the tags &lt;property name="javacSource"
+value="1.6"&gt; with &lt;property name="javacSource" value="1.5"&gt;
+and &lt;property name="javacTarget" value="1.6"&gt; with &lt;property
+name="javacTarget" value="1.5"&gt;</li><li>Remove code which compile
+and package the plugins that require JDK 1.6 currently:
+org.eclipse.jdt.compiler.tool, org.eclipse.jdt.compiler.apt and
+org.eclipse.jdt.apt.pluggable.core from the files
+features/org.eclipse.jdt/feature.xml and
+features/org.eclipse.jdt/feature.xml. </li><property name="javacSource" value="1.4">
+</property></ul></li></ol><p>&nbsp;</p><p></p></li></ol><p>&nbsp;</p></p><h2><a name="port"></a>Using the source build to construct a new Eclipse
   port</h2><p>The Eclipse platform releng team has limited hardware, software and time to compile Eclipse on every conceivable platform. If you would like to enhance
   the source build scripts to build eclipse on a platform
   that is not currently included, please follow the following steps:</p><ul><li>Extract the source build drop</li><li>Update the build.bat and build files to reflect the new architecture. For
