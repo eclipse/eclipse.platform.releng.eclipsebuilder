@@ -217,18 +217,8 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<copy todir="${linux.gtk.x86_64.rootfiles}">
 			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64" includes="
 				about_files/mpl-v11.txt" />
-		</copy>
-	
-		<!--copy linux gtk s390 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
-		<property name="linux.gtk.s390.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.s390" />
-		<mkdir dir="${linux.gtk.s390.rootfiles}" />
-		<copy tofile="${linux.gtk.s390.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.s390/about.html" />
-	
-		<!--copy linux gtk s390s about_files to in temp location where it will be copied into root of eclipse at assembly time-->
-		<property name="linux.gtk.s390s.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.s390s" />
-		<mkdir dir="${linux.gtk.s390s.rootfiles}" />
-		<copy tofile="${linux.gtk.s390s.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.s390s/about.html" />
-
+		</copy>	
+		
 	</target>
 
 	<!-- ===================================================================== -->
