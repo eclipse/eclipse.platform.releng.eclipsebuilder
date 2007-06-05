@@ -20,9 +20,7 @@
 			<platform id="common" name="All" fileName="@org.eclipse.equinox.common@.jar">
 			</platform>
 			<platform id="device" name="All" fileName="@org.eclipse.equinox.device@.jar">
-			</platform>
-			<platform id="ds" name="All" fileName="@org.eclipse.equinox.ds@.jar">
-			</platform>
+			</platform>			
 			<platform id="event" name="All" fileName="@org.eclipse.equinox.event@.jar">
 			</platform>		
 			<platform id="log" name="All" fileName="@org.eclipse.equinox.log@.jar">
@@ -46,9 +44,7 @@
 			<platform id="useradmin" name="All" fileName="@org.eclipse.equinox.useradmin@.jar">
 			</platform>
 			<platform id="util" name="All" fileName="@org.eclipse.osgi.util@.jar">
-			</platform>
-			<platform id="wireadmin" name="All" fileName="@org.eclipse.equinox.wireadmin@.jar">
-			</platform>
+			</platform>			
 			<platform id="equinoxservletbridge" name="All" fileName="@org.eclipse.equinox.servletbridge@.jar">
 			</platform>
 			<platform id="http" name="All" fileName="@org.eclipse.equinox.http@.jar">
@@ -80,8 +76,12 @@
 		<zipType name="Incubator">
  	    	<platform id="cm" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="@org.eclipse.equinox.cm@.jar">
 			</platform>	
+			<platform id="ds" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="@org.eclipse.equinox.ds@.jar">
+			</platform>
 		 	<platform id="initializer" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="@org.eclipse.equinox.initializer@.jar">
 			</platform>			 									
+			<platform id="wireadmin" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="@org.eclipse.equinox.wireadmin@.jar">
+			</platform>
 			<platform id="equinoxjmxcommon" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="eclipse-equinox-jmx-common-@buildid@.zip">
 			</platform>
 			<platform id="equinoxjmxclient" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="eclipse-equinox-jmx-client-@buildid@.zip">
