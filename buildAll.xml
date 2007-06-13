@@ -220,7 +220,7 @@
                         <fileset dir="${buildDirectory}/plugins" includes="com.ibm.icu*, com.ibm.icu.*, com.jcraft.jsch*" />
                 </apply>                
                 <replaceregexp file="${packproperties}" match="\n+" replace=","/>
-                <replaceregexp file="${packproperties}" match="\s+" replace=","/>
+                <replaceregexp file="${packproperties}" match="\s+" replace=",eclipse/plugins/"/>
                 <replaceregexp file="${packproperties}" match="\n+" replace=""/>
                 <loadfile property="pack.properties" srcFile="${packproperties}" />
                 <delete file="${packproperties}" failonerror="false" />
