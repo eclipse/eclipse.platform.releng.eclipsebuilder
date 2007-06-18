@@ -44,6 +44,7 @@
 
 	<target name="replaceBuildId" if="performance.base">
 		<replace file="${tester}/vm.properties" token="@buildType@@timestamp@" value="${testedBuildIdDBLabel}"/>
+		<replace file="${tester}/vm.properties" token="@testMachine@_R3.3" value="${testMachine}_R3.4"/> 
 	</target>
 	
 	<target name="installVm">
