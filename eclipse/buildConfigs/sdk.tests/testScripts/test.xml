@@ -421,6 +421,14 @@
 			<param name="testPluginsRequired" value="**/${org.eclipse.pde.ui.tests}/* ${org.eclipse.pde.ui.tests.prerequisite.testplugins}" />
 		</antcall>
 	</target>
+	
+	<target name="pdebuild">
+		<antcall target="runtests" >
+			<param name="testPlugin" value="${org.eclipse.pde.build.tests}" />
+			<param name="report" value="org.eclipse.pde.build.tests" />
+			<param name="testPluginsRequired" value="**/${org.eclipse.pde.build.tests}/* ${org.eclipse.pde.build.tests.prerequisite.testplugins}" />
+		</antcall>
+	</target>
 
 	<target name="swt" description="Runs the org.eclipse.swt.tests test.xml">
 		<antcall target="runtests" >
@@ -552,6 +560,7 @@
 		<antcall target="teamcvs" />
 		<antcall target="jdtapt" />
 		<antcall target="ua" />
+		<antcall target="pdebuild" />
 	</target>
 
 	<target name="genHtml" description="Generates HTML results with provided JUNIT.XSL provided">
