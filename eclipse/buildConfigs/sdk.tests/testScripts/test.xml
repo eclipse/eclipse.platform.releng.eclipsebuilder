@@ -407,6 +407,10 @@
 		<runTests testPlugin="org.eclipse.pde.ui.tests" />
 	</target>
 
+	<target name="pdebuild">
+			<runTests testPlugin="org.eclipse.pde.build.tests" />
+		</target>
+	
 	<target name="swt">
 		<runTests testPlugin="org.eclipse.swt.tests" />
 	</target>
@@ -491,6 +495,7 @@
 		<antcall target="teamcvs" />
 		<antcall target="coretestsnet" />
 		<antcall target="jdtapt" />
+		<antcall target="pdebuild" />
 		<!-- <antcall target="jdtaptpluggable" /> -->
 		<antcall target="ua" />		
 	</target>

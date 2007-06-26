@@ -505,8 +505,6 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-
-
 <logFile name="org.eclipse.pde.ui.tests_win32.win32.x86.xml">
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
@@ -526,6 +524,30 @@
 </logFile>
 
 <logFile name="org.eclipse.pde.ui.tests_linux.gtk.x86_5.0.xml">
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SLG2"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.pde.build.tests_win32.win32.x86.xml">
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SW"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.pde.build.tests_linux.gtk.x86.xml">
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SLG2"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.pde.build.tests_macosx.carbon.ppc_5.0.xml">
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SMC"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.pde.build.tests_linux.gtk.x86_5.0.xml">
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
 	<effectedFile id="SLG2"></effectedFile>
