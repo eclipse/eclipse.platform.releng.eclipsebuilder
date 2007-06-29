@@ -532,7 +532,7 @@
 		<antcall target="coreresources" />
 		<antcall target="osgi" />
 		<antcall target="coreexpressions" />
-		<antcall target="update" />
+		<!-- <antcall target="update" /> -->
 		<antcall target="teamcore" />
 		<!--antcall target="jdtcompilertool" /-->
 		<antcall target="jdtcoreperf" />
