@@ -30,12 +30,12 @@
 		<property name="linux.gtk.x86_64.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.x86_64" />
 		<mkdir dir="${linux.gtk.x86_64.rootfiles}" />
 		<copy tofile="${linux.gtk.x86_64.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64/about.html" />
-		
+
 		<!--copy linux gtk s390 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
 		<property name="linux.gtk.s390.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.s390" />
 		<mkdir dir="${linux.gtk.s390.rootfiles}" />
 		<copy tofile="${linux.gtk.s390.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.s390/about.html" />
-		
+
 		<!--copy linux gtk s390 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
 		<property name="linux.gtk.s390x.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.s390x" />
 		<mkdir dir="${linux.gtk.s390x.rootfiles}" />
@@ -91,18 +91,21 @@
 				<include name="**/*.so" />
 			</fileset>
 		</move>
-		<!--unzip launcher -->
-		<property name="launcherlibs" value="${buildDirectory}/launchertmp" />
-		<mkdir dir="${launcherlibs}" />
-		<unzip dest="${launcherlibs}">
-			<fileset dir="${buildDirectory}/plugins/org.eclipse.platform.source/src/">
-				<include name="org.eclipse.platform_*/launchersrc.zip" />
-			</fileset>
-		</unzip>
+	
+		<property name="launcherlibs" value="${buildDirectory}/features/org.eclipse.equinox.executable" />
 		<exec dir="${launcherlibs}/library/${installWs}/" executable="sh" failonerror="true">
 			<arg line="build.sh" />
 		</exec>
-		<move file="${launcherlibs}/library/${installWs}/eclipse" todir="${launcherlibs}/" />
+		<copy file="${launcherlibs}/library/${installWs}/eclipse" todir="${buildDirectory}/eclipse/" />
+
+		<property name="launcherfragment" value="org.eclipse.equinox.launcher.${installWs}.${installOs}.${installArch}" />
+
+		<copy file="${launcherlibs}/library/${installWs}/eclipse" todir="features/org.eclipse.equinox.executable/contributed/${installWs}/${installOs}/.${installArch}/" />
+		<copy todir="${buildDirectory}/plugins/${launcherfragment}">
+			<fileset dir="${launcherlibs}/library/${installWs}">
+				<include name="**/*.so" />
+			</fileset>
+		</copy>
 
 		<!-- build liblocalfile -->
 		<exec dir="plugins/org.eclipse.core.filesystem/natives/unix/linux" executable="make" failonerror="true" />
@@ -287,7 +290,7 @@
 			<os family="mac" />
 		</condition>
 		<property name="bootclasspath" refid="default.bootclasspath" />
-		
+
 		<!--set the compiler and compiler arguments-->
 		<!--the default compiler is set to the one used by eclipse rel. eng. -->
 		<condition property="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter">
