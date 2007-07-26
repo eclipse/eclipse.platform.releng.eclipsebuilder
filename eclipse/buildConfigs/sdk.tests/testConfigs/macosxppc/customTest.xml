@@ -16,8 +16,8 @@
 		</exec>
 		
 		<!--copy deltapack needed to run pdebuild tests-->	
-		<exec dir="." executable="${copyClient}">
-			<arg line="-r ${runtimeDeltapack} ${testMachine}:${executionDir}" />
+		<exec dir="${postingDirectory}" executable="${copyClient}">
+			<arg line="-r ${postingDirectory}/${buildId}/${runtimeDeltapack} ${testMachine}:${executionDir}" />
 		</exec>
 	</target>
 
