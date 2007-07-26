@@ -23,6 +23,11 @@
 		<exec dir="." executable="${copyClient}">
 			<arg line="-r ${extraBinariesDir} ${testMachine}:${testDir}" />
 		</exec>
+		
+		<!--copy deltapack needed to run pdebuild tests-->	
+		<exec dir="." executable="${copyClient}">
+			<arg line="-r ${runtimeDeltapack} ${testMachine}:${executionDir}" />
+		</exec>
 	</target>
 	
 	<target name="install5.0Vm">

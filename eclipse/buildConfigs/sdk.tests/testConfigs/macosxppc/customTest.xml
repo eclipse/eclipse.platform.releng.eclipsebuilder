@@ -14,6 +14,11 @@
 		<exec dir="." executable="${copyClient}">
 			<arg line="${tester}/vm.properties ${testMachine}:${executionDir}" />
 		</exec>
+		
+		<!--copy deltapack needed to run pdebuild tests-->	
+		<exec dir="." executable="${copyClient}">
+			<arg line="-r ${runtimeDeltapack} ${testMachine}:${executionDir}" />
+		</exec>
 	</target>
 
 </project>

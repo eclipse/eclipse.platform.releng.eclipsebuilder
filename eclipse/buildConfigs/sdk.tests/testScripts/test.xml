@@ -27,7 +27,7 @@
 	<!--Directory name of org.eclipse.test plug-in installed in ${eclipse-home}-->
 	<property name="org.eclipse.test" value="org.eclipse.test" />
 
-	<target name="setup" unless="noclean" depends="init">
+	<target name="setup" unless="noclean" depends="init">		
 		<condition property="setupTarget" value="setup-zip">
 			<contains string="${runtimeArchive}" substring=".zip" />
 		</condition>
@@ -36,6 +36,7 @@
 		</condition>
 		<antcall target="${setupTarget}" />
 		<antcall target="configureTeamTest" />
+		<antcall target="configureDeltaPack"/>
 	</target>
 
 	<!--setup for zip archives-->
@@ -91,6 +92,13 @@
 			<and>
 				<equals arg1="${os}" arg2="win32" />
 				<equals arg1="${ws}" arg2="win32" />
+				<equals arg1="${arch}" arg2="x86" />
+			</and>
+		</condition>
+		<condition property="runtimeArchive" value="eclipse-SDK-${buildId}-win32-wpf.zip">
+			<and>
+				<equals arg1="${os}" arg2="win32" />
+				<equals arg1="${ws}" arg2="wpf" />
 				<equals arg1="${arch}" arg2="x86" />
 			</and>
 		</condition>
@@ -196,6 +204,14 @@
 		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@host@" value="${cvs_host}"/>
 		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@root@" value="${cvs_root}"/>
 	</target>
+    
+    <target name="configureDeltaPack" if="pdebuild">
+		<property name="deltapackArchive" value="eclipse-${buildId}-delta-pack.zip"/>
+    	<property name="installDeltapack" value="${install)/" />
+    	<exec dir="." executable="unzip">
+    			<arg line="-o -qq ${deltapackArchive} -d ${install}/deltapack"/>
+    	</exec>
+    </target>
 
 	<macrodef name="runTests">
 		<attribute name="testPlugin" />
@@ -408,8 +424,9 @@
 	</target>
 
 	<target name="pdebuild">
+			<property name="pdebuild" value="true"/>	
 			<runTests testPlugin="org.eclipse.pde.build.tests" />
-		</target>
+	</target>
 	
 	<target name="swt">
 		<runTests testPlugin="org.eclipse.swt.tests" />

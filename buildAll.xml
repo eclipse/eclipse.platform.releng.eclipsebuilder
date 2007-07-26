@@ -320,6 +320,9 @@
 			<param name="packagingInfo" value="${eclipse.build.configs}/sdk/packager" />
 		</antcall>
 		<antcall target="package">
+			<param name="packagingInfo" value="${eclipse.build.configs}/rcp.sdk/packager" />
+		</antcall>
+		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/sdk.examples/packager" />
 		</antcall>
 		<antcall target="package">
@@ -342,10 +345,7 @@
 		</antcall>
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/rcp/packager" />
-		</antcall>
-		<antcall target="package">
-			<param name="packagingInfo" value="${eclipse.build.configs}/rcp.sdk/packager" />
-		</antcall>
+		</antcall>		
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/rcp.deltapack/packager" />
 		</antcall>
