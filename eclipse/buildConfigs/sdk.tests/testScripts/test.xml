@@ -514,7 +514,7 @@
 		<antcall target="coretestsnet" />
 		<antcall target="jdtapt" />
 		<antcall target="pdebuild" />
-		<!-- <antcall target="jdtaptpluggable" /> -->
+		<antcall target="jdtaptpluggable" />
 		<antcall target="ua" />
 	</target>
 </project>
