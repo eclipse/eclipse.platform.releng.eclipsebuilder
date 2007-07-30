@@ -27,7 +27,7 @@
 	<!--Directory name of org.eclipse.test plug-in installed in ${eclipse-home}-->
 	<property name="org.eclipse.test" value="org.eclipse.test" />
 
-	<target name="setup" unless="noclean" depends="init">		
+	<target name="setup" unless="noclean" depends="init">
 		<condition property="setupTarget" value="setup-zip">
 			<contains string="${runtimeArchive}" substring=".zip" />
 		</condition>
@@ -204,14 +204,15 @@
 		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@host@" value="${cvs_host}"/>
 		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@root@" value="${cvs_root}"/>
 	</target>
-    
-    <target name="configureDeltaPack" if="pdebuild">
-		<property name="deltapackArchive" value="eclipse-RCP-${buildId}-delta-pack.zip"/>
-    	<property name="installDeltapack" value="${install)/" />
-    	<exec dir="." executable="unzip">
-    			<arg line="-o -qq ${deltapackArchive} -d ${install}/deltapack"/>
-    	</exec>
-    </target>
+
+	<target name="configureDeltaPack" if="pdebuild">
+		<property name="deltapackArchive" value="eclipse-RCP-${buildId}-delta-pack.zip" />
+		<property name="installDeltapack" value="${install}/deltapack" />
+		<exec dir="." executable="unzip">
+			<arg line="-o -qq ${deltapackArchive} -d ${installDeltapack}" />
+		</exec>
+	</target>
+
 
 	<macrodef name="runTests">
 		<attribute name="testPlugin" />
@@ -233,7 +234,7 @@
 			<!--override the value of this property with performance if the tests run on performance machine-->
 			<property name="test.target" value="junit" />
 			<property name="report" value="@{testPlugin}" />
-			
+
 			<!--install Cloudscape plug-ins if running performance tests-->
 			<condition property="derby" value="eclipse/plugins/Cloudscape*/* ">
 				<equals arg1="${test.target}" arg2="performance"/>
@@ -243,7 +244,7 @@
 				<param name="testPlugin" value="${@{testPlugin}}" />
 				<param name="testPluginsRequired" value="@{testPluginsRequired}" />
 				<param name="output-file" value="@{testPlugin}.xml" />
-			</antcall>		
+			</antcall>
 		</sequential>
 	</macrodef>
 
@@ -331,10 +332,10 @@
 	<target name="ua">
 		<runTests testPlugin="org.eclipse.ua.tests" />
 	</target>
-	
+
 	<target name="coretestsnet">
-			<runTests testPlugin="org.eclipse.core.tests.net" />
-		</target>
+		<runTests testPlugin="org.eclipse.core.tests.net" />
+	</target>
 
 	<target name="jdtcorecompiler" depends="setJVMProperties">
 		<condition property="jvm" value="${J2SE-5.0}">
@@ -355,17 +356,17 @@
 	</target>
 
 	<target name="jdtaptpluggable" depends="setJVMProperties">
-			<property name="jvm" value="${J2SE-5.0}"/>
-			<!--only run test if J2SE-5.0 property  set-->
-			<condition property="skip.test">
-				<not>
-					<isset property="J2SE-5.0" />
-				</not>
-			</condition>
-			<runTests testPlugin="org.eclipse.jdt.apt.pluggable.tests" />
-		</target>
-	
-	
+		<property name="jvm" value="${J2SE-5.0}"/>
+		<!--only run test if J2SE-5.0 property  set-->
+		<condition property="skip.test">
+			<not>
+				<isset property="J2SE-5.0" />
+			</not>
+		</condition>
+		<runTests testPlugin="org.eclipse.jdt.apt.pluggable.tests" />
+	</target>
+
+
 	<target name="jdtcorebuilder" depends="setJVMProperties">
 		<!--Run with 1.5 vm if it is available-->
 		<condition property="jvm" value="${J2SE-5.0}">
@@ -424,10 +425,10 @@
 	</target>
 
 	<target name="pdebuild">
-			<property name="pdebuild" value="true"/>	
-			<runTests testPlugin="org.eclipse.pde.build.tests" />
+		<property name="pdebuild" value="true"/>
+		<runTests testPlugin="org.eclipse.pde.build.tests" />
 	</target>
-	
+
 	<target name="swt">
 		<runTests testPlugin="org.eclipse.swt.tests" />
 	</target>
@@ -437,7 +438,7 @@
 	</target>
 
 	<target name="teamcvs">
-		<property name="teamcvs" value="true"/>		
+		<property name="teamcvs" value="true"/>
 		<runTests testPlugin="org.eclipse.team.tests.cvs.core" />
 	</target>
 
@@ -489,7 +490,7 @@
 		<antcall target="teamcore" />
 		<antcall target="jdtcoreperf" />
 		<antcall target="jdtcorebuilder" />
-		<antcall target="jdtcorecompiler" /> 
+		<antcall target="jdtcorecompiler" />
 		<antcall target="jdtcoremodel" />
 		<antcall target="ui" />
 		<antcall target="uiperformance" />
@@ -514,6 +515,6 @@
 		<antcall target="jdtapt" />
 		<antcall target="pdebuild" />
 		<!-- <antcall target="jdtaptpluggable" /> -->
-		<antcall target="ua" />		
+		<antcall target="ua" />
 	</target>
 </project>
