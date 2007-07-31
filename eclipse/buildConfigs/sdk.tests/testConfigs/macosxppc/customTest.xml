@@ -10,13 +10,13 @@
 		<exec dir="." executable="${copyClient}">
 			<arg line="${tester}/../../testScripts/test.xml ${testMachine}:${executionDir}" />
 		</exec>
-		<!--copy in the properties file for testing with vm args to run on Mac OSX-->	
+		<!--copy in the properties file for testing with vm args to run on Mac OSX-->
 		<exec dir="." executable="${copyClient}">
 			<arg line="${tester}/vm.properties ${testMachine}:${executionDir}" />
 		</exec>
-		
-		<!--copy deltapack needed to run pdebuild tests-->	
-		<exec dir="${postingDirectory}" executable="${copyClient}">
+
+		<!--copy deltapack needed to run pdebuild tests-->
+		<exec dir="." executable="${copyClient}">
 			<arg line="-r ${postingDirectory}/${buildId}/${runtimeDeltapack} ${testMachine}:${executionDir}" />
 		</exec>
 	</target>
