@@ -1,0 +1,124 @@
+<project name="provisioning build" default="run">
+
+	<target name="run">
+
+		<!-- TODO: pass these arguments in -->
+		<property name="prov.output.base" value="${buildDirectory}/provtemp"/>		
+		<property file="build.properties" />
+		<property name="prov.generator.dir" value="${prov.output.base}/generator" />
+		<property name="prov.repo.dir" value="${prov.output.base}/servers" />
+		<property name="prov.agent.dir" value="${prov.output.base}/agent" />
+		<property name="prov.director.dir" value="${prov.output.base}/director" />
+		<property name="metadata.repo" value="${prov.repo.dir}/metadata/" />
+		<property name="artifact.repo" value="${prov.repo.dir}/artifacts/" />
+		<property name="prov.flavor" value="tooling" />
+		<property name="prov.rootIUId" value="agent" />
+		<property name="rcpZip" value="files/eclipse-RCP-3.3-win32.zip" />
+		<property name="prov.install.folder" value="${prov.output.base}/install_folder" />
+
+		<antcall target="build.features" />
+		<antcall target="build.agent" />
+		<antcall target="generate.metadata" />
+		<antcall target="run.director" />
+		<antcall target="zip.install" />
+	</target>
+
+	<target name="build.features">		
+		<ant antfile="${eclipse.pdebuild.scripts}/build.xml">
+			<property name="builder" value="${basedir}" />
+		</ant>
+	</target>
+
+	<target name="build.agent">		
+		<ant antfile="${eclipse.pdebuild.scripts}/productBuild/productBuild.xml">
+			<property name="builder" value="${basedir}" />
+		</ant>
+	</target>
+
+	<target name="generate.metadata">
+		<delete dir="${prov.repo.dir}" />
+		<mkdir dir="${metadata.repo}" />
+		<mkdir dir="${artifact.repo}" />
+
+		<!-- set up the metadata generator -->
+		<path id="feature.zip.path">
+			<fileset dir="${buildDirectory}/${buildType}.${buildId}">
+				<include name="**/org.eclipse.equinox.prov.generator.feature*.zip" />
+			</fileset>
+		</path>
+		<property name="feature.zip.name" refid="feature.zip.path" />
+		<delete dir="${prov.generator.dir}" />
+		<mkdir dir="${prov.generator.dir}" />
+		<unzip src="${feature.zip.name}" dest="${prov.generator.dir}" />
+		<delete>
+			<fileset dir="${prov.generator.dir}" includes="**/org.eclipse.update.configurator_*" />
+		</delete>
+		<unzip src="${rcpZip}" dest="${prov.generator.dir}" />
+		<copy file="files/config.ini.generator" tofile="${prov.generator.dir}/eclipse/configuration/config.ini" overwrite="true" />
+		<copy todir="${prov.generator.dir}/eclipse/plugins">
+			<fileset dir="files">
+				<include name="**/*.jar" />
+			</fileset>
+		</copy>
+
+		<!-- set up the agent -->
+		<path id="agent.zip.path">
+			<fileset dir="${buildDirectory}/${buildType}.${buildId}">
+				<include name="**/${buildId}*.zip" />
+			</fileset>
+		</path>
+		<property name="agent.zip.name" refid="agent.zip.path" />
+		<delete dir="${prov.agent.dir}" />
+		<mkdir dir="${prov.agent.dir}" />
+		<unzip src="${agent.zip.name}" dest="${prov.agent.dir}" />
+
+		<!-- run the app to generate the metadata -->
+		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
+		<exec executable="${prov.generator.dir}/eclipse/eclipse">
+			<arg line="-application org.eclipse.equinox.prov.metadata.generator.EclipseGenerator" />
+			<arg line="-consoleLog" />
+			<arg line="-metadataRepository file:${metadata.repo}" />
+			<arg line="-artifactRepository file:${artifact.repo}" />
+			<arg line="-source ${prov.agent.dir}/eclipse" />
+			<arg line="-root ${prov.rootIUId}" />
+			<arg line="-flavor ${prov.flavor}" />
+			<arg line="-publishArtifacts" />
+		</exec>
+	</target>
+
+	<target name="run.director">
+		<!-- set up the director -->
+		<path id="director.zip.path">
+			<fileset dir="${buildDirectory}/${buildType}.${buildId}">
+				<include name="**/org.eclipse.equinox.prov.director.feature*.zip" />
+			</fileset>
+		</path>
+		<property name="director.zip.name" refid="director.zip.path" />
+		<delete dir="${prov.director.dir}" />
+		<mkdir dir="${prov.director.dir}" />
+		<unzip src="${director.zip.name}" dest="${prov.director.dir}" />
+		<unzip src="${rcpZip}" dest="${prov.director.dir}" />
+		<copy file="files/config.ini.director" tofile="${prov.director.dir}/eclipse/configuration/config.ini" overwrite="true" />
+		<copy todir="${prov.director.dir}/eclipse/plugins">
+			<fileset dir="files">
+				<include name="**/*.jar" />
+			</fileset>
+		</copy>
+
+		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
+		<exec executable="${prov.director.dir}/eclipse/eclipse">
+			<arg line="-application org.eclipse.equinox.prov.director.app.application" />
+			<arg line="-consoleLog" />
+			<arg line="-flavor ${prov.flavor}" />
+			<arg line="-installIU ${prov.rootIUId}" />
+			<arg line="-metadataRepository file:${metadata.repo}" />
+			<arg line="-artifactRepository file:${artifact.repo}" />
+			<arg line="-destination ${prov.install.folder}" /> 
+			<arg line="-profile ${prov.install.folder}" />
+		</exec>
+	</target>
+	
+	<target name="zip.install">		
+		<zip destfile="${equinoxPostingDirectory}/eclipse-equinox-prov-agent-${buildId}-win32.zip" basedir="${prov.install.folder}"/>
+	</target>
+</project>
