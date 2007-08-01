@@ -29,6 +29,11 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		</ant-->
 	</target>
 
+	<target name="assemble.org.eclipse.sdk.win32.win32.x86_64">
+			<property name="archiveName" value="eclipse-SDK-${buildId}-win32-x86_64.zip" />
+			<antcall target="assemble" />
+		</target>
+	
 	<target name="assemble.org.eclipse.sdk.win32.wpf.x86">
 		<property name="archiveName" value="eclipse-SDK-${buildId}-win32-wpf.zip" />
 		<antcall target="assemble" />
