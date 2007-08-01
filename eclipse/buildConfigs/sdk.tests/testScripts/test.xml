@@ -356,11 +356,11 @@
 	</target>
 
 	<target name="jdtaptpluggable" depends="setJVMProperties">
-		<property name="jvm" value="${J2SE-5.0}"/>
+		<property name="jvm" value="${J2SE-6.0}"/>
 		<!--only run test if J2SE-5.0 property  set-->
 		<condition property="skip.test">
 			<not>
-				<isset property="J2SE-5.0" />
+				<isset property="J2SE-6.0" />
 			</not>
 		</condition>
 		<runTests testPlugin="org.eclipse.jdt.apt.pluggable.tests" />
