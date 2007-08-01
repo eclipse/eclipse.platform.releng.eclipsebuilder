@@ -83,13 +83,10 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 		   		<?php
 				$servername = $_SERVER["SERVER_NAME"];
 				if (! preg_match("/.eclipse.org/i",$servername)) {
-				        echo "<br> To download a file via HTTP click on its corresponding http link below.
-				To download a file via FTP click on its corresponding FTP link. If you have problems
-				ftping a file directly try this <a href=\"ftp://$servername/@buildlabel@/\">link</a>
-				for ftp access to the entire build directory.";
+				        echo "<br> To download a file via HTTP click on its corresponding http link below.";
 				} else {
 				    echo "<br>";
-				} ?> You can also download builds via anonymous ftp at download.eclipse.org.  <BR>Click <a href="verifyMD5.html">here</a> for instructions on how to verify the 
+				} ?>   <BR>Click <a href="verifyMD5.html">here</a> for instructions on how to verify the 
 				integrity of your downloads.</p></td></tr>
 			</td>
 		</tr>
@@ -135,27 +132,20 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 #     $httplink = "http://www.eclipse.org/downloads/download.php?file=/eclipse/downloads/drops/$buildlabel/$zipfile";
      $httplink = "download.php?dropFile=$zipfile";
      $httplabel = $zipfile;
-     $httpline =  "<div align=\"left\"><a href=\"$httplink\">$httplabel</a>";
-     $ftplink = "";
-     $ftplabel = "";
-     $ftpline =  "";
+     $httpline =  "<div align=\"left\"><a href=\"$httplink\">$httplabel</a>"; 
      $md5name = "";
      $shaname = "";
 } else {
     $httplink = "download.php?dropFile=$zipfile";
     $httplabel = "(http)";
-    $httpline = "<div align=\"left\"><a href=\"$httplink\">$httplabel</a>";
-    $ftplink = "ftp://$servername/$buildlabel/$zipfile";
-    $ftplabel = "(ftp)";
-    $ftpline =  "<a href=\"$ftplink\">$ftplabel</a>";
+    $httpline = "<div align=\"left\"><a href=\"$httplink\">$httplabel</a>"; 
     $md5name = $zipfile;
     $shaname = $zipfile;
 }
   $filesize = getDropSize($zipfile);
     
   echo "$httpline"; 
-  echo "&nbsp;&nbsp";
-  echo "$ftpline";
+  echo "&nbsp;&nbsp"; 
   echo "<td>$filesize</td>";
   echo "<td>$zipfile</td>";
   echo "<td><a href=\"http://download.eclipse.org/eclipse/downloads/drops/@buildlabel@/checksum/$zipfile.md5\">(md5)</a>";
@@ -214,7 +204,7 @@ are quite complete, all should be considered experimental.</P></TD></TR></table>
 <tr><td><div class="homeitem3col">
 <h3><a name="Launchers"> Launchers</a></h3>
 <table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" > 
-<TR> <TD HEIGHT="48" COLSPAN="2"> <P>While it is possible to use the Equinox framework as a standalone JAR, it is often convenient to use the executable program launcher.  The platform-specific archives here include precompiled executables as well as some support files such as startup.jar and a configuration template.</P></TD></TR></table>
+<TR> <TD HEIGHT="48" COLSPAN="2"> <P>While it is possible to use the Equinox framework as a standalone JAR, it is often convenient to use the executable program launcher.  The platform-specific archives here include precompiled executables as well as some support files such as the equinox launcher and a configuration template.</P></TD></TR></table>
 <table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" >
 <tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="33%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
 </tr> %launchers% </table>

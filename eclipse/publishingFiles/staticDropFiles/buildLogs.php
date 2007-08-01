@@ -85,9 +85,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 		<li><a class="" href="solPlatform.php" target="_self">Solaris</a></li>
 		<li class="tabstart">&#160;&#160;&#160;</li>
 		<li><a class="" href="aixPlatform.php" target="_self">AIX</a></li>
-		<li class="tabstart">&#160;&#160;&#160;</li>
-		<li><a class="" href="hpuxPlatform.php" target="_self">HP-UX</a></li>
-		<li class="tabstart">&#160;&#160;&#160;</li>
+		<li class="tabstart">&#160;&#160;&#160;</li>		
 		<li><a class="" href="macPlatform.php" target="_self">Macintosh</a></li>
 		<li class="tabseparator">&#160;&#160;&#160;</li>			
 	</ul>
@@ -153,7 +151,7 @@ These logs contain the console output captured while running the JUnit automated
 </ul>
 <?php if (! (preg_match("/N/i",$buildName))) {
 echo " <li><a href=\"testresults/versiontool/results.xml\"><b> Versioning Compare Tool Output Logs </b></a>";
-echo "This log compares the build's plugin and features versions with 3.2.1. </li> ";
+echo "This log compares the build's plugin and features versions with 3.3. </li> ";
 }
 ?>
 

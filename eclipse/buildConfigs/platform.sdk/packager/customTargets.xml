@@ -1,66 +1,78 @@
 <project default="noDefault">
 
-<target name="noDefault" />
+	<target name="noDefault" />
 
-<!-- set the root of the output file name -->
-<property name="archiveRoot" value="eclipse-platform-SDK-${buildId}"/>
-	
-<!-- Target to get the packaging map files for the components of interest
+	<!-- set the root of the output file name -->
+	<property name="archiveRoot" value="eclipse-platform-SDK-${buildId}" />
+
+	<!-- Target to get the packaging map files for the components of interest
      The files must be fetched into the downloadDirectory folder -->
-<target name="getMapFiles" unless="mapsFetched">
-	<copy file="${packagingInfo}/../../../../packaging.map" tofile="${downloadDirectory}/packaging.map" />
-</target>
+	<target name="getMapFiles" unless="mapsFetched">
+		<copy file="${packagingInfo}/../../../../packaging.map" tofile="${downloadDirectory}/packaging.map" />
+	</target>
 
-<target name="assemble.win32.win32.x86.xml">
-	<antcall target="assembler">
-		<param name="archiveName" value="${archiveRoot}-win32.zip"/>
-	</antcall>
-</target>
-
-<target name="assemble.linux.gtk.x86.xml">
+	<target name="assemble.win32.win32.x86.xml">
 		<antcall target="assembler">
-			<param name="archiveName" value="${archiveRoot}-linux-gtk.tar.gz"/>
+			<param name="archiveName" value="${archiveRoot}-win32.zip" />
 		</antcall>
-</target>
+	</target>
+	
+	<target name="assemble.win32.win32.x86_64.xml">
+			<antcall target="assembler">
+				<param name="archiveName" value="${archiveRoot}-win32-win32-x86_64.zip " />
+			</antcall>
+   </target>
+
+	<target name="assemble.win32.wpf.x86.xml">
+		<antcall target="assembler">
+			<param name="archiveName" value="${archiveRoot}-win32-wpf.zip" />
+		</antcall>
+	</target>
+
+	<target name="assemble.linux.gtk.x86.xml">
+		<antcall target="assembler">
+			<param name="archiveName" value="${archiveRoot}-linux-gtk.tar.gz" />
+		</antcall>
+	</target>
 
 	<target name="assemble.linux.gtk.x86_64.xml">
 		<antcall target="assembler">
-			<param name="archiveName" value="${archiveRoot}-linux-gtk-x86_64.tar.gz"/>
+			<param name="archiveName" value="${archiveRoot}-linux-gtk-x86_64.tar.gz" />
 		</antcall>
 	</target>
 
 	<target name="assemble.linux.gtk.ppc.xml">
 		<antcall target="assembler">
-			<param name="archiveName" value="${archiveRoot}-linux-gtk-ppc.tar.gz"/>
+			<param name="archiveName" value="${archiveRoot}-linux-gtk-ppc.tar.gz" />
 		</antcall>
-	</target>	
+	</target>
 
 	<target name="assemble.solaris.gtk.sparc.xml">
 		<antcall target="assembler">
-			<param name="archiveName" value="${archiveRoot}-solaris-gtk.zip"/>
+			<param name="archiveName" value="${archiveRoot}-solaris-gtk.zip" />
 		</antcall>
 	</target>
 
 	<target name="assemble.aix.motif.ppc.xml">
 		<antcall target="assembler">
-			<param name="archiveName" value="${archiveRoot}-aix-motif.zip"/>
+			<param name="archiveName" value="${archiveRoot}-aix-motif.zip" />
 		</antcall>
 	</target>
-	
+
 	<target name="assemble.macosx.carbon.ppc.xml">
 		<antcall target="assembler">
-			<param name="archiveName" value="${archiveRoot}-macosx-carbon.tar.gz"/>
+			<param name="archiveName" value="${archiveRoot}-macosx-carbon.tar.gz" />
 		</antcall>
 	</target>
-	
-<target name="assembler">
-	<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
-	<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
-	<ant antfile="${assembleScriptName}" />
-	<checksum file="${archiveFullPath}" property="md5"/>
-	<checksum file="${archiveFullPath}" algorithm="SHA" property="sha"/>
-	<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5"/>
-	<echo message="${sha} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.sha1"/>
-</target>
+
+	<target name="assembler">
+		<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
+		<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
+		<ant antfile="${assembleScriptName}" />
+		<checksum file="${archiveFullPath}" property="md5" />
+		<checksum file="${archiveFullPath}" algorithm="SHA" property="sha" />
+		<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5" />
+		<echo message="${sha} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.sha1" />
+	</target>
 
 </project>

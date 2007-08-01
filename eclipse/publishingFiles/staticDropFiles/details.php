@@ -63,9 +63,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 		<li><a class="" href="solPlatform.php" target="_self">Solaris</a></li>
 		<li class="tabstart">&#160;&#160;&#160;</li>
 		<li><a class="" href="aixPlatform.php" target="_self">AIX</a></li>
-		<li class="tabstart">&#160;&#160;&#160;</li>
-		<li><a class="" href="hpuxPlatform.php" target="_self">HP-UX</a></li>
-		<li class="tabstart">&#160;&#160;&#160;</li>
+		<li class="tabstart">&#160;&#160;&#160;</li>		
 		<li><a class="" href="macPlatform.php" target="_self">Macintosh</a></li>
 		<li class="tabseparator">&#160;&#160;&#160;</li>			
 	</ul>
@@ -84,11 +82,11 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 <li><a href="#JDTRuntime">JDT Runtime Binary</a></li>
 <li><a href="#JDTSDK">JDT SDK</a></li>
 <li><a href="#JDTCORE">JDT Core Batch Compiler</a></li>
+<li><a href="#JARPROCESSOR">Jar Processor</a></li>
 <li><a href="#PDERuntime">PDE Runtime Binary</a></li>
 <li><a href="#PDESDK">PDE SDK</a></li>
 <li><a href="#CVSRuntime">CVS Client Runtime Binary</a></li>
 <li><a href="#CVSSDK">CVS Client SDK</a></li>
-<li><a href="#FTP">FTP and WebDAV Support</a></li>
 <li><a href="#SWT">SWT binary and Source</a></li>
 <li><a href="#org.eclipse.releng">org.eclipse.releng.tools plug-in</a></li>
  
@@ -213,6 +211,11 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				<li>
 				These drops contain the standalone batch java compiler, Ant compiler adapter and associated source. The batch compiler and Ant adapter (ecj.jar) are extracted from the org.eclipse.jdt.core plug-in as a 1.2MB download. For examples of usage, please refer to this help section: JDT Plug-in Developer Guide>Programmer's Guide>JDT Core>Compiling Java code.</li></ul>
 
+				<li><a name="JARPROCESSOR"> <b> Jar Processor </b> </a>
+				<ul>
+				<li>
+				These drops contain the standalone jar processor and associated source.  The jar processor is extracted from org.eclipse.update.core.  For details, see the	wiki pages for <a href="http://wiki.eclipse.org/index.php/Update_Site_Optimization">Update Site Optimization</a> and <a href="http://wiki.eclipse.org/index.php/Pack200#Jar_Processor">Pack200 Compression</a>.</li></ul>
+
 				<li><a name="PDERuntime"> <b> PDE Runtime Binary </b> </a>
 				<ul>
 				<li>
@@ -237,15 +240,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				<li><a name="CVSSDK"> <b> CVS Client SDK </b> </a>
 				<ul>
 				<li>
-				These drops contain the CVS Runtime Binary with associated source.</li></ul>
-
-
-				<li><a name="FTP"> <b> FTP and WebDAV Support </b> </a>
-				<ul>
-				<li>
-				These drops contain the FTP and WebDAV target management support plug-ins. You can combine 
-				this with the Platform Runtime Binary or Eclipse SDK. Includes both source code 
-				and binary.</li></ul>
+				These drops contain the CVS Runtime Binary with associated source.</li></ul>		
 
 				<li><a name="SWT"> <b> SWT Binary and Source </b> </a>
 				<ul>
@@ -300,8 +295,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				<li><a href="winPlatform.php#EclipseSDK">Windows Platform</a></li>
 				<li><a href="linPlatform.php#EclipseSDK">Linux Platform</a></li>
 				<li><a href="solPlatform.php#EclipseSDK">Solaris Platform</a></li>
-				<li><a href="aixPlatform.php#EclipseSDK">AIX Platform</a></li>
-				<li><a href="hpuxPlatform.php#EclipseSDK">HP-UX Platform</a></li>
+				<li><a href="aixPlatform.php#EclipseSDK">AIX Platform</a></li>				
 				<li><a href="macPlatform.php#EclipseSDK">Macintosh Platform</a></li>
 				<li><a href="sourceBuilds.php#EclipseSDK">Source Builds</a></li>
 			</ul>

@@ -15,27 +15,35 @@
 		<property name="featuresRecursively" value="true" />
 		<ant antfile="fetch_org.eclipse.equinox.executable.xml" />
 		<ant antfile="fetch_org.eclipse.sdk.xml" />
-		
+
 		<!--copy linux motif about_files to in temp location where it will be copied into root of eclipse at assembly time-->
 		<property name="linux.motif.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.motif.x86" />
 		<mkdir dir="${linux.motif.rootfiles}" />
 		<copy tofile="${linux.motif.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86/about.html" />
-		
+
 		<!--copy linux gtk x86 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
 		<property name="linux.gtk.x86.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.x86" />
 		<mkdir dir="${linux.gtk.x86.rootfiles}" />
 		<copy tofile="${linux.gtk.x86.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86/about.html" />
-		
+
 		<!--copy linux gtk x86_64 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
 		<property name="linux.gtk.x86_64.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.x86_64" />
 		<mkdir dir="${linux.gtk.x86_64.rootfiles}" />
 		<copy tofile="${linux.gtk.x86_64.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64/about.html" />
 
+		<!--copy linux gtk s390 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
+		<property name="linux.gtk.s390.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.s390" />
+		<mkdir dir="${linux.gtk.s390.rootfiles}" />
+		<copy tofile="${linux.gtk.s390.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.s390/about.html" />
+
+		<!--copy linux gtk s390 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
+		<property name="linux.gtk.s390x.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.s390x" />
+		<mkdir dir="${linux.gtk.s390x.rootfiles}" />
+		<copy tofile="${linux.gtk.s390x.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.s390x/about.html" />
+
 		<copy todir="${linux.gtk.x86_64.rootfiles}">
-			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64"
-				includes="
-				about_files/mpl-v11.txt"
-			/>
+			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64" includes="
+				about_files/mpl-v11.txt" />
 		</copy>
 
 	</target>
@@ -83,18 +91,29 @@
 				<include name="**/*.so" />
 			</fileset>
 		</move>
-		<!--unzip launcher -->
-		<property name="launcherlibs" value="${buildDirectory}/launchertmp" />
-		<mkdir dir="${launcherlibs}" />
-		<unzip dest="${launcherlibs}">
-			<fileset dir="${buildDirectory}/plugins/org.eclipse.platform.source/src/">
-				<include name="org.eclipse.platform_*/launchersrc.zip" />
-			</fileset>
-		</unzip>
+	
+		<property name="launcherlibs" value="${buildDirectory}/features/org.eclipse.equinox.executable" />
 		<exec dir="${launcherlibs}/library/${installWs}/" executable="sh" failonerror="true">
 			<arg line="build.sh" />
 		</exec>
-		<move file="${launcherlibs}/library/${installWs}/eclipse" todir="${launcherlibs}/" />
+		<copy file="${launcherlibs}/library/${installWs}/eclipse" todir="${buildDirectory}/eclipse/" />
+
+		<property name="launcherfragment" value="org.eclipse.equinox.launcher.${installWs}.${installOs}.${installArch}" />
+
+		<copy file="${launcherlibs}/library/${installWs}/eclipse" todir="features/org.eclipse.equinox.executable/contributed/${installWs}/${installOs}/.${installArch}/" />
+		<copy todir="${buildDirectory}/plugins/${launcherfragment}">
+			<fileset dir="${launcherlibs}/library/${installWs}">
+				<include name="**/*.so" />
+			</fileset>
+		</copy>
+
+		<!-- build liblocalfile -->
+		<exec dir="plugins/org.eclipse.core.filesystem/natives/unix/linux" executable="make" failonerror="true" />
+		<move file="plugins/org.eclipse.core.filesystem/natives/unix/linux/liblocalfile_1_0_0.so" todir="plugins/org.eclipse.core.filesystem.linux.${installArch}/os/linux/${installArch}">
+		</move>
+		<!-- build libupdate -->
+		<ant dir="plugins/org.eclipse.update.core.linux/src" antfile="build.xml" />
+
 	</target>
 
 
@@ -145,20 +164,26 @@
 		<antcall target="install.eclipse.${archive.format}" />
 		<property name="plugin.destination" value="${buildDirectory}/tmp/eclipse/plugins" />
 		<mkdir dir="${plugin.destination}" />
-		
-		<java fork="true" jar="${buildDirectory}/eclipse/startup.jar" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.isv" output="platform.doc.isv.txt">
+
+		<pathconvert property="launcher">
+			<path>
+				<fileset dir="${buildDirectory}\eclipse\plugins" includes="**/*.jar" />
+			</path>
+			<regexpmapper from="(org\.eclipse\.equinox\.launcher)(_)(.*)\.jar" to="\0" />
+		</pathconvert>
+		<java fork="true" jar="${buildDirectory}/eclipse/plugins/${launcher}" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.isv" output="platform.doc.isv.txt">
 			<arg line="-data ${buildDirectory}/workspace -application org.eclipse.ant.core.antRunner build.update.jar -Dplugin.destination=${plugin.destination}" />
 		</java>
-		<java fork="true" jar="${buildDirectory}/eclipse/startup.jar" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.user" output="platform.doc.user.txt">
+		<java fork="true" jar="${buildDirectory}/eclipse/plugins/${launcher}" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.user" output="platform.doc.user.txt">
 			<arg line="-data ${buildDirectory}/workspace -application org.eclipse.ant.core.antRunner build.update.jar -Dplugin.destination=${plugin.destination}" />
 		</java>
-		<java fork="true" jar="${buildDirectory}/eclipse/startup.jar" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv" output="jdt.doc.isv.txt">
+		<java fork="true" jar="${buildDirectory}/eclipse/plugins/${launcher}" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv" output="jdt.doc.isv.txt">
 			<arg line="-data ${buildDirectory}/workspace -application org.eclipse.ant.core.antRunner build.update.jar -Dplugin.destination=${plugin.destination}" />
 		</java>
-		<java fork="true" jar="${buildDirectory}/eclipse/startup.jar" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.user" output="jdt.doc.user.txt">
+		<java fork="true" jar="${buildDirectory}/eclipse/plugins/${launcher}" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.user" output="jdt.doc.user.txt">
 			<arg line="-data ${buildDirectory}/workspace -application org.eclipse.ant.core.antRunner build.update.jar -Dplugin.destination=${plugin.destination}" />
 		</java>
-		<java fork="true" jar="${buildDirectory}/eclipse/startup.jar" dir="${buildDirectory}/plugins/org.eclipse.pde.doc.user" output="pde.doc.user.txt">
+		<java fork="true" jar="${buildDirectory}/eclipse/plugins/${launcher}" dir="${buildDirectory}/plugins/org.eclipse.pde.doc.user" output="pde.doc.user.txt">
 			<arg line="-data ${buildDirectory}/workspace -application org.eclipse.ant.core.antRunner build.update.jar -Dplugin.destination=${plugin.destination}" />
 		</java>
 
@@ -243,7 +268,7 @@
 		</condition>
 		<property name="cvspass" value="${user.home}/.cvspass" />
 
-		<!--bootclasspath-->	
+		<!--bootclasspath-->
 		<path id="default.bootclasspath">
 			<fileset dir="${java.home}/lib">
 				<include name="*.jar" />
@@ -255,7 +280,7 @@
 			</fileset>
 		</path>
 		<path id="java5.bootclasspath">
-			<fileset dir="${java5.home}">
+			<fileset dir="${java.home}">
 				<include name="**/*.jar" />
 			</fileset>
 		</path>
@@ -265,7 +290,7 @@
 			<os family="mac" />
 		</condition>
 		<property name="bootclasspath" refid="default.bootclasspath" />
-	
+
 		<!--set the compiler and compiler arguments-->
 		<!--the default compiler is set to the one used by eclipse rel. eng. -->
 		<condition property="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter">
@@ -280,16 +305,16 @@
 		</fail>
 
 		<property name="compilerArg" value="-enableJavadoc -encoding ISO-8859-1" />
-		<property name="javacSource" value="1.3" />
-		<property name="javacTarget" value="1.2" />
+		<property name="javacSource" value="1.6" />
+		<property name="javacTarget" value="1.6" />
 		<property name="javacDebugInfo" value="true" />
 		<property name="javacFailOnError" value="true" />
 
 		<!--required property setting to build bundles in Eclipse 3.x stream builds -->
 		<property name="buildingOSGi" value="true" />
-		
+
 		<!--property to invoke the packager for baseLocation files -->
-		<property name="runPackager" value="true"/>
+		<property name="runPackager" value="true" />
 
 		<!--indentifies this as a srcFetch build-->
 		<available file="fetch_org.eclipse.equinox.executable.xml" property="srcFetch" />
@@ -299,11 +324,13 @@
 			<or>
 				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="linux-gtk-ppc64" />
 				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="linux-motif-x86" />
+				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="linux-gtk-s390" />
+				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="linux-gtk-s390x" />
 				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="hpux-motif-ia64" />
 				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="hpux-motif-ia64_32" />
 				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="solaris-gtk-x86" />
-				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="hpux-motif-PA_RISC" />	
-		    </or>
+				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="hpux-motif-PA_RISC" />
+			</or>
 		</condition>
 
 		<!--used to add doc plug-ins to result after initial assembly-->

@@ -46,6 +46,16 @@
 			<param name="arch" value="x86" />
 		</antcall>
 		<antcall target="packageSwtStandalone">
+			<param name="ws" value="win32" />
+			<param name="os" value="win32" />
+			<param name="os" value="x86_64" />
+		</antcall>
+		<antcall target="packageSwtStandalone">
+				<param name="ws" value="wpf" />
+				<param name="os" value="win32" />
+				<param name="arch" value="x86" />
+		</antcall>
+		<antcall target="packageSwtStandalone">
 			<param name="os" value="linux" />
 			<param name="ws" value="motif" />
 			<param name="arch" value="x86" />
@@ -197,6 +207,7 @@
 				<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-SDK-${buildId}-win32.zip.md5"/>
 				<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-SDK-${buildId}-linux-gtk.tar.gz.md5"/>
 				<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-SDK-${buildId}-macosx-carbon.tar.gz.md5"/>
+				<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-RCP-${buildId}-delta-pack.zip.md5"/>
 			</and>
 		</waitfor>
 
@@ -266,7 +277,7 @@
 		<ant antfile="${base.builder}/plugins/org.eclipse.build.tools/scripts/publish.xml" dir="${publishingContent}" target="generateIndex">
 			<property name="isBuildTested" value="true" />
 			<property name="buildType" value="${buildType}" />
-			<property name="dropTokenList" value="%sdk%,%tests%,%example%,%rcpruntime%,%rcpsdk%,%icubase%,%runtime%,%platformsdk%,%jdt%,%jdtsdk%,%jdtc%,%pde%,%pdesdk%,%cvs%,%cvssdk%,%teamextras%,%swt%,%relengtools%" />
+			<property name="dropTokenList" value="%sdk%,%tests%,%example%,%rcpruntime%,%rcpsdk%,%icubase%,%runtime%,%platformsdk%,%jdt%,%jdtsdk%,%jdtc%,%jarprocessor%,%pde%,%pdesdk%,%cvs%,%cvssdk%,%swt%,%relengtools%" />
 			<property name="platformIdentifierToken" value="%platform%" />
 			<property name="platformSpecificTemplateList" value="Windows,${publishingContent}/templateFiles/platform.php.template,winPlatform.php;Linux,${publishingContent}/templateFiles/platform.php.template,linPlatform.php;Solaris,${publishingContent}/templateFiles/platform.php.template,solPlatform.php;AIX,${publishingContent}/templateFiles/platform.php.template,aixPlatform.php;Macintosh,${publishingContent}/templateFiles/platform.php.template,macPlatform.php;Source Build,${publishingContent}/templateFiles/sourceBuilds.php.template,sourceBuilds.php" />
 			<property name="indexFileName" value="index.php" />
@@ -295,8 +306,8 @@
 		</condition>
 		<property name="configArgs" value="" />
 
-		<java jar="${basedir}/../org.eclipse.releng.basebuilder/startup.jar" fork="true" maxmemory="256m">
-			<arg line="${configArgs} -application org.eclipse.test.performance.ui.resultGenerator
+		<java jar="${basedir}/../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar" fork="true" maxmemory="512m" error="${buildDirectory}/perfgenerror.txt">
+			<arg line="${configArgs} -consolelog -nosplash -data ${buildDirectory}/perf-workspace -application org.eclipse.test.performance.ui.resultGenerator
 					-baseline ${eclipse.perf.ref}
 					-baseline.prefix 3.2_200606291905
 					-current ${buildId}
@@ -385,7 +396,7 @@
 			<classpath>
 				<pathelement location="${base.builder}/plugins/org.eclipse.internal.build.tools/internalTools.jar"/>
 				<pathelement location="${base.builder}/plugins/org.eclipse.build.tools/buildTools.jar"/>
-				<pathelement location="${base.builder}/plugins/org.eclipse.osgi_3.3.0.v20070208.jar"/>
+				<pathelement location="${base.builder}/plugins/org.eclipse.osgi_3.3.0.v20070530.jar"/>
 			</classpath>
 		</java>
 		
@@ -406,7 +417,7 @@
 		<exec executable="unzip" dir=".">
 			<arg line="-j ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.bak.zip -i */plugins/* -x */master-equinox* */com.ibm.icu.base* -d ${updateSite}/plugins" />
 		</exec>
-	    <java jar="${eclipse.home}/startup.jar"
+	    <java jar="${eclipse.home}/plugins/org.eclipse.equinox.launcher.jar"
 	           fork="true"
      	       jvm="${java15-home}/bin/java"
 	           failonerror="true"
