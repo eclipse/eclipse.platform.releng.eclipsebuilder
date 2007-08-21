@@ -96,8 +96,8 @@
 	</zipType>	
 
 	<zipType name="JDTC">
-		<platform id="ECJ" name="All" fileName="ecj.jar"></platform>
-		<platform id="ECJSRC" name="All" fileName="ecjsrc.zip"></platform>
+		<platform id="ECJ" name="All" fileName="ecj-@build@.jar"></platform>
+		<platform id="ECJSRC" name="All" fileName="ecjsrc-@build@.zip"></platform>
 	</zipType>
 	
 	<zipType name="Jarprocessor">
