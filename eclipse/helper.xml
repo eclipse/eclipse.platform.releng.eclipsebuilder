@@ -304,6 +304,7 @@
 			<arg line="${configArgs} -consolelog -nosplash -data ${buildDirectory}/perf-workspace -application org.eclipse.test.performance.ui.resultGenerator
 					-baseline ${eclipse.perf.ref}
 					-baseline.prefix 3.2_200606291905
+					-currentPrefix M,I 
 					-current ${buildId}
 					-jvm ${eclipse.perf.jvm}
 					-output ${postingDirectory}/${buildLabel}/performance/
