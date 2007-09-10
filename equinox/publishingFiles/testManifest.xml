@@ -77,6 +77,12 @@
  	    	<platform id="cm" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="@org.eclipse.equinox.cm@.jar">
 			</platform>	
 			<platform id="ds" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="@org.eclipse.equinox.ds@.jar">
+			</platform>		
+			<platform id="io" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="@org.eclipse.equinox.io@.jar">
+			</platform>
+			<platform id="ip" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="@org.eclipse.equinox.ip@.jar">
+			</platform>
+			<platform id="util" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="@org.eclipse.equinox.util@.jar">
 			</platform>
 		 	<platform id="initializer" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="@org.eclipse.equinox.initializer@.jar">
 			</platform>			 									
