@@ -77,6 +77,12 @@
  	    	<platform id="cm" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="@org.eclipse.equinox.cm@.jar">
 			</platform>	
 			<platform id="ds" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="@org.eclipse.equinox.ds@.jar">
+			</platform>		
+			<platform id="io" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="@org.eclipse.equinox.io@.jar">
+			</platform>
+			<platform id="ip" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="@org.eclipse.equinox.ip@.jar">
+			</platform>
+			<platform id="equinoxutil" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="@org.eclipse.equinox.util@.jar">
 			</platform>
 		 	<platform id="initializer" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="@org.eclipse.equinox.initializer@.jar">
 			</platform>			 									
@@ -89,29 +95,28 @@
 			<platform id="equinoxjmxserver" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="eclipse-equinox-jmx-server-@buildid@.zip">			
  			</platform>
  			<platform id="provagentrcp" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="eclipse-equinox-prov-agent-${buildId}-win32.zip">			
- 			</platform>			 									
-    	</zi			 									
+ 			</platform>			 									    		 									
     	</zipType>   	
     	
 
 		<zipType name="Launchers">
-			<platform id="SW" name="Windows (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="launchers-win32.win32.x86.@buildid@.zip">
+			<platform id="SW" name="Windows (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_4.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="launchers-win32.win32.x86.@buildid@.zip">
 			</platform>
-			<platform id="SW64" name="Windows 64bit (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="launchers-win32.win32.x86.@buildid@.zip">
+			<platform id="SW64" name="Windows (x86_64) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_4.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="launchers-win32.win32.x86.@buildid@.zip">
 			</platform>
-			<platform id="SWWPF" name="Windows WPF **early access** (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="launchers-win32.wpf.x86.@buildid@.zip">
+			<platform id="SWWPF" name="Windows WPF **early access** (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_4.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="launchers-win32.wpf.x86.@buildid@.zip">
 			</platform>
-			<platform id="SLG2" name="Linux (x86/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="launchers-linux.gtk.x86.@buildid@.tar.gz">
+			<platform id="SLG2" name="Linux (x86/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_4.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="launchers-linux.gtk.x86.@buildid@.tar.gz">
 			</platform>
-			<platform id="SLG264" name="Linux (x86_64/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="launchers-linux.gtk.x86_64.@buildid@.tar.gz">
+			<platform id="SLG264" name="Linux (x86_64/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_4.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="launchers-linux.gtk.x86_64.@buildid@.tar.gz">
 			</platform>
-			<platform id="SLG2PPC" name="Linux (PPC/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="launchers-linux.gtk.ppc.@buildid@.tar.gz">
+			<platform id="SLG2PPC" name="Linux (PPC/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_4.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="launchers-linux.gtk.ppc.@buildid@.tar.gz">
 			</platform>			
 			<platform id="SSG" name="Solaris 8 (SPARC/GTK 2)" fileName="launchers-solaris.gtk.sparc.@buildid@.zip">
 			</platform>			
 			<platform id="SAM" name="AIX (PPC/Motif)" fileName="launchers-aix.motif.ppc.@buildid@.zip">
 			</platform>			
-			<platform id="SMC" name="Mac OSX (Mac/Carbon) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_3.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="launchers-macosx.carbon.ppc.@buildid@.tar.gz">
+			<platform id="SMC" name="Mac OSX (Mac/Carbon) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_4.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="launchers-macosx.carbon.ppc.@buildid@.tar.gz">
 			</platform>
 		</zipType>
 

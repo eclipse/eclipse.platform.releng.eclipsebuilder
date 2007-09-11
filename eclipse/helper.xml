@@ -48,8 +48,8 @@
 		<antcall target="packageSwtStandalone">
 			<param name="ws" value="win32" />
 			<param name="os" value="win32" />
-			<param name="os" value="x86_64" />
-		</antcall>
+			<param name="arch" value="x86_64" />
+		</antcall> 
 		<antcall target="packageSwtStandalone">
 				<param name="ws" value="wpf" />
 				<param name="os" value="win32" />
@@ -309,13 +309,12 @@
 		<java jar="${basedir}/../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar" fork="true" maxmemory="512m" error="${buildDirectory}/perfgenerror.txt">
 			<arg line="${configArgs} -consolelog -nosplash -data ${buildDirectory}/perf-workspace -application org.eclipse.test.performance.ui.resultGenerator
 					-baseline ${eclipse.perf.ref}
-					-baseline.prefix 3.2_200606291905
+					-baseline.prefix 3.3_200706251500
 					-current ${buildId}
 					-jvm ${eclipse.perf.jvm}
 					-output ${postingDirectory}/${buildLabel}/performance/
-					-config eclipseperfwin1_R3.3,eclipseperflnx1_R3.3,eclipseperfwin2_R3.3,eclipseperflnx2_R3.3,eclipseperflnx3_R3.3
-					-config.properties ${eclipse.perf.config.descriptors}
-					-scenario.pattern org.eclipse.%.test"
+					-config eclipseperfwin1,eclipseperflnx1,eclipseperfwin2,eclipseperflnx2,eclipseperflnx3
+					-config.properties ${eclipse.perf.config.descriptors}"					
 				/>
 			<!-- add this argument to list above when there are milestone builds to highlight 
 			-highlight.latest 3.3M1_
@@ -396,7 +395,7 @@
 			<classpath>
 				<pathelement location="${base.builder}/plugins/org.eclipse.internal.build.tools/internalTools.jar"/>
 				<pathelement location="${base.builder}/plugins/org.eclipse.build.tools/buildTools.jar"/>
-				<pathelement location="${base.builder}/plugins/org.eclipse.osgi_3.3.0.v20070530.jar"/>
+				<pathelement location="${base.builder}/plugins/org.eclipse.osgi_3.4.0.v20070803.jar"/>
 			</classpath>
 		</java>
 		

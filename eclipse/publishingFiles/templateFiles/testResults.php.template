@@ -94,7 +94,6 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 <div id="leftcol">
 <ul id="leftnav">
 <li><a href="#Logs">Logs</a></li>
-<li><a href="#RefCheck">Internal References Check</a></li>
 <li><a href="#UnitTest">Unit Test Results</a></li>
 <li><a href="#PluginsErrors">Plugins Containing Compile Errors</a></li>
  
