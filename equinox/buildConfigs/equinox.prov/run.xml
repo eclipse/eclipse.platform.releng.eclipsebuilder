@@ -17,25 +17,25 @@
 		<property name="prov.output.base" value="${buildDirectory}/provtemp" />
 		<mkdir dir="${prov.output.base}" />
 
-		<property name="sdk.archive" value="${buildDirectory}/eclipse-SDK-${buildId}-win32.zip" />
-		<property name="rcp.delta.archive" value="${buildDirectory}/eclipse-RCP-${buildId}-delta-pack.zip" />
-		<property name="rcp.archive" value="${buildDirectory}/eclipse-RCP-${buildId}-win32.zip" />
+		<property name="sdk.archive" value="${postingDirectory}/${buildLabel/eclipse-SDK-${buildId}-win32.zip" />
+		<property name="rcp.delta.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-delta-pack.zip" />
+		<property name="rcp.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-win32.zip" />
 
 		<!--	<property name="prov.install.folder.parent" value="${prov.root}/" />
 		<property name="prov.install.path" value="${prov.install.folder.parent}${prov.install.folder}" /> -->
 		<property name="prov.install.folder" value="equinox.prov" />
 		<property name="base" value="${prov.output.base}/base" />
-		<mkdir name="${base}" />
+		<mkdir dir="${base}" />
 		<property name="prov.install.path" value="${prov.output.base}/${prov.install.folder}" />
-		<mkdir name="${prov.install.path}" />
+		<mkdir dir="${prov.install.path}" />
 
 
 		<property file="build.properties" />
 
 		<property name="prov.generator.dir" value="${prov.output.base}/generator" />
-		<mkdir name="${prov.generator.dir}" />
+		<mkdir dir="${prov.generator.dir}" />
 		<property name="prov.metadata.repo" value="${prov.output.base}/servers/metadata/" />
-		<mkdir name="${prov.generator.repo}" />
+		<mkdir dir="${prov.generator.repo}" />
 		<property name="prov.artifact.repo" value="${prov.output.base}/servers/artifacts/" />
 		<property name="prov.flavor" value="tooling" />
 	</target>
