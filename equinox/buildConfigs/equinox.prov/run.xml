@@ -17,7 +17,7 @@
 		<property name="prov.output.base" value="${buildDirectory}/provtemp" />
 		<mkdir dir="${prov.output.base}" />
 
-		<property name="sdk.archive" value="${postingDirectory}/${buildLabel/eclipse-SDK-${buildId}-win32.zip" />
+		<property name="sdk.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" />
 		<property name="rcp.delta.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-delta-pack.zip" />
 		<property name="rcp.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-win32.zip" />
 
@@ -35,9 +35,11 @@
 		<property name="prov.generator.dir" value="${prov.output.base}/generator" />
 		<mkdir dir="${prov.generator.dir}" />
 		<property name="prov.metadata.repo" value="${prov.output.base}/servers/metadata/" />
-		<mkdir dir="${prov.generator.repo}" />
+		<mkdir dir="${prov.metadata.repo}" />
 		<property name="prov.artifact.repo" value="${prov.output.base}/servers/artifacts/" />
+		<mkdir dir="${prov.artifact.repo}" />
 		<property name="prov.flavor" value="tooling" />
+
 	</target>
 
 	<target name="build" depends="init">
