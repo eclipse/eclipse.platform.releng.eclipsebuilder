@@ -13,17 +13,18 @@
 	-->
 		 <target name="init">
 		 		 <!-- TODO: pass these arguments in -->
-		 		 <!-- <property name="prov.root" value="c:" /> -->
-		 		 <property name="prov.output.base" value="${buildDirectory}/provtemp" />
+		 		 <property name="prov.root" value="${postingDirectory}/${buildLabel}/provtemp" /> 
+		 		 <property name="prov.output.base" value="${prov.root}/equinox.prov.build" />
 		 		 <mkdir dir="${prov.output.base}" />
 
 		 		 <property name="sdk.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-ppc.tar.gz" />
 		 		 <property name="rcp.delta.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-delta-pack.zip" />
 		 		 <property name="rcp.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-linux-gtk-ppc.tar.gz" />
 
-		 		 <!--	<property name="prov.install.folder.parent" value="${prov.root}/" />
-		<property name="prov.install.path" value="${prov.install.folder.parent}${prov.install.folder}" /> -->
-		 		 <property name="prov.install.folder" value="equinox.prov" />
+		 		 <property name="prov.install.folder.parent" value="${prov.root}/" />
+		 		 <property name="prov.install.folder" value="equinox.prov" /> 		 	
+				 <property name="prov.install.path" value="${prov.install.folder.parent}${prov.install.folder}" /> 
+		 			 		 
 		 		 <property name="base" value="${prov.output.base}/base" />
 		 		 <mkdir dir="${base}" />
 		 		 <property name="prov.install.path" value="${prov.output.base}/${prov.install.folder}" />
@@ -44,7 +45,7 @@
 		 <target name="build" depends="init">
 
 
-		 		 <antcall target="clean" />
+		 		 <!-- <antcall target="clean" /> -->
 		 		 <!-- Ensure that we are building against the same version that we
 			are generating the metadata for -->
 		 		 <antcall target="extract">
@@ -246,11 +247,11 @@
 		 		 </exec>
 
 		 		 <!-- Delete the other copy of ICU until bug 199299 is fixed -->
-		<delete>
+<!--		<delete>
 			<fileset dir="${prov.install.path}/plugins">
 				<include name="**/com.ibm.icu_*.jar" />
-			</fileset>
-		</delete>
+			</fileset> 
+		</delete>-->
 
 		 		 <!-- Modify the ini files to reference c:/equinox.prov until bug 200228 is fixed and we can use relative paths -->
 		 		 <replace dir="${prov.install.path}" token="file:${prov.install.path}" value="file://c:/equinox.prov">
@@ -273,7 +274,8 @@
 
 		 <target name="zip.install">
 		 <!--	<zip destfile="${prov.output.base}/equinox-prov-agent-${buildId}-win32.zip" basedir="${prov.install.folder.parent}" includes="${prov.install.folder}/**" /> -->
-		 		 <zip destfile="${prov.output.base}/equinox-prov-agent-${buildId}-win32.zip" basedir="${prov.output.base}" includes="${prov.install.folder}/**" />
+		 	<zip destfile="${prov.output.base}/equinox-prov-agent-${buildId}-win32.zip" basedir="${prov.install.folder.parent}" includes="${prov.install.folder}/**" />
+		 	<copy file="${prov.output.base}/equinox-prov-agent-${buildId}-win32.zip" todir="${equinoxPostingDirectory}"/>
 		 </target>
 
 		 <target name="extract">
