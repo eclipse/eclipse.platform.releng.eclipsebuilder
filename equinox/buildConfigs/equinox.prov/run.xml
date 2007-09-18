@@ -13,7 +13,7 @@
 	-->
 		 <target name="init">
 		 		 <!-- TODO: pass these arguments in -->
-		 		 <property name="prov.root" value="${postingDirectory}/${buildLabel}/provtemp" /> 
+		 		 <property name="prov.root" value="${buildDirectory}/${buildId}/provtemp" /> 
 		 		 <property name="prov.output.base" value="${prov.root}/equinox.prov.build" />
 		 		 <mkdir dir="${prov.output.base}" />
 
@@ -21,16 +21,16 @@
 		 		 <property name="rcp.delta.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-delta-pack.zip" />
 		 		 <property name="rcp.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-linux-gtk-ppc.tar.gz" />
 
+			 	 <property name="prov.install.folder" value="equinox.prov" />
 		 		 <property name="prov.install.folder.parent" value="${prov.root}/" />
-		 		 <property name="prov.install.folder" value="equinox.prov" /> 		 	
+		 	 		 	
 				 <property name="prov.install.path" value="${prov.install.folder.parent}${prov.install.folder}" /> 
 		 			 		 
 		 		 <property name="base" value="${prov.output.base}/base" />
 		 		 <mkdir dir="${base}" />
 		 		 <property name="prov.install.path" value="${prov.output.base}/${prov.install.folder}" />
 		 		 <mkdir dir="${prov.install.path}" />
-
-
+		 	
 		 		 <property file="build.properties" />
 
 		 		 <property name="prov.generator.dir" value="${prov.output.base}/generator" />
@@ -43,8 +43,6 @@
 		 </target>
 
 		 <target name="build" depends="init">
-
-
 		 		 <!-- <antcall target="clean" /> -->
 		 		 <!-- Ensure that we are building against the same version that we
 			are generating the metadata for -->
@@ -274,8 +272,9 @@
 
 		 <target name="zip.install">
 		 <!--	<zip destfile="${prov.output.base}/equinox-prov-agent-${buildId}-win32.zip" basedir="${prov.install.folder.parent}" includes="${prov.install.folder}/**" /> -->
-		 	<zip destfile="${prov.output.base}/equinox-prov-agent-${buildId}-win32.zip" basedir="${prov.install.folder.parent}" includes="${prov.install.folder}/**" />
-		 	<copy file="${prov.output.base}/equinox-prov-agent-${buildId}-win32.zip" todir="${equinoxPostingDirectory}"/>
+		 	
+		 	<zip destfile="${prov.output.base}/equinox-prov-agent-${buildId}-win32.zip" basedir="${prov.install.folder.parent}" includes="${prov.agent.dir}/**" />
+		 	<copy file="${prov.output.base}/equinox-prov-agent-${buildId}-win32.zip" todir="${equinoxPostingDirectory}/${buildId}"/>
 		 </target>
 
 		 <target name="extract">
@@ -295,9 +294,6 @@
 		 </target>
 
 		 <target name="extract-tar.gz">
-<!--		<gunzip src="${extract-src}" dest="${extract-dest}/temp.tar" />
-		<untar src="${prov.output.base}/temp.tar" dest="${extract-dest}" />
-		<delete file="${extract-dest}/temp.tar" /> -->
 		 		 <exec dir="${extract-dest}" executable="tar">
 		 		 		 <arg line="-xzf ${extract-src}"/>
 		 		 </exec>

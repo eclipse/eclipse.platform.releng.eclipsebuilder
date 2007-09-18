@@ -49,6 +49,7 @@ osgi.bundles=\
 	org.eclipse.equinox.common,\
 	org.eclipse.equinox.frameworkadmin,\
 	org.eclipse.equinox.frameworkadmin.equinox@start,\
+	org.eclipse.equinox.preferences,\
 	org.eclipse.equinox.prov.artifact.repository,\
 	org.eclipse.equinox.prov.console,\
 	org.eclipse.equinox.prov.core,\
