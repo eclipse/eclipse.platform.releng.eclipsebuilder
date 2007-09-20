@@ -236,6 +236,7 @@
 			<arg line="-prov.os win32" />
 			<arg line="-prov.ws win32" />
 			<arg line="-prov.arch x86" />
+		    <arg line="-roaming">
 			<arg line="-profile EquinoxProvisioningUI" />
 			<arg line="-metadataRepository file:${prov.metadata.repo}" />
 			<arg line="-artifactRepository file:${prov.artifact.repo}" />
