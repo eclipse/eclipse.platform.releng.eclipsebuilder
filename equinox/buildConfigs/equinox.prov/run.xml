@@ -246,18 +246,18 @@
 		</exec>
 
 		<!-- Delete the other copy of ICU until bug 199299 is fixed -->
-		<!--		<delete>
+		<delete failonerror="false">
 			<fileset dir="${prov.install.path}/plugins">
 				<include name="**/com.ibm.icu_*.jar" />
-			</fileset> 
-		</delete>-->
+			</fileset>
+		</delete>
 
 		<!-- Modify the ini files to reference c:/equinox.prov until bug 200228 is fixed and we can use relative paths -->
-		<replace dir="${prov.install.path}" token="file:${prov.install.path}" value="file://c:/equinox.prov">
+		<replace dir="${prov.install.path}" token="file:${prov.install.path}" value="file:c:/equinox.prov">
 			<include name="eclipse.ini" />
 			<include name="configuration/org.eclipse.equinox.simpleconfigurator/bundles.txt" />
 		</replace>
-		<replace dir="${prov.install.path}" token="file\:${prov.install.path}" value="file\://c\:/equinox.prov">
+		<replace dir="${prov.install.path}" token="file\:${prov.install.path}" value="file\:c\:/equinox.prov">
 			<include name="configuration/config.ini" />
 		</replace>
 
