@@ -43,7 +43,7 @@
 		     isBuildTested="false"
 	   		 sendMail="false"
 	   		 buildType="${buildType}"
-		     dropTokenList="%equinox%,%framework%,%extrabundles%,%other%,%incubator%,%launchers%"
+		     dropTokenList="%equinox%,%framework%,%extrabundles%,%other%,%incubator%,%provisioningincubator%,%launchers%"
 		     xmlDirectoryName="${postingDirectory}/testresults/xml"
 		     dropDirectoryName="${equinoxPostingDirectory}/${buildLabel}"
 		     testResultsTemplateFileName="${publishingContent}/templateFiles/testResults.php.template"
