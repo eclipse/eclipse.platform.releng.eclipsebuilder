@@ -98,11 +98,11 @@
     	<zipType name="ProvisioningIncubator">
 			<platform id="provagentrcp" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="equinox-prov-agent-@buildid@-win32.zip">			
  			</platform>
- 			<platform id="provagentrcp" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="equinox-prov-servers-@buildid@.zip">			
+ 			<platform id="provservers" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="equinox-prov-servers-@buildid@.zip">			
  			</platform> 			
- 			<platform id="provagentrcp" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="org.eclipse.equinox.prov.selfhosting.feature-@buildid@-win32.win32.x86.zip">			
+ 			<platform id="provselfhosting" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="org.eclipse.equinox.prov.selfhosting.feature-@buildid@-win32.win32.x86.zip">			
  			</platform>
- 			<platform id="provagentrcp" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="org.eclipse.equinox.prov.user.ui.feature-@buildid@-win32.win32.x86.zip">			
+ 			<platform id="provuserui" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="org.eclipse.equinox.prov.user.ui.feature-@buildid@-win32.win32.x86.zip">			
  			</platform>	
  		</zipType>
 
