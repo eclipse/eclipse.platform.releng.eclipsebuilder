@@ -1,0 +1,11 @@
+osgi.bundles=\
+	org.eclipse.equinox.app@start,\
+	org.eclipse.equinox.frameworkadmin.equinox@start,\
+	org.eclipse.equinox.prov.console@start,\
+	org.eclipse.equinox.prov.examplarysetup@start,\
+	org.eclipse.equinox.simpleconfigurator@1:start
+eclipse.product=org.eclipse.equinox.prov.ui.admin.rcp.product
+org.eclipse.equinox.simpleconfigurator.useReference=true
+eclipse.prov.artifactRepository=http://download.eclipse.org/eclipse/equinox/provisioning/artifactRepository/artifacts.xml
+eclipse.prov.metadataRepository=http://download.eclipse.org/eclipse/equinox/provisioning/metadataRepository/
+org.eclipse.update.reconcile=false

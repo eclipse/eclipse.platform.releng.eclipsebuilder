@@ -12,40 +12,39 @@
 		- Run the metadata generator on the Eclipse SDK.
 	-->
 	<target name="init">
-		<!-- TODO: pass these arguments in -->
+		<!-- TODO: pass these arguments in -->		
 		<property name="prov.root" value="${buildDirectory}/${buildId}/provtemp" />
-		<property name="prov.output.base" value="${prov.root}/equinox.prov.build" />
+		<property name="prov.output.base" value="${prov.root}/equinox.prov.build" />	
 		<mkdir dir="${prov.output.base}" />
 
 		<property name="sdk.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-ppc.tar.gz" />
 		<property name="rcp.delta.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-delta-pack.zip" />
-		<property name="rcp.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-linux-gtk-ppc.tar.gz" />
+		<property name="rcp.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-linux-gtk-ppc.tar.gz" />			
 
 		<property name="prov.install.folder.parent" value="${prov.root}/" />
 		<property name="prov.install.folder" value="equinox.prov" />
-		<property name="prov.install.path" value="${prov.install.folder.parent}${prov.install.folder}" />
+		<property name="prov.install.path" value="${prov.install.folder.parent}${prov.install.folder}" />		
 
 		<property name="base" value="${prov.output.base}/base" />
 		<mkdir dir="${base}" />
 		<property name="prov.install.path" value="${prov.output.base}${prov.install.folder}" />
 		<mkdir dir="${prov.install.path}" />
 
-
 		<property file="build.properties" />
 
+		<property name="prov.agent.dir" value="${prov.output.base}/agent" />
 		<property name="prov.generator.dir" value="${prov.output.base}/generator" />
 		<mkdir dir="${prov.generator.dir}" />
-		<property name="prov.metadata.repo" value="${prov.output.base}/servers/metadata/" />
+		<property name="prov.repo.root" value="${prov.output.base}/servers" />
 		<mkdir dir="${prov.metadata.repo}" />
-		<property name="prov.artifact.repo" value="${prov.output.base}/servers/artifacts/" />
+		<property name="prov.metadata.repo" value="${prov.repo.root}/metadataRepository/" />
+		<mkdir dir="${prov.metadata.repo}" />
+		<property name="prov.artifact.repo" value="${prov.repo.root}/artifactRepository/" />
 		<mkdir dir="${prov.artifact.repo}" />
 		<property name="prov.flavor" value="tooling" />
 	</target>
 
 	<target name="build" depends="init">
-
-
-		<!--		 		 <antcall target="clean" /> -->
 		<!-- Ensure that we are building against the same version that we
 			are generating the metadata for -->
 		<antcall target="extract">
@@ -57,20 +56,15 @@
 			<param name="extract-dest" value="${base}" />
 		</antcall>
 		<antcall target="build.features" />
-		<antcall target="build.agent" />
 		<!-- Generate the metadata for the agent and create the install first due
 			to bug 199317... installing will install all fragments and we don't want the
 			ones from the SDK -->
 		<antcall target="generate.metadata.agent" />
 		<antcall target="run.director" />
-		<antcall target="zip.install" />
 		<antcall target="generate.metadata.selfhosting" />
+		<antcall target="generate.metadata.userUI" />
 		<antcall target="generate.metadata.sdk" />
-	</target>
-
-	<target name="clean">
-		<delete dir="${prov.output.base}" />
-		<delete dir="${prov.install.path}" />
+		<antcall target="zip.install" />
 	</target>
 
 	<target name="build.features">
@@ -79,29 +73,18 @@
 		</ant>
 	</target>
 
-	<target name="build.agent">
-		<ant antfile="${eclipse.pdebuild.scripts}/productBuild/productBuild.xml">
-			<property name="builder" value="${basedir}" />
-		</ant>
-	</target>
-
 	<target name="generate.metadata.agent">
+		<!-- prepare the generator application -->
 		<path id="feature.zip.path">
 			<fileset dir="${buildDirectory}/${buildId}">
 				<include name="**/org.eclipse.equinox.prov.generator.feature-*-linux.gtk.x86.zip" />
 			</fileset>
 		</path>
 		<property name="feature.zip.name" refid="feature.zip.path" />
-
 		<antcall target="extract">
 			<param name="extract-src" value="${feature.zip.name}" />
 			<param name="extract-dest" value="${prov.generator.dir}" />
 		</antcall>
-
-		<delete>
-			<fileset dir="${prov.generator.dir}" includes="**/org.eclipse.update.configurator_*" />
-		</delete>
-
 		<antcall target="extract">
 			<param name="extract-src" value="${rcp.archive}" />
 			<param name="extract-dest" value="${prov.generator.dir}" />
@@ -115,18 +98,32 @@
 			</fileset>
 		</copy>
 
+		<!-- prepare the agent -->
+		<antcall target="extract">
+			<param name="extract-src" value="${rcp.win32.archive}" />
+			<param name="extract-dest" value="${prov.agent.dir}" />
+		</antcall>
 		<path id="agent.zip.path">
 			<fileset dir="${buildDirectory}/${buildId}">
-				<include name="**/${buildId}*-win32.win32.x86.zip" />
+				<include name="**/org.eclipse.equinox.prov.agent.feature-*-win32.win32.x86.zip" />
 			</fileset>
 		</path>
 		<property name="agent.zip.name" refid="agent.zip.path" />
-		<property name="prov.agent.dir" value="${prov.output.base}/agent" />
-
 		<antcall target="extract">
 			<param name="extract-src" value="${agent.zip.name}" />
 			<param name="extract-dest" value="${prov.agent.dir}" />
 		</antcall>
+		<copy file="files/config.ini.agent" tofile="${prov.agent.dir}/eclipse/configuration/config.ini" overwrite="true" />
+		<copy todir="${prov.agent.dir}/eclipse/plugins">
+			<fileset dir="files">
+				<include name="**/*.jar" />
+			</fileset>
+		</copy>
+		<delete includeEmptyDirs="true" failonerror="false">
+			<fileset dir="${prov.agent.dir}/eclipse/plugins" includes="**/org.eclipse.update.configurator_*" />
+			<fileset dir="${prov.agent.dir}/eclipse/plugins" includes="**/org.eclipse.rcp_*" />
+			<fileset dir="${prov.agent.dir}/eclipse/features" includes="**/*" />
+		</delete>
 
 		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
 		<exec executable="${prov.generator.dir}/eclipse/eclipse">
@@ -137,6 +134,7 @@
 			<arg line="-metadataRepository file:${prov.metadata.repo}" />
 			<arg line="-artifactRepository file:${prov.artifact.repo}" />
 			<arg line="-source ${prov.agent.dir}/eclipse" />
+			<arg line="-rootVersion 0.1.0.${buildId}" />
 			<arg line="-root agent" />
 			<arg line="-flavor ${prov.flavor}" />
 			<arg line="-publishArtifacts" />
@@ -151,7 +149,6 @@
 		</path>
 		<property name="selfhosting.feature.zip.name" refid="selfhosting.feature.zip.path" />
 		<property name="prov.selfhosting.dir" value="${prov.output.base}/selfhosting" />
-
 		<antcall target="extract">
 			<param name="extract-src" value="${selfhosting.feature.zip.name}" />
 			<param name="extract-dest" value="${prov.selfhosting.dir}" />
@@ -163,7 +160,11 @@
 			<arg line="-application org.eclipse.equinox.prov.metadata.generator.EclipseGenerator" />
 			<arg line="-consoleLog" />
 			<arg line="-nosplash" />
-			<arg line="-updateSite ${prov.selfhosting.dir}/eclipse" />
+			<arg line="-prov.os win32" />
+			<arg line="-base ${prov.selfhosting.dir}/eclipse" />
+			<arg line="-features ${prov.selfhosting.dir}/eclipse/features" />
+			<arg line="-bundles ${prov.selfhosting.dir}/eclipse/plugins" />
+			<arg line="-rootVersion 0.1.0.${buildId}" />
 			<arg line="-root selfhosting" />
 			<arg line="-flavor ${prov.flavor}" />
 			<arg line="-publishArtifacts" />
@@ -174,7 +175,41 @@
 		</exec>
 	</target>
 
-	<target name="generate.metadata.sdk">
+	<target name="generate.metadata.userUI">
+		<path id="userui.feature.zip.path">
+			<fileset dir="${buildDirectory}/${buildId}">
+				<include name="**/org.eclipse.equinox.prov.user.ui.feature-*-win32.win32.x86.zip" />
+			</fileset>
+		</path>
+		<property name="userui.feature.zip.name" refid="userui.feature.zip.path" />
+		<property name="prov.userui.dir" value="${prov.output.base}/userui" />
+		<antcall target="extract">
+			<param name="extract-src" value="${userui.feature.zip.name}" />
+			<param name="extract-dest" value="${prov.userui.dir}" />
+		</antcall>
+
+		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
+		<exec executable="${prov.generator.dir}/eclipse/eclipse">
+			<arg line="-vm ${java15-home}/bin/java" />
+			<arg line="-application org.eclipse.equinox.prov.metadata.generator.EclipseGenerator" />
+			<arg line="-consoleLog" />
+			<arg line="-nosplash" />
+			<arg line="-prov.os win32" />
+			<arg line="-base ${prov.userui.dir}/eclipse" />
+			<arg line="-features ${prov.userui.dir}/eclipse/features" />
+			<arg line="-bundles ${prov.userui.dir}/eclipse/plugins" />
+			<arg line="-root userui" />
+			<arg line="-rootVersion 0.1.0.${buildId}" />
+			<arg line="-flavor ${prov.flavor}" />
+			<arg line="-publishArtifacts" />
+			<arg line="-metadataRepository file:${prov.metadata.repo}" />
+			<arg line="-artifactRepository file:${prov.artifact.repo}" />
+			<arg line="-noDefaultIUs" />
+			<arg line="-append" />
+		</exec>
+	</target>
+
+		<target name="generate.metadata.sdk">
 		<property name="prov.sdk" value="${prov.output.base}/sdk" />
 		<mkdir dir="${prov.sdk}" />
 		<antcall target="extract">
@@ -188,9 +223,11 @@
 			<arg line="-application org.eclipse.equinox.prov.metadata.generator.EclipseGenerator" />
 			<arg line="-consoleLog" />
 			<arg line="-nosplash" />
+			<arg line="-prov.os win32" />
 			<arg line="-metadataRepository file:${prov.metadata.repo}" />
 			<arg line="-artifactRepository file:${prov.artifact.repo}" />
 			<arg line="-source ${prov.sdk}/eclipse" />
+			<arg line="-rootVersion 3.4.0.${buildId}" />
 			<arg line="-root sdk" />
 			<arg line="-flavor ${prov.flavor}" />
 			<arg line="-publishArtifacts" />
@@ -206,17 +243,14 @@
 		</path>
 		<property name="director.zip.name" refid="director.zip.path" />
 		<property name="prov.director.dir" value="${prov.output.base}/director" />
-
 		<antcall target="extract">
 			<param name="extract-src" value="${director.zip.name}" />
 			<param name="extract-dest" value="${prov.director.dir}" />
 		</antcall>
-
 		<antcall target="extract">
 			<param name="extract-src" value="${rcp.archive}" />
 			<param name="extract-dest" value="${prov.director.dir}" />
 		</antcall>
-
 		<chmod file="${prov.director.dir}/eclipse/eclipse" perm="777" />
 		<copy file="files/config.ini.director" tofile="${prov.director.dir}/eclipse/configuration/config.ini" overwrite="true" />
 		<copy todir="${prov.director.dir}/eclipse/plugins">
@@ -250,31 +284,26 @@
 		<delete failonerror="false">
 			<fileset dir="${prov.install.path}/plugins">
 				<include name="**/com.ibm.icu_*.jar" />
-			</fileset>
-		</delete>
-
-		<!-- Modify the ini files to reference c:/equinox.prov until bug 200228 is fixed and we can use relative paths -->
-		<replace dir="${prov.install.path}" token="file:${prov.install.path}" value="file:c:/equinox.prov">
-			<include name="eclipse.ini" />
-			<include name="configuration/org.eclipse.equinox.simpleconfigurator/bundles.txt" />
-		</replace>
-		<replace dir="${prov.install.path}" token="file\:${prov.install.path}" value="file\:c\:/equinox.prov">
-			<include name="configuration/config.ini" />
-		</replace>
-
-		<replace dir="${prov.install.path}" token="${prov.install.path}" value="c:/equinox.prov">
-			<include name="eclipse.ini" />
-			<include name="configuration/org.eclipse.equinox.simpleconfigurator/bundles.txt" />
-		</replace>
-		<replace dir="${prov.install.path}" token="${prov.install.path}" value="c\:/equinox.prov">
-			<include name="configuration/config.ini" />
-		</replace>
+			</fileset> 
+		</delete>		
 
 	</target>
 
 	<target name="zip.install">
 		<zip destfile="${prov.output.base}/equinox-prov-agent-${buildId}-win32.zip" basedir="${prov.install.folder.parent}" includes="${prov.install.folder}/**" />
-		<copy file="${prov.output.base}/equinox-prov-agent-${buildId}-win32.zip" todir="${equinoxPostingDirectory}/${buildId}" />
+		<copy file="${prov.output.base}/equinox-prov-agent-${buildId}-win32.zip" todir="${equinoxPostingDirectory}" />
+		
+		<zip destfile="${prov.output.base}/equinox-prov-servers-${buildId}.zip" basedir="${prov.repo.root}" includes="**/*" />
+
+		<copy todir="${equinoxPostingDirectory}" file="${prov.output.base}/equinox-prov-servers-${buildId}.zip"/>
+		
+		<copy todir="${equinoxPostingDirectory}">
+			<fileset dir="${buildDirectory}/${buildId}">
+				<include name="**/org.eclipse.equinox.prov.selfhosting.feature-${buildId}-win32.win32.x86.zip" />
+				<include name="**/org.eclipse.equinox.prov.user.ui.feature-${buildId}-win32.win32.x86.zip" />
+			</fileset>
+		</copy>
+
 	</target>
 
 	<target name="extract">
