@@ -80,7 +80,7 @@
 		<!-- prepare the generator application -->
 		<path id="feature.zip.path">
 			<fileset dir="${buildDirectory}/${buildId}">
-				<include name="**/org.eclipse.equinox.prov.generator.feature-*-linux.gtk.x86.zip" />
+				<include name="**/org.eclipse.equinox.prov.generator.feature-${buildId}-linux.gtk.x86.zip" />
 			</fileset>
 		</path>
 		<property name="feature.zip.name" refid="feature.zip.path" />
