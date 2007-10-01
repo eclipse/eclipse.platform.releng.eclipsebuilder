@@ -15,7 +15,7 @@
 		<!-- TODO: pass these arguments in -->
 		<property name="prov.root" value="${buildDirectory}/${buildId}/provtemp" />
 		<mkdir dir="${prov.root}" />
-		<property name="prov.output.base" value="${prov.root}/equinox.p2.build" />
+		<property name="prov.output.base" value="${prov.root}/equinox.prov.build" />
 		<mkdir dir="${prov.output.base}" />
 
 		<property name="sdk.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-ppc.tar.gz" />
