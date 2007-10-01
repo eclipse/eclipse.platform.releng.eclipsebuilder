@@ -293,12 +293,12 @@
 	</target>
 
 	<target name="zip.install">
-		<zip destfile="${prov.output.base}/equinox-prov-agent-${buildId}-win32.zip" basedir="${prov.install.folder.parent}" includes="${prov.install.folder}/**" />
-		<copy file="${prov.output.base}/equinox-prov-agent-${buildId}-win32.zip" todir="${equinoxPostingDirectory}/${buildLabel}" />
+		<zip destfile="${prov.output.base}/equinox-p2-agent-${buildId}-win32.zip" basedir="${prov.install.folder.parent}" includes="${prov.install.folder}/**" />
+		<copy file="${prov.output.base}/equinox-p2-agent-${buildId}-win32.zip" todir="${equinoxPostingDirectory}/${buildLabel}" />
 
-		<zip destfile="${prov.output.base}/equinox-prov-servers-${buildId}.zip" basedir="${prov.repo.root}" includes="**/*" />
+		<zip destfile="${prov.output.base}/equinox-p2-servers-${buildId}.zip" basedir="${prov.repo.root}" includes="**/*" />
 
-		<copy todir="${equinoxPostingDirectory}/${buildLabel}" file="${prov.output.base}/equinox-prov-servers-${buildId}.zip" />
+		<copy todir="${equinoxPostingDirectory}/${buildLabel}" file="${prov.output.base}/equinox-p2-servers-${buildId}.zip" />
 
 		<copy todir="${equinoxPostingDirectory}/${buildLabel}">
 			<fileset dir="${buildDirectory}/${buildId}">

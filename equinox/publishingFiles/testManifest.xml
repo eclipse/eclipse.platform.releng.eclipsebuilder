@@ -96,9 +96,9 @@
     	</zipType>   	
     	
     	<zipType name="ProvisioningIncubator">
-			<platform id="provagentrcp" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="equinox-prov-agent-@buildid@-win32.zip">			
+			<platform id="provagentrcp" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="equinox-p2-agent-@buildid@-win32.zip">			
  			</platform>
- 			<platform id="provservers" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="equinox-prov-servers-@buildid@.zip">			
+ 			<platform id="provservers" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="equinox-p2-servers-@buildid@.zip">			
  			</platform> 			
  			<platform id="provselfhosting" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="org.eclipse.equinox.p2.selfhosting.feature-@buildid@-win32.win32.x86.zip">			
  			</platform>
