@@ -39,7 +39,7 @@
 		<property name="prov.generator.dir" value="${prov.output.base}/generator" />
 		<mkdir dir="${prov.generator.dir}" />
 		<property name="prov.repo.root" value="${prov.output.base}/servers" />
-		<mkdir dir="${prov.metadata.repo}" />
+	    <mkdir dir="${prov.repo.root}" />		
 		<property name="prov.metadata.repo" value="${prov.repo.root}/metadataRepository/" />
 		<mkdir dir="${prov.metadata.repo}" />
 		<property name="prov.artifact.repo" value="${prov.repo.root}/artifactRepository/" />
