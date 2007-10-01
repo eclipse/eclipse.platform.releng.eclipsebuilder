@@ -11,23 +11,23 @@
  	<target name="allElementsDelegator">
  		<ant antfile="${genericTargets}" target="${target}">
 	 		<property name="type" value="feature" />
-	 		<property name="id" value="org.eclipse.equinox.prov.agent.feature" />
+	 		<property name="id" value="org.eclipse.equinox.p2.agent.feature" />
  		</ant>
  		<ant antfile="${genericTargets}" target="${target}">
 	 		<property name="type" value="feature" />
-	 		<property name="id" value="org.eclipse.equinox.prov.generator.feature" />
+	 		<property name="id" value="org.eclipse.equinox.p2.generator.feature" />
  		</ant>
  		<ant antfile="${genericTargets}" target="${target}">
 	 		<property name="type" value="feature" />
-	 		<property name="id" value="org.eclipse.equinox.prov.director.feature" />
+	 		<property name="id" value="org.eclipse.equinox.p2.director.feature" />
  		</ant>
  		<ant antfile="${genericTargets}" target="${target}">
 	 		<property name="type" value="feature" />
-	 		<property name="id" value="org.eclipse.equinox.prov.selfhosting.feature" />
+	 		<property name="id" value="org.eclipse.equinox.p2.selfhosting.feature" />
  		</ant>
  		<ant antfile="${genericTargets}" target="${target}">
 	 		<property name="type" value="feature" />
-	 		<property name="id" value="org.eclipse.equinox.prov.user.ui.feature" />
+	 		<property name="id" value="org.eclipse.equinox.p2.user.ui.feature" />
  		</ant>
  	</target>
  
@@ -38,34 +38,34 @@
  	<!-- Add one target for each root element and each configuration           -->
  	<!-- Replace element.id with the id of the top level element being built   -->
  	<!-- ===================================================================== -->
-	<target name="assemble.org.eclipse.equinox.prov.agent.feature.linux.gtk.x86">
+	<target name="assemble.org.eclipse.equinox.p2.agent.feature.linux.gtk.x86">
  		<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
  	</target>
-	<target name="assemble.org.eclipse.equinox.prov.generator.feature.linux.gtk.x86">
+	<target name="assemble.org.eclipse.equinox.p2.generator.feature.linux.gtk.x86">
  		<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
  	</target>
- 	<target name="assemble.org.eclipse.equinox.prov.director.feature.linux.gtk.x86">
+ 	<target name="assemble.org.eclipse.equinox.p2.director.feature.linux.gtk.x86">
  		<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
  	</target>
- 	<target name="assemble.org.eclipse.equinox.prov.selfhosting.feature.linux.gtk.x86">
+ 	<target name="assemble.org.eclipse.equinox.p2.selfhosting.feature.linux.gtk.x86">
  		<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
  	</target>
- 	<target name="assemble.org.eclipse.equinox.prov.user.ui.feature.linux.gtk.x86">
+ 	<target name="assemble.org.eclipse.equinox.p2.user.ui.feature.linux.gtk.x86">
  		<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
  	</target>
-	<target name="assemble.org.eclipse.equinox.prov.agent.feature.win32.win32.x86">
+	<target name="assemble.org.eclipse.equinox.p2.agent.feature.win32.win32.x86">
  		<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
  	</target>
-	<target name="assemble.org.eclipse.equinox.prov.generator.feature.win32.win32.x86">
+	<target name="assemble.org.eclipse.equinox.p2.generator.feature.win32.win32.x86">
  		<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
  	</target>
- 	<target name="assemble.org.eclipse.equinox.prov.director.feature.win32.win32.x86">
+ 	<target name="assemble.org.eclipse.equinox.p2.director.feature.win32.win32.x86">
  		<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
  	</target>
- 	<target name="assemble.org.eclipse.equinox.prov.selfhosting.feature.win32.win32.x86">
+ 	<target name="assemble.org.eclipse.equinox.p2.selfhosting.feature.win32.win32.x86">
  		<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
  	</target>
- 	<target name="assemble.org.eclipse.equinox.prov.user.ui.feature.win32.win32.x86">
+ 	<target name="assemble.org.eclipse.equinox.p2.user.ui.feature.win32.win32.x86">
  		<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
  	</target>
 </project>

@@ -15,7 +15,7 @@
 		<!-- TODO: pass these arguments in -->
 		<property name="prov.root" value="${buildDirectory}/${buildId}/provtemp" />
 		<mkdir dir="${prov.root}" />
-		<property name="prov.output.base" value="${prov.root}/equinox.prov.build" />
+		<property name="prov.output.base" value="${prov.root}/equinox.p2.build" />
 		<mkdir dir="${prov.output.base}" />
 
 		<property name="sdk.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-ppc.tar.gz" />
@@ -80,7 +80,7 @@
 		<!-- prepare the generator application -->
 		<path id="feature.zip.path">
 			<fileset dir="${buildDirectory}/${buildId}">
-				<include name="**/org.eclipse.equinox.prov.generator.feature-${buildId}-linux.gtk.x86.zip" />
+				<include name="**/org.eclipse.equinox.p2.generator.feature-${buildId}-linux.gtk.x86.zip" />
 			</fileset>
 		</path>
 		<property name="feature.zip.name" refid="feature.zip.path" />
@@ -108,7 +108,7 @@
 		</antcall>
 		<path id="agent.zip.path">
 			<fileset dir="${buildDirectory}/${buildId}">
-				<include name="**/org.eclipse.equinox.prov.agent.feature-*-win32.win32.x86.zip" />
+				<include name="**/org.eclipse.equinox.p2.agent.feature-*-win32.win32.x86.zip" />
 			</fileset>
 		</path>
 		<property name="agent.zip.name" refid="agent.zip.path" />
@@ -131,7 +131,7 @@
 		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
 		<exec executable="${prov.generator.dir}/eclipse/eclipse">
 			<arg line="-vm ${java15-home}/bin/java" />
-			<arg line="-application org.eclipse.equinox.prov.metadata.generator.EclipseGenerator" />
+			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
 			<arg line="-consoleLog" />
 			<arg line="-prov.os win32" />
 			<arg line="-metadataRepository file:${prov.metadata.repo}" />
@@ -147,7 +147,7 @@
 	<target name="generate.metadata.selfhosting">
 		<path id="selfhosting.feature.zip.path">
 			<fileset dir="${buildDirectory}/${buildId}">
-				<include name="**/org.eclipse.equinox.prov.selfhosting.feature-${buildId}-win32.win32.x86.zip" />
+				<include name="**/org.eclipse.equinox.p2.selfhosting.feature-${buildId}-win32.win32.x86.zip" />
 			</fileset>
 		</path>
 		<property name="selfhosting.feature.zip.name" refid="selfhosting.feature.zip.path" />
@@ -160,7 +160,7 @@
 		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
 		<exec executable="${prov.generator.dir}/eclipse/eclipse">
 			<arg line="-vm ${java15-home}/bin/java" />
-			<arg line="-application org.eclipse.equinox.prov.metadata.generator.EclipseGenerator" />
+			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
 			<arg line="-consoleLog" />
 			<arg line="-nosplash" />
 			<arg line="-prov.os win32" />
@@ -181,7 +181,7 @@
 	<target name="generate.metadata.userUI">
 		<path id="userui.feature.zip.path">
 			<fileset dir="${buildDirectory}/${buildId}">
-				<include name="**/org.eclipse.equinox.prov.user.ui.feature-${buildId}-win32.win32.x86.zip" />
+				<include name="**/org.eclipse.equinox.p2.user.ui.feature-${buildId}-win32.win32.x86.zip" />
 			</fileset>
 		</path>
 		<property name="userui.feature.zip.name" refid="userui.feature.zip.path" />
@@ -194,7 +194,7 @@
 		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
 		<exec executable="${prov.generator.dir}/eclipse/eclipse">
 			<arg line="-vm ${java15-home}/bin/java" />
-			<arg line="-application org.eclipse.equinox.prov.metadata.generator.EclipseGenerator" />
+			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
 			<arg line="-consoleLog" />
 			<arg line="-nosplash" />
 			<arg line="-prov.os win32" />
@@ -223,7 +223,7 @@
 		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
 		<exec executable="${prov.generator.dir}/eclipse/eclipse">
 			<arg line="-vm ${java15-home}/bin/java" />
-			<arg line="-application org.eclipse.equinox.prov.metadata.generator.EclipseGenerator" />
+			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
 			<arg line="-consoleLog" />
 			<arg line="-nosplash" />
 			<arg line="-prov.os win32" />
@@ -241,7 +241,7 @@
 	<target name="run.director">
 		<path id="director.zip.path">
 			<fileset dir="${buildDirectory}/${buildId}">
-				<include name="**/org.eclipse.equinox.prov.director.feature-${buildId}-linux.gtk.x86.zip" />
+				<include name="**/org.eclipse.equinox.p2.director.feature-${buildId}-linux.gtk.x86.zip" />
 			</fileset>
 		</path>
 		<property name="director.zip.name" refid="director.zip.path" />
@@ -265,7 +265,7 @@
 		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
 		<exec executable="${prov.director.dir}/eclipse/eclipse">
 			<arg line="-vm ${java15-home}/bin/java" />
-			<arg line="-application org.eclipse.equinox.prov.director.app.application" />
+			<arg line="-application org.eclipse.equinox.p2.director.app.application" />
 			<arg line="-nosplash" />
 			<arg line="-consoleLog" />
 			<arg line="-flavor ${prov.flavor}" />
@@ -280,7 +280,7 @@
 			<arg line="-destination ${prov.install.path}" />
 			<arg line="-bundlepool ${prov.install.path}" />
 			<arg line="-vmargs" />
-			<arg line="-Declipse.prov.data.area=${prov.install.path}/configuration/org.eclipse.equinox.prov.core/agentdata" />
+			<arg line="-Declipse.p2.data.area=${prov.install.path}/configuration/org.eclipse.equinox.p2.core/agentdata" />
 		</exec>
 
 		<!-- Delete the other copy of ICU until bug 199299 is fixed -->
@@ -302,8 +302,8 @@
 
 		<copy todir="${equinoxPostingDirectory}/${buildLabel}">
 			<fileset dir="${buildDirectory}/${buildId}">
-				<include name="**/org.eclipse.equinox.prov.selfhosting.feature-${buildId}-win32.win32.x86.zip" />
-				<include name="**/org.eclipse.equinox.prov.user.ui.feature-${buildId}-win32.win32.x86.zip" />
+				<include name="**/org.eclipse.equinox.p2.selfhosting.feature-${buildId}-win32.win32.x86.zip" />
+				<include name="**/org.eclipse.equinox.p2.user.ui.feature-${buildId}-win32.win32.x86.zip" />
 			</fileset>
 		</copy>
 	</target>

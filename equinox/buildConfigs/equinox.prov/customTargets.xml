@@ -70,7 +70,7 @@
 	<target name="postSetup">
 		<ant antfile="${genericTargets}" target="fetchElement">
 		    <property name="type" value="plugin"/>
-		    <property name="id" value="org.eclipse.equinox.prov.ui.admin.rcp" />
+		    <property name="id" value="org.eclipse.equinox.p2.ui.admin.rcp" />
 		</ant>
 		<antcall target="getBaseComponents" />
 	</target>
