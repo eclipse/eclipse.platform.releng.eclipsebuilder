@@ -13,38 +13,38 @@
 	-->
 	<target name="init">
 		<!-- TODO: pass these arguments in -->
-		<property name="prov.root" value="${buildDirectory}/${buildId}/provtemp" />
-		<mkdir dir="${prov.root}" />
-		<property name="prov.output.base" value="${prov.root}/equinox.prov.build" />
-		<mkdir dir="${prov.output.base}" />
+		<property name="p2.root" value="${buildDirectory}/${buildId}/p2temp" />
+		<mkdir dir="${p2.root}" />
+		<property name="p2.output.base" value="${p2.root}/equinox.p2.build" />
+		<mkdir dir="${p2.output.base}" />
 
 		<property name="sdk.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-ppc.tar.gz" />
 		<property name="rcp.delta.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-delta-pack.zip" />
 		<property name="rcp.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-linux-gtk-ppc.tar.gz" />
 		<property name="rcp.win32.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-linux-gtk-ppc.tar.gz" />
 
-		<property name="prov.install.folder.parent" value="${prov.root}/" />
-		<property name="prov.install.folder" value="equinox.prov" />
-		<property name="prov.install.path" value="${prov.install.folder.parent}${prov.install.folder}" />
+		<property name="p2.install.folder.parent" value="${p2.root}/" />
+		<property name="p2.install.folder" value="equinox.p2" />
+		<property name="p2.install.path" value="${p2.install.folder.parent}${p2.install.folder}" />
 
-		<property name="base" value="${prov.output.base}/base" />
+		<property name="base" value="${p2.output.base}/base" />
 		<mkdir dir="${base}" />
-		<property name="prov.install.path" value="${prov.output.base}${prov.install.folder}" />
-		<mkdir dir="${prov.install.path}" />
+		<property name="p2.install.path" value="${p2.output.base}${p2.install.folder}" />
+		<mkdir dir="${p2.install.path}" />
 
 		<property file="build.properties" />
 
-		<property name="prov.agent.dir" value="${prov.output.base}/agent" />
-		<mkdir dir="${prov.agent.dir}" />
-		<property name="prov.generator.dir" value="${prov.output.base}/generator" />
-		<mkdir dir="${prov.generator.dir}" />
-		<property name="prov.repo.root" value="${prov.output.base}/servers" />
-	    <mkdir dir="${prov.repo.root}" />		
-		<property name="prov.metadata.repo" value="${prov.repo.root}/metadataRepository/" />
-		<mkdir dir="${prov.metadata.repo}" />
-		<property name="prov.artifact.repo" value="${prov.repo.root}/artifactRepository/" />
-		<mkdir dir="${prov.artifact.repo}" />
-		<property name="prov.flavor" value="tooling" />
+		<property name="p2.agent.dir" value="${p2.output.base}/agent" />
+		<mkdir dir="${p2.agent.dir}" />
+		<property name="p2.generator.dir" value="${p2.output.base}/generator" />
+		<mkdir dir="${p2.generator.dir}" />
+		<property name="p2.repo.root" value="${p2.output.base}/servers" />
+	    <mkdir dir="${p2.repo.root}" />		
+		<property name="p2.metadata.repo" value="${p2.repo.root}/metadataRepository/" />
+		<mkdir dir="${p2.metadata.repo}" />
+		<property name="p2.artifact.repo" value="${p2.repo.root}/artifactRepository/" />
+		<mkdir dir="${p2.artifact.repo}" />
+		<property name="p2.flavor" value="tooling" />
 	</target>
 
 	<target name="build" depends="init">
@@ -86,16 +86,16 @@
 		<property name="feature.zip.name" refid="feature.zip.path" />
 		<antcall target="extract">
 			<param name="extract-src" value="${feature.zip.name}" />
-			<param name="extract-dest" value="${prov.generator.dir}" />
+			<param name="extract-dest" value="${p2.generator.dir}" />
 		</antcall>
 		<antcall target="extract">
 			<param name="extract-src" value="${rcp.archive}" />
-			<param name="extract-dest" value="${prov.generator.dir}" />
+			<param name="extract-dest" value="${p2.generator.dir}" />
 		</antcall>
 
-		<chmod file="${prov.generator.dir}/eclipse/eclipse" perm="777" />
-		<copy file="files/config.ini.generator" tofile="${prov.generator.dir}/eclipse/configuration/config.ini" overwrite="true" />
-		<copy todir="${prov.generator.dir}/eclipse/plugins">
+		<chmod file="${p2.generator.dir}/eclipse/eclipse" perm="777" />
+		<copy file="files/config.ini.generator" tofile="${p2.generator.dir}/eclipse/configuration/config.ini" overwrite="true" />
+		<copy todir="${p2.generator.dir}/eclipse/plugins">
 			<fileset dir="files">
 				<include name="**/*.jar" />
 			</fileset>
@@ -104,7 +104,7 @@
 		<!-- prepare the agent -->
 		<antcall target="extract">
 			<param name="extract-src" value="${rcp.win32.archive}" />
-			<param name="extract-dest" value="${prov.agent.dir}" />
+			<param name="extract-dest" value="${p2.agent.dir}" />
 		</antcall>
 		<path id="agent.zip.path">
 			<fileset dir="${buildDirectory}/${buildId}">
@@ -114,32 +114,32 @@
 		<property name="agent.zip.name" refid="agent.zip.path" />
 		<antcall target="extract">
 			<param name="extract-src" value="${agent.zip.name}" />
-			<param name="extract-dest" value="${prov.agent.dir}" />
+			<param name="extract-dest" value="${p2.agent.dir}" />
 		</antcall>
-		<copy file="files/config.ini.agent" tofile="${prov.agent.dir}/eclipse/configuration/config.ini" overwrite="true" />
-		<copy todir="${prov.agent.dir}/eclipse/plugins">
+		<copy file="files/config.ini.agent" tofile="${p2.agent.dir}/eclipse/configuration/config.ini" overwrite="true" />
+		<copy todir="${p2.agent.dir}/eclipse/plugins">
 			<fileset dir="files">
 				<include name="**/*.jar" />
 			</fileset>
 		</copy>
 		<delete includeEmptyDirs="true" failonerror="false">
-			<fileset dir="${prov.agent.dir}/eclipse/plugins" includes="**/org.eclipse.update.configurator_*" />
-			<fileset dir="${prov.agent.dir}/eclipse/plugins" includes="**/org.eclipse.rcp_*" />
-			<fileset dir="${prov.agent.dir}/eclipse/features" includes="**/*" />
+			<fileset dir="${p2.agent.dir}/eclipse/plugins" includes="**/org.eclipse.update.configurator_*" />
+			<fileset dir="${p2.agent.dir}/eclipse/plugins" includes="**/org.eclipse.rcp_*" />
+			<fileset dir="${p2.agent.dir}/eclipse/features" includes="**/*" />
 		</delete>
 
 		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
-		<exec executable="${prov.generator.dir}/eclipse/eclipse">
+		<exec executable="${p2.generator.dir}/eclipse/eclipse">
 			<arg line="-vm ${java15-home}/bin/java" />
 			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
 			<arg line="-consoleLog" />
-			<arg line="-prov.os win32" />
-			<arg line="-metadataRepository file:${prov.metadata.repo}" />
-			<arg line="-artifactRepository file:${prov.artifact.repo}" />
-			<arg line="-source ${prov.agent.dir}/eclipse" />
+			<arg line="-p2.os win32" />
+			<arg line="-metadataRepository file:${p2.metadata.repo}" />
+			<arg line="-artifactRepository file:${p2.artifact.repo}" />
+			<arg line="-source ${p2.agent.dir}/eclipse" />
 			<arg line="-rootVersion 0.1.0.${buildId}" />
 			<arg line="-root agent" />
-			<arg line="-flavor ${prov.flavor}" />
+			<arg line="-flavor ${p2.flavor}" />
 			<arg line="-publishArtifacts" />
 		</exec>
 	</target>
@@ -151,28 +151,28 @@
 			</fileset>
 		</path>
 		<property name="selfhosting.feature.zip.name" refid="selfhosting.feature.zip.path" />
-		<property name="prov.selfhosting.dir" value="${prov.output.base}/selfhosting" />
+		<property name="p2.selfhosting.dir" value="${p2.output.base}/selfhosting" />
 		<antcall target="extract">
 			<param name="extract-src" value="${selfhosting.feature.zip.name}" />
-			<param name="extract-dest" value="${prov.selfhosting.dir}" />
+			<param name="extract-dest" value="${p2.selfhosting.dir}" />
 		</antcall>
 
 		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
-		<exec executable="${prov.generator.dir}/eclipse/eclipse">
+		<exec executable="${p2.generator.dir}/eclipse/eclipse">
 			<arg line="-vm ${java15-home}/bin/java" />
 			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
 			<arg line="-consoleLog" />
 			<arg line="-nosplash" />
-			<arg line="-prov.os win32" />
-			<arg line="-base ${prov.selfhosting.dir}/eclipse" />
-			<arg line="-features ${prov.selfhosting.dir}/eclipse/features" />
-			<arg line="-bundles ${prov.selfhosting.dir}/eclipse/plugins" />
+			<arg line="-p2.os win32" />
+			<arg line="-base ${p2.selfhosting.dir}/eclipse" />
+			<arg line="-features ${p2.selfhosting.dir}/eclipse/features" />
+			<arg line="-bundles ${p2.selfhosting.dir}/eclipse/plugins" />
 			<arg line="-rootVersion 0.1.0.${buildId}" />
 			<arg line="-root selfhosting" />
-			<arg line="-flavor ${prov.flavor}" />
+			<arg line="-flavor ${p2.flavor}" />
 			<arg line="-publishArtifacts" />
-			<arg line="-metadataRepository file:${prov.metadata.repo}" />
-			<arg line="-artifactRepository file:${prov.artifact.repo}" />
+			<arg line="-metadataRepository file:${p2.metadata.repo}" />
+			<arg line="-artifactRepository file:${p2.artifact.repo}" />
 			<arg line="-noDefaultIUs" />
 			<arg line="-append" />
 		</exec>
@@ -185,54 +185,54 @@
 			</fileset>
 		</path>
 		<property name="userui.feature.zip.name" refid="userui.feature.zip.path" />
-		<property name="prov.userui.dir" value="${prov.output.base}/userui" />
+		<property name="p2.userui.dir" value="${p2.output.base}/userui" />
 		<antcall target="extract">
 			<param name="extract-src" value="${userui.feature.zip.name}" />
-			<param name="extract-dest" value="${prov.userui.dir}" />
+			<param name="extract-dest" value="${p2.userui.dir}" />
 		</antcall>
 
 		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
-		<exec executable="${prov.generator.dir}/eclipse/eclipse">
+		<exec executable="${p2.generator.dir}/eclipse/eclipse">
 			<arg line="-vm ${java15-home}/bin/java" />
 			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
 			<arg line="-consoleLog" />
 			<arg line="-nosplash" />
-			<arg line="-prov.os win32" />
-			<arg line="-base ${prov.userui.dir}/eclipse" />
-			<arg line="-features ${prov.userui.dir}/eclipse/features" />
-			<arg line="-bundles ${prov.userui.dir}/eclipse/plugins" />
+			<arg line="-p2.os win32" />
+			<arg line="-base ${p2.userui.dir}/eclipse" />
+			<arg line="-features ${p2.userui.dir}/eclipse/features" />
+			<arg line="-bundles ${p2.userui.dir}/eclipse/plugins" />
 			<arg line="-root userui" />
 			<arg line="-rootVersion 0.1.0.${buildId}" />
-			<arg line="-flavor ${prov.flavor}" />
+			<arg line="-flavor ${p2.flavor}" />
 			<arg line="-publishArtifacts" />
-			<arg line="-metadataRepository file:${prov.metadata.repo}" />
-			<arg line="-artifactRepository file:${prov.artifact.repo}" />
+			<arg line="-metadataRepository file:${p2.metadata.repo}" />
+			<arg line="-artifactRepository file:${p2.artifact.repo}" />
 			<arg line="-noDefaultIUs" />
 			<arg line="-append" />
 		</exec>
 	</target>
 
 	<target name="generate.metadata.sdk">
-		<property name="prov.sdk" value="${prov.output.base}/sdk" />
-		<mkdir dir="${prov.sdk}" />
+		<property name="p2.sdk" value="${p2.output.base}/sdk" />
+		<mkdir dir="${p2.sdk}" />
 		<antcall target="extract">
 			<param name="extract-src" value="${sdk.archive}" />
-			<param name="extract-dest" value="${prov.sdk}" />
+			<param name="extract-dest" value="${p2.sdk}" />
 		</antcall>
 
 		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
-		<exec executable="${prov.generator.dir}/eclipse/eclipse">
+		<exec executable="${p2.generator.dir}/eclipse/eclipse">
 			<arg line="-vm ${java15-home}/bin/java" />
 			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
 			<arg line="-consoleLog" />
 			<arg line="-nosplash" />
-			<arg line="-prov.os win32" />
-			<arg line="-metadataRepository file:${prov.metadata.repo}" />
-			<arg line="-artifactRepository file:${prov.artifact.repo}" />
-			<arg line="-source ${prov.sdk}/eclipse" />
+			<arg line="-p2.os win32" />
+			<arg line="-metadataRepository file:${p2.metadata.repo}" />
+			<arg line="-artifactRepository file:${p2.artifact.repo}" />
+			<arg line="-source ${p2.sdk}/eclipse" />
 			<arg line="-rootVersion 3.4.0.${buildId}" />
 			<arg line="-root sdk" />
-			<arg line="-flavor ${prov.flavor}" />
+			<arg line="-flavor ${p2.flavor}" />
 			<arg line="-publishArtifacts" />
 			<arg line="-append" />
 		</exec>
@@ -245,47 +245,47 @@
 			</fileset>
 		</path>
 		<property name="director.zip.name" refid="director.zip.path" />
-		<property name="prov.director.dir" value="${prov.output.base}/director" />
+		<property name="p2.director.dir" value="${p2.output.base}/director" />
 		<antcall target="extract">
 			<param name="extract-src" value="${director.zip.name}" />
-			<param name="extract-dest" value="${prov.director.dir}" />
+			<param name="extract-dest" value="${p2.director.dir}" />
 		</antcall>
 		<antcall target="extract">
 			<param name="extract-src" value="${rcp.archive}" />
-			<param name="extract-dest" value="${prov.director.dir}" />
+			<param name="extract-dest" value="${p2.director.dir}" />
 		</antcall>
-		<chmod file="${prov.director.dir}/eclipse/eclipse" perm="777" />
-		<copy file="files/config.ini.director" tofile="${prov.director.dir}/eclipse/configuration/config.ini" overwrite="true" />
-		<copy todir="${prov.director.dir}/eclipse/plugins">
+		<chmod file="${p2.director.dir}/eclipse/eclipse" perm="777" />
+		<copy file="files/config.ini.director" tofile="${p2.director.dir}/eclipse/configuration/config.ini" overwrite="true" />
+		<copy todir="${p2.director.dir}/eclipse/plugins">
 			<fileset dir="files">
 				<include name="**/*.jar" />
 			</fileset>
 		</copy>
 
 		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
-		<exec executable="${prov.director.dir}/eclipse/eclipse">
+		<exec executable="${p2.director.dir}/eclipse/eclipse">
 			<arg line="-vm ${java15-home}/bin/java" />
 			<arg line="-application org.eclipse.equinox.p2.director.app.application" />
 			<arg line="-nosplash" />
 			<arg line="-consoleLog" />
-			<arg line="-flavor ${prov.flavor}" />
+			<arg line="-flavor ${p2.flavor}" />
 			<arg line="-installIU agent" />
-			<arg line="-prov.os win32" />
-			<arg line="-prov.ws win32" />
-			<arg line="-prov.arch x86" />
+			<arg line="-p2.os win32" />
+			<arg line="-p2.ws win32" />
+			<arg line="-p2.arch x86" />
 			<arg line="-roaming" />
 			<arg line="-profile EquinoxProvisioningUI" />
-			<arg line="-metadataRepository file:${prov.metadata.repo}" />
-			<arg line="-artifactRepository file:${prov.artifact.repo}" />
-			<arg line="-destination ${prov.install.path}" />
-			<arg line="-bundlepool ${prov.install.path}" />
+			<arg line="-metadataRepository file:${p2.metadata.repo}" />
+			<arg line="-artifactRepository file:${p2.artifact.repo}" />
+			<arg line="-destination ${p2.install.path}" />
+			<arg line="-bundlepool ${p2.install.path}" />
 			<arg line="-vmargs" />
-			<arg line="-Declipse.p2.data.area=${prov.install.path}/configuration/org.eclipse.equinox.p2.core/agentdata" />
+			<arg line="-Declipse.p2.data.area=${p2.install.path}/configuration/org.eclipse.equinox.p2.core/agentdata" />
 		</exec>
 
 		<!-- Delete the other copy of ICU until bug 199299 is fixed -->
 		<delete failonerror="false">
-			<fileset dir="${prov.install.path}/plugins">
+			<fileset dir="${p2.install.path}/plugins">
 				<include name="**/com.ibm.icu_*.jar" />
 			</fileset>
 		</delete>
@@ -293,12 +293,12 @@
 	</target>
 
 	<target name="zip.install">
-		<zip destfile="${prov.output.base}/equinox-p2-agent-${buildId}-win32.zip" basedir="${prov.install.folder.parent}" includes="${prov.install.folder}/**" />
-		<copy file="${prov.output.base}/equinox-p2-agent-${buildId}-win32.zip" todir="${equinoxPostingDirectory}/${buildLabel}" />
+		<zip destfile="${p2.output.base}/equinox-p2-agent-${buildId}-win32.zip" basedir="${p2.install.folder.parent}" includes="${p2.install.folder}/**" />
+		<copy file="${p2.output.base}/equinox-p2-agent-${buildId}-win32.zip" todir="${equinoxPostingDirectory}/${buildLabel}" />
 
-		<zip destfile="${prov.output.base}/equinox-p2-servers-${buildId}.zip" basedir="${prov.repo.root}" includes="**/*" />
+		<zip destfile="${p2.output.base}/equinox-p2-servers-${buildId}.zip" basedir="${p2.repo.root}" includes="**/*" />
 
-		<copy todir="${equinoxPostingDirectory}/${buildLabel}" file="${prov.output.base}/equinox-p2-servers-${buildId}.zip" />
+		<copy todir="${equinoxPostingDirectory}/${buildLabel}" file="${p2.output.base}/equinox-p2-servers-${buildId}.zip" />
 
 		<copy todir="${equinoxPostingDirectory}/${buildLabel}">
 			<fileset dir="${buildDirectory}/${buildId}">
