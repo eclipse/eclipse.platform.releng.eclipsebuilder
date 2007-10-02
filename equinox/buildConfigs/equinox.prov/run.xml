@@ -129,11 +129,12 @@
 		</delete>
 
 		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
-		<exec executable="${p2.generator.dir}/eclipse/eclipse">
+		<exec executable="${p2.generator.dir}/eclipse/eclipse" failonerror="false">
 			<arg line="-vm ${java15-home}/bin/java" />
 			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
 			<arg line="-consoleLog" />
 			<arg line="-p2.os win32" />
+			<arg line="--launcher.suppressErrors" />
 			<arg line="-metadataRepository file:${p2.metadata.repo}" />
 			<arg line="-artifactRepository file:${p2.artifact.repo}" />
 			<arg line="-source ${p2.agent.dir}/eclipse" />
@@ -158,11 +159,12 @@
 		</antcall>
 
 		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
-		<exec executable="${p2.generator.dir}/eclipse/eclipse">
+		<exec executable="${p2.generator.dir}/eclipse/eclipse" failonerror="false">
 			<arg line="-vm ${java15-home}/bin/java" />
 			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
 			<arg line="-consoleLog" />
 			<arg line="-nosplash" />
+			<arg line="--launcher.suppressErrors" />
 			<arg line="-p2.os win32" />
 			<arg line="-base ${p2.selfhosting.dir}/eclipse" />
 			<arg line="-features ${p2.selfhosting.dir}/eclipse/features" />
@@ -192,11 +194,12 @@
 		</antcall>
 
 		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
-		<exec executable="${p2.generator.dir}/eclipse/eclipse">
+		<exec executable="${p2.generator.dir}/eclipse/eclipse" failonerror="false">
 			<arg line="-vm ${java15-home}/bin/java" />
 			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
 			<arg line="-consoleLog" />
 			<arg line="-nosplash" />
+			<arg line="--launcher.suppressErrors" />
 			<arg line="-p2.os win32" />
 			<arg line="-base ${p2.userui.dir}/eclipse" />
 			<arg line="-features ${p2.userui.dir}/eclipse/features" />
@@ -221,11 +224,12 @@
 		</antcall>
 
 		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
-		<exec executable="${p2.generator.dir}/eclipse/eclipse">
+		<exec executable="${p2.generator.dir}/eclipse/eclipse" failonerror="false">
 			<arg line="-vm ${java15-home}/bin/java" />
 			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
 			<arg line="-consoleLog" />
 			<arg line="-nosplash" />
+			<arg line="--launcher.suppressErrors" />
 			<arg line="-p2.os win32" />
 			<arg line="-metadataRepository file:${p2.metadata.repo}" />
 			<arg line="-artifactRepository file:${p2.artifact.repo}" />
@@ -263,10 +267,11 @@
 		</copy>
 
 		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
-		<exec executable="${p2.director.dir}/eclipse/eclipse">
+		<exec executable="${p2.director.dir}/eclipse/eclipse" failonerror="false">
 			<arg line="-vm ${java15-home}/bin/java" />
 			<arg line="-application org.eclipse.equinox.p2.director.app.application" />
 			<arg line="-nosplash" />
+			<arg line="--launcher.suppressErrors" />
 			<arg line="-consoleLog" />
 			<arg line="-flavor ${p2.flavor}" />
 			<arg line="-installIU agent" />
