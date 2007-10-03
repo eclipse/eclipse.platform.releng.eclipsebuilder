@@ -2,7 +2,7 @@ osgi.bundles=\
 	org.eclipse.equinox.app@start,\
 	org.eclipse.equinox.frameworkadmin.equinox@start,\
 	org.eclipse.equinox.p2.console@start,\
-	org.eclipse.equinox.p2.examplarysetup@start,\
+	org.eclipse.equinox.p2.exemplarysetup@start,\
 	org.eclipse.equinox.simpleconfigurator@1:start
 eclipse.product=org.eclipse.equinox.p2.ui.admin.rcp.product
 org.eclipse.equinox.simpleconfigurator.useReference=true
