@@ -129,7 +129,7 @@
 		</delete>
 
 		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
-		<exec executable="${p2.generator.dir}/eclipse/eclipse" failonerror="false">
+		<exec executable="${p2.generator.dir}/eclipse/eclipse" failonerror="false" timeout="900000">
 			<arg line="-vm ${java15-home}/bin/java" />
 			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
 			<arg line="-consoleLog" />
@@ -159,7 +159,7 @@
 		</antcall>
 
 		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
-		<exec executable="${p2.generator.dir}/eclipse/eclipse" failonerror="false">
+		<exec executable="${p2.generator.dir}/eclipse/eclipse" failonerror="false" timeout="900000">
 			<arg line="-vm ${java15-home}/bin/java" />
 			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
 			<arg line="-consoleLog" />
@@ -194,7 +194,7 @@
 		</antcall>
 
 		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
-		<exec executable="${p2.generator.dir}/eclipse/eclipse" failonerror="false">
+		<exec executable="${p2.generator.dir}/eclipse/eclipse" failonerror="false" timeout="900000">
 			<arg line="-vm ${java15-home}/bin/java" />
 			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
 			<arg line="-consoleLog" />
@@ -224,7 +224,7 @@
 		</antcall>
 
 		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
-		<exec executable="${p2.generator.dir}/eclipse/eclipse" failonerror="false">
+		<exec executable="${p2.generator.dir}/eclipse/eclipse" failonerror="false" timeout="900000">
 			<arg line="-vm ${java15-home}/bin/java" />
 			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
 			<arg line="-consoleLog" />
@@ -267,7 +267,7 @@
 		</copy>
 
 		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
-		<exec executable="${p2.director.dir}/eclipse/eclipse" failonerror="false">
+		<exec executable="${p2.director.dir}/eclipse/eclipse" failonerror="false" timeout="900000">
 			<arg line="-vm ${java15-home}/bin/java" />
 			<arg line="-application org.eclipse.equinox.p2.director.app.application" />
 			<arg line="-nosplash" />
