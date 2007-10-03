@@ -184,15 +184,6 @@
 			<param name="bundle.id" value="org.eclipse.equinox.servletbridge" />
 		</antcall>
 		<antcall target="updateTestManifest">
-			<param name="bundle.id" value="org.eclipse.equinox.security.boot.jre14x" />
-		</antcall>
-		<antcall target="updateTestManifest">
-			<param name="bundle.id" value="org.eclipse.equinox.security.boot.jre15x" />
-		</antcall>
-		<antcall target="updateTestManifest">
-			<param name="bundle.id" value="org.eclipse.equinox.security.provider" />
-		</antcall>				
-		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="javax.servlet" />
 		</antcall>
 		<antcall target="updateTestManifest">
