@@ -6,6 +6,6 @@ osgi.bundles=\
 	org.eclipse.equinox.simpleconfigurator@1:start
 eclipse.product=org.eclipse.equinox.p2.ui.admin.rcp.product
 org.eclipse.equinox.simpleconfigurator.useReference=true
-eclipse.p2.artifactRepository=http://download.eclipse.org/eclipse/equinox/provisioning/artifactRepository/artifacts.xml
-eclipse.p2.metadataRepository=http://download.eclipse.org/eclipse/equinox/provisioning/metadataRepository/
+#eclipse.p2.artifactRepository=http://download.eclipse.org/eclipse/equinox/provisioning/artifactRepository/artifacts.xml
+#eclipse.p2.metadataRepository=http://download.eclipse.org/eclipse/equinox/provisioning/metadataRepository/
 org.eclipse.update.reconcile=false
