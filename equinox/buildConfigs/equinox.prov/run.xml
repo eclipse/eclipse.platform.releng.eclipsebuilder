@@ -20,7 +20,7 @@
 		<property name="sdk.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-ppc.tar.gz" />
 		<property name="rcp.delta.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-delta-pack.zip" />
 		<property name="rcp.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-linux-gtk-ppc.tar.gz" />
-		<property name="rcp.win32.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-linux-gtk-ppc.tar.gz" />
+		<property name="rcp.win32.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-win32.zip" />
 
 		<property name="p2.install.folder.parent" value="${p2.root}/" />
 		<property name="p2.install.folder" value="equinox.p2" />
