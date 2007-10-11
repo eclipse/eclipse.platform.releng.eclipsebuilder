@@ -19,8 +19,8 @@
 	<!-- ${assembleScriptName}) but may also add pre and post processing -->
 	<!-- Add one target for each root element and each configuration -->
 	<!-- ===================================================================== -->
-
-	<target name="assemble.org.eclipse.sdk.tests">
+	
+	<target name="assemble.org.eclipse.sdk.tests.group.group.group">
 		<property name="archiveName" value="eclipse-junit-tests-${buildId}.zip"/>
 		<antcall target="assemble" />
 	</target>
