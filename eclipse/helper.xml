@@ -421,8 +421,9 @@
 	           fork="true"
      	       jvm="${java15-home}/bin/java"
 	           failonerror="true"
-	           maxmemory="128m"
-			   dir="${buildDirectory}">
+	           maxmemory="768m"
+	    	   error="${buildDirectory}/errorlogupdatesite.txt"
+			   dir="${buildDirectory}">	    	   
 	         <arg line="-application org.eclipse.update.core.siteOptimizer"/>
 	         <arg line="-digestBuilder -digestOutputDir=${updateSite} -siteXML=${updateSite}/site.xml"/>
 	       </java>
