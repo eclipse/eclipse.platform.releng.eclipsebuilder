@@ -469,6 +469,10 @@
 		<runTests testPlugin="org.eclipse.ui.tests.rcp" />
 	</target>
 
+	<target name="uiforms">
+		<runTests testPlugin="org.eclipse.ui.tests.forms" />
+	</target>
+	
 	<target name="uieditors">
 		<runTests testPlugin="org.eclipse.ui.editors.tests" />
 	</target>
