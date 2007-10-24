@@ -53,6 +53,39 @@
  	<target name="assemble.org.eclipse.equinox.p2.user.ui.feature.linux.gtk.x86">
  		<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
  	</target>
+
+	<target name="assemble.org.eclipse.equinox.p2.agent.feature.linux.gtk.ppc">
+ 		<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
+ 	</target>
+	<target name="assemble.org.eclipse.equinox.p2.generator.feature.linux.gtk.ppc">
+ 		<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
+ 	</target>
+ 	<target name="assemble.org.eclipse.equinox.p2.director.feature.linux.gtk.ppc">
+ 		<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
+ 	</target>
+ 	<target name="assemble.org.eclipse.equinox.p2.selfhosting.feature.linux.gtk.ppc">
+ 		<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
+ 	</target>
+ 	<target name="assemble.org.eclipse.equinox.p2.user.ui.feature.linux.gtk.ppc">
+ 		<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
+ 	</target>
+
+	<target name="assemble.org.eclipse.equinox.p2.agent.feature.macosx.carbon.ppc">
+ 		<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
+ 	</target>
+	<target name="assemble.org.eclipse.equinox.p2.generator.feature.macosx.carbon.ppc">
+ 		<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
+ 	</target>
+ 	<target name="assemble.org.eclipse.equinox.p2.director.feature.macosx.carbon.ppc">
+ 		<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
+ 	</target>
+ 	<target name="assemble.org.eclipse.equinox.p2.selfhosting.feature.macosx.carbon.ppc">
+ 		<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
+ 	</target>
+ 	<target name="assemble.org.eclipse.equinox.p2.user.ui.feature.macosx.carbon.ppc">
+ 		<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
+ 	</target>
+
 	<target name="assemble.org.eclipse.equinox.p2.agent.feature.win32.win32.x86">
  		<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
  	</target>

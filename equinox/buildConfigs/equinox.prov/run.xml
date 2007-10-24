@@ -16,32 +16,36 @@
 		<mkdir dir="${p2.root}" />
 		<property name="p2.output.base" value="${p2.root}/equinox.p2.build" />
 		<mkdir dir="${p2.output.base}" />
+		<property name="p2.director.dir" value="${p2.output.base}/director" />
+		<mkdir dir="${p2.director.dir}" />
 
-		<property name="sdk.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-ppc.tar.gz" />
+		<property name="sdk.win32.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32-win32-x86.zip" />
+		<property name="sdk.linux.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-ppc.tar.gz" />
+		<property name="sdk.macosx.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-macosx-carbon-ppc.tar.gz" />
 		<property name="rcp.delta.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-delta-pack.zip" />
 		<property name="rcp.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-linux-gtk-ppc.tar.gz" />
 		<property name="rcp.win32.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-win32.zip" />
+		<property name="rcp.linux.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-linux-gtk-x86.tar.gz" />
+		<property name="rcp.macosx.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-macosx-carbon-ppc.tar.gz" />
 
-		<property name="p2.install.folder.parent" value="${p2.root}/" />
+		<property name="p2.agent.install.win32" value="${p2.output.base}/agent.install.win32" />
+		<property name="p2.agent.install.linux" value="${p2.output.base}/agent.install.linux" />
+		<property name="p2.agent.install.macosx" value="${p2.output.base}/agent.install.macosx" />
 		<property name="p2.install.folder" value="equinox.p2" />
-		<property name="p2.install.path" value="${p2.install.folder.parent}${p2.install.folder}" />
 
 		<property name="base" value="${p2.output.base}/base" />
 		<mkdir dir="${base}" />
-		<property name="p2.install.path" value="${p2.output.base}${p2.install.folder}" />
-		<mkdir dir="${p2.install.path}" />
 
 		<property file="build.properties" />
 
-		<property name="p2.agent.dir" value="${p2.output.base}/agent" />
-		<mkdir dir="${p2.agent.dir}" />
+		<property name="p2.updateSite" value="${updateSite}" />
 		<property name="p2.generator.dir" value="${p2.output.base}/generator" />
 		<mkdir dir="${p2.generator.dir}" />
 		<property name="p2.repo.root" value="${p2.output.base}/servers" />
-	    <mkdir dir="${p2.repo.root}" />		
-		<property name="p2.metadata.repo" value="${p2.repo.root}/metadataRepository/" />
+		<mkdir dir="${p2.repo.root}" />
+		<property name="p2.metadata.repo" value="${p2.updateSite}/" />
 		<mkdir dir="${p2.metadata.repo}" />
-		<property name="p2.artifact.repo" value="${p2.repo.root}/artifactRepository/" />
+		<property name="p2.artifact.repo" value="${p2.updateSite}/" />
 		<mkdir dir="${p2.artifact.repo}" />
 		<property name="p2.flavor" value="tooling" />
 	</target>
@@ -50,7 +54,7 @@
 		<!-- Ensure that we are building against the same version that we
 			are generating the metadata for -->
 		<antcall target="extract">
-			<param name="extract-src" value="${sdk.archive}" />
+			<param name="extract-src" value="${sdk.win32.archive}" />
 			<param name="extract-dest" value="${base}" />
 		</antcall>
 		<antcall target="extract">
@@ -62,12 +66,36 @@
 			to bug 199317... installing will install all fragments and we don't want the
 			ones from the SDK -->
 		<antcall target="setup.generator" />
+		<antcall target="setup.director" />
+
 		<antcall target="generate.metadata.agent" />
-		<antcall target="run.director" />
+
+		<antcall target="run.director">
+			<param name="p2.agent.install.path" value="${p2.agent.install.win32}/${p2.install.folder}" />
+			<param name="p2.os" value="win32" />
+			<param name="p2.ws" value="win32" />
+			<param name="p2.arch" value="x86" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.agent.install.path" value="${p2.agent.install.linux}/${p2.install.folder}" />
+			<param name="p2.os" value="linux" />
+			<param name="p2.ws" value="gtk" />
+			<param name="p2.arch" value="x86" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.agent.install.path" value="${p2.agent.install.macosx}/${p2.install.folder}" />
+			<param name="p2.os" value="macosx" />
+			<param name="p2.ws" value="carbon" />
+			<param name="p2.arch" value="ppc" />
+		</antcall>
+		
 		<antcall target="generate.metadata.selfhosting" />
 		<antcall target="generate.metadata.userUI" />
 		<antcall target="generate.metadata.sdk" />
 		<antcall target="zip.install" />
+
 	</target>
 
 	<target name="build.features">
@@ -79,7 +107,7 @@
 	<target name="setup.generator">
 		<path id="feature.zip.path">
 			<fileset dir="${buildDirectory}/${buildId}">
-				<include name="**/org.eclipse.equinox.p2.generator.feature-${buildId}-linux.gtk.x86.zip" />
+				<include name="**/org.eclipse.equinox.p2.generator.feature-${buildId}-*.zip" />
 			</fileset>
 		</path>
 		<property name="feature.zip.name" refid="feature.zip.path" />
@@ -102,13 +130,20 @@
 	</target>
 
 	<target name="generate.metadata.agent">
+		<property name="p2.agent.dir" value="${p2.output.base}/agent" />
+		<mkdir dir="${p2.agent.dir}" />
 		<antcall target="extract">
-			<param name="extract-src" value="${rcp.win32.archive}" />
+			<param name="extract-src" value="${rcp.delta.archive}" />
 			<param name="extract-dest" value="${p2.agent.dir}" />
 		</antcall>
+		<antcall target="extract">
+			<param name="extract-src" value="${rcp.archive}" />
+			<param name="extract-dest" value="${p2.agent.dir}" />
+		</antcall>
+
 		<path id="agent.zip.path">
 			<fileset dir="${buildDirectory}/${buildId}">
-				<include name="**/org.eclipse.equinox.p2.agent.feature-*-win32.win32.x86.zip" />
+				<include name="**/org.eclipse.equinox.p2.agent.feature-*-win32*.zip" />
 			</fileset>
 		</path>
 		<property name="agent.zip.name" refid="agent.zip.path" />
@@ -123,9 +158,12 @@
 			</fileset>
 		</copy>
 		<delete includeEmptyDirs="true" failonerror="false">
-			<fileset dir="${p2.agent.dir}/eclipse/plugins" includes="**/org.eclipse.update.configurator_*" />
-			<fileset dir="${p2.agent.dir}/eclipse/plugins" includes="**/org.eclipse.rcp_*" />
-			<fileset dir="${p2.agent.dir}/eclipse/features" includes="**/*" />
+			<fileset dir="${p2.agent.dir}/eclipse/plugins" includes="**/org.eclipse.*.source.*/**"/>
+			<fileset dir="${p2.agent.dir}/eclipse/plugins" includes="**/org.eclipse.jdt.*" />
+			<fileset dir="${p2.agent.dir}/eclipse/plugins" includes="**/org.eclipse.update.core.*" />
+			<fileset dir="${p2.agent.dir}/eclipse/plugins" includes="**/org.eclipse.core.filesystem.*" />
+			<fileset dir="${p2.agent.dir}/eclipse/plugins" includes="**/org.eclipse.core.resources.*" />
+			<fileset dir="${p2.agent.dir}/eclipse/plugins" includes="**/org.eclipse.ui.win32*"/>
 		</delete>
 
 		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
@@ -133,7 +171,6 @@
 			<arg line="-vm ${java15-home}/bin/java" />
 			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
 			<arg line="-consoleLog" />
-			<arg line="-p2.os win32" />
 			<arg line="--launcher.suppressErrors" />
 			<arg line="-metadataRepository file:${p2.metadata.repo}" />
 			<arg line="-artifactRepository file:${p2.artifact.repo}" />
@@ -146,13 +183,13 @@
 	</target>
 
 	<target name="generate.metadata.selfhosting">
+		<property name="p2.selfhosting.dir" value="${p2.output.base}/selfhosting" />
 		<path id="selfhosting.feature.zip.path">
 			<fileset dir="${buildDirectory}/${buildId}">
-				<include name="**/org.eclipse.equinox.p2.selfhosting.feature-${buildId}-win32.win32.x86.zip" />
+				<include name="**/org.eclipse.equinox.p2.selfhosting.feature-${buildId}-win32*.zip" />
 			</fileset>
 		</path>
 		<property name="selfhosting.feature.zip.name" refid="selfhosting.feature.zip.path" />
-		<property name="p2.selfhosting.dir" value="${p2.output.base}/selfhosting" />
 		<antcall target="extract">
 			<param name="extract-src" value="${selfhosting.feature.zip.name}" />
 			<param name="extract-dest" value="${p2.selfhosting.dir}" />
@@ -165,7 +202,6 @@
 			<arg line="-consoleLog" />
 			<arg line="-nosplash" />
 			<arg line="--launcher.suppressErrors" />
-			<arg line="-p2.os win32" />
 			<arg line="-base ${p2.selfhosting.dir}/eclipse" />
 			<arg line="-features ${p2.selfhosting.dir}/eclipse/features" />
 			<arg line="-bundles ${p2.selfhosting.dir}/eclipse/plugins" />
@@ -181,13 +217,13 @@
 	</target>
 
 	<target name="generate.metadata.userUI">
+		<property name="p2.userui.dir" value="${p2.output.base}/userui" />
 		<path id="userui.feature.zip.path">
 			<fileset dir="${buildDirectory}/${buildId}">
-				<include name="**/org.eclipse.equinox.p2.user.ui.feature-${buildId}-win32.win32.x86.zip" />
+				<include name="**/org.eclipse.equinox.p2.user.ui.feature-${buildId}-win32*.zip" />
 			</fileset>
 		</path>
 		<property name="userui.feature.zip.name" refid="userui.feature.zip.path" />
-		<property name="p2.userui.dir" value="${p2.output.base}/userui" />
 		<antcall target="extract">
 			<param name="extract-src" value="${userui.feature.zip.name}" />
 			<param name="extract-dest" value="${p2.userui.dir}" />
@@ -200,7 +236,6 @@
 			<arg line="-consoleLog" />
 			<arg line="-nosplash" />
 			<arg line="--launcher.suppressErrors" />
-			<arg line="-p2.os win32" />
 			<arg line="-base ${p2.userui.dir}/eclipse" />
 			<arg line="-features ${p2.userui.dir}/eclipse/features" />
 			<arg line="-bundles ${p2.userui.dir}/eclipse/plugins" />
@@ -216,11 +251,16 @@
 	</target>
 
 	<target name="generate.metadata.sdk">
-		<property name="p2.sdk" value="${p2.output.base}/sdk" />
-		<mkdir dir="${p2.sdk}" />
+		<property name="sdk.archive" value="${sdk.win32.archive}" />
+		<property name="p2.sdk.dir" value="${p2.output.base}/sdk" />
+		<mkdir dir="${p2.sdk.dir}" />
 		<antcall target="extract">
 			<param name="extract-src" value="${sdk.archive}" />
-			<param name="extract-dest" value="${p2.sdk}" />
+			<param name="extract-dest" value="${p2.sdk.dir}" />
+		</antcall>
+		<antcall target="extract">
+			<param name="extract-src" value="${rcp.delta.archive}" />
+			<param name="extract-dest" value="${p2.sdk.dir}" />
 		</antcall>
 
 		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
@@ -230,10 +270,9 @@
 			<arg line="-consoleLog" />
 			<arg line="-nosplash" />
 			<arg line="--launcher.suppressErrors" />
-			<arg line="-p2.os win32" />
 			<arg line="-metadataRepository file:${p2.metadata.repo}" />
 			<arg line="-artifactRepository file:${p2.artifact.repo}" />
-			<arg line="-source ${p2.sdk}/eclipse" />
+			<arg line="-source ${p2.sdk.dir}/eclipse" />
 			<arg line="-rootVersion 3.4.0.${buildId}" />
 			<arg line="-root sdk" />
 			<arg line="-flavor ${p2.flavor}" />
@@ -242,14 +281,13 @@
 		</exec>
 	</target>
 
-	<target name="run.director">
+	<target name="setup.director">
 		<path id="director.zip.path">
 			<fileset dir="${buildDirectory}/${buildId}">
-				<include name="**/org.eclipse.equinox.p2.director.feature-${buildId}-linux.gtk.x86.zip" />
+				<include name="**/org.eclipse.equinox.p2.director.feature-${buildId}-*.zip" />
 			</fileset>
 		</path>
 		<property name="director.zip.name" refid="director.zip.path" />
-		<property name="p2.director.dir" value="${p2.output.base}/director" />
 		<antcall target="extract">
 			<param name="extract-src" value="${director.zip.name}" />
 			<param name="extract-dest" value="${p2.director.dir}" />
@@ -265,7 +303,9 @@
 				<include name="**/*.jar" />
 			</fileset>
 		</copy>
+	</target>
 
+	<target name="run.director">
 		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
 		<exec executable="${p2.director.dir}/eclipse/eclipse" failonerror="false" timeout="900000">
 			<arg line="-vm ${java15-home}/bin/java" />
@@ -275,18 +315,24 @@
 			<arg line="-consoleLog" />
 			<arg line="-flavor ${p2.flavor}" />
 			<arg line="-installIU agent" />
-			<arg line="-p2.os win32" />
-			<arg line="-p2.ws win32" />
-			<arg line="-p2.arch x86" />
+			<arg line="-p2.os ${p2.os}" />
+			<arg line="-p2.ws ${p2.ws}" />
+			<arg line="-p2.arch ${p2.arch}" />
 			<arg line="-roaming" />
 			<arg line="-profile EquinoxProvisioningUI" />
 			<arg line="-metadataRepository file:${p2.metadata.repo}" />
 			<arg line="-artifactRepository file:${p2.artifact.repo}" />
-			<arg line="-destination ${p2.install.path}" />
-			<arg line="-bundlepool ${p2.install.path}" />
+			<arg line="-destination ${p2.agent.install.path}" />
+			<arg line="-bundlepool ${p2.agent.install.path}" />
 			<arg line="-vmargs" />
-			<arg line="-Declipse.p2.data.area=${p2.install.path}/configuration/org.eclipse.equinox.p2.core/agentdata" />
+			<arg line="-Declipse.p2.data.area=${p2.agent.install.path}/configuration/org.eclipse.equinox.p2.core/agentdata" />
 		</exec>
+
+		<!-- delete the metadata cache as well as the artifacts for unzipped bundles -->
+		<delete failonerror="false" includeEmptyDirs="true">
+			<fileset dir="${p2.agent.install.path}/configuration/org.eclipse.equinox.p2.core/agentdata/metadata"/>
+			<fileset dir="${p2.agent.install.path}/configuration/org.eclipse.equinox.p2.core/agentdata/artifacts"/>
+		</delete>
 
 		<!-- Delete the other copy of ICU until bug 199299 is fixed -->
 		<!--
@@ -300,20 +346,39 @@
 	</target>
 
 	<target name="zip.install">
-		<zip destfile="${p2.output.base}/equinox-p2-agent-${buildId}-win32.zip" basedir="${p2.install.folder.parent}" includes="${p2.install.folder}/**" />
-		<copy file="${p2.output.base}/equinox-p2-agent-${buildId}-win32.zip" todir="${equinoxPostingDirectory}/${buildLabel}" />
+		<property name="output.dir" value="${equinoxPostingDirectory}/${buildLabel}" />
+		<mkdir dir="${output.dir}" />
 
-		<zip destfile="${p2.output.base}/equinox-p2-servers-${buildId}.zip" basedir="${p2.repo.root}" includes="**/*" />
+		<!-- win32 -->
+		<zip destfile="${output.dir}/equinox-p2-agent-${buildId}-win32.zip" basedir="${p2.agent.install.win32}" includes="${p2.install.folder}/**" />
 
-		<copy todir="${equinoxPostingDirectory}/${buildLabel}" file="${p2.output.base}/equinox-p2-servers-${buildId}.zip" />
+		<!-- linux -->
+		<antcall target="p2.tar">
+			<param name="tar.base.dir" value="${p2.agent.install.linux}" />
+			<param name="tar.base.filename" value="${output.dir}/equinox-p2-agent-${buildId}-linux" />
+		</antcall>
 
-		<copy todir="${equinoxPostingDirectory}/${buildLabel}">
+		<!-- macosx -->
+		<antcall target="p2.tar">
+			<param name="tar.base.dir" value="${p2.agent.install.macosx}" />
+			<param name="tar.base.filename" value="${output.dir}/equinox-p2-agent-${buildId}-macosx" />
+		</antcall>
+
+		<!-- other features -->
+		<copy todir="${output.dir}">
 			<fileset dir="${buildDirectory}/${buildId}">
-				<include name="**/org.eclipse.equinox.p2.selfhosting.feature-${buildId}-win32.win32.x86.zip" />
-				<include name="**/org.eclipse.equinox.p2.user.ui.feature-${buildId}-win32.win32.x86.zip" />
+				<include name="**/org.eclipse.equinox.p2.selfhosting.feature-${buildId}-*" />
+				<include name="**/org.eclipse.equinox.p2.user.ui.feature-${buildId}-*" />
 			</fileset>
 		</copy>
+	</target>
 
+	<target name="p2.tar">
+		<exec dir="${tar.base.dir}" executable="tar">
+			<arg line="-cvf ${tar.base.filename}.tar ${p2.install.folder}"/>
+		</exec>
+		<gzip zipfile="${tar.base.filename}.tar.gz" src="${tar.base.filename}.tar"/>
+		<delete file="${tar.base.filename}.tar" />
 	</target>
 
 	<target name="extract">

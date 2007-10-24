@@ -114,10 +114,12 @@
     	
     	
     	<zipType name="ProvisioningIncubator">
-			<platform id="provagentrcp" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="equinox-p2-agent-@buildid@-win32.zip">			
+			<platform id="provagentrcpwin32" name="Windows &lt;img src = &quot;egg.gif&quot; >" fileName="equinox-p2-agent-@buildid@-win32.zip">			
  			</platform>
- 			<platform id="provservers" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="equinox-p2-servers-@buildid@.zip">			
- 			</platform> 			
+			<platform id="provagentrcplinux" name="Linux &lt;img src = &quot;egg.gif&quot; >" fileName="equinox-p2-agent-@buildid@-linux.tar.gz">			
+ 			</platform>
+			<platform id="provagentrcpmacosx" name="Mac OSX &lt;img src = &quot;egg.gif&quot; >" fileName="equinox-p2-agent-@buildid@-macosx.tar.gz">			
+ 			</platform>
  			<platform id="provselfhosting" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="org.eclipse.equinox.p2.selfhosting.feature-@buildid@-win32.win32.x86.zip">			
  			</platform>
  			<platform id="provuserui" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="org.eclipse.equinox.p2.user.ui.feature-@buildid@-win32.win32.x86.zip">			
