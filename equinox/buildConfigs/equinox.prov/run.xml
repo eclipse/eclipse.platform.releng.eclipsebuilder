@@ -19,7 +19,7 @@
 		<property name="p2.director.dir" value="${p2.output.base}/director" />
 		<mkdir dir="${p2.director.dir}" />
 
-		<property name="sdk.win32.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32-win32-x86.zip" />
+		<property name="sdk.win32.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" />
 		<property name="sdk.linux.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-ppc.tar.gz" />
 		<property name="sdk.macosx.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-macosx-carbon-ppc.tar.gz" />
 		<property name="rcp.delta.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-delta-pack.zip" />
