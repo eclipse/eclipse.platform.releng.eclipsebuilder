@@ -307,10 +307,11 @@
 					-currentPrefix M,I 
 					-current ${buildId}
 					-jvm ${eclipse.perf.jvm}
-					-output ${postingDirectory}/${buildLabel}/performance/
-					-config eclipseperfwin1_R3.3,eclipseperflnx1_R3.3,eclipseperfwin2_R3.3,eclipseperflnx2_R3.3,eclipseperflnx3_R3.3
+					-output ${postingDirectory}/${buildLabel}/performance/				  
+				    -config eclipseperflnx3_R3.3,eclipseperfwin2_R3.3,eclipseperflnx2_R3.3,eclipseperfwin1_R3.3,eclipseperflnx1_R3.3 
 					-config.properties ${eclipse.perf.config.descriptors}
-					-scenario.pattern org.eclipse.%.test"
+				    -dataDir ${postingDirectory}/data/v33
+				    -scenario.pattern org.eclipse.%.test%"
 				/>
 			<!-- add this argument to list above when there are milestone builds to highlight 
 			-highlight.latest 3.3M1_
