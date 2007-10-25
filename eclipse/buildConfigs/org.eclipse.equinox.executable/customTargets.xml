@@ -19,7 +19,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- ===================================================================== -->
 	<!-- Targets to assemble the built elements for particular configurations  -->
 	<!-- ===================================================================== -->
-	<target name="assemble.org.eclipse.equinox.executable">
+	<target name="assemble.org.eclipse.equinox.executable.group.group.group">
 		<property name="archiveName" value="org.eclipse.equinox.executable_${buildId}.zip"/>
 		<antcall target="assemble" />
 	</target>
