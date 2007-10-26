@@ -438,8 +438,9 @@
 
 	<target name="cleanSites">
 		<cleanSite ageInMinutes="1440" directoryName="/builds/transfer/files/master/downloads/drops" realDelete="true" />
-		<cleanSite ageInMinutes="1440" directoryName="/builds/transfer/files/master/equinox/drops/" realDelete="true" />
+		<cleanSite ageInMinutes="1440" directoryName="/builds/transfer/files/master/equinox/drops" realDelete="true" />
 		<cleanSite ageInMinutes="1440" directoryName="/builds/transfer/files/bogus/downloads/drops" realDelete="true" />
+	  <cleanSite ageInMinutes="1440" directoryName="/builds/transfer/files/bogus/equinox/drops" realDelete="true" />
 		<cleanSite ageInMinutes="1440" directoryName="/builds/transfer/files/zrh" realDelete="true" />
 		<cleanSite ageInMinutes="1440" directoryName="/builds/transfer/files/snz" realDelete="true" />
 	</target>
