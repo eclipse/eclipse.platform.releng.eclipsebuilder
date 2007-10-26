@@ -54,7 +54,13 @@
 	<property name="archiveName" value="eclipse-RCP-${buildId}-linux-gtk-x86_64.tar.gz"/>
 	<antcall target="assemble" />
 </target>	
-
+	
+<target name="assemble.org.eclipse.rcp.hpux.motif.ia64_32">
+	<property name="archiveName" value="eclipse-RCP-${buildId}-hpux.motif.ia64_32.zip"/>
+	<antcall target="assemble" />
+</target>
+	
+	
 <target name="assemble.org.eclipse.rcp.solaris.gtk.sparc">
 	<property name="archiveName" value="eclipse-RCP-${buildId}-solaris-gtk.zip"/>
 	<antcall target="assemble" />
@@ -66,7 +72,6 @@
 </target>
 	
 <target name="assemble.org.eclipse.rcp.qnx.photon.x86"/>
-<target name="assemble.org.eclipse.rcp.hpux.motif.ia64_32"/>
 <target name="assemble.org.eclipse.rcp.hpux.motif.PA_RISC"/>
 <target name="assemble.org.eclipse.rcp.linux.gtk.ia64" />
 <target name="assemble.org.eclipse.rcp.linux.gtk.ppc64" />
