@@ -52,12 +52,6 @@
 			<param name="archiveName" value="${archiveRoot}-linux-motif.tar.gz" />
 		</antcall>
 	</target>
-	
-	<target name="assemble.hpux.motif.ia64_32.xml">
-		<antcall target="assembler">
-			<param name="archiveName" value="${archiveRoot}-hpux.motif.ia64_32.zip" />
-		</antcall>
-	</target>
 
 	<target name="assemble.solaris.gtk.sparc.xml">
 		<antcall target="assembler">

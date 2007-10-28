@@ -47,10 +47,6 @@
 		<property name="archiveName" value="launchers-linux.gtk.ppc.${buildId}.tar.gz" />
 		<antcall target="assemble" />
 	</target>
-	<target name="assemble.org.eclipse.equinox.launchers-feature.hpux.motif.ia64_32">
-			<property name="archiveName" value="launchers-hpux.motif.ia64_32.${buildId}.zip" />
-			<antcall target="assemble" />
-	</target>
 	<target name="assemble.org.eclipse.equinox.launchers-feature.solaris.gtk.sparc">
 		<property name="archiveName" value="launchers-solaris.gtk.sparc.${buildId}.zip" />
 		<antcall target="assemble" />

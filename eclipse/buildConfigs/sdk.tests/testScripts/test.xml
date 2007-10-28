@@ -158,13 +158,6 @@
 				<equals arg1="${arch}" arg2="PA_RISC" />
 			</and>
 		</condition>
-		<condition property="runtimeArchive" value="eclipse-SDK-${buildId}-hpux-motif.zip">
-			<and>
-				<equals arg1="${os}" arg2="hpux" />
-				<equals arg1="${ws}" arg2="motif" />
-				<equals arg1="${arch}" arg2="ia64_32" />
-			</and>
-		</condition>
 		<condition property="runtimeArchive" value="eclipse-SDK-${buildId}-solaris-motif.zip">
 			<and>
 				<equals arg1="${os}" arg2="solaris" />
