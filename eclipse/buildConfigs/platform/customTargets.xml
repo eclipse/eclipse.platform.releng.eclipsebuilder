@@ -54,7 +54,7 @@
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.org.eclipse.platform.hpux.motif.ia64_32">
-		<property name="archiveName" value="eclipse-platform-${buildId}-hpux.motif.ia64_32.zip" />
+		<property name="archiveName" value="eclipse-platform-${buildId}-hpux-motif-ia64_32.zip" />
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.org.eclipse.platform.linux.gtk.ppc64" />

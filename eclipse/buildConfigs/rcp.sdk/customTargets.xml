@@ -56,7 +56,7 @@
 		</target>
 	
 	<target name="assemble.org.eclipse.rcp.sdk.hpux.motif.ia64_32">
-		<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-hpux.motif.ia64_32.zip" />
+		<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-hpux-motif-ia64_32.zip" />
 		<antcall target="assemble" />
 	</target>
 	
