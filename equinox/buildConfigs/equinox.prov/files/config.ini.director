@@ -39,7 +39,6 @@
 # Simple bundle locations are interepreted as relative to the framework's parent directory.
 # The startlevel indicates the OSGi start level at which the bundle should run.
 osgi.bundles=\
-	com.thoughtworks.xstream,\
 	org.eclipse.core.jobs,\
 	org.eclipse.ecf,\
 	org.eclipse.ecf.filetransfer,\
