@@ -355,14 +355,11 @@
 			<arg line="-destination ${p2.agent.install.path}" />
 			<arg line="-bundlepool ${p2.agent.install.path}" />
 			<arg line="-vmargs" />
-			<arg line="-Declipse.p2.data.area=${p2.agent.install.path}/configuration/org.eclipse.equinox.p2.core/agentdata" />
+			<arg line="-Declipse.p2.data.area=${p2.agent.install.path}/p2" />
 		</exec>
 
 		<!-- delete the metadata cache as well as the artifacts for unzipped bundles -->
-		<delete failonerror="false" includeEmptyDirs="true">
-			<fileset dir="${p2.agent.install.path}/configuration/org.eclipse.equinox.p2.core/agentdata/metadata" />
-			<fileset dir="${p2.agent.install.path}/configuration/org.eclipse.equinox.p2.core/agentdata/artifacts" />
-		</delete>
+		<delete failonerror="false" includeEmptyDirs="true" dir="${p2.agent.install.path}/p2/org.eclipse.equinox.p2.core/cache" />
 
 		<!-- Delete the other copy of ICU until bug 199299 is fixed -->
 		<!--
