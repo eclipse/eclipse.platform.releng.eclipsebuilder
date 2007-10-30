@@ -65,7 +65,9 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 		<li><a class="" href="aixPlatform.php" target="_self">AIX</a></li>		
 		<li class="tabstart">&#160;&#160;&#160;</li>
 		<li><a class="" href="macPlatform.php" target="_self">Macintosh</a></li>
-		<li class="tabseparator">&#160;&#160;&#160;</li>			
+		<li class="tabseparator">&#160;&#160;&#160;</li>
+		<li><a class="" href="hpuxPlatform.php" target="_self">HP-UX</a></li>
+		<li class="tabseparator">&#160;&#160;&#160;</li>				
 	</ul>
 </div>
 <div id="topnavsep"></div>
@@ -166,6 +168,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				<li><a href="solPlatform.php#EclipseSDK">Solaris Platform</a></li>
 				<li><a href="aixPlatform.php#EclipseSDK">AIX Platform</a></li>			
 				<li><a href="macPlatform.php#EclipseSDK">Macintosh Platform</a></li>
+				<li><a href="hpuxPlatform.php#EclipseSDK">HP-UX Platform</a></li>
 			</ul>
 		</div>
 		</br></br></br></br>

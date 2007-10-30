@@ -79,6 +79,13 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 					$link = "aixPlatform.php";
 					$code = 1;
 					}
+				else if($clientOS == "hpux") {
+					$clientOS = HPUX;
+					$anchor = "hpuxPlatform.php#EclipseSDK";
+					$link = "hpuxPlatform.php";
+					$code = 1;
+					}
+
 				else {
 					$anchor = "index.php#EclipseSDK";
 					$code = 0;
