@@ -19,14 +19,9 @@
 		<property name="p2.director.dir" value="${p2.output.base}/director" />
 		<mkdir dir="${p2.director.dir}" />
 
-		<property name="sdk.win32.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" />
-		<property name="sdk.linux.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-ppc.tar.gz" />
-		<property name="sdk.macosx.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-macosx-carbon-ppc.tar.gz" />
+		<property name="sdk.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-ppc.tar.gz" />
 		<property name="rcp.delta.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-delta-pack.zip" />
 		<property name="rcp.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-linux-gtk-ppc.tar.gz" />
-		<property name="rcp.win32.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-win32.zip" />
-		<property name="rcp.linux.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-linux-gtk-x86.tar.gz" />
-		<property name="rcp.macosx.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-macosx-carbon-ppc.tar.gz" />
 		<property name="releng.tools.archive" value="${postingDirectory}/${buildLabel}/org.eclipse.releng.tools-${buildId}.zip" />
 
 		<property name="p2.agent.install.win32" value="${p2.output.base}/agent.install.win32" />
@@ -56,7 +51,7 @@
 		<!-- Ensure that we are building against the same version that we
 			are generating the metadata for -->
 		<antcall target="extract">
-			<param name="extract-src" value="${sdk.win32.archive}" />
+			<param name="extract-src" value="${sdk.archive}" />
 			<param name="extract-dest" value="${base}" />
 		</antcall>
 		<antcall target="extract">
@@ -291,7 +286,6 @@
 	</target>
 
 	<target name="generate.metadata.sdk">
-		<property name="sdk.archive" value="${sdk.win32.archive}" />
 		<property name="p2.sdk.dir" value="${p2.output.base}/sdk" />
 		<mkdir dir="${p2.sdk.dir}" />
 		<antcall target="extract">
