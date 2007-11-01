@@ -16,12 +16,12 @@
 			<param name="archiveName" value="${archiveRoot}-win32.zip" />
 		</antcall>
 	</target>
-	
+
 	<target name="assemble.win32.win32.x86_64.xml">
-			<antcall target="assembler">
-				<param name="archiveName" value="${archiveRoot}-win32-x86_64.zip" />
-			</antcall>
-   </target>
+		<antcall target="assembler">
+			<param name="archiveName" value="${archiveRoot}-win32-x86_64.zip" />
+		</antcall>
+	</target>
 
 	<target name="assemble.win32.wpf.x86.xml">
 		<antcall target="assembler">
@@ -70,13 +70,33 @@
 	</target>
 
 	<target name="assembler">
-		<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
-		<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
-		<ant antfile="${assembleScriptName}" />
-		<checksum file="${archiveFullPath}" property="md5" />
-		<checksum file="${archiveFullPath}" algorithm="SHA" property="sha" />
-		<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5" />
-		<echo message="${sha} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.sha1" />
-	</target>
+			<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
+			<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
+			<ant antfile="${assembleScriptName}" />
+			<condition property="hpuxperm">
+				<equals arg1="${archiveName}" arg2="${archiveRoot}-hpux-motif-ia64_32.zip" />
+			</condition>
+			<antcall target="fixhpux" />
+			<checksum file="${archiveFullPath}" property="md5" />
+			<checksum file="${archiveFullPath}" algorithm="SHA" property="sha" />
+			<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5" />
+			<echo message="${sha} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.sha1" />
+		</target>
+
+		<target name="fixhpux" if="hpuxperm">
+			<property name="hpuxtemp" value="${buildDirectory}/hpuxtemp" />
+			<delete dir="${hpuxtemp}" />
+			<mkdir dir="${hpuxtemp}" />
+			<unzip src="${archiveFullPath}" dest="${hpuxtemp}">
+				<patternset>
+					<include name="eclipse/plugins/org.eclipse.equinox.launcher.motif.hpux.ia64_32_*/*.so" />
+				</patternset>
+			</unzip>
+			<chmod dir="${hpuxtemp}" perm="755" includes="**/*.so" />
+			<exec executable="zip" dir="${hpuxtemp}">
+				<arg line="-r ${postingDirectory}/${buildLabel}/${archiveName} *" />
+			</exec>
+		</target>
+
 
 </project>
