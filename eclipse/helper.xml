@@ -317,6 +317,7 @@
 						-baseline.prefix 3.3_200706251500
 						-current ${buildId}
 						-jvm ${eclipse.perf.jvm}
+						-print					    
 						-output ${postingDirectory}/${buildLabel}/performance/
 						-config eclipseperflnx3,eclipseperfwin2,eclipseperflnx2,eclipseperfwin1,eclipseperflnx1 
 						-config.properties ${eclipse.perf.config.descriptors}
