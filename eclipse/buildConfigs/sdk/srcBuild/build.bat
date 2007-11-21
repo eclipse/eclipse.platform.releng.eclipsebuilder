@@ -31,6 +31,7 @@ if x%ws%==x goto usage
 if x%arch%==x goto usage
 if %installOs%-%ws%-%arch%==win32-win32-x86 goto run
 if %installOs%-%ws%-%arch%==win32-wpf-x86 goto run
+if %installOs%-%ws%-%arch%==win32-win32-ia64 goto run
 if %installOs%-%ws%-%arch%==linux-motif-x86 goto run
 if %installOs%-%ws%-%arch%==linux-gtk-x86 goto run
 if %installOs%-%ws%-%arch%==linux-gtk-ppc goto run

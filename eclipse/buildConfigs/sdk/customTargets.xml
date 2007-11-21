@@ -81,6 +81,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	</ant-->
 	</target>
 
+	<target name="assemble.org.eclipse.sdk.win32.win32.ia64" />
 	<target name="assemble.org.eclipse.sdk.hpux.motif.ia64" />	
 	<target name="assemble.org.eclipse.sdk.hpux.motif.PA_RISC" />
 	<target name="assemble.org.eclipse.sdk.linux.gtk.ia64" />
