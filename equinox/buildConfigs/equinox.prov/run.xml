@@ -371,17 +371,17 @@
 		<mkdir dir="${output.dir}" />
 
 		<!-- win32 -->
-		<zip destfile="${output.dir}/equinox-p2-agent-${buildId}-win32.zip" basedir="${p2.agent.install.win32}" includes="${p2.install.folder}/**" />
+		<zip destfile="${output.dir}/equinox-p2-agent-${buildId}-win32.zip" basedir="${p2.agent.install.win32}/${p2.install.folder}" includes="**/*" />
 
 		<!-- linux -->
 		<antcall target="p2.tar">
-			<param name="tar.base.dir" value="${p2.agent.install.linux}" />
+			<param name="tar.base.dir" value="${p2.agent.install.linux}/${p2.install.folder}" />
 			<param name="tar.base.filename" value="${output.dir}/equinox-p2-agent-${buildId}-linux" />
 		</antcall>
 
 		<!-- macosx -->
 		<antcall target="p2.tar">
-			<param name="tar.base.dir" value="${p2.agent.install.macosx}" />
+			<param name="tar.base.dir" value="${p2.agent.install.macosx}/${p2.install.folder}" />
 			<param name="tar.base.filename" value="${output.dir}/equinox-p2-agent-${buildId}-macosx" />
 		</antcall>
 
@@ -396,7 +396,7 @@
 
 	<target name="p2.tar">
 		<exec dir="${tar.base.dir}" executable="tar">
-			<arg line="-cvf ${tar.base.filename}.tar ${p2.install.folder}" />
+			<arg line="-cvf ${tar.base.filename}.tar *" />
 		</exec>
 		<gzip zipfile="${tar.base.filename}.tar.gz" src="${tar.base.filename}.tar" />
 		<delete file="${tar.base.filename}.tar" />
