@@ -306,6 +306,7 @@
 					-baseline.prefix 3.2_200606291905
 					-currentPrefix M,I 
 					-current ${buildId}
+					-print
 					-jvm ${eclipse.perf.jvm}
 					-output ${postingDirectory}/${buildLabel}/performance/				  
 				    -config eclipseperflnx3_R3.3,eclipseperfwin2_R3.3,eclipseperflnx2_R3.3,eclipseperfwin1_R3.3,eclipseperflnx1_R3.3 
