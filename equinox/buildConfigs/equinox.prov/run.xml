@@ -395,8 +395,8 @@
 	</target>
 
 	<target name="p2.tar">
-		<exec dir="${tar.base.dir}" executable="tar">
-			<arg line="-cvf ${tar.base.filename}.tar *" />
+		<exec dir="${tar.base.dir}" executable="sh">
+			<arg line='-c "tar -cvf ${tar.base.filename}.tar *"' />
 		</exec>
 		<gzip zipfile="${tar.base.filename}.tar.gz" src="${tar.base.filename}.tar" />
 		<delete file="${tar.base.filename}.tar" />
