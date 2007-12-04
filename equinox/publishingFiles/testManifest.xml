@@ -120,9 +120,9 @@
  			</platform>
 			<platform id="provagentrcpmacosx" name="Mac OSX &lt;img src = &quot;egg.gif&quot; >" fileName="equinox-p2-agent-@buildid@-macosx.tar.gz">			
  			</platform>
- 			<platform id="provselfhosting" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="org.eclipse.equinox.p2.selfhosting.feature-@buildid@-win32.win32.x86.zip">			
+ 			<platform id="provselfhosting" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="org.eclipse.equinox.p2.selfhosting.feature-@buildid@.zip">			
  			</platform>
- 			<platform id="provuserui" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="org.eclipse.equinox.p2.user.ui.feature-@buildid@-win32.win32.x86.zip">			
+ 			<platform id="provuserui" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="org.eclipse.equinox.p2.user.ui.feature-@buildid@.zip">			
  			</platform>	
  		</zipType>
 
