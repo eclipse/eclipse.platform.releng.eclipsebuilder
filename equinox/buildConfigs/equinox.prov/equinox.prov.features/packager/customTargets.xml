@@ -11,23 +11,20 @@
 	<copy file="${packagingInfo}/../../../../packaging.map" tofile="${downloadDirectory}/packaging.map" />
 </target>
 
-
 <target name="assemble.common.common.common.xml">
 	<antcall target="assembler">
 		<param name="archiveName" value="${archiveRoot}.zip"/>
 	</antcall>
 </target>
-
-
+	
 <target name="assembler">
-	<mkdir dir="${equinoxPostingDirectory}/${buildLabel}/checksum" />
-	<!--fix this to point to the p2temp directory -->
-	<property name="archiveFullPath" value="${base}/${archiveName}" />
-	<ant antfile="${assembleScriptName}" />	
+	<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
+	<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
+	<ant antfile="${assembleScriptName}" />
 	<checksum file="${archiveFullPath}" property="md5"/>
-	<checksum file="${archiveFullPath}" property="sha"/>
-	<echo message="${md5} *${archiveName}" file="${equinoxPostingDirectory}/${buildLabel}/checksum/${archiveName}.md5"/>
-	<echo message="${sha} *${archiveName}" file="${equinoxPostingDirectory}/${buildLabel}/checksum/${archiveName}.sha1"/>
+	<checksum file="${archiveFullPath}" algorithm="SHA" property="sha"/>
+	<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5"/>
+	<echo message="${sha} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.sha1"/>
 </target>
 
 </project>
