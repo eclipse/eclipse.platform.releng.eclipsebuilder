@@ -29,11 +29,7 @@
 		<property name="p2.agent.install.linux" value="${p2.output.base}/agent.install.linux" />
 		<mkdir dir="${p2.agent.install.linux}" />
 		<property name="p2.agent.install.macosx" value="${p2.output.base}/agent.install.macosx" />
-		<mkdir dir="${p2.agent.install.macosx}" />
-		<property name="p2.install.folder" value="equinox.p2" />
-		<mkdir dir="${p2.agent.install.win32}/${p2.install.folder}" />
-		<mkdir dir="${p2.agent.install.linux}/${p2.install.folder}" />
-		<mkdir dir="${p2.agent.install.macosx}/${p2.install.folder}" />
+		<mkdir dir="${p2.agent.install.macosx}" />				
 		<property name="base" value="${p2.output.base}/base" />
 		<mkdir dir="${base}" />
 
