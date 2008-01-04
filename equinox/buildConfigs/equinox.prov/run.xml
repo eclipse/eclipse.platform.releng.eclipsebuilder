@@ -13,7 +13,7 @@
 	-->
 	<target name="init">
 		<property name="p2.root" value="${buildDirectory}/${buildId}/p2temp" />
-		<mkdir dir="${p2.root}" />
+		<mkdir dir="${p2.root}" />		
 		<property name="p2.output.base" value="${p2.root}/equinox.p2.build" />
 		<mkdir dir="${p2.output.base}" />
 		<property name="p2.director.dir" value="${p2.output.base}/director" />
@@ -99,13 +99,11 @@
 	<target name="build.features">
 	<!--	<ant antfile="${eclipse.pdebuild.scripts}/build.xml">
 			<property name="builder" value="${basedir}" />
-		</ant> -->
-		<ant antfile="build.xml" dir="${equinox.build.configs}/equinox.prov">
-			<property name="component" value="${equinox.build.configs}/equinox.prov/equinox.prov.features" />
-		</ant>
+		</ant> -->		
 		<!-- unzip equinox p2 feature into baselocation for use in later builds -->
+		<property name="p2-feature" value="${buildDirectory}/${buildLabel}/eclipse-equinox-p2-feature-${buildId}.zip" />
 		<antcall target="extract">
-				<param name="extract-src" value="${base}/master-equinox-p2-${buildId}.zip" />
+				<param name="extract-src" value="${p2-feature}" />
 				<param name="extract-dest" value="${base}" />
 		</antcall>		
 	</target>

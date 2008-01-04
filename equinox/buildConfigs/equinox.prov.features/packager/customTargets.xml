@@ -19,7 +19,7 @@
 	
 <target name="assembler">
 	<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
-	<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
+	<property name="archiveFullPath" value="${buildDirectory}/${buildLabel}/${archiveName}" />
 	<ant antfile="${assembleScriptName}" />
 	<checksum file="${archiveFullPath}" property="md5"/>
 	<checksum file="${archiveFullPath}" algorithm="SHA" property="sha"/>
