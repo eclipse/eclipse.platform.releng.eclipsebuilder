@@ -97,9 +97,17 @@
 	</target>
 
 	<target name="build.features">
-		<ant antfile="${eclipse.pdebuild.scripts}/build.xml">
+	<!--	<ant antfile="${eclipse.pdebuild.scripts}/build.xml">
 			<property name="builder" value="${basedir}" />
+		</ant> -->
+		<ant antfile="build.xml" dir="${equinox.build.configs}/equinox.prov">
+			<property name="component" value="${equinox.build.configs}/equinox.prov/equinox.prov.features" />
 		</ant>
+		<!-- unzip equinox p2 feature into baselocation for use in later builds -->
+		<antcall target="extract">
+				<param name="extract-src" value="${base}/master-equinox-p2-${buildId}.zip" />
+				<param name="extract-dest" value="${base}" />
+		</antcall>		
 	</target>
 
 	<target name="setup.generator">
