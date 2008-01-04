@@ -172,7 +172,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Steps to do before fetching the build elements -->
 	<!-- ===================================================================== -->
 	<target name="preFetch">
-		<mkdir dir="${buildDirectory}/baseLocation"/>
+		<!-- <mkdir dir="${buildDirectory}/baseLocation"/> -->
 	</target>
 
 	<!-- ===================================================================== -->
