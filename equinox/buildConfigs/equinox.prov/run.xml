@@ -57,8 +57,7 @@
 		<antcall target="extract">
 			<param name="extract-src" value="${rcp.delta.archive}" />
 			<param name="extract-dest" value="${base}" />
-		</antcall>
-		<antcall target="build.features" />
+		</antcall>	
 		<!-- Generate the metadata for the agent and create the install first due
 			to bug 199317... installing will install all fragments and we don't want the
 			ones from the SDK -->
@@ -94,19 +93,7 @@
 		<antcall target="generate.metadata.releng.tools" />
 		<antcall target="zip.install" />
 
-	</target>
-
-	<target name="build.features">
-	<!--	<ant antfile="${eclipse.pdebuild.scripts}/build.xml">
-			<property name="builder" value="${basedir}" />
-		</ant> -->		
-		<!-- unzip equinox p2 feature into baselocation for use in later builds -->
-		<property name="p2-feature" value="${buildDirectory}/${buildLabel}/eclipse-equinox-p2-feature-${buildId}.zip" />
-		<antcall target="extract">
-				<param name="extract-src" value="${p2-feature}" />
-				<param name="extract-dest" value="${base}" />
-		</antcall>		
-	</target>
+	</target>	
 
 	<target name="setup.generator">
 		<path id="feature.zip.path">
