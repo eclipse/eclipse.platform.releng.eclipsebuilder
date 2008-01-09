@@ -20,7 +20,7 @@
 	<!-- ===================================================================== -->
 
 	<target name="assemble.org.eclipse.cvs.sdk">
-		<property name="archiveName" value="eclipse-CVS--Client-SDK-${buildId}.zip" />
+		<property name="archiveName" value="eclipse-CVS-Client-SDK-${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 
