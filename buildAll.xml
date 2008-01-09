@@ -347,9 +347,6 @@
 			<param name="packagingInfo" value="${eclipse.build.configs}/rcp/packager" />
 		</antcall>		
 		<antcall target="package">
-			<param name="packagingInfo" value="${eclipse.build.configs}/rcp.deltapack/packager" />
-		</antcall>
-		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/com.ibm.icu.base/packager" />
 		</antcall>
 		<antcall target="package">
