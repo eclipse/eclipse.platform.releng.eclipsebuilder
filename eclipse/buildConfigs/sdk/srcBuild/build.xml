@@ -100,7 +100,7 @@
 
 		<property name="launcherfragment" value="org.eclipse.equinox.launcher.${installWs}.${installOs}.${installArch}" />
 
-		<copy file="${launcherlibs}/library/${installWs}/eclipse" todir="features/org.eclipse.equinox.executable/contributed/${installWs}/${installOs}/.${installArch}/" />
+		<copy file="${launcherlibs}/library/${installWs}/eclipse" todir="features/org.eclipse.equinox.executable/contributed/${installWs}/${installOs}/${installArch}/" />
 		<copy todir="${buildDirectory}/plugins/${launcherfragment}">
 			<fileset dir="${launcherlibs}/library/${installWs}">
 				<include name="**/*.so" />
