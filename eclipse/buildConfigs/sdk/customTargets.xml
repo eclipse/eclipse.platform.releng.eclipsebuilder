@@ -339,7 +339,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
 		<property name="tempDir" value="${basedir}/temp" />
 		<mkdir dir="${tempDir}/buildScripts" />
-		<mkdir dir="${tempDir}/buildScripts/baseLocation" />
+	<!--	<mkdir dir="${tempDir}/buildScripts/baseLocation" /> -->
 
 		<copy file="${buildDirectory}/label.properties" todir="${tempDir}/buildScripts" />
 
@@ -347,9 +347,9 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<fileset dir="${eclipse.build.configs}/sdk/srcBuild" excludes="incl,fetch/**,jdtcoresrc/**" />
 		</copy>
 
-		<copy todir="${tempDir}/buildScripts/baseLocation">
+	<!--	<copy todir="${tempDir}/buildScripts/baseLocation">
 			<fileset dir="${baseLocation}" />
-		</copy>
+		</copy> -->
 
 		<mkdir dir="${tempDir}/buildScripts/jdtcoresrc" />
 		<copy todir="${tempDir}/buildScripts/jdtcoresrc">
