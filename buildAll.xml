@@ -319,9 +319,9 @@
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/sdk/packager" />
 		</antcall>
-		<antcall target="package">
-			<param name="packagingInfo" value="${eclipse.build.configs}/rcp.sdk/packager" />
-		</antcall>
+    	<antcall target="package">
+		     <param name="packagingInfo" value="${eclipse.build.configs}/rcp.deltapack/packager" />
+		</antcall>		
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/sdk.examples/packager" />
 		</antcall>
@@ -339,13 +339,16 @@
 		</antcall>
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/platform/packager" />
-		</antcall>
+		</antcall>		
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/platform.sdk/packager" />
 		</antcall>
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/rcp/packager" />
-		</antcall>		
+		</antcall>
+		<antcall target="package">
+					<param name="packagingInfo" value="${eclipse.build.configs}/rcp.sdk/packager" />
+		</antcall>
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/com.ibm.icu.base/packager" />
 		</antcall>
@@ -381,10 +384,7 @@
 		</ant>
 		<ant antfile="build.xml" dir="${basedir}">
 			<property name="component" value="${equinox.build.configs}/equinox.jmx.server" />
-		</ant>
-		<!--<antcall target="package">
-			<param name="packagingInfo" value="${equinox.build.configs}/equinox.prov.features/packager" />
-		</antcall> -->
+		</ant>		
 		<antcall target="package">
 			<param name="packagingInfo" value="${equinox.build.configs}/equinox.p2.agent.feature/packager" />
 		</antcall>
