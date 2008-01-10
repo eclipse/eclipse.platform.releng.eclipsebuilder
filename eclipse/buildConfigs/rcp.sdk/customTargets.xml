@@ -59,8 +59,7 @@
 		<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-hpux-motif-ia64_32.zip" />
 		<antcall target="assemble" />
 	</target>
-	
-	<target name="assemble.org.eclipse.rcp.sdk.linux.gtk.ppc64"/>
+
 	<target name="assemble.org.eclipse.rcp.sdk.linux.gtk.ia64"/>
 	
 	<target name="assemble.org.eclipse.rcp.sdk.solaris.gtk.sparc">
