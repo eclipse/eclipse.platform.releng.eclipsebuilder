@@ -92,18 +92,11 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 
 function column($servername) {
 
- if (! preg_match("/.eclipse.org/i",$servername)) {
       echo "<td width=\"7%\"><b>Download</b></td>";
-          echo "<td width=\"7%\"><b>Size</b></td>";
-                echo "<td width=\"40%\"><b>File</b></td>";
-                   echo "<td width=\"11%\"><b>Checksum</b></td>";
-      } else { 
-           echo "<td width=\"7%\"><b>Download</b></td>";
-          echo "<td width=\"7%\"><b>Size</b></td>";
-                echo "<td width=\"40%\"><b>File</b></td>";
-                   echo "<td width=\"11%\"><b>Checksum</b></td>";
-    }
-    return;
+      echo "<td width=\"7%\"><b>Size</b></td>";
+      echo "<td width=\"40%\"><b>File</b></td>";
+      echo "<td width=\"11%\"><b>Checksum</b></td>";
+      return;
 }
 
 function getDropSize($zipfile) {
@@ -123,28 +116,17 @@ function getDropSize($zipfile) {
 
 function genLinks($servername,$buildlabel,$zipfile) {
 
-if (preg_match("/.eclipse.org/i",$servername)) {
-#     $httplink = "http://www.eclipse.org/downloads/download.php?file=/eclipse/downloads/drops/$buildlabel/$zipfile";
      $httplink = "download.php?dropFile=$zipfile";
-     $httplabel = $zipfile;
-     $httpline =  "<div align=\"left\"><a href=\"$httplink\">$httplabel</a>"; 
-     $md5name = "";
-     $shaname = "";
-} else {
-    $httplink = "download.php?dropFile=$zipfile";
-    $httplabel = "(http)";
-    $httpline = "<div align=\"left\"><a href=\"$httplink\">$httplabel</a>"; 
-    $md5name = $zipfile;
-    $shaname = $zipfile;
-}
-  $filesize = getDropSize($zipfile);
-    
-  echo "$httpline"; 
-  echo "&nbsp;&nbsp"; 
-  echo "<td>$filesize</td>";
-  echo "<td>$zipfile</td>";
-  echo "<td><a href=\"http://download.eclipse.org/eclipse/downloads/drops/@buildlabel@/checksum/$zipfile.md5\">(md5)</a>";
-  echo " <a href=\"http://download.eclipse.org/eclipse/downloads/drops/@buildlabel@/checksum/$zipfile.sha1\">(sha1)</a>";
+     $httplabel = "(http)";
+     $httpline =  "<div align=\"left\"><a href=\"$httplink\">$httplabel</a>";
+     $filesize = getDropSize($zipfile);
+
+     echo "$httpline";
+     echo "&nbsp;&nbsp";
+     echo "<td>$filesize</td>";
+     echo "<td>$zipfile</td>";
+     echo "<td><a href=\"http://download.eclipse.org/eclipse/downloads/drops/@buildlabel@/checksum/$zipfile.md5\">(md5)</a>";
+     echo " <a href=\"http://download.eclipse.org/eclipse/downloads/drops/@buildlabel@/checksum/$zipfile.sha1\">(sha1)</a>";
 }
 ?>	
 
