@@ -38,15 +38,11 @@ tagMaps=""
 tag=""
 
 # tag v20060907 is the one that includes the new build page
-#buildProjectTags=v20070228
-#buildProjectTags=v20070301
-#buildProjectTags=v20070301a
-#buildProjectTags=v20070305
-#buildProjectTags=v20070306
-#buildProjectTags=v20070312b
-#buildProjectTags=v20070313b
-#buildProjectTags=v20070315a
-buildProjectTags=v20070316
+#buildProjectTags=v20071206
+#buildProjectTags=v20071218a
+#buildProjectTags=v20080102
+#buildProjectTags=v20080109b
+buildProjectTags=v20080110a
 
 #updateSite property setting
 updateSite=""
@@ -190,7 +186,7 @@ cp -r eclipseInternalBuildTools/plugins org.eclipse.releng.basebuilder
 linuxJdkArchive=jdks/jdk-1_5_0_11-fcs-bin-b03-linux-i586-15_dec_2006.zip
 linuxppcJdkArchive=jdks/IBMJava2-SDK-ppc-142.zip
 linuxppcJdkArchive15=jdks/ibm-java2-sdk-50-linux-ppc.tgz
-windowsJreArchive=jdks/jdk-1_4_2_14-fcs-bin-b03-windows-i586-22_jan_2007.zip
+windowsJreArchive=jdks/jdk-1_4_2_14-fcs-bin-b05-windows-i586-14_mar_2007.zip
 windows15JdkArchive=jdks/jdk-1_5_0_11-fcs-bin-b03-windows-i586-15_dec_2006.zip
 windows16JdkArchive=jdks/1.6/jdk-6-fcs-bin-b105-windows-i586-29_nov_2006.zip
 windows10FoundationArchive=jdks/weme-win-x86-foundation10_6.1.0.20060317-111429.zip
@@ -282,6 +278,6 @@ $buildCommandRSS
 fi
 
 #clean up
-#rm -rf $builderDir
+rm -rf $builderDir
 
 
