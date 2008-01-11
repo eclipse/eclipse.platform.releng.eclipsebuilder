@@ -1,6 +1,6 @@
 <project name="Helper targets" default="noDefault">
 	<property name="postingDirectory" value="${buildDirectory}" />
-	<property name="publishingContent" value="${eclipse.build.configs}/../publishingFiles"/>
+	<property name="publishingContent" value="${eclipse.build.configs}/../publishingFiles" />
 
 	<!-- ===================================================================== -->
 	<!-- Set of helper targets for building the Eclipse SDK -->
@@ -49,11 +49,16 @@
 			<param name="ws" value="win32" />
 			<param name="os" value="win32" />
 			<param name="arch" value="x86_64" />
-		</antcall> 
+		</antcall>
 		<antcall target="packageSwtStandalone">
-				<param name="ws" value="wpf" />
-				<param name="os" value="win32" />
-				<param name="arch" value="x86" />
+			<param name="ws" value="win32" />
+			<param name="os" value="win32" />
+			<param name="arch" value="ia64" />
+		</antcall>
+		<antcall target="packageSwtStandalone">
+			<param name="ws" value="wpf" />
+			<param name="os" value="win32" />
+			<param name="arch" value="x86" />
 		</antcall>
 		<antcall target="packageSwtStandalone">
 			<param name="os" value="linux" />
@@ -64,7 +69,7 @@
 			<param name="os" value="aix" />
 			<param name="ws" value="motif" />
 			<param name="arch" value="ppc" />
-		</antcall>		
+		</antcall>
 		<antcall target="packageSwtStandalone">
 			<param name="os" value="solaris" />
 			<param name="ws" value="motif" />
@@ -89,11 +94,11 @@
 			<param name="os" value="linux" />
 			<param name="ws" value="gtk" />
 			<param name="arch" value="x86" />
-		</antcall>		
+		</antcall>
 		<antcall target="packageSwtStandalone">
 			<param name="os" value="macosx" />
 			<param name="ws" value="carbon" />
-			<param name="arch" value="" /> 
+			<param name="arch" value="" />
 		</antcall>
 		<antcall target="packageSwtStandalone">
 			<param name="os" value="linux" />
@@ -106,8 +111,7 @@
 			<param name="arch" value="ppc" />
 		</antcall>
 
-	   <available property="org.eclipse.swt.win32.wce_ppc.arm.exists"
-			file="${buildDirectory}/plugins/org.eclipse.swt.win32.wce_ppc.arm" type="dir"/>
+		<available property="org.eclipse.swt.win32.wce_ppc.arm.exists" file="${buildDirectory}/plugins/org.eclipse.swt.win32.wce_ppc.arm" type="dir" />
 		<antcall target="fetch_org.eclipse.swt.win32.wce_ppc.arm" />
 
 		<antcall target="packageSwtStandalone">
@@ -115,7 +119,7 @@
 			<param name="os" value="wce_ppc" />
 			<param name="arch" value="arm" />
 			<param name="skipChecksum" value="true" />
-		</antcall> 
+		</antcall>
 		<antcall target="generateChecksum">
 			<param name="downloadFile" value="swt-${buildId}-win32-wce_ppc-arm-j2se.zip" />
 			<param name="archiveFullPath" value="${postingDirectory}/${buildLabel}/swt-${buildId}-win32-wce_ppc-arm-j2se.zip" />
@@ -140,20 +144,20 @@
 
 	<target name="packageSwtStandalone">
 		<condition property="downloadFile" value="swt-${buildid}-${ws}-${os}.zip">
-			<equals arg1="${arch}" arg2=""/>
+			<equals arg1="${arch}" arg2="" />
 		</condition>
 		<property name="downloadFile" value="swt-${buildid}-${ws}-${os}-${arch}.zip" />
 		<property name="destination" value="${postingDirectory}/${buildLabel}" />
 		<property name="archiveFullPath" value="${destination}/${downloadFile}" />
 
 		<condition property="swtdir" value="${buildDirectory}/plugins/org.eclipse.swt.${ws}.${os}">
-		<equals arg1="${arch}" arg2=""/>
+			<equals arg1="${arch}" arg2="" />
 		</condition>
 
-		<property name="swtdir" value="${buildDirectory}/plugins/org.eclipse.swt.${ws}.${os}.${arch}"/>
-		<ant antfile="build.xml" target="swtdownload" dir="${swtdir}">			
+		<property name="swtdir" value="${buildDirectory}/plugins/org.eclipse.swt.${ws}.${os}.${arch}" />
+		<ant antfile="build.xml" target="swtdownload" dir="${swtdir}">
 		</ant>
-		
+
 		<antcall target="generateChecksum" />
 	</target>
 
@@ -208,22 +212,19 @@
 	<target name="testAll" unless="skip.tests">
 		<waitfor maxwait="4" maxwaitunit="hour" checkevery="1" checkeveryunit="minute">
 			<and>
-				<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-Automated-Tests-${buildId}.zip.md5"/>
-				<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-SDK-${buildId}-win32.zip.md5"/>
-				<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-SDK-${buildId}-linux-gtk.tar.gz.md5"/>
-				<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-SDK-${buildId}-macosx-carbon.tar.gz.md5"/>
-				<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-RCP-${buildId}-delta-pack.zip.md5"/>
+				<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-Automated-Tests-${buildId}.zip.md5" />
+				<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-SDK-${buildId}-win32.zip.md5" />
+				<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-SDK-${buildId}-linux-gtk.tar.gz.md5" />
+				<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-SDK-${buildId}-macosx-carbon.tar.gz.md5" />
+				<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-RCP-${buildId}-delta-pack.zip.md5" />
 			</and>
 		</waitfor>
 
 		<property name="cvstest.properties" value="${base.builder}/../eclipseInternalBuildTools/cvstest.properties" />
-		<antcall target="configure.team.cvs.test"/>
+		<antcall target="configure.team.cvs.test" />
 
 		<!--replace buildid in vm.properties for JVM location settings-->
-		<replace dir="${eclipse.build.configs}/sdk.tests/testConfigs"
-			token="@buildid@"
-			value="${buildId}"
-			includes="**/vm.properties"/>
+		<replace dir="${eclipse.build.configs}/sdk.tests/testConfigs" token="@buildid@" value="${buildId}" includes="**/vm.properties" />
 
 		<parallel>
 			<antcall target="test-JUnit" />
@@ -254,7 +255,7 @@
 		<property name="dropLocation" value="${postingDirectory}" />
 		<ant antfile="testAll.xml" dir="${eclipse.build.configs}/sdk.tests/testConfigs" target="performanceTests" />
 		<antcall target="generatePerformanceResults" />
-	</target>	
+	</target>
 
 	<!-- ===================================================================== -->
 	<!-- Helper targets                                                        -->
@@ -293,11 +294,8 @@
 		</ant>
 
 		<!--  Replace build label in generated html files -->
-		<replace dir="${postingDirectory}/${buildLabel}"
-					token="@buildlabel@"
-					value="${buildLabel}"
-					includes="**/*.php"/>
-		
+		<replace dir="${postingDirectory}/${buildLabel}" token="@buildlabel@" value="${buildLabel}" includes="**/*.php" />
+
 	</target>
 
 	<target name="generatePerformanceResults">
@@ -322,8 +320,7 @@
 						-config eclipseperflnx3,eclipseperfwin2,eclipseperflnx2,eclipseperfwin1,eclipseperflnx1 
 						-config.properties ${eclipse.perf.config.descriptors}
 			            -dataDir ${postingDirectory}/../../data/v34
-						-scenario.pattern org.eclipse.%.test%"
-			/>
+						-scenario.pattern org.eclipse.%.test%" />
 			<!-- add this argument to list above when there are milestone builds to highlight 
 			-highlight.latest 3.3M1_
 			-->
@@ -331,14 +328,7 @@
 			<sysproperty key="eclipse.perf.dbloc" value="${dbloc}" />
 		</java>
 
-		<performanceResults
-			xmlDirectoryName="${postingDirectory}/${buildLabel}/performance/xml"
-			dropDirectoryName="${postingDirectory}/${buildLabel}"
-			testResultsTemplateFileName="${publishingContent}/templateFiles/performance.php.template"
-			testResultsHtmlFileName="performance/performance.php"
-			hrefTestResultsTargetPath="html"
-			testManifestFileName="${publishingContent}/performanceTestManifest.xml" 
-		/>
+		<performanceResults xmlDirectoryName="${postingDirectory}/${buildLabel}/performance/xml" dropDirectoryName="${postingDirectory}/${buildLabel}" testResultsTemplateFileName="${publishingContent}/templateFiles/performance.php.template" testResultsHtmlFileName="performance/performance.php" hrefTestResultsTargetPath="html" testManifestFileName="${publishingContent}/performanceTestManifest.xml" />
 
 		<replace file="${postingDirectory}/${buildLabel}/performance/performance.php" token="@buildType@" value="${buildType}" />
 	</target>
@@ -346,7 +336,7 @@
 	<target name="verifyCompile" if="eclipse.running">
 		<echo message="Checking for compile errors..." />
 		<!--create html output for compile logs-->
-		<eclipse.convert input="${postingDirectory}/${buildLabel}/compilelogs" validation="true"/>
+		<eclipse.convert input="${postingDirectory}/${buildLabel}/compilelogs" validation="true" />
 		<!-- Sends email to recipient list in monitor.properties with compile logs attached if errors found-->
 		<verifyCompile install="${postingDirectory}/${buildLabel}/compilelogs" />
 	</target>
@@ -362,14 +352,14 @@
 	<target name="snzBuilds">
 		<!--copy drops to local directory for rsync with snz-->
 		<copy todir="/builds/transfer/files/snz">
-			<fileset dir="${postingDirectory}" includes ="${buildLabel}/eclipse-SDK-*-win32.zip,${buildLabel}/eclipse-SDK-*-linux-gtk.tar.gz" excludes="${buildLabel}/eclipse-SDK-examples-*-win32.zip" />
+			<fileset dir="${postingDirectory}" includes="${buildLabel}/eclipse-SDK-*-win32.zip,${buildLabel}/eclipse-SDK-*-linux-gtk.tar.gz" excludes="${buildLabel}/eclipse-SDK-examples-*-win32.zip" />
 		</copy>
 	</target>
 
 	<target name="zrhBuilds">
 		<!--copy drops to local directory for rsync with zrh-->
 		<copy todir="/builds/transfer/files/zrh">
-			<fileset dir="${postingDirectory}" includes ="${buildLabel}/eclipse-SDK-*-macosx-carbon.tar.gz,${buildLabel}/eclipse-SDK-*-win32.zip,${buildLabel}/eclipse-SDK-*-linux-*.tar.gz" excludes="${buildLabel}/eclipse-SDK-examples-*-win32.zip,${buildLabel}/eclipse-SDK-*-linux-gtk-x86_64.tar.gz,${buildLabel}/eclipse-SDK-*-linux-gtk-ppc.tar.gz" />
+			<fileset dir="${postingDirectory}" includes="${buildLabel}/eclipse-SDK-*-macosx-carbon.tar.gz,${buildLabel}/eclipse-SDK-*-win32.zip,${buildLabel}/eclipse-SDK-*-linux-*.tar.gz" excludes="${buildLabel}/eclipse-SDK-examples-*-win32.zip,${buildLabel}/eclipse-SDK-*-linux-gtk-x86_64.tar.gz,${buildLabel}/eclipse-SDK-*-linux-gtk-ppc.tar.gz" />
 		</copy>
 	</target>
 	<!-- ===================================================================== -->
@@ -380,7 +370,7 @@
 	</target>
 
 	<target name="cvsUp">
-		<exec dir="." executable="/home/users/releng/cvsup/upload_snz.pl"/>
+		<exec dir="." executable="/home/users/releng/cvsup/upload_snz.pl" />
 		<cvsUp flagString="http://dev.eclipse.org/builds/snz_complete.flag" />
 		<echo message="cvsUp complete." />
 	</target>
@@ -396,24 +386,24 @@
 		<delete includeemptydirs="true">
 			<fileset dir="${updateJarWorkingDir}/eclipse/features" includes="com.ibm.icu.base*/**,master-equinox*/**" />
 		</delete>
-		
+
 		<!--operation on creates update jars for features and for plug-ins which are to be unpacked when installed-->
-		<java classname="org.eclipse.releng.generators.UpdateBuilder" >
+		<java classname="org.eclipse.releng.generators.UpdateBuilder">
 			<arg line="-root ${updateJarWorkingDir}/eclipse -directory ${buildDirectory}/directory.txt -build ${buildId} -site ${updateJarWorkingDir}/site -sitexml ${updateSite}/site.xml" />
 			<classpath>
-				<pathelement location="${base.builder}/plugins/org.eclipse.internal.build.tools/internalTools.jar"/>
-				<pathelement location="${base.builder}/plugins/org.eclipse.build.tools/buildTools.jar"/>
-				<pathelement location="${base.builder}/plugins/org.eclipse.osgi_3.4.0.v20071207.jar"/>				
+				<pathelement location="${base.builder}/plugins/org.eclipse.internal.build.tools/internalTools.jar" />
+				<pathelement location="${base.builder}/plugins/org.eclipse.build.tools/buildTools.jar" />
+				<pathelement location="${base.builder}/plugins/org.eclipse.osgi_3.4.0.v20071207.jar" />
 			</classpath>
 		</java>
-		
+
 		<!--store previous site.xml-->
 		<move file="${updateSite}/site.xml" tofile="${updateSite}/site.xml.bak" overwrite="true" />
 		<!--copy site.xml to update site-->
 		<copy todir="${updateSite}" overwrite="true">
 			<fileset dir="${updateJarWorkingDir}/site" includes="site.xml" />
 		</copy>
-		
+
 		<mkdir dir="${updateSite}/features" />
 		<mkdir dir="${updateSite}/plugins" />
 
@@ -424,23 +414,17 @@
 		<exec executable="unzip" dir=".">
 			<arg line="-j ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.bak.zip -i */plugins/* -x */master-equinox* */com.ibm.icu.base* -d ${updateSite}/plugins" />
 		</exec>
-	    <java jar="${eclipse.home}/plugins/org.eclipse.equinox.launcher.jar"
-	           fork="true"
-     	       jvm="${java15-home}/bin/java"
-	           failonerror="true"
-	           maxmemory="768m"
-	    	   error="${buildDirectory}/errorlogupdatesite.txt"
-			   dir="${buildDirectory}">	    	   
-	         <arg line="-application org.eclipse.update.core.siteOptimizer"/>
-	         <arg line="-digestBuilder -digestOutputDir=${updateSite} -siteXML=${updateSite}/site.xml"/>
-	       </java>
+		<java jar="${eclipse.home}/plugins/org.eclipse.equinox.launcher.jar" fork="true" jvm="${java15-home}/bin/java" failonerror="true" maxmemory="768m" error="${buildDirectory}/errorlogupdatesite.txt" dir="${buildDirectory}">
+			<arg line="-application org.eclipse.update.core.siteOptimizer" />
+			<arg line="-digestBuilder -digestOutputDir=${updateSite} -siteXML=${updateSite}/site.xml" />
+		</java>
 	</target>
 
 	<target name="cleanSites">
 		<cleanSite ageInMinutes="1440" directoryName="/builds/transfer/files/master/downloads/drops" realDelete="true" />
 		<cleanSite ageInMinutes="1440" directoryName="/builds/transfer/files/master/equinox/drops" realDelete="true" />
 		<cleanSite ageInMinutes="1440" directoryName="/builds/transfer/files/bogus/downloads/drops" realDelete="true" />
-	  <cleanSite ageInMinutes="1440" directoryName="/builds/transfer/files/bogus/equinox/drops" realDelete="true" />
+		<cleanSite ageInMinutes="1440" directoryName="/builds/transfer/files/bogus/equinox/drops" realDelete="true" />
 		<cleanSite ageInMinutes="1440" directoryName="/builds/transfer/files/zrh" realDelete="true" />
 		<cleanSite ageInMinutes="1440" directoryName="/builds/transfer/files/snz" realDelete="true" />
 	</target>
