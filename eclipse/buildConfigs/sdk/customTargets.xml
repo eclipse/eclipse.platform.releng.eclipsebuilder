@@ -226,7 +226,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64" includes="
 				about_files/mpl-v11.txt" />
 		</copy>	
-		<antcall target="buildSourceDrops" />		
+				
 	</target>
 
 	<!-- ===================================================================== -->
@@ -239,7 +239,8 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Steps to do after generating the build scripts -->
 	<!-- ===================================================================== -->
 	<target name="postGenerate">
-		<antcall target="clean" />	
+		<antcall target="clean" />
+		<antcall target="buildSourceDrops" />
 	</target>
 
 	<!-- ===================================================================== -->
