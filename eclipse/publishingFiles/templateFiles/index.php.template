@@ -119,6 +119,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 <li><a href="#ExamplePlugins">Example Plug-ins</a></li>
 <li><a href="#RCPRuntime">RCP Runtime Binary</a></li>
 <li><a href="#RCPSDK">RCP SDK</a></li>
+<li><a href="#DeltaPack">Delta Pack</a></li>
 <li><a href="#com.ibm.icu">com.ibm.icu.base Binary and Source Plug-ins</a></li>
 <li><a href="#PlatformRuntime">Platform Runtime Binary</a></li>
 <li><a href="#PlatformSDK">Platform SDK</a></li>

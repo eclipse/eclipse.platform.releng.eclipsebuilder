@@ -10,7 +10,7 @@
 
 <target name="assemble.delta.delta.delta.xml">
 	<antcall target="assembler">
-		<param name="archiveName" value="eclipse-RCP-${buildId}-delta-pack.zip"/>
+		<param name="archiveName" value="eclipse-${buildId}-delta-pack.zip"/>
 	</antcall>
 </target>
 

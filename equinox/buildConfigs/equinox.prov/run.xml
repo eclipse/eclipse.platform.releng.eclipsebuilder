@@ -20,7 +20,7 @@
 		<mkdir dir="${p2.director.dir}" />
 
 		<property name="sdk.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-ppc.tar.gz" />
-		<property name="rcp.delta.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-delta-pack.zip" />
+		<property name="rcp.delta.archive" value="${postingDirectory}/${buildLabel}/eclipse-${buildId}-delta-pack.zip" />
 		<property name="rcp.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-linux-gtk-ppc.tar.gz" />
 		<property name="releng.tools.archive" value="${postingDirectory}/${buildLabel}/org.eclipse.releng.tools-${buildId}.zip" />
 

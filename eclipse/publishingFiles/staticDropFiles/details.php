@@ -78,6 +78,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 <li><a href="#ExamplePlugins">Example Plug-ins</a></li>
 <li><a href="#RCPRuntime">RCP Runtime Binary</a></li>
 <li><a href="#RCPSDK">RCP SDK</a></li>
+<li><a href="#DeltaPack">Delta Pack</a></li>
 <li><a href="#com.ibm.icu">com.ibm.icu.base Binary and Source Plug-ins</a></li>
 <li><a href="#PlatformRuntime">Platform Runtime Binary</a></li>
 <li><a href="#PlatformSDK">Platform SDK</a></li>
@@ -166,8 +167,14 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				<ul>
 				<li>
 				These drops consist of the Eclipse Rich Client Platform base plug-ins and their source and the RCP 
-				delta pack. The delta pack contains all the platform specific resources from RCP 
-				and the platform and is used for cross-platform exports of RCP applications.</li></ul>
+				delta pack. 
+				</li></ul>
+
+				<li><a name="DeltaPack"> <b> Delta Pack </b> </a>
+				<ul>
+				<li>				
+				The delta pack contains all the platform specific resources from the SDK and is used for cross-platform exports of RCP applications.</li></ul>
+				</li></ul>
 				
 				<li><a name="com.ibm.icu"> <b> com.ibm.icu.base binary and source Plug-ins </b> </a>
 				<ul>

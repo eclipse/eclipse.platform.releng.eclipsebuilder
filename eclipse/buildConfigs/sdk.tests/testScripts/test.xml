@@ -227,7 +227,7 @@
 	</target>
 
 	<target name="configureDeltaPack" if="pdebuild">
-		<property name="deltapackArchive" value="eclipse-RCP-${buildId}-delta-pack.zip" />
+		<property name="deltapackArchive" value="eclipse-${buildId}-delta-pack.zip" />
 		<property name="installDeltapack" value="${install}/deltapack" />
 		<mkdir dir="${installDeltapack}"/>	
 		<exec dir="." executable="unzip">

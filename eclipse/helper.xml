@@ -216,7 +216,7 @@
 				<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-SDK-${buildId}-win32.zip.md5" />
 				<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-SDK-${buildId}-linux-gtk.tar.gz.md5" />
 				<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-SDK-${buildId}-macosx-carbon.tar.gz.md5" />
-				<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-RCP-${buildId}-delta-pack.zip.md5" />
+				<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-${buildId}-delta-pack.zip.md5" />
 			</and>
 		</waitfor>
 
