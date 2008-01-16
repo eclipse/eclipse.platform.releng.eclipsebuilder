@@ -112,7 +112,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 <div class="homeitem3col">
 <h3><a name="Logs"> Logs <?php echo "$buildType $buildName"; ?> </a></h3>
 <ul>
-<li> <a href="chkpiiResults.php"><b> RelEng Build Tests Logs </b></a>
+<li> <a href="chkpiiResults.php"><b> CHKPII Tests Logs </b></a>
 These logs only need to be checked if the org.eclipse.releng.tests above report a test failures. <?php if (! (preg_match("/N/i",$buildName))) { echo "<br><br>Cvs tag v$buildName of org.eclipse.releng.eclipsebuilder and org.eclipse.releng.basebuilder was used to create this build."; } ?> 
 </li>
 <li> <a href="consoleLogs.php"><b> Console Output Logs </b></a>
