@@ -22,13 +22,13 @@
 			<platform id="device" name="All" fileName="@org.eclipse.equinox.device@.jar">
 			</platform>			
 			<platform id="event" name="All" fileName="@org.eclipse.equinox.event@.jar">
-			</platform>		
+			</platform>
+			<platform id="equinoxlauncher" name="All" fileName="@org.eclipse.equinox.launcher@.jar">0
+			</platform>			
 			<platform id="log" name="All" fileName="@org.eclipse.equinox.log@.jar">
 			</platform>			
 			<platform id="jspjasper" name="All" fileName="@org.eclipse.equinox.jsp.jasper@.jar">0
-			</platform>			
-			<platform id="equinoxlauncher" name="All" fileName="@org.eclipse.equinox.launcher@.jar">0
-			</platform>			
+			</platform>					
 			<platform id="jspjasperregistry" name="All" fileName="@org.eclipse.equinox.jsp.jasper.registry@.jar">
 			</platform>					
 			<platform id="metatype" name="All" fileName="@org.eclipse.equinox.metatype@.jar">
