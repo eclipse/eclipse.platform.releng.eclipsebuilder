@@ -52,8 +52,7 @@
 				<antcall target="updatePackProperties" />
 				<antcall target="signMasterFeature" />
 				<antcall target="packMasterFeature" />
-				<antcall target="unpackUpdateJarsForPackaging" />
-				<antcall target="buildUpdateSite" />
+				<antcall target="unpackUpdateJarsForPackaging" />				
 			</sequential>
 			<sequential>
 				<antcall target="buildMasterRootFeature" />
@@ -64,6 +63,7 @@
 		<parallel failonany="true">
 			<sequential>
 				<antcall target="packageEclipseDistributables" />
+				<antcall target="buildUpdateSite" />
 				<antcall target="packageEquinoxDistributables" />
 				<antcall target="publishEclipse" />
 				<antcall target="publishEquinox" />
@@ -180,7 +180,7 @@
 			<arg line="-jarProcessor -verbose -outputDir ${buildLabel} -processAll -pack ${repack} ${packtmp}/${archiveName}" />
 		</java>
 
-		<!--	<delete dir="${packtmp}" /> -->
+		<delete dir="${packtmp}" />
 	</target>
 
 	<target name="waitForChangedAttribs" unless="attribs.changed">
