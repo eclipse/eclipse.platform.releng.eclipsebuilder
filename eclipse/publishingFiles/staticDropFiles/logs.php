@@ -3,24 +3,59 @@
 <head>
 
 <?php
-		 $parts = explode("/", getcwd());
-		 $parts2 = explode("-", $parts[count($parts) - 1]);
-		 $buildName = $parts2[0] . "-" . $parts2[1];
-		 
-		 // Get build type names
 
-		 $fileHandle = fopen("../../dlconfig2.txt", "r");
-		 while (!feof($fileHandle)) {
-		 		 
-		 		 $aLine = fgets($fileHandle, 4096); // Length parameter only optional after 4.2.0
-		 		 $parts = explode(",", $aLine);
-		 		 $dropNames[trim($parts[0])] = trim($parts[1]);
- 		 }
-		 fclose($fileHandle);
+function listLogs($myDir) {
 
-		 $buildType = $dropNames[$parts2[0]];
+        $aDirectory = dir($myDir);
+        $index = 0;
+        $cdir = getcwd();
+        while ($anEntry = $aDirectory->read()) {
+            $path = $cdir . "/" . $myDir . "/" . $anEntry;
+            if (is_file($path)) {
+                $entries[$index] = $anEntry;
+                $index++;
+            }
+        }
 
-		 echo "<title>Logs for $buildType $buildName </title>";
+        aDirectory.closedir();
+        sort($entries);
+
+        if ($index < 0) {
+            echo "<br>There are no test logs for this build.";
+            return;
+        }
+        for ($i = 0; $i < $index; $i++) {
+            $anEntry = $entries[$i];
+            $line = "<td><a href=\"$myDir/$anEntry\">$anEntry</a></td>";
+            echo "<li>$line</li>";
+        }
+}
+
+function getBuildId() {
+        $parts = explode("/", getcwd());
+        $parts2 = explode("-", $parts[count($parts) - 1]);
+        $buildName = $parts2[0] . "-" . $parts2[1];
+
+        // Get build type names
+        $fileHandle = fopen("../../dlconfig2.txt", "r");
+        while (!feof($fileHandle)) {
+                $aLine = fgets($fileHandle, 4096); // Length parameter only optional after 4.2.0
+                $parts = explode(",", $aLine);
+                $dropNames[trim($parts[0])] = trim($parts[1]);
+        }
+        fclose($fileHandle);
+
+        $buildType = $dropNames[$parts2[0]];
+    
+        $buildId = $buildType.$buildName;
+ 
+        return($buildId);
+       
+}
+
+
+
+
 ?>
 <STYLE TYPE="text/css">
 <!--
@@ -29,7 +64,7 @@ P {text-indent: 30pt;}
 </STYLE>
 
 
-<title>Logs</title>
+<title>Drop Test Results</title>
 		 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 		 <meta name="author" content="Eclipse Foundation, Inc." />
 		 <meta name="keywords" content="eclipse,project,plug-ins,plugins,java,ide,swt,refactoring,free java ide,tools,platform,open source,development environment,development,ide" />
@@ -95,7 +130,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 <div id="topnavsep"></div>
 <div id="leftcol">
 <ul id="leftnav">
-<li><a href="testResults.php#Logs">Logs</a></li>
+<li><a href="logs.php">Logs</a></li>
 <li><a href="testResults.php#UnitTest">Unit Test Results</a></li>
 <li><a href="testResults.php#PluginsErrors">Plugins Containing Compile Errors</a></li>
  
@@ -107,35 +142,58 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 
 </div>
 
-
 <div id="midcolumn">
-<div class="homeitem">
-<h3>Logs <?php echo "$buildType $buildName"; ?> </h3>
+<div class="homeitem3col">
+<?php 
+    global $buildId;
+    $buildId = getBuildId(); 
+    echo "<title>Test Results for $buildId </title>\n";
+
+echo "<h3>Logs $buildType $buildName</h3>\n";
+
+echo <<<END
 <ul>
-<li> <a href="chkpiiResults.php"><b> CHKPII Tests Logs </b></a>
-These logs only need to be checked if the org.eclipse.releng.tests above report a test failures. <?php if (! (preg_match("/N/i",$buildName))) { echo "<br><br>Cvs tag v$buildName of org.eclipse.releng.eclipsebuilder and org.eclipse.releng.basebuilder was used to create this build."; } ?>
-</li>
-<li> <strong>Console Output Logs</strong>
+<li>
+<strong><a name="chkpii" id="chkpii"></a>CHKPII Logs</strong>
+These logs only need to be checked if the org.eclipse.releng.tests above report a test failures.
+END;
 
-<?php
-        global $myDir,$aDirectory;
-        $myDir  = "testresults/consolelogs";
-        include 'showLogs.php';
+if (! (preg_match("/N/i",$buildId))) { echo "<br><br>Cvs tag v$buildName of org.eclipse.releng.eclipsebuilder and org.eclipse.releng.basebuilder was used to create this build."; }
+echo"<ul>\n";
+        listLogs("testresults/chkpii");
 ?>
+</ul>
+</li>
 
-
+<li>
+<ul>
+<strong><a name="console" id="console"></a>Console Logs</strong>
+These logs contain the console output captured while running the JUnit automated tests.
+<?php
+        listLogs("testresults/consolelogs");
+?>
+</ul>
 </li>
 <li>
-<a href="buildLogs.php"><b> Javadoc Logs </b></a>
+<strong><a name="javadoc" id="javadoc"></a>Javadoc Logs</strong>
+<ul>
+
+<?php
+        listLogs("compilelogs");
+?>
+</ul>
 </li>
-<?php if (! (preg_match("/N/i",$buildName))) {
+<?php if (! (preg_match("/N/i",$buildId))) {
 echo " <li><a href=\"testresults/versiontool/results.xml\"><b> Versioning Compare Tool Output Logs </b></a>";
-echo "This log compares the build's plugin and features versions with 3.3.1.1 </li> ";
+echo "This log compares the build's plugin and features versions with 3.3. </li> ";
 }
 ?>
-</div>
-</div>
 
+</li>
+</li>
+</div>
+</div>
+</br></br></br>
 <div id="footer">
 		 <ul id="footernav">
 		 		 <li class="first"><a href="/">Home</a></li>
