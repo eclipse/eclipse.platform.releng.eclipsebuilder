@@ -64,7 +64,7 @@
 		<antcall target="setup.generator" />
 		<antcall target="setup.director" />
 
-		<antcall target="generate.metadata.agent" />
+		<antcall target="generate.metadata.agent"/>			
 
 		<antcall target="run.director">
 			<param name="p2.agent.install.path" value="${p2.agent.install.win32}" />
@@ -93,6 +93,14 @@
 		<antcall target="generate.metadata.releng.tools" />
 		<antcall target="zip.install" />
 
+		<!--Collect logs from p2 run and copy to build directory-->
+		<property name="equinoxTestResults" value="${equinoxPostingDirectory}/testresults"/>
+		<mkdir dir="${equinoxTestResults}"/> 
+		<copy todir="${equinoxPostingDirectory}">
+			<fileset dir="${p2.root}">
+				<include name="**/*.log" />
+			</fileset>
+		</copy>
 	</target>	
 
 	<target name="setup.generator">
