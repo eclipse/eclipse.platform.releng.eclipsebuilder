@@ -114,10 +114,10 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 <ul>
 <li> <a href="logs.php#chkpii"><b> CHKPII Test Logs </b></a>
 </li>
-<li> <a href="logs.php#console"><b> Console Output Logs </b></a>
-</li>
 <li>
 <a href="logs.php#javadoc"><b> Javadoc Logs </b></a>
+</li>
+<li> <a href="logs.php#console"><b> Console Output Logs </b></a>
 </li>
 <?php if (! (preg_match("/N/i",$buildName))) {
 echo " <li><a href=\"testresults/versiontool/results.xml\"><b> Versioning Compare Tool Output Logs </b></a>";
