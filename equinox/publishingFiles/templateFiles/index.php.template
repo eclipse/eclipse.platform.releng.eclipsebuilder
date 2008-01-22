@@ -183,7 +183,7 @@ are quite complete, all should be considered experimental.</P></TD></TR></table>
 <table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" > 
 <TR> <TD HEIGHT="48" COLSPAN="2"> <P>The Equinox Incubator is a place for exploring Eclipse and OSGi running in
 different scenarios and environments (e.g., secure, server-side, ...). The downloads supplied below are made available as a convenience and, while some
-are quite complete, all should be considered experimental. For more about provisoning, see <a href="http://wiki.eclipse.org/Category:Provisioning"> provisioning articles on the eclipse.org wiki"</a>  Click <a href="logs.php">to view</a> the logs that were generated during the p2 build.</P></TD></TR></table>
+are quite complete, all should be considered experimental. For more about provisoning, see <a href="http://wiki.eclipse.org/Category:Provisioning"> provisioning articles on the eclipse.org wiki</a>.  Click <a href="logs.php">to view</a> the logs that were generated during the p2 build.</P></TD></TR></table>
 <table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" >
 <tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="33%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
 </tr> %provisioningincubator% </table>
