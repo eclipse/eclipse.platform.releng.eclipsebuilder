@@ -65,51 +65,72 @@ P {text-indent: 30pt;}
 
 
 <title>Drop Test Results</title>
-		 		  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-		 		  <meta name="author" content="Eclipse Foundation, Inc." />
-		 		  <meta name="keywords" content="eclipse,project,plug-ins,plugins,java,ide,swt,refactoring,free java ide,tools,platform,open source,development environment,development,ide" />
-		 		  <link rel="stylesheet" type="text/css" href="../../../eclipse.org-common/stylesheets/visual.css" media="screen" />
-		 		  <link rel="stylesheet" type="text/css" href="../../../eclipse.org-common/stylesheets/layout.css" media="screen" />
-		 		  <link rel="stylesheet" type="text/css" href="../../../eclipse.org-common/stylesheets/print.css" media="print" />
-		 		  <script type="text/javascript">
+		 		  		 		   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		 		  		 		   <meta name="author" content="Eclipse Foundation, Inc." />
+		 		  		 		   <meta name="keywords" content="eclipse,project,plug-ins,plugins,java,ide,swt,refactoring,free java ide,tools,platform,open source,development environment,development,ide" />
+		 		  		 		   <link rel="stylesheet" type="text/css" href="../../../eclipse.org-common/stylesheets/visual.css" media="screen" />
+		 		  		 		   <link rel="stylesheet" type="text/css" href="../../../eclipse.org-common/stylesheets/layout.css" media="screen" />
+		 		  		 		   <link rel="stylesheet" type="text/css" href="../../../eclipse.org-common/stylesheets/print.css" media="print" />
+		 		  		 		   <script type="text/javascript">
 
 sfHover = function() {
-		 		  var sfEls = document.getElementById("leftnav").getElementsByTagName("LI");
-		 		  for (var i=0; i<sfEls.length; i++) {
-		 		  		 		  sfEls[i].onmouseover=function() {
-		 		  		 		  		 		  this.className+=" sfhover";
-		 		  		 		  }
-		 		  		 		  sfEls[i].onmouseout=function() {
-		 		  		 		  		 		  this.className=this.className.replace(new RegExp(" sfhover\\b"), "");
-		 		  		 		  }
-		 		  }
+		 		  		 		   var sfEls = document.getElementById("leftnav").getElementsByTagName("LI");
+		 		  		 		   for (var i=0; i<sfEls.length; i++) {
+		 		  		 		   		 		  		 		   sfEls[i].onmouseover=function() {
+		 		  		 		   		 		  		 		   		 		  		 		   this.className+=" sfhover";
+		 		  		 		   		 		  		 		   }
+		 		  		 		   		 		  		 		   sfEls[i].onmouseout=function() {
+		 		  		 		   		 		  		 		   		 		  		 		   this.className=this.className.replace(new RegExp(" sfhover\\b"), "");
+		 		  		 		   		 		  		 		   }
+		 		  		 		   }
 }
 if (window.attachEvent) window.attachEvent("onload", sfHover);
 </script>
 </head>
 <body>
 <div id="header">
-		 		  <a href="/"><img src="../../../eclipse.org-common/stylesheets/header_logo.gif" width="163" height="68" border="0" alt="Eclipse Logo" class="logo" /></a>
-		 		  <div id="searchbar">
-		 		  		 		  <img src="../../../eclipse.org-common/stylesheets/searchbar_transition.gif" width="92" height="26" class="transition" alt="" />
-		 		  		 		  <img src="../../../eclipse.org-common/stylesheets/searchbar_header.gif" width="64" height="17" class="header" alt="Search" />
-		 		  		 		  <form method="get" action="/search/search.cgi">
-		 		  		 		  		 		  <input type="hidden" name="t" value="All" />
-		 		  		 		  		 		  <input type="hidden" name="t" value="Doc" />
-		 		  		 		  		 		  <input type="hidden" name="t" value="Downloads" />
-		 		  		 		  		 		  <input type="hidden" name="t" value="Wiki" />
-		 		  		 		  		 		  <input type="hidden" name="wf" value="574a74" />
-		 		  		 		  		 		  <input type="text" name="q" value="" />
-		 		  		 		  		 		  <input type="image" class="button" src="../../../eclipse.org-common/stylesheets/searchbar_submit.gif" alt="Submit" onclick="this.submit();" />
-		 		  		 		  </form>
-		 		  </div>
-		 		  <ul id="headernav">
-		 		  		 		  <li class="first"><a href="/org/foundation/contact.php">Contact</a></li>
-		 		  		 		  <li><a href="/legal/">Legal</a></li>
-		 		  </ul>
+		 		  		 		   <a href="/"><img src="../../../eclipse.org-common/stylesheets/header_logo.gif" width="163" height="68" border="0" alt="Eclipse Logo" class="logo" /></a>
+		 		  		 		   <div id="searchbar">
+		 		  		 		   		 		  		 		   <img src="../../../eclipse.org-common/stylesheets/searchbar_transition.gif" width="92" height="26" class="transition" alt="" />
+		 		  		 		   		 		  		 		   <img src="../../../eclipse.org-common/stylesheets/searchbar_header.gif" width="64" height="17" class="header" alt="Search" />
+		 		  		 		   		 		  		 		   <form method="get" action="/search/search.cgi">
+		 		  		 		   		 		  		 		   		 		  		 		   <input type="hidden" name="t" value="All" />
+		 		  		 		   		 		  		 		   		 		  		 		   <input type="hidden" name="t" value="Doc" />
+		 		  		 		   		 		  		 		   		 		  		 		   <input type="hidden" name="t" value="Downloads" />
+		 		  		 		   		 		  		 		   		 		  		 		   <input type="hidden" name="t" value="Wiki" />
+		 		  		 		   		 		  		 		   		 		  		 		   <input type="hidden" name="wf" value="574a74" />
+		 		  		 		   		 		  		 		   		 		  		 		   <input type="text" name="q" value="" />
+		 		  		 		   		 		  		 		   		 		  		 		   <input type="image" class="button" src="../../../eclipse.org-common/stylesheets/searchbar_submit.gif" alt="Submit" onclick="this.submit();" />
+		 		  		 		   		 		  		 		   </form>
+		 		  		 		   </div>
+		 		  		 		   <ul id="headernav">
+		 		  		 		   		 		  		 		   <li class="first"><a href="/org/foundation/contact.php">Contact</a></li>
+		 		  		 		   		 		  		 		   <li><a href="/legal/">Legal</a></li>
+		 		  		 		   </ul>
 </div>
 <div id="topnavsep"></div>
 </div>
+
+
+<div id="leftcol">
+<ul id="leftnav">
+<li><a href="#Equinox">Eclipse Equinox</a></li>
+<li><a href="#Framework">Framework</a></li>
+<li><a href="#Addon">Add-on Bundles</a></li>
+<li><a href="#Incubator">Incubator</a></li>
+<li><a href="#ProvisioningIncubator">Provisioning Incubator</a></li>
+<li><a href="#Other">Other</a></li>
+<li><a href="#Launchers">Launchers</a></li>
+
+  </li>
+  <li style="background-image: url(../../../eclipse.org-common/stylesheets/leftnav_fade.jpg); background-repeat: repeat-x; border-style: none;">
+                        <br /><br /><br /><br /><br />
+  </li>
+</ul>
+
+</div>
+
+
 
 <div id="midcolumn">
 <div class="homeitem3col">
@@ -121,25 +142,25 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 echo "<h3>Logs for Equinox $buildId</h3>\n";
 ?>
 
-<li>
 <ul>
+<li>
 <strong><a name="p2logs" id="p2logs"></a>P2 Logs</strong>
 The .log files that were generated during the p2 build.
 <?php
         listLogs("testresults");
 ?>
-</ul>
 </li>
+</ul>
 </div>
 </div>
 </br></br></br>
 <div id="footer">
-		 		  <ul id="footernav">
-		 		  		 		  <li class="first"><a href="/">Home</a></li>
-		 		  		 		  <li><a href="/legal/privacy.php">Privacy Policy</a></li>
-		 		  		 		  <li><a href="/legal/termsofuse.php">Terms of Use</a></li>
-		 		  </ul>
-		 		  <p>Copyright &copy; 2006 The Eclipse Foundation. All Rights
+		 		  		 		   <ul id="footernav">
+		 		  		 		   		 		  		 		   <li class="first"><a href="/">Home</a></li>
+		 		  		 		   		 		  		 		   <li><a href="/legal/privacy.php">Privacy Policy</a></li>
+		 		  		 		   		 		  		 		   <li><a href="/legal/termsofuse.php">Terms of Use</a></li>
+		 		  		 		   </ul>
+		 		  		 		   <p>Copyright &copy; 2006 The Eclipse Foundation. All Rights
 Reserved</p>
 </div>
 </body>
