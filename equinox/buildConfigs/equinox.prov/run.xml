@@ -1,19 +1,15 @@
 <project name="provisioning build" default="build">
 
 	<!--
-		- Build the agent product. (win32)
-		- Build the metadata generator. (linux)
+		- Build the features.
 		- Run the metadata generator on the agent. 
-		- Build the director. (linux)
 		- Run the director and install a new agent.
 		- Zip up the agent.
-		- Build the self-hosting feature. (win32)
-		- Run the metadata generator on the self-hosting feature.
-		- Run the metadata generator on the Eclipse SDK.
+		- Run the metadata generator on the SDK, self-hosting feature, and releng tools.
 	-->
 	<target name="init">
 		<property name="p2.root" value="${buildDirectory}/${buildId}/p2temp" />
-		<mkdir dir="${p2.root}" />		
+		<mkdir dir="${p2.root}" />
 		<property name="p2.output.base" value="${p2.root}/equinox.p2.build" />
 		<mkdir dir="${p2.output.base}" />
 		<property name="p2.director.dir" value="${p2.output.base}/director" />
@@ -29,7 +25,7 @@
 		<property name="p2.agent.install.linux" value="${p2.output.base}/agent.install.linux" />
 		<mkdir dir="${p2.agent.install.linux}" />
 		<property name="p2.agent.install.macosx" value="${p2.output.base}/agent.install.macosx" />
-		<mkdir dir="${p2.agent.install.macosx}" />				
+		<mkdir dir="${p2.agent.install.macosx}" />
 		<property name="base" value="${p2.output.base}/base" />
 		<mkdir dir="${base}" />
 
@@ -57,15 +53,14 @@
 		<antcall target="extract">
 			<param name="extract-src" value="${rcp.delta.archive}" />
 			<param name="extract-dest" value="${base}" />
-		</antcall>	
+		</antcall>
 		<!-- Generate the metadata for the agent and create the install first due
 			to bug 199317... installing will install all fragments and we don't want the
 			ones from the SDK -->
 		<antcall target="setup.generator" />
+		<antcall target="generate.metadata.agent" />
+
 		<antcall target="setup.director" />
-
-		<antcall target="generate.metadata.agent"/>			
-
 		<antcall target="run.director">
 			<param name="p2.agent.install.path" value="${p2.agent.install.win32}" />
 			<param name="p2.os" value="win32" />
@@ -94,14 +89,14 @@
 		<antcall target="zip.install" />
 
 		<!--Collect logs from p2 run and copy to build directory-->
-		<property name="equinoxTestResults" value="${equinoxPostingDirectory}/testresults"/>
-		<mkdir dir="${equinoxTestResults}"/> 
+		<property name="equinoxTestResults" value="${equinoxPostingDirectory}/testresults" />
+		<mkdir dir="${equinoxTestResults}" />
 		<copy todir="${equinoxPostingDirectory}">
 			<fileset dir="${p2.root}">
 				<include name="**/*.log" />
 			</fileset>
 		</copy>
-	</target>	
+	</target>
 
 	<target name="setup.generator">
 		<path id="feature.zip.path">
@@ -122,8 +117,9 @@
 		<chmod file="${p2.generator.dir}/eclipse/eclipse" perm="777" />
 		<copy file="files/config.ini.generator" tofile="${p2.generator.dir}/eclipse/configuration/config.ini" overwrite="true" />
 		<copy todir="${p2.generator.dir}/eclipse/plugins">
-			<fileset dir="files">
-				<include name="**/*.jar" />
+			<fileset dir="${base}/eclipse/plugins">
+				<include name="**/org.eclipse.osgi.services_*.jar" />
+				<include name="**/org.eclipse.core.net_*.jar" />
 			</fileset>
 		</copy>
 	</target>
@@ -139,7 +135,24 @@
 			<param name="extract-src" value="${rcp.archive}" />
 			<param name="extract-dest" value="${p2.agent.dir}" />
 		</antcall>
-
+		<copy todir="${p2.agent.dir}/eclipse/plugins">
+			<fileset dir="${base}/eclipse/plugins">
+				<include name="**/org.eclipse.osgi.services_*.jar" />
+				<include name="**/org.eclipse.core.net_*.jar" />
+			</fileset>
+		</copy>
+		<!-- delete ICU and replace with ICU Base -->
+		<delete failonerror="false">
+			<fileset dir="${p2.agent.dir}/eclipse/plugins">
+				<include name="**/com.ibm.icu_*.jar" />
+			</fileset> 
+		</delete>
+		<copy todir="${p2.agent.dir}/eclipse/plugins">
+			<fileset dir="files">
+				<include name="**/*.jar" />
+			</fileset>
+		</copy>
+				
 		<path id="agent.zip.path">
 			<fileset dir="${buildDirectory}/${buildId}">
 				<include name="**/org.eclipse.equinox.p2.agent.feature-${buildId}.zip" />
@@ -329,8 +342,9 @@
 		<chmod file="${p2.director.dir}/eclipse/eclipse" perm="777" />
 		<copy file="files/config.ini.director" tofile="${p2.director.dir}/eclipse/configuration/config.ini" overwrite="true" />
 		<copy todir="${p2.director.dir}/eclipse/plugins">
-			<fileset dir="files">
-				<include name="**/*.jar" />
+			<fileset dir="${base}/eclipse/plugins">
+				<include name="**/org.eclipse.osgi.services_*.jar" />
+				<include name="**/org.eclipse.core.net_*.jar" />
 			</fileset>
 		</copy>
 	</target>
@@ -361,16 +375,6 @@
 
 		<!-- delete the metadata cache as well as the artifacts for unzipped bundles -->
 		<delete failonerror="false" includeEmptyDirs="true" dir="${p2.agent.install.path}/p2/org.eclipse.equinox.p2.core/cache" />
-
-		<!-- Delete the other copy of ICU until bug 199299 is fixed -->
-		<!--
-		<delete failonerror="false">
-			<fileset dir="${p2.install.path}/plugins">
-				<include name="**/com.ibm.icu_*.jar" />
-			</fileset> 
-		</delete>
-		-->
-
 	</target>
 
 	<target name="zip.install">
