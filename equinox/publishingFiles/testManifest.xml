@@ -84,13 +84,7 @@
 			<platform id="equinoxutil" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="@org.eclipse.equinox.util@.jar">
 			</platform>
 		 	<platform id="initializer" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="@org.eclipse.equinox.initializer@.jar">
-			</platform>
-			<platform id="securitybootjr14" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="@org.eclipse.equinox.security.boot.jre14x@.jar">
-			</platform>
-			<platform id="securitybootjr15" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="@org.eclipse.equinox.security.boot.jre15x@.jar">
-			</platform>
-			<platform id="securityprovider" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="@org.eclipse.equinox.security.provider@.jar">
-			</platform>			 									
+			</platform>							 									
 			<platform id="wireadmin" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="@org.eclipse.equinox.wireadmin@.jar">
 			</platform>			
 			<platform id="equinoxjmxcommon" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="eclipse-equinox-jmx-common-@buildid@.zip">
@@ -98,21 +92,9 @@
 			<platform id="equinoxjmxclient" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="eclipse-equinox-jmx-client-@buildid@.zip">
 			</platform>
 			<platform id="equinoxjmxserver" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="eclipse-equinox-jmx-server-@buildid@.zip">
- 			</platform>	
- 								    		 									
-    	</zipType>   	
-    	
-    	<antcall target="updateTestManifest">
-			<param name="bundle.id" value="org.eclipse.equinox.security.boot.jre14x" />
-		</antcall>
-		<antcall target="updateTestManifest">
-			<param name="bundle.id" value="org.eclipse.equinox.security.boot.jre15x" />
-		</antcall>
-		<antcall target="updateTestManifest">
-			<param name="bundle.id" value="org.eclipse.equinox.security.provider" />
-		</antcall>				
-    	
-    	
+ 			</platform>	 								    		 									
+    	</zipType> 	
+    	   	    	    	
     	<zipType name="ProvisioningIncubator">
 			<platform id="provagentrcpwin32" name="Windows &lt;img src = &quot;egg.gif&quot; >" fileName="equinox-p2-agent-@buildid@-win32.zip">			
  			</platform>
