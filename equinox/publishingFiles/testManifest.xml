@@ -106,9 +106,9 @@
  			</platform>
  			<platform id="provinstallerwin" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="equinox.p2.installer-@buildid@-win32.win32.x86.zip">			
  			</platform>	
- 			<platform id="provinstallerlin" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="equinox.p2.installer-@buildid@-linux.gtk.x86.zip">			
+ 			<platform id="provinstallerlin" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="equinox.p2.installer-@buildid@-linux.gtk.x86.tar.gz">			
  			</platform>
- 			<platform id="provinstallermac" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="equinox.p2.installer-@buildid@-macosx.carbon.ppc.zip">			
+ 			<platform id="provinstallermac" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="equinox.p2.installer-@buildid@-macosx.carbon.ppc.tar.gz">			
  			</platform>
  			
  		</zipType>
