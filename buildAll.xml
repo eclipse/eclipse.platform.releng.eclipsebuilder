@@ -403,8 +403,8 @@
 		<ant antfile="run.xml" dir="${equinox.build.configs}/equinox.prov">
 			<property name="component" value="${equinox.build.configs}/equinox.prov" />
 		</ant> 
-		<ant antfile="productBuild.xml" dir="${basedir}">
-			<property name="component" value="${equinox.build.configs}/equinox.p2.installer" />
+		<ant antfile="productBuild.xml" dir="${equinox.build.configs}/equinox.p2.installer">
+			<property name="builder" value="${equinox.build.configs}/equinox.p2.installer" />			
 		</ant>		
 	</target>
 
