@@ -89,9 +89,9 @@
 		<antcall target="zip.install" />
 
 		<!--Collect logs from p2 run and copy to build directory-->
-		<property name="equinoxTestResults" value="${equinoxPostingDirectory}/testresults" />
+		<property name="equinoxTestResults" value="${equinoxPostingDirectory}/${buildLabel}/testresults" />
 		<mkdir dir="${equinoxTestResults}" />
-		<copy todir="${equinoxPostingDirectory}">
+		<copy todir="${equinoxTestResults}">
 			<fileset dir="${p2.root}">
 				<include name="**/*.log" />
 			</fileset>
