@@ -88,6 +88,7 @@
 		<antcall target="generate.metadata.releng.tools" />
 		<antcall target="zip.install" />
 
+		<antcall target="update.pack200"/>
 		<!--Collect logs from p2 run and copy to build directory-->
 		<property name="equinoxTestResults" value="${equinoxPostingDirectory}/${buildLabel}/testresults" />
 		<mkdir dir="${equinoxTestResults}" />
@@ -96,6 +97,8 @@
 				<include name="**/*.log" />
 			</fileset>
 		</copy>
+		
+			
 	</target>
 
 	<target name="setup.generator">
@@ -437,5 +440,26 @@
 		</exec>
 	</target>
 
+	<target name="update.pack200">
+		<pathconvert property="launcher">
+			<path>
+				<fileset dir="${p2.generator.dir}/eclipse/plugins" includes="**/*.jar" />
+			</path>
+			<regexpmapper from="(org\.eclipse\.equinox\.launcher)(_)(.*)\.jar" to="\0" />
+		</pathconvert>
+		<java jar="${p2.generator.dir}/eclipse/plugins/${launcher}" fork="true" failonerror="false">
+		<arg line="-console -consolelog -nosplash  
+		-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator
+		-metadataRepository file:${updateSite} 
+		-artifactRepository file:${updateSite}
+		-update ${updateSite}
+		-flavor tooling
+		-append
+		-compress
+		-reusePack200Files" />
+		</java>
+	</target>
+	
+	
 </project>
 
