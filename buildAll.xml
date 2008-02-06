@@ -401,7 +401,7 @@
 
 	<target name="unziplauncherfragment">
 		<!--unzip binary version of equinox launcher fragments into ${baseLocation} so they are available to be used in the build-->
-		<property name="output" value="${buildDirectory}/${bundle.id}.txt" />		
+		<property name="output" value="${buildDirectory}/${bundle.id}.txt" />
 		<apply executable="ls" output="${output}" dir="${p2InstallBaseLocation}/plugins">
 			<fileset dir="${p2InstallBaseLocation}/plugins">
 				<patternset>
@@ -412,10 +412,11 @@
 		<replaceregexp file="${buildDirectory}/${bundle.id}.txt" match="\.jar" replace="" />
 		<replaceregexp file="${buildDirectory}/${bundle.id}.txt" match="\n" replace="" />
 		<loadfile property="bundledir" srcFile="${output}" failonerror="off" />
-		<delete file="${output}" failonerror="false" />
-		<unzip src="${bundledir}.jar" dest="${bundledir}" />
+		<delete file="${buildDirectory}/${bundle.id}.txt" failonerror="false" />
+		<exec executable="unzip" dir="${p2InstallBaseLocation}/plugins">
+			<arg line="-q ${bundledir}.jar -d ${bundledir}" />
+		</exec>
 	</target>
-
 
 	<target name="build.p2.installer.product">
 		<property name="p2InstallBaseLocation" value="${buildDirectory}/tmpsite/eclipse" />
@@ -432,8 +433,15 @@
 			<param name="p2InstallBaseLocation" value="${buildDirectory}/tmpsite/eclipse" />
 		</antcall>
 
-		<property name="tmpdatadir" value="${equinox.build.configs}/equinox.p2.installer/data" />
+		<!-- unzip delta pack in a temporary location to get binary versions of launchers for product build -->
+		<property name="pPath" value="${buildDirectory}/${buildId}/p2launchertmp" />
+		<unzip file="${postingDirectory}/${buildLabel}/eclipse-${buildId}-delta-pack.zip" dest="${pPath}">
+			<patternset>
+				<include name="eclipse/features/" />
+			</patternset>
+		</unzip>
 
+		<property name="tmpdatadir" value="${equinox.build.configs}/equinox.p2.installer/data" />
 		<mkdir dir="${tmpdatadir}" />
 		<java jar="${eclipse.home}/plugins/org.eclipse.equinox.launcher.jar" dir="${eclipse.pdebuild.scripts}/productBuild" fork="true" failonerror="false" jvm="${java15-home}/bin/java">
 			<jvmarg value="-Xmx768M" />
@@ -449,10 +457,10 @@
 			<arg value="-DbuildDirectory=${buildDirectory}/${buildId}/tmp" />
 			<arg value="-DbaseLocation=${p2InstallBaseLocation}" />
 			<arg value="-DeclipseBuildDirectory=${buildDirectory}" />
+			<arg value="-DpluginPath=${pPath}/eclipse" />
 			<arg value="-DequinoxPostingDirectory=${equinoxPostingDirectory}" />
 		</java>
 	</target>
-
 
 	<target name="package">
 		<ant antfile="package.xml" dir="${eclipse.pdebuild.scripts}">
