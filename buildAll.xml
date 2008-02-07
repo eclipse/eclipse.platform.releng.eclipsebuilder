@@ -435,7 +435,7 @@
 
 		<!-- unzip delta pack in a temporary location to get binary versions of launchers for product build -->
 		<property name="pPath" value="${buildDirectory}/${buildId}/p2launchertmp" />
-		<unzip file="${postingDirectory}/${buildLabel}/eclipse-${buildId}-delta-pack.zip" dest="${pPath}">
+		<unzip src="${postingDirectory}/${buildLabel}/eclipse-${buildId}-delta-pack.zip" dest="${pPath}">
 			<patternset>
 				<include name="eclipse/features/" />
 			</patternset>
