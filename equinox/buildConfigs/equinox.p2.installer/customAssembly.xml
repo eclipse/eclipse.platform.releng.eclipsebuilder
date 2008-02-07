@@ -39,21 +39,21 @@
 	<!-- In addititon to the properties listed above:						   -->
 	<!--    - rootFolder : the folder containing the root files                -->
 	<!-- ===================================================================== -->
-    <target name="pre.archive">
-              <condition property="assembling" >
-                      <contains string="${assembleScriptName}" substring="assemble"/>
-              </condition>
-              <antcall target="copyconfig"/>
-              <delete file="${rootFolder}/launcher.exe" quiet="true"/>
-              <delete file="${rootFolder}/launcher" quiet="true"/>
-      </target>
+	<target name="pre.archive">
+		<condition property="assembling">
+			<contains string="${assembleScriptName}" substring="assemble" />
+		</condition>
+		<antcall target="copyconfig" />
+		<delete file="${rootFolder}/launcher.exe" quiet="true" />
+		<delete file="${rootFolder}/launcher" quiet="true" />
+	</target>
 
 
-     <target name="copyconfig" if="assembling">
-              <copy file="${eclipseBuildDirectory}/plugins/org.eclipse.equinox.p2.installer/config.ini" tofile="${rootFolder}/configuration/config.ini" overwrite="true"/>
-     </target>
+	<target name="copyconfig" if="assembling">
+		<copy file="${eclipseBuildDirectory}/plugins/org.eclipse.equinox.p2.installer/config.ini" tofile="${rootFolder}/configuration/config.ini" overwrite="true" />
+	</target>
 
-	
+
 	<!-- ===================================================================== -->
 	<!-- Default target                                                        -->
 	<!-- ===================================================================== -->
