@@ -41,6 +41,7 @@
 osgi.bundles=\
 	org.eclipse.core.jobs,\
 	org.eclipse.core.net,\
+	org.eclipse.core.runtime,\
 	org.eclipse.core.runtime.compatibility.auth,\
 	org.eclipse.ecf,\
 	org.eclipse.ecf.filetransfer,\
