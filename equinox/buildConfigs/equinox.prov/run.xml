@@ -458,7 +458,7 @@
 		<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
 		<arg line="-metadataRepository file:${updateSite}" /> 
 		<arg line="-artifactRepository file:${updateSite}" />
-		<arg line="-update ${updateSite}" />
+		<arg line="-updateSite ${updateSite}" />
 		<arg line="-flavor tooling" />
 		<arg line="-append" />
 		<arg line="-compress" />

@@ -416,6 +416,7 @@
 		<exec executable="unzip" dir="${p2InstallBaseLocation}/plugins">
 			<arg line="-q ${bundledir}.jar -d ${bundledir}" />
 		</exec>
+		<move file="${bundledir}.jar" tofile="${bundledir}.jar.bak" failonerror="false"/>
 	</target>
 
 	<target name="build.p2.installer.product">
@@ -457,10 +458,11 @@
 			<arg value="-DbuildDirectory=${buildDirectory}/${buildId}/tmp" />
 			<arg value="-DbaseLocation=${p2InstallBaseLocation}" />
 			<arg value="-DeclipseBuildDirectory=${buildDirectory}" />
-			<arg value="-DpluginPath=${pPath}/eclipse" />
+			<arg value="-DpluginPath=${pPath}/eclipse/features" />
 			<arg value="-DequinoxPostingDirectory=${equinoxPostingDirectory}" />
 		</java>
 	</target>
+
 
 	<target name="package">
 		<ant antfile="package.xml" dir="${eclipse.pdebuild.scripts}">
