@@ -238,6 +238,8 @@
 			<arg line="-publishArtifacts" />
 			<arg line="-metadataRepository file:${p2.metadata.repo}" />
 			<arg line="-artifactRepository file:${p2.artifact.repo}" />
+			<arg line="-metadataRepositoryName EclipsePlatform" />
+			<arg line="-artifactRepositoryName EclipsePlatform" />
 			<arg line="-noDefaultIUs" />
 			<arg line="-append" />
 		</exec>
@@ -297,6 +299,8 @@
 			<arg line="--launcher.suppressErrors" />
 			<arg line="-metadataRepository file:${p2.metadata.repo}" />
 			<arg line="-artifactRepository file:${p2.artifact.repo}" />
+			<arg line="-metadataRepositoryName EclipsePlatform" />
+			<arg line="-artifactRepositoryName EclipsePlatform" />
 			<arg line="-source ${p2.generator.source}" />
 			<arg line="-site ${p2.site.xml}" />
 			<arg line="-compress" />
@@ -448,15 +452,17 @@
 			<regexpmapper from="(org\.eclipse\.equinox\.launcher)(_)(.*)\.jar" to="\0" />
 		</pathconvert>
 		<java jar="${p2.generator.dir}/eclipse/plugins/${launcher}" fork="true" failonerror="false">
-		<arg line="-console -consolelog -nosplash  
-		-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator
-		-metadataRepository file:${updateSite} 
-		-artifactRepository file:${updateSite}
-		-update ${updateSite}
-		-flavor tooling
-		-append
-		-compress
-		-reusePack200Files" />
+		<arg line="-console" />
+		<arg line="-consolelog" />
+		<arg line="-nosplash" />
+		<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
+		<arg line="-metadataRepository file:${updateSite}" /> 
+		<arg line="-artifactRepository file:${updateSite}" />
+		<arg line="-update ${updateSite}" />
+		<arg line="-flavor tooling" />
+		<arg line="-append" />
+		<arg line="-compress" />
+		<arg line="-reusePack200Files" />
 		</java>
 	</target>
 	
