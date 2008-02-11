@@ -44,8 +44,10 @@
 			<contains string="${assembleScriptName}" substring="assemble" />
 		</condition>
 		<antcall target="copyconfig" />
+		
 		<delete file="${rootFolder}/launcher.exe" quiet="true" />
-		<delete file="${rootFolder}/launcher" quiet="true" />
+		<delete file="${rootFolder}/launcher" quiet="true" />		
+		<chmod dir="${rootFolder}" perm="755" includes="p2installer*"/>		
 	</target>
 
 
