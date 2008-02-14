@@ -252,16 +252,47 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				These drops contain the CVS Runtime Binary with associated source.</li></ul>		
 
 				<li><a name="SWT"> <b> SWT Binary and Source </b> </a>
-				<ul>
-				<li>
-				These drops contain the SWT libraries and source for standalone SWT application development. 
-				For examples of standalone SWT applications refer to the <a href="http://dev.eclipse.org/viewcvs/index.cgi/%7Echeckout%7E/platform-swt-home/dev.html#snippets">snippets</a> 
-				section of the SWT Component page. </p><p>To run a standalone SWT application, 
-				add the swt jar(s) to the classpath and add the directory/folder for the SWT JNI 
-				library to the java.library.path. For example, if you extract the download below 
-				to C:\SWT you would launch the HelloWorld application with the following command: 
-				</p>java -classpath C:\SWT\swt.jar;C:\MyApp\helloworld.jar -Djava.library.path=C:\SWT 
-				HelloWorld </li></ul>
+				<ul><li><p>These drops contain the SWT libraries and source for standalone SWT
+				application development. For examples of standalone SWT applications
+				refer to the <a href="http://dev.eclipse.org/viewcvs/index.cgi/%7Echeckout%7E/platform-swt-home/dev.html#snippets">snippets</a> 
+				section of the SWT Component page.				
+				</p><p>To run a standalone SWT application, add the swt jar(s) to the 
+				classpath and add the directory/folder for the SWT JNI library to the
+				java.library.path. For example, if you extract the download below to
+				C:\SWT you would launch the HelloWorld application with the following command: 
+				</p>
+				<p>
+				java -classpath C:\SWT\swt.jar;C:\MyApp\helloworld.jar 	-Djava.library.path=C:\SWT HelloWorld
+				</p>
+				<p>
+				<b>Note that if you are running on Eclipse 3.3 or later</b>, you do not 
+				need to specify the library path, so you would launch the HelloWorld
+				application with the following command:
+				</p>
+				<p>
+				java -classpath C:\SWT\swt.jar;C:\MyApp\helloworld.jar HelloWorld
+				</p>
+				<p>
+				To run the standalone SWT examples that are shipped with Eclipse, download them
+				from <a href="../index.php#ExamplePlugins">here</a>. Then copy the file
+				eclipse\plugins\org.eclipse.swt.examples_xxx\swtexamples.jar to C:\SWT,
+				and then you can run the examples that are described
+				<a href="http://www.eclipse.org/swt/examples.php">here</a>, for example:
+				</p>
+				<p>
+				cd C:\SWT<br>
+				java -classpath swt.jar;swtexamples.jar
+				org.eclipse.swt.examples.controlexample.ControlExample
+				</p>
+				<p>
+				On Linux systems, note that the classpath separator character is a colon,
+				so the equivalent command becomes:
+				</p>
+				<p>
+				java -classpath swt.jar:swtexamples.jar
+				org.eclipse.swt.examples.controlexample.ControlExample
+				</p>
+				</li></ul>
 
 				<li><a name="org.eclipse.releng"> <b> org.eclipse.releng.tools plug-in </b> </a>
 				<ul>
