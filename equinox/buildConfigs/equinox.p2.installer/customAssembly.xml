@@ -61,7 +61,10 @@
 		
 		<delete file="${rootFolder}/launcher.exe" quiet="true" />
 		<delete file="${rootFolder}/launcher" quiet="true" />		
-		<!-- <chmod dir="${rootFolder}" perm="755" includes="p2installer*"/> -->		
+		<!-- <chmod dir="${rootFolder}" perm="755" includes="p2installer*"/> -->	
+		<exec dir="${rootFolder}" executable="chmod" failonerror="true">
+				<arg line="755 p2installer" />
+			</exec>
 	</target>
 
 
