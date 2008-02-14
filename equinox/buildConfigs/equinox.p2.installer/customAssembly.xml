@@ -23,7 +23,7 @@
 	<!-- =====================================================================  -->
 	<target name="gather.bin.parts">
 	</target>
-	
+
 	<!-- ===================================================================== -->
 	<!-- Called after invoking the gather.bin.parts targets for all plugins    -->
 	<!-- and features. Results exist as folders and have not yet been jarred.  -->
@@ -58,13 +58,13 @@
 			<contains string="${assembleScriptName}" substring="assemble" />
 		</condition>
 		<antcall target="copyconfig" />
-		
+
 		<delete file="${rootFolder}/launcher.exe" quiet="true" />
-		<delete file="${rootFolder}/launcher" quiet="true" />		
-		<!-- <chmod dir="${rootFolder}" perm="755" includes="p2installer*"/> -->	
-		<exec dir="${rootFolder}" executable="chmod" failonerror="false">
-				<arg line="755 p2installer"/>
+		<delete file="${rootFolder}/launcher" quiet="true" />
+		<exec dir="." executable="chmod" failonerror="false">
+			<arg line="755 ${rootFolder}/p2installer" />
 		</exec>
+
 	</target>
 
 
