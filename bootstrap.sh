@@ -38,11 +38,8 @@ tagMaps=""
 tag=""
 
 # tag v20060907 is the one that includes the new build page
-#buildProjectTags=v20071206
-#buildProjectTags=v20071218a
-#buildProjectTags=v20080102
-#buildProjectTags=v20080109b
-buildProjectTags=v20080110a
+#buildProjectTags=v20080214a
+buildProjectTags=v20080215
 
 #updateSite property setting
 updateSite=""
@@ -151,6 +148,7 @@ baseBuilderTag=$buildProjectTags
 
 # tag for exporting the custom builder
 customBuilderTag=$buildProjectTags
+#customBuilderTag=v20071213
 
 if [ -e $builderDir ]
 then
@@ -183,12 +181,12 @@ fi
 cp -r eclipseInternalBuildTools/plugins org.eclipse.releng.basebuilder
 
 #The URLs and filenames of vms used in build
-linuxJdkArchive=jdks/jdk-1_5_0_11-fcs-bin-b03-linux-i586-15_dec_2006.zip
-linuxppcJdkArchive=jdks/IBMJava2-SDK-ppc-142.zip
-linuxppcJdkArchive15=jdks/ibm-java2-sdk-50-linux-ppc.tgz
-windowsJreArchive=jdks/jdk-1_4_2_14-fcs-bin-b05-windows-i586-14_mar_2007.zip
-windows15JdkArchive=jdks/jdk-1_5_0_11-fcs-bin-b03-windows-i586-15_dec_2006.zip
-windows16JdkArchive=jdks/1.6/jdk-6-fcs-bin-b105-windows-i586-29_nov_2006.zip
+linuxJdkArchive=jdks/jdk-1_5_0_14-fcs-bin-b03-linux-i586-05_oct_2007.zip
+linuxppcJdkArchive=jdks/IBMJava2-SDK-1.4.2-10.0.ppc.tgz
+linuxppcJdkArchive15=jdks/ibm-java2-sdk-5.0-6.0-linux-ppc.tgz
+windowsJreArchive=jdks/jdk-1_4_2_16-fcs-bin-b05-windows-i586-16_sep_2007.zip
+windows15JdkArchive=jdks/jdk-1_5_0_14-fcs-bin-b03-windows-i586-05_oct_2007.zip
+windows16JdkArchive=jdks/1.6/jdk-6u4-fcs-bin-b12-windows-i586-14_dec_2007.zip
 windows10FoundationArchive=jdks/weme-win-x86-foundation10_6.1.0.20060317-111429.zip
 
 #get then install the Linux vm used for running the build
@@ -209,7 +207,7 @@ mkdir -p jdk/win32_16; cvs -d :pserver:anonymous@ottcvs1:/home/cvs/releng co $wi
 if [ "$HOSTNAME" == "eclipsebuildserv.ottawa.ibm.com" ]
 then
     #get then install the Linuxppc vm used for running the build
-    mkdir -p jdk/linuxppc; cvs -d :pserver:anonymous@ottcvs1:/home/cvs/releng co $linuxppcJdkArchive; unzip -qq $linuxppcJdkArchive -d jdk/linuxppc; rm $linuxppcJdkArchive
+    mkdir -p jdk/linuxppc; cd jdk/linuxppc; cvs -d :pserver:anonymous@ottcvs1:/home/cvs/releng co $linuxppcJdkArchive; tar -xzf $linuxppcJdkArchive; rm $linuxppcJdkArchive
     #get then install the Linuxppc 1.5 vm used for generating javadoc
     cd jdk/linuxppc; cvs -d :pserver:anonymous@ottcvs1:/home/cvs/releng co $linuxppcJdkArchive15; tar -xzf $linuxppcJdkArchive15; rm -rf $linuxppcJdkArchive15; cd ../..
     javadoc="-Djavadoc15=$builderDir/jdk/linuxppc/ibm-java2-ppc-50/bin/javadoc"
@@ -219,10 +217,10 @@ mkdir -p $postingDirectory/$buildLabel
 chmod -R 755 $builderDir
 
 #default value of the bootclasspath attribute used in ant javac calls.  
-bootclasspath="$builderDir/jdk/win32/jdk1.4.2_14/jre/lib/rt.jar:$builderDir/jdk/win32/jdk1.4.2_14/jre/lib/jsse.jar"
+bootclasspath="$builderDir/jdk/win32/jdk1.4.2_16/jre/lib/rt.jar:$builderDir/jdk/win32/jdk1.4.2_16/jre/lib/jsse.jar"
 
-bootclasspath_15="$builderDir/jdk/win32_15/jdk1.5.0_11/jre/lib/rt.jar"
-bootclasspath_16="$builderDir/jdk/win32_16/jdk6/jre/lib/rt.jar"
+bootclasspath_15="$builderDir/jdk/win32_15/jdk1.5.0_14/jre/lib/rt.jar"
+bootclasspath_16="$builderDir/jdk/win32_16/jdk6_04/jre/lib/rt.jar"
 bootclasspath_foundation="$builderDir/jdk/win32_foundation/lib/jclFoundation10/classes.zip"
 
 if [ "$HOSTNAME" == "eclipsebuildserv.ottawa.ibm.com" ]
