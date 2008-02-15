@@ -39,22 +39,7 @@
 		</copy>
 
 		<!--regenerate the index page with links to test results-->
-		<indexResults 
-		     isBuildTested="false"
-	   		 sendMail="false"
-	   		 buildType="${buildType}"
-		     dropTokenList="%equinox%,%framework%,%extrabundles%,%other%,%incubator%,%provisioningincubator%,%launchers%"
-		     xmlDirectoryName="${postingDirectory}/testresults/xml"
-		     dropDirectoryName="${equinoxPostingDirectory}/${buildLabel}"
-		     testResultsTemplateFileName="${publishingContent}/templateFiles/testResults.php.template"
-		     dropTemplateFileName="${publishingContent}/templateFiles/index.php.template"
-		     testResultsHtmlFileName="testResults.php"
-		     dropHtmlFileName="index.php"
-		     hrefTestResultsTargetPath="../../../downloads/drops/${buildLabel}/testresults/html"
-		     hrefCompileLogsTargetPath="compilelogs"
-		     compileLogsDirectoryName="${equinoxPostingDirectory}/${buildLabel}/compilelogs"
-		     testManifestFileName="${publishingContent}/testManifest.xml"
-	   />
+		<indexResults isBuildTested="false" sendMail="false" buildType="${buildType}" dropTokenList="%equinox%,%framework%,%extrabundles%,%other%,%incubator%,%provisioningincubator%,%launchers%" xmlDirectoryName="${postingDirectory}/testresults/xml" dropDirectoryName="${equinoxPostingDirectory}/${buildLabel}" testResultsTemplateFileName="${publishingContent}/templateFiles/testResults.php.template" dropTemplateFileName="${publishingContent}/templateFiles/index.php.template" testResultsHtmlFileName="testResults.php" dropHtmlFileName="index.php" hrefTestResultsTargetPath="../../../downloads/drops/${buildLabel}/testresults/html" hrefCompileLogsTargetPath="compilelogs" compileLogsDirectoryName="${equinoxPostingDirectory}/${buildLabel}/compilelogs" testManifestFileName="${publishingContent}/testManifest.xml" />
 		<tstamp>
 			<format property="TODAY" pattern="MMMM d, yyyy" />
 		</tstamp>
@@ -104,7 +89,7 @@
 		</antcall>
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.device" />
-		</antcall>				
+		</antcall>
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.event" />
 		</antcall>
@@ -122,7 +107,7 @@
 		</antcall>
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.useradmin" />
-		</antcall>		
+		</antcall>
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.osgi" />
 		</antcall>
@@ -145,10 +130,19 @@
 			<param name="bundle.id" value="org.eclipse.equinox.cm" />
 		</antcall>
 		<antcall target="updateTestManifest">
+			<param name="bundle.id" value="org.eclipse.equinox.ds" />
+		</antcall>
+		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.http" />
 		</antcall>
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.http.jetty" />
+		</antcall>
+		<antcall target="updateTestManifest">
+			<param name="bundle.id" value="org.eclipse.equinox.io" />
+		</antcall>
+		<antcall target="updateTestManifest">
+			<param name="bundle.id" value="org.eclipse.equinox.ip" />
 		</antcall>
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.jsp.jasper" />
@@ -167,7 +161,13 @@
 		</antcall>
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.servletbridge" />
-		</antcall>		
+		</antcall>
+		<antcall target="updateTestManifest">
+			<param name="bundle.id" value="org.eclipse.equinox.util" />
+		</antcall>
+		<antcall target="updateTestManifest">
+			<param name="bundle.id" value="org.eclipse.equinox.wireadmin" />
+		</antcall>
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="javax.servlet" />
 		</antcall>
@@ -223,7 +223,7 @@
 		<exec executable="unzip" dir="${p2InstallBaseLocation}/plugins">
 			<arg line="-q ${bundledir}.jar -d ${bundledir}" />
 		</exec>
-		<move file="${bundledir}.jar" tofile="${bundledir}.jar.bak" failonerror="false"/>
+		<move file="${bundledir}.jar" tofile="${bundledir}.jar.bak" failonerror="false" />
 	</target>
 
 	<target name="build.p2.installer.product">
@@ -270,8 +270,8 @@
 		</java>
 	</target>
 
-	
-	
+
+
 	<!-- ===================================================================== -->
 	<!-- Default target                                                        -->
 	<!-- ===================================================================== -->

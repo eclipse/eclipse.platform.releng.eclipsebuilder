@@ -20,8 +20,14 @@
 			<platform id="common" name="All" fileName="@org.eclipse.equinox.common@.jar">
 			</platform>
 			<platform id="device" name="All" fileName="@org.eclipse.equinox.device@.jar">
+			</platform>
+			<platform id="ds" name="All" fileName="@org.eclipse.equinox.ds@.jar">
 			</platform>			
 			<platform id="event" name="All" fileName="@org.eclipse.equinox.event@.jar">
+			</platform>
+			<platform id="io" name="All" fileName="@org.eclipse.equinox.io@.jar">
+			</platform>
+			<platform id="ip" name="All" fileName="@org.eclipse.equinox.ip@.jar">
 			</platform>
 			<platform id="equinoxlauncher" name="All" fileName="@org.eclipse.equinox.launcher@.jar">0
 			</platform>			
@@ -36,13 +42,15 @@
 			<platform id="preferences" name="All" fileName="@org.eclipse.equinox.preferences@.jar">
 			</platform>
 			<platform id="registry" name="All" fileName="@org.eclipse.equinox.registry@.jar">
-			</platform>
+			</platform>			
 			<platform id="services" name="All" fileName="@org.eclipse.osgi.services@.jar">
 			</platform>			
 			<platform id="supplement" name="All" fileName="@org.eclipse.equinox.supplement@.jar">
 			</platform>
-			<platform id="useradmin" name="All" fileName="@org.eclipse.equinox.useradmin@.jar">
+			<platform id="equinoxutil" name="All" fileName="@org.eclipse.equinox.util@.jar">
 			</platform>
+			<platform id="useradmin" name="All" fileName="@org.eclipse.equinox.useradmin@.jar">
+			</platform>			
 			<platform id="util" name="All" fileName="@org.eclipse.osgi.util@.jar">
 			</platform>			
 			<platform id="equinoxservletbridge" name="All" fileName="@org.eclipse.equinox.servletbridge@.jar">
@@ -56,7 +64,9 @@
 			<platform id="httpservlet" name="All" fileName="@org.eclipse.equinox.http.servlet@.jar">
 			</platform>
 			<platform id="httpservletbridge" name="All" fileName="@org.eclipse.equinox.http.servletbridge@.jar">
-			 </platform>
+			</platform>
+			<platform id="wireadmin" name="All" fileName="@org.eclipse.equinox.wireadmin@.jar">
+			</platform>	
 		</zipType>	
 
 		<zipType name="Other">
