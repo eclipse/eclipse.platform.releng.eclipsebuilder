@@ -88,7 +88,7 @@
 		<antcall target="generate.metadata.releng.tools" />
 		<antcall target="zip.install" />
 
-		<antcall target="update.pack200"/>
+		<antcall target="update.pack200" />
 		<!--Collect logs from p2 run and copy to build directory-->
 		<property name="equinoxTestResults" value="${equinoxPostingDirectory}/${buildLabel}/testresults" />
 		<mkdir dir="${equinoxTestResults}" />
@@ -97,8 +97,7 @@
 				<include name="**/*.log" />
 			</fileset>
 		</copy>
-		
-			
+		<antcall target="run.generator.sdk" />
 	</target>
 
 	<target name="setup.generator">
@@ -148,14 +147,14 @@
 		<delete failonerror="false">
 			<fileset dir="${p2.agent.dir}/eclipse/plugins">
 				<include name="**/com.ibm.icu_*.jar" />
-			</fileset> 
+			</fileset>
 		</delete>
 		<copy todir="${p2.agent.dir}/eclipse/plugins">
 			<fileset dir="files">
 				<include name="**/*.jar" />
 			</fileset>
 		</copy>
-				
+
 		<path id="agent.zip.path">
 			<fileset dir="${buildDirectory}/${buildId}">
 				<include name="**/org.eclipse.equinox.p2.agent.feature-${buildId}.zip" />
@@ -452,20 +451,63 @@
 			<regexpmapper from="(org\.eclipse\.equinox\.launcher)(_)(.*)\.jar" to="\0" />
 		</pathconvert>
 		<java jar="${p2.generator.dir}/eclipse/plugins/${launcher}" fork="true" failonerror="false">
-		<arg line="-console" />
-		<arg line="-consolelog" />
-		<arg line="-nosplash" />
-		<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
-		<arg line="-metadataRepository file:${updateSite}" /> 
-		<arg line="-artifactRepository file:${updateSite}" />
-		<arg line="-updateSite ${updateSite}" />
-		<arg line="-flavor tooling" />
-		<arg line="-append" />
-		<arg line="-compress" />
-		<arg line="-reusePack200Files" />
+			<arg line="-console" />
+			<arg line="-consolelog" />
+			<arg line="-nosplash" />
+			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
+			<arg line="-metadataRepository file:${updateSite}" />
+			<arg line="-artifactRepository file:${updateSite}" />
+			<arg line="-updateSite ${updateSite}" />
+			<arg line="-flavor tooling" />
+			<arg line="-append" />
+			<arg line="-compress" />
+			<arg line="-reusePack200Files" />
 		</java>
 	</target>
-	
-	
+
+	<target name="run.generator.sdk">
+		<!--generate metadata for sdk -->
+		<!-- eclipse.base is the folder containg the features and plugins directories -->
+		<exec executable="${p2.generator.dir}/eclipse/eclipse" failonerror="false" timeout="900000">
+			<arg line="-source ${eclipse.base}" />
+			<arg line="-append" />
+			<arg line="-flavor ${p2.flavor}" />
+			<arg line="-metadataRepository ${p2.metadata.repo}" />
+			<arg line="-artifactRepository ${p2.artifact.repo}" />
+			<arg line="-publishArtifacts" />
+			<arg line="-p2OS linux" />
+			<arg line="-mode incremental" />
+		</exec>
+
+		<!-- Platform specific root files, once for each platform.  Generates root file and configuration IUs -->
+		<!-- pde.build style config for this platform -->
+		<exec executable="${p2.generator.dir}/eclipse/eclipse" failonerror="false" timeout="900000">
+			<arg line="-config ${eclipse.base}/win32.win32.x86/${collectingFolder}" />
+			<arg line="-launcherConfig win32_win32_x86" />
+			<arg line="-append true" />
+			<arg line="-flavor ${p2.flavor}" />
+			<arg line="-metadataRepository ${p2.metadata.repo}" />
+			<arg line="-artifactRepository {p2.artifact.repo}" />
+			<arg line="-p2OS linux" />
+			<arg line="-publishArtifacts true" />
+			<arg line="-exe ${eclipse.base}/win32.win32.x86/${collectingFolder}/${launcherName}" />
+			<arg line="-productFile ${eclipseBuildDirectory}/plugins/org.eclipse.equinox.p2.installer/installer.product" />
+			<arg line="-mode incremental" />
+		</exec>
+
+		<!-- Final call to generate the product IU: -->
+		<exec executable="${p2.generator.dir}/eclipse/eclipse" failonerror="false" timeout="900000">
+			<arg line="-append" />
+			<arg line="-flavor ${p2.flavor}" />
+			<arg line="-metadataRepository ${p2.metadata.repo}" />
+			<arg line="-artifactRepository ${p2.artifact.repo}" />
+			<arg line="-publishArtifacts true" />
+			<arg line="-mode final" />
+			<arg line="-productFile ${eclipseBuildDirectory}/plugins/org.eclipse.equinox.p2.installer/installer.product" />
+		</exec>
+
+
+	</target>
+
 </project>
 
