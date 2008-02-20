@@ -254,7 +254,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				<li><a name="SWT"> <b> SWT Binary and Source </b> </a>
 				<ul><li><p>These drops contain the SWT libraries and source for standalone SWT
 				application development. For examples of standalone SWT applications
-				refer to the <a href="http://dev.eclipse.org/viewcvs/index.cgi/%7Echeckout%7E/platform-swt-home/dev.html#snippets">snippets</a> 
+				refer to the <a href=" http://www.eclipse.org/swt/snippets/">snippets</a> 
 				section of the SWT Component page.				
 				</p><p>To run a standalone SWT application, add the swt jar(s) to the 
 				classpath and add the directory/folder for the SWT JNI library to the
@@ -275,7 +275,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				<p>
 				To run the standalone SWT examples that are shipped with Eclipse, download them
 				from <a href="index.php#ExamplePlugins">here</a>. Then copy the file
-				eclipse\plugins\org.eclipse.swt.examples_xxx\swtexamples.jar to C:\SWT,
+				eclipse\plugins\org.eclipse.swt.examples_xxx\swtexamples.jar to C:\SWT  
 				Now you can run the examples that are described  
 				<a href="http://www.eclipse.org/swt/examples.php">here</a>.  For example:
 				</p>
