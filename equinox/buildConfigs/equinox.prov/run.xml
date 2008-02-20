@@ -97,7 +97,7 @@
 				<include name="**/*.log" />
 			</fileset>
 		</copy>
-		<antcall target="run.generator.sdk" />
+	<!--	<antcall target="run.generator.sdk" /> -->
 	</target>
 
 	<target name="setup.generator">
