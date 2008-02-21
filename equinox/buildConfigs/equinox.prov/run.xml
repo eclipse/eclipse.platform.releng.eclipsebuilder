@@ -26,6 +26,14 @@
 		<mkdir dir="${p2.agent.install.linux}" />
 		<property name="p2.agent.install.macosx" value="${p2.output.base}/agent.install.macosx" />
 		<mkdir dir="${p2.agent.install.macosx}" />
+
+		<property name="p2.sdk.install.win32" value="${p2.output.base}/sdk.install.win32" />
+		<mkdir dir="${p2.sdk.install.win32}" />
+		<property name="p2.sdk.install.linux" value="${p2.output.base}/sdk.install.linux" />
+		<mkdir dir="${p2.sdk.install.linux}" />
+		<property name="p2.sdk.install.macosx" value="${p2.output.base}/sdk.install.macosx" />
+		<mkdir dir="${p2.sdk.install.macosx}" />
+
 		<property name="base" value="${p2.output.base}/base" />
 		<mkdir dir="${base}" />
 
@@ -41,6 +49,7 @@
 		<mkdir dir="${p2.artifact.repo}" />
 		<property name="p2.flavor" value="tooling" />
 		<property name="p2.agent.version" value="0.1.0.${buildId}" />
+		<property name="p2.sdk.version" value="3.4.0.${buildId}" />
 	</target>
 
 	<target name="build" depends="init">
@@ -58,34 +67,18 @@
 			to bug 199317... installing will install all fragments and we don't want the
 			ones from the SDK -->
 		<antcall target="setup.generator" />
-		<antcall target="generate.metadata.agent" />
-
 		<antcall target="setup.director" />
-		<antcall target="run.director">
-			<param name="p2.agent.install.path" value="${p2.agent.install.win32}" />
-			<param name="p2.os" value="win32" />
-			<param name="p2.ws" value="win32" />
-			<param name="p2.arch" value="x86" />
-		</antcall>
 
-		<antcall target="run.director">
-			<param name="p2.agent.install.path" value="${p2.agent.install.linux}" />
-			<param name="p2.os" value="linux" />
-			<param name="p2.ws" value="gtk" />
-			<param name="p2.arch" value="x86" />
-		</antcall>
+		<antcall target="generate.metadata.agent" />
+		<antcall target="provision.agent" />
 
-		<antcall target="run.director">
-			<param name="p2.agent.install.path" value="${p2.agent.install.macosx}" />
-			<param name="p2.os" value="macosx" />
-			<param name="p2.ws" value="carbon" />
-			<param name="p2.arch" value="ppc" />
-		</antcall>
+		<antcall target="generate.metadata.sdk" />
+		<antcall target="provision.sdk" />
 
 		<antcall target="generate.metadata.selfhosting" />
 		<antcall target="generate.metadata.userUI" />
-		<antcall target="generate.metadata.sdk" />
 		<antcall target="generate.metadata.releng.tools" />
+
 		<antcall target="zip.install" />
 
 		<antcall target="update.pack200" />
@@ -97,7 +90,77 @@
 				<include name="**/*.log" />
 			</fileset>
 		</copy>
-	<!--	<antcall target="run.generator.sdk" /> -->
+		<!-- <antcall target="run.generator.sdk" /> -->
+	</target>
+
+	<target name="provision.agent">
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="agent" />
+			<param name="p2.director.version" value="${p2.agent.version}" />
+			<param name="p2.director.profile" value="EquinoxProvisioningUI" />
+			<param name="p2.director.install.path" value="${p2.agent.install.win32}" />
+			<param name="p2.director.extraArgs" value="" />
+			<param name="p2.os" value="win32" />
+			<param name="p2.ws" value="win32" />
+			<param name="p2.arch" value="x86" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="agent" />
+			<param name="p2.director.version" value="${p2.agent.version}" />
+			<param name="p2.director.profile" value="EquinoxProvisioningUI" />
+			<param name="p2.director.install.path" value="${p2.agent.install.linux}" />
+			<param name="p2.director.extraArgs" value="" />
+			<param name="p2.os" value="linux" />
+			<param name="p2.ws" value="gtk" />
+			<param name="p2.arch" value="x86" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="agent" />
+			<param name="p2.director.version" value="${p2.agent.version}" />
+			<param name="p2.director.profile" value="EquinoxProvisioningUI" />
+			<param name="p2.director.install.path" value="${p2.agent.install.macosx}" />
+			<param name="p2.director.extraArgs" value="" />
+			<param name="p2.os" value="macosx" />
+			<param name="p2.ws" value="carbon" />
+			<param name="p2.arch" value="ppc" />
+		</antcall>
+	</target>
+
+	<target name="provision.sdk">
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="sdk" />
+			<param name="p2.director.version" value="${p2.sdk.version}" />
+			<param name="p2.director.profile" value="SDKProfile" />
+			<param name="p2.director.install.path" value="${p2.sdk.install.win32}" />
+			<param name="p2.director.extraArgs" value="-profileProperties eclipse.p2.install.features=true" />
+			<param name="p2.os" value="win32" />
+			<param name="p2.ws" value="win32" />
+			<param name="p2.arch" value="x86" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="sdk" />
+			<param name="p2.director.version" value="${p2.sdk.version}" />
+			<param name="p2.director.profile" value="SDKProfile" />
+			<param name="p2.director.install.path" value="${p2.sdk.install.linux}" />
+			<param name="p2.director.extraArgs" value="-profileProperties eclipse.p2.install.features=true" />
+			<param name="p2.os" value="linux" />
+			<param name="p2.ws" value="gtk" />
+			<param name="p2.arch" value="x86" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="sdk" />
+			<param name="p2.director.version" value="${p2.sdk.version}" />
+			<param name="p2.director.profile" value="SDKProfile" />
+			<param name="p2.director.install.path" value="${p2.sdk.install.macosx}" />
+			<param name="p2.director.extraArgs" value="-profileProperties eclipse.p2.install.features=true" />
+			<param name="p2.os" value="macosx" />
+			<param name="p2.ws" value="carbon" />
+			<param name="p2.arch" value="ppc" />
+		</antcall>
 	</target>
 
 	<target name="setup.generator">
@@ -326,7 +389,7 @@
 		<antcall target="run.generator">
 			<param name="p2.generator.source" value="${p2.sdk.dir}/eclipse" />
 			<param name="p2.generator.root" value="sdk" />
-			<param name="p2.generator.root.version" value="3.4.0.${buildId}" />
+			<param name="p2.generator.root.version" value="${p2.sdk.version}" />
 		</antcall>
 	</target>
 
@@ -364,23 +427,24 @@
 			<arg line="--launcher.suppressErrors" />
 			<arg line="-consoleLog" />
 			<arg line="-flavor ${p2.flavor}" />
-			<arg line="-installIU agent" />
-			<arg line="-version ${p2.agent.version}" />
+			<arg line="-installIU ${p2.director.installIU}" />
+			<arg line="-version ${p2.director.version}" />
 			<arg line="-p2.os ${p2.os}" />
 			<arg line="-p2.ws ${p2.ws}" />
 			<arg line="-p2.arch ${p2.arch}" />
 			<arg line="-roaming" />
-			<arg line="-profile EquinoxProvisioningUI" />
+			<arg line="-profile ${p2.director.profile}" />
+			<arg line="${p2.director.extraArgs}" />
 			<arg line="-metadataRepository file:${p2.metadata.repo}" />
 			<arg line="-artifactRepository file:${p2.artifact.repo}" />
-			<arg line="-destination ${p2.agent.install.path}" />
-			<arg line="-bundlepool ${p2.agent.install.path}" />
+			<arg line="-destination ${p2.director.install.path}" />
+			<arg line="-bundlepool ${p2.director.install.path}" />
 			<arg line="-vmargs" />
-			<arg line="-Declipse.p2.data.area=${p2.agent.install.path}/p2" />
+			<arg line="-Declipse.p2.data.area=${p2.director.install.path}/p2" />
 		</exec>
 
 		<!-- delete the metadata cache as well as the artifacts for unzipped bundles -->
-		<delete failonerror="false" includeEmptyDirs="true" dir="${p2.agent.install.path}/p2/org.eclipse.equinox.p2.core/cache" />
+		<delete failonerror="false" includeEmptyDirs="true" dir="${p2.director.install.path}/p2/org.eclipse.equinox.p2.core/cache" />
 	</target>
 
 	<target name="zip.install">
@@ -389,17 +453,26 @@
 
 		<!-- win32 -->
 		<zip destfile="${output.dir}/equinox-p2-agent-${buildId}-win32.zip" basedir="${p2.agent.install.win32}" includes="**/*" />
+		<zip destfile="${output.dir}/equinox-p2-sdk-${buildId}-win32.zip" basedir="${p2.sdk.install.win32}" includes="**/*" />
 
 		<!-- linux -->
 		<antcall target="p2.tar">
 			<param name="tar.base.dir" value="${p2.agent.install.linux}" />
 			<param name="tar.base.filename" value="${output.dir}/equinox-p2-agent-${buildId}-linux.tar" />
 		</antcall>
+		<antcall target="p2.tar">
+			<param name="tar.base.dir" value="${p2.sdk.install.linux}" />
+			<param name="tar.base.filename" value="${output.dir}/equinox-p2-sdk-${buildId}-linux.tar" />
+		</antcall>
 
 		<!-- macosx -->
 		<antcall target="p2.tar">
 			<param name="tar.base.dir" value="${p2.agent.install.macosx}" />
 			<param name="tar.base.filename" value="${output.dir}/equinox-p2-agent-${buildId}-macosx.tar" />
+		</antcall>
+		<antcall target="p2.tar">
+			<param name="tar.base.dir" value="${p2.sdk.install.macosx}" />
+			<param name="tar.base.filename" value="${output.dir}/equinox-p2-sdk-${buildId}-macosx.tar" />
 		</antcall>
 
 		<!-- other features -->
@@ -470,6 +543,8 @@
 		<!-- eclipse.base is the folder containg the features and plugins directories -->
 		<exec executable="${p2.generator.dir}/eclipse/eclipse" failonerror="false" timeout="900000">
 			<arg line="-source ${eclipse.base}" />
+			<arg line="-nosplash" />
+			<arg line="--launcher.suppressErrors" />
 			<arg line="-append" />
 			<arg line="-flavor ${p2.flavor}" />
 			<arg line="-metadataRepository ${p2.metadata.repo}" />
@@ -483,6 +558,8 @@
 		<!-- pde.build style config for this platform -->
 		<exec executable="${p2.generator.dir}/eclipse/eclipse" failonerror="false" timeout="900000">
 			<arg line="-config ${eclipse.base}/win32.win32.x86/${collectingFolder}" />
+			<arg line="-nosplash" />
+			<arg line="--launcher.suppressErrors" />
 			<arg line="-launcherConfig win32_win32_x86" />
 			<arg line="-append true" />
 			<arg line="-flavor ${p2.flavor}" />
@@ -498,6 +575,8 @@
 		<!-- Final call to generate the product IU: -->
 		<exec executable="${p2.generator.dir}/eclipse/eclipse" failonerror="false" timeout="900000">
 			<arg line="-append" />
+			<arg line="-nosplash" />
+			<arg line="--launcher.suppressErrors" />
 			<arg line="-flavor ${p2.flavor}" />
 			<arg line="-metadataRepository ${p2.metadata.repo}" />
 			<arg line="-artifactRepository ${p2.artifact.repo}" />
@@ -505,8 +584,6 @@
 			<arg line="-mode final" />
 			<arg line="-productFile ${eclipseBuildDirectory}/plugins/org.eclipse.equinox.p2.installer/installer.product" />
 		</exec>
-
-
 	</target>
 
 </project>
