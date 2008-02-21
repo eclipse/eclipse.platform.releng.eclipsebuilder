@@ -275,7 +275,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				<p>
 				To run the standalone SWT examples that are shipped with Eclipse, download them
 				from <a href="index.php#ExamplePlugins">here</a>. Then copy the file
-				eclipse\plugins\org.eclipse.swt.examples_xxx\swtexamples.jar to C:\SWT  
+				eclipse\plugins\org.eclipse.swt.examples_xxx\swtexamples.jar to C:\SWT.    
 				Now you can run the examples that are described  
 				<a href="http://www.eclipse.org/swt/examples.php">here</a>.  For example:
 				</p>
