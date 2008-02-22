@@ -1,4 +1,4 @@
-<project name="Automated Eclipse Testing" default="all"  basedir="." >
+<project name="Automated Eclipse Testing" default="all" basedir=".">
 
 	<!--properties file containing the plugin directory name including version number,
 		 and list of required test plug-ins expressed as command-line argument to unzip executable.
@@ -36,7 +36,7 @@
 		</condition>
 		<antcall target="${setupTarget}" />
 		<antcall target="configureTeamTest" />
-		<antcall target="configureDeltaPack"/>
+		<antcall target="configureDeltaPack" />
 	</target>
 
 	<!--setup for zip archives-->
@@ -44,20 +44,20 @@
 		<delete dir="${install}" />
 		<mkdir dir="${install}" />
 		<exec dir="." executable="unzip">
-			<arg line="-o -qq ${runtimeArchive} -d ${install}"/>
+			<arg line="-o -qq ${runtimeArchive} -d ${install}" />
 		</exec>
-		<antcall target="installTestPlugins"/>
+		<antcall target="installTestPlugins" />
 	</target>
 
 	<!--setup for tar.gz archives-->
 	<target name="setup-tar.gz" description="Reinstall the test Eclipse installation if specified by user">
-		<property name="currentDir" value="${basedir}"/>
+		<property name="currentDir" value="${basedir}" />
 		<delete dir="${install}" />
 		<mkdir dir="${install}" />
 		<exec dir="${install}" executable="tar">
-			<arg line="-xzf ${currentDir}/${runtimeArchive}"/>
+			<arg line="-xzf ${currentDir}/${runtimeArchive}" />
 		</exec>
-		<antcall target="installTestPlugins"/>
+		<antcall target="installTestPlugins" />
 	</target>
 
 	<target name="installTestPlugins">
@@ -70,7 +70,7 @@
 				eclipse/plugins/org.eclipse.ant.optional.junit_*
 				${testPluginsRequired}
 				-x eclipse/plugins/*.source*/**
-				-d ${install}"/>
+				-d ${install}" />
 		</exec>
 	</target>
 
@@ -83,7 +83,7 @@
 		<!--Unlock files on the Mac before starting tests.
 		  Required to delete some workspace directories (org.eclipse.core.filebuffers.tests and Team CVS tests).-->
 		<exec dir="${basedir}" executable="chflags" os="Mac OS X">
-			<arg line="-R nouchg ${install}"/>
+			<arg line="-R nouchg ${install}" />
 		</exec>
 	</target>
 
@@ -145,12 +145,12 @@
 			</and>
 		</condition>
 		<condition property="runtimeArchive" value="eclipse-SDK-${buildId}-macosx-carbon.tar.gz">
-					<and>
-						<equals arg1="${os}" arg2="macosx" />
-						<equals arg1="${ws}" arg2="carbon" />
-						<equals arg1="${arch}" arg2="x86" />
-					</and>
-				</condition>
+			<and>
+				<equals arg1="${os}" arg2="macosx" />
+				<equals arg1="${ws}" arg2="carbon" />
+				<equals arg1="${arch}" arg2="x86" />
+			</and>
+		</condition>
 		<condition property="runtimeArchive" value="eclipse-SDK-${buildId}-hpux-motif.zip">
 			<and>
 				<equals arg1="${os}" arg2="hpux" />
@@ -220,16 +220,16 @@
 	</target>
 	<target name="configureTeamTest" if="teamcvs">
 		<!-- Fill in cvs repository information -->
-		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@user@" value="${cvs_user}"/>
-		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@password@" value="${cvs_password}"/>
-		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@host@" value="${cvs_host}"/>
-		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@root@" value="${cvs_root}"/>
+		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@user@" value="${cvs_user}" />
+		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@password@" value="${cvs_password}" />
+		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@host@" value="${cvs_host}" />
+		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@root@" value="${cvs_root}" />
 	</target>
 
 	<target name="configureDeltaPack" if="pdebuild">
 		<property name="deltapackArchive" value="eclipse-${buildId}-delta-pack.zip" />
 		<property name="installDeltapack" value="${install}/deltapack" />
-		<mkdir dir="${installDeltapack}"/>	
+		<mkdir dir="${installDeltapack}" />
 		<exec dir="." executable="unzip">
 			<arg line="-o -qq ${deltapackArchive} -d ${installDeltapack}" />
 		</exec>
@@ -250,7 +250,7 @@
 			</condition-->
 
 			<condition property="performance.target.present" value="true">
-				<isset property="@{testPlugin}.has.performance.target"/>
+				<isset property="@{testPlugin}.has.performance.target" />
 			</condition>
 
 			<!--override the value of this property with performance if the tests run on performance machine-->
@@ -259,7 +259,7 @@
 
 			<!--install Cloudscape plug-ins if running performance tests-->
 			<condition property="derby" value="eclipse/plugins/Cloudscape*/* ">
-				<equals arg1="${test.target}" arg2="performance"/>
+				<equals arg1="${test.target}" arg2="performance" />
 			</condition>
 			<property name="derby" value="" />
 			<antcall target="${test.target}">
@@ -346,8 +346,8 @@
 	<target name="relEng" depends="setRuntimeArchive">
 		<runTests testPlugin="org.eclipse.releng.tests" />
 		<move todir="${results}/chkpii" includeEmptyDirs="no" failonerror="false">
-			<fileset dir="${results}/chkpii"/>
-			<mapper type="glob" from="*" to="${platform}_*"/>
+			<fileset dir="${results}/chkpii" />
+			<mapper type="glob" from="*" to="${platform}_*" />
 		</move>
 	</target>
 
@@ -361,13 +361,13 @@
 
 	<target name="jdtcorecompiler" depends="setJVMProperties">
 		<condition property="jvm" value="${J2SE-5.0}">
-			<isset property="J2SE-5.0"/>
+			<isset property="J2SE-5.0" />
 		</condition>
 		<runTests testPlugin="org.eclipse.jdt.core.tests.compiler" />
 	</target>
 
 	<target name="jdtapt" depends="setJVMProperties">
-		<property name="jvm" value="${J2SE-5.0}"/>
+		<property name="jvm" value="${J2SE-5.0}" />
 		<!--only run test if J2SE-5.0 property  set-->
 		<condition property="skip.test">
 			<not>
@@ -378,7 +378,7 @@
 	</target>
 
 	<target name="jdtaptpluggable" depends="setJVMProperties">
-		<property name="jvm" value="${J2SE-6.0}"/>
+		<property name="jvm" value="${J2SE-6.0}" />
 		<!--only run test if J2SE-5.0 property  set-->
 		<condition property="skip.test">
 			<not>
@@ -392,7 +392,7 @@
 	<target name="jdtcorebuilder" depends="setJVMProperties">
 		<!--Run with 1.5 vm if it is available-->
 		<condition property="jvm" value="${J2SE-5.0}">
-			<isset property="J2SE-5.0"/>
+			<isset property="J2SE-5.0" />
 		</condition>
 		<runTests testPlugin="org.eclipse.jdt.core.tests.builder" />
 	</target>
@@ -421,7 +421,7 @@
 
 	<target name="jdtcoremodel" depends="setJVMProperties">
 		<condition property="jvm" value="${J2SE-5.0}">
-			<isset property="J2SE-5.0"/>
+			<isset property="J2SE-5.0" />
 		</condition>
 		<runTests testPlugin="org.eclipse.jdt.core.tests.model" />
 	</target>
@@ -447,7 +447,7 @@
 	</target>
 
 	<target name="pdebuild">
-		<property name="pdebuild" value="true"/>
+		<property name="pdebuild" value="true" />
 		<runTests testPlugin="org.eclipse.pde.build.tests" />
 	</target>
 
@@ -460,7 +460,7 @@
 	</target>
 
 	<target name="teamcvs">
-		<property name="teamcvs" value="true"/>
+		<property name="teamcvs" value="true" />
 		<runTests testPlugin="org.eclipse.team.tests.cvs.core" />
 	</target>
 
@@ -479,7 +479,7 @@
 	<target name="uiforms">
 		<runTests testPlugin="org.eclipse.ui.tests.forms" />
 	</target>
-	
+
 	<target name="uieditors">
 		<runTests testPlugin="org.eclipse.ui.editors.tests" />
 	</target>
@@ -498,6 +498,13 @@
 
 	<target name="update">
 		<runTests testPlugin="org.eclipse.update.tests.core" />
+	</target>
+
+	<target name="pdeapitooling" depends="setJVMProperties">
+		<condition property="jvm" value="${J2SE-5.0}">
+			<isset property="J2SE-5.0" />
+		</condition>
+		<runTests testPlugin="org.eclipse.pde.api.tools.tests" />
 	</target>
 
 	<target name="all">
@@ -543,5 +550,6 @@
 		<antcall target="jdtaptpluggable" />
 		<antcall target="ua" />
 		<antcall target="uiforms" />
+		<antcall target="pdeapitooling" />
 	</target>
 </project>
