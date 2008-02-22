@@ -550,6 +550,6 @@
 		<antcall target="jdtaptpluggable" />
 		<antcall target="ua" />
 		<antcall target="uiforms" />
-		<antcall target="pdeapitooling" />
+		<!-- <antcall target="pdeapitooling" /> -->
 	</target>
 </project>
