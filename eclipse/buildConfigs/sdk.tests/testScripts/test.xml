@@ -501,8 +501,12 @@
 	</target>
 
 	<target name="pdeapitooling" depends="setJVMProperties">
-		<condition property="jvm" value="${J2SE-5.0}">
-			<isset property="J2SE-5.0" />
+		<property name="jvm" value="${J2SE-5.0}" />
+		<!--only run test if J2SE-5.0 property  set-->
+		<condition property="skip.test">
+			<not>
+				<isset property="J2SE-5.0" />
+			</not>
 		</condition>
 		<runTests testPlugin="org.eclipse.pde.api.tools.tests" />
 	</target>
