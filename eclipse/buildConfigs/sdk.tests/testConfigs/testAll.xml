@@ -42,7 +42,7 @@
 			 <antcall target="test">
 				<param name="tester" value="${basedir}/rhelws5" />
 				<param name="cfgKey" value="rhelws5" />
-				<param name="markerName" value="eclipse-rhelws4-${buildId}" />
+				<param name="markerName" value="eclipse-rhelws5-${buildId}" />
 			</antcall> 
 			<antcall target="test">
 				<param name="tester" value="${basedir}/win32xp" />
