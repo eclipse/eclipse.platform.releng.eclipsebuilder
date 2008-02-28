@@ -50,6 +50,7 @@
 		<property name="p2.flavor" value="tooling" />
 		<property name="p2.agent.version" value="0.1.0.${buildId}" />
 		<property name="p2.sdk.version" value="3.4.0.${buildId}" />
+		<property name="p2.repo.name" value="&quot;Eclipse Project Test Site&quot;" />
 	</target>
 
 	<target name="build" depends="init">
@@ -300,8 +301,8 @@
 			<arg line="-publishArtifacts" />
 			<arg line="-metadataRepository file:${p2.metadata.repo}" />
 			<arg line="-artifactRepository file:${p2.artifact.repo}" />
-			<arg line="-metadataRepositoryName EclipsePlatform" />
-			<arg line="-artifactRepositoryName EclipsePlatform" />
+			<arg line="-metadataRepositoryName ${p2.repo.name}" />
+			<arg line="-artifactRepositoryName ${p2.repo.name}" />
 			<arg line="-noDefaultIUs" />
 			<arg line="-append" />
 		</exec>
@@ -361,8 +362,8 @@
 			<arg line="--launcher.suppressErrors" />
 			<arg line="-metadataRepository file:${p2.metadata.repo}" />
 			<arg line="-artifactRepository file:${p2.artifact.repo}" />
-			<arg line="-metadataRepositoryName EclipsePlatform" />
-			<arg line="-artifactRepositoryName EclipsePlatform" />
+			<arg line="-metadataRepositoryName ${p2.repo.name}" />
+			<arg line="-artifactRepositoryName ${p2.repo.name}" />
 			<arg line="-source ${p2.generator.source}" />
 			<arg line="-site ${p2.site.xml}" />
 			<arg line="-compress" />
