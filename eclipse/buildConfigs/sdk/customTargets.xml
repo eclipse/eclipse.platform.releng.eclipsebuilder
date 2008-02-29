@@ -170,10 +170,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Steps to do before fetching the build elements -->
 	<!-- ===================================================================== -->
 	<target name="preFetch">
-		<mkdir dir="${buildDirectory}/baseLocation"/>		
-		<exec executable="/usr/bin/wget" dir="${buildDirectory}/baseLocation" failonerror="false" os="Linux">
-		  	 <arg line="-q -O  ${buildDirectory}/baseLocation/javax.xml_1.3.4.v200801282000.jar http://fullmoon.ottawa.ibm.com/tools/orbit/downloads/drops/S20080203062035/bundles/javax.xml_1.3.4.v200801282000.jar"/>
-		</exec>
+		<!-- <mkdir dir="${buildDirectory}/baseLocation"/> -->
 	</target>
 
 	<!-- ===================================================================== -->
