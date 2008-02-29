@@ -39,11 +39,16 @@
 				<param name="cfgKey" value="macosxppc" />
 				<param name="markerName" value="eclipse-macosxppc-${buildId}" />
 			</antcall>
-			 <antcall target="test">
+			 <!-- <antcall target="test">
 				<param name="tester" value="${basedir}/rhelws5" />
 				<param name="cfgKey" value="rhelws5" />
 				<param name="markerName" value="eclipse-rhelws5-${buildId}" />
-			</antcall> 
+			</antcall> -->
+			<antcall target="test">
+					<param name="tester" value="${basedir}/rhelws4" />
+					<param name="cfgKey" value="rhelws5" />
+					<param name="markerName" value="eclipse-rhelws4-${buildId}" />
+			</antcall>
 			<antcall target="test">
 				<param name="tester" value="${basedir}/win32xp" />
 				<param name="cfgKey" value="win32xp" />
