@@ -134,8 +134,8 @@
 			<param name="p2.director.installIU" value="sdk" />
 			<param name="p2.director.version" value="${p2.sdk.version}" />
 			<param name="p2.director.profile" value="SDKProfile" />
-			<param name="p2.director.install.path" value="${p2.sdk.install.win32}" />
-			<param name="p2.director.extraArgs" value="-profileProperties eclipse.p2.install.features=true" />
+			<param name="p2.director.install.path" value="${p2.sdk.install.win32}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
 			<param name="p2.os" value="win32" />
 			<param name="p2.ws" value="win32" />
 			<param name="p2.arch" value="x86" />
@@ -145,8 +145,8 @@
 			<param name="p2.director.installIU" value="sdk" />
 			<param name="p2.director.version" value="${p2.sdk.version}" />
 			<param name="p2.director.profile" value="SDKProfile" />
-			<param name="p2.director.install.path" value="${p2.sdk.install.linux}" />
-			<param name="p2.director.extraArgs" value="-profileProperties eclipse.p2.install.features=true" />
+			<param name="p2.director.install.path" value="${p2.sdk.install.linux}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
 			<param name="p2.os" value="linux" />
 			<param name="p2.ws" value="gtk" />
 			<param name="p2.arch" value="x86" />
@@ -156,8 +156,8 @@
 			<param name="p2.director.installIU" value="sdk" />
 			<param name="p2.director.version" value="${p2.sdk.version}" />
 			<param name="p2.director.profile" value="SDKProfile" />
-			<param name="p2.director.install.path" value="${p2.sdk.install.macosx}" />
-			<param name="p2.director.extraArgs" value="-profileProperties eclipse.p2.install.features=true" />
+			<param name="p2.director.install.path" value="${p2.sdk.install.macosx}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
 			<param name="p2.os" value="macosx" />
 			<param name="p2.ws" value="carbon" />
 			<param name="p2.arch" value="ppc" />
