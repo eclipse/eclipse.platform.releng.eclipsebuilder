@@ -7,7 +7,7 @@
 	<property name="markerContainer" value="/home/users/releng/buildTools/markers" />
 	<property name="cfg" value="${basedir}/machine.cfg" />
 	<property name="test.xml" value="${base.builder}/plugins/org.eclipse.build.tools/scripts/test.xml" />
-	
+
 	<target name="test">
 		<!--TODO  find a way to queue requests-->
 		<findMachine cfg="${cfg}" markerContainer="${markerContainer}" cfgKey="${cfgKey}" markerName="${markerName}" waitInterval="30" />
@@ -19,15 +19,15 @@
 		 specified test machine is in use.-->
 		<property file="${markerContainer}/${markerName}.marker" />
 		<property name="testMachine" value="${0}" />
-		
+
 		<!--A sleep in included here to avoid network timeouts if this target is called multiple times in parallel tasks.
 		  Default overidden by setting in calling targets.-->
-		<property name="sleep" value="0"/>
-		<sleep seconds="${sleep}"/>
-		
+		<property name="sleep" value="0" />
+		<sleep seconds="${sleep}" />
+
 		<!--Run all tests on the test machine-->
-		<ant antfile="${test.xml}"/>
-		
+		<ant antfile="${test.xml}" />
+
 		<!--Delete the marker to free up the host to run other tests.-->
 		<delete file="${markerContainer}/${markerName}.marker" />
 	</target>
@@ -39,27 +39,32 @@
 				<param name="cfgKey" value="macosxppc" />
 				<param name="markerName" value="eclipse-macosxppc-${buildId}" />
 			</antcall>
-			 <!-- <antcall target="test">
+			<!-- <antcall target="test">
 				<param name="tester" value="${basedir}/rhelws5" />
 				<param name="cfgKey" value="rhelws5" />
 				<param name="markerName" value="eclipse-rhelws5-${buildId}" />
 			</antcall> -->
 			<antcall target="test">
-					<param name="tester" value="${basedir}/rhelws4" />
-					<param name="cfgKey" value="rhelws5" />
-					<param name="markerName" value="eclipse-rhelws4-${buildId}" />
+				<param name="tester" value="${basedir}/rhelws4" />
+				<param name="cfgKey" value="rhelws4" />
+				<param name="markerName" value="eclipse-rhelws4-${buildId}" />
 			</antcall>
 			<antcall target="test">
 				<param name="tester" value="${basedir}/win32xp" />
 				<param name="cfgKey" value="win32xp" />
 				<param name="markerName" value="eclipse-win32xp-${buildId}" />
 			</antcall>
-			 <antcall target="test">
+			<!--<antcall target="test">
 				<param name="tester" value="${basedir}/rhelws5-5.0" />
 				<param name="cfgKey" value="rhelws5-5.0" />
 				<param name="markerName" value="eclipse-rhelws5-5.0-${buildId}" />
-			</antcall> 
-		    <antcall target="test">
+			</antcall> -->
+			<antcall target="test">
+				<param name="tester" value="${basedir}/rhelws4-5.0" />
+				<param name="cfgKey" value="rhelws4-5.0" />
+				<param name="markerName" value="eclipse-rhelws4-5.0-${buildId}" />
+			</antcall>
+			<antcall target="test">
 				<param name="tester" value="${basedir}/win32xp-5.0" />
 				<param name="cfgKey" value="win32xp-5.0" />
 				<param name="markerName" value="eclipse-win32xp-5.0-${buildId}" />
@@ -68,9 +73,9 @@
 	</target>
 
 	<target name="performanceTests">
-		
+
 		<condition property="internalPlugins" value="../../../eclipsePerformanceBuildTools/plugins">
-			<isset property="performance.base"/>
+			<isset property="performance.base" />
 		</condition>
 
 		<property name="testResults" value="${postingDirectory}/${buildLabel}/performance" />
