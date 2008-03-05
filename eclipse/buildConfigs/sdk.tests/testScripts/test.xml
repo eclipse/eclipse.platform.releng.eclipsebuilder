@@ -510,6 +510,10 @@
 		</condition>
 		<runTests testPlugin="org.eclipse.pde.api.tools.tests" />
 	</target>
+	
+	<target name="equinoxsecurity">
+			<runTests testPlugin="org.eclipse.equinox.security.tests" />
+	</target>	
 
 	<target name="all">
 		<antcall target="jdtcompilertool" />
@@ -555,5 +559,6 @@
 		<antcall target="ua" />
 		<antcall target="uiforms" />
 		<antcall target="pdeapitooling" />
+		<antcall target="equinoxsecurity" />		
 	</target>
 </project>
