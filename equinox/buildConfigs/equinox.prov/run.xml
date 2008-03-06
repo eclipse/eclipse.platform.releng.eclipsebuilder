@@ -76,8 +76,6 @@
 		<antcall target="generate.metadata.sdk" />
 		<antcall target="provision.sdk" />
 
-		<antcall target="generate.metadata.selfhosting" />
-		<antcall target="generate.metadata.userUI" />
 		<antcall target="generate.metadata.releng.tools" />
 
 		<antcall target="zip.install" />
@@ -253,28 +251,6 @@
 		</antcall>
 	</target>
 
-	<target name="generate.metadata.selfhosting">
-		<property name="p2.selfhosting.dir" value="${p2.output.base}/selfhosting" />
-		<path id="selfhosting.feature.zip.path">
-			<fileset dir="${buildDirectory}/${buildId}">
-				<include name="**/org.eclipse.equinox.p2.selfhosting.feature-${buildId}.zip" />
-			</fileset>
-		</path>
-		<property name="selfhosting.feature.zip.name" refid="selfhosting.feature.zip.path" />
-		<antcall target="extract">
-			<param name="extract-src" value="${selfhosting.feature.zip.name}" />
-			<param name="extract-dest" value="${p2.selfhosting.dir}" />
-		</antcall>
-
-		<antcall target="run.generator.feature.based">
-			<param name="p2.generator.base" value="${p2.selfhosting.dir}/eclipse" />
-			<param name="p2.generator.feature.dir" value="${p2.selfhosting.dir}/eclipse/features" />
-			<param name="p2.generator.plugins.dir" value="${p2.selfhosting.dir}/eclipse/plugins" />
-			<param name="p2.generator.root.version" value="0.1.0.${buildId}" />
-			<param name="p2.generator.root" value="selfhosting" />
-		</antcall>
-	</target>
-
 	<!--
 	p2.generator.base
 	p2.generator.feature.dir
@@ -306,28 +282,6 @@
 			<arg line="-noDefaultIUs" />
 			<arg line="-append" />
 		</exec>
-	</target>
-
-	<target name="generate.metadata.userUI">
-		<property name="p2.userui.dir" value="${p2.output.base}/userui" />
-		<path id="userui.feature.zip.path">
-			<fileset dir="${buildDirectory}/${buildId}">
-				<include name="**/org.eclipse.equinox.p2.user.ui.feature-${buildId}.zip" />
-			</fileset>
-		</path>
-		<property name="userui.feature.zip.name" refid="userui.feature.zip.path" />
-		<antcall target="extract">
-			<param name="extract-src" value="${userui.feature.zip.name}" />
-			<param name="extract-dest" value="${p2.userui.dir}" />
-		</antcall>
-
-		<antcall target="run.generator.feature.based">
-			<param name="p2.generator.base" value="${p2.userui.dir}/eclipse" />
-			<param name="p2.generator.feature.dir" value="${p2.userui.dir}/eclipse/features" />
-			<param name="p2.generator.plugins.dir" value="${p2.userui.dir}/eclipse/plugins" />
-			<param name="p2.generator.root.version" value="0.1.0.${buildId}" />
-			<param name="p2.generator.root" value="userui" />
-		</antcall>
 	</target>
 
 	<target name="generate.metadata.releng.tools">
@@ -475,14 +429,6 @@
 			<param name="tar.base.dir" value="${p2.sdk.install.macosx}" />
 			<param name="tar.base.filename" value="${output.dir}/equinox-p2-sdk-${buildId}-macosx.tar" />
 		</antcall>
-
-		<!-- other features -->
-		<copy todir="${output.dir}">
-			<fileset dir="${buildDirectory}/${buildId}">
-				<include name="**/org.eclipse.equinox.p2.selfhosting.feature-${buildId}.zip" />
-				<include name="**/org.eclipse.equinox.p2.user.ui.feature-${buildId}.zip" />
-			</fileset>
-		</copy>
 	</target>
 
 	<target name="p2.tar">
