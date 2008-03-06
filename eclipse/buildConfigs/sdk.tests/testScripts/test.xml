@@ -559,6 +559,6 @@
 		<antcall target="ua" />
 		<antcall target="uiforms" />
 		<antcall target="pdeapitooling" />
-	<!--	<antcall target="equinoxsecurity" /> -->		
+		<antcall target="equinoxsecurity" /> 		
 	</target>
 </project>
