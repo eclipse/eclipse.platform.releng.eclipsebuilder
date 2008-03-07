@@ -17,7 +17,7 @@
 		</antcall>
 	</target>
 
-	<target name="assemble.win32.win32.x86_64.xml">
+	<!-- <target name="assemble.win32.win32.x86_64.xml">
 		<antcall target="assembler">
 			<param name="archiveName" value="${archiveRoot}-win32-x86_64.zip" />
 		</antcall>
@@ -27,7 +27,7 @@
 		<antcall target="assembler">
 			<param name="archiveName" value="${archiveRoot}-win32-wpf.zip" />
 		</antcall>
-	</target>
+	</target> -->
 
 	<target name="assemble.linux.gtk.x86.xml">
 		<antcall target="assembler">
@@ -35,11 +35,11 @@
 		</antcall>
 	</target>
 
-	<target name="assemble.linux.gtk.x86_64.xml">
+<!--	<target name="assemble.linux.gtk.x86_64.xml">
 		<antcall target="assembler">
 			<param name="archiveName" value="${archiveRoot}-linux-gtk-x86_64.tar.gz" />
 		</antcall>
-	</target>
+	</target> -->
 
 	<target name="assemble.linux.gtk.ppc.xml">
 		<antcall target="assembler">
@@ -47,7 +47,7 @@
 		</antcall>
 	</target>
 
-	<target name="assemble.hpux.motif.ia64_32.xml">
+<!--	<target name="assemble.hpux.motif.ia64_32.xml">
 		<antcall target="assembler">
 			<param name="archiveName" value="${archiveRoot}-hpux-motif-ia64_32.zip" />
 		</antcall>
@@ -69,7 +69,7 @@
 		<antcall target="assembler">
 			<param name="archiveName" value="${archiveRoot}-aix-motif.zip" />
 		</antcall>
-	</target>
+	</target> -->
 
 	<target name="assemble.macosx.carbon.ppc.xml">
 		<antcall target="assembler">
