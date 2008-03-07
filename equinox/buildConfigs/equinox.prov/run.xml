@@ -43,8 +43,9 @@
 		<property name="p2.site.xml" value="file:${updateSite}/site.xml" />
 		<property name="p2.generator.dir" value="${p2.output.base}/generator" />
 		<mkdir dir="${p2.generator.dir}" />
-		<property name="p2.metadata.repo" value="${p2.updateSite}/" />
-		<mkdir dir="${p2.metadata.repo}" />
+		<!-- <property name="p2.metadata.repo" value="${p2.updateSite}/" /> -->
+		<property name="p2.metadata.repo" value="${repo}" />
+		<!-- <mkdir dir="${p2.metadata.repo}" /> -->
 		<property name="p2.artifact.repo" value="${p2.updateSite}/" />
 		<mkdir dir="${p2.artifact.repo}" />
 		<property name="p2.flavor" value="tooling" />
@@ -56,14 +57,6 @@
 	<target name="build" depends="init">
 		<!-- Ensure that we are building against the same version that we
 			are generating the metadata for -->
-		<antcall target="extract">
-			<param name="extract-src" value="${sdk.archive}" />
-			<param name="extract-dest" value="${base}" />
-		</antcall>
-		<antcall target="extract">
-			<param name="extract-src" value="${rcp.delta.archive}" />
-			<param name="extract-dest" value="${base}" />
-		</antcall>
 		<!-- Generate the metadata for the agent and create the install first due
 			to bug 199317... installing will install all fragments and we don't want the
 			ones from the SDK -->
@@ -73,13 +66,15 @@
 		<antcall target="generate.metadata.agent" />
 		<antcall target="provision.agent" />
 
-		<antcall target="generate.metadata.sdk" />
+		<!--	<antcall target="generate.metadata.sdk" /> -->
 		<antcall target="provision.sdk" />
 
 		<antcall target="generate.metadata.releng.tools" />
 
 		<antcall target="zip.install" />
+	</target>
 
+	<target name="updatesite" depends="init">
 		<antcall target="update.pack200" />
 		<!--Collect logs from p2 run and copy to build directory-->
 		<property name="equinoxTestResults" value="${equinoxPostingDirectory}/${buildLabel}/testresults" />
@@ -129,8 +124,8 @@
 
 	<target name="provision.sdk">
 		<antcall target="run.director">
-			<param name="p2.director.installIU" value="sdk" />
-			<param name="p2.director.version" value="${p2.sdk.version}" />
+			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
+			<param name="p2.director.version" value="3.4.0.${buildId}" />
 			<param name="p2.director.profile" value="SDKProfile" />
 			<param name="p2.director.install.path" value="${p2.sdk.install.win32}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -140,8 +135,8 @@
 		</antcall>
 
 		<antcall target="run.director">
-			<param name="p2.director.installIU" value="sdk" />
-			<param name="p2.director.version" value="${p2.sdk.version}" />
+			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
+			<param name="p2.director.version" value="3.4.0.${buildId}" />
 			<param name="p2.director.profile" value="SDKProfile" />
 			<param name="p2.director.install.path" value="${p2.sdk.install.linux}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -151,8 +146,8 @@
 		</antcall>
 
 		<antcall target="run.director">
-			<param name="p2.director.installIU" value="sdk" />
-			<param name="p2.director.version" value="${p2.sdk.version}" />
+			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
+			<param name="p2.director.version" value="3.4.0.${buildId}" />
 			<param name="p2.director.profile" value="SDKProfile" />
 			<param name="p2.director.install.path" value="${p2.sdk.install.macosx}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -429,6 +424,7 @@
 			<param name="tar.base.dir" value="${p2.sdk.install.macosx}" />
 			<param name="tar.base.filename" value="${output.dir}/equinox-p2-sdk-${buildId}-macosx.tar" />
 		</antcall>
+		<!--- add for all other platforms -->
 	</target>
 
 	<target name="p2.tar">

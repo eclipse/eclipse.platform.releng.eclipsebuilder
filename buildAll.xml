@@ -63,7 +63,9 @@
 		<parallel failonany="true">
 			<sequential>
 				<antcall target="packageEclipseDistributables" />
+				<ant antfile="${equinox.build.configs}/equinox.prov/run.xml" target="build"/>
 				<antcall target="buildUpdateSite" />
+				<ant antfile="${equinox.build.configs}/equinox.prov/run.xml" target="updatesite"/>
 				<antcall target="packageEquinoxDistributables" />
 				<antcall target="publishEclipse" />
 				<antcall target="publishEquinox" />
@@ -305,8 +307,15 @@
 			<arg line="-q ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -r eclipse" />
 		</exec>
 	</target>
-
+	
+	
 	<target name="packageEclipseDistributables">
+		<replace token="@qualifier@" file="${eclipse.build.configs}/sdk/packager/sdk.product" value="${buildId}" />
+		<property name="repo" value="${buildDirectory}/repo" />
+		<mkdir dir="${repo}" />
+		<unzip src="${buildDirectory}/${buildLabel}/eclipse-mater-${buildId}.zip" dest="${repo}" />
+		<p2.generator source="${repo}" append="true" flavor="${p2.flavor}" metadataRepository="${repo}" artifactRepository="${repo}" publishArtifacts="false" p2OS="linux" mode="incremental" />
+
 		<replace file="packaging.map" token="@buildId@" value="${buildId}" />
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/sdk/packager" />
