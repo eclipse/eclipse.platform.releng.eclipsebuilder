@@ -63,9 +63,9 @@
 		<parallel failonany="true">
 			<sequential>
 				<antcall target="packageEclipseDistributables" />
-				<ant antfile="${equinox.build.configs}/equinox.prov/run.xml" target="build"/>
+				<ant antfile="${equinox.build.configs}/equinox.prov/run.xml" target="build" />
 				<antcall target="buildUpdateSite" />
-				<ant antfile="${equinox.build.configs}/equinox.prov/run.xml" target="updatesite"/>
+				<ant antfile="${equinox.build.configs}/equinox.prov/run.xml" target="updatesite" />
 				<antcall target="packageEquinoxDistributables" />
 				<antcall target="publishEclipse" />
 				<antcall target="publishEquinox" />
@@ -190,9 +190,20 @@
 		</exec>
 		<echo message="original:  ${originalAttribs}" />
 		<condition property="attribChanged">
-			<not>
-				<contains string="${polledAttribs}" substring="No such file or directory" casesensitive="no" />
-			</not>
+			<and>
+				<not>
+					<contains string="${polledAttribs}" substring="Permission denied, please try again." casesensitive="no" />
+				</not>
+				<not>
+					<contains string="${polledAttribs}" substring="Host key verification failed." casesensitive="no" />
+				</not>
+				<or>
+					<not>
+						<contains string="${polledAttribs}" substring="No such file or directory" casesensitive="no" />
+					</not>
+					<contains string="${polledAttribs}" substring="bash: line 0: cd:" casesensitive="no" />
+				</or>
+			</and>
 		</condition>
 		<echo message="polled:  ${polledAttribs}" />
 		<antcall target="writeDiffResult" />
@@ -307,8 +318,8 @@
 			<arg line="-q ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -r eclipse" />
 		</exec>
 	</target>
-	
-	
+
+
 	<target name="packageEclipseDistributables">
 		<replace token="@qualifier@" file="${eclipse.build.configs}/sdk/packager/sdk.product" value="${buildId}" />
 		<property name="repo" value="${buildDirectory}/repo" />
@@ -397,11 +408,11 @@
 		</antcall>
 		<antcall target="package">
 			<param name="packagingInfo" value="${equinox.build.configs}/equinox.p2.selfhosting.feature/packager" />
-		</antcall>		
+		</antcall>
 		<ant antfile="run.xml" dir="${equinox.build.configs}/equinox.prov">
 			<property name="component" value="${equinox.build.configs}/equinox.prov" />
 		</ant>
-		<!-- invoke equinox.p2.installer in a separate process -->		
+		<!-- invoke equinox.p2.installer in a separate process -->
 		<ant antfile="${equinox.build.configs}/../helper.xml" target="build.p2.installer.product" />
 	</target>
 
