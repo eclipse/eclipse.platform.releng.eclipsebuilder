@@ -57,6 +57,14 @@
 	<target name="build" depends="init">
 		<!-- Ensure that we are building against the same version that we
 			are generating the metadata for -->
+		<antcall target="extract">
+			<param name="extract-src" value="${sdk.archive}" />
+			<param name="extract-dest" value="${base}" />
+		</antcall>
+		<antcall target="extract">
+			<param name="extract-src" value="${rcp.delta.archive}" />
+			<param name="extract-dest" value="${base}" />
+		</antcall>
 		<!-- Generate the metadata for the agent and create the install first due
 			to bug 199317... installing will install all fragments and we don't want the
 			ones from the SDK -->
@@ -174,7 +182,7 @@
 		</antcall>
 
 		<chmod file="${p2.generator.dir}/eclipse/eclipse" perm="777" />
-		<copy file="files/config.ini.generator" tofile="${p2.generator.dir}/eclipse/configuration/config.ini" overwrite="true" />
+		<copy file="${equinox.build.configs}/equinox.prov/files/config.ini.generator" tofile="${p2.generator.dir}/eclipse/configuration/config.ini" overwrite="true" />
 		<copy todir="${p2.generator.dir}/eclipse/plugins">
 			<fileset dir="${base}/eclipse/plugins">
 				<include name="**/org.eclipse.osgi.services_*.jar" />
@@ -207,7 +215,7 @@
 			</fileset>
 		</delete>
 		<copy todir="${p2.agent.dir}/eclipse/plugins">
-			<fileset dir="files">
+			<fileset dir="${equinox.build.configs}/equinox.prov/files">
 				<include name="**/*.jar" />
 			</fileset>
 		</copy>
@@ -222,9 +230,9 @@
 			<param name="extract-src" value="${agent.zip.name}" />
 			<param name="extract-dest" value="${p2.agent.dir}" />
 		</antcall>
-		<copy file="files/config.ini.agent" tofile="${p2.agent.dir}/eclipse/configuration/config.ini" overwrite="true" />
+		<copy file="${equinox.build.configs}/equinox.prov/files/config.ini.agent" tofile="${p2.agent.dir}/eclipse/configuration/config.ini" overwrite="true" />
 		<copy todir="${p2.agent.dir}/eclipse/plugins">
-			<fileset dir="files">
+			<fileset dir="${equinox.build.configs}/equinox.prov/files">
 				<include name="**/*.jar" />
 			</fileset>
 		</copy>
@@ -359,7 +367,7 @@
 			<param name="extract-dest" value="${p2.director.dir}" />
 		</antcall>
 		<chmod file="${p2.director.dir}/eclipse/eclipse" perm="777" />
-		<copy file="files/config.ini.director" tofile="${p2.director.dir}/eclipse/configuration/config.ini" overwrite="true" />
+		<copy file="${equinox.build.configs}/equinox.prov/files/config.ini.director" tofile="${p2.director.dir}/eclipse/configuration/config.ini" overwrite="true" />
 		<copy todir="${p2.director.dir}/eclipse/plugins">
 			<fileset dir="${base}/eclipse/plugins">
 				<include name="**/org.eclipse.osgi.services_*.jar" />
@@ -403,7 +411,8 @@
 
 		<!-- win32 -->
 		<zip destfile="${output.dir}/equinox-p2-agent-${buildId}-win32.zip" basedir="${p2.agent.install.win32}" includes="**/*" />
-		<zip destfile="${output.dir}/equinox-p2-sdk-${buildId}-win32.zip" basedir="${p2.sdk.install.win32}" includes="**/*" />
+		<!--		<zip destfile="${output.dir}/equinox-p2-sdk-${buildId}-win32.zip" basedir="${p2.sdk.install.win32}" includes="**/*" /> -->
+		<zip destfile="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" basedir="${p2.sdk.install.win32}" includes="**/*" />
 
 		<!-- linux -->
 		<antcall target="p2.tar">
@@ -412,7 +421,8 @@
 		</antcall>
 		<antcall target="p2.tar">
 			<param name="tar.base.dir" value="${p2.sdk.install.linux}" />
-			<param name="tar.base.filename" value="${output.dir}/equinox-p2-sdk-${buildId}-linux.tar" />
+			<!-- <param name="tar.base.filename" value="${output.dir}/equinox-p2-sdk-${buildId}-linux.tar" /> -->
+			<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk.tar" />
 		</antcall>
 
 		<!-- macosx -->
@@ -422,7 +432,8 @@
 		</antcall>
 		<antcall target="p2.tar">
 			<param name="tar.base.dir" value="${p2.sdk.install.macosx}" />
-			<param name="tar.base.filename" value="${output.dir}/equinox-p2-sdk-${buildId}-macosx.tar" />
+			<!-- <param name="tar.base.filename" value="${output.dir}/equinox-p2-sdk-${buildId}-macosx.tar" /> -->
+			<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-macosx-carbon.tar" />
 		</antcall>
 		<!--- add for all other platforms -->
 	</target>
