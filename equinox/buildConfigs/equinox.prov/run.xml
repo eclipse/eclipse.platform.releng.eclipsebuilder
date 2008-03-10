@@ -44,6 +44,8 @@
 		<property name="p2.generator.dir" value="${p2.output.base}/generator" />
 		<mkdir dir="${p2.generator.dir}" />
 		<!-- <property name="p2.metadata.repo" value="${p2.updateSite}/" /> -->
+		<property name="repo" value="${buildDirectory}/repo" />
+		<mkdir dir="${repo}" />
 		<property name="p2.metadata.repo" value="${repo}" />
 		<!-- <mkdir dir="${p2.metadata.repo}" /> -->
 		<property name="p2.artifact.repo" value="${p2.updateSite}/" />
@@ -65,16 +67,13 @@
 			<param name="extract-src" value="${rcp.delta.archive}" />
 			<param name="extract-dest" value="${base}" />
 		</antcall>
-		<!-- Generate the metadata for the agent and create the install first due
-			to bug 199317... installing will install all fragments and we don't want the
-			ones from the SDK -->
 		<antcall target="setup.generator" />
 		<antcall target="setup.director" />
 
 		<antcall target="generate.metadata.agent" />
 		<antcall target="provision.agent" />
 
-		<!--	<antcall target="generate.metadata.sdk" /> -->
+		<!--		<antcall target="generate.metadata.sdk" /> -->
 		<antcall target="provision.sdk" />
 
 		<antcall target="generate.metadata.releng.tools" />
@@ -378,7 +377,7 @@
 
 	<target name="run.director">
 		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
-		<exec executable="${p2.director.dir}/eclipse/eclipse" failonerror="false" timeout="900000">
+		<exec executable="${p2.director.dir}/eclipse/eclipse" failonerror="true" timeout="900000">
 			<arg line="-vm ${java15-home}/bin/java" />
 			<arg line="-application org.eclipse.equinox.p2.director.app.application" />
 			<arg line="-nosplash" />
@@ -393,8 +392,10 @@
 			<arg line="-roaming" />
 			<arg line="-profile ${p2.director.profile}" />
 			<arg line="${p2.director.extraArgs}" />
-			<arg line="-metadataRepository file:${p2.metadata.repo}" />
-			<arg line="-artifactRepository file:${p2.artifact.repo}" />
+			<!--			<arg line="-metadataRepository file:${p2.metadata.repo}" />
+			<arg line="-artifactRepository file:${p2.artifact.repo}" /> -->
+			<arg line="-metadataRepository file:${repo}" />
+			<arg line="-artifactRepository file:${repo}" />
 			<arg line="-destination ${p2.director.install.path}" />
 			<arg line="-bundlepool ${p2.director.install.path}" />
 			<arg line="-vmargs" />

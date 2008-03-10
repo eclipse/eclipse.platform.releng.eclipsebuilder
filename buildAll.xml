@@ -66,7 +66,7 @@
 				<antcall target="packageEquinoxDistributables" />
 				<ant antfile="${equinox.build.configs}/equinox.prov/run.xml" target="build" />
 				<antcall target="buildUpdateSite" />
-				<ant antfile="${equinox.build.configs}/equinox.prov/run.xml" target="updatesite" />		
+				<ant antfile="${equinox.build.configs}/equinox.prov/run.xml" target="updatesite" />
 				<antcall target="publishEclipse" />
 				<antcall target="publishEquinox" />
 			</sequential>
@@ -97,6 +97,7 @@
 		<property name="zipargs" value="-y -qq" />
 		<!--unzip args-->
 		<property name="unzipArgs" value="-qq" />
+		<property name="repo" value="${buildDirectory}/repo" />
 	</target>
 
 	<target name="buildMasterFeature">
@@ -322,17 +323,23 @@
 
 	<target name="packageEclipseDistributables">
 		<replace token="@qualifier@" file="${eclipse.build.configs}/sdk/packager/sdk.product" value="${buildId}" />
-		<property name="repo" value="${buildDirectory}/repo" />
+		<delete dir="${repo}" />
 		<mkdir dir="${repo}" />
+		<copy todir="${repo}" failonerror="false">
+			<fileset file="${updateSite}/artifacts.*" />
+			<fileset file="${updateSite}/content.*" />
+		</copy>
 		<unzip src="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip" dest="${repo}" />
 		<move todir="${repo}">
 			<fileset dir="${repo}/eclipse" />
 		</move>
 		<delete dir="${repo}/eclipse" />
 
+		<!--features and plugins metadata -->
 		<p2.generator source="${repo}" append="true" flavor="tooling" metadataRepository="file:${repo}" artifactRepository="file:${repo}" publishArtifacts="false" p2OS="linux" mode="incremental" />
 
 		<replace file="packaging.map" token="@buildId@" value="${buildId}" />
+		<!---rootfiles and product metadata -->
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/sdk/packager" />
 		</antcall>
@@ -414,7 +421,7 @@
 		<antcall target="package">
 			<param name="packagingInfo" value="${equinox.build.configs}/equinox.p2.selfhosting.feature/packager" />
 		</antcall>
-	<!--	<ant antfile="run.xml" dir="${equinox.build.configs}/equinox.prov">
+		<!--	<ant antfile="run.xml" dir="${equinox.build.configs}/equinox.prov">
 			<property name="component" value="${equinox.build.configs}/equinox.prov" />
 		</ant> -->
 		<!-- invoke equinox.p2.installer in a separate process -->
