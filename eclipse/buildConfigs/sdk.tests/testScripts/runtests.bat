@@ -25,7 +25,7 @@ REM
 REM Install Eclipse if it does not exist
 REM
 REM ****************************************************************
-if NOT EXIST eclipse unzip -qq -o eclipse-SDK-*.zip && unzip -qq -o -C eclipse-junit-tests*.zip */plugins/org.eclipse.test*
+if NOT EXIST eclipse unzip -qq -o eclipse-SDK-*.zip && unzip -qq -o -C eclipse-junit-tests*.zip */plugins/org.eclipse.test* -d eclipse/dropins/
 
 
 :processcmdlineargs

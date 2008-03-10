@@ -70,7 +70,7 @@
 				eclipse/plugins/org.eclipse.ant.optional.junit_*
 				${testPluginsRequired}
 				-x eclipse/plugins/*.source*/**
-				-d ${install}" />
+				-d ${install}/eclipse/dropins/" />
 		</exec>
 	</target>
 
@@ -220,10 +220,10 @@
 	</target>
 	<target name="configureTeamTest" if="teamcvs">
 		<!-- Fill in cvs repository information -->
-		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@user@" value="${cvs_user}" />
-		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@password@" value="${cvs_password}" />
-		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@host@" value="${cvs_host}" />
-		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@root@" value="${cvs_root}" />
+		<replace file="${eclipse-home}/dropins/eclipse/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@user@" value="${cvs_user}" />
+		<replace file="${eclipse-home}/dropins/eclipse/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@password@" value="${cvs_password}" />
+		<replace file="${eclipse-home}/dropins/eclipse/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@host@" value="${cvs_host}" />
+		<replace file="${eclipse-home}/dropins/eclipse/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@root@" value="${cvs_root}" />
 	</target>
 
 	<target name="configureDeltaPack" if="pdebuild">
@@ -257,8 +257,11 @@
 			<property name="test.target" value="junit" />
 			<property name="report" value="@{testPlugin}" />
 
+			<!--library.xml is now in dropins folder -->
+			  <property name="library-file" value="${eclipse-home}/dropins/eclipse/plugins/org.eclipse.test/library.xml"/>
+
 			<!--install Cloudscape plug-ins if running performance tests-->
-			<condition property="derby" value="eclipse/plugins/Cloudscape*/* ">
+			<condition property="derby" value="eclipse/dropins/eclipse/plugins/Cloudscape*/* ">
 				<equals arg1="${test.target}" arg2="performance" />
 			</condition>
 			<property name="derby" value="" />
@@ -272,19 +275,19 @@
 
 	<target name="junit" unless="skip.test">
 		<antcall target="setup" />
-		<ant antfile="${eclipse-home}/plugins/${testPlugin}/test.xml" dir="${eclipse-home}" />
+		<ant antfile="${eclipse-home}/dropins/eclipse/plugins/${testPlugin}/test.xml" dir="${eclipse-home}" />
 		<antcall target="genResults" />
 	</target>
 
 	<target name="performance" if="performance.target.present" unless="skip.test">
 		<antcall target="setup" />
-		<ant antfile="${eclipse-home}/plugins/${testPlugin}/test.xml" dir="${eclipse-home}" target="performance" />
+		<ant antfile="${eclipse-home}/dropins/eclipse/plugins/${testPlugin}/test.xml" dir="${eclipse-home}" target="performance" />
 		<antcall target="genResults" />
 	</target>
 
 	<target name="genResults">
 		<copy file="${eclipse-home}/${report}.xml" tofile="${results}/xml/${report}_${platform}.xml" failonerror="false" />
-		<style style="${eclipse-home}/plugins/org.eclipse.test/JUNIT.XSL" basedir="${results}/xml" destdir="${results}/html" />
+		<style style="${eclipse-home}/dropins/eclipse/plugins/org.eclipse.test/JUNIT.XSL" basedir="${results}/xml" destdir="${results}/html" />
 	</target>
 
 	<target name="ant">
