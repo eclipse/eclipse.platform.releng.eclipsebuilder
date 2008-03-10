@@ -136,7 +136,7 @@
 		 		 <arg line="-j ${buildDirectory}/equinox/${buildLabel}/${archiveName} eclipse/plugins/org.eclipse.osgi* eclipse/plugins/org.eclipse.equinox* -d ${equinoxPostingDirectory}/${buildLabel}"/>		 		 		 		 		 		 
 		 </exec>
 		 <exec executable="unzip" dir="${basedir}">
-			    <arg line="-j ${postingDirectory}/eclipse-SDK-${buildId}-win32.zip eclipse/plugins/org.eclipse.equinox.launcher_* -d ${equinoxPostingDirectory}/${buildLabel}"/>		 		 		 		 		 		 
+			    <arg line="-j ${postingDirectory}/eclipse-SDK-${buildId}-b4p2-win32.zip eclipse/plugins/org.eclipse.equinox.launcher_* -d ${equinoxPostingDirectory}/${buildLabel}"/>		 		 		 		 		 		 
 		 </exec>
 	</target>
 	<!-- ===================================================================== -->

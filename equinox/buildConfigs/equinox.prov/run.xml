@@ -408,16 +408,23 @@
 
 		<!-- win32 -->
 		<zip destfile="${output.dir}/equinox-p2-agent-${buildId}-win32.zip" basedir="${p2.agent.install.win32}" includes="**/*" />
-		<zip destfile="${output.dir}/equinox-p2-sdk-${buildId}-win32.zip" basedir="${p2.sdk.install.win32}" includes="**/*" />
+		<zip destfile="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" basedir="${p2.sdk.install.win32}" includes="**/*" />
+		<antcall target="generateChecksums">
+			<param name="archiveName" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" />
+		</antcall>
 
 		<!-- linux -->
 		<antcall target="p2.tar">
 			<param name="tar.base.dir" value="${p2.agent.install.linux}" />
 			<param name="tar.base.filename" value="${output.dir}/equinox-p2-agent-${buildId}-linux.tar" />
 		</antcall>
+
 		<antcall target="p2.tar">
 			<param name="tar.base.dir" value="${p2.sdk.install.linux}" />
-			<param name="tar.base.filename" value="${output.dir}/equinox-p2-sdk-${buildId}-linux.tar" />
+			<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk.tar" />
+		</antcall>
+		<antcall target="generateChecksums">
+			<param name="archiveName" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk.tar.gz" />
 		</antcall>
 
 		<!-- macosx -->
@@ -427,8 +434,20 @@
 		</antcall>
 		<antcall target="p2.tar">
 			<param name="tar.base.dir" value="${p2.sdk.install.macosx}" />
-			<param name="tar.base.filename" value="${output.dir}/equinox-p2-sdk-${buildId}-macosx.tar" />
+			<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-macosx-carbon.tar" />
 		</antcall>
+		<antcall target="generateChecksums">
+			<param name="archiveName" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-macosx-carbon.tar.gz" />
+		</antcall>
+	</target>
+
+	<target name="generateChecksums">
+		<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
+		<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
+		<checksum file="${archiveFullPath}" property="md5" />
+		<checksum file="${archiveFullPath}" algorithm="SHA" property="sha" />
+		<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5" />
+		<echo message="${sha} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.sha1" />
 	</target>
 
 	<target name="p2.tar">
