@@ -410,7 +410,7 @@
 		<zip destfile="${output.dir}/equinox-p2-agent-${buildId}-win32.zip" basedir="${p2.agent.install.win32}" includes="**/*" />
 		<zip destfile="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" basedir="${p2.sdk.install.win32}" includes="**/*" />
 		<antcall target="generateChecksums">
-			<param name="archiveName" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" />
+			<param name="archiveName" value="eclipse-SDK-${buildId}-win32.zip" />
 		</antcall>
 
 		<!-- linux -->
@@ -424,7 +424,7 @@
 			<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk.tar" />
 		</antcall>
 		<antcall target="generateChecksums">
-			<param name="archiveName" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk.tar.gz" />
+			<param name="archiveName" value="eclipse-SDK-${buildId}-linux-gtk.tar.gz" />
 		</antcall>
 
 		<!-- macosx -->
@@ -437,7 +437,7 @@
 			<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-macosx-carbon.tar" />
 		</antcall>
 		<antcall target="generateChecksums">
-			<param name="archiveName" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-macosx-carbon.tar.gz" />
+			<param name="archiveName" value="eclipse-SDK-${buildId}-macosx-carbon.tar.gz" />
 		</antcall>
 	</target>
 
