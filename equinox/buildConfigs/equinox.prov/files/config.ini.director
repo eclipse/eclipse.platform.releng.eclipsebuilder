@@ -68,8 +68,10 @@ osgi.bundles=\
 	org.eclipse.equinox.registry,\
 	org.eclipse.equinox.simpleconfigurator,\
 	org.eclipse.equinox.simpleconfigurator.manipulator@start,\
-	org.eclipse.osgi.services	
-
+	org.eclipse.osgi.services,\
+	org.sat4j.core,\
+	org.sat4j.pb
+	
 org.eclipse.update.reconcile=false
 
 # The product to run.  A given Eclipse configuration may contain many products.
