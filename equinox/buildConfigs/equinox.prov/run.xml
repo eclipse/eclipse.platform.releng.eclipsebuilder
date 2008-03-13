@@ -16,18 +16,18 @@
 		<mkdir dir="${p2.director.dir}" />
 		
 		<condition property="sdk.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-ppc.tar.gz">
-			<equals arg1="{os.arch}" arg2="ppc64" />
+			<equals arg1="${os.arch}" arg2="ppc64" />
 		</condition>
 		<condition property="sdk.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk.tar.gz">
-			<equals arg1="{os.arch}" arg2="i386" />
+			<equals arg1="${os.arch}" arg2="i386" />
 		</condition>
 		<property name="sdk.archive" value="" />
 		<property name="rcp.delta.archive" value="${postingDirectory}/${buildLabel}/eclipse-${buildId}-delta-pack.zip" />
 		<condition property="rcp.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-linux-gtk-ppc.tar.gz">
-			<equals arg1="{os.arch}" arg2="ppc64" />
+			<equals arg1="${os.arch}" arg2="ppc64" />
 		</condition>
 		<condition property="rcp.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-linux-gtk.tar.gz">
-			<equals arg1="{os.arch}" arg2="i386" />
+			<equals arg1="${os.arch}" arg2="i386" />
 		</condition>
 		<property name="rcp.archive" value="" />	
 		<property name="releng.tools.archive" value="${postingDirectory}/${buildLabel}/org.eclipse.releng.tools-${buildId}.zip" />
