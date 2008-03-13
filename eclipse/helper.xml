@@ -302,10 +302,11 @@
 		<mkdir dir="${buildDirectory}/${buildLabel}/performance" />
 		<mkdir dir="${postingDirectory}/${buildLabel}/performance" />
 		<taskdef name="performanceResults" classname="org.eclipse.releng.performance.PerformanceResultHtmlGenerator" />
-		<condition property="configArgs" value="-ws gtk -arch ppc">
-			<not>
-				<equals arg1="{os.arch}" arg2="i386" />
-			</not>
+		<condition property="configArgs" value="-ws gtk -arch ppc">			
+				<equals arg1="${os.arch}" arg2="ppc64" />			
+		</condition>
+		<condition property="configArgs" value="-ws gtk -arch x86">
+			<equals arg1="${os.arch}" arg2="i386" />
 		</condition>
 		<property name="configArgs" value="" />
 
