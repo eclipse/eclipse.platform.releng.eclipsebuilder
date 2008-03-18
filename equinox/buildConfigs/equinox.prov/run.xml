@@ -14,7 +14,7 @@
 		<mkdir dir="${p2.output.base}" />
 		<property name="p2.director.dir" value="${p2.output.base}/director" />
 		<mkdir dir="${p2.director.dir}" />
-		
+
 		<condition property="sdk.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-ppc.tar.gz">
 			<equals arg1="${os.arch}" arg2="ppc64" />
 		</condition>
@@ -29,7 +29,8 @@
 		<condition property="rcp.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-linux-gtk.tar.gz">
 			<equals arg1="${os.arch}" arg2="i386" />
 		</condition>
-		<property name="rcp.archive" value="" />	
+		<property name="rcp.archive" value="" />
+		<property name="icu.base.archive" value="${postingDirectory}/${buildLabel}/com.ibm.icu.base-${buildId}.zip" />
 		<property name="releng.tools.archive" value="${postingDirectory}/${buildLabel}/org.eclipse.releng.tools-${buildId}.zip" />
 
 		<property name="p2.agent.install.win32" value="${p2.output.base}/agent.install.win32" />
@@ -39,12 +40,29 @@
 		<property name="p2.agent.install.macosx" value="${p2.output.base}/agent.install.macosx" />
 		<mkdir dir="${p2.agent.install.macosx}" />
 
-		<property name="p2.sdk.install.win32" value="${p2.output.base}/sdk.install.win32" />
-		<mkdir dir="${p2.sdk.install.win32}" />
-		<property name="p2.sdk.install.linux" value="${p2.output.base}/sdk.install.linux" />
-		<mkdir dir="${p2.sdk.install.linux}" />
-		<property name="p2.sdk.install.macosx" value="${p2.output.base}/sdk.install.macosx" />
-		<mkdir dir="${p2.sdk.install.macosx}" />
+		<property name="p2.sdk.install.win32.win32.x86" value="${p2.output.base}/sdk.install.win32.win32.x86" />
+		<mkdir dir="${p2.sdk.install.win32.win32.x86}" />
+		<property name="p2.sdk.install.win32.win32.x86_64" value="${p2.output.base}/sdk.install.win32.win32.x86_64" />
+		<mkdir dir="${p2.sdk.install.win32.win32.x86_64}" />
+		<property name="p2.sdk.install.win32.wpf.x86" value="${p2.output.base}/sdk.install.win32.wpf.x86" />
+		<mkdir dir="${p2.sdk.install.win32.wpf.x86}" />
+		<property name="p2.sdk.install.linux.gtk.x86" value="${p2.output.base}/sdk.install.linux.gtk.x86" />
+		<mkdir dir="${p2.sdk.install.linux.gtk.x86}" />
+		<property name="p2.sdk.install.linux.motif.x86" value="${p2.output.base}/sdk.install.linux.motif.x86" />
+		<mkdir dir="${p2.sdk.install.linux.motif.x86}" />
+		<property name="p2.sdk.install.linux.gtk.x86_64" value="${p2.output.base}/sdk.install.linux.gtk.x86_64" />
+		<mkdir dir="${p2.sdk.install.linux.gtk.x86_64}" />
+		<property name="p2.sdk.install.linux.gtk.ppc" value="${p2.output.base}/sdk.install.linux.gtk.ppc" />
+		<mkdir dir="${p2.sdk.install.linux.gtk.ppc}" />
+		<property name="p2.sdk.install.hpux.motif.ia64_32" value="${p2.output.base}/sdk.install.hpux.motif.ia64_32" />
+		<mkdir dir="${p2.sdk.install.lhpux.motif.ia64_32}" />
+		<property name="p2.sdk.install.solaris.gtk.sparc" value="${p2.output.base}/sdk.install.install.solaris.gtk.sparc" />
+		<mkdir dir="${p2.sdk.install.solaris.gtk.sparc}" />
+		<property name="p2.sdk.install.aix.motif.ppc" value="${p2.output.base}/sdk.install.install.aix.motif.ppc" />
+		<mkdir dir="${p2.sdk.install.aix.motif.ppc}" />
+		<property name="p2.sdk.install.macosx.carbon.x86" value="${p2.output.base}/sdk.install.macosx.carbon.x86" />
+		<mkdir dir="${p2.sdk.install.macosx.carbon.x86}" />
+
 
 		<property name="base" value="${p2.output.base}/base" />
 		<mkdir dir="${base}" />
@@ -69,16 +87,16 @@
 	</target>
 
 	<target name="build" depends="init">
-		<!-- Ensure that we are building against the same version that we
-			are generating the metadata for -->
 		<antcall target="extract">
-			<param name="extract-src" value="${sdk.archive}" />
+			<param name="extract-src" value="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip" />
 			<param name="extract-dest" value="${base}" />
 		</antcall>
+
 		<antcall target="extract">
-			<param name="extract-src" value="${rcp.delta.archive}" />
+			<param name="extract-src" value="${icu.base.archive}" />
 			<param name="extract-dest" value="${base}" />
 		</antcall>
+
 		<!-- Generate the metadata for the agent and create the install first due
 			to bug 199317... installing will install all fragments and we don't want the
 			ones from the SDK -->
@@ -149,7 +167,7 @@
 			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
 			<param name="p2.director.version" value="3.4.0.${buildId}" />
 			<param name="p2.director.profile" value="SDKProfile" />
-			<param name="p2.director.install.path" value="${p2.sdk.install.win32}/eclipse" />
+			<param name="p2.director.install.path" value="${p2.sdk.install.win32.win32.x86}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
 			<param name="p2.os" value="win32" />
 			<param name="p2.ws" value="win32" />
@@ -160,7 +178,29 @@
 			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
 			<param name="p2.director.version" value="3.4.0.${buildId}" />
 			<param name="p2.director.profile" value="SDKProfile" />
-			<param name="p2.director.install.path" value="${p2.sdk.install.linux}/eclipse" />
+			<param name="p2.director.install.path" value="${p2.sdk.install.win32.win32.x86_64}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="win32" />
+			<param name="p2.ws" value="win32" />
+			<param name="p2.arch" value="x86_64" />
+		</antcall>		
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
+			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.profile" value="SDKProfile" />
+			<param name="p2.director.install.path" value="${p2.sdk.install.win32.wpf.x86}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="win32" />
+			<param name="p2.ws" value="wpf" />
+			<param name="p2.arch" value="x86" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
+			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.profile" value="SDKProfile" />
+			<param name="p2.director.install.path" value="${p2.sdk.install.linux.gtk.x86}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
 			<param name="p2.os" value="linux" />
 			<param name="p2.ws" value="gtk" />
@@ -171,12 +211,80 @@
 			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
 			<param name="p2.director.version" value="3.4.0.${buildId}" />
 			<param name="p2.director.profile" value="SDKProfile" />
-			<param name="p2.director.install.path" value="${p2.sdk.install.macosx}/eclipse" />
+			<param name="p2.director.install.path" value="${p2.sdk.install.linux.gtk.ppc}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="linux" />
+			<param name="p2.ws" value="gtk" />
+			<param name="p2.arch" value="ppc" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
+			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.profile" value="SDKProfile" />
+			<param name="p2.director.install.path" value="${p2.sdk.install.linux.motif.x86}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="linux" />
+			<param name="p2.ws" value="motif" />
+			<param name="p2.arch" value="x86" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
+			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.profile" value="SDKProfile" />
+			<param name="p2.director.install.path" value="${p2.sdk.install.linux.gtk.x86_64}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="linux" />
+			<param name="p2.ws" value="gtk" />
+			<param name="p2.arch" value="x86_64" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
+			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.profile" value="SDKProfile" />
+			<param name="p2.director.install.path" value="${p2.sdk.install.macosx.carbon.x86}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
 			<param name="p2.os" value="macosx" />
 			<param name="p2.ws" value="carbon" />
 			<param name="p2.arch" value="ppc" />
 		</antcall>
+
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
+			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.profile" value="SDKProfile" />
+			<param name="p2.director.install.path" value="${p2.sdk.install.hpux.motif.ia64_32}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="hpux" />
+			<param name="p2.ws" value="motif" />
+			<param name="p2.arch" value="ia64_32" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
+			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.profile" value="SDKProfile" />
+			<param name="p2.director.install.path" value="${p2.sdk.install.solaris.gtk.sparc}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="solaris" />
+			<param name="p2.ws" value="gtk" />
+			<param name="p2.arch" value="sparc" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
+			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.profile" value="SDKProfile" />
+			<param name="p2.director.install.path" value="${p2.sdk.install.aix.motif.ppc}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="aix" />
+			<param name="p2.ws" value="motif" />
+			<param name="p2.arch" value="ppc" />
+		</antcall>
+
 	</target>
 
 	<target name="setup.generator">
@@ -425,26 +533,76 @@
 		<property name="output.dir" value="${equinoxPostingDirectory}/${buildLabel}" />
 		<mkdir dir="${output.dir}" />
 
-		<!-- win32 -->
+		<!-- win32 win32 x86 -->
 		<zip destfile="${output.dir}/equinox-p2-agent-${buildId}-win32.zip" basedir="${p2.agent.install.win32}" includes="**/*" />
-		<!--		<zip destfile="${output.dir}/equinox-p2-sdk-${buildId}-win32.zip" basedir="${p2.sdk.install.win32}" includes="**/*" /> -->
-		<zip destfile="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" basedir="${p2.sdk.install.win32}" includes="**/*" />
+		<zip destfile="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" basedir="${p2.sdk.install.win32.win32.x86}" includes="**/*" />
 		<antcall target="generateChecksums">
 			<param name="archiveName" value="eclipse-SDK-${buildId}-win32.zip" />
 		</antcall>
 
-		<!-- linux -->
+		<!-- win32 win32 x86_64 -->
+		<zip destfile="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32-x86_64.zip" basedir="${p2.sdk.install.win32.win32.x86_64}" includes="**/*" />
+		<antcall target="generateChecksums">
+			<param name="archiveName" value="eclipse-SDK-${buildId}-win32-x86_64.zip" />
+		</antcall>
+
+		<!-- win32 wpf x86 -->
+		<zip destfile="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32-wpf.zip" basedir="${p2.sdk.install.win32.wpf.x86}" includes="**/*" />
+		<antcall target="generateChecksums">
+			<param name="archiveName" value="eclipse-SDK-${buildId}-win32-wpf.zip" />
+		</antcall>
+
+
+		<!-- linux gtk x86-->
 		<antcall target="p2.tar">
 			<param name="tar.base.dir" value="${p2.agent.install.linux}" />
 			<param name="tar.base.filename" value="${output.dir}/equinox-p2-agent-${buildId}-linux.tar" />
 		</antcall>
 		<antcall target="p2.tar">
-			<param name="tar.base.dir" value="${p2.sdk.install.linux}" />
-			<!-- <param name="tar.base.filename" value="${output.dir}/equinox-p2-sdk-${buildId}-linux.tar" /> -->
+			<param name="tar.base.dir" value="${p2.sdk.install.linux.gtk.x86}" />
 			<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk.tar" />
 		</antcall>
 		<antcall target="generateChecksums">
 			<param name="archiveName" value="eclipse-SDK-${buildId}-linux-gtk.tar.gz" />
+		</antcall>
+		<!-- linux gtk ppc-->
+		<antcall target="p2.tar">
+			<param name="tar.base.dir" value="${p2.sdk.install.linux.gtk.ppc}" />
+			<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-ppc.tar" />
+		</antcall>
+		<antcall target="generateChecksums">
+			<param name="archiveName" value="eclipse-SDK-${buildId}linux-gtk-ppc.tar.gz" />
+		</antcall>
+		<!-- linux motif x86-->
+		<antcall target="p2.tar">
+			<param name="tar.base.dir" value="${p2.sdk.install.linux.motif.x86}" />
+			<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-motif.tar" />
+		</antcall>
+		<antcall target="generateChecksums">
+			<param name="archiveName" value="eclipse-SDK-${buildId}-linux-motif.tar.gz" />
+		</antcall>
+		<!-- linux gtk x86_64-->
+		<antcall target="p2.tar">
+			<param name="tar.base.dir" value="${p2.sdk.install.linux.gtk.x86_64}" />
+			<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-x86_64.tar" />
+		</antcall>
+		<antcall target="generateChecksums">
+			<param name="archiveName" value="eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz" />
+		</antcall>
+		<!-- hpux motif ia64_32-->
+		<zip destfile="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-hpux-motif-ia64_32.zip" basedir="${p2.sdk.install.hpux.motif.ia64_32}" includes="**/*" />
+		<antcall target="generateChecksums">
+			<param name="archiveName" value="eclipse-SDK-${buildId}-hpux-motif-ia64_32.zip" />
+		</antcall>
+		<!-- solaris gtk sparc -->
+		<zip destfile="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-solaris-gtk.zip" basedir="${p2.sdk.install.solaris.gtk.sparc}" includes="**/*" />
+		<antcall target="generateChecksums">
+			<param name="archiveName" value="eclipse-SDK-${buildId}-solaris-gtk.zip" />
+		</antcall>
+		<!-- aix gtk sparc -->
+		<zip destfile="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-aix-motif.zip" basedir="${p2.sdk.install.aix.motif.sparc}" includes="**/*" />
+		<antcall target="generateChecksums">
+			<param name="archiveName" value="eclipse-SDK-${buildId}-aix-motif.zip" />
 		</antcall>
 
 		<!-- macosx -->
@@ -453,14 +611,13 @@
 			<param name="tar.base.filename" value="${output.dir}/equinox-p2-agent-${buildId}-macosx.tar" />
 		</antcall>
 		<antcall target="p2.tar">
-			<param name="tar.base.dir" value="${p2.sdk.install.macosx}" />
-			<!-- <param name="tar.base.filename" value="${output.dir}/equinox-p2-sdk-${buildId}-macosx.tar" /> -->
+			<param name="tar.base.dir" value="${p2.sdk.install.macosx.carbon.x86}" />
 			<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-macosx-carbon.tar" />
 		</antcall>
 		<antcall target="generateChecksums">
 			<param name="archiveName" value="eclipse-SDK-${buildId}-macosx-carbon.tar.gz" />
 		</antcall>
-		<!--- add for all other platforms -->
+
 	</target>
 
 	<target name="generateChecksums">

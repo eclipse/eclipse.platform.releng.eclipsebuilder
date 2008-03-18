@@ -98,6 +98,7 @@
 		<!--unzip args-->
 		<property name="unzipArgs" value="-qq" />
 		<property name="repo" value="${buildDirectory}/repo" />
+		<property name="reposource" value="${buildDirectory}/reposource" />
 	</target>
 
 	<target name="buildMasterFeature">
@@ -323,26 +324,27 @@
 
 	<target name="packageEclipseDistributables">
 		<replace token="@qualifier@" file="${eclipse.build.configs}/sdk/packager/sdk.product" value="${buildId}" />
-		<delete dir="${repo}" />
+		<delete dir="${repo}"/>
 		<mkdir dir="${repo}" />
-		<copy todir="${repo}" failonerror="false">
+		<delete dir="${reposource}"/>
+                <mkdir dir="${reposource}" />
+		<copy todir="${reposource}" failonerror="false">
 			<fileset file="${updateSite}/artifacts.*" />
 			<fileset file="${updateSite}/content.*" />
 		</copy>
-		<unzip src="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip" dest="${repo}" />
-		<move todir="${repo}">
-			<fileset dir="${repo}/eclipse" />
+		<unzip src="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip" dest="${reposource}" />
+		<move todir="${reposource}">
+			<fileset dir="${reposource}/eclipse" />
 		</move>
-		<delete dir="${repo}/eclipse" />
+		<delete dir="${reposource}/eclipse" />
 
 		<!--features and plugins metadata -->
-		<p2.generator source="${repo}" append="true" flavor="tooling" metadataRepository="file:${repo}" artifactRepository="file:${repo}" publishArtifacts="false" p2OS="linux" mode="incremental" />
+		<p2.generator source="${reposource}" append="true" flavor="tooling" metadataRepository="file:${repo}" artifactRepository="file:${repo}" publishArtifacts="true" p2OS="linux" mode="incremental" />
 
 		<replace file="packaging.map" token="@buildId@" value="${buildId}" />
-		<!---rootfiles and product metadata -->
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/sdk/packager" />
-		</antcall>
+		</antcall> 
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/rcp.deltapack/packager" />
 		</antcall>
