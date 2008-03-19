@@ -63,12 +63,12 @@
 		<parallel failonany="true">
 			<sequential>
 				<antcall target="packageEclipseDistributables" />
-				<antcall target="packageEquinoxDistributables" />
-				<ant antfile="${equinox.build.configs}/equinox.prov/run.xml" target="build" />
+				<antcall target="packageEquinoxDistributables" />  
+				<ant antfile="${equinox.build.configs}/equinox.prov/run.xml" target="build" />  -->
 				<antcall target="buildUpdateSite" />
-				<ant antfile="${equinox.build.configs}/equinox.prov/run.xml" target="updatesite" />
+				<ant antfile="${equinox.build.configs}/equinox.prov/run.xml" target="updatesite" /> 
 				<antcall target="publishEclipse" />
-				<antcall target="publishEquinox" />
+				<antcall target="publishEquinox" /> 
 			</sequential>
 			<antcall target="testEclipse" />
 		</parallel>
@@ -333,6 +333,7 @@
 			<fileset file="${updateSite}/content.*" />
 		</copy>
 		<unzip src="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip" dest="${reposource}" />
+		<unzip src="${postingDirectory}/${buildLabel}/com.ibm.icu.base-${buildId}.zip" dest="${reposource}" />
 		<move todir="${reposource}">
 			<fileset dir="${reposource}/eclipse" />
 		</move>
@@ -341,7 +342,7 @@
 		<!--features and plugins metadata -->
 		<p2.generator source="${reposource}" append="true" flavor="tooling" metadataRepository="file:${repo}" artifactRepository="file:${repo}" publishArtifacts="true" p2OS="linux" mode="incremental" />
 
-		<replace file="packaging.map" token="@buildId@" value="${buildId}" />
+	<replace file="packaging.map" token="@buildId@" value="${buildId}" />
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/sdk/packager" />
 		</antcall> 
@@ -387,7 +388,7 @@
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/cvsfeature.sdk/packager" />
 		</antcall>
-	</target>
+	</target> 
 
 	<target name="packageEquinoxDistributables">
 		<antcall target="package">
