@@ -333,7 +333,10 @@
 			<fileset file="${updateSite}/content.*" />
 		</copy>
 		<unzip src="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip" dest="${reposource}" />
-		<!-- <unzip src="${postingDirectory}/${buildLabel}/com.ibm.icu.base-${buildId}.zip" dest="${reposource}" /> -->
+		<antcall target="package">
+				<param name="packagingInfo" value="${eclipse.build.configs}/com.ibm.icu.base/packager" />
+		</antcall>
+		<unzip src="${postingDirectory}/${buildLabel}/com.ibm.icu.base-${buildId}.zip" dest="${reposource}" />
 		<move todir="${reposource}">
 			<fileset dir="${reposource}/eclipse" />
 		</move>
@@ -376,9 +379,7 @@
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/rcp.sdk/packager" />
 		</antcall>
-		<antcall target="package">
-			<param name="packagingInfo" value="${eclipse.build.configs}/com.ibm.icu.base/packager" />
-		</antcall>
+		
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/releng.tools/packager" />
 		</antcall>
