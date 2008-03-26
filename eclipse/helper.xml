@@ -302,8 +302,8 @@
 		<mkdir dir="${buildDirectory}/${buildLabel}/performance" />
 		<mkdir dir="${postingDirectory}/${buildLabel}/performance" />
 		<taskdef name="performanceResults" classname="org.eclipse.releng.performance.PerformanceResultHtmlGenerator" />
-		<condition property="configArgs" value="-ws gtk -arch ppc">
-			<equals arg1="${os.arch}" arg2="ppc64" />
+		<condition property="configArgs" value="-ws gtk -arch ppc">			
+				<equals arg1="${os.arch}" arg2="ppc64" />			
 		</condition>
 		<condition property="configArgs" value="-ws gtk -arch x86">
 			<equals arg1="${os.arch}" arg2="i386" />
@@ -415,10 +415,6 @@
 		<exec executable="unzip" dir=".">
 			<arg line="-j ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.bak.zip -i */plugins/* -x */master-equinox* */com.ibm.icu.base* -d ${updateSite}/plugins" />
 		</exec>
-		<copy todir="${updateSite}" failonerror="false" overwrite="true">
-			<fileset file="${repo}/artifacts.*" />
-			<fileset file="${repo}/content.*" />
-		</copy>
 		<java jar="${eclipse.home}/plugins/org.eclipse.equinox.launcher.jar" fork="true" jvm="${java15-home}/bin/java" failonerror="true" maxmemory="768m" error="${buildDirectory}/errorlogupdatesite.txt" dir="${buildDirectory}">
 			<arg line="-application org.eclipse.update.core.siteOptimizer" />
 			<arg line="-digestBuilder -digestOutputDir=${updateSite} -siteXML=${updateSite}/site.xml" />
