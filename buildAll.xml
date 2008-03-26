@@ -53,6 +53,7 @@
 				<antcall target="signMasterFeature" />
 				<antcall target="packMasterFeature" />
 				<antcall target="unpackUpdateJarsForPackaging" />
+				<antcall target="buildUpdateSite" />				
 			</sequential>
 			<sequential>
 				<antcall target="buildMasterRootFeature" />
@@ -64,9 +65,7 @@
 			<sequential>
 				<antcall target="packageEclipseDistributables" />
 				<antcall target="packageEquinoxDistributables" />
-				<ant antfile="${equinox.build.configs}/equinox.prov/run.xml" target="build" />
-				<antcall target="buildUpdateSite" />
-				<ant antfile="${equinox.build.configs}/equinox.prov/run.xml" target="updatesite" />
+				<ant antfile="${equinox.build.configs}/equinox.prov/run.xml"/>			
 				<antcall target="publishEclipse" />
 				<antcall target="publishEquinox" />
 			</sequential>

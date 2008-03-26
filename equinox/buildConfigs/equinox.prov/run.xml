@@ -1,12 +1,5 @@
 <project name="provisioning build" default="build">
 
-	<!--
-		- Build the features.
-		- Run the metadata generator on the agent. 
-		- Run the director and install a new agent.
-		- Zip up the agent.
-		- Run the metadata generator on the SDK, self-hosting feature, and releng tools.
-	-->
 	<target name="init">
 		<property name="p2.root" value="${buildDirectory}/${buildId}/p2temp" />
 		<mkdir dir="${p2.root}" />
@@ -69,16 +62,11 @@
 
 		<property file="build.properties" />
 
-		<property name="p2.updateSite" value="${updateSite}" />
 		<property name="p2.site.xml" value="file:${updateSite}/site.xml" />
 		<property name="p2.generator.dir" value="${p2.output.base}/generator" />
 		<mkdir dir="${p2.generator.dir}" />
-		<!-- <property name="p2.metadata.repo" value="${p2.updateSite}/" /> -->
 		<property name="repo" value="${buildDirectory}/repo" />
-		<property name="p2.metadata.repo" value="${repo}" />
-		<!-- <mkdir dir="${p2.metadata.repo}" /> -->
-		<property name="p2.artifact.repo" value="${p2.updateSite}/" />
-		<mkdir dir="${p2.artifact.repo}" />
+		<mkdir dir="${repo}" />
 		<property name="p2.flavor" value="tooling" />
 		<property name="p2.agent.version" value="0.1.0.${buildId}" />
 		<property name="p2.sdk.version" value="3.4.0.${buildId}" />
@@ -102,25 +90,20 @@
 			</fileset>
 		</delete>
 
-		<!-- Generate the metadata for the agent and create the install first due
-			to bug 199317... installing will install all fragments and we don't want the
-			ones from the SDK -->
 		<antcall target="setup.generator" />
 		<antcall target="setup.director" />
 
 		<antcall target="generate.metadata.agent" />
-		<antcall target="provision.agent" />
-
-		<!--		<antcall target="generate.metadata.sdk" /> -->
-		<antcall target="provision.sdk" />
-
 		<antcall target="generate.metadata.releng.tools" />
 
+		<antcall target="provision.agent" />
+		<antcall target="provision.sdk" />
 		<antcall target="zip.install" />
-	</target>
-
-	<target name="updatesite" depends="init">
 		<antcall target="update.pack200" />
+		<copy todir="${updateSite}" failonerror="false" overwrite="true">
+				<fileset file="${repo}/artifacts.*" />
+				<fileset file="${repo}/content.*" />
+		</copy>
 		<!--Collect logs from p2 run and copy to build directory-->
 		<property name="equinoxTestResults" value="${equinoxPostingDirectory}/${buildLabel}/testresults" />
 		<mkdir dir="${equinoxTestResults}" />
@@ -128,8 +111,7 @@
 			<fileset dir="${p2.root}">
 				<include name="**/*.log" />
 			</fileset>
-		</copy>
-		<!-- <antcall target="run.generator.sdk" /> -->
+		</copy>		
 	</target>
 
 	<target name="provision.agent">
@@ -377,6 +359,8 @@
 			<param name="p2.generator.source" value="${p2.agent.dir}/eclipse" />
 			<param name="p2.generator.root" value="agent" />
 			<param name="p2.generator.root.version" value="${p2.agent.version}" />
+			<!-- publish the metadata to the temp repo -->
+			<param name="p2.repo" value="${repo}" />
 		</antcall>
 	</target>
 
@@ -386,6 +370,7 @@
 	p2.generator.plugins.dir
 	p2.generator.root.version
 	p2.generator.root
+	p2.repo
 	-->
 	<target name="run.generator.feature.based">
 		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
@@ -404,8 +389,8 @@
 			<arg line="-root ${p2.generator.root}" />
 			<arg line="-flavor ${p2.flavor}" />
 			<arg line="-publishArtifacts" />
-			<arg line="-metadataRepository file:${p2.metadata.repo}" />
-			<arg line="-artifactRepository file:${p2.artifact.repo}" />
+			<arg line="-metadataRepository file:${p2.repo}" />
+			<arg line="-artifactRepository file:${p2.repo}" />
 			<arg line="-metadataRepositoryName ${p2.repo.name}" />
 			<arg line="-artifactRepositoryName ${p2.repo.name}" />
 			<arg line="-noDefaultIUs" />
@@ -427,6 +412,8 @@
 			<param name="p2.generator.plugins.dir" value="${p2.releng.tools.dir}/eclipse/plugins" />
 			<param name="p2.generator.root.version" value="3.2.100.${buildId}" />
 			<param name="p2.generator.root" value="releng.tools" />
+			<!-- publish the metadata to the real update site -->
+			<param name="p2.repo" value="${updateSite}" />
 		</antcall>
 	</target>
 
@@ -434,6 +421,7 @@
 	p2.generator.source
 	p2.generator.root
 	p2.generator.root.version
+	p2.repo
 	-->
 	<target name="run.generator">
 		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
@@ -443,8 +431,8 @@
 			<arg line="-consoleLog" />
 			<arg line="-nosplash" />
 			<arg line="--launcher.suppressErrors" />
-			<arg line="-metadataRepository file:${p2.metadata.repo}" />
-			<arg line="-artifactRepository file:${p2.artifact.repo}" />
+			<arg line="-metadataRepository file:${p2.repo}" />
+			<arg line="-artifactRepository file:${p2.repo}" />
 			<arg line="-metadataRepositoryName ${p2.repo.name}" />
 			<arg line="-artifactRepositoryName ${p2.repo.name}" />
 			<arg line="-source ${p2.generator.source}" />
@@ -456,25 +444,6 @@
 			<arg line="-publishArtifacts" />
 			<arg line="-append" />
 		</exec>
-	</target>
-
-	<target name="generate.metadata.sdk">
-		<property name="p2.sdk.dir" value="${p2.output.base}/sdk" />
-		<mkdir dir="${p2.sdk.dir}" />
-		<antcall target="extract">
-			<param name="extract-src" value="${sdk.archive}" />
-			<param name="extract-dest" value="${p2.sdk.dir}" />
-		</antcall>
-		<antcall target="extract">
-			<param name="extract-src" value="${rcp.delta.archive}" />
-			<param name="extract-dest" value="${p2.sdk.dir}" />
-		</antcall>
-
-		<antcall target="run.generator">
-			<param name="p2.generator.source" value="${p2.sdk.dir}/eclipse" />
-			<param name="p2.generator.root" value="sdk" />
-			<param name="p2.generator.root.version" value="${p2.sdk.version}" />
-		</antcall>
 	</target>
 
 	<target name="setup.director">
@@ -519,10 +488,8 @@
 			<arg line="-roaming" />
 			<arg line="-profile ${p2.director.profile}" />
 			<arg line="${p2.director.extraArgs}" />
-			<!--			<arg line="-metadataRepository file:${p2.metadata.repo}" />
-			<arg line="-artifactRepository file:${p2.artifact.repo}" /> -->
-			<arg line="-metadataRepository file:${repo}" />
-			<arg line="-artifactRepository file:${repo}" />
+			<arg line="-metadataRepository file:${updateSite}" />
+			<arg line="-artifactRepository file:${updateSite}" />
 			<arg line="-destination ${p2.director.install.path}" />
 			<arg line="-bundlepool ${p2.director.install.path}" />
 			<arg line="-vmargs" />
@@ -617,7 +584,7 @@
 		<antcall target="generateChecksums">
 			<param name="archiveName" value="eclipse-SDK-${buildId}-solaris-gtk.zip" />
 		</antcall>
-		<!-- aix gtk sparc -->		
+		<!-- aix gtk sparc -->
 		<exec dir="${p2.sdk.install.aix.motif.ppc}" executable="zip">
 			<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-aix-motif.zip -r ." />
 		</exec>
@@ -702,54 +669,6 @@
 			<arg line="-compress" />
 			<arg line="-reusePack200Files" />
 		</java>
-	</target>
-
-	<target name="run.generator.sdk">
-		<!--generate metadata for sdk -->
-		<!-- eclipse.base is the folder containg the features and plugins directories -->
-		<exec executable="${p2.generator.dir}/eclipse/eclipse" failonerror="false" timeout="900000">
-			<arg line="-source ${eclipse.base}" />
-			<arg line="-nosplash" />
-			<arg line="--launcher.suppressErrors" />
-			<arg line="-append" />
-			<arg line="-flavor ${p2.flavor}" />
-			<arg line="-metadataRepository ${p2.metadata.repo}" />
-			<arg line="-artifactRepository ${p2.artifact.repo}" />
-			<arg line="-publishArtifacts" />
-			<arg line="-p2OS linux" />
-			<arg line="-mode incremental" />
-		</exec>
-
-		<!-- Platform specific root files, once for each platform.  Generates root file and configuration IUs -->
-		<!-- pde.build style config for this platform -->
-		<exec executable="${p2.generator.dir}/eclipse/eclipse" failonerror="false" timeout="900000">
-			<arg line="-config ${eclipse.base}/win32.win32.x86/${collectingFolder}" />
-			<arg line="-nosplash" />
-			<arg line="--launcher.suppressErrors" />
-			<arg line="-launcherConfig win32_win32_x86" />
-			<arg line="-append true" />
-			<arg line="-flavor ${p2.flavor}" />
-			<arg line="-metadataRepository ${p2.metadata.repo}" />
-			<arg line="-artifactRepository {p2.artifact.repo}" />
-			<arg line="-p2OS linux" />
-			<arg line="-publishArtifacts true" />
-			<arg line="-exe ${eclipse.base}/win32.win32.x86/${collectingFolder}/${launcherName}" />
-			<arg line="-productFile ${eclipseBuildDirectory}/plugins/org.eclipse.equinox.p2.installer/installer.product" />
-			<arg line="-mode incremental" />
-		</exec>
-
-		<!-- Final call to generate the product IU: -->
-		<exec executable="${p2.generator.dir}/eclipse/eclipse" failonerror="false" timeout="900000">
-			<arg line="-append" />
-			<arg line="-nosplash" />
-			<arg line="--launcher.suppressErrors" />
-			<arg line="-flavor ${p2.flavor}" />
-			<arg line="-metadataRepository ${p2.metadata.repo}" />
-			<arg line="-artifactRepository ${p2.artifact.repo}" />
-			<arg line="-publishArtifacts true" />
-			<arg line="-mode final" />
-			<arg line="-productFile ${eclipseBuildDirectory}/plugins/org.eclipse.equinox.p2.installer/installer.product" />
-		</exec>
 	</target>
 
 </project>
