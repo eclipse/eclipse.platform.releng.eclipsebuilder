@@ -510,7 +510,7 @@
 		</exec>
 
 		<exec dir="${p2.sdk.install.win32.win32.x86}" executable="zip">
-			<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip -r ." />
+			<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip -d eclipse/**" />
 		</exec>
 		<antcall target="generateChecksums">
 			<param name="archiveName" value="eclipse-SDK-${buildId}-win32.zip" />
@@ -518,15 +518,15 @@
 
 		<!-- win32 win32 x86_64 -->
 		<exec dir="${p2.sdk.install.win32.win32.x86_64}" executable="zip">
-			<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32-x86_64.zip -r ." />
-		</exec>
+			<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32-x86_64.zip -d eclipse/**" />
+		</exec>		
 		<antcall target="generateChecksums">
 			<param name="archiveName" value="eclipse-SDK-${buildId}-win32-x86_64.zip" />
 		</antcall>
 
 		<!-- win32 wpf x86 -->
 		<exec dir="${p2.sdk.install.win32.wpf.x86}" executable="zip">
-			<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32-wpf.zip -r ." />
+			<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32-wpf.zip -d eclipse/**" />
 		</exec>
 		<antcall target="generateChecksums">
 			<param name="archiveName" value="eclipse-SDK-${buildId}-win32-wpf.zip" />
@@ -572,21 +572,21 @@
 		<!-- hpux motif ia64_32-->
 		<chmod dir="${p2.sdk.install.hpux.motif.ia64_32}" perm="755" includes="**/*.so" />
 		<exec dir="${p2.sdk.install.hpux.motif.ia64_32}" executable="zip">
-			<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-hpux-motif-ia64_32.zip -r ." />
+			<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-hpux-motif-ia64_32.zip -d eclipse/**" />
 		</exec>
 		<antcall target="generateChecksums">
 			<param name="archiveName" value="eclipse-SDK-${buildId}-hpux-motif-ia64_32.zip" />
 		</antcall>
 		<!-- solaris gtk sparc -->
 		<exec dir="${p2.sdk.install.solaris.gtk.sparc}" executable="zip">
-			<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-solaris-gtk.zip -r ." />
+			<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-solaris-gtk.zip -d eclipse/**" />
 		</exec>
 		<antcall target="generateChecksums">
 			<param name="archiveName" value="eclipse-SDK-${buildId}-solaris-gtk.zip" />
 		</antcall>
 		<!-- aix gtk sparc -->
 		<exec dir="${p2.sdk.install.aix.motif.ppc}" executable="zip">
-			<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-aix-motif.zip -r ." />
+			<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-aix-motif.zip -d eclipse/**" />
 		</exec>
 		<antcall target="generateChecksums">
 			<param name="archiveName" value="eclipse-SDK-${buildId}-aix-motif.zip" />
