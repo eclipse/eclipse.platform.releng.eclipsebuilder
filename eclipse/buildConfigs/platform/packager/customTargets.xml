@@ -85,10 +85,10 @@
 				<equals arg1="${archiveName}" arg2="${archiveRoot}-hpux-motif-ia64_32.zip" />
 			</condition>
 			<antcall target="fixhpux" />
-			<checksum file="${archiveFullPath}" property="md5" />
+		<!--	<checksum file="${archiveFullPath}" property="md5" />
 			<checksum file="${archiveFullPath}" algorithm="SHA" property="sha" />
 			<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5" />
-			<echo message="${sha} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.sha1" />
+			<echo message="${sha} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.sha1" /> -->
 		</target>
 
 		<target name="fixhpux" if="hpuxperm">
