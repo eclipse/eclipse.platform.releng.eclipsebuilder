@@ -1193,8 +1193,7 @@
 			</path>
 			<regexpmapper from="(org\.eclipse\.equinox\.launcher)(_)(.*)\.jar" to="\0" />
 		</pathconvert>
-		<java jar="${p2.generator.dir}/eclipse/plugins/${launcher}" fork="true" failonerror="false">
-			<arg line="-console" />
+		<java jar="${p2.generator.dir}/eclipse/plugins/${launcher}" fork="true" failonerror="false">		
 			<arg line="-consolelog" />
 			<arg line="-nosplash" />
 			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
