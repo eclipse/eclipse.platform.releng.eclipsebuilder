@@ -55,6 +55,28 @@
 		<mkdir dir="${p2.sdk.install.aix.motif.ppc}" />
 		<property name="p2.sdk.install.macosx.carbon.x86" value="${p2.output.base}/sdk.install.macosx.carbon.x86" />
 		<mkdir dir="${p2.sdk.install.macosx.carbon.x86}" />
+		<property name="p2.platform.install.win32.win32.x86" value="${p2.output.base}/platform.install.win32.win32.x86" />
+		<mkdir dir="${p2.platform.install.win32.win32.x86}" />
+		<property name="${p2.platform.install.win32.win32.x86_64" value="${p2.output.base}/platform.install.win32.win32.x86_64" />
+		<mkdir dir="${p2.platform.install.win32.win32.x86_64}" />
+		<property name="p2.platform.install.win32.wpf.x86" value="${p2.output.base}/platform.install.win32.wpf.x86" />
+		<mkdir dir="${p2.platform.install.win32.wpf.x86}" />
+		<property name="p2.platform.install.linux.gtk.x86" value="${p2.output.base}/platform.install.linux.gtk.x86" />
+		<mkdir dir="${p2.platform.install.linux.gtk.x86}" />
+		<property name="p2.platform.install.linux.motif.x86" value="${p2.output.base}/platform.install.linux.motif.x86" />
+		<mkdir dir="${p2.platform.install.linux.motif.x86}" />
+		<property name="p2.platform.install.linux.gtk.x86_64" value="${p2.output.base}/platform.install.linux.gtk.x86_64" />
+		<mkdir dir="${p2.platform.install.linux.gtk.x86_64}" />
+		<property name="p2.platform.install.linux.gtk.ppc" value="${p2.output.base}/platform.install.linux.gtk.ppc" />
+		<mkdir dir="${p2.platform.install.linux.gtk.ppc}" />
+		<property name="p2.platform.install.hpux.motif.ia64_32" value="${p2.output.base}/platform.install.hpux.motif.ia64_32" />
+		<mkdir dir="${p2.platform.install.hpux.motif.ia64_32}" />
+		<property name="p2.platform.install.solaris.gtk.sparc" value="${p2.output.base}/platform.install.install.solaris.gtk.sparc" />
+		<mkdir dir="${p2.platform.install.solaris.gtk.sparc}" />
+		<property name="p2.platform.install.aix.motif.ppc" value="${p2.output.base}/platform.install.install.aix.motif.ppc" />
+		<mkdir dir="${p2.platform.install.aix.motif.ppc}" />
+		<property name="p2.platform.install.macosx.carbon.x86" value="${p2.output.base}/platform.install.macosx.carbon.x86" />
+		<mkdir dir="${p2.platform.install.macosx.carbon.x86}" />
 
 
 		<property name="base" value="${p2.output.base}/base" />
@@ -74,9 +96,13 @@
 	</target>
 
 	<target name="build" depends="init">
+		<mkdir dir="${updateSite}/binary" />
 		<copy todir="${updateSite}" failonerror="false" overwrite="true">
 			<fileset file="${repo}/artifacts.*" />
 			<fileset file="${repo}/content.*" />
+		</copy>
+		<copy todir="${updateSite}/binary" failonerror="false" overwrite="true">
+			<fileset file="${repo}/binary/**" />
 		</copy>
 		<antcall target="extract">
 			<param name="extract-src" value="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip" />
@@ -654,13 +680,13 @@
 
 		<!-- win32 wpf x86 -->
 		<delete file="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32-wpf.zip" failonerror="false" />
+		<copy file="${equinox.build.configs}/equinox.prov/wpftemp/eclipse.ini" tofile="${p2.sdk.install.win32.wpf.x86}/eclipse/eclipse.ini" overwrite="true" failonerror="false" />
 		<exec dir="${p2.sdk.install.win32.wpf.x86}" executable="zip">
 			<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32-wpf.zip -r ." />
 		</exec>
 		<antcall target="generateChecksums">
 			<param name="archiveName" value="eclipse-SDK-${buildId}-win32-wpf.zip" />
 		</antcall>
-
 
 		<!-- linux gtk x86-->
 		<antcall target="p2.tar">
@@ -740,7 +766,7 @@
 		<!--platform drops-->
 		<delete file="${postingDirectory}/${buildLabel}/eclipse-platform-{buildId}-win32.zip" failonerror="false" />
 		<exec dir="${p2.platform.install.win32.win32.x86}" executable="zip">
-			<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-platform-{buildId}-win32.zip -r ." />
+			<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-win32.zip -r ." />
 		</exec>
 		<antcall target="generateChecksums">
 			<param name="archiveName" value="eclipse-platform-{buildId}-win32.zip" />
@@ -757,6 +783,7 @@
 
 		<!-- win32 wpf x86 -->
 		<delete file="${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-win32-wpf.zip" failonerror="false" />
+		<copy file="${equinox.build.configs}/equinox.prov/wpftemp/eclipse.ini" tofile="${p2.platform.install.win32.wpf.x86}/eclipse/eclipse.ini" overwrite="true" failonerror="false" />
 		<exec dir="${p2.platform.install.win32.wpf.x86}" executable="zip">
 			<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-win32-wpf.zip -r ." />
 		</exec>
@@ -765,7 +792,7 @@
 		</antcall>
 
 
-		<!-- linux gtk x86-->		
+		<!-- linux gtk x86-->
 		<antcall target="p2.tar">
 			<param name="tar.base.dir" value="${p2.platform.install.linux.gtk.x86}" />
 			<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-linux-gtk.tar" />
@@ -823,7 +850,7 @@
 			<param name="archiveName" value="eclipse-platform-${buildId}-aix-motif.zip" />
 		</antcall>
 
-		<!-- macosx -->		
+		<!-- macosx -->
 		<antcall target="p2.tar">
 			<param name="tar.base.dir" value="${p2.platform.install.macosx.carbon.x86}" />
 			<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-macosx-carbon.tar" />
