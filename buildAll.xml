@@ -324,6 +324,7 @@
 	<target name="packageEclipseDistributables">
 		<replace token="@qualifier@" file="${eclipse.build.configs}/sdk/packager/sdk.product" value="${buildId}" />
 		<replace token="@qualifier@" file="${eclipse.build.configs}/platform/packager/platform.product" value="${buildId}" />
+		<replace token="@qualifier@" file="${eclipse.build.configs}/platform.sdk/packager/platform.product" value="${buildId}" />
 		<delete dir="${repo}" />
 		<mkdir dir="${repo}" />
 		<delete dir="${reposource}" />
