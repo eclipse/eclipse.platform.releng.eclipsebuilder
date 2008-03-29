@@ -52,7 +52,7 @@
 	
 	<target name="assemble.org.eclipse.platform.sdk.linux.gtk.ia64"/>
 	<target name="assemble.org.eclipse.platform.sdk.linux.gtk.ppc">
-	<target name="assemble.org.eclipse.platform.solaris.motif.sparc"/>		
+	<target name="assemble.org.eclipse.platform.sdk.solaris.motif.sparc"/>		
 		
 	<property name="archiveName" value="eclipse-platform-SDK-${buildId}-linux-gtk-ppc.tar.gz" />
 		<antcall target="assemble" />
