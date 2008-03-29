@@ -53,7 +53,7 @@
 				<antcall target="signMasterFeature" />
 				<antcall target="packMasterFeature" />
 				<antcall target="unpackUpdateJarsForPackaging" />
-				<antcall target="buildUpdateSite" />				
+				<antcall target="buildUpdateSite" />
 			</sequential>
 			<sequential>
 				<antcall target="buildMasterRootFeature" />
@@ -65,7 +65,7 @@
 			<sequential>
 				<antcall target="packageEclipseDistributables" />
 				<antcall target="packageEquinoxDistributables" />
-				<ant antfile="${equinox.build.configs}/equinox.prov/run.xml"/>			
+				<ant antfile="${equinox.build.configs}/equinox.prov/run.xml" />
 				<antcall target="publishEclipse" />
 				<antcall target="publishEquinox" />
 			</sequential>
@@ -346,6 +346,12 @@
 
 		<replace file="packaging.map" token="@buildId@" value="${buildId}" />
 		<antcall target="package">
+			<param name="packagingInfo" value="${eclipse.build.configs}/platform/packager" />
+		</antcall>
+		<antcall target="package">
+			<param name="packagingInfo" value="${eclipse.build.configs}/platform.sdk/packager" />
+		</antcall>
+		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/sdk/packager" />
 		</antcall>
 		<antcall target="package">
@@ -365,12 +371,6 @@
 		</antcall>
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/pde.sdk/packager" />
-		</antcall>
-		<antcall target="package">
-			<param name="packagingInfo" value="${eclipse.build.configs}/platform/packager" />
-		</antcall>
-		<antcall target="package">
-			<param name="packagingInfo" value="${eclipse.build.configs}/platform.sdk/packager" />
 		</antcall>
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/rcp/packager" />
