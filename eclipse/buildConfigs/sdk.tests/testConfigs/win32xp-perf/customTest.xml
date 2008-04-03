@@ -33,8 +33,8 @@
 	</target>
 	
 	<target name="installCloudscape" if="Cloudscape.available">
-		<mkdir dir="${tester}/eclipse/plugins" />
-		<copy todir="${tester}/eclipse/plugins">
+		<mkdir dir="${tester}/eclipse/dropins/eclipse/plugins" />
+		<copy todir="${tester}/eclipse/dropins/eclipse/plugins">
 			<fileset dir="${internalPlugins}" includes="Cloudscape/**" />
 		</copy>
 		<exec dir="${tester}" executable="${copyClient}">
