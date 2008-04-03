@@ -62,8 +62,7 @@
 
 	<target name="installTestPlugins">
 		<exec dir="." executable="unzip">
-			<arg line="-o -qq eclipse-junit-tests-*.zip
-				${derby}
+			<arg line="-o -qq eclipse-junit-tests-*.zip				
 				eclipse/plugins/org.eclipse.test/*
 				eclipse/plugins/org.eclipse.test.performance_*
 				eclipse/plugins/org.eclipse.test.performance.win32_*
@@ -71,6 +70,15 @@
 				${testPluginsRequired}
 				-x eclipse/plugins/*.source*/**
 				-d ${install}/eclipse/dropins/" />
+		</exec>
+		<antcall target="unzipderby" />
+	</target>
+
+	<target name="unzipderby" if="derby">
+		<exec dir="." executable="unzip">
+			<arg line="-o -qq eclipse-junit-tests-*.zip
+		               ${derby}
+		               -d ${install}" />
 		</exec>
 	</target>
 
@@ -258,7 +266,7 @@
 			<property name="report" value="@{testPlugin}" />
 
 			<!--library.xml is now in dropins folder -->
-			  <property name="library-file" value="${eclipse-home}/dropins/eclipse/plugins/org.eclipse.test/library.xml"/>
+			<property name="library-file" value="${eclipse-home}/dropins/eclipse/plugins/org.eclipse.test/library.xml" />
 
 			<!--install Cloudscape plug-ins if running performance tests-->
 			<condition property="derby" value="eclipse/dropins/eclipse/plugins/Cloudscape*/* ">
@@ -513,10 +521,10 @@
 		</condition>
 		<runTests testPlugin="org.eclipse.pde.api.tools.tests" />
 	</target>
-	
+
 	<target name="equinoxsecurity">
-			<runTests testPlugin="org.eclipse.equinox.security.tests" />
-	</target>	
+		<runTests testPlugin="org.eclipse.equinox.security.tests" />
+	</target>
 
 	<target name="all">
 		<antcall target="jdtcompilertool" />
@@ -562,6 +570,6 @@
 		<antcall target="ua" />
 		<antcall target="uiforms" />
 		<antcall target="pdeapitooling" />
-		<antcall target="equinoxsecurity" /> 		
+		<antcall target="equinoxsecurity" />
 	</target>
 </project>
