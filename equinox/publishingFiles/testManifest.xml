@@ -48,6 +48,10 @@
 			<platform id="services" name="All" fileName="@org.eclipse.osgi.services@.jar">
 			</platform>			
 			<platform id="supplement" name="All" fileName="@org.eclipse.equinox.supplement@.jar">
+			</platform>			
+			<platform id="transforms" name="All" fileName="@org.eclipse.equinox.transforms.xslt@.jar">
+			</platform>
+			<platform id="transformshook" name="All" fileName="@org.eclipse.equinox.transforms.hook@.jar">
 			</platform>
 			<platform id="equinoxutil" name="All" fileName="@org.eclipse.equinox.util@.jar">
 			</platform>

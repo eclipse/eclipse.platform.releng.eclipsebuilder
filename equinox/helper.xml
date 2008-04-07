@@ -163,6 +163,12 @@
 			<param name="bundle.id" value="org.eclipse.equinox.servletbridge" />
 		</antcall>
 		<antcall target="updateTestManifest">
+			<param name="bundle.id" value="org.eclipse.equinox.transforms.hook" />
+		</antcall>
+		<antcall target="updateTestManifest">
+			<param name="bundle.id" value="org.eclipse.equinox.transforms.xslt" />
+		</antcall>
+		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.util" />
 		</antcall>
 		<antcall target="updateTestManifest">
