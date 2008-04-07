@@ -76,9 +76,7 @@
 
 	<target name="unzipderby" if="derby">
 		<exec dir="." executable="unzip">
-			<arg line="-o -qq eclipse-junit-tests-*.zip
-		               ${derby}
-		               -d ${install}" />
+			<arg line="-o -qq eclipse-junit-tests-*.zip ${derby} -d ${install}" />
 		</exec>
 	</target>
 
@@ -272,7 +270,7 @@
 			<condition property="derby" value="eclipse/dropins/eclipse/plugins/Cloudscape*/* ">
 				<equals arg1="${test.target}" arg2="performance" />
 			</condition>
-			<property name="derby" value="" />
+			<!-- <property name="derby" value="" /> -->
 			<antcall target="${test.target}">
 				<param name="testPlugin" value="${@{testPlugin}}" />
 				<param name="testPluginsRequired" value="@{testPluginsRequired}" />
