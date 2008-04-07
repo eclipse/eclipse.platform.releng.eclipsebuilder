@@ -525,6 +525,11 @@
 	<target name="equinoxsecurity">
 		<runTests testPlugin="org.eclipse.equinox.security.tests" />
 	</target>
+	
+	<target name="equinoxp2">
+			<runTests testPlugin="org.eclipse.equinox.p2.tests" />
+		</target>
+
 
 	<target name="all">
 		<antcall target="jdtcompilertool" />
@@ -571,5 +576,6 @@
 		<antcall target="uiforms" />
 		<antcall target="pdeapitooling" />
 		<antcall target="equinoxsecurity" />
+		<antcall target="equinoxp2" />
 	</target>
 </project>
