@@ -64,7 +64,7 @@
 		<property name="p2.platform.install.win32.wpf.x86" value="${p2.output.base}/platform.install.win32.wpf.x86" />
 		<mkdir dir="${p2.platform.install.win32.wpf.x86}" />
 		<property name="p2.platform.install.linux.gtk.x86" value="${p2.output.base}/platform.install.linux.gtk.x86" />
-		<mkdir dir="${p2.platform.install.linux.gtk.x86}" />		
+		<mkdir dir="${p2.platform.install.linux.gtk.x86}" />
 		<property name="p2.platform.install.linux.gtk.x86_64" value="${p2.output.base}/platform.install.linux.gtk.x86_64" />
 		<mkdir dir="${p2.platform.install.linux.gtk.x86_64}" />
 		<property name="p2.platform.install.linux.gtk.ppc" value="${p2.output.base}/platform.install.linux.gtk.ppc" />
@@ -86,7 +86,7 @@
 		<property name="p2.platformsdk.install.win32.wpf.x86" value="${p2.output.base}/platformsdk.install.win32.wpf.x86" />
 		<mkdir dir="${p2.platformsdk.install.win32.wpf.x86}" />
 		<property name="p2.platformsdk.install.linux.gtk.x86" value="${p2.output.base}/platformsdk.install.linux.gtk.x86" />
-		<mkdir dir="${p2.platformsdk.install.linux.gtk.x86}" />		
+		<mkdir dir="${p2.platformsdk.install.linux.gtk.x86}" />
 		<property name="p2.platformsdk.install.linux.gtk.x86_64" value="${p2.output.base}/platformsdk.install.linux.gtk.x86_64" />
 		<mkdir dir="${p2.platformsdk.install.linux.gtk.x86_64}" />
 		<property name="p2.platformsdk.install.linux.gtk.ppc" value="${p2.output.base}/platformsdk.install.linux.gtk.ppc" />
@@ -397,7 +397,7 @@
 			<param name="p2.arch" value="ppc" />
 			<param name="p2.repo" value="${updateSite}" />
 		</antcall>
-		
+
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.platform.ide" />
 			<param name="p2.director.version" value="3.4.0.${buildId}" />
@@ -520,7 +520,7 @@
 			<param name="p2.arch" value="ppc" />
 			<param name="p2.repo" value="${updateSite}" />
 		</antcall>
-		
+
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.platform.sdk" />
 			<param name="p2.director.version" value="3.4.0.${buildId}" />
@@ -914,6 +914,11 @@
 			<param name="tar.base.dir" value="${p2.agent.install.macosx}" />
 			<param name="tar.base.filename" value="${output.dir}/equinox-p2-agent-${buildId}-macosx.tar" />
 		</antcall>
+		<!-- temp fix for https://bugs.eclipse.org/bugs/show_bug.cgi?id=223319 -->
+		<delete file="${p2.sdk.install.macosx.carbon.x86}/eclipse/eclipse" failonerror="false" />
+		<exec dir="${p2.sdk.install.macosx.carbon.x86}/eclipse" executable="ln">
+			<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
+		</exec>
 		<antcall target="p2.tar">
 			<param name="tar.base.dir" value="${p2.sdk.install.macosx.carbon.x86}" />
 			<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-macosx-carbon.tar" />
@@ -967,7 +972,7 @@
 		<antcall target="generateChecksums">
 			<param name="archiveName" value="eclipse-platform-${buildId}-linux-gtk-ppc.tar.gz" />
 		</antcall>
-		
+
 		<!-- linux gtk x86_64-->
 		<antcall target="p2.tar">
 			<param name="tar.base.dir" value="${p2.platform.install.linux.gtk.x86_64}" />
@@ -1003,14 +1008,18 @@
 		</antcall>
 
 		<!-- macosx -->
+		<delete file="${p2.platform.install.macosx.carbon.x86}/eclipse/eclipse" failonerror="false" />
+		<exec dir="${p2.platform.install.macosx.carbon.x86}/eclipse" executable="ln">
+			<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
+		</exec>
 		<antcall target="p2.tar">
 			<param name="tar.base.dir" value="${p2.platform.install.macosx.carbon.x86}" />
 			<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-macosx-carbon.tar" />
 		</antcall>
 		<antcall target="generateChecksums">
 			<param name="archiveName" value="eclipse-platform-${buildId}-macosx-carbon.tar.gz" />
-		</antcall>										
-								
+		</antcall>
+
 		<!--platform sdk drops-->
 		<delete file="${postingDirectory}/${buildLabel}/eclipse-platform-SDK-${buildId}-win32.zip" failonerror="false" />
 		<exec dir="${p2.platformsdk.install.win32.win32.x86}" executable="zip">
@@ -1054,7 +1063,7 @@
 		</antcall>
 		<antcall target="generateChecksums">
 			<param name="archiveName" value="eclipse-platform-SDK-${buildId}-linux-gtk-ppc.tar.gz" />
-		</antcall>		
+		</antcall>
 		<!-- linux gtk x86_64-->
 		<antcall target="p2.tar">
 			<param name="tar.base.dir" value="${p2.platformsdk.install.linux.gtk.x86_64}" />
@@ -1090,6 +1099,10 @@
 		</antcall>
 
 		<!-- macosx -->
+		<delete file="${p2.platformsdk.install.macosx.carbon.x86}/eclipse/eclipse" failonerror="false" />
+		<exec dir="${p2.platformsdk.install.macosx.carbon.x86}/eclipse" executable="ln">
+			<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
+		</exec>
 		<antcall target="p2.tar">
 			<param name="tar.base.dir" value="${p2.platformsdk.install.macosx.carbon.x86}" />
 			<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-platform-SDK-${buildId}-macosx-carbon.tar" />
@@ -1150,7 +1163,7 @@
 			</path>
 			<regexpmapper from="(org\.eclipse\.equinox\.launcher)(_)(.*)\.jar" to="\0" />
 		</pathconvert>
-		<java jar="${p2.generator.dir}/eclipse/plugins/${launcher}" fork="true" failonerror="false">		
+		<java jar="${p2.generator.dir}/eclipse/plugins/${launcher}" fork="true" failonerror="false">
 			<arg line="-consolelog" />
 			<arg line="-nosplash" />
 			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
