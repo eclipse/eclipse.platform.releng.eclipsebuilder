@@ -801,6 +801,8 @@
 			<arg line="${p2.director.extraArgs}" />
 			<arg line="-metadataRepository file:${p2.repo}" />
 			<arg line="-artifactRepository file:${p2.repo}" />
+			<arg line="-metadataRepositoryName ${p2.repo.name}" />
+			<arg line="-artifactRepositoryName ${p2.repo.name}" />
 			<arg line="-destination ${p2.director.install.path}" />
 			<arg line="-bundlepool ${p2.director.install.path}" />
 			<arg line="-vmargs" />
