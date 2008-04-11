@@ -20,11 +20,7 @@
  		<ant antfile="${genericTargets}" target="${target}">
 	 		<property name="type" value="feature" />
 	 		<property name="id" value="org.eclipse.equinox.p2.director.feature" />
- 		</ant>
- 		<ant antfile="${genericTargets}" target="${target}">
-	 		<property name="type" value="feature" />
-	 		<property name="id" value="org.eclipse.equinox.p2.selfhosting.feature" />
- 		</ant> 		
+ 		</ant> 	
  	</target>
  
  	<!-- ===================================================================== -->
