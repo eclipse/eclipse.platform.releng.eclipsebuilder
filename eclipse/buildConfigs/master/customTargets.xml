@@ -211,6 +211,9 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<replace dir="${buildDirectory}/plugins" value="${buildId}" token="@build@">
 			<include name="**/about.mappings" />
 		</replace>
+		<replace dir="${buildDirectory}/plugins/org.eclipse.platform" value="${buildId}" token="qualifier">
+			<include name="META-INF/MANIFEST.MF" />
+		</replace>
 		<replace dir="${buildDirectory}/features/org.eclipse.platform" value="${buildId}" token="@build@">
 			<include name="**/config.ini" />
 		</replace>
