@@ -722,9 +722,7 @@
 		<antcall target="run.generator.feature.based">
 			<param name="p2.generator.base" value="${p2.releng.tools.dir}/eclipse" />
 			<param name="p2.generator.feature.dir" value="${p2.releng.tools.dir}/eclipse/features" />
-			<param name="p2.generator.plugins.dir" value="${p2.releng.tools.dir}/eclipse/plugins" />
-			<param name="p2.generator.root.version" value="3.2.100.${buildId}" />
-			<param name="p2.generator.root" value="releng.tools" />
+			<param name="p2.generator.plugins.dir" value="${p2.releng.tools.dir}/eclipse/plugins" />		
 			<!-- publish the metadata to the real update site -->
 			<param name="p2.repo" value="${updateSite}" />
 		</antcall>
