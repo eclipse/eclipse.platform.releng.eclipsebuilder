@@ -40,76 +40,92 @@
 
 
 	<target name="buildStandAloneSWT">
-		<antcall target="packageSwtStandalone">
-			<param name="ws" value="win32" />
-			<param name="os" value="win32" />
-			<param name="arch" value="x86" />
-		</antcall>
-		<antcall target="packageSwtStandalone">
-			<param name="ws" value="win32" />
-			<param name="os" value="win32" />
-			<param name="arch" value="x86_64" />
-		</antcall>
-		<antcall target="packageSwtStandalone">
-			<param name="ws" value="win32" />
-			<param name="os" value="win32" />
-			<param name="arch" value="ia64" />
-		</antcall>
-		<antcall target="packageSwtStandalone">
-			<param name="ws" value="wpf" />
-			<param name="os" value="win32" />
-			<param name="arch" value="x86" />
-		</antcall>
-		<antcall target="packageSwtStandalone">
-			<param name="os" value="linux" />
-			<param name="ws" value="motif" />
-			<param name="arch" value="x86" />
-		</antcall>
-		<antcall target="packageSwtStandalone">
-			<param name="os" value="aix" />
-			<param name="ws" value="motif" />
-			<param name="arch" value="ppc" />
-		</antcall>
-		<antcall target="packageSwtStandalone">
-			<param name="os" value="solaris" />
-			<param name="ws" value="motif" />
-			<param name="arch" value="sparc" />
-		</antcall>
-		<antcall target="packageSwtStandalone">
-			<param name="os" value="solaris" />
-			<param name="ws" value="gtk" />
-			<param name="arch" value="sparc" />
-		</antcall>
-		<antcall target="packageSwtStandalone">
-			<param name="os" value="hpux" />
-			<param name="ws" value="motif" />
-			<param name="arch" value="ia64_32" />
-		</antcall>
-		<antcall target="packageSwtStandalone">
-			<param name="os" value="qnx" />
-			<param name="ws" value="photon" />
-			<param name="arch" value="x86" />
-		</antcall>
-		<antcall target="packageSwtStandalone">
-			<param name="os" value="linux" />
-			<param name="ws" value="gtk" />
-			<param name="arch" value="x86" />
-		</antcall>
-		<antcall target="packageSwtStandalone">
-			<param name="os" value="macosx" />
-			<param name="ws" value="carbon" />
-			<param name="arch" value="" />
-		</antcall>
-		<antcall target="packageSwtStandalone">
-			<param name="os" value="linux" />
-			<param name="ws" value="gtk" />
-			<param name="arch" value="x86_64" />
-		</antcall>
-		<antcall target="packageSwtStandalone">
-			<param name="os" value="linux" />
-			<param name="ws" value="gtk" />
-			<param name="arch" value="ppc" />
-		</antcall>
+		<parallel failonany="true">
+			<sequential>
+				<antcall target="packageSwtStandalone">
+					<param name="ws" value="win32" />
+					<param name="os" value="win32" />
+					<param name="arch" value="x86" />
+				</antcall>
+				<antcall target="packageSwtStandalone">
+					<param name="ws" value="win32" />
+					<param name="os" value="win32" />
+					<param name="arch" value="x86_64" />
+				</antcall>
+				<antcall target="packageSwtStandalone">
+					<param name="ws" value="win32" />
+					<param name="os" value="win32" />
+					<param name="arch" value="ia64" />
+				</antcall>
+			</sequential>
+		</parallel>
+		<parallel failonany="true">
+			<sequential>
+				<antcall target="packageSwtStandalone">
+					<param name="ws" value="wpf" />
+					<param name="os" value="win32" />
+					<param name="arch" value="x86" />
+				</antcall>
+				<antcall target="packageSwtStandalone">
+					<param name="os" value="linux" />
+					<param name="ws" value="motif" />
+					<param name="arch" value="x86" />
+				</antcall>
+				<antcall target="packageSwtStandalone">
+					<param name="os" value="aix" />
+					<param name="ws" value="motif" />
+					<param name="arch" value="ppc" />
+				</antcall>
+			</sequential>
+		</parallel>
+		<parallel failonany="true">
+			<sequential>
+				<antcall target="packageSwtStandalone">
+					<param name="os" value="solaris" />
+					<param name="ws" value="motif" />
+					<param name="arch" value="sparc" />
+				</antcall>
+				<antcall target="packageSwtStandalone">
+					<param name="os" value="solaris" />
+					<param name="ws" value="gtk" />
+					<param name="arch" value="sparc" />
+				</antcall>
+				<antcall target="packageSwtStandalone">
+					<param name="os" value="hpux" />
+					<param name="ws" value="motif" />
+					<param name="arch" value="ia64_32" />
+				</antcall>
+				<antcall target="packageSwtStandalone">
+					<param name="os" value="qnx" />
+					<param name="ws" value="photon" />
+					<param name="arch" value="x86" />
+				</antcall>
+			</sequential>
+		</parallel>
+		<parallel failonany="true">
+			<sequential>
+				<antcall target="packageSwtStandalone">
+					<param name="os" value="linux" />
+					<param name="ws" value="gtk" />
+					<param name="arch" value="x86" />
+				</antcall>
+				<antcall target="packageSwtStandalone">
+					<param name="os" value="macosx" />
+					<param name="ws" value="carbon" />
+					<param name="arch" value="" />
+				</antcall>
+				<antcall target="packageSwtStandalone">
+					<param name="os" value="linux" />
+					<param name="ws" value="gtk" />
+					<param name="arch" value="x86_64" />
+				</antcall>
+				<antcall target="packageSwtStandalone">
+					<param name="os" value="linux" />
+					<param name="ws" value="gtk" />
+					<param name="arch" value="ppc" />
+				</antcall>
+			</sequential>
+		</parallel>
 
 		<available property="org.eclipse.swt.win32.wce_ppc.arm.exists" file="${buildDirectory}/plugins/org.eclipse.swt.win32.wce_ppc.arm" type="dir" />
 		<antcall target="fetch_org.eclipse.swt.win32.wce_ppc.arm" />
@@ -302,8 +318,8 @@
 		<mkdir dir="${buildDirectory}/${buildLabel}/performance" />
 		<mkdir dir="${postingDirectory}/${buildLabel}/performance" />
 		<taskdef name="performanceResults" classname="org.eclipse.releng.performance.PerformanceResultHtmlGenerator" />
-		<condition property="configArgs" value="-ws gtk -arch ppc">			
-				<equals arg1="${os.arch}" arg2="ppc64" />			
+		<condition property="configArgs" value="-ws gtk -arch ppc">
+			<equals arg1="${os.arch}" arg2="ppc64" />
 		</condition>
 		<condition property="configArgs" value="-ws gtk -arch x86">
 			<equals arg1="${os.arch}" arg2="i386" />
