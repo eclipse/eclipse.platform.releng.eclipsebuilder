@@ -53,7 +53,7 @@
 				<antcall target="signMasterFeature" />
 				<antcall target="packMasterFeature" />
 				<antcall target="unpackUpdateJarsForPackaging" />
-				<antcall target="buildUpdateSite" />				
+				<antcall target="buildUpdateSite" />
 			</sequential>
 			<sequential>
 				<antcall target="buildMasterRootFeature" />
@@ -65,7 +65,7 @@
 			<sequential>
 				<antcall target="packageEclipseDistributables" />
 				<antcall target="packageEquinoxDistributables" />
-				<ant antfile="${equinox.build.configs}/equinox.prov/run.xml"/>			
+				<ant antfile="${equinox.build.configs}/equinox.prov/run.xml" />
 				<antcall target="publishEclipse" />
 				<antcall target="publishEquinox" />
 			</sequential>
@@ -225,13 +225,19 @@
 			<arg value="-d" />
 			<fileset dir="${buildDirectory}/plugins" includes="com.ibm.icu*, com.ibm.icu.*, com.jcraft.jsch*" />
 		</apply>
-		<replaceregexp file="${packproperties}" match="\n+" replace=",eclipse/plugins/" />
-		<replaceregexp file="${packproperties}" match="\s+" replace=",eclipse/plugins/" />
-		<replaceregexp file="${packproperties}" match="\n+" replace="" />
+		<replaceregexp file="${packproperties}" match="com" flags="g" replace="eclipse/plugins/com" />
+		<replaceregexp file="${packproperties}" match="\n+" replace="," />
+		<replaceregexp file="${packproperties}" match="\n+" replace="," />
+		<replaceregexp file="${packproperties}" match="\n+" replace="," />
+		<replaceregexp file="${packproperties}" match="\n+" replace="," />
+		<replaceregexp file="${packproperties}" match="\s+" replace="" />
 		<loadfile property="pack.properties" srcFile="${packproperties}" />
 		<delete file="${packproperties}" failonerror="false" />
 		<replace file="${eclipse.build.configs}/../../extras/pack.properties" token="@excludejars@" value="${pack.properties}" />
 	</target>
+
+
+
 
 
 	<target name="signMasterFeature" if="sign">
@@ -422,7 +428,7 @@
 		</antcall>
 		<antcall target="package">
 			<param name="packagingInfo" value="${equinox.build.configs}/equinox.p2.generator.feature/packager" />
-		</antcall>		
+		</antcall>
 		<!-- invoke equinox.p2.installer in a separate process -->
 		<ant antfile="${equinox.build.configs}/../helper.xml" target="build.p2.installer.product" />
 	</target>
