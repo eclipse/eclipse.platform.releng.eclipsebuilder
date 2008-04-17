@@ -65,6 +65,8 @@
 			</platform>
 			<platform id="httpjetty" name="All" fileName="@org.eclipse.equinox.http.jetty@.jar">
 			</platform>
+			<platform id="equinoxjetty" name="All" fileName="@org.eclipse.equinox.http.jetty_1.1.0@.jar">
+			</platform>
 			<platform id="httpjettyregistry" name="All" fileName="@org.eclipse.equinox.http.registry@.jar">
 			</platform>			
 			<platform id="httpservlet" name="All" fileName="@org.eclipse.equinox.http.servlet@.jar">
@@ -72,12 +74,14 @@
 			<platform id="httpservletbridge" name="All" fileName="@org.eclipse.equinox.http.servletbridge@.jar">
 			</platform>
 			<platform id="wireadmin" name="All" fileName="@org.eclipse.equinox.wireadmin@.jar">
-			</platform>	
+			</platform>		
 		</zipType>	
 
 		<zipType name="Other">
-			<platform id="javaxservlet" name="All" fileName="@javax.servlet@.jar">
+			<platform id="javaxservlet_2.4.0" name="All" fileName="@javax.servlet_2.4.0@.jar">
 			</platform>
+			<platform id="javaxservlet_2.5.0" name="All" fileName="@javax.servle_2.5.0t@.jar">
+			</platform>			
 			<platform id="javaxservletjsp" name="All" fileName="@javax.servlet.jsp@.jar">
 			</platform>
 			<platform id="apachecommonsel" name="All" fileName="@org.apache.commons.el@.jar">
@@ -85,7 +89,11 @@
 			<platform id="apachecomminglogging" name="All" fileName="@org.apache.commons.logging@.jar">
 			</platform>													
 			<platform id="mortbayjetty" name="All" fileName="@org.mortbay.jetty@.jar">
-			</platform>										
+			</platform>		
+			<platform id="mortbayjettyutil" name="All" fileName="@org.mortbay.jetty.util@.jar">
+			</platform>
+			<platform id="mortbayjettyutil" name="All" fileName="@org.mortbay.jetty.server@.jar">
+			</platform>											
 		 </zipType>	
 					
 		<zipType name="Incubator"> 	    								
