@@ -178,12 +178,6 @@
 			<param name="bundle.id" value="javax.servlet" />
 		</antcall>
 		<antcall target="updateTestManifest">
-				<param name="bundle.id" value="javax.servlet_2.4.0" />
-		</antcall>
-		<antcall target="updateTestManifest">
-						<param name="bundle.id" value="javax.servlet_2.5.0" />
-		</antcall>
-		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="javax.servlet.jsp" />
 		</antcall>
 		<antcall target="updateTestManifest">
@@ -195,12 +189,6 @@
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.mortbay.jetty" />
 		</antcall>
-		<antcall target="updateTestManifest">
-			<param name="bundle.id" value="org.mortbay.jetty.util" />
-		</antcall>
-		<antcall target="updateTestManifest">
-			<param name="bundle.id" value="org.mortbay.jetty.server" />
-		</antcall>		
 	</target>
 
 	<!-- ===================================================================== -->
