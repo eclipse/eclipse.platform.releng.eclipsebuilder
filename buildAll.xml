@@ -236,10 +236,6 @@
 		<replace file="${eclipse.build.configs}/../../extras/pack.properties" token="@excludejars@" value="${pack.properties}" />
 	</target>
 
-
-
-
-
 	<target name="signMasterFeature" if="sign">
 		<property name="archiveName" value="eclipse-master-${buildId}.zip" />
 		<property name="packtmp" value="${buildDirectory}/packtmp" />

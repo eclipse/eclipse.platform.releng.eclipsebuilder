@@ -30,10 +30,10 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	</target>
 
 	<target name="assemble.org.eclipse.sdk.win32.win32.x86_64">
-			<property name="archiveName" value="eclipse-SDK-${buildId}-win32-x86_64.zip" />
-			<antcall target="assemble" />
-		</target>
-	
+		<property name="archiveName" value="eclipse-SDK-${buildId}-win32-x86_64.zip" />
+		<antcall target="assemble" />
+	</target>
+
 	<target name="assemble.org.eclipse.sdk.win32.wpf.x86">
 		<property name="archiveName" value="eclipse-SDK-${buildId}-win32-wpf.zip" />
 		<antcall target="assemble" />
@@ -65,10 +65,10 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	</target>
 
 	<target name="assemble.org.eclipse.sdk.hpux.motif.ia64_32">
-			<property name="archiveName" value="eclipse-SDK-${buildId}-hpux-motif-ia64_32.zip" />
-			<antcall target="assemble" />
+		<property name="archiveName" value="eclipse-SDK-${buildId}-hpux-motif-ia64_32.zip" />
+		<antcall target="assemble" />
 	</target>
-	
+
 	<target name="assemble.org.eclipse.sdk.solaris.gtk.sparc">
 		<property name="archiveName" value="eclipse-SDK-${buildId}-solaris-gtk.zip" />
 		<antcall target="assemble" />
@@ -81,7 +81,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	</ant-->
 	</target>
 
-	<target name="assemble.org.eclipse.sdk.win32.win32.ia64" />		
+	<target name="assemble.org.eclipse.sdk.win32.win32.ia64" />
 	<target name="assemble.org.eclipse.sdk.hpux.motif.PA_RISC" />
 	<target name="assemble.org.eclipse.sdk.linux.gtk.ia64" />
 	<target name="assemble.org.eclipse.sdk.solaris.motif.sparc" />
@@ -171,6 +171,12 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- ===================================================================== -->
 	<target name="preFetch">
 		<!-- <mkdir dir="${buildDirectory}/baseLocation"/> -->
+		<mkdir dir="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_1.1.0" />
+		<cvs cvsRoot="${mapCvsRoot}" dest="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_1.1.0" command="co -r jetty6 org.eclipse.equinox.http.jetty" output="${buildDirectory}/jetty6checkout.txt" />
+		<move todir="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_1.1.0" failonerror="false">
+			<fileset file="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_1.1.0/org.eclipse.equinox.http.jetty/*" />
+		</move>
+		<delete dir="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_1.1.0/org.eclipse.equinox.http.jetty" />
 	</target>
 
 	<!-- ===================================================================== -->
@@ -225,8 +231,8 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<copy todir="${linux.gtk.x86_64.rootfiles}">
 			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64" includes="
 				about_files/mpl-v11.txt" />
-		</copy>	
-				
+		</copy>
+
 	</target>
 
 	<!-- ===================================================================== -->
@@ -337,7 +343,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
 		<property name="tempDir" value="${basedir}/temp" />
 		<mkdir dir="${tempDir}/buildScripts" />
-	<!--	<mkdir dir="${tempDir}/buildScripts/baseLocation" /> -->
+		<!--	<mkdir dir="${tempDir}/buildScripts/baseLocation" /> -->
 
 		<copy file="${buildDirectory}/label.properties" todir="${tempDir}/buildScripts" />
 
@@ -345,7 +351,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<fileset dir="${eclipse.build.configs}/sdk/srcBuild" excludes="incl,fetch/**,jdtcoresrc/**" />
 		</copy>
 
-	<!--	<copy todir="${tempDir}/buildScripts/baseLocation">
+		<!--	<copy todir="${tempDir}/buildScripts/baseLocation">
 			<fileset dir="${baseLocation}" />
 		</copy> -->
 
