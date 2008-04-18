@@ -1,7 +1,7 @@
-<project name="Build specific targets and properties" default="noDefault" >
+<project name="Build specific targets and properties" default="noDefault">
 
 	<property name="postingDirectory" value="${buildDirectory}" />
-	<property name="archiveName" value="eclipse-master-${buildId}.zip"/>
+	<property name="archiveName" value="eclipse-master-${buildId}.zip" />
 	<property name="archiveFullPath" value="${buildDirectory}/${buildLabel}/${archiveName}" />
 
 	<!-- ===================================================================== -->
@@ -11,7 +11,7 @@
 	<!-- ****** figure out how to build the platform, sdk, examples, ... from one compile"
 see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets  -->
 	<target name="allElements">
-		<ant antfile="${genericTargets}" target="${target}" >
+		<ant antfile="${genericTargets}" target="${target}">
 			<property name="type" value="feature" />
 			<property name="id" value="master" />
 		</ant>
@@ -22,7 +22,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- ===================================================================== -->
 	<target name="assemble.master.group.group.group">
 		<!-- workaround for Bug 127747 Grouped config build failing on missing group.group.group folder-->
-		<mkdir dir="${buildDirectory}/tmp/eclipse/group.group.group/eclipse"/>
+		<mkdir dir="${buildDirectory}/tmp/eclipse/group.group.group/eclipse" />
 		<antcall target="assemble" />
 	</target>
 
@@ -43,23 +43,17 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<!-- ***  change the repo info -->
 		<property name="mapCvsRoot" value=":pserver:anonymous@dev.eclipse.org:/home/eclipse" />
 		<property name="mapVersionTag" value="HEAD" />
-		<cvs cvsRoot="${mapCvsRoot}"
-		package="org.eclipse.releng"
-		dest="${buildDirectory}/maps"
-		tag="${mapVersionTag}"
-	/>
+		<cvs cvsRoot="${mapCvsRoot}" package="org.eclipse.releng" dest="${buildDirectory}/maps" tag="${mapVersionTag}" />
 		<!--compare the map files project-->
 		<antcall target="compareMapFiles" />
 		<!--tag the map files project-->
 		<antcall target="tagMapFiles" />
-	<generateBaseFetchScript
-			mapfile="${buildDirectory}/maps/org.eclipse.releng/maps/base.map"
-			outputfile="${buildDirectory}/fetchbase.xml"/>
-		<ant antfile="${buildDirectory}/fetchbase.xml" /> 
+		<generateBaseFetchScript mapfile="${buildDirectory}/maps/org.eclipse.releng/maps/base.map" outputfile="${buildDirectory}/fetchbase.xml" />
+		<ant antfile="${buildDirectory}/fetchbase.xml" />
 	</target>
 
 	<target name="compareMapFiles" if="compareMaps">
-		<property file="${mapTag.properties}"/>
+		<property file="${mapTag.properties}" />
 		<property name="cvsDiffFile" value="${buildDirectory}/cvsDiff.txt" />
 		<cvs cvsRoot="${mapCvsRoot}" dest="${buildDirectory}/maps" command="diff -w -r ${lastMapTag}" output="${cvsDiffFile}" />
 		<modifiedMaps mapDiffFile="${cvsDiffFile}" />
@@ -84,7 +78,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- ===================================================================== -->
 	<!-- Steps to do after setup but before starting the build proper -->
 	<!-- ===================================================================== -->
-	<target name="postSetup" >
+	<target name="postSetup">
 	</target>
 
 	<!-- ===================================================================== -->
@@ -97,6 +91,14 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Steps to do after the fetch -->
 	<!-- ===================================================================== -->
 	<target name="postFetch">
+		<delete dir="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_1.1.0" />
+		<mkdir dir="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_1.1.0" />
+		<cvs cvsRoot="${mapCvsRoot}" dest="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_1.1.0" command="co -r jetty6 org.eclipse.equinox.http.jetty" output="${buildDirectory}/jetty6checkout.txt" />
+		<move todir="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_1.1.0" failonerror="false">
+			<fileset file="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_1.1.0/org.eclipse.equinox.http.jetty/**" />
+		</move>
+		<delete dir="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_1.1.0/org.eclipse.equinox.http.jetty" />
+		
 		<ant antfile="${genericTargets}" target="fetchElement">
 			<property name="type" value="feature" />
 			<property name="id" value="org.eclipse.equinox.executable" />
@@ -108,18 +110,18 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<!--copy linux motif about_files to in temp location where it will be copied into root of eclipse at assembly time-->
 		<property name="linux.motif.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.motif.x86" />
 		<mkdir dir="${linux.motif.rootfiles}" />
-		<copy tofile="${linux.motif.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86/about.html" /> 
+		<copy tofile="${linux.motif.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86/about.html" />
 		<copy todir="${linux.motif.rootfiles}">
-			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86"/>
+			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86" />
 		</copy>
 
 		<!--copy linux gtk x86 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
 		<property name="linux.gtk.x86.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.x86" />
 		<mkdir dir="${linux.gtk.x86.rootfiles}" />
-		<copy tofile="${linux.gtk.x86.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86/about.html" /> 
+		<copy tofile="${linux.gtk.x86.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86/about.html" />
 
 		<copy todir="${linux.gtk.x86.rootfiles}">
-			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86"/>
+			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86" />
 		</copy>
 
 		<!--copy linux gtk x86_64 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
@@ -128,13 +130,11 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<copy tofile="${linux.gtk.x86_64.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64/about.html" />
 
 		<copy todir="${linux.gtk.x86_64.rootfiles}">
-			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64"
-				includes="
+			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64" includes="
 				about_files/about_cairo.html,
 				about_files/pixman-licenses.txt,
-				about_files/mpl-v11.txt"
-			/>
-		</copy>		
+				about_files/mpl-v11.txt" />
+		</copy>
 	</target>
 
 	<!-- ===================================================================== -->
@@ -146,16 +146,16 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<!--	<delete>
 			<fileset dir="${buildDirectory}/features" includes="*.source*/**" />			
 			<fileset dir="${buildDirectory}/plugins" excludes="com.ibm.icu.base.source_*/**, com.ibm.icu.source_*/**, org.mortbay.jetty.source_*/**, org.apache.commons.logging.source_*/**, javax.servlet.source_*/**, org.apache.lucene.source_*/**, org.apache.lucene.analysis.source_*/**, javax.servlet.jsp.source_*/**, org.apache.jasper.source_*/**, org.apache.commons.el.source_*/**, org.junit.source_*/**, org.apache.ant.source_*/**" includes="*.source*/**" />
-		</delete> -->  
-	<!--need to exclude source bundles from orbit-->
+		</delete> -->
+		<!--need to exclude source bundles from orbit-->
 	</target>
-	
+
 	<!-- ===================================================================== -->
 	<!-- Steps to do after generating the build scripts -->
 	<!-- ===================================================================== -->
 	<target name="postGenerate">
 		<antcall target="clean" />
-		
+
 		<!--must ensure the org.eclipse.swt.tools plug-in is built before the 64 bit swt fragments (see bug #144991)-->
 		<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.win32.win32.x86" target="build.jars">
 			<property name="type" value="plugin" />

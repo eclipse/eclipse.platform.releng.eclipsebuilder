@@ -171,18 +171,21 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- ===================================================================== -->
 	<target name="preFetch">
 		<!-- <mkdir dir="${buildDirectory}/baseLocation"/> -->
-		<mkdir dir="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_1.1.0" />
-		<cvs cvsRoot="${mapCvsRoot}" dest="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_1.1.0" command="co -r jetty6 org.eclipse.equinox.http.jetty" output="${buildDirectory}/jetty6checkout.txt" />
-		<move todir="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_1.1.0" failonerror="false">
-			<fileset file="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_1.1.0/org.eclipse.equinox.http.jetty/*" />
-		</move>
-		<delete dir="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_1.1.0/org.eclipse.equinox.http.jetty" />
 	</target>
 
 	<!-- ===================================================================== -->
 	<!-- Steps to do after the fetch -->
 	<!-- ===================================================================== -->
 	<target name="postFetch">
+		<!--delete fetched equinox.http.jetty bundle and replace with one for jetty6 branch -->
+		<delete dir="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_1.1.0" />
+		<mkdir dir="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_1.1.0" />
+		<cvs cvsRoot="${mapCvsRoot}" dest="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_1.1.0" command="co -r jetty6 org.eclipse.equinox.http.jetty" output="${buildDirectory}/jetty6checkout.txt" />
+		<move todir="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_1.1.0" failonerror="false">
+			<fileset file="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_1.1.0/org.eclipse.equinox.http.jetty/**" />
+		</move>
+		<delete dir="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_1.1.0/org.eclipse.equinox.http.jetty" />
+
 		<ant antfile="${genericTargets}" target="fetchElement">
 			<property name="type" value="feature" />
 			<property name="id" value="org.eclipse.equinox.executable" />
