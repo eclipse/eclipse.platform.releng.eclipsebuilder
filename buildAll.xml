@@ -291,22 +291,19 @@
 			<ant antfile="eclipse/helper.xml" target="testAll" />
 		</parallel>
 	</target>
-	
+
 	<target name="apiTooling">
-		<property name="reference" value="${buildDirectory}/apitooolingreference"/>
-		<property name="reference_location" value="${reference}/eclipse-SDK-3.4M6a-win32.zip"/>
-		<exec executable="/usr/bin/wget" dir="${locationcompare}" output="${reference}/error.txt" failonerror="false" os="Linux">
-		  	     <arg line="-q -O  ${locationcompare}/eclipse-SDK-3.4M6a-win32.zip http://fullmoon.ottawa.ibm.com/downloads/drops/S-3.4M6a-200804091425/eclipse-SDK-3.4M6a-win32.zip"/>
-		  	</exec>
-		<property name="current_location" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip"/>
-		<property name="report" value="${postingDirectory}/${buildLabel}/apitools"/>		
-		<mkdir dir="${report}"/>
-		<property name="report_location" value="${report}/report.xml"/>
-		<apitooling.apifreeze
-		        reference="${reference_location}"
-		        profile="${current_location}"
-		        report="${report_location}"		       
-		/>
+		<property name="reference" value="${buildDirectory}/apitooolingreference" />
+		<mkdir dir="${reference}" />
+		<property name="reference_location" value="${reference}/eclipse-SDK-3.4M6a-win32.zip" />
+		<exec executable="/usr/bin/wget" dir="${reference}" output="${reference}/error.txt" failonerror="false" os="Linux">
+			<arg line="-q -O  ${reference_location} http://fullmoon.ottawa.ibm.com/downloads/drops/S-3.4M6a-200804091425/eclipse-SDK-3.4M6a-win32.zip" />
+		</exec>
+		<property name="current_location" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" />
+		<property name="report" value="${postingDirectory}/${buildLabel}/apitools" />
+		<mkdir dir="${report}" />
+		<property name="report_location" value="${report}/report.xml" />
+		<apitooling.apifreeze reference="${reference_location}" profile="${current_location}" report="${report_location}" />
 		<!-- excludelist="${exclude_list_location}" -->
 	</target>
 
