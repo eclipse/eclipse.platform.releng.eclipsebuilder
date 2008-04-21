@@ -303,8 +303,9 @@
 		<property name="report" value="${postingDirectory}/${buildLabel}/apitools" />
 		<mkdir dir="${report}" />
 		<property name="report_location" value="${report}/report.xml" />
-		<apitooling.apifreeze reference="${reference_location}" profile="${current_location}" report="${report_location}" />
-		<!-- excludelist="${exclude_list_location}" -->
+		<property name="exclude_list_location" value="${buildDirectory}/maps/org.eclipse.releng/apiexclude/exclude_list.txt"/>
+		<apitooling.apifreeze reference="${reference_location}" profile="${current_location}" report="${report_location}" excludelist="${exclude_list_location}" debug="true" />		
+		<apitooling.deltareportconversion xmlfile="${report_location}" debug="true" />
 	</target>
 
 	<target name="publishEclipse">
