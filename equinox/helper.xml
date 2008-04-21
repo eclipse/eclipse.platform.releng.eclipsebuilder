@@ -136,7 +136,10 @@
 			<param name="bundle.id" value="org.eclipse.equinox.http" />
 		</antcall>
 		<antcall target="updateTestManifest">
-			<param name="bundle.id" value="org.eclipse.equinox.http.jetty" />
+			<param name="bundle.id" value="org.eclipse.equinox.http.jetty_1.1.0" />
+		</antcall>
+		<antcall target="updateTestManifest">
+			<param name="bundle.id" value="org.eclipse.equinox.http.jetty_2.0.0" />
 		</antcall>
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.io" />
