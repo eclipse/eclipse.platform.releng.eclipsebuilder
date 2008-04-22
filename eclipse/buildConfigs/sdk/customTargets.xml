@@ -170,7 +170,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Steps to do before fetching the build elements -->
 	<!-- ===================================================================== -->
 
-	<target name="fetchJetty">
+	<target name="fetchJetty" if="fetchjetty" >
 		<delete dir="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_2.0.0" />
 		<mkdir dir="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_2.0.0" />
 		<cvs cvsRoot="${mapCvsRoot}" dest="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_2.0.0" command="co -r jetty6 org.eclipse.equinox.http.jetty" output="${buildDirectory}/jetty6checkout.txt" />
@@ -189,7 +189,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- ===================================================================== -->
 	<target name="postFetch">
 		<!--delete fetched equinox.http.jetty bundle and replace with one for jetty6 branch -->
-		<antcall target="fetchJetty" if="fetchjetty" />
+		<antcall target="fetchJetty" />
 
 		<ant antfile="${genericTargets}" target="fetchElement">
 			<property name="type" value="feature" />
