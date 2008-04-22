@@ -141,6 +141,9 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 				about_files/pixman-licenses.txt,
 				about_files/mpl-v11.txt" />
 		</copy>
+		<replace dir="${buildDirectory}/plugins/org.eclipse.platform" value="${buildId}" token="qualifier">
+				<include name="META-INF/MANIFEST.MF" />
+		</replace>
 	</target>
 
 	<!-- ===================================================================== -->
@@ -216,10 +219,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="preProcess">
 		<replace dir="${buildDirectory}/plugins" value="${buildId}" token="@build@">
 			<include name="**/about.mappings" />
-		</replace>
-		<replace dir="${buildDirectory}/plugins/org.eclipse.platform" value="${buildId}" token="qualifier">
-			<include name="META-INF/MANIFEST.MF" />
-		</replace>
+		</replace>	
 		<replace dir="${buildDirectory}/features/org.eclipse.platform" value="${buildId}" token="@build@">
 			<include name="**/config.ini" />
 		</replace>
