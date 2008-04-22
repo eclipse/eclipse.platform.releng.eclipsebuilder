@@ -213,7 +213,7 @@
 		<apply executable="ls" output="${buildDirectory}/${bundle.id}.txt" dir="${equinoxPostingDirectory}/${buildLabel}">
 			<fileset dir="${equinoxPostingDirectory}/${buildLabel}">
 				<patternset>
-					<include name="${bundle.id}_*.jar" />
+					<include name="${bundle.id}*.jar" />					
 				</patternset>
 			</fileset>
 		</apply>
