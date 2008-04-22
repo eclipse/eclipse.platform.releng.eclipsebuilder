@@ -80,7 +80,7 @@
 		<zipType name="Other">
 			<platform id="javaxservlet_2.4.0" name="All" fileName="@javax.servlet_2.4.0@.jar">
 			</platform>
-			<platform id="javaxservlet_2.5.0" name="All" fileName="@javax.servlet_2.5.0t@.jar">
+			<platform id="javaxservlet_2.5.0" name="All" fileName="@javax.servlet_2.5.0@.jar">
 			</platform>			
 			<platform id="javaxservletjsp" name="All" fileName="@javax.servlet.jsp@.jar">
 			</platform>
