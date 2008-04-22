@@ -169,6 +169,17 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- ===================================================================== -->
 	<!-- Steps to do before fetching the build elements -->
 	<!-- ===================================================================== -->
+
+	<target name="fetchJetty">
+		<delete dir="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_2.0.0" />
+		<mkdir dir="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_2.0.0" />
+		<cvs cvsRoot="${mapCvsRoot}" dest="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_2.0.0" command="co -r jetty6 org.eclipse.equinox.http.jetty" output="${buildDirectory}/jetty6checkout.txt" />
+		<move todir="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_2.0.0" failonerror="false">
+			<fileset file="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_2.0.0/org.eclipse.equinox.http.jetty/**" />
+		</move>
+		<delete dir="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_2.0.0/org.eclipse.equinox.http.jetty" />
+	</target>
+
 	<target name="preFetch">
 		<!-- <mkdir dir="${buildDirectory}/baseLocation"/> -->
 	</target>
@@ -178,13 +189,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- ===================================================================== -->
 	<target name="postFetch">
 		<!--delete fetched equinox.http.jetty bundle and replace with one for jetty6 branch -->
-		<delete dir="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_2.0.0" />
-		<mkdir dir="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_2.0.0" />
-		<cvs cvsRoot="${mapCvsRoot}" dest="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_2.0.0" command="co -r jetty6 org.eclipse.equinox.http.jetty" output="${buildDirectory}/jetty6checkout.txt" />
-		<move todir="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_2.0.0" failonerror="false">
-			<fileset file="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_2.0.0/org.eclipse.equinox.http.jetty/**" />
-		</move>
-		<delete dir="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_2.0.0/org.eclipse.equinox.http.jetty" />
+		<antcall target="fetchJetty" if="fetchjetty" />
 
 		<ant antfile="${genericTargets}" target="fetchElement">
 			<property name="type" value="feature" />

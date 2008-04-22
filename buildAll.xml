@@ -98,7 +98,10 @@
 		<!--unzip args-->
 		<property name="unzipArgs" value="-qq" />
 		<property name="repo" value="${buildDirectory}/repo" />
-		<property name="reposource" value="${buildDirectory}/reposource" />
+		<property name="reposource" value="${buildDirectory}/reposource" />		
+		<condition property="fetchjetty" value="true">
+			<equals arg1="${buildType}" arg2="N" />
+		</condition>
 	</target>
 
 	<target name="buildMasterFeature">
