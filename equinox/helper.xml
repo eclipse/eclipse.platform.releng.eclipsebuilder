@@ -155,12 +155,12 @@
 		</antcall>
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.http.registry" />
-		</antcall>		
-		<antcall target="updateTestManifest">
-			<param name="bundle.id" value="org.eclipse.equinox.http.servletbridge" />
 		</antcall>
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.http.servlet" />
+		</antcall>
+		<antcall target="updateTestManifest">
+			<param name="bundle.id" value="org.eclipse.equinox.http.servletbridge" />
 		</antcall>
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.servletbridge" />
@@ -181,10 +181,10 @@
 			<param name="bundle.id" value="javax.servlet" />
 		</antcall>
 		<antcall target="updateTestManifest">
-				<param name="bundle.id" value="javax.servlet_2.4.0" />
+			<param name="bundle.id" value="javax.servlet_2.4.0" />
 		</antcall>
 		<antcall target="updateTestManifest">
-						<param name="bundle.id" value="javax.servlet_2.5.0" />
+			<param name="bundle.id" value="javax.servlet_2.5.0" />
 		</antcall>
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="javax.servlet.jsp" />
@@ -203,7 +203,7 @@
 		</antcall>
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.mortbay.jetty.server" />
-		</antcall>		
+		</antcall>
 	</target>
 
 	<!-- ===================================================================== -->
@@ -213,7 +213,7 @@
 		<apply executable="ls" output="${buildDirectory}/${bundle.id}.txt" dir="${equinoxPostingDirectory}/${buildLabel}">
 			<fileset dir="${equinoxPostingDirectory}/${buildLabel}">
 				<patternset>
-					<include name="${bundle.id}*.jar" />					
+					<include name="${bundle.id}*.jar" />
 				</patternset>
 			</fileset>
 		</apply>

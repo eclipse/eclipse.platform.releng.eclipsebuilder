@@ -60,7 +60,7 @@
 			<platform id="util" name="All" fileName="@org.eclipse.osgi.util@.jar">
 			</platform>			
 			<platform id="equinoxservletbridge" name="All" fileName="@org.eclipse.equinox.servletbridge@.jar">
-			</platform>
+			</platform>			
 			<platform id="http" name="All" fileName="@org.eclipse.equinox.http@.jar">
 			</platform>
 			<platform id="httpjetty" name="All" fileName="@org.eclipse.equinox.http.jetty_1.1.0@.jar">
