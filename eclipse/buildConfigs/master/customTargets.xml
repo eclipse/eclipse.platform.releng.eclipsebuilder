@@ -97,14 +97,14 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	</target>
 
 	<target name="preFetch">
-		<antcall target="fetchJetty" />
+	<!--	<antcall target="fetchJetty" /> -->
 	</target>
 
 	<!-- ===================================================================== -->
 	<!-- Steps to do after the fetch -->
 	<!-- ===================================================================== -->
 	<target name="postFetch">
-		<antcall target="fetchJetty" />
+	<!--	<antcall target="fetchJetty" /> -->
 		<ant antfile="${genericTargets}" target="fetchElement">
 			<property name="type" value="feature" />
 			<property name="id" value="org.eclipse.equinox.executable" />
