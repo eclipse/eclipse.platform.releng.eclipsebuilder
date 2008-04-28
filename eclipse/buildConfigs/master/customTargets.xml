@@ -141,9 +141,9 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 				about_files/pixman-licenses.txt,
 				about_files/mpl-v11.txt" />
 		</copy>
-		<replace dir="${buildDirectory}/plugins/org.eclipse.platform" value="${buildId}" token="qualifier">
+	<!--	<replace dir="${buildDirectory}/plugins/org.eclipse.platform" value="${buildId}" token="qualifier">
 				<include name="META-INF/MANIFEST.MF" />
-		</replace>
+		</replace> -->
 	</target>
 
 	<!-- ===================================================================== -->
