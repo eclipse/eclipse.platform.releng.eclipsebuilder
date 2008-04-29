@@ -170,16 +170,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Steps to do before fetching the build elements -->
 	<!-- ===================================================================== -->
 
-	<target name="fetchJetty" if="fetchjetty" >
-		<delete dir="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_2.0.0" />
-		<mkdir dir="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_2.0.0" />
-		<cvs cvsRoot="${mapCvsRoot}" dest="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_2.0.0" command="co -r jetty6 org.eclipse.equinox.http.jetty" output="${buildDirectory}/jetty6checkout.txt" />
-		<move todir="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_2.0.0" failonerror="false">
-			<fileset file="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_2.0.0/org.eclipse.equinox.http.jetty/**" />
-		</move>
-		<delete dir="${buildDirectory}/plugins/org.eclipse.equinox.http.jetty_2.0.0/org.eclipse.equinox.http.jetty" />
-	</target>
-
 	<target name="preFetch">
 		<!-- <mkdir dir="${buildDirectory}/baseLocation"/> -->
 	</target>
@@ -188,8 +178,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Steps to do after the fetch -->
 	<!-- ===================================================================== -->
 	<target name="postFetch">
-		<!--delete fetched equinox.http.jetty bundle and replace with one for jetty6 branch -->
-	<!--	<antcall target="fetchJetty" /> -->
+		<concat	destfile="${buildDirectory}/plugins/org.eclipse.platform/build.properties" append="true">\nqualifier=v${timestamp}\n</concat>
 
 		<ant antfile="${genericTargets}" target="fetchElement">
 			<property name="type" value="feature" />
@@ -215,7 +204,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<property name="id" value="org.eclipse.swt.tools" />
 			<property name="baseos" value="win32" />
 			<property name="basews" value="win32" />
-			<property name="basearch" value="x86" />
+			<property name="basearch" value="x86" />				
 		</ant>
 
 		<!--copy linux motif about_files to in temp location where it will be copied into root of eclipse at assembly time-->
