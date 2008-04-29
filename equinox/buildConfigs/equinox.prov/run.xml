@@ -681,8 +681,6 @@
 	p2.generator.base
 	p2.generator.feature.dir
 	p2.generator.plugins.dir
-	p2.generator.root.version
-	p2.generator.root
 	p2.repo
 	-->
 	<target name="run.generator.feature.based">
@@ -696,10 +694,8 @@
 			<arg line="-base ${p2.generator.base}" />
 			<arg line="-features ${p2.generator.feature.dir}" />
 			<arg line="-bundles ${p2.generator.plugins.dir}" />
-			<arg line="-rootVersion ${p2.generator.root.version}" />
 			<arg line="-site ${p2.site.xml}" />
 			<arg line="-compress" />
-			<arg line="-root ${p2.generator.root}" />
 			<arg line="-flavor ${p2.flavor}" />
 			<arg line="-publishArtifacts" />
 			<arg line="-metadataRepository file:${p2.repo}" />
