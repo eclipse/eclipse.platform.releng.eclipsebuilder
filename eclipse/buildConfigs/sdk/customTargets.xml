@@ -178,7 +178,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Steps to do after the fetch -->
 	<!-- ===================================================================== -->
 	<target name="postFetch">
-		<concat	destfile="${buildDirectory}/plugins/org.eclipse.platform/build.properties" append="true">\nqualifier=v${timestamp}\n</concat>
+		<concat	destfile="${buildDirectory}/plugins/org.eclipse.platform/build.properties" append="true">qualifier=v${timestamp}</concat>
 
 		<ant antfile="${genericTargets}" target="fetchElement">
 			<property name="type" value="feature" />
