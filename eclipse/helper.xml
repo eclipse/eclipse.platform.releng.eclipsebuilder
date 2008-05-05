@@ -398,10 +398,10 @@
 		<mkdir dir="${updateJarWorkingDir}/site" />
 
 		<!--eclipse-master-${buildId}.bak.zip contains the signed update jars. eclipse-master-${buildId}.zip contains the
-		features and plug-ins unpacked.  Need features in directory structures for tool to work. -->
+	                features and plug-ins unpacked.  Need features in directory structures for tool to work. -->
 		<unzip src="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip" dest="${updateJarWorkingDir}" />
 		<delete includeemptydirs="true">
-			<fileset dir="${updateJarWorkingDir}/eclipse/features" includes="com.ibm.icu.base*/**,master-equinox*/**" />
+			<fileset dir="${updateJarWorkingDir}/eclipse/features" includes="com.ibm.icu.base*/**,master-equinox*/**,master-jetty*/**" />
 		</delete>
 
 		<!--operation on creates update jars for features and for plug-ins which are to be unpacked when installed-->
@@ -426,16 +426,17 @@
 
 		<!--use original signed update jars-->
 		<exec executable="unzip" dir=".">
-			<arg line="-j ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.bak.zip -i */features/* -x */master-equinox* */com.ibm.icu.base* -d ${updateSite}/features" />
+			<arg line="-j ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.bak.zip -i */features/* -x */master-equinox* */master-jetty* */com.ibm.icu.base* -d ${updateSite}/features" />
 		</exec>
 		<exec executable="unzip" dir=".">
-			<arg line="-j ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.bak.zip -i */plugins/* -x */master-equinox* */com.ibm.icu.base* -d ${updateSite}/plugins" />
+			<arg line="-j ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.bak.zip -i */plugins/* -x */master-equinox* */master-jetty* */com.ibm.icu.base* -d ${updateSite}/plugins" />
 		</exec>
 		<java jar="${eclipse.home}/plugins/org.eclipse.equinox.launcher.jar" fork="true" jvm="${java15-home}/bin/java" failonerror="true" maxmemory="768m" error="${buildDirectory}/errorlogupdatesite.txt" dir="${buildDirectory}">
 			<arg line="-application org.eclipse.update.core.siteOptimizer" />
 			<arg line="-digestBuilder -digestOutputDir=${updateSite} -siteXML=${updateSite}/site.xml" />
 		</java>
 	</target>
+
 
 	<target name="cleanSites">
 		<cleanSite ageInMinutes="1440" directoryName="/builds/transfer/files/master/downloads/drops" realDelete="true" />
