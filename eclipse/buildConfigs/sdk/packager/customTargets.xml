@@ -77,6 +77,12 @@
 		</antcall>
 	</target>
 
+	<target name="assemble.macosx.carbon.x86.xml">
+		<antcall target="assembler">
+			<param name="archiveName" value="${archiveRoot}-macosx-carbon.x86.tar.gz" />
+		</antcall>
+	</target>
+				
 	<target name="assembler">
 		<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
 		<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
