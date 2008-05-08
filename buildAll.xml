@@ -44,9 +44,9 @@
 	<property name="postingDirectory" value="${buildDirectory}" />
 	<property name="equinoxPostingDirectory" value="${postingDirectory}/../../equinox/drops" />
 
-	<target name="main" depends="init">
-		<antcall target="buildEclipseSourceDrops" />
+	<target name="main" depends="init">		
 		<antcall target="buildMasterFeature" />
+		<antcall target="buildEclipseSourceDrops" />
 		<parallel failonany="true">
 			<sequential>
 				<antcall target="updatePackProperties" />
