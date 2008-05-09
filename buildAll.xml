@@ -45,7 +45,6 @@
 	<property name="equinoxPostingDirectory" value="${postingDirectory}/../../equinox/drops" />
 
 	<target name="main" depends="init">
-		<antcall target="buildECFMasterFeature" />
 		<antcall target="buildEclipseSourceDrops" />
 		<antcall target="buildMasterFeature" />
 		<parallel failonany="true">
@@ -134,10 +133,14 @@
 	</target>
 
 	<target name="buildECFMasterFeature">
-		<ant antfile="build.xml" dir="${basedir}">
-					<property name="component" value="${eclipse.build.configs}/master-ecf" />
+		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="preBuild">
+			<property name="builder" value="${eclipse.build.configs}/master-ecf" />
+		</ant>
+		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="fetch">
+			<property name="builder" value="${eclipse.build.configs}/master-ecf" />
 		</ant>
 	</target>
+
 
 
 	<target name="buildEclipseSourceDrops">
@@ -149,6 +152,7 @@
 		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="fetch">
 			<property name="builder" value="${eclipse.build.configs}/sdk.examples" />
 		</ant>
+		<antcall target="buildECFMasterFeature" />
 		<!--fetch source and generate scripts for eclipse SDK-->
 		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="preBuild">
 			<property name="builder" value="${eclipse.build.configs}/sdk" />
