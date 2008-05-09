@@ -44,10 +44,9 @@
 	<property name="postingDirectory" value="${buildDirectory}" />
 	<property name="equinoxPostingDirectory" value="${postingDirectory}/../../equinox/drops" />
 
-	<target name="main" depends="init">
-		<antcall target="buildECFMasterFeature" />
-		<antcall target="buildEclipseSourceDrops" />
+	<target name="main" depends="init">		
 		<antcall target="buildMasterFeature" />
+		<antcall target="buildEclipseSourceDrops" />
 		<parallel failonany="true">
 			<sequential>
 				<antcall target="updatePackProperties" />
@@ -99,7 +98,7 @@
 		<!--unzip args-->
 		<property name="unzipArgs" value="-qq" />
 		<property name="repo" value="${buildDirectory}/repo" />
-		<property name="reposource" value="${buildDirectory}/reposource" />
+		<property name="reposource" value="${buildDirectory}/reposource" />		
 		<condition property="fetchjetty" value="true">
 			<equals arg1="${buildType}" arg2="N" />
 		</condition>
@@ -132,13 +131,6 @@
 			<property name="component" value="${eclipse.build.configs}/test.framework" />
 		</ant>
 	</target>
-
-	<target name="buildECFMasterFeature">
-		<ant antfile="build.xml" dir="${basedir}">
-					<property name="component" value="${eclipse.build.configs}/master-ecf" />
-		</ant>
-	</target>
-
 
 	<target name="buildEclipseSourceDrops">
 		<property name="buildSourceDrops" value="true" />
@@ -314,8 +306,8 @@
 		<property name="report" value="${postingDirectory}/${buildLabel}/apitools" />
 		<mkdir dir="${report}" />
 		<property name="report_location" value="${report}/report.xml" />
-		<property name="exclude_list_location" value="${buildDirectory}/maps/org.eclipse.releng/apiexclude/exclude_list.txt" />
-		<apitooling.apifreeze reference="${reference_location}" profile="${current_location}" report="${report_location}" excludelist="${exclude_list_location}" debug="true" />
+		<property name="exclude_list_location" value="${buildDirectory}/maps/org.eclipse.releng/apiexclude/exclude_list.txt"/>
+		<apitooling.apifreeze reference="${reference_location}" profile="${current_location}" report="${report_location}" excludelist="${exclude_list_location}" debug="true" />		
 		<apitooling.deltareportconversion xmlfile="${report_location}" debug="true" />
 	</target>
 
