@@ -314,7 +314,7 @@
 		<property name="reference_location" value="${reference}/eclipse-SDK-3.4M6a-win32.zip" />
 		<exec executable="/usr/bin/wget" dir="${reference}" output="${reference}/error.txt" failonerror="false" os="Linux">
 			<arg line="-q -O  ${reference_location} http://fullmoon.ottawa.ibm.com/downloads/drops/S-3.4M6a-200804091425/eclipse-SDK-3.4M6a-win32.zip" />
-		</exec>
+		</exec>		
 		<property name="current_location" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" />
 		<property name="report" value="${postingDirectory}/${buildLabel}/apitools" />
 		<mkdir dir="${report}" />
@@ -341,6 +341,9 @@
 		<property name="html_directory_location" value="${report}/apitoolsverifications/html" />
 		<property name="report_directory_location" value="${report}/apitoolsverifications/xml" />
 		<property name="3_3_reference_location" value="${reference}/eclipse-SDK-3.3.2-win32.zip" />
+		<exec executable="/usr/bin/wget" dir="${reference}" output="${reference}/error.txt" failonerror="false" os="Linux">
+			<arg line="-q -O  ${3_3_reference_location} http://fullmoon.ottawa.ibm.com/downloads/drops/R-3.3.2-200802211800/eclipse-SDK-3.3.2-win32.zip" />
+		</exec>
 		<apitooling.apitoolsverification
 			profile="${current_location}"
 			reference="${3_3_reference_location}"
