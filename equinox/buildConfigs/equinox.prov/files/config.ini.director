@@ -71,6 +71,7 @@ osgi.bundles=\
 	org.eclipse.osgi.services,\
 	org.eclipse.equinox.security,\
 	org.sat4j.core,\
+	org.eclipse.equinox.p2.jarprocessor,\
 	org.sat4j.pb
 	
 org.eclipse.update.reconcile=false
