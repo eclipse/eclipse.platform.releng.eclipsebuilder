@@ -319,7 +319,7 @@
 		<apitooling.deltareportconversion
 			xmlfile="${report_location}"
 			debug="true" />
-<!--		<property name="filter_store" value="${buildDirectory}/apifilters" />
+		<property name="filter_store" value="${buildDirectory}/apifilters" />
 		<mkdir dir="${filter_store}" />
 	
 		<copy todir="${filter_store}">
@@ -342,7 +342,7 @@
 		<apitooling.apitoolsreportconversion
 			xmlreportdirectory="${report_directory_location}"
 			debug="true"
-			htmlreportdirectory="${html_directory_location}" /> -->
+			htmlreportdirectory="${html_directory_location}" />
 	</target>
 
 	<target name="publishEclipse">
