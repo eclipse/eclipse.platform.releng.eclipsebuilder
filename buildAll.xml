@@ -98,7 +98,7 @@
 		<!--unzip args-->
 		<property name="unzipArgs" value="-qq" />
 		<property name="repo" value="${buildDirectory}/repo" />
-		<property name="reposource" value="${buildDirectory}/reposource" />
+		<property name="reposource" value="${buildDirectory}/reposource" />		
 		<condition property="fetchjetty" value="true">
 			<equals arg1="${buildType}" arg2="N" />
 		</condition>
@@ -133,17 +133,6 @@
 		</ant>
 	</target>
 
-	<target name="buildECFMasterFeature">
-		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="preBuild">
-			<property name="builder" value="${eclipse.build.configs}/master-ecf" />
-		</ant>
-		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="fetch">
-			<property name="builder" value="${eclipse.build.configs}/master-ecf" />
-		</ant>
-	</target>
-
-
-
 	<target name="buildEclipseSourceDrops">
 		<property name="buildSourceDrops" value="true" />
 		<!--examples are required to pull sample doc into SDK doc plug-ins-->
@@ -153,7 +142,6 @@
 		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="fetch">
 			<property name="builder" value="${eclipse.build.configs}/sdk.examples" />
 		</ant>
-		<antcall target="buildECFMasterFeature" />
 		<!--fetch source and generate scripts for eclipse SDK-->
 		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="preBuild">
 			<property name="builder" value="${eclipse.build.configs}/sdk" />
