@@ -251,6 +251,21 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<copy todir="${postingDirectory}/${buildLabel}/compilelogs" overwrite="true">
 			<fileset dir="${buildDirectory}/features/org.eclipse.sdk/feature.temp.folder" />
 		</copy>
+		<copy todir="${postingDirectory}/${buildLabel}/compilelogs" overwrite="true">
+			<fileset dir="${buildDirectory}/features/master-equinox/feature.temp.folder" />
+		</copy>		
+		<copy todir="${postingDirectory}/${buildLabel}/compilelogs" overwrite="true">
+			<fileset dir="${buildDirectory}/features/master-equinox-p2/feature.temp.folder" />
+		</copy>
+		<copy todir="${postingDirectory}/${buildLabel}/compilelogs" overwrite="true">
+			<fileset dir="${buildDirectory}/features/org.eclipse.equinox.launchers-feature/feature.temp.folder" />
+		</copy>
+		<copy todir="${postingDirectory}/${buildLabel}/compilelogs" overwrite="true">
+				<fileset dir="${buildDirectory}/features/org.eclipse.help/feature.temp.folder" />
+		</copy>		
+		<copy todir="${postingDirectory}/${buildLabel}/compilelogs" overwrite="true">
+			<fileset dir="${buildDirectory}/features/org.eclipse.pde/feature.temp.folder" />
+		</copy>		
 	</target>
 
 	<target name="clean" unless="noclean">
