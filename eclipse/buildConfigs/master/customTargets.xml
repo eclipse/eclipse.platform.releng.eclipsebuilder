@@ -256,10 +256,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		</copy>		
 		<copy todir="${postingDirectory}/${buildLabel}/compilelogs" overwrite="true">
 			<fileset dir="${buildDirectory}/features/master-equinox-p2/feature.temp.folder" />
-		</copy>
-		<copy todir="${postingDirectory}/${buildLabel}/compilelogs" overwrite="true">
-			<fileset dir="${buildDirectory}/features/org.eclipse.equinox.launchers-feature/feature.temp.folder" />
-		</copy>
+		</copy>	
 		<copy todir="${postingDirectory}/${buildLabel}/compilelogs" overwrite="true">
 				<fileset dir="${buildDirectory}/features/org.eclipse.help/feature.temp.folder" />
 		</copy>		
