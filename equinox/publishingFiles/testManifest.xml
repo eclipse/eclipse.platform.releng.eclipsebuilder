@@ -74,7 +74,9 @@
 			<platform id="httpservletbridge" name="All" fileName="@org.eclipse.equinox.http.servletbridge@.jar">
 			</platform>
 			<platform id="wireadmin" name="All" fileName="@org.eclipse.equinox.wireadmin@.jar">
-			</platform>		
+			</platform>
+			<platform id="simpleconfigurator" name="All" fileName="@org.eclipse.equinox.simpleconfigurator@.jar">
+			</platform>			
 		</zipType>	
 
 		<zipType name="Other">

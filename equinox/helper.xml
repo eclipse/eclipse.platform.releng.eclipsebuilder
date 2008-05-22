@@ -204,6 +204,9 @@
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.mortbay.jetty.server" />
 		</antcall>
+		<antcall target="updateTestManifest">
+			<param name="bundle.id" value="org.eclipse.equinox.simpleconfigurator" />
+		</antcall>		
 	</target>
 
 	<!-- ===================================================================== -->
