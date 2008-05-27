@@ -40,7 +40,7 @@ the following environment variables set.
   <li>Extract the eclipse-sourceBuild-srcIncluded-*.zip to an empty directory. Extract using tar if using a *nix drop.</li>
   <li>Update the build.properties file included at the root of this zip to point to the locations of your 1.4, 1.5, and 1.6 JDK locations.</li>
   <li>cd to the directory.</li><li>Execute <b>build -os &lt;osType&gt; -ws &lt;windowSystemType&gt; -arch &lt;architecture&gt; 
-    [-bc &lt;bootclasspath&gt;] [-compilelibs] [-target &lt;target&gt;]</b></li><p>&nbsp;</p><ol>
+    [-bc &lt;bootclasspath&gt;] [-target &lt;target&gt;]</b></li><p>&nbsp;</p><ol>
     <table border="1" width="75%">
       <tbody><tr> 
         <td width="30%">Parameter Name</td><td width="70%">Description</td></tr>
@@ -58,10 +58,7 @@ the following environment variables set.
           bootclasspath are part of any JDK or JRE. Typically this parameter is 
           only specified if you are cross compiling Eclipse. The default is set to the 
           jars in the JDK or JRE in JAVA_HOME.</td></tr>
-      
-	   <tr> 
-        <td width="30%">compilelibs</td><td width="70%">Flag to force the recompilation of native libraries.</td></tr>
-      <tr> 
+        
         <td width="30%">target (optional)</td><td width="70%"> 
           <p>The Ant target from build.xml to execute. The default target is <b>run</b> 
             and performs a complete build and generates an install. Other valid 
@@ -201,8 +198,7 @@ are all provided prebuilt in this build process. The
 linux-gtk-ia64, linux-gtk-s390, linux-gtk-s390x, hpux-motif-ia64_32 and
 hpux-motif-ia64 configurations will require a re-compilation of the
 eclipse executable and swt libaries and copying these files to the
-apppropriate directories. This can be accomplished by using the
--compilelibs flag when running the build. The instructions on <a href="http://www.eclipse.org/swt/faq.php#buildeclipseexe">recompiling
+apppropriate directories. The instructions on <a href="http://www.eclipse.org/swt/faq.php#buildeclipseexe">recompiling
     the eclipse executable</a> and <a href="http://www.eclipse.org/swt/faq.php#howbuilddll">recompiling
     the swt libraries</a>  available in the <a href="http://www.eclipse.org/swt/faq.php">SWT
     FAQ</a> are also a useful reference. This document also includes a list of the prerequisites <a href="http://www.eclipse.org/swt/faq.php#gtkstartup">for
