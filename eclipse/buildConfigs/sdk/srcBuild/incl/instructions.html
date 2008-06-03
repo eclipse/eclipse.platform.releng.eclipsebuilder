@@ -38,8 +38,9 @@ the following environment variables set.
   
   <h4>Run the Build</h4><ol>
   <li>Extract the eclipse-sourceBuild-srcIncluded-*.zip to an empty directory. Extract using tar if using a *nix drop.</li>
-  <li>Update the build.properties file included at the root of this zip to point to the locations of your 1.4, 1.5, and 1.6 JDK locations.</li>
-  <li>cd to the directory.</li><li>Execute <b>build -os &lt;osType&gt; -ws &lt;windowSystemType&gt; -arch &lt;architecture&gt; 
+  <li>cd to the directory.</li>
+  <li>Update the build.properties file included at the root of this zip to point to the bootstrap classpath of your 1.4, 1.5, and 1.6 JDK locations.</li>  
+  <li>Execute <b>build -os &lt;osType&gt; -ws &lt;windowSystemType&gt; -arch &lt;architecture&gt; 
     [-bc &lt;bootclasspath&gt;] [-target &lt;target&gt;]</b></li><p>&nbsp;</p><ol>
     <table border="1" width="75%">
       <tbody><tr> 
@@ -52,7 +53,7 @@ the following environment variables set.
           supported types</a>).</td></tr>
       <tr> 
         <td width="30%">architecture</td><td width="70%">Target system architecture (<a href="#build_platforms">See 
-          supported types</a>).</td></tr><tr><td width="30%"> java 5 installation</td></tr><tr> 
+          supported types</a>).</td></tr><tr> 
         <td width="30%">bootclasspath (optional)</td><td width="70%">The default  list of bootclasspath jars to compile against using 
           either a colon or semi-colon as separators. The jars that make up a 
           bootclasspath are part of any JDK or JRE. Typically this parameter is 
