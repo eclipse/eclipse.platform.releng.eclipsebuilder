@@ -777,7 +777,8 @@
 		</copy>
 	</target>
 
-	<target name="run.director">
+	<target name="run.director">		   
+		<delete dir="${p2.output.base}/director/eclipse/configuration/.settings" includeemptydirs="true"/>		                
 		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
 		<exec executable="${p2.director.dir}/eclipse/eclipse" failonerror="false" timeout="900000">
 			<arg line="-vm ${java15-home}/bin/java" />
