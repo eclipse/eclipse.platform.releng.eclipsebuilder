@@ -1,5 +1,5 @@
 eclipse-master-@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | | | runtime | full
-org.eclipse.equinox.executable_@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | | | runtime | delta-pack
+#org.eclipse.equinox.executable_@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | | | runtime | delta-pack
 
 master-root-@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | | eclipse/ | runtime | root
 master-root-launcher-@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | | eclipse/ | runtime | root-launcher
