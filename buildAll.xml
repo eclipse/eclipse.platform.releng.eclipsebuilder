@@ -301,7 +301,7 @@
 		<mkdir dir="${reference}" />
 		<property name="reference_location" value="${reference}/eclipse-SDK-3.4M6a-win32.zip" />
 		<exec executable="/usr/bin/wget" dir="${reference}" output="${reference}/error.txt" failonerror="false" os="Linux">
-			<arg line="-q -O  ${reference_location} http://fullmoon.ottawa.ibm.com/downloads/drops/S-3.4M6a-200804091425/eclipse-SDK-3.4M6a-win32.zip" />
+			<arg line="-q -O  ${reference_location} http://archive.eclipse.org/eclipse/downloads/drops/S-3.4M6a-200804091425/eclipse-SDK-3.4M6a-win32.zip" />
 		</exec>		
 		<property name="current_location" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" />
 		<property name="report" value="${postingDirectory}/${buildLabel}/apitools" />
