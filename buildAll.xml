@@ -240,6 +240,7 @@
 		<delete file="${packproperties}" failonerror="false" />
 		<replace file="${eclipse.build.configs}/../../extras/pack.properties" token="@excludejars@" value="${pack.properties}" />
 		<property name="archiveName" value="eclipse-master-${buildId}.zip" />
+		<!-- add pack.properties file that specifies effort level -->
 		<exec dir="${eclipse.build.configs}/../../extras" executable="zip">
 				<arg line="-r ${buildDirectory}/${buildLabel}/${archiveName} pack.properties" />
 		</exec>
@@ -249,14 +250,11 @@
 		<property name="packtmp" value="${buildDirectory}/packtmp" />
 		<property name="stagingDirectoryOutput" value="/home/data/httpd/download-staging.priv/eclipse/${buildId}-out" />
 		<property name="stagingDirectory" value="/home/data/httpd/download-staging.priv/eclipse" />
+		<property name="archiveName" value="eclipse-master-${buildId}.zip" />
 		<property name="outputFile" value="${stagingDirectoryOutput}/${archiveName}" />
 		<mkdir dir="${packtmp}" />
-		<move file="${buildDirectory}/${buildLabel}/${archiveName}" tofile="${packtmp}/${archiveName}" />
-		<!-- add pack.properties file that specifies effort level -->
-		<exec dir="${eclipse.build.configs}/../../extras" executable="zip">
-			<arg line="-r ${packtmp}/${archiveName} pack.properties" />
-		</exec>
-
+		<move file="${buildDirectory}/${buildLabel}/${archiveName}" tofile="${packtmp}/${archiveName}" />	
+		
 		<!--push drop to staging directory-->
 		<echo message="push drop to staging directory" />
 		<exec dir="${packtmp}" executable="scp" output="signing.txt">
