@@ -71,9 +71,9 @@
 		<mkdir dir="${p2.platform.install.linux.gtk.ppc}" />
 		<property name="p2.platform.install.hpux.motif.ia64_32" value="${p2.output.base}/platform.install.hpux.motif.ia64_32" />
 		<mkdir dir="${p2.platform.install.hpux.motif.ia64_32}" />
-		<property name="p2.platform.install.solaris.gtk.sparc" value="${p2.output.base}/platform.install.install.solaris.gtk.sparc" />
+		<property name="p2.platform.install.solaris.gtk.sparc" value="${p2.output.base}/platform.install.solaris.gtk.sparc" />
 		<mkdir dir="${p2.platform.install.solaris.gtk.sparc}" />
-		<property name="p2.platform.install.aix.motif.ppc" value="${p2.output.base}/platform.install.install.aix.motif.ppc" />
+		<property name="p2.platform.install.aix.motif.ppc" value="${p2.output.base}/platform.install.aix.motif.ppc" />
 		<mkdir dir="${p2.platform.install.aix.motif.ppc}" />
 		<property name="p2.platform.install.macosx.carbon.x86" value="${p2.output.base}/platform.install.macosx.carbon.x86" />
 		<mkdir dir="${p2.platform.install.macosx.carbon.x86}" />
@@ -93,9 +93,9 @@
 		<mkdir dir="${p2.platformsdk.install.linux.gtk.ppc}" />
 		<property name="p2.platformsdk.install.hpux.motif.ia64_32" value="${p2.output.base}/platformsdk.install.hpux.motif.ia64_32" />
 		<mkdir dir="${p2.platformsdk.install.hpux.motif.ia64_32}" />
-		<property name="p2.platformsdk.install.solaris.gtk.sparc" value="${p2.output.base}/platformsdk.install.install.solaris.gtk.sparc" />
+		<property name="p2.platformsdk.install.solaris.gtk.sparc" value="${p2.output.base}/platformsdk.install.solaris.gtk.sparc" />
 		<mkdir dir="${p2.platformsdk.install.solaris.gtk.sparc}" />
-		<property name="p2.platformsdk.install.aix.motif.ppc" value="${p2.output.base}/platformsdk.install.install.aix.motif.ppc" />
+		<property name="p2.platformsdk.install.aix.motif.ppc" value="${p2.output.base}/platformsdk.install.aix.motif.ppc" />
 		<mkdir dir="${p2.platformsdk.install.aix.motif.ppc}" />
 		<property name="p2.platformsdk.install.macosx.carbon.x86" value="${p2.output.base}/platformsdk.install.macosx.carbon.x86" />
 		<mkdir dir="${p2.platformsdk.install.macosx.carbon.x86}" />
