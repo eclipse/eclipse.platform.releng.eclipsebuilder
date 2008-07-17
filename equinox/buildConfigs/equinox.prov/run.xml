@@ -5,8 +5,8 @@
 		<mkdir dir="${p2.root}" />
 		<property name="p2.output.base" value="${p2.root}/equinox.p2.build" />
 		<mkdir dir="${p2.output.base}" />
-		<property name="p2.director.dir" value="${p2.output.base}/director" />
-		<mkdir dir="${p2.director.dir}" />
+	<!--	<property name="p2.director.dir" value="${p2.output.base}/director" />
+		<mkdir dir="${p2.director.dir}" /> -->
 
 		<condition property="sdk.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-ppc.tar.gz">
 			<equals arg1="${os.arch}" arg2="ppc64" />
@@ -141,7 +141,7 @@
 		</delete>
 
 		<antcall target="setup.generator" />
-		<antcall target="setup.director" />
+		<!-- <antcall target="setup.director" /> -->
 
 		<antcall target="generate.metadata.agent" />
 		<antcall target="generate.metadata.releng.tools" />
@@ -752,7 +752,7 @@
 		</exec>
 	</target>
 
-	<target name="setup.director">
+<!--	<target name="setup.director">
 		<path id="director.zip.path">
 			<fileset dir="${buildDirectory}/${buildId}">
 				<include name="**/org.eclipse.equinox.p2.director.feature-${buildId}.zip" />
@@ -775,13 +775,11 @@
 				<include name="**/org.eclipse.core.net_*.jar" />
 			</fileset>
 		</copy>
-	</target>
+	</target> -->
 
 	<target name="run.director">		   
-		<delete dir="${p2.output.base}/director/eclipse/configuration/.settings" includeemptydirs="true" failonerror="false"/>		                
-		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
-		<exec executable="${p2.director.dir}/eclipse/eclipse" failonerror="false" timeout="900000">
-			<arg line="-vm ${java15-home}/bin/java" />
+		<delete dir="${p2.output.base}/director/eclipse/configuration/.settings" includeemptydirs="true" failonerror="false"/>                
+		<java jar="${base.builder}/plugins/org.eclipse.equinox.launcher" fork="true" jvm="${java15-home}/bin/java" failonerror="false" timeout="900000" maxmemory="768m" error="${buildDirectory}/directorerror.txt">			
 			<arg line="-application org.eclipse.equinox.p2.director.app.application" />
 			<arg line="-nosplash" />
 			<arg line="--launcher.suppressErrors" />
@@ -803,7 +801,7 @@
 			<arg line="-bundlepool ${p2.director.install.path}" />
 			<arg line="-vmargs" />
 			<arg line="-Declipse.p2.data.area=${p2.director.install.path}/p2" />
-		</exec>
+		</java>
 
 		<!-- delete the metadata cache as well as the artifacts for unzipped bundles -->
 		<delete failonerror="false" includeEmptyDirs="true" dir="${p2.director.install.path}/p2/org.eclipse.equinox.p2.core/cache" />
