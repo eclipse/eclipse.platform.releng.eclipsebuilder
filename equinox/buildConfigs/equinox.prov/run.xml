@@ -780,13 +780,13 @@
 	<target name="run.director">
 		<echo message="basebuilder ${base.builder}/plugins/org.eclipse.equinox.launcher" />
 		<delete dir="${base.builder}/configuration/.settings" includeemptydirs="true" failonerror="false" />
-		<copy file="${equinox.build.configs}/equinox.prov/files/config.ini.director" tofile="${base.builder}/configuration/config.ini" overwrite="true" />
+	<!--	<copy file="${equinox.build.configs}/equinox.prov/files/config.ini.director" tofile="${base.builder}/configuration/config.ini" overwrite="true" /> -->
 		<exec executable="${base.builder}/eclipse" failonerror="false" timeout="900000">
 			<arg line="-vm ${java15-home}/bin/java" />		
 			<arg line="-application org.eclipse.equinox.p2.director.app.application" />
 			<arg line="-nosplash" />
-			<arg line="-consoleLog" />
 			<arg line="--launcher.suppressErrors" />
+			<arg line="-consoleLog" />		
 			<arg line="-flavor ${p2.flavor}" />
 			<arg line="-installIU ${p2.director.installIU}" />
 			<arg line="-version ${p2.director.version}" />
