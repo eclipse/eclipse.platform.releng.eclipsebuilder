@@ -5,7 +5,7 @@
 		<mkdir dir="${p2.root}" />
 		<property name="p2.output.base" value="${p2.root}/equinox.p2.build" />
 		<mkdir dir="${p2.output.base}" />
-	<!--	<property name="p2.director.dir" value="${p2.output.base}/director" />
+		<!--	<property name="p2.director.dir" value="${p2.output.base}/director" />
 		<mkdir dir="${p2.director.dir}" /> -->
 
 		<condition property="sdk.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-ppc.tar.gz">
@@ -112,7 +112,7 @@
 		<mkdir dir="${repo}" />
 		<property name="p2.flavor" value="tooling" />
 		<property name="p2.agent.version" value="0.1.0.${buildId}" />
-		<property name="p2.sdk.version" value="3.5.0.${buildId}" />		
+		<property name="p2.sdk.version" value="3.5.0.${buildId}" />
 	</target>
 
 	<target name="build" depends="init">
@@ -717,7 +717,7 @@
 		<antcall target="run.generator.feature.based">
 			<param name="p2.generator.base" value="${p2.releng.tools.dir}/eclipse" />
 			<param name="p2.generator.feature.dir" value="${p2.releng.tools.dir}/eclipse/features" />
-			<param name="p2.generator.plugins.dir" value="${p2.releng.tools.dir}/eclipse/plugins" />		
+			<param name="p2.generator.plugins.dir" value="${p2.releng.tools.dir}/eclipse/plugins" />
 			<!-- publish the metadata to the real update site -->
 			<param name="p2.repo" value="${updateSite}" />
 		</antcall>
@@ -752,7 +752,7 @@
 		</exec>
 	</target>
 
-<!--	<target name="setup.director">
+	<!--	<target name="setup.director">
 		<path id="director.zip.path">
 			<fileset dir="${buildDirectory}/${buildId}">
 				<include name="**/org.eclipse.equinox.p2.director.feature-${buildId}.zip" />
@@ -777,13 +777,15 @@
 		</copy>
 	</target> -->
 
-	<target name="run.director">		   
-		<delete dir="${p2.output.base}/director/eclipse/configuration/.settings" includeemptydirs="true" failonerror="false"/>                
-		<java jar="${base.builder}/plugins/org.eclipse.equinox.launcher" fork="true" jvm="${java15-home}/bin/java" failonerror="false" timeout="900000" maxmemory="768m" error="${buildDirectory}/directorerror.txt">			
+	<target name="run.director">
+		<echo message="basebuilder ${base.builder}/plugins/org.eclipse.equinox.launcher" />
+		<delete dir="${base.builder}/configuration/.settings" includeemptydirs="true" failonerror="false" />
+		<copy file="${equinox.build.configs}/equinox.prov/files/config.ini.director" tofile="${base.builder}/configuration/config.ini" overwrite="true" />
+		<java jar="${base.builder}/plugins/org.eclipse.equinox.launcher.jar" fork="true" jvm="${java15-home}/bin/java" failonerror="false" timeout="900000" dir="${base.builder}" error="${buildDirectory}/directorerror.txt">
 			<arg line="-application org.eclipse.equinox.p2.director.app.application" />
 			<arg line="-nosplash" />
-			<arg line="--launcher.suppressErrors" />
 			<arg line="-consoleLog" />
+			<arg line="--launcher.suppressErrors" />
 			<arg line="-flavor ${p2.flavor}" />
 			<arg line="-installIU ${p2.director.installIU}" />
 			<arg line="-version ${p2.director.version}" />
@@ -806,6 +808,7 @@
 		<!-- delete the metadata cache as well as the artifacts for unzipped bundles -->
 		<delete failonerror="false" includeEmptyDirs="true" dir="${p2.director.install.path}/p2/org.eclipse.equinox.p2.core/cache" />
 	</target>
+
 
 	<target name="zip.install">
 
@@ -1202,7 +1205,7 @@
 			<arg line="-metadataRepository file:${updateSite}" />
 			<arg line="-artifactRepository file:${updateSite}" />
 			<arg line="-metadataRepositoryName ${p2.repo.name}" />
-			<arg line="-artifactRepositoryName ${p2.repo.name}" />			
+			<arg line="-artifactRepositoryName ${p2.repo.name}" />
 			<arg line="-updateSite ${updateSite}" />
 			<arg line="-flavor tooling" />
 			<arg line="-append" />
