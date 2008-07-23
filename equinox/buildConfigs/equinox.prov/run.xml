@@ -4,9 +4,7 @@
 		<property name="p2.root" value="${buildDirectory}/${buildId}/p2temp" />
 		<mkdir dir="${p2.root}" />
 		<property name="p2.output.base" value="${p2.root}/equinox.p2.build" />
-		<mkdir dir="${p2.output.base}" />
-		<!--	<property name="p2.director.dir" value="${p2.output.base}/director" />
-		<mkdir dir="${p2.director.dir}" /> -->
+		<mkdir dir="${p2.output.base}" />	
 
 		<condition property="sdk.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-ppc.tar.gz">
 			<equals arg1="${os.arch}" arg2="ppc64" />
