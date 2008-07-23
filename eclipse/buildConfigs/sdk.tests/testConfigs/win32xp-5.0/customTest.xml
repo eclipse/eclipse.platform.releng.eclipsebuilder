@@ -28,15 +28,17 @@
 		<exec dir="." executable="${copyClient}">
 			<arg line="-r ${postingDirectory}/${buildId}/${runtimeDeltapack} ${testMachine}:${executionDir}" />
 		</exec>
+
+		<!--copy platform runtime needed to run p2 tests-->
+		<exec dir="." executable="${copyClient}">
+			<arg line="-r ${postingDirectory}/${buildId}/${runtimePlatform} ${testMachine}:${executionDir}" />
+		</exec>
 	</target>
 
 	<target name="install5.0Vm">
 		<property name="testVmTag" value="HEAD" />
 		<!--get and install the vm to test with-->
-		<cvs cvsRoot="${cvsRoot}"
-        	 command="export -r ${testVmTag} ${vmUrl5}"
-        	 dest="${tester}"
-  		/>
+		<cvs cvsRoot="${cvsRoot}" command="export -r ${testVmTag} ${vmUrl5}" dest="${tester}" />
 
 		<exec dir="${tester}" executable="${copyClient}">
 			<arg line="${vmUrl5} ${testMachine}:${testDir}" />

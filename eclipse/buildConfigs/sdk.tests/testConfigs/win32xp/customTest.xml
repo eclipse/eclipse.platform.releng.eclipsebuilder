@@ -14,7 +14,7 @@
 			<arg line="${tester}/../../testScripts/test.xml ${testMachine}:${executionDir}" />
 		</exec>
 
-		<replace file="${tester}/vm.properties" token="@buildid@" value="${buildId}"/>
+		<replace file="${tester}/vm.properties" token="@buildid@" value="${buildId}" />
 		<exec dir="." executable="${copyClient}">
 			<arg line="${tester}/vm.properties ${testMachine}:${executionDir}" />
 		</exec>
@@ -23,15 +23,17 @@
 		<exec dir="." executable="${copyClient}">
 			<arg line="-r ${postingDirectory}/${buildId}/${runtimeDeltapack} ${testMachine}:${executionDir}" />
 		</exec>
+
+		<!--copy platform runtime needed to run p2 tests-->
+		<exec dir="." executable="${copyClient}">
+			<arg line="-r ${postingDirectory}/${buildId}/${runtimePlatform} ${testMachine}:${executionDir}" />
+		</exec>
 	</target>
 
 	<target name="installVm">
 		<property name="testVmTag" value="HEAD" />
 		<!--get and install the vm to test with-->
-		<cvs cvsRoot="${cvsRoot}"
-        	 command="export -r ${testVmTag} ${vmUrl}"
-        	 dest="${tester}"
-  		/>
+		<cvs cvsRoot="${cvsRoot}" command="export -r ${testVmTag} ${vmUrl}" dest="${tester}" />
 
 		<exec dir="${tester}" executable="${copyClient}">
 			<arg line="${vmUrl} ${testMachine}:${testDir}" />
@@ -44,10 +46,7 @@
 	<target name="install5.0Vm">
 		<property name="testVmTag" value="HEAD" />
 		<!--get and install the vm to test with-->
-		<cvs cvsRoot="${cvsRoot}"
-        	 command="export -r ${testVmTag} ${vmUrl5}"
-        	 dest="${tester}"
-  		/>
+		<cvs cvsRoot="${cvsRoot}" command="export -r ${testVmTag} ${vmUrl5}" dest="${tester}" />
 
 		<exec dir="${tester}" executable="${copyClient}">
 			<arg line="${vmUrl5} ${testMachine}:${testDir}" />
@@ -60,10 +59,7 @@
 	<target name="install1.6Vm">
 		<property name="testVmTag" value="HEAD" />
 		<!--get and install the vm to test with-->
-		<cvs cvsRoot="${cvsRoot}"
-        	 command="export -r ${testVmTag} ${vmUrl6}"
-        	 dest="${tester}"
-  		/>
+		<cvs cvsRoot="${cvsRoot}" command="export -r ${testVmTag} ${vmUrl6}" dest="${tester}" />
 
 		<exec dir="${tester}" executable="${copyClient}">
 			<arg line="${vmUrl6} ${testMachine}:${testDir}" />
