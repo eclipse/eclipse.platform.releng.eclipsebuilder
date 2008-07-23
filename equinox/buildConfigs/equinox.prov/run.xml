@@ -141,7 +141,6 @@
 		</delete>
 
 		<antcall target="setup.generator" />
-		<!-- <antcall target="setup.director" /> -->
 
 		<antcall target="generate.metadata.agent" />
 		<antcall target="generate.metadata.releng.tools" />
@@ -751,32 +750,7 @@
 			<arg line="-append" />
 		</exec>
 	</target>
-
-	<!--	<target name="setup.director">
-		<path id="director.zip.path">
-			<fileset dir="${buildDirectory}/${buildId}">
-				<include name="**/org.eclipse.equinox.p2.director.feature-${buildId}.zip" />
-			</fileset>
-		</path>
-		<property name="director.zip.name" refid="director.zip.path" />
-		<antcall target="extract">
-			<param name="extract-src" value="${director.zip.name}" />
-			<param name="extract-dest" value="${p2.director.dir}" />
-		</antcall>
-		<antcall target="extract">
-			<param name="extract-src" value="${rcp.archive}" />
-			<param name="extract-dest" value="${p2.director.dir}" />
-		</antcall>
-		<chmod file="${p2.director.dir}/eclipse/eclipse" perm="777" />
-		<copy file="${equinox.build.configs}/equinox.prov/files/config.ini.director" tofile="${p2.director.dir}/eclipse/configuration/config.ini" overwrite="true" />
-		<copy todir="${p2.director.dir}/eclipse/plugins">
-			<fileset dir="${base}/eclipse/plugins">
-				<include name="**/org.eclipse.osgi.services_*.jar" />
-				<include name="**/org.eclipse.core.net_*.jar" />
-			</fileset>
-		</copy>
-	</target> -->
-
+	
 	<target name="run.director">
 		<echo message="basebuilder ${base.builder}/plugins/org.eclipse.equinox.launcher" />
 		<delete dir="${base.builder}/configuration/.settings" includeemptydirs="true" failonerror="false" />
