@@ -72,7 +72,10 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<property name="archiveName" value="master-root-launcher-macosx.carbon.ppc.${buildId}.zip"/>
 		<antcall target="assemble" />
 	</target>
-
+	<target name="assemble.master-root.launcher-macosx.cocoa.x86">
+		<property name="archiveName" value="master-root-launcher-macosx.cocoa.x86.${buildId}.zip"/>
+		<antcall target="assemble" />
+	</target>
 	<target name="assemble.master-root.sdk-linux.gtk.x86">
 		<property name="archiveName" value="master-root-sdk-linux.gtk.x86.${buildId}.zip"/>
 		<antcall target="assemble" />
@@ -117,7 +120,10 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<property name="archiveName" value="master-root-sdk-macosx.carbon.ppc.${buildId}.zip"/>
 		<antcall target="assemble" />
 	</target>
-
+	<target name="assemble.master-root.sdk-macosx.cocoa.x86">
+		<property name="archiveName" value="master-root-sdk-macosx.cocoa.x86.${buildId}.zip"/>
+		<antcall target="assemble" />
+	</target>
 	<target name="assemble.master-root.platform-linux.gtk.x86">
 		<property name="archiveName" value="master-root-platform-linux.gtk.x86.${buildId}.zip"/>
 		<antcall target="assemble" />
@@ -160,6 +166,10 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	</target>	
 	<target name="assemble.master-root.platform-macosx.carbon.ppc">
 		<property name="archiveName" value="master-root-platform-macosx.carbon.ppc.${buildId}.zip"/>
+		<antcall target="assemble" />
+	</target>
+	<target name="assemble.master-root.platform-macosx.cocoa.x86">
+		<property name="archiveName" value="master-root-platform-macosx.cocoa.x86.${buildId}.zip"/>
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.master-root.rcp-common.common.common">
@@ -212,6 +222,10 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	</target>	
 	<target name="assemble.master-root.equinox-launcher-macosx.carbon.ppc">
 		<property name="archiveName" value="launchers-macosx.carbon.ppc.${buildId}.tar.gz" />
+		<antcall target="assemble.equinox" />
+	</target>
+	<target name="assemble.master-root.equinox-launcher-macosx.cocoa.x86">
+		<property name="archiveName" value="launchers-macosx.cocoa.x86.${buildId}.tar.gz" />
 		<antcall target="assemble.equinox" />
 	</target>
 	<target name="assemble">

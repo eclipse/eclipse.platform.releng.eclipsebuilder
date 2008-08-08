@@ -84,6 +84,11 @@
 	<target name="assemble.org.eclipse.rcp.sdk.macosx.carbon.ppc">
 		<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-macosx-carbon.tar.gz" />
 		<antcall target="assemble" />
+	</target>	
+
+	<target name="assemble.org.eclipse.rcp.sdk.macosx.cocoa.x86">
+		<property name="archiveName" value="eclipse-RCP-SDK-${buildId}-macosx-cocoa.tar.gz" />
+		<antcall target="assemble" />
 	</target>
 
 	<target name="assemble">

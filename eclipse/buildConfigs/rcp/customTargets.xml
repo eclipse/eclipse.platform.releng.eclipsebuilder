@@ -86,6 +86,11 @@
 	<property name="archiveName" value="eclipse-RCP-${buildId}-macosx-carbon.tar.gz"/>
 	<antcall target="assemble" />
 </target>
+	
+<target name="assemble.org.eclipse.rcp.macosx.cocoa.x86">
+	<property name="archiveName" value="eclipse-RCP-${buildId}-macosx-cocoa.tar.gz"/>
+	<antcall target="assemble" />
+</target>
 
 	<target name="assemble">
 		<property name="archiveFullPath" value="${buildDirectory}/${buildLabel}/${archiveName}" />

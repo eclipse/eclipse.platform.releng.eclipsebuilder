@@ -4,7 +4,7 @@
 		<property name="p2.root" value="${buildDirectory}/${buildId}/p2temp" />
 		<mkdir dir="${p2.root}" />
 		<property name="p2.output.base" value="${p2.root}/equinox.p2.build" />
-		<mkdir dir="${p2.output.base}" />	
+		<mkdir dir="${p2.output.base}" />
 
 		<condition property="sdk.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-ppc.tar.gz">
 			<equals arg1="${os.arch}" arg2="ppc64" />
@@ -53,6 +53,8 @@
 		<mkdir dir="${p2.sdk.install.aix.motif.ppc}" />
 		<property name="p2.sdk.install.macosx.carbon.x86" value="${p2.output.base}/sdk.install.macosx.carbon.x86" />
 		<mkdir dir="${p2.sdk.install.macosx.carbon.x86}" />
+		<property name="p2.sdk.install.macosx.cocoa.x86" value="${p2.output.base}/sdk.install.macosx.cocoa.x86" />
+		<mkdir dir="${p2.sdk.install.macosx.cocoa.x86}" />
 
 		<!--platform zips-->
 		<property name="p2.platform.install.win32.win32.x86" value="${p2.output.base}/platform.install.win32.win32.x86" />
@@ -75,6 +77,8 @@
 		<mkdir dir="${p2.platform.install.aix.motif.ppc}" />
 		<property name="p2.platform.install.macosx.carbon.x86" value="${p2.output.base}/platform.install.macosx.carbon.x86" />
 		<mkdir dir="${p2.platform.install.macosx.carbon.x86}" />
+		<property name="p2.platform.install.macosx.cocoa.x86" value="${p2.output.base}/platform.install.macosx.cocoa.x86" />
+		<mkdir dir="${p2.platform.install.macosx.cocoa.x86}" />
 
 		<!--platform sdk zips-->
 		<property name="p2.platformsdk.install.win32.win32.x86" value="${p2.output.base}/platformsdk.install.win32.win32.x86" />
@@ -97,6 +101,8 @@
 		<mkdir dir="${p2.platformsdk.install.aix.motif.ppc}" />
 		<property name="p2.platformsdk.install.macosx.carbon.x86" value="${p2.output.base}/platformsdk.install.macosx.carbon.x86" />
 		<mkdir dir="${p2.platformsdk.install.macosx.carbon.x86}" />
+		<property name="p2.platformsdk.install.macosx.cocoa.x86" value="${p2.output.base}/platformsdk.install.macosx.cocoa.x86" />
+		<mkdir dir="${p2.platformsdk.install.macosx.cocoa.x86}" />
 
 		<property name="base" value="${p2.output.base}/base" />
 		<mkdir dir="${base}" />
@@ -301,6 +307,18 @@
 			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
 			<param name="p2.director.version" value="3.5.0.${buildId}" />
 			<param name="p2.director.profile" value="SDKProfile" />
+			<param name="p2.director.install.path" value="${p2.sdk.install.macosx.cocoa.x86}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="macosx" />
+			<param name="p2.ws" value="cocoa" />
+			<param name="p2.arch" value="x86" />
+			<param name="p2.repo" value="${updateSite}" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
+			<param name="p2.director.version" value="3.5.0.${buildId}" />
+			<param name="p2.director.profile" value="SDKProfile" />
 			<param name="p2.director.install.path" value="${p2.sdk.install.hpux.motif.ia64_32}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
 			<param name="p2.os" value="hpux" />
@@ -424,6 +442,18 @@
 			<param name="p2.director.installIU" value="org.eclipse.platform.ide" />
 			<param name="p2.director.version" value="3.5.0.${buildId}" />
 			<param name="p2.director.profile" value="PlatformProfile" />
+			<param name="p2.director.install.path" value="${p2.platform.install.macosx.cocoa.x86}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="macosx" />
+			<param name="p2.ws" value="cocoa" />
+			<param name="p2.arch" value="x86" />
+			<param name="p2.repo" value="${updateSite}" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.platform.ide" />
+			<param name="p2.director.version" value="3.5.0.${buildId}" />
+			<param name="p2.director.profile" value="PlatformProfile" />
 			<param name="p2.director.install.path" value="${p2.platform.install.hpux.motif.ia64_32}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
 			<param name="p2.os" value="hpux" />
@@ -540,6 +570,18 @@
 			<param name="p2.os" value="macosx" />
 			<param name="p2.ws" value="carbon" />
 			<param name="p2.arch" value="ppc" />
+			<param name="p2.repo" value="${updateSite}" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.platform.sdk" />
+			<param name="p2.director.version" value="3.5.0.${buildId}" />
+			<param name="p2.director.profile" value="PlatformSDKProfile" />
+			<param name="p2.director.install.path" value="${p2.platformsdk.install.macosx.cocoa.x86}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="macosx" />
+			<param name="p2.ws" value="cocoa" />
+			<param name="p2.arch" value="x86" />
 			<param name="p2.repo" value="${updateSite}" />
 		</antcall>
 
@@ -748,17 +790,17 @@
 			<arg line="-append" />
 		</exec>
 	</target>
-	
+
 	<target name="run.director">
 		<echo message="basebuilder ${base.builder}/plugins/org.eclipse.equinox.launcher" />
 		<delete dir="${base.builder}/configuration/.settings" includeemptydirs="true" failonerror="false" />
-	<!--	<copy file="${equinox.build.configs}/equinox.prov/files/config.ini.director" tofile="${base.builder}/configuration/config.ini" overwrite="true" /> -->
+		<!--	<copy file="${equinox.build.configs}/equinox.prov/files/config.ini.director" tofile="${base.builder}/configuration/config.ini" overwrite="true" /> -->
 		<exec executable="${base.builder}/eclipse" failonerror="false" dir="${base.builder}" timeout="900000">
-			<arg line="-vm ${java15-home}/bin/java" />		
+			<arg line="-vm ${java15-home}/bin/java" />
 			<arg line="-application org.eclipse.equinox.p2.director.app.application" />
 			<arg line="-nosplash" />
 			<arg line="--launcher.suppressErrors" />
-			<arg line="-consoleLog" />		
+			<arg line="-consoleLog" />
 			<arg line="-flavor ${p2.flavor}" />
 			<arg line="-installIU ${p2.director.installIU}" />
 			<arg line="-version ${p2.director.version}" />
@@ -823,6 +865,22 @@
 				</antcall>
 				<antcall target="generateChecksums">
 					<param name="archiveName" value="eclipse-SDK-${buildId}-macosx-carbon.tar.gz" />
+				</antcall>
+			</sequential>
+
+			<sequential>
+				<!-- macosx -->
+				<!-- temp fix for https://bugs.eclipse.org/bugs/show_bug.cgi?id=223319 -->
+				<delete file="${p2.sdk.install.macosx.cocoa.x86}/eclipse/eclipse" failonerror="false" />
+				<exec dir="${p2.sdk.install.macosx.cocoa.x86}/eclipse" executable="ln">
+					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
+				</exec>
+				<antcall target="p2.tar">
+					<param name="tar.base.dir" value="${p2.sdk.install.macosx.cocoa.x86}" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-macosx-cocoa.tar" />
+				</antcall>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-SDK-${buildId}-macosx-cocoa.tar.gz" />
 				</antcall>
 			</sequential>
 
@@ -1015,6 +1073,19 @@
 				</antcall>
 				<antcall target="generateChecksums">
 					<param name="archiveName" value="eclipse-platform-${buildId}-macosx-carbon.tar.gz" />
+				</antcall>
+
+				<!-- macosx -->
+				<delete file="${p2.platform.install.macosx.cocoa.x86}/eclipse/eclipse" failonerror="false" />
+				<exec dir="${p2.platform.install.macosx.cocoa.x86}/eclipse" executable="ln">
+					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
+				</exec>
+				<antcall target="p2.tar">
+					<param name="tar.base.dir" value="${p2.platform.install.macosx.cocoa.x86}" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-macosx-cocoa.tar" />
+				</antcall>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-platform-${buildId}-macosx-cocoa.tar.gz" />
 				</antcall>
 			</sequential>
 		</parallel>
