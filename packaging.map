@@ -45,7 +45,7 @@ master-root-platform-hpux.motif.ia64_32.@buildId@.zip=file:${buildDirectory}/${b
 master-root-platform-solaris.gtk.sparc.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | solaris,gtk,sparc | eclipse/ | runtime | root-platform
 master-root-platform-aix.motif.ppc.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | aix,motif,ppc | eclipse/ | runtime | root-platform
 master-root-platform-macosx.carbon.ppc.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | macosx,carbon,ppc & macosx,carbon,x86| eclipse/ | runtime | root-platform
-master-root-platform-macosx.cocoa.ppc.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | macosx,cocoa,ppc & macosx,cocoa,x86| eclipse/ | runtime | root-platform
+master-root-platform-macosx.cocoa.x86.@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | macosx,cocoa,ppc & macosx,cocoa,x86| eclipse/ | runtime | root-platform
 
 master-root-rcp-@buildId@.zip=file:${buildDirectory}/${buildLabel}/ | | eclipse/ | runtime | root-rcp
 
