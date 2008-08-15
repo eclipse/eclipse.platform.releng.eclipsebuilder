@@ -83,18 +83,6 @@
 		</antcall>
 	</target>
 	
-	<target name="assemble.macosx.cocoa.x86.xml">
-		<antcall target="assembler">
-			<param name="archiveName" value="${archiveRoot}-macosx-cocoa.tar.gz" />
-		</antcall>
-	</target>
-	
-	<target name="assemble.macosx.cocoa.ppc.xml">
-			<antcall target="assembler">
-				<param name="archiveName" value="${archiveRoot}-macosx-cocoa.ppc.tar.gz" />
-			</antcall>
-	</target>
-	
 	<target name="assembler">
 			<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
 			<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />

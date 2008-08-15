@@ -47,7 +47,6 @@ if %installOs%-%ws%-%arch%==hpux-motif-PA_RISC goto run
 if %installOs%-%ws%-%arch%==qnx-photon-x86 goto run
 if %installOs%-%ws%-%arch%==hpux-motif-ia64_32 goto run
 if %installOs%-%ws%-%arch%==macosx-carbon-ppc goto run
-if %installOs%-%ws%-%arch%==macosx-cocoa-x86 goto run
 
 ECHO The ws os arch combination entered is not valid.
 goto end

@@ -62,10 +62,6 @@
 	<target name="assemble.org.eclipse.equinox.launchers-feature.macosx.carbon.ppc">
 		<property name="archiveName" value="launchers-macosx.carbon.ppc.${buildId}.tar.gz" />
 		<antcall target="assemble" />
-	</target>
-	<target name="assemble.org.eclipse.equinox.launchers-feature.macosx.cocoa.x86">
-		<property name="archiveName" value="launchers-macosx.cocoa.x86.${buildId}.tar.gz" />
-		<antcall target="assemble" />
 	</target>	
 	
 	<target name="assemble">
