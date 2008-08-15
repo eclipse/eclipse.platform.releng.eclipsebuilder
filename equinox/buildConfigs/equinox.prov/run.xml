@@ -1173,7 +1173,7 @@
 					<param name="archiveName" value="eclipse-platform-SDK-${buildId}-aix-motif.zip" />
 				</antcall>
 
-				<!-- macosx -->
+				<!-- macosx carbon -->
 				<delete file="${p2.platformsdk.install.macosx.carbon.x86}/eclipse/eclipse" failonerror="false" />
 				<exec dir="${p2.platformsdk.install.macosx.carbon.x86}/eclipse" executable="ln">
 					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
@@ -1184,6 +1184,19 @@
 				</antcall>
 				<antcall target="generateChecksums">
 					<param name="archiveName" value="eclipse-platform-SDK-${buildId}-macosx-carbon.tar.gz" />
+				</antcall>
+
+				<!-- macosx cocoa -->
+				<delete file="${p2.platformsdk.install.macosx.cocoa.x86}/eclipse/eclipse" failonerror="false" />
+				<exec dir="${p2.platformsdk.install.macosx.cocoa.x86}/eclipse" executable="ln">
+					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
+				</exec>
+				<antcall target="p2.tar">
+					<param name="tar.base.dir" value="${p2.platformsdk.install.macosx.cocoa.x86}" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-platform-SDK-${buildId}-macosx-cocoa.tar" />
+				</antcall>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-platform-SDK-${buildId}-macosx-cocoa.tar.gz" />
 				</antcall>
 			</sequential>
 		</parallel>
