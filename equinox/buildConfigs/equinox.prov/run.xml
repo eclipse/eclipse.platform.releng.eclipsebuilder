@@ -141,7 +141,8 @@
 		<antcall target="setup.generator" />
 
 		<antcall target="generate.metadata.agent" />
-		<antcall target="generate.metadata.releng.tools" />
+		<!--TODO:  reenable when fix available for https://bugs.eclipse.org/bugs/show_bug.cgi?id=244813.-->
+		<!--antcall target="generate.metadata.releng.tools" /-->
 
 		<parallel failonany="true" threadCount='4'>
 			<antcall target="provision.agent" />
