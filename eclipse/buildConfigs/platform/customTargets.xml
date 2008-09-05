@@ -168,28 +168,7 @@
 		</ant>
 		<!--create launchersrc.zip and copy to org.eclipse.platform plugin (fix for bug #49237) -->
 		<zip destfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/features/org.eclipse.equinox.executable" includes="library/**" />
-
-		<!--fetch and compile swt tools-->
-		<ant antfile="genericTargets.xml" dir="${eclipse.pdebuild.scripts}" target="fetchElement">
-			<property name="type" value="plugin" />
-			<property name="id" value="org.eclipse.swt.tools" />
-		</ant>
-		<ant antfile="genericTargets.xml" dir="${eclipse.pdebuild.scripts}" target="generateScript">
-			<property name="type" value="plugin" />
-			<property name="id" value="org.eclipse.swt.tools" />
-		</ant>
-		<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.win32.win32.x86" target="build.jars">
-			<property name="type" value="plugin" />
-			<property name="id" value="org.eclipse.swt.win32.win32.x86" />
-		</ant>
-		<ant antfile="build.xml" dir="${buildDirectory}/plugins/org.eclipse.swt.tools" target="build.jars">
-			<property name="type" value="plugin" />
-			<property name="id" value="org.eclipse.swt.tools" />
-			<property name="baseos" value="win32" />
-			<property name="basews" value="win32" />
-			<property name="basearch" value="x86" />
-		</ant>
-
+			
 		<!--copy linux motif about_files to in temp location where it will be copied into root of eclipse at assembly time-->
 		<property name="linux.motif.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.motif.x86" />
 		<mkdir dir="${linux.motif.rootfiles}" />
