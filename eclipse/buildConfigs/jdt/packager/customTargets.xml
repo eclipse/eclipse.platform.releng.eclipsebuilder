@@ -22,6 +22,12 @@
 		<param name="archiveName" value="${archiveRoot}-macosx-carbon.tar.gz"/>
 	</antcall>
 </target>
+			
+<target name="assemble.macosx.cocoa.x86.xml">
+	<antcall target="assembler">
+		<param name="archiveName" value="${archiveRoot}-macosx-cocoa.tar.gz"/>
+	</antcall>
+</target>
 
 <target name="assembler">
 	<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />

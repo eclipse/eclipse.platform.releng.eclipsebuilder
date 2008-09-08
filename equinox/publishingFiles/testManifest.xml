@@ -146,6 +146,8 @@
 			</platform>			
 			<platform id="SMC" name="Mac OSX (Mac/Carbon) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_4.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="launchers-macosx.carbon.ppc.@buildid@.tar.gz">
 			</platform>
+			<platform id="SMCC" name="Mac OSX (Mac/Carbon) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_4.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="launchers-macosx.cocoa.x86.@buildid@.tar.gz">
+			</platform>
 		</zipType>
 
 	</zipTypes>

@@ -25,7 +25,7 @@
 	</target>
 
 	<target name="assemble.org.eclipse.jdt.sdk.macosx.carbon.ppc">
-		<property name="archiveName" value="eclipse-JDT-SDK-${buildId}-macosx-carbon.tar.gz" />
+		<property name="archiveName" value="eclipse-JDT-SDK-${buildId}-macosx.tar.gz" />
 		<antcall target="assemble" />
 	</target>
 

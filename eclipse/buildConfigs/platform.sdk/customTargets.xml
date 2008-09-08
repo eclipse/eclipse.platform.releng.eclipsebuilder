@@ -81,6 +81,11 @@
 		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-macosx-carbon.tar.gz" />
 		<antcall target="assemble" />
 	</target>
+	
+	<target name="assemble.org.eclipse.platform.sdk.macosx.cocoa.x86">
+			<property name="archiveName" value="eclipse-platform-SDK-${buildId}-macosx-cocoa.tar.gz" />
+			<antcall target="assemble" />
+	</target>
 
 	<target name="assemble">
 		<property name="archiveFullPath" value="${buildDirectory}/${buildLabel}/${archiveName}" />
