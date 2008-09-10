@@ -19,15 +19,15 @@
 </target>
 <target name="assemble.macosx.carbon.ppc.xml">
 	<antcall target="assembler">
-		<param name="archiveName" value="${archiveRoot}-macosx-carbon.tar.gz"/>
+		<param name="archiveName" value="${archiveRoot}-macosx.tar.gz"/>
 	</antcall>
 </target>
 			
-<target name="assemble.macosx.cocoa.x86.xml">
+<!-- <target name="assemble.macosx.cocoa.x86.xml">
 	<antcall target="assembler">
 		<param name="archiveName" value="${archiveRoot}-macosx-cocoa.tar.gz"/>
 	</antcall>
-</target>
+</target> -->
 
 <target name="assembler">
 	<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
