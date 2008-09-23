@@ -109,9 +109,7 @@
 
 		<property file="build.properties" />
 
-		<property name="p2.site.xml" value="file:${updateSite}/site.xml" />
-		<property name="p2.generator.dir" value="${p2.output.base}/generator" />
-		<mkdir dir="${p2.generator.dir}" />
+		<property name="p2.site.xml" value="file:${updateSite}/site.xml" />	 
 		<property name="repo" value="${buildDirectory}/repo" />
 		<mkdir dir="${repo}" />
 		<property name="p2.flavor" value="tooling" />
@@ -143,8 +141,6 @@
 				<include name="**/com.ibm.icu_*.jar" />
 			</fileset>
 		</delete>
-
-		<antcall target="setup.generator" />
 
 		<antcall target="generate.metadata.agent" />
 		<antcall target="generate.metadata.releng.tools" />
@@ -623,33 +619,6 @@
 
 	</target>
 
-
-	<target name="setup.generator">
-		<path id="feature.zip.path">
-			<fileset dir="${buildDirectory}/${buildId}">
-				<include name="**/org.eclipse.equinox.p2.generator.feature-${buildId}.zip" />
-			</fileset>
-		</path>
-		<property name="feature.zip.name" refid="feature.zip.path" />
-		<antcall target="extract">
-			<param name="extract-src" value="${feature.zip.name}" />
-			<param name="extract-dest" value="${p2.generator.dir}" />
-		</antcall>
-		<antcall target="extract">
-			<param name="extract-src" value="${rcp.archive}" />
-			<param name="extract-dest" value="${p2.generator.dir}" />
-		</antcall>
-
-		<chmod file="${p2.generator.dir}/eclipse/eclipse" perm="777" />
-		<copy file="${equinox.build.configs}/equinox.prov/files/config.ini.generator" tofile="${p2.generator.dir}/eclipse/configuration/config.ini" overwrite="true" />
-		<copy todir="${p2.generator.dir}/eclipse/plugins">
-			<fileset dir="${base}/eclipse/plugins">
-				<include name="**/org.eclipse.osgi.services_*.jar" />
-				<include name="**/org.eclipse.core.net_*.jar" />
-			</fileset>
-		</copy>
-	</target>
-
 	<target name="generate.metadata.agent">
 		<property name="p2.agent.dir" value="${p2.output.base}/agent" />
 		<mkdir dir="${p2.agent.dir}" />
@@ -723,7 +692,7 @@
 	-->
 	<target name="run.generator.feature.based">
 		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
-		<exec executable="${p2.generator.dir}/eclipse/eclipse" failonerror="false" timeout="900000">
+		<exec executable="${base.builder}/eclipse" failonerror="false" timeout="900000">
 			<arg line="-vm ${java15-home}/bin/java" />
 			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
 			<arg line="-consoleLog" />
@@ -770,7 +739,7 @@
 	-->
 	<target name="run.generator">
 		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
-		<exec executable="${p2.generator.dir}/eclipse/eclipse" failonerror="false" timeout="900000">
+		<exec executable="${base.builder}/eclipse" failonerror="false" timeout="900000">
 			<arg line="-vm ${java15-home}/bin/java" />
 			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
 			<arg line="-consoleLog" />

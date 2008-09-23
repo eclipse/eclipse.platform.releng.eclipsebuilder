@@ -474,10 +474,7 @@
 		</antcall>
 		<antcall target="package">
 			<param name="packagingInfo" value="${equinox.build.configs}/equinox.p2.director.feature/packager" />
-		</antcall>
-		<antcall target="package">
-			<param name="packagingInfo" value="${equinox.build.configs}/equinox.p2.generator.feature/packager" />
-		</antcall>
+		</antcall>	
 		<!-- invoke equinox.p2.installer in a separate process -->
 		<ant antfile="${equinox.build.configs}/../helper.xml" target="build.p2.installer.product" />
 	</target>
