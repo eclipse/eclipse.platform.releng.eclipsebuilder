@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.1"?>
 
-<product name="Eclipse SDK" version="3.4.0.@qualifier@" id="org.eclipse.sdk.ide" application="org.eclipse.ui.ide.workbench" useFeatures="true">
+<product name="Eclipse SDK" version="3.4.2.@qualifier@" id="org.eclipse.sdk.ide" application="org.eclipse.ui.ide.workbench" useFeatures="true">
 
    <configIni use="default"/>
 

@@ -112,7 +112,7 @@
 		<mkdir dir="${repo}" />
 		<property name="p2.flavor" value="tooling" />
 		<property name="p2.agent.version" value="0.1.0.${buildId}" />
-		<property name="p2.sdk.version" value="3.4.0.${buildId}" />		
+		<property name="p2.sdk.version" value="3.4.2.${buildId}" />		
 	</target>
 
 	<target name="build" depends="init">
@@ -206,7 +206,7 @@
 	<target name="provision.sdk">
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="SDKProfile" />
 			<param name="p2.director.install.path" value="${p2.sdk.install.win32.win32.x86}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -218,7 +218,7 @@
 
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="SDKProfile" />
 			<param name="p2.director.install.path" value="${p2.sdk.install.win32.win32.x86_64}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -230,7 +230,7 @@
 
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="SDKProfile" />
 			<param name="p2.director.install.path" value="${p2.sdk.install.win32.wpf.x86}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -242,7 +242,7 @@
 
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="SDKProfile" />
 			<param name="p2.director.install.path" value="${p2.sdk.install.linux.gtk.x86}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -254,7 +254,7 @@
 
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="SDKProfile" />
 			<param name="p2.director.install.path" value="${p2.sdk.install.linux.gtk.ppc}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -266,7 +266,7 @@
 
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="SDKProfile" />
 			<param name="p2.director.install.path" value="${p2.sdk.install.linux.motif.x86}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -278,7 +278,7 @@
 
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="SDKProfile" />
 			<param name="p2.director.install.path" value="${p2.sdk.install.linux.gtk.x86_64}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -290,7 +290,7 @@
 
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="SDKProfile" />
 			<param name="p2.director.install.path" value="${p2.sdk.install.macosx.carbon.x86}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -302,7 +302,7 @@
 
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="SDKProfile" />
 			<param name="p2.director.install.path" value="${p2.sdk.install.hpux.motif.ia64_32}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -314,7 +314,7 @@
 
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="SDKProfile" />
 			<param name="p2.director.install.path" value="${p2.sdk.install.solaris.gtk.sparc}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -326,7 +326,7 @@
 
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="SDKProfile" />
 			<param name="p2.director.install.path" value="${p2.sdk.install.aix.motif.ppc}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -341,7 +341,7 @@
 	<target name="provision.platform">
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.platform.ide" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="PlatformProfile" />
 			<param name="p2.director.install.path" value="${p2.platform.install.win32.win32.x86}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -353,7 +353,7 @@
 
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.platform.ide" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="PlatformProfile" />
 			<param name="p2.director.install.path" value="${p2.platform.install.win32.win32.x86_64}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -365,7 +365,7 @@
 
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.platform.ide" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="PlatformProfile" />
 			<param name="p2.director.install.path" value="${p2.platform.install.win32.wpf.x86}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -377,7 +377,7 @@
 
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.platform.ide" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="PlatformProfile" />
 			<param name="p2.director.install.path" value="${p2.platform.install.linux.gtk.x86}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -389,7 +389,7 @@
 
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.platform.ide" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="PlatformProfile" />
 			<param name="p2.director.install.path" value="${p2.platform.install.linux.gtk.ppc}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -401,7 +401,7 @@
 
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.platform.ide" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="PlatformProfile" />
 			<param name="p2.director.install.path" value="${p2.platform.install.linux.gtk.x86_64}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -413,7 +413,7 @@
 
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.platform.ide" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="PlatformProfile" />
 			<param name="p2.director.install.path" value="${p2.platform.install.macosx.carbon.x86}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -425,7 +425,7 @@
 
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.platform.ide" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="PlatformProfile" />
 			<param name="p2.director.install.path" value="${p2.platform.install.hpux.motif.ia64_32}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -437,7 +437,7 @@
 
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.platform.ide" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="PlatformProfile" />
 			<param name="p2.director.install.path" value="${p2.platform.install.solaris.gtk.sparc}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -449,7 +449,7 @@
 
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.platform.ide" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="PlatformProfile" />
 			<param name="p2.director.install.path" value="${p2.platform.install.aix.motif.ppc}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -464,7 +464,7 @@
 	<target name="provision.platformsdk">
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.platform.sdk" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="PlatformSDKProfile" />
 			<param name="p2.director.install.path" value="${p2.platformsdk.install.win32.win32.x86}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -476,7 +476,7 @@
 
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.platform.sdk" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="PlatformSDKProfile" />
 			<param name="p2.director.install.path" value="${p2.platformsdk.install.win32.win32.x86_64}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -488,7 +488,7 @@
 
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.platform.sdk" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="PlatformSDKProfile" />
 			<param name="p2.director.install.path" value="${p2.platformsdk.install.win32.wpf.x86}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -500,7 +500,7 @@
 
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.platform.sdk" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="PlatformSDKProfile" />
 			<param name="p2.director.install.path" value="${p2.platformsdk.install.linux.gtk.x86}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -512,7 +512,7 @@
 
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.platform.sdk" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="PlatformSDKProfile" />
 			<param name="p2.director.install.path" value="${p2.platformsdk.install.linux.gtk.ppc}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -524,7 +524,7 @@
 
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.platform.sdk" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="PlatformSDKProfile" />
 			<param name="p2.director.install.path" value="${p2.platformsdk.install.linux.gtk.x86_64}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -536,7 +536,7 @@
 
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.platform.sdk" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="PlatformSDKProfile" />
 			<param name="p2.director.install.path" value="${p2.platformsdk.install.macosx.carbon.x86}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -548,7 +548,7 @@
 
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.platform.sdk" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="PlatformSDKProfile" />
 			<param name="p2.director.install.path" value="${p2.platformsdk.install.hpux.motif.ia64_32}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -560,7 +560,7 @@
 
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.platform.sdk" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="PlatformSDKProfile" />
 			<param name="p2.director.install.path" value="${p2.platformsdk.install.solaris.gtk.sparc}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
@@ -572,7 +572,7 @@
 
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.platform.sdk" />
-			<param name="p2.director.version" value="3.4.0.${buildId}" />
+			<param name="p2.director.version" value="3.4.2.${buildId}" />
 			<param name="p2.director.profile" value="PlatformSDKProfile" />
 			<param name="p2.director.install.path" value="${p2.platformsdk.install.aix.motif.ppc}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
