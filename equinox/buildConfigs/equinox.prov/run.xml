@@ -1220,11 +1220,11 @@
 	<target name="update.pack200">
 		<pathconvert property="launcher">
 			<path>
-				<fileset dir="${p2.generator.dir}/eclipse/plugins" includes="**/*.jar" />
+				<fileset dir="${base.builder}/plugins" includes="**/*.jar" />
 			</path>
 			<regexpmapper from="(org\.eclipse\.equinox\.launcher)(_)(.*)\.jar" to="\0" />
 		</pathconvert>
-		<java jar="${p2.generator.dir}/eclipse/plugins/${launcher}" fork="true" failonerror="false">
+		<java jar="${base.builder}/plugins/${launcher}" fork="true" failonerror="false">
 			<arg line="-consolelog" />
 			<arg line="-nosplash" />
 			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
