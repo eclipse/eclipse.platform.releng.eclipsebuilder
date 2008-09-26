@@ -67,6 +67,7 @@
 				eclipse/plugins/org.eclipse.test.performance_*
 				eclipse/plugins/org.eclipse.test.performance.win32_*
 				eclipse/plugins/org.eclipse.ant.optional.junit_*
+				eclipse/plugins/org.easymock/*
 				${testPluginsRequired}
 				-x eclipse/plugins/*.source*/**
 				-d ${install}/eclipse/dropins/" />
@@ -539,11 +540,22 @@
 	</target>
 
 	<target name="equinoxp2">
-		<runTests testPlugin="org.eclipse.equinox.p2.tests" />
+		<property name="jvm" value="${J2SE-5.0}" />
+		<!--only run test if J2SE-5.0 property  set-->
+		<condition property="skip.test">
+			<not>
+				<isset property="J2SE-5.0" />
+			</not>
+		</condition>
+		<property name="org.eclipse.equinox.p2.tests.prerequisite.testplugins" value="eclipse/plugins/org.eclipse.equinox.frameworkadmin.tests_* eclipse/plugins/org.eclipse.equinox.p2.installer_*"/>
+		<runTests testPlugin="org.eclipse.equinox.p2.tests"/>
+	</target>
+	<target name="equinoxp2ui">
+		<runTests testPlugin="org.eclipse.equinox.p2.tests"/>
 	</target>
 	
 	<target name="search">
-			<runTests testPlugin="org.eclipse.jdt.text.tests" />
+			<runTests testPlugin="org.eclipse.search.tests" />
 		</target>
 		
 	<target name="all">
@@ -591,7 +603,8 @@
 		<antcall target="uiforms" />
 		<antcall target="pdeapitooling" />
 		<antcall target="equinoxsecurity" />
-		<antcall target="equinoxp2" />		
+		<antcall target="equinoxp2" />	
+		<antcall target="equinoxp2ui" />
 		<antcall target="search" />
 	</target>
 </project>
