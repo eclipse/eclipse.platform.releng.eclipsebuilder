@@ -551,7 +551,14 @@
 		<runTests testPlugin="org.eclipse.equinox.p2.tests"/>
 	</target>
 	
-	<target name="equinoxp2ui">
+	<target name="equinoxp2ui" depends="setJVMProperties">
+		<property name="jvm" value="${J2SE-5.0}" />
+		<!--only run test if J2SE-5.0 property  set-->
+		<condition property="skip.test">
+			<not>
+				<isset property="J2SE-5.0" />
+			</not>
+		</condition>
 		<runTests testPlugin="org.eclipse.equinox.p2.tests.ui"/>
 	</target>
 	
