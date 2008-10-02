@@ -266,8 +266,8 @@
 			<!--library.xml is now in dropins folder -->
 			<property name="library-file" value="${eclipse-home}/dropins/eclipse/plugins/org.eclipse.test/library.xml" />
 
-			<!--install Cloudscape plug-ins if running performance tests-->
-			<condition property="derby" value="eclipse/dropins/eclipse/plugins/Cloudscape*/* ">
+			<!--install db plug-ins if running performance tests-->
+			<condition property="derby" value="eclipse/dropins/eclipse/plugins/db*/* ">
 				<equals arg1="${test.target}" arg2="performance" />
 			</condition>
 		<!--	<property name="derby" value="" /> -->

@@ -4,7 +4,7 @@ REM test script
 
 mkdir results
 
-REM add Cloudscape plugin to junit tests zip file
+REM add db plugin to junit tests zip file
 zip eclipse-junit-tests-%3%.zip -rm eclipse
 
 REM run all tests

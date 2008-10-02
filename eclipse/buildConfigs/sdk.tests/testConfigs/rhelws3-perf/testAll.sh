@@ -11,7 +11,7 @@ ulimit -c unlimited
 
 export USERNAME DISPLAY LD_LIBRARY_PATH
 
-# add Cloudscape plugin to junit tests zip file
+# add db plugin to junit tests zip file
 zip eclipse-junit-tests-$1.zip -rm eclipse
 
 #all tests

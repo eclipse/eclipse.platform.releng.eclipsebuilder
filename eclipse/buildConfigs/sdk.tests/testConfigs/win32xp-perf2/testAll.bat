@@ -7,7 +7,7 @@ set PATH=%PATH%;%1\..\windowsBin
 
 mkdir results
 
-REM add Cloudscape plugin to junit tests zip file
+REM add db junit tests zip file
 zip eclipse-junit-tests-%3%.zip -rm eclipse
 
 REM run all tests.  -vm argument used as is to eclipse launcher for target eclipse
