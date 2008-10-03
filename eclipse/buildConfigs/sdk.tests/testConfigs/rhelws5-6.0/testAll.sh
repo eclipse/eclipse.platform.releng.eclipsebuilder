@@ -3,7 +3,7 @@ cd .
 #environment variables
 PATH=$PATH:`pwd`/../linux;export PATH
 xhost +$HOSTNAME
-MOZILLA_FIVE_HOME=/usr/lib/mozilla-1.7.13;export MOZILLA_FIVE_HOME
+MOZILLA_FIVE_HOME=/usr/lib/firefox-1.5.0.12; export MOZILLA_FIVE_HOME
 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MOZILLA_FIVE_HOME
 USERNAME=`whoami`
 DISPLAY=$HOSTNAME:0.0
@@ -13,4 +13,4 @@ export USERNAME DISPLAY LD_LIBRARY_PATH
 
 #execute command to run tests
 
-./runtests -os linux -ws gtk -arch x86 -vm `pwd`/../jdk1.5.0_14/jre/bin/java -properties vm.properties 1> linux.gtk-5.0_consolelog.txt 2>&1
+./runtests -os linux -ws gtk -arch x86 -vm `pwd`/../jdk6_04/jre/bin/java -properties vm.properties 1> linux.gtk-5.0_consolelog.txt 2>&1
