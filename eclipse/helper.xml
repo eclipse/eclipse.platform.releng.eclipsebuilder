@@ -412,10 +412,10 @@
 
 		<!--use original signed update jars-->
 		<exec executable="unzip" dir=".">
-			<arg line="-j ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.bak.zip -i */features/* -x */master-equinox* */master-jetty* */master-ecf* */com.ibm.icu.base* -d ${updateSite}/features" />
+			<arg line="-j ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.bak.zip -i */features/* -x */master-equinox* */master-jetty* */master-ecf* -d ${updateSite}/features" />
 		</exec>
 		<exec executable="unzip" dir=".">
-			<arg line="-j ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.bak.zip -i */plugins/* -x */master-equinox* */master-jetty* */master-ecf* */com.ibm.icu.base* -d ${updateSite}/plugins" />
+			<arg line="-j ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.bak.zip -i */plugins/* -x */master-equinox* */master-jetty* */master-ecf* -d ${updateSite}/plugins" />
 		</exec>		
 	</target>
 
