@@ -38,10 +38,10 @@
 	<target name="install5.0Vm">
 		<property name="testVmTag" value="HEAD" />
 		<!--get and install the vm to test with-->
-		<cvs cvsRoot="${cvsRoot}" command="export -r ${testVmTag} ${vmUrl5}" dest="${tester}" />
+		<cvs cvsRoot="${cvsRoot}" command="export -r ${testVmTag} ${vmUrl6}" dest="${tester}" />
 
 		<exec dir="${tester}" executable="${copyClient}">
-			<arg line="${vmUrl5} ${testMachine}:${testDir}" />
+			<arg line="${vmUrl6} ${testMachine}:${testDir}" />
 		</exec>
 		<exec dir="." executable="${loginClient}">
 			<arg line="${testMachine} ${vmInstallCommand5}" />
