@@ -84,14 +84,14 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- ===================================================================== -->
 	<!-- Steps to do before fetching the build elements -->
 	<!-- ===================================================================== -->
-	
+
 	<target name="preFetch">
 	</target>
 
 	<!-- ===================================================================== -->
 	<!-- Steps to do after the fetch -->
 	<!-- ===================================================================== -->
-	<target name="postFetch">	
+	<target name="postFetch">
 		<ant antfile="${genericTargets}" target="fetchElement">
 			<property name="type" value="feature" />
 			<property name="id" value="org.eclipse.equinox.executable" />
@@ -127,7 +127,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 				about_files/about_cairo.html,
 				about_files/pixman-licenses.txt,
 				about_files/mpl-v11.txt" />
-		</copy>	
+		</copy>
 	</target>
 
 	<!-- ===================================================================== -->
@@ -188,9 +188,14 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Steps to do before running the build.xmls for the elements being built. -->
 	<!-- ===================================================================== -->
 	<target name="preProcess">
+		<tstamp>
+			<format property="preprocess.time" pattern="MM/dd/yyyy HH:mm:ss" />
+		</tstamp>
+		<property name="masterTime" value="${buildDirectory}/mastertime.txt" />
+		<echo message="preProcess master feature ${preprocess.time} ${line.separator}" file="${masterTime}" append="true" />
 		<replace dir="${buildDirectory}/plugins" value="${buildId}" token="@build@">
 			<include name="**/about.mappings" />
-		</replace>	
+		</replace>
 		<replace dir="${buildDirectory}/features/org.eclipse.platform" value="${buildId}" token="@build@">
 			<include name="**/config.ini" />
 		</replace>
@@ -203,7 +208,12 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Steps to do after running the build.xmls for the elements being built. -->
 	<!-- ===================================================================== -->
 	<target name="postProcess">
+		<tstamp>
+			<format property="postprocess.time" pattern="MM/dd/yyyy HH:mm:ss" />
+		</tstamp>
+		<echo message="postProcess master feature ${postprocess.time} ${line.separator}" file="${masterTime}" append="true" />
 		<antcall target="gatherLogs" />
+
 	</target>
 
 	<!-- ===================================================================== -->
@@ -240,16 +250,16 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		</copy>
 		<copy todir="${postingDirectory}/${buildLabel}/compilelogs" overwrite="true" failonerror="false">
 			<fileset dir="${buildDirectory}/features/master-equinox/feature.temp.folder" />
-		</copy>		
+		</copy>
 		<copy todir="${postingDirectory}/${buildLabel}/compilelogs" overwrite="true" failonerror="false">
 			<fileset dir="${buildDirectory}/features/master-equinox-p2/feature.temp.folder" />
-		</copy>	
+		</copy>
 		<copy todir="${postingDirectory}/${buildLabel}/compilelogs" overwrite="true" failonerror="false">
-				<fileset dir="${buildDirectory}/features/org.eclipse.help/feature.temp.folder" />
-		</copy>		
+			<fileset dir="${buildDirectory}/features/org.eclipse.help/feature.temp.folder" />
+		</copy>
 		<copy todir="${postingDirectory}/${buildLabel}/compilelogs" overwrite="true" failonerror="false">
 			<fileset dir="${buildDirectory}/features/org.eclipse.pde/feature.temp.folder" />
-		</copy>		
+		</copy>
 	</target>
 
 	<target name="clean" unless="noclean">
