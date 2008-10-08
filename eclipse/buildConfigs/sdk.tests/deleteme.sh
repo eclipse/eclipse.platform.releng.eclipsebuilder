@@ -1,1 +1,1 @@
-echo "delete me" $*
+echo "this file has changed" $*
