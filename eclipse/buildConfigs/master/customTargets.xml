@@ -211,6 +211,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<tstamp>
 			<format property="postprocess.time" pattern="MM/dd/yyyy HH:mm:ss" />
 		</tstamp>
+		<property name="masterTime" value="${buildDirectory}/mastertime.txt" />
 		<echo message="postProcess master feature ${postprocess.time} ${line.separator}" file="${masterTime}" append="true" />
 		<antcall target="gatherLogs" />
 
