@@ -44,7 +44,7 @@
 			<arg line="${vmUrl6} ${testMachine}:${testDir}" />
 		</exec>
 		<exec dir="." executable="${loginClient}">
-			<arg line="${testMachine} ${vmInstallCommand5}" />
+			<arg line="${testMachine} ${vmInstallCommand6}" />
 		</exec>
 	</target>
 </project>
