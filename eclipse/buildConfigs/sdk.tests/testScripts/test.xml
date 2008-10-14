@@ -67,6 +67,7 @@
 				eclipse/plugins/org.eclipse.test.performance_*
 				eclipse/plugins/org.eclipse.test.performance.win32_*
 				eclipse/plugins/org.eclipse.ant.optional.junit_*
+				eclipse/plugins/org.easymock_*
 				${testPluginsRequired}
 				-x eclipse/plugins/*.source*/**
 				-d ${install}/eclipse/dropins/" />
@@ -154,6 +155,20 @@
 			<and>
 				<equals arg1="${os}" arg2="macosx" />
 				<equals arg1="${ws}" arg2="carbon" />
+				<equals arg1="${arch}" arg2="x86" />
+			</and>
+		</condition>
+		<condition property="runtimeArchive" value="eclipse-SDK-${buildId}-macosx-cocoa-ppc.tar.gz">
+			<and>
+				<equals arg1="${os}" arg2="macosx" />
+				<equals arg1="${ws}" arg2="cocoa" />
+				<equals arg1="${arch}" arg2="ppc" />
+			</and>
+		</condition>
+		<condition property="runtimeArchive" value="eclipse-SDK-${buildId}-macosx-cocoa.tar.gz">
+			<and>
+				<equals arg1="${os}" arg2="macosx" />
+				<equals arg1="${ws}" arg2="cocoa" />
 				<equals arg1="${arch}" arg2="x86" />
 			</and>
 		</condition>
@@ -266,11 +281,11 @@
 			<!--library.xml is now in dropins folder -->
 			<property name="library-file" value="${eclipse-home}/dropins/eclipse/plugins/org.eclipse.test/library.xml" />
 
-			<!--install db plug-ins if running performance tests-->
-			<condition property="derby" value="eclipse/dropins/eclipse/plugins/db*/* ">
+			<!--install Cloudscape plug-ins if running performance tests-->
+			<condition property="derby" value="eclipse/dropins/eclipse/plugins/Cloudscape*/* ">
 				<equals arg1="${test.target}" arg2="performance" />
 			</condition>
-		<!--	<property name="derby" value="" /> -->
+			<!--	<property name="derby" value="" /> -->
 			<antcall target="${test.target}">
 				<param name="testPlugin" value="${@{testPlugin}}" />
 				<param name="testPluginsRequired" value="@{testPluginsRequired}" />
@@ -523,12 +538,34 @@
 	<target name="equinoxsecurity">
 		<runTests testPlugin="org.eclipse.equinox.security.tests" />
 	</target>
+
+	<target name="equinoxp2" depends="setJVMProperties">
+		<property name="jvm" value="${J2SE-5.0}" />
+		<!--only run test if J2SE-5.0 property  set-->
+		<condition property="skip.test">
+			<not>
+				<isset property="J2SE-5.0" />
+			</not>
+		</condition>
+		<property name="org.eclipse.equinox.p2.tests.prerequisite.testplugins" value="eclipse/plugins/org.eclipse.equinox.frameworkadmin.test_* eclipse/plugins/org.eclipse.equinox.p2.installer_*"/>
+		<runTests testPlugin="org.eclipse.equinox.p2.tests"/>
+	</target>
 	
-	<target name="equinoxp2">
-			<runTests testPlugin="org.eclipse.equinox.p2.tests" />
-		</target>
-
-
+	<target name="equinoxp2ui" depends="setJVMProperties">
+		<property name="jvm" value="${J2SE-5.0}" />
+		<!--only run test if J2SE-5.0 property  set-->
+		<condition property="skip.test">
+			<not>
+				<isset property="J2SE-5.0" />
+			</not>
+		</condition>
+		<runTests testPlugin="org.eclipse.equinox.p2.tests.ui"/>
+	</target>
+	
+	<target name="search">
+		<runTests testPlugin="org.eclipse.search.tests" />
+	</target>
+		
 	<target name="all">
 		<antcall target="jdtcompilertool" />
 		<antcall target="jdtcompilerapt" />
@@ -574,6 +611,8 @@
 		<antcall target="uiforms" />
 		<antcall target="pdeapitooling" />
 		<antcall target="equinoxsecurity" />
-		<antcall target="equinoxp2" />
+		<antcall target="equinoxp2" />	
+		<antcall target="equinoxp2ui" />
+		<antcall target="search" />
 	</target>
 </project>

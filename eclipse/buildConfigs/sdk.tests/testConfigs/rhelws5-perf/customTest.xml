@@ -27,15 +27,15 @@
 			<arg line="${tester}/vm.properties ${testMachine}:${executionDir}" />
 		</exec>
 		
-		<!--add db to junit test zip if it is available-->
-		<available file="${internalPlugins}/db" type="dir" property="db.available" />
-		<antcall target="installdb" />
+		<!--add Cloudscape to junit test zip if it is available-->
+		<available file="${internalPlugins}/Cloudscape" type="dir" property="Cloudscape.available" />
+		<antcall target="installCloudscape" />
 	</target>
 	
-	<target name="installdb" if="db.available">
+	<target name="installCloudscape" if="Cloudscape.available">
 		<mkdir dir="${tester}/eclipse/dropins/eclipse/plugins" />
 		<copy todir="${tester}/eclipse/dropins/eclipse/plugins">
-			<fileset dir="${internalPlugins}" includes="db/*" />
+			<fileset dir="${internalPlugins}" includes="Cloudscape/**" />
 		</copy>
 		<exec dir="${tester}" executable="${copyClient}">
 				<arg line="-r eclipse ${testMachine}:${executionDir}" />

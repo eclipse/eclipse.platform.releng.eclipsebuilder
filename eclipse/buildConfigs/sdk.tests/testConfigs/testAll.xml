@@ -38,26 +38,26 @@
 				<param name="tester" value="${basedir}/macosxppc" />
 				<param name="cfgKey" value="macosxppc" />
 				<param name="markerName" value="eclipse-macosxppc-${buildId}" />
-			</antcall>
+			</antcall>		
 			<!-- 	<antcall target="test">
 				<param name="tester" value="${basedir}/rhelws5" />
 				<param name="cfgKey" value="rhelws5" />
 				<param name="markerName" value="eclipse-rhelws5-${buildId}" />
 			</antcall> -->
-			<antcall target="test">
+			 <antcall target="test">
 				<param name="tester" value="${basedir}/rhelws4" />
 				<param name="cfgKey" value="rhelws4" />
 				<param name="markerName" value="eclipse-rhelws4-${buildId}" />
-			</antcall>
+			</antcall>  
 			<antcall target="test">
 				<param name="tester" value="${basedir}/win32xp" />
 				<param name="cfgKey" value="win32xp" />
 				<param name="markerName" value="eclipse-win32xp-${buildId}" />
 			</antcall>
 			<antcall target="test">
-				<param name="tester" value="${basedir}/rhelws5-5.0" />
-				<param name="cfgKey" value="rhelws5-5.0" />
-				<param name="markerName" value="eclipse-rhelws5-5.0-${buildId}" />
+				<param name="tester" value="${basedir}/rhelws5-6.0" />
+				<param name="cfgKey" value="rhelws5-6.0" />
+				<param name="markerName" value="eclipse-rhelws5-6.0-${buildId}" />
 			</antcall>
 			<!-- <antcall target="test">
 				<param name="tester" value="${basedir}/rhelws4-5.0" />
@@ -65,9 +65,9 @@
 				<param name="markerName" value="eclipse-rhelws4-5.0-${buildId}" />
 			</antcall> -->
 			<antcall target="test">
-				<param name="tester" value="${basedir}/win32xp-5.0" />
-				<param name="cfgKey" value="win32xp-5.0" />
-				<param name="markerName" value="eclipse-win32xp-5.0-${buildId}" />
+				<param name="tester" value="${basedir}/win32xp-6.0" />
+				<param name="cfgKey" value="win32xp-6.0" />
+				<param name="markerName" value="eclipse-win32xp-6.0-${buildId}" />
 			</antcall>
 		</parallel>
 	</target>
@@ -82,29 +82,35 @@
 		<mkdir dir="${testResults}" />
 
 		<parallel>
-			<!--winxp 1.5 vm -->
+			<!--slow machines-->
 			<antcall target="test">
 				<param name="tester" value="${basedir}/win32xp-perf" />
 				<param name="cfgKey" value="win32xp-perf" />
 				<param name="markerName" value="eclipse-win32xp-perf-${buildId}" />
 			</antcall>
-			<!--vista 1.6 vm -->
 			<antcall target="test">
-				<param name="tester" value="${basedir}/winvista-perf" />
-				<param name="cfgKey" value="win32xp-perf" />
-				<param name="markerName" value="eclipse-winvista-perf-${buildId}" />
+				<param name="tester" value="${basedir}/rhelws3-perf" />
+				<param name="cfgKey" value="rhelws3-perf" />
+				<param name="markerName" value="eclipse-rhelws3-perf-${buildId}" />
 			</antcall>
-			<!--rhel5 1.6 vm -->
+			<!--fast machines-->
 			<antcall target="test">
-				<param name="tester" value="${basedir}/rhelws5-perf" />
-				<param name="cfgKey" value="rhelws5-perf" />
-				<param name="markerName" value="eclipse-rhelws5-perf-${buildId}" />
+				<param name="tester" value="${basedir}/win32xp-perf2" />
+				<param name="sleep" value="240" />
+				<param name="cfgKey" value="win32xp-perf2" />
+				<param name="markerName" value="eclipse-win32xp-perf2-${buildId}" />
 			</antcall>
-			<!--sled 10 1.5 vm -->
 			<antcall target="test">
-				<param name="tester" value="${basedir}/sled10-perf" />
-				<param name="cfgKey" value="sled10-perf" />
-				<param name="markerName" value="eclipse-sled10-perf-${buildId}" />
+				<param name="tester" value="${basedir}/rhelws3-perf2" />
+				<param name="sleep" value="120" />
+				<param name="cfgKey" value="rhelws3-perf2" />
+				<param name="markerName" value="eclipse-rhelws3-perf2-${buildId}" />
+			</antcall>
+			<antcall target="test">
+				<param name="tester" value="${basedir}/rhelws4-perf" />
+				<param name="sleep" value="300" />
+				<param name="cfgKey" value="rhelws4-perf" />
+				<param name="markerName" value="eclipse-rhelws4-perf-${buildId}" />
 			</antcall>
 		</parallel>
 	</target>

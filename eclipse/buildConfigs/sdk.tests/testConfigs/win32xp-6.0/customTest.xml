@@ -2,7 +2,7 @@
 
 	<target name="customSetup">
 		<!--install 5.0 vm -->
-		<antcall target="install5.0Vm" />
+		<antcall target="install6.0Vm" />
 
 		<!--copy the script which sets up environment and invokes the tests on test machine-->
 		<exec dir="." executable="${copyClient}">
@@ -28,21 +28,23 @@
 		<exec dir="." executable="${copyClient}">
 			<arg line="-r ${postingDirectory}/${buildId}/${runtimeDeltapack} ${testMachine}:${executionDir}" />
 		</exec>
+
+		<!--copy platform runtime needed to run p2 tests-->
+		<exec dir="." executable="${copyClient}">
+			<arg line="-r ${postingDirectory}/${buildId}/${runtimePlatform} ${testMachine}:${executionDir}" />
+		</exec>
 	</target>
 
-	<target name="install5.0Vm">
+	<target name="install6.0Vm">
 		<property name="testVmTag" value="HEAD" />
 		<!--get and install the vm to test with-->
-		<cvs cvsRoot="${cvsRoot}"
-        	 command="export -r ${testVmTag} ${vmUrl5}"
-        	 dest="${tester}"
-  		/>
+		<cvs cvsRoot="${cvsRoot}" command="export -r ${testVmTag} ${vmUrl6}" dest="${tester}" />
 
 		<exec dir="${tester}" executable="${copyClient}">
-			<arg line="${vmUrl5} ${testMachine}:${testDir}" />
+			<arg line="${vmUrl6} ${testMachine}:${testDir}" />
 		</exec>
 		<exec dir="." executable="${loginClient}">
-			<arg line="${testMachine} ${vmInstallCommand5}" />
+			<arg line="${testMachine} ${vmInstallCommand6}" />
 		</exec>
 	</target>
 </project>

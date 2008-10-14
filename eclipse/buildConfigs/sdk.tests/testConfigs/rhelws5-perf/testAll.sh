@@ -11,10 +11,10 @@ ulimit -c unlimited
 
 export USERNAME DISPLAY LD_LIBRARY_PATH
 
-# add db plugin to junit tests zip file
+# add Cloudscape plugin to junit tests zip file
 zip eclipse-junit-tests-$1.zip -rm eclipse
 
 #all tests
-./runtests -os linux -ws gtk -arch x86 -vm `pwd`/../jdk1.4.2_10/jre/bin/java -properties vm.properties -Dtest.target=performance -Dplatform=linux.gtk.perf3 1> linux.gtk.perf3_consolelog.txt 2>&1
+./runtests -os linux -ws gtk -arch x86 -vm `pwd`/../jdk6_04/jre/bin/java -properties vm.properties -Dtest.target=performance -Dplatform=linux.gtk.perf2 1> linux.gtk.perf2_consolelog.txt 2>&1
 
 
