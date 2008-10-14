@@ -110,17 +110,17 @@
     	</zipType> 	
     	   	    	    	
     	<zipType name="Provisioning">
-			<platform id="provagentrcpwin32" name="Windows <b>**early access**</b>" fileName="equinox-p2-agent-@buildid@-win32.zip">			
+			<platform id="provagentrcpwin32" name="Windows **early access**" fileName="equinox-p2-agent-@buildid@-win32.zip">			
  			</platform>
-			<platform id="provagentrcplinux" name="Linux <b>**early access**</b>" fileName="equinox-p2-agent-@buildid@-linux.tar.gz">			
+			<platform id="provagentrcplinux" name="Linux **early access**" fileName="equinox-p2-agent-@buildid@-linux.tar.gz">			
  			</platform>	
- 			<platform id="provagentrcpmac" name="MacOSX <b>**early access**</b>" fileName="equinox-p2-agent-@buildid@-macosx.tar.gz">			
+ 			<platform id="provagentrcpmac" name="MacOSX **early access**" fileName="equinox-p2-agent-@buildid@-macosx.tar.gz">			
  			</platform>		
- 			<platform id="provinstallerwin" name="Windows <b>**early access**</b>" fileName="equinox.p2.installer-@buildid@-win32.win32.x86.zip">			
+ 			<platform id="provinstallerwin" name="Windows **early access**" fileName="equinox.p2.installer-@buildid@-win32.win32.x86.zip">			
  			</platform>	
- 			<platform id="provinstallerlin" name="Linux <b>**early access**</b>" fileName="equinox.p2.installer-@buildid@-linux.gtk.x86.tar.gz">			
+ 			<platform id="provinstallerlin" name="Linux **early access**" fileName="equinox.p2.installer-@buildid@-linux.gtk.x86.tar.gz">			
  			</platform>
- 			<platform id="provinstallermac" name="MacOSX <b>**early access**</b>" fileName="equinox.p2.installer-@buildid@-macosx.carbon.ppc.tar.gz">			
+ 			<platform id="provinstallermac" name="MacOSX **early access**" fileName="equinox.p2.installer-@buildid@-macosx.carbon.ppc.tar.gz">			
  			</platform>
  			
  		</zipType>
