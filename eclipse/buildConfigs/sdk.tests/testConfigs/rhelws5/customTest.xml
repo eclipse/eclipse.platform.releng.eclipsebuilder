@@ -29,6 +29,11 @@
          <exec dir="." executable="${copyClient}">
                   <arg line="-r ${postingDirectory}/${buildId}/${runtimeDeltapack} ${testMachine}:${executionDir}" />
 	     </exec>
+		
+		<!--copy platform runtime needed to run p2 tests-->
+		<exec dir="." executable="${copyClient}">
+			<arg line="-r ${postingDirectory}/${buildId}/${runtimePlatform} ${testMachine}:${executionDir}" />
+		</exec>
 	</target>
 	
 	<target name="installVm">
