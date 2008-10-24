@@ -325,7 +325,8 @@
 			<equals arg1="${os.arch}" arg2="i386" />
 		</condition>
 		<property name="configArgs" value="" />
-		<property name="eclipse.perf.config.descriptors" value="Win XP Sun 1.5.0_10 (2 x 3.00GHz, 3GB RAM), Win Vista Sun 1.6_04 (2 x 3.00GHz, 3GB RAM),  SLED 10 Sun 1.50_10 (2 x 3.00GHz, 3GB RAM), RHEL 5.0 Sun 1.6_04 (2 x 3.00GHz, 3GB RAM)"/>
+	<!--	<property name="eclipse.perf.config.descriptors" value="Win XP Sun 1.5.0_10 (2 x 3.00GHz, 3GB RAM), Win Vista Sun 1.6_04 (2 x 3.00GHz, 3GB RAM),  SLED 10 Sun 1.50_10 (2 x 3.00GHz, 3GB RAM), RHEL 5.0 Sun 1.6_04 (2 x 3.00GHz, 3GB RAM)"/> -->
+			<property name="eclipse.perf.config.descriptors" value="Win XP Sun 1.5.0_10 (2 x 3.00GHz, 3GB RAM), SLED 10 Sun 1.50_10 (2 x 3.00GHz, 3GB RAM), RHEL 5.0 Sun 1.6_04 (2 x 3.00GHz, 3GB RAM)"/>
 
 		<java jar="${basedir}/../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar" fork="true" maxmemory="512m" error="${buildDirectory}/perfgenerror.txt">
 			<arg line="${configArgs} -consolelog -nosplash -data ${buildDirectory}/perf-workspace -application org.eclipse.test.performance.ui.resultGenerator
