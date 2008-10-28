@@ -21,6 +21,8 @@
 	<!-- ===================================================================== -->
 	
 	<target name="assemble.org.eclipse.sdk.tests.group.group.group">
+		<!-- workaround for Bug 127747 Grouped config build failing on missing group.group.group folder-->
+		<mkdir dir="${buildDirectory}/tmp/eclipse/group.group.group/eclipse" />
 		<property name="archiveName" value="eclipse-junit-tests-${buildId}.zip"/>
 		<antcall target="assemble" />
 	</target>
