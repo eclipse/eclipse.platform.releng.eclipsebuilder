@@ -332,7 +332,7 @@
 		<java jar="${basedir}/../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar" fork="true" maxmemory="512m" error="${buildDirectory}/perfgenerror.txt">
 			<arg line="${configArgs} -consolelog -nosplash -data ${buildDirectory}/perf-workspace -application org.eclipse.test.performance.ui.resultGenerator
 						-baseline ${eclipse.perf.ref}
-						-baseline.prefix 3.3_200706251500
+						-baseline.prefix 3.4_200806172000 
 						-current ${buildId}
 						-jvm ${eclipse.perf.jvm}
 						-print					    
