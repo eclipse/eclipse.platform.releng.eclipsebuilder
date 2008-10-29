@@ -339,7 +339,7 @@
 						-output ${postingDirectory}/${buildLabel}/performance/
 						-config epwin2,eplnx1,eplnx2 
 						-config.properties ${eclipse.perf.config.descriptors}
-			            -dataDir ${postingDirectory}/../../data/v34
+			            -dataDir ${postingDirectory}/../../data/v35
 						-scenario.pattern org.eclipse.%.test%" />
 			<!-- add this argument to list above when there are milestone builds to highlight 
 			-highlight.latest 3.3M1_
