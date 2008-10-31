@@ -66,8 +66,7 @@
 				eclipse/plugins/org.eclipse.test/*
 				eclipse/plugins/org.eclipse.test.performance_*
 				eclipse/plugins/org.eclipse.test.performance.win32_*
-				eclipse/plugins/org.eclipse.ant.optional.junit_*
-				eclipse/plugins/org.easymock_*
+				eclipse/plugins/org.eclipse.ant.optional.junit_*				
 				${testPluginsRequired}
 				-x eclipse/plugins/*.source*/**
 				-d ${install}/eclipse/dropins/" />
