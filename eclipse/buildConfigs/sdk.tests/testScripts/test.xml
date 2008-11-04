@@ -77,7 +77,6 @@
 	<target name="unzipderby" if="derby">
 		<exec dir="." executable="unzip">
 			<arg line="-o eclipse-junit-tests-*.zip ${derby} -d ${install}/eclipse/dropins/" />
-
 		</exec>
 	</target>
 
@@ -283,9 +282,8 @@
 			<!--library.xml is now in dropins folder -->
 			<property name="library-file" value="${eclipse-home}/dropins/eclipse/plugins/org.eclipse.test/library.xml" />
 
-			<!--install db plug-ins if running performance tests-->
-			<!-- <condition property="derby" value="eclipse/dropins/eclipse/plugins/db/*"> -->
-			<condition property="derby" value="eclipse/plugins/db/derby*">
+			<!--install db plug-ins if running performance tests-->		
+			<condition property="derby" value="eclipse/plugins/org.apache.derby.core*/*">
 				<equals arg1="${test.target}" arg2="performance" />
 			</condition>
 			<!--	<property name="derby" value="" /> -->
