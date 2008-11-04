@@ -75,19 +75,12 @@
 	</target>
 
 	<target name="unzipderby" if="derby">
-		<property name="tmpderby" value="${install}/tmpderby"/>
-		<mkdir dir="${tmpderby}"/>
 		<exec dir="." executable="unzip">
-			<!--			<arg line="-o -qq eclipse-junit-tests-*.zip ${derby} -d ${install}/" />  -->
-			<arg line="-o eclipse-junit-tests-*.zip ${derby} -d ${tmpderby}" />
+			<arg line="-o eclipse-junit-tests-*.zip ${derby} -d ${install}/eclipse/dropins/" />
+
 		</exec>
-		<move todir="${install}/eclipse/dropins/eclipse/plugins/">
-			<fileset dir="${tmpderby}/eclipse/plugins/db/">
-				<include name="**"/>
-			</fileset>
-		</move>
-		<delete dir="${tmpderby}"/>
 	</target>
+
 
 
 	<target name="init" depends="setRuntimeArchive">
@@ -557,8 +550,8 @@
 				<isset property="J2SE-5.0" />
 			</not>
 		</condition>
-		<property name="org.eclipse.equinox.p2.tests.prerequisite.testplugins" value="eclipse/plugins/org.eclipse.equinox.frameworkadmin.test_* eclipse/plugins/org.eclipse.equinox.p2.installer_*"/>
-		<runTests testPlugin="org.eclipse.equinox.p2.tests"/>
+		<property name="org.eclipse.equinox.p2.tests.prerequisite.testplugins" value="eclipse/plugins/org.eclipse.equinox.frameworkadmin.test_* eclipse/plugins/org.eclipse.equinox.p2.installer_*" />
+		<runTests testPlugin="org.eclipse.equinox.p2.tests" />
 	</target>
 
 	<target name="equinoxp2ui" depends="setJVMProperties">
@@ -569,7 +562,7 @@
 				<isset property="J2SE-5.0" />
 			</not>
 		</condition>
-		<runTests testPlugin="org.eclipse.equinox.p2.tests.ui"/>
+		<runTests testPlugin="org.eclipse.equinox.p2.tests.ui" />
 	</target>
 
 	<target name="search">
@@ -621,7 +614,7 @@
 		<antcall target="uiforms" />
 		<antcall target="pdeapitooling" />
 		<antcall target="equinoxsecurity" />
-		<antcall target="equinoxp2" />	
+		<antcall target="equinoxp2" />
 		<antcall target="equinoxp2ui" />
 		<antcall target="search" />
 	</target>
