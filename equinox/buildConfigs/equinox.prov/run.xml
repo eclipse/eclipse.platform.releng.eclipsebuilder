@@ -773,6 +773,7 @@
 			<arg line="-p2.os ${p2.os}" />
 			<arg line="-p2.ws ${p2.ws}" />
 			<arg line="-p2.arch ${p2.arch}" />
+			<arg line="-eclipse.p2.MD5Check=false" />			
 			<arg line="-roaming" />
 			<arg line="-profile ${p2.director.profile}" />
 			<arg line="${p2.director.extraArgs}" />
