@@ -326,9 +326,9 @@
 			<fileset dir="${buildDirectory}/plugins" includes="**/.settings/.api_filters" />
 			<regexpmapper from="^(org.eclipse.*\/)(\.settings\/)(\.api_filters)" to="\1\3" />
 		</copy>
-		<property name="apifilterzip" value="${report}/apifilters-${buildId}.zip"/>
+		<property name="apifilterzip" value="${report}/apifilters-${buildId}.zip" />
 		<exec executable="zip" dir="${report}">
-			<arg line="${apifilterzip} -d ${filter_store}"/>
+			<arg line="-r ${apifilterzip} ${filter_store}" />
 		</exec>
 		<property name="html_directory_location" value="${report}/apitoolsverifications/html" />
 		<property name="report_directory_location" value="${report}/apitoolsverifications/xml" />

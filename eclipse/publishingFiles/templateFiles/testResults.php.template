@@ -133,7 +133,7 @@ echo " <li><a href=\"apitools/apitoolsverifications/html/index.html\"><b>PDE API
 echo "  This tool verifies the versions of the plugins against Eclipse 3.3.2.  Exclusions are listed in org.eclipse.releng/apiexclude/exclude_list_external.txt. </li> ";
 ?>
 <?php
-echo " <li><a href=\"apitools/apifilters-${buildId}.zip\"><b>Zip of .api_filters files used in the build</b></a></li>";
+echo " <li><a href=\"apitools/apifilters-$buildName.zip\"><b>Zip of .api_filters files used in the build</b></a></li>";
 ?>
 
 </div>
