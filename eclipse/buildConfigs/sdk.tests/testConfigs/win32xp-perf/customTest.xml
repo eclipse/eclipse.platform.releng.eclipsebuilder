@@ -28,14 +28,14 @@
 		</exec>
 		
 		<!--add Cloudscape to junit test zip if it is available-->
-		<available file="${internalPlugins}/db" type="dir" property="db.available" />
+		<available file="${internalPlugins}/org.apache.derby_10.4.2.0" type="dir" property="db.available" />
 		<antcall target="installdb" />
 	</target>
 	
 	<target name="installdb" if="db.available">
 		<mkdir dir="${tester}/eclipse/dropins/eclipse/plugins" />
 		<copy todir="${tester}/eclipse/dropins/eclipse/plugins">
-			<fileset dir="${internalPlugins}" includes="db/**" />
+			<fileset dir="${internalPlugins}" includes="org.apache.derby_10.4.2.0/**" />
 		</copy>
 		<exec dir="${tester}" executable="${copyClient}">
 				<arg line="-r eclipse ${testMachine}:${executionDir}" />
