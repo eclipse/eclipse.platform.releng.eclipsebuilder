@@ -82,11 +82,11 @@
 		<mkdir dir="${testResults}" />
 
 		<parallel>			
-		<!--	<antcall target="test">
+			<antcall target="test">
 				<param name="tester" value="${basedir}/win32xp-perf" />
 				<param name="cfgKey" value="win32xp-perf" />
 				<param name="markerName" value="eclipse-win32xp-perf-${buildId}" />
-			</antcall> -->			
+			</antcall>	
 			<antcall target="test">
 				<param name="tester" value="${basedir}/rhelws5-perf" />
 				<param name="sleep" value="120" />
