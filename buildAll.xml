@@ -387,6 +387,9 @@
 		<unzip src="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip" dest="${reposource}">
 			<patternset>
 				<exclude name="eclipse/plugins/org.eclipse.swt.tools**" />
+				<exclude name="eclipse/features/master-equinox*" />
+				<exclude name="eclipse/features/master-jetty*" />		
+				<exclude name="eclipse/features/master-root*" />			  
 			</patternset>
 		</unzip>
 
