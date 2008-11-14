@@ -15,6 +15,6 @@ export USERNAME DISPLAY LD_LIBRARY_PATH
 zip eclipse-junit-tests-$1.zip -rm eclipse
 
 #all tests
-./runtests -os linux -ws gtk -arch x86 -vm `pwd`/../jdk1.5.0_14/jre/bin/java -properties vm.properties -Dtest.target=performance -Dplatform=linux.gtk.perf1 1> linux.gtk.perf1_consolelog.txt 2>&1
+./runtests -os linux -ws gtk -arch x86 -vm `pwd`/../jdk1.5.0_14/jre/bin/java -properties vm.properties -Dtest.target=performance -Dplatform=linuxgtkperf1 1> linux.gtk.perf1_consolelog.txt 2>&1
 
 
