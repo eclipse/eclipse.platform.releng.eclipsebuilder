@@ -300,9 +300,9 @@
 		<property name="reference" value="${buildDirectory}/apitooolingreference" />
 		<mkdir dir="${reference}" />
 		<property name="reference_location" value="${reference}/eclipse-SDK-3.4M6a-win32.zip" />
-		<exec executable="/usr/bin/wget" dir="${reference}" output="${reference}/error.txt" failonerror="false" os="Linux">
+	<!--	<exec executable="/usr/bin/wget" dir="${reference}" output="${reference}/error.txt" failonerror="false" os="Linux">
 			<arg line="-q -O  ${reference_location} http://archive.eclipse.org/eclipse/downloads/drops/S-3.4M6a-200804091425/eclipse-SDK-3.4M6a-win32.zip" />
-		</exec>
+		</exec> -->
 		<property name="current_location" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" />
 		<property name="report" value="${postingDirectory}/${buildLabel}/apitools" />
 		<mkdir dir="${report}" />
@@ -334,7 +334,7 @@
 		<property name="report_directory_location" value="${report}/apitoolsverifications/xml" />
 		<property name="3_4_reference_location" value="${reference}/eclipse-SDK-3.4-win32.zip" />
 		<exec executable="/usr/bin/wget" dir="${reference}" output="${reference}/error.txt" failonerror="false" os="Linux">
-			<arg line="-q -O  ${3_4_reference_location} http://fullmoon.ottawa.ibm.com/downloads/drops/R-3.4-200806172000/eclipse-SDK-3.4-win32.zip" />
+			<arg line="-q -O  ${3_4_reference_location} http://archive.eclipse.org/eclipse/downloads/drops/R-3.4-200806172000/eclipse-SDK-3.4-win32.zip" />
 		</exec>
 		<apitooling.apitoolsverification profile="${current_location}" reference="${3_4_reference_location}" report="${report_directory_location}" filterstoreroot="${filter_store}" excludelist="${exclude_list_external_location}" debug="true" />
 		<apitooling.apitoolsreportconversion xmlreportdirectory="${report_directory_location}" debug="true" htmlreportdirectory="${html_directory_location}" />
