@@ -386,11 +386,11 @@
 		</copy>
 		<unzip src="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip" dest="${reposource}">
 			<patternset>
-				<exclude name="eclipse/plugins/org.eclipse.swt.tools**" />
-				<exclude name="eclipse/features/master-equinox**" />
-				<exclude name="eclipse/features/master-jetty**" />		
-				<exclude name="eclipse/features/master-root**" />			  
-			</patternset>
+				<exclude name="**/org.eclipse.swt.tools**" />
+				<exclude name="**/master-equinox**" />
+				<exclude name="**/master-jetty**" />		
+				<exclude name="**/master-root**" />			  
+			</patternset>						
 		</unzip>
 
 		<move todir="${reposource}">
