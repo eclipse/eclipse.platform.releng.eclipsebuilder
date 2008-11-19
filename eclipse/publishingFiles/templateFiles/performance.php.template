@@ -6,55 +6,55 @@
 <body>
 <p><B><FONT FACE="Verdana" SIZE="+3">Performance Results</FONT></B><BR><BR> <TABLE BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > 
 <TR> <TD ALIGN=LEFT VALIGN=TOP COLSPAN="3" BGCOLOR="#0080C0"><B><FONT COLOR="#FFFFFF" FACE="Arial,Helvetica"> 
-Performance fingerprint</FONT></B></TD></TR></TABLE><?php
-	$performance = dir(".");
-	$index=0;
-	$fpcount=0;
+Performance fingerprint</FONT></B></TD></TR></TABLE>
+<?php
+    $performance = dir(".");
+    $index=0;
+    $fpcount=0;
 
-	while ($fp = $performance ->read()) {
-		if (strstr($fp,".php")){
-			$parts=split(".php",$fp);
-			$component=$parts[0];
-			if ($component=="global"){
-				$contents = implode('', file("$fp"));
-				//remove <html> and <body> tags
-				$trimmedcontents=ereg_replace('<html>','',$contents);
-				$trimmedcontents=ereg_replace('</html>','',$trimmedcontents);
-				$trimmedcontents=ereg_replace('<body>','',$trimmedcontents);
-				$trimmedcontents=ereg_replace('</body>','',$trimmedcontents);
-		
-				echo $trimmedcontents;
-			}
-			else{ 
-				if ($component!="performance"){
-					$componentFps[$fpcount]=$fp;
-					$fpcount++;
-				}
-			}	
-		}
-	}
-?> <P><A NAME="unit"></A>* Missing reference data. Build used for comparison specified 
+    include("global_fp.php");
+    while ($fp = $performance ->read()) {
+        if (strstr($fp,".php")){
+            $parts=split(".php",$fp);
+            $component=$parts[0];
+            $start=substr($component, 0, 11);
+            if ($start == "org.eclipse") {
+                $componentFps[$fpcount]=$fp;
+                $fpcount++;
+            }
+        }
+    }
+?>
+<P><A NAME="unit"></A>* Missing reference data. Build used for comparison specified 
 in ending parenthesis.<BR>green: faster, less memory
 <BR>red: slower, more memory
 <BR>grey: regression with explanation. Click the bar for notes on this scenario.
 <BR>x axis: difference between current value and baseline value as percentage<BR></P>
 <TABLE BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > 
 <TR> <TD ALIGN=LEFT VALIGN=TOP COLSPAN="3" BGCOLOR="#0080C0"><B><FONT COLOR="#FFFFFF" FACE="Arial,Helvetica"> 
-Detailed performance data grouped by scenario prefix</FONT></B></TD></TR></TABLE><?php
+Detailed performance data grouped by scenario prefix</FONT></B></TD></TR></TABLE>
+<?php
 
-        if (count($componentFps)==0){
-                echo "Results pending.";
+    if (count($componentFps)==0){
+        echo "Results pending.";
+    }
+    else {
+        $type=$_SERVER['QUERY_STRING'];
+        if ($type=="") {
+            $type="fp_type=0";
         }
-        else{
-        	sort($componentFps);
+        sort($componentFps);
 
-        	for ($counter=0;$counter<count($componentFps);$counter++){
-			$parts=split(".php",$componentFps[$counter]);
-			$prefix=$parts[0];
-                	echo "<A HREF=\"$componentFps[$counter]?$config\">$prefix*</A><br>";
-        	}
-	}
-?><p><BR><BR><TABLE BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > <TR> <TD ALIGN=LEFT VALIGN=TOP COLSPAN="3" BGCOLOR="#0080C0"><B><FONT COLOR="#FFFFFF" FACE="Arial,Helvetica">Performance 
+        for ($counter=0;$counter<count($componentFps);$counter++){
+            $parts=split(".php",$componentFps[$counter]);
+            $prefix=$parts[0];
+            $href="<A HREF=\"$componentFps[$counter]?";
+            $href=$href . $type . "\">$prefix*</A><br>";
+            echo $href;
+        }
+    }
+?>
+<p><BR><BR><TABLE BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > <TR> <TD ALIGN=LEFT VALIGN=TOP COLSPAN="3" BGCOLOR="#0080C0"><B><FONT COLOR="#FFFFFF" FACE="Arial,Helvetica">Performance 
 Unit Test Results for <?php echo "$buildName"; ?> </FONT></B></TD></TR> </TABLE><P></P><TABLE BORDER="0"> 
 </TABLE>** test errors or failures here do not produce Red X's for now**<TABLE WIDTH="77%" BORDER="1"> 
 <TR> <TD WIDTH="81%"><B>Tests Performed</B></TD><TD WIDTH="19%"><B>Errors &amp; 
