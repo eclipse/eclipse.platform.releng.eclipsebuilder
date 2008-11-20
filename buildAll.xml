@@ -300,7 +300,7 @@
 		<property name="reference" value="${buildDirectory}/apitooolingreference" />
 		<mkdir dir="${reference}" />
 		<property name="reference_location" value="${reference}/eclipse-SDK-3.4M6a-win32.zip" />
-	<!--	<exec executable="/usr/bin/wget" dir="${reference}" output="${reference}/error.txt" failonerror="false" os="Linux">
+		<!--	<exec executable="/usr/bin/wget" dir="${reference}" output="${reference}/error.txt" failonerror="false" os="Linux">
 			<arg line="-q -O  ${reference_location} http://archive.eclipse.org/eclipse/downloads/drops/S-3.4M6a-200804091425/eclipse-SDK-3.4M6a-win32.zip" />
 		</exec> -->
 		<property name="current_location" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" />
@@ -384,14 +384,9 @@
 			<fileset file="${updateSite}/artifacts.*" />
 			<fileset file="${updateSite}/content.*" />
 		</copy>
-		<unzip src="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip" dest="${reposource}">
-			<patternset>
-				<exclude name="**/org.eclipse.swt.tools**" />
-				<exclude name="**/master-equinox**" />
-				<exclude name="**/master-jetty**" />		
-				<exclude name="**/master-root**" />			  
-			</patternset>						
-		</unzip>
+		<exec executable="unzip" dir=".">
+			<arg line="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -x */features/master* */plugins/org.eclipse.swt.tools* -d ${reposource}" />
+		</exec>
 
 		<move todir="${reposource}">
 			<fileset dir="${reposource}/eclipse" />
