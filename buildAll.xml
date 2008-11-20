@@ -373,15 +373,9 @@
 			<fileset file="${updateSite}/artifacts.*" />
 			<fileset file="${updateSite}/content.*" />
 		</copy>
-		<unzip src="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip" dest="${reposource}">
-			<patternset>
-				<exclude name="**/org.eclipse.swt.tools**" />
-				<exclude name="**/master-equinox**" />
-				<exclude name="**/master-jetty**" />		
-				<exclude name="**/master-root**" />			  
-			</patternset>
-		</unzip>
-
+		<exec executable="unzip" dir=".">
+			<arg line="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -x */features/master* */plugins/org.eclipse.swt.tools* -d ${reposource}" />
+		</exec>
 		<move todir="${reposource}">
 			<fileset dir="${reposource}/eclipse" />
 		</move>
