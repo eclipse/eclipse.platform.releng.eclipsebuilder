@@ -380,7 +380,7 @@
 		<mkdir dir="${repo}" />
 		<delete dir="${reposource}" />
 		<mkdir dir="${reposource}" />
-		<copy todir="${reposource}" failonerror="false">
+		<copy todir="${repo}" failonerror="false">
 			<fileset file="${updateSite}/artifacts.*" />
 			<fileset file="${updateSite}/content.*" />
 		</copy>
