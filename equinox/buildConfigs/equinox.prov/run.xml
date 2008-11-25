@@ -761,7 +761,7 @@
 		<echo message="basebuilder ${base.builder}/plugins/org.eclipse.equinox.launcher" />
 		<delete dir="${base.builder}/configuration/.settings" includeemptydirs="true" failonerror="false" />
 		<!--	<copy file="${equinox.build.configs}/equinox.prov/files/config.ini.director" tofile="${base.builder}/configuration/config.ini" overwrite="true" /> -->
-		<exec executable="${base.builder}/eclipse" failonerror="false" dir="${base.builder}" timeout="900000">
+		<exec executable="${base.builder}/eclipse" failonerror="false" dir="${base.builder}" timeout="900000" output="${postingDirectory}/${buildLabel}/buildlogs/director.txt" resultproperty="${directorcode}">
 			<arg line="-vm ${java15-home}/bin/java" />
 			<arg line="-application org.eclipse.equinox.p2.director.app.application" />
 			<arg line="-nosplash" />
@@ -786,7 +786,7 @@
 			<arg line="-Declipse.p2.data.area=${p2.director.install.path}/p2" />
 			<arg line="-Declipse.p2.MD5Check=false" />
 		</exec>
-
+        <echo message="${directorcode}" file="{postingDirectory}/${buildLabel}/buildlogs/director.txt" append="true"/>
 		<!-- delete the metadata cache as well as the artifacts for unzipped bundles -->
 		<delete failonerror="false" includeEmptyDirs="true" dir="${p2.director.install.path}/p2/org.eclipse.equinox.p2.core/cache" />
 	</target>
