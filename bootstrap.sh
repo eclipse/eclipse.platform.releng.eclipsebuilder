@@ -18,7 +18,7 @@ proc=$$
 recipients=
 
 #default text message notification list
-textRecipients=
+textRecipients=6132962910@txt.bellmobility.ca
 
 #sets skip.performance.tests Ant property
 skipPerf=""
@@ -38,20 +38,21 @@ tagMaps=""
 tag=""
 
 # tag v20060907 is the one that includes the new build page
-#buildProjectTags=v20080619c
-#buildProjectTags=v20080623
-#buildProjectTags=v20080625
-#buildProjectTags=v20080715
-#buildProjectTags=v20080723a
-#buildProjectTags=v20080726
-#buildProjectTags=v20080728
-##buildProjectTags=v20080815c
-#buildProjectTags=v20080905
-#buildProjectTags=v20080910
-#buildProjectTags=v20080925
-#buildProjectTags=v20080926a
-#buildProjectTags=v20080929
-buildProjectTags=v20080930
+#buildProjectTags=v20080930
+#buildProjectTags=v20081010
+#buildProjectTags=v20081010b
+#buildProjectTags=v20081014
+#buildProjectTags=v20081015
+#buildProjectTags=v20081020a
+#buildProjectTags=v20081021
+#buildProjectTags=v20081112
+#buildProjectTags=v20081114a
+#buildProjectTags=v20081116a
+#buildProjectTags=v20081118a
+#buildProjectTags=v20081119
+#buildProjectTags=v20081120
+#buildProjectTags=v20081121
+buildProjectTags=v20081125_M3_35_perf
 
 #updateSite property setting
 updateSite=""
@@ -69,7 +70,8 @@ buildId=""
 buildLabel=""
 
 # tag for build contribution project containing .map files
-mapVersionTag=HEAD
+#mapVersionTag=HEAD
+mapVersionTag=M3_35_perf
 
 # directory in which to export builder projects
 builderDir=/builds/eclipsebuilder
@@ -92,7 +94,9 @@ javadoc=""
 # value used in buildLabel and for text replacement in index.php template file
 builddate=`date +%Y%m%d`
 buildtime=`date +%H%M`
-timestamp=$builddate$buildtime
+#timestamp=$builddate$buildtime
+timestamp=200810301917
+
 
 
 # process command line arguments
@@ -100,35 +104,35 @@ usage="usage: $0 [-notify emailaddresses][-textRecipients textaddesses][-test][-
 
 if [ $# -lt 1 ]
 then
-		 echo >&2 "$usage"
-		 exit 1
+		 		  echo >&2 "$usage"
+		 		  exit 1
 fi
 
 while [ $# -gt 0 ]
 do
-		 case "$1" in
-		 		 -buildId) buildId="$2"; shift;;
-		 		 -buildLabel) buildLabel="$2"; shift;;
-		 		 -mapVersionTag) mapVersionTag="$2"; shift;;
-		 		 -tagMapFiles) tagMaps="-DtagMaps=true";;
-		 		 -skipPerf) skipPerf="-Dskip.performance.tests=true";;
-		 		 -skipTest) skipTest="-Dskip.tests=true";;
-		 		 -skipRSS) skipRSS="-Dskip.feed=true";;
-		 		 -skipPack) skipPack="-DskipPack=true";;
-		 		 -buildDirectory) builderDir="$2"; shift;;
-		 		 -notify) recipients="$2"; shift;;
-				 -textRecipients) textRecipients="$2"; shift;;
-		 		 -test) postingDirectory="/builds/transfer/files/bogus/downloads/drops";testBuild="-Dtest=true";;
-		 		 -builderTag) buildProjectTags="$2"; shift;;
-		 		 -compareMaps) compareMaps="-DcompareMaps=true";;
-		 		 -updateSite) updateSite="-DupdateSite=$2";shift;;
-		 		 -sign) sign="-Dsign=true";;
-		 		 -*)
-		 		 		 echo >&2 $usage
-		 		 		 exit 1;;
-		 		 *) break;;		 # terminate while loop
-		 esac
-		 shift
+		 		  case "$1" in
+		 		  		 		  -buildId) buildId="$2"; shift;;
+		 		  		 		  -buildLabel) buildLabel="$2"; shift;;
+		 		  		 		  -mapVersionTag) mapVersionTag="$2"; shift;;
+		 		  		 		  -tagMapFiles) tagMaps="-DtagMaps=true";;
+		 		  		 		  -skipPerf) skipPerf="-Dskip.performance.tests=true";;
+		 		  		 		  -skipTest) skipTest="-Dskip.tests=true";;
+		 		  		 		  -skipRSS) skipRSS="-Dskip.feed=true";;
+		 		  		 		  -skipPack) skipPack="-DskipPack=true";;
+		 		  		 		  -buildDirectory) builderDir="$2"; shift;;
+		 		  		 		  -notify) recipients="$2"; shift;;
+		 		 		 		  -textRecipients) textRecipients="$2"; shift;;
+		 		  		 		  -test) postingDirectory="/builds/transfer/files/bogus/downloads/drops";testBuild="-Dtest=true";;
+		 		  		 		  -builderTag) buildProjectTags="$2"; shift;;
+		 		  		 		  -compareMaps) compareMaps="-DcompareMaps=true";;
+		 		  		 		  -updateSite) updateSite="-DupdateSite=$2";shift;;
+		 		  		 		  -sign) sign="-Dsign=true";;
+		 		  		 		  -*)
+		 		  		 		  		 		  echo >&2 $usage
+		 		  		 		  		 		  exit 1;;
+		 		  		 		  *) break;;		 		  # terminate while loop
+		 		  esac
+		 		  shift
 done
 
 # After the above the build type is left in $1.
@@ -137,12 +141,12 @@ buildType=$1
 # Set default buildId and buildLabel if none explicitly set
 if [ "$buildId" = "" ]
 then
-		 buildId=$buildType$builddate-$buildtime
+		 		  buildId=$buildType$builddate-$buildtime
 fi
 
 if [ "$buildLabel" = "" ]
 then
-		 buildLabel=$buildId
+		 		  buildLabel=$buildId
 fi
 
 #Set the tag to HEAD for Nightly builds
@@ -165,7 +169,7 @@ customBuilderTag=$buildProjectTags
 
 if [ -e $builderDir ]
 then
-		 builderDir=$builderDir$timestamp
+		 		  builderDir=$builderDir$timestamp
 fi
 
 # directory where features and plugins will be compiled
@@ -203,7 +207,7 @@ windowsJreArchive=jdks/jdk-1_4_2_16-fcs-bin-b05-windows-i586-16_sep_2007.zip
 windows15JdkArchive=jdks/jdk-1_5_0_14-fcs-bin-b03-windows-i586-05_oct_2007.zip
 windows16JdkArchive=jdks/1.6/jdk-6u4-fcs-bin-b12-windows-i586-14_dec_2007.zip
 windows10FoundationArchive=jdks/weme-win-x86-foundation10_6.1.0.20060317-111429.zip
-#windows11FoundationArchive=jdks/weme-win-x86-ppro11_6.1.1.20061110-161633.zip add CDC-1.1/Foundation-1.1= to parameters passed to build
+windows11FoundationArchive=jdks/weme-win-x86-ppro11_6.1.1.20061110-161633.zip
 
 #get then install the Linux 1.6 vm used for running the build
 mkdir -p jdk/linux; cvs -d sdimitro@ottcvs1:/home/cvs/releng co $linuxJdkArchive; unzip -qq $linuxJdkArchive -d jdk/linux; rm $linuxJdkArchive
@@ -221,8 +225,8 @@ mkdir -p jdk/win32_15; cvs -d sdimitro@ottcvs1:/home/cvs/releng co $windows15Jdk
 #get and install the Windows Foundation jre containing the 1.0 Java libraries against which to compile
 mkdir -p jdk/win32_foundation; cvs -d sdimitro@ottcvs1:/home/cvs/releng co $windows10FoundationArchive;unzip -qq $windows10FoundationArchive -d jdk/win32_foundation/; rm $windows10FoundationArchive
 
-#get and install the Windows Foundation jre containing the 1.0 Java libraries against which to compile
-#mkdir -p jdk/win32_foundation11; cvs -d sdimitro@ottcvs1:/home/cvs/releng co $windows11FoundationArchive;unzip -qq $windows11FoundationArchive -d jdk/win32_foundation11/; rm $windows11FoundationArchive
+#get and install the Windows Foundation jre containing the 11 Java libraries against which to compile
+mkdir -p jdk/win32_foundation11; cvs -d sdimitro@ottcvs1:/home/cvs/releng co $windows11FoundationArchive;unzip -qq $windows11FoundationArchive -d jdk/win32_foundation11/; rm $windows11FoundationArchive
 
 #get and install the Windows 1.6 Java libraries against which to compile
 mkdir -p jdk/win32_16; cvs -d sdimitro@ottcvs1:/home/cvs/releng co $windows16JdkArchive;unzip -qq $windows16JdkArchive -d jdk/win32_16/; rm $windows16JdkArchive
@@ -247,6 +251,7 @@ bootclasspath="$builderDir/jdk/win32/jdk1.4.2_16/jre/lib/rt.jar:$builderDir/jdk/
 bootclasspath_15="$builderDir/jdk/win32_15/jdk1.5.0_14/jre/lib/rt.jar"
 bootclasspath_16="$builderDir/jdk/win32_16/jdk6_04/jre/lib/rt.jar"
 bootclasspath_foundation="$builderDir/jdk/win32_foundation/lib/jclFoundation10/classes.zip"
+bootclasspath_foundation11="$builderDir/jdk/win32_foundation11/lib/jclFoundation11/classes.zip"
 
 if [ "$HOSTNAME" == "eclipsebuildserv.ottawa.ibm.com" ]
 then
@@ -287,9 +292,9 @@ echo buildDirectory=$buildDirectory
 #full command with args
 if [ "$HOSTNAME" == "eclipsebuildserv.ottawa.ibm.com" ]
 then
-buildCommand="$antRunner -q -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:ext:sdimitro@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $skipPack $tagMaps -DJ2SE-1.5=$bootclasspath_15 -DJ2SE-1.4=$bootclasspath -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation -DJavaSE-1.6=$bootclasspath_16 -DlogExtension=.xml $javadoc $updateSite $sign -DgenerateFeatureVersionSuffix=true -Djava15-home=$builderDir/jdk/linuxppc/ibm-java2-ppc-50/jre -listener org.eclipse.releng.build.listeners.EclipseBuildListener"
+buildCommand="$antRunner -q -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:ext:sdimitro@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $skipPack $tagMaps -DJ2SE-1.5=$bootclasspath_15 -DJ2SE-1.4=$bootclasspath -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation -DCDC-1.1/Foundation-1.1=$bootclasspath_foundation11 -DJavaSE-1.6=$bootclasspath_16 -DlogExtension=.xml $javadoc $updateSite $sign -DgenerateFeatureVersionSuffix=true -Djava15-home=$builderDir/jdk/linuxppc/ibm-java2-ppc-50/jre -listener org.eclipse.releng.build.listeners.EclipseBuildListener"
 else
-buildCommand="$antRunner -q -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:ext:sdimitro@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $skipPack $tagMaps -DJ2SE-1.5=$bootclasspath_15 -DJ2SE-1.4=$bootclasspath -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation -DJavaSE-1.6=$bootclasspath_16 -DlogExtension=.xml $javadoc $updateSite $sign -DgenerateFeatureVersionSuffix=true -Djava15-home=$builderDir/jdk/linux/jdk1.5.0_14/jre -listener org.eclipse.releng.build.listeners.EclipseBuildListener"
+buildCommand="$antRunner -q -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:ext:sdimitro@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $skipPack $tagMaps -DJ2SE-1.5=$bootclasspath_15 -DJ2SE-1.4=$bootclasspath -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation -DCDC-1.1/Foundation-1.1=$bootclasspath_foundation11 -DJavaSE-1.6=$bootclasspath_16 -DlogExtension=.xml $javadoc $updateSite $sign -DgenerateFeatureVersionSuffix=true -Djava15-home=$builderDir/jdk/linux/jdk1.5.0_14/jre -listener org.eclipse.releng.build.listeners.EclipseBuildListener"
 fi
 
 #capture command used to run the build
@@ -302,7 +307,7 @@ retCode=$?
 if [ $retCode != 0 ]
 then
         echo "Build failed (error code $retCode)."
-	exit $retCode
+		 exit $retCode
 fi
 
 if [ "$skip.feed" != "true" ]
