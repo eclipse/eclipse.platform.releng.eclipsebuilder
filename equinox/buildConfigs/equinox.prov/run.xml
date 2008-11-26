@@ -108,7 +108,7 @@
 		<mkdir dir="${base}" />
 
 		<property file="build.properties" />
-		
+
 		<property name="repo" value="${buildDirectory}/repo" />
 		<mkdir dir="${repo}" />
 		<property name="p2.flavor" value="tooling" />
@@ -699,7 +699,7 @@
 			<arg line="--launcher.suppressErrors" />
 			<arg line="-base ${p2.generator.base}" />
 			<arg line="-features ${p2.generator.feature.dir}" />
-			<arg line="-bundles ${p2.generator.plugins.dir}" />			
+			<arg line="-bundles ${p2.generator.plugins.dir}" />
 			<arg line="-compress" />
 			<arg line="-flavor ${p2.flavor}" />
 			<arg line="-publishArtifacts" />
@@ -747,7 +747,7 @@
 			<arg line="-artifactRepository file:${p2.repo}" />
 			<arg line="-metadataRepositoryName ${p2.repo.name}" />
 			<arg line="-artifactRepositoryName ${p2.repo.name}" />
-			<arg line="-source ${p2.generator.source}" />		
+			<arg line="-source ${p2.generator.source}" />
 			<arg line="-compress" />
 			<arg line="-rootVersion ${p2.generator.root.version}" />
 			<arg line="-root ${p2.generator.root}" />
@@ -786,7 +786,9 @@
 			<arg line="-Declipse.p2.data.area=${p2.director.install.path}/p2" />
 			<arg line="-Declipse.p2.MD5Check=false" />
 		</exec>
-        <echo message="${directorcode}" file="{postingDirectory}/${buildLabel}/buildlogs/director.txt" append="true"/>
+		<echo message="director ${p2.director.install.path}" file="${postingDirectory}/${buildLabel}/buildlogs/director.txt" append="true" />
+		<echo message="${directorcode}" file="${postingDirectory}/${buildLabel}/buildlogs/director.txt" append="true" />
+
 		<!-- delete the metadata cache as well as the artifacts for unzipped bundles -->
 		<delete failonerror="false" includeEmptyDirs="true" dir="${p2.director.install.path}/p2/org.eclipse.equinox.p2.core/cache" />
 	</target>
