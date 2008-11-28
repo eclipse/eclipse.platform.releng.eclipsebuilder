@@ -351,8 +351,6 @@
 
 		<java jar="${basedir}/../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar" fork="true" maxmemory="512m" error="${postingDirectory}/${buildLabel}/buildlogs/perfgenerror.txt" output="${postingDirectory}/${buildLabel}/buildlogs/perfgenoutput.txt">
 			<arg line="${configArgs} -consolelog -nosplash -data ${buildDirectory}/perf-workspace -application org.eclipse.test.performance.ui.resultGenerator
-						-baseline ${eclipse.perf.ref}
-						-baseline.prefix R-3.4_200806172000
 						-current ${buildId}
 						-jvm ${eclipse.perf.jvm}
 						-print					    
@@ -361,6 +359,10 @@
 						-config.properties ${eclipse.perf.config.descriptors}
 			            -dataDir ${postingDirectory}/../../data/v35
 						-scenario.pattern org.eclipse.%.test%" />
+			<!-- baselines arguments are no longer necessary since bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=209322 has been fixed...
+						-baseline ${eclipse.perf.ref}
+						-baseline.prefix R-3.4_200806172000
+			-->
 			<!-- add this argument to list above when there are milestone builds to highlight 
 			-highlight.latest 3.3M1_
 			-->
