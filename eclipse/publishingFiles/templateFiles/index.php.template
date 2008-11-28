@@ -214,8 +214,13 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 					echo "<li><a href=\"testResults.php\">View the <b>test results</b> for the current build.</a></li>";
 				}
 				if (file_exists("performance/performance.php")) {
-                         echo "<li><a href=\"performance/performance.php\">View the <b>performance results</b> for the current build.</a></li>";
-                 }
+					echo "<li>";
+					$generated=file_exists("performance/global_fp.php");
+					if (!$generated) echo <i>;
+					echo "<a href=\"performance/performance.php\">View the <b>performance results</b> for the current build.</a>";
+					if (!$generated) echo </i>;
+					echo "</li>";
+				}
 				?>
 				
 				<li><a href="directory.txt">View the <b>map file entries</b> for the current build.</a></li></ul>
