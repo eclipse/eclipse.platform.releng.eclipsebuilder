@@ -1,4 +1,4 @@
-<project name="Build specific targets and properties" default="noDefault" >
+<project name="Build specific targets and properties" default="noDefault">
 
 
 	<property name="postingDirectory" value="${buildDirectory}" />
@@ -11,7 +11,7 @@
 	<!-- ****** figure out how to build the platform, sdk, examples, ... from one compile"
 see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets  -->
 	<target name="allElements">
-		<ant antfile="${genericTargets}" target="${target}" >
+		<ant antfile="${genericTargets}" target="${target}">
 			<property name="type" value="feature" />
 			<property name="id" value="master-root" />
 		</ant>
@@ -21,163 +21,175 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Targets to assemble the built elements for particular configurations  -->
 	<!-- ===================================================================== -->
 	<target name="assemble.master-root.common.common.common">
-		<property name="archiveName" value="master-root-${buildId}.zip"/>
+		<property name="archiveName" value="master-root-${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.master-root.launcher-common.common.common">
-		<property name="archiveName" value="master-root-launcher-${buildId}.zip"/>
+		<property name="archiveName" value="master-root-launcher-${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.master-root.launcher-linux.gtk.x86">
-		<property name="archiveName" value="master-root-launcher-linux.gtk.x86.${buildId}.zip"/>
+		<property name="archiveName" value="master-root-launcher-linux.gtk.x86.${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.master-root.launcher-linux.motif.x86">
-			<property name="archiveName" value="master-root-launcher-linux.motif.x86.${buildId}.zip"/>
-			<antcall target="assemble" />
+		<property name="archiveName" value="master-root-launcher-linux.motif.x86.${buildId}.zip" />
+		<antcall target="assemble" />
 	</target>
 	<target name="assemble.master-root.launcher-win32.win32.x86">
-		<property name="archiveName" value="master-root-launcher-win32.win32.x86.${buildId}.zip"/>
+		<property name="archiveName" value="master-root-launcher-win32.win32.x86.${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.master-root.launcher-win32.win32.x86_64">
-			<property name="archiveName" value="master-root-launcher-win32.win32.x86_64.${buildId}.zip"/>
-			<antcall target="assemble" />
-		</target>
+		<property name="archiveName" value="master-root-launcher-win32.win32.x86_64.${buildId}.zip" />
+		<antcall target="assemble" />
+	</target>
 	<target name="assemble.master-root.launcher-win32.wpf.x86">
-			<property name="archiveName" value="master-root-launcher-win32.wpf.x86.${buildId}.zip"/>
-			<antcall target="assemble" />
-	</target>	
+		<property name="archiveName" value="master-root-launcher-win32.wpf.x86.${buildId}.zip" />
+		<antcall target="assemble" />
+	</target>
 	<target name="assemble.master-root.launcher-linux.gtk.x86_64">
-		<property name="archiveName" value="master-root-launcher-linux.gtk.x86_64.${buildId}.zip"/>
+		<property name="archiveName" value="master-root-launcher-linux.gtk.x86_64.${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.master-root.launcher-linux.gtk.ppc">
-		<property name="archiveName" value="master-root-launcher-linux.gtk.ppc.${buildId}.zip"/>
+		<property name="archiveName" value="master-root-launcher-linux.gtk.ppc.${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.master-root.launcher-hpux.motif.ia64_32">
-			<property name="archiveName" value="master-root-launcher-hpux.motif.ia64_32.${buildId}.zip"/>
-			<antcall target="assemble" />
-		</target>
+		<property name="archiveName" value="master-root-launcher-hpux.motif.ia64_32.${buildId}.zip" />
+		<antcall target="assemble" />
+	</target>
 	<target name="assemble.master-root.launcher-solaris.gtk.sparc">
-		<property name="archiveName" value="master-root-launcher-solaris.gtk.sparc.${buildId}.zip"/>
+		<property name="archiveName" value="master-root-launcher-solaris.gtk.sparc.${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.master-root.launcher-aix.motif.ppc">
-		<property name="archiveName" value="master-root-launcher-aix.motif.ppc.${buildId}.zip"/>
+		<property name="archiveName" value="master-root-launcher-aix.motif.ppc.${buildId}.zip" />
 		<antcall target="assemble" />
-	</target>	
+	</target>
 	<target name="assemble.master-root.launcher-macosx.carbon.ppc">
-		<property name="archiveName" value="master-root-launcher-macosx.carbon.ppc.${buildId}.zip"/>
+		<property name="archiveName" value="master-root-launcher-macosx.carbon.ppc.${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.master-root.launcher-macosx.cocoa.x86">
-		<property name="archiveName" value="master-root-launcher-macosx.cocoa.x86.${buildId}.zip"/>
+		<property name="archiveName" value="master-root-launcher-macosx.cocoa.x86.${buildId}.zip" />
+		<antcall target="assemble" />
+	</target>
+	<target name="assemble.master-root.launcher-macosx.cocoa.x86_64">
+		<property name="archiveName" value="master-root-launcher-macosx.cocoa.x86_64.${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.master-root.sdk-linux.gtk.x86">
-		<property name="archiveName" value="master-root-sdk-linux.gtk.x86.${buildId}.zip"/>
+		<property name="archiveName" value="master-root-sdk-linux.gtk.x86.${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.master-root.sdk-linux.motif.x86">
-			<property name="archiveName" value="master-root-sdk-linux.motif.x86.${buildId}.zip"/>
-			<antcall target="assemble" />
-		</target>
+		<property name="archiveName" value="master-root-sdk-linux.motif.x86.${buildId}.zip" />
+		<antcall target="assemble" />
+	</target>
 	<target name="assemble.master-root.sdk-win32.wpf.x86">
-			<property name="archiveName" value="master-root-sdk-win32.wpf.x86.${buildId}.zip"/>
-			<antcall target="assemble"/>
+		<property name="archiveName" value="master-root-sdk-win32.wpf.x86.${buildId}.zip" />
+		<antcall target="assemble" />
 	</target>
 	<target name="assemble.master-root.sdk-win32.win32.x86">
-		<property name="archiveName" value="master-root-sdk-win32.win32.x86.${buildId}.zip"/>
+		<property name="archiveName" value="master-root-sdk-win32.win32.x86.${buildId}.zip" />
 		<antcall target="assemble" />
-	</target>	
+	</target>
 	<target name="assemble.master-root.sdk-win32.win32.x86_64">
-			<property name="archiveName" value="master-root-sdk-win32.win32.x86_64.${buildId}.zip"/>
-			<antcall target="assemble" />
-		</target>	
+		<property name="archiveName" value="master-root-sdk-win32.win32.x86_64.${buildId}.zip" />
+		<antcall target="assemble" />
+	</target>
 	<target name="assemble.master-root.sdk-linux.gtk.x86_64">
-		<property name="archiveName" value="master-root-sdk-linux.gtk.x86_64.${buildId}.zip"/>
+		<property name="archiveName" value="master-root-sdk-linux.gtk.x86_64.${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.master-root.sdk-linux.gtk.ppc">
-		<property name="archiveName" value="master-root-sdk-linux.gtk.ppc.${buildId}.zip"/>
+		<property name="archiveName" value="master-root-sdk-linux.gtk.ppc.${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.master-root.sdk-hpux.motif.ia64_32">
-		<property name="archiveName" value="master-root-sdk-hpux.motif.ia64_32.${buildId}.zip"/>
+		<property name="archiveName" value="master-root-sdk-hpux.motif.ia64_32.${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.master-root.sdk-solaris.gtk.sparc">
-		<property name="archiveName" value="master-root-sdk-solaris.gtk.sparc.${buildId}.zip"/>
+		<property name="archiveName" value="master-root-sdk-solaris.gtk.sparc.${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.master-root.sdk-aix.motif.ppc">
-		<property name="archiveName" value="master-root-sdk-aix.motif.ppc.${buildId}.zip"/>
+		<property name="archiveName" value="master-root-sdk-aix.motif.ppc.${buildId}.zip" />
 		<antcall target="assemble" />
-	</target>	
+	</target>
 	<target name="assemble.master-root.sdk-macosx.carbon.ppc">
-		<property name="archiveName" value="master-root-sdk-macosx.carbon.ppc.${buildId}.zip"/>
+		<property name="archiveName" value="master-root-sdk-macosx.carbon.ppc.${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.master-root.sdk-macosx.cocoa.x86">
-		<property name="archiveName" value="master-root-sdk-macosx.cocoa.x86.${buildId}.zip"/>
+		<property name="archiveName" value="master-root-sdk-macosx.cocoa.x86.${buildId}.zip" />
+		<antcall target="assemble" />
+	</target>
+	<target name="assemble.master-root.sdk-macosx.cocoa.x86_64">
+		<property name="archiveName" value="master-root-sdk-macosx.cocoa.x86_64.${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.master-root.platform-linux.gtk.x86">
-		<property name="archiveName" value="master-root-platform-linux.gtk.x86.${buildId}.zip"/>
+		<property name="archiveName" value="master-root-platform-linux.gtk.x86.${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.master-root.platform-win32.win32.x86">
-		<property name="archiveName" value="master-root-platform-win32.win32.x86.${buildId}.zip"/>
+		<property name="archiveName" value="master-root-platform-win32.win32.x86.${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.master-root.platform-win32.win32.x86_64">
-			<property name="archiveName" value="master-root-platform-win32.win32.x86_64.${buildId}.zip"/>
-			<antcall target="assemble" />
-		</target>
+		<property name="archiveName" value="master-root-platform-win32.win32.x86_64.${buildId}.zip" />
+		<antcall target="assemble" />
+	</target>
 	<target name="assemble.master-root.platform-win32.wpf.x86">
-			<property name="archiveName" value="master-root-platform-win32.wpf.x86.${buildId}.zip"/>
-			<antcall target="assemble" />
+		<property name="archiveName" value="master-root-platform-win32.wpf.x86.${buildId}.zip" />
+		<antcall target="assemble" />
 	</target>
 	<target name="assemble.master-root.platform-linux.gtk.x86_64">
-		<property name="archiveName" value="master-root-platform-linux.gtk.x86_64.${buildId}.zip"/>
+		<property name="archiveName" value="master-root-platform-linux.gtk.x86_64.${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.master-root.platform-linux.gtk.ppc">
-		<property name="archiveName" value="master-root-platform-linux.gtk.ppc.${buildId}.zip"/>
+		<property name="archiveName" value="master-root-platform-linux.gtk.ppc.${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.master-root.platform-linux.motif.x86">
-		<property name="archiveName" value="master-root-platform-linux.motif.x86.${buildId}.zip"/>
+		<property name="archiveName" value="master-root-platform-linux.motif.x86.${buildId}.zip" />
 		<antcall target="assemble" />
-	</target>	
+	</target>
 	<target name="assemble.master-root.platform-hpux.motif.ia64_32">
-			<property name="archiveName" value="master-root-platform-hpux.motif.ia64_32.${buildId}.zip"/>
-			<antcall target="assemble" />
+		<property name="archiveName" value="master-root-platform-hpux.motif.ia64_32.${buildId}.zip" />
+		<antcall target="assemble" />
 	</target>
 	<target name="assemble.master-root.platform-solaris.gtk.sparc">
-		<property name="archiveName" value="master-root-platform-solaris.gtk.sparc.${buildId}.zip"/>
+		<property name="archiveName" value="master-root-platform-solaris.gtk.sparc.${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.master-root.platform-aix.motif.ppc">
-		<property name="archiveName" value="master-root-platform-aix.motif.ppc.${buildId}.zip"/>
+		<property name="archiveName" value="master-root-platform-aix.motif.ppc.${buildId}.zip" />
 		<antcall target="assemble" />
-	</target>	
+	</target>
 	<target name="assemble.master-root.platform-macosx.carbon.ppc">
-		<property name="archiveName" value="master-root-platform-macosx.carbon.ppc.${buildId}.zip"/>
+		<property name="archiveName" value="master-root-platform-macosx.carbon.ppc.${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.master-root.platform-macosx.cocoa.x86">
-		<property name="archiveName" value="master-root-platform-macosx.cocoa.x86.${buildId}.zip"/>
+		<property name="archiveName" value="master-root-platform-macosx.cocoa.x86.${buildId}.zip" />
+		<antcall target="assemble" />
+	</target>
+	<target name="assemble.master-root.platform-macosx.cocoa.x86_64">
+		<property name="archiveName" value="master-root-platform-macosx.cocoa.x86_64.${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.master-root.rcp-common.common.common">
-		<property name="archiveName" value="master-root-rcp-${buildId}.zip"/>
+		<property name="archiveName" value="master-root-rcp-${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.master-root.examples-common.common.common">
-		<property name="archiveName" value="master-root-examples-${buildId}.zip"/>
+		<property name="archiveName" value="master-root-examples-${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble.master-root.equinox-launcher-linux.gtk.x86">
@@ -189,12 +201,12 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<antcall target="assemble.equinox" />
 	</target>
 	<target name="assemble.master-root.equinox-launcher-win32.win32.x86_64">
-			<property name="archiveName" value="launchers-win32.win32.x86_64.${buildId}.zip" />
-			<antcall target="assemble.equinox" />
+		<property name="archiveName" value="launchers-win32.win32.x86_64.${buildId}.zip" />
+		<antcall target="assemble.equinox" />
 	</target>
 	<target name="assemble.master-root.equinox-launcher-win32.wpf.x86">
-			<property name="archiveName" value="launchers-win32.wpf.x86.${buildId}.zip" />
-			<antcall target="assemble.equinox" />
+		<property name="archiveName" value="launchers-win32.wpf.x86.${buildId}.zip" />
+		<antcall target="assemble.equinox" />
 	</target>
 	<target name="assemble.master-root.equinox-launcher-linux.gtk.x86_64">
 		<property name="archiveName" value="launchers-linux.gtk.x86_64.${buildId}.tar.gz" />
@@ -205,13 +217,13 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<antcall target="assemble.equinox" />
 	</target>
 	<target name="assemble.master-root.equinox-launcher-hpux.motif.ia64_32">
-			<property name="archiveName" value="launchers-hpux.motif.ia64_32.${buildId}.zip" />
-			<antcall target="assemble.equinox" />
+		<property name="archiveName" value="launchers-hpux.motif.ia64_32.${buildId}.zip" />
+		<antcall target="assemble.equinox" />
 	</target>
 	<target name="assemble.master-root.equinox-launcher-linux.motif.x86">
 		<property name="archiveName" value="launchers-linux.motif.x86.${buildId}.tar.gz" />
 		<antcall target="assemble.equinox" />
-	</target>	
+	</target>
 	<target name="assemble.master-root.equinox-launcher-solaris.gtk.sparc">
 		<property name="archiveName" value="launchers-solaris.gtk.sparc.${buildId}.zip" />
 		<antcall target="assemble.equinox" />
@@ -219,7 +231,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="assemble.master-root.equinox-launcher-aix.motif.ppc">
 		<property name="archiveName" value="launchers-aix.motif.ppc.${buildId}.zip" />
 		<antcall target="assemble.equinox" />
-	</target>	
+	</target>
 	<target name="assemble.master-root.equinox-launcher-macosx.carbon.ppc">
 		<property name="archiveName" value="launchers-macosx.carbon.ppc.${buildId}.tar.gz" />
 		<antcall target="assemble.equinox" />
@@ -232,7 +244,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<property name="archiveFullPath" value="${buildDirectory}/${buildLabel}/${archiveName}" />
 		<ant antfile="${assembleScriptName}" />
 	</target>
-	
+
 	<target name="assemble.equinox">
 		<property name="archiveFullPath" value="${buildDirectory}/${buildLabel}/${archiveName}" />
 		<ant antfile="${assembleScriptName}" />
@@ -250,11 +262,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<!-- ***  change the repo info -->
 		<property name="mapCvsRoot" value=":pserver:anonymous@dev.eclipse.org:/home/eclipse" />
 		<property name="mapVersionTag" value="HEAD" />
-		<cvs cvsRoot="${mapCvsRoot}"
-		package="org.eclipse.releng"
-		dest="${buildDirectory}/maps"
-		tag="${mapVersionTag}"
-	/>
+		<cvs cvsRoot="${mapCvsRoot}" package="org.eclipse.releng" dest="${buildDirectory}/maps" tag="${mapVersionTag}" />
 		<!--compare the map files project-->
 		<antcall target="compareMapFiles" />
 		<!--tag the map files project-->
@@ -262,7 +270,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	</target>
 
 	<target name="compareMapFiles" if="compareMaps">
-		<property file="${mapTag.properties}"/>
+		<property file="${mapTag.properties}" />
 		<property name="cvsDiffFile" value="${buildDirectory}/cvsDiff.txt" />
 		<cvs cvsRoot="${mapCvsRoot}" dest="${buildDirectory}/maps" command="diff -w -r ${lastMapTag}" output="${cvsDiffFile}" />
 		<modifiedMaps mapDiffFile="${cvsDiffFile}" />
@@ -285,7 +293,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- ===================================================================== -->
 	<!-- Steps to do after setup but before starting the build proper -->
 	<!-- ===================================================================== -->
-	<target name="postSetup" >
+	<target name="postSetup">
 	</target>
 
 	<!-- ===================================================================== -->

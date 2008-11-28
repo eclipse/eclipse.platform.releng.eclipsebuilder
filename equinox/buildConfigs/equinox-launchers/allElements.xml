@@ -67,6 +67,10 @@
 		<property name="archiveName" value="launchers-macosx.cocoa.x86.${buildId}.tar.gz" />
 		<antcall target="assemble" />
 	</target>	
+	<target name="assemble.org.eclipse.equinox.launchers-feature.macosx.cocoa.x86_64">
+		<property name="archiveName" value="launchers-macosx.cocoa.x86_64.${buildId}.tar.gz" />
+		<antcall target="assemble" />
+	</target>	
 	
 	<target name="assemble">
 			 		 <mkdir dir="${equinoxPostingDirectory}/${buildLabel}/checksum" />

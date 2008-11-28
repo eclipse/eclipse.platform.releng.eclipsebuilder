@@ -1,7 +1,7 @@
 <project name="Build specific targets and properties" default="noDefault" basedir=".">
 
 	<property name="postingDirectory" value="${buildDirectory}" />
-	
+
 	<!-- ===================================================================== -->
 	<!-- Run a given ${target} on all elements being built -->
 	<!-- ===================================================================== -->
@@ -24,17 +24,17 @@
 		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-win32.zip" />
 		<antcall target="assemble" />
 	</target>
-	
+
 	<target name="assemble.org.eclipse.platform.sdk.win32.win32.x86_64">
-			<property name="archiveName" value="eclipse-platform-SDK-${buildId}-win32-x86_64.zip" />
-			<antcall target="assemble" />
-		</target>
+		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-win32-x86_64.zip" />
+		<antcall target="assemble" />
+	</target>
 
 	<target name="assemble.org.eclipse.platform.sdk.win32.wpf.x86">
-			<property name="archiveName" value="eclipse-platform-SDK-${buildId}-win32-wpf.zip" />
-			<antcall target="assemble" />
-		</target>
-	
+		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-win32-wpf.zip" />
+		<antcall target="assemble" />
+	</target>
+
 	<target name="assemble.org.eclipse.platform.sdk.linux.motif.x86">
 		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-linux-motif.tar.gz" />
 		<antcall target="assemble" />
@@ -49,25 +49,25 @@
 		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-linux-gtk-x86_64.tar.gz" />
 		<antcall target="assemble" />
 	</target>
-	
-	<target name="assemble.org.eclipse.platform.sdk.linux.gtk.ia64"/>
+
+	<target name="assemble.org.eclipse.platform.sdk.linux.gtk.ia64" />
 	<target name="assemble.org.eclipse.platform.sdk.linux.gtk.ppc">
-	<target name="assemble.org.eclipse.platform.sdk.solaris.motif.sparc"/>		
-		
-	<property name="archiveName" value="eclipse-platform-SDK-${buildId}-linux-gtk-ppc.tar.gz" />
+		<target name="assemble.org.eclipse.platform.sdk.solaris.motif.sparc" />
+
+		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-linux-gtk-ppc.tar.gz" />
 		<antcall target="assemble" />
 	</target>
-	
+
 	<target name="assemble.org.eclipse.platform.sdk.hpux.motif.ia64_32">
-			<property name="archiveName" value="eclipse-platform-SDK-${buildId}-hpux-motif-ia64_32.zip" />
-			<antcall target="assemble" />
+		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-hpux-motif-ia64_32.zip" />
+		<antcall target="assemble" />
 	</target>
-	
+
 	<target name="assemble.org.eclipse.platform.sdk.solaris.gtk.sparc">
 		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-solaris-gtk.zip" />
 		<antcall target="assemble" />
 	</target>
-	
+
 	<target name="assemble.org.eclipse.platform.sdk.qnx.photon.x86" />
 
 	<target name="assemble.org.eclipse.platform.sdk.aix.motif.ppc">
@@ -75,31 +75,36 @@
 		<antcall target="assemble" />
 	</target>
 
-	<target name="assemble.org.eclipse.platform.sdk.hpux.motif.PA_RISC"/>	
+	<target name="assemble.org.eclipse.platform.sdk.hpux.motif.PA_RISC" />
 
 	<target name="assemble.org.eclipse.platform.sdk.macosx.carbon.ppc">
 		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-macosx-carbon.tar.gz" />
 		<antcall target="assemble" />
 	</target>
-	
+
 	<target name="assemble.org.eclipse.platform.sdk.macosx.cocoa.x86">
-			<property name="archiveName" value="eclipse-platform-SDK-${buildId}-macosx-cocoa.tar.gz" />
-			<antcall target="assemble" />
+		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-macosx-cocoa.tar.gz" />
+		<antcall target="assemble" />
+	</target>
+
+	<target name="assemble.org.eclipse.platform.sdk.macosx.cocoa.x86_64">
+		<property name="archiveName" value="eclipse-platform-SDK-${buildId}-macosx-cocoa-x86_64.tar.gz" />
+		<antcall target="assemble" />
 	</target>
 
 	<target name="assemble">
 		<property name="archiveFullPath" value="${buildDirectory}/${buildLabel}/${archiveName}" />
 		<ant antfile="${assembleScriptName}" />
 	</target>
-		<target name="postPackage">
-			<mkdir dir="${buildDirectory}/${buildLabel}/checksum"/>
-			<exec executable="sh" dir="${buildDirectory}/${buildLabel}">
-				<arg line="${eclipse.build.configs}/../../extras/produceChecksum" />
-			</exec>
-			<move todir="${postingDirectory}/${buildLabel}">
-				<fileset dir="${buildDirectory}/${buildLabel}" />
-			</move>
-		</target>
+	<target name="postPackage">
+		<mkdir dir="${buildDirectory}/${buildLabel}/checksum" />
+		<exec executable="sh" dir="${buildDirectory}/${buildLabel}">
+			<arg line="${eclipse.build.configs}/../../extras/produceChecksum" />
+		</exec>
+		<move todir="${postingDirectory}/${buildLabel}">
+			<fileset dir="${buildDirectory}/${buildLabel}" />
+		</move>
+	</target>
 
 	<!-- ===================================================================== -->
 	<!-- Check out map files from correct repository -->
@@ -120,7 +125,7 @@
 	</target>
 
 	<target name="compareMapFiles" if="compareMaps">
-		<property file="${mapTag.properties}"/>
+		<property file="${mapTag.properties}" />
 		<property name="cvsDiffFile" value="${buildDirectory}/cvsDiff.txt" />
 		<cvs cvsRoot="${mapCvsRoot}" dest="${buildDirectory}/maps" command="diff -w -r ${lastMapTag}" output="${cvsDiffFile}" />
 		<modifiedMaps mapDiffFile="${cvsDiffFile}" />
@@ -135,9 +140,7 @@
 	</target>
 
 	<target name="getPrebuiltElements">
-		<generateBaseFetchScript
-			mapfile="${buildDirectory}/maps/org.eclipse.releng/maps/base.map"
-			outputfile="${buildDirectory}/fetchbase.xml"/>
+		<generateBaseFetchScript mapfile="${buildDirectory}/maps/org.eclipse.releng/maps/base.map" outputfile="${buildDirectory}/fetchbase.xml" />
 		<ant antfile="${buildDirectory}/fetchbase.xml" />
 	</target>
 
@@ -176,7 +179,7 @@
 			<property name="id" value="org.eclipse.equinox.executable" />
 		</ant>
 		<!--create launchersrc.zip and copy to org.eclipse.platform plugin (fix for bug #49237) -->
-		<zip destfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/features/org.eclipse.equinox.executable" includes="library/**" />		
+		<zip destfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/features/org.eclipse.equinox.executable" includes="library/**" />
 
 	</target>
 

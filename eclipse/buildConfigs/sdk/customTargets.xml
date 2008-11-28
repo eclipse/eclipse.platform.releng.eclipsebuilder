@@ -48,10 +48,15 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<property name="archiveName" value="eclipse-SDK-${buildId}-macosx-carbon.tar.gz" />
 		<antcall target="assemble" />
 	</target>
-	
+
 	<target name="assemble.org.eclipse.sdk.macosx.cocoa.x86">
-			<property name="archiveName" value="eclipse-SDK-${buildId}-macosx-cocoa.tar.gz" />
-			<antcall target="assemble" />
+		<property name="archiveName" value="eclipse-SDK-${buildId}-macosx-cocoa.tar.gz" />
+		<antcall target="assemble" />
+	</target>
+
+	<target name="assemble.org.eclipse.sdk.macosx.cocoa.x86_64">
+		<property name="archiveName" value="eclipse-SDK-${buildId}-macosx-cocoa-x86_64.tar.gz" />
+		<antcall target="assemble" />
 	</target>
 
 	<target name="assemble.org.eclipse.sdk.linux.gtk.x86">
@@ -183,15 +188,15 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Steps to do after the fetch -->
 	<!-- ===================================================================== -->
 	<target name="postFetch">
-		<concat	destfile="${buildDirectory}/plugins/org.eclipse.platform/build.properties" append="true">qualifier=v${timestamp}</concat>
-		<concat	destfile="${buildDirectory}/plugins/org.eclipse.sdk/build.properties" append="true">qualifier=v${timestamp}</concat>
-		
+		<concat destfile="${buildDirectory}/plugins/org.eclipse.platform/build.properties" append="true">qualifier=v${timestamp}</concat>
+		<concat destfile="${buildDirectory}/plugins/org.eclipse.sdk/build.properties" append="true">qualifier=v${timestamp}</concat>
+
 		<ant antfile="${genericTargets}" target="fetchElement">
 			<property name="type" value="feature" />
 			<property name="id" value="org.eclipse.equinox.executable" />
 		</ant>
 		<zip zipfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/features/org.eclipse.equinox.executable" includes="library/" />
-		
+
 		<!--copy linux motif about_files to in temp location where it will be copied into root of eclipse at assembly time-->
 		<property name="linux.motif.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.motif.x86" />
 		<mkdir dir="${linux.motif.rootfiles}" />
