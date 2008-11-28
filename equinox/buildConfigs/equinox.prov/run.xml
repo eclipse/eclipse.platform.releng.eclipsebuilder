@@ -803,7 +803,7 @@
 		<echo message="basebuilder ${base.builder}/plugins/org.eclipse.equinox.launcher" />
 		<delete dir="${base.builder}/configuration/.settings" includeemptydirs="true" failonerror="false" />
 		<!--	<copy file="${equinox.build.configs}/equinox.prov/files/config.ini.director" tofile="${base.builder}/configuration/config.ini" overwrite="true" /> -->
-		<exec executable="${base.builder}/eclipse" failonerror="false" dir="${base.builder}" timeout="900000" output="${postingDirectory}/${buildLabel}/buildlogs/director.txt" resultproperty="${directorcode}">
+		<exec executable="${base.builder}/eclipse" failonerror="false" dir="${base.builder}" timeout="900000" output="${postingDirectory}/${buildLabel}/buildlogs/director.txt" resultproperty="directorcode">
 			<arg line="-vm ${java15-home}/bin/java" />
 			<arg line="-application org.eclipse.equinox.p2.director.app.application" />
 			<arg line="-nosplash" />
