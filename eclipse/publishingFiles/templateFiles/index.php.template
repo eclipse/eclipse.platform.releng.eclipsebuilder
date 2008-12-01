@@ -216,9 +216,9 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				if (file_exists("performance/performance.php")) {
 					echo "<li>";
 					$generated=file_exists("performance/global_fp.php");
-					if (!$generated) echo <i>;
+					if (!$generated) echo "<i>";
 					echo "<a href=\"performance/performance.php\">View the <b>performance results</b> for the current build.</a>";
-					if (!$generated) echo </i>;
+					if (!$generated) echo "</i>";
 					echo "</li>";
 				}
 				?>
