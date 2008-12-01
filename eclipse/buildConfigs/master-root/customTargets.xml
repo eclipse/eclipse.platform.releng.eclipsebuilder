@@ -240,6 +240,10 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<property name="archiveName" value="launchers-macosx.cocoa.x86.${buildId}.tar.gz" />
 		<antcall target="assemble.equinox" />
 	</target>
+	<target name="assemble.master-root.equinox-launcher-macosx.cocoa.x86_64">
+		<property name="archiveName" value="launchers-macosx.cocoa.x86_64.${buildId}.tar.gz" />
+		<antcall target="assemble.equinox" />
+	</target>
 	<target name="assemble">
 		<property name="archiveFullPath" value="${buildDirectory}/${buildLabel}/${archiveName}" />
 		<ant antfile="${assembleScriptName}" />
