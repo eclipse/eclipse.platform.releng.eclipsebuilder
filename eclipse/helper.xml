@@ -112,12 +112,12 @@
 				<antcall target="packageSwtStandalone">
 					<param name="os" value="macosx" />
 					<param name="ws" value="carbon" />
-					<param name="arch" value="ppc" />
+					<param name="arch" value="" />
 				</antcall>
 				<antcall target="packageSwtStandalone">
 					<param name="os" value="macosx" />
 					<param name="ws" value="cocoa" />
-					<param name="arch" value="x86" />
+					<param name="arch" value="" />
 				</antcall>
 				<antcall target="packageSwtStandalone">
 					<param name="os" value="macosx" />
