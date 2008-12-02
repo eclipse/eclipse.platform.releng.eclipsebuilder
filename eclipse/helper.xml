@@ -255,7 +255,7 @@
 		<!--replace buildid in vm.properties for JVM location settings-->
 		<replace dir="${eclipse.build.configs}/sdk.tests/testConfigs" token="@buildid@" value="${buildId}" includes="**/vm.properties" />
 
-		<target name="addnoperfmarker" />
+		<antcall target="addnoperfmarker" />
 
 		<parallel>
 			<antcall target="test-JUnit" />
