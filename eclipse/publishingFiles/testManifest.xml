@@ -155,8 +155,8 @@
 		<platform id="SWTHP" name="HPUX (IA64_32/Motif)" fileName="swt-@build@-motif-hpux-ia64_32.zip"></platform>
 		<platform id="SWTNP" name="QNX (x86/Photon)" fileName="swt-@build@-photon-qnx-x86.zip"></platform>
 		<platform id="SWTAM" name="AIX (PPC/Motif)" fileName="swt-@build@-motif-aix-ppc.zip"></platform>		
-		<platform id="SWTMC" name="Mac OSX (Mac/Carbon) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_4.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="swt-@build@-carbon-macosx-ppc.zip"></platform>
-		<platform id="SWTMCC" name="Mac OSX (Mac/Cocoa) **early access** (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_4.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="swt-@build@-cocoa-macosx-x86.zip"></platform>
+		<platform id="SWTMC" name="Mac OSX (Mac/Carbon) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_4.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="swt-@build@-carbon-macosx.zip"></platform>
+		<platform id="SWTMCC" name="Mac OSX (Mac/Cocoa) **early access** (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_4.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="swt-@build@-cocoa-macosx.zip"></platform>
 		<platform id="SWTMCC64" name="Mac OSX (Mac/Cocoa/x86_64) **early access** (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_4.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="swt-@build@-cocoa-macosx-x86_64.zip"></platform>
 	</zipType>
 
