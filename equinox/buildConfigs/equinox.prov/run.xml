@@ -163,6 +163,9 @@
 		<property name="equinoxTestResults" value="${equinoxPostingDirectory}/${buildLabel}/testresults" />
 		<mkdir dir="${equinoxTestResults}" />
 		<copy todir="${equinoxTestResults}" flatten="true">
+			<fileset dir="${base.builder}/configuration">
+					<include name="**/*.log" />
+			</fileset>
 			<fileset dir="${p2.root}">
 				<include name="**/*.log" />
 			</fileset>
