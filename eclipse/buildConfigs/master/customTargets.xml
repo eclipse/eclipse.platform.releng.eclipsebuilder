@@ -191,7 +191,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<tstamp>
 			<format property="preprocess.time" pattern="MM/dd/yyyy HH:mm:ss" />
 		</tstamp>
-		<property name="masterTime" value="${buildDirectory}/mastertime.txt" />
+		<property name="masterTime" value="${buildlogs}/mastertime.txt" />
 		<echo message="preProcess master feature ${preprocess.time} ${line.separator}" file="${masterTime}" append="true" />
 		<replace dir="${buildDirectory}/plugins" value="${buildId}" token="@build@">
 			<include name="**/about.mappings" />
@@ -211,7 +211,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<tstamp>
 			<format property="postprocess.time" pattern="MM/dd/yyyy HH:mm:ss" />
 		</tstamp>
-		<property name="masterTime" value="${buildDirectory}/mastertime.txt" />
+		<property name="masterTime" value="${buildlogs}/mastertime.txt" />
 		<echo message="postProcess master feature ${postprocess.time} ${line.separator}" file="${masterTime}" append="true" />
 		<antcall target="gatherLogs" />
 

@@ -43,6 +43,13 @@
 	<!--default location for build output, parent to ${buildLabel}-->
 	<property name="postingDirectory" value="${buildDirectory}" />
 	<property name="equinoxPostingDirectory" value="${postingDirectory}/../../equinox/drops" />
+	
+	<!--p2 repo name-->
+	<property name="p2.repo.name" value="&quot;Eclipse Project Test Site&quot;" />
+	
+	<!--location for buildlogs-->
+	<property name="buildlogs" value="${postingDirectory}/${buildLabel}/buildlogs"/>
+	<mkdir dir="${buildlogs}" />
 
 	<target name="main" depends="init">
 		<antcall target="buildEclipseSourceDrops" />
@@ -102,8 +109,7 @@
 		<condition property="fetchjetty" value="true">
 			<equals arg1="${buildType}" arg2="N" />
 		</condition>
-		<property name="p2.repo.name" value="&quot;Eclipse Project Test Site&quot;" />
-		<mkdir dir="${postingDirectory}/${buildLabel}/buildlogs" />
+				
 	</target>
 
 	<target name="buildMasterFeature">
@@ -175,7 +181,7 @@
 		<property name="repack" value="" />
 
 		<!--pack200-->
-		<java jar="${eclipse.home}/plugins/org.eclipse.equinox.launcher.jar" fork="true" timeout="10800000" jvm="${java15-home}/bin/java" failonerror="true" maxmemory="768m" error="${postingDirectory}/${buildLabel}/buildlogs/packerrorlog.txt" dir="${buildDirectory}" output="${postingDirectory}/${buildLabel}/buildlogs/packoutputlog.txt">
+		<java jar="${eclipse.home}/plugins/org.eclipse.equinox.launcher.jar" fork="true" timeout="10800000" jvm="${java15-home}/bin/java" failonerror="true" maxmemory="768m" error="${buildlogs}/packerrorlog.txt" dir="${buildDirectory}" output="${buildlogs}/packoutputlog.txt">
 			<jvmarg value="-Dorg.eclipse.update.jarprocessor.pack200=${eclipse.build.configs}/../../extras" />
 			<arg line="-consolelog -application org.eclipse.update.core.siteOptimizer" />
 			<arg line="-jarProcessor -verbose -outputDir ${buildLabel} -processAll -pack ${repack} ${packtmp}/${archiveName}" />

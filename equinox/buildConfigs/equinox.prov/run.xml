@@ -5,6 +5,7 @@
 		<mkdir dir="${p2.root}" />
 		<property name="p2.output.base" value="${p2.root}/equinox.p2.build" />
 		<mkdir dir="${p2.output.base}" />
+	    <property name="directorlog" value="${buildlogs}/director.txt"/>
 
 		<condition property="sdk.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-ppc.tar.gz">
 			<equals arg1="${os.arch}" arg2="ppc64" />
@@ -162,7 +163,7 @@
 		<!--Collect logs from p2 run and copy to build directory-->
 		<property name="equinoxTestResults" value="${equinoxPostingDirectory}/${buildLabel}/testresults" />
 		<mkdir dir="${equinoxTestResults}" />
-		<copy todir="${equinoxTestResults}" flatten="true">
+		<copy todir="${buildlogs}" flatten="true">
 			<fileset dir="${base.builder}/configuration">
 					<include name="**/*.log" />
 			</fileset>
@@ -806,7 +807,7 @@
 		<echo message="basebuilder ${base.builder}/plugins/org.eclipse.equinox.launcher" />
 		<delete dir="${base.builder}/configuration/.settings" includeemptydirs="true" failonerror="false" />
 		<!--	<copy file="${equinox.build.configs}/equinox.prov/files/config.ini.director" tofile="${base.builder}/configuration/config.ini" overwrite="true" /> -->
-		<exec executable="${base.builder}/eclipse" failonerror="false" dir="${base.builder}" timeout="900000" output="${postingDirectory}/${buildLabel}/buildlogs/director.txt" resultproperty="directorcode">
+		<exec executable="${base.builder}/eclipse" failonerror="false" dir="${base.builder}" timeout="900000" output="${directorlog}" resultproperty="directorcode">
 			<arg line="-vm ${java15-home}/bin/java" />
 			<arg line="-application org.eclipse.equinox.p2.director.app.application" />
 			<arg line="-nosplash" />
@@ -831,8 +832,8 @@
 			<arg line="-Declipse.p2.data.area=${p2.director.install.path}/p2" />
 			<arg line="-Declipse.p2.MD5Check=false" />
 		</exec>
-		<echo message="director ${p2.director.install.path}" file="${postingDirectory}/${buildLabel}/buildlogs/director.txt" append="true" />
-		<echo message="${directorcode}" file="${postingDirectory}/${buildLabel}/buildlogs/director.txt" append="true" />
+		<echo message="director ${p2.director.install.path}" file="${directorlog}" append="true" />
+		<echo message="${directorcode}" file="${directorlog}" append="true" />
 
 		<!-- delete the metadata cache as well as the artifacts for unzipped bundles -->
 		<delete failonerror="false" includeEmptyDirs="true" dir="${p2.director.install.path}/p2/org.eclipse.equinox.p2.core/cache" />
