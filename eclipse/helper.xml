@@ -346,7 +346,7 @@
 		</condition>
 		<property name="configArgs" value="" />
 		<!--<property name="eclipse.perf.config.descriptors" value="Win XP Sun 1.5.0_10 (2 x 3.00GHz, 3GB RAM), Win Vista Sun 1.6_04 (2 x 3.00GHz, 3GB RAM),  SLED 10 Sun 1.50_10 (2 x 3.00GHz, 3GB RAM), RHEL 5.0 Sun 1.6_04 (2 x 3.00GHz, 3GB RAM)"/> -->
-		<property name="eclipse.perf.config.descriptors" value="Win XP Sun 1.5.0_10 (2 x 3.00GHz - 3GB RAM), SLED 10 Sun 1.5.0_10 (2 x 3.00GHz - 3GB RAM), RHEL 5.0 Sun 6.0_04 (2 x 3.00GHz - 3GB RAM)" />
+		<property name="eclipse.perf.config.descriptors" value="epwin2, Win XP Sun 1.5.0_10 (2 x 3.00GHz - 3GB RAM); eplnx1, SLED 10 Sun 1.5.0_10 (2 x 3.00GHz - 3GB RAM); eplnx2, RHEL 5.0 Sun 6.0_04 (2 x 3.00GHz - 3GB RAM)" />
 		<!--	-config epwin2,epwin3,eplnx1,eplnx2 -->
 
 		<java jar="${basedir}/../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar" fork="true" maxmemory="512m" error="${buildlogs}/perfgenerror.txt" output="${buildlogs}/perfgenoutput.txt">
