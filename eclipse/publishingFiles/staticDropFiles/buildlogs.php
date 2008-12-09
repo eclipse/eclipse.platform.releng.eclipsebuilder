@@ -112,19 +112,17 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 </div>
 
 
+</div>
+<div id="topnavsep"></div>
 <div id="leftcol">
 <ul id="leftnav">
-<li><a href="#Equinox">Eclipse Equinox</a></li>
-<li><a href="#Framework">Framework</a></li>
-<li><a href="#Addon">Add-on Bundles</a></li>
-<li><a href="#Incubator">Incubator</a></li>
-<li><a href="#ProvisioningIncubator">Provisioning Incubator</a></li>
-<li><a href="#Other">Other</a></li>
-<li><a href="#Launchers">Launchers</a></li>
+<li><a href="logs.php">Logs</a></li>
+<li><a href="testResults.php#UnitTest">Unit Test Results</a></li>
+<li><a href="testResults.php#PluginsErrors">Plugins Containing Compile Errors</a></li>
 
   </li>
   <li style="background-image: url(../../../eclipse.org-common/stylesheets/leftnav_fade.jpg); background-repeat: repeat-x; border-style: none;">
-                        <br /><br /><br /><br /><br />
+                                                                                                  <br /><br /><br /><br /><br />
   </li>
 </ul>
 
@@ -137,17 +135,13 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 <?php 
     global $buildId;
     $buildId = getBuildId(); 
-    echo "<title>Logs for Equinox $buildId </title>\n";
+    echo "<title>Release Engineering logs for  $buildId </title>\n";
 
-echo "<h3>Logs for Equinox $buildId</h3>\n";
+echo "<h3>Release Engineering Logs for  $buildId</h3>\n";
 ?>
 
-<ul>
-<li>
-<strong><a name="p2logs" id="p2logs"></a>P2 Logs</strong>
-The .log files that were generated during the p2 build.
 <?php
-        listLogs("testresults");
+        listLogs("buildlogs");
 ?>
 </li>
 </ul>
