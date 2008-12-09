@@ -183,7 +183,7 @@
 			<param name="p2.os" value="win32" />
 			<param name="p2.ws" value="win32" />
 			<param name="p2.arch" value="x86" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${repo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -195,7 +195,7 @@
 			<param name="p2.os" value="linux" />
 			<param name="p2.ws" value="gtk" />
 			<param name="p2.arch" value="x86" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${repo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -207,7 +207,7 @@
 			<param name="p2.os" value="macosx" />
 			<param name="p2.ws" value="carbon" />
 			<param name="p2.arch" value="ppc" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${repo}" />
 		</antcall>
 	</target>
 
