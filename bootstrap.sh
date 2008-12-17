@@ -18,7 +18,8 @@ proc=$$
 recipients=
 
 #default text message notification list
-textRecipients=6132962910@txt.bellmobility.ca
+#textRecipients=6132962910@txt.bellmobility.ca
+textRecipients=
 
 #sets skip.performance.tests Ant property
 skipPerf=""
@@ -49,7 +50,20 @@ tag=""
 #buildProjectTags=v20081114a
 #buildProjectTags=v20081116a
 #buildProjectTags=v20081118a
-buildProjectTags=v20081119
+#buildProjectTags=v20081119
+#buildProjectTags=v20081120
+#buildProjectTags=v20081121
+#buildProjectTags=v20081124a
+#buildProjectTags=v20081202
+#buildProjectTags=v20081205a
+#new pde build for jetty
+#buildProjectTags=v20081205b
+#buildProjectTags=v20081208b
+#buildProjectTags=v20081209a
+#buildProjectTags=v20081210
+#buildProjectTags=v20081210a
+#buildProjectTags=v20081215
+buildProjectTags=v20081216b
 
 #updateSite property setting
 updateSite=""
@@ -260,7 +274,7 @@ echo buildId=$buildId >> monitor.properties
 echo timestamp=$timestamp >> monitor.properties 
 echo buildLabel=$buildLabel >> monitor.properties 
 echo recipients=$recipients >> monitor.properties
-echo textRecipients=$textRecipients >> monitor.properties
+#echo textRecipients=$textRecipients >> monitor.properties
 echo log=$postingDirectory/$buildLabel/index.php >> monitor.properties
 
 #the base command used to run AntRunner headless
@@ -313,6 +327,6 @@ $buildCommandRSS
 fi
 
 #clean up
-#rm -rf $builderDir
+rm -rf $builderDir
 
 
