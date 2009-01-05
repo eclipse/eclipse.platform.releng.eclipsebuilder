@@ -63,7 +63,11 @@ tag=""
 #buildProjectTags=v20081210
 #buildProjectTags=v20081210a
 #buildProjectTags=v20081215
-buildProjectTags=v20081216b
+#buildProjectTags=v20081216b
+#ejlnx1, ejlnx2
+#buildProjectTags=v20081217
+#remove extra build scripts
+buildProjectTags=v20090102b
 
 #updateSite property setting
 updateSite=""
