@@ -82,12 +82,7 @@
 		<mkdir dir="${testResults}" />
 
 		<parallel>
-			<!--slow machines-->
-			<antcall target="test">
-				<param name="tester" value="${basedir}/win32xp-perf" />
-				<param name="cfgKey" value="win32xp-perf" />
-				<param name="markerName" value="eclipse-win32xp-perf-${buildId}" />
-			</antcall>
+			<!--slow machines-->			
 			<antcall target="test">
 				<param name="tester" value="${basedir}/rhelws3-perf" />
 				<param name="cfgKey" value="rhelws3-perf" />
