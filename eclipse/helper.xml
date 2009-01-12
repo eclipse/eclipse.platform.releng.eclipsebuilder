@@ -382,23 +382,17 @@
 
 	<target name="rSyncWithSnzZrh" unless="test">
 		<waitfor maxwait="300" maxwaitunit="minute" checkevery="1" checkeveryunit="minute">
-			<available file="${postingDirectory}/${buildLabel}/eclipse-Automated-Tests-${buildId}.zip" />
+			<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-SDK-${buildId}-win32.zip.md5" />
+			<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-SDK-${buildId}-linux-gtk.tar.gz.md5" />
+			<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-SDK-${buildId}-macosx-carbon.tar.gz.md5" />
 		</waitfor>
-		<antcall target="zrhBuilds" />
-		<antcall target="snzBuilds" />
-	</target>
-
-	<target name="snzBuilds">
-		<!--copy drops to local directory for rsync with snz-->
-		<copy todir="/builds/transfer/files/snz">
-			<fileset dir="${postingDirectory}" includes="${buildLabel}/eclipse-SDK-*-win32.zip,${buildLabel}/eclipse-SDK-*-linux-gtk.tar.gz" excludes="${buildLabel}/eclipse-SDK-examples-*-win32.zip" />
-		</copy>
-	</target>
+		<antcall target="zrhBuilds" />	
+	</target>	
 
 	<target name="zrhBuilds">
 		<!--copy drops to local directory for rsync with zrh-->
 		<copy todir="/builds/transfer/files/zrh">
-			<fileset dir="${postingDirectory}" includes="${buildLabel}/eclipse-SDK-*-macosx-carbon.tar.gz,${buildLabel}/eclipse-SDK-*-win32.zip,${buildLabel}/eclipse-SDK-*-linux-*.tar.gz" excludes="${buildLabel}/eclipse-SDK-examples-*-win32.zip,${buildLabel}/eclipse-SDK-*-linux-gtk-x86_64.tar.gz,${buildLabel}/eclipse-SDK-*-linux-gtk-ppc.tar.gz" />
+			<fileset dir="${postingDirectory}" includes="${buildLabel}/eclipse-SDK-*-macosx-carbon.tar.gz,${buildLabel}/eclipse-SDK-*-win32.zip,${buildLabel}/eclipse-SDK-*-linux-*.tar.gz" excludes="${buildLabel}/eclipse-SDK-examples-*-win32.zip,${buildLabel}/eclipse-SDK-*-linux-gtk-x86_64.tar.gz,${buildLabel}/eclipse-SDK-*-linux-gtk-ppc.tar.gz,${buildLabel}/eclipse-SDK-*-linux-motif.tar.gz" />
 		</copy>
 	</target>
 	<!-- ===================================================================== -->
