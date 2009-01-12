@@ -725,7 +725,7 @@
 			<param name="p2.generator.root" value="agent" />
 			<param name="p2.generator.root.version" value="${p2.agent.version}" />
 			<!-- publish the metadata to the temp repo -->
-			<param name="p2.repo" value="${repo}" />
+			<param name="p2.repo" value="${updateSite}" />
 		</antcall>
 	</target>
 
