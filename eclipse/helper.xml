@@ -353,11 +353,9 @@
 						-print					    
 						-output ${postingDirectory}/${buildLabel}/performance/
 						-config epwin2,eplnx1,eplnx2 
+			            -dataDir ${postingDirectory}/../../data/v35
 						-config.properties ${eclipse.perf.config.descriptors}
 						-scenario.pattern org.eclipse.%.test%" />
-			<!-- Remove data dir until bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=258527 is fixed...
-			            -dataDir ${postingDirectory}/../../data/v35
-			-->
 			<!-- baselines arguments are no longer necessary since bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=209322 has been fixed...
 						-baseline ${eclipse.perf.ref}
 						-baseline.prefix R-3.4_200806172000
