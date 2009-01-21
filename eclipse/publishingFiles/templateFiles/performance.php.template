@@ -12,14 +12,17 @@ Performance fingerprint</FONT></B></TD></TR></TABLE>
     $index=0;
     $fpcount=0;
 
-    include("global_fp.php");
-    while ($fp = $performance ->read()) {
-        if (strstr($fp,".php")){
-            $parts=split(".php",$fp);
+    $fp_file="global_fp.php";
+    if (file_exists($fp_file)) {
+        include($fp_file);
+    }
+    while ($file = $performance->read()) {
+        if (strstr($file,".php")){
+            $parts=split(".php",$file);
             $component=$parts[0];
             $start=substr($component, 0, 11);
             if ($start == "org.eclipse") {
-                $componentFps[$fpcount]=$fp;
+                $componentFps[$fpcount]=$file;
                 $fpcount++;
             }
         }
