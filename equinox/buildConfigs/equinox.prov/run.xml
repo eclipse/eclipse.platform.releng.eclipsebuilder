@@ -725,7 +725,7 @@
 			<param name="p2.generator.root" value="agent" />
 			<param name="p2.generator.root.version" value="${p2.agent.version}" />
 			<!-- publish the metadata to the temp repo -->
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 	</target>
 
@@ -771,7 +771,7 @@
 			<param name="p2.generator.feature.dir" value="${p2.releng.tools.dir}/eclipse/features" />
 			<param name="p2.generator.plugins.dir" value="${p2.releng.tools.dir}/eclipse/plugins" />
 			<!-- publish the metadata to the real update site -->
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 	</target>
 
