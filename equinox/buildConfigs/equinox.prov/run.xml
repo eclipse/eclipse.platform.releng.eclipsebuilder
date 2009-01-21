@@ -5,7 +5,7 @@
 		<mkdir dir="${p2.root}" />
 		<property name="p2.output.base" value="${p2.root}/equinox.p2.build" />
 		<mkdir dir="${p2.output.base}" />
-	    <property name="directorlog" value="${buildlogs}/director.txt"/>
+		<property name="directorlog" value="${buildlogs}/director.txt" />
 
 		<condition property="sdk.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-ppc.tar.gz">
 			<equals arg1="${os.arch}" arg2="ppc64" />
@@ -125,13 +125,13 @@
 
 	<target name="build" depends="init">
 		<mkdir dir="${updateSite}/binary" />
-		<copy todir="${updateSite}" failonerror="false" overwrite="true">
+		<!--	<copy todir="${updateSite}" failonerror="false" overwrite="true">
 			<fileset file="${repo}/artifacts.*" />
 			<fileset file="${repo}/content.*" />
-		</copy>
-		<copy todir="${updateSite}/binary" failonerror="false" overwrite="true">
+		</copy> -->
+		<!-- <copy todir="${updateSite}/binary" failonerror="false" overwrite="true">
 			<fileset file="${repo}/binary/**" />
-		</copy>
+		</copy> -->
 		<antcall target="extract">
 			<param name="extract-src" value="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip" />
 			<param name="extract-dest" value="${base}" />
@@ -158,21 +158,21 @@
 			<antcall target="provision.platformsdk" />
 		</parallel>
 		<antcall target="zip.install" />
-		<antcall target="update.pack200" />
+		<antcall target="update.pack200" />		
 
 		<!--Collect logs from p2 run and copy to build directory-->
 		<property name="equinoxTestResults" value="${equinoxPostingDirectory}/${buildLabel}/testresults" />
 		<mkdir dir="${equinoxTestResults}" />
 		<copy todir="${buildlogs}" flatten="true">
 			<fileset dir="${base.builder}/configuration">
-					<include name="**/*.log" />
+				<include name="**/*.log" />
 			</fileset>
 			<fileset dir="${p2.root}">
 				<include name="**/*.log" />
 			</fileset>
 		</copy>
 	</target>
-
+	
 	<target name="provision.agent">
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="agent" />
@@ -1311,11 +1311,11 @@
 			<arg line="-consolelog" />
 			<arg line="-nosplash" />
 			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
-			<arg line="-metadataRepository file:${updateSite}" />
-			<arg line="-artifactRepository file:${updateSite}" />
+			<arg line="-metadataRepository file:${buildRepo}" />
+			<arg line="-artifactRepository file:${buildRepo}" />
 			<arg line="-metadataRepositoryName ${p2.repo.name}" />
 			<arg line="-artifactRepositoryName ${p2.repo.name}" />
-			<arg line="-updateSite ${updateSite}" />
+			<arg line="-updateSite ${buildRepo}" />
 			<arg line="-flavor tooling" />
 			<arg line="-append" />
 			<arg line="-compress" />

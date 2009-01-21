@@ -59,8 +59,7 @@
 				<antcall target="updatePackProperties" />
 				<antcall target="signMasterFeature" />
 				<antcall target="packMasterFeature" />
-				<antcall target="unpackUpdateJarsForPackaging" />
-				<antcall target="buildUpdateSite" />
+				<antcall target="unpackUpdateJarsForPackaging" />			
 			</sequential>
 			<sequential>
 				<antcall target="buildMasterRootFeature" />
@@ -396,10 +395,10 @@
 		<mkdir dir="${repo}" />
 		<delete dir="${reposource}" />
 		<mkdir dir="${reposource}" />
-		<copy todir="${repo}" failonerror="false">
+		<!--	<copy todir="${repo}" failonerror="false">
 			<fileset file="${updateSite}/artifacts.*" />
 			<fileset file="${updateSite}/content.*" />
-		</copy>
+		</copy> -->
 		<exec executable="unzip" dir=".">
 			<arg line="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -x */features/master* */plugins/org.eclipse.swt.tools* */plugins/com.ibm.icu.base* */features/com.ibm.icu.base* -d ${reposource}" />
 		</exec>
@@ -458,6 +457,20 @@
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/cvsfeature.sdk/packager" />
 		</antcall>
+
+		<!--copy repo to public update site-->
+		<property name="buildRepo" value="${updateSite}/${buildId}" />
+		<mkdir dir="${buildRepo}" />
+		<copy todir="${buildRepo}">
+			<fileset dir="${repo}" />
+		</copy>
+		<!--try create composite repository and fail if it already exists-->
+		<p2.composite.artifact.repository.create location="${updateSite}" name="${p2.repo.name}" compressed="true" failOnExists="true" />
+		<p2.composite.metadata.repository.create location="${updateSite}" name="${p2.repo.name}" compressed="true" failOnExists="true" />
+
+		<!--add buildRepo to composite repo-->
+		<p2.composite.artifact.repository.add location="${updateSite}" child="${buildRepo}" />
+		<p2.composite.artifact.metadata.add location="${updateSite}" child="${buildRepo}" />
 	</target>
 
 	<target name="packageEquinoxDistributables">
