@@ -50,6 +50,8 @@
 	<!--location for buildlogs-->
 	<property name="buildlogs" value="${postingDirectory}/${buildLabel}/buildlogs" />
 	<mkdir dir="${buildlogs}" />
+	
+	<property name="buildRepo" value="${updateSite}/${buildId}" />
 
 	<target name="main" depends="init">
 		<antcall target="buildEclipseSourceDrops" />
@@ -59,7 +61,7 @@
 				<antcall target="updatePackProperties" />
 				<antcall target="signMasterFeature" />
 				<antcall target="packMasterFeature" />
-				<antcall target="unpackUpdateJarsForPackaging" />			
+				<antcall target="unpackUpdateJarsForPackaging" />
 			</sequential>
 			<sequential>
 				<antcall target="buildMasterRootFeature" />
@@ -458,19 +460,18 @@
 			<param name="packagingInfo" value="${eclipse.build.configs}/cvsfeature.sdk/packager" />
 		</antcall>
 
-		<!--copy repo to public update site-->
-		<property name="buildRepo" value="${updateSite}/${buildId}" />
+		<!--copy repo to public update site-->	
 		<mkdir dir="${buildRepo}" />
 		<copy todir="${buildRepo}">
 			<fileset dir="${repo}" />
 		</copy>
-		<!--try create composite repository and fail if it already exists-->
-		<p2.composite.artifact.repository.create location="${updateSite}" name="${p2.repo.name}" compressed="true" failOnExists="true" />
-		<p2.composite.metadata.repository.create location="${updateSite}" name="${p2.repo.name}" compressed="true" failOnExists="true" />
+		<!--try create composite repository and fail if it already exists-->		
+		<p2.composite.artifact.repository.create location="file://${updateSite}" name="${p2.repo.name}" compressed="true" failOnExists="false" />
+		<p2.composite.metadata.repository.create location="file://${updateSite}" name="${p2.repo.name}" compressed="true" failOnExists="false" />
 
 		<!--add buildRepo to composite repo-->
-		<p2.composite.artifact.repository.add location="${updateSite}" child="${buildRepo}" />
-		<p2.composite.artifact.metadata.add location="${updateSite}" child="${buildRepo}" />
+		<p2.composite.artifact.repository.add location="file://${updateSite}" child="file://${buildRepo}" />
+		<p2.composite.metadata.repository.add location="file://${updateSite}" child="file://${buildRepo}" />
 	</target>
 
 	<target name="packageEquinoxDistributables">
