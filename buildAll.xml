@@ -420,7 +420,7 @@
 			source="${reposource}" 
 			compress="true" 
 			append="true" 
-			repository="file:${p2.repo}" 
+			repository="file:${repo}" 
 			repositoryName="${p2.repo.name}"
 			publishArtifacts="true"
 		/>
