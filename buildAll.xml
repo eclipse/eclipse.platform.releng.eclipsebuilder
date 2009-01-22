@@ -62,6 +62,7 @@
 				<antcall target="signMasterFeature" />
 				<antcall target="packMasterFeature" />
 				<antcall target="unpackUpdateJarsForPackaging" />
+				<antcall target="buildUpdateSite" />				
 			</sequential>
 			<sequential>
 				<antcall target="buildMasterRootFeature" />
