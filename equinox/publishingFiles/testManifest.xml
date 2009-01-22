@@ -76,7 +76,9 @@
 			<platform id="wireadmin" name="All" fileName="@org.eclipse.equinox.wireadmin@.jar">
 			</platform>
 			<platform id="simpleconfigurator" name="All" fileName="@org.eclipse.equinox.simpleconfigurator@.jar">
-			</platform>			
+			</platform>
+			<platform id="concurrent" name="All" fileName="@org.eclipse.equinox.concurrent@.jar">
+			</platform>						
 		</zipType>	
 
 		<zipType name="Other">
