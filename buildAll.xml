@@ -469,7 +469,7 @@
 		<mkdir dir="${buildRepo}" />
 		<copy todir="${buildRepo}">
 			<fileset dir="${repo}" />
-			<fileset file="${eclipse.build.configs}/../../extras/sdkinstaller.properties" />
+			<fileset file="${eclipse.build.configs}/../../extras/sdk-installer.properties" />
 		</copy>
 
 		<condition property="repoURL" value="http://download.eclipse.org/eclipse/updates/3.5-I-builds">
