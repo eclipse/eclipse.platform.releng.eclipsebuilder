@@ -555,7 +555,7 @@
 				<isset property="J2SE-5.0" />
 			</not>
 		</condition>
-		<property name="org.eclipse.equinox.p2.tests.prerequisite.testplugins" value="eclipse/plugins/org.eclipse.equinox.frameworkadmin.test_* eclipse/plugins/org.eclipse.equinox.p2.installer_*" />
+		<property name="org.eclipse.equinox.p2.tests.prerequisite.testplugins" value="eclipse/plugins/org.eclipse.equinox.frameworkadmin.test_* eclipse/plugins/org.eclipse.equinox.p2.installer_* eclipse/plugins/org.eclipse.core.tests.harness_*" />
 		<runTests testPlugin="org.eclipse.equinox.p2.tests" />
 	</target>
 
