@@ -590,8 +590,7 @@
 		<antcall target="teamcore" />
 		<antcall target="jdtcoreperf" />
 		<antcall target="jdtcorebuilder" />
-		<antcall target="jdtcorecompiler" />
-		<antcall target="jdtcoremodel" />
+		<antcall target="jdtcorecompiler" />	
 		<antcall target="ui" />
 		<antcall target="uiperformance" />
 		<antcall target="uieditors" />
@@ -622,5 +621,6 @@
 		<antcall target="equinoxp2" />
 		<antcall target="equinoxp2ui" />
 		<antcall target="search" />
+		<antcall target="jdtcoremodel" />
 	</target>
 </project>
