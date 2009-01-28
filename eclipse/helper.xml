@@ -337,7 +337,7 @@
 						-jvm ${eclipse.perf.jvm}
 						-print					    
 						-output ${postingDirectory}/${buildLabel}/performance/
-						-config eclipseperflnx3,eclipseperfwin2,eclipseperflnx2,eclipseperflnx1 
+						-config eclipseperflnx3,eclipseperfwin2,eclipseperflnx2,eclipseperfwin1,eclipseperflnx1 
 						-config.properties ${eclipse.perf.config.descriptors}
 			            -dataDir ${postingDirectory}/../../data/v34
 						-scenario.pattern org.eclipse.%.test%" />
