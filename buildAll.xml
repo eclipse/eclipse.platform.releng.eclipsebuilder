@@ -244,9 +244,13 @@
 		<property name="packproperties" value="${buildDirectory}/updatePackProperties.txt" />
 		<apply executable="ls" output="${packproperties}" dir="${buildDirectory}/plugins" relative="true" parallel="true" append="true">
 			<arg value="-d" />
-			<fileset dir="${buildDirectory}/plugins" includes="com.ibm.icu*, com.ibm.icu.*, com.jcraft.jsch*" />
+			<fileset dir="${buildDirectory}/plugins" includes="com.ibm.icu*, com.ibm.icu.*, com.jcraft.jsch*, org.junit*" />
 		</apply>
 		<replaceregexp file="${packproperties}" match="com" flags="g" replace="eclipse/plugins/com" />
+		<replaceregexp file="${packproperties}" match="org.junit" flags="g" replace="eclipse/plugins/org.junit" />
+		<echo message="eclipse/plugins/org.junit_3.8.2.v20080602-1318" file="${packproperties}" append="true" />
+		<replaceregexp file="${packproperties}" match="\n+" replace="," />
+		<replaceregexp file="${packproperties}" match="\n+" replace="," />
 		<replaceregexp file="${packproperties}" match="\n+" replace="," />
 		<replaceregexp file="${packproperties}" match="\n+" replace="," />
 		<replaceregexp file="${packproperties}" match="\n+" replace="," />
@@ -261,6 +265,7 @@
 			<arg line="-r ${buildDirectory}/${buildLabel}/${archiveName} pack.properties" />
 		</exec>
 	</target>
+
 
 	<target name="signMasterFeature" if="sign">
 		<property name="packtmp" value="${buildDirectory}/packtmp" />
