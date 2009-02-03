@@ -248,7 +248,7 @@
 		</apply>
 		<replaceregexp file="${packproperties}" match="com" flags="g" replace="eclipse/plugins/com" />
 		<replaceregexp file="${packproperties}" match="org.junit" flags="g" replace="eclipse/plugins/org.junit" />
-		<echo message="eclipse/plugins/org.junit_3.8.2.v20080602-1318" file="${packproperties}" append="true" />
+		<echo message="eclipse/plugins/org.junit_3.8.2.v20080602-1318.jar" file="${packproperties}" append="true" />
 		<replaceregexp file="${packproperties}" match="\n+" replace="," />
 		<replaceregexp file="${packproperties}" match="\n+" replace="," />
 		<replaceregexp file="${packproperties}" match="\n+" replace="," />
