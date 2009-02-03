@@ -181,7 +181,8 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- ===================================================================== -->
 
 	<target name="preFetch">
-		<!-- <mkdir dir="${buildDirectory}/baseLocation"/> -->
+		<!-- <mkdir dir="${buildDirectory}/baseLocation"/> -->		
+		<replace file="${buildDirectory}/src/maps/org.eclipse.releng/maps/orbit.map" value="fullmoon.ottawa.ibm.com" token="download.eclipse.org"/>
 	</target>
 
 	<!-- ===================================================================== -->
