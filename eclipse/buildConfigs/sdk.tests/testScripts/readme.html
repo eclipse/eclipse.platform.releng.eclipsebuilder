@@ -6,7 +6,7 @@
 
 <body bgcolor="#FFFFFF" text="#000000">
 <font size="+2"> Automated Testing of Eclipse Builds</font>
-<p>last updated: May 18, 2006</p><p><font size="+1">Description</font></p><p>This document describes how to run Eclipse JUnit plugin tests from the command 
+<p>last updated: February 5, 2009</p><p><font size="+1">Description</font></p><p>This document describes how to run Eclipse JUnit plugin tests from the command 
   line using Eclipse SDK  JUnit test plugins and a testing framework. This method of running tests is intended 
   for anyone who wishes to automate their testing process or reproduce the testing 
   mechanism used in Eclipse builds by the Eclipse Platform  Release Engineering team.</p><p>Click <a href="http://dev.eclipse.org/viewcvs/index.cgi/*checkout*/org.eclipse.test/testframework.html?rev=HEAD&content-type=text/html">here</a> for a description of the testing 
@@ -23,18 +23,23 @@
   5. An Eclipse SDK distribution (<a href="http://www.eclipse.org/downloads/index.php">http://www.eclipse.org/downloads/index.php</a>) 
   to test. Usually you will want to test a particular Eclipse build using a matching 
   Automated Tests feature.
-  <br>6. To run the pde build tests you will need the eclipse-&lt;buildid&gt;delta-pack.zip.
-    </p>
-  
-  <p>To run the Team CVS tests you will need extssh access to a CVS repository. 
+  <br>6. To run the pde build tests you will need the eclipse-&lt;buildid&gt;delta-pack.zip. 
+  <br>
+  7. To run the Team CVS tests you will need extssh access to a CVS repository. 
   The tests create a lot of junk modules and tags so you will want to keep the 
   test repository seperate from your development repository. While it is not necessary 
   to clean up the repository between each Team test run you will probably want 
-  to clean it up periodically.</p><p><font size="+1">Setup</font></p><p>1. Extract the eclipse-Automated-Tests-&lt;buildid&gt;.zip or tar.gz. On Window, extract 
+  to clean it up periodically.
+  <br>
+  8. Some of the p2 tests require a copy of the Eclipse Platform Runtime Binary archive for the platform you
+  are testing. More information is available from the <a href="http://wiki.eclipse.org/Equinox/p2/Testing">Equinox Testing Wiki page</a>. 
+  </p>
+  
+  <p><font size="+1">Setup</font></p><p>1. Extract the eclipse-Automated-Tests-&lt;buildid&gt;.zip or tar.gz. On Window, extract 
   this file close to the root of the drive to prevent some path names from exceeding 
   the 255 character limit. This will create a top-level directory &quot;<b>eclipse-testing</b>&quot;.<br>
-  2. Place the Eclipse SDK distribution to test in the eclipse-testing directory. 
-  Do not extract this file as the test scripts will take care of this.<br>
+  2. Place the Eclipse SDK distribution to test (and the Eclipse Platform Runtime Binary) in the eclipse-testing directory. 
+  Do not extract these files as the test scripts will take care of this.<br>
   3. To run the Team CVS tests, edit the test.xml script to provide connection 
   information.</p><blockquote> 
   <p>Replace the following strings in the &quot;teamcvs&quot; target of the test.xml 
