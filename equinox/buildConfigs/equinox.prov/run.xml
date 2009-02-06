@@ -5,7 +5,7 @@
 		<mkdir dir="${p2.root}" />
 		<property name="p2.output.base" value="${p2.root}/equinox.p2.build" />
 		<mkdir dir="${p2.output.base}" />
-	    <property name="directorlog" value="${buildlogs}/director.txt"/>
+		<property name="directorlog" value="${buildlogs}/director.txt" />
 
 		<condition property="sdk.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-ppc.tar.gz">
 			<equals arg1="${os.arch}" arg2="ppc64" />
@@ -123,15 +123,7 @@
 		<property name="p2.sdk.version" value="3.5.0.${buildId}" />
 	</target>
 
-	<target name="build" depends="init">
-		<mkdir dir="${updateSite}/binary" />
-		<copy todir="${updateSite}" failonerror="false" overwrite="true">
-			<fileset file="${repo}/artifacts.*" />
-			<fileset file="${repo}/content.*" />
-		</copy>
-		<copy todir="${updateSite}/binary" failonerror="false" overwrite="true">
-			<fileset file="${repo}/binary/**" />
-		</copy>
+	<target name="build" depends="init">	
 		<antcall target="extract">
 			<param name="extract-src" value="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip" />
 			<param name="extract-dest" value="${base}" />
@@ -158,21 +150,21 @@
 			<antcall target="provision.platformsdk" />
 		</parallel>
 		<antcall target="zip.install" />
-		<antcall target="update.pack200" />
+		<antcall target="update.pack200" />		
 
 		<!--Collect logs from p2 run and copy to build directory-->
 		<property name="equinoxTestResults" value="${equinoxPostingDirectory}/${buildLabel}/testresults" />
 		<mkdir dir="${equinoxTestResults}" />
 		<copy todir="${buildlogs}" flatten="true">
 			<fileset dir="${base.builder}/configuration">
-					<include name="**/*.log" />
+				<include name="**/*.log" />
 			</fileset>
 			<fileset dir="${p2.root}">
 				<include name="**/*.log" />
 			</fileset>
 		</copy>
 	</target>
-
+	
 	<target name="provision.agent">
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="agent" />
@@ -183,7 +175,7 @@
 			<param name="p2.os" value="win32" />
 			<param name="p2.ws" value="win32" />
 			<param name="p2.arch" value="x86" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -195,7 +187,7 @@
 			<param name="p2.os" value="linux" />
 			<param name="p2.ws" value="gtk" />
 			<param name="p2.arch" value="x86" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -207,7 +199,7 @@
 			<param name="p2.os" value="macosx" />
 			<param name="p2.ws" value="carbon" />
 			<param name="p2.arch" value="ppc" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 	</target>
 
@@ -221,7 +213,7 @@
 			<param name="p2.os" value="win32" />
 			<param name="p2.ws" value="win32" />
 			<param name="p2.arch" value="x86" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -233,7 +225,7 @@
 			<param name="p2.os" value="win32" />
 			<param name="p2.ws" value="win32" />
 			<param name="p2.arch" value="x86_64" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -245,7 +237,7 @@
 			<param name="p2.os" value="win32" />
 			<param name="p2.ws" value="wpf" />
 			<param name="p2.arch" value="x86" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -257,7 +249,7 @@
 			<param name="p2.os" value="linux" />
 			<param name="p2.ws" value="gtk" />
 			<param name="p2.arch" value="x86" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -269,7 +261,7 @@
 			<param name="p2.os" value="linux" />
 			<param name="p2.ws" value="gtk" />
 			<param name="p2.arch" value="ppc" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -281,7 +273,7 @@
 			<param name="p2.os" value="linux" />
 			<param name="p2.ws" value="motif" />
 			<param name="p2.arch" value="x86" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -293,7 +285,7 @@
 			<param name="p2.os" value="linux" />
 			<param name="p2.ws" value="gtk" />
 			<param name="p2.arch" value="x86_64" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -305,7 +297,7 @@
 			<param name="p2.os" value="macosx" />
 			<param name="p2.ws" value="carbon" />
 			<param name="p2.arch" value="ppc" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -317,7 +309,7 @@
 			<param name="p2.os" value="macosx" />
 			<param name="p2.ws" value="cocoa" />
 			<param name="p2.arch" value="x86" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -329,7 +321,7 @@
 			<param name="p2.os" value="macosx" />
 			<param name="p2.ws" value="cocoa" />
 			<param name="p2.arch" value="x86_64" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -341,7 +333,7 @@
 			<param name="p2.os" value="hpux" />
 			<param name="p2.ws" value="motif" />
 			<param name="p2.arch" value="ia64_32" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -353,7 +345,7 @@
 			<param name="p2.os" value="solaris" />
 			<param name="p2.ws" value="gtk" />
 			<param name="p2.arch" value="sparc" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -365,7 +357,7 @@
 			<param name="p2.os" value="aix" />
 			<param name="p2.ws" value="motif" />
 			<param name="p2.arch" value="ppc" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 	</target>
@@ -380,7 +372,7 @@
 			<param name="p2.os" value="win32" />
 			<param name="p2.ws" value="win32" />
 			<param name="p2.arch" value="x86" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -392,7 +384,7 @@
 			<param name="p2.os" value="win32" />
 			<param name="p2.ws" value="win32" />
 			<param name="p2.arch" value="x86_64" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -404,7 +396,7 @@
 			<param name="p2.os" value="win32" />
 			<param name="p2.ws" value="wpf" />
 			<param name="p2.arch" value="x86" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -416,7 +408,7 @@
 			<param name="p2.os" value="linux" />
 			<param name="p2.ws" value="gtk" />
 			<param name="p2.arch" value="x86" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -428,7 +420,7 @@
 			<param name="p2.os" value="linux" />
 			<param name="p2.ws" value="gtk" />
 			<param name="p2.arch" value="ppc" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -440,7 +432,7 @@
 			<param name="p2.os" value="linux" />
 			<param name="p2.ws" value="gtk" />
 			<param name="p2.arch" value="x86_64" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -452,7 +444,7 @@
 			<param name="p2.os" value="macosx" />
 			<param name="p2.ws" value="carbon" />
 			<param name="p2.arch" value="ppc" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -464,7 +456,7 @@
 			<param name="p2.os" value="macosx" />
 			<param name="p2.ws" value="cocoa" />
 			<param name="p2.arch" value="x86" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -476,7 +468,7 @@
 			<param name="p2.os" value="macosx" />
 			<param name="p2.ws" value="cocoa" />
 			<param name="p2.arch" value="x86_64" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -488,7 +480,7 @@
 			<param name="p2.os" value="hpux" />
 			<param name="p2.ws" value="motif" />
 			<param name="p2.arch" value="ia64_32" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -500,7 +492,7 @@
 			<param name="p2.os" value="solaris" />
 			<param name="p2.ws" value="gtk" />
 			<param name="p2.arch" value="sparc" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -512,7 +504,7 @@
 			<param name="p2.os" value="aix" />
 			<param name="p2.ws" value="motif" />
 			<param name="p2.arch" value="ppc" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 	</target>
@@ -527,7 +519,7 @@
 			<param name="p2.os" value="win32" />
 			<param name="p2.ws" value="win32" />
 			<param name="p2.arch" value="x86" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -539,7 +531,7 @@
 			<param name="p2.os" value="win32" />
 			<param name="p2.ws" value="win32" />
 			<param name="p2.arch" value="x86_64" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -551,7 +543,7 @@
 			<param name="p2.os" value="win32" />
 			<param name="p2.ws" value="wpf" />
 			<param name="p2.arch" value="x86" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -563,7 +555,7 @@
 			<param name="p2.os" value="linux" />
 			<param name="p2.ws" value="gtk" />
 			<param name="p2.arch" value="x86" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -575,7 +567,7 @@
 			<param name="p2.os" value="linux" />
 			<param name="p2.ws" value="gtk" />
 			<param name="p2.arch" value="ppc" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -587,7 +579,7 @@
 			<param name="p2.os" value="linux" />
 			<param name="p2.ws" value="gtk" />
 			<param name="p2.arch" value="x86_64" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -599,7 +591,7 @@
 			<param name="p2.os" value="macosx" />
 			<param name="p2.ws" value="carbon" />
 			<param name="p2.arch" value="ppc" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -611,7 +603,7 @@
 			<param name="p2.os" value="macosx" />
 			<param name="p2.ws" value="cocoa" />
 			<param name="p2.arch" value="x86" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -623,7 +615,7 @@
 			<param name="p2.os" value="macosx" />
 			<param name="p2.ws" value="cocoa" />
 			<param name="p2.arch" value="x86_64" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -635,7 +627,7 @@
 			<param name="p2.os" value="hpux" />
 			<param name="p2.ws" value="motif" />
 			<param name="p2.arch" value="ia64_32" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -647,7 +639,7 @@
 			<param name="p2.os" value="solaris" />
 			<param name="p2.ws" value="gtk" />
 			<param name="p2.arch" value="sparc" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 		<antcall target="run.director">
@@ -659,7 +651,7 @@
 			<param name="p2.os" value="aix" />
 			<param name="p2.ws" value="motif" />
 			<param name="p2.arch" value="ppc" />
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
 	</target>
@@ -725,7 +717,7 @@
 			<param name="p2.generator.root" value="agent" />
 			<param name="p2.generator.root.version" value="${p2.agent.version}" />
 			<!-- publish the metadata to the temp repo -->
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 	</target>
 
@@ -771,7 +763,7 @@
 			<param name="p2.generator.feature.dir" value="${p2.releng.tools.dir}/eclipse/features" />
 			<param name="p2.generator.plugins.dir" value="${p2.releng.tools.dir}/eclipse/plugins" />
 			<!-- publish the metadata to the real update site -->
-			<param name="p2.repo" value="${updateSite}" />
+			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 	</target>
 
@@ -1311,11 +1303,11 @@
 			<arg line="-consolelog" />
 			<arg line="-nosplash" />
 			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
-			<arg line="-metadataRepository file:${updateSite}" />
-			<arg line="-artifactRepository file:${updateSite}" />
+			<arg line="-metadataRepository file:${buildRepo}" />
+			<arg line="-artifactRepository file:${buildRepo}" />
 			<arg line="-metadataRepositoryName ${p2.repo.name}" />
 			<arg line="-artifactRepositoryName ${p2.repo.name}" />
-			<arg line="-updateSite ${updateSite}" />
+			<arg line="-updateSite ${buildRepo}" />
 			<arg line="-flavor tooling" />
 			<arg line="-append" />
 			<arg line="-compress" />

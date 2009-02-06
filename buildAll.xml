@@ -51,6 +51,8 @@
 	<property name="buildlogs" value="${postingDirectory}/${buildLabel}/buildlogs" />
 	<mkdir dir="${buildlogs}" />
 
+	<property name="buildRepo" value="${updateSite}/${buildId}" />
+
 	<target name="main" depends="init">
 		<antcall target="buildEclipseSourceDrops" />
 		<antcall target="buildMasterFeature" />
@@ -401,10 +403,10 @@
 		<mkdir dir="${repo}" />
 		<delete dir="${reposource}" />
 		<mkdir dir="${reposource}" />
-		<copy todir="${repo}" failonerror="false">
+		<!--	<copy todir="${repo}" failonerror="false">
 			<fileset file="${updateSite}/artifacts.*" />
 			<fileset file="${updateSite}/content.*" />
-		</copy>
+		</copy> -->
 		<exec executable="unzip" dir=".">
 			<arg line="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -x */features/master* */plugins/org.eclipse.swt.tools* */plugins/com.ibm.icu.base* */features/com.ibm.icu.base* -d ${reposource}" />
 		</exec>
@@ -463,6 +465,30 @@
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/cvsfeature.sdk/packager" />
 		</antcall>
+
+		<!--copy repo to public update site-->
+		<mkdir dir="${buildRepo}" />
+		<copy todir="${buildRepo}">
+			<fileset dir="${repo}" />
+			<fileset file="${eclipse.build.configs}/../../extras/sdkinstaller.properties" />
+		</copy>
+		<!--try create composite repository and fail if it already exists-->
+
+		<condition property="repoURL" value="http://download.eclipse.org/eclipse/updates/3.5-I-builds">
+			<equals arg1="${buildType}" arg2="I" />
+		</condition>
+		<condition property="repoURL" value="http://download.eclipse.org/eclipse/updates/3.5-N-builds">
+			<equals arg1="${buildType}" arg2="N" />
+		</condition>
+
+		<!--try create composite repository and fail if it already exists-->
+		<p2.composite.artifact.repository.create location="file://${updateSite}" name="${p2.repo.name}" compressed="true" failOnExists="false" />
+		<p2.composite.metadata.repository.create location="file://${updateSite}" name="${p2.repo.name}" compressed="true" failOnExists="false" />
+
+		<!--add childRepo to composite repo-->
+		<property name="childRepoURL" value="${repoURL}/${buildId}" />
+		<p2.composite.artifact.repository.add location="file://${updateSite}" child="${childRepoURL}" />
+		<p2.composite.metadata.repository.add location="file://${updateSite}" child="${childRepoURL}" />
 	</target>
 
 	<target name="packageEquinoxDistributables">

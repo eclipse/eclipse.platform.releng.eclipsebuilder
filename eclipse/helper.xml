@@ -406,15 +406,15 @@
 
 		<!--eclipse-master-${buildId}.bak.zip contains the signed update jars. eclipse-master-${buildId}.zip contains the
 	                features and plug-ins unpacked.  Need features in directory structures for tool to work. -->
-		<mkdir dir="${updateSite}/features" />
-		<mkdir dir="${updateSite}/plugins" />
+		<mkdir dir="${buildRepo}/features" />
+		<mkdir dir="${buildRepo}/plugins" />
 
 		<!--use original signed update jars-->
 		<exec executable="unzip" dir=".">
-			<arg line="-j ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.bak.zip -i */features/* -x */master-equinox* */master-jetty* */master-ecf* */com.ibm.icu.base* -d ${updateSite}/features" />
+			<arg line="-j ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.bak.zip -i */features/* -x */master-equinox* */master-jetty* */master-ecf* */com.ibm.icu.base* -d ${buildRepo}/features" />
 		</exec>
 		<exec executable="unzip" dir=".">
-			<arg line="-j ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.bak.zip -i */plugins/* -x */com.ibm.icu.base* -d ${updateSite}/plugins" />
+			<arg line="-j ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.bak.zip -i */plugins/* -x */com.ibm.icu.base* -d ${buildRepo}/plugins" />
 		</exec>
 	</target>
 
