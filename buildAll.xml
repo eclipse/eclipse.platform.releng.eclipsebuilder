@@ -417,19 +417,11 @@
 		<delete dir="${reposource}/eclipse" />
 
 		<!--features and plugins metadata -->
-		
-		<p2.generator source="${reposource}" compress="true" append="true" flavor="tooling" metadataRepository="file:${repo}" artifactRepository="file:${repo}" metadataRepositoryName="${p2.repo.name}" artifactRepositoryName="${p2.repo.name}" publishArtifacts="true" p2OS="linux" mode="incremental" />
-		
-		
-	<!--	<p2.publish.featuresAndBundles 
-			source="${reposource}" 
-			compress="true" 
-			append="true" 
-			repository="file:${repo}" 
-			repositoryName="${p2.repo.name}"
-			publishArtifacts="true"
-		/> -->
-		
+
+		<!-- <p2.generator source="${reposource}" compress="true" append="true" flavor="tooling" metadataRepository="file:${repo}" artifactRepository="file:${repo}" metadataRepositoryName="${p2.repo.name}" artifactRepositoryName="${p2.repo.name}" publishArtifacts="true" p2OS="linux" mode="incremental" /> -->
+
+		<p2.publish.featuresAndBundles source="${reposource}" compress="true" append="true" repository="file:${repo}" repositoryName="${p2.repo.name}" publishArtifacts="true" />
+
 		<replace file="packaging.map" token="@buildId@" value="${buildId}" />
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/sdk/packager" />
@@ -478,13 +470,18 @@
 		</antcall>
 
 		<!--copy repo to public update site-->
-		<mkdir dir="${buildRepo}" />
+		<mkdir dir="${buildRepo}" />	
+		<!--mirror metadata-->
+		<p2.metadata.mirror source="file:${repo}" destination="file:${buildRepo}" />
+		<!-- have to check if baseline repo exists first before comparing against baseline -->
+		<available file="${updateSite}/compositeArtifacts.jar" type="file" property="baseline.present" />
+	    <antcall target="mirror.artifacts.baseline"/>
+		<antcall target="mirror.artifacts"/>				
 		<copy todir="${buildRepo}">
-			<fileset dir="${repo}" />
 			<fileset file="${eclipse.build.configs}/../../extras/sdkinstaller.properties" />
 		</copy>
-		<!--try create composite repository and fail if it already exists-->
 
+		<!--try create composite repository and fail if it already exists-->
 		<condition property="repoURL" value="http://download.eclipse.org/eclipse/updates/3.5-I-builds">
 			<equals arg1="${buildType}" arg2="I" />
 		</condition>
@@ -500,6 +497,14 @@
 		<property name="childRepoURL" value="${repoURL}/${buildId}" />
 		<p2.composite.artifact.repository.add location="file://${updateSite}" child="${childRepoURL}" />
 		<p2.composite.metadata.repository.add location="file://${updateSite}" child="${childRepoURL}" />
+	</target>
+		
+	<target name="mirror.artifacts.baseline" if="baseline.present">
+		<p2.artifact.mirror source="file:${repo}" baseline="file:${updateSite}" destination="file:${buildRepo}" />
+	</target>
+	
+	<target name="mirror.artifacts" unless="baseline.present">
+		<p2.artifact.mirror source="file:${repo}" destination="file:${buildRepo}" />
 	</target>
 
 	<target name="packageEquinoxDistributables">
