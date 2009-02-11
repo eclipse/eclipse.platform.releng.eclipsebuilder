@@ -474,9 +474,10 @@
 		<!--mirror metadata-->
 		<p2.metadata.mirror source="file:${repo}" destination="file:${buildRepo}" />
 		<!-- have to check if baseline repo exists first before comparing against baseline -->
-		<available file="${updateSite}/compositeArtifacts.jar" type="file" property="baseline.present" />
+		<!--<available file="${updateSite}/compositeArtifacts.jar" type="file" property="baseline.present" />
 	    <antcall target="mirror.artifacts.baseline"/>
-		<antcall target="mirror.artifacts"/>				
+		<antcall target="mirror.artifacts"/> -->				
+		<p2.artifact.mirror source="file:${repo}" baseline="file:${updateSite}" destination="file:${buildRepo}" />
 		<copy todir="${buildRepo}">
 			<fileset file="${eclipse.build.configs}/../../extras/sdkinstaller.properties" />
 		</copy>
@@ -499,13 +500,13 @@
 		<p2.composite.metadata.repository.add location="file://${updateSite}" child="${childRepoURL}" />
 	</target>
 		
-	<target name="mirror.artifacts.baseline" if="baseline.present">
+<!--	<target name="mirror.artifacts.baseline" if="baseline.present">
 		<p2.artifact.mirror source="file:${repo}" baseline="file:${updateSite}" destination="file:${buildRepo}" />
 	</target>
 	
 	<target name="mirror.artifacts" unless="baseline.present">
 		<p2.artifact.mirror source="file:${repo}" destination="file:${buildRepo}" />
-	</target>
+	</target> -->
 
 	<target name="packageEquinoxDistributables">
 		<antcall target="package">
