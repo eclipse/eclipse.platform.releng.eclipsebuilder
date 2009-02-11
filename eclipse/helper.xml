@@ -410,12 +410,12 @@
 		<mkdir dir="${buildRepo}/plugins" />
 
 		<!--use original signed update jars-->
-		<exec executable="unzip" dir=".">
+	<!--	<exec executable="unzip" dir=".">
 			<arg line="-j ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.bak.zip -i */features/* -x */master-equinox* */master-jetty* */master-ecf* */com.ibm.icu.base* -d ${buildRepo}/features" />
 		</exec>
 		<exec executable="unzip" dir=".">
 			<arg line="-j ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.bak.zip -i */plugins/* -x */com.ibm.icu.base* -d ${buildRepo}/plugins" />
-		</exec>
+		</exec> -->
 	</target>
 
 
