@@ -52,7 +52,7 @@
 	<mkdir dir="${buildlogs}" />
 	
 	<!--copy blank update site to repo -->
-	<property name="tempSite" value="${buildDirectory/tempSite"/>
+	<property name="tempSite" value="${buildDirectory}/tempSite"/>
 	<mkdir dir="${tempSite}"/>
 	<copy file="${eclipse.build.configs}/../../extras/site.xml" todir="${tempSite}"/>	
 	<property name="p2.site.xml" value="file:${tempSite}/site.xml" />	
