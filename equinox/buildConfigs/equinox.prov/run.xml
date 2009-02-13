@@ -140,7 +140,7 @@
 			</fileset>
 		</delete>
 
-		<antcall target="generate.metadata.agent" />
+	<!--	<antcall target="generate.metadata.agent" /> -->
 		<antcall target="generate.metadata.releng.tools" />
 
 		<parallel failonany="true" threadCount='4'>
@@ -672,7 +672,7 @@
 				<include name="**/org.eclipse.osgi.services_*.jar" />
 				<include name="**/org.eclipse.core.net_*.jar" />
 			</fileset>
-		</copy>
+		</copy> 
 		<!-- delete ICU and replace with ICU Base -->
 		<delete failonerror="false">
 			<fileset dir="${p2.agent.dir}/eclipse/plugins">
@@ -715,8 +715,7 @@
 		<antcall target="run.generator">
 			<param name="p2.generator.source" value="${p2.agent.dir}/eclipse" />
 			<param name="p2.generator.root" value="agent" />
-			<param name="p2.generator.root.version" value="${p2.agent.version}" />
-			<!-- publish the metadata to the temp repo -->
+			<param name="p2.generator.root.version" value="${p2.agent.version}" />			
 			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 	</target>
