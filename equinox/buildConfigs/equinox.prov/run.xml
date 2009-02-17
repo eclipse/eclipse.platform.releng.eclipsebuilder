@@ -140,7 +140,7 @@
 			</fileset>
 		</delete>
 
-	<!--	<antcall target="generate.metadata.agent" /> -->
+		<antcall target="generate.metadata.agent" />
 		<antcall target="generate.metadata.releng.tools" />
 
 		<parallel failonany="true" threadCount='4'>
@@ -716,6 +716,7 @@
 			<param name="p2.generator.source" value="${p2.agent.dir}/eclipse" />
 			<param name="p2.generator.root" value="agent" />
 			<param name="p2.generator.root.version" value="${p2.agent.version}" />			
+			<!-- publish the metadata to the temp repo -->
 			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 	</target>
@@ -737,7 +738,6 @@
 			<arg line="-base ${p2.generator.base}" />
 			<arg line="-features ${p2.generator.feature.dir}" />
 			<arg line="-bundles ${p2.generator.plugins.dir}" />
-			<arg line="-site ${p2.site.xml}" />
 			<arg line="-compress" />
 			<arg line="-flavor ${p2.flavor}" />
 			<arg line="-publishArtifacts" />
@@ -785,7 +785,6 @@
 			<arg line="-artifactRepository file:${p2.repo}" />
 			<arg line="-metadataRepositoryName ${p2.repo.name}" />
 			<arg line="-artifactRepositoryName ${p2.repo.name}" />
-			<arg line="-site ${p2.site.xml}" />
 			<arg line="-source ${p2.generator.source}" />
 			<arg line="-compress" />
 			<arg line="-rootVersion ${p2.generator.root.version}" />

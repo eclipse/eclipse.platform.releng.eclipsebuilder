@@ -403,25 +403,19 @@
 		<property name="updateJarWorkingDir" value="${buildDirectory}/updateJars" />
 		<mkdir dir="${updateJarWorkingDir}" />
 		<mkdir dir="${updateJarWorkingDir}/site" />
-		<mkdir dir="${updateJarWorkingDir}/eclipse/features}"/>
-		<mkdir dir="${updateJarWorkingDir}/eclipse/plugins}"/>
 		
 		<!--eclipse-master-${buildId}.bak.zip contains the signed update jars. eclipse-master-${buildId}.zip contains the
 		 	                features and plug-ins unpacked.  Need features in directory structures for tool to work. -->
-		<unzip src="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip" dest="${updateJarWorkingDir}" />
-		<delete includeemptydirs="true">
-			<fileset dir="${updateJarWorkingDir}/eclipse/features" includes="com.ibm.icu.base*/**,master-equinox*/**,master-jetty*/**,master-ecf*/**" />
-		</delete>
+	<!--	<mkdir dir="${buildRepo}/features" />
+		<mkdir dir="${buildRepo}/plugins" /> -->
 
-		<!--operation on creates update jars for features and for plug-ins which are to be unpacked when installed-->
-		<java classname="org.eclipse.releng.generators.UpdateBuilder">
-			<arg line="-root ${updateJarWorkingDir}/eclipse -directory ${buildDirectory}/directory.txt -build ${buildId} -site ${updateJarWorkingDir}/site -sitexml ${updateSite}/site.xml" />
-			<classpath>
-				<pathelement location="${base.builder}/plugins/org.eclipse.internal.build.tools/internalTools.jar" />
-				<pathelement location="${base.builder}/plugins/org.eclipse.build.tools/buildTools.jar" />
-				<pathelement location="${base.builder}/plugins/org.eclipse.osgi_3.5.0.v20090119-1830.jar" />
-			</classpath>
-		</java>
+		<!--use original signed update jars-->
+	<!--	<exec executable="unzip" dir=".">
+			<arg line="-j ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.bak.zip -i */features/* -x */master-equinox* */master-jetty* */master-ecf* */com.ibm.icu.base* -d ${buildRepo}/features" />
+		</exec>
+		<exec executable="unzip" dir=".">
+			<arg line="-j ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.bak.zip -i */plugins/* -x */com.ibm.icu.base* -d ${buildRepo}/plugins" />
+		</exec> -->
 	</target>
 
 
