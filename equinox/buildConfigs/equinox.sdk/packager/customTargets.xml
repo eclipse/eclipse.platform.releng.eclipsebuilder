@@ -12,7 +12,7 @@
 </target>
 
 
-<target name="assemble.common.common.common.xml">
+<target name="assemble.delta.delta.delta.xml">
 	<antcall target="assembler">
 		<param name="archiveName" value="${archiveRoot}.zip"/>
 	</antcall>
