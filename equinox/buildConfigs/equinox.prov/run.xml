@@ -742,7 +742,8 @@
 			<arg line="-flavor ${p2.flavor}" />
 			<arg line="-publishArtifacts" />
 			<arg line="-metadataRepository file:${p2.repo}" />
-			<arg line="-artifactRepository file:${p2.repo}" />			
+			<arg line="-artifactRepository file:${p2.repo}" />	
+			<arg line="-site ${p2.site.xml}" />
 			<arg line="-metadataRepositoryName ${p2.repo.name}" />
 			<arg line="-artifactRepositoryName ${p2.repo.name}" />
 			<arg line="-noDefaultIUs" />
@@ -785,6 +786,7 @@
 			<arg line="-artifactRepository file:${p2.repo}" />
 			<arg line="-metadataRepositoryName ${p2.repo.name}" />
 			<arg line="-artifactRepositoryName ${p2.repo.name}" />
+			<arg line="-site ${p2.site.xml}" />
 			<arg line="-source ${p2.generator.source}" />
 			<arg line="-compress" />
 			<arg line="-rootVersion ${p2.generator.root.version}" />

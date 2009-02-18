@@ -50,7 +50,15 @@
 	<!--location for buildlogs-->
 	<property name="buildlogs" value="${postingDirectory}/${buildLabel}/buildlogs" />
 	<mkdir dir="${buildlogs}" />
+
+	<property name="buildRepo" value="${updateSite}/${buildId}" />
 	
+	<!--copy blank update site to repo -->
+	<property name="tempSite" value="${buildDirectory}/tempSite" />
+	<mkdir dir="${tempSite}" />
+	<copy file="${eclipse.build.configs}/../../extras/site.xml" todir="${tempSite}" />
+	<property name="p2.site.xml" value="file:${tempSite}/site.xml" />
+
 	<property name="buildRepo" value="${updateSite}/${buildId}" />
 
 	<target name="main" depends="init">
@@ -418,7 +426,7 @@
 
 		<!--features and plugins metadata -->
 
-		<p2.generator source="${reposource}" compress="true" append="true" flavor="tooling" metadataRepository="file:${repo}" artifactRepository="file:${repo}" metadataRepositoryName="${p2.repo.name}" artifactRepositoryName="${p2.repo.name}" publishArtifacts="true" p2OS="linux" mode="incremental" /> 
+		<p2.generator source="${reposource}" compress="true" append="true" flavor="tooling" metadataRepository="file:${repo}" artifactRepository="file:${repo}" metadataRepositoryName="${p2.repo.name}" artifactRepositoryName="${p2.repo.name}" publishArtifacts="true" p2OS="linux" mode="incremental" />
 
 		<!-- 	<p2.publish.featuresAndBundles source="${reposource}" compress="true" append="true" repository="file:${repo}" repositoryName="${p2.repo.name}" publishArtifacts="true" /> -->
 
@@ -479,7 +487,7 @@
 		<copy todir="${buildRepo}">
 			<fileset file="${eclipse.build.configs}/../../extras/sdkinstaller.properties" />
 		</copy>
-	
+
 		<condition property="repoURL" value="http://download.eclipse.org/eclipse/updates/3.5-I-builds">
 			<equals arg1="${buildType}" arg2="I" />
 		</condition>
@@ -495,7 +503,7 @@
 		<property name="childRepoURL" value="${repoURL}/${buildId}" />
 		<p2.composite.artifact.repository.add location="file://${updateSite}" child="${childRepoURL}" />
 		<p2.composite.metadata.repository.add location="file://${updateSite}" child="${childRepoURL}" />
-	</target>	
+	</target>
 
 	<target name="packageEquinoxDistributables">
 		<antcall target="package">
@@ -519,7 +527,7 @@
 		<ant antfile="build.xml" dir="${basedir}">
 			<property name="component" value="${equinox.build.configs}/equinox.jmx.server" />
 		</ant>
-	<!--	<antcall target="package">
+		<!--	<antcall target="package">
 			<param name="packagingInfo" value="${equinox.build.configs}/equinox.p2.agent.feature/packager" />
 		</antcall>
 		<antcall target="package">
