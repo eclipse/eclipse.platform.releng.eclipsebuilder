@@ -140,7 +140,7 @@
 			</fileset>
 		</delete>
 
-		<antcall target="generate.metadata.agent" />
+	<!--	<antcall target="generate.metadata.agent" /> -->
 		<antcall target="generate.metadata.releng.tools" />
 
 		<parallel failonany="true" threadCount='4'>
