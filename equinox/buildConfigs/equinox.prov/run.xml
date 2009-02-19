@@ -197,8 +197,8 @@
 			<param name="p2.director.install.path" value="${p2.agent.install.macosx}" />
 			<param name="p2.director.extraArgs" value="" />
 			<param name="p2.os" value="macosx" />
-			<param name="p2.ws" value="carbon" />
-			<param name="p2.arch" value="ppc" />
+			<param name="p2.ws" value="cocoa" />
+			<param name="p2.arch" value="x86" />
 			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 	</target>
