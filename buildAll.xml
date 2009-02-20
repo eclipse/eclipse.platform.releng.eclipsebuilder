@@ -83,7 +83,7 @@
 				<antcall target="packageEclipseDistributables" />
 				<antcall target="packageEquinoxDistributables" />
 				<ant antfile="${equinox.build.configs}/equinox.prov/run.xml" />
-				<antcall target="apiTooling" />
+	<!--			<antcall target="apiTooling" /> -->
 				<antcall target="publishEclipse" />
 				<antcall target="publishEquinox" />
 			</sequential>
