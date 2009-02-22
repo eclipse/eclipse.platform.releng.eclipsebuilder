@@ -35,39 +35,39 @@ sign=""
 
 tagMaps=""
 
+#delete build artifacts after build is complete
+deleteArtifacts=""
+
 #sets fetchTag="HEAD" for nightly builds if required
 tag=""
 
 # tag v20060907 is the one that includes the new build page
-#buildProjectTags=v20080930
-#buildProjectTags=v20081010
-#buildProjectTags=v20081010b
-#buildProjectTags=v20081014
-#buildProjectTags=v20081015
-#buildProjectTags=v20081020a
-#buildProjectTags=v20081021
-#buildProjectTags=v20081112
-#buildProjectTags=v20081114a
-#buildProjectTags=v20081116a
-#buildProjectTags=v20081118a
-#buildProjectTags=v20081119
-#buildProjectTags=v20081120
-#buildProjectTags=v20081121
-#buildProjectTags=v20081124a
-#buildProjectTags=v20081202
-#buildProjectTags=v20081205a
-#new pde build for jetty
-#buildProjectTags=v20081205b
-#buildProjectTags=v20081208b
-#buildProjectTags=v20081209a
-#buildProjectTags=v20081210
-#buildProjectTags=v20081210a
-#buildProjectTags=v20081215
-#buildProjectTags=v20081216b
 #ejlnx1, ejlnx2
 #buildProjectTags=v20081217
 #remove extra build scripts
-buildProjectTags=v20090102b
+#buildProjectTags=v20090102b
+#buildProjectTags=v20090107
+#buildProjectTags=v20090113a
+#buildProjectTags=v20090114
+#ibuild
+#buildProjectTags=v20090119
+#nbuild
+#buildProjectTags=v20090120b
+#buildProjectTags=v20090122
+#buildProjectTags=v20090122a
+#buildProjectTags=v20090123
+#wo new publisher and compo repos
+#buildProjectTags=v20090123a
+#buildProjectTags=v20090127a
+#buildProjectTags=v20090128a
+#buildProjectTags=v20090206
+#buildProjectTags=v20090208
+#buildProjectTags=v20090209
+#buildProjectTags=v20090210
+#buildProjectTags=v20090213a
+#buildProjectTags=v20090217
+#buildProjectTags=v20090220
+buildProjectTags=v20090220a
 
 #updateSite property setting
 updateSite=""
@@ -130,6 +130,7 @@ do
 		 		  		 		  -skipPerf) skipPerf="-Dskip.performance.tests=true";;
 		 		  		 		  -skipTest) skipTest="-Dskip.tests=true";;
 		 		  		 		  -skipRSS) skipRSS="-Dskip.feed=true";;
+		 		  		 		  -deleteArtifacts) deleteArtifacts="-Ddelete.artifacts=true";;
 		 		  		 		  -skipPack) skipPack="-DskipPack=true";;
 		 		  		 		  -buildDirectory) builderDir="$2"; shift;;
 		 		  		 		  -notify) recipients="$2"; shift;;
@@ -304,9 +305,9 @@ echo buildDirectory=$buildDirectory
 #full command with args
 if [ "$HOSTNAME" == "eclipsebuildserv.ottawa.ibm.com" ]
 then
-buildCommand="$antRunner -q -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:ext:sdimitro@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $skipPack $tagMaps -DJ2SE-1.5=$bootclasspath_15 -DJ2SE-1.4=$bootclasspath -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation -DCDC-1.1/Foundation-1.1=$bootclasspath_foundation11 -DJavaSE-1.6=$bootclasspath_16 -DlogExtension=.xml $javadoc $updateSite $sign -DgenerateFeatureVersionSuffix=true -Djava15-home=$builderDir/jdk/linuxppc/ibm-java2-ppc-50/jre -listener org.eclipse.releng.build.listeners.EclipseBuildListener"
+buildCommand="$antRunner -q -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:ext:sdimitro@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $skipPack $tagMaps -DJ2SE-1.5=$bootclasspath_15 -DJ2SE-1.4=$bootclasspath -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation -DCDC-1.1/Foundation-1.1=$bootclasspath_foundation11 -DOSGi/Minimum-1.2=$bootclasspath_foundation11 -DJavaSE-1.6=$bootclasspath_16 -DlogExtension=.xml $javadoc $updateSite $sign -DgenerateFeatureVersionSuffix=true -Djava15-home=$builderDir/jdk/linuxppc/ibm-java2-ppc-50/jre -listener org.eclipse.releng.build.listeners.EclipseBuildListener"
 else
-buildCommand="$antRunner -q -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:ext:sdimitro@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $skipPack $tagMaps -DJ2SE-1.5=$bootclasspath_15 -DJ2SE-1.4=$bootclasspath -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation -DCDC-1.1/Foundation-1.1=$bootclasspath_foundation11 -DJavaSE-1.6=$bootclasspath_16 -DlogExtension=.xml $javadoc $updateSite $sign -DgenerateFeatureVersionSuffix=true -Djava15-home=$builderDir/jdk/linux/jdk1.5.0_14/jre -listener org.eclipse.releng.build.listeners.EclipseBuildListener"
+buildCommand="$antRunner -q -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:ext:sdimitro@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $skipPack $tagMaps -DJ2SE-1.5=$bootclasspath_15 -DJ2SE-1.4=$bootclasspath -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation -DCDC-1.1/Foundation-1.1=$bootclasspath_foundation11 -DOSGi/Minimum-1.2=$bootclasspath_foundation11  -DJavaSE-1.6=$bootclasspath_16 -DlogExtension=.xml $javadoc $updateSite $sign -DgenerateFeatureVersionSuffix=true -Djava15-home=$builderDir/jdk/linux/jdk1.5.0_14/jre -listener org.eclipse.releng.build.listeners.EclipseBuildListener"
 fi
 
 #capture command used to run the build
@@ -331,6 +332,9 @@ $buildCommandRSS
 fi
 
 #clean up
-rm -rf $builderDir
+if [ "$delete.artifacts" = "true" ]
+then
+		 rm -rf $builderDir
+fi
 
 
