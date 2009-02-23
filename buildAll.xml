@@ -411,11 +411,7 @@
 		<delete dir="${repo}" />
 		<mkdir dir="${repo}" />
 		<delete dir="${reposource}" />
-		<mkdir dir="${reposource}" />
-		<!--	<copy todir="${repo}" failonerror="false">
-			<fileset file="${updateSite}/artifacts.*" />
-			<fileset file="${updateSite}/content.*" />
-		</copy> -->
+		<mkdir dir="${reposource}" />		
 		<exec executable="unzip" dir=".">
 			<arg line="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -x */features/master* */plugins/org.eclipse.swt.tools* */plugins/com.ibm.icu.base* */features/com.ibm.icu.base* -d ${reposource}" />
 		</exec>
