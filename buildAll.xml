@@ -502,10 +502,8 @@
 		<p2.composite.metadata.repository.add location="file://${updateSite}" child="${childRepoURL}" />
 	</target>
 
-	<target name="packageEquinoxDistributables">
-		<antcall target="package">
-			<param name="packagingInfo" value="${equinox.build.configs}/equinox/packager" />
-		</antcall>
+	<target name="packageEquinoxDistributables">		
+		<ant antfile="${equinox.build.configs}/equinox/build.xml" />
 		<antcall target="package">
 			<param name="packagingInfo" value="${equinox.build.configs}/equinox.sdk/packager" />
 		</antcall>
