@@ -64,6 +64,7 @@
 		<exec dir="." executable="unzip">
 			<arg line="-o -qq eclipse-junit-tests-*.zip				
 				eclipse/plugins/org.eclipse.test/*
+				eclipse/plugins/org.eclipse.test.dispatcher_*
 				eclipse/plugins/org.eclipse.test.performance_*
 				eclipse/plugins/org.eclipse.test.performance.win32_*
 				eclipse/plugins/org.eclipse.ant.optional.junit_*
