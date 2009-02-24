@@ -140,7 +140,6 @@
 			</fileset>
 		</delete>
 
-	<!--	<antcall target="generate.metadata.agent" /> -->
 		<antcall target="generate.metadata.releng.tools" />
 
 		<parallel failonany="true" threadCount='4'>
@@ -651,72 +650,6 @@
 			<param name="p2.os" value="aix" />
 			<param name="p2.ws" value="motif" />
 			<param name="p2.arch" value="ppc" />
-			<param name="p2.repo" value="${buildRepo}" />
-		</antcall>
-
-	</target>
-
-	<target name="generate.metadata.agent">
-		<property name="p2.agent.dir" value="${p2.output.base}/agent" />
-		<mkdir dir="${p2.agent.dir}" />
-		<antcall target="extract">
-			<param name="extract-src" value="${rcp.delta.archive}" />
-			<param name="extract-dest" value="${p2.agent.dir}" />
-		</antcall>
-		<antcall target="extract">
-			<param name="extract-src" value="${rcp.archive}" />
-			<param name="extract-dest" value="${p2.agent.dir}" />
-		</antcall>
-		<copy todir="${p2.agent.dir}/eclipse/plugins">
-			<fileset dir="${base}/eclipse/plugins">
-				<include name="**/org.eclipse.osgi.services_*.jar" />
-				<include name="**/org.eclipse.core.net_*.jar" />
-			</fileset>
-		</copy> 
-		<!-- delete ICU and replace with ICU Base -->
-		<delete failonerror="false">
-			<fileset dir="${p2.agent.dir}/eclipse/plugins">
-				<include name="**/com.ibm.icu_*.jar" />
-			</fileset>
-		</delete>
-		<copy todir="${p2.agent.dir}/eclipse/plugins">
-			<fileset dir="${reposource}/plugins/">
-				<include name="**/com.ibm.icu.base_*.jar" />
-			</fileset>
-		</copy>
-
-		<path id="agent.zip.path">
-			<fileset dir="${buildDirectory}/${buildId}">
-				<include name="**/org.eclipse.equinox.p2.agent.feature-${buildId}.zip" />
-			</fileset>
-		</path>
-		<property name="agent.zip.name" refid="agent.zip.path" />
-		<antcall target="extract">
-			<param name="extract-src" value="${agent.zip.name}" />
-			<param name="extract-dest" value="${p2.agent.dir}" />
-		</antcall>
-		<copy file="${equinox.build.configs}/equinox.prov/files/config.ini.agent" tofile="${p2.agent.dir}/eclipse/configuration/config.ini" overwrite="true" />
-		<copy todir="${p2.agent.dir}/eclipse/plugins">
-			<fileset dir="${equinox.build.configs}/equinox.prov/files">
-				<include name="**/*.jar" />
-			</fileset>
-		</copy>
-		<delete includeEmptyDirs="true" failonerror="false">
-			<fileset dir="${p2.agent.dir}/eclipse/plugins" includes="**/org.eclipse.*.source.*/**" />
-			<fileset dir="${p2.agent.dir}/eclipse/plugins" includes="**/org.eclipse.jdt.*" />
-			<fileset dir="${p2.agent.dir}/eclipse/plugins" includes="**/org.eclipse.update.core.*" />
-			<fileset dir="${p2.agent.dir}/eclipse/plugins" includes="**/org.eclipse.core.filesystem.*" />
-			<fileset dir="${p2.agent.dir}/eclipse/plugins" includes="**/org.eclipse.core.resources.*" />
-			<fileset dir="${p2.agent.dir}/eclipse/plugins" includes="**/org.eclipse.ui.win32*" />
-			<fileset dir="${p2.agent.dir}/eclipse/plugins" includes="**/com.ibm.icu_*" />
-			<fileset dir="${p2.agent.dir}/eclipse/features" includes="**/org.eclipse.rcp*/**" />
-		</delete>
-
-		<antcall target="run.generator">
-			<param name="p2.generator.source" value="${p2.agent.dir}/eclipse" />
-			<param name="p2.generator.root" value="agent" />
-			<param name="p2.generator.root.version" value="${p2.agent.version}" />			
-			<!-- publish the metadata to the temp repo -->
 			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 	</target>
