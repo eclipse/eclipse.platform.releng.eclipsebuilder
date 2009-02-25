@@ -504,9 +504,7 @@
 
 	<target name="packageEquinoxDistributables">		
 		<ant antfile="${equinox.build.configs}/equinox/build.xml" />
-		<antcall target="package">
-			<param name="packagingInfo" value="${equinox.build.configs}/equinox.sdk/packager" />
-		</antcall>
+		<ant antfile="${equinox.build.configs}/equinox.sdk/build.xml" />		
 		<antcall target="package">
 			<param name="packagingInfo" value="${equinox.build.configs}/master-equinox/packager" />
 		</antcall>
@@ -522,12 +520,7 @@
 		<ant antfile="build.xml" dir="${basedir}">
 			<property name="component" value="${equinox.build.configs}/equinox.jmx.server" />
 		</ant>
-		<!--	<antcall target="package">
-			<param name="packagingInfo" value="${equinox.build.configs}/equinox.p2.agent.feature/packager" />
-		</antcall>
-		<antcall target="package">
-			<param name="packagingInfo" value="${equinox.build.configs}/equinox.p2.director.feature/packager" />
-		</antcall> -->
+	
 		<!-- invoke equinox.p2.installer in a separate process -->
 		<ant antfile="${equinox.build.configs}/../helper.xml" target="build.p2.installer.product" />
 	</target>
