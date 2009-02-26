@@ -11,7 +11,7 @@
 		<p2.mirror source="file://${buildRepo}">
 			<destination kind="metadata" location="file://${featureTemp}" name="Equinox SDK Feature Repo" format="file://${buildRepo}" />
 			<destination kind="artifact" location="file://${featureTemp}" name="Equinox SDK Feature Repo" format="file://${buildRepo}" />
-			<iu id="'org.eclipse.equinox.source.feature.group" version="" />
+			<iu id="org.eclipse.equinox.source.feature.group" version="" />
 			<slicingOptions platformFilter="true" includeOptional="false" includeNonGreedy="false" followStrict="true" />
 		</p2.mirror>
 		<antcall target="assembler" />
