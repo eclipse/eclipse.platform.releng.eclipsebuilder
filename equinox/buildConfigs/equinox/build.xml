@@ -21,7 +21,7 @@
 		<mkdir dir="${equinoxPostingDirectory}/${buildLabel}/checksum" />
 		<property name="archiveFullPath" value="${equinoxPostingDirectory}/${buildLabel}/${archiveName}" />
 		<exec executable="zip" dir="${featureTemp}">
-			<arg line="${archiveFull} -r ." />
+			<arg line="${archiveFullPath} -r ." />
 		</exec>
 		<checksum file="${archiveFullPath}" property="md5" />
 		<checksum file="${archiveFullPath}" algorithm="SHA" property="sha" />
