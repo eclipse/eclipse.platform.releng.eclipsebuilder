@@ -575,6 +575,10 @@
 		<runTests testPlugin="org.eclipse.search.tests" />
 	</target>
 
+	<target name="pdeds">
+		<runTests testPlugin="org.eclipse.pde.ds.tests" />
+	</target>
+
 	<target name="all">
 		<antcall target="jdtcompilertool" />
 		<antcall target="jdtcompilerapt" />
@@ -591,7 +595,7 @@
 		<antcall target="teamcore" />
 		<antcall target="jdtcoreperf" />
 		<antcall target="jdtcorebuilder" />
-		<antcall target="jdtcorecompiler" />	
+		<antcall target="jdtcorecompiler" />
 		<antcall target="ui" />
 		<antcall target="uiperformance" />
 		<antcall target="uieditors" />
@@ -622,6 +626,7 @@
 		<antcall target="equinoxp2" />
 		<antcall target="equinoxp2ui" />
 		<antcall target="search" />
+		<antcall target="pdeds" />
 		<antcall target="jdtcoremodel" />
 	</target>
 </project>
