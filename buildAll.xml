@@ -484,22 +484,14 @@
 		<copy todir="${buildRepo}">
 			<fileset file="${eclipse.build.configs}/../../extras/sdkinstaller.properties" />
 		</copy>
-		
-		<condition property="repoURL" value="http://download.eclipse.org/eclipse/updates/3.5-I-builds">
-			<equals arg1="${buildType}" arg2="I" />
-		</condition>
-		<condition property="repoURL" value="http://download.eclipse.org/eclipse/updates/3.5-N-builds">
-			<equals arg1="${buildType}" arg2="N" />
-		</condition>
-
+	
 		<!--try create composite repository-->
 		<p2.composite.artifact.repository.create location="file://${updateSite}" name="${p2.repo.name}" compressed="true" failOnExists="false" />
 		<p2.composite.metadata.repository.create location="file://${updateSite}" name="${p2.repo.name}" compressed="true" failOnExists="false" />
 
 		<!--add childRepo to composite repo-->
-		<property name="childRepoURL" value="${repoURL}/${buildId}" />
-		<p2.composite.artifact.repository.add location="file://${updateSite}" child="${childRepoURL}" />
-		<p2.composite.metadata.repository.add location="file://${updateSite}" child="${childRepoURL}" />
+		<p2.composite.artifact.repository.add location="file://${updateSite}" child="${buildId}" />
+		<p2.composite.metadata.repository.add location="file://${updateSite}" child="${buildId}" />
 	</target>
 
 	<target name="packageEquinoxDistributables">		
