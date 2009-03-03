@@ -91,13 +91,9 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	</ant-->
 	</target>
 
-	<target name="assemble.org.eclipse.sdk.win32.win32.ia64" />
 	<target name="assemble.org.eclipse.sdk.hpux.motif.PA_RISC" />
 	<target name="assemble.org.eclipse.sdk.linux.gtk.ia64" />
 	<target name="assemble.org.eclipse.sdk.solaris.motif.sparc" />
-	<target name="assemble.org.eclipse.sdk.gtk.solaris.x86" />
-	<target name="assemble.org.eclipse.sdk.gtk.linux.s390" />
-	<target name="assemble.org.eclipse.sdk.gtk.linux.s390x" />
 
 	<target name="assemble.org.eclipse.sdk.aix.motif.ppc">
 		<property name="archiveName" value="eclipse-SDK-${buildId}-aix-motif.zip" />
