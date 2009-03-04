@@ -51,12 +51,7 @@
 					<param name="ws" value="win32" />
 					<param name="os" value="win32" />
 					<param name="arch" value="x86_64" />
-				</antcall>
-				<antcall target="packageSwtStandalone">
-					<param name="ws" value="win32" />
-					<param name="os" value="win32" />
-					<param name="arch" value="ia64" />
-				</antcall>
+				</antcall>				
 			</sequential>
 		</parallel>
 		<parallel failonany="true">
