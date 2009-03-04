@@ -410,7 +410,7 @@
 
 		<!--features and plugins metadata -->
 
-		<p2.generator source="${reposource}" compress="true" append="true" flavor="tooling" metadataRepository="file:${repo}" artifactRepository="file:${repo}" metadataRepositoryName="${p2.repo.name}" artifactRepositoryName="${p2.repo.name}" publishArtifacts="true" p2OS="linux" mode="incremental" />
+		<!-- <p2.generator source="${reposource}" compress="true" append="true" flavor="tooling" metadataRepository="file:${repo}" artifactRepository="file:${repo}" metadataRepositoryName="${p2.repo.name}" artifactRepositoryName="${p2.repo.name}" publishArtifacts="true" p2OS="linux" mode="incremental" /> -->
 
 		<!-- 	<p2.publish.featuresAndBundles source="${reposource}" compress="true" append="true" repository="file:${repo}" repositoryName="${p2.repo.name}" publishArtifacts="true" /> -->
 
