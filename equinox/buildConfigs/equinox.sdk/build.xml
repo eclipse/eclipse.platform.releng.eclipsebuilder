@@ -6,8 +6,7 @@
 	<target name="build">
 		<property name="featureTemp" value="${equinox.build.configs}/equinox/featureTemp" />
 		<delete dir="${featureTemp}" />
-		<mkdir dir="${featureTemp}" />
-		<echo message="${buildRepo} buildRepo" />
+		<mkdir dir="${featureTemp}" />	
 		<p2.mirror source="file://${buildRepo}">
 			<destination kind="metadata" location="file://${featureTemp}" name="Equinox SDK Feature Repo" format="file://${buildRepo}" />
 			<destination kind="artifact" location="file://${featureTemp}" name="Equinox SDK Feature Repo" format="file://${buildRepo}" />

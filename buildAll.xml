@@ -252,20 +252,7 @@
 	<target name="updatePackProperties">
 		<!--exclude pre-built Orbit bundles from being signed and packed-->
 		<property name="packproperties" value="${buildDirectory}/updatePackProperties.txt" />
-		<apply executable="ls" output="${packproperties}" dir="${buildDirectory}/plugins" relative="true" parallel="true" append="true">
-			<arg value="-d" />
-			<fileset dir="${buildDirectory}/plugins" includes="com.ibm.icu*, com.ibm.icu.*, com.jcraft.jsch*, org.junit*" />
-		</apply>
-		<replaceregexp file="${packproperties}" match="com" flags="g" replace="eclipse/plugins/com" />
-		<replaceregexp file="${packproperties}" match="org.junit" flags="g" replace="eclipse/plugins/org.junit" />
-		<echo message="eclipse/plugins/org.junit_3.8.2.v20080602-1318.jar" file="${packproperties}" append="true" />
-		<replaceregexp file="${packproperties}" match="\n+" replace="," />
-		<replaceregexp file="${packproperties}" match="\n+" replace="," />
-		<replaceregexp file="${packproperties}" match="\n+" replace="," />
-		<replaceregexp file="${packproperties}" match="\n+" replace="," />
-		<replaceregexp file="${packproperties}" match="\n+" replace="," />
-		<replaceregexp file="${packproperties}" match="\n+" replace="," />
-		<replaceregexp file="${packproperties}" match="\s+" replace="" />
+		<generateExcludeList mapFile="${buildDirectory}/maps/org.eclipse.releng/maps/orbit.map" outputFile="${packproperties}"/>		
 		<loadfile property="pack.properties" srcFile="${packproperties}" />
 		<delete file="${packproperties}" failonerror="false" />
 		<replace file="${eclipse.build.configs}/../../extras/pack.properties" token="@excludejars@" value="${pack.properties}" />
@@ -478,28 +465,21 @@
 		</antcall>
 
 		<mkdir dir="${buildRepo}" />
-		<!--mirror metadata - note have to mirror metadata first see https://bugs.eclipse.org/bugs/show_bug.cgi?id=264891 -->
+		<!--mirror metadata - note have to mirror metadata first see https://bugs.eclipse.org/bugs/show_bug.cgi?id=264891 -->		
 		<p2.metadata.mirror source="file:${repo}" writeMode="append" destination="file:${buildRepo}" />
-		<p2.artifact.mirror source="file:${repo}" baseline="file:${updateSite}" comparatorId="org.eclipse.equinox.p2.repository.tools.jar.comparator"  destination="file:${buildRepo}" />
+        <p2.artifact.mirror source="file:${repo}" baseline="file:${updateSite}" comparatorId="org.eclipse.equinox.p2.repository.tools.jar.comparator"  destination="file:${buildRepo}" ignoreErrors="true"/>
+				
 		<copy todir="${buildRepo}">
 			<fileset file="${eclipse.build.configs}/../../extras/sdkinstaller.properties" />
 		</copy>
-		
-		<condition property="repoURL" value="http://download.eclipse.org/eclipse/updates/3.5-I-builds">
-			<equals arg1="${buildType}" arg2="I" />
-		</condition>
-		<condition property="repoURL" value="http://download.eclipse.org/eclipse/updates/3.5-N-builds">
-			<equals arg1="${buildType}" arg2="N" />
-		</condition>
-
+	
 		<!--try create composite repository-->
 		<p2.composite.artifact.repository.create location="file://${updateSite}" name="${p2.repo.name}" compressed="true" failOnExists="false" />
 		<p2.composite.metadata.repository.create location="file://${updateSite}" name="${p2.repo.name}" compressed="true" failOnExists="false" />
 
 		<!--add childRepo to composite repo-->
-		<property name="childRepoURL" value="${repoURL}/${buildId}" />
-		<p2.composite.artifact.repository.add location="file://${updateSite}" child="${childRepoURL}" />
-		<p2.composite.metadata.repository.add location="file://${updateSite}" child="${childRepoURL}" />
+		<p2.composite.artifact.repository.add location="file://${updateSite}" child="${buildId}" />
+		<p2.composite.metadata.repository.add location="file://${updateSite}" child="${buildId}" />
 	</target>
 
 	<target name="packageEquinoxDistributables">		

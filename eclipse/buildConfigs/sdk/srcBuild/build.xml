@@ -31,16 +31,6 @@
 		<mkdir dir="${linux.gtk.x86_64.rootfiles}" />
 		<copy tofile="${linux.gtk.x86_64.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64/about.html" />
 
-		<!--copy linux gtk s390 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
-		<property name="linux.gtk.s390.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.s390" />
-		<mkdir dir="${linux.gtk.s390.rootfiles}" />
-		<copy tofile="${linux.gtk.s390.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.s390/about.html" />
-
-		<!--copy linux gtk s390 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
-		<property name="linux.gtk.s390x.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.s390x" />
-		<mkdir dir="${linux.gtk.s390x.rootfiles}" />
-		<copy tofile="${linux.gtk.s390x.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.s390x/about.html" />
-
 		<copy todir="${linux.gtk.x86_64.rootfiles}">
 			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64" includes="
 				about_files/mpl-v11.txt" />
@@ -274,9 +264,7 @@
 		<!-- determines if libraries need to be recompiled for specific platforms -->
 		<condition property="libsconfig">
 			<or>			
-				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="linux-motif-x86" />
-				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="linux-gtk-s390" />
-				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="linux-gtk-s390x" />								
+				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="linux-motif-x86" />											
 				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="solaris-gtk-x86" />
 				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="hpux-motif-PA_RISC" />
 			</or>

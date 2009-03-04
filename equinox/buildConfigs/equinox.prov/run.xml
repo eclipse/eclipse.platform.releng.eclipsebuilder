@@ -755,6 +755,7 @@
 			<arg line="-bundlepool ${p2.director.install.path}" />
 			<arg line="-vmargs" />
 			<arg line="-Declipse.p2.data.area=${p2.director.install.path}/p2" />
+			<arg line="-Declipse.p2.MD5Check=false" />
 		</exec>
 		<echo message="director ${p2.director.install.path}" file="${directorlog}" append="true" />
 		<echo message="${directorcode}" file="${directorlog}" append="true" />
