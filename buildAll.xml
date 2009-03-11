@@ -71,8 +71,8 @@
 				<antcall target="updatePackProperties" />
 				<antcall target="signMasterFeature" />
 				<antcall target="packMasterFeature" />
-				<antcall target="unpackUpdateJarsForPackaging" />
-				<antcall target="buildUpdateSite" />
+			<!--	<antcall target="unpackUpdateJarsForPackaging" />
+				<antcall target="buildUpdateSite" /> -->
 			</sequential>
 			<sequential>
 				<antcall target="buildMasterRootFeature" />
@@ -482,6 +482,9 @@
 		<!--add childRepo to composite repo-->
 		<p2.composite.artifact.repository.add location="file://${updateSite}" child="${buildId}" />
 		<p2.composite.metadata.repository.add location="file://${updateSite}" child="${buildId}" />
+		
+		<!--call to generate pde, rcp and jdt repos-->
+		<ant antfile="${eclipse.build.configs}/repos/build.xml" />
 	</target>
 
 	<target name="packageEquinoxDistributables">		
