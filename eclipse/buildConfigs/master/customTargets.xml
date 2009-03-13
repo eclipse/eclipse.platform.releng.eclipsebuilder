@@ -21,8 +21,8 @@
 	<!-- ===================================================================== -->
 	<!-- ===================================================================== -->
 	<target name="getBaseComponents" depends="checkLocalBase" unless="skipBase">
-		<get src="${eclipseBaseURL}" dest="${buildDirectory}/../temp-base.zip" />
-		<unzip dest="${base}" overwrite="true" src="${buildDirectory}/../temp-base.zip" />
+	<!--	<get src="${eclipseBaseURL}" dest="${buildDirectory}/../temp-base.zip" />
+		<unzip dest="${base}" overwrite="true" src="${buildDirectory}/../temp-base.zip" /> -->
 	</target>
 
 	<target name="checkLocalBase">
@@ -96,8 +96,7 @@
 	<!-- ===================================================================== -->
 	<!-- Steps to do after setup but before starting the build proper -->
 	<!-- ===================================================================== -->
-	<target name="postSetup">
-		<antcall target="getBaseComponents" />
+	<target name="postSetup">	
 	</target>
 
 	<!-- ===================================================================== -->
