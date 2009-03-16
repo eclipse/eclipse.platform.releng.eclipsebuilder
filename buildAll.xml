@@ -71,8 +71,8 @@
 				<antcall target="updatePackProperties" />
 				<antcall target="signMasterFeature" />
 				<antcall target="packMasterFeature" />
-			<!--	<antcall target="unpackUpdateJarsForPackaging" />
-				<antcall target="buildUpdateSite" /> -->
+				<antcall target="unpackUpdateJarsForPackaging" />
+				<antcall target="buildUpdateSite" />
 			</sequential>
 			<sequential>
 				<antcall target="buildMasterRootFeature" />
@@ -469,9 +469,8 @@
 		<mkdir dir="${buildRepo}" />
 		<!--mirror metadata - note have to mirror metadata first see https://bugs.eclipse.org/bugs/show_bug.cgi?id=264891 -->		
 		<p2.metadata.mirror source="file:${repo}" writeMode="append" destination="file:${buildRepo}" />
-        <!-- <p2.artifact.mirror source="file:${repo}" baseline="file:${updateSite}" comparatorId="org.eclipse.equinox.p2.repository.tools.jar.comparator"  destination="file:${buildRepo}" ignoreErrors="true"/> -->
-		<p2.artifact.mirror source="file:${repo}" baseline="file:${updateSite}" comparatorId="org.eclipse.equinox.p2.repository.tools.jar.comparator"  destination="file:${buildRepo}"/>
-		
+        <p2.artifact.mirror source="file:${repo}" baseline="file:${updateSite}" comparatorId="org.eclipse.equinox.p2.repository.tools.jar.comparator"  destination="file:${buildRepo}" ignoreErrors="true"/>
+				
 		<copy todir="${buildRepo}">
 			<fileset file="${eclipse.build.configs}/../../extras/sdkinstaller.properties" />
 		</copy>
