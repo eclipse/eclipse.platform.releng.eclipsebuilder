@@ -3,9 +3,9 @@
 	<zipTypes>
 		
 		<zipType name="Equinox">
-			<platform id="EBF" name="&lt;img src = &quot;repo.gif&quot;&lt; All" fileName="eclipse-equinox-@buildid@.zip">
+			<platform id="EBF" name="&lt;img src = &quot;repo.gif&quot;> All" fileName="eclipse-equinox-@buildid@.zip">
 			</platform>
-			<platform id="EBS" name="&lt;img src = &quot;repo.gif&quot;&lt;All" fileName="eclipse-equinox-SDK-@buildid@.zip">
+			<platform id="EBS" name="&lt;img src = &quot;repo.gif&quot;>All" fileName="eclipse-equinox-SDK-@buildid@.zip">
 			</platform>
 		</zipType>
 

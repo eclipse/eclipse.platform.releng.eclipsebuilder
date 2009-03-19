@@ -140,7 +140,9 @@ echo"<li><a href=\"apitools/report.html\"><b>PDE API Tools Report</b></a>  This 
 echo " <li><a href=\"apitools/apifilters-$buildName.zip\"><b>Zip of .api_filters files used in the build</b></a></li>";
 ?>
 <?php
-<echo "<li>Cvs tag v$buildType$buildName of org.eclipse.releng.eclipsebuilder and org.eclipse.releng.basebuilder was used to create this build.</li> 
+if (! (preg_match("/N/i",$buildType))) {
+    echo"<li>Cvs tag v$buildType$buildName of org.eclipse.releng.eclipsebuilder and org.eclipse.releng.basebuilder was used to create this build.</li> ";
+}
 ?>
 </div>
 

@@ -44,7 +44,7 @@
 		<platform id="RCPMCC" name="Mac OSX (Mac/Cocoa) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_4.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-@build@-macosx-cocoa.tar.gz"></platform>
 		<platform id="RCPMCC64" name="Mac OSX (Mac/Cocoa/x86_64) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_4.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-@build@-macosx-cocoa-x86_64.tar.gz"></platform>
 		<platform id="RCPMC" name="Mac OSX (Mac/Carbon) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_4.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-@build@-macosx-carbon.tar.gz"></platform>
-		<platform id="RCPR" name="&lt;img src = &quot;repo.gif&quot;&lt; RCP Runtime Repo " fileName="org.eclipse.rcp-p2repo-@build@.zip"></platform>
+		<platform id="RCPR" name="&lt;img src = &quot;repo.gif&quot;> RCP Runtime Repo " fileName="org.eclipse.rcp-p2repo-@build@.zip"></platform>
 	</zipType>
 
 	<zipType name="RCP SDK">
@@ -62,7 +62,7 @@
 		<platform id="RCPMCSDKC" name="Mac OSX (Mac/Cocoa) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_4.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-SDK-@build@-macosx-cocoa.tar.gz"></platform>
 		<platform id="RCPMCSDKC64" name="Mac OSX (Mac/Cocoa/x86_64) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_4.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-SDK-@build@-macosx-cocoa-x86_64.tar.gz"></platform>
 		<platform id="RCPMCSDK" name="Mac OSX (Mac/Carbon) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_4.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-SDK-@build@-macosx-carbon.tar.gz"></platform>
-		<platform id="RCPSR" name="&lt;img src = &quot;repo.gif&quot;&lt; RCP Source Repo " fileName="org.eclipse.rcp.source-p2repo-@build@.zip"></platform>
+		<platform id="RCPSR" name="&lt;img src = &quot;repo.gif&quot;> RCP Source Repo " fileName="org.eclipse.rcp.source-p2repo-@build@.zip"></platform>
     </zipType>		
 		
  	<zipType name="Delta Pack">
@@ -114,7 +114,7 @@
 	<zipType name="JDT SDK">
 		<platform id="JASDK" name="All" fileName="eclipse-JDT-SDK-@build@.zip"></platform>
 		<platform id="JMCSDK" name="Mac OSX (Mac/Carbon)" fileName="eclipse-JDT-SDK-@build@-macosx.tar.gz"></platform>
-		<platform id="JSR" name="&lt;img src = &quot;repo.gif&quot;&lt; JDT Source Repo " fileName="org.eclipse.jdt.source-p2repo-@build@.zip"></platform>
+		<platform id="JSR" name="&lt;img src = &quot;repo.gif&quot;> JDT Source Repo " fileName="org.eclipse.jdt.source-p2repo-@build@.zip"></platform>
 	</zipType>	
 
 	<zipType name="JDTC">
@@ -139,12 +139,12 @@
 	
 	<zipType name="CVS Runtime">
 		<platform id="CVS" name="All" fileName="eclipse-CVS-Client-@build@.zip"></platform>
-		<platform id="CRR" name="&lt;img src = &quot;repo.gif&quot;&lt; CVS Repo " fileName="org.eclipse.cvs-p2repo-@build@.zip"></platform>
+		<platform id="CRR" name="&lt;img src = &quot;repo.gif&quot;> CVS Repo " fileName="org.eclipse.cvs-p2repo-@build@.zip"></platform>
 	</zipType>
 		
 	<zipType name="CVS SDK">	
 		<platform id="CVSSDK" name="All" fileName="eclipse-CVS-Client-SDK-@build@.zip"></platform>
-		<platform id="CSR" name="&lt;img src = &quot;repo.gif&quot;&lt; CVS Repo " fileName="org.eclipse.cvs.source-p2repo-@build@.zip"></platform>
+		<platform id="CSR" name="&lt;img src = &quot;repo.gif&quot;> CVS Repo " fileName="org.eclipse.cvs.source-p2repo-@build@.zip"></platform>
 	</zipType>
 
 	<zipType name="SWT">
