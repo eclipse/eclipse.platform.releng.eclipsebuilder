@@ -148,7 +148,8 @@
 			<antcall target="provision.platform" />
 			<antcall target="provision.platformsdk" />
 		</parallel>
-		<antcall target="zip.install" />		
+		<antcall target="zip.install" />	
+		<!--generate packed jars in repo-->
 		<p2.process.artifacts repositoryPath="${buildRepo}"  pack="true"    />
 		<antcall target="update.pack200" />
 
