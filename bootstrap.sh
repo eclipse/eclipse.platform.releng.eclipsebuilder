@@ -42,32 +42,30 @@ deleteArtifacts=""
 tag=""
 
 # tag v20060907 is the one that includes the new build page
-#ejlnx1, ejlnx2
-#buildProjectTags=v20081217
-#remove extra build scripts
-#buildProjectTags=v20090102b
-#buildProjectTags=v20090107
-#buildProjectTags=v20090113a
-#buildProjectTags=v20090114
-#ibuild
-#buildProjectTags=v20090119
-#nbuild
-#buildProjectTags=v20090120b
-#buildProjectTags=v20090122
-#buildProjectTags=v20090122a
-#buildProjectTags=v20090123
-#wo new publisher and compo repos
-#buildProjectTags=v20090123a
-#buildProjectTags=v20090127a
-#buildProjectTags=v20090128a
-#buildProjectTags=v20090206
-#buildProjectTags=v20090208
-#buildProjectTags=v20090209
-#buildProjectTags=v20090210
-#buildProjectTags=v20090213a
-#buildProjectTags=v20090217
-#buildProjectTags=v20090220
-buildProjectTags=v20090220a
+#pde api tools
+#buildProjectTags=v20090224
+#slice equinox feature
+#buildProjectTags=v20090224b
+#buildProjectTags=v20090227b
+#buildProjectTags=v20090301
+#buildProjectTags=v20090302a
+#buildProjectTags=v20090304
+#buildProjectTags=v20090305
+#buildProjectTags=v20090306
+#buildProjectTags=v20090306a
+#M6
+#buildProjectTags=v20090310
+#3.5M6 test bundles
+#buildProjectTags=v20090310a
+#version to test publisher
+#buildProjectTags=v20090311test
+#buildProjectTags=v20090312test
+#buildProjectTags=v20090316b
+#buildProjectTags=v20090318
+#buildProjectTags=v20090319b
+#buildProjectTags=v20090323
+buildProjectTags=v20090326
+#buildProjectTags=v20090324test
 
 #updateSite property setting
 updateSite=""
