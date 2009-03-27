@@ -35,9 +35,9 @@
 	<target name="JUnitTests">
 		<parallel>
 			<antcall target="test">
-				<param name="tester" value="${basedir}/macosxppc" />
-				<param name="cfgKey" value="macosxppc" />
-				<param name="markerName" value="eclipse-macosxppc-${buildId}" />
+				<param name="tester" value="${basedir}/macosx" />
+				<param name="cfgKey" value="macosx" />
+				<param name="markerName" value="eclipse-macosx-${buildId}" />
 			</antcall>	
 		    <antcall target="test">
 				<param name="tester" value="${basedir}/rhelws5" />
