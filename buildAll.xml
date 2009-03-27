@@ -62,6 +62,7 @@
 	<property name="p2.site.xml" value="file:${tempSite}/site.xml" />
 
 	<property name="buildRepo" value="${updateSite}/${buildId}" />
+	<property name="p2.build.repo" value="file:${buildDirectory}/buildRepo"/>
 
 	<target name="main" depends="init">
 		<antcall target="buildEclipseSourceDrops" />
