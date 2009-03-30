@@ -2,7 +2,7 @@
 
 
 	<target name="init">
-		<property name="eclipse.build.configs" value="${basedir}/eclipse/buildConfigs" />		
+		<property name="eclipse.build.configs" value="${basedir}/eclipse/buildConfigs" />
 		<property name="featureTempRoot" value="${eclipse.build.configs}/repossliced" />
 		<property name="featureTempDir" value="featureTemp" />
 		<property name="featureTemp" value="${featureTempRoot}/${featureTempDir}" />
@@ -18,6 +18,9 @@
 		<antcall target="pdesource" />
 		<antcall target="rcp" />
 		<antcall target="rcpsource" />
+		<antcall target="sdkexamples" />
+		<antcall target="icubase" />
+		<antcall target="relengtools" />
 	</target>
 
 	<target name="cvs">
@@ -32,12 +35,12 @@
 
 	<target name="pde">
 		<property name="archiveRoot" value="eclipse-PDE-${buildId}" />
-		<buildRepos feature="org.eclipse.cvs" os="win32" ws="win32" arch="x86" archiveName="${archiveRoot}.zip" />
+		<buildRepos feature="org.eclipse.pde" os="win32" ws="win32" arch="x86" archiveName="${archiveRoot}.zip" />
 	</target>
 
 	<target name="pdesource">
 		<property name="archiveRoot" value="eclipse-PDE-SDK-${buildId}" />
-		<buildReposSource feature="org.eclipse.cvs" os="win32" ws="win32" arch="x86" archiveName="${archiveRoot}.zip" />
+		<buildReposSource feature="org.eclipse.pde" os="win32" ws="win32" arch="x86" archiveName="${archiveRoot}.zip" />
 	</target>
 
 	<target name="jdt">
@@ -82,6 +85,22 @@
 		<buildReposSource feature="org.eclipse.rcp" os="macosx" ws="carbon" arch="ppc" archiveName="${archiveRoot}-hpux-motif-ia64_32.zip" />
 		<buildReposSource feature="org.eclipse.rcp" os="macosx" ws="cocoa" arch="x86" archiveName="${archiveRoot}-macosx-cocoa.tar.gz" />
 		<buildReposSource feature="org.eclipse.rcp" os="macosx" ws="cocoa" arch="x86_64" archiveName="${archiveRoot}-macosx-cocoa-x86_64.tar.gz" />
+	</target>
+
+	<target name="sdkexamples">
+		<property name="archiveRoot" value="eclipse-examples-${buildId}" />
+		<buildRepos feature="org.eclipse.sdk.examples" os="win32" ws="win32" arch="x86" archiveName="${archiveRoot}-win32.zip" />
+		<buildRepos feature="org.eclipse.sdk.examples" os="linux" ws="gtk" arch="x86" archiveName="${archiveRoot}.zip" />
+	</target>
+
+	<target name="icubase">
+		<property name="archiveRoot" value="com.ibm.icu.base-${buildId}" />
+		<buildRepos feature="com.ibm.icu.base" os="win32" ws="win32" arch="x86" archiveName="${archiveRoot}.zip" />
+	</target>
+
+	<target name="relengtools">
+		<property name="archiveRoot" value="org.eclipse.releng.tools-${buildId}" />
+		<buildRepos feature="org.eclipse.releng.tools" os="win32" ws="win32" arch="x86" archiveName="${archiveRoot}.zip" />
 	</target>
 
 	<macrodef name="buildReposSource">
