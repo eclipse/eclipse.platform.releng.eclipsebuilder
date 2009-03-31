@@ -397,7 +397,7 @@
 		<delete dir="${reposource}" />
 		<mkdir dir="${reposource}" />		
 		<exec executable="unzip" dir=".">
-			<arg line="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -x */features/master* */plugins/org.eclipse.swt.tools* */plugins/com.ibm.icu.base* */features/com.ibm.icu.base* -d ${reposource}" />
+			<arg line="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -x */features/master* */plugins/org.eclipse.swt.tools* */plugins/com.ibm.icu.base* -d ${reposource}" />
 		</exec>
 
 		<move todir="${reposource}">
@@ -409,7 +409,7 @@
 
 		<!-- <p2.generator source="${reposource}" compress="true" append="true" flavor="tooling" metadataRepository="file:${repo}" artifactRepository="file:${repo}" metadataRepositoryName="${p2.repo.name}" artifactRepositoryName="${p2.repo.name}" publishArtifacts="true" p2OS="linux" mode="incremental" /> -->
 
-		<!-- 	<p2.publish.featuresAndBundles source="${reposource}" compress="true" append="true" repository="file:${repo}" repositoryName="${p2.repo.name}" publishArtifacts="true" /> -->
+		<p2.publish.featuresAndBundles source="${reposource}" compress="true" append="true" repository="file:${repo}" repositoryName="${p2.repo.name}" publishArtifacts="true" /> 
 
 		<replace file="packaging.map" token="@buildId@" value="${buildId}" />
 	<!--	<antcall target="package">
