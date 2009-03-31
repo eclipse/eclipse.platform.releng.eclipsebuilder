@@ -1,6 +1,12 @@
 <project name="Build Repos" default="all" basedir=".">
 
-	<target name="all">
+	<target name="init">
+		<property name="featureTempRoot" value="${equinox.build.configs}/repossliced" />
+		<property name="featureTempDir" value="featureTemp" />
+		<property name="featureTemp" value="${featureTempRoot}/${featureTempDir}" />
+	</target>
+
+	<target name="all" depends="init">
 		<antcall target="equinox" />
 		<antcall target="equinoxsdk" />
 		<antcall target="jmxclient" />
@@ -44,9 +50,7 @@
 			<property name="runtimeIU" value="@{feature}.feature.group" />
 			<property name="sdkIU" value="@{feature}.source.feature.group" />
 			<delete dir="${featureTemp}" />
-			<delete dir="${featureTemp2}" />
 			<mkdir dir="${featureTemp}" />
-			<mkdir dir="${featureTemp2}" />
 			<p2.mirror source="file://${buildRepo}">
 				<destination kind="metadata" location="file://${featureTemp}" name="@{feature} Repo" format="file://${buildRepo}" />
 				<destination kind="artifact" location="file://${featureTemp}" name="@{feature} Repo" format="file://${buildRepo}" />
@@ -98,7 +102,7 @@
 			<contains string="${archiveName}" substring=".tar.gz" />
 		</condition>
 		<antcall target="${compress.target}">
-			<param name="dir" value="${featureTemp2}" />
+			<param name="dir" value="${featureTemp}" />
 			<param name="filename" value="${archiveName}" />
 		</antcall>
 		<antcall target="generateChecksums">
@@ -125,7 +129,7 @@
 		<checksum file="${archiveFullPath}" property="md5" />
 		<checksum file="${archiveFullPath}" algorithm="SHA" property="sha" />
 		<parallel>
-			<echo message="${md5} *${archiveName}" file="${equinoxequinoxPostingDirectory}/${buildLabel}/checksum/${archiveName}.md5" />
+			<echo message="${md5} *${archiveName}" file="${equinoxPostingDirectory}/${buildLabel}/checksum/${archiveName}.md5" />
 			<echo message="${sha} *${archiveName}" file="${equinoxPostingDirectory}/${buildLabel}/checksum/${archiveName}.sha1" />
 		</parallel>
 	</target>
