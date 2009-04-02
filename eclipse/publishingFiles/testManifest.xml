@@ -183,7 +183,7 @@
 		<effectedFile id="SAM"></effectedFile>
 		<effectedFile id="SHM"></effectedFile>
 		<!--effectedFile id="SNP"></effectedFile-->
-		<effectedFile id="SMC"></effectedFile>		
+		<effectedFile id="SMCC"></effectedFile>		
 		<effectedFile id="JA"></effectedFile>
 		<effectedFile id="JMC"></effectedFile>
 		<effectedFile id="JASDK"></effectedFile>
@@ -199,7 +199,7 @@
 		<effectedFile id="SAM"></effectedFile>
 		<effectedFile id="SHM"></effectedFile>
 		<!--effectedFile id="SNP"></effectedFile-->
-		<effectedFile id="SMC"></effectedFile>
+		<effectedFile id="SMCC"></effectedFile>
 		<effectedFile id="JA"></effectedFile>
 		<effectedFile id="JMC"></effectedFile>
 		<effectedFile id="JASDK"></effectedFile>
@@ -215,7 +215,7 @@
 		<effectedFile id="SAM"></effectedFile>
 		<effectedFile id="SHM"></effectedFile>
 		<!--effectedFile id="SNP"></effectedFile-->
-		<effectedFile id="SMC"></effectedFile>
+		<effectedFile id="SMCC"></effectedFile>
 		<effectedFile id="JA"></effectedFile>
 		<effectedFile id="JMC"></effectedFile>
 		<effectedFile id="JASDK"></effectedFile>
@@ -232,7 +232,7 @@
 		<effectedFile id="SAM"></effectedFile>
 		<effectedFile id="SHM"></effectedFile>
 		<!--effectedFile id="SNP"></effectedFile-->
-		<effectedFile id="SMC"></effectedFile>
+		<effectedFile id="SMCC"></effectedFile>
 		<effectedFile id="JA"></effectedFile>
 		<effectedFile id="JMC"></effectedFile>
 		<effectedFile id="JASDK"></effectedFile>
@@ -248,7 +248,7 @@
 		<effectedFile id="SAM"></effectedFile>
 		<effectedFile id="SHM"></effectedFile>
 		<!--effectedFile id="SNP"></effectedFile-->
-		<effectedFile id="SMC"></effectedFile>
+		<effectedFile id="SMCC"></effectedFile>
 		<effectedFile id="JA"></effectedFile>
 		<effectedFile id="JMC"></effectedFile>
 		<effectedFile id="JASDK"></effectedFile>
@@ -264,7 +264,7 @@
 		<effectedFile id="SAM"></effectedFile>
 		<effectedFile id="SHM"></effectedFile>
 		<!--effectedFile id="SNP"></effectedFile-->
-		<effectedFile id="SMC"></effectedFile>
+		<effectedFile id="SMCC"></effectedFile>
 		<effectedFile id="JA"></effectedFile>
 		<effectedFile id="JMC"></effectedFile>
 		<effectedFile id="JASDK"></effectedFile>
@@ -280,7 +280,7 @@
 		<effectedFile id="SAM"></effectedFile>
 		<effectedFile id="SHM"></effectedFile>
 		<!--effectedFile id="SNP"></effectedFile-->
-		<effectedFile id="SMC"></effectedFile>
+		<effectedFile id="SMCC"></effectedFile>
 		<effectedFile id="JA"></effectedFile>
 		<effectedFile id="JMC"></effectedFile>
 		<effectedFile id="JASDK"></effectedFile>
@@ -288,7 +288,7 @@
 	</logFile>
 
 	<logFile name="plugins\org.eclipse.swt.carbon_*\ws\carbon\swt.jar.bin.xml" type="compile">
-		<effectedFile id="SMC"></effectedFile>
+		<effectedFile id="SMCC"></effectedFile>
 		<effectedFile id="PMC"></effectedFile>
 		<effectedFile id="PMCSDK"></effectedFile>
 		<effectedFile id="SWTMC"></effectedFile>
@@ -501,7 +501,7 @@
 	</logFile>
 
     <logFile name="plugins\org.eclipse.ui.carbon_*\carbon.jar.bin.xml" type="compile">
-        <effectedFile id="SMC"></effectedFile>    
+        <effectedFile id="SMCC"></effectedFile>    
 		<effectedFile id="RCPMC"></effectedFile>
 		<effectedFile id="RCPSDKMC"></effectedFile>
 		<effectedFile id="PMC"></effectedFile>
@@ -533,7 +533,7 @@
 </logFile>
 
 <logFile name="org.eclipse.releng.tests_macosx.cocoa.x86_5.0.xml">
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.releng.tests_linux.gtk.x86_6.0.xml">
@@ -555,7 +555,7 @@
 <logFile name="org.eclipse.pde.ui.tests_macosx.cocoa.x86_5.0.xml">
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.pde.ui.tests_linux.gtk.x86_6.0.xml">
@@ -579,7 +579,7 @@
 <logFile name="org.eclipse.pde.build.tests_macosx.cocoa.x86_5.0.xml">
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.pde.build.tests_linux.gtk.x86_6.0.xml">
@@ -721,7 +721,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.jdt.core.tests.builder_macosx.cocoa.x86_5.0.xml">
@@ -729,7 +729,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.jdt.core.tests.compiler_macosx.cocoa.x86_5.0.xml">
@@ -737,7 +737,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.jdt.core.tests.model_macosx.cocoa.x86_5.0.xml">
@@ -745,7 +745,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.jdt.core.tests.performance_macosx.cocoa.x86_5.0.xml">
@@ -753,7 +753,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.jdt.debug.tests_macosx.cocoa.x86_5.0.xml">
@@ -761,7 +761,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.jdt.text.tests_macosx.cocoa.x86_5.0.xml">
@@ -769,7 +769,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.jdt.ui.tests_macosx.cocoa.x86_5.0.xml">
@@ -777,7 +777,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.jdt.ui.tests.refactoring_macosx.cocoa.x86_5.0.xml">
@@ -785,7 +785,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.jdt.apt.tests_linux.gtk.x86_6.0.xml">
@@ -1226,7 +1226,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.ant.tests.ui_macosx.cocoa.x86_5.0.xml">
@@ -1234,7 +1234,7 @@
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.compare.tests_macosx.cocoa.x86_5.0.xml">
@@ -1244,7 +1244,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.core.filebuffers.tests_macosx.cocoa.x86_5.0.xml">
@@ -1254,7 +1254,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.core.tests.resources_macosx.cocoa.x86_5.0.xml">
@@ -1264,7 +1264,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.jface.text.tests_macosx.cocoa.x86_5.0.xml">
@@ -1274,7 +1274,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.team.tests.core_macosx.cocoa.x86_5.0.xml">
@@ -1284,7 +1284,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.team.tests.cvs.core_macosx.cocoa.x86_5.0.xml">
@@ -1294,7 +1294,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.core.tests.net_macosx.cocoa.x86_5.0.xml">
@@ -1304,7 +1304,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.text.tests_macosx.cocoa.x86_5.0.xml">
@@ -1314,7 +1314,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.ua.tests_macosx.cocoa.x86_5.0.xml">
@@ -1324,7 +1324,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.ui.editors.tests_macosx.cocoa.x86_5.0.xml">
@@ -1334,7 +1334,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.ui.tests.navigator_macosx.cocoa.x86_5.0.xml">
@@ -1344,7 +1344,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.ui.tests.views.properties.tabbed_macosx.cocoa.x86_5.0.xml">
@@ -1354,7 +1354,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.ui.workbench.texteditor.tests_macosx.cocoa.x86_5.0.xml">
@@ -1364,7 +1364,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.update.tests.core_macosx.cocoa.x86_5.0.xml">
@@ -1374,7 +1374,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.ltk.core.refactoring.tests_macosx.cocoa.x86_5.0.xml">
@@ -1384,7 +1384,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.ltk.ui.refactoring.tests_macosx.cocoa.x86_5.0.xml">
@@ -1394,7 +1394,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.ant.tests.core_linux.gtk.x86_6.0.xml">
@@ -1777,7 +1777,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.ui.tests_macosx.cocoa.x86_5.0.xml">
@@ -1789,7 +1789,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.jface.tests.databinding_macosx.cocoa.x86_5.0.xml">
@@ -1801,7 +1801,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.swt.tests_macosx.cocoa.x86_5.0.xml">
@@ -1813,7 +1813,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.core.expressions.tests_macosx.cocoa.x86_5.0.xml">
@@ -1825,7 +1825,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.osgi.tests_macosx.cocoa.x86_5.0.xml">
@@ -1837,7 +1837,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.ui.tests.rcp_macosx.cocoa.x86_5.0.xml">
@@ -1849,7 +1849,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.ui.tests.forms_macosx.cocoa.x86_5.0.xml">
@@ -1861,7 +1861,7 @@
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
-	<effectedFile id="SMC"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
 <logFile name="org.eclipse.core.tests.runtime_linux.gtk.x86_6.0.xml">
