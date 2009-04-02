@@ -33,7 +33,7 @@
 
    <features>
       <feature id="org.eclipse.sdk"/>
-      <feature id="org.eclipse.equinox.p2.user.ui" version="1.0.0.qualifier"/>
+      <feature id="org.eclipse.equinox.p2.user.ui" version="1.1.0.@qualifier@"/>
    </features>
 
    <configurations>
@@ -45,7 +45,7 @@
       <plugin id="org.eclipse.update.configurator" autoStart="true" startLevel="3" />
       <property name="org.eclipse.update.reconcile" value="false" />                                        
       <property name="osgi.bundles.defaultStartLevel" value="4" />   
-      <property name="eclipse.buildId" value"@qualifier@"/>
+      <property name="eclipse.buildId" value="@qualifier@"/>
    </configurations>
 
 </product>
