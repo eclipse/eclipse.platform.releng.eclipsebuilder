@@ -28,9 +28,9 @@
    </plugins>
 
    <features>
-      <feature id="org.eclipse.platform" version="0.0.0"/>
-      <feature id="org.eclipse.platform.source" version="0.0.0"/>
-      <feature id="org.eclipse.equinox.p2.user.ui" version="1.1.0.@qualifier@"/>
+      <feature id="org.eclipse.platform"/>
+      <feature id="org.eclipse.platform.source"/>
+      <feature id="org.eclipse.equinox.p2.user.ui"/>
    </features>
    
    <configurations>
