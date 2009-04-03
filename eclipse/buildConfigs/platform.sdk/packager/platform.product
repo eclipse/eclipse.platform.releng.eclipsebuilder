@@ -6,12 +6,10 @@
    <configIni use="default">
    </configIni>
 
-   <launcherArgs>
-      <programArgs>-showsplash org.eclipse.platform -showsplash org.eclipse.platform --launcher.XXMaxPermSize 256m</programArgs>      
-      <vmArgsLin>-Xms40m -Xmx256m</vmArgsLin>
-      <vmArgsWin>-Xms40m -Xmx256m</vmArgsWin>
-      <vmArgsSol>-vmargs -Xms40m -Xmx256m</vmArgsSol>      
-      <vmArgsMac>-Xdock:icon=../Resources/Eclipse.icns -XstartOnFirstThread -Xms40m -Xmx256m -XX:MaxPermSize=256m -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>      
+  <launcherArgs>
+      <programArgs>-showsplash org.eclipse.platform -showsplash org.eclipse.platform --launcher.XXMaxPermSize 256m</programArgs>
+      <vmArgs>-Xms40m -Xmx256m</vmArgs>
+      <vmArgsMac>-Xdock:icon=../Resources/Eclipse.icns -XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
 
    <launcher name="eclipse">

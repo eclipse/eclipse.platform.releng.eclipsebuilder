@@ -149,10 +149,7 @@
 			<antcall target="provision.platformsdk" />
 		</parallel>
 		<antcall target="zip.install" />	
-		<!--generate packed jars in repo-->
-		<p2.process.artifacts repositoryPath="file://${buildRepo}"  pack="true"    />
-		<antcall target="update.pack200" />
-
+		
 		<!--Collect logs from p2 run and copy to build directory-->
 		<property name="equinoxTestResults" value="${equinoxPostingDirectory}/${buildLabel}/testresults" />
 		<mkdir dir="${equinoxTestResults}" />
@@ -1230,28 +1227,6 @@
 		</exec>
 	</target>
 
-	<target name="update.pack200">
-		<pathconvert property="launcher">
-			<path>
-				<fileset dir="${base.builder}/plugins" includes="**/*.jar" />
-			</path>
-			<regexpmapper from="(org\.eclipse\.equinox\.launcher)(_)(.*)\.jar" to="\0" />
-		</pathconvert>
-		<java jar="${base.builder}/plugins/${launcher}" fork="true" failonerror="false">
-			<arg line="-consolelog" />
-			<arg line="-nosplash" />
-			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
-			<arg line="-metadataRepository file:${buildRepo}" />
-			<arg line="-artifactRepository file:${buildRepo}" />
-			<arg line="-metadataRepositoryName ${p2.repo.name}" />
-			<arg line="-artifactRepositoryName ${p2.repo.name}" />
-			<arg line="-updateSite ${buildRepo}" />
-			<arg line="-flavor tooling" />
-			<arg line="-append" />
-			<arg line="-compress" />
-			<arg line="-reusePack200Files" />
-		</java>
-	</target>
 
 </project>
 
