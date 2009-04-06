@@ -105,7 +105,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 			</td><tr><tr>
 		<tr>
 				<td width="75%">
-		   			This page provides the source build Eclipse SDK downlaods. Test results 
+		   			This page provides the source build Eclipse SDK downloads. Test results 
 					are provided below and performance results are posted once they are available. 
 					You may navigate through the platform pages by selecting a tab from the 
 					list of platform navigation tabs above.
