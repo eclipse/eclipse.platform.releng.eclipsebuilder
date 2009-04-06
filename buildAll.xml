@@ -71,8 +71,6 @@
 			<sequential>
 				<antcall target="updatePackProperties" />
 				<antcall target="signMasterFeature" />
-				<antcall target="packMasterFeature" />
-				<antcall target="unpackUpdateJarsForPackaging" />			
 			</sequential>
 			<sequential>
 				<!--		<antcall target="buildMasterRootFeature" /> -->
@@ -194,33 +192,13 @@
 		<property name="repack" value="" />
 
 		<!--pack200-->
-		<java jar="${eclipse.home}/plugins/org.eclipse.equinox.launcher.jar" fork="true" timeout="10800000" jvm="${java15-home}/bin/java" failonerror="true" maxmemory="768m" error="${buildlogs}/packerrorlog.txt" dir="${buildDirectory}" output="${buildlogs}/packoutputlog.txt">
+		<!--	<java jar="${eclipse.home}/plugins/org.eclipse.equinox.launcher.jar" fork="true" timeout="10800000" jvm="${java15-home}/bin/java" failonerror="true" maxmemory="768m" error="${buildlogs}/packerrorlog.txt" dir="${buildDirectory}" output="${buildlogs}/packoutputlog.txt">
 			<jvmarg value="-Dorg.eclipse.update.jarprocessor.pack200=${eclipse.build.configs}/../../extras" />
 			<arg line="-consolelog -application org.eclipse.update.core.siteOptimizer" />
 			<arg line="-jarProcessor -verbose -outputDir ${buildLabel} -processAll -pack ${repack} ${reposource}" />
-		</java>
+		</java> -->
 
 		<p2.process.artifacts repositoryPath="file://${reposource}" pack="true" />
-		<pathconvert property="launcher">
-			<path>
-				<fileset dir="${base.builder}/plugins" includes="**/*.jar" />
-			</path>
-			<regexpmapper from="(org\.eclipse\.equinox\.launcher)(_)(.*)\.jar" to="\0" />
-		</pathconvert>
-		<java jar="${base.builder}/plugins/${launcher}" fork="true" failonerror="false">
-			<arg line="-consolelog" />
-			<arg line="-nosplash" />
-			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
-			<arg line="-metadataRepository file:${buildRepo}" />
-			<arg line="-artifactRepository file:${buildRepo}" />
-			<arg line="-metadataRepositoryName ${p2.repo.name}" />
-			<arg line="-artifactRepositoryName ${p2.repo.name}" />
-			<arg line="-updateSite ${buildRepo}" />
-			<arg line="-flavor tooling" />
-			<arg line="-append" />
-			<arg line="-compress" />
-			<arg line="-reusePack200Files" />
-		</java>
 
 	</target>
 
@@ -413,7 +391,7 @@
 		</exec>
 
 		<move todir="${reposource}">
-			<fileset dir="${reposource}/eclipse" />		
+			<fileset dir="${reposource}/eclipse" />
 		</move>
 		<delete dir="${reposource}/eclipse" />
 
@@ -476,36 +454,63 @@
 
 		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${eclipse.build.configs}/sdk/packager/sdk.product">
 			<config os="win32" ws="win32" arch="x86" />
+			<config os="win32" ws="win32" arch="x86_64" />
+			<config os="win32" ws="wpf" arch="x86" />
 			<config os="linux" ws="gtk" arch="x86" />
+			<config os="linux" ws="gtk" arch="x86_64" />
+			<config os="linux" ws="gtk" arch="ppc" />
+			<config os="linux" ws="motif" arch="x86" />
 			<config os="solaris" ws="gtk" arch="sparc" />
 			<config os="macosx" ws="cocoa" arch="x86" />
+			<config os="macosx" ws="cocoa" arch="x86_64" />
+			<config os="macosx" ws="carbon" arch="ppc" />
+			<config os="hpux" ws="motif" arch="ia64_32" />
+			<config os="aix" ws="motif" arch="ppc" />
 			<advice kind="featureVersions" file="${buildDirectory}/finalFeaturesVersions.properties" />
 			<advice kind="pluginVersions" file="${buildDirectory}/finalPluginsVersions.properties" />
 		</p2.publish.product>
 
 		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${eclipse.build.configs}/platform/packager/platform.product">
 			<config os="win32" ws="win32" arch="x86" />
+			<config os="win32" ws="win32" arch="x86_64" />
+			<config os="win32" ws="wpf" arch="x86" />
 			<config os="linux" ws="gtk" arch="x86" />
+			<config os="linux" ws="gtk" arch="x86_64" />
+			<config os="linux" ws="gtk" arch="ppc" />
 			<config os="solaris" ws="gtk" arch="sparc" />
 			<config os="macosx" ws="cocoa" arch="x86" />
+			<config os="macosx" ws="cocoa" arch="x86_64" />
+			<config os="macosx" ws="carbon" arch="ppc" />
+			<config os="hpux" ws="motif" arch="ia64_32" />
+			<config os="aix" ws="motif" arch="ppc" />
 			<advice kind="featureVersions" file="${buildDirectory}/finalFeaturesVersions.properties" />
 			<advice kind="pluginVersions" file="${buildDirectory}/finalPluginsVersions.properties" />
 		</p2.publish.product>
 
 		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${eclipse.build.configs}/platform.sdk/packager/platform.product">
 			<config os="win32" ws="win32" arch="x86" />
+			<config os="win32" ws="win32" arch="x86_64" />
+			<config os="win32" ws="wpf" arch="x86" />
 			<config os="linux" ws="gtk" arch="x86" />
+			<config os="linux" ws="gtk" arch="x86_64" />
+			<config os="linux" ws="gtk" arch="ppc" />
 			<config os="solaris" ws="gtk" arch="sparc" />
 			<config os="macosx" ws="cocoa" arch="x86" />
+			<config os="macosx" ws="cocoa" arch="x86_64" />
+			<config os="macosx" ws="carbon" arch="ppc" />
+			<config os="hpux" ws="motif" arch="ia64_32" />
+			<config os="aix" ws="motif" arch="ppc" />
 			<advice kind="featureVersions" file="${buildDirectory}/finalFeaturesVersions.properties" />
 			<advice kind="pluginVersions" file="${buildDirectory}/finalPluginsVersions.properties" />
 		</p2.publish.product>
 
 
+		<antcall target="packMasterFeature" />
+
 		<mkdir dir="${buildRepo}" />
 		<!--mirror metadata - note have to mirror metadata first see https://bugs.eclipse.org/bugs/show_bug.cgi?id=264891 -->
-		<p2.metadata.mirror source="file:${repo}" writeMode="append" destination="file:${buildRepo}" />
-		<p2.artifact.mirror source="file:${repo}" baseline="file:${updateSite}" comparatorId="org.eclipse.equinox.p2.repository.tools.jar.comparator" destination="file:${buildRepo}" ignoreErrors="true" />
+		<p2.metadata.mirror source="file:${reposource}" writeMode="append" destination="file:${buildRepo}" />
+		<p2.artifact.mirror source="file:${reposource}" baseline="file:${updateSite}" comparatorId="org.eclipse.equinox.p2.repository.tools.jar.comparator" destination="file:${buildRepo}" ignoreErrors="true" />
 
 		<copy todir="${buildRepo}">
 			<fileset file="${eclipse.build.configs}/../../extras/sdkinstaller.properties" />
@@ -528,7 +533,7 @@
 	<target name="packageEquinoxDistributables">
 		<ant antfile="${equinox.build.configs}/repos/build.xml" />
 		<!-- equinox slicer build now includes master equinox-->
-		<ant antfile="${equinox.build.configs}/equinox/build.xml" />	
+		<ant antfile="${equinox.build.configs}/equinox/build.xml" />
 		<ant antfile="build.xml" dir="${basedir}">
 			<property name="component" value="${equinox.build.configs}/equinox-launchers" />
 		</ant>

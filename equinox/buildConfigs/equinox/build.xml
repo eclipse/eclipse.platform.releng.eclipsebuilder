@@ -17,7 +17,7 @@
 		<buildRepos feature="org.eclipse.equinox" archiveName="${archiveRoot}.zip" />
 	</target>
 
-	<target name="equinox.sdk">
+	<target name="equinoxsdk">
 		<property name="archiveRoot" value="eclipse-equinox-SDK-${buildId}" />
 		<buildReposSource feature="org.eclipse.equinox" archiveName="${archiveRoot}.zip" />
 	</target>
