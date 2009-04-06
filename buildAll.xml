@@ -430,7 +430,7 @@
 		<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/rcp.deltapack/packager" />
 		</antcall> -->
-		<ant antfile="${equinox.build.configs}/rcp.deltapack/build.xml" />
+		<ant antfile="${eclipse.build.configs}/rcp.deltapack/build.xml" />
 		<!--	<antcall target="package">
 			<param name="packagingInfo" value="${eclipse.build.configs}/sdk.examples/packager" />
 		</antcall> -->
