@@ -153,7 +153,7 @@
 				<destination kind="metadata" location="file://${featureTemp}" name="@{feature} Repo" format="file://${buildRepo}" />
 				<destination kind="artifact" location="file://${featureTemp}" name="@{feature} Repo" format="file://${buildRepo}" />
 				<iu id="${runtimeIU}" version="" />
-				<slicingOptions platformFilter="linux,gtk,x86" includeOptional="false" includeNonGreedy="false" followStrict="true" />
+				<slicingOptions platformFilter="@{os},@{ws},@{arch}" includeOptional="false" includeNonGreedy="false" followStrict="true" />
 			</p2.mirror>
 			<p2.repo2runnable destination="${featureTemp2}/eclipse">
 				<source dir="${featureTempRoot}" includes="${featureTempDir}" />
