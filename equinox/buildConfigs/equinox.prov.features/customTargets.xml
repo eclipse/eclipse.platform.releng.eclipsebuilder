@@ -146,7 +146,7 @@
 		</antcall>
 
 		<unzip dest="${postingDirectory}/${buildLabel}/compilelogs" overwrite="true">
-			<fileset dir="${buildDirectory}/features/org.eclipse.equinox">
+			<fileset dir="${buildDirectory}/features/org.eclipse.equinox.sdk">
 				<include name="*.log.zip" />
 			</fileset>
 		</unzip>

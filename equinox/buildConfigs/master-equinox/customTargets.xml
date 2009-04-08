@@ -21,7 +21,7 @@
 	<!-- ===================================================================== -->
 
 	<property name="archiveName" value="master-equinox-${buildId}.zip" />
-	<target name="assemble.org.eclipse.equinox">
+	<target name="assemble.org.eclipse.equinox.sdk">
 		<antcall target="assemble" />
 	</target>
 

@@ -6,14 +6,20 @@
 		<property name="featureTemp" value="${featureTempRoot}/${featureTempDir}" />
 	</target>
 
-	<target name="all" depends="init">	
+	<target name="all" depends="init">
+		<antcall target="equinox" />
 		<antcall target="equinoxsdk" />
-		<!-- <antcall target="master-equinox" /> -->
+		<antcall target="master-equinox" />
+	</target>
+
+	<target name="equinox">
+		<property name="archiveRoot" value="eclipse-equinox-${buildId}" />
+		<buildRepos feature="org.eclipse.equinox" archiveName="${archiveRoot}.zip" />
 	</target>
 
 	<target name="equinoxsdk">
 		<property name="archiveRoot" value="eclipse-equinox-SDK-${buildId}" />
-		<buildReposSource feature="org.eclipse.equinox.sdk" archiveName="${archiveRoot}.zip" />
+		<buildReposSource feature="org.eclipse.equinox" archiveName="${archiveRoot}.zip" />
 	</target>
 
 	<target name="master-equinox">
