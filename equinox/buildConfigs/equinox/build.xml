@@ -13,7 +13,7 @@
 
 	<target name="equinoxsdk">
 		<property name="archiveRoot" value="eclipse-equinox-SDK-${buildId}" />
-		<buildReposSource feature="org.eclipse.equinox.sdk" archiveName="${archiveRoot}.zip" />
+		<buildRepos feature="org.eclipse.equinox.sdk" archiveName="${archiveRoot}.zip" />
 	</target>
 
 	<target name="master-equinox">
