@@ -176,10 +176,7 @@
 		</ant>
 		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="fetch">
 			<property name="builder" value="${eclipse.build.configs}/sdk" />
-		</ant>
-		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="postFetch">
-			<property name="builder" value="${eclipse.build.configs}/sdk" />
-		</ant>
+		</ant>		
 		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="generate">
 			<property name="builder" value="${eclipse.build.configs}/sdk" />
 		</ant>
