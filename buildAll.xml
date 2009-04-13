@@ -387,7 +387,7 @@
 		<delete dir="${reposource}" />
 		<mkdir dir="${reposource}" />
 		<exec executable="unzip" dir=".">
-			<arg line="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -x */features/master-jetty* */features/master-ecf* */features/master-equinox-p2* */plugins/org.eclipse.swt.tools* -d ${reposource}" />
+			<arg line="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -x */features/master/* */features/master-ecf* */features/master-equinox-p2* */features/master-jetty* */features/master-root* */plugins/org.eclipse.swt.tools* */plugins/com.ibm.icu.base* */features/com.ibm.icu.base* -d ${reposource}" />
 		</exec>
 
 		<move todir="${reposource}">

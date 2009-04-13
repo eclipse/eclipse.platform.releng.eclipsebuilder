@@ -7,24 +7,22 @@
 	</target>
 
 	<target name="all" depends="init">
-		<antcall target="equinox" />
 		<antcall target="equinoxsdk" />
 		<antcall target="master-equinox" />
 	</target>
 
-	<target name="equinox">
-		<property name="archiveRoot" value="eclipse-equinox-${buildId}" />
-		<buildRepos feature="org.eclipse.equinox" archiveName="${archiveRoot}.zip" />
-	</target>
-
 	<target name="equinoxsdk">
 		<property name="archiveRoot" value="eclipse-equinox-SDK-${buildId}" />
-		<buildReposSource feature="org.eclipse.equinox" archiveName="${archiveRoot}.zip" />
+		<buildRepos feature="org.eclipse.equinox.sdk" archiveName="${archiveRoot}.zip" />
 	</target>
 
 	<target name="master-equinox">
 		<property name="archiveRoot" value="master-equinox-${buildId}" />
 		<buildRepos feature="master-equinox" archiveName="${archiveRoot}.zip" />
+		<!--unzip plug-ins to equinoxPostingDirectory-->
+		<exec executable="unzip" dir="${equinoxPostingDirectory}/${buildLabel}">
+			<arg line="-j ${archiveName} eclipse/plugins/*.jar -x eclipse/plugins/*jmx* -d ${equinoxPostingDirectory}/${buildLabel}" />
+		</exec>		
 	</target>
 
 	<macrodef name="buildReposSource">

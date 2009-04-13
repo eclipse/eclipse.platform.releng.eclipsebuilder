@@ -2,9 +2,7 @@
 <topLevel>
 	<zipTypes>
 		
-		<zipType name="Equinox">
-			<platform id="EBF" name="&lt;img src = &quot;repo.gif&quot;> All" fileName="eclipse-equinox-@buildid@.zip">
-			</platform>
+		<zipType name="Equinox">			
 			<platform id="EBS" name="&lt;img src = &quot;repo.gif&quot;>All" fileName="eclipse-equinox-SDK-@buildid@.zip">
 			</platform>
 		</zipType>

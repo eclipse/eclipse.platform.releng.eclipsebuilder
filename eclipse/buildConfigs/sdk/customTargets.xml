@@ -190,7 +190,12 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="postFetch">
 		<concat destfile="${buildDirectory}/plugins/org.eclipse.platform/build.properties" append="true">qualifier=v${timestamp}</concat>
 		<concat destfile="${buildDirectory}/plugins/org.eclipse.sdk/build.properties" append="true">qualifier=v${timestamp}</concat>
-
+		<concat destfile="${buildDirectory}/plugins/org.eclipse.platform.doc.isv/build.properties" append="true">qualifier=v${timestamp}</concat>
+		<concat destfile="${buildDirectory}/plugins/org.eclipse.platform.doc.user/build.properties" append="true">qualifier=v${timestamp}</concat>
+		<concat destfile="${buildDirectory}/plugins/org.eclipse.pde.doc.user/build.properties" append="true">qualifier=v${timestamp}</concat>
+		<concat destfile="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv/build.properties" append="true">qualifier=v${timestamp}</concat>
+		<concat destfile="${buildDirectory}/plugins/org.eclipse.jdt.doc.user/build.properties" append="true">qualifier=v${timestamp}</concat>
+			
 		<ant antfile="${genericTargets}" target="fetchElement">
 			<property name="type" value="feature" />
 			<property name="id" value="org.eclipse.equinox.executable" />
