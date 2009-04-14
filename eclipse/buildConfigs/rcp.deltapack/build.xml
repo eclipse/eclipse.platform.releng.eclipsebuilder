@@ -21,13 +21,13 @@
 
 	<target name="assembler">
 		<mkdir dir="${equinoxPostingDirectory}/${buildLabel}/checksum" />
-		<property name="archiveFullPath" value="${equinoxPostingDirectory}/${buildLabel}/${archiveName}" />
+		<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
 		<exec executable="zip" dir="${featureTemp}">
 			<arg line="${archiveFullPath} -r ." />
 		</exec>
 		<checksum file="${archiveFullPath}" property="md5" />
 		<checksum file="${archiveFullPath}" algorithm="SHA" property="sha" />
-		<echo message="${md5} *${archiveName}" file="${equinoxPostingDirectory}/${buildLabel}/checksum/${archiveName}.md5" />
-		<echo message="${sha} *${archiveName}" file="${equinoxPostingDirectory}/${buildLabel}/checksum/${archiveName}.sha1" />
+		<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5" />
+		<echo message="${sha} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.sha1" />
 	</target>
 </project>
