@@ -12,7 +12,7 @@
 			<destination kind="metadata" location="file://${featureTemp}" name="Equinox Feature Repo" format="file://${buildRepo}" />
 			<destination kind="artifact" location="file://${featureTemp}" name="Equinox Feature Repo" format="file://${buildRepo}" />
 			<iu id="org.eclipse.platform.feature.group" version="" />
-			<iu id="org.eclipse.equinox.feature.group" version="" />
+			<iu id="org.eclipse.equinox.sdk.feature.group" version="" />
 			<iu id="org.eclipse.equinox.executable.feature.group" version="" />
 			<slicingOptions platformFilter="true" includeOptional="false" includeNonGreedy="false" followStrict="true" />
 		</p2.mirror>		
