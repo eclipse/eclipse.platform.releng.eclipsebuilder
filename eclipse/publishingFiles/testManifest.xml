@@ -56,7 +56,6 @@
 		<platform id="RCPLG2PPCSDK" name="Linux (PPC/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_4.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-SDK-@build@-linux-gtk-ppc.tar.gz"></platform>		
 		<platform id="RCPSGSDK" name="Solaris 10 (SPARC/GTK 2)" fileName="eclipse-RCP-SDK-@build@-solaris-gtk.zip"></platform>
 		<platform id="RCPHPUXSDK" name="HPUX (IA64_32/Motif)" fileName="eclipse-RCP-SDK-@build@-hpux-motif-ia64_32.zip"></platform>
-		<platform id="RCPSMSDK" name="Solaris 10 (SPARC/Motif)" fileName="eclipse-RCP-SDK-@build@-solaris-motif.zip"></platform>
 		<!--platform id="PNP" name="QNX (x86/Photon)" fileName="eclipse-RCP-SDK-@build@-qnx-photon.zip"></platform-->
 		<platform id="RCPAMSDK" name="AIX (PPC/Motif)" fileName="eclipse-RCP-SDK-@build@-aix-motif.zip"></platform>		
 		<platform id="RCPMCSDKC" name="Mac OSX (Mac/Cocoa) (&lt;a href=&quot;http://www.eclipse.org/eclipse/development/eclipse_project_plan_3_4.html#TargetOperatingEnvironments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-RCP-SDK-@build@-macosx-cocoa.tar.gz"></platform>

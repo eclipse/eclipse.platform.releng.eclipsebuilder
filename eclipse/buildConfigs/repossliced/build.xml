@@ -66,7 +66,7 @@
 		<buildRepos feature="org.eclipse.rcp" os="hpux" ws="motif" arch="ia64_32" archiveName="${archiveRoot}-hpux-motif-ia64_32.zip" />
 		<buildRepos feature="org.eclipse.rcp" os="solaris" ws="gtk" arch="sparc" archiveName="${archiveRoot}-solaris-gtk.zip" />
 		<buildRepos feature="org.eclipse.rcp" os="aix" ws="motif" arch="ppc" archiveName="${archiveRoot}-aix-motif.zip" />
-		<buildRepos feature="org.eclipse.rcp" os="macosx" ws="carbon" arch="ppc" archiveName="${archiveRoot}-hpux-motif-ia64_32.zip" />
+		<buildRepos feature="org.eclipse.rcp" os="macosx" ws="carbon" arch="ppc" archiveName="${archiveRoot}-macosx-carbon.tar.gz" />
 		<buildRepos feature="org.eclipse.rcp" os="macosx" ws="cocoa" arch="x86" archiveName="${archiveRoot}-macosx-cocoa.tar.gz" />
 		<buildRepos feature="org.eclipse.rcp" os="macosx" ws="cocoa" arch="x86_64" archiveName="${archiveRoot}-macosx-cocoa-x86_64.tar.gz" />
 	</target>
@@ -82,7 +82,7 @@
 		<buildReposSource feature="org.eclipse.rcp" os="hpux" ws="motif" arch="ia64_32" archiveName="${archiveRoot}-hpux-motif-ia64_32.zip" />
 		<buildReposSource feature="org.eclipse.rcp" os="solaris" ws="gtk" arch="sparc" archiveName="${archiveRoot}-solaris-gtk.zip" />
 		<buildReposSource feature="org.eclipse.rcp" os="aix" ws="motif" arch="ppc" archiveName="${archiveRoot}-aix-motif.zip" />
-		<buildReposSource feature="org.eclipse.rcp" os="macosx" ws="carbon" arch="ppc" archiveName="${archiveRoot}-hpux-motif-ia64_32.zip" />
+		<buildReposSource feature="org.eclipse.rcp" os="macosx" ws="carbon" arch="ppc" archiveName="${archiveRoot}-macosx-carbon.tar.gz" />
 		<buildReposSource feature="org.eclipse.rcp" os="macosx" ws="cocoa" arch="x86" archiveName="${archiveRoot}-macosx-cocoa.tar.gz" />
 		<buildReposSource feature="org.eclipse.rcp" os="macosx" ws="cocoa" arch="x86_64" archiveName="${archiveRoot}-macosx-cocoa-x86_64.tar.gz" />
 	</target>
