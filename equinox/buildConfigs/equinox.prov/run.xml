@@ -727,8 +727,7 @@
 		</exec>
 	</target>
 
-	<target name="run.director">
-		<echo message="basebuilder ${base.builder}/plugins/org.eclipse.equinox.launcher" />
+	<target name="run.director">	
 		<delete dir="${base.builder}/configuration/.settings" includeemptydirs="true" failonerror="false" />
 		<!--	<copy file="${equinox.build.configs}/equinox.prov/files/config.ini.director" tofile="${base.builder}/configuration/config.ini" overwrite="true" /> -->
 		<exec executable="${base.builder}/eclipse" failonerror="false" dir="${base.builder}" timeout="900000" output="${directorlog}" resultproperty="directorcode">
