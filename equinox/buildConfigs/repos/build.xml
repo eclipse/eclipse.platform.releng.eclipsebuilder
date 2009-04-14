@@ -1,7 +1,7 @@
 <project name="Build Repos" default="all" basedir=".">
 
 	<target name="init">
-		<property name="featureTempRoot" value="${equinox.build.configs}/repossliced" />
+		<property name="featureTempRoot" value="${equinox.build.configs}/repos" />
 		<property name="featureTempDir" value="featureTemp" />
 		<property name="featureTemp" value="${featureTempRoot}/${featureTempDir}" />
 	</target>
