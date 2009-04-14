@@ -28,7 +28,7 @@
 
 		<!--temporary hack to copy orbit files to equinox download directory -->
 		<copy todir="${equinoxPostingDirectory}/${buildLabel}" overwrite="true">
-			<fileset dir="${buildDirectory}/plugins" includes="javax.servlet_*,org.apache.commons.logging_*,org.mortbay.jetty_*" />
+			<fileset dir="${buildDirectory}/plugins" includes="javax.servlet_*,org.apache.commons.logging_*,org.apache.commons.el_*,org.mortbay.jetty_*" />
 		</copy>
 
 		<!--post directory.txt-->
