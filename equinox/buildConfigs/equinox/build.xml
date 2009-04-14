@@ -1,7 +1,7 @@
 <project name="Build Repos" default="all" basedir=".">
 
 	<target name="init">
-		<property name="featureTempRoot" value="${equinox.build.configs}/repossliced" />
+		<property name="featureTempRoot" value="${equinox.build.configs}/equinox" />
 		<property name="featureTempDir" value="featureTemp" />
 		<property name="featureTemp" value="${featureTempRoot}/${featureTempDir}" />
 	</target>
@@ -19,11 +19,13 @@
 	<target name="master-equinox">
 		<property name="archiveRoot" value="master-equinox-${buildId}" />
 		<buildRepos feature="master-equinox" archiveName="${archiveRoot}.zip" />
+		<property name="archiveName" value="${archiveRoot}.zip" />
 		<!--unzip plug-ins to equinoxPostingDirectory-->
 		<exec executable="unzip" dir="${equinoxPostingDirectory}/${buildLabel}">
-			<arg line="-j ${archiveName} eclipse/plugins/*.jar -x eclipse/plugins/*jmx* -d ${equinoxPostingDirectory}/${buildLabel}" />
-		</exec>		
+			<arg line="-j ${archiveName} plugins/*.jar -x plugins/*jmx* plugins/*.source_* -d ${equinoxPostingDirectory}/${buildLabel}" />
+		</exec>
 	</target>
+
 
 	<macrodef name="buildReposSource">
 		<attribute name="feature" />
