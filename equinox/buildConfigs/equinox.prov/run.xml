@@ -111,6 +111,59 @@
 		<property name="p2.platformsdk.install.macosx.cocoa.x86_64" value="${p2.output.base}/platformsdk.install.macosx.cocoa.x86_64" />
 		<mkdir dir="${p2.platformsdk.install.macosx.cocoa.x86_64}" />
 
+		<!--rcp zips-->
+		<property name="p2.rcp.install.win32.win32.x86" value="${p2.output.base}/rcp.install.win32.win32.x86" />
+		<mkdir dir="${p2.rcp.install.win32.win32.x86}" />
+		<property name="p2.rcp.install.win32.win32.x86_64" value="${p2.output.base}/rcp.install.win32.win32.x86_64" />
+		<mkdir dir="${p2.rcp.install.win32.win32.x86_64}" />
+		<property name="p2.rcp.install.win32.wpf.x86" value="${p2.output.base}/rcp.install.win32.wpf.x86" />
+		<mkdir dir="${p2.rcp.install.win32.wpf.x86}" />
+		<property name="p2.rcp.install.linux.gtk.x86" value="${p2.output.base}/rcp.install.linux.gtk.x86" />
+		<mkdir dir="${p2.rcp.install.linux.gtk.x86}" />
+		<property name="p2.rcp.install.linux.gtk.x86_64" value="${p2.output.base}/rcp.install.linux.gtk.x86_64" />
+		<mkdir dir="${p2.rcp.install.linux.gtk.x86_64}" />
+		<property name="p2.rcp.install.linux.gtk.ppc" value="${p2.output.base}/rcp.install.linux.gtk.ppc" />
+		<mkdir dir="${p2.rcp.install.linux.gtk.ppc}" />
+		<property name="p2.rcp.install.hpux.motif.ia64_32" value="${p2.output.base}/rcp.install.hpux.motif.ia64_32" />
+		<mkdir dir="${p2.rcp.install.hpux.motif.ia64_32}" />
+		<property name="p2.rcp.install.solaris.gtk.sparc" value="${p2.output.base}/rcp.install.solaris.gtk.sparc" />
+		<mkdir dir="${p2.rcp.install.solaris.gtk.sparc}" />
+		<property name="p2.rcp.install.aix.motif.ppc" value="${p2.output.base}/rcp.install.aix.motif.ppc" />
+		<mkdir dir="${p2.rcp.install.aix.motif.ppc}" />
+		<property name="p2.rcp.install.macosx.carbon.x86" value="${p2.output.base}/rcp.install.macosx.carbon.x86" />
+		<mkdir dir="${p2.rcp.install.macosx.carbon.x86}" />
+		<property name="p2.rcp.install.macosx.cocoa.x86" value="${p2.output.base}/rcp.install.macosx.cocoa.x86" />
+		<mkdir dir="${p2.rcp.install.macosx.cocoa.x86}" />
+		<property name="p2.rcp.install.macosx.cocoa.x86_64" value="${p2.output.base}/rcp.install.macosx.cocoa.x86_64" />
+		<mkdir dir="${p2.rcp.install.macosx.cocoa.x86_64}" />
+
+		<!--rcp sdk zips-->
+		<property name="p2.rcpsdk.install.win32.win32.x86" value="${p2.output.base}/rcpsdk.install.win32.win32.x86" />
+		<mkdir dir="${p2.rcpsdk.install.win32.win32.x86}" />
+		<property name="p2.rcpsdk.install.win32.win32.x86_64" value="${p2.output.base}/rcpsdk.install.win32.win32.x86_64" />
+		<mkdir dir="${p2.rcpsdk.install.win32.win32.x86_64}" />
+		<property name="p2.rcpsdk.install.win32.wpf.x86" value="${p2.output.base}/rcpsdk.install.win32.wpf.x86" />
+		<mkdir dir="${p2.rcpsdk.install.win32.wpf.x86}" />
+		<property name="p2.rcpsdk.install.linux.gtk.x86" value="${p2.output.base}/rcpsdk.install.linux.gtk.x86" />
+		<mkdir dir="${p2.rcpsdk.install.linux.gtk.x86}" />
+		<property name="p2.rcpsdk.install.linux.gtk.x86_64" value="${p2.output.base}/rcpsdk.install.linux.gtk.x86_64" />
+		<mkdir dir="${p2.rcpsdk.install.linux.gtk.x86_64}" />
+		<property name="p2.rcpsdk.install.linux.gtk.ppc" value="${p2.output.base}/rcpsdk.install.linux.gtk.ppc" />
+		<mkdir dir="${p2.rcpsdk.install.linux.gtk.ppc}" />
+		<property name="p2.rcpsdk.install.hpux.motif.ia64_32" value="${p2.output.base}/rcpsdk.install.hpux.motif.ia64_32" />
+		<mkdir dir="${p2.rcpsdk.install.hpux.motif.ia64_32}" />
+		<property name="p2.rcpsdk.install.solaris.gtk.sparc" value="${p2.output.base}/rcpsdk.install.solaris.gtk.sparc" />
+		<mkdir dir="${p2.rcpsdk.install.solaris.gtk.sparc}" />
+		<property name="p2.rcpsdk.install.aix.motif.ppc" value="${p2.output.base}/rcpsdk.install.aix.motif.ppc" />
+		<mkdir dir="${p2.rcpsdk.install.aix.motif.ppc}" />
+		<property name="p2.rcpsdk.install.macosx.carbon.x86" value="${p2.output.base}/rcpsdk.install.macosx.carbon.x86" />
+		<mkdir dir="${p2.rcpsdk.install.macosx.carbon.x86}" />
+		<property name="p2.rcpsdk.install.macosx.cocoa.x86" value="${p2.output.base}/rcpsdk.install.macosx.cocoa.x86" />
+		<mkdir dir="${p2.rcpsdk.install.macosx.cocoa.x86}" />
+		<property name="p2.rcpsdk.install.macosx.cocoa.x86_64" value="${p2.output.base}/rcpsdk.install.macosx.cocoa.x86_64" />
+		<mkdir dir="${p2.rcpsdk.install.macosx.cocoa.x86_64}" />
+
+
 		<property name="base" value="${p2.output.base}/base" />
 		<mkdir dir="${base}" />
 
@@ -147,9 +200,11 @@
 			<antcall target="provision.sdk" />
 			<antcall target="provision.platform" />
 			<antcall target="provision.platformsdk" />
+			<antcall target="provision.rcp" />
+			<antcall target="provision.rcpsdk" />
 		</parallel>
-		<antcall target="zip.install" />	
-		
+		<antcall target="zip.install" />
+
 		<!--Collect logs from p2 run and copy to build directory-->
 		<property name="equinoxTestResults" value="${equinoxPostingDirectory}/${buildLabel}/testresults" />
 		<mkdir dir="${equinoxTestResults}" />
@@ -653,6 +708,300 @@
 		</antcall>
 	</target>
 
+	<target name="provision.rcp">
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.rcp.id" />
+			<param name="p2.director.version" value="3.5.0.${buildId}" />
+			<param name="p2.director.profile" value="RCPProfile" />
+			<param name="p2.director.install.path" value="${p2.rcp.install.win32.win32.x86}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="win32" />
+			<param name="p2.ws" value="win32" />
+			<param name="p2.arch" value="x86" />
+			<param name="p2.repo" value="${buildRepo}" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.rcp.id" />
+			<param name="p2.director.version" value="3.5.0.${buildId}" />
+			<param name="p2.director.profile" value="RCPProfile" />
+			<param name="p2.director.install.path" value="${p2.rcp.install.win32.win32.x86_64}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="win32" />
+			<param name="p2.ws" value="win32" />
+			<param name="p2.arch" value="x86_64" />
+			<param name="p2.repo" value="${buildRepo}" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.rcp.id" />
+			<param name="p2.director.version" value="3.5.0.${buildId}" />
+			<param name="p2.director.profile" value="RCPProfile" />
+			<param name="p2.director.install.path" value="${p2.rcp.install.win32.wpf.x86}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="win32" />
+			<param name="p2.ws" value="wpf" />
+			<param name="p2.arch" value="x86" />
+			<param name="p2.repo" value="${buildRepo}" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.rcp.id" />
+			<param name="p2.director.version" value="3.5.0.${buildId}" />
+			<param name="p2.director.profile" value="RCPProfile" />
+			<param name="p2.director.install.path" value="${p2.rcp.install.linux.gtk.x86}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="linux" />
+			<param name="p2.ws" value="gtk" />
+			<param name="p2.arch" value="x86" />
+			<param name="p2.repo" value="${buildRepo}" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.rcp.id" />
+			<param name="p2.director.version" value="3.5.0.${buildId}" />
+			<param name="p2.director.profile" value="RCPProfile" />
+			<param name="p2.director.install.path" value="${p2.rcp.install.linux.gtk.ppc}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="linux" />
+			<param name="p2.ws" value="gtk" />
+			<param name="p2.arch" value="ppc" />
+			<param name="p2.repo" value="${buildRepo}" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.rcp.id" />
+			<param name="p2.director.version" value="3.5.0.${buildId}" />
+			<param name="p2.director.profile" value="RCPProfile" />
+			<param name="p2.director.install.path" value="${p2.rcp.install.linux.gtk.x86_64}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="linux" />
+			<param name="p2.ws" value="gtk" />
+			<param name="p2.arch" value="x86_64" />
+			<param name="p2.repo" value="${buildRepo}" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.rcp.id" />
+			<param name="p2.director.version" value="3.5.0.${buildId}" />
+			<param name="p2.director.profile" value="RCPProfile" />
+			<param name="p2.director.install.path" value="${p2.rcp.install.macosx.carbon.x86}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="macosx" />
+			<param name="p2.ws" value="carbon" />
+			<param name="p2.arch" value="ppc" />
+			<param name="p2.repo" value="${buildRepo}" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.rcp.id" />
+			<param name="p2.director.version" value="3.5.0.${buildId}" />
+			<param name="p2.director.profile" value="RCPProfile" />
+			<param name="p2.director.install.path" value="${p2.rcp.install.macosx.cocoa.x86}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="macosx" />
+			<param name="p2.ws" value="cocoa" />
+			<param name="p2.arch" value="x86" />
+			<param name="p2.repo" value="${buildRepo}" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.rcp.id" />
+			<param name="p2.director.version" value="3.5.0.${buildId}" />
+			<param name="p2.director.profile" value="RCPProfile" />
+			<param name="p2.director.install.path" value="${p2.rcp.install.macosx.cocoa.x86_64}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="macosx" />
+			<param name="p2.ws" value="cocoa" />
+			<param name="p2.arch" value="x86_64" />
+			<param name="p2.repo" value="${buildRepo}" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.rcp.id" />
+			<param name="p2.director.version" value="3.5.0.${buildId}" />
+			<param name="p2.director.profile" value="RCPProfile" />
+			<param name="p2.director.install.path" value="${p2.rcp.install.hpux.motif.ia64_32}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="hpux" />
+			<param name="p2.ws" value="motif" />
+			<param name="p2.arch" value="ia64_32" />
+			<param name="p2.repo" value="${buildRepo}" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.rcp.id" />
+			<param name="p2.director.version" value="3.5.0.${buildId}" />
+			<param name="p2.director.profile" value="RCPProfile" />
+			<param name="p2.director.install.path" value="${p2.rcp.install.solaris.gtk.sparc}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="solaris" />
+			<param name="p2.ws" value="gtk" />
+			<param name="p2.arch" value="sparc" />
+			<param name="p2.repo" value="${buildRepo}" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.rcp.id" />
+			<param name="p2.director.version" value="3.5.0.${buildId}" />
+			<param name="p2.director.profile" value="RCPProfile" />
+			<param name="p2.director.install.path" value="${p2.rcp.install.aix.motif.ppc}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="aix" />
+			<param name="p2.ws" value="motif" />
+			<param name="p2.arch" value="ppc" />
+			<param name="p2.repo" value="${buildRepo}" />
+		</antcall>
+
+	</target>
+
+	<target name="provision.rcpsdk">
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.rcp.sdk.id" />
+			<param name="p2.director.version" value="3.5.0.${buildId}" />
+			<param name="p2.director.profile" value="RCPSDKProfile" />
+			<param name="p2.director.install.path" value="${p2.rcpsdk.install.win32.win32.x86}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="win32" />
+			<param name="p2.ws" value="win32" />
+			<param name="p2.arch" value="x86" />
+			<param name="p2.repo" value="${buildRepo}" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.rcp.sdk.id" />
+			<param name="p2.director.version" value="3.5.0.${buildId}" />
+			<param name="p2.director.profile" value="RCPSDKProfile" />
+			<param name="p2.director.install.path" value="${p2.rcpsdk.install.win32.win32.x86_64}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="win32" />
+			<param name="p2.ws" value="win32" />
+			<param name="p2.arch" value="x86_64" />
+			<param name="p2.repo" value="${buildRepo}" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.rcp.sdk.id" />
+			<param name="p2.director.version" value="3.5.0.${buildId}" />
+			<param name="p2.director.profile" value="RCPSDKProfile" />
+			<param name="p2.director.install.path" value="${p2.rcpsdk.install.win32.wpf.x86}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="win32" />
+			<param name="p2.ws" value="wpf" />
+			<param name="p2.arch" value="x86" />
+			<param name="p2.repo" value="${buildRepo}" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.rcp.sdk.id" />
+			<param name="p2.director.version" value="3.5.0.${buildId}" />
+			<param name="p2.director.profile" value="RCPSDKProfile" />
+			<param name="p2.director.install.path" value="${p2.rcpsdk.install.linux.gtk.x86}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="linux" />
+			<param name="p2.ws" value="gtk" />
+			<param name="p2.arch" value="x86" />
+			<param name="p2.repo" value="${buildRepo}" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.rcp.sdk.id" />
+			<param name="p2.director.version" value="3.5.0.${buildId}" />
+			<param name="p2.director.profile" value="RCPSDKProfile" />
+			<param name="p2.director.install.path" value="${p2.rcpsdk.install.linux.gtk.ppc}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="linux" />
+			<param name="p2.ws" value="gtk" />
+			<param name="p2.arch" value="ppc" />
+			<param name="p2.repo" value="${buildRepo}" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.rcp.sdk.id" />
+			<param name="p2.director.version" value="3.5.0.${buildId}" />
+			<param name="p2.director.profile" value="RCPSDKProfile" />
+			<param name="p2.director.install.path" value="${p2.rcpsdk.install.linux.gtk.x86_64}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="linux" />
+			<param name="p2.ws" value="gtk" />
+			<param name="p2.arch" value="x86_64" />
+			<param name="p2.repo" value="${buildRepo}" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.rcp.sdk.id" />
+			<param name="p2.director.version" value="3.5.0.${buildId}" />
+			<param name="p2.director.profile" value="RCPSDKProfile" />
+			<param name="p2.director.install.path" value="${p2.rcpsdk.install.macosx.carbon.x86}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="macosx" />
+			<param name="p2.ws" value="carbon" />
+			<param name="p2.arch" value="ppc" />
+			<param name="p2.repo" value="${buildRepo}" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.rcp.sdk.id" />
+			<param name="p2.director.version" value="3.5.0.${buildId}" />
+			<param name="p2.director.profile" value="RCPSDKProfile" />
+			<param name="p2.director.install.path" value="${p2.rcpsdk.install.macosx.cocoa.x86}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="macosx" />
+			<param name="p2.ws" value="cocoa" />
+			<param name="p2.arch" value="x86" />
+			<param name="p2.repo" value="${buildRepo}" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.rcp.sdk.id" />
+			<param name="p2.director.version" value="3.5.0.${buildId}" />
+			<param name="p2.director.profile" value="RCPSDKProfile" />
+			<param name="p2.director.install.path" value="${p2.rcpsdk.install.macosx.cocoa.x86_64}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="macosx" />
+			<param name="p2.ws" value="cocoa" />
+			<param name="p2.arch" value="x86_64" />
+			<param name="p2.repo" value="${buildRepo}" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.rcp.sdk.id" />
+			<param name="p2.director.version" value="3.5.0.${buildId}" />
+			<param name="p2.director.profile" value="RCPSDKProfile" />
+			<param name="p2.director.install.path" value="${p2.rcpsdk.install.hpux.motif.ia64_32}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="hpux" />
+			<param name="p2.ws" value="motif" />
+			<param name="p2.arch" value="ia64_32" />
+			<param name="p2.repo" value="${buildRepo}" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.rcp.sdk.id" />
+			<param name="p2.director.version" value="3.5.0.${buildId}" />
+			<param name="p2.director.profile" value="RCPSDKProfile" />
+			<param name="p2.director.install.path" value="${p2.rcpsdk.install.solaris.gtk.sparc}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="solaris" />
+			<param name="p2.ws" value="gtk" />
+			<param name="p2.arch" value="sparc" />
+			<param name="p2.repo" value="${buildRepo}" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.rcp.sdk.id" />
+			<param name="p2.director.version" value="3.5.0.${buildId}" />
+			<param name="p2.director.profile" value="RCPSDKProfile" />
+			<param name="p2.director.install.path" value="${p2.rcpsdk.install.aix.motif.ppc}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="aix" />
+			<param name="p2.ws" value="motif" />
+			<param name="p2.arch" value="ppc" />
+			<param name="p2.repo" value="${buildRepo}" />
+		</antcall>
+
+	</target>
+
 	<!--
 	p2.generator.base
 	p2.generator.feature.dir
@@ -727,7 +1076,7 @@
 		</exec>
 	</target>
 
-	<target name="run.director">	
+	<target name="run.director">
 		<delete dir="${base.builder}/configuration/.settings" includeemptydirs="true" failonerror="false" />
 		<!--	<copy file="${equinox.build.configs}/equinox.prov/files/config.ini.director" tofile="${base.builder}/configuration/config.ini" overwrite="true" /> -->
 		<exec executable="${base.builder}/eclipse" failonerror="false" dir="${base.builder}" timeout="900000" output="${directorlog}" resultproperty="directorcode">
@@ -1175,6 +1524,506 @@
 				</antcall>
 				<antcall target="generateChecksums">
 					<param name="archiveName" value="eclipse-platform-SDK-${buildId}-macosx-cocoa-x86_64.tar.gz" />
+				</antcall>
+			</sequential>
+		</parallel>
+
+
+		<parallel failonany="true" threadCount='4'>
+			<sequential>
+				<!--RCP drops-->
+				<delete file="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-win32.zip" failonerror="false" />
+				<exec dir="${p2.rcp.install.win32.win32.x86}" executable="zip">
+					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-win32.zip -r ." />
+				</exec>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-win32.zip" />
+				</antcall>
+
+				<!-- win32 win32 x86_64 -->
+				<delete file="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-win32-x86_64.zip" failonerror="false" />
+				<exec dir="${p2.rcp.install.win32.win32.x86_64}" executable="zip">
+					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-win32-x86_64.zip -r ." />
+				</exec>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-win32-x86_64.zip" />
+				</antcall>
+
+				<!-- win32 wpf x86 -->
+				<delete file="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-win32-wpf.zip" failonerror="false" />
+				<copy file="${equinox.build.configs}/equinox.prov/wpftemp/eclipse.ini" tofile="${p2.rcp.install.win32.wpf.x86}/eclipse/eclipse.ini" overwrite="true" failonerror="false" />
+				<exec dir="${p2.rcp.install.win32.wpf.x86}" executable="zip">
+					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-win32-wpf.zip -r ." />
+				</exec>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-win32-wpf.zip" />
+				</antcall>
+			</sequential>
+
+			<sequential>
+				<!-- linux gtk x86-->
+				<antcall target="p2.tar">
+					<param name="tar.base.dir" value="${p2.rcp.install.linux.gtk.x86}" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-linux-gtk.tar" />
+				</antcall>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-linux-gtk.tar.gz" />
+				</antcall>
+				<!-- linux gtk ppc-->
+				<antcall target="p2.tar">
+					<param name="tar.base.dir" value="${p2.rcp.install.linux.gtk.ppc}" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-linux-gtk-ppc.tar" />
+				</antcall>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-linux-gtk-ppc.tar.gz" />
+				</antcall>
+				<!-- linux gtk x86_64-->
+				<antcall target="p2.tar">
+					<param name="tar.base.dir" value="${p2.rcp.install.linux.gtk.x86_64}" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-linux-gtk-x86_64.tar" />
+				</antcall>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-linux-gtk-x86_64.tar.gz" />
+				</antcall>
+			</sequential>
+			<sequential>
+				<!-- hpux motif ia64_32-->
+				<delete file="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-hpux-motif-ia64_32.zip" failonerror="false" />
+				<chmod dir="${p2.rcp.install.hpux.motif.ia64_32}" perm="755" includes="**/*.so" />
+				<exec dir="${p2.rcp.install.hpux.motif.ia64_32}" executable="zip">
+					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-hpux-motif-ia64_32.zip -r ." />
+				</exec>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-hpux-motif-ia64_32.zip" />
+				</antcall>
+				<!-- solaris gtk sparc -->
+				<delete file="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-solaris-gtk.zip" failonerror="false" />
+				<exec dir="${p2.rcp.install.solaris.gtk.sparc}" executable="zip">
+					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-solaris-gtk.zip -r ." />
+				</exec>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-solaris-gtk.zip" />
+				</antcall>
+				<!-- aix gtk sparc -->
+				<delete file="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-aix-motif.zip" failonerror="false" />
+				<exec dir="${p2.rcp.install.aix.motif.ppc}" executable="zip">
+					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-aix-motif.zip -r ." />
+				</exec>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-aix-motif.zip" />
+				</antcall>
+
+				<!-- macosx -->
+				<delete file="${p2.rcp.install.macosx.carbon.x86}/eclipse/eclipse" failonerror="false" />
+				<exec dir="${p2.rcp.install.macosx.carbon.x86}/eclipse" executable="ln">
+					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
+				</exec>
+				<antcall target="p2.tar">
+					<param name="tar.base.dir" value="${p2.rcp.install.macosx.carbon.x86}" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-macosx-carbon.tar" />
+				</antcall>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-macosx-carbon.tar.gz" />
+				</antcall>
+
+				<!-- macosx -->
+				<delete file="${p2.rcp.install.macosx.cocoa.x86}/eclipse/eclipse" failonerror="false" />
+				<exec dir="${p2.rcp.install.macosx.cocoa.x86}/eclipse" executable="ln">
+					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
+				</exec>
+				<antcall target="p2.tar">
+					<param name="tar.base.dir" value="${p2.rcp.install.macosx.cocoa.x86}" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-macosx-cocoa.tar" />
+				</antcall>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-macosx-cocoa.tar.gz" />
+				</antcall>
+
+				<!-- macosx cocoa x86_64-->
+				<delete file="${p2.rcp.install.macosx.cocoa.x86_64}/eclipse/eclipse" failonerror="false" />
+				<exec dir="${p2.rcp.install.macosx.cocoa.x86_64}/eclipse" executable="ln">
+					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
+				</exec>
+				<antcall target="p2.tar">
+					<param name="tar.base.dir" value="${p2.rcp.install.macosx.cocoa.x86_64}" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-macosx-cocoa-x86_64.tar" />
+				</antcall>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-macosx-cocoa-x86_64.tar.gz" />
+				</antcall>
+			</sequential>
+		</parallel>
+		<parallel failonany="true" threadCount='4'>
+			<sequential>
+				<!--RCP drops-->
+				<delete file="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-win32.zip" failonerror="false" />
+				<exec dir="${p2.rcp.install.win32.win32.x86}" executable="zip">
+					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-win32.zip -r ." />
+				</exec>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-win32.zip" />
+				</antcall>
+
+				<!-- win32 win32 x86_64 -->
+				<delete file="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-win32-x86_64.zip" failonerror="false" />
+				<exec dir="${p2.rcp.install.win32.win32.x86_64}" executable="zip">
+					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-win32-x86_64.zip -r ." />
+				</exec>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-win32-x86_64.zip" />
+				</antcall>
+
+				<!-- win32 wpf x86 -->
+				<delete file="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-win32-wpf.zip" failonerror="false" />
+				<copy file="${equinox.build.configs}/equinox.prov/wpftemp/eclipse.ini" tofile="${p2.rcp.install.win32.wpf.x86}/eclipse/eclipse.ini" overwrite="true" failonerror="false" />
+				<exec dir="${p2.rcp.install.win32.wpf.x86}" executable="zip">
+					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-win32-wpf.zip -r ." />
+				</exec>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-win32-wpf.zip" />
+				</antcall>
+			</sequential>
+
+			<sequential>
+				<!-- linux gtk x86-->
+				<antcall target="p2.tar">
+					<param name="tar.base.dir" value="${p2.rcp.install.linux.gtk.x86}" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-linux-gtk.tar" />
+				</antcall>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-linux-gtk.tar.gz" />
+				</antcall>
+				<!-- linux gtk ppc-->
+				<antcall target="p2.tar">
+					<param name="tar.base.dir" value="${p2.rcp.install.linux.gtk.ppc}" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-linux-gtk-ppc.tar" />
+				</antcall>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-linux-gtk-ppc.tar.gz" />
+				</antcall>
+				<!-- linux gtk x86_64-->
+				<antcall target="p2.tar">
+					<param name="tar.base.dir" value="${p2.rcp.install.linux.gtk.x86_64}" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-linux-gtk-x86_64.tar" />
+				</antcall>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-linux-gtk-x86_64.tar.gz" />
+				</antcall>
+			</sequential>
+			<sequential>
+				<!-- hpux motif ia64_32-->
+				<delete file="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-hpux-motif-ia64_32.zip" failonerror="false" />
+				<chmod dir="${p2.rcp.install.hpux.motif.ia64_32}" perm="755" includes="**/*.so" />
+				<exec dir="${p2.rcp.install.hpux.motif.ia64_32}" executable="zip">
+					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-hpux-motif-ia64_32.zip -r ." />
+				</exec>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-hpux-motif-ia64_32.zip" />
+				</antcall>
+				<!-- solaris gtk sparc -->
+				<delete file="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-solaris-gtk.zip" failonerror="false" />
+				<exec dir="${p2.rcp.install.solaris.gtk.sparc}" executable="zip">
+					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-solaris-gtk.zip -r ." />
+				</exec>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-solaris-gtk.zip" />
+				</antcall>
+				<!-- aix gtk sparc -->
+				<delete file="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-aix-motif.zip" failonerror="false" />
+				<exec dir="${p2.rcp.install.aix.motif.ppc}" executable="zip">
+					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-aix-motif.zip -r ." />
+				</exec>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-aix-motif.zip" />
+				</antcall>
+
+				<!-- macosx -->
+				<delete file="${p2.rcp.install.macosx.carbon.x86}/eclipse/eclipse" failonerror="false" />
+				<exec dir="${p2.rcp.install.macosx.carbon.x86}/eclipse" executable="ln">
+					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
+				</exec>
+				<antcall target="p2.tar">
+					<param name="tar.base.dir" value="${p2.rcp.install.macosx.carbon.x86}" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-macosx-carbon.tar" />
+				</antcall>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-macosx-carbon.tar.gz" />
+				</antcall>
+
+				<!-- macosx -->
+				<delete file="${p2.rcp.install.macosx.cocoa.x86}/eclipse/eclipse" failonerror="false" />
+				<exec dir="${p2.rcp.install.macosx.cocoa.x86}/eclipse" executable="ln">
+					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
+				</exec>
+				<antcall target="p2.tar">
+					<param name="tar.base.dir" value="${p2.rcp.install.macosx.cocoa.x86}" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-macosx-cocoa.tar" />
+				</antcall>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-macosx-cocoa.tar.gz" />
+				</antcall>
+
+				<!-- macosx cocoa x86_64-->
+				<delete file="${p2.rcp.install.macosx.cocoa.x86_64}/eclipse/eclipse" failonerror="false" />
+				<exec dir="${p2.rcp.install.macosx.cocoa.x86_64}/eclipse" executable="ln">
+					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
+				</exec>
+				<antcall target="p2.tar">
+					<param name="tar.base.dir" value="${p2.rcp.install.macosx.cocoa.x86_64}" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-macosx-cocoa-x86_64.tar" />
+				</antcall>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-macosx-cocoa-x86_64.tar.gz" />
+				</antcall>
+			</sequential>
+		</parallel>
+
+		<parallel failonany="true" threadCount='4'>
+			<sequential>
+				<!--RCP drops-->
+				<delete file="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-win32.zip" failonerror="false" />
+				<exec dir="${p2.rcp.install.win32.win32.x86}" executable="zip">
+					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-win32.zip -r ." />
+				</exec>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-win32.zip" />
+				</antcall>
+
+				<!-- win32 win32 x86_64 -->
+				<delete file="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-win32-x86_64.zip" failonerror="false" />
+				<exec dir="${p2.rcp.install.win32.win32.x86_64}" executable="zip">
+					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-win32-x86_64.zip -r ." />
+				</exec>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-win32-x86_64.zip" />
+				</antcall>
+
+				<!-- win32 wpf x86 -->
+				<delete file="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-win32-wpf.zip" failonerror="false" />
+				<copy file="${equinox.build.configs}/equinox.prov/wpftemp/eclipse.ini" tofile="${p2.rcp.install.win32.wpf.x86}/eclipse/eclipse.ini" overwrite="true" failonerror="false" />
+				<exec dir="${p2.rcp.install.win32.wpf.x86}" executable="zip">
+					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-win32-wpf.zip -r ." />
+				</exec>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-win32-wpf.zip" />
+				</antcall>
+			</sequential>
+
+			<sequential>
+				<!-- linux gtk x86-->
+				<antcall target="p2.tar">
+					<param name="tar.base.dir" value="${p2.rcp.install.linux.gtk.x86}" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-linux-gtk.tar" />
+				</antcall>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-linux-gtk.tar.gz" />
+				</antcall>
+				<!-- linux gtk ppc-->
+				<antcall target="p2.tar">
+					<param name="tar.base.dir" value="${p2.rcp.install.linux.gtk.ppc}" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-linux-gtk-ppc.tar" />
+				</antcall>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-linux-gtk-ppc.tar.gz" />
+				</antcall>
+				<!-- linux gtk x86_64-->
+				<antcall target="p2.tar">
+					<param name="tar.base.dir" value="${p2.rcp.install.linux.gtk.x86_64}" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-linux-gtk-x86_64.tar" />
+				</antcall>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-linux-gtk-x86_64.tar.gz" />
+				</antcall>
+			</sequential>
+			<sequential>
+				<!-- hpux motif ia64_32-->
+				<delete file="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-hpux-motif-ia64_32.zip" failonerror="false" />
+				<chmod dir="${p2.rcp.install.hpux.motif.ia64_32}" perm="755" includes="**/*.so" />
+				<exec dir="${p2.rcp.install.hpux.motif.ia64_32}" executable="zip">
+					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-hpux-motif-ia64_32.zip -r ." />
+				</exec>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-hpux-motif-ia64_32.zip" />
+				</antcall>
+				<!-- solaris gtk sparc -->
+				<delete file="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-solaris-gtk.zip" failonerror="false" />
+				<exec dir="${p2.rcp.install.solaris.gtk.sparc}" executable="zip">
+					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-solaris-gtk.zip -r ." />
+				</exec>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-solaris-gtk.zip" />
+				</antcall>
+				<!-- aix gtk sparc -->
+				<delete file="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-aix-motif.zip" failonerror="false" />
+				<exec dir="${p2.rcp.install.aix.motif.ppc}" executable="zip">
+					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-aix-motif.zip -r ." />
+				</exec>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-aix-motif.zip" />
+				</antcall>
+
+				<!-- macosx -->
+				<delete file="${p2.rcp.install.macosx.carbon.x86}/eclipse/eclipse" failonerror="false" />
+				<exec dir="${p2.rcp.install.macosx.carbon.x86}/eclipse" executable="ln">
+					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
+				</exec>
+				<antcall target="p2.tar">
+					<param name="tar.base.dir" value="${p2.rcp.install.macosx.carbon.x86}" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-macosx-carbon.tar" />
+				</antcall>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-macosx-carbon.tar.gz" />
+				</antcall>
+
+				<!-- macosx -->
+				<delete file="${p2.rcp.install.macosx.cocoa.x86}/eclipse/eclipse" failonerror="false" />
+				<exec dir="${p2.rcp.install.macosx.cocoa.x86}/eclipse" executable="ln">
+					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
+				</exec>
+				<antcall target="p2.tar">
+					<param name="tar.base.dir" value="${p2.rcp.install.macosx.cocoa.x86}" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-macosx-cocoa.tar" />
+				</antcall>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-macosx-cocoa.tar.gz" />
+				</antcall>
+
+				<!-- macosx cocoa x86_64-->
+				<delete file="${p2.rcp.install.macosx.cocoa.x86_64}/eclipse/eclipse" failonerror="false" />
+				<exec dir="${p2.rcp.install.macosx.cocoa.x86_64}/eclipse" executable="ln">
+					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
+				</exec>
+				<antcall target="p2.tar">
+					<param name="tar.base.dir" value="${p2.rcp.install.macosx.cocoa.x86_64}" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-macosx-cocoa-x86_64.tar" />
+				</antcall>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-${buildId}-macosx-cocoa-x86_64.tar.gz" />
+				</antcall>
+			</sequential>
+		</parallel>
+
+		<parallel failonany="true" threadCount='4'>
+			<sequential>
+				<!--RCP SDK drops-->
+				<delete file="${postingDirectory}/${buildLabel}/eclipse-RCP-SDK-${buildId}-win32.zip" failonerror="false" />
+				<exec dir="${p2.rcpsdk.install.win32.win32.x86}" executable="zip">
+					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-RCP-SDK-${buildId}-win32.zip -r ." />
+				</exec>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-SDK-${buildId}-win32.zip" />
+				</antcall>
+
+				<!-- win32 win32 x86_64 -->
+				<delete file="${postingDirectory}/${buildLabel}/eclipse-RCP-SDK-${buildId}-win32-x86_64.zip" failonerror="false" />
+				<exec dir="${p2.rcpsdk.install.win32.win32.x86_64}" executable="zip">
+					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-RCP-SDK-${buildId}-win32-x86_64.zip -r ." />
+				</exec>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-SDK-${buildId}-win32-x86_64.zip" />
+				</antcall>
+
+				<!-- win32 wpf x86 -->
+				<delete file="${postingDirectory}/${buildLabel}/eclipse-RCP-SDK-${buildId}-win32-wpf.zip" failonerror="false" />
+				<copy file="${equinox.build.configs}/equinox.prov/wpftemp/eclipse.ini" tofile="${p2.rcpsdk.install.win32.wpf.x86}/eclipse/eclipse.ini" overwrite="true" failonerror="false" />
+				<exec dir="${p2.rcpsdk.install.win32.wpf.x86}" executable="zip">
+					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-RCP-SDK-${buildId}-win32-wpf.zip -r ." />
+				</exec>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-SDK-${buildId}-win32-wpf.zip" />
+				</antcall>
+			</sequential>
+
+			<sequential>
+				<!-- linux gtk x86-->
+				<antcall target="p2.tar">
+					<param name="tar.base.dir" value="${p2.rcpsdk.install.linux.gtk.x86}" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-SDK-${buildId}-linux-gtk.tar" />
+				</antcall>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-SDK-${buildId}-linux-gtk.tar.gz" />
+				</antcall>
+				<!-- linux gtk ppc-->
+				<antcall target="p2.tar">
+					<param name="tar.base.dir" value="${p2.rcpsdk.install.linux.gtk.ppc}" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-SDK-${buildId}-linux-gtk-ppc.tar" />
+				</antcall>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-SDK-${buildId}-linux-gtk-ppc.tar.gz" />
+				</antcall>
+				<!-- linux gtk x86_64-->
+				<antcall target="p2.tar">
+					<param name="tar.base.dir" value="${p2.rcpsdk.install.linux.gtk.x86_64}" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-SDK-${buildId}-linux-gtk-x86_64.tar" />
+				</antcall>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-SDK-${buildId}-linux-gtk-x86_64.tar.gz" />
+				</antcall>
+			</sequential>
+			<sequential>
+				<!-- hpux motif ia64_32-->
+				<delete file="${postingDirectory}/${buildLabel}/eclipse-RCP-SDK-${buildId}-hpux-motif-ia64_32.zip" failonerror="false" />
+				<chmod dir="${p2.rcpsdk.install.hpux.motif.ia64_32}" perm="755" includes="**/*.so" />
+				<exec dir="${p2.rcpsdk.install.hpux.motif.ia64_32}" executable="zip">
+					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-RCP-SDK-${buildId}-hpux-motif-ia64_32.zip -r ." />
+				</exec>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-SDK-${buildId}-hpux-motif-ia64_32.zip" />
+				</antcall>
+				<!-- solaris gtk sparc -->
+				<delete file="${postingDirectory}/${buildLabel}/eclipse-RCP-SDK-${buildId}-solaris-gtk.zip" failonerror="false" />
+				<exec dir="${p2.rcpsdk.install.solaris.gtk.sparc}" executable="zip">
+					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-RCP-SDK-${buildId}-solaris-gtk.zip -r ." />
+				</exec>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-SDK-${buildId}-solaris-gtk.zip" />
+				</antcall>
+				<!-- aix gtk sparc -->
+				<delete file="${postingDirectory}/${buildLabel}/eclipse-RCP-SDK-${buildId}-aix-motif.zip" failonerror="false" />
+				<exec dir="${p2.rcpsdk.install.aix.motif.ppc}" executable="zip">
+					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-RCP-SDK-${buildId}-aix-motif.zip -r ." />
+				</exec>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-SDK-${buildId}-aix-motif.zip" />
+				</antcall>
+
+				<!-- macosx -->
+				<delete file="${p2.rcpsdk.install.macosx.carbon.x86}/eclipse/eclipse" failonerror="false" />
+				<exec dir="${p2.rcpsdk.install.macosx.carbon.x86}/eclipse" executable="ln">
+					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
+				</exec>
+				<antcall target="p2.tar">
+					<param name="tar.base.dir" value="${p2.rcpsdk.install.macosx.carbon.x86}" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-SDK-${buildId}-macosx-carbon.tar" />
+				</antcall>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-SDK-${buildId}-macosx-carbon.tar.gz" />
+				</antcall>
+
+				<!-- macosx -->
+				<delete file="${p2.rcpsdk.install.macosx.cocoa.x86}/eclipse/eclipse" failonerror="false" />
+				<exec dir="${p2.rcpsdk.install.macosx.cocoa.x86}/eclipse" executable="ln">
+					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
+				</exec>
+				<antcall target="p2.tar">
+					<param name="tar.base.dir" value="${p2.rcpsdk.install.macosx.cocoa.x86}" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-SDK-${buildId}-macosx-cocoa.tar" />
+				</antcall>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-SDK-${buildId}-macosx-cocoa.tar.gz" />
+				</antcall>
+
+				<!-- macosx cocoa x86_64-->
+				<delete file="${p2.rcpsdk.install.macosx.cocoa.x86_64}/eclipse/eclipse" failonerror="false" />
+				<exec dir="${p2.rcpsdk.install.macosx.cocoa.x86_64}/eclipse" executable="ln">
+					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
+				</exec>
+				<antcall target="p2.tar">
+					<param name="tar.base.dir" value="${p2.rcpsdk.install.macosx.cocoa.x86_64}" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-SDK-${buildId}-macosx-cocoa-x86_64.tar" />
+				</antcall>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-RCP-SDK-${buildId}-macosx-cocoa-x86_64.tar.gz" />
 				</antcall>
 			</sequential>
 		</parallel>

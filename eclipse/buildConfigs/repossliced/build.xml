@@ -15,9 +15,7 @@
 		<antcall target="jdt" />
 		<antcall target="jdtsource" />
 		<antcall target="pde" />
-		<antcall target="pdesource" />
-		<antcall target="rcp" />
-		<antcall target="rcpsource" />
+		<antcall target="pdesource" />	
 		<antcall target="sdkexamples" />
 		<antcall target="icubase" />
 		<antcall target="relengtools" />
@@ -54,39 +52,7 @@
 		<buildReposSource feature="org.eclipse.jdt" os="win32" ws="win32" arch="x86" archiveName="${archiveRoot}.zip" />
 		<buildReposSource feature="org.eclipse.jdt" os="macosx" ws="carbon" arch="ppc" archiveName="${archiveRoot}-macosx.tar.gz" />
 	</target>
-
-	<target name="rcp">
-		<property name="archiveRoot" value="eclipse-RCP-${buildId}" />
-		<buildRepos feature="org.eclipse.rcp" os="win32" ws="win32" arch="x86" archiveName="${archiveRoot}-win32.zip" />
-		<buildRepos feature="org.eclipse.rcp" os="win32" ws="win32" arch="x86_64" archiveName="${archiveRoot}-win32-x86_64.zip" />
-		<buildRepos feature="org.eclipse.rcp" os="win32" ws="wpf" arch="x86" archiveName="${archiveRoot}-win32-wpf.zip" />
-		<buildRepos feature="org.eclipse.rcp" os="linux" ws="gtk" arch="x86" archiveName="${archiveRoot}-linux-gtk.tar.gz" />
-		<buildRepos feature="org.eclipse.rcp" os="linux" ws="gtk" arch="x86_64" archiveName="${archiveRoot}-linux-gtk-x86_64.tar.gz" />
-		<buildRepos feature="org.eclipse.rcp" os="linux" ws="gtk" arch="ppc" archiveName="${archiveRoot}-linux-gtk-ppc.tar.gz" />
-		<buildRepos feature="org.eclipse.rcp" os="hpux" ws="motif" arch="ia64_32" archiveName="${archiveRoot}-hpux-motif-ia64_32.zip" />
-		<buildRepos feature="org.eclipse.rcp" os="solaris" ws="gtk" arch="sparc" archiveName="${archiveRoot}-solaris-gtk.zip" />
-		<buildRepos feature="org.eclipse.rcp" os="aix" ws="motif" arch="ppc" archiveName="${archiveRoot}-aix-motif.zip" />
-		<buildRepos feature="org.eclipse.rcp" os="macosx" ws="carbon" arch="ppc" archiveName="${archiveRoot}-macosx-carbon.tar.gz" />
-		<buildRepos feature="org.eclipse.rcp" os="macosx" ws="cocoa" arch="x86" archiveName="${archiveRoot}-macosx-cocoa.tar.gz" />
-		<buildRepos feature="org.eclipse.rcp" os="macosx" ws="cocoa" arch="x86_64" archiveName="${archiveRoot}-macosx-cocoa-x86_64.tar.gz" />
-	</target>
-
-	<target name="rcpsource">
-		<property name="archiveRoot" value="eclipse-RCP-SDK-${buildId}" />
-		<buildReposSource feature="org.eclipse.rcp" os="win32" ws="win32" arch="x86" archiveName="${archiveRoot}-win32.zip" />
-		<buildReposSource feature="org.eclipse.rcp" os="win32" ws="win32" arch="x86_64" archiveName="${archiveRoot}-win32-x86_64.zip" />
-		<buildReposSource feature="org.eclipse.rcp" os="win32" ws="wpf" arch="x86" archiveName="${archiveRoot}-win32-wpf.zip" />
-		<buildReposSource feature="org.eclipse.rcp" os="linux" ws="gtk" arch="x86" archiveName="${archiveRoot}-linux-gtk.tar.gz" />
-		<buildReposSource feature="org.eclipse.rcp" os="linux" ws="gtk" arch="x86_64" archiveName="${archiveRoot}-linux-gtk-x86_64.tar.gz" />
-		<buildReposSource feature="org.eclipse.rcp" os="linux" ws="gtk" arch="ppc" archiveName="${archiveRoot}-linux-gtk-ppc.tar.gz" />
-		<buildReposSource feature="org.eclipse.rcp" os="hpux" ws="motif" arch="ia64_32" archiveName="${archiveRoot}-hpux-motif-ia64_32.zip" />
-		<buildReposSource feature="org.eclipse.rcp" os="solaris" ws="gtk" arch="sparc" archiveName="${archiveRoot}-solaris-gtk.zip" />
-		<buildReposSource feature="org.eclipse.rcp" os="aix" ws="motif" arch="ppc" archiveName="${archiveRoot}-aix-motif.zip" />
-		<buildReposSource feature="org.eclipse.rcp" os="macosx" ws="carbon" arch="ppc" archiveName="${archiveRoot}-macosx-carbon.tar.gz" />
-		<buildReposSource feature="org.eclipse.rcp" os="macosx" ws="cocoa" arch="x86" archiveName="${archiveRoot}-macosx-cocoa.tar.gz" />
-		<buildReposSource feature="org.eclipse.rcp" os="macosx" ws="cocoa" arch="x86_64" archiveName="${archiveRoot}-macosx-cocoa-x86_64.tar.gz" />
-	</target>
-
+	
 	<target name="sdkexamples">
 		<property name="archiveRoot" value="eclipse-examples-${buildId}" />
 		<buildRepos feature="org.eclipse.sdk.examples" os="win32" ws="win32" arch="x86" archiveName="${archiveRoot}-win32.zip" />
