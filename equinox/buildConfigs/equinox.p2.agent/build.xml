@@ -18,7 +18,7 @@
 		<property name="archiveRoot" value="equinox-p2-agent-${buildId}" />
 		<buildRepos feature="org.eclipse.equinox.p2.agent.feature" os="win32" ws="win32" arch="x86" archiveName="${archiveRoot}-win32.zip" />
 		<buildRepos feature="org.eclipse.equinox.p2.agent.feature" os="linux" ws="gtk" arch="x86" archiveName="${archiveRoot}-linux.tar.gz" />
-		<buildRepos feature="org.eclipse.equinox.p2.agent.feature" os="linux" ws="gtk" arch="x86" archiveName="${archiveRoot}-macosx.tar.gz" />
+		<buildRepos feature="org.eclipse.equinox.p2.agent.feature" os="macosx" ws="cocoa" arch="x86" archiveName="${archiveRoot}-macosx.tar.gz" />
 	</target>
 
 	<macrodef name="buildRepos">

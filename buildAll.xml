@@ -569,6 +569,7 @@
 		<ant antfile="${equinox.build.configs}/repos/build.xml" />
 		<!-- equinox slicer build now includes master equinox-->
 		<ant antfile="${equinox.build.configs}/equinox/build.xml" />
+		<ant antfile="${equinox.build.configs}/equinox.p2.agent/build.xml" />
 	<!--	<ant antfile="build.xml" dir="${basedir}">
 			<property name="component" value="${equinox.build.configs}/equinox-launchers" />
 		</ant> -->
