@@ -21,7 +21,7 @@
 	<!-- ===================================================================== -->
 	<!-- ===================================================================== -->
 	<target name="getBaseComponents" depends="checkLocalBase" unless="skipBase">
-	<!--	<get src="${eclipseBaseURL}" dest="${buildDirectory}/../temp-base.zip" />
+		<!--	<get src="${eclipseBaseURL}" dest="${buildDirectory}/../temp-base.zip" />
 		<unzip dest="${base}" overwrite="true" src="${buildDirectory}/../temp-base.zip" /> -->
 	</target>
 
@@ -84,7 +84,7 @@
 			<fileset dir="${buildDirectory}/features">
 				<include name="**/*.log.zip" />
 			</fileset>
-		</unzip>				
+		</unzip>
 	</target>
 
 	<!-- ===================================================================== -->
@@ -96,7 +96,7 @@
 	<!-- ===================================================================== -->
 	<!-- Steps to do after setup but before starting the build proper -->
 	<!-- ===================================================================== -->
-	<target name="postSetup">	
+	<target name="postSetup">
 	</target>
 
 	<!-- ===================================================================== -->
@@ -228,6 +228,9 @@
 	<target name="postPackage">
 		<exec executable="zip" dir="${buildDirectory}/${buildLabel}">
 			<arg line="-d ${archiveName} win32** wce** linux** solaris** aix** hpux** macosx** qnx**" />
+		</exec>
+		<exec dir="${buildDirectory}/buildRepo" executable="zip">
+			<arg line="-r ${archiveFullPath} ." />
 		</exec>
 	</target>
 

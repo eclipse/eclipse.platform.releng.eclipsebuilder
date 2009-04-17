@@ -382,6 +382,8 @@
 		<replace token="@qualifier@" file="${eclipse.build.configs}/platform/packager/platform.product" value="${buildId}" />
 		<replace token="@qualifier@" file="${eclipse.build.configs}/platform.sdk/packager/platform.product" value="${buildId}" />
 		<replace token="@qualifier@" file="${buildDirectory}/plugins/org.eclipse.equinox.p2.ui.admin.rcp/rcp.product" value="${buildId}" />
+		<replace token="@qualifier@" file="${eclipse.build.configs}/rcp/rcp.product" value="${buildId}" />
+		<replace token="@qualifier@" file="${eclipse.build.configs}/rcp.sdk/rcp.product" value="${buildId}" />
 		<delete dir="${repo}" />
 		<mkdir dir="${repo}" />
 		<delete dir="${reposource}" />
@@ -389,11 +391,18 @@
 		<exec executable="unzip" dir=".">
 			<arg line="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -x */features/master/* */features/master-ecf* */features/master-equinox-p2* */features/master-jetty* */features/master-root* */plugins/org.eclipse.swt.tools* */plugins/com.ibm.icu.base* */features/com.ibm.icu.base* -d ${reposource}" />
 		</exec>
+		<property name="tempexec" value="${buildDirectory}/tempexec" />
+		<mkdir dir="${tempexec}" />
+		<delete dir="${tempexec}" />
+		<copy file="/builds/N200904170904/src/buildRepo/features/org.eclipse.equinox.executable_3.3.200.N20090417-0904-7M-FhJF7DIehZfy-vKhZfx.jar" todir="${tempexec}" />
+		<exec executable="unzip" dir="${tempexec}">
+			<arg line="*.jar -d ${tempexec}" />
+		</exec>
 
-		<move todir="${reposource}">
-			<fileset dir="${reposource}/eclipse" />
-		</move>
-		<delete dir="${reposource}/eclipse" />
+		<subant antfile="build.xml" target="publish.bin.parts" buildpath="${tempexec}/build.xml">
+			<property name="p2.gathering" value="true" />
+			<property name="p2.build.repo" value="file:/builds/N200904170904/src/reposource" />
+		</subant>
 
 		<!--features and plugins metadata -->
 
@@ -451,6 +460,7 @@
 		<!--	<antcall target="package">
 			<param name="packagingInfo" value="${equinox.build.configs}/equinox.p2.agent/packager" />
 		</antcall> -->
+
 
 		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${eclipse.build.configs}/sdk/packager/sdk.product">
 			<config os="win32" ws="win32" arch="x86" />
@@ -569,8 +579,8 @@
 		<ant antfile="${equinox.build.configs}/repos/build.xml" />
 		<!-- equinox slicer build now includes master equinox-->
 		<ant antfile="${equinox.build.configs}/equinox/build.xml" />
-		<ant antfile="${equinox.build.configs}/equinox.p2.agent/build.xml" />
-	<!--	<ant antfile="build.xml" dir="${basedir}">
+	<!--	<ant antfile="${equinox.build.configs}/equinox.p2.agent/build.xml" /> -->
+		<!--	<ant antfile="build.xml" dir="${basedir}">
 			<property name="component" value="${equinox.build.configs}/equinox-launchers" />
 		</ant> -->
 		<!-- invoke equinox.p2.installer in a separate process -->
