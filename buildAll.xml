@@ -394,73 +394,23 @@
 		<property name="tempexec" value="${buildDirectory}/tempexec" />
 		<mkdir dir="${tempexec}" />
 		<delete dir="${tempexec}" />
-		<copy file="/builds/N200904170904/src/buildRepo/features/org.eclipse.equinox.executable_3.3.200.N20090417-0904-7M-FhJF7DIehZfy-vKhZfx.jar" todir="${tempexec}" />
+		<copy todir="${tempexec}">
+			<fileset dir="${p2.build.repo}">
+				<include name="features/org.eclipse.equinox.executable_*.jar" />
+			</fileset>
+		</copy>		
 		<exec executable="unzip" dir="${tempexec}">
 			<arg line="*.jar -d ${tempexec}" />
 		</exec>
 
 		<subant antfile="build.xml" target="publish.bin.parts" buildpath="${tempexec}/build.xml">
 			<property name="p2.gathering" value="true" />
-			<property name="p2.build.repo" value="file:/builds/N200904170904/src/reposource" />
+			
 		</subant>
-
-		<!--features and plugins metadata -->
-
-		<!-- <p2.generator source="${reposource}" compress="true" append="true" flavor="tooling" metadataRepository="file:${repo}" artifactRepository="file:${repo}" metadataRepositoryName="${p2.repo.name}" artifactRepositoryName="${p2.repo.name}" publishArtifacts="true" p2OS="linux" mode="incremental" /> -->
-
-		<!-- <p2.publish.featuresAndBundles source="${reposource}" compress="true" append="true" repository="file:${repo}" repositoryName="${p2.repo.name}" publishArtifacts="true" /> -->
+		<!--not sure if p2.build.repo properties will be inherited in above call --> 
+		<!-- <property name="p2.build.repo" value="file:/builds/N200904170904/src/reposource" /> -->
 
 		<replace file="packaging.map" token="@buildId@" value="${buildId}" />
-		<!--	<antcall target="package">
-			<param name="packagingInfo" value="${eclipse.build.configs}/sdk/packager" />
-		</antcall>
-		<antcall target="package">
-			<param name="packagingInfo" value="${eclipse.build.configs}/rcp.deltapack/packager" />
-		</antcall> -->
-
-		<!--	<antcall target="package">
-			<param name="packagingInfo" value="${eclipse.build.configs}/sdk.examples/packager" />
-		</antcall> -->
-		<!-- <antcall target="package">
-			<param name="packagingInfo" value="${eclipse.build.configs}/jdt/packager" />
-		</antcall>
-		<antcall target="package">
-			<param name="packagingInfo" value="${eclipse.build.configs}/jdt.sdk/packager" />
-		</antcall>
-		<antcall target="package">
-			<param name="packagingInfo" value="${eclipse.build.configs}/pde/packager" />
-		</antcall>
-		<antcall target="package">
-			<param name="packagingInfo" value="${eclipse.build.configs}/pde.sdk/packager" />
-		</antcall>
-		<antcall target="package">
-			<param name="packagingInfo" value="${eclipse.build.configs}/platform/packager" />
-		</antcall>
-		<antcall target="package">
-			<param name="packagingInfo" value="${eclipse.build.configs}/platform.sdk/packager" />
-		</antcall>
-		<antcall target="package">
-			<param name="packagingInfo" value="${eclipse.build.configs}/rcp/packager" />
-		</antcall>
-		<antcall target="package">
-			<param name="packagingInfo" value="${eclipse.build.configs}/rcp.sdk/packager" />
-		</antcall> -->
-		<!--	<antcall target="package">
-			<param name="packagingInfo" value="${eclipse.build.configs}/com.ibm.icu.base/packager" />
-		</antcall>
-		<antcall target="package">
-			<param name="packagingInfo" value="${eclipse.build.configs}/releng.tools/packager" />
-		</antcall> -->
-		<!-- <antcall target="package">
-			<param name="packagingInfo" value="${eclipse.build.configs}/cvsfeature/packager" />
-		</antcall>
-		<antcall target="package">
-			<param name="packagingInfo" value="${eclipse.build.configs}/cvsfeature.sdk/packager" />
-		</antcall> -->
-		<!--	<antcall target="package">
-			<param name="packagingInfo" value="${equinox.build.configs}/equinox.p2.agent/packager" />
-		</antcall> -->
-
 
 		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${eclipse.build.configs}/sdk/packager/sdk.product">
 			<config os="win32" ws="win32" arch="x86" />
@@ -548,6 +498,13 @@
 			<advice kind="pluginVersions" file="${buildDirectory}/finalPluginsVersions.properties" />
 		</p2.publish.product>
 
+		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${buildDirectory}/plugins/org.eclipse.equinox.p2.ui.admin.rcp/rcp.product">
+			<config os="win32" ws="win32" arch="x86" />
+			<config os="linux" ws="gtk" arch="x86" />
+			<config os="macosx" ws="cocoa" arch="x86" />
+			<advice kind="featureVersions" file="${buildDirectory}/finalFeaturesVersions.properties" />
+			<advice kind="pluginVersions" file="${buildDirectory}/finalPluginsVersions.properties" />
+		</p2.publish.product>
 
 		<antcall target="packMasterFeature" />
 
@@ -579,12 +536,12 @@
 		<ant antfile="${equinox.build.configs}/repos/build.xml" />
 		<!-- equinox slicer build now includes master equinox-->
 		<ant antfile="${equinox.build.configs}/equinox/build.xml" />
-	<!--	<ant antfile="${equinox.build.configs}/equinox.p2.agent/build.xml" /> -->
+		<!--	<ant antfile="${equinox.build.configs}/equinox.p2.agent/build.xml" /> -->
 		<!--	<ant antfile="build.xml" dir="${basedir}">
 			<property name="component" value="${equinox.build.configs}/equinox-launchers" />
 		</ant> -->
 		<!-- invoke equinox.p2.installer in a separate process -->
-		<!-- <ant antfile="${equinox.build.configs}/../helper.xml" target="build.p2.installer.product" /> -->
+		<ant antfile="${equinox.build.configs}/../helper.xml" target="build.p2.installer.product" />
 	</target>
 
 
