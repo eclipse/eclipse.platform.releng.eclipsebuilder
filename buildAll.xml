@@ -62,7 +62,7 @@
 	<property name="p2.site.xml" value="file:${tempSite}/site.xml" />
 
 	<property name="buildRepo" value="${updateSite}/${buildId}" />
-	<property name="p2.build.repo" value="file:${buildDirectory}/buildRepo" />
+	<property name="p2.build.repo" value="file:${buildDirectory}/buildRepo" />	
 
 	<target name="main" depends="init">
 		<antcall target="buildEclipseSourceDrops" />
@@ -119,6 +119,12 @@
 		<condition property="fetchjetty" value="true">
 			<equals arg1="${buildType}" arg2="N" />
 		</condition>
+		<property name="buildDirectoryAbsoluteTemp" value="${buildDirectory}/absolutetemp.txt" />
+		<echo message="${reposource}" file="${buildDirectoryAbsoluteTemp}" />
+		<replaceregexp file="${buildDirectoryAbsoluteTemp}" match="org.eclipse.releng.eclipsebuilder/../src/" replace="src/" />
+		<loadfile property="buildDirectoryAbsolute" srcFile="${buildDirectoryAbsoluteTemp}" failonerror="false" />
+		<delete file="${buildDirectoryAbsoluteTemp}" />
+
 	</target>
 
 	<target name="buildECFMasterFeature">
@@ -395,20 +401,18 @@
 		<mkdir dir="${tempexec}" />
 		<delete dir="${tempexec}" />
 		<copy todir="${tempexec}">
-			<fileset dir="${p2.build.repo}">
+			<fileset dir="${reposource}">
 				<include name="features/org.eclipse.equinox.executable_*.jar" />
 			</fileset>
-		</copy>		
+		</copy>
 		<exec executable="unzip" dir="${tempexec}">
-			<arg line="*.jar -d ${tempexec}" />
+			<arg line="features/*.jar -d ${tempexec}" />
 		</exec>
 
 		<subant antfile="build.xml" target="publish.bin.parts" buildpath="${tempexec}/build.xml">
 			<property name="p2.gathering" value="true" />
-			
+			<property name="p2.build.repo" value="file:/${buildDirectoryAbsolute}" />
 		</subant>
-		<!--not sure if p2.build.repo properties will be inherited in above call --> 
-		<!-- <property name="p2.build.repo" value="file:/builds/N200904170904/src/reposource" /> -->
 
 		<replace file="packaging.map" token="@buildId@" value="${buildId}" />
 
@@ -536,14 +540,10 @@
 		<ant antfile="${equinox.build.configs}/repos/build.xml" />
 		<!-- equinox slicer build now includes master equinox-->
 		<ant antfile="${equinox.build.configs}/equinox/build.xml" />
-		<!--	<ant antfile="${equinox.build.configs}/equinox.p2.agent/build.xml" /> -->
-		<!--	<ant antfile="build.xml" dir="${basedir}">
-			<property name="component" value="${equinox.build.configs}/equinox-launchers" />
-		</ant> -->
+		<ant antfile="${equinox.build.configs}/equinox-launchers/build.xml" />		
 		<!-- invoke equinox.p2.installer in a separate process -->
 		<ant antfile="${equinox.build.configs}/../helper.xml" target="build.p2.installer.product" />
 	</target>
-
 
 	<target name="package">
 		<ant antfile="package.xml" dir="${eclipse.pdebuild.scripts}">

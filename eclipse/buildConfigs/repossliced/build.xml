@@ -2,7 +2,6 @@
 
 
 	<target name="init">
-		<property name="eclipse.build.configs" value="${basedir}/eclipse/buildConfigs" />
 		<property name="featureTempRoot" value="${eclipse.build.configs}/repossliced" />
 		<property name="featureTempDir" value="featureTemp" />
 		<property name="featureTemp" value="${featureTempRoot}/${featureTempDir}" />
