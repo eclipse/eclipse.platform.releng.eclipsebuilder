@@ -10,33 +10,34 @@
 	<target name="all" depends="init">
 		<antcall target="equinoxlaunchers" />
 	</target>
-	
 	<target name="equinoxlaunchers">
-		<property name="archiveRoot" value="launchers-${buildId}" />
-		<buildRepos os="win32" ws="win32" arch="x86" archiveName="${archiveRoot}-win32.win32.x86.zip" />
-		<buildRepos os="win32" ws="win32" arch="x86_64" archiveName="${archiveRoot}-win32.win32.x86_64.zip" />
-		<buildRepos os="win32" ws="wpf" arch="x86" archiveName="${archiveRoot}-win32.wpf.86_64.zip" />
-		<buildRepos os="linux" ws="gtk" arch="x86" archiveName="${archiveRoot}-linux.gtk.x86.tar.gz" />
-		<buildRepos os="linux" ws="gtk" arch="x86_64" archiveName="${archiveRoot}-linux.gtk.x86_64.tar.gz" />
-		<buildRepos os="linux" ws="gtk" arch="ppc" archiveName="${archiveRoot}-linux.gtk.ppc.tar.gz" />
-		<buildRepos os="solaris" ws="gtk" arch="sparc" archiveName="${archiveRoot}-solaris.gtk.sparc.zip" />
-		<buildRepos os="hpux" ws="motif" arch="a64_32" archiveName="${archiveRoot}-hpux.motif.ia64_32.zip" />
-		<buildRepos os="aix" ws="motif" arch="ppc" archiveName="${archiveRoot}-aix.motif.ppc.zip" />
-		<buildRepos os="macosx" ws="carbon" arch="ppc" archiveName="${archiveRoot}-macosx.carbon.ppc.tar.gz" />
-		<buildRepos os="macosx" ws="cocoa" arch="x86_64" archiveName="${archiveRoot}-macosx.cocoa.x86.tar.gz" />
-		<buildRepos os="macosx" ws="cocoa" arch="x86_64" archiveName="${archiveRoot}-macosx.cocoa.x86_64.tar.gz" />
+		<property name="archiveRoot" value="launchers" />
+		<buildRepos os="win32" ws="win32" arch="x86" archiveName="${archiveRoot}-win32.win32.x86.${buildId}.zip" />
+		<buildRepos os="win32" ws="win32" arch="x86_64" archiveName="${archiveRoot}-win32.win32.x86_64.${buildId}.zip" />
+		<buildRepos os="win32" ws="wpf" arch="x86" archiveName="${archiveRoot}-win32.wpf.86.${buildId}.zip" />
+		<buildRepos os="linux" ws="gtk" arch="x86" archiveName="${archiveRoot}-linux.gtk.x86.${buildId}.tar.gz" />
+		<buildRepos os="linux" ws="gtk" arch="x86_64" archiveName="${archiveRoot}-linux.gtk.x86_64.${buildId}.tar.gz" />
+		<buildRepos os="linux" ws="gtk" arch="ppc" archiveName="${archiveRoot}-linux.gtk.ppc.${buildId}.tar.gz" />
+		<buildRepos os="solaris" ws="gtk" arch="sparc" archiveName="${archiveRoot}-solaris.gtk.sparc.${buildId}.zip" />
+		<buildRepos os="hpux" ws="motif" arch="a64_32" archiveName="${archiveRoot}-hpux.motif.ia64_32.${buildId}.zip" />
+		<buildRepos os="aix" ws="motif" arch="ppc" archiveName="${archiveRoot}-aix.motif.ppc.${buildId}.zip" />
+		<buildRepos os="macosx" ws="carbon" arch="ppc" archiveName="${archiveRoot}-macosx.carbon.ppc.${buildId}.tar.gz" />
+		<buildRepos os="macosx" ws="cocoa" arch="x86_64" archiveName="${archiveRoot}-macosx.cocoa.x86.${buildId}.tar.gz" />
+		<buildRepos os="macosx" ws="cocoa" arch="x86_64" archiveName="${archiveRoot}-macosx.cocoa.x86_64.${buildId}.tar.gz" />
 	</target>
 
-	<macrodef name="buildRepos">
 
+	<macrodef name="buildRepos">
 		<attribute name="os" />
 		<attribute name="ws" />
 		<attribute name="arch" />
 		<attribute name="archiveName" />
 
-		<sequential>	
+		<sequential>
 			<delete dir="${featureTemp}" />
 			<mkdir dir="${featureTemp}" />
+			<delete dir="${featureTemp2}" />
+			<mkdir dir="${featureTemp2}" />
 			<p2.mirror source="file://${buildRepo}">
 				<destination kind="metadata" location="file://${featureTemp}" name="Equinox Launchers Repo" format="file://${buildRepo}" />
 				<destination kind="artifact" location="file://${featureTemp}" name="Equinox Launchers Repo" format="file://${buildRepo}" />
@@ -47,6 +48,7 @@
 			<p2.repo2runnable destination="${featureTemp2}/eclipse">
 				<source dir="${featureTempRoot}" includes="${featureTempDir}" />
 				<iu id="org.eclipse.equinox.executable" version="" />
+				<iu id="org.eclipse.equinox.executable.feature.group" version="" />
 			</p2.repo2runnable>
 			<delete>
 				<fileset dir="${featureTemp2}/eclipse" includes="*.jar" />

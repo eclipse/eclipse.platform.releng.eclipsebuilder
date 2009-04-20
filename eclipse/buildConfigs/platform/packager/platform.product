@@ -40,6 +40,7 @@
       <property name="org.eclipse.update.reconcile" value="false" />                                        
       <property name="osgi.bundles.defaultStartLevel" value="4" />   
       <property name="eclipse.buildId" value="@qualifier@"/>
+      <property name="osgi.instance.area.default" value="@user.home/workspace" />   
    </configurations>
 
 </product>
