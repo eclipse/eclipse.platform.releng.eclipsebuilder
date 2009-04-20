@@ -25,9 +25,9 @@
 			<iu id="org.eclipse.platform.feature.group" version="" />
 			<iu id="org.eclipse.equinox.executable" version="" />
 		</p2.repo2runnable>
-		<copy todir="${featureTemp2}/eclipse">
+<!--		<copy todir="${featureTemp2}/eclipse">
 			<fileset dir="${featureTemp}" includes="binary/**" />
-		</copy>
+		</copy> -->
 		<delete>
 			<fileset dir="${featureTemp2}/eclipse" includes="*.jar" />
 			<fileset dir="${featureTemp2}/eclipse" includes="*.xml" />
