@@ -21,41 +21,41 @@
 	</target>
 
 	<target name="cvs">
-		<property name="archiveRoot" value="eclipse-CVS-${buildId}" />
-		<buildRepos feature="org.eclipse.cvs" filter="false" archiveName="${archiveRoot}.zip" />
+		<property name="archiveRoot" value="eclipse-CVS-Client-${buildId}" />
+		<buildRepos feature="org.eclipse.cvs" filter="true" archiveName="${archiveRoot}.zip" />
 	</target>
 
 	<target name="cvssource">
-		<property name="archiveRoot" value="eclipse-CVS-SDK-${buildId}" />
-		<buildReposSource feature="org.eclipse.cvs" filter="false" archiveName="${archiveRoot}.zip" />
+		<property name="archiveRoot" value="eclipse-CVS-Client-SDK${buildId}" />
+		<buildReposSource feature="org.eclipse.cvs" filter="true" archiveName="${archiveRoot}.zip" />
 	</target>
 
 	<target name="pde">
 		<property name="archiveRoot" value="eclipse-PDE-${buildId}" />
-		<buildRepos feature="org.eclipse.pde" filter="false" archiveName="${archiveRoot}.zip" />
+		<buildRepos feature="org.eclipse.pde" filter="true" archiveName="${archiveRoot}.zip" />
 	</target>
 
 	<target name="pdesource">
 		<property name="archiveRoot" value="eclipse-PDE-SDK-${buildId}" />
-		<buildReposSource feature="org.eclipse.pde" filter="false" archiveName="${archiveRoot}.zip" />
+		<buildReposSource feature="org.eclipse.pde" filter="true" archiveName="${archiveRoot}.zip" />
 	</target>
 
 	<target name="jdt">
 		<property name="archiveRoot" value="eclipse-JDT-${buildId}" />
-		<buildRepos feature="org.eclipse.jdt" filter="false" archiveName="${archiveRoot}.zip" />
+		<buildRepos feature="org.eclipse.jdt" filter="true" archiveName="${archiveRoot}.zip" />
 		<buildRepos feature="org.eclipse.jdt" filter="macosx,carbon,ppc" archiveName="${archiveRoot}-macosx.tar.gz" />
 	</target>
 
 	<target name="jdtsource">
 		<property name="archiveRoot" value="eclipse-JDT-SDK-${buildId}" />
-		<buildReposSource feature="org.eclipse.jdt" filter="false" archiveName="${archiveRoot}.zip" />
+		<buildReposSource feature="org.eclipse.jdt" filter="true" archiveName="${archiveRoot}.zip" />
 		<buildReposSource feature="org.eclipse.jdt" filter="macosx,carbon,ppc" archiveName="${archiveRoot}-macosx.tar.gz" />
 	</target>
 
 	<target name="sdkexamples">
 		<property name="archiveRoot" value="eclipse-examples-${buildId}" />
 		<buildRepos feature="org.eclipse.sdk.examples" filter="win32,win32,x86" archiveName="${archiveRoot}-win32.zip" />
-		<buildRepos feature="org.eclipse.sdk.examples" filter="false" archiveName="${archiveRoot}.zip" />
+		<buildRepos feature="org.eclipse.sdk.examples" filter="true" archiveName="${archiveRoot}.zip" />
 	</target>
 
 	<target name="icubase">
@@ -65,7 +65,7 @@
 
 	<target name="relengtools">
 		<property name="archiveRoot" value="org.eclipse.releng.tools-${buildId}" />
-		<buildRepos feature="org.eclipse.releng.tools" filter="false" archiveName="${archiveRoot}.zip" />
+		<buildRepos feature="org.eclipse.releng.tools" filter="true" archiveName="${archiveRoot}.zip" />
 	</target>
 
 	<macrodef name="buildReposSource">
