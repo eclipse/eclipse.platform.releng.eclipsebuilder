@@ -51,7 +51,7 @@
 					<param name="ws" value="win32" />
 					<param name="os" value="win32" />
 					<param name="arch" value="x86_64" />
-				</antcall>				
+				</antcall>
 			</sequential>
 		</parallel>
 		<parallel failonany="true">
@@ -84,6 +84,11 @@
 					<param name="os" value="solaris" />
 					<param name="ws" value="gtk" />
 					<param name="arch" value="sparc" />
+				</antcall>
+				<antcall target="packageSwtStandalone">
+					<param name="os" value="solaris" />
+					<param name="ws" value="gtk" />
+					<param name="arch" value="x86" />
 				</antcall>
 				<antcall target="packageSwtStandalone">
 					<param name="os" value="hpux" />

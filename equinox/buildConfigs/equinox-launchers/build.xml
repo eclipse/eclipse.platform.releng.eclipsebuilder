@@ -19,6 +19,7 @@
 		<buildRepos os="linux" ws="gtk" arch="x86_64" archiveName="${archiveRoot}-linux.gtk.x86_64.${buildId}.tar.gz" />
 		<buildRepos os="linux" ws="gtk" arch="ppc" archiveName="${archiveRoot}-linux.gtk.ppc.${buildId}.tar.gz" />
 		<buildRepos os="solaris" ws="gtk" arch="sparc" archiveName="${archiveRoot}-solaris.gtk.sparc.${buildId}.zip" />
+		<buildRepos os="solaris" ws="gtk" arch="x86" archiveName="${archiveRoot}-solaris.gtk.x86.${buildId}.zip" />
 		<buildRepos os="hpux" ws="motif" arch="a64_32" archiveName="${archiveRoot}-hpux.motif.ia64_32.${buildId}.zip" />
 		<buildRepos os="aix" ws="motif" arch="ppc" archiveName="${archiveRoot}-aix.motif.ppc.${buildId}.zip" />
 		<buildRepos os="macosx" ws="carbon" arch="ppc" archiveName="${archiveRoot}-macosx.carbon.ppc.${buildId}.tar.gz" />

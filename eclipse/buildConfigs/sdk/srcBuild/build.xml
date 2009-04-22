@@ -276,8 +276,7 @@
 			<or>			
 				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="linux-motif-x86" />											
 				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="linux-gtk-s390" />
-				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="linux-gtk-s390x" />								
-				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="solaris-gtk-x86" />
+				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="linux-gtk-s390x" />
 				<equals arg1="${installOs}-${installWs}-${installArch}" arg2="hpux-motif-PA_RISC" />
 			</or>
 		</condition>
