@@ -44,8 +44,7 @@
       <plugin id="org.eclipse.update.configurator" autoStart="true" startLevel="3" />
       <property name="org.eclipse.update.reconcile" value="false" />                                        
       <property name="osgi.bundles.defaultStartLevel" value="4" />   
-      <property name="eclipse.buildId" value="@qualifier@"/>
-      <property name="osgi.instance.area.default" value="@user.home/workspace" />   
+      <property name="eclipse.buildId" value="@qualifier@"/>    
    </configurations>
 
 </product>
