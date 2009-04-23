@@ -7,14 +7,9 @@
    </configIni>
 
    <launcherArgs>
-      <programArgsMac>-showsplash
-org.eclipse.platform</programArgsMac>
-      <vmArgsMac>-Xdock:icon=../Resources/Eclipse.icns
--XstartOnFirstThread
--Xms40m
--Xmx256m
--XX:MaxPermSize=256m
--Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
+      <programArgs>-showsplash org.eclipse.platform --launcher.XXMaxPermSize 256m</programArgs>
+      <vmArgs>-Xms40m -Xmx256m</vmArgs>
+      <vmArgsMac>-Xdock:icon=../Resources/Eclipse.icns -XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
 
    <launcher name="eclipse">
@@ -31,8 +26,21 @@ org.eclipse.platform</programArgsMac>
    </plugins>
 
    <features>
-      <feature id="org.eclipse.platform" version="0.0.0"/>
-      <feature id="org.eclipse.equinox.p2.user.ui" version="1.0.0.qualifier"/>
+      <feature id="org.eclipse.platform"/>
+      <feature id="org.eclipse.equinox.p2.user.ui"/>
+      <feature id="org.eclipse.rcp.configuration"/>
    </features>
+   
+   <configurations>
+      <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="4" />
+      <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.ds" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.p2.reconciler.dropins" autoStart="true" startLevel="4" />
+      <plugin id="org.eclipse.equinox.simpleconfigurator" autoStart="true" startLevel="1" />
+      <plugin id="org.eclipse.update.configurator" autoStart="true" startLevel="3" />
+      <property name="org.eclipse.update.reconcile" value="false" />                                        
+      <property name="osgi.bundles.defaultStartLevel" value="4" />   
+      <property name="eclipse.buildId" value="@qualifier@"/>   
+   </configurations>
 
 </product>

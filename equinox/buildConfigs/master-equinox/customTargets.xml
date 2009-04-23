@@ -9,7 +9,7 @@
 	<target name="allElements">
 		<ant antfile="${genericTargets}" target="${target}">
 			<property name="type" value="feature" />
-			<property name="id" value="master-equinox-p2" />
+			<property name="id" value="master-equinox" />
 		</ant>
 	</target>
 
@@ -20,19 +20,15 @@
 	<!-- Add one target for each root element and each configuration -->
 	<!-- ===================================================================== -->
 
-	<target name="assemble.master-equinox-p2">
-		<property name="archiveName" value="master-equinox-p2-${buildId}.zip" />
+	<property name="archiveName" value="master-equinox-${buildId}.zip" />
+	<target name="assemble.org.eclipse.equinox">
 		<antcall target="assemble" />
 	</target>
 
 	<target name="assemble">
 		<mkdir dir="${equinoxPostingDirectory}/${buildLabel}/checksum" />
-		<property name="archiveFullPath" value="${base}/${archiveName}" />
+		<property name="archiveFullPath" value="${buildDirectory}/equinox/${buildLabel}/${archiveName}" />
 		<ant antfile="${assembleScriptName}" />
-		<checksum file="${archiveFullPath}" property="md5"/>
-		<checksum file="${archiveFullPath}" property="sha"/>
-		<echo message="${md5} *${archiveName}" file="${equinoxPostingDirectory}/${buildLabel}/checksum/${archiveName}.md5"/>
-		<echo message="${sha} *${archiveName}" file="${equinoxPostingDirectory}/${buildLabel}/checksum/${archiveName}.sha1"/>
 	</target>
 	
 	<!-- ===================================================================== -->
@@ -135,7 +131,14 @@
 	</target>
 
 	<target name="prePackage"/>
-	<target name="postPackage"/>
+	<target name="postPackage">
+		 <exec executable="unzip" dir="${basedir}">
+		 		 <arg line="-j ${buildDirectory}/equinox/${buildLabel}/${archiveName} eclipse/plugins/org.eclipse.osgi* eclipse/plugins/org.eclipse.equinox* -d ${equinoxPostingDirectory}/${buildLabel}"/>		 		 		 		 		 		 
+		 </exec>
+		 <exec executable="unzip" dir="${basedir}">
+			    <arg line="-j ${postingDirectory}/eclipse-SDK-${buildId}-win32.zip eclipse/plugins/org.eclipse.equinox.launcher_* -d ${equinoxPostingDirectory}/${buildLabel}"/>		 		 		 		 		 		 
+		 </exec>
+	</target>
 	<!-- ===================================================================== -->
 	<!-- Helper targets -->
 	<!-- ===================================================================== -->
@@ -146,7 +149,7 @@
 		</antcall>
 
 		<unzip dest="${postingDirectory}/${buildLabel}/compilelogs" overwrite="true">
-			<fileset dir="${buildDirectory}/features/org.eclipse.equinox">
+			<fileset dir="${buildDirectory}/features/master-equinox">
 				<include name="*.log.zip" />
 			</fileset>
 		</unzip>

@@ -1,0 +1,2 @@
+org.eclipse.pde.build.append.startlevels=false
+org.eclipse.pde.build.append.launchers=true
