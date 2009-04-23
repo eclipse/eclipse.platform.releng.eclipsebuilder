@@ -1,7 +1,7 @@
-instructions.configure=\ 
-addRepository(type:0,location:http${#58}//download.eclipse.org/eclipse/updates/3.5);\ 
-addRepository(type:1,location:http${#58}//download.eclipse.org/eclipse/updates/3.5);\ 
-addRepository(type:0,location:http${#58}//download.eclipse.org/releases/galileo);\ 
+instructions.configure=\
+addRepository(type:0,location:http${#58}//download.eclipse.org/eclipse/updates/3.5);\
+addRepository(type:1,location:http${#58}//download.eclipse.org/eclipse/updates/3.5);\
+addRepository(type:0,location:http${#58}//download.eclipse.org/releases/galileo);\
 addRepository(type:1,location:http${#58}//download.eclipse.org/releases/galileo);\
   mkdir(path:${installFolder}/dropins);
 requires.1.namespace=org.eclipse.equinox.p2.iu
