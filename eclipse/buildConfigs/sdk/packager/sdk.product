@@ -33,7 +33,7 @@
    <features>
       <feature id="org.eclipse.sdk"/>
       <feature id="org.eclipse.equinox.p2.user.ui"/>
-      <feature id="orc.eclipse.rcp.configuration"/>
+      <feature id="org.eclipse.rcp.configuration"/>
    </features>
 
    <configurations>

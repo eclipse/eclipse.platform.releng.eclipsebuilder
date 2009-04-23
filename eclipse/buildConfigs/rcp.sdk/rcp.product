@@ -28,7 +28,7 @@
    <features>
       <feature id="org.eclipse.platform"/>
       <feature id="org.eclipse.platform.source"/>
-      <feature id="orc.eclipse.rcp.configuration"/>
+      <feature id="org.eclipse.rcp.configuration"/>
    </features>
 
    <configurations>

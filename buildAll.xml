@@ -390,6 +390,7 @@
 		<replace token="@qualifier@" file="${buildDirectory}/plugins/org.eclipse.equinox.p2.ui.admin.rcp/rcp.product" value="${buildId}" />
 		<replace token="@qualifier@" file="${eclipse.build.configs}/rcp/rcp.product" value="${buildId}" />
 		<replace token="@qualifier@" file="${eclipse.build.configs}/rcp.sdk/rcp.product" value="${buildId}" />
+		<replace token="@qualifier@" file="${eclipse.build.configs}/rcp.config/feature.xml" value="${buildId}" />
 		<delete dir="${repo}" />
 		<mkdir dir="${repo}" />
 		<delete dir="${reposource}" />

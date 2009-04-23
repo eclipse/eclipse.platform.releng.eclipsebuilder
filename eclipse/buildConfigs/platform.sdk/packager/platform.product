@@ -29,7 +29,7 @@
       <feature id="org.eclipse.platform"/>
       <feature id="org.eclipse.platform.source"/>
       <feature id="org.eclipse.equinox.p2.user.ui"/>
-      <feature id="orc.eclipse.rcp.configuration"/>
+      <feature id="org.eclipse.rcp.configuration"/>
    </features>
    
    <configurations>

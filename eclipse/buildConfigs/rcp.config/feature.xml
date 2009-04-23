@@ -1,4 +1,4 @@
 <feature
       id="org.eclipse.rcp.configuration"
-      version="1.0.0.N20090422-0951">
+      version="1.0.0.@qualifier@">
 </feature>
