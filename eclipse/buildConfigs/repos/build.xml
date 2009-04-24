@@ -3,7 +3,6 @@
 	<target name="all">
 		<antcall target="rcp" />
 		<antcall target="pde" />
-		<antcall target="pde-api" />
 		<antcall target="jdt" />
 		<antcall target="cvs" />
 		<antcall target="rcpsource" />
@@ -11,13 +10,10 @@
 		<antcall target="jdtsource" />
 		<antcall target="cvssource" />
 	</target>
-	
+
+
 	<target name="pde">
 		<buildRepos feature="org.eclipse.pde" />
-	</target>
-	
-	<target name="pde-api">
-		<buildRepos feature="org.eclipse.pde.api.tools.ee.fragments" />	
 	</target>
 
 	<target name="rcp">
@@ -90,7 +86,8 @@
 		</sequential>
 	</macrodef>
 
-	<target name="assembler">	
+	<target name="assembler">
+		<echo message="feature is ${feature}" />
 		<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
 		<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
 		<exec executable="zip" dir="${featureTemp}">
