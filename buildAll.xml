@@ -62,7 +62,7 @@
 	<property name="p2.site.xml" value="file:${tempSite}/site.xml" />
 
 	<property name="buildRepo" value="${updateSite}/${buildId}" />
-	<property name="p2.build.repo" value="file:${buildDirectory}/buildRepo" />	
+	<property name="p2.build.repo" value="file:${buildDirectory}/buildRepo" />
 
 	<target name="main" depends="init">
 		<antcall target="buildEclipseSourceDrops" />
@@ -398,6 +398,10 @@
 		<exec executable="unzip" dir=".">
 			<arg line="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -x */features/master/* */features/master-ecf* */features/master-equinox-p2* */features/master-jetty* */features/master-root* */plugins/org.eclipse.swt.tools* */plugins/com.ibm.icu.base* */features/com.ibm.icu.base* -d ${reposource}" />
 		</exec>
+		<jar destfile="${reposource}/artifacts.jar" basedir="{reposource}" includes="${reposource}/artifacts.xml" />
+		<delete file="${reposource}/artifacts.xml" />
+		<jar destfile="${reposource}/content.jar" basedir="{reposource}" includes="${reposource}/content.xml" />
+		<delete file="${reposource}/content.xml" />
 		<property name="tempexec" value="${buildDirectory}/tempexec" />
 		<mkdir dir="${tempexec}" />
 		<delete dir="${tempexec}" />
@@ -416,7 +420,7 @@
 		</subant>
 
 		<ant target="main" antfile="buildConfiguration.xml" dir="${eclipse.build.configs}/rcp.config" />
-		
+
 		<replace file="packaging.map" token="@buildId@" value="${buildId}" />
 
 		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${eclipse.build.configs}/sdk/packager/sdk.product">
@@ -548,7 +552,7 @@
 		<ant antfile="${equinox.build.configs}/repos/build.xml" />
 		<!-- equinox slicer build now includes master equinox-->
 		<ant antfile="${equinox.build.configs}/equinox/build.xml" />
-		<ant antfile="${equinox.build.configs}/equinox-launchers/build.xml" />		
+		<ant antfile="${equinox.build.configs}/equinox-launchers/build.xml" />
 		<!-- invoke equinox.p2.installer in a separate process -->
 		<ant antfile="${equinox.build.configs}/../helper.xml" target="build.p2.installer.product" />
 	</target>
