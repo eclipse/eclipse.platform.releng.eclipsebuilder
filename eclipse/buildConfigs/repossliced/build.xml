@@ -26,7 +26,7 @@
 	</target>
 
 	<target name="cvssource">
-		<property name="archiveRoot" value="eclipse-CVS-Client-SDK${buildId}" />
+		<property name="archiveRoot" value="eclipse-CVS-Client-SDK-${buildId}" />
 		<buildReposSource feature="org.eclipse.cvs" filter="true" archiveName="${archiveRoot}.zip" />
 	</target>
 
