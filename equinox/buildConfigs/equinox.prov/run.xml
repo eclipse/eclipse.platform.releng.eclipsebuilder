@@ -1178,9 +1178,6 @@
 		</exec>
 		<echo message="director ${p2.director.install.path}" file="${directorlog}" append="true" />
 		<echo message="${directorcode}" file="${directorlog}" append="true" />
-
-		<!-- delete the metadata cache as well as the artifacts for unzipped bundles -->
-		<delete failonerror="false" includeEmptyDirs="true" dir="${p2.director.install.path}/p2/org.eclipse.equinox.p2.core/cache" />
 	</target>
 
 
