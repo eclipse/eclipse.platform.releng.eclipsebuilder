@@ -60,7 +60,7 @@
 	<mkdir dir="${tempSite}" />
 	<copy file="${eclipse.build.configs}/../../extras/site.xml" todir="${tempSite}" />
 	<property name="p2.site.xml" value="file:${tempSite}/site.xml" />
-	
+
 	<property name="p2.build.repo" value="file:${buildDirectory}/buildRepo" />
 
 	<target name="main" depends="init">
@@ -201,7 +201,7 @@
 			<jvmarg value="-Dorg.eclipse.update.jarprocessor.pack200=${eclipse.build.configs}/../../extras" />
 			<arg line="-consolelog -application org.eclipse.update.core.siteOptimizer" />
 			<arg line="-jarProcessor -verbose -outputDir ${buildLabel} -processAll -pack ${repack} ${reposource}" />
-		</java> -->	
+		</java> -->
 
 	</target>
 
@@ -395,9 +395,9 @@
 		<exec executable="unzip" dir=".">
 			<arg line="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -x */features/master/* */features/master-ecf* */features/master-equinox-p2* */features/master-jetty* */features/master-root* */plugins/org.eclipse.swt.tools* */plugins/com.ibm.icu.base* */features/com.ibm.icu.base* -d ${reposource}" />
 		</exec>
-		<jar destfile="${reposource}/artifacts.jar" basedir="{reposource}" includes="${reposource}/artifacts.xml" />
+		<jar destfile="${reposource}/artifacts.jar" basedir="${reposource}" includes="artifacts.xml" filesonly="true" />
 		<delete file="${reposource}/artifacts.xml" />
-		<jar destfile="${reposource}/content.jar" basedir="{reposource}" includes="${reposource}/content.xml" />
+		<jar destfile="${reposource}/content.jar" basedir="${reposource}" includes="content.xml" filesonly="true" />
 		<delete file="${reposource}/content.xml" />
 		<property name="tempexec" value="${buildDirectory}/tempexec" />
 		<mkdir dir="${tempexec}" />
@@ -439,7 +439,7 @@
 			<advice kind="pluginVersions" file="${buildDirectory}/finalPluginsVersions.properties" />
 		</p2.publish.product>
 
-		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${eclipse.build.configs}/platform/packager/platform.product" compress="true" >
+		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${eclipse.build.configs}/platform/packager/platform.product" compress="true">
 			<config os="win32" ws="win32" arch="x86" />
 			<config os="win32" ws="win32" arch="x86_64" />
 			<config os="win32" ws="wpf" arch="x86" />
@@ -514,7 +514,7 @@
 		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${buildDirectory}/plugins/org.eclipse.equinox.p2.ui.admin.rcp/rcp.product" compress="true">
 			<config os="win32" ws="win32" arch="x86" />
 			<config os="linux" ws="gtk" arch="x86" />
-			<config os="macosx" ws="cocoa" arch="x86" />		
+			<config os="macosx" ws="cocoa" arch="x86" />
 		</p2.publish.product>
 
 		<antcall target="packMasterFeature" />
