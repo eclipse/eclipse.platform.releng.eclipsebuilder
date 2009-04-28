@@ -394,11 +394,7 @@
 		<mkdir dir="${reposource}" />
 		<exec executable="unzip" dir=".">
 			<arg line="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -x */features/master/* */features/master-ecf* */features/master-equinox-p2* */features/master-jetty* */features/master-root* */plugins/org.eclipse.swt.tools* */plugins/com.ibm.icu.base* */features/com.ibm.icu.base* -d ${reposource}" />
-		</exec>
-		<jar destfile="${reposource}/artifacts.jar" basedir="${reposource}" includes="artifacts.xml" filesonly="true" />
-		<delete file="${reposource}/artifacts.xml" />
-		<jar destfile="${reposource}/content.jar" basedir="${reposource}" includes="content.xml" filesonly="true" />
-		<delete file="${reposource}/content.xml" />
+		</exec>		
 		<property name="tempexec" value="${buildDirectory}/tempexec" />
 		<mkdir dir="${tempexec}" />
 		<delete dir="${tempexec}" />
