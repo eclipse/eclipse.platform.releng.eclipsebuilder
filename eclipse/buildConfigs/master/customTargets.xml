@@ -140,7 +140,7 @@
 		<mkdir dir="${linux.motif.rootfiles}" />
 		<copy tofile="${linux.motif.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86/about.html" />
 		<copy todir="${linux.motif.rootfiles}">
-			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86" />
+			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.motif.linux.x86" includes="about_files/**" />
 		</copy>
 
 		<!--copy linux gtk x86 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
@@ -149,7 +149,7 @@
 		<copy tofile="${linux.gtk.x86.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86/about.html" />
 
 		<copy todir="${linux.gtk.x86.rootfiles}">
-			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86" />
+			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86" includes="about_files/**" />
 		</copy>
 
 		<!--copy linux gtk x86_64 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
@@ -158,10 +158,7 @@
 		<copy tofile="${linux.gtk.x86_64.rootfiles}/about.html" file="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64/about.html" />
 
 		<copy todir="${linux.gtk.x86_64.rootfiles}">
-			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64" includes="
-			about_files/about_cairo.html,
-			about_files/pixman-licenses.txt,
-			about_files/mpl-v11.txt" />
+			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.x86_64" includes="about_files/**"/>
 		</copy>
 	</target>
 
