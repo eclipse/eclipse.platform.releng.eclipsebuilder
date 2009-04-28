@@ -60,8 +60,7 @@
 	<mkdir dir="${tempSite}" />
 	<copy file="${eclipse.build.configs}/../../extras/site.xml" todir="${tempSite}" />
 	<property name="p2.site.xml" value="file:${tempSite}/site.xml" />
-
-	<property name="buildRepo" value="${updateSite}/${buildId}" />
+	
 	<property name="p2.build.repo" value="file:${buildDirectory}/buildRepo" />
 
 	<target name="main" depends="init">
@@ -202,9 +201,7 @@
 			<jvmarg value="-Dorg.eclipse.update.jarprocessor.pack200=${eclipse.build.configs}/../../extras" />
 			<arg line="-consolelog -application org.eclipse.update.core.siteOptimizer" />
 			<arg line="-jarProcessor -verbose -outputDir ${buildLabel} -processAll -pack ${repack} ${reposource}" />
-		</java> -->
-
-		<p2.process.artifacts repositoryPath="file://${reposource}" pack="true" />
+		</java> -->	
 
 	</target>
 
