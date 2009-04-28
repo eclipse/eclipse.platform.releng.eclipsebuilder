@@ -517,9 +517,7 @@
 		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${buildDirectory}/plugins/org.eclipse.equinox.p2.ui.admin.rcp/rcp.product">
 			<config os="win32" ws="win32" arch="x86" />
 			<config os="linux" ws="gtk" arch="x86" />
-			<config os="macosx" ws="cocoa" arch="x86" />
-			<advice kind="featureVersions" file="${buildDirectory}/finalFeaturesVersions.properties" />
-			<advice kind="pluginVersions" file="${buildDirectory}/finalPluginsVersions.properties" />
+			<config os="macosx" ws="cocoa" arch="x86" />		
 		</p2.publish.product>
 
 		<antcall target="packMasterFeature" />
