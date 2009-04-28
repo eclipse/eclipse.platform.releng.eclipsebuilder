@@ -16,12 +16,12 @@
 		<mkdir dir="${featureTemp2}" />
 		<!--need to change slicing options to only include platform specific bits -->
 		<p2.mirror source="file://${buildRepo}">
-			<destination kind="metadata" location="file://${featureTemp}" name="Equinox Feature Repo" format="file://${buildRepo}" />
-			<destination kind="artifact" location="file://${featureTemp}" name="Equinox Feature Repo" format="file://${buildRepo}" />
+			<destination kind="metadata" location="file://${featureTemp}" name="RCP Delta Pack Repo" format="file://${buildRepo}" />
+			<destination kind="artifact" location="file://${featureTemp}" name="RCP Delta Pack Repo" format="file://${buildRepo}" />
 			<iu id="org.eclipse.platform.feature.group" version="" />
 			<iu id="org.eclipse.rcp.feature.group" version="" />
 			<iu id="org.eclipse.equinox.executable" version="" />
-			<slicingOptions includeOptional="false" includeNonGreedy="false" followStrict="true" followOnlyFilteredRequirements="true" />
+			<slicingOptions platformFilter="true" includeOptional="false" includeNonGreedy="false" followStrict="true" />
 		</p2.mirror>
 		<p2.repo2runnable destination="${featureTemp2}/eclipse">
 			<source dir="${featureTempRoot}" includes="${featureTempDir}" />
