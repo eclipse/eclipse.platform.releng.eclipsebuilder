@@ -125,8 +125,8 @@ function genLinks($servername,$buildlabel,$zipfile) {
      echo "&nbsp;&nbsp";
      echo "<td>$filesize</td>";
      echo "<td>$zipfile</td>";
-     echo "<td><a href=\"http://download.eclipse.org/eclipse/equinox/drops/@buildlabel@/checksum/$zipfile.md5\">(md5)</a>";
-     echo " <a href=\"http://download.eclipse.org/eclipse/equinox/drops/@buildlabel@/checksum/$zipfile.sha1\">(sha1)</a>";
+     echo "<td><a href=\"http://download.eclipse.org/equinox/drops/@buildlabel@/checksum/$zipfile.md5\">(md5)</a>";
+     echo " <a href=\"http://download.eclipse.org/equinox/drops/@buildlabel@/checksum/$zipfile.sha1\">(sha1)</a>";
 }
 ?>	
 
