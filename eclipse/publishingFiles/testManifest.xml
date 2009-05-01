@@ -551,7 +551,19 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
+<logFile name="org.eclipse.pde.api.tools.tests_win32.win32.x86.xml">
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SW"></effectedFile>
+</logFile>
+
 <logFile name="org.eclipse.pde.ui.tests_linux.gtk.x86.xml">
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SLG2"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.pde.api.tools.tests_linux.gtk.x86.xml">
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
 	<effectedFile id="SLG2"></effectedFile>
@@ -563,13 +575,55 @@
 	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
+<logFile name="org.eclipse.pde.api.tools.tests_macosx.cocoa.x86_5.0.xml">
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
+</logFile>
+
 <logFile name="org.eclipse.pde.ui.tests_linux.gtk.x86_6.0.xml">
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
+<logFile name="org.eclipse.pde.api.tools.tests_linux.gtk.x86_6.0.xml">
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SLG2"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.pde.ds.tests_win32.win32.x86.xml">
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SW"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.pde.ds.tests_linux.gtk.x86.xml">
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SLG2"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.pde.ds.tests_macosx.cocoa.x86_5.0.xml">
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.pde.ds.tests_linux.gtk.x86_6.0.xml">
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SLG2"></effectedFile>
+</logFile>
+
 <logFile name="org.eclipse.pde.build.tests_win32.win32.x86.xml">
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SW"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.pde.build.tests_win32.win32.x86_6.0.xml">
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
 	<effectedFile id="SW"></effectedFile>
@@ -641,6 +695,14 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
+<logFile name="org.eclipse.search.tests_win32.win32.x86.xml">
+	<effectedFile id="JA"></effectedFile>
+	<effectedFile id="JASDK"></effectedFile>
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SW"></effectedFile>
+</logFile>
+
 <logFile name="org.eclipse.jdt.ui.tests_win32.win32.x86.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
@@ -650,6 +712,14 @@
 </logFile>
 
 <logFile name="org.eclipse.jdt.ui.tests.refactoring_win32.win32.x86.xml">
+	<effectedFile id="JA"></effectedFile>
+	<effectedFile id="JASDK"></effectedFile>
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SW"></effectedFile>
+</logFile>
+
+<logFile name="jdt.apt.tests_win32.win32.x86.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -705,6 +775,14 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
+<logFile name="org.eclipse.search.tests_linux.gtk.x86.xml">
+	<effectedFile id="JA"></effectedFile>
+	<effectedFile id="JASDK"></effectedFile>
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SLG2"></effectedFile>
+</logFile>
+
 <logFile name="org.eclipse.jdt.ui.tests_linux.gtk.x86.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
@@ -721,7 +799,63 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
+<logFile name="org.eclipse.org.eclipse.jdt.apt.tests_linux.gtk.x86.xml">
+	<effectedFile id="JA"></effectedFile>
+	<effectedFile id="JASDK"></effectedFile>
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SLG2"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.jdt.compiler.apt_linux.gtk.x86.xml">
+	<effectedFile id="JA"></effectedFile>
+	<effectedFile id="JASDK"></effectedFile>
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SLG2"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.jdt.compiler.tool.tests_linux.gtk.x86.xml">
+	<effectedFile id="JA"></effectedFile>
+	<effectedFile id="JASDK"></effectedFile>
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SLG2"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.org.eclipse.jdt.apt.pluggable.tests_linux.gtk.x86.xml">
+	<effectedFile id="JA"></effectedFile>
+	<effectedFile id="JASDK"></effectedFile>
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SLG2"></effectedFile>
+</logFile>
+
 <logFile name="org.eclipse.jdt.apt.tests_macosx.cocoa.x86_5.0.xml">
+	<effectedFile id="JMC"></effectedFile>
+	<effectedFile id="JMCSDK"></effectedFile>
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.jdt.compiler.apt_macosx.cocoa.x86_5.0.xml">
+	<effectedFile id="JMC"></effectedFile>
+	<effectedFile id="JMCSDK"></effectedFile>
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.jdt.compiler.tool.tests_macosx.cocoa.x86_5.0.xml">
+	<effectedFile id="JMC"></effectedFile>
+	<effectedFile id="JMCSDK"></effectedFile>
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.jdt.apt.pluggable.tests_macosx.cocoa.x86_5.0.xml">
 	<effectedFile id="JMC"></effectedFile>
 	<effectedFile id="JMCSDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -777,6 +911,14 @@
 	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
+<logFile name="org.eclipse.search.tests_macosx.cocoa.x86_5.0.xml">
+	<effectedFile id="JMC"></effectedFile>
+	<effectedFile id="JMCSDK"></effectedFile>
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
+</logFile>
+
 <logFile name="org.eclipse.jdt.ui.tests_macosx.cocoa.x86_5.0.xml">
 	<effectedFile id="JMC"></effectedFile>
 	<effectedFile id="JMCSDK"></effectedFile>
@@ -794,6 +936,30 @@
 </logFile>
 
 <logFile name="org.eclipse.jdt.apt.tests_linux.gtk.x86_6.0.xml">
+	<effectedFile id="JA"></effectedFile>
+	<effectedFile id="JASDK"></effectedFile>
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SLG2"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.jdt.compiler.apt_linux.gtk.x86_6.0.xml">
+	<effectedFile id="JA"></effectedFile>
+	<effectedFile id="JASDK"></effectedFile>
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SLG2"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.jdt.compiler.tool.tests_linux.gtk.x86_6.0.xml">
+	<effectedFile id="JA"></effectedFile>
+	<effectedFile id="JASDK"></effectedFile>
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SLG2"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.jdt.apt.pluggable.tests_linux.gtk.x86_6.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -849,6 +1015,14 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
+<logFile name="org.eclipse.search.tests_linux.gtk.x86_6.0.xml">
+	<effectedFile id="JA"></effectedFile>
+	<effectedFile id="JASDK"></effectedFile>
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SLG2"></effectedFile>
+</logFile>
+
 <logFile name="org.eclipse.jdt.ui.tests_linux.gtk.x86_6.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
@@ -864,8 +1038,6 @@
 	<effectedFile id="PDESDK"></effectedFile>
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
-
-
 
 <logFile name="org.eclipse.ant.tests.core_win32.win32.x86.xml">
 	<effectedFile id="PW"></effectedFile>
@@ -1605,6 +1777,18 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
+<logFile name="org.eclipse.ui.tests.performance_win32.win32.x86.xml">
+	<effectedFile id="RCPW"></effectedFile>
+	<effectedFile id="RCPWSDK"></effectedFile>
+	<effectedFile id="PW"></effectedFile>
+	<effectedFile id="PWSDK"></effectedFile>
+	<effectedFile id="JA"></effectedFile>
+	<effectedFile id="JASDK"></effectedFile>
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SW"></effectedFile>
+</logFile>
+
 <logFile name="org.eclipse.jface.tests.databinding_win32.win32.x86.xml">
 	<effectedFile id="RCPW"></effectedFile>
 	<effectedFile id="RCPWSDK"></effectedFile>
@@ -1653,6 +1837,30 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
+<logFile name="org.eclipse.equinox.security.tests_win32.win32.x86.xml">
+	<effectedFile id="RCPW"></effectedFile>
+	<effectedFile id="RCPWSDK"></effectedFile>
+	<effectedFile id="PW"></effectedFile>
+	<effectedFile id="PWSDK"></effectedFile>	
+	<effectedFile id="SW"></effectedFile>
+</logFile> 
+
+<logFile name="org.eclipse.equinox.p2.tests_win32.win32.x86.xml">
+	<effectedFile id="RCPW"></effectedFile>
+	<effectedFile id="RCPWSDK"></effectedFile>
+	<effectedFile id="PW"></effectedFile>
+	<effectedFile id="PWSDK"></effectedFile>	
+	<effectedFile id="SW"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.equinox.p2.tests.ui_win32.win32.x86.xml">
+	<effectedFile id="RCPW"></effectedFile>
+	<effectedFile id="RCPWSDK"></effectedFile>
+	<effectedFile id="PW"></effectedFile>
+	<effectedFile id="PWSDK"></effectedFile>	
+	<effectedFile id="SW"></effectedFile>
+</logFile>
+
 <logFile name="org.eclipse.ui.tests.rcp_win32.win32.x86.xml">
 	<effectedFile id="RCPW"></effectedFile>
 	<effectedFile id="RCPWSDK"></effectedFile>
@@ -1690,6 +1898,18 @@
 </logFile>
 
 <logFile name="org.eclipse.ui.tests_linux.gtk.x86.xml">
+	<effectedFile id="RCPLG2"></effectedFile>
+	<effectedFile id="RCPLG2SDK"></effectedFile>
+	<effectedFile id="PLG2"></effectedFile>
+	<effectedFile id="PLG2SDK"></effectedFile>
+	<effectedFile id="JA"></effectedFile>
+	<effectedFile id="JASDK"></effectedFile>
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SLG2"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.ui.tests.performance_linux.gtk.x86.xml">
 	<effectedFile id="RCPLG2"></effectedFile>
 	<effectedFile id="RCPLG2SDK"></effectedFile>
 	<effectedFile id="PLG2"></effectedFile>
@@ -1749,6 +1969,30 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
+<logFile name="org.eclipse.equinox.security.tests_linux.gtk.x86.xml">
+	<effectedFile id="RCPLG2"></effectedFile>
+	<effectedFile id="RCPLG2SDK"></effectedFile>
+	<effectedFile id="PLG2"></effectedFile>
+	<effectedFile id="PLG2SDK"></effectedFile>	
+	<effectedFile id="SLG2"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.equinox.p2.tests_linux.gtk.x86.xml">
+	<effectedFile id="RCPLG2"></effectedFile>
+	<effectedFile id="RCPLG2SDK"></effectedFile>
+	<effectedFile id="PLG2"></effectedFile>
+	<effectedFile id="PLG2SDK"></effectedFile>
+	<effectedFile id="SLG2"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.equinox.p2.tests.ui_linux.gtk.x86.xml">
+	<effectedFile id="RCPLG2"></effectedFile>
+	<effectedFile id="RCPLG2SDK"></effectedFile>
+	<effectedFile id="PLG2"></effectedFile>
+	<effectedFile id="PLG2SDK"></effectedFile>
+	<effectedFile id="SLG2"></effectedFile>
+</logFile>
+
 <logFile name="org.eclipse.ui.tests.rcp_linux.gtk.x86.xml">
 	<effectedFile id="RCPLG2"></effectedFile>
 	<effectedFile id="RCPLG2SDK"></effectedFile>
@@ -1786,6 +2030,18 @@
 </logFile>
 
 <logFile name="org.eclipse.ui.tests_macosx.cocoa.x86_5.0.xml">
+	<effectedFile id="RCPMC"></effectedFile>
+	<effectedFile id="RCPMCSDK"></effectedFile>
+	<effectedFile id="PMC"></effectedFile>
+	<effectedFile id="PMCSDK"></effectedFile>
+	<effectedFile id="JMC"></effectedFile>
+	<effectedFile id="JMCSDK"></effectedFile>
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SMCC"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.ui.tests.performance_macosx.cocoa.x86_5.0.xml">
 	<effectedFile id="RCPMC"></effectedFile>
 	<effectedFile id="RCPMCSDK"></effectedFile>
 	<effectedFile id="PMC"></effectedFile>
@@ -1845,6 +2101,30 @@
 	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
+<logFile name="org.eclipse.equinox.security.tests_macosx.cocoa.x86_5.0.xml">
+	<effectedFile id="RCPMC"></effectedFile>
+	<effectedFile id="RCPMCSDK"></effectedFile>
+	<effectedFile id="PMC"></effectedFile>
+	<effectedFile id="PMCSDK"></effectedFile>	
+	<effectedFile id="SMCC"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.equinox.p2.tests_macosx.cocoa.x86_5.0.xml">
+	<effectedFile id="RCPMC"></effectedFile>
+	<effectedFile id="RCPMCSDK"></effectedFile>
+	<effectedFile id="PMC"></effectedFile>
+	<effectedFile id="PMCSDK"></effectedFile>	
+	<effectedFile id="SMCC"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.equinox.p2.tests.ui_macosx.cocoa.x86_5.0.xml">
+	<effectedFile id="RCPMC"></effectedFile>
+	<effectedFile id="RCPMCSDK"></effectedFile>
+	<effectedFile id="PMC"></effectedFile>
+	<effectedFile id="PMCSDK"></effectedFile>	
+	<effectedFile id="SMCC"></effectedFile>
+</logFile>
+
 <logFile name="org.eclipse.ui.tests.rcp_macosx.cocoa.x86_5.0.xml">
 	<effectedFile id="RCPMC"></effectedFile>
 	<effectedFile id="RCPMCSDK"></effectedFile>
@@ -1869,6 +2149,18 @@
 	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
+
+
+
+
+
+
+
+
+
+
+
+
 <logFile name="org.eclipse.core.tests.runtime_linux.gtk.x86_6.0.xml">
 	<effectedFile id="RCPLG2"></effectedFile>
 	<effectedFile id="RCPLG2SDK"></effectedFile>
@@ -1892,6 +2184,19 @@
 	<effectedFile id="PDESDK"></effectedFile>
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
+
+<logFile name="org.eclipse.ui.tests.performance_linux.gtk.x86_6.0.xml">
+	<effectedFile id="RCPLG2"></effectedFile>
+	<effectedFile id="RCPLG2SDK"></effectedFile>
+	<effectedFile id="PLG2"></effectedFile>
+	<effectedFile id="PLG2SDK"></effectedFile>
+	<effectedFile id="JA"></effectedFile>
+	<effectedFile id="JASDK"></effectedFile>
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SLG2"></effectedFile>
+</logFile>
+
 
 <logFile name="org.eclipse.jface.tests.databinding_linux.gtk.x86_6.0.xml">
 	<effectedFile id="RCPLG2"></effectedFile>
@@ -1941,6 +2246,30 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
+<logFile name="org.eclipse.equinox.security.tests_linux.gtk.x86_6.0.xml">
+	<effectedFile id="RCPLG2"></effectedFile>
+	<effectedFile id="RCPLG2SDK"></effectedFile>
+	<effectedFile id="PLG2"></effectedFile>
+	<effectedFile id="PLG2SDK"></effectedFile>	
+	<effectedFile id="SLG2"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.equinox.p2.tests_linux.gtk.x86_6.0.xml">
+	<effectedFile id="RCPLG2"></effectedFile>
+	<effectedFile id="RCPLG2SDK"></effectedFile>
+	<effectedFile id="PLG2"></effectedFile>
+	<effectedFile id="PLG2SDK"></effectedFile>
+	<effectedFile id="SLG2"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.equinox.p2.tests.ui_linux.gtk.x86_6.0.xml">
+	<effectedFile id="RCPLG2"></effectedFile>
+	<effectedFile id="RCPLG2SDK"></effectedFile>
+	<effectedFile id="PLG2"></effectedFile>
+	<effectedFile id="PLG2SDK"></effectedFile>
+	<effectedFile id="SLG2"></effectedFile>
+</logFile>
+
 <logFile name="org.eclipse.ui.tests.rcp_linux.gtk.x86_6.0.xml">
 	<effectedFile id="RCPLG2"></effectedFile>
 	<effectedFile id="RCPLG2SDK"></effectedFile>
@@ -1978,6 +2307,18 @@
 </logFile>
 
 <logFile name="org.eclipse.ui.tests_win32.win32.x86_6.0.xml">
+	<effectedFile id="RCPW"></effectedFile>
+	<effectedFile id="RCPWSDK"></effectedFile>
+	<effectedFile id="PW"></effectedFile>
+	<effectedFile id="PWSDK"></effectedFile>
+	<effectedFile id="JA"></effectedFile>
+	<effectedFile id="JASDK"></effectedFile>
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SW"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.ui.tests.performance_win32.win32.x86_6.0.xml">
 	<effectedFile id="RCPW"></effectedFile>
 	<effectedFile id="RCPWSDK"></effectedFile>
 	<effectedFile id="PW"></effectedFile>
@@ -2038,6 +2379,30 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
+<logFile name="org.eclipse.equinox.security.tests_win32.win32.x86_6.0.xml">
+	<effectedFile id="RCPW"></effectedFile>
+	<effectedFile id="RCPWSDK"></effectedFile>
+	<effectedFile id="PW"></effectedFile>
+	<effectedFile id="PWSDK"></effectedFile>
+	<effectedFile id="SW"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.equinox.p2.tests_win32.win32.x86_6.0.xml">
+	<effectedFile id="RCPW"></effectedFile>
+	<effectedFile id="RCPWSDK"></effectedFile>
+	<effectedFile id="PW"></effectedFile>
+	<effectedFile id="PWSDK"></effectedFile>	
+	<effectedFile id="SW"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.equinox.p2.tests.ui_win32.win32.x86_6.0.xml">
+	<effectedFile id="RCPW"></effectedFile>
+	<effectedFile id="RCPWSDK"></effectedFile>
+	<effectedFile id="PW"></effectedFile>
+	<effectedFile id="PWSDK"></effectedFile>	
+	<effectedFile id="SW"></effectedFile>
+</logFile>
+
 <logFile name="org.eclipse.ui.tests.rcp_win32.win32.x86_6.0.xml">
 	<effectedFile id="RCPW"></effectedFile>
 	<effectedFile id="RCPWSDK"></effectedFile>
@@ -2073,8 +2438,37 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
+<logFile name="org.eclipse.pde.api.tools.tests_win32.win32.x86_6.0.xml">
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SW"></effectedFile>
+</logFile>
 
 <logFile name="org.eclipse.jdt.apt.tests_win32.win32.x86_6.0.xml">
+	<effectedFile id="JA"></effectedFile>
+	<effectedFile id="JASDK"></effectedFile>
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SW"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.jdt.compiler.apt.tests_win32.win32.x86_6.0.xml">
+	<effectedFile id="JA"></effectedFile>
+	<effectedFile id="JASDK"></effectedFile>
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SW"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.jdt.compiler.tool.tests_win32.win32.x86_6.0.xml">
+	<effectedFile id="JA"></effectedFile>
+	<effectedFile id="JASDK"></effectedFile>
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SW"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.jdt.apt.pluggable.tests_win32.win32.x86_6.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -2123,6 +2517,14 @@
 </logFile>
 
 <logFile name="org.eclipse.jdt.text.tests_win32.win32.x86_6.0.xml">
+	<effectedFile id="JA"></effectedFile>
+	<effectedFile id="JASDK"></effectedFile>
+	<effectedFile id="PDE"></effectedFile>
+	<effectedFile id="PDESDK"></effectedFile>
+	<effectedFile id="SW"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.search.tests_win32.win32.x86_6.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
