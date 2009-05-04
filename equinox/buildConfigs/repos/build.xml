@@ -13,17 +13,17 @@
 	</target>
 	
 	<target name="jmxclient">
-		<property name="archiveRoot" value="eclipse-equinox-jmx-client-${buildId}" />
+		<property name="archiveRoot" value="equinox-jmx-client-${buildId}" />
 		<buildRepos feature="org.eclipse.equinox.jmx.client.feature" os="win32" ws="win32" arch="x86" archiveName="${archiveRoot}.zip" />
 	</target>
 
 	<target name="jmxcommon">
-		<property name="archiveRoot" value="eclipse-equinox-jmx-common-${buildId}" />
+		<property name="archiveRoot" value="equinox-jmx-common-${buildId}" />
 		<buildRepos feature="org.eclipse.equinox.jmx.common.feature" os="win32" ws="win32" arch="x86" archiveName="${archiveRoot}.zip" />
 	</target>
 
 	<target name="jmxserver">
-		<property name="archiveRoot" value="eclipse-equinox-jmx-server-${buildId}" />
+		<property name="archiveRoot" value="equinox-jmx-server-${buildId}" />
 		<buildRepos feature="org.eclipse.equinox.jmx.server.feature" os="win32" ws="win32" arch="x86" archiveName="${archiveRoot}.zip" />
 	</target>
 

@@ -3,7 +3,7 @@
 <target name="noDefault" />
 
 <!-- set the root of the output file name -->
-<property name="archiveRoot" value="eclipse-equinox-p2-feature-${buildId}"/>
+<property name="archiveRoot" value="equinox-p2-feature-${buildId}"/>
 	
 <!-- Target to get the packaging map files for the components of interest
      The files must be fetched into the downloadDirectory folder -->
