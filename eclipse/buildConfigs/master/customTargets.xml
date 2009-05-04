@@ -93,10 +93,7 @@
 		</copy>
 		<copy todir="${postingDirectory}/${buildLabel}/compilelogs" overwrite="true" failonerror="false">
 			<fileset dir="${buildDirectory}/features/master-equinox/feature.temp.folder" />
-		</copy>
-		<copy todir="${postingDirectory}/${buildLabel}/compilelogs" overwrite="true" failonerror="false">
-			<fileset dir="${buildDirectory}/features/master-equinox-p2/feature.temp.folder" />
-		</copy>
+		</copy>		
 		<copy todir="${postingDirectory}/${buildLabel}/compilelogs" overwrite="true" failonerror="false">
 			<fileset dir="${buildDirectory}/features/org.eclipse.help/feature.temp.folder" />
 		</copy>

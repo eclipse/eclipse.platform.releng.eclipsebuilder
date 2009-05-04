@@ -71,8 +71,7 @@
 				<antcall target="updatePackProperties" />
 				<antcall target="signMasterFeature" />
 			</sequential>
-			<sequential>
-				<!--		<antcall target="buildMasterRootFeature" /> -->
+			<sequential>				
 				<antcall target="buildSdkTestFeature" />
 				<ant antfile="${eclipse.build.configs}/../helper.xml" target="verifyCompile" />
 			</sequential>
@@ -140,16 +139,7 @@
 			<property name="component" value="${eclipse.build.configs}/master" />
 		</ant>
 	</target>
-
-	<!-- <target name="buildMasterRootFeature">
-		<ant antfile="build.xml" dir="${basedir}" target="main">
-			<property name="component" value="${eclipse.build.configs}/org.eclipse.equinox.executable" />
-		</ant>
-		<ant antfile="build.xml" dir="${basedir}" target="main">
-			<property name="component" value="${eclipse.build.configs}/master-root" />
-		</ant>
-	</target> -->
-
+	
 	<target name="buildSdkTestFeature">
 		<ant antfile="build.xml" dir="${basedir}" target="main">
 			<property name="component" value="${eclipse.build.configs}/sdk.tests" />
@@ -383,9 +373,9 @@
 
 
 	<target name="packageEclipseDistributables">
-		<replace token="@qualifier@" file="${eclipse.build.configs}/sdk/packager/sdk.product" value="${buildId}" />
-		<replace token="@qualifier@" file="${eclipse.build.configs}/platform/packager/platform.product" value="${buildId}" />
-		<replace token="@qualifier@" file="${eclipse.build.configs}/platform.sdk/packager/platform.product" value="${buildId}" />
+		<replace token="@qualifier@" file="${eclipse.build.configs}/sdk/builder/sdk.product" value="${buildId}" />
+		<replace token="@qualifier@" file="${eclipse.build.configs}/platform/platform.product" value="${buildId}" />
+		<replace token="@qualifier@" file="${eclipse.build.configs}/platform.sdk/platform.product" value="${buildId}" />
 		<replace token="@qualifier@" file="${buildDirectory}/plugins/org.eclipse.equinox.p2.ui.admin.rcp/rcp.product" value="${buildId}" />
 		<replace token="@qualifier@" file="${eclipse.build.configs}/rcp/rcp.product" value="${buildId}" />
 		<replace token="@qualifier@" file="${eclipse.build.configs}/rcp.sdk/rcp.product" value="${buildId}" />
@@ -395,7 +385,7 @@
 		<delete dir="${reposource}" />
 		<mkdir dir="${reposource}" />
 		<exec executable="unzip" dir=".">
-			<arg line="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -x */features/master/* */features/master-ecf* */features/master-equinox-p2* */features/master-jetty* */features/master-root* */plugins/org.eclipse.swt.tools* */plugins/com.ibm.icu.base* */features/com.ibm.icu.base* -d ${reposource}" />
+			<arg line="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -x */features/master/* */features/master-ecf* */features/master-jetty* */plugins/org.eclipse.swt.tools* */plugins/com.ibm.icu.base* */features/com.ibm.icu.base* -d ${reposource}" />
 		</exec>		
 		<property name="tempexec" value="${buildDirectory}/tempexec" />
 		<mkdir dir="${tempexec}" />
@@ -418,7 +408,7 @@
 
 		<replace file="packaging.map" token="@buildId@" value="${buildId}" />
 
-		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${eclipse.build.configs}/sdk/packager/sdk.product" compress="true">
+		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${eclipse.build.configs}/sdk/builder/sdk.product" compress="true">
 			<config os="win32" ws="win32" arch="x86" />
 			<config os="win32" ws="win32" arch="x86_64" />
 			<config os="win32" ws="wpf" arch="x86" />
@@ -437,7 +427,7 @@
 			<advice kind="pluginVersions" file="${buildDirectory}/finalPluginsVersions.properties" />
 		</p2.publish.product>
 
-		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${eclipse.build.configs}/platform/packager/platform.product" compress="true">
+		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${eclipse.build.configs}/platform/builder/platform.product" compress="true">
 			<config os="win32" ws="win32" arch="x86" />
 			<config os="win32" ws="win32" arch="x86_64" />
 			<config os="win32" ws="wpf" arch="x86" />
@@ -455,7 +445,7 @@
 			<advice kind="pluginVersions" file="${buildDirectory}/finalPluginsVersions.properties" />
 		</p2.publish.product>
 
-		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${eclipse.build.configs}/platform.sdk/packager/platform.product" compress="true">
+		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${eclipse.build.configs}/platform.sdk/builder/platform.product" compress="true">
 			<config os="win32" ws="win32" arch="x86" />
 			<config os="win32" ws="win32" arch="x86_64" />
 			<config os="win32" ws="wpf" arch="x86" />
