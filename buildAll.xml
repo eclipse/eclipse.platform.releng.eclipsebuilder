@@ -71,7 +71,7 @@
 				<antcall target="updatePackProperties" />
 				<antcall target="signMasterFeature" />
 			</sequential>
-			<sequential>				
+			<sequential>
 				<antcall target="buildSdkTestFeature" />
 				<ant antfile="${eclipse.build.configs}/../helper.xml" target="verifyCompile" />
 			</sequential>
@@ -139,7 +139,7 @@
 			<property name="component" value="${eclipse.build.configs}/master" />
 		</ant>
 	</target>
-	
+
 	<target name="buildSdkTestFeature">
 		<ant antfile="build.xml" dir="${basedir}" target="main">
 			<property name="component" value="${eclipse.build.configs}/sdk.tests" />
@@ -192,7 +192,7 @@
 			<arg line="-consolelog -application org.eclipse.update.core.siteOptimizer" />
 			<arg line="-jarProcessor -verbose -outputDir ${buildLabel} -processAll -pack ${repack} ${reposource}" />
 		</java> -->
-		
+
 		<!-- <p2.process.artifacts repositoryPath="file://${reposource}" /> -->
 		<p2.process.artifacts repositoryPath="file://${reposource}" pack="true" />
 
@@ -387,7 +387,7 @@
 		<mkdir dir="${reposource}" />
 		<exec executable="unzip" dir=".">
 			<arg line="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -x */features/master/* */features/master-ecf* */features/master-jetty* */plugins/org.eclipse.swt.tools* */plugins/com.ibm.icu.base* */features/com.ibm.icu.base* -d ${reposource}" />
-		</exec>		
+		</exec>
 		<property name="tempexec" value="${buildDirectory}/tempexec" />
 		<mkdir dir="${tempexec}" />
 		<delete dir="${tempexec}" />
@@ -405,7 +405,7 @@
 			<property name="p2.build.repo" value="file:/${buildDirectoryAbsolute}" />
 		</subant>
 
-		<ant target="main" antfile="buildConfiguration.xml" dir="${eclipse.build.configs}/rcp.config" />		
+		<ant target="main" antfile="buildConfiguration.xml" dir="${eclipse.build.configs}/rcp.config" />
 
 		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${eclipse.build.configs}/sdk/builder/sdk.product" compress="true">
 			<config os="win32" ws="win32" arch="x86" />
@@ -511,14 +511,16 @@
 		<antcall target="packMasterFeature" />
 
 		<mkdir dir="${buildRepo}" />
-		<!--mirror metadata - note have to mirror metadata first see https://bugs.eclipse.org/bugs/show_bug.cgi?id=264891 -->
-		<p2.metadata.mirror source="file:${reposource}" writeMode="append" destination="file:${buildRepo}" />
-		<p2.artifact.mirror source="file:${reposource}" baseline="file:${updateSite}" comparatorId="org.eclipse.equinox.p2.repository.tools.jar.comparator" destination="file:${buildRepo}" ignoreErrors="true" comparatorLog="${buildlogs}/comparatorlog.txt" log="${buildlogs}/mirrorlog.txt" />
-
+		<p2.mirror source="file:${reposource}" ignoreErrors="true" log="${buildlogs}/mirrorlog.txt">
+			<destination compressed="true" name="${p2.repo.name}" location="file:${buildRepo}" append="true" />
+			<comparator comparatorId="org.eclipse.equinox.p2.repository.tools.jar.comparator" comparatorLog="${buildlogs}/comparatorlog.txt">
+				<repository location="file:${updateSite}" />
+			</comparator>
+		</p2.mirror>
 		<copy todir="${buildRepo}">
 			<fileset file="${eclipse.build.configs}/../../extras/sdkinstaller.properties" />
 		</copy>
-		
+
 		<!--try create composite repository-->
 		<p2.composite.artifact.repository.create location="file://${updateSite}" name="${p2.repo.name}" compressed="true" failOnExists="false" />
 		<p2.composite.metadata.repository.create location="file://${updateSite}" name="${p2.repo.name}" compressed="true" failOnExists="false" />
