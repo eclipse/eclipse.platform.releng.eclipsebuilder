@@ -26,8 +26,8 @@
    </plugins>
 
    <features>
-      <feature id="org.eclipse.platform"/>
-      <feature id="org.eclipse.platform.source"/>
+      <feature id="org.eclipse.rcp"/>
+      <feature id="org.eclipse.rcp.source"/>
       <feature id="org.eclipse.rcp.configuration"/>
    </features>
 
