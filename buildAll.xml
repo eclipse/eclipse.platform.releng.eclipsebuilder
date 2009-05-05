@@ -193,7 +193,8 @@
 			<arg line="-jarProcessor -verbose -outputDir ${buildLabel} -processAll -pack ${repack} ${reposource}" />
 		</java> -->
 		
-		<p2.process.artifacts repositoryPath="file://${reposource}" />
+		<!-- <p2.process.artifacts repositoryPath="file://${reposource}" /> -->
+		<p2.process.artifacts repositoryPath="file://${reposource}" pack="true" />
 
 	</target>
 
