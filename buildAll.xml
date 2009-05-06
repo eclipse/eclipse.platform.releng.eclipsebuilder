@@ -511,12 +511,18 @@
 		<antcall target="packMasterFeature" />
 
 		<mkdir dir="${buildRepo}" />
-		<p2.mirror source="file:${reposource}" ignoreErrors="true" log="${buildlogs}/mirrorlog.txt">
+<!--		<p2.mirror source="file:${reposource}" ignoreErrors="true" log="${buildlogs}/mirrorlog.txt">
 			<destination compressed="true" name="${p2.repo.name}" location="file:${buildRepo}" append="true" />
 			<comparator comparatorId="org.eclipse.equinox.p2.repository.tools.jar.comparator" comparatorLog="${buildlogs}/comparatorlog.txt">
 				<repository location="file:${updateSite}" />
 			</comparator>
-		</p2.mirror>
+		</p2.mirror> -->
+		<p2.metadata.mirror source="file:${reposource}" writeMode="append" destination="file:${buildRepo}" />
+		<p2.artifact.mirror source="file:${reposource}" baseline="file:${updateSite}" comparatorId="org.eclipse.equinox.p2.repository.tools.jar.comparator" destination="file:${buildRepo}" ignoreErrors="true" comparatorLog="${buildlogs}/comparatorlog.txt" log="${buildlogs}/mirrorlog.txt" />
+		<copy todir="${buildRepo}">
+			<fileset file="${eclipse.build.configs}/../../extras/sdkinstaller.properties" />
+		</copy>
+
 		<copy todir="${buildRepo}">
 			<fileset file="${eclipse.build.configs}/../../extras/sdkinstaller.properties" />
 		</copy>
