@@ -234,6 +234,7 @@
 				<include name="**/*.log" />
 			</fileset>
 		</copy>		
+		<p2.process.artifacts repositoryPath="file://${buildRepo}" pack="true" />
 	</target>
 
 	<target name="provision.agent">
