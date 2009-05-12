@@ -521,11 +521,7 @@
 		<p2.artifact.mirror source="file:${reposource}" baseline="file:${updateSite}" comparatorId="org.eclipse.equinox.p2.repository.tools.jar.comparator" destinationName="${p2.repo.name}" destination="file:${buildRepo}" ignoreErrors="true" comparatorLog="${buildlogs}/comparatorlog.txt" log="${buildlogs}/mirrorlog.txt" />
 		<copy todir="${buildRepo}">
 			<fileset file="${eclipse.build.configs}/../../extras/sdkinstaller.properties" />
-		</copy>
-
-		<copy todir="${buildRepo}">
-			<fileset file="${eclipse.build.configs}/../../extras/sdkinstaller.properties" />
-		</copy>
+		</copy>		
 
 		<!--try create composite repository-->
 		<p2.composite.artifact.repository.create location="file://${updateSite}" name="${p2.repo.name}" compressed="true" failOnExists="false" />
