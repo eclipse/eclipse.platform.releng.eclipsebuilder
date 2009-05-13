@@ -500,9 +500,19 @@
 			<config os="aix" ws="motif" arch="ppc" />
 			<advice kind="featureVersions" file="${buildDirectory}/finalFeaturesVersions.properties" />
 			<advice kind="pluginVersions" file="${buildDirectory}/finalPluginsVersions.properties" />
-		</p2.publish.product>
+		</p2.publish.product>		
+		
+		<property name="equinox.p2.agent.dir" value="${equinox.build.configs}/equinox.p2.agent" />
+		<replace file="${equinox.p2.agent.dir}/p2.inf" token="@qualifier@" value="${buildId}" />				
+		<copy todir="${equinox.p2.agent.dir}">
+			<fileset file="${buildDirectory}/plugins/org.eclipse.equinox.p2.ui.admin.rcp/rcp.product" />
+		</copy>		
+		<mkdir dir="${equinox.p2.agent.dir}/org.eclipse.equinox.p2.ui.admin.rcp" />
+		<copy todir="${equinox.p2.agent.dir}/org.eclipse.equinox.p2.ui.admin.rcp">
+			<fileset file="${buildDirectory}/plugins/org.eclipse.equinox.p2.ui.admin.rcp/config.ini" />
+		</copy>
 
-		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${buildDirectory}/plugins/org.eclipse.equinox.p2.ui.admin.rcp/rcp.product" compress="true">
+		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${equinox.p2.agent.dir}/rcp.product" compress="true">
 			<config os="win32" ws="win32" arch="x86" />
 			<config os="linux" ws="gtk" arch="x86" />
 			<config os="macosx" ws="cocoa" arch="x86" />
@@ -511,7 +521,7 @@
 		<antcall target="packMasterFeature" />
 
 		<mkdir dir="${buildRepo}" />
-<!--		<p2.mirror source="file:${reposource}" ignoreErrors="true" log="${buildlogs}/mirrorlog.txt">
+		<!--		<p2.mirror source="file:${reposource}" ignoreErrors="true" log="${buildlogs}/mirrorlog.txt">
 			<destination compressed="true" name="${p2.repo.name}" location="file:${buildRepo}" append="true" />
 			<comparator comparatorId="org.eclipse.equinox.p2.repository.tools.jar.comparator" comparatorLog="${buildlogs}/comparatorlog.txt">
 				<repository location="file:${updateSite}" />
@@ -521,7 +531,7 @@
 		<p2.artifact.mirror source="file:${reposource}" baseline="file:${updateSite}" comparatorId="org.eclipse.equinox.p2.repository.tools.jar.comparator" destinationName="${p2.repo.name}" destination="file:${buildRepo}" ignoreErrors="true" comparatorLog="${buildlogs}/comparatorlog.txt" log="${buildlogs}/mirrorlog.txt" />
 		<copy todir="${buildRepo}">
 			<fileset file="${eclipse.build.configs}/../../extras/sdkinstaller.properties" />
-		</copy>		
+		</copy>
 
 		<!--try create composite repository-->
 		<p2.composite.artifact.repository.create location="file://${updateSite}" name="${p2.repo.name}" compressed="true" failOnExists="false" />
