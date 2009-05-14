@@ -407,7 +407,7 @@
 
 		<ant target="main" antfile="buildConfiguration.xml" dir="${eclipse.build.configs}/rcp.config" />
 
-		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${eclipse.build.configs}/sdk/builder/sdk.product" compress="true">
+		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${eclipse.build.configs}/platform/platform.product" compress="true">
 			<config os="win32" ws="win32" arch="x86" />
 			<config os="win32" ws="win32" arch="x86_64" />
 			<config os="win32" ws="wpf" arch="x86" />
@@ -428,13 +428,16 @@
 			<advice kind="pluginVersions" file="${buildDirectory}/finalPluginsVersions.properties" />
 		</p2.publish.product>
 
-		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${eclipse.build.configs}/platform/platform.product" compress="true">
+		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${eclipse.build.configs}/sdk/builder/sdk.product" compress="true">
 			<config os="win32" ws="win32" arch="x86" />
 			<config os="win32" ws="win32" arch="x86_64" />
 			<config os="win32" ws="wpf" arch="x86" />
 			<config os="linux" ws="gtk" arch="x86" />
 			<config os="linux" ws="gtk" arch="x86_64" />
 			<config os="linux" ws="gtk" arch="ppc" />
+			<config os="linux" ws="gtk" arch="s390" />
+			<config os="linux" ws="gtk" arch="s390x" />
+			<config os="linux" ws="motif" arch="x86" />
 			<config os="solaris" ws="gtk" arch="sparc" />
 			<config os="solaris" ws="gtk" arch="x86" />
 			<config os="macosx" ws="cocoa" arch="x86" />

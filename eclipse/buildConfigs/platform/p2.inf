@@ -3,7 +3,16 @@ addRepository(type:0,location:http${#58}//download.eclipse.org/eclipse/updates/3
 addRepository(type:1,location:http${#58}//download.eclipse.org/eclipse/updates/3.5,name:The Eclipse Project Updates);\
 addRepository(type:0,location:http${#58}//download.eclipse.org/releases/galileo,name:Galileo);\
 addRepository(type:1,location:http${#58}//download.eclipse.org/releases/galileo,name:Galileo);\
-  mkdir(path:${installFolder}/dropins);
+  mkdir(path:${installFolder}/dropins);\
+  setProgramProperty(propName:osgi.splashPath,propValue:org.eclipse.platform);\
+  setProgramProperty(propName:eclipse.product,propValue:org.eclipse.platform.ide);\
+  setProgramProperty(propName:eclipse.application,propValue:org.eclipse.ui.ide.workbench);
+  
+instructions.unconfigure=\
+  setProgramProperty(propName:osgi.splashPath,propValue:);\
+  setProgramProperty(propName:eclipse.product,propValue:);\
+  setProgramProperty(propName:eclipse.application,propValue:);
+  
 requires.1.namespace=org.eclipse.equinox.p2.iu
 requires.1.name=toolingorg.eclipse.configuration.macosx
 requires.1.filter=(osgi.os=macosx)

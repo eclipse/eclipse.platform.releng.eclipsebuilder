@@ -16,6 +16,11 @@ requires.2.filter=(!(osgi.os=macosx))
 requires.2.range=[1.0.0,1.0.0]
 requires.2.greedy=true
 
+requires.3.namespace=org.eclipse.equinox.p2.iu
+requires.3.name=toolingorg.eclipse.platform.ide.configuration
+requires.3.range=[$version$,$version$]
+requires.3.greedy=true
+
 units.1.id=toolingorg.eclipse.configuration.macosx
 units.1.version=1.0.0
 units.1.provides.1.namespace=org.eclipse.equinox.p2.iu
