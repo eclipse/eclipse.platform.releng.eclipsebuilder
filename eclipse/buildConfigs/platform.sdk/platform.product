@@ -33,5 +33,17 @@
       <feature id="org.eclipse.equinox.p2.user.ui"/>
       <feature id="org.eclipse.rcp.configuration"/>
    </features>
+   
+   <configurations>
+      <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="4" />
+      <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.ds" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.p2.reconciler.dropins" autoStart="true" startLevel="4" />
+      <plugin id="org.eclipse.equinox.simpleconfigurator" autoStart="true" startLevel="1" />
+      <plugin id="org.eclipse.update.configurator" autoStart="true" startLevel="3" />
+      <property name="org.eclipse.update.reconcile" value="false" />                                        
+      <property name="osgi.bundles.defaultStartLevel" value="4" />   
+      <property name="eclipse.buildId" value="@qualifier@"/>
+   </configurations>
 
 </product>
