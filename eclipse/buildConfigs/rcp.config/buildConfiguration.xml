@@ -4,13 +4,9 @@
         <property name="product" value="${basedir}/config.product" />
         <property name="id" value="org.eclipse.pde.build.container.feature" />
         <property name="type" value="feature" />
+        <property name="baseLocation" value="${reposource}"/>
 		<property name="verify" value="false" />
-
-		<path id="launcher.paths">
-			<fileset dir="${reposource}" includes="plugins/org.eclipse.equinox.launcher*" />
-			<!-- the built version of the org.eclipse.equinox.executable feature -->
-			<dirset dir="${buildDirectory}" includes="features/org.eclipse.equinox.executable*" />  
-		</path>
+        <property name="filteredDependencyCheck" value="true"/>
 
 		<!-- generate a feature based on our .product file -->
 		<property file="${eclipse.build.configs}/master/build.properties" />
@@ -20,9 +16,6 @@
 		<!-- generate product build scripts for the generated feature -->
 		<ant antfile="${eclipse.pdebuild.scripts}/genericTargets.xml" target="generateScript" >
             <property name="buildDirectory" value="${basedir}/temp"/>
-			<property name="baseLocation" value="" />
-			<property name="transformedRepoLocation" value="" />
-			<property name="pluginPath" refid="launcher.paths" />
 			<property name="forceContextQualifier" value="${buildId}" />
         </ant>
 
