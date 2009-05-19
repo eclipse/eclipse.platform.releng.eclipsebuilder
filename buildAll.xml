@@ -500,14 +500,14 @@
 			<config os="aix" ws="motif" arch="ppc" />
 			<advice kind="featureVersions" file="${buildDirectory}/finalFeaturesVersions.properties" />
 			<advice kind="pluginVersions" file="${buildDirectory}/finalPluginsVersions.properties" />
-		</p2.publish.product>		
-		
+		</p2.publish.product>
+
 		<property name="equinox.p2.agent.dir" value="${equinox.build.configs}/equinox.p2.agent" />
-		<replace file="${equinox.p2.agent.dir}/p2.inf" token="@qualifier@" value="${buildId}" />				
+		<replace file="${equinox.p2.agent.dir}/p2.inf" token="@qualifier@" value="${buildId}" />
 		<copy todir="${equinox.p2.agent.dir}">
 			<fileset file="${buildDirectory}/plugins/org.eclipse.equinox.p2.ui.admin.rcp/rcp.product" />
 		</copy>
-		
+
 		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${equinox.p2.agent.dir}/rcp.product" compress="true">
 			<config os="win32" ws="win32" arch="x86" />
 			<config os="linux" ws="gtk" arch="x86" />
@@ -517,6 +517,17 @@
 		<antcall target="packMasterFeature" />
 
 		<mkdir dir="${buildRepo}" />
+		<condition property="repoURL" value="http://www.eclipse.org/downloads/download.php?file=eclipse/updates/3.5-I-builds/${buildId}/&amp;format=xml&amp;protocol=http">
+			<equals arg1="${buildType}" arg2="I" />
+		</condition>
+		<condition property="repoURL" value="http://www.eclipse.org/downloads/download.php?file=eclipse/updates/3.5-N-builds/${buildId}/&amp;format=xml&amp;protocol=http">
+			<equals arg1="${buildType}" arg2="N" />
+		</condition>
+		<replace file="${eclipse.build.configs}/../../extras/artifact.xml" token="@p2.repo.name@" value="${p2.repo.name}" />
+		<replace file="${eclipse.build.configs}/../../extras/artifact.xml" token="@repoURL@" value="${repoURL}" />
+		<jar destfile="${eclipse.build.configs}/../../extras/artifact.jar" basedir="${eclipse.build.configs}/../../extras/" includes="artifact.xml" />
+		<copy file="${eclipse.build.configs}/../../extras/artifact.jar" todir="${buildRepo}" />
+
 		<!--		<p2.mirror source="file:${reposource}" ignoreErrors="true" log="${buildlogs}/mirrorlog.txt">
 			<destination compressed="true" name="${p2.repo.name}" location="file:${buildRepo}" append="true" />
 			<comparator comparatorId="org.eclipse.equinox.p2.repository.tools.jar.comparator" comparatorLog="${buildlogs}/comparatorlog.txt">
