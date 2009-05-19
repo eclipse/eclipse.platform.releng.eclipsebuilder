@@ -4,7 +4,7 @@ addRepository(type:1,location:http${#58}//download.eclipse.org/eclipse/updates/3
 addRepository(type:0,location:http${#58}//download.eclipse.org/releases/galileo,name:Galileo);\
 addRepository(type:1,location:http${#58}//download.eclipse.org/releases/galileo,name:Galileo);\
   mkdir(path:${installFolder}/dropins);\  
-  setProgramProperty(propName:osgi.splashPath, propValue:platform:/base/plugins/org.eclipse.platform);
+  setProgramProperty(propName:osgi.splashPath, propValue:platform:/base/plugins/org.eclipse.platform);\
   setProgramProperty(propName:eclipse.product,propValue:org.eclipse.platform.ide);\
   setProgramProperty(propName:eclipse.application,propValue:org.eclipse.ui.ide.workbench);
   
