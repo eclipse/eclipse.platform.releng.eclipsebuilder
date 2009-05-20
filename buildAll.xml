@@ -500,13 +500,13 @@
 			<config os="aix" ws="motif" arch="ppc" />
 			<advice kind="featureVersions" file="${buildDirectory}/finalFeaturesVersions.properties" />
 			<advice kind="pluginVersions" file="${buildDirectory}/finalPluginsVersions.properties" />
-		</p2.publish.product>
-
+		</p2.publish.product>		
+		
 		<property name="equinox.p2.agent.dir" value="${equinox.build.configs}/equinox.p2.agent" />
-		<replace file="${equinox.p2.agent.dir}/p2.inf" token="@qualifier@" value="${buildId}" />
+		<replace file="${equinox.p2.agent.dir}/p2.inf" token="@qualifier@" value="${buildId}" />				
 		<copy todir="${equinox.p2.agent.dir}">
 			<fileset file="${buildDirectory}/plugins/org.eclipse.equinox.p2.ui.admin.rcp/rcp.product" />
-		</copy>
+		</copy>		
 		<mkdir dir="${equinox.p2.agent.dir}/org.eclipse.equinox.p2.ui.admin.rcp" />
 		<copy todir="${equinox.p2.agent.dir}/org.eclipse.equinox.p2.ui.admin.rcp">
 			<fileset file="${buildDirectory}/plugins/org.eclipse.equinox.p2.ui.admin.rcp/config.ini" />
@@ -521,17 +521,6 @@
 		<antcall target="packMasterFeature" />
 
 		<mkdir dir="${buildRepo}" />
-		<condition property="repoURL" value="http://www.eclipse.org/downloads/download.php?file=eclipse/updates/3.5-I-builds/${buildId}/">
-			<equals arg1="${buildType}" arg2="I" />
-		</condition>
-		<condition property="repoURL" value="http://www.eclipse.org/downloads/download.php?file=eclipse/updates/3.5-N-builds/${buildId}/">
-			<equals arg1="${buildType}" arg2="N" />
-		</condition>
-		<replace file="${eclipse.build.configs}/../../extras/artifacts.xml" token="@p2.repo.name@" value="${p2.repo.name}" />
-		<replace file="${eclipse.build.configs}/../../extras/artifacts.xml" token="@repoURL@" value="${repoURL}" />
-		<zip zipfile="${eclipse.build.configs}/../../extras/artifacts.jar" basedir="${eclipse.build.configs}/../../extras/" includes="artifacts.xml" />
-		<copy file="${eclipse.build.configs}/../../extras/artifacts.jar" todir="${buildRepo}" />
-
 		<!--		<p2.mirror source="file:${reposource}" ignoreErrors="true" log="${buildlogs}/mirrorlog.txt">
 			<destination compressed="true" name="${p2.repo.name}" location="file:${buildRepo}" append="true" />
 			<comparator comparatorId="org.eclipse.equinox.p2.repository.tools.jar.comparator" comparatorLog="${buildlogs}/comparatorlog.txt">
@@ -588,7 +577,7 @@
 		<condition property="feedFileValue" value="${base.builder}/plugins/org.eclipse.build.tools/data/builds-eclipse.xml">
 			<equals arg1="${test}" arg2="true" />
 		</condition>
-		<condition property="feedFileValue" value="/builds/transfer/files/master/downloads/builds-eclipse-3.5.xml">
+		<condition property="feedFileValue" value="/builds/transfer/files/master/downloads/builds-eclipse-3.4.xml">
 			<equals arg1="${buildType}" arg2="I" />
 		</condition>
 		<condition property="feedFileValue" value="/builds/transfer/files/master/downloads/builds-eclipse-N.xml">
@@ -598,7 +587,7 @@
 		<condition property="feedURL" value="http://download.eclipse.org/eclipse/downloads/builds-eclipse-test.xml">
 			<equals arg1="${test}" arg2="true" />
 		</condition>
-		<condition property="feedURL" value="http://download.eclipse.org/eclipse/downloads/builds-eclipse-3.5.xml">
+		<condition property="feedURL" value="http://download.eclipse.org/eclipse/downloads/builds-eclipse-3.4.xml">
 			<equals arg1="${buildType}" arg2="I" />
 		</condition>
 		<condition property="feedURL" value="http://download.eclipse.org/eclipse/downloads/builds-eclipse-N.xml">
