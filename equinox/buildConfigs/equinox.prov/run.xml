@@ -1311,7 +1311,6 @@
 
 			<sequential>
 				<!-- win32 win32 x86 agent -->
-				<copy file="${buildDirectory}/plugins/org.eclipse.equinox.p2.ui.admin.rcp/config.ini" tofile="${p2.agent.install.win32}/configuration/config.ini" overwrite="true" />
 				<exec dir="${p2.agent.install.win32}" executable="zip">
 					<arg line="-q ${output.dir}/equinox-p2-agent-${buildId}-win32.zip -r ." />
 				</exec>
@@ -1337,7 +1336,6 @@
 
 			<sequential>
 				<!-- linux gtk x86 agent -->
-				<copy file="${buildDirectory}/plugins/org.eclipse.equinox.p2.ui.admin.rcp/config.ini" tofile="${p2.agent.install.linux}/configuration/config.ini" overwrite="true" />
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.agent.install.linux}" />
 					<param name="tar.base.filename" value="${output.dir}/equinox-p2-agent-${buildId}-linux.tar" />
@@ -1424,7 +1422,6 @@
 				</antcall>
 
 				<!-- macosx agent -->
-				<copy file="${buildDirectory}/plugins/org.eclipse.equinox.p2.ui.admin.rcp/config.ini" tofile="${p2.agent.install.macosx}/configuration/config.ini" overwrite="true" />
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.agent.install.macosx}" />
 					<param name="tar.base.filename" value="${output.dir}/equinox-p2-agent-${buildId}-macosx.tar" />
