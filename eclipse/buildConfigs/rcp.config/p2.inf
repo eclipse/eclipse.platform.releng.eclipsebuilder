@@ -6,4 +6,4 @@ properties.1.value=false
 instructions.configure.import=org.eclipse.equinox.p2.touchpoint.eclipse.setLauncherName
 instructions.configure=setLauncherName(name:eclipse);
 instructions.unconfigure.import=org.eclipse.equinox.p2.touchpoint.eclipse.setLauncherName
-instructions.unconfigure=setLauncherName(name:);
+instructions.unconfigure=setLauncherName();
