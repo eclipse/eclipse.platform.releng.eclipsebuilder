@@ -70,8 +70,7 @@
 	</target>
 
 
-	<target name="copyconfig" if="assembling">
-		<copy file="${eclipseBuildDirectory}/plugins/org.eclipse.equinox.p2.installer/config.ini" tofile="${rootFolder}/configuration/config.ini" overwrite="true" />
+	<target name="copyconfig" if="assembling">	
 	    <copy file="${eclipseBuildDirectory}/plugins/org.eclipse.equinox.p2.installer/installer.properties" tofile="${rootFolder}/installer.properties" overwrite="true" />			
 	</target>
 
