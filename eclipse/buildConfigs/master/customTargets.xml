@@ -166,7 +166,6 @@
 		<copy todir="${linux.gtk.ppc.rootfiles}">
 			<fileset dir="${buildDirectory}/plugins/org.eclipse.swt.gtk.linux.ppc" includes="about_files/**" />
 		</copy>
-		<concat destfile="${buildDirectory}/features/org.eclipse.equinox.sdk/build.properties" append="true">qualifier=${buildId}</concat>
 	</target>
 
 	<!-- ===================================================================== -->
