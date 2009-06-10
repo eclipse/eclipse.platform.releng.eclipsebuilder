@@ -169,6 +169,18 @@
 		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="generate">
 			<property name="builder" value="${eclipse.build.configs}/sdk" />
 		</ant>
+		<replace file="${eclipse.build.configs}/sdk/newSrcBuild/build.properties" token="@build@" value="${buildId}" />
+		<replace file="${eclipse.build.configs}/sdk/newSrcBuild/build" token="@build@" value="${buildId}" />
+		<condition property="builderTag" value="v${buildId}">
+			<or>
+				<equals arg1="${buildType}" arg2="I" />
+				<equals arg1="${buildType}" arg2="M" />
+			</or>
+		</condition>
+		<property name="builderTag" value="HEAD"/>
+		<condition property="builderTag" value="v${buildId}">
+			<equals arg1="${buildType}" arg2="I" />
+		</condition>
 	</target>
 
 	<target name="packMasterFeature" unless="skipPack">
@@ -500,13 +512,13 @@
 			<config os="aix" ws="motif" arch="ppc" />
 			<advice kind="featureVersions" file="${buildDirectory}/finalFeaturesVersions.properties" />
 			<advice kind="pluginVersions" file="${buildDirectory}/finalPluginsVersions.properties" />
-		</p2.publish.product>		
-		
+		</p2.publish.product>
+
 		<property name="equinox.p2.agent.dir" value="${equinox.build.configs}/equinox.p2.agent" />
-		<replace file="${equinox.p2.agent.dir}/p2.inf" token="@qualifier@" value="${buildId}" />				
+		<replace file="${equinox.p2.agent.dir}/p2.inf" token="@qualifier@" value="${buildId}" />
 		<copy todir="${equinox.p2.agent.dir}">
 			<fileset file="${buildDirectory}/plugins/org.eclipse.equinox.p2.ui.admin.rcp/rcp.product" />
-		</copy>		
+		</copy>
 		<mkdir dir="${equinox.p2.agent.dir}/org.eclipse.equinox.p2.ui.admin.rcp" />
 		<copy todir="${equinox.p2.agent.dir}/org.eclipse.equinox.p2.ui.admin.rcp">
 			<fileset file="${buildDirectory}/plugins/org.eclipse.equinox.p2.ui.admin.rcp/config.ini" />
