@@ -91,7 +91,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	</ant-->
 	</target>
 
-	<target name="assemble.org.eclipse.sdk.hpux.motif.PA_RISC" />	
+	<target name="assemble.org.eclipse.sdk.hpux.motif.PA_RISC" />
 	<target name="assemble.org.eclipse.sdk.solaris.motif.sparc" />
 	<target name="assemble.org.eclipse.sdk.gtk.solaris.x86" />
 	<target name="assemble.org.eclipse.sdk.gtk.linux.s390" />
@@ -179,8 +179,8 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- ===================================================================== -->
 
 	<target name="preFetch">
-		<!-- <mkdir dir="${buildDirectory}/baseLocation"/> -->		
-		<replace file="${buildDirectory}/maps/org.eclipse.releng/maps/orbit.map" value="fullmoon.ottawa.ibm.com" token="download.eclipse.org"/>
+		<!-- <mkdir dir="${buildDirectory}/baseLocation"/> -->
+		<replace file="${buildDirectory}/maps/org.eclipse.releng/maps/orbit.map" value="fullmoon.ottawa.ibm.com" token="download.eclipse.org" />
 	</target>
 
 	<!-- ===================================================================== -->
@@ -340,7 +340,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 
 		<copy todir="${tempDir}/buildScripts" flatten="true" overwrite="true">
 			<fileset dir="${eclipse.build.configs}/sdk/srcBuild" excludes="incl,fetch/**" />
-		</copy>		
+		</copy>
 
 		<!--  set correct permissions on linux script -->
 		<chmod file="${tempDir}/buildScripts/build" perm="755" />
@@ -349,17 +349,18 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<ant antfile="buildDoc.xml" target="examplesDocCopy" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.isv" />
 		<ant antfile="buildDoc.xml" target="examplesDocCopy" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv" />
 
-		<copy todir="${tempDir}/buildScripts">
-			<fileset dir="${buildDirectory}" excludes="features/*example*/**,plugins/*example*/**" includes="features/*/build.xml,features/*.source*/**,plugins/*/build.xml,plugins/*/javaCompiler.*.args,plugins/*.source*/**,fetch_*.xml,assemble*.xml,package*.xml,plugins/org.eclipse.swt.tools/**,plugins/*doc*/**" />
+		<mkdir dir="${tempDir}/buildScripts/src" />
+		<copy todir="${tempDir}/buildScripts/src">
+			<fileset dir="${buildDirectory}" excludes="features/*example*/**,plugins/*example*/**" includes="features/*/build.xml,features/*.source*/**,plugins/*/build.xml,plugins/*/javaCompiler.*.args,plugins/*.source*/**,fetch_*.xml,assemble*.xml,plugins/org.eclipse.swt.tools/**,plugins/*doc*/**" />
 		</copy>
-
-		<!--replace hard-coded location of Orbit bundles in generated packaging scripts to avoid bug 182331, 178869 -->
-		<replaceregexp match="/builds/(I\d*|N\d*|M\d*)/src" replace="$${buildDirectory}" byline="true">
-			<fileset dir="${tempDir}/buildScripts" includes="package*" />
-		</replaceregexp>
 
 		<!--ensure linux drops are created as .tar.gz files -->
 		<replace dir="${tempDir}/buildScripts" includes="assemble*" excludes="*win32*,*hpux*,*solaris*,*aix*" token=".zip" value=".tar.gz" />
+
+		<!--copy current version of eclipsebuilder to include in source build-->
+		<copy todir="${tempDir}/buildScripts">
+			<fileset dir="${basedir}" />
+		</copy>
 
 		<!-- create drop containing the fetch scripts, no source -->
 		<exec dir="${tempDir}" executable="zip">
@@ -373,13 +374,14 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<echo message="${sha} *$eclipse-sourceBuild-srcFetch-${buildId}.zip" file="${postingDirectory}/${buildLabel}/checksum/eclipse-sourceBuild-srcFetch-${buildId}.zip.sha1" />
 
 		<!--  create zip with all source for an Eclipse SDK  -->
-		<copy todir="${tempDir}/buildScripts">
+		<copy todir="${tempDir}/buildScripts/src">
 			<fileset dir="${buildDirectory}" includes="features/,plugins/" excludes="features/*example*/**,plugins/*example*/**" />
 		</copy>
+		<!--set skipFetch = true when the source is is included with the source build --> 
+		<replace file="{eclipse.build.configs}/sdk/srcBuild" value="skipFetch=false" token="skipFetch=true" />
 		<copy todir="${tempDir}/buildScripts" flatten="true" overwrite="true">
 			<fileset dir="${eclipse.build.configs}/sdk/srcBuild" excludes="fetch/**,incl" />
 		</copy>
-
 		<!--replace hard-coded location of Orbit bundles in generated packaging scripts to avoid bug 182331, 178869 -->
 		<replaceregexp match="/builds/(I\d*|N\d*|M\d*)/src" replace="${buildDirectory}" byline="true">
 			<fileset dir="${tempDir}/buildScripts" includes="package*" />
