@@ -378,7 +378,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<fileset dir="${buildDirectory}" includes="features/,plugins/" excludes="features/*example*/**,plugins/*example*/**" />
 		</copy>
 		<!--set skipFetch = true when the source is is included with the source build --> 
-		<replace file="{eclipse.build.configs}/sdk/srcBuild" value="skipFetch=false" token="skipFetch=true" />
+		<replace file="${eclipse.build.configs}/sdk/srcBuild" value="skipFetch=false" token="skipFetch=true" />
 		<copy todir="${tempDir}/buildScripts" flatten="true" overwrite="true">
 			<fileset dir="${eclipse.build.configs}/sdk/srcBuild" excludes="fetch/**,incl" />
 		</copy>
