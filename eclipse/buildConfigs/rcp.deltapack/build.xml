@@ -19,9 +19,12 @@
 			<destination kind="metadata" location="file://${featureTemp}" name="RCP Delta Pack Repo" format="file://${buildRepo}" />
 			<destination kind="artifact" location="file://${featureTemp}" name="RCP Delta Pack Repo" format="file://${buildRepo}" />
 			<iu id="org.eclipse.platform.feature.group" version="" />
+			<iu id="org.eclipse.platform.source.feature.group" version="" />
 			<iu id="org.eclipse.rcp.feature.group" version="" />
+			<iu id="org.eclipse.rcp.feature.source.group" version="" />
 			<iu id="org.eclipse.jdt.feature.group" version="" />
-			<iu id="org.eclipse.equinox.executable" version="" />
+			<iu id="org.eclipse.jdt.feature.source.group" version="" />
+			<iu id="org.eclipse.equinox.executable" version="" />		
 			<slicingOptions includeOptional="false" includeNonGreedy="false" followStrict="true" followOnlyFilteredRequirements="true" />
 		</p2.mirror>
 		<p2.repo2runnable destination="${featureTemp2}/eclipse">
