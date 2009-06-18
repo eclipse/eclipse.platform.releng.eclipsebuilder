@@ -36,7 +36,7 @@
 
 	<target name="getMapFiles" depends="checkLocalMaps" unless="skipMaps">
 		<!-- ***  change the repo info -->
-		<property name="mapCvsRoot" value=":pserver:anonymous@dev.eclipse.org:/home/eclipse" />
+		<property name="mapCvsRoot" value=":pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse" />
 		<property name="mapsCheckoutTag" value="HEAD" />
 		<property name="mapsRepo" value="/cvsroot/eclipse" />
 		<cvs cvsRoot="${mapsRepo}" package="${mapsRoot}" dest="${buildDirectory}/maps" tag="${mapsCheckoutTag}" />
