@@ -334,12 +334,11 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
 		<property name="tempDir" value="${basedir}/temp" />
 		<mkdir dir="${tempDir}/buildScripts" />
-		<!--	<mkdir dir="${tempDir}/buildScripts/baseLocation" /> -->
-
-		<copy file="${buildDirectory}/label.properties" todir="${tempDir}/buildScripts" />
+		<mkdir dir="${tempDir}/buildScripts/src" />
+		<copy file="${buildDirectory}/label.properties" todir="${tempDir}/src/buildScripts" />
 
 		<copy todir="${tempDir}/buildScripts" flatten="true" overwrite="true">
-			<fileset dir="${eclipse.build.configs}/sdk/srcBuild" excludes="incl,fetch/**" />
+			<fileset dir="${eclipse.build.configs}/sdk/srcBuild" excludes="incl,fetch/**,buildFromSource.xml,run.xml" />
 		</copy>
 
 		<!--  set correct permissions on linux script -->
@@ -348,8 +347,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<!--copy example doc -->
 		<ant antfile="buildDoc.xml" target="examplesDocCopy" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.isv" />
 		<ant antfile="buildDoc.xml" target="examplesDocCopy" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv" />
-
-		<mkdir dir="${tempDir}/buildScripts/src" />
+		
 		<copy todir="${tempDir}/buildScripts/src">
 			<fileset dir="${buildDirectory}" excludes="features/*example*/**,plugins/*example*/**" includes="features/*/build.xml,features/*.source*/**,plugins/*/build.xml,plugins/*/javaCompiler.*.args,plugins/*.source*/**,fetch_*.xml,assemble*.xml,plugins/org.eclipse.swt.tools/**,plugins/*doc*/**" />
 		</copy>
@@ -359,7 +357,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 
 		<!--copy current version of eclipsebuilder to include in source build-->
 		<copy todir="${tempDir}/buildScripts">
-			<fileset dir="${basedir}" />
+			<fileset dir="${buildDirectory}/.." includes="org.eclipse.releng.eclipsebuilder"/>
 		</copy>
 
 		<!-- create drop containing the fetch scripts, no source -->
@@ -376,9 +374,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<!--  create zip with all source for an Eclipse SDK  -->
 		<copy todir="${tempDir}/buildScripts/src">
 			<fileset dir="${buildDirectory}" includes="features/,plugins/" excludes="features/*example*/**,plugins/*example*/**" />
-		</copy>
-		<!--set skipFetch = true when the source is is included with the source build --> 
-		<replace file="${eclipse.build.configs}/sdk/srcBuild/build.properties" value="skipFetch=false" token="skipFetch=true" />
+		</copy>	
 		<copy todir="${tempDir}/buildScripts" flatten="true" overwrite="true">
 			<fileset dir="${eclipse.build.configs}/sdk/srcBuild" excludes="fetch/**,incl" />
 		</copy>
