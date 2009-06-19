@@ -59,8 +59,7 @@
 		<ant antfile="run.xml" />
 	</target>
 
-	<target name="init">
-		<echo message="message ${base.builder}/org.eclipse.pde.build_3.5.0.v20090527-1800/lib/pdebuild-ant.jar" />
+	<target name="init">	
 		<ant antfile="build.xml" target="init" />
 		<condition property="fetchTag" value="HEAD">
 			<equals arg1="${buildType}" arg2="N" />
