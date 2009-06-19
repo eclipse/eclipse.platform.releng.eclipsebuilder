@@ -75,7 +75,7 @@
 
 		 <target name="zip.install">
 		 		 <antcall target="p2.${archive.format}">
-                    <param name="base.dir" value="${p2.sdk.install}/eclipse"/>
+                    <param name="base.dir" value="${p2.sdk.install}"/>
 		 		     <param name="base.filename" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-${installOs}.${installWs}.${installArch}.tar" />
                 </antcall>
 		 		 <antcall target="generateChecksums">
