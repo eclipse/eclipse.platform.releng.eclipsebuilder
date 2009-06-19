@@ -186,7 +186,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- ===================================================================== -->
 	<!-- Steps to do after the fetch -->
 	<!-- ===================================================================== -->
-	<target name="postFetch">
+	<target name="postFetch" unless="skipFetch">
 		<concat destfile="${buildDirectory}/plugins/org.eclipse.platform/build.properties" append="true">qualifier=v${timestamp}</concat>
 		<concat destfile="${buildDirectory}/plugins/org.eclipse.sdk/build.properties" append="true">qualifier=v${timestamp}</concat>
 		<concat destfile="${buildDirectory}/plugins/org.eclipse.cvs/build.properties" append="true">qualifier=v${timestamp}</concat>
@@ -338,7 +338,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<copy file="${buildDirectory}/label.properties" todir="${tempDir}/src/buildScripts" />
 
 		<copy todir="${tempDir}/buildScripts" flatten="true" overwrite="true">
-			<fileset dir="${eclipse.build.configs}/sdk/srcBuild" excludes="incl,fetch/**,buildFromSource.xml,run.xml" />
+			<fileset dir="${eclipse.build.configs}/sdk/srcBuild" excludes="incl,fetch/**" />
 		</copy>
 
 		<!--  set correct permissions on linux script -->
@@ -349,7 +349,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<ant antfile="buildDoc.xml" target="examplesDocCopy" dir="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv" />
 		
 		<copy todir="${tempDir}/buildScripts/src">
-			<fileset dir="${buildDirectory}" excludes="features/*example*/**,plugins/*example*/**" includes="features/*/build.xml,features/*.source*/**,plugins/*/build.xml,plugins/*/javaCompiler.*.args,plugins/*.source*/**,fetch_*.xml,assemble*.xml,plugins/org.eclipse.swt.tools/**,plugins/*doc*/**" />
+			<fileset dir="${buildDirectory}" excludes="features/*example*/**,plugins/*example*/**" includes="features/*/build.xml,features/*.source*/**,plugins/*/build.xml,plugins/*/javaCompiler.*.args,plugins/*.source*/**,fetch_*.xml,assemble*.xml,plugins/org.eclipse.swt.tools/**,plugins/*doc*/**,label.properties" />
 		</copy>
 
 		<!--ensure linux drops are created as .tar.gz files -->
@@ -357,7 +357,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 
 		<!--copy current version of eclipsebuilder to include in source build-->
 		<copy todir="${tempDir}/buildScripts">
-			<fileset dir="${buildDirectory}/.." includes="org.eclipse.releng.eclipsebuilder"/>
+			<fileset dir="${buildDirectory}/.." includes="org.eclipse.releng.eclipsebuilder/**"/>
 		</copy>
 
 		<!-- create drop containing the fetch scripts, no source -->
@@ -371,9 +371,9 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<echo message="${md5} *eclipse-sourceBuild-srcFetch-${buildId}.zip" file="${postingDirectory}/${buildLabel}/checksum/eclipse-sourceBuild-srcFetch-${buildId}.zip.md5" />
 		<echo message="${sha} *$eclipse-sourceBuild-srcFetch-${buildId}.zip" file="${postingDirectory}/${buildLabel}/checksum/eclipse-sourceBuild-srcFetch-${buildId}.zip.sha1" />
 
-		<!--  create zip with all source for an Eclipse SDK  -->
+		<!--  create zip with all source for an Eclipse SDK + maps  -->
 		<copy todir="${tempDir}/buildScripts/src">
-			<fileset dir="${buildDirectory}" includes="features/,plugins/" excludes="features/*example*/**,plugins/*example*/**" />
+			<fileset dir="${buildDirectory}" includes="features/,plugins/" excludes="features/*example*/**,plugins/*example*/**,maps/**" />
 		</copy>	
 		<copy todir="${tempDir}/buildScripts" flatten="true" overwrite="true">
 			<fileset dir="${eclipse.build.configs}/sdk/srcBuild" excludes="fetch/**,incl" />
