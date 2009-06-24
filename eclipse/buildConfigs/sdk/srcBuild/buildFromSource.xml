@@ -61,6 +61,7 @@
 
 	<target name="init">	
 		<ant antfile="build.xml" target="init" />
+  	    <property name="updateproperties" value="true"/>
 		<condition property="fetchTag" value="HEAD">
 			<equals arg1="${buildType}" arg2="N" />
 		</condition>

@@ -169,9 +169,12 @@
 		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="generate">
 			<property name="builder" value="${eclipse.build.configs}/sdk" />
 		</ant>
+		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="preBuild">
+			<property name="builder" value="${eclipse.build.configs}/master" />
+		</ant>
 		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="fetch">
 			<property name="builder" value="${eclipse.build.configs}/master" />
-		</ant>		
+		</ant>
 		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="generate">
 			<property name="builder" value="${eclipse.build.configs}/master" />
 		</ant>
@@ -183,7 +186,7 @@
 				<equals arg1="${buildType}" arg2="M" />
 			</or>
 		</condition>
-		<property name="builderTag" value="HEAD"/>
+		<property name="builderTag" value="HEAD" />
 		<condition property="builderTag" value="v${buildId}">
 			<equals arg1="${buildType}" arg2="I" />
 		</condition>
