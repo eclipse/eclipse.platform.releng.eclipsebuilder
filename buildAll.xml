@@ -159,6 +159,16 @@
 			<property name="builder" value="${eclipse.build.configs}/sdk.examples" />
 		</ant>
 		<antcall target="buildECFMasterFeature" />
+		<!--fetch source and generate scripts for eclipse master feature-->
+		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="preBuild">
+			<property name="builder" value="${eclipse.build.configs}/master" />
+		</ant>
+		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="fetch">
+			<property name="builder" value="${eclipse.build.configs}/master" />
+		</ant>
+		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="generate">
+			<property name="builder" value="${eclipse.build.configs}/master" />
+		</ant>
 		<!--fetch source and generate scripts for eclipse SDK-->
 		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="preBuild">
 			<property name="builder" value="${eclipse.build.configs}/sdk" />
@@ -169,15 +179,7 @@
 		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="generate">
 			<property name="builder" value="${eclipse.build.configs}/sdk" />
 		</ant>
-		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="preBuild">
-			<property name="builder" value="${eclipse.build.configs}/master" />
-		</ant>
-		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="fetch">
-			<property name="builder" value="${eclipse.build.configs}/master" />
-		</ant>
-		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="generate">
-			<property name="builder" value="${eclipse.build.configs}/master" />
-		</ant>
+
 		<replace file="${eclipse.build.configs}/sdk/srcBuild/build.properties" token="@build@" value="${buildId}" />
 		<replace file="${eclipse.build.configs}/sdk/srcBuild/build" token="@build@" value="${buildId}" />
 		<condition property="builderTag" value="v${buildId}">
