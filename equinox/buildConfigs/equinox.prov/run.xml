@@ -1266,12 +1266,7 @@
 				</antcall>
 			</sequential>
 			<sequential>
-				<!-- macosx -->
-				<!-- temp fix for https://bugs.eclipse.org/bugs/show_bug.cgi?id=223319 -->
-				<delete file="${p2.sdk.install.macosx.carbon.x86}/eclipse/eclipse" failonerror="false" />
-				<exec dir="${p2.sdk.install.macosx.carbon.x86}/eclipse" executable="ln">
-					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
-				</exec>
+				<!-- macosx -->						
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.sdk.install.macosx.carbon.x86}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-macosx-carbon.tar" />
@@ -1282,16 +1277,7 @@
 			</sequential>
 
 			<sequential>
-				<!-- macosx -->
-				<!-- temp fix for https://bugs.eclipse.org/bugs/show_bug.cgi?id=223319 -->
-				<delete file="${p2.sdk.install.macosx.cocoa.x86}/eclipse/eclipse" failonerror="false" />
-				<exec dir="${p2.sdk.install.macosx.cocoa.x86}/eclipse" executable="ln">
-					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
-				</exec>
-				<delete file="${p2.sdk.install.macosx.cocoa.x86_64}/eclipse/eclipse" failonerror="false" />
-				<exec dir="${p2.sdk.install.macosx.cocoa.x86_64}/eclipse" executable="ln">
-					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
-				</exec>
+				<!-- macosx -->			
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.sdk.install.macosx.cocoa.x86}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-macosx-cocoa.tar" />
@@ -1521,11 +1507,7 @@
 					<param name="archiveName" value="eclipse-platform-${buildId}-aix-motif.zip" />
 				</antcall>
 
-				<!-- macosx -->
-				<delete file="${p2.platform.install.macosx.carbon.x86}/eclipse/eclipse" failonerror="false" />
-				<exec dir="${p2.platform.install.macosx.carbon.x86}/eclipse" executable="ln">
-					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
-				</exec>
+				<!-- macosx -->				
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.platform.install.macosx.carbon.x86}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-macosx-carbon.tar" />
@@ -1534,11 +1516,7 @@
 					<param name="archiveName" value="eclipse-platform-${buildId}-macosx-carbon.tar.gz" />
 				</antcall>
 
-				<!-- macosx -->
-				<delete file="${p2.platform.install.macosx.cocoa.x86}/eclipse/eclipse" failonerror="false" />
-				<exec dir="${p2.platform.install.macosx.cocoa.x86}/eclipse" executable="ln">
-					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
-				</exec>
+				<!-- macosx -->				
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.platform.install.macosx.cocoa.x86}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-macosx-cocoa.tar" />
@@ -1547,11 +1525,7 @@
 					<param name="archiveName" value="eclipse-platform-${buildId}-macosx-cocoa.tar.gz" />
 				</antcall>
 
-				<!-- macosx cocoa x86_64-->
-				<delete file="${p2.platform.install.macosx.cocoa.x86_64}/eclipse/eclipse" failonerror="false" />
-				<exec dir="${p2.platform.install.macosx.cocoa.x86_64}/eclipse" executable="ln">
-					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
-				</exec>
+				<!-- macosx cocoa x86_64-->				
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.platform.install.macosx.cocoa.x86_64}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-macosx-cocoa-x86_64.tar" />
@@ -1653,11 +1627,7 @@
 					<param name="archiveName" value="eclipse-platform-SDK-${buildId}-aix-motif.zip" />
 				</antcall>
 
-				<!-- macosx carbon -->
-				<delete file="${p2.platformsdk.install.macosx.carbon.x86}/eclipse/eclipse" failonerror="false" />
-				<exec dir="${p2.platformsdk.install.macosx.carbon.x86}/eclipse" executable="ln">
-					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
-				</exec>
+				<!-- macosx carbon -->				
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.platformsdk.install.macosx.carbon.x86}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-platform-SDK-${buildId}-macosx-carbon.tar" />
@@ -1666,11 +1636,7 @@
 					<param name="archiveName" value="eclipse-platform-SDK-${buildId}-macosx-carbon.tar.gz" />
 				</antcall>
 
-				<!-- macosx cocoa -->
-				<delete file="${p2.platformsdk.install.macosx.cocoa.x86}/eclipse/eclipse" failonerror="false" />
-				<exec dir="${p2.platformsdk.install.macosx.cocoa.x86}/eclipse" executable="ln">
-					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
-				</exec>
+				<!-- macosx cocoa -->				
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.platformsdk.install.macosx.cocoa.x86}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-platform-SDK-${buildId}-macosx-cocoa.tar" />
@@ -1679,11 +1645,7 @@
 					<param name="archiveName" value="eclipse-platform-SDK-${buildId}-macosx-cocoa.tar.gz" />
 				</antcall>
 
-				<!-- macosx cocoa x86_64 -->
-				<delete file="${p2.platformsdk.install.macosx.cocoa.x86_64}/eclipse/eclipse" failonerror="false" />
-				<exec dir="${p2.platformsdk.install.macosx.cocoa.x86_64}/eclipse" executable="ln">
-					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
-				</exec>
+				<!-- macosx cocoa x86_64 -->				
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.platformsdk.install.macosx.cocoa.x86_64}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-platform-SDK-${buildId}-macosx-cocoa-x86_64.tar" />
@@ -1803,11 +1765,7 @@
 					<param name="archiveName" value="eclipse-RCP-${buildId}-aix-motif.zip" />
 				</antcall>
 
-				<!-- macosx -->
-				<delete file="${p2.rcp.install.macosx.carbon.x86}/eclipse/eclipse" failonerror="false" />
-				<exec dir="${p2.rcp.install.macosx.carbon.x86}/eclipse" executable="ln">
-					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
-				</exec>
+				<!-- macosx -->			
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.rcp.install.macosx.carbon.x86}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-macosx-carbon.tar" />
@@ -1816,11 +1774,7 @@
 					<param name="archiveName" value="eclipse-RCP-${buildId}-macosx-carbon.tar.gz" />
 				</antcall>
 
-				<!-- macosx -->
-				<delete file="${p2.rcp.install.macosx.cocoa.x86}/eclipse/eclipse" failonerror="false" />
-				<exec dir="${p2.rcp.install.macosx.cocoa.x86}/eclipse" executable="ln">
-					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
-				</exec>
+				<!-- macosx -->			
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.rcp.install.macosx.cocoa.x86}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-macosx-cocoa.tar" />
@@ -1829,11 +1783,7 @@
 					<param name="archiveName" value="eclipse-RCP-${buildId}-macosx-cocoa.tar.gz" />
 				</antcall>
 
-				<!-- macosx cocoa x86_64-->
-				<delete file="${p2.rcp.install.macosx.cocoa.x86_64}/eclipse/eclipse" failonerror="false" />
-				<exec dir="${p2.rcp.install.macosx.cocoa.x86_64}/eclipse" executable="ln">
-					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
-				</exec>
+				<!-- macosx cocoa x86_64-->			
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.rcp.install.macosx.cocoa.x86_64}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-macosx-cocoa-x86_64.tar" />
@@ -1936,11 +1886,7 @@
 					<param name="archiveName" value="eclipse-RCP-${buildId}-aix-motif.zip" />
 				</antcall>
 
-				<!-- macosx -->
-				<delete file="${p2.rcp.install.macosx.carbon.x86}/eclipse/eclipse" failonerror="false" />
-				<exec dir="${p2.rcp.install.macosx.carbon.x86}/eclipse" executable="ln">
-					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
-				</exec>
+				<!-- macosx -->				
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.rcp.install.macosx.carbon.x86}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-macosx-carbon.tar" />
@@ -1949,11 +1895,7 @@
 					<param name="archiveName" value="eclipse-RCP-${buildId}-macosx-carbon.tar.gz" />
 				</antcall>
 
-				<!-- macosx -->
-				<delete file="${p2.rcp.install.macosx.cocoa.x86}/eclipse/eclipse" failonerror="false" />
-				<exec dir="${p2.rcp.install.macosx.cocoa.x86}/eclipse" executable="ln">
-					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
-				</exec>
+				<!-- macosx -->				
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.rcp.install.macosx.cocoa.x86}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-macosx-cocoa.tar" />
@@ -1962,11 +1904,7 @@
 					<param name="archiveName" value="eclipse-RCP-${buildId}-macosx-cocoa.tar.gz" />
 				</antcall>
 
-				<!-- macosx cocoa x86_64-->
-				<delete file="${p2.rcp.install.macosx.cocoa.x86_64}/eclipse/eclipse" failonerror="false" />
-				<exec dir="${p2.rcp.install.macosx.cocoa.x86_64}/eclipse" executable="ln">
-					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
-				</exec>
+				<!-- macosx cocoa x86_64-->				
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.rcp.install.macosx.cocoa.x86_64}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-macosx-cocoa-x86_64.tar" />
@@ -2070,11 +2008,7 @@
 					<param name="archiveName" value="eclipse-RCP-${buildId}-aix-motif.zip" />
 				</antcall>
 
-				<!-- macosx -->
-				<delete file="${p2.rcp.install.macosx.carbon.x86}/eclipse/eclipse" failonerror="false" />
-				<exec dir="${p2.rcp.install.macosx.carbon.x86}/eclipse" executable="ln">
-					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
-				</exec>
+				<!-- macosx -->			
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.rcp.install.macosx.carbon.x86}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-macosx-carbon.tar" />
@@ -2083,11 +2017,7 @@
 					<param name="archiveName" value="eclipse-RCP-${buildId}-macosx-carbon.tar.gz" />
 				</antcall>
 
-				<!-- macosx -->
-				<delete file="${p2.rcp.install.macosx.cocoa.x86}/eclipse/eclipse" failonerror="false" />
-				<exec dir="${p2.rcp.install.macosx.cocoa.x86}/eclipse" executable="ln">
-					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
-				</exec>
+				<!-- macosx -->				
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.rcp.install.macosx.cocoa.x86}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-macosx-cocoa.tar" />
@@ -2096,11 +2026,7 @@
 					<param name="archiveName" value="eclipse-RCP-${buildId}-macosx-cocoa.tar.gz" />
 				</antcall>
 
-				<!-- macosx cocoa x86_64-->
-				<delete file="${p2.rcp.install.macosx.cocoa.x86_64}/eclipse/eclipse" failonerror="false" />
-				<exec dir="${p2.rcp.install.macosx.cocoa.x86_64}/eclipse" executable="ln">
-					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
-				</exec>
+				<!-- macosx cocoa x86_64-->				
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.rcp.install.macosx.cocoa.x86_64}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-macosx-cocoa-x86_64.tar" />
@@ -2204,11 +2130,7 @@
 					<param name="archiveName" value="eclipse-RCP-SDK-${buildId}-aix-motif.zip" />
 				</antcall>
 
-				<!-- macosx -->
-				<delete file="${p2.rcpsdk.install.macosx.carbon.x86}/eclipse/eclipse" failonerror="false" />
-				<exec dir="${p2.rcpsdk.install.macosx.carbon.x86}/eclipse" executable="ln">
-					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
-				</exec>
+				<!-- macosx -->				
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.rcpsdk.install.macosx.carbon.x86}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-SDK-${buildId}-macosx-carbon.tar" />
@@ -2217,11 +2139,7 @@
 					<param name="archiveName" value="eclipse-RCP-SDK-${buildId}-macosx-carbon.tar.gz" />
 				</antcall>
 
-				<!-- macosx -->
-				<delete file="${p2.rcpsdk.install.macosx.cocoa.x86}/eclipse/eclipse" failonerror="false" />
-				<exec dir="${p2.rcpsdk.install.macosx.cocoa.x86}/eclipse" executable="ln">
-					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
-				</exec>
+				<!-- macosx -->				
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.rcpsdk.install.macosx.cocoa.x86}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-SDK-${buildId}-macosx-cocoa.tar" />
@@ -2230,11 +2148,7 @@
 					<param name="archiveName" value="eclipse-RCP-SDK-${buildId}-macosx-cocoa.tar.gz" />
 				</antcall>
 
-				<!-- macosx cocoa x86_64-->
-				<delete file="${p2.rcpsdk.install.macosx.cocoa.x86_64}/eclipse/eclipse" failonerror="false" />
-				<exec dir="${p2.rcpsdk.install.macosx.cocoa.x86_64}/eclipse" executable="ln">
-					<arg line="-s Eclipse.app/Contents/MacOS/eclipse eclipse" />
-				</exec>
+				<!-- macosx cocoa x86_64-->				
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.rcpsdk.install.macosx.cocoa.x86_64}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-RCP-SDK-${buildId}-macosx-cocoa-x86_64.tar" />

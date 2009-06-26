@@ -47,7 +47,21 @@ tag=""
 #buildProjectTags=v20090504a
 #buildProjectTags=v20090505a
 #buildProjectTags=v20090506c
-buildProjectTags=v20090507a
+#buildProjectTags=v20090507a
+#buildProjectTags=v20090512
+#buildProjectTags=v20090513a
+#buildProjectTags=v20090513test
+#buildProjectTags=v20090514b
+#buildProjectTags=v20090515
+#buildProjectTags=v20090515a
+#buildProjectTags=v20090520b
+#buildProjectTags=v20090521
+#buildProjectTags=v20090521b
+#buildProjectTags=v20090522
+#buildProjectTags=v20090527c
+#buildProjectTags=v20090528
+buildProjectTags=v20090602
+
 
 #updateSite property setting
 updateSite=""
@@ -265,12 +279,12 @@ echo log=$postingDirectory/$buildLabel/index.php >> monitor.properties
 #the base command used to run AntRunner headless
 if [ "$HOSTNAME" == "eclipsebuildserv.ottawa.ibm.com" ]
 then
-antRunner="`which java` -Xmx500m -jar ../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=ppc -application org.eclipse.ant.core.antRunner -Declipse.p2.MD5Check=false -Dorg.eclipse.update.jarprocessor.pack200=$builderDir/jdk/linuxppc/ibm-java2-ppc-50/bin"
-antRunnerJDK15="$builderDir/jdk/linuxppc/ibm-java2-ppc-50/jre/bin/java -Xmx500m -jar ../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=ppc -application org.eclipse.ant.core.antRunner -Declipse.p2.MD5Check=false -Dorg.eclipse.update.jarprocessor.pack200=$builderDir/jdk/linuxppc/ibm-java2-ppc-50/bin"
+antRunner="`which java` -Xmx500m -Dorg.eclipse.update.jarprocessor.pack200=$builderDir/jdk/linuxppc/ibm-java2-ppc-50/bin -jar ../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=ppc -application org.eclipse.ant.core.antRunner -Declipse.p2.MD5Check=false"
+antRunnerJDK15="$builderDir/jdk/linuxppc/ibm-java2-ppc-50/jre/bin/java -Xmx500m -Dorg.eclipse.update.jarprocessor.pack200=$builderDir/jdk/linuxppc/ibm-java2-ppc-50/bin -jar ../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=ppc -application org.eclipse.ant.core.antRunner -Declipse.p2.MD5Check=false"
 else
 #antRunner="$builderDir/jdk/linux14/jdk1.4.2_14/jre/bin/java -Xmx500m -jar ../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=ppc -application org.eclipse.ant.core.antRunner"
-antRunner="$builderDir/jdk/linux16/jdk6_07/jre/bin/java -Xmx500m -jar ../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=ppc -application org.eclipse.ant.core.antRunner -Declipse.p2.MD5Check=false -Dorg.eclipse.update.jarprocessor.pack200=$builderDir/jdk/linux/jdk1.5.0_14/bin"
-antRunnerJDK15="$builderDir/jdk/linux/jdk1.5.0_14/jre/bin/java -Xmx500m -jar ../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=ppc -application org.eclipse.ant.core.antRunner -Declipse.p2.MD5Check=false -Dorg.eclipse.update.jarprocessor.pack200=$builderDir/jdk/linux/jdk1.5.0_14/bin"
+antRunner="$builderDir/jdk/linux16/jdk6_07/jre/bin/java -Xmx500m -Declipse.p2.MD5Check=false -Dorg.eclipse.update.jarprocessor.pack200=$builderDir/jdk/linux/jdk1.5.0_14/bin -jar ../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=ppc -application org.eclipse.ant.core.antRunner -Declipse.p2.MD5Check=false"
+antRunnerJDK15="$builderDir/jdk/linux/jdk1.5.0_14/jre/bin/java -Xmx500m -Dorg.eclipse.update.jarprocessor.pack200=$builderDir/jdk/linux/jdk1.5.0_14/bin -jar ../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=ppc -application org.eclipse.ant.core.antRunner  -Declipse.p2.MD5Check=false"
 fi
 
 
