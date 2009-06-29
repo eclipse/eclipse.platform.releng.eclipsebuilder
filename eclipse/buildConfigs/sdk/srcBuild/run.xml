@@ -14,7 +14,7 @@
 		 		 <property name="repo" value="${buildDirectory}/repo" />
 		 		 <mkdir dir="${repo}" />
 		 		 <property name="p2.flavor" value="tooling" />
-		 		 <property name="p2.sdk.version" value="3.5.0.${buildId}" />
+		 		 <property name="p2.sdk.version" value="3.6.0.${buildId}" />
 		 		 <condition property="archive.format" value="tar.gz">
 		 		 		 <or>
 		 		 		 		 <equals arg1="${installOs}" arg2="linux" />
@@ -32,7 +32,7 @@
 		 <target name="provision.sdk">
 		 		 <antcall target="run.director">
 		 		 		 <param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
-		 		 		 <param name="p2.director.version" value="3.5.0.${buildId}" />
+		 		 		 <param name="p2.director.version" value="3.6.0.${buildId}" />
 		 		 		 <param name="p2.director.profile" value="SDKProfile" />
 		 		 		 <param name="p2.director.install.path" value="${p2.sdk.install}/eclipse" />
 		 		 		 <param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />

@@ -55,12 +55,6 @@
 
 	<property name="buildRepo" value="${updateSite}/${buildId}" />
 
-	<!--copy blank update site to repo -->
-	<property name="tempSite" value="${buildDirectory}/tempSite" />
-	<mkdir dir="${tempSite}" />
-	<copy file="${eclipse.build.configs}/../../extras/site.xml" todir="${tempSite}" />
-	<property name="p2.site.xml" value="file:${tempSite}/site.xml" />
-
 	<property name="p2.build.repo" value="file:${buildDirectory}/buildRepo" />
 
 	<target name="main" depends="init">
