@@ -233,15 +233,9 @@ echo"<ul>\n";
 </li>
 <?php if (! (preg_match("/N/i",$buildId))) {
 echo " <li><a href=\"testresults/versiontool/results.xml\"><b> Versioning Compare Tool Output Logs </b></a>";
-echo "This log compares the build's plugin and features versions with 3.3. </li> ";
+echo "This log compares the build's plugin and features versions with 3.5. </li> ";
 }
 ?>
-/* 
-<?php
-echo " <li><a href=\"apitools/report.html\"><b>PDE API Tools Report</b></a>";
-echo "  This report describes API changes since M6a.  Exclusions are listed in org.eclipse.releng/apiexclude/exclude_list.txt. </li> ";
-?>
-*/
 <?php
 echo " <li><a href=\"apitools/apitoolsverifications/html/index.html\"><b>PDE API Tools Verification Report</b></a>";
 echo "  This tool verifies the versions of the plugins against Eclipse 3.4.  Exclusions are listed in org.eclipse.releng/apiexclude/exclude_list_external.txt. </li> ";
