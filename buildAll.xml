@@ -354,7 +354,7 @@
 		<property name="report_directory_location" value="${report}/apitoolsverifications/xml" />
 		<property name="3_4_reference_location" value="${reference}/eclipse-SDK-3.4-win32.zip" />
 		<exec executable="/usr/bin/wget" dir="${reference}" output="${reference}/error.txt" failonerror="false" os="Linux">
-			<arg line="-q -O  ${3_4_reference_location} http://fullmoon.ottawa.ibm.com/eclipse/downloads/drops/R-3.4-200806172000/eclipse-SDK-3.4-win32.zip" />
+			<arg line="-q -O  ${3_4_reference_location} http://fullmoon.ottawa.ibm.com/downloads/drops/R-3.5-200906111540/eclipse-SDK-3.5-win32.zip" />
 		</exec>
 		<apitooling.analysis baseline="${3_4_reference_location}" profile="${current_location}" report="${report_directory_location}" filters="${filter_store}" excludelist="${exclude_list_external_location}" debug="true" />
 		<apitooling.analysis_reportconversion xmlfiles="${report_directory_location}" debug="true" htmlfiles="${html_directory_location}" />
