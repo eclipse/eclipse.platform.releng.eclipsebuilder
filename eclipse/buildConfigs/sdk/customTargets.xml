@@ -380,7 +380,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<fileset dir="${buildDirectory}" includes="features/,plugins/,maps/**" excludes="features/*example*/**,plugins/*example*/**" />
 		</copy>
 		<copy todir="${tempDir}/buildScripts" flatten="true" overwrite="true">
-			<fileset dir="${eclipse.build.configs}/sdk/srcBuild" excludes="fetch/**,incl,buildFromSource.xml,run.xml" />
+			<fileset dir="${eclipse.build.configs}/sdk/srcBuild" excludes="fetch/**,incl,buildFromSource.xml,build.properties,run.xml" />
 		</copy>
 		<!--replace hard-coded location of Orbit bundles in generated packaging scripts to avoid bug 182331, 178869 -->
 		<replaceregexp match="/builds/(I\d*|N\d*|M\d*)/src" replace="${buildDirectory}" byline="true">
