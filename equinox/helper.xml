@@ -5,6 +5,11 @@
 	<property name="publishingContent" value="${equinox.build.configs}/../publishingFiles" />
 
 	<target name="publish">
+		<!--temporary hack to copy orbit files to equinox download directory -->
+		<copy todir="${equinoxPostingDirectory}/${buildLabel}" overwrite="true">
+			<fileset dir="${buildDirectory}/plugins" includes="javax.servlet_*,org.apache.commons.logging_*,org.apache.commons.el_*,org.mortbay.jetty_*" />
+		</copy>
+
 		<antcall target="updateTestManifests" />
 		<available classname="org.eclipse.releng.generators.EclipseTestResultsGenerator" property="class" value="org.eclipse.releng.generators.EclipseTestResultsGenerator" />
 		<taskdef name="indexResults" classname="${class}" />
@@ -24,11 +29,6 @@
 		<!--copy compile logs to this posting directory-->
 		<copy todir="${equinoxPostingDirectory}/${buildLabel}" overwrite="true">
 			<fileset dir="${postingDirectory}/${buildLabel}" includes="compilelogs/**/plugins/org.eclipse.osgi*/**,compilelogs/**/plugins/org.eclipse.equinox*/**" excludes="compilelogs/**/plugins/org.eclipse.osgi.test*/**" />
-		</copy>
-
-		<!--temporary hack to copy orbit files to equinox download directory -->
-		<copy todir="${equinoxPostingDirectory}/${buildLabel}" overwrite="true">
-			<fileset dir="${buildDirectory}/plugins" includes="javax.servlet_*,org.apache.commons.logging_*,org.apache.commons.el_*,org.mortbay.jetty_*" />
 		</copy>
 
 		<!--post directory.txt-->
@@ -209,7 +209,7 @@
 		</antcall>
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.concurrent" />
-		</antcall>		
+		</antcall>
 	</target>
 
 	<!-- ===================================================================== -->
