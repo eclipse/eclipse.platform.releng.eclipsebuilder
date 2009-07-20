@@ -395,6 +395,10 @@
 		<runTests testPlugin="org.eclipse.ua.tests" />
 	</target>
 
+	<target name="uadoc">
+		<runTests testPlugin="org.eclipse.ua.tests.doc" />
+	</target>
+
 	<target name="coretestsnet">
 		<runTests testPlugin="org.eclipse.core.tests.net" />
 	</target>
@@ -635,5 +639,6 @@
 		<antcall target="search" />
 		<antcall target="pdeds" />
 		<antcall target="jdtcoremodel" />
+		<antcall target="uadoc" />
 	</target>
 </project>
