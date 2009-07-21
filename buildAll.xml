@@ -32,7 +32,7 @@
 	<property name="mapTag.properties" value="/home/users/releng/buildTools/eclipse36/mapTag.properties" />
 
 	<!--location of properties file containing last performance reference test information-->
-	<property name="ref.properties" value="/home/users/releng/buildTools/eclipse.perf/ref35.properties" />
+	<property name="ref.properties" value="/home/users/releng/buildTools/eclipse.perf/ref36.properties" />
 
 	<!--location of test update site-->
 	<property file="${ref.properties}" />
