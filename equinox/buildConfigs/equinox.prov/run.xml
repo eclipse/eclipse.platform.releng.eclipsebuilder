@@ -22,9 +22,8 @@
 			<equals arg1="${os.arch}" arg2="i386" />
 		</condition>
 		<property name="rcp.archive" value="" />
-		<property name="icu.base.archive" value="${postingDirectory}/${buildLabel}/com.ibm.icu.base-${buildId}.zip" />
-		<property name="releng.tools.archive" value="${postingDirectory}/${buildLabel}/org.eclipse.releng.tools-${buildId}.zip" />
-
+		<property name="icu.base.archive" value="${postingDirectory}/${buildLabel}/com.ibm.icu.base-${buildId}.zip" />		
+		
 		<property name="p2.agent.install.win32" value="${p2.output.base}/agent.install.win32" />
 		<mkdir dir="${p2.agent.install.win32}" />
 		<property name="p2.agent.install.linux" value="${p2.output.base}/agent.install.linux" />
@@ -209,9 +208,7 @@
 			<fileset dir="${base}/eclipse/plugins">
 				<include name="**/com.ibm.icu_*.jar" />
 			</fileset>
-		</delete>
-
-		<antcall target="generate.metadata.releng.tools" />
+		</delete>	
 
 		<parallel failonany="true" threadCount='4'>
 			<antcall target="provision.agent" />
@@ -1157,23 +1154,6 @@
 			<arg line="-noDefaultIUs" />
 			<arg line="-append" />
 		</exec>
-	</target>
-
-	<target name="generate.metadata.releng.tools">
-		<property name="p2.releng.tools.dir" value="${p2.output.base}/releng.tools" />
-		<mkdir dir="${p2.releng.tools.dir}" />
-		<antcall target="extract">
-			<param name="extract-src" value="${releng.tools.archive}" />
-			<param name="extract-dest" value="${p2.releng.tools.dir}" />
-		</antcall>
-
-		<antcall target="run.generator.feature.based">
-			<param name="p2.generator.base" value="${p2.releng.tools.dir}/eclipse" />
-			<param name="p2.generator.feature.dir" value="${p2.releng.tools.dir}/eclipse/features" />
-			<param name="p2.generator.plugins.dir" value="${p2.releng.tools.dir}/eclipse/plugins" />
-			<!-- publish the metadata to the real update site -->
-			<param name="p2.repo" value="${buildRepo}" />
-		</antcall>
 	</target>
 
 	<!--
