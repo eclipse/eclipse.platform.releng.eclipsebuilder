@@ -14,7 +14,7 @@
 			<slicingOptions includeOptional="false" includeNonGreedy="false" />
 		</p2.mirror>
 		<antcall target="assembler">
-			<param name="archiveName" value="org.eclipse.platform-p2repo-${buildId}.zip" />
+			<param name="archiveName" value="org.eclipse.platform-${buildId}.zip" />
 		</antcall>
 	</target>
 

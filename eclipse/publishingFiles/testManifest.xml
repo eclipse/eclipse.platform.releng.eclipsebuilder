@@ -29,15 +29,15 @@
 	</zipType>
 
 	<zipType name="Example plug-ins">		
-		<platform id="EA" name="&lt;img src = &quot;repo.gif&quot;> Eclipse Examples Repo" fileName="eclipse-examples-p2repo-@build@.zip"></platform>
+		<platform id="EA" name="&lt;img src = &quot;repo.gif&quot;> Eclipse Examples Repo" fileName="org.eclipse.sdk.examples-@build@.zip"></platform>
 	</zipType>
 
 	<zipType name="RCP Runtime Binary">
-		<platform id="RCPR" name="&lt;img src = &quot;repo.gif&quot;> RCP Runtime Repo " fileName="org.eclipse.rcp-p2repo-@build@.zip"></platform>
+		<platform id="RCPR" name="&lt;img src = &quot;repo.gif&quot;> RCP Runtime Repo " fileName="org.eclipse.rcp-@build@.zip"></platform>
 	</zipType>
 
 	<zipType name="RCP SDK">
-		<platform id="RCPSR" name="&lt;img src = &quot;repo.gif&quot;> RCP Source Repo " fileName="org.eclipse.rcp.source-p2repo-@build@.zip"></platform>
+		<platform id="RCPSR" name="&lt;img src = &quot;repo.gif&quot;> RCP Source Repo " fileName="org.eclipse.rcp.source-@build@.zip"></platform>
     </zipType>		
 		
  	<zipType name="Delta Pack">
@@ -45,7 +45,7 @@
 	</zipType>
 
 	<zipType name="com.ibm.icu.base plug-in">
-		<platform id="ICUBASE" name="All" fileName="com.ibm.icu.base-p2repo-@build@.zip"></platform>
+		<platform id="ICUBASE" name="&lt;img src = &quot;repo.gif&quot;> All" fileName="com.ibm.icu.base-@build@.zip"></platform>
 	</zipType>
 
 	<zipType name="Platform Runtime Binary">
@@ -63,7 +63,7 @@
 		<platform id="PMCC" name="Mac OSX (Mac/Cocoa) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-@build@-macosx-cocoa.tar.gz"></platform>
 		<platform id="PMCC64" name="Mac OSX (Mac/Cocoa/x86_64)(&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-@build@-macosx-cocoa-x86_64.tar.gz"></platform>
 		<platform id="PMC" name="Mac OSX (Mac/Carbon) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-@build@-macosx-carbon.tar.gz"></platform>
-		<platform id="PLR" name="&lt;img src = &quot;repo.gif&quot;> Platform Runtime Repo " fileName="org.eclipse.platform-p2repo-@build@.zip"></platform>
+		<platform id="PLR" name="&lt;img src = &quot;repo.gif&quot;> Platform Runtime Repo " fileName="org.eclipse.platform-@build@.zip"></platform>
 	</zipType>
 
 	<zipType name="Platform SDK">
@@ -84,11 +84,11 @@
 	</zipType>
 
 	<zipType name="JDT Runtime Binary">
-		<platform id="JRR" name="JDT Runtime Repo " fileName="org.eclipse.jdt-p2repo-@build@.zip"></platform>
+		<platform id="JRR" name="&lt;img src = &quot;repo.gif&quot;> JDT Runtime Repo " fileName="org.eclipse.jdt-@build@.zip"></platform>
 	</zipType>
 
 	<zipType name="JDT SDK">
-		<platform id="JSR" name="&lt;img src = &quot;repo.gif&quot;> JDT Source Repo " fileName="org.eclipse.jdt.source-p2repo-@build@.zip"></platform>
+		<platform id="JSR" name="&lt;img src = &quot;repo.gif&quot;> JDT Source Repo " fileName="org.eclipse.jdt.source-@build@.zip"></platform>
 	</zipType>	
 
 	<zipType name="JDTC">
@@ -102,20 +102,20 @@
 	</zipType>
 
 	<zipType name="PDE Runtime">
-		<platform id="PRR" name="PDE Repo " fileName="org.eclipse.pde-p2repo-@build@.zip"></platform>
-		<platform id="PAR" name="PDE API Tools execution environment fragments repo" fileName="org.eclipse.pde.api.tools.ee.fragments-p2repo-@build@.zip"></platform>		
+		<platform id="PRR" name="&lt;img src = &quot;repo.gif&quot;> PDE Repo " fileName="org.eclipse.pde-@build@.zip"></platform>
+		<platform id="PAR" name="&lt;img src = &quot;repo.gif&quot;> PDE API Tools execution environment fragments repo" fileName="org.eclipse.pde.api.tools.ee.fragments-@build@.zip"></platform>		
 	</zipType>	
 
 	<zipType name="PDE SDK">		
-		<platform id="PSR" name="PDE Source Repo " fileName="org.eclipse.pde.source-p2repo-@build@.zip"></platform>
+		<platform id="PSR" name="&lt;img src = &quot;repo.gif&quot;> PDE Source Repo " fileName="org.eclipse.pde.source-@build@.zip"></platform>
 	</zipType>
 	
 	<zipType name="CVS Runtime">		
-		<platform id="CRR" name="&lt;img src = &quot;repo.gif&quot;> CVS Repo " fileName="org.eclipse.cvs-p2repo-@build@.zip"></platform>
+		<platform id="CRR" name="&lt;img src = &quot;repo.gif&quot;> CVS Repo " fileName="org.eclipse.cvs-@build@.zip"></platform>
 	</zipType>
 		
 	<zipType name="CVS SDK">		
-		<platform id="CSR" name="&lt;img src = &quot;repo.gif&quot;> CVS Repo " fileName="org.eclipse.cvs.source-p2repo-@build@.zip"></platform>
+		<platform id="CSR" name="&lt;img src = &quot;repo.gif&quot;> CVS Repo " fileName="org.eclipse.cvs.source-@build@.zip"></platform>
 	</zipType>
 
 	<zipType name="SWT">
@@ -140,7 +140,7 @@
 	</zipType>
 
 	<zipType name="RelEng Tool plug-in">
-		<platform id="RE" name="&lt;img src = &quot;repo.gif&quot;> Releng Tools Repo" fileName="org.eclipse.releng.tools-p2repo-@build@.zip"></platform>
+		<platform id="RE" name="&lt;img src = &quot;repo.gif&quot;> Releng Tools Repo" fileName="org.eclipse.releng.tools-@build@.zip"></platform>
 	</zipType>
 
 </zipTypes>

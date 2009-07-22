@@ -81,7 +81,7 @@
 				<slicingOptions platformFilter="true" includeOptional="false" includeNonGreedy="false" followStrict="true" />
 			</p2.mirror>
 			<antcall target="assembler">
-				<param name="archiveName" value="@{feature}.source-p2repo-${buildId}.zip" />
+				<param name="archiveName" value="@{feature}.source-${buildId}.zip" />
 			</antcall>
 		</sequential>
 	</macrodef>
@@ -100,7 +100,7 @@
 				<slicingOptions platformFilter="true" includeOptional="false" includeNonGreedy="false" followStrict="true" />
 			</p2.mirror>
 			<antcall target="assembler">
-				<param name="archiveName" value="@{feature}-p2repo-${buildId}.zip" />
+				<param name="archiveName" value="@{feature}-${buildId}.zip" />
 			</antcall>
 		</sequential>
 	</macrodef>
