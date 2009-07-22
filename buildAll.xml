@@ -598,7 +598,7 @@
 		<condition property="feedFileValue" value="${base.builder}/plugins/org.eclipse.build.tools/data/builds-eclipse.xml">
 			<equals arg1="${test}" arg2="true" />
 		</condition>
-		<condition property="feedFileValue" value="/builds/transfer/files/master/downloads/builds-eclipse-3.4.xml">
+		<condition property="feedFileValue" value="/builds/transfer/files/master/downloads/builds-eclipse-3.5.xml">
 			<equals arg1="${buildType}" arg2="I" />
 		</condition>
 		<condition property="feedFileValue" value="/builds/transfer/files/master/downloads/builds-eclipse-N.xml">
@@ -608,7 +608,7 @@
 		<condition property="feedURL" value="http://download.eclipse.org/eclipse/downloads/builds-eclipse-test.xml">
 			<equals arg1="${test}" arg2="true" />
 		</condition>
-		<condition property="feedURL" value="http://download.eclipse.org/eclipse/downloads/builds-eclipse-3.4.xml">
+		<condition property="feedURL" value="http://download.eclipse.org/eclipse/downloads/builds-eclipse-3.5.xml">
 			<equals arg1="${buildType}" arg2="I" />
 		</condition>
 		<condition property="feedURL" value="http://download.eclipse.org/eclipse/downloads/builds-eclipse-N.xml">
