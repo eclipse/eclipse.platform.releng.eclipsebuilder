@@ -7,6 +7,7 @@
 		<antcall target="jdt" />
 		<antcall target="cvs" />
 		<antcall target="relengtools" />
+		<antcall target="icubase" />
 		<antcall target="sdkexamples" />
 		<antcall target="rcpsource" />
 		<antcall target="pdesource" />
@@ -36,6 +37,10 @@
 
 	<target name="relengtools">
 		<buildRepos feature="org.eclipse.releng.tools" />
+	</target>
+
+	<target name="icubase">
+		<buildRepos feature="com.ibm.icu.base" />
 	</target>
 
 	<target name="sdkexamples">

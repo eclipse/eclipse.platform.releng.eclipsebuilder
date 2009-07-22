@@ -45,7 +45,7 @@
 	</zipType>
 
 	<zipType name="com.ibm.icu.base plug-in">
-		<platform id="ICUBASE" name="All" fileName="com.ibm.icu.base-@build@.zip"></platform>
+		<platform id="ICUBASE" name="All" fileName="com.ibm.icu.base-p2repo-@build@.zip"></platform>
 	</zipType>
 
 	<zipType name="Platform Runtime Binary">
