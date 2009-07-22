@@ -190,7 +190,7 @@
 		<property name="repo" value="${buildDirectory}/repo" />
 		<mkdir dir="${repo}" />
 		<property name="p2.flavor" value="tooling" />
-		<property name="p2.agent.version" value="1.0.0.${buildId}" />
+		<property name="p2.agent.version" value="1.0.1.${buildId}" />
 		<property name="p2.sdk.version" value="3.5.0.${buildId}" />
 	</target>
 
