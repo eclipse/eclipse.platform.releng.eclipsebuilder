@@ -120,7 +120,7 @@
  			</platform>	
  			<platform id="provinstallerlin" name="Linux **early access**" fileName="equinox.p2.installer-@buildid@-linux.gtk.x86.tar.gz">			
  			</platform>
- 			<platform id="provinstallermac" name="MacOSX **early access**" fileName="equinox.p2.installer-@buildid@-macosx.carbon.ppc.tar.gz">			
+ 			<platform id="provinstallermac" name="MacOSX **early access**" fileName="equinox.p2.installer-@buildid@-macosx.carbon.x86.tar.gz">			
  			</platform>
  			
  		</zipType>
@@ -146,7 +146,7 @@
 			</platform>		
 			<platform id="SAM" name="AIX (PPC/Motif)" fileName="launchers-aix.motif.ppc.@buildid@.zip">
 			</platform>			
-			<platform id="SMC" name="Mac OSX (Mac/Carbon) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="launchers-macosx.carbon.ppc.@buildid@.tar.gz">
+			<platform id="SMC" name="Mac OSX (Mac/Carbon) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="launchers-macosx.carbon.x86.@buildid@.tar.gz">
 			</platform>
 			<platform id="SMCC" name="Mac OSX (Mac/Cocoa) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="launchers-macosx.cocoa.x86.@buildid@.tar.gz">
 			</platform>

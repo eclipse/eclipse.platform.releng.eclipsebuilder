@@ -45,9 +45,7 @@
 	<!-- Called after all plugins and features have been jarred                -->
 	<!-- (and potentially signed)                                              -->
 	<!-- ===================================================================== -->
-	<target name="post.jarUp">
-		<!-- work around https://bugs.eclipse.org/bugs/show_bug.cgi?id=234032 -->
-		<delete file="${eclipse.base}/macosx.carbon.ppc/${collectingFolder}/Eclipse.app/Contents/MacOS/eclipse.ini" failonerror="false" />
+	<target name="post.jarUp">		
 	</target>
 
 	<!-- ===================================================================== -->
