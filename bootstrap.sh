@@ -60,8 +60,14 @@ tag=""
 #buildProjectTags=v20090522
 #buildProjectTags=v20090527c
 #buildProjectTags=v20090528
-buildProjectTags=v20090602
-
+#buildProjectTags=v20090602
+#buildProjectTags=v20090619
+#buildProjectTags=v20090626
+#buildProjectTags=v20090629a
+#buildProjectTags=v20090707
+#buildProjectTags=v20090720
+#buildProjectTags=v20090721a
+buildProjectTags=v20090723b
 
 #updateSite property setting
 updateSite=""
@@ -326,7 +332,7 @@ $buildCommandRSS
 fi
 
 #clean up
-if [ "$delete.artifacts" = "true" ]
+if [ "$delete.artifacts" == "-Ddelete.artifacts=true"  ]
 then
 		 rm -rf $builderDir
 fi
