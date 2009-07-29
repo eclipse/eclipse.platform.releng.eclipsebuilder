@@ -1,0 +1,4 @@
+#!/bin/sh
+
+cd /builds
+$WORKSPACE/org.eclipse.releng.eclipsebuilder/eclipse/bootstrapHudson.sh -test -notify kmoir@ca.ibm.com -skipTest -buildDirectory $WORKSPACE/builds/N -skipRSS -updateSite $WORKSPACE/builds/transfer/files/testUpdates-N N
