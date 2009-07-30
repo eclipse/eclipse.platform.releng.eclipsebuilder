@@ -259,6 +259,8 @@ bootclasspath_16="/shared/common/jdk-1.6.0_10/jre/lib/rt.jar"
 bootclasspath_foundation="/shared/common/Java_ME_platform_SDK_3.0_EA/lib/cdc_1.0.jar"
 bootclasspath_foundation11="/shared/common/Java_ME_platform_SDK_3.0_EA/lib/cdc_1.1.jar"
 
+echo builderDir $builderDir
+
 #PATH=$BASE_PATH:$builderDir/eclipseInternalBuildTools/bin/linux/:$builderDir/jdk/linux/jdk1.5.0_14/jre/bin;export PATH
 
 
