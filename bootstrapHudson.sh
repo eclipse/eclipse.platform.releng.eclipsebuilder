@@ -186,20 +186,21 @@ then
 fi
 
 # directory where features and plugins will be compiled
+echo builderDir $builderDir
 buildDirectory=$builderDir/src
 
 mkdir $builderDir
 cd $builderDir
 
 #check out org.eclipse.releng.basebuilder
-cvs -d sdimitro@dev.eclipse.org:/cvsroot/eclipse co -r $baseBuilderTag org.eclipse.releng.basebuilder
+cvs -d :pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse co -r $baseBuilderTag org.eclipse.releng.basebuilder
 #need to figure out how to tag the build with hudson
 #if [ "$tagMaps" == "-DtagMaps=true" ]; then  
 #  cvs -d sdimitro@dev.eclipse.org:/cvsroot/eclipse rtag -r $baseBuilderTag v$buildId org.eclipse.releng.basebuilder;
 #fi
 
 #check out org.eclipse.releng.eclipsebuilder
-cvs -d sdimitro@dev.eclipse.org:/cvsroot/eclipse co -r $customBuilderTag org.eclipse.releng.eclipsebuilder
+cvs -d :pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse co -r $customBuilderTag org.eclipse.releng.eclipsebuilder
 #need to figure out how to tag the build with hudson
 #if [ "$tagMaps" == "-DtagMaps=true" ]; then  
 #  cvs -d sdimitro@dev.eclipse.org:/cvsroot/eclipse rtag -r $customBuilderTag v$buildId  org.eclipse.releng.eclipsebuilder;
