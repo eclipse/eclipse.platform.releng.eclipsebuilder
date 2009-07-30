@@ -130,7 +130,7 @@ do
 		 		  		 		  -mapVersionTag) mapVersionTag="$2"; shift;;
 		 		  		 		  -tagMapFiles) tagMaps="-DtagMaps=true";;
 		 		  		 		  -skipPerf) skipPerf="-Dskip.performance.tests=true";;
-		 		  		 		  -skipCleanSites ) skipCleanSites="-Dskip.clean.sites=true";
+		 		  		 		  -skipCleanSites) skipCleanSites="-Dskip.clean.sites=true";;
 		 		  		 		  -skipTest) skipTest="-Dskip.tests=true";;
 		 		  		 		  -skipRSS) skipRSS="-Dskip.feed=true";;
 		 		  		 		  -deleteArtifacts) deleteArtifacts="-Ddelete.artifacts=true";;
