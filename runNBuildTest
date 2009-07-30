@@ -4,4 +4,4 @@ mkdir $WORKSPACE/builds
 cd $WORKSPACE/builds
 mkdir -p $WORKSPACE/builds/N
 mkdir -p $WORKSPACE/builds/transfer/files/testUpdates-N
-$WORKSPACE/bootstrapHudson.sh -test -notify kmoir@ca.ibm.com -skipTest -buildDirectory $WORKSPACE/builds/N -skipRSS -updateSite $WORKSPACE/builds/transfer/files/testUpdates-N N
+$WORKSPACE/bootstrapHudson.sh -test -skipTest -buildDirectory $WORKSPACE/builds/N -skipRSS -updateSite $WORKSPACE/builds/transfer/files/testUpdates-N N
