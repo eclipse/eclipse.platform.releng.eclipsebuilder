@@ -399,7 +399,7 @@
 		<echo message="cvsUp complete." />
 	</target>
 
-	<target name="cleanSites">
+	<target name="cleanSites" unless="skip.clean.sites">
 		<cleanSite ageInMinutes="1440" directoryName="/builds/transfer/files/master/downloads/drops" realDelete="true" />
 		<cleanSite ageInMinutes="1440" directoryName="/builds/transfer/files/master/equinox/drops" realDelete="true" />
 		<cleanSite ageInMinutes="1440" directoryName="/builds/transfer/files/bogus/downloads/drops" realDelete="true" />
