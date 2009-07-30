@@ -284,7 +284,7 @@ antRunnerJDK15="/shared/common/ibm-java2-ppc64-50/jre/bin/java -Xmx500m -Dorg.ec
 
 
 #clean drop directories
-$antRunner -buildfile eclipse/helper.xml cleanSites
+$#antRunner -buildfile eclipse/helper.xml cleanSites
 
 echo recipients=$recipients
 echo postingDirectory=$postingDirectory
