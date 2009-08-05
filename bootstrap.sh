@@ -26,6 +26,9 @@ skipPerformanceTests=""
 #sets skip.clean.sites Ant property
 skipCleanSites=""
 
+#sets hudson Ant property
+hudson=""
+
 #sets skipPack Ant property
 skipPack=""
 
@@ -131,6 +134,7 @@ do
 		 		  		 		  -tagMapFiles) tagMaps="-DtagMaps=true";;
 		 		  		 		  -skipPerf) skipPerf="-Dskip.performance.tests=true";;
 		 		  		 		  -skipCleanSites) skipCleanSites="-Dskip.clean.sites=true";;
+		 		  		 		  -hudson) skipPerf="-Dhudson=true";;
 		 		  		 		  -skipTest) skipTest="-Dskip.tests=true";;
 		 		  		 		  -skipRSS) skipRSS="-Dskip.feed=true";;
 		 		  		 		  -deleteArtifacts) deleteArtifacts="-Ddelete.artifacts=true";;

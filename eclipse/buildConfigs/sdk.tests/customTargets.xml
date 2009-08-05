@@ -251,13 +251,13 @@
 		</copy>
 		
 		<!--convert .bat files to dos just in case-->
-		<exec executable="unix2dos" dir="${workingDirectory}/eclipse-testing">
+	<!--	<exec executable="unix2dos" dir="${workingDirectory}/eclipse-testing">
 			<arg line="runtests.bat" />
-		</exec>
+		</exec> -->
 		<!--convert runtests files to unix just in case-->
-		<exec executable="dos2unix" dir="${workingDirectory}/eclipse-testing">
+		<!-- <exec executable="dos2unix" dir="${workingDirectory}/eclipse-testing">
 			<arg line="runtests" />
-		</exec>
+		</exec> -->
 
 		<move file="${workingDirectory}/eclipse-junit-tests-${buildId}.zip" todir="${workingDirectory}/eclipse-testing"/>
 
