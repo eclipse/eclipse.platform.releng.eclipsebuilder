@@ -755,11 +755,10 @@
 			<arg line="-append" />
 		</exec>
 	</target>
-
+	
 	<target name="run.director">
-		<delete dir="${base.builder}/configuration/.settings" includeemptydirs="true" failonerror="false" />
-		<!--	<copy file="${equinox.build.configs}/equinox.prov/files/config.ini.director" tofile="${base.builder}/configuration/config.ini" overwrite="true" /> -->
-		<exec executable="${base.builder}/eclipse" failonerror="false" dir="${base.builder}" timeout="900000" output="${directorlog}" resultproperty="directorcode">
+		<delete dir="${base.builder}/configuration/.settings" includeemptydirs="true" failonerror="false" />		
+		<java jar="${base.builder}/plugins/org.eclipse.equinox.launcher.jar" fork="true" jvm="${java15-home}/bin/java" failonerror="false" dir="${base.builder}" timeout="900000" output="${directorlog}" resultproperty="directorcode">
 			<arg line="-vm ${java15-home}/bin/java" />
 			<arg line="-application org.eclipse.equinox.p2.director.app.application" />
 			<arg line="-nosplash" />
@@ -784,7 +783,7 @@
 			<arg line="-Declipse.p2.data.area=${p2.director.install.path}/p2" />
 			<arg line="-Declipse.p2.MD5Check=false" />
 			<arg line="-Declipse.p2.profile=@none" />
-		</exec>
+		</java>
 		<echo message="director ${p2.director.install.path}" file="${directorlog}" append="true" />
 		<echo message="${directorcode}" file="${directorlog}" append="true" />
 	</target>
