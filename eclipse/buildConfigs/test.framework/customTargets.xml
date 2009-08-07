@@ -77,10 +77,6 @@
 </target>
 
 <target name="getPrebuiltElements">
-	<generateBaseFetchScript
-		mapfile="${buildDirectory}/maps/org.eclipse.releng/maps/base.map"
-		outputfile="${buildDirectory}/fetchbase.xml"/>
-	<ant antfile="${buildDirectory}/fetchbase.xml" />
 </target>
 
 <!-- ===================================================================== -->
