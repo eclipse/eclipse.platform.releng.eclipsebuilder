@@ -22,8 +22,8 @@
 			<equals arg1="${os.arch}" arg2="i386" />
 		</condition>
 		<property name="rcp.archive" value="" />
-		<property name="icu.base.archive" value="${postingDirectory}/${buildLabel}/com.ibm.icu.base-${buildId}.zip" />		
-		
+		<property name="icu.base.archive" value="${postingDirectory}/${buildLabel}/com.ibm.icu.base-${buildId}.zip" />
+
 		<property name="p2.agent.install.win32" value="${p2.output.base}/agent.install.win32" />
 		<mkdir dir="${p2.agent.install.win32}" />
 		<property name="p2.agent.install.linux" value="${p2.output.base}/agent.install.linux" />
@@ -118,7 +118,7 @@
 		<property name="p2.platformsdk.install.macosx.cocoa.x86" value="${p2.output.base}/platformsdk.install.macosx.cocoa.x86" />
 		<mkdir dir="${p2.platformsdk.install.macosx.cocoa.x86}" />
 		<property name="p2.platformsdk.install.macosx.cocoa.x86_64" value="${p2.output.base}/platformsdk.install.macosx.cocoa.x86_64" />
-		<mkdir dir="${p2.platformsdk.install.macosx.cocoa.x86_64}" />	
+		<mkdir dir="${p2.platformsdk.install.macosx.cocoa.x86_64}" />
 
 		<property name="base" value="${p2.output.base}/base" />
 		<mkdir dir="${base}" />
@@ -147,13 +147,13 @@
 			<fileset dir="${base}/eclipse/plugins">
 				<include name="**/com.ibm.icu_*.jar" />
 			</fileset>
-		</delete>	
+		</delete>
 
 		<parallel failonany="true" threadCount='4'>
 			<antcall target="provision.agent" />
 			<antcall target="provision.sdk" />
 			<antcall target="provision.platform" />
-			<antcall target="provision.platformsdk" />		
+			<antcall target="provision.platformsdk" />
 		</parallel>
 		<antcall target="zip.install" />
 
@@ -167,7 +167,7 @@
 			<fileset dir="${p2.root}">
 				<include name="**/*.log" />
 			</fileset>
-		</copy>		
+		</copy>
 		<p2.process.artifacts repositoryPath="file://${buildRepo}" pack="true" />
 	</target>
 
@@ -720,14 +720,14 @@
 			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 	</target>
-	
+
 	<!--
 	p2.generator.base
 	p2.generator.feature.dir
 	p2.generator.plugins.dir
 	p2.repo
 	-->
-	
+
 	<!--
 	p2.generator.source
 	p2.generator.root
@@ -755,10 +755,11 @@
 			<arg line="-append" />
 		</exec>
 	</target>
-	
+
 	<target name="run.director">
-		<delete dir="${base.builder}/configuration/.settings" includeemptydirs="true" failonerror="false" />		
-		<java jar="${base.builder}/plugins/org.eclipse.equinox.launcher.jar" fork="true" jvm="${java15-home}/bin/java" failonerror="false" dir="${base.builder}" timeout="900000" output="${directorlog}" resultproperty="directorcode">
+		<delete dir="${base.builder}/configuration/.settings" includeemptydirs="true" failonerror="false" />
+		<!--	<copy file="${equinox.build.configs}/equinox.prov/files/config.ini.director" tofile="${base.builder}/configuration/config.ini" overwrite="true" /> -->
+		<exec executable="${base.builder}/eclipse" failonerror="false" dir="${base.builder}" timeout="900000" output="${directorlog}" resultproperty="directorcode">
 			<arg line="-vm ${java15-home}/bin/java" />
 			<arg line="-application org.eclipse.equinox.p2.director.app.application" />
 			<arg line="-nosplash" />
@@ -783,7 +784,7 @@
 			<arg line="-Declipse.p2.data.area=${p2.director.install.path}/p2" />
 			<arg line="-Declipse.p2.MD5Check=false" />
 			<arg line="-Declipse.p2.profile=@none" />
-		</java>
+		</exec>
 		<echo message="director ${p2.director.install.path}" file="${directorlog}" append="true" />
 		<echo message="${directorcode}" file="${directorlog}" append="true" />
 	</target>
@@ -817,7 +818,7 @@
 				</antcall>
 			</sequential>
 			<sequential>
-				<!-- macosx -->						
+				<!-- macosx -->
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.sdk.install.macosx.carbon.x86}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-macosx-carbon.tar" />
@@ -828,7 +829,7 @@
 			</sequential>
 
 			<sequential>
-				<!-- macosx -->			
+				<!-- macosx -->
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.sdk.install.macosx.cocoa.x86}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-macosx-cocoa.tar" />
@@ -1058,7 +1059,7 @@
 					<param name="archiveName" value="eclipse-platform-${buildId}-aix-motif.zip" />
 				</antcall>
 
-				<!-- macosx -->				
+				<!-- macosx -->
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.platform.install.macosx.carbon.x86}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-macosx-carbon.tar" />
@@ -1067,7 +1068,7 @@
 					<param name="archiveName" value="eclipse-platform-${buildId}-macosx-carbon.tar.gz" />
 				</antcall>
 
-				<!-- macosx -->				
+				<!-- macosx -->
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.platform.install.macosx.cocoa.x86}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-macosx-cocoa.tar" />
@@ -1076,7 +1077,7 @@
 					<param name="archiveName" value="eclipse-platform-${buildId}-macosx-cocoa.tar.gz" />
 				</antcall>
 
-				<!-- macosx cocoa x86_64-->				
+				<!-- macosx cocoa x86_64-->
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.platform.install.macosx.cocoa.x86_64}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-macosx-cocoa-x86_64.tar" />
@@ -1178,7 +1179,7 @@
 					<param name="archiveName" value="eclipse-platform-SDK-${buildId}-aix-motif.zip" />
 				</antcall>
 
-				<!-- macosx carbon -->				
+				<!-- macosx carbon -->
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.platformsdk.install.macosx.carbon.x86}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-platform-SDK-${buildId}-macosx-carbon.tar" />
@@ -1187,7 +1188,7 @@
 					<param name="archiveName" value="eclipse-platform-SDK-${buildId}-macosx-carbon.tar.gz" />
 				</antcall>
 
-				<!-- macosx cocoa -->				
+				<!-- macosx cocoa -->
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.platformsdk.install.macosx.cocoa.x86}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-platform-SDK-${buildId}-macosx-cocoa.tar" />
@@ -1196,7 +1197,7 @@
 					<param name="archiveName" value="eclipse-platform-SDK-${buildId}-macosx-cocoa.tar.gz" />
 				</antcall>
 
-				<!-- macosx cocoa x86_64 -->				
+				<!-- macosx cocoa x86_64 -->
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.platformsdk.install.macosx.cocoa.x86_64}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-platform-SDK-${buildId}-macosx-cocoa-x86_64.tar" />
