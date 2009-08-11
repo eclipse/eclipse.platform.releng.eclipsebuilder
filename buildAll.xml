@@ -329,7 +329,7 @@
 		<condition property="signpollline" value="${stagingDirectoryOutput}/${archiveName}">
 			<equals arg1="${hudson}" arg2="true" />
 		</condition>
-		<property name="signpollline" value="${signhost}; ls ${stagingDirectoryOutput}/${archiveName}" />
+	    <property name="signpollline" value="${signhost} ${signquote}cd ${stagingDirectoryOutput};ls ${archiveName}${signquote}" />
 
 		<antcall target="waitForChangedAttribs">
 			<param name="signpoll" value="${signpoll}" />
