@@ -13,8 +13,7 @@
 
 		 		 <property name="repo" value="${buildDirectory}/repo" />
 		 		 <mkdir dir="${repo}" />
-		 		 <property name="p2.flavor" value="tooling" />
-		 		 <property name="p2.sdk.version" value="3.6.0.${buildId}" />
+		 		 <property name="p2.flavor" value="tooling" />		
 		 		 <condition property="archive.format" value="tar.gz">
 		 		 		 <or>
 		 		 		 		 <equals arg1="${installOs}" arg2="linux" />
