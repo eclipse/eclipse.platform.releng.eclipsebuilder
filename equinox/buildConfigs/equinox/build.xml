@@ -8,12 +8,18 @@
 
 	<target name="all" depends="init">
 		<antcall target="equinoxsdk" />
+		<antcall target="equinoxweavingsdk" />
 		<antcall target="master-equinox" />
 	</target>
 
 	<target name="equinoxsdk">
 		<property name="archiveRoot" value="equinox-SDK-${buildId}" />
 		<buildRepos feature="org.eclipse.equinox.sdk" archiveName="${archiveRoot}.zip" />
+	</target>
+
+	<target name="equinoxweavingsdk">
+		<property name="archiveRoot" value="org.eclipse.equinox.weaving.sdk-${buildId}" />
+		<buildReposSource feature="org.eclipse.equinox.weaving.sdk" archiveName="${archiveRoot}.zip" />
 	</target>
 
 	<target name="master-equinox">

@@ -444,7 +444,7 @@
 		<delete dir="${reposource}" />
 		<mkdir dir="${reposource}" />
 		<exec executable="unzip" dir=".">
-			<arg line="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -x */features/master/* */features/master-ecf* */features/master-jetty* */plugins/org.eclipse.swt.tools* */plugins/com.ibm.icu.base* */features/com.ibm.icu.base* -d ${reposource}" />
+			<arg line="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -x */features/master/* */features/master-ecf* */features/master-jetty* */features/master-equinox-weaving* */plugins/org.eclipse.swt.tools* */plugins/com.ibm.icu.base* */plugins/org.aspectj* */features/com.ibm.icu.base* -d ${reposource}" />
 		</exec>
 		<property name="tempexec" value="${buildDirectory}/tempexec" />
 		<mkdir dir="${tempexec}" />

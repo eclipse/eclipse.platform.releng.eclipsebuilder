@@ -5,6 +5,9 @@
 		<zipType name="Equinox">			
 			<platform id="EBS" name="&lt;img src = &quot;repo.gif&quot;>All" fileName="equinox-SDK-@buildid@.zip">
 			</platform>
+			<platform id="EWS" name="&lt;img src = &quot;repo.gif&quot;>All" fileName="org.eclipse.equinox.weaving.sdk-@buildid@.zip">
+			</platform>
+			
 		</zipType>
 
 		<zipType name="Framework">
