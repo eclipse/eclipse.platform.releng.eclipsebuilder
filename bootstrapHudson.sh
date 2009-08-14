@@ -144,7 +144,7 @@ do
 		 		  		 		  -buildDirectory) builderDir="$2"; shift;;
 		 		  		 		  -notify) recipients="$2"; shift;;
 		 		 		 		  -textRecipients) textRecipients="$2"; shift;;
-		 		  		 		  -test) postingDirectory="/builds/transfer/files/bogus/downloads/drops";testBuild="-Dtest=true";;
+		 		  		 		  -test) postingDirectory="$WORKSPACE/builds/transfer/files/bogus/downloads/drops";testBuild="-Dtest=true";;
 		 		  		 		  -builderTag) buildProjectTags="$2"; shift;;
 		 		  		 		  -compareMaps) compareMaps="-DcompareMaps=true";;
 		 		  		 		  -updateSite) updateSite="-DupdateSite=$2";shift;;
