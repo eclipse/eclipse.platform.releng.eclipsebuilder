@@ -170,13 +170,10 @@
 		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="fetch">
 			<property name="builder" value="${eclipse.build.configs}/sdk" />
 		</ant>		
-		<!-- <ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="generate">
-			<property name="builder" value="${eclipse.build.configs}/sdk" />
-		</ant> -->
-		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="postGenerate">
+		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="generate">
 			<property name="builder" value="${eclipse.build.configs}/sdk" />
 		</ant>
-
+		
 		<replace file="${eclipse.build.configs}/sdk/srcBuild/build.properties" token="@build@" value="${buildId}" />
 		<replace file="${eclipse.build.configs}/sdk/srcBuild/build" token="@build@" value="${buildId}" />
 		<condition property="builderTag" value="v${buildId}">
