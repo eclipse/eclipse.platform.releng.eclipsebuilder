@@ -160,19 +160,22 @@
 		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="fetch">
 			<property name="builder" value="${eclipse.build.configs}/master" />
 		</ant>
-		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="generate">
+		<!--	<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="generate">
 			<property name="builder" value="${eclipse.build.configs}/master" />
-		</ant>
+		</ant> -->
 		<!--fetch source and generate scripts for eclipse SDK-->
 		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="preBuild">
 			<property name="builder" value="${eclipse.build.configs}/sdk" />
 		</ant>
 		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="fetch">
 			<property name="builder" value="${eclipse.build.configs}/sdk" />
-		</ant>
-		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="generate">
+		</ant>		
+		<!-- <ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="generate">
 			<property name="builder" value="${eclipse.build.configs}/sdk" />
-		</ant> 
+		</ant> -->
+		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="postGenerate">
+			<property name="builder" value="${eclipse.build.configs}/sdk" />
+		</ant>
 
 		<replace file="${eclipse.build.configs}/sdk/srcBuild/build.properties" token="@build@" value="${buildId}" />
 		<replace file="${eclipse.build.configs}/sdk/srcBuild/build" token="@build@" value="${buildId}" />
@@ -329,7 +332,7 @@
 		<condition property="signpollline" value="${stagingDirectoryOutput}/${archiveName}">
 			<equals arg1="${hudson}" arg2="true" />
 		</condition>
-	    <property name="signpollline" value="${signhost} ${signquote}cd ${stagingDirectoryOutput};ls ${archiveName}${signquote}" />
+		<property name="signpollline" value="${signhost} ${signquote}cd ${stagingDirectoryOutput};ls ${archiveName}${signquote}" />
 
 		<antcall target="waitForChangedAttribs">
 			<param name="signpoll" value="${signpoll}" />
