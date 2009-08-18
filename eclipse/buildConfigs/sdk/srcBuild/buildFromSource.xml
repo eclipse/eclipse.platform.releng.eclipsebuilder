@@ -111,7 +111,7 @@
 		</ant>
 	</target>
 
-	<target name="buildEclipseSourceDrops">
+	<target name="buildEclipseSourceDrops" unless="skipFetch">	
 		<!--examples are required to pull sample doc into SDK doc plug-ins-->
 		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="preBuild">
 			<property name="builder" value="${eclipse.build.configs}/sdk.examples" />

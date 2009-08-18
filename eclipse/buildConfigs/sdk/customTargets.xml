@@ -380,8 +380,9 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 
 		<!--  create zip with all source for an Eclipse SDK + maps  -->
 		<copy todir="${tempDir}/buildScripts/src">
-			<fileset dir="${buildDirectory}" includes="features/,plugins/,maps/**" excludes="features/*example*/**,plugins/*example*/**" />
+			<fileset dir="${buildDirectory}" includes="features/,plugins/,maps/**" />
 		</copy>
+		<!-- <fileset dir="${buildDirectory}" includes="features/,plugins/,maps/**" excludes="features/*example*/**,plugins/*example*/**" /> -->
 		<copy todir="${tempDir}/buildScripts" flatten="true" overwrite="true">
 			<fileset dir="${eclipse.build.configs}/sdk/srcBuild" excludes="fetch/**,incl,buildFromSource.xml,build.properties,run.xml" />
 		</copy>
