@@ -95,7 +95,7 @@ buildLabel=""
 mapVersionTag=HEAD
 
 # directory in which to export builder projects
-builderDir=/builds/eclipsebuilder
+builderDir=$WORKSPACE/builds/eclipsebuilder
 
 # buildtype determines whether map file tags are used as entered or are replaced with HEAD
 buildType=N
@@ -272,7 +272,7 @@ bootclasspath_foundation11="/shared/common/Java_ME_platform_SDK_3.0_EA/lib/cdc_1
 
 echo builderDir $builderDir
 
-#PATH=$BASE_PATH:$builderDir/eclipseInternalBuildTools/bin/linux/:$builderDir/jdk/linux/jdk1.5.0_14/jre/bin;export PATH
+PATH=$BASE_PATH:$builderDir/eclipseInternalBuildTools/bin/linux/:$builderDir/jdk/linux/jdk1.5.0_14/jre/bin;export PATH
 
 
 cd $builderDir/org.eclipse.releng.eclipsebuilder
