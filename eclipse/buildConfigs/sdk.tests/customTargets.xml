@@ -7,7 +7,7 @@
 	<!-- ===================================================================== -->
 	<target name="allElements">
 
-		<ant antfile="${genericTargets}" target="${target}" >
+		<ant antfile="${genericTargets}" target="${target}">
 			<property name="type" value="feature" />
 			<property name="id" value="org.eclipse.sdk.tests" />
 		</ant>
@@ -19,11 +19,11 @@
 	<!-- ${assembleScriptName}) but may also add pre and post processing -->
 	<!-- Add one target for each root element and each configuration -->
 	<!-- ===================================================================== -->
-	
+
 	<target name="assemble.org.eclipse.sdk.tests.group.group.group">
 		<!-- workaround for Bug 127747 Grouped config build failing on missing group.group.group folder-->
 		<mkdir dir="${buildDirectory}/tmp/eclipse/group.group.group/eclipse" />
-		<property name="archiveName" value="eclipse-junit-tests-${buildId}.zip"/>
+		<property name="archiveName" value="eclipse-junit-tests-${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 
@@ -44,18 +44,14 @@
 		<property name="mapCvsRoot" value=":pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse" />
 
 		<property name="mapVersionTag" value="HEAD" />
-		<cvs cvsRoot="${mapCvsRoot}"
-		package="org.eclipse.releng"
-		dest="${buildDirectory}/maps"
-		tag="${mapVersionTag}"
-	/>
+		<cvs cvsRoot="${mapCvsRoot}" package="org.eclipse.releng" dest="${buildDirectory}/maps" tag="${mapVersionTag}" />
 		<!--tag the map files project-->
 		<antcall target="tagMapFiles" />
 		<antcall target="getPrebuiltElements" />
 	</target>
 
 	<target name="compareMapFiles" if="compareMaps">
-		<property file="${mapTag.properties}"/>
+		<property file="${mapTag.properties}" />
 		<property name="cvsDiffFile" value="${buildDirectory}/cvsDiff.txt" />
 		<cvs cvsRoot="${mapCvsRoot}" dest="${buildDirectory}/maps" command="diff -w -r ${lastMapTag}" output="${cvsDiffFile}" />
 		<modifiedMaps mapDiffFile="${cvsDiffFile}" />
@@ -88,7 +84,7 @@
 	<!-- Steps to do before fetching the build elements -->
 	<!-- ===================================================================== -->
 	<target name="preFetch" if="performance.base">
-		<mkdir dir="${buildDirectory}/${buildLabel}"/>
+		<mkdir dir="${buildDirectory}/${buildLabel}" />
 		<property name="eclipse.base" value="${downloadUrl}/eclipse-SDK-${testedBuildId}-win32.zip" />
 		<property name="linux.base" value="${downloadUrl}/eclipse-SDK-${testedBuildId}-linux-gtk.tar.gz" />
 		<get src="${eclipse.base}" dest="${buildDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" usetimestamp="true" />
@@ -202,14 +198,10 @@
 		<!--copy label.properties file for use in performance testing-->
 		<copy file="${buildDirectory}/label.properties" tofile="${workingDirectory}/eclipse-testing/label.properties" />
 
-		<property name="test.properties" value="${workingDirectory}/eclipse-testing/test.properties"/>
+		<property name="test.properties" value="${workingDirectory}/eclipse-testing/test.properties" />
 
 		<!--generate test.properties.  Custom Ant task contributed by org.eclipse.build.tools in org.eclipse.releng.basebuilder.-->
-		<generateTestProperties
-			buildDirectory="${buildDirectory}"
-			featureId="org.eclipse.sdk.tests"
-			outputFile="${test.properties}"
-		/>
+		<generateTestProperties buildDirectory="${buildDirectory}" featureId="org.eclipse.sdk.tests" outputFile="${test.properties}" />
 
 		<!--load the property file created with the directory names for all test plugins-->
 		<property file="${test.properties}" />
@@ -227,16 +219,16 @@
 
 		<!-- rezip the JUnit plugin tests -->
 		<exec dir="${workingDirectory}" executable="zip">
-			<arg line="-r -q eclipse-junit-tests-${buildId}.zip eclipse"/>
+			<arg line="-r -q eclipse-junit-tests-${buildId}.zip eclipse" />
 		</exec>
 
 		<delete dir="${workingDirectory}/eclipse" includeEmptyDirs="true" />
 
 		<!--Copy javadoc logs to the testing directory for use by relEng tests-->
-		<copy file="${buildDirectory}/plugins/org.eclipse.platform.doc.isv/doc.bin.log" tofile="${workingDirectory}/eclipse-testing/org.eclipse.platform.doc.isv.javadoc.txt" failonerror="false"/>
-		<copy file="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv/doc.bin.log" tofile="${workingDirectory}/eclipse-testing/org.eclipse.jdt.doc.isv.javadoc.txt" failonerror="false"/>
-		<copy file="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv/jdtapt.doc.bin.log" tofile="${workingDirectory}/eclipse-testing/org.eclipse.jdt.apt.javadoc.txt" failonerror="false"/>
-		<copy file="${buildDirectory}/plugins/org.eclipse.pde.doc.user/doc.bin.log" tofile="${workingDirectory}/eclipse-testing/org.eclipse.pde.doc.user.javadoc.txt" failonerror="false"/>
+		<copy file="${buildDirectory}/plugins/org.eclipse.platform.doc.isv/doc.bin.log" tofile="${workingDirectory}/eclipse-testing/org.eclipse.platform.doc.isv.javadoc.txt" failonerror="false" />
+		<copy file="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv/doc.bin.log" tofile="${workingDirectory}/eclipse-testing/org.eclipse.jdt.doc.isv.javadoc.txt" failonerror="false" />
+		<copy file="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv/jdtapt.doc.bin.log" tofile="${workingDirectory}/eclipse-testing/org.eclipse.jdt.apt.javadoc.txt" failonerror="false" />
+		<copy file="${buildDirectory}/plugins/org.eclipse.pde.doc.user/doc.bin.log" tofile="${workingDirectory}/eclipse-testing/org.eclipse.pde.doc.user.javadoc.txt" failonerror="false" />
 
 		<!--Copy scripts and doc used in the automated testing to the testing directory-->
 		<copy todir="${workingDirectory}/eclipse-testing">
@@ -245,9 +237,13 @@
 		<copy todir="${workingDirectory}/eclipse-testing">
 			<fileset dir="${builderDirectory}/testScripts" />
 		</copy>
-		
+
 		<!--convert .bat files to dos just in case-->
-		<exec executable="unix2dos" dir="${workingDirectory}/eclipse-testing">
+		<condition property="${unix2dos}" value="/usr/local/bin/unix2dos">
+			<equals arg1="${hudson}" arg2="true" />
+		</condition>
+		<property name="unix2dos" value="unix2dos"/>
+		<exec executable="${unix2dos}" dir="${workingDirectory}/eclipse-testing">
 			<arg line="runtests.bat" />
 		</exec>
 		<!--convert runtests files to unix just in case-->
@@ -255,22 +251,22 @@
 			<arg line="runtests" />
 		</exec>
 
-		<move file="${workingDirectory}/eclipse-junit-tests-${buildId}.zip" todir="${workingDirectory}/eclipse-testing"/>
+		<move file="${workingDirectory}/eclipse-junit-tests-${buildId}.zip" todir="${workingDirectory}/eclipse-testing" />
 
 		<!--set execute permission on *nix shell script-->
-		<chmod file="${workingDirectory}/eclipse-testing/runtests" perm="755"/>
+		<chmod file="${workingDirectory}/eclipse-testing/runtests" perm="755" />
 		<property name="postingDirectory" value="${buildDirectory}" />
 
 		<!--create zip file of the automated testing framework-->
 		<exec dir="${workingDirectory}" executable="zip">
-			<arg line="-r -q ${postingDirectory}/${buildLabel}/eclipse-Automated-Tests-${buildId}.zip eclipse-testing"/>
+			<arg line="-r -q ${postingDirectory}/${buildLabel}/eclipse-Automated-Tests-${buildId}.zip eclipse-testing" />
 		</exec>
 		<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
-		<checksum file="${postingDirectory}/${buildLabel}/eclipse-Automated-Tests-${buildId}.zip" property="md5"/>
-		<checksum file="${postingDirectory}/${buildLabel}/eclipse-Automated-Tests-${buildId}.zip" algorithm="SHA" property="sha"/>		
-		<echo message="${md5} *eclipse-Automated-Tests-${buildId}.zip" file="${postingDirectory}/${buildLabel}/checksum/eclipse-Automated-Tests-${buildId}.zip.md5"/>
-		<echo message="${sha} *eclipse-Automated-Tests-${buildId}.zip" file="${postingDirectory}/${buildLabel}/checksum/eclipse-Automated-Tests-${buildId}.zip.sha1"/>
-		<delete file="${buildDirectory}/${buildLabel}/eclipse-junit-tests-${buildId}.zip"  />
+		<checksum file="${postingDirectory}/${buildLabel}/eclipse-Automated-Tests-${buildId}.zip" property="md5" />
+		<checksum file="${postingDirectory}/${buildLabel}/eclipse-Automated-Tests-${buildId}.zip" algorithm="SHA" property="sha" />
+		<echo message="${md5} *eclipse-Automated-Tests-${buildId}.zip" file="${postingDirectory}/${buildLabel}/checksum/eclipse-Automated-Tests-${buildId}.zip.md5" />
+		<echo message="${sha} *eclipse-Automated-Tests-${buildId}.zip" file="${postingDirectory}/${buildLabel}/checksum/eclipse-Automated-Tests-${buildId}.zip.sha1" />
+		<delete file="${buildDirectory}/${buildLabel}/eclipse-junit-tests-${buildId}.zip" />
 	</target>
 
 	<!-- ===================================================================== -->
