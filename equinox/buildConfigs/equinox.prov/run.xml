@@ -733,27 +733,7 @@
 	p2.generator.root.version
 	p2.repo
 	-->
-	<target name="run.generator">
-		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
-		<exec executable="${base.builder}/eclipse" failonerror="false" timeout="900000">
-			<arg line="-vm ${java15-home}/bin/java" />
-			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
-			<arg line="-consoleLog" />
-			<arg line="-nosplash" />
-			<arg line="--launcher.suppressErrors" />
-			<arg line="-metadataRepository file:${p2.repo}" />
-			<arg line="-artifactRepository file:${p2.repo}" />
-			<arg line="-metadataRepositoryName ${p2.repo.name}" />
-			<arg line="-artifactRepositoryName ${p2.repo.name}" />
-			<arg line="-source ${p2.generator.source}" />
-			<arg line="-compress" />
-			<arg line="-rootVersion ${p2.generator.root.version}" />
-			<arg line="-root ${p2.generator.root}" />
-			<arg line="-flavor ${p2.flavor}" />
-			<arg line="-publishArtifacts" />
-			<arg line="-append" />
-		</exec>
-	</target>
+	
 	
 	<target name="run.director">
 		<delete dir="${base.builder}/configuration/.settings" includeemptydirs="true" failonerror="false" />
