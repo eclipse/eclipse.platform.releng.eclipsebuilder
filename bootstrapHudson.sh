@@ -74,7 +74,7 @@ tag=""
 #buildProjectTags=v20090721a
 #buildProjectTags=v20090729
 #buildProjectTags=v20090813d
-buildProjectTags=v20090818
+buildProjectTags=v20090819
 
 #updateSite property setting
 updateSite=""
@@ -297,7 +297,7 @@ echo builderTag=$buildProjectTags
 echo buildDirectory=$buildDirectory
 
 #full command with args
-buildCommand="$antRunner -q -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $skipPack $tagMaps -DJ2SE-1.5=$bootclasspath_15 -DJ2SE-1.4=$bootclasspath -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation -DCDC-1.1/Foundation-1.1=$bootclasspath_foundation11 -DOSGi/Minimum-1.2=$bootclasspath_foundation11  -DJavaSE-1.6=$bootclasspath_16 -DlogExtension=.xml $javadoc $updateSite $sign -DgenerateFeatureVersionSuffix=true -Djava15-home=$builderDir/jdk/linux/jdk1.5.0_14/jre"
+buildCommand="$antRunner -q -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $skipPack $tagMaps -DJ2SE-1.5=$bootclasspath_15 -DJ2SE-1.4=$bootclasspath -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation -DCDC-1.1/Foundation-1.1=$bootclasspath_foundation11 -DOSGi/Minimum-1.2=/shared/common/ee.foundation.jar  -DJavaSE-1.6=$bootclasspath_16 -DlogExtension=.xml $javadoc $updateSite $sign -DgenerateFeatureVersionSuffix=true -Djava15-home=$builderDir/jdk/linux/jdk1.5.0_14/jre"
 
 #capture command used to run the build
 echo $buildCommand>command.txt
