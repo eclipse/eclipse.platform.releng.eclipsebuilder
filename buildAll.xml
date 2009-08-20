@@ -55,13 +55,7 @@
 
 	<property name="buildRepo" value="${updateSite}/${buildId}" />
 
-	<property name="p2.build.repo" value="file:${buildDirectory}/buildRepo" />
-
-	<!--set local mirror location depending if hudson is running -->
-	<condition property="${localmirror}" value="download.eclipse.org">
-		<equals arg1="${hudson}" arg2="true" />
-	</condition>
-	<property name="${localmirror}" value="fullmoon.ottawa.ibm.com" />
+	<property name="p2.build.repo" value="file:${buildDirectory}/buildRepo" />	
 
 	<target name="main" depends="init">
 		<antcall target="buildEclipseSourceDrops" />
@@ -122,7 +116,11 @@
 		<replaceregexp file="${buildDirectoryAbsoluteTemp}" match="org.eclipse.releng.eclipsebuilder/../src/" replace="src/" />
 		<loadfile property="buildDirectoryAbsolute" srcFile="${buildDirectoryAbsoluteTemp}" failonerror="false" />
 		<delete file="${buildDirectoryAbsoluteTemp}" />
-
+		<!--set local mirror location depending if hudson is running -->
+		<condition property="${localmirror}" value="download.eclipse.org">
+			<equals arg1="${hudson}" arg2="true" />
+		</condition>
+		<property name="${localmirror}" value="fullmoon.ottawa.ibm.com" />
 	</target>
 
 	<target name="buildECFMasterFeature">
