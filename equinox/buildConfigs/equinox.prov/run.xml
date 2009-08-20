@@ -128,7 +128,7 @@
 		<property name="repo" value="${buildDirectory}/repo" />
 		<mkdir dir="${repo}" />
 		<property name="p2.flavor" value="tooling" />
-		<property name="p2.agent.version" value="1.0.100.${buildId}" />	
+		<property name="p2.agent.version" value="1.0.100.${buildId}" />
 	</target>
 
 	<target name="build" depends="init">
@@ -733,41 +733,24 @@
 	p2.generator.root.version
 	p2.repo
 	-->
-	
-	
+
 	<target name="run.director">
-		<delete dir="${base.builder}/configuration/.settings" includeemptydirs="true" failonerror="false" />
-		<property name="p2.director.configArea" value="${osgi.configuration.area}" />
-		<java jar="${base.builder}/plugins/org.eclipse.equinox.launcher.jar" fork="true" jvm="${java15-home}/bin/java" failonerror="false" dir="${base.builder}" timeout="900000" output="${directorlog}" resultproperty="directorcode">
-			<arg line="-vm ${java15-home}/bin/java" />
-			<arg line="-application org.eclipse.equinox.p2.director.app.application" />
-			<arg line="-nosplash" />
-			<arg line="--launcher.suppressErrors" />
-			<arg line="-consoleLog" />
-			<arg line="-flavor ${p2.flavor}" />
-			<arg line="-installIU ${p2.director.installIU}" />
-			<arg line="-version ${p2.director.version}" />
-			<arg line="-p2.os ${p2.os}" />
-			<arg line="-p2.ws ${p2.ws}" />
-			<arg line="-p2.arch ${p2.arch}" />
-			<arg line="-roaming" />
-			<arg line="-profile ${p2.director.profile}" />
-			<arg line="${p2.director.extraArgs}" />
-			<arg line="-metadataRepository file:${p2.repo}" />
-			<arg line="-artifactRepository file:${p2.repo}" />
-			<arg line="-metadataRepositoryName ${p2.repo.name}" />
-			<arg line="-artifactRepositoryName ${p2.repo.name}" />
-			<arg line="-destination ${p2.director.install.path}" />
-			<arg line="-bundlepool ${p2.director.install.path}" />
-			<arg line="-vmargs" />
-			<arg line="-Declipse.p2.data.area=${p2.director.install.path}/p2" />
-			<arg line="-Declipse.p2.MD5Check=false" />
-			<arg line="-Declipse.p2.profile=profile" />
-			<sysproperty key="osgi.configuration.area" value="${p2.director.configArea}" />
-		</java>
+		<ant antfile="${eclipse.pdebuild.scripts}/genericTargets.xml" target="runDirector" inheritAll="true">
+			<property name="p2.repo" value="file:${p2.repo}" />
+			<property name="p2.director.iu" value="${p2.director.installIU}" />
+			<property name="p2.director.installPath" value="${p2.director.install.path}" />
+			<property name="os" value="p2.os" />
+			<property name="ws" value="p2.ws" />
+			<property name="arch" value="p2.arch" />
+			<property name="p2.director.log" value="${directorlog}" />
+			<property name="equinoxLauncherJar" value="${base.builder}/plugins/org.eclipse.equinox.launcher.jar" />
+		</ant>
 		<echo message="director ${p2.director.install.path}" file="${directorlog}" append="true" />
 		<echo message="${directorcode}" file="${directorlog}" append="true" />
 	</target>
+
+
+
 
 
 	<target name="zip.install">
