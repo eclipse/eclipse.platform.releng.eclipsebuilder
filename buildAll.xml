@@ -57,6 +57,12 @@
 
 	<property name="p2.build.repo" value="file:${buildDirectory}/buildRepo" />
 
+	<!--set local mirror location depending if hudson is running -->
+	<condition property="${localmirror}" value="download.eclipse.org">
+		<equals arg1="${hudson}" arg2="true" />
+	</condition>
+	<property name="${localmirror}" value="fullmoon.ottawa.ibm.com" />
+
 	<target name="main" depends="init">
 		<antcall target="buildEclipseSourceDrops" />
 		<antcall target="buildMasterFeature" />
@@ -162,18 +168,18 @@
 		</ant>
 		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="generate">
 			<property name="builder" value="${eclipse.build.configs}/master" />
-		</ant> 
+		</ant>
 		<!--fetch source and generate scripts for eclipse SDK-->
 		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="preBuild">
 			<property name="builder" value="${eclipse.build.configs}/sdk" />
 		</ant>
 		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="fetch">
 			<property name="builder" value="${eclipse.build.configs}/sdk" />
-		</ant>		
+		</ant>
 		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="generate">
 			<property name="builder" value="${eclipse.build.configs}/sdk" />
 		</ant>
-		
+
 		<replace file="${eclipse.build.configs}/sdk/srcBuild/build.properties" token="@build@" value="${buildId}" />
 		<replace file="${eclipse.build.configs}/sdk/srcBuild/build" token="@build@" value="${buildId}" />
 		<condition property="builderTag" value="v${buildId}">
@@ -393,7 +399,7 @@
 		<property name="report_directory_location" value="${report}/apitoolsverifications/xml" />
 		<property name="3_4_reference_location" value="${reference}/eclipse-SDK-3.4-win32.zip" />
 		<exec executable="/usr/bin/wget" dir="${reference}" output="${reference}/error.txt" failonerror="false" os="Linux">
-			<arg line="-q -O  ${3_4_reference_location} http://fullmoon.ottawa.ibm.com/downloads/drops/R-3.5-200906111540/eclipse-SDK-3.5-win32.zip" />
+			<arg line="-q -O  ${3_4_reference_location} http://${localmirror}/eclipse/downloads/drops/R-3.5-200906111540/eclipse-SDK-3.5-win32.zip" />
 		</exec>
 		<apitooling.analysis baseline="${3_4_reference_location}" profile="${current_location}" report="${report_directory_location}" filters="${filter_store}" excludelist="${exclude_list_external_location}" debug="true" />
 		<apitooling.analysis_reportconversion xmlfiles="${report_directory_location}" debug="true" htmlfiles="${html_directory_location}" />

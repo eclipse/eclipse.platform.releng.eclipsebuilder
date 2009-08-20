@@ -181,9 +181,9 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Steps to do before fetching the build elements -->
 	<!-- ===================================================================== -->
 
-	<target name="preFetch" unless="${hudson}">
+	<target name="preFetch">
 		<!-- <mkdir dir="${buildDirectory}/baseLocation"/> -->
-		<replace file="${buildDirectory}/maps/org.eclipse.releng/maps/orbit.map" value="fullmoon.ottawa.ibm.com" token="download.eclipse.org" />
+		<replace file="${buildDirectory}/maps/org.eclipse.releng/maps/orbit.map" value="${localmirror}" token="download.eclipse.org" />
 	</target>
 
 	<target name="updateproperties" unless="updateproperties">
