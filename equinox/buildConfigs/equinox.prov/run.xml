@@ -749,10 +749,6 @@
 		<echo message="${directorcode}" file="${directorlog}" append="true" />
 	</target>
 
-
-
-
-
 	<target name="zip.install">
 
 		<property name="output.dir" value="${equinoxPostingDirectory}/${buildLabel}" />
