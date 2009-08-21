@@ -739,9 +739,9 @@
 			<property name="p2.repo" value="file:${p2.repo}" />
 			<property name="p2.director.iu" value="${p2.director.installIU}" />
 			<property name="p2.director.installPath" value="${p2.director.install.path}" />
-			<property name="os" value="p2.os" />
-			<property name="ws" value="p2.ws" />
-			<property name="arch" value="p2.arch" />
+			<property name="os" value="${p2.os}" />
+			<property name="ws" value="${p2.ws}" />
+			<property name="arch" value="${p2.arch}" />
 			<property name="p2.director.log" value="${directorlog}" />
 			<property name="equinoxLauncherJar" value="${base.builder}/plugins/org.eclipse.equinox.launcher.jar" />
 		</ant>
