@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?pde version="3.4"?>
+<?pde version="3.5"?>
 
-<product name="Eclipse Platform SDK" id="org.eclipse.platform.ide" application="org.eclipse.ui.ide.workbench" version="3.6.0.@qualifier@" useFeatures="true">
+<product name="Eclipse Platform SDK" uid="org.eclipse.platform.sdk" id="org.eclipse.platform.ide" application="org.eclipse.ui.ide.workbench" version="3.6.0.@qualifier@" useFeatures="true" includeLaunchers="true">
 
    <configIni use="default">
    </configIni>
 
-  <launcherArgs>
+   <launcherArgs>
       <programArgs>-showsplash org.eclipse.platform --launcher.XXMaxPermSize 256m</programArgs>
       <vmArgs>-Xms40m -Xmx384m</vmArgs>
       <vmArgsMac>-Xdock:icon=../Resources/Eclipse.icns -XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
@@ -33,7 +33,7 @@
       <feature id="org.eclipse.equinox.p2.user.ui"/>
       <feature id="org.eclipse.rcp.configuration"/>
    </features>
-   
+
    <configurations>
       <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="4" />
       <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="2" />
@@ -41,9 +41,6 @@
       <plugin id="org.eclipse.equinox.p2.reconciler.dropins" autoStart="true" startLevel="4" />
       <plugin id="org.eclipse.equinox.simpleconfigurator" autoStart="true" startLevel="1" />
       <plugin id="org.eclipse.update.configurator" autoStart="true" startLevel="3" />
-      <property name="org.eclipse.update.reconcile" value="false" />                                        
-      <property name="osgi.bundles.defaultStartLevel" value="4" />   
-      <property name="eclipse.buildId" value="@qualifier@"/>
    </configurations>
 
 </product>
