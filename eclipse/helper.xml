@@ -370,6 +370,9 @@
 		<performanceResults xmlDirectoryName="${postingDirectory}/${buildLabel}/performance/xml" dropDirectoryName="${postingDirectory}/${buildLabel}" testResultsTemplateFileName="${publishingContent}/templateFiles/performance.php.template" testResultsHtmlFileName="performance/performance.php" hrefTestResultsTargetPath="html" testManifestFileName="${publishingContent}/performanceTestManifest.xml" />
 
 		<replace file="${postingDirectory}/${buildLabel}/performance/performance.php" token="@buildType@" value="${buildType}" />
+		<copy todir="/home/users/ecperf/data/" failonerror="false" overwrite="true">
+			<fileset dir=" /builds/transfer/files/master/data/v35" />
+		</copy>
 	</target>
 
 	<target name="verifyCompile" if="eclipse.running">
