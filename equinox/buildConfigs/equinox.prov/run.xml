@@ -22,7 +22,7 @@
 			<equals arg1="${os.arch}" arg2="i386" />
 		</condition>
 		<property name="rcp.archive" value="" />
-		<property name="icu.base.archive" value="${postingDirectory}/${buildLabel}/com.ibm.icu.base-${buildId}.zip" />
+		<!-- <property name="icu.base.archive" value="${postingDirectory}/${buildLabel}/com.ibm.icu.base-${buildId}.zip" /> -->
 
 		<property name="p2.agent.install.win32" value="${p2.output.base}/agent.install.win32" />
 		<mkdir dir="${p2.agent.install.win32}" />
@@ -120,19 +120,16 @@
 		<property name="p2.platformsdk.install.macosx.cocoa.x86_64" value="${p2.output.base}/platformsdk.install.macosx.cocoa.x86_64" />
 		<mkdir dir="${p2.platformsdk.install.macosx.cocoa.x86_64}" />
 
-		<property name="base" value="${p2.output.base}/base" />
-		<mkdir dir="${base}" />
+		<!-- <property name="base" value="${p2.output.base}/base" />
+		<mkdir dir="${base}" /> -->
 
-		<property file="build.properties" />
-
-		<property name="repo" value="${buildDirectory}/repo" />
-		<mkdir dir="${repo}" />
+		<property file="build.properties" />	
 		<property name="p2.flavor" value="tooling" />
 		<property name="p2.agent.version" value="1.0.100.${buildId}" />
 	</target>
 
 	<target name="build" depends="init">
-		<antcall target="extract">
+<!--		<antcall target="extract">
 			<param name="extract-src" value="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip" />
 			<param name="extract-dest" value="${base}" />
 		</antcall>
@@ -146,7 +143,7 @@
 			<fileset dir="${base}/eclipse/plugins">
 				<include name="**/com.ibm.icu_*.jar" />
 			</fileset>
-		</delete>
+		</delete> -->
 
 		<parallel failonany="true" threadCount='4'>
 			<antcall target="provision.agent" />
