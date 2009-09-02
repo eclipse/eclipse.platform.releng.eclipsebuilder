@@ -7,7 +7,7 @@
 	<!-- ===================================================================== -->
 	<target name="allElements">
 
-		<ant antfile="${genericTargets}" target="${target}" >
+		<ant antfile="${genericTargets}" target="${target}">
 			<property name="type" value="feature" />
 			<property name="id" value="master-ecf" />
 		</ant>
@@ -19,9 +19,9 @@
 	<!-- ${assembleScriptName}) but may also add pre and post processing -->
 	<!-- Add one target for each root element and each configuration -->
 	<!-- ===================================================================== -->
-	
+
 	<target name="assemble.master-ecf.group.group.group">
-		<property name="archiveName" value="master-ecf-feature-${buildId}.zip"/>
+		<property name="archiveName" value="master-ecf-feature-${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 
@@ -42,18 +42,14 @@
 		<property name="mapCvsRoot" value=":pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse" />
 
 		<property name="mapVersionTag" value="HEAD" />
-		<cvs cvsRoot="${mapCvsRoot}"
-		package="org.eclipse.releng"
-		dest="${buildDirectory}/maps"
-		tag="${mapVersionTag}"
-	/>
+		<cvs cvsRoot="${mapCvsRoot}" package="org.eclipse.releng" dest="${buildDirectory}/maps" tag="${mapVersionTag}" />
 		<!--tag the map files project-->
 		<antcall target="tagMapFiles" />
 		<antcall target="getPrebuiltElements" />
 	</target>
 
 	<target name="compareMapFiles" if="compareMaps">
-		<property file="${mapTag.properties}"/>
+		<property file="${mapTag.properties}" />
 		<property name="cvsDiffFile" value="${buildDirectory}/cvsDiff.txt" />
 		<cvs cvsRoot="${mapCvsRoot}" dest="${buildDirectory}/maps" command="diff -w -r ${lastMapTag}" output="${cvsDiffFile}" />
 		<modifiedMaps mapDiffFile="${cvsDiffFile}" />
@@ -67,7 +63,7 @@
 		<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag ${buildId}" />
 	</target>
 
-	<target name="getPrebuiltElements">	
+	<target name="getPrebuiltElements">
 	</target>
 
 	<!-- ===================================================================== -->
@@ -85,7 +81,8 @@
 	<!-- ===================================================================== -->
 	<!-- Steps to do before fetching the build elements -->
 	<!-- ===================================================================== -->
-	<target name="preFetch">		
+	<target name="preFetch">
+		<replace file="${buildDirectory}/maps/org.eclipse.releng/maps/orbit.map" value="${localmirror}" token="download.eclipse.org" />
 	</target>
 
 	<!-- ===================================================================== -->
@@ -148,7 +145,7 @@
 	<!-- Steps to do after everything is built and assembled -->
 	<!-- (e.g., testing, posting, emailing, ...) -->
 	<!-- ===================================================================== -->
-	<target name="postBuild">		
+	<target name="postBuild">
 	</target>
 
 	<!-- ===================================================================== -->
