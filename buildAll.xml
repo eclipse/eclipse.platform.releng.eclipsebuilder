@@ -384,7 +384,7 @@
 		<!--	<apitooling.apifreeze_reportconversion xmlfile="${report_location}" debug="true" /> -->
 		<property name="filter_store" value="${buildDirectory}/apifilters" />
 		<mkdir dir="${filter_store}" />
-
+		<property name="exclude_list_external_location" value="${buildDirectory}/maps/org.eclipse.releng/apiexclude/exclude_list_external.txt" />
 		<copy todir="${filter_store}">
 			<fileset dir="${buildDirectory}/plugins" includes="**/.settings/.api_filters" />
 			<regexpmapper from="^(org.eclipse.*\/)(\.settings\/)(\.api_filters)" to="\1\3" />
