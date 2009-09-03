@@ -357,11 +357,6 @@
 		<effectedFile id="RCPSDKW"></effectedFile>
 	</logFile>
 	
-	<logFile name="plugins\org.eclipse.jdt.ui.examples.projects_*\jdtexamples.jar.bin.xml" type="compile">
-		<effectedFile id="EW"></effectedFile>
-		<effectedFile id="EA"></effectedFile>
-	</logFile>
-	
 	<logFile name="plugins\org.eclipse.scripting.examples_*\scriptex1.jar.bin.xml" type="compile">
 		<effectedFile id="EW"></effectedFile>
 		<effectedFile id="EA"></effectedFile>
