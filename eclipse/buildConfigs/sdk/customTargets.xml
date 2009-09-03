@@ -96,7 +96,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	</ant-->
 	</target>
 
-	<target name="assemble.org.eclipse.sdk.hpux.motif.PA_RISC" />
 	<target name="assemble.org.eclipse.sdk.solaris.motif.sparc" />
 	<target name="assemble.org.eclipse.sdk.gtk.solaris.x86" />
 	<target name="assemble.org.eclipse.sdk.gtk.linux.s390" />
