@@ -11,8 +11,12 @@
 		</copy>
 
 		<antcall target="updateTestManifests" />
-		<available classname="org.eclipse.releng.generators.EclipseTestResultsGenerator" property="class" value="org.eclipse.releng.generators.EclipseTestResultsGenerator" />
-		<taskdef name="indexResults" classname="${class}" />
+		<condition property="generatorClass" value="org.eclipse.releng.generators.EclipseTestResultsGeneratorNoMail">
+			<equals arg1="${hudson}" arg2="true" />
+		</condition>
+		<property name="generatorClass" value="org.eclipse.releng.generators.EclipseTestResultsGenerator" />
+
+		<available classname="${generatorClass}" property="class" value="${generatorClass}" />
 
 		<!-- generate md5s and sha1s for bundle -->
 		<mkdir dir="${equinoxPostingDirectory}/${buildLabel}/checksum" />
