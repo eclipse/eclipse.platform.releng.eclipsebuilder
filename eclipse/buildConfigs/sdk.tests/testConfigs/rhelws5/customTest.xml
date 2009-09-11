@@ -34,6 +34,11 @@
 		<exec dir="." executable="${copyClient}">
 			<arg line="-r ${postingDirectory}/${buildId}/${runtimePlatform} ${testMachine}:${executionDir}" />
 		</exec>
+
+		<!--copy previous platform runtime needed to run p2 tests-->
+		<exec dir="." executable="${copyClient}">
+			<arg line="-r ${previousPlatformZips}/${previousRuntimePlatform} ${testMachine}:${executionDir}" />
+		</exec>
 	</target>
 
 	<target name="installVm">

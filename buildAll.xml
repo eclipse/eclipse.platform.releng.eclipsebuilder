@@ -55,7 +55,7 @@
 
 	<property name="buildRepo" value="${updateSite}/${buildId}" />
 
-	<property name="p2.build.repo" value="file:${buildDirectory}/buildRepo" />	
+	<property name="p2.build.repo" value="file:${buildDirectory}/buildRepo" />
 
 	<target name="main" depends="init">
 		<antcall target="buildEclipseSourceDrops" />
@@ -121,6 +121,15 @@
 			<equals arg1="${hudson}" arg2="true" />
 		</condition>
 		<property name="localmirror" value="fullmoon.ottawa.ibm.com" />
+		<condition property="org.eclipse.equinox.p2.tests.current.build.repo " value="http://${localmirror}/eclipse/updates/3.6-I-builds/${buildId}">
+			<equals arg1="${buildType}" arg2="I" />
+		</condition>
+		<condition property="org.eclipse.equinox.p2.tests.current.build.repo " value="http://${localmirror}/eclipse/updates/3.6.x/${buildId}">
+			<equals arg1="${buildType}" arg2="M" />
+		</condition>
+		<property name="org.eclipse.equinox.p2.tests.current.build.repo " value="http://${localmirror}/eclipse/updates/3.6-N-builds/${buildId}" />	
+		<property name="previousPlatformZips" value="${buildDirectory}/previousPlatformZips" />
+		<mkdir dir="${previousPlatformZips}" />
 	</target>
 
 	<target name="buildECFMasterFeature">
@@ -442,7 +451,7 @@
 		<replace token="@qualifier@" file="${buildDirectory}/plugins/org.eclipse.equinox.p2.ui.admin.rcp/rcp.product" value="${buildId}" />
 		<replace token="@qualifier@" file="${eclipse.build.configs}/rcp/rcp.product" value="${buildId}" />
 		<replace token="@qualifier@" file="${eclipse.build.configs}/rcp.sdk/rcp.product" value="${buildId}" />
-		<replace token="@qualifier@" file="${eclipse.build.configs}/rcp.config/feature.xml" value="${buildId}" />	
+		<replace token="@qualifier@" file="${eclipse.build.configs}/rcp.config/feature.xml" value="${buildId}" />
 		<delete dir="${reposource}" />
 		<mkdir dir="${reposource}" />
 		<exec executable="unzip" dir=".">
