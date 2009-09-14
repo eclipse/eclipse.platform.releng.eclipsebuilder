@@ -83,7 +83,6 @@
 
 
 	<target name="init" depends="setRuntimeArchive">
-
 		<mkdir dir="${results}/xml" />
 		<mkdir dir="${results}/html" />
 		<mkdir dir="${junit-report-output}" />
@@ -239,6 +238,17 @@
 				<equals arg1="${arch}" arg2="x86" />
 			</and>
 		</condition>
+	</target>
+
+	<target name="setRepo">
+		<property name="localmirror" value="fullmoon.ottawa.ibm.com" />
+		<condition property="org.eclipse.equinox.p2.tests.current.build.repo " value="http://${localmirror}/eclipse/updates/3.6-I-builds/${buildId}">
+			<equals arg1="${buildType}" arg2="I" />
+		</condition>
+		<condition property="org.eclipse.equinox.p2.tests.current.build.repo " value="http://${localmirror}/eclipse/updates/3.6.x/${buildId}">
+			<equals arg1="${buildType}" arg2="M" />
+		</condition>
+		<property name="org.eclipse.equinox.p2.tests.current.build.repo " value="http://${localmirror}/eclipse/updates/3.6-N-builds/${buildId}" />
 	</target>
 
 	<target name="setRuntimePreviousPlatformArchive">
@@ -600,7 +610,7 @@
 		<runTests testPlugin="org.eclipse.equinox.security.tests" />
 	</target>
 
-	<target name="equinoxp2" depends="setJVMProperties,setRuntimePlatformArchive,setRuntimePreviousPlatformArchive">
+	<target name="equinoxp2" depends="setJVMProperties,setRuntimePlatformArchive,setRuntimePreviousPlatformArchive,setRepo">
 		<property name="jvm" value="${J2SE-5.0}" />
 		<!--only run test if J2SE-5.0 property  set-->
 		<condition property="skip.test">
