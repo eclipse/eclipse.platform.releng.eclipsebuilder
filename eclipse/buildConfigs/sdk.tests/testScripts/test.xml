@@ -214,67 +214,7 @@
 				<equals arg1="${arch}" arg2="ppc" />
 			</and>
 		</condition>
-	</target>
-
-	<target name="setRuntimePlatformArchive">
-		<condition property="org.eclipse.equinox.p2.reconciler.tests.platform.archive" value="c:\\buildtest\\${buildId}\\eclipse-testing\\eclipse-platform-${buildId}-win32.zip">
-			<and>
-				<equals arg1="${os}" arg2="win32" />
-				<equals arg1="${ws}" arg2="win32" />
-				<equals arg1="${arch}" arg2="x86" />
-			</and>
-		</condition>
-		<condition property="org.eclipse.equinox.p2.reconciler.tests.platform.archive" value="/buildtest/${buildId}/eclipse-testing/eclipse-platform-${buildId}-linux-gtk.tar.gz">
-			<and>
-				<equals arg1="${os}" arg2="linux" />
-				<equals arg1="${ws}" arg2="gtk" />
-				<equals arg1="${arch}" arg2="x86" />
-			</and>
-		</condition>
-		<condition property="org.eclipse.equinox.p2.reconciler.tests.platform.archive" value="/Users/sdimitro/buildtest/buildtest/${buildId}/eclipse-testing/eclipse-platform-${buildId}-macosx-cocoa.tar.gz">
-			<and>
-				<equals arg1="${os}" arg2="macosx" />
-				<equals arg1="${ws}" arg2="cocoa" />
-				<equals arg1="${arch}" arg2="x86" />
-			</and>
-		</condition>
-	</target>
-
-	<target name="setRepo">
-		<property name="localmirror" value="fullmoon.ottawa.ibm.com" />
-		<condition property="org.eclipse.equinox.p2.tests.current.build.repo " value="http://${localmirror}/eclipse/updates/3.6-I-builds/${buildId}">
-			<equals arg1="${buildType}" arg2="I" />
-		</condition>
-		<condition property="org.eclipse.equinox.p2.tests.current.build.repo " value="http://${localmirror}/eclipse/updates/3.6.x/${buildId}">
-			<equals arg1="${buildType}" arg2="M" />
-		</condition>
-		<property name="org.eclipse.equinox.p2.tests.current.build.repo " value="http://${localmirror}/eclipse/updates/3.6-N-builds/${buildId}" />
-	</target>
-
-	<target name="setRuntimePreviousPlatformArchive">
-		<condition property="org.eclipse.equinox.p2.reconciler.tests.35.platform.archive" value="c:\\buildtest\\${buildId}\\eclipse-testing\\eclipse-platform-3.5-win32.zip">
-			<and>
-				<equals arg1="${os}" arg2="win32" />
-				<equals arg1="${ws}" arg2="win32" />
-				<equals arg1="${arch}" arg2="x86" />
-			</and>
-		</condition>
-		<condition property="org.eclipse.equinox.p2.reconciler.tests.35.platform.archive" value="/buildtest/${buildId}/eclipse-testing/eclipse-platform-3.5-linux-gtk.tar.gz">
-			<and>
-				<equals arg1="${os}" arg2="linux" />
-				<equals arg1="${ws}" arg2="gtk" />
-				<equals arg1="${arch}" arg2="x86" />
-			</and>
-		</condition>
-		<condition property="org.eclipse.equinox.p2.reconciler.tests.35.platform.archive" value="/Users/sdimitro/buildtest/buildtest/${buildId}/eclipse-testing/eclipse-platform-3.5-macosx-cocoa.tar.gz">
-			<and>
-				<equals arg1="${os}" arg2="macosx" />
-				<equals arg1="${ws}" arg2="cocoa" />
-				<equals arg1="${arch}" arg2="x86" />
-			</and>
-		</condition>
-	</target>
-
+	</target>	
 
 	<target name="setJVMProperties" depends="setJVMfromUserSpecified">
 		<!--enable tests requiring 1.5 or 1.6 vms to run if running vm level detected matches required execution environment-->
@@ -610,7 +550,7 @@
 		<runTests testPlugin="org.eclipse.equinox.security.tests" />
 	</target>
 
-	<target name="equinoxp2" depends="setJVMProperties,setRuntimePlatformArchive,setRuntimePreviousPlatformArchive,setRepo">
+	<target name="equinoxp2" depends="setJVMProperties">
 		<property name="jvm" value="${J2SE-5.0}" />
 		<!--only run test if J2SE-5.0 property  set-->
 		<condition property="skip.test">
