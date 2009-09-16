@@ -1,7 +1,7 @@
 #!/bin/sh
 
-mkdir $WORKSPACE/builds
-cd $WORKSPACE/builds
+mkdir $WORKSPACE/$BUILD_ID/builds
+cd $WORKSPACE/$BUILD_ID/builds
 mkdir -p $WORKSPACE/$BUILD_ID/builds/N
 mkdir -p $WORKSPACE/$BUILD_ID/builds/transfer/files/testUpdates-N
 $WORKSPACE/$BUILD_ID/bootstrapHudson.sh -test -skipTest -buildDirectory $WORKSPACE/$BUILD_ID/builds/N -skipRSS -hudson -skipPack -updateSite $WORKSPACE/builds/transfer/files/testUpdates-N N
