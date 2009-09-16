@@ -121,13 +121,13 @@
 			<equals arg1="${hudson}" arg2="true" />
 		</condition>
 		<property name="localmirror" value="fullmoon.ottawa.ibm.com" />
-		<condition property="org.eclipse.equinox.p2.tests.current.build.repo " value="http://${localmirror}/eclipse/updates/3.6-I-builds/${buildId}">
+		<condition property="org.eclipse.equinox.p2.tests.current.build.repo" value="http://${localmirror}/eclipse/updates/3.6-I-builds/${buildId}">
 			<equals arg1="${buildType}" arg2="I" />
 		</condition>
-		<condition property="org.eclipse.equinox.p2.tests.current.build.repo " value="http://${localmirror}/eclipse/updates/3.6.x/${buildId}">
+		<condition property="org.eclipse.equinox.p2.tests.current.build.repo" value="http://${localmirror}/eclipse/updates/3.6.x/${buildId}">
 			<equals arg1="${buildType}" arg2="M" />
 		</condition>
-		<property name="org.eclipse.equinox.p2.tests.current.build.repo " value="http://${localmirror}/eclipse/updates/3.6-N-builds/${buildId}" />	
+		<property name="org.eclipse.equinox.p2.tests.current.build.repo" value="http://${localmirror}/eclipse/updates/3.6-N-builds/${buildId}" />	
 		<property name="previousPlatformZips" value="${buildDirectory}/previousPlatformZips" />
 		<mkdir dir="${previousPlatformZips}" />
 	</target>
