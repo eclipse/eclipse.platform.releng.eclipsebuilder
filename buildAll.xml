@@ -121,13 +121,17 @@
 			<equals arg1="${hudson}" arg2="true" />
 		</condition>
 		<property name="localmirror" value="fullmoon.ottawa.ibm.com" />
-		<condition property="org.eclipse.equinox.p2.tests.current.build.repo" value="http://${localmirror}/eclipse/updates/3.6-I-builds/${buildId}">
+
+		<replace token="@localmirror@" file="${basedir}/repos.properties" value="${localmirror}" />
+		<loadproperties srcFile="${buildDirectory}/repos.properties" />
+		<condition property="p2RepoURL" value="${p2repoI}">
 			<equals arg1="${buildType}" arg2="I" />
 		</condition>
-		<condition property="org.eclipse.equinox.p2.tests.current.build.repo" value="http://${localmirror}/eclipse/updates/3.6.x/${buildId}">
+		<condition property="p2RepoURL" value="${p2repoM}">
 			<equals arg1="${buildType}" arg2="M" />
 		</condition>
-		<property name="org.eclipse.equinox.p2.tests.current.build.repo" value="http://${localmirror}/eclipse/updates/3.6-N-builds/${buildId}" />	
+		<property name="p2RepoURL" value="${p2repoN}" />
+		<property name="org.eclipse.equinox.p2.tests.current.build.repo" value="${p2RepoURL}/${buildId}" />	
 		<property name="previousPlatformZips" value="${buildDirectory}/previousPlatformZips" />
 		<mkdir dir="${previousPlatformZips}" />
 	</target>
@@ -597,8 +601,14 @@
 				<repository location="file:${updateSite}" />
 			</comparator>
 		</p2.mirror> -->
+
+		<condition property="repoBaseline" value="p2RepoURL">
+			<equals arg1="${hudson}" arg2="true" />
+		</condition>
+		<property name="${repoBaseline}" value="file:${updateSite}" />
+
 		<p2.metadata.mirror source="file:${reposource}" writeMode="append" destinationName="${p2.repo.name}" destination="file:${buildRepo}" />
-		<p2.artifact.mirror source="file:${reposource}" baseline="file:${updateSite}" comparatorId="org.eclipse.equinox.p2.repository.tools.jar.comparator" destinationName="${p2.repo.name}" destination="file:${buildRepo}" ignoreErrors="true" comparatorLog="${buildlogs}/comparatorlog.txt" log="${buildlogs}/mirrorlog.txt" />
+		<p2.artifact.mirror source="file:${reposource}" baseline="${repoBaseline}" comparatorId="org.eclipse.equinox.p2.repository.tools.jar.comparator" destinationName="${p2.repo.name}" destination="file:${buildRepo}" ignoreErrors="true" comparatorLog="${buildlogs}/comparatorlog.txt" log="${buildlogs}/mirrorlog.txt" />
 		<copy todir="${buildRepo}">
 			<fileset file="${eclipse.build.configs}/../../extras/sdkinstaller.properties" />
 		</copy>
