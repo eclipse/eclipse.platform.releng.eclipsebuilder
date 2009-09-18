@@ -123,13 +123,13 @@
 		<!-- <property name="base" value="${p2.output.base}/base" />
 		<mkdir dir="${base}" /> -->
 
-		<property file="build.properties" />	
+		<property file="build.properties" />
 		<property name="p2.flavor" value="tooling" />
 		<property name="p2.agent.version" value="1.0.100.${buildId}" />
 	</target>
 
 	<target name="build" depends="init">
-<!--		<antcall target="extract">
+		<!--		<antcall target="extract">
 			<param name="extract-src" value="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip" />
 			<param name="extract-dest" value="${base}" />
 		</antcall>
@@ -165,6 +165,11 @@
 			</fileset>
 		</copy>
 		<p2.process.artifacts repositoryPath="file://${buildRepo}" pack="true" />
+		<delete>
+			<fileset dir="${buildRepo}">
+				<include name="plugins/com.ibm.icu*.jar.pack.gz" />
+			</fileset>
+		</delete>
 	</target>
 
 	<target name="provision.agent">

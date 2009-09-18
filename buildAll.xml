@@ -131,7 +131,7 @@
 			<equals arg1="${buildType}" arg2="M" />
 		</condition>
 		<property name="p2RepoURL" value="${p2repoN}" />
-		<property name="org.eclipse.equinox.p2.tests.current.build.repo" value="${p2RepoURL}/${buildId}" />	
+		<property name="org.eclipse.equinox.p2.tests.current.build.repo" value="${p2RepoURL}/${buildId}" />
 		<property name="previousPlatformZips" value="${buildDirectory}/previousPlatformZips" />
 		<mkdir dir="${previousPlatformZips}" />
 	</target>
@@ -229,6 +229,11 @@
 
 		<!-- <p2.process.artifacts repositoryPath="file://${reposource}" /> -->
 		<p2.process.artifacts repositoryPath="file://${reposource}" pack="true" />
+		<delete>
+			<fileset dir="${reposource}">
+				<include name="plugins/com.ibm.icu*.jar.pack.gz" />
+			</fileset>
+		</delete>
 	</target>
 
 	<target name="waitForChangedAttribs" unless="attribs.changed">
