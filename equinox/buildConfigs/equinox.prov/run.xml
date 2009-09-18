@@ -22,8 +22,7 @@
 			<equals arg1="${os.arch}" arg2="i386" />
 		</condition>
 		<property name="rcp.archive" value="" />
-		<!-- <property name="icu.base.archive" value="${postingDirectory}/${buildLabel}/com.ibm.icu.base-${buildId}.zip" /> -->
-
+	
 		<property name="p2.agent.install.win32" value="${p2.output.base}/agent.install.win32" />
 		<mkdir dir="${p2.agent.install.win32}" />
 		<property name="p2.agent.install.linux" value="${p2.output.base}/agent.install.linux" />
