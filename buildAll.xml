@@ -123,7 +123,7 @@
 		<property name="localmirror" value="fullmoon.ottawa.ibm.com" />
 
 		<replace token="@localmirror@" file="${basedir}/repos.properties" value="${localmirror}" />
-		<loadproperties srcFile="${buildDirectory}/repos.properties" />
+		<loadproperties srcFile="${basedir}/repos.properties" />
 		<condition property="p2RepoURL" value="${p2repoI}">
 			<equals arg1="${buildType}" arg2="I" />
 		</condition>
