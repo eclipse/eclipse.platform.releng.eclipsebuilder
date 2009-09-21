@@ -78,13 +78,13 @@ buildLabel=""
 mapVersionTag=HEAD
 
 # directory in which to export builder projects
-builderDir=$WORKSPACE/$BUILD_ID/builds/eclipsebuilder
+builderDir=$WORKSPACE/builds/eclipsebuilder
 
 # buildtype determines whether map file tags are used as entered or are replaced with HEAD
 buildType=N
 
 # directory where to copy build
-postingDirectory=$WORKSPACE/$BUILD_ID/builds/transfer/files/master/downloads/drops
+postingDirectory=$WORKSPACE/builds/transfer/files/master/downloads/drops
 
 #directory for rss feed - not used 
 #rssDirectory=/builds/transfer/files/master
@@ -128,7 +128,7 @@ do
 		 		  		 		  -buildDirectory) builderDir="$2"; shift;;
 		 		  		 		  -notify) recipients="$2"; shift;;
 		 		 		 		  -textRecipients) textRecipients="$2"; shift;;
-		 		  		 		  -test) postingDirectory="$WORKSPACE/$BUILD_ID/builds/transfer/files/bogus/downloads/drops";testBuild="-Dtest=true";;
+		 		  		 		  -test) postingDirectory="$WORKSPACE/builds/transfer/files/bogus/downloads/drops";testBuild="-Dtest=true";;
 		 		  		 		  -builderTag) buildProjectTags="$2"; shift;;
 		 		  		 		  -compareMaps) compareMaps="-DcompareMaps=true";;
 		 		  		 		  -updateSite) updateSite="-DupdateSite=$2";shift;;
