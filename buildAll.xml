@@ -607,7 +607,7 @@
 			</comparator>
 		</p2.mirror> -->
 
-		<condition property="repoBaseline" value="p2RepoURL">
+		<condition property="repoBaseline" value="${p2RepoURL}">
 			<equals arg1="${hudson}" arg2="true" />
 		</condition>
 		<property name="repoBaseline" value="file:${updateSite}" />
