@@ -228,10 +228,12 @@
 		</java> -->
 
 		<!-- <p2.process.artifacts repositoryPath="file://${reposource}" /> -->
+		<copy file="${eclipse.build.configs}/../../extras/pack.properties" todir="${reposource}" />
 		<p2.process.artifacts repositoryPath="file://${reposource}" pack="true" />
 		<delete>
 			<fileset dir="${reposource}">
 				<include name="plugins/com.ibm.icu*.jar.pack.gz" />
+				<include name="pack.properties" />
 			</fileset>
 		</delete>
 	</target>

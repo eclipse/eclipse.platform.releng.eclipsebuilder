@@ -22,7 +22,7 @@
 			<equals arg1="${os.arch}" arg2="i386" />
 		</condition>
 		<property name="rcp.archive" value="" />
-	
+
 		<property name="p2.agent.install.win32" value="${p2.output.base}/agent.install.win32" />
 		<mkdir dir="${p2.agent.install.win32}" />
 		<property name="p2.agent.install.linux" value="${p2.output.base}/agent.install.linux" />
@@ -163,12 +163,15 @@
 				<include name="**/*.log" />
 			</fileset>
 		</copy>
+		<!-- not sure we need this step anymore -->
+		<!--		<copy file="${eclipse.build.configs}/../../extras/pack.properties" todir="${buildRepo}" />
 		<p2.process.artifacts repositoryPath="file://${buildRepo}" pack="true" />
 		<delete>
 			<fileset dir="${buildRepo}">
 				<include name="plugins/com.ibm.icu*.jar.pack.gz" />
+				<include name="pack.properties" />
 			</fileset>
-		</delete>
+		</delete> -->
 	</target>
 
 	<target name="provision.agent">
