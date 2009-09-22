@@ -214,7 +214,7 @@
 				<equals arg1="${arch}" arg2="ppc" />
 			</and>
 		</condition>
-	</target>	
+	</target>
 
 	<target name="setJVMProperties" depends="setJVMfromUserSpecified">
 		<!--enable tests requiring 1.5 or 1.6 vms to run if running vm level detected matches required execution environment-->
@@ -328,6 +328,10 @@
 
 	<target name="compare">
 		<runTests testPlugin="org.eclipse.compare.tests" />
+	</target>
+
+	<target name="debug">
+		<runTests testPlugin="org.eclipse.debug.tests" />
 	</target>
 
 	<target name="coreresources">
@@ -557,7 +561,7 @@
 			<not>
 				<isset property="J2SE-5.0" />
 			</not>
-		</condition>	
+		</condition>
 		<runTests testPlugin="org.eclipse.equinox.p2.tests" />
 	</target>
 
@@ -605,6 +609,7 @@
 		<antcall target="uircp" />
 		<antcall target="uiviews" />
 		<antcall target="jdtdebug" />
+		<antcall target="debug" />
 		<antcall target="jdtui" />
 		<antcall target="jdtuirefactoring" />
 		<antcall target="ltkuirefactoringtests" />
