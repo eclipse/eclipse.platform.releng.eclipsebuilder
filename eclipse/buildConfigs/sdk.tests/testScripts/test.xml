@@ -608,8 +608,7 @@
 		<antcall target="uiworkbenchtexteditor" />
 		<antcall target="uircp" />
 		<antcall target="uiviews" />
-		<antcall target="jdtdebug" />
-		<antcall target="debug" />
+		<antcall target="jdtdebug" />		
 		<antcall target="jdtui" />
 		<antcall target="jdtuirefactoring" />
 		<antcall target="ltkuirefactoringtests" />
@@ -635,5 +634,6 @@
 		<antcall target="pdeds" />
 		<antcall target="jdtcoremodel" />
 		<antcall target="uadoc" />
+		<antcall target="debug" />
 	</target>
 </project>
