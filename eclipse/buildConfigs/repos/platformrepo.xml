@@ -10,6 +10,7 @@
 			<iu id="org.eclipse.platform.feature.group" version="" />
 			<iu id="org.eclipse.equinox.p2.user.ui.feature.group" version="" />
 			<iu id="org.eclipse.rcp.configuration.feature.group" version="" />
+			<iu id="org.eclipse.equinox.executable.feature.group" version="" />				
 			<slicingOptions includeOptional="false" includeNonGreedy="false" />
 		</p2.mirror>
 		<antcall target="assembler">
