@@ -163,8 +163,8 @@
 			<arg line="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -x */features/master/* */features/master-ecf* */features/master-jetty* -d ${reposource}" />
 		</exec>
 		<property name="tempexec" value="${buildDirectory}/tempexec" />
-		<mkdir dir="${tempexec}" />
 		<delete dir="${tempexec}" />
+		<mkdir dir="${tempexec}" />	
 		<copy todir="${tempexec}">
 			<fileset dir="${reposource}">
 				<include name="features/org.eclipse.equinox.executable_*.jar" />
