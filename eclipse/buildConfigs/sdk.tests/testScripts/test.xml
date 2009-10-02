@@ -315,7 +315,7 @@
 
 	<target name="genResults">
 		<copy file="${eclipse-home}/${report}.xml" tofile="${results}/xml/${report}_${platform}.xml" failonerror="false" />
-		<style style="${eclipse-home}/dropins/eclipse/plugins/org.eclipse.test/JUNIT.XSL" basedir="${results}/xml" destdir="${results}/html" />
+		<xslt style="${eclipse-home}/dropins/eclipse/plugins/org.eclipse.test/JUNIT.XSL" basedir="${results}/xml" destdir="${results}/html" />
 	</target>
 
 	<target name="ant">
