@@ -297,7 +297,7 @@
 		<!--invoke sign script and wait-->
 		<echo message="invoke sign script and wait" />
 		<exec dir="." executable="ssh" output="signing.txt" append="true">
-			<arg line="build.eclipse.org &quot;cd ${stagingDirectory}; /usr/bin/sign ${stagingDirectory}/${archiveName} mail ${stagingDirectoryOutput}&quot;" />
+			<arg line="build.eclipse.org &quot;cd ${stagingDirectory}; /usr/bin/sign ${stagingDirectory}/${archiveName} ${stagingDirectoryOutput}&quot;" />
 		</exec>
 
 		<!--Wait for build to be available -->
