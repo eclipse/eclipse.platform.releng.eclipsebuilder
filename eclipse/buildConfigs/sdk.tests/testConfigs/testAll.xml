@@ -38,12 +38,12 @@
 				<param name="tester" value="${basedir}/macosx" />
 				<param name="cfgKey" value="macosx" />
 				<param name="markerName" value="eclipse-macosx-${buildId}" />
-			</antcall>	
-		    <antcall target="test">
+			</antcall>
+			<antcall target="test">
 				<param name="tester" value="${basedir}/rhelws5" />
 				<param name="cfgKey" value="rhelws5" />
 				<param name="markerName" value="eclipse-rhelws5-${buildId}" />
-			</antcall>  
+			</antcall>
 			<antcall target="test">
 				<param name="tester" value="${basedir}/win32xp" />
 				<param name="cfgKey" value="win32xp" />
@@ -53,7 +53,7 @@
 				<param name="tester" value="${basedir}/rhelws5-6.0" />
 				<param name="cfgKey" value="rhelws5-6.0" />
 				<param name="markerName" value="eclipse-rhelws5-6.0-${buildId}" />
-			</antcall>			
+			</antcall>
 			<antcall target="test">
 				<param name="tester" value="${basedir}/win32xp-6.0" />
 				<param name="cfgKey" value="win32xp-6.0" />
@@ -71,12 +71,17 @@
 		<property name="testResults" value="${postingDirectory}/${buildLabel}/performance" />
 		<mkdir dir="${testResults}" />
 
-		<parallel>			
+		<parallel>
 			<antcall target="test">
 				<param name="tester" value="${basedir}/win32xp-perf" />
 				<param name="cfgKey" value="win32xp-perf" />
 				<param name="markerName" value="eclipse-win32xp-perf-${buildId}" />
-			</antcall>			
+			</antcall>
+			<antcall target="test">
+				<param name="tester" value="${basedir}/win32xp2-perf" />
+				<param name="cfgKey" value="win32xp2-perf" />
+				<param name="markerName" value="eclipse-win32xp2-perf-${buildId}" />
+			</antcall>
 			<antcall target="test">
 				<param name="tester" value="${basedir}/rhelws5-perf" />
 				<param name="sleep" value="120" />
