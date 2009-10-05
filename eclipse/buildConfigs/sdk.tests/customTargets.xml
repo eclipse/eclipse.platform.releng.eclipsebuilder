@@ -1,61 +1,53 @@
-<project name="Build specific targets and properties" default="noDefault">
+<project name="Build specific targets and properties" default="noDefault" basedir=".">
 
 	<property name="postingDirectory" value="${buildDirectory}" />
-	<property name="archiveName" value="eclipse-junit-tests-${buildId}.zip" />
-	<property name="archiveFullPath" value="${buildDirectory}/${buildLabel}/${archiveName}" />
-	<property name="mapsRoot" value="${buildDirectory}/maps/org.eclipse.releng/maps" />
-
 
 	<!-- ===================================================================== -->
 	<!-- Run a given ${target} on all elements being built -->
-	<!-- Add on <ant> task for each top level element being built. -->
 	<!-- ===================================================================== -->
-	<available property="allElementsFile" file="${builder}/allElements.xml" value="${builder}/allElements.xml" />
-	<property name="allElementsFile" location="${eclipse.pdebuild.templates}/headless-build/allElements.xml" />
-
-	<import file="${allElementsFile}" />
 	<target name="allElements">
-		<antcall target="allElementsDelegator" />
+
+		<ant antfile="${genericTargets}" target="${target}">
+			<property name="type" value="feature" />
+			<property name="id" value="org.eclipse.sdk.tests" />
+		</ant>
 	</target>
 
 	<!-- ===================================================================== -->
+	<!-- Targets to assemble the built elements for particular configurations  -->
+	<!-- These generally call the generated assemble scripts (named in -->
+	<!-- ${assembleScriptName}) but may also add pre and post processing -->
+	<!-- Add one target for each root element and each configuration -->
 	<!-- ===================================================================== -->
-	<target name="getBaseComponents" depends="checkLocalBase" unless="skipBase">
-		<get src="${eclipseBaseURL}" dest="${buildDirectory}/../temp-base.zip" />
-		<unzip dest="${base}" overwrite="true" src="${buildDirectory}/../temp-base.zip" />
+
+	<target name="assemble.org.eclipse.sdk.tests.group.group.group">
+		<!-- workaround for Bug 127747 Grouped config build failing on missing group.group.group folder-->
+		<mkdir dir="${buildDirectory}/tmp/eclipse/group.group.group/eclipse" />
+		<property name="archiveName" value="eclipse-junit-tests-${buildId}.zip" />
+		<antcall target="assemble" />
 	</target>
 
-	<target name="checkLocalBase">
-		<available file="${base}" property="skipBase" />
+	<target name="assemble">
+		<ant antfile="${assembleScriptName}" />
 	</target>
-
 	<!-- ===================================================================== -->
 	<!-- Check out map files from correct repository -->
-	<!-- Replace values for mapsCheckoutTag as desired. -->
+	<!-- Replace values for cvsRoot, package and mapVersionTag as desired. -->
 	<!-- ===================================================================== -->
-	<target name="getMapFiles" depends="checkLocalMaps" unless="skipMaps">
+	<target name="checkLocal">
+		<available property="mapsLocal" file="${buildDirectory}/maps/org.eclipse.releng" />
+	</target>
+
+	<target name="getMapFiles" depends="checkLocal" unless="mapsLocal">
+
 		<!-- ***  change the repo info -->
 		<property name="mapCvsRoot" value=":pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse" />
-		<property name="mapsCheckoutTag" value="HEAD" />
-		<property name="mapsRepo" value="/cvsroot/eclipse" />
-		<cvs cvsRoot="${mapsRepo}" package="${mapsRoot}" dest="${buildDirectory}/maps" tag="${mapsCheckoutTag}" />
-		<!--compare the map files project-->
-		<antcall target="compareMapFiles" />
+
+		<property name="mapVersionTag" value="HEAD" />
+		<cvs cvsRoot="${mapCvsRoot}" package="org.eclipse.releng" dest="${buildDirectory}/maps" tag="${mapVersionTag}" />
 		<!--tag the map files project-->
 		<antcall target="tagMapFiles" />
-	</target>
-
-	<target name="checkLocalMaps">
-		<available property="skipMaps" file="${buildDirectory}/maps" />
-	</target>
-
-	<target name="tagMapFiles" if="tagMaps">
-		<!-- Stores tag on the filesystem so map files can be compared -->
-		<echo file="${mapTag.properties}">
-					lastMapTag=${buildId}
-			</echo>
-		<property name="mapsTagTag" value="${buildId}" />
-		<cvs dest="${buildDirectory}/maps/${mapsRoot}" command="tag ${mapsTagTag}" />
+		<antcall target="getPrebuiltElements" />
 	</target>
 
 	<target name="compareMapFiles" if="compareMaps">
@@ -65,24 +57,15 @@
 		<modifiedMaps mapDiffFile="${cvsDiffFile}" />
 	</target>
 
-	<!-- ===================================================================== -->
-
-	<target name="clean" unless="noclean">
-		<antcall target="allElements">
-			<param name="target" value="cleanElement" />
-		</antcall>
+	<target name="tagMapFiles" if="tagMaps">
+		<!-- Stores tag on the filesystem so map files can be compared -->
+		<echo file="${mapTag.properties}">
+	lastMapTag=${buildId}
+</echo>
+		<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag ${buildId}" />
 	</target>
 
-	<target name="gatherLogs">
-		<mkdir dir="${buildDirectory}/${buildLabel}/compilelogs" />
-		<antcall target="allElements">
-			<param name="target" value="gatherLogs" />
-		</antcall>
-		<unzip dest="${buildDirectory}/${buildLabel}/compilelogs" overwrite="true">
-			<fileset dir="${buildDirectory}/features">
-				<include name="**/*.log.zip" />
-			</fileset>
-		</unzip>
+	<target name="getPrebuiltElements">
 	</target>
 
 	<!-- ===================================================================== -->
@@ -95,7 +78,6 @@
 	<!-- Steps to do after setup but before starting the build proper -->
 	<!-- ===================================================================== -->
 	<target name="postSetup">
-		<antcall target="getBaseComponents" />
 	</target>
 
 	<!-- ===================================================================== -->
@@ -113,7 +95,7 @@
 	</target>
 
 	<!-- ===================================================================== -->
-	<!-- Steps to do after fetching the build elements -->
+	<!-- Steps to do after the fetch -->
 	<!-- ===================================================================== -->
 	<target name="postFetch">
 		<replace dir="${buildDirectory}/plugins" value="${buildId}" token="@buildid@">
@@ -122,29 +104,32 @@
 	</target>
 
 	<!-- ===================================================================== -->
-	<!-- Steps to do before the repositories are being processed -->
-	<!-- ===================================================================== -->
-	<target name="preProcessRepos">
-	</target>
-
-	<!-- ===================================================================== -->
-	<!-- Steps to do after the repositories have been processed -->
-	<!-- ===================================================================== -->
-	<target name="postProcessRepos">
-	</target>
-
-	<!-- ===================================================================== -->
-	<!-- Steps to do before generating the build scripts. -->
+	<!-- Steps to do before generating build scripts -->
 	<!-- ===================================================================== -->
 	<target name="preGenerate">
+
 	</target>
 
 	<!-- ===================================================================== -->
-	<!-- Steps to do after generating the build scripts. -->
+	<!-- Steps to do after generating the build scripts -->
 	<!-- ===================================================================== -->
 	<target name="postGenerate">
 		<antcall target="clean" />
 	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do before assembling -->
+	<!-- ===================================================================== -->
+	<target name="preAssemble">
+
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do after assembling-->
+	<!-- ===================================================================== -->
+	<target name="postAssemble">
+	</target>
+
 
 	<!-- ===================================================================== -->
 	<!-- Steps to do before running the build.xmls for the elements being built. -->
@@ -162,53 +147,37 @@
 		<antcall target="gatherLogs" />
 	</target>
 
-	<!-- ===================================================================== -->
-	<!-- Steps to do before running assemble. -->
-	<!-- ===================================================================== -->
-	<target name="preAssemble">
-	</target>
+	<target name="prePackage" />
+	<target name="postPackage" />
 
 	<!-- ===================================================================== -->
-	<!-- Steps to do after  running assemble. -->
-	<!-- ===================================================================== -->
-	<target name="postAssemble">
-	</target>
-
-	<!-- ===================================================================== -->
-	<!-- Steps to do before running package. -->
-	<!-- ===================================================================== -->
-	<target name="prePackage">
-	</target>
-
-	<!-- ===================================================================== -->
-	<!-- Steps to do after  running package. -->
-	<!-- ===================================================================== -->
-	<target name="postPackage">
-	</target>
-
-	<!-- ===================================================================== -->
-	<!-- Steps to do after the build is done. -->
+	<!-- Steps to do after everything is built and assembled -->
+	<!-- (e.g., testing, posting, emailing, ...) -->
 	<!-- ===================================================================== -->
 	<target name="postBuild">
-		<antcall target="gatherLogs" />
 		<antcall target="packageTestFramework" />
-	</target>
-
-	<!-- ===================================================================== -->
-	<!-- Steps to do to test the build results -->
-	<!-- ===================================================================== -->
-	<target name="test">
-	</target>
-
-	<!-- ===================================================================== -->
-	<!-- Steps to do to publish the build results -->
-	<!-- ===================================================================== -->
-	<target name="publish">
 	</target>
 
 	<!-- ===================================================================== -->
 	<!-- Helper targets -->
 	<!-- ===================================================================== -->
+	<target name="gatherLogs">
+		<mkdir dir="${postingDirectory}/${buildLabel}/compilelogs" />
+		<antcall target="allElements">
+			<param name="target" value="gatherLogs" />
+		</antcall>
+
+		<unzip dest="${postingDirectory}/${buildLabel}/compilelogs" overwrite="true">
+			<fileset dir="${buildDirectory}/features/org.eclipse.sdk.tests">
+				<include name="*.log.zip" />
+			</fileset>
+		</unzip>
+	</target>
+	<target name="clean" unless="noclean">
+		<antcall target="allElements">
+			<param name="target" value="cleanElement" />
+		</antcall>
+	</target>
 
 	<target name="packageTestFramework">
 		<!--package automated test framework used in Eclipse builds-->

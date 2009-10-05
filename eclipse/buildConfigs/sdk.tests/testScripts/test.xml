@@ -60,7 +60,7 @@
 		<antcall target="installTestPlugins" />
 	</target>
 
-<!--	<target name="installTestPlugins">
+	<target name="installTestPlugins">
 		<exec dir="." executable="unzip">
 			<arg line="-o -qq eclipse-junit-tests-*.zip				
 				eclipse/plugins/org.eclipse.test/*		
@@ -73,27 +73,7 @@
 				-d ${install}/eclipse/dropins/" />
 		</exec>
 		<antcall target="unzipderby" />
-	</target> -->
-	
-	<echo>-installIU ${testPlugin} +</echo>
-		<exec executable="${eclipse-home}/eclipse" failonerror="false" dir="${eclipse-home}" timeout="900000" output="${results}/director.log" resultproperty="directorcode">
-			<arg line="-vm	${java.home}/bin/java" />
-			<arg line="-application	org.eclipse.equinox.p2.director" />
-			<arg line="-nosplash" />
-			<arg line="--launcher.suppressErrors" />
-			<arg line="-consoleLog" />
-			<arg line="-flavor tooling" />
-			<arg line="-installIUs ${testPlugin},org.eclipse.test,org.eclipse.ant.optional.junit,org.eclipse.test.performance,org.eclipse.test.performance.win32,org.easymock" />
-			<arg line="-p2.os ${os}" />
-			<arg line="-p2.ws ${ws}" />
-			<arg line="-p2.arch ${arch}" />
-			<arg line="-roaming" />
-			<arg line="-profile SDKProfile" />
-			<arg line="-repository file:${repoLocation}" />
-			<arg line="-destination ${eclipse-home}" />
-			<arg line="-bundlepool ${eclipse-home}" />
- 		</exec>
- 		<antcall target="unzipderby" />
+	</target>
 
 	<target name="unzipderby" if="derby">
 		<exec dir="." executable="unzip">
