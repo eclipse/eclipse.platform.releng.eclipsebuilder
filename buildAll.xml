@@ -344,12 +344,9 @@
 		</exec>
 
 		<!--invoke sign script and wait-->
-		<echo message="invoke sign script and wait" />
+		<echo message="invoke sign script and wait" />		
 		<exec dir="." executable="${signexec}" output="signing.txt" append="true">
-			<arg line="${signhost} ${signquote}/bin/mkdir ${stagingDirectoryOutput}${signquote}" />
-		</exec>
-		<exec dir="." executable="${signexec}" output="signing.txt" append="true">
-			<arg line="${signhost} ${signquote}/usr/bin/sign ${stagingDirectory}/${archiveName} ${stagingDirectoryOutput}${signquote}" />
+			<arg line="${signhost} ${signquote}/usr/bin/sign ${stagingDirectory}/${archiveName} mail ${stagingDirectoryOutput}${signquote}" />
 		</exec>
 
 		<!--Wait for build to be available -->
