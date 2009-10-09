@@ -189,12 +189,13 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<concat destfile="${buildDirectory}/plugins/org.eclipse.platform/build.properties" append="true">qualifier=v${timestamp}</concat>
 		<concat destfile="${buildDirectory}/plugins/org.eclipse.sdk/build.properties" append="true">qualifier=v${timestamp}</concat>
 		<concat destfile="${buildDirectory}/plugins/org.eclipse.cvs/build.properties" append="true">qualifier=v${timestamp}</concat>
+		<concat destfile="${buildDirectory}/plugins/org.eclipse.help.base/build.properties" append="true">qualifier=v${timestamp}</concat>
 		<concat destfile="${buildDirectory}/plugins/org.eclipse.jdt/build.properties" append="true">qualifier=v${timestamp}</concat>
 		<concat destfile="${buildDirectory}/plugins/org.eclipse.rcp/build.properties" append="true">qualifier=v${timestamp}</concat>	
 		<concat destfile="${buildDirectory}/plugins/org.eclipse.pde/build.properties" append="true">qualifier=v${timestamp}</concat>
 		<property name="updateproperties" value="true" />
 	</target>
-	<!-- <concat destfile="${buildDirectory}/plugins/org.eclipse.help.base/build.properties" append="true">qualifier=v${timestamp}</concat> -->
+	
 
 	<!-- ===================================================================== -->
 	<!-- Steps to do after the fetch -->
