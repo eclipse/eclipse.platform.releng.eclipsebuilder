@@ -35,15 +35,8 @@
 	<!-- ===================================================================== -->
 
 	<target name="getMapFiles" depends="checkLocalMaps" unless="skipMaps">
-		<!-- ***  change the repo info -->
-		<property name="mapCvsRoot" value=":pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse" />
 		<property name="mapsCheckoutTag" value="HEAD" />
-		<property name="mapsRepo" value="/cvsroot/eclipse" />
 		<cvs cvsRoot="${mapsRepo}" package="${mapsRoot}" dest="${buildDirectory}/maps" tag="${mapsCheckoutTag}" />
-		<!--compare the map files project-->
-		<antcall target="compareMapFiles" />
-		<!--tag the map files project-->
-		<antcall target="tagMapFiles" />
 	</target>
 
 	<target name="checkLocalMaps">
@@ -51,11 +44,6 @@
 	</target>
 
 	<target name="tagMapFiles" if="tagMaps">
-		<!-- Stores tag on the filesystem so map files can be compared -->
-		<echo file="${mapTag.properties}">
-				lastMapTag=${buildId}
-		</echo>
-		<property name="mapsTagTag" value="${buildId}" />
 		<cvs dest="${buildDirectory}/maps/${mapsRoot}" command="tag ${mapsTagTag}" />
 	</target>
 
