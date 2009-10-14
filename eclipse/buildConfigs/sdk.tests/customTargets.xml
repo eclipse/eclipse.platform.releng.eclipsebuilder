@@ -51,7 +51,7 @@
 		<property name="cvsDiffFile" value="${buildDirectory}/cvsDiff.txt" />
 		<cvs cvsRoot="${mapCvsRoot}" dest="${buildDirectory}/maps" command="diff -w -r ${lastMapTag}" output="${cvsDiffFile}" />
 		<modifiedMaps mapDiffFile="${cvsDiffFile}" />
-	</target>	
+	</target>
 
 	<!-- ===================================================================== -->
 
@@ -200,13 +200,17 @@
 
 	<target name="packageTestFramework">
 		<!--package automated test framework used in Eclipse builds-->
-
 		<property name="workingDirectory" value="${buildDirectory}/test.assembly" />
-
-		<!--unzip the junit tests-->
-		<exec dir="${buildDirectory}/${buildLabel}" executable="unzip">
-			<arg line="-o -qq eclipse*junit*.zip -d ${workingDirectory}" />
-		</exec>
+		<p2.repo2runnable destination="${workingDirectory}/eclipse">
+			<source dir="${buildDirectory}" includes="buildRepoTests" />
+		</p2.repo2runnable>
+		<delete>
+			<fileset dir="${workingDirectory}/eclipse" includes="*.jar" />
+			<fileset dir="${workingDirectory}/eclipse" includes="*.xml" />
+		</delete>
+	
+		<!-- create top level testing directory-->
+		<mkdir dir="${workingDirectory}/eclipse-testing" />
 
 		<!-- create top level testing directory-->
 		<mkdir dir="${workingDirectory}/eclipse-testing" />
