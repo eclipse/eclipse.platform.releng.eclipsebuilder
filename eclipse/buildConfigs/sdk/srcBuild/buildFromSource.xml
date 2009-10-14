@@ -48,9 +48,7 @@
 
 	<property name="updateSite" value="${buildDirectory}/updateSite" />
 	<mkdir dir="${updateSite}" />
-	<property name="buildRepo" value="${updateSite}/${buildId}" />
-
-	<property name="p2.build.repo" value="file:${buildDirectory}/buildRepo" />
+	<property name="buildRepo" value="${updateSite}/${buildId}" />	
 
 	<target name="main" depends="init">
 		<antcall target="buildEclipseSourceDrops" /> 
