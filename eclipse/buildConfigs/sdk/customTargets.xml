@@ -148,7 +148,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag ${buildId}" />
 	</target>
 
-	<target name="getPrebuiltElements">
+	<target name="getPrebuiltElements">		
 	</target>
 	<!-- ===================================================================== -->
 	<!-- Steps to do before setup -->
@@ -191,16 +191,11 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<concat destfile="${buildDirectory}/plugins/org.eclipse.cvs/build.properties" append="true">qualifier=v${timestamp}</concat>
 		<concat destfile="${buildDirectory}/plugins/org.eclipse.help.base/build.properties" append="true">qualifier=v${timestamp}</concat>
 		<concat destfile="${buildDirectory}/plugins/org.eclipse.jdt/build.properties" append="true">qualifier=v${timestamp}</concat>
-		<concat destfile="${buildDirectory}/plugins/org.eclipse.rcp/build.properties" append="true">qualifier=v${timestamp}</concat>
+		<concat destfile="${buildDirectory}/plugins/org.eclipse.rcp/build.properties" append="true">qualifier=v${timestamp}</concat>	
 		<concat destfile="${buildDirectory}/plugins/org.eclipse.pde/build.properties" append="true">qualifier=v${timestamp}</concat>
-		<concat destfile="${buildDirectory}/plugins/org.eclipse.platform.doc.isv/build.properties" append="true">qualifier=v${timestamp}</concat>
-		<concat destfile="${buildDirectory}/plugins/org.eclipse.platform.doc.user/build.properties" append="true">qualifier=v${timestamp}</concat>
-		<concat destfile="${buildDirectory}/plugins/org.eclipse.pde.doc.user/build.properties" append="true">qualifier=v${timestamp}</concat>
-		<concat destfile="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv/build.properties" append="true">qualifier=v${timestamp}</concat>
-		<concat destfile="${buildDirectory}/plugins/org.eclipse.jdt.doc.user/build.properties" append="true">qualifier=v${timestamp}</concat>
 		<property name="updateproperties" value="true" />
 	</target>
-
+	
 
 	<!-- ===================================================================== -->
 	<!-- Steps to do after the fetch -->
