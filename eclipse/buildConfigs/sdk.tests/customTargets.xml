@@ -200,10 +200,10 @@
 
 	<target name="packageTestFramework">
 		<!--package automated test framework used in Eclipse builds-->
-		<property name="workingDirectory" value="${buildDirectory}/test.assembly" />		
+		<property name="workingDirectory" value="${buildDirectory}/test.assembly" />
 		<copy todir="${workingDirectory}/eclipse">
-		    <fileset dir="${buildDirectory}/buildRepoTests"/>
-	   </copy>
+			<fileset dir="${buildDirectory}/buildRepoTests" />
+		</copy>
 
 
 		<!-- create top level testing directory-->
@@ -214,17 +214,6 @@
 
 		<!--copy label.properties file for use in performance testing-->
 		<copy file="${buildDirectory}/label.properties" tofile="${workingDirectory}/eclipse-testing/label.properties" />
-
-		<!--should fix this so it looks in the directory and finds gets the test name dynamically-->
-
-		<pathconvert property="testdir">
-			<path>
-				<fileset dir="${workingDirectory}/eclipse/plugins" includes="**/*.jar" />
-			</path>
-			<regexpmapper from="(org\.eclipse\.test)(_)(.*)" to="\0" />
-		</pathconvert>
-		<property name="org.eclipse.test" value="org.eclipse.test_3.2.100" />
-		<property name="library-file" value="${eclipse-home}/plugins/${org.eclipse.test}/library.xml" />
 
 		<!--create properties file for use in equinoxp2 tests -->
 		<property name="equinoxp2tests.properties" value="${workingDirectory}/eclipse-testing/equinoxp2tests.properties" />
@@ -245,8 +234,8 @@
 		</propertyfile>
 
 		<!-- rezip the JUnit plugin tests -->
-		<exec dir="${workingDirectory}" executable="zip">
-			<arg line="-r -q eclipse-junit-tests-${buildId}.zip eclipse" />
+		<exec dir="${workingDirectory}/eclipse" executable="zip">
+			<arg line="-r -q ${workingDirectory}/eclipse-junit-tests-${buildId}.zip ." />
 		</exec>
 
 		<delete dir="${workingDirectory}/eclipse" includeEmptyDirs="true" />
