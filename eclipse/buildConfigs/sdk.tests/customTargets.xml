@@ -200,17 +200,11 @@
 
 	<target name="packageTestFramework">
 		<!--package automated test framework used in Eclipse builds-->
-		<property name="workingDirectory" value="${buildDirectory}/test.assembly" />
-		<p2.repo2runnable destination="${workingDirectory}/eclipse">
-			<source dir="${buildDirectory}" includes="buildRepoTests" />
-		</p2.repo2runnable>
-		<delete>
-			<fileset dir="${workingDirectory}/eclipse" includes="*.jar" />
-			<fileset dir="${workingDirectory}/eclipse" includes="*.xml" />
-		</delete>
-	
-		<!-- create top level testing directory-->
-		<mkdir dir="${workingDirectory}/eclipse-testing" />
+		<property name="workingDirectory" value="${buildDirectory}/test.assembly" />		
+		<copy todir="${workingDirectory}/eclipse">
+		    <fileset dir="${buildDirectory}/buildRepoTests"/>
+	   </copy>
+
 
 		<!-- create top level testing directory-->
 		<mkdir dir="${workingDirectory}/eclipse-testing" />
@@ -221,24 +215,16 @@
 		<!--copy label.properties file for use in performance testing-->
 		<copy file="${buildDirectory}/label.properties" tofile="${workingDirectory}/eclipse-testing/label.properties" />
 
-		<property name="test.properties" value="${workingDirectory}/eclipse-testing/test.properties" />
+		<!--should fix this so it looks in the directory and finds gets the test name dynamically-->
 
-		<!--generate test.properties.  Custom Ant task contributed by org.eclipse.build.tools in org.eclipse.releng.basebuilder.-->
-		<generateTestProperties buildDirectory="${buildDirectory}" featureId="org.eclipse.sdk.tests" outputFile="${test.properties}" />
-
-		<!--load the property file created with the directory names for all test plugins-->
-		<property file="${test.properties}" />
-
-		<!-- Remove the plugin version number appended to the org.eclipse.test plugin directory.
-   	     This is so that contributors of test.xml's do not have to update their paths to 
-   	     library.xml in org.eclipse.test whenever its version is updated.
-   	 -->
-		<property file="${buildDirectory}/finalPluginsVersions.properties" />
-		<move todir="${workingDirectory}/eclipse/plugins/org.eclipse.test">
-			<fileset dir="${workingDirectory}/eclipse/plugins/org.eclipse.test_${org.eclipse.test}" />
-		</move>
-		<!--the Ant move task leaves behind an empty directory-->
-		<delete dir="${workingDirectory}/eclipse/plugins/org.eclipse.test_${org.eclipse.test}" includeEmptyDirs="true" />
+		<pathconvert property="testdir">
+			<path>
+				<fileset dir="${workingDirectory}/eclipse/plugins" includes="**/*.jar" />
+			</path>
+			<regexpmapper from="(org\.eclipse\.test)(_)(.*)" to="\0" />
+		</pathconvert>
+		<property name="org.eclipse.test" value="org.eclipse.test_3.2.100" />
+		<property name="library-file" value="${eclipse-home}/plugins/${org.eclipse.test}/library.xml" />
 
 		<!--create properties file for use in equinoxp2 tests -->
 		<property name="equinoxp2tests.properties" value="${workingDirectory}/eclipse-testing/equinoxp2tests.properties" />
@@ -257,8 +243,6 @@
 			<entry key="org.eclipse.equinox.p2.reconciler.tests.35.platform.archive.macosx" value="${org.eclipse.equinox.p2.reconciler.tests.35.platform.archive.macosx}" />
 			<entry key="org.eclipse.equinox.p2.tests.current.build.repo" value="${org.eclipse.equinox.p2.tests.current.build.repo}" />
 		</propertyfile>
-
-
 
 		<!-- rezip the JUnit plugin tests -->
 		<exec dir="${workingDirectory}" executable="zip">
