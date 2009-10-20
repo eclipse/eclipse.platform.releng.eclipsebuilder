@@ -54,7 +54,7 @@
 	<mkdir dir="${buildlogs}" />
 
 	<property name="buildRepo" value="${updateSite}/${buildId}" />
-	
+
 	<target name="main" depends="init">
 		<antcall target="buildEclipseSourceDrops" />
 		<antcall target="buildMasterFeature" />
@@ -234,6 +234,13 @@
 				<include name="pack.properties" />
 			</fileset>
 		</delete>
+		<p2.remove.iu>
+			<repository location="file://${reposource}" />
+			<iu id="com.ibm.icu" artifacts="(format=packed)" />
+			<iu id="com.ibm.icu.base" artifacts="(format=packed)" />
+			<iu id="com.ibm.icu.source" artifacts="(format=packed)" />
+			<iu id="com.ibm.icu.base.source" artifacts="(format=packed)" />
+		</p2.remove.iu>
 	</target>
 
 	<target name="waitForChangedAttribs" unless="attribs.changed">
@@ -342,7 +349,7 @@
 		</exec>
 
 		<!--invoke sign script and wait-->
-		<echo message="invoke sign script and wait" />		
+		<echo message="invoke sign script and wait" />
 		<exec dir="." executable="${signexec}" output="signing.txt" append="true">
 			<arg line="${signhost} ${signquote}/usr/bin/sign ${stagingDirectory}/${archiveName} nomail ${stagingDirectoryOutput}${signquote}" />
 		</exec>
@@ -372,7 +379,7 @@
 		<property name="signdeleteline" value="${signhost} ${signquote}/bin/rm -rf ${stagingDirectory}/${buildId}-out ${stagingDirectory}/${archiveName}${signquote}" />
 		<exec dir="." executable="${signexec}" output="signing.txt" append="true">
 			<arg line="${signdeleteline}" />
-		</exec> 
+		</exec>
 	</target>
 
 	<target name="testEclipse">
