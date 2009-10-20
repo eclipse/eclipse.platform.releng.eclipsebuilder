@@ -36,9 +36,9 @@
 			<contains string="${runtimeArchive}" substring=".tar.gz" />
 		</condition>
 		<mkdir dir="${repoLocation}" />
-		<!--		<exec dir="." executable="unzip">
-                        <arg line="-o ${repoZip} -d ${repoLocation}" />
-                </exec> -->
+		<exec dir="." executable="unzip">
+			<arg line="-o ${repoZip} -d ${repoLocation}" />
+		</exec>
 		<antcall target="${setupTarget}" />
 		<antcall target="configureTeamTest" />
 		<antcall target="configureDeltaPack" />
