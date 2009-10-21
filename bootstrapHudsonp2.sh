@@ -80,7 +80,7 @@ buildId=""
 buildLabel=""
 
 # tag for build contribution project containing .map files
-mapVersionTag=HEAD
+mapVersionTag=R3_6_api_cleanup
 
 # directory in which to export builder projects
 builderDir=$WORKSPACE/builds/eclipsebuilder
