@@ -295,9 +295,6 @@
 			<property name="test.target" value="junit" />
 			<property name="report" value="@{testPlugin}" />
 
-			<!--library.xml is now in dropins folder -->
-			<!--			<property name="library-file" value="${eclipse-home}/dropins/eclipse/plugins/org.eclipse.test/library.xml" /> -->
-
 			<!--install db plug-ins if running performance tests-->
 			<condition property="derby" value="eclipse/dropins/eclipse/plugins/org.apache.derby*/**">
 				<equals arg1="${test.target}" arg2="performance" />
@@ -313,8 +310,7 @@
 
 	<target name="junit" unless="skip.test">
 		<antcall target="setup">
-		</antcall>
-		<!--library.xml is now in dropins folder -->
+		</antcall>		
 		<property name="org.eclipse.test" value="org.eclipse.test_3.2.100" />
 		<property name="library-file" value="${basedir}/test-eclipse/eclipse/plugins/${org.eclipse.test}/library.xml" />
 
