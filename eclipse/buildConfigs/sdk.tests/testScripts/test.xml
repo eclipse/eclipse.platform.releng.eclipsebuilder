@@ -617,8 +617,7 @@
 		<antcall target="teamcore" />
 		<antcall target="jdtcoreperf" />
 		<antcall target="jdtcorebuilder" />
-		<antcall target="jdtcorecompiler" />
-		<antcall target="ui" />
+		<antcall target="jdtcorecompiler" />		
 		<antcall target="uiperformance" />
 		<antcall target="uieditors" />
 		<antcall target="uinavigator" />
@@ -652,6 +651,7 @@
 		<antcall target="jdtcoremodel" />
 		<antcall target="uadoc" />
 		<antcall target="debug" />
+		<antcall target="ui" />
 	</target>
 </project>
 
