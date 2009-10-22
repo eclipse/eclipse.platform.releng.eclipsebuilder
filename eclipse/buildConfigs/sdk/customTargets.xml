@@ -79,11 +79,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<antcall target="assemble" />
 	</target>
 
-	<target name="assemble.org.eclipse.sdk.linux.gtk.ppc64">
-		<property name="archiveName" value="eclipse-SDK-${buildId}-linux-gtk-ppc64.tar.gz" />
-		<antcall target="assemble" />
-	</target>
-
 	<target name="assemble.org.eclipse.sdk.hpux.motif.ia64_32">
 		<property name="archiveName" value="eclipse-SDK-${buildId}-hpux-motif-ia64_32.zip" />
 		<antcall target="assemble" />
@@ -153,7 +148,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag ${buildId}" />
 	</target>
 
-	<target name="getPrebuiltElements">
+	<target name="getPrebuiltElements">		
 	</target>
 	<!-- ===================================================================== -->
 	<!-- Steps to do before setup -->
