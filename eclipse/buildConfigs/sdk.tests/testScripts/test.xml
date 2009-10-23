@@ -35,13 +35,20 @@
 		<condition property="setupTarget" value="setup-tar.gz">
 			<contains string="${runtimeArchive}" substring=".tar.gz" />
 		</condition>
+		<condition property="repoexists" value="true">
+			<available file="${repoLocation}" />
+		</condition>
+		<antcall target="setupRepo" />
+		<antcall target="${setupTarget}" />
+		<antcall target="configureDeltaPack" />
+	</target>
+
+	<!--Extract test bundles repo -->
+	<target name="setupRepo" unless="repoexists">
 		<mkdir dir="${repoLocation}" />
 		<exec dir="." executable="unzip">
 			<arg line="-o ${repoZip} -d ${repoLocation}" />
 		</exec>
-		<antcall target="${setupTarget}" />
-		<antcall target="configureTeamTest" />
-		<antcall target="configureDeltaPack" />
 	</target>
 
 	<!--setup for zip archives-->
@@ -84,6 +91,7 @@
 			<arg line="-destination ${eclipse-home}" />
 			<arg line="-bundlepool ${eclipse-home}" />
 		</exec>
+		<antcall target="configureTeamTest" />
 		<antcall target="unzipderby" />
 	</target>
 
@@ -310,7 +318,7 @@
 
 	<target name="junit" unless="skip.test">
 		<antcall target="setup">
-		</antcall>		
+		</antcall>
 		<property name="org.eclipse.test" value="org.eclipse.test_3.2.100" />
 		<property name="library-file" value="${basedir}/test-eclipse/eclipse/plugins/${org.eclipse.test}/library.xml" />
 
@@ -320,9 +328,19 @@
 		</fileset>
 		<property name="testPluginX" refid="test.plugin.file" />
 		<echo>trying to find ${testPluginX}</echo>
-		<ant antfile="${eclipse-home}/plugins/${testPluginX}" dir="${eclipse-home}" />
+		<condition property="pluginexists" value="true">
+			<not>
+				<equals arg1="${testPluginX}" arg2="" />
+			</not>
+		</condition>
+		<antcall target="runSuite" />
 		<antcall target="genResults" />
 	</target>
+
+	<target name="runSuite" if="pluginexists">
+		<ant antfile="${eclipse-home}/plugins/${testPluginX}" dir="${eclipse-home}" />
+	</target>
+
 
 	<target name="performance" if="performance.target.present" unless="skip.test">
 		<antcall target="setup" />
@@ -617,14 +635,14 @@
 		<antcall target="teamcore" />
 		<antcall target="jdtcoreperf" />
 		<antcall target="jdtcorebuilder" />
-		<antcall target="jdtcorecompiler" />		
+		<antcall target="jdtcorecompiler" />
 		<antcall target="uiperformance" />
 		<antcall target="uieditors" />
 		<antcall target="uinavigator" />
 		<antcall target="uiworkbenchtexteditor" />
 		<antcall target="uircp" />
 		<antcall target="uiviews" />
-		<antcall target="jdtdebug" />		
+		<antcall target="jdtdebug" />
 		<antcall target="jdtui" />
 		<antcall target="jdtuirefactoring" />
 		<antcall target="ltkuirefactoringtests" />
