@@ -387,7 +387,7 @@
 
 	<target name="performance" if="performance.target.present" unless="skip.test">
 		<antcall target="setup" />
-		<ant antfile="${eclipse-home}/dropins/eclipse/plugins/${testPlugin}/test.xml" dir="${eclipse-home}" target="performance" />
+		<ant antfile="${eclipse-home}/plugins/${testPlugin}/test.xml" dir="${eclipse-home}" target="performance" />
 		<antcall target="genResults" />
 	</target>
 
