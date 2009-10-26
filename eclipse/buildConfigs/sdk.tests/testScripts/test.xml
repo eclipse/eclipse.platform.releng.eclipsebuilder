@@ -19,6 +19,7 @@
 
 	<property name="repoZip" value="${basedir}/eclipse-junit-tests-${buildId}.zip" />
 	<property name="repoLocation" value="${basedir}/testRepo" />
+	<property name="platformLocation" value="${basedir}/platformLocation" />
 
 	<!-- The directory that will contain all files containing information on the tests that ran.-->
 	<property name="results" value="${basedir}/results" />
@@ -72,11 +73,53 @@
 		<antcall target="installTestPlugins" />
 	</target>
 
+	<!--use an stable version of the director so that instability in the current build doesn't cause all the tests to fail -->
+	<target name="setupPlatform">
+		<property file="equinoxp2tests.properties" />
+		<condition property="platformArchive" value="${org.eclipse.equinox.p2.reconciler.tests.35.platform.archive.linux}">
+			<os family="unix" />
+		</condition>
+		<condition property="platformArchive" value="${org.eclipse.equinox.p2.reconciler.tests.35.platform.archive.macosx}">
+			<os family="mac" />
+		</condition>
+		<condition property="platformArchive" value="${org.eclipse.equinox.p2.reconciler.tests.platform.archive.win32}">
+			<os family="windows" />
+		</condition>
+		<condition property="platformTarget" value="platform-zip">
+			<contains string="${platformArchive}" substring=".zip" />
+		</condition>
+		<condition property="platformTarget" value="platform-tar.gz">
+			<contains string="${platformArchive}" substring=".tar.gz" />
+		</condition>
+		<echo message="platform target ${platformTarget} platformArchive ${platformArchive}" />
+		<antcall target="${platformTarget}" />
+	</target>
+
+
+	<!--setup for platform zip archives-->
+	<target name="platform-zip" description="Reinstall the test Eclipse installation if specified by user">
+		<delete dir="${platformLocation}" />
+		<mkdir dir="${platformLocation}" />
+		<exec dir="${platformLocation}" executable="unzip">
+			<arg line="-o -qq ${platformArchive} -d ${platformLocation}" />
+		</exec>
+	</target>
+
+	<!--setup for platform tar.gz archives-->
+	<target name="platform-tar.gz" description="Reinstall the test Eclipse installation if specified by user">
+		<delete dir="${platformLocation}" />
+		<mkdir dir="${platformLocation}" />
+		<exec dir="${platformLocation}" executable="tar">
+			<arg line="-xzf ${platformArchive}" />
+		</exec>
+	</target>
+
 	<target name="installTestPlugins">
+		<antcall target="setupPlatform" />
 		<echo>-installIU ${testPlugin} +</echo>
 		<exec executable="${eclipse-home}/eclipse" failonerror="false" dir="${eclipse-home}" timeout="900000" output="${basedir}/director.log" resultproperty="directorcode">
-			<arg line="-vm		 ${java.home}/bin/java" />
-			<arg line="-application		 org.eclipse.equinox.p2.director" />
+			<arg line="-vm ${java.home}/bin/java" />
+			<arg line="-application org.eclipse.equinox.p2.director" />
 			<arg line="-nosplash" />
 			<arg line="--launcher.suppressErrors" />
 			<arg line="-consoleLog" />
