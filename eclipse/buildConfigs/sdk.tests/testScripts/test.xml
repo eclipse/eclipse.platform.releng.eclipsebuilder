@@ -137,13 +137,16 @@
 		<antcall target="configureTeamTest" />
 		<antcall target="unzipderby" />
 	</target>
-
+	
+	
 	<target name="unzipderby" if="derby">
 		<exec dir="." executable="unzip">
 			<arg line="-o eclipse-junit-tests-*.zip ${derby} -d ${install}" />
 		</exec>
+		<copy todir="${install}/eclipse/dropins/eclipse/plugins">
+			<fileset dir="${repoLocation}/eclipse/dropins/eclipse/plugins" includes="org.apache.derby**/*" />
+		</copy>
 	</target>
-
 
 	<target name="init" depends="setRuntimeArchive">
 		<mkdir dir="${results}/xml" />
