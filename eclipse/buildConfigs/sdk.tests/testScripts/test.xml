@@ -387,9 +387,24 @@
 
 	<target name="performance" if="performance.target.present" unless="skip.test">
 		<antcall target="setup" />
-		<ant antfile="${eclipse-home}/plugins/${testPlugin}/test.xml" dir="${eclipse-home}" target="performance" />
+		<property name="org.eclipse.test" value="org.eclipse.test_3.2.100" />
+		<property name="library-file" value="${basedir}/test-eclipse/eclipse/plugins/${org.eclipse.test}/library.xml" />
+
+		<echo>trying to find ${testPlugin}_*</echo>
+		<fileset id="test.plugin.file" dir="${eclipse-home}/plugins">
+			<filename name="${testPlugin}_*/test.xml" />
+		</fileset>
+		<property name="testPluginX" refid="test.plugin.file" />
+		<echo>trying to find ${testPluginX}</echo>
+		<condition property="pluginexists" value="true">
+			<not>
+				<equals arg1="${testPluginX}" arg2="" />
+			</not>
+		</condition>
+		<antcall target="runSuite" />
 		<antcall target="genResults" />
 	</target>
+
 
 	<target name="genResults">
 		<copy file="${eclipse-home}/${report}.xml" tofile="${results}/xml/${report}_${platform}.xml" failonerror="false" />
