@@ -100,6 +100,7 @@
 	<!-- ===================================================================== -->
 	<target name="preFetch">
 		<replace file="${buildDirectory}/maps/org.eclipse.releng/maps/orbit.map" value="${localmirror}" token="download.eclipse.org" />
+		<replace file="${buildDirectory}/maps/org.eclipse.releng/maps/p2.map" value="${localmirror}" token="download.eclipse.org" />
 	</target>
 
 	<!-- ===================================================================== -->
