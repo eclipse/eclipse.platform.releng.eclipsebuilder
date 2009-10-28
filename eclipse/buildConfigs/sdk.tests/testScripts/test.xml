@@ -137,8 +137,8 @@
 		<antcall target="configureTeamTest" />
 		<antcall target="unzipderby" />
 	</target>
-	
-	
+
+
 	<target name="unzipderby" if="derby">
 		<exec dir="." executable="unzip">
 			<arg line="-o eclipse-junit-tests-*.zip ${derby} -d ${install}" />
@@ -388,6 +388,11 @@
 	</target>
 
 
+	<target name="runSuitePerf" if="pluginexists">
+		<echo message="testPluginX ${testPluginX}" />
+		<ant antfile="${eclipse-home}/plugins/${testPluginX}" dir="${eclipse-home}" target="performance" />
+	</target>
+
 	<target name="performance" if="performance.target.present" unless="skip.test">
 		<antcall target="setup" />
 		<property name="org.eclipse.test" value="org.eclipse.test_3.2.100" />
@@ -404,9 +409,10 @@
 				<equals arg1="${testPluginX}" arg2="" />
 			</not>
 		</condition>
-		<antcall target="runSuite" />
+		<antcall target="runSuitePerf" />
 		<antcall target="genResults" />
 	</target>
+
 
 
 	<target name="genResults">
