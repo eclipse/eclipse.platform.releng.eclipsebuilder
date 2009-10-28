@@ -413,8 +413,6 @@
 		<antcall target="genResults" />
 	</target>
 
-
-
 	<target name="genResults">
 		<copy file="${eclipse-home}/${report}.xml" tofile="${results}/xml/${report}_${platform}.xml" failonerror="false" />
 		<xslt style="${eclipse-home}/plugins/${org.eclipse.test}/JUNIT.XSL" basedir="${results}/xml" destdir="${results}/html" />
