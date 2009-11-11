@@ -112,11 +112,11 @@
 	</zipType>
 	
 	<zipType name="CVS Runtime">		
-		<platform id="CRR" name="&lt;img src = &quot;repo.gif&quot;> CVS Repo " fileName="org.eclipse.cvs-@build@.zip"></platform>
+		<platform id="CRR" name="&lt;img src = &quot;repo.gif&quot;> CVS Runtime Repo " fileName="org.eclipse.cvs-@build@.zip"></platform>
 	</zipType>
 		
 	<zipType name="CVS SDK">		
-		<platform id="CSR" name="&lt;img src = &quot;repo.gif&quot;> CVS Repo " fileName="org.eclipse.cvs.source-@build@.zip"></platform>
+		<platform id="CSR" name="&lt;img src = &quot;repo.gif&quot;> CVS Source Repo " fileName="org.eclipse.cvs.source-@build@.zip"></platform>
 	</zipType>
 
 	<zipType name="SWT">
