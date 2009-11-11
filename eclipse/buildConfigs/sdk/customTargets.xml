@@ -150,7 +150,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag ${buildId}" />
 	</target>
 
-	<target name="getPrebuiltElements">
+	<target name="getPrebuiltElements">		
 	</target>
 	<!-- ===================================================================== -->
 	<!-- Steps to do before setup -->
