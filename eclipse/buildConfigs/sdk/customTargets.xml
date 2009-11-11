@@ -196,6 +196,11 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<concat destfile="${buildDirectory}/plugins/org.eclipse.jdt/build.properties" append="true">qualifier=v${timestamp}</concat>
 		<concat destfile="${buildDirectory}/plugins/org.eclipse.rcp/build.properties" append="true">qualifier=v${timestamp}</concat>	
 		<concat destfile="${buildDirectory}/plugins/org.eclipse.pde/build.properties" append="true">qualifier=v${timestamp}</concat>
+		<concat destfile="${buildDirectory}/plugins/org.eclipse.platform.doc.isv/build.properties" append="true">qualifier=v${timestamp}</concat>
+		<concat destfile="${buildDirectory}/plugins/org.eclipse.platform.doc.user/build.properties" append="true">qualifier=v${timestamp}</concat>
+		<concat destfile="${buildDirectory}/plugins/org.eclipse.pde.doc.user/build.properties" append="true">qualifier=v${timestamp}</concat>
+		<concat destfile="${buildDirectory}/plugins/org.eclipse.jdt.doc.isv/build.properties" append="true">qualifier=v${timestamp}</concat>
+		<concat destfile="${buildDirectory}/plugins/org.eclipse.jdt.doc.user/build.properties" append="true">qualifier=v${timestamp}</concat>			
 		<property name="updateproperties" value="true" />
 	</target>
 	
