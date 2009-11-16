@@ -232,7 +232,7 @@ echo"<ul>\n";
 </ul>
 </li>
 <?php if (! (preg_match("/N/i",$buildId))) {
-echo " <li><a href=\"testresults/versiontool/results.html\"><b> Versioning Compare Tool Output Logs </b></a>";
+echo " <li><a href=\"testresults/versiontool/results.xml\"><b> Versioning Compare Tool Output Logs </b></a>";
 echo "This log compares the build's plugin and features versions with 3.5. </li> ";
 }
 ?>
