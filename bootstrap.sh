@@ -46,8 +46,8 @@ deleteArtifacts=""
 #sets fetchTag="HEAD" for nightly builds if required
 tag=""
 
-#buildProjectTags=v20090923
-buildProjectTags=v20090923a
+#buildProjectTags=v20091111
+buildProjectTags=v20091112b
 
 #updateSite property setting
 updateSite=""
@@ -96,38 +96,38 @@ usage="usage: $0 [-notify emailaddresses][-textRecipients textaddesses][-test][-
 
 if [ $# -lt 1 ]
 then
-		 		  echo >&2 "$usage"
-		 		  exit 1
+		 		  		 		   echo >&2 "$usage"
+		 		  		 		   exit 1
 fi
 
 while [ $# -gt 0 ]
 do
-		 		  case "$1" in
-		 		  		 		  -buildId) buildId="$2"; shift;;
-		 		  		 		  -buildLabel) buildLabel="$2"; shift;;
-		 		  		 		  -mapVersionTag) mapVersionTag="$2"; shift;;
-		 		  		 		  -tagMapFiles) tagMaps="-DtagMaps=true";;
-		 		  		 		  -skipPerf) skipPerf="-Dskip.performance.tests=true";;
-		 		  		 		  -skipCleanSites) skipCleanSites="-Dskip.clean.sites=true";;
-		 		  		 		  -hudson) skipPerf="-Dhudson=true";;
-		 		  		 		  -skipTest) skipTest="-Dskip.tests=true";;
-		 		  		 		  -skipRSS) skipRSS="-Dskip.feed=true";;
-		 		  		 		  -deleteArtifacts) deleteArtifacts="-Ddelete.artifacts=true";;
-		 		  		 		  -skipPack) skipPack="-DskipPack=true";;
-		 		  		 		  -buildDirectory) builderDir="$2"; shift;;
-		 		  		 		  -notify) recipients="$2"; shift;;
-		 		 		 		  -textRecipients) textRecipients="$2"; shift;;
-		 		  		 		  -test) postingDirectory="/builds/transfer/files/bogus/downloads/drops";testBuild="-Dtest=true";;
-		 		  		 		  -builderTag) buildProjectTags="$2"; shift;;
-		 		  		 		  -compareMaps) compareMaps="-DcompareMaps=true";;
-		 		  		 		  -updateSite) updateSite="-DupdateSite=$2";shift;;
-		 		  		 		  -sign) sign="-Dsign=true";;
-		 		  		 		  -*)
-		 		  		 		  		 		  echo >&2 $usage
-		 		  		 		  		 		  exit 1;;
-		 		  		 		  *) break;;		 		  # terminate while loop
-		 		  esac
-		 		  shift
+		 		  		 		   case "$1" in
+		 		  		 		   		 		  		 		   -buildId) buildId="$2"; shift;;
+		 		  		 		   		 		  		 		   -buildLabel) buildLabel="$2"; shift;;
+		 		  		 		   		 		  		 		   -mapVersionTag) mapVersionTag="$2"; shift;;
+		 		  		 		   		 		  		 		   -tagMapFiles) tagMaps="-DtagMaps=true";;
+		 		  		 		   		 		  		 		   -skipPerf) skipPerf="-Dskip.performance.tests=true";;
+		 		  		 		   		 		  		 		   -skipCleanSites) skipCleanSites="-Dskip.clean.sites=true";;
+		 		  		 		   		 		  		 		   -hudson) skipPerf="-Dhudson=true";;
+		 		  		 		   		 		  		 		   -skipTest) skipTest="-Dskip.tests=true";;
+		 		  		 		   		 		  		 		   -skipRSS) skipRSS="-Dskip.feed=true";;
+		 		  		 		   		 		  		 		   -deleteArtifacts) deleteArtifacts="-Ddelete.artifacts=true";;
+		 		  		 		   		 		  		 		   -skipPack) skipPack="-DskipPack=true";;
+		 		  		 		   		 		  		 		   -buildDirectory) builderDir="$2"; shift;;
+		 		  		 		   		 		  		 		   -notify) recipients="$2"; shift;;
+		 		  		 		  		 		  		 		   -textRecipients) textRecipients="$2"; shift;;
+		 		  		 		   		 		  		 		   -test) postingDirectory="/builds/transfer/files/bogus/downloads/drops";testBuild="-Dtest=true";;
+		 		  		 		   		 		  		 		   -builderTag) buildProjectTags="$2"; shift;;
+		 		  		 		   		 		  		 		   -compareMaps) compareMaps="-DcompareMaps=true";;
+		 		  		 		   		 		  		 		   -updateSite) updateSite="-DupdateSite=$2";shift;;
+		 		  		 		   		 		  		 		   -sign) sign="-Dsign=true";;
+		 		  		 		   		 		  		 		   -*)
+		 		  		 		   		 		  		 		   		 		  		 		   echo >&2 $usage
+		 		  		 		   		 		  		 		   		 		  		 		   exit 1;;
+		 		  		 		   		 		  		 		   *) break;;		 		  		 		   # terminate while loop
+		 		  		 		   esac
+		 		  		 		   shift
 done
 
 # After the above the build type is left in $1.
@@ -136,12 +136,12 @@ buildType=$1
 # Set default buildId and buildLabel if none explicitly set
 if [ "$buildId" = "" ]
 then
-		 		  buildId=$buildType$builddate-$buildtime
+		 		  		 		   buildId=$buildType$builddate-$buildtime
 fi
 
 if [ "$buildLabel" = "" ]
 then
-		 		  buildLabel=$buildId
+		 		  		 		   buildLabel=$buildId
 fi
 
 #Set the tag to HEAD for Nightly builds
@@ -164,7 +164,7 @@ customBuilderTag=$buildProjectTags
 
 if [ -e $builderDir ]
 then
-		 		  builderDir=$builderDir$timestamp
+		 		  		 		   builderDir=$builderDir$timestamp
 fi
 
 # directory where features and plugins will be compiled
@@ -302,7 +302,7 @@ retCode=$?
 if [ $retCode != 0 ]
 then
         echo "Build failed (error code $retCode)."
-		 exit $retCode
+		 		  exit $retCode
 fi
 
 if [ "$skip.feed" != "true" ]
@@ -316,7 +316,8 @@ fi
 #clean up
 if [ "$delete.artifacts" == "-Ddelete.artifacts=true"  ]
 then
-		 rm -rf $builderDir
+		 		  rm -rf $builderDir
 fi
+
 
 
