@@ -76,7 +76,7 @@ mapVersionTag=R3_6_api_cleanup
 builderDir=$WORKSPACE/builds/eclipsebuilder
 
 # buildtype determines whether map file tags are used as entered or are replaced with HEAD
-buildType=N
+buildType=
 
 # directory where to copy build
 postingDirectory=$WORKSPACE/builds/transfer/files/master/downloads/drops
