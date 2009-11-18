@@ -52,7 +52,7 @@ tag=""
 #buildProjectTags=v20091106
 #buildProjectTags=v20091110a
 #buildProjectTags=v20091111
-buildProjectTags=v20091111a
+buildProjectTags=v20091112b
 
 #updateSite property setting
 updateSite=""
@@ -76,7 +76,7 @@ mapVersionTag=R3_6_api_cleanup
 builderDir=$WORKSPACE/builds/eclipsebuilder
 
 # buildtype determines whether map file tags are used as entered or are replaced with HEAD
-buildType=N
+buildType=
 
 # directory where to copy build
 postingDirectory=$WORKSPACE/builds/transfer/files/master/downloads/drops
