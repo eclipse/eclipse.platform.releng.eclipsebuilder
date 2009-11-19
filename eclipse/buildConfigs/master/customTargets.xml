@@ -106,8 +106,8 @@
 	<!-- Steps to do before fetching the build elements -->
 	<!-- ===================================================================== -->
 	<target name="preFetch">
-		<replace file="${buildDirectory}/maps/org.eclipse.releng/maps/orbit.map" value="${localmirror}" token="download.eclipse.org" />
-		<replace file="${buildDirectory}/maps/org.eclipse.releng/maps/p2.map" value="${localmirror}" token="download.eclipse.org" />
+		<replace dir="${buildDirectory}/maps/org.eclipse.releng/maps" value="${localmirror}" token="download.eclipse.org" />
+		<replace dir="${buildDirectory}/maps/org.eclipse.releng/maps" value="kmoir" token=":pserver:anonymous" />
 	</target>
 
 	<!-- ===================================================================== -->
