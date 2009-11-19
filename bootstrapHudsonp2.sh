@@ -182,59 +182,9 @@ cd $builderDir
 
 #check out org.eclipse.releng.basebuilder
 cvs -d :pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse co -r $baseBuilderTag org.eclipse.releng.basebuilder
-#need to figure out how to tag the build with hudson
-#if [ "$tagMaps" == "-DtagMaps=true" ]; then  
-#  cvs -d sdimitro@dev.eclipse.org:/cvsroot/eclipse rtag -r $baseBuilderTag v$buildId org.eclipse.releng.basebuilder;
-#fi
 
 #check out org.eclipse.releng.eclipsebuilder
 cvs -d :pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse co -r $customBuilderTag org.eclipse.releng.eclipsebuilder
-#need to figure out how to tag the build with hudson
-#if [ "$tagMaps" == "-DtagMaps=true" ]; then  
-#  cvs -d sdimitro@dev.eclipse.org:/cvsroot/eclipse rtag -r $customBuilderTag v$buildId  org.eclipse.releng.eclipsebuilder;
-#fi
-
-#check out eclipseInternalBuildTools and install custom plugins
-#cvs -d sdimitro@ottcvs1:/home/cvs/releng co -r $internalToolsTag eclipseInternalBuildTools
-#if [ "$tagMaps" == "-DtagMaps=true" ]; then  
-#  cvs -d sdimitro@ottcvs1:/home/cvs/releng rtag -r $internalToolsTag v$buildId eclipseInternalBuildTools;
-#fi
-#cp -r eclipseInternalBuildTools/plugins org.eclipse.releng.basebuilder
-
-#The URLs and filenames of vms used in build
-#linuxJdkArchive=jdks/jdk-1_5_0_14-fcs-bin-b03-linux-i586-05_oct_2007.zip
-#linuxJdkArchive14=jdks/jdk-1_4_2_14-fcs-bin-b05-linux-i586-14_mar_2007.zip
-#linuxJdkArchive16=jdks/1.6/jdk-6u7-fcs-bin-b06-linux-i586-10_jun_2008.zip
-#linuxppcJdkArchive=jdks/IBMJava2-SDK-1.4.2-10.0.ppc.tgz
-#linuxppcJdkArchive15=jdks/ibm-java2-sdk-5.0-6.0-linux-ppc.tgz
-#windowsJreArchive=jdks/jdk-1_4_2_16-fcs-bin-b05-windows-i586-16_sep_2007.zip
-#windows15JdkArchive=jdks/jdk-1_5_0_14-fcs-bin-b03-windows-i586-05_oct_2007.zip
-#windows16JdkArchive=jdks/1.6/jdk-6u4-fcs-bin-b12-windows-i586-14_dec_2007.zip
-#windows10FoundationArchive=jdks/weme-win-x86-foundation10_6.1.0.20060317-111429.zip
-#windows11FoundationArchive=jdks/weme-win-x86-ppro11_6.1.1.20061110-161633.zip
-
-#get then install the Linux 1.6 vm used for running the build
-#mkdir -p jdk/linux; cvs -d sdimitro@ottcvs1:/home/cvs/releng co $linuxJdkArchive; unzip -qq $linuxJdkArchive -d jdk/linux; rm $linuxJdkArchive
-
-#mkdir -p jdk/linux14; cvs -d sdimitro@ottcvs1:/home/cvs/releng co $linuxJdkArchive14; unzip -qq $linuxJdkArchive14 -d jdk/linux14; rm $linuxJdkArchive14
-
-#mkdir -p jdk/linux16; cvs -d sdimitro@ottcvs1:/home/cvs/releng co $linuxJdkArchive16; unzip -qq $linuxJdkArchive16 -d jdk/linux16; rm $linuxJdkArchive16
-
-#get the install the Windows jre containing the Java libraries against which to compile
-#mkdir -p jdk/win32; cvs -d sdimitro@ottcvs1:/home/cvs/releng co $windowsJreArchive;unzip -qq $windowsJreArchive -d jdk/win32; rm $windowsJreArchive
-
-#get and install the Windows 1.5 jre containing the 1.5 Java libraries against which to compile
-#mkdir -p jdk/win32_15; cvs -d sdimitro@ottcvs1:/home/cvs/releng co $windows15JdkArchive;unzip -qq $windows15JdkArchive -d jdk/win32_15/; rm $windows15JdkArchive
-
-#get and install the Windows Foundation jre containing the 1.0 Java libraries against which to compile
-#mkdir -p jdk/win32_foundation; cvs -d sdimitro@ottcvs1:/home/cvs/releng co $windows10FoundationArchive;unzip -qq $windows10FoundationArchive -d jdk/win32_foundation/; rm $windows10FoundationArchive
-
-#get and install the Windows Foundation jre containing the 11 Java libraries against which to compile
-#mkdir -p jdk/win32_foundation11; cvs -d sdimitro@ottcvs1:/home/cvs/releng co $windows11FoundationArchive;unzip -qq $windows11FoundationArchive -d jdk/win32_foundation11/; rm $windows11FoundationArchive
-
-#get and install the Windows 1.6 Java libraries against which to compile
-#mkdir -p jdk/win32_16; cvs -d sdimitro@ottcvs1:/home/cvs/releng co $windows16JdkArchive;unzip -qq $windows16JdkArchive -d jdk/win32_16/; rm $windows16JdkArchive
-
 
 javadoc="-Djavadoc15=/shared/common/jdk-1.5.0_16/bin/javadoc"
 
