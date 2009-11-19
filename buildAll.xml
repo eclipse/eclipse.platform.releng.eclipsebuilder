@@ -119,6 +119,10 @@
 			<equals arg1="${hudson}" arg2="true" />
 		</condition>
 		<property name="localmirror" value="fullmoon.ottawa.ibm.com" />
+		<condition property="cvsuser" value=":pserver:anonymous">
+			<equals arg1="${hudson}" arg2="true" />
+		</condition>
+		<property name="cvsuser" value="kmoir" />
 
 		<replace token="@localmirror@" file="${basedir}/repos.properties" value="${localmirror}" />
 		<loadproperties srcFile="${basedir}/repos.properties" />
@@ -229,7 +233,7 @@
 		<copy file="${eclipse.build.configs}/../../extras/pack.properties" todir="${reposource}" />
 		<p2.process.artifacts repositoryPath="file://${reposource}" pack="true" />
 		<delete>
-			<fileset dir="${reposource}">			
+			<fileset dir="${reposource}">
 				<include name="pack.properties" />
 			</fileset>
 		</delete>
@@ -556,7 +560,7 @@
 			<config os="linux" ws="gtk" arch="x86" />
 			<config os="linux" ws="gtk" arch="x86_64" />
 			<config os="linux" ws="gtk" arch="ppc" />
-			<config os="linux" ws="gtk" arch="ppc64" />		
+			<config os="linux" ws="gtk" arch="ppc64" />
 			<config os="solaris" ws="gtk" arch="sparc" />
 			<config os="solaris" ws="gtk" arch="x86" />
 			<config os="macosx" ws="cocoa" arch="x86" />

@@ -107,7 +107,7 @@
 	<!-- ===================================================================== -->
 	<target name="preFetch">
 		<replace dir="${buildDirectory}/maps/org.eclipse.releng/maps" value="${localmirror}" token="download.eclipse.org" />
-		<replace dir="${buildDirectory}/maps/org.eclipse.releng/maps" value="kmoir" token=":pserver:anonymous" />
+		<replace dir="${buildDirectory}/maps/org.eclipse.releng/maps" value="${cvsuser}" token=":pserver:anonymous" />
 	</target>
 
 	<!-- ===================================================================== -->
