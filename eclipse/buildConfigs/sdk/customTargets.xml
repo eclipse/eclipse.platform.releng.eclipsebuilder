@@ -125,7 +125,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="getMapFiles" depends="checkLocal" unless="mapsLocal">
 
 		<!-- ***  change the repo info -->
-		<property name="mapCvsRoot" value=":pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse" />
+		<property name="mapCvsRoot" value="${mapsRepo}" />
 		<property name="mapVersionTag" value="HEAD" />
 		<cvs cvsRoot="${mapCvsRoot}" package="org.eclipse.releng" dest="${buildDirectory}/maps" tag="${mapVersionTag}" />
 		<!--compare the map files project-->
