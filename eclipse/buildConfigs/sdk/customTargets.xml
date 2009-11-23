@@ -1,7 +1,7 @@
 <project name="Build specific targets and properties" default="noDefault">
 
 
-	<property name="postingDirectory" value="${buildDirectory}" />	
+	<property name="postingDirectory" value="${buildDirectory}" />
 
 	<!-- ===================================================================== -->
 	<!-- Run a given ${target} on all elements being built -->
@@ -119,7 +119,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<target name="getMapFiles" depends="checkLocal" unless="mapsLocal">
 
 		<!-- ***  change the repo info -->
-		<property name="mapCvsRoot" value=":pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse" />
+		<property name="mapCvsRoot" value="${mapsRepo}" />
 		<property name="mapVersionTag" value="HEAD" />
 		<cvs cvsRoot="${mapCvsRoot}" package="org.eclipse.releng" dest="${buildDirectory}/maps" tag="${mapVersionTag}" />
 		<!--compare the map files project-->
@@ -179,8 +179,8 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- ===================================================================== -->
 
 	<target name="preFetch">
-		<!-- <mkdir dir="${buildDirectory}/baseLocation"/> -->
-		<replace file="${buildDirectory}/maps/org.eclipse.releng/maps/orbit.map" value="fullmoon.ottawa.ibm.com" token="download.eclipse.org" />
+		<replace dir="${buildDirectory}/maps/org.eclipse.releng/maps" value="${localmirror}" token="download.eclipse.org" />
+		<replace dir="${buildDirectory}/maps/org.eclipse.releng/maps" value="${cvsuser}" token=":pserver:anonymous" />
 	</target>
 
 	<target name="updateproperties" unless="updateproperties">
@@ -191,9 +191,9 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<concat destfile="${buildDirectory}/plugins/org.eclipse.rcp/build.properties" append="true">qualifier=v${timestamp}</concat>
 		<concat destfile="${buildDirectory}/plugins/org.eclipse.help.base/build.properties" append="true">qualifier=v${timestamp}</concat>
 		<concat destfile="${buildDirectory}/plugins/org.eclipse.pde/build.properties" append="true">qualifier=v${timestamp}</concat>
-	    <property name="updateproperties" value="true"/>
+		<property name="updateproperties" value="true" />
 	</target>
-	
+
 	<!-- ===================================================================== -->
 	<!-- Steps to do after the fetch -->
 	<!-- ===================================================================== -->
