@@ -203,7 +203,13 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 			<ul>
 				<li><a href="verifyMD5.html">Click for instructions on how to verify the integrity of your downloads.</a></li>
 			</ul>
-		</div>		
+		</div>	
+		<div class="sideitem">
+            <h6>Support Eclipse!</h6>
+            <ul>
+                <img src="friendslogo.jpg" height="115" width="180"/><li><a href="http://www.eclipse.org/donate/">Become a friend</a></li>
+            </ul>
+        </div>	
 </div>		
 <?php 
 
