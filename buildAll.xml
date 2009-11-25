@@ -122,9 +122,7 @@
 		<replaceregexp file="${buildDirectoryAbsoluteTemp}" match="org.eclipse.releng.eclipsebuilder/../src/" replace="src/" />
 		<loadfile property="buildDirectoryAbsolute" srcFile="${buildDirectoryAbsoluteTemp}" failonerror="false" />
 		<delete file="${buildDirectoryAbsoluteTemp}" />
-		<property name="localmirror" value="fullmoon.ottawa.ibm.com" />		
-		<property name="cvsuser" value="kmoir" />		
-		<property name="mapsRepo" value="kmoir@dev.eclipse.org/cvsroot/eclipse" />
+
 	</target>
 
 	<target name="buildECFMasterFeature">
@@ -334,9 +332,9 @@
 		<property name="reference_location" value="${reference}/eclipse-SDK-3.5-win32.zip" />
 		<exec executable="/usr/bin/wget" dir="${reference}" output="${reference}/error.txt" failonerror="false" os="Linux">
 			<arg line="-q -O  ${reference_location} http://fullmoon.ottawa.ibm.com/downloads/drops/R-3.5-200906111540/eclipse-SDK-3.5-win32.zip" />
-		</exec>
+		</exec>		
 		<property name="current_location" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" />
-		<property name="report" value="${postingDirectory}/${buildLabel}/apitools" />
+    	<property name="report" value="${postingDirectory}/${buildLabel}/apitools" />
 		<mkdir dir="${report}" />
 		<property name="report_location" value="${report}/report.xml" />
 		<property name="report_html_location" value="${report}/reporthtml" />

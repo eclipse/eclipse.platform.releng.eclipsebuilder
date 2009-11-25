@@ -22,7 +22,7 @@
 
 	<!--location of PDE Build configuration files for builder and packager-->
 	<property name="eclipse.build.configs" value="${basedir}/eclipse/buildConfigs" />
-	<property name="basedir" value="/home/myuserid/srcbuild2/org.eclipse.releng.eclipsebuilder" />
+	<property name="basedir" value="/home/sdimitro/srcbuild2/org.eclipse.releng.eclipsebuilder" />
 	<property name="base.builder" value="${basedir}/../eclipse" />
 
 	<!--default buildDirectory-->
