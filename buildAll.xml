@@ -103,6 +103,8 @@
 			<equals arg1="${buildType}" arg2="N" />
 		</condition>
 		<property name="p2.repo.name" value="&quot;Eclipse Project Test Site&quot;" />
+		<property name="localmirror" value="fullmoon.ottawa.ibm.com" />
+		<property name="cvsuser" value="kmoir" />
 	</target>
 
 	<target name="buildMasterFeature">

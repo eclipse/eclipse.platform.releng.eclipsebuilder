@@ -86,6 +86,8 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- ===================================================================== -->
 	
 	<target name="preFetch">
+		<replace dir="${buildDirectory}/maps/org.eclipse.releng/maps" value="${localmirror}" token="download.eclipse.org" />
+		<replace dir="${buildDirectory}/maps/org.eclipse.releng/maps" value="pserver:anonymous" token="extssh:kmoir" />
 	</target>
 
 	<!-- ===================================================================== -->
