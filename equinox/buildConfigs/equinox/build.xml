@@ -8,7 +8,7 @@
 
 	<target name="all" depends="init">
 		<antcall target="equinoxsdk" />
-		<antcall target="equinoxweavingsdk" />
+	<!--	<antcall target="equinoxweavingsdk" /> -->
 		<antcall target="master-equinox" />
 	</target>
 
