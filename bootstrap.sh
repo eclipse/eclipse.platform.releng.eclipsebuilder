@@ -97,38 +97,38 @@ usage="usage: $0 [-notify emailaddresses][-textRecipients textaddesses][-test][-
 
 if [ $# -lt 1 ]
 then
-		 		  		 		   echo >&2 "$usage"
-		 		  		 		   exit 1
+		 		  		 		   		 		  		 		    echo >&2 "$usage"
+		 		  		 		   		 		  		 		    exit 1
 fi
 
 while [ $# -gt 0 ]
 do
-		 		  		 		   case "$1" in
-		 		  		 		   		 		  		 		   -buildId) buildId="$2"; shift;;
-		 		  		 		   		 		  		 		   -buildLabel) buildLabel="$2"; shift;;
-		 		  		 		   		 		  		 		   -mapVersionTag) mapVersionTag="$2"; shift;;
-		 		  		 		   		 		  		 		   -tagMapFiles) tagMaps="-DtagMaps=true";;
-		 		  		 		   		 		  		 		   -skipPerf) skipPerf="-Dskip.performance.tests=true";;
-		 		  		 		   		 		  		 		   -skipCleanSites) skipCleanSites="-Dskip.clean.sites=true";;
-		 		  		 		   		 		  		 		   -hudson) skipPerf="-Dhudson=true";;
-		 		  		 		   		 		  		 		   -skipTest) skipTest="-Dskip.tests=true";;
-		 		  		 		   		 		  		 		   -skipRSS) skipRSS="-Dskip.feed=true";;
-		 		  		 		   		 		  		 		   -deleteArtifacts) deleteArtifacts="-Ddelete.artifacts=true";;
-		 		  		 		   		 		  		 		   -skipPack) skipPack="-DskipPack=true";;
-		 		  		 		   		 		  		 		   -buildDirectory) builderDir="$2"; shift;;
-		 		  		 		   		 		  		 		   -notify) recipients="$2"; shift;;
-		 		  		 		  		 		  		 		   -textRecipients) textRecipients="$2"; shift;;
-		 		  		 		   		 		  		 		   -test) postingDirectory="/builds/transfer/files/bogus/downloads/drops";testBuild="-Dtest=true";;
-		 		  		 		   		 		  		 		   -builderTag) buildProjectTags="$2"; shift;;
-		 		  		 		   		 		  		 		   -compareMaps) compareMaps="-DcompareMaps=true";;
-		 		  		 		   		 		  		 		   -updateSite) updateSite="-DupdateSite=$2";shift;;
-		 		  		 		   		 		  		 		   -sign) sign="-Dsign=true";;
-		 		  		 		   		 		  		 		   -*)
-		 		  		 		   		 		  		 		   		 		  		 		   echo >&2 $usage
-		 		  		 		   		 		  		 		   		 		  		 		   exit 1;;
-		 		  		 		   		 		  		 		   *) break;;		 		  		 		   # terminate while loop
-		 		  		 		   esac
-		 		  		 		   shift
+		 		  		 		   		 		  		 		    case "$1" in
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -buildId) buildId="$2"; shift;;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -buildLabel) buildLabel="$2"; shift;;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -mapVersionTag) mapVersionTag="$2"; shift;;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -tagMapFiles) tagMaps="-DtagMaps=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -skipPerf) skipPerf="-Dskip.performance.tests=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -skipCleanSites) skipCleanSites="-Dskip.clean.sites=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -hudson) skipPerf="-Dhudson=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -skipTest) skipTest="-Dskip.tests=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -skipRSS) skipRSS="-Dskip.feed=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -deleteArtifacts) deleteArtifacts="-Ddelete.artifacts=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -skipPack) skipPack="-DskipPack=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -buildDirectory) builderDir="$2"; shift;;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -notify) recipients="$2"; shift;;
+		 		  		 		   		 		  		 		   		 		  		 		   		 		  		 		    -textRecipients) textRecipients="$2"; shift;;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -test) postingDirectory="/builds/transfer/files/bogus/downloads/drops";testBuild="-Dtest=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -builderTag) buildProjectTags="$2"; shift;;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -compareMaps) compareMaps="-DcompareMaps=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -updateSite) updateSite="-DupdateSite=$2";shift;;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -sign) sign="-Dsign=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -*)
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    echo >&2 $usage
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    exit 1;;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    *) break;;		 		  		 		   		 		  		 		    # terminate while loop
+		 		  		 		   		 		  		 		    esac
+		 		  		 		   		 		  		 		    shift
 done
 
 # After the above the build type is left in $1.
@@ -137,12 +137,12 @@ buildType=$1
 # Set default buildId and buildLabel if none explicitly set
 if [ "$buildId" = "" ]
 then
-		 		  		 		   buildId=$buildType$builddate-$buildtime
+		 		  		 		   		 		  		 		    buildId=$buildType$builddate-$buildtime
 fi
 
 if [ "$buildLabel" = "" ]
 then
-		 		  		 		   buildLabel=$buildId
+		 		  		 		   		 		  		 		    buildLabel=$buildId
 fi
 
 #Set the tag to HEAD for Nightly builds
@@ -165,7 +165,7 @@ customBuilderTag=$buildProjectTags
 
 if [ -e $builderDir ]
 then
-		 		  		 		   builderDir=$builderDir$timestamp
+		 		  		 		   		 		  		 		    builderDir=$builderDir$timestamp
 fi
 
 # directory where features and plugins will be compiled
@@ -194,14 +194,14 @@ fi
 cp -r eclipseInternalBuildTools/plugins org.eclipse.releng.basebuilder
 
 #The URLs and filenames of vms used in build
-linuxJdkArchive=jdks/jdk-1_5_0_14-fcs-bin-b03-linux-i586-05_oct_2007.zip
+linuxJdkArchive=jdks/jdk-1_5_0_22-fcs-bin-b03-linux-i586-09_oct_2009.zip
 linuxJdkArchive14=jdks/jdk-1_4_2_14-fcs-bin-b05-linux-i586-14_mar_2007.zip
-linuxJdkArchive16=jdks/1.6/jdk-6u7-fcs-bin-b06-linux-i586-10_jun_2008.zip
+linuxJdkArchive16=jdks/1.6/jdk-6u17-fcs-bin-b04-linux-i586-11_oct_2009.zip
 linuxppcJdkArchive=jdks/IBMJava2-SDK-1.4.2-10.0.ppc.tgz
 linuxppcJdkArchive15=jdks/ibm-java2-sdk-5.0-6.0-linux-ppc.tgz
 windowsJreArchive=jdks/jdk-1_4_2_16-fcs-bin-b05-windows-i586-16_sep_2007.zip
-windows15JdkArchive=jdks/jdk-1_5_0_14-fcs-bin-b03-windows-i586-05_oct_2007.zip
-windows16JdkArchive=jdks/1.6/jdk-6u4-fcs-bin-b12-windows-i586-14_dec_2007.zip
+windows15JdkArchive=jdks/jdk-1_5_0_22-fcs-bin-b03-windows-i586-09_oct_2009.zip
+windows16JdkArchive=jdks/1.6/jdk-6u17-fcs-bin-b04-windows-i586-11_oct_2009.zip
 windows10FoundationArchive=jdks/weme-win-x86-foundation10_6.1.0.20060317-111429.zip
 windows11FoundationArchive=jdks/weme-win-x86-ppro11_6.1.1.20061110-161633.zip
 
@@ -303,7 +303,7 @@ retCode=$?
 if [ $retCode != 0 ]
 then
         echo "Build failed (error code $retCode)."
-		 		  exit $retCode
+		 		  		 		   exit $retCode
 fi
 
 if [ "$skip.feed" != "true" ]
@@ -317,8 +317,9 @@ fi
 #clean up
 if [ "$delete.artifacts" == "-Ddelete.artifacts=true"  ]
 then
-		 		  rm -rf $builderDir
+		 		  		 		   rm -rf $builderDir
 fi
+
 
 
 
