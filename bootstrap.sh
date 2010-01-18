@@ -172,21 +172,21 @@ mkdir $builderDir
 cd $builderDir
 
 #check out org.eclipse.releng.basebuilder
-cvs -d sdimitro@dev.eclipse.org:/cvsroot/eclipse co -r $baseBuilderTag org.eclipse.releng.basebuilder
+cvs -d kmoir@dev.eclipse.org:/cvsroot/eclipse co -r $baseBuilderTag org.eclipse.releng.basebuilder
 if [ "$tagMaps" == "-DtagMaps=true" ]; then  
-  cvs -d sdimitro@dev.eclipse.org:/cvsroot/eclipse rtag -r $baseBuilderTag v$buildId org.eclipse.releng.basebuilder;
+  cvs -d kmoir@dev.eclipse.org:/cvsroot/eclipse rtag -r $baseBuilderTag v$buildId org.eclipse.releng.basebuilder;
 fi
 
 #check out org.eclipse.releng.eclipsebuilder
-cvs -d sdimitro@dev.eclipse.org:/cvsroot/eclipse co -r $customBuilderTag org.eclipse.releng.eclipsebuilder
+cvs -d kmoir@dev.eclipse.org:/cvsroot/eclipse co -r $customBuilderTag org.eclipse.releng.eclipsebuilder
 if [ "$tagMaps" == "-DtagMaps=true" ]; then  
-  cvs -d sdimitro@dev.eclipse.org:/cvsroot/eclipse rtag -r $customBuilderTag v$buildId  org.eclipse.releng.eclipsebuilder;
+  cvs -d kmoir@dev.eclipse.org:/cvsroot/eclipse rtag -r $customBuilderTag v$buildId  org.eclipse.releng.eclipsebuilder;
 fi
 
 #check out eclipseInternalBuildTools and install custom plugins
-cvs -d sdimitro@ottcvs1:/home/cvs/releng co -r $internalToolsTag eclipseInternalBuildTools
+cvs -d kmoir@ottcvs1:/home/cvs/releng co -r $internalToolsTag eclipseInternalBuildTools
 if [ "$tagMaps" == "-DtagMaps=true" ]; then  
-  cvs -d sdimitro@ottcvs1:/home/cvs/releng rtag -r $internalToolsTag v$buildId eclipseInternalBuildTools;
+  cvs -d kmoir@ottcvs1:/home/cvs/releng rtag -r $internalToolsTag v$buildId eclipseInternalBuildTools;
 fi
 cp -r eclipseInternalBuildTools/plugins org.eclipse.releng.basebuilder
 
@@ -203,33 +203,33 @@ windows10FoundationArchive=jdks/weme-win-x86-foundation10_6.1.0.20060317-111429.
 windows11FoundationArchive=jdks/weme-win-x86-ppro11_6.1.1.20061110-161633.zip
 
 #get then install the Linux 1.6 vm used for running the build
-mkdir -p jdk/linux; cvs -d sdimitro@ottcvs1:/home/cvs/releng co $linuxJdkArchive; unzip -qq $linuxJdkArchive -d jdk/linux; rm $linuxJdkArchive
+mkdir -p jdk/linux; cvs -d kmoir@ottcvs1:/home/cvs/releng co $linuxJdkArchive; unzip -qq $linuxJdkArchive -d jdk/linux; rm $linuxJdkArchive
 
-mkdir -p jdk/linux14; cvs -d sdimitro@ottcvs1:/home/cvs/releng co $linuxJdkArchive14; unzip -qq $linuxJdkArchive14 -d jdk/linux14; rm $linuxJdkArchive14
+mkdir -p jdk/linux14; cvs -d kmoir@ottcvs1:/home/cvs/releng co $linuxJdkArchive14; unzip -qq $linuxJdkArchive14 -d jdk/linux14; rm $linuxJdkArchive14
 
-mkdir -p jdk/linux16; cvs -d sdimitro@ottcvs1:/home/cvs/releng co $linuxJdkArchive16; unzip -qq $linuxJdkArchive16 -d jdk/linux16; rm $linuxJdkArchive16
+mkdir -p jdk/linux16; cvs -d kmoir@ottcvs1:/home/cvs/releng co $linuxJdkArchive16; unzip -qq $linuxJdkArchive16 -d jdk/linux16; rm $linuxJdkArchive16
 
 #get the install the Windows jre containing the Java libraries against which to compile
-mkdir -p jdk/win32; cvs -d sdimitro@ottcvs1:/home/cvs/releng co $windowsJreArchive;unzip -qq $windowsJreArchive -d jdk/win32; rm $windowsJreArchive
+mkdir -p jdk/win32; cvs -d kmoir@ottcvs1:/home/cvs/releng co $windowsJreArchive;unzip -qq $windowsJreArchive -d jdk/win32; rm $windowsJreArchive
 
 #get and install the Windows 1.5 jre containing the 1.5 Java libraries against which to compile
-mkdir -p jdk/win32_15; cvs -d sdimitro@ottcvs1:/home/cvs/releng co $windows15JdkArchive;unzip -qq $windows15JdkArchive -d jdk/win32_15/; rm $windows15JdkArchive
+mkdir -p jdk/win32_15; cvs -d kmoir@ottcvs1:/home/cvs/releng co $windows15JdkArchive;unzip -qq $windows15JdkArchive -d jdk/win32_15/; rm $windows15JdkArchive
 
 #get and install the Windows Foundation jre containing the 1.0 Java libraries against which to compile
-mkdir -p jdk/win32_foundation; cvs -d sdimitro@ottcvs1:/home/cvs/releng co $windows10FoundationArchive;unzip -qq $windows10FoundationArchive -d jdk/win32_foundation/; rm $windows10FoundationArchive
+mkdir -p jdk/win32_foundation; cvs -d kmoir@ottcvs1:/home/cvs/releng co $windows10FoundationArchive;unzip -qq $windows10FoundationArchive -d jdk/win32_foundation/; rm $windows10FoundationArchive
 
 #get and install the Windows Foundation jre containing the 11 Java libraries against which to compile
-mkdir -p jdk/win32_foundation11; cvs -d sdimitro@ottcvs1:/home/cvs/releng co $windows11FoundationArchive;unzip -qq $windows11FoundationArchive -d jdk/win32_foundation11/; rm $windows11FoundationArchive
+mkdir -p jdk/win32_foundation11; cvs -d kmoir@ottcvs1:/home/cvs/releng co $windows11FoundationArchive;unzip -qq $windows11FoundationArchive -d jdk/win32_foundation11/; rm $windows11FoundationArchive
 
 #get and install the Windows 1.6 Java libraries against which to compile
-mkdir -p jdk/win32_16; cvs -d sdimitro@ottcvs1:/home/cvs/releng co $windows16JdkArchive;unzip -qq $windows16JdkArchive -d jdk/win32_16/; rm $windows16JdkArchive
+mkdir -p jdk/win32_16; cvs -d kmoir@ottcvs1:/home/cvs/releng co $windows16JdkArchive;unzip -qq $windows16JdkArchive -d jdk/win32_16/; rm $windows16JdkArchive
 
 if [ "$HOSTNAME" == "eclipsebuildserv.ottawa.ibm.com" ]
 then
     #get then install the Linuxppc vm used for running the build
-    mkdir -p jdk/linuxppc; cd jdk/linuxppc; cvs -d sdimitro@ottcvs1:/home/cvs/releng co $linuxppcJdkArchive; tar -xzf $linuxppcJdkArchive; rm $linuxppcJdkArchive
+    mkdir -p jdk/linuxppc; cd jdk/linuxppc; cvs -d kmoir@ottcvs1:/home/cvs/releng co $linuxppcJdkArchive; tar -xzf $linuxppcJdkArchive; rm $linuxppcJdkArchive
     #get then install the Linuxppc 1.5 vm used for generating javadoc
-    cd jdk/linuxppc; cvs -d sdimitro@ottcvs1:/home/cvs/releng co $linuxppcJdkArchive15; tar -xzf $linuxppcJdkArchive15; rm -rf $linuxppcJdkArchive15; cd ../..
+    cd jdk/linuxppc; cvs -d kmoir@ottcvs1:/home/cvs/releng co $linuxppcJdkArchive15; tar -xzf $linuxppcJdkArchive15; rm -rf $linuxppcJdkArchive15; cd ../..
     javadoc="-Djavadoc15=$builderDir/jdk/linuxppc/ibm-java2-ppc-50/bin/javadoc"
 else
    javadoc="-Djavadoc15=$builderDir/jdk/linux/jdk1.5.0_14/bin/javadoc"
@@ -285,9 +285,9 @@ echo buildDirectory=$buildDirectory
 #full command with args
 if [ "$HOSTNAME" == "eclipsebuildserv.ottawa.ibm.com" ]
 then
-buildCommand="$antRunner -q -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:ext:sdimitro@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $skipPack $tagMaps -DJ2SE-1.5=$bootclasspath_15 -DJ2SE-1.4=$bootclasspath -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation -DCDC-1.1/Foundation-1.1=$bootclasspath_foundation11 -DOSGi/Minimum-1.2=$bootclasspath_foundation11 -DJavaSE-1.6=$bootclasspath_16 -DlogExtension=.xml $javadoc $updateSite $sign -DgenerateFeatureVersionSuffix=true -Djava15-home=$builderDir/jdk/linuxppc/ibm-java2-ppc-50/jre -listener org.eclipse.releng.build.listeners.EclipseBuildListener"
+buildCommand="$antRunner -q -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:ext:kmoir@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $skipPack $tagMaps -DJ2SE-1.5=$bootclasspath_15 -DJ2SE-1.4=$bootclasspath -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation -DCDC-1.1/Foundation-1.1=$bootclasspath_foundation11 -DOSGi/Minimum-1.2=$bootclasspath_foundation11 -DJavaSE-1.6=$bootclasspath_16 -DlogExtension=.xml $javadoc $updateSite $sign -DgenerateFeatureVersionSuffix=true -Djava15-home=$builderDir/jdk/linuxppc/ibm-java2-ppc-50/jre -listener org.eclipse.releng.build.listeners.EclipseBuildListener"
 else
-buildCommand="$antRunner -q -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:ext:sdimitro@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $skipPack $tagMaps -DJ2SE-1.5=$bootclasspath_15 -DJ2SE-1.4=$bootclasspath -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation -DCDC-1.1/Foundation-1.1=$bootclasspath_foundation11 -DOSGi/Minimum-1.2=$bootclasspath_foundation11  -DJavaSE-1.6=$bootclasspath_16 -DlogExtension=.xml $javadoc $updateSite $sign -DgenerateFeatureVersionSuffix=true -Djava15-home=$builderDir/jdk/linux/jdk1.5.0_14/jre -listener org.eclipse.releng.build.listeners.EclipseBuildListener"
+buildCommand="$antRunner -q -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:ext:kmoir@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $skipPack $tagMaps -DJ2SE-1.5=$bootclasspath_15 -DJ2SE-1.4=$bootclasspath -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation -DCDC-1.1/Foundation-1.1=$bootclasspath_foundation11 -DOSGi/Minimum-1.2=$bootclasspath_foundation11  -DJavaSE-1.6=$bootclasspath_16 -DlogExtension=.xml $javadoc $updateSite $sign -DgenerateFeatureVersionSuffix=true -Djava15-home=$builderDir/jdk/linux/jdk1.5.0_14/jre -listener org.eclipse.releng.build.listeners.EclipseBuildListener"
 fi
 
 #capture command used to run the build
