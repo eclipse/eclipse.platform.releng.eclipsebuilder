@@ -372,7 +372,7 @@
 	<target name="junit" unless="skip.test">
 		<antcall target="setup">
 		</antcall>
-		<property name="org.eclipse.test" value="org.eclipse.test_3.2.100" />
+		<property name="org.eclipse.test" value="org.eclipse.test_3.3.0" />
 		<property name="library-file" value="${basedir}/test-eclipse/eclipse/plugins/${org.eclipse.test}/library.xml" />
 
 		<echo>trying to find ${testPlugin}_*</echo>
@@ -402,7 +402,7 @@
 
 	<target name="performance" if="performance.target.present" unless="skip.test">
 		<antcall target="setup" />
-		<property name="org.eclipse.test" value="org.eclipse.test_3.2.100" />
+		<property name="org.eclipse.test" value="org.eclipse.test_3.3.0" />
 		<property name="library-file" value="${basedir}/test-eclipse/eclipse/plugins/${org.eclipse.test}/library.xml" />
 
 		<echo>trying to find ${testPlugin}_*</echo>
