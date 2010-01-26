@@ -147,7 +147,7 @@
 		</delete> -->
 
 		<parallel failonany="true" threadCount='4'>
-	<!--		<antcall target="provision.agent" /> -->
+			<antcall target="provision.agent" /> 
 			<antcall target="provision.sdk" />
 			<antcall target="provision.platform" />
 			<antcall target="provision.platformsdk" />
