@@ -480,8 +480,8 @@
 			<arg line="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -x features/master/* features/master-ecf* features/master-jetty* features/master-equinox-weaving* plugins/org.aspectj* -d ${reposource}" />
 		</exec>
 		<property name="tempexec" value="${buildDirectory}/tempexec" />
-		<mkdir dir="${tempexec}" />
 		<delete dir="${tempexec}" />
+		<mkdir dir="${tempexec}" />	
 		<copy todir="${tempexec}">
 			<fileset dir="${reposource}">
 				<include name="features/org.eclipse.equinox.executable_*.jar" />
@@ -598,11 +598,7 @@
 		<copy todir="${equinox.p2.agent.dir}">
 			<fileset file="${buildDirectory}/plugins/org.eclipse.equinox.p2.ui.admin.rcp/rcp.product" />
 		</copy>
-		<mkdir dir="${equinox.p2.agent.dir}/org.eclipse.equinox.p2.ui.admin.rcp" />
-		<copy todir="${equinox.p2.agent.dir}/org.eclipse.equinox.p2.ui.admin.rcp">
-			<fileset file="${buildDirectory}/plugins/org.eclipse.equinox.p2.ui.admin.rcp/config.ini" />
-		</copy>
-
+		<mkdir dir="${equinox.p2.agent.dir}/org.eclipse.equinox.p2.ui.admin.rcp" />		
 		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${equinox.p2.agent.dir}/rcp.product" compress="true">
 			<config os="win32" ws="win32" arch="x86" />
 			<config os="linux" ws="gtk" arch="x86" />

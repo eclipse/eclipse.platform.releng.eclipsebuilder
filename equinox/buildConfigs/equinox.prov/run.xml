@@ -126,7 +126,7 @@
 
 		<property file="build.properties" />
 		<property name="p2.flavor" value="tooling" />
-		<property name="p2.agent.version" value="1.0.100.${buildId}" />
+		<property name="p2.agent.version" value="1.1.0.${buildId}" />
 	</target>
 
 	<target name="build" depends="init">
@@ -147,7 +147,7 @@
 		</delete> -->
 
 		<parallel failonany="true" threadCount='4'>
-			<antcall target="provision.agent" />
+			<antcall target="provision.agent" /> 
 			<antcall target="provision.sdk" />
 			<antcall target="provision.platform" />
 			<antcall target="provision.platformsdk" />
