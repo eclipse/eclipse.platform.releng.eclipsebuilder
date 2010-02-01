@@ -34,8 +34,6 @@
 		<mkdir dir="${p2.sdk.install.win32.win32.x86}" />
 		<property name="p2.sdk.install.win32.win32.x86_64" value="${p2.output.base}/sdk.install.win32.win32.x86_64" />
 		<mkdir dir="${p2.sdk.install.win32.win32.x86_64}" />
-		<property name="p2.sdk.install.win32.wpf.x86" value="${p2.output.base}/sdk.install.win32.wpf.x86" />
-		<mkdir dir="${p2.sdk.install.win32.wpf.x86}" />
 		<property name="p2.sdk.install.linux.gtk.x86" value="${p2.output.base}/sdk.install.linux.gtk.x86" />
 		<mkdir dir="${p2.sdk.install.linux.gtk.x86}" />
 		<property name="p2.sdk.install.linux.motif.x86" value="${p2.output.base}/sdk.install.linux.motif.x86" />
@@ -66,8 +64,6 @@
 		<mkdir dir="${p2.platform.install.win32.win32.x86}" />
 		<property name="p2.platform.install.win32.win32.x86_64" value="${p2.output.base}/platform.install.win32.win32.x86_64" />
 		<mkdir dir="${p2.platform.install.win32.win32.x86_64}" />
-		<property name="p2.platform.install.win32.wpf.x86" value="${p2.output.base}/platform.install.win32.wpf.x86" />
-		<mkdir dir="${p2.platform.install.win32.wpf.x86}" />
 		<property name="p2.platform.install.linux.gtk.x86" value="${p2.output.base}/platform.install.linux.gtk.x86" />
 		<mkdir dir="${p2.platform.install.linux.gtk.x86}" />
 		<property name="p2.platform.install.linux.gtk.x86_64" value="${p2.output.base}/platform.install.linux.gtk.x86_64" />
@@ -96,8 +92,6 @@
 		<mkdir dir="${p2.platformsdk.install.win32.win32.x86}" />
 		<property name="p2.platformsdk.install.win32.win32.x86_64" value="${p2.output.base}/platformsdk.install.win32.win32.x86_64" />
 		<mkdir dir="${p2.platformsdk.install.win32.win32.x86_64}" />
-		<property name="p2.platformsdk.install.win32.wpf.x86" value="${p2.output.base}/platformsdk.install.win32.wpf.x86" />
-		<mkdir dir="${p2.platformsdk.install.win32.wpf.x86}" />
 		<property name="p2.platformsdk.install.linux.gtk.x86" value="${p2.output.base}/platformsdk.install.linux.gtk.x86" />
 		<mkdir dir="${p2.platformsdk.install.linux.gtk.x86}" />
 		<property name="p2.platformsdk.install.linux.gtk.x86_64" value="${p2.output.base}/platformsdk.install.linux.gtk.x86_64" />
@@ -236,18 +230,6 @@
 			<param name="p2.os" value="win32" />
 			<param name="p2.ws" value="win32" />
 			<param name="p2.arch" value="x86_64" />
-			<param name="p2.repo" value="${buildRepo}" />
-		</antcall>
-
-		<antcall target="run.director">
-			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
-			<param name="p2.director.version" value="3.6.0.${buildId}" />
-			<param name="p2.director.profile" value="SDKProfile" />
-			<param name="p2.director.install.path" value="${p2.sdk.install.win32.wpf.x86}/eclipse" />
-			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
-			<param name="p2.os" value="win32" />
-			<param name="p2.ws" value="wpf" />
-			<param name="p2.arch" value="x86" />
 			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
@@ -426,18 +408,6 @@
 			<param name="p2.director.installIU" value="org.eclipse.platform.ide" />
 			<param name="p2.director.version" value="3.6.0.${buildId}" />
 			<param name="p2.director.profile" value="PlatformProfile" />
-			<param name="p2.director.install.path" value="${p2.platform.install.win32.wpf.x86}/eclipse" />
-			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
-			<param name="p2.os" value="win32" />
-			<param name="p2.ws" value="wpf" />
-			<param name="p2.arch" value="x86" />
-			<param name="p2.repo" value="${buildRepo}" />
-		</antcall>
-
-		<antcall target="run.director">
-			<param name="p2.director.installIU" value="org.eclipse.platform.ide" />
-			<param name="p2.director.version" value="3.6.0.${buildId}" />
-			<param name="p2.director.profile" value="PlatformProfile" />
 			<param name="p2.director.install.path" value="${p2.platform.install.linux.gtk.x86}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
 			<param name="p2.os" value="linux" />
@@ -590,18 +560,6 @@
 			<param name="p2.os" value="win32" />
 			<param name="p2.ws" value="win32" />
 			<param name="p2.arch" value="x86_64" />
-			<param name="p2.repo" value="${buildRepo}" />
-		</antcall>
-
-		<antcall target="run.director">
-			<param name="p2.director.installIU" value="org.eclipse.platform.sdk" />
-			<param name="p2.director.version" value="3.6.0.${buildId}" />
-			<param name="p2.director.profile" value="PlatformSDKProfile" />
-			<param name="p2.director.install.path" value="${p2.platformsdk.install.win32.wpf.x86}/eclipse" />
-			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
-			<param name="p2.os" value="win32" />
-			<param name="p2.ws" value="wpf" />
-			<param name="p2.arch" value="x86" />
 			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
@@ -837,16 +795,6 @@
 				<antcall target="generateChecksums">
 					<param name="archiveName" value="eclipse-SDK-${buildId}-win32-x86_64.zip" />
 				</antcall>
-
-				<!-- win32 wpf x86 -->
-				<delete file="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32-wpf.zip" failonerror="false" />
-				<copy file="${equinox.build.configs}/equinox.prov/wpftemp/eclipse.ini" tofile="${p2.sdk.install.win32.wpf.x86}/eclipse/eclipse.ini" overwrite="true" failonerror="false" />
-				<exec dir="${p2.sdk.install.win32.wpf.x86}" executable="zip">
-					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32-wpf.zip -r ." />
-				</exec>
-				<antcall target="generateChecksums">
-					<param name="archiveName" value="eclipse-SDK-${buildId}-win32-wpf.zip" />
-				</antcall>
 			</sequential>
 
 			<sequential>
@@ -953,17 +901,7 @@
 				</exec>
 				<antcall target="generateChecksums">
 					<param name="archiveName" value="eclipse-platform-${buildId}-win32-x86_64.zip" />
-				</antcall>
-
-				<!-- win32 wpf x86 -->
-				<delete file="${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-win32-wpf.zip" failonerror="false" />
-				<copy file="${equinox.build.configs}/equinox.prov/wpftemp/eclipse.ini" tofile="${p2.platform.install.win32.wpf.x86}/eclipse/eclipse.ini" overwrite="true" failonerror="false" />
-				<exec dir="${p2.platform.install.win32.wpf.x86}" executable="zip">
-					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-win32-wpf.zip -r ." />
-				</exec>
-				<antcall target="generateChecksums">
-					<param name="archiveName" value="eclipse-platform-${buildId}-win32-wpf.zip" />
-				</antcall>
+				</antcall>		
 			</sequential>
 
 			<sequential>
@@ -1082,17 +1020,7 @@
 				</exec>
 				<antcall target="generateChecksums">
 					<param name="archiveName" value="eclipse-platform-SDK-${buildId}-win32-x86_64.zip" />
-				</antcall>
-
-				<!-- win32 wpf x86 -->
-				<delete file="${postingDirectory}/${buildLabel}/eclipse-platform-SDK-${buildId}-win32-wpf.zip" failonerror="false" />
-				<copy file="${equinox.build.configs}/equinox.prov/wpftemp/eclipse.ini" tofile="${p2.platformsdk.install.win32.wpf.x86}/eclipse/eclipse.ini" overwrite="true" failonerror="false" />
-				<exec dir="${p2.platformsdk.install.win32.wpf.x86}" executable="zip">
-					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-platform-SDK-${buildId}-win32-wpf.zip -r ." />
-				</exec>
-				<antcall target="generateChecksums">
-					<param name="archiveName" value="eclipse-platform-SDK-${buildId}-win32-wpf.zip" />
-				</antcall>
+				</antcall>			
 			</sequential>
 			<sequential>
 				<!-- linux gtk x86-->
