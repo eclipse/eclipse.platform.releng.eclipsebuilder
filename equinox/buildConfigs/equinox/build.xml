@@ -49,6 +49,10 @@
 				<iu id="${sdkIU}" version="" />
 				<slicingOptions platformFilter="true" includeOptional="false" includeNonGreedy="false" followStrict="true" />
 			</p2.mirror>
+			<p2.remove.iu>
+				<repository location="file://${featureTemp}" />
+				<iu query="" artifacts="(format=packed)" />
+			</p2.remove.iu>
 			<!-- assemble compressed files and create checksums -->
 			<antcall target="compress">
 				<param name="archiveName" value="@{archiveName}" />
@@ -71,6 +75,10 @@
 				<iu id="${runtimeIU}" version="" />
 				<slicingOptions platformFilter="true" includeOptional="false" includeNonGreedy="false" followStrict="true" />
 			</p2.mirror>
+			<p2.remove.iu>
+				<repository location="file://${featureTemp}" />
+				<iu query="" artifacts="(format=packed)" />
+			</p2.remove.iu>
 			<!-- assemble compressed files and create checksums -->
 			<antcall target="compress">
 				<param name="archiveName" value="@{archiveName}" />

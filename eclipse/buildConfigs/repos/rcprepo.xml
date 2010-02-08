@@ -30,6 +30,10 @@
 				<iu id="a.jre.javase" version="" />
 				<slicingOptions platformFilter="true" includeOptional="false" includeNonGreedy="false" followStrict="true" />
 			</p2.mirror>
+			<p2.remove.iu>
+				<repository location="file://${featureTemp}" />
+				<iu query="" artifacts="(format=packed)" />
+			</p2.remove.iu>
 			<antcall target="assembler">
 				<param name="archiveName" value="@{feature}.source-${buildId}.zip" />
 			</antcall>
@@ -50,6 +54,10 @@
 				<iu id="a.jre.javase" version="" />
 				<slicingOptions platformFilter="true" includeOptional="false" includeNonGreedy="false" followStrict="true" />
 			</p2.mirror>
+			<p2.remove.iu>
+				<repository location="file://${featureTemp}" />
+				<iu query="" artifacts="(format=packed)" />
+			</p2.remove.iu>
 			<antcall target="assembler">
 				<param name="archiveName" value="@{feature}-${buildId}.zip" />
 			</antcall>
