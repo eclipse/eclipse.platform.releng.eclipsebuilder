@@ -54,7 +54,7 @@ tag=""
 #buildProjectTags=v20100204
 #buildProjectTags=v20100208
 #buildProjectTags=v20100210
-buildProjectTags=v20100212
+buildProjectTags=v20100212a
 
 #updateSite property setting
 updateSite=""
