@@ -225,6 +225,9 @@
 		<!--load the property file created with the directory names for all test plugins-->
 		<property file="${test.properties}" />
 
+		<!--copy comparator log to test directory-->
+		<copy file="${buildlogs}/comparatorlog.txt" todir="${workingDirectory}/eclipse-testing" failonerror="false"/>	
+
 		<!--create properties file for use in equinoxp2 tests -->
 		<property name="equinoxp2tests.properties" value="${workingDirectory}/eclipse-testing/equinoxp2tests.properties" />
 		<property name="org.eclipse.equinox.p2.reconciler.tests.platform.archive.win32" value="c:\\buildtest\\${buildId}\\eclipse-testing\\eclipse-platform-${buildId}-win32.zip" />
