@@ -237,8 +237,8 @@ echo "This log compares the build's plugin and features versions with 3.5. </li>
 }
 ?>
 <?php
-echo " <li><a href=\"apitools/apitoolsverifications/html/index.html\"><b>PDE API Tools Verification Report</b></a>";
-echo "  This tool verifies the versions of the plugins against Eclipse 3.5.1.  Exclusions are listed in org.eclipse.releng/apiexclude/exclude_list_external.txt. </li> ";
+echo " <li><a href=\"apitools/apitoolsverifications/html/index.html\"><b>API Tools Version Verification Report</b></a>";
+echo "  This tool verifies the versions of the plugins against Eclipse 3.5.2.  Exclusions are listed in org.eclipse.releng/apiexclude/exclude_list_external.txt. </li> ";
 ?>
 
 </li>

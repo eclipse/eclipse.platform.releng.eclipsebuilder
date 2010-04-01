@@ -130,6 +130,14 @@ function genLinks($servername,$buildlabel,$zipfile) {
 }
 ?>	
 
+<?php
+echo " <li><a href=\"apitools/apitoolsverifications/html/index.html\"><b>API Tools Version Verification Report</b></a>";
+echo "  This tool verifies the versions of the plugins against Eclipse 3.5.2.  Exclusions are listed in org.eclipse.releng/apiexclude/exclude_list_external.txt. </li> ";
+?>
+<?php
+echo"<li><a href=\"apitools/report.html\"><b>API Tools Post-API Freeze Report</b></a>  This report describes API changes since 3.6M6.  Exclusions are listed in org.eclipse.releng/apiexclude/exclude_list.txt. </li>";
+?>
+
 <table align="left" BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%">
 <tr><td><div class="homeitem3col">
 <h3><a name="Equinox"> Eclipse Equinox</a></h3>
