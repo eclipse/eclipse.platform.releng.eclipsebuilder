@@ -436,10 +436,10 @@
 		<property name="equinox_api_report" value="${equinoxPostingDirectory}/${buildLabel}/apitools" />
 		<mkdir dir="${equinox_api_report}" />
 		<copy todir="${equinox_api_report}">
-			<fileset dir="${report_html_location}">
+			<fileset dir="${report}">
 				<include name="report.html" />
 			</fileset>
-			<fileset dir="${html_html_location}">
+			<fileset dir="${html_directory_location}">
 				<include name="index.html" />
 			</fileset>
 		</copy>
