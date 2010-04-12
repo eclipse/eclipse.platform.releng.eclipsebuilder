@@ -123,7 +123,7 @@
 		<condition property="cvsuser" value=":pserver:anonymous">
 			<equals arg1="${hudson}" arg2="true" />
 		</condition>
-		<property name="cvsuser" value=":extssh:kmoir" />
+ 		<property name="cvsuser" value="kmoir" />
 		<condition property="mapsRepo" value=":pserver:anonymous@dev.eclipse.org/cvsroot/eclipse">
 			<equals arg1="${hudson}" arg2="true" />
 		</condition>
