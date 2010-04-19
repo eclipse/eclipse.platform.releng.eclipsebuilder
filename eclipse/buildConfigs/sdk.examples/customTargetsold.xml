@@ -107,7 +107,7 @@
 	<!-- Steps to do after fetching the build elements -->
 	<!-- ===================================================================== -->
 	<target name="postFetch">
-		<replace file="${buildDirectory}/sourceReferences.properties" value=":extssh" token=":pserver" />	
+		<replace file="${buildDirectory}/sourceReferences.properties" token=":extssh" value=":pserver"  />	
 	</target>
 
 	<!-- ===================================================================== -->

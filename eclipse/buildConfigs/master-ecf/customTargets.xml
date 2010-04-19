@@ -90,6 +90,7 @@
 	<!-- Steps to do after the fetch -->
 	<!-- ===================================================================== -->
 	<target name="postFetch">
+		<replace file="${buildDirectory}/sourceReferences.properties" token=":extssh" value=":pserver"  />	
 		<replace dir="${buildDirectory}/plugins" value="${buildId}" token="@buildid@">
 			<include name="**/about.mappings" />
 		</replace>

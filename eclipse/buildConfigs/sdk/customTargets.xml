@@ -198,7 +198,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Steps to do after the fetch -->
 	<!-- ===================================================================== -->
 	<target name="postFetch" unless="skipFetch">
-	    <replace file="${buildDirectory}/sourceReferences.properties" value=":extssh" token=":pserver" />
+		<replace file="${buildDirectory}/sourceReferences.properties" token=":extssh" value=":pserver"  />
 		<antcall target="updateproperties" />
 		<ant antfile="${genericTargets}" target="fetchElement">
 			<property name="type" value="feature" />
