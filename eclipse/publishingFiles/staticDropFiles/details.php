@@ -179,13 +179,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				<li><a name="com.ibm.icu"> <b> com.ibm.icu.base binary and source Plug-ins </b> </a>
 				<ul>
 				<li>
-				This plugin is a replacement plugin for the com.ibm.icu plugin. If the size of your 
-				application overrides the need to adopt ICU4J, use this plugin *in place of* the ICU4J 
-				plugin (com.ibm.icu).  To install and use this plugin:<BR>1.  Extract the zip at the 
-				root of your Eclipse install directory<BR>2.  In the \eclipse\plugins directory, 
-				delete com.ibm.icu_&lt;version&gt;.jar and the directory com.ibm.icu.source_&lt;version&gt;<BR>3.
-				In \eclipse\features\org.eclipse.rcp_&lt;version&gt;\feature.xml, replace the id of the 
-				com.ibm.icu plugin entry with com.ibm.icu.base.</li></ul>
+				</li></ul>
 				
 				<li><a name="PlatformRuntime"> <b> Platform Runtime Binary </b> </a>
 				<ul>
