@@ -39,18 +39,37 @@
 		<condition property="repoexists" value="true">
 			<available file="${repoLocation}" />
 		</condition>
-		<antcall target="setupRepo" />
+		<antcall target="extractTestBundlesRepo" repoLocation="${repoLocation}" repoZip="${repoZip}" />
+		<condition property="extraIU" value="org.eclipse.equinox.p2.discovery.feature.feature.group">
+			<equals arg1="${testPlugin}" arg2="org.eclipse.equinox.p2.tests.discovery" />
+		</condition>
 		<antcall target="${setupTarget}" />
 		<antcall target="configureDeltaPack" />
 	</target>
 
+	<target name="extractTestBundlesRepo" unless="repoexists">
+		<antcall target="setupRepo" repoLocation="${repoLocation}" repoZip="${repoZip}" />
+	</target>
+
 	<!--Extract test bundles repo -->
-	<target name="setupRepo" unless="repoexists">
+	<macrodef name="setupRepo">
+		<attribute name="repoLocation" />
+		<attribute name="repoZip" />
+		<sequential>
+			<mkdir dir="@{repoLocation}" />
+			<exec dir="." executable="unzip">
+				<arg line="-o @{repoZip} -d @{repoLocation}" />
+			</exec>
+		</sequential>
+	</macrodef>
+
+	<!-- old setupRepo task -->
+	<!-- <target name="setupRepo" unless="repoexists">
 		<mkdir dir="${repoLocation}" />
 		<exec dir="." executable="unzip">
 			<arg line="-o ${repoZip} -d ${repoLocation}" />
 		</exec>
-	</target>
+	</target> -->
 
 	<!--setup for zip archives-->
 	<target name="setup-zip" description="Reinstall the test Eclipse installation if specified by user">
@@ -60,6 +79,7 @@
 			<arg line="-o -qq ${runtimeArchive} -d ${install}" />
 		</exec>
 		<antcall target="installTestPlugins" />
+		<antcall target="installExtraPlugins" />
 	</target>
 
 	<!--setup for tar.gz archives-->
@@ -71,6 +91,7 @@
 			<arg line="-xzf ${currentDir}/${runtimeArchive}" />
 		</exec>
 		<antcall target="installTestPlugins" />
+		<antcall target="installExtraPlugins" />
 	</target>
 
 	<!--use an stable version of the director so that instability in the current build doesn't cause all the tests to fail -->
@@ -111,6 +132,29 @@
 		<mkdir dir="${platformLocation}" />
 		<exec dir="${platformLocation}" executable="tar">
 			<arg line="-xzf ${platformArchive}" />
+		</exec>
+	</target>
+
+	<target name="installExtraPlugins" if="extraIU">
+		<property file="equinoxp2tests.properties"/>
+		<property name="currentBuildRepo" value="${org.eclipse.equinox.p2.tests.current.build.repo}" />
+		<echo>-installIU ${extraIU} +</echo>
+		<exec executable="${eclipse-home}/eclipse" failonerror="false" dir="${eclipse-home}" timeout="900000" output="${basedir}/director.log" resultproperty="directorcode">
+			<arg line="-vm ${java.home}/bin/java" />
+			<arg line="-application org.eclipse.equinox.p2.director" />
+			<arg line="-nosplash" />
+			<arg line="--launcher.suppressErrors" />
+			<arg line="-consoleLog" />
+			<arg line="-flavor tooling" />
+			<arg line="-installIUs ${extraIU}" />
+			<arg line="-p2.os ${os}" />
+			<arg line="-p2.ws ${ws}" />
+			<arg line="-p2.arch ${arch}" />
+			<arg line="-roaming" />
+			<arg line="-profile SDKProfile" />
+			<arg line="-repository ${currentBuildRepo}" />
+			<arg line="-destination ${eclipse-home}" />
+			<arg line="-bundlepool ${eclipse-home}" />
 		</exec>
 	</target>
 
@@ -167,7 +211,7 @@
 				<equals arg1="${ws}" arg2="win32" />
 				<equals arg1="${arch}" arg2="x86" />
 			</and>
-		</condition>		
+		</condition>
 		<condition property="runtimeArchive" value="eclipse-SDK-${buildId}-win32-x86_64.zip">
 			<and>
 				<equals arg1="${os}" arg2="win32" />
@@ -676,6 +720,17 @@
 		<runTests testPlugin="org.eclipse.equinox.p2.tests.ui" />
 	</target>
 
+	<target name="equinoxp2testsdiscovery" depends="setJVMProperties">
+		<property name="jvm" value="${J2SE-5.0}" />
+		<!--only run test if J2SE-5.0 property  set-->
+		<condition property="skip.test">
+			<not>
+				<isset property="J2SE-5.0" />
+			</not>
+		</condition>
+		<runTests testPlugin="org.eclipse.equinox.p2.tests.discovery" />
+	</target>
+
 	<target name="search">
 		<runTests testPlugin="org.eclipse.search.tests" />
 	</target>
@@ -735,6 +790,7 @@
 		<antcall target="uadoc" />
 		<antcall target="debug" />
 		<antcall target="ui" />
+		<antcall target="equinoxp2testsdiscovery" />
 	</target>
 </project>
 
