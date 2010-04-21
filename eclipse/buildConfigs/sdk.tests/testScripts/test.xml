@@ -39,37 +39,21 @@
 		<condition property="repoexists" value="true">
 			<available file="${repoLocation}" />
 		</condition>
-		<antcall target="extractTestBundlesRepo" repoLocation="${repoLocation}" repoZip="${repoZip}" />
 		<condition property="extraIU" value="org.eclipse.equinox.p2.discovery.feature.feature.group">
 			<equals arg1="${testPlugin}" arg2="org.eclipse.equinox.p2.tests.discovery" />
 		</condition>
+		<antcall target="setupRepo" />
 		<antcall target="${setupTarget}" />
 		<antcall target="configureDeltaPack" />
 	</target>
 
-	<target name="extractTestBundlesRepo" unless="repoexists">
-		<antcall target="setupRepo" repoLocation="${repoLocation}" repoZip="${repoZip}" />
-	</target>
-
 	<!--Extract test bundles repo -->
-	<macrodef name="setupRepo">
-		<attribute name="repoLocation" />
-		<attribute name="repoZip" />
-		<sequential>
-			<mkdir dir="@{repoLocation}" />
-			<exec dir="." executable="unzip">
-				<arg line="-o @{repoZip} -d @{repoLocation}" />
-			</exec>
-		</sequential>
-	</macrodef>
-
-	<!-- old setupRepo task -->
-	<!-- <target name="setupRepo" unless="repoexists">
+	<target name="setupRepo" unless="repoexists">
 		<mkdir dir="${repoLocation}" />
 		<exec dir="." executable="unzip">
 			<arg line="-o ${repoZip} -d ${repoLocation}" />
 		</exec>
-	</target> -->
+	</target>
 
 	<!--setup for zip archives-->
 	<target name="setup-zip" description="Reinstall the test Eclipse installation if specified by user">
@@ -78,8 +62,8 @@
 		<exec dir="." executable="unzip">
 			<arg line="-o -qq ${runtimeArchive} -d ${install}" />
 		</exec>
-		<antcall target="installTestPlugins" />
 		<antcall target="installExtraPlugins" />
+		<antcall target="installTestPlugins" />
 	</target>
 
 	<!--setup for tar.gz archives-->
@@ -90,8 +74,8 @@
 		<exec dir="${install}" executable="tar">
 			<arg line="-xzf ${currentDir}/${runtimeArchive}" />
 		</exec>
-		<antcall target="installTestPlugins" />
 		<antcall target="installExtraPlugins" />
+		<antcall target="installTestPlugins" />
 	</target>
 
 	<!--use an stable version of the director so that instability in the current build doesn't cause all the tests to fail -->
@@ -136,7 +120,7 @@
 	</target>
 
 	<target name="installExtraPlugins" if="extraIU">
-		<property file="equinoxp2tests.properties"/>
+		<property file="equinoxp2tests.properties" />
 		<property name="currentBuildRepo" value="${org.eclipse.equinox.p2.tests.current.build.repo}" />
 		<echo>-installIU ${extraIU} +</echo>
 		<exec executable="${eclipse-home}/eclipse" failonerror="false" dir="${eclipse-home}" timeout="900000" output="${basedir}/director.log" resultproperty="directorcode">
@@ -720,7 +704,7 @@
 		<runTests testPlugin="org.eclipse.equinox.p2.tests.ui" />
 	</target>
 
-	<target name="equinoxp2testsdiscovery" depends="setJVMProperties">
+	<target name="equinoxp2discovery" depends="setJVMProperties">
 		<property name="jvm" value="${J2SE-5.0}" />
 		<!--only run test if J2SE-5.0 property  set-->
 		<condition property="skip.test">
@@ -784,13 +768,14 @@
 		<antcall target="equinoxsecurity" />
 		<antcall target="equinoxp2" />
 		<antcall target="equinoxp2ui" />
+		<antcall target="equinoxp2discovery" />
 		<antcall target="search" />
 		<antcall target="pdeds" />
 		<antcall target="jdtcoremodel" />
 		<antcall target="uadoc" />
 		<antcall target="debug" />
 		<antcall target="ui" />
-		<antcall target="equinoxp2testsdiscovery" />
+	
 	</target>
 </project>
 
