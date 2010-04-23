@@ -47,6 +47,7 @@ deleteArtifacts=""
 tag=""
 
 buildProjectTags=v20100331a
+buildProjectTags=v20100423
 
 #updateSite property setting
 updateSite=""
