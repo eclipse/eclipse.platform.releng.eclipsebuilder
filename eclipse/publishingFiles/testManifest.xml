@@ -8,7 +8,8 @@
 		<platform id="SLM" name="Linux (x86/Motif) **testing only**" fileName="eclipse-SDK-@build@-linux-motif.tar.gz"></platform>
 		<platform id="SLG264" name="Linux (x86_64/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-SDK-@build@-linux-gtk-x86_64.tar.gz"></platform>
 	    <platform id="SLG2PPC" name="Linux (PPC/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-SDK-@build@-linux-gtk-ppc.tar.gz"></platform>	
-	    <platform id="SLG2PPC64" name="Linux (PPC64/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-SDK-@build@-linux-gtk-ppc64.tar.gz"></platform>			
+	    <platform id="SLG2PPC64" name="Linux (PPC64/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-SDK-@build@-linux-gtk-ppc64.tar.gz"></platform>
+	    <platform id="SLG2S390X" name="Linux (s390x/GTK 2) **early access** (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-SDK-@build@-linux-gtk-s390x.tar.gz"></platform>
 		<platform id="SSG" name="Solaris 10 (SPARC/GTK 2)" fileName="eclipse-SDK-@build@-solaris-gtk.zip"></platform>
 		<platform id="SSGX" name="Solaris 10 (x86/GTK 2)" fileName="eclipse-SDK-@build@-solaris-gtk-x86.zip"></platform>
 		<platform id="SSHPUX" name="HP-UX (IA64_32/Motif)" fileName="eclipse-SDK-@build@-hpux-motif-ia64_32.zip"></platform>		
