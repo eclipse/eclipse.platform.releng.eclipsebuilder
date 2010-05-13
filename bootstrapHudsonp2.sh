@@ -46,24 +46,6 @@ deleteArtifacts=""
 #sets fetchTag="HEAD" for nightly builds if required
 tag=""
 
-#buildProjectTags=v20091020
-#buildProjectTags=v20091028a
-#buildProjectTags=v20091105
-#buildProjectTags=v20091106
-#buildProjectTags=v20091110a
-#buildProjectTags=v20091111
-#buildProjectTags=v20091112b
-#buildProjectTags=v20091208
-#buildProjectTags=v20091214
-#buildProjectTags=v20100105
-#buildProjectTags=v20100108
-#buildProjectTags=v20100113
-#buildProjectTags=v20100114
-#buildProjectTags=v20100118a
-#buildProjectTags=v20100126
-#buildProjectTags=v20100204
-#buildProjectTags=v20100208
-#buildProjectTags=v20100210
 #buildProjectTags=v20100505
 buildProjectTags=v20100512
 
@@ -230,13 +212,13 @@ if [ $buildMachineArch == "ppc64" ]
 then
         buildLaunchingVM="/shared/common/ibm-java-ppc-605/jre/bin"
 else
-        buildLaunchingVM="/shared/common/jdk-1.6.0_10/jre/bin"
+        buildLaunchingVM="/shared/common/jdk-1.6.x86_64/jre/bin"
 fi
 if [ $buildMachineArch == "ppc64" ]
 then
         buildLaunching15VM="/shared/common/ibm-java2-ppc64-50/jre/bin"
 else
-        buildLaunching15VM="/shared/common/jdk-1.5.0_16/jre/bin"
+        buildLaunching15VM="/shared/common/jdk-1.5.0-22.x86_64/jre/bin"
 fi
 
 antRunner="$buildLaunchingVM/java -Xmx500m -Declipse.p2.MD5Check=false -Dorg.eclipse.update.jarprocessor.pack200=$buildLaunching15VM -jar ../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=ppc -application org.eclipse.ant.core.antRunner -Declipse.p2.MD5Check=false"
