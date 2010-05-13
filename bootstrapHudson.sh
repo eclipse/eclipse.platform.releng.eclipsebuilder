@@ -249,14 +249,6 @@ then
 		 exit $retCode
 fi
 
-if [ "$skip.feed" != "true" ]
-then
-buildCommandRSS="$antRunnerJDK15 -buildfile $builderDir/org.eclipse.releng.basebuilder/plugins/org.eclipse.build.tools/scripts_rss/feedManipulation.xml"
-echo $buildCommandRSS>commandRSS.txt
-#run the RSS command
-$buildCommandRSS
-fi
-
 #clean up
 if [ "$delete.artifacts" == "-Ddelete.artifacts=true"  ]
 then
