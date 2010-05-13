@@ -46,35 +46,9 @@ deleteArtifacts=""
 #sets fetchTag="HEAD" for nightly builds if required
 tag=""
 
-#buildProjectTags=v20091028a
-#buildProjectTags=v20091105
-#buildProjectTags=v20091106
-#buildProjectTags=v20091110a
-#buildProjectTags=v20091111
-#buildProjectTags=v20091112b
-#buildProjectTags=v20091208
-#buildProjectTags=v20091214
-#buildProjectTags=v20100105
-#buildProjectTags=v20100108
-#buildProjectTags=v20100113
-#buildProjectTags=v20100114
-#buildProjectTags=v20100118a
-#buildProjectTags=v20100126
-#buildProjectTags=v20100204
-#buildProjectTags=v20100208
-#buildProjectTags=v20100210
-#buildProjectTags=v20100219
-#buildProjectTags=v20100222
-#buildProjectTags=v20100305
-#buildProjectTags=v20100312
-#buildProjectTags=v20100315
-#buildProjectTags=v20100414a
-#buildProjectTags=v20100422
-#buildProjectTags=v20100423
-#buildProjectTags=v20100427
-#buildProjectTags=v20100505a
 #buildProjectTags=v20100509
-buildProjectTags=v20100511
+#buildProjectTags=v20100511
+buildProjectTags=v20100512
 
 #updateSite property setting
 updateSite=""
@@ -234,8 +208,22 @@ echo recipients=$recipients >> monitor.properties
 echo log=$postingDirectory/$buildLabel/index.php >> monitor.properties
 
 #the base command used to run AntRunner headless
-antRunner="/shared/common/ibm-java-ppc-605/jre/bin/java -Xmx500m -Declipse.p2.MD5Check=false -Dorg.eclipse.update.jarprocessor.pack200=/shared/common/ibm-java2-ppc-50/bin -jar ../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=ppc -application org.eclipse.ant.core.antRunner -Declipse.p2.MD5Check=false"
-antRunnerJDK15="/shared/common/ibm-java2-ppc64-50/jre/bin/java -Xmx500m -Dorg.eclipse.update.jarprocessor.pack200=/shared/common/ibm-java2-ppc-50/bin -jar ../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=ppc -application org.eclipse.ant.core.antRunner  -Declipse.p2.MD5Check=false"
+buildMachineArch=`uname -p`
+if [ $buildMachineArch == "ppc64" ]
+then
+        buildLaunchingVM="/shared/common/ibm-java-ppc-605/jre/bin"
+else
+        buildLaunchingVM="/shared/common/jdk-1.6.0_10/jre/bin"
+fi
+if [ $buildMachineArch == "ppc64" ]
+then
+        buildLaunching15VM="/shared/common/ibm-java2-ppc64-50/jre/bin"
+else
+        buildLaunching15VM="/shared/common/jdk-1.5.0_16/jre/bin"
+fi
+
+antRunner="$buildLaunchingVM/java -Xmx500m -Declipse.p2.MD5Check=false -Dorg.eclipse.update.jarprocessor.pack200=$buildLaunching15VM -jar ../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=ppc -application org.eclipse.ant.core.antRunner -Declipse.p2.MD5Check=false"
+antRunnerJDK15="$buildLaunching15VM/java -Xmx500m -Dorg.eclipse.update.jarprocessor.pack200=$buildLaunching15VM -jar ../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=ppc -application org.eclipse.ant.core.antRunner  -Declipse.p2.MD5Check=false"
 
 
 #clean drop directories
