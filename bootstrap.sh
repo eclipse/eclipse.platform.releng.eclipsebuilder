@@ -102,7 +102,7 @@ timestamp=$builddate$buildtime
 
 
 # process command line arguments
-usage="usage: $0 [-notify emailaddresses][-textRecipients textaddesses][-test][-buildDirectory directory][-buildId name][-buildLabel directory name][-tagMapFiles][-mapVersionTag tag][-builderTag tag][-bootclasspath path][-compareMaps][-skipPerf] [-skipCleanSites] [-skipTest] [-skipRSS] [-updateSite site][-skipPack][-sign] M|N|I|S|R"
+usage="usage: $0 [-notify emailaddresses][-textRecipients textaddesses][-test][-buildDirectory directory][-buildId name][-buildLabel directory name][-tagMapFiles][-mapVersionTag tag][-builderTag tag][-bootclasspath path][-compareMaps][-skipPerf] [-skipCleanSites] [-skipTest] [-updateSite site][-skipPack][-sign] M|N|I|S|R"
 
 if [ $# -lt 1 ]
 then
@@ -120,8 +120,7 @@ do
 		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -skipPerf) skipPerf="-Dskip.performance.tests=true";;
 		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -skipCleanSites) skipCleanSites="-Dskip.clean.sites=true";;
 		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -hudson) skipPerf="-Dhudson=true";;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -skipTest) skipTest="-Dskip.tests=true";;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -skipRSS) skipRSS="-Dskip.feed=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -skipTest) skipTest="-Dskip.tests=true";;		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     
 		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -deleteArtifacts) deleteArtifacts="-Ddelete.artifacts=true";;
 		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -skipPack) skipPack="-DskipPack=true";;
 		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -buildDirectory) builderDir="$2"; shift;;
