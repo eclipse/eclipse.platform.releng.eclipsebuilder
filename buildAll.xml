@@ -487,8 +487,18 @@
 		<delete dir="${reposource}" />
 		<mkdir dir="${reposource}" />
 		<exec executable="unzip" dir=".">
-			<arg line="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -x features/master/* features/master-ecf* features/master-jetty* features/master-equinox-weaving* plugins/org.aspectj* -d ${reposource}" />
+			<arg line="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -d ${reposource}" />
 		</exec>
+		<p2.remove.iu>
+			<repository location="file://${reposource}" />
+			<iu id="org.aspectj.runtime" />
+			<iu id="org.aspectj.weaver" />
+			<iu id="master.feature.group" />			
+			<iu id="master-ecf.feature.group" />	
+			<iu id="master-jetty.feature.group" />
+			<iu id="master-equinox-weaving.feature.group" />
+		</p2.remove.iu>
+
 		<property name="tempexec" value="${buildDirectory}/tempexec" />
 		<delete dir="${tempexec}" />
 		<mkdir dir="${tempexec}" />
@@ -630,9 +640,10 @@
 		</condition>
 		<property name="repoBaseline" value="file:${updateSite}" />
 
-		<p2.mirror source="file:${reposource}" ignoreErrors="true" log="${buildlogs}/mirrorlog.txt" comparatorLog="${buildlogs}/comparatorlog.txt">
+		<p2.mirror source="file:${reposource}" log="${buildlogs}/mirrorlog.txt" ignoreErrors="true">
 			<destination compressed="true" name="${p2.repo.name}" location="file:${buildRepo}" append="true" />
-			<comparator comparator="org.eclipse.equinox.p2.repository.tools.jar.comparator" repository="${repoBaseline}">
+			<comparator comparator="org.eclipse.equinox.p2.repository.tools.jar.comparator" comparatorLog="${buildlogs}/comparatorlog.txt">
+				<repository location="${repoBaseline}" />
 				<exclude>
 					<artifact id="org.eclipse.jdt.doc.isv" version="" />
 					<artifact id="org.eclipse.jdt.doc.user" version="" />
@@ -643,6 +654,7 @@
 				</exclude>
 			</comparator>
 		</p2.mirror>
+
 
 		<!--	
 		<p2.metadata.mirror source="file:${reposource}" writeMode="append" destinationName="${p2.repo.name}" destination="file:${buildRepo}" />
