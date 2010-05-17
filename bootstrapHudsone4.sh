@@ -211,6 +211,9 @@ buildMachineArch=`uname -p`
 if [ $buildMachineArch == "ppc64" ]
 then
         buildLaunchingVM="/shared/common/ibm-java-ppc-605/jre/bin"
+        echo "buildLaunchingVM $buildLaunchingVM"
+        test = `ls /shared/common`
+        echo "test $test"
 else
         buildLaunchingVM="/shared/common/jdk-1.6.x86_64/jre/bin"
 fi
@@ -220,6 +223,8 @@ then
 else
         buildLaunching15VM="/shared/common/jdk-1.5.0-22.x86_64/jre/bin"
 fi
+
+ 
 
 antRunner="$buildLaunchingVM/java -Xmx500m -Declipse.p2.MD5Check=false -Dorg.eclipse.update.jarprocessor.pack200=$buildLaunching15VM -jar ../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=ppc -application org.eclipse.ant.core.antRunner -Declipse.p2.MD5Check=false"
 antRunnerJDK15="$buildLaunching15VM/java -Xmx500m -Dorg.eclipse.update.jarprocessor.pack200=$buildLaunching15VM -jar ../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=ppc -application org.eclipse.ant.core.antRunner  -Declipse.p2.MD5Check=false"
