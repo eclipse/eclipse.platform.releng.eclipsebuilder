@@ -208,6 +208,7 @@ echo log=$postingDirectory/$buildLabel/index.php >> monitor.properties
 
 #the base command used to run AntRunner headless
 buildMachineArch=`uname -p`
+echo "buildMachineArch $buildMachineArch"
 if [ $buildMachineArch == "ppc64" ]
 then
         buildLaunchingVM="/shared/common/ibm-java-ppc-605/jre/bin"
