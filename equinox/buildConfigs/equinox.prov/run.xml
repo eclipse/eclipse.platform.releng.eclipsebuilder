@@ -912,6 +912,15 @@
 					<param name="archiveName" value="eclipse-SDK-${buildId}-linux-gtk-s390x.tar.gz" />
 				</antcall>
 
+				<!-- linux gtk s390 -->
+				<antcall target="p2.tar">
+					<param name="tar.base.dir" value="${p2.sdk.install.linux.gtk.s390}" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-s390.tar" />
+				</antcall>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-SDK-${buildId}-linux-gtk-s390.tar.gz" />
+				</antcall>
+
 				<!-- macosx agent -->
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.agent.install.macosx}" />
