@@ -79,7 +79,7 @@
 				<antcall target="publishEquinox" />
 			</sequential>
 			<antcall target="testEclipse" />
-		</parallel>
+		</parallel>	
 	</target>
 
 	<target name="init">
@@ -122,7 +122,7 @@
 		<condition property="cvsuser" value=":pserver:anonymous">
 			<equals arg1="${hudson}" arg2="true" />
 		</condition>
-		<property name="cvsuser" value="kmoir" />
+ 		<property name="cvsuser" value="kmoir" />
 		<condition property="mapsRepo" value=":pserver:anonymous@dev.eclipse.org/cvsroot/eclipse">
 			<equals arg1="${hudson}" arg2="true" />
 		</condition>
@@ -197,7 +197,7 @@
 		</ant>
 
 		<replace file="${eclipse.build.configs}/sdk/srcBuild/build.properties" token="@build@" value="${buildId}" />
-		<replace file="${eclipse.build.configs}/sdk/srcBuild/build" token="@build@" value="${buildId}" />
+		<replace file="${eclipse.build.configs}/sdk/srcBuild/build" token="@build@" value="${buildId}" />	
 		<condition property="builderTag" value="v${buildId}">
 			<or>
 				<equals arg1="${buildType}" arg2="I" />
@@ -487,18 +487,8 @@
 		<delete dir="${reposource}" />
 		<mkdir dir="${reposource}" />
 		<exec executable="unzip" dir=".">
-			<arg line="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -d ${reposource}" />
+			<arg line="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -x features/master/* features/master-ecf* features/master-jetty* features/master-equinox-weaving* plugins/org.aspectj* -d ${reposource}" />
 		</exec>
-		<p2.remove.iu>
-			<repository location="file://${reposource}" />
-			<iu id="org.aspectj.runtime" />
-			<iu id="org.aspectj.weaver" />
-			<iu id="master.feature.group" />			
-			<iu id="master-ecf.feature.group" />	
-			<iu id="master-jetty.feature.group" />
-			<iu id="master-equinox-weaving.feature.group" />
-		</p2.remove.iu>
-
 		<property name="tempexec" value="${buildDirectory}/tempexec" />
 		<delete dir="${tempexec}" />
 		<mkdir dir="${tempexec}" />
@@ -645,27 +635,8 @@
 		</condition>
 		<property name="repoBaseline" value="file:${updateSite}" />
 
-		<p2.mirror source="file:${reposource}" log="${buildlogs}/mirrorlog.txt" ignoreErrors="true">
-			<destination compressed="true" name="${p2.repo.name}" location="file:${buildRepo}" append="true" />
-			<comparator comparator="org.eclipse.equinox.p2.repository.tools.jar.comparator" comparatorLog="${buildlogs}/comparatorlog.txt">
-				<repository location="${repoBaseline}" />
-				<exclude>
-					<artifact id="org.eclipse.jdt.doc.isv" version="" />
-					<artifact id="org.eclipse.jdt.doc.user" version="" />
-					<artifact id="org.eclipse.pde.doc.user" version="" />
-					<artifact id="org.eclipse.platform.doc.isv" version="" />
-					<artifact id="org.eclipse.platform.doc.user" version="" />
-					<artifact id="org.eclipse.ua.tests.doc" version="" />
-				</exclude>
-			</comparator>
-		</p2.mirror>
-
-
-		<!--	
 		<p2.metadata.mirror source="file:${reposource}" writeMode="append" destinationName="${p2.repo.name}" destination="file:${buildRepo}" />
-		<p2.artifact.mirror source="file:${reposource}" baseline="${repoBaseline}" comparatorId="org.eclipse.equinox.p2.repository.tools.jar.comparator" destinationName="${p2.repo.name}" destination="file:${buildRepo}" ignoreErrors="true" comparatorLog="${buildlogs}/comparatorlog.txt" log="${buildlogs}/mirrorlog.txt" /> 
-		-->
-
+		<p2.artifact.mirror source="file:${reposource}" baseline="${repoBaseline}" comparatorId="org.eclipse.equinox.p2.repository.tools.jar.comparator" destinationName="${p2.repo.name}" destination="file:${buildRepo}" ignoreErrors="true" comparatorLog="${buildlogs}/comparatorlog.txt" log="${buildlogs}/mirrorlog.txt" />
 		<copy todir="${buildRepo}">
 			<fileset file="${eclipse.build.configs}/../../extras/sdkinstaller.properties" />
 		</copy>
