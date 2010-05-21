@@ -145,12 +145,10 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				<li><a name="ExamplePlugins"> <b> Example Plug-ins </b> </a>
 				<ul>
 				<li>
-				To install the examples, first make sure you have exited your Eclipse program. Then download 
-				the zip file containing the examples and extract the contents of the zip file 
-				to the same directory you used for your SDK installation. For example, if you 
-				installed the Eclipse Project SDK on d:\eclipse-sdk then extract the contents 
-				of the examples zip file to d:\eclipse-sdk. Start Eclipse. The example plug-ins 
-				will be installed. For information on what the examples do and how to run them, 
+				To install the examples, download the p2 repository zip containing the examples into a directory on disk. Select <b>Help 
+				-> Install New Software</b>.  Select <b>Add</b> to add a new software site. Select <b>Archive</b>
+				and specify the location of the examples p2 repository zip and <b>Okay</b>.  You will be prompted
+				to restart Eclipse to enable the new bundles.  For information on what the examples do and how to run them, 
 				look in the &quot;Examples Guide&quot; section of the &quot;Platform Plug-in Developer 
 				Guide&quot;, by selecting Help Contents from the Help menu, and choosing &quot;Platform 
 				Plug-in Developer Guide&quot; book from the combo box.</li></ul>
@@ -158,7 +156,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				<li><a name="RCPRuntime"> <b> RCP Runtime Binary </b> </a>
 				<ul>
 				<li>
-				These drops contain the Eclipse Rich Client Platform base plug-ins and do not contain 
+				This p2 repository contains the Eclipse Rich Client Platform base bundles and do not contain 
 				source or programmer documentation. These downloads are meant to be used as target 
 				platforms when developing RCP applications, and are not executable, stand-alone 
 				applications.</li></ul>
@@ -166,7 +164,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				<li><a name="RCPSDK"> <b> RCP SDK </b> </a>
 				<ul>
 				<li>
-				These drops consist of the Eclipse Rich Client Platform base plug-ins and their source and the RCP 
+				This p2 repository consists of the Eclipse Rich Client Platform base bundles and their source and the RCP 
 				delta pack. 
 				</li></ul>
 
@@ -198,7 +196,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				<li><a name="JDTRuntime"> <b> JDT Runtime Binary </b> </a>
 				<ul>
 				<li>
-				These drops contain the Java development tools plug-ins only, with user documentation 
+				This p2 repository contains the Java development tools bundles only, with user documentation 
 				and no source and no programmer documentation. The Eclipse platform and Plug-in 
 				development environment are NOT included. You can combine this with the Platform 
 				Runtime Binary if your tools rely on the JDT being present.</li></ul>
@@ -206,7 +204,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				<li><a name="JDTSDK"> <b> JDT SDK </b> </a>
 				<ul>
 				<li>
-				These drops contain the JDT Runtime binary with associated source and programmer 
+				This p2 repository contains the JDT Runtime binary with associated source and programmer 
 				documentation.</li></ul>
 				
 				<li><a name="JDTCORE"> <b> JDT Core Batch Compiler </b> </a>
@@ -222,7 +220,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				<li><a name="PDERuntime"> <b> PDE Runtime Binary </b> </a>
 				<ul>
 				<li>
-				These drops contain the Plug-in Development Enviroment plug-ins only, with user documentation. 
+				This p2 repository contains the Plug-in Development Enviroment bundles only, with user documentation. 
 				The Eclipse platform and Java development tools are NOT included. You can combine 
 				this with the Platform and JDT Runtime Binary or SDK if your tools rely on the 
 				PDE being present.</li></ul>
@@ -235,7 +233,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				<li><a name="CVSRuntime"> <b> CVS Client Runtime Binary </b> </a>
 				<ul>
 				<li>
-				These drops contain the CVS Client plug-ins only. 
+				This p2 repository contains the CVS Client plug-ins only. 
 				The Eclipse platform, Java development, and Plug-in Development Environment tools are NOT included. You can combine 
 				this with the Platform and JDT Runtime Binary or SDK if your tools rely on the 
 				CVS client being present.</li></ul>
@@ -243,7 +241,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				<li><a name="CVSSDK"> <b> CVS Client SDK </b> </a>
 				<ul>
 				<li>
-				These drops contain the CVS Runtime Binary with associated source.</li></ul>		
+				This p2 repository contains the CVS Runtime Binary with associated source.</li></ul>		
 
 				<li><a name="SWT"> <b> SWT Binary and Source </b> </a>
 				<ul><li><p>These drops contain the SWT libraries and source for standalone SWT
