@@ -633,13 +633,7 @@
 		<antcall target="packMasterFeature" />
 
 		<mkdir dir="${buildRepo}" />
-		<!--		<p2.mirror source="file:${reposource}" ignoreErrors="true" log="${buildlogs}/mirrorlog.txt">
-			<destination compressed="true" name="${p2.repo.name}" location="file:${buildRepo}" append="true" />
-			<comparator comparatorId="org.eclipse.equinox.p2.repository.tools.jar.comparator" comparatorLog="${buildlogs}/comparatorlog.txt">
-				<repository location="file:${updateSite}" />
-			</comparator>
-		</p2.mirror> -->
-
+	
 		<condition property="repoBaseline" value="${p2RepoURL}">
 			<equals arg1="${hudson}" arg2="true" />
 		</condition>
@@ -654,16 +648,12 @@
 					<artifact id="org.eclipse.jdt.doc.user"/>
 					<artifact id="org.eclipse.pde.doc.user"/>
 					<artifact id="org.eclipse.platform.doc.isv"/>
-					<artifact id="org.eclipse.platform.doc.user"/>					
+					<artifact id="org.eclipse.platform.doc.user"/>
+					<artifact id="org.eclipse.update.feature,org.eclipse.equinox.executable"/>
+					<artifact id="org.eclipse.sdk.examples"/>					
 				</exclude>
 			</comparator>
 		</p2.mirror>
-
-
-		<!--	
-		<p2.metadata.mirror source="file:${reposource}" writeMode="append" destinationName="${p2.repo.name}" destination="file:${buildRepo}" />
-		<p2.artifact.mirror source="file:${reposource}" baseline="${repoBaseline}" comparatorId="org.eclipse.equinox.p2.repository.tools.jar.comparator" destinationName="${p2.repo.name}" destination="file:${buildRepo}" ignoreErrors="true" comparatorLog="${buildlogs}/comparatorlog.txt" log="${buildlogs}/mirrorlog.txt" /> 
-		-->
 
 		<copy todir="${buildRepo}">
 			<fileset file="${eclipse.build.configs}/../../extras/sdkinstaller.properties" />
