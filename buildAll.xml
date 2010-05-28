@@ -511,7 +511,7 @@
 			<arg line="features/*.jar -d ${tempexec}" />
 		</exec>
 
-		<subant antfile="build.xml" target="publish.bin.parts" buildpath="${tempexec}/build.xml">
+		<subant antfile="build.xml" target="publish.bin.parts" buildpath="${tempexec}/build.xml" failonerror="false">
 			<property name="p2.gathering" value="true" />
 			<property name="p2.build.repo" value="file:/${buildDirectoryAbsolute}" />
 		</subant>
