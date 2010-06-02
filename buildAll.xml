@@ -246,6 +246,8 @@
 			<iu id="com.ibm.icu.base" artifacts="(format=packed)" />
 			<iu id="com.ibm.icu.source" artifacts="(format=packed)" />
 			<iu id="com.ibm.icu.base.source" artifacts="(format=packed)" />
+			<iu id="org.eclipse.jdt.debug.ui" artifacts="(format=packed)" />
+			<iu id="org.eclipse.pde.api.tools" artifacts="(format=packed)" />
 		</p2.remove.iu>
 	</target>
 
