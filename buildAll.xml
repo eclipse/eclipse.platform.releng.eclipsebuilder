@@ -652,7 +652,9 @@
 					<artifact id="org.eclipse.platform.doc.isv"/>
 					<artifact id="org.eclipse.platform.doc.user"/>
 					<artifact id="org.eclipse.equinox.executable"/>
-					<artifact id="org.eclipse.sdk.examples"/>					
+					<artifact id="org.eclipse.sdk.examples"/>	
+					<artifact id="org.eclipse.sdk.examples.source"/>
+					<artifact id="master-equinox"/>
 				</exclude>
 			</comparator>
 		</p2.mirror>
