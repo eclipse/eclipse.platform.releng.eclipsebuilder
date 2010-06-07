@@ -1,6 +1,8 @@
 instructions.configure=\
-addRepository(type:0,location:http${#58}//download.eclipse.org/eclipse/updates/3.6,name:The Eclipse Project Updates);\
-addRepository(type:1,location:http${#58}//download.eclipse.org/eclipse/updates/3.6,name:The Eclipse Project Updates);\
+addRepository(type:0,location:http${#58}//download.eclipse.org/eclipse/updates/4.0,name:The Eclipse Project Updates);\
+addRepository(type:1,location:http${#58}//download.eclipse.org/eclipse/updates/4.0,name:The Eclipse Project Updates);\
+addRepository(type:0,location:http${#58}//download.eclipse.org/e4/updates/2010,name:e4 2010 Updates);\
+addRepository(type:1,location:http${#58}//download.eclipse.org/e4/updates/2010,name:e4 2010 Updates);\
 addRepository(type:0,location:http${#58}//download.eclipse.org/releases/helios,name:Helios);\
 addRepository(type:1,location:http${#58}//download.eclipse.org/releases/helios,name:Helios);\
   mkdir(path:${installFolder}/dropins);
