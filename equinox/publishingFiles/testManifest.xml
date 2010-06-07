@@ -69,7 +69,7 @@
 			</platform>				
 			<platform id="httpservletbridge" name="All" fileName="@org.eclipse.equinox.http.servletbridge@.jar">
 			</platform>
-			<platform id="httpservlet" name="All" fileName="@org.eclipse.equinox.http.servlet_1.0.200@.jar">
+			<platform id="httpservlet" name="All" fileName="@org.eclipse.equinox.http.servlet_1.1.0@.jar">
 			</platform>
 			<platform id="wireadmin" name="All" fileName="@org.eclipse.equinox.wireadmin@.jar">
 			</platform>
