@@ -73,10 +73,10 @@
 				<antcall target="packageEclipseDistributables" />
 				<ant antfile="${equinox.build.configs}/equinox.prov/run.xml" />
 				<antcall target="packageRepos" />
-				<antcall target="packageEquinoxDistributables" />
+			<!--	<antcall target="packageEquinoxDistributables" /> -->
 				<antcall target="apiTooling" />
 				<antcall target="publishEclipse" />
-				<antcall target="publishEquinox" />
+			<!--	<antcall target="publishEquinox" /> -->
 			</sequential>
 			<antcall target="testEclipse" />
 		</parallel>
@@ -448,9 +448,9 @@
 
 	<target name="publishEclipse">
 		<parallel>
-			<ant antfile="eclipse/helper.xml" target="rSyncWithSnzZrh" />
+			<!-- <ant antfile="eclipse/helper.xml" target="rSyncWithSnzZrh" /> -->
 			<sequential>
-				<ant antfile="eclipse/helper.xml" target="buildStandAloneSWT" />
+			<!--	<ant antfile="eclipse/helper.xml" target="buildStandAloneSWT" /> -->
 				<ant antfile="eclipse/helper.xml" target="publish" />
 			</sequential>
 		</parallel>
@@ -525,11 +525,11 @@
 			<config os="win32" ws="win32" arch="x86_64" />
 			<config os="linux" ws="gtk" arch="x86" />
 			<config os="linux" ws="gtk" arch="x86_64" />
-			<config os="linux" ws="gtk" arch="ppc" />
+			<!-- <config os="linux" ws="gtk" arch="ppc" /> -->
 			<config os="linux" ws="gtk" arch="ppc64" />
-			<config os="linux" ws="motif" arch="x86" />
+			<!--<config os="linux" ws="motif" arch="x86" /> 
 			<config os="linux" ws="gtk" arch="s390x" />
-			<config os="linux" ws="gtk" arch="s390" />
+			<config os="linux" ws="gtk" arch="s390" /> -->
 			<config os="solaris" ws="gtk" arch="sparc" />
 			<config os="solaris" ws="gtk" arch="x86" />
 			<config os="macosx" ws="cocoa" arch="x86" />
@@ -547,9 +547,9 @@
 			<config os="win32" ws="win32" arch="x86_64" />
 			<config os="linux" ws="gtk" arch="x86" />
 			<config os="linux" ws="gtk" arch="x86_64" />
-			<config os="linux" ws="gtk" arch="s390x" />
+		<!--	<config os="linux" ws="gtk" arch="s390x" />
 			<config os="linux" ws="gtk" arch="s390" />
-			<config os="linux" ws="gtk" arch="ppc" />
+			<config os="linux" ws="gtk" arch="ppc" /> -->
 			<config os="solaris" ws="gtk" arch="sparc" />
 			<config os="solaris" ws="gtk" arch="x86" />
 			<config os="macosx" ws="cocoa" arch="x86" />
@@ -565,11 +565,11 @@
 			<config os="win32" ws="win32" arch="x86" />
 			<config os="win32" ws="win32" arch="x86_64" />
 			<config os="linux" ws="gtk" arch="x86" />
-			<config os="linux" ws="gtk" arch="x86_64" />
-			<config os="linux" ws="gtk" arch="ppc" />
+			<config os="linux" ws="gtk" arch="x86_64" />			
 			<config os="linux" ws="gtk" arch="ppc64" />
+			<!-- <config os="linux" ws="gtk" arch="ppc" />
 			<config os="linux" ws="gtk" arch="s390x" />
-			<config os="linux" ws="gtk" arch="s390" />
+			<config os="linux" ws="gtk" arch="s390" /> -->
 			<config os="solaris" ws="gtk" arch="sparc" />
 			<config os="solaris" ws="gtk" arch="x86" />
 			<config os="macosx" ws="cocoa" arch="x86" />
@@ -585,11 +585,11 @@
 			<config os="win32" ws="win32" arch="x86" />
 			<config os="win32" ws="win32" arch="x86_64" />
 			<config os="linux" ws="gtk" arch="x86" />
-			<config os="linux" ws="gtk" arch="x86_64" />
-			<config os="linux" ws="gtk" arch="ppc" />
+			<config os="linux" ws="gtk" arch="x86_64" />			
 			<config os="linux" ws="gtk" arch="ppc64" />
+			<!-- <config os="linux" ws="gtk" arch="ppc" />
 			<config os="linux" ws="gtk" arch="s390x" />
-			<config os="linux" ws="gtk" arch="s390" />
+			<config os="linux" ws="gtk" arch="s390" /> -->
 			<config os="solaris" ws="gtk" arch="sparc" />
 			<config os="solaris" ws="gtk" arch="x86" />
 			<config os="macosx" ws="cocoa" arch="x86" />
@@ -674,7 +674,7 @@
 
 	<target name="packageRepos">
 		<!--call to generate pde, rcp, cvs and jdt repos-->
-		<ant antfile="${eclipse.build.configs}/repos/build.xml" />
+	<!--	<ant antfile="${eclipse.build.configs}/repos/build.xml" /> -->
 		<ant antfile="${eclipse.build.configs}/repos/platformrepo.xml" />
 		<ant antfile="${eclipse.build.configs}/repos/rcprepo.xml" />
 		<ant antfile="${eclipse.build.configs}/rcp.deltapack/build.xml" />

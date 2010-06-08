@@ -5,12 +5,12 @@
 		<platform id="SW" name="Windows (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-SDK-@build@-win32.zip"></platform>
 		<platform id="SWX8664" name="Windows (x86_64) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-SDK-@build@-win32-x86_64.zip"></platform>		
 		<platform id="SLG2" name="Linux (x86/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-SDK-@build@-linux-gtk.tar.gz"></platform>
-		<platform id="SLM" name="Linux (x86/Motif) **testing only**" fileName="eclipse-SDK-@build@-linux-motif.tar.gz"></platform>
+		<!-- <platform id="SLM" name="Linux (x86/Motif) **testing only**" fileName="eclipse-SDK-@build@-linux-motif.tar.gz"></platform> -->
 		<platform id="SLG264" name="Linux (x86_64/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-SDK-@build@-linux-gtk-x86_64.tar.gz"></platform>
-	    <platform id="SLG2PPC" name="Linux (PPC/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-SDK-@build@-linux-gtk-ppc.tar.gz"></platform>	
+	    <!--<platform id="SLG2PPC" name="Linux (PPC/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-SDK-@build@-linux-gtk-ppc.tar.gz"></platform> -->	
 	    <platform id="SLG2PPC64" name="Linux (PPC64/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-SDK-@build@-linux-gtk-ppc64.tar.gz"></platform>
-	    <platform id="SLG2S390X" name="Linux (s390x/GTK 2) **early access** (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-SDK-@build@-linux-gtk-s390x.tar.gz"></platform>
-	    <platform id="SLG2S390" name="Linux (s390/GTK 2) **early access** (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-SDK-@build@-linux-gtk-s390.tar.gz"></platform>
+<!--	<platform id="SLG2S390X" name="Linux (s390x/GTK 2) **early access** (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-SDK-@build@-linux-gtk-s390x.tar.gz"></platform>
+	    <platform id="SLG2S390" name="Linux (s390/GTK 2) **early access** (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-SDK-@build@-linux-gtk-s390.tar.gz"></platform> -->
 		<platform id="SSG" name="Solaris 10 (SPARC/GTK 2)" fileName="eclipse-SDK-@build@-solaris-gtk.zip"></platform>
 		<platform id="SSGX" name="Solaris 10 (x86/GTK 2)" fileName="eclipse-SDK-@build@-solaris-gtk-x86.zip"></platform>
 		<platform id="SSHPUX" name="HP-UX (IA64_32/Motif)" fileName="eclipse-SDK-@build@-hpux-motif-ia64_32.zip"></platform>		
@@ -23,7 +23,7 @@
 		<platform id="SAA" name='Source Build (Source fetched via CVS) (&lt;a href="srcFetchBuildInstructions.html">instructions&lt;/a>)' fileName="eclipse-sourceBuild-srcFetch-@build@.zip"></platform>
 	</zipType>
 
-	<zipType name="JUnit test plug-ins">
+<!--	<zipType name="JUnit test plug-ins">
 		<platform id="TF" name="All" fileName="eclipse-test-framework-@build@.zip"></platform>
 		<platform id="JT" name="All" fileName="eclipse-Automated-Tests-@build@.zip"></platform>
 	</zipType>
@@ -46,14 +46,14 @@
 
 	<zipType name="com.ibm.icu.base plug-in">
 		<platform id="ICUBASE" name="&lt;img src = &quot;repo.gif&quot;> All" fileName="com.ibm.icu.base-@build@.zip"></platform>
-	</zipType>
+	</zipType> -->
 
 	<zipType name="Platform Runtime Binary">
 		<platform id="PW" name="Windows (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-@build@-win32.zip"></platform>
 		<platform id="PWX8664" name="Windows (x86_64) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-@build@-win32-x86_64.zip"></platform>		
 		<platform id="PLG2" name="Linux (x86/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-@build@-linux-gtk.tar.gz"></platform>
 		<platform id="PLG264" name="Linux (x86_64/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-@build@-linux-gtk-x86_64.tar.gz"></platform>
-		<platform id="PLG2PPC" name="Linux (PPC/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-@build@-linux-gtk-ppc.tar.gz"></platform>
+	<!--	<platform id="PLG2PPC" name="Linux (PPC/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-@build@-linux-gtk-ppc.tar.gz"></platform> -->
 		<platform id="PLG2PPC64" name="Linux (PPC64/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-@build@-linux-gtk-ppc64.tar.gz"></platform>
 		<platform id="PSG" name="Solaris 10 (SPARC/GTK 2)" fileName="eclipse-platform-@build@-solaris-gtk.zip"></platform>
 		<platform id="PSGX" name="Solaris 10 (x86/GTK 2)" fileName="eclipse-platform-@build@-solaris-gtk-x86.zip"></platform>
@@ -71,7 +71,7 @@
 		<platform id="PWSDKX8664" name="Windows (x86_64) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-SDK-@build@-win32-x86_64.zip"></platform>
 		<platform id="PLG2SDK" name="Linux (x86/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-SDK-@build@-linux-gtk.tar.gz"></platform>
 		<platform id="PLG264SDK" name="Linux (x86_64 64/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-SDK-@build@-linux-gtk-x86_64.tar.gz"></platform>
-		<platform id="PLG2PPCSDK" name="Linux (PPC/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-SDK-@build@-linux-gtk-ppc.tar.gz"></platform>
+	<!--	<platform id="PLG2PPCSDK" name="Linux (PPC/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-SDK-@build@-linux-gtk-ppc.tar.gz"></platform> -->
 		<platform id="PSGSDK" name="Solaris 10 (SPARC/GTK 2)" fileName="eclipse-platform-SDK-@build@-solaris-gtk.zip"></platform>
 		<platform id="PSGSDKX" name="Solaris 10 (x86/GTK 2)" fileName="eclipse-platform-SDK-@build@-solaris-gtk-x86.zip"></platform>
 		<platform id="PHPUXSDK" name="HPUX (IA64_32/Motif)" fileName="eclipse-platform-SDK-@build@-hpux-motif-ia64_32.zip"></platform>
@@ -83,7 +83,7 @@
 		<platform id="PLSR" name="&lt;img src = &quot;repo.gif&quot;> Platform Source Repo " fileName="org.eclipse.platform.source-@build@.zip"></platform>
 	</zipType>
 
-	<zipType name="JDT Runtime Binary">
+	<!-- <zipType name="JDT Runtime Binary">
 		<platform id="JRR" name="&lt;img src = &quot;repo.gif&quot;> JDT Runtime Repo " fileName="org.eclipse.jdt-@build@.zip"></platform>
 	</zipType>
 
@@ -137,11 +137,11 @@
 		<platform id="SWTMCC" name="Mac OSX (Mac/Cocoa) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="swt-@build@-cocoa-macosx.zip"></platform>
 		<platform id="SWTMCC64" name="Mac OSX (Mac/Cocoa/x86_64) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="swt-@build@-cocoa-macosx-x86_64.zip"></platform>
 		<platform id="SWTMC" name="Mac OSX (Mac/Carbon) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="swt-@build@-carbon-macosx.zip"></platform>
-	</zipType>
+	</zipType> 
 
 	<zipType name="RelEng Tool plug-in">
 		<platform id="RE" name="&lt;img src = &quot;repo.gif&quot;> Releng Tools Repo" fileName="org.eclipse.releng.tools-@build@.zip"></platform>
-	</zipType>
+	</zipType> -->
 
 </zipTypes>
 
