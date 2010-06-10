@@ -403,7 +403,7 @@
 		<mkdir dir="${report}" />
 		<property name="current_location" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" />
 		<property name="reference_location" value="${reference}/eclipse-SDK-3.5M6-win32.zip" />
-		<exec executable="/usr/bin/wget" dir="${reference}" output="${reference}/error.txt" failonerror="false" os="Linux">
+	<!--	<exec executable="/usr/bin/wget" dir="${reference}" output="${reference}/error.txt" failonerror="false" os="Linux">
 			<arg line="-q -O  ${reference_location} http://${localmirror}/eclipse/downloads/drops/S-3.6M6-201003121448/eclipse-SDK-3.6M6-win32.zip" />
 		</exec>
 		<property name="report" value="${postingDirectory}/${buildLabel}/apitools" />
@@ -412,9 +412,9 @@
 		<property name="report_html_location" value="${report}/reporthtml" />
 		<property name="exclude_list_location" value="${buildDirectory}/maps/org.eclipse.releng/apiexclude/exclude_list.txt" />
 		<property name="exclude_list_external_location" value="${buildDirectory}/maps/org.eclipse.releng/apiexclude/exclude_list_external.txt" />
-		<apitooling.apifreeze baseline="${reference_location}" profile="${current_location}" report="${report_location}" excludelist="${exclude_list_location}" debug="true" />
+		<apitooling.apifreeze baseline="${reference_location}" profile="${current_location}" report="${report_location}" excludelist="${exclude_list_location}" debug="true" /> -->
 		<!-- html report will be dumped at the same location as the xml report -->
-		<apitooling.apifreeze_reportconversion xmlfile="${report_location}" debug="true" />
+	<!--	<apitooling.apifreeze_reportconversion xmlfile="${report_location}" debug="true" /> -->
 		<property name="filter_store" value="${buildDirectory}/apifilters" />
 		<mkdir dir="${filter_store}" />
 		<property name="exclude_list_external_location" value="${buildDirectory}/maps/org.eclipse.releng/apiexclude/exclude_list_external.txt" />
