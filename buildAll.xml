@@ -378,16 +378,16 @@
 		<echo message="copy zip back to build machine" />
 		<exec dir="." executable="${signcopy}" output="signing.txt" append="true">
 			<arg line="${signhost}${signdelimiter}${stagingDirectory}/${buildId}-out/${archiveName} ${buildDirectory}/${buildLabel}" />
-		</exec>
-
+		</exec>		
+		<antcall target="deletetempsigningfiles"/>		
+	</target>
+	
+	<target name="deletetempsigningfiles" unless="hudson">
 		<echo message="delete temp files on build.eclipse.org" />
-		<condition property="signdeleteline" value="/bin/rm -rf ${stagingDirectory}/${buildId}-out ${stagingDirectory}/${archiveName}">
-			<equals arg1="${hudson}" arg2="true" />
-		</condition>
 		<property name="signdeleteline" value="${signhost} ${signquote}/bin/rm -rf ${stagingDirectory}/${buildId}-out ${stagingDirectory}/${archiveName}${signquote}" />
 		<exec dir="." executable="${signexec}" output="signing.txt" append="true">
 			<arg line="${signdeleteline}" />
-		</exec>
+		</exec>		
 	</target>
 
 	<target name="testEclipse">
