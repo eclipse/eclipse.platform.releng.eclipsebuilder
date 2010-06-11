@@ -378,16 +378,16 @@
 		<echo message="copy zip back to build machine" />
 		<exec dir="." executable="${signcopy}" output="signing.txt" append="true">
 			<arg line="${signhost}${signdelimiter}${stagingDirectory}/${buildId}-out/${archiveName} ${buildDirectory}/${buildLabel}" />
-		</exec>
-
+		</exec>		
+		<antcall target="deletetempsigningfiles"/>		
+	</target>
+	
+	<target name="deletetempsigningfiles" unless="hudson">
 		<echo message="delete temp files on build.eclipse.org" />
-		<condition property="signdeleteline" value="/bin/rm -rf ${stagingDirectory}/${buildId}-out ${stagingDirectory}/${archiveName}">
-			<equals arg1="${hudson}" arg2="true" />
-		</condition>
 		<property name="signdeleteline" value="${signhost} ${signquote}/bin/rm -rf ${stagingDirectory}/${buildId}-out ${stagingDirectory}/${archiveName}${signquote}" />
 		<exec dir="." executable="${signexec}" output="signing.txt" append="true">
 			<arg line="${signdeleteline}" />
-		</exec>
+		</exec>		
 	</target>
 
 	<target name="testEclipse">
@@ -404,7 +404,7 @@
 		<property name="current_location" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" />
 		<property name="reference_location" value="${reference}/eclipse-SDK-3.5M6-win32.zip" />
 		<exec executable="/usr/bin/wget" dir="${reference}" output="${reference}/error.txt" failonerror="false" os="Linux">
-			<arg line="-q -O  ${reference_location} http://${localmirror}/eclipse/downloads/drops/S-3.6M6-201003121448/eclipse-SDK-3.6M6-win32.zip" />
+			<arg line="-q -O  ${reference_location} http://archive.eclipse.org/eclipse/downloads/drops/S-3.6M6-201003121448/eclipse-SDK-3.6M6-win32.zip" />
 		</exec>
 		<property name="report" value="${postingDirectory}/${buildLabel}/apitools" />
 		<mkdir dir="${report}" />
