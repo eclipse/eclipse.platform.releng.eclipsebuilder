@@ -5,3 +5,4 @@ cd $WORKSPACE/builds
 mkdir -p $WORKSPACE/builds/I
 mkdir -p $WORKSPACE/builds/transfer/files/testUpdates-I
 $WORKSPACE/org.eclipse.releng.eclipsebuilder/bootstrapHudsone4.sh -test -skipTest -sign -buildDirectory $WORKSPACE/builds/I -hudson -updateSite /shared/eclipse/e4/build/e4/downloads/drops/4.0.0/targets/updates/4.0 I
+touch /shared/eclipse/e4/build/e4/downloads/drops/4.0.0/targets/updates/4.0/build_done.txt
