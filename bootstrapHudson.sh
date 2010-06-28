@@ -217,10 +217,10 @@ echo log=$postingDirectory/$buildLabel/index.php >> monitor.properties
 buildMachineArch=`uname -p`
 if [ $buildMachineArch == "ppc64" ]
 then
-        buildLaunchingVM="/shared/common/ibm-java-ppc-605/jre/bin"
-        echo "buildLaunchingVM $buildLaunchingVM"
-        test = `ls /shared/common`
-        echo "test $test"
+       buildLaunchingVM="/shared/common/ibm-java-ppc-605/jre/bin"
+       # echo "buildLaunchingVM $buildLaunchingVM"
+       # test = `ls /shared/common`
+      #  echo "test $test"
 else
         buildLaunchingVM="/shared/common/jdk-1.6.x86_64/jre/bin"
 fi
