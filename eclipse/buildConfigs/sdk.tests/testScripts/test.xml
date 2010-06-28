@@ -766,9 +766,9 @@
 		<antcall target="uiforms" />
 		<antcall target="pdeapitooling" />
 		<antcall target="equinoxsecurity" />
-		<antcall target="equinoxp2" />
+	<!--	<antcall target="equinoxp2" />
 		<antcall target="equinoxp2ui" />
-		<antcall target="equinoxp2discovery" />
+		<antcall target="equinoxp2discovery" /> -->
 		<antcall target="search" />
 		<antcall target="pdeds" />
 		<antcall target="jdtcoremodel" />
