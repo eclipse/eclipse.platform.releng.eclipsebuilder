@@ -86,7 +86,8 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 			</td>
 		</tr>
 		<tr></tr>
-                <tr><td><a href="apitools/index.html"><b>API Tools Version Verification Report</b></a> This tool verifies the versions of the plugins against Eclipse 3.6.  Exclusions are listed in org.eclipse.releng/apiexclude/exclude_list_external.txt.</td></tr>
+                <tr><td><a href="apitools/index.html"><b>API Tools Version Verification Report</b></a> This tool verifies the versions of the plugins against Eclipse 3.6.  Exclusions are listed in org.eclipse.releng/apiexclude/exclude_list_external.txt.</td></tr>               
+				 <tr><td><li><a href=\"apitools/apitoolsdeprecation/apideprecation.html\"><b>API Tools Deprecation Report</b></a> This tool generates a report for API deprecated since 3.6. </td></tr>                
                <!-- <tr><td><a href="apitools/report.html"><b>API Tools Post-API Freeze Report</b></a>  This report describes API changes since 3.6M6.  Exclusions are listed in org.eclipse.releng/apiexclude/exclude_list.txt.</td></tr> -->		
 		</table>
 </div>

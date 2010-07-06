@@ -378,16 +378,16 @@
 		<echo message="copy zip back to build machine" />
 		<exec dir="." executable="${signcopy}" output="signing.txt" append="true">
 			<arg line="${signhost}${signdelimiter}${stagingDirectory}/${buildId}-out/${archiveName} ${buildDirectory}/${buildLabel}" />
-		</exec>		
-		<antcall target="deletetempsigningfiles"/>		
+		</exec>
+		<antcall target="deletetempsigningfiles" />
 	</target>
-	
+
 	<target name="deletetempsigningfiles" unless="hudson">
 		<echo message="delete temp files on build.eclipse.org" />
 		<property name="signdeleteline" value="${signhost} ${signquote}/bin/rm -rf ${stagingDirectory}/${buildId}-out ${stagingDirectory}/${archiveName}${signquote}" />
 		<exec dir="." executable="${signexec}" output="signing.txt" append="true">
 			<arg line="${signdeleteline}" />
-		</exec>		
+		</exec>
 	</target>
 
 	<target name="testEclipse">
@@ -406,7 +406,7 @@
 		<exec executable="/usr/bin/wget" dir="${reference}" output="${reference}/error.txt" failonerror="false" os="Linux">
 			<arg line="-q -O  ${reference_location} http://${localmirror}/eclipse/downloads/drops/S-3.6M6-201003121448/eclipse-SDK-3.6M6-win32.zip" />
 		</exec>
-	<!--	<property name="report" value="${postingDirectory}/${buildLabel}/apitools" />
+		<!--	<property name="report" value="${postingDirectory}/${buildLabel}/apitools" />
 		<mkdir dir="${report}" />
 		<property name="report_location" value="${report}/report.xml" />
 		<property name="report_html_location" value="${report}/reporthtml" />
@@ -414,7 +414,7 @@
 		<property name="exclude_list_external_location" value="${buildDirectory}/maps/org.eclipse.releng/apiexclude/exclude_list_external.txt" />
 		<apitooling.apifreeze baseline="${reference_location}" profile="${current_location}" report="${report_location}" excludelist="${exclude_list_location}" debug="true" /> -->
 		<!-- html report will be dumped at the same location as the xml report -->
-	<!--	<apitooling.apifreeze_reportconversion xmlfile="${report_location}" debug="true" /> -->
+		<!--	<apitooling.apifreeze_reportconversion xmlfile="${report_location}" debug="true" /> -->
 		<property name="filter_store" value="${buildDirectory}/apifilters" />
 		<mkdir dir="${filter_store}" />
 		<property name="exclude_list_external_location" value="${buildDirectory}/maps/org.eclipse.releng/apiexclude/exclude_list_external.txt" />
@@ -433,7 +433,15 @@
 			<arg line="-q -O  ${3_6_reference_location} http://${localmirror}/downloads/drops/R-3.6-201006080911/eclipse-SDK-3.6-win32.zip" />
 		</exec>
 		<apitooling.analysis baseline="${3_6_reference_location}" profile="${current_location}" report="${report_directory_location}" filters="${filter_store}" excludelist="${exclude_list_external_location}" debug="true" />
+
 		<apitooling.analysis_reportconversion xmlfiles="${report_directory_location}" debug="true" htmlfiles="${html_directory_location}" />
+		<!--check for api deprecation in comparison with previous release -->
+
+        <property name="api_deprecation_report" value="${report}/apitoolsdeprecations/apideprecation.xml"/>
+        <property name="api_deprecation_html" value="${report}/apitoolsdeprecations/apideprecation.html" />
+		<apitooling.apideprecation baseline="${3_6_reference_location}" profile="${current_location}" report="${api_deprecation_report}" debug="true" />
+		<apitooling.apideprecation_reportconversion xmlfile="${api_deprecation_report}" debug="true" htmlfile="${api_deprecation_html}" />
+
 		<property name="equinox_api_report" value="${equinoxPostingDirectory}/${buildLabel}/apitools" />
 		<mkdir dir="${equinox_api_report}" />
 		<copy todir="${equinox_api_report}">
@@ -443,6 +451,7 @@
 			<fileset dir="${html_directory_location}">
 				<include name="index.html" />
 			</fileset>
+			<file name="${api_deprecation_html}"/>
 		</copy>
 	</target>
 
@@ -635,7 +644,7 @@
 		<antcall target="packMasterFeature" />
 
 		<mkdir dir="${buildRepo}" />
-	
+
 		<condition property="repoBaseline" value="${p2RepoURL}">
 			<equals arg1="${hudson}" arg2="true" />
 		</condition>
@@ -646,15 +655,15 @@
 			<comparator comparator="org.eclipse.equinox.p2.repository.tools.jar.comparator" comparatorLog="${buildlogs}/comparatorlog.txt">
 				<repository location="${repoBaseline}" />
 				<exclude>
-					<artifact id="org.eclipse.jdt.doc.isv"/>
-					<artifact id="org.eclipse.jdt.doc.user"/>
-					<artifact id="org.eclipse.pde.doc.user"/>
-					<artifact id="org.eclipse.platform.doc.isv"/>
-					<artifact id="org.eclipse.platform.doc.user"/>
-					<artifact id="org.eclipse.equinox.executable"/>
-					<artifact id="org.eclipse.sdk.examples"/>	
-					<artifact id="org.eclipse.sdk.examples.source"/>
-					<artifact id="master-equinox"/>
+					<artifact id="org.eclipse.jdt.doc.isv" />
+					<artifact id="org.eclipse.jdt.doc.user" />
+					<artifact id="org.eclipse.pde.doc.user" />
+					<artifact id="org.eclipse.platform.doc.isv" />
+					<artifact id="org.eclipse.platform.doc.user" />
+					<artifact id="org.eclipse.equinox.executable" />
+					<artifact id="org.eclipse.sdk.examples" />
+					<artifact id="org.eclipse.sdk.examples.source" />
+					<artifact id="master-equinox" />
 				</exclude>
 			</comparator>
 		</p2.mirror>
