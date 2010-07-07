@@ -135,7 +135,7 @@ echo "  This tool verifies the versions of the plugins against Eclipse 3.6.  Exc
 ?>
 
 <?php
-echo " <li><a href=\"apitools/apitoolsdeprecation/apideprecation.html\"><b>API Tools Deprecation Report</b></a>";
+echo " <li><a href=\"apitools/apitoolsdeprecations/apideprecation.html\"><b>API Tools Deprecation Report</b></a>";
 echo "  This tool generates a report for API deprecated since 3.6. </li> ";
 ?>
 
