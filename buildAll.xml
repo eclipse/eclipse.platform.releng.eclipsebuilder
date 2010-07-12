@@ -122,11 +122,11 @@
 		<condition property="cvsuser" value=":pserver:anonymous">
 			<equals arg1="${hudson}" arg2="true" />
 		</condition>
-		<property name="cvsuser" value="kmoir" />
+		<property name="cvsuser" value="pwebster" />
 		<condition property="mapsRepo" value=":pserver:anonymous@dev.eclipse.org/cvsroot/eclipse">
 			<equals arg1="${hudson}" arg2="true" />
 		</condition>
-		<property name="mapsRepo" value="kmoir@dev.eclipse.org/cvsroot/eclipse" />
+		<property name="mapsRepo" value="pwebster@dev.eclipse.org/cvsroot/eclipse" />
 		<replace token="@localmirror@" file="${basedir}/repos.properties" value="${localmirror}" />
 		<loadproperties srcFile="${basedir}/repos.properties" />
 		<condition property="p2RepoURL" value="${p2repoI}">
