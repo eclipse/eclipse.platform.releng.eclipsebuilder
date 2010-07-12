@@ -115,10 +115,11 @@
 		<loadfile property="buildDirectoryAbsolute" srcFile="${buildDirectoryAbsoluteTemp}" failonerror="false" />
 		<delete file="${buildDirectoryAbsoluteTemp}" />
 		<!--set local mirror location depending if hudson is running -->
-		<condition property="localmirror" value="download.eclipse.org">
+		<!--	<condition property="localmirror" value="download.eclipse.org">
 			<equals arg1="${hudson}" arg2="true" />
-		</condition>
-		<property name="localmirror" value="fullmoon.ottawa.ibm.com" />
+		</condition>		
+		<property name="localmirror" value="fullmoon.ottawa.ibm.com" /> -->
+		<property name="localmirror" value="download.eclipse.org" />
 		<condition property="cvsuser" value=":pserver:anonymous">
 			<equals arg1="${hudson}" arg2="true" />
 		</condition>
