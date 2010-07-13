@@ -6,11 +6,12 @@ BASE_PATH=.:/bin:/usr/bin:/usr/bin/X11:/usr/local/bin:/usr/bin:/usr/X11R6/bin
 LD_LIBRARY_PATH=.
 BASH_ENV=$HOME/.bashrc
 USERNAME=`whoami`
-xhost +$HOSTNAME
-DISPLAY=:0.0
+#xhost +$HOSTNAME
+#DISPLAY=:0.0
 CVS_RSH=ssh
 ulimit -c unlimited
-export CVS_RSH USERNAME BASH_ENV LD_LIBRARY_PATH DISPLAY
+#export CVS_RSH USERNAME BASH_ENV LD_LIBRARY_PATH DISPLAY
+export CVS_RSH USERNAME BASH_ENV LD_LIBRARY_PATH
 
 proc=$$
 

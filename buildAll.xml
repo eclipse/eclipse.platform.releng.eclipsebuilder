@@ -333,7 +333,7 @@
 		<condition property="signUser" value="">
 			<equals arg1="${hudson}" arg2="true" />
 		</condition>
-		<property name="signUser" value="pwebster\@" />
+		<property name="signUser" value="pwebster@" />
 
 		<condition property="signhost" value="">
 			<equals arg1="${hudson}" arg2="true" />
