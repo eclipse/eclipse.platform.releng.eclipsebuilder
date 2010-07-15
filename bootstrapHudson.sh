@@ -56,7 +56,8 @@ tag=""
 #buildProjectTags=v20100610a
 #buildProjectTags=v20100621
 #buildProjectTags=v20100628
-buildProjectTags=v20100708
+#buildProjectTags=v20100708
+buildProjectTags=v20100715
 
 #updateSite property setting
 updateSite=""
@@ -223,7 +224,9 @@ then
        # test = `ls /shared/common`
       #  echo "test $test"
 else
-        buildLaunchingVM="/shared/common/jdk-1.6.x86_64/jre/bin"
+        #buildLaunchingVM="/shared/common/jdk-1.6.x86_64/jre/bin"
+        buildLaunchingVM="/shared/common/ibm-java-x86_64-60/jre/bin"
+        
 fi
 if [ $buildMachineArch == "ppc64" ]
 then
