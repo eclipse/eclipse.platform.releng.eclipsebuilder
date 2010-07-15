@@ -309,8 +309,8 @@
 
 	<target name="signMasterFeature" if="sign">
 		<property name="packtmp" value="${buildDirectory}/packtmp" />
-		<property name="stagingDirectoryOutput" value="/home/data/httpd/download-staging.priv/eclipse/${buildId}-out" />
-		<property name="stagingDirectory" value="/home/data/httpd/download-staging.priv/eclipse" />
+		<property name="stagingDirectoryOutput" value="/home/data/httpd/download-staging.priv/eclipse/e4/${buildId}-out" />
+		<property name="stagingDirectory" value="/home/data/httpd/download-staging.priv/eclipse/e4" />
 		<property name="archiveName" value="eclipse-master-${buildId}.zip" />
 
 		<property name="outputFile" value="${stagingDirectoryOutput}/${archiveName}" />
