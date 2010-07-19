@@ -223,7 +223,8 @@ then
         test = `ls /shared/common`
         echo "test $test"
 else
-        buildLaunchingVM="/shared/common/jdk-1.6.x86_64/jre/bin"
+        #buildLaunchingVM="/shared/common/jdk-1.6.x86_64/jre/bin"
+        buildLaunchingVM="/shared/common/ibm-java-x86_64-60/jre/bin"
 fi
 if [ $buildMachineArch == "ppc64" ]
 then

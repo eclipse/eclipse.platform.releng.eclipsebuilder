@@ -52,7 +52,12 @@ tag=""
 #buildProjectTags=v20100519
 #buildProjectTags=v20100528c
 #buildProjectTags=v20100528d
-buildProjectTags=v20100601
+#buildProjectTags=v20100601
+#buildProjectTags=v20100610a
+#buildProjectTags=v20100621
+#buildProjectTags=v20100628
+#buildProjectTags=v20100708
+buildProjectTags=v20100715
 
 #updateSite property setting
 updateSite=""
@@ -214,9 +219,14 @@ echo log=$postingDirectory/$buildLabel/index.php >> monitor.properties
 buildMachineArch=`uname -p`
 if [ $buildMachineArch == "ppc64" ]
 then
-        buildLaunchingVM="/shared/common/ibm-java-ppc-605/jre/bin"
+       buildLaunchingVM="/shared/common/ibm-java-ppc-605/jre/bin"
+       # echo "buildLaunchingVM $buildLaunchingVM"
+       # test = `ls /shared/common`
+      #  echo "test $test"
 else
-        buildLaunchingVM="/shared/common/jdk-1.6.x86_64/jre/bin"
+        #buildLaunchingVM="/shared/common/jdk-1.6.x86_64/jre/bin"
+        buildLaunchingVM="/shared/common/ibm-java-x86_64-60/jre/bin"
+        
 fi
 if [ $buildMachineArch == "ppc64" ]
 then
