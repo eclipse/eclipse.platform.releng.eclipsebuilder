@@ -215,7 +215,7 @@
 		<property name="archiveName" value="eclipse-master-${buildId}.zip" />
 
 		<!-- update location of jvm arguments -->
-		<replace file="${eclipse.build.configs}/../../extras/pack200" token="@pack200@" value="${java15-home}/bin/pack200" />
+		<replace file="${eclipse.build.configs}/../../extras/pack200" token="@pack200@" value="${java15home}/bin/pack200" />
 		<chmod file="${eclipse.build.configs}/../../extras/pack200" perm="755" />
 
 		<!--condition jar if it is not pushed to eclipse.org for signing-->
@@ -227,7 +227,7 @@
 		<property name="repack" value="" />
 
 		<!--pack200-->
-		<!--	<java jar="${eclipse.home}/plugins/org.eclipse.equinox.launcher.jar" fork="true" timeout="10800000" jvm="${java15-home}/bin/java" failonerror="true" maxmemory="768m" error="${buildlogs}/packerrorlog.txt" dir="${buildDirectory}" output="${buildlogs}/packoutputlog.txt">
+		<!--	<java jar="${eclipse.home}/plugins/org.eclipse.equinox.launcher.jar" fork="true" timeout="10800000" jvm="${java15home}/bin/java" failonerror="true" maxmemory="768m" error="${buildlogs}/packerrorlog.txt" dir="${buildDirectory}" output="${buildlogs}/packoutputlog.txt">
 			<jvmarg value="-Dorg.eclipse.update.jarprocessor.pack200=${eclipse.build.configs}/../../extras" />
 			<arg line="-consolelog -application org.eclipse.update.core.siteOptimizer" />
 			<arg line="-jarProcessor -verbose -outputDir ${buildLabel} -processAll -pack ${repack} ${reposource}" />

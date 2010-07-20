@@ -42,7 +42,7 @@
 		 <target name="run.director">
 		 		 <delete dir="${base.builder}/configuration/.settings" includeemptydirs="true" failonerror="false" />
 		 		 <exec executable="${base.builder}/eclipse" failonerror="false" dir="${base.builder}" timeout="900000">
-		 		 		 <arg line="-vm ${java15-home}/bin/java" />
+		 		 		 <arg line="-vm ${java15home}/bin/java" />
 		 		 		 <arg line="-application org.eclipse.equinox.p2.director.app.application" />
 		 		 		 <arg line="-nosplash" />
 		 		 		 <arg line="--launcher.suppressErrors" />
