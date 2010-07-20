@@ -24,7 +24,7 @@
 	</zipType>
 
 	<zipType name="JUnit test plug-ins">
-		<platform id="TF" name="All" fileName="eclipse-test-framework-@build@.zip"></platform>
+		<platform id="TF" name="&lt;img src = &quot;repo.gif&quot;> All" fileName="eclipse-test-framework-@build@.zip"></platform>
 		<platform id="JT" name="All" fileName="eclipse-Automated-Tests-@build@.zip"></platform>
 	</zipType>
 
