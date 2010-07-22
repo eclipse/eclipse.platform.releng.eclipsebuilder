@@ -296,7 +296,7 @@
 	<target name="updatePackProperties">
 		<!--exclude pre-built Orbit bundles from being signed and packed-->
 		<property name="packproperties" value="${buildDirectory}/updatePackProperties.txt" />
-		<generateExcludeList mapFile="${buildDirectory}/maps/org.eclipse.releng/maps/orbit.map" outputFile="${packproperties}" />
+		<generateExcludeList mapFile="${buildDirectory}/maps/org.eclipse.releng/maps/e4-orbit.map" outputFile="${packproperties}" />
 		<loadfile property="pack.properties" srcFile="${packproperties}" />
 		<delete file="${packproperties}" failonerror="false" />
 		<replace file="${eclipse.build.configs}/../../extras/pack.properties" token="@excludejars@" value="${pack.properties}" />
