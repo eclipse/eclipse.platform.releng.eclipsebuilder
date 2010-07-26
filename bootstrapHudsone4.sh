@@ -59,7 +59,7 @@ tag=""
 #buildProjectTags=r4_v20100719
 #buildProjectTags=r4_v20100720
 #buildProjectTags=r4_v20100722
-buildProjectTags=r4_v20100722
+buildProjectTags=r4_v20100726
 
 #updateSite property setting
 updateSite=""
