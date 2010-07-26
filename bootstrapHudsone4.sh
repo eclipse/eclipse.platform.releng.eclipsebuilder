@@ -58,6 +58,7 @@ tag=""
 #buildProjectTags=r4_v20100715
 #buildProjectTags=r4_v20100719
 #buildProjectTags=r4_v20100720
+#buildProjectTags=r4_v20100722
 buildProjectTags=r4_v20100722
 
 #updateSite property setting
@@ -191,8 +192,6 @@ cvs -d :pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse co -r $baseBuilderTag
 #check out org.eclipse.releng.eclipsebuilder
 cvs -d :pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse co -r $customBuilderTag org.eclipse.releng.eclipsebuilder
 
-javadoc="-Djavadoc15=/shared/common/jdk-1.5.0_16/bin/javadoc"
-
 mkdir -p $postingDirectory/$buildLabel
 chmod -R 755 $builderDir
 
@@ -226,15 +225,17 @@ then
         echo "test $test"
 else
         #buildLaunchingVM="/shared/common/jdk-1.6.x86_64/jre/bin"
-        buildLaunchingVM="/shared/common/ibm-java-x86_64-60/jre/bin"
+        buildLaunchingVM="/shared/common/ibm-java-x86_64-60/jre/bin"        
 fi
 if [ $buildMachineArch == "ppc64" ]
 then
         buildLaunching15VM="/shared/common/ibm-java2-ppc64-50/jre/bin"
         java15home="/shared/common/ibm-java2-ppc64-50/jre"
+        javadoc="-Djavadoc15=/shared/common/ibm-java2-ppc64-50/bin/javadoc"
 else
         buildLaunching15VM="/shared/common/jdk-1.5.0-22.x86_64/jre/bin"
         java15home="/shared/common/jdk-1.5.0-22.x86_64/jre"
+        javadoc="-Djavadoc15=/shared/common/jdk-1.5.0-22.x86_64/bin/javadoc"
 fi
 
  
