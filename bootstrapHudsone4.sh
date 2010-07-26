@@ -6,11 +6,12 @@ BASE_PATH=.:/bin:/usr/bin:/usr/bin/X11:/usr/local/bin:/usr/bin:/usr/X11R6/bin
 LD_LIBRARY_PATH=.
 BASH_ENV=$HOME/.bashrc
 USERNAME=`whoami`
-xhost +$HOSTNAME
-DISPLAY=:0.0
+#xhost +$HOSTNAME
+#DISPLAY=:0.0
 CVS_RSH=ssh
 ulimit -c unlimited
-export CVS_RSH USERNAME BASH_ENV LD_LIBRARY_PATH DISPLAY
+#export CVS_RSH USERNAME BASH_ENV LD_LIBRARY_PATH DISPLAY
+export CVS_RSH USERNAME BASH_ENV LD_LIBRARY_PATH
 
 proc=$$
 
@@ -46,15 +47,19 @@ deleteArtifacts=""
 #sets fetchTag="HEAD" for nightly builds if required
 tag=""
 
-#buildProjectTags=v20100331a
-#buildProjectTags=v20100423
-#buildProjectTags=v20100517a
-#buildProjectTags=v20100519b
-#buildProjectTags=v20100526a
-#buildProjectTags=v20100527
-#buildProjectTags=v20100527a
-#buildProjectTags=v20100528a
-buildProjectTags=v20100528c
+#buildProjectTags=v20100609a
+#buildProjectTags=v20100610
+#buildProjectTags=v20100611a
+#buildProjectTags=r4_v20100623
+#buildProjectTags=r4_v20100624
+#buildProjectTags=r4_v20100629
+#buildProjectTags=r4_v20100712
+#buildProjectTags=r4_v20100714
+#buildProjectTags=r4_v20100715
+#buildProjectTags=r4_v20100719
+#buildProjectTags=r4_v20100720
+#buildProjectTags=r4_v20100722
+buildProjectTags=r4_v20100726
 
 #updateSite property setting
 updateSite=""
@@ -187,8 +192,6 @@ cvs -d :pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse co -r $baseBuilderTag
 #check out org.eclipse.releng.eclipsebuilder
 cvs -d :pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse co -r $customBuilderTag org.eclipse.releng.eclipsebuilder
 
-javadoc="-Djavadoc15=/shared/common/jdk-1.5.0_16/bin/javadoc"
-
 mkdir -p $postingDirectory/$buildLabel
 chmod -R 755 $builderDir
 
@@ -222,16 +225,20 @@ then
         echo "test $test"
 else
         #buildLaunchingVM="/shared/common/jdk-1.6.x86_64/jre/bin"
-        buildLaunchingVM="/shared/common/ibm-java-x86_64-60/jre/bin"
+        buildLaunchingVM="/shared/common/ibm-java-x86_64-60/jre/bin"        
 fi
 if [ $buildMachineArch == "ppc64" ]
 then
         buildLaunching15VM="/shared/common/ibm-java2-ppc64-50/jre/bin"
         java15home="/shared/common/ibm-java2-ppc64-50/jre"
+        javadoc="-Djavadoc15=/shared/common/ibm-java2-ppc64-50/bin/javadoc"
 else
         buildLaunching15VM="/shared/common/jdk-1.5.0-22.x86_64/jre/bin"
         java15home="/shared/common/jdk-1.5.0-22.x86_64/jre"
+        javadoc="-Djavadoc15=/shared/common/jdk-1.5.0-22.x86_64/bin/javadoc"
 fi
+
+ 
 
 antRunner="$buildLaunchingVM/java -Xmx500m -Declipse.p2.MD5Check=false -Dorg.eclipse.update.jarprocessor.pack200=$buildLaunching15VM -jar ../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=ppc -application org.eclipse.ant.core.antRunner -Declipse.p2.MD5Check=false"
 antRunnerJDK15="$buildLaunching15VM/java -Xmx500m -Dorg.eclipse.update.jarprocessor.pack200=$buildLaunching15VM -jar ../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=ppc -application org.eclipse.ant.core.antRunner  -Declipse.p2.MD5Check=false"

@@ -191,8 +191,6 @@ cvs -d :pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse co -r $baseBuilderTag
 #check out org.eclipse.releng.eclipsebuilder
 cvs -d :pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse co -r $customBuilderTag org.eclipse.releng.eclipsebuilder
 
-javadoc="-Djavadoc15=/shared/common/jdk-1.5.0_16/bin/javadoc"
-
 mkdir -p $postingDirectory/$buildLabel
 chmod -R 755 $builderDir
 
@@ -233,9 +231,11 @@ if [ $buildMachineArch == "ppc64" ]
 then
         buildLaunching15VM="/shared/common/ibm-java2-ppc64-50/jre/bin"
         java15home="/shared/common/ibm-java2-ppc64-50/jre"
+        javadoc="-Djavadoc15=/shared/common/ibm-java2-ppc64-50/bin/javadoc"
 else
         buildLaunching15VM="/shared/common/jdk-1.5.0-22.x86_64/jre/bin"
         java15home="/shared/common/jdk-1.5.0-22.x86_64/jre"
+        javadoc="-Djavadoc15=/shared/common/jdk-1.5.0-22.x86_64/bin/javadoc"
 fi
 
 antRunner="$buildLaunchingVM/java -Xmx500m -Declipse.p2.MD5Check=false -Dorg.eclipse.update.jarprocessor.pack200=$buildLaunching15VM -jar ../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=ppc -application org.eclipse.ant.core.antRunner -Declipse.p2.MD5Check=false"
