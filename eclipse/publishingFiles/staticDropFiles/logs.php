@@ -182,7 +182,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
     $buildId = getBuildId(); 
     echo "<title>Test Results for $buildId </title>\n";
 
-echo "<h3>Logs $buildType $buildName</h3>\n";
+echo "<h3>Logs</h3>\n";
 
 echo <<<END
 <ul>
