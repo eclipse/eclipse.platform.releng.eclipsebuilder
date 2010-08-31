@@ -85,7 +85,10 @@
 			<os family="unix" />
 		</condition>
 		<condition property="platformArchive" value="${org.eclipse.equinox.p2.reconciler.tests.35.platform.archive.macosx}">
-			<os family="mac" />
+			<and>
+				<os family="mac" />
+				<os family="unix" />
+			</and>
 		</condition>
 		<condition property="platformArchive" value="${org.eclipse.equinox.p2.reconciler.tests.platform.archive.win32}">
 			<os family="windows" />
