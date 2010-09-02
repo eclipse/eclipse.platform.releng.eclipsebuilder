@@ -82,7 +82,12 @@
 	<target name="setupPlatform">
 		<property file="equinoxp2tests.properties" />
 		<condition property="platformArchive" value="${org.eclipse.equinox.p2.reconciler.tests.35.platform.archive.linux}">
-			<os family="unix" />
+			<and>
+				<os family="unix" />
+				<not>
+					<os family="mac" />
+				</not>
+			</and>
 		</condition>
 		<condition property="platformArchive" value="${org.eclipse.equinox.p2.reconciler.tests.35.platform.archive.macosx}">
 			<and>
