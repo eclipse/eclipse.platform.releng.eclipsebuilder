@@ -668,19 +668,19 @@
 			</comparator>
 		</p2.mirror>
 
+		<copy todir="${buildRepo}">
+			<fileset file="${eclipse.build.configs}/../../extras/sdkinstaller.properties" />
+		</copy>
+
 		<!--mirror JUnit test bundles and test framework bundles to the repo -->
-		<p2.mirror source="file://${buildDirectory}/buildRepoTests">
+		<p2.mirror source="file://${buildDirectory}/buildRepoTests" ignoreErrors="true">
 			<destination compressed="true" name="${p2.repo.name}" location="file:${buildRepo}" append="true" format="file:${reposource}" />
 			<comparator comparator="org.eclipse.equinox.p2.repository.tools.jar.comparator" comparatorLog="${buildlogs}/comparatorlogtests.txt">
 				<repository location="${repoBaseline}" />
 			</comparator>
-			<iu id="org.eclipse.sdk.tests.feature.group" version="" />	
-			<iu id="org.eclipse.test.feature.group" version="" />			
+			<iu id="org.eclipse.sdk.tests.feature.group" version="" />
+			<iu id="org.eclipse.test.feature.group" version="" />
 		</p2.mirror>
-
-		<copy todir="${buildRepo}">
-			<fileset file="${eclipse.build.configs}/../../extras/sdkinstaller.properties" />
-		</copy>
 
 		<!--try create composite repository-->
 		<p2.composite.artifact.repository.create location="file://${updateSite}" name="${p2.repo.name}" compressed="true" failOnExists="false" />
