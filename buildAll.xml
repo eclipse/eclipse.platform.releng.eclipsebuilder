@@ -74,7 +74,7 @@
 				<ant antfile="${equinox.build.configs}/equinox.prov/run.xml" />
 				<antcall target="packageRepos" />
 				<antcall target="packageEquinoxDistributables" />
-				<antcall target="apiTooling" /> 
+				<antcall target="apiTooling" />
 				<antcall target="publishEclipse" />
 				<antcall target="publishEquinox" />
 			</sequential>
@@ -437,8 +437,8 @@
 		<apitooling.analysis_reportconversion xmlfiles="${report_directory_location}" debug="true" htmlfiles="${html_directory_location}" />
 		<!--check for api deprecation in comparison with previous release -->
 
-        <property name="api_deprecation_report" value="${report}/apitoolsdeprecations/apideprecation.xml"/>
-        <property name="api_deprecation_html" value="${report}/apitoolsdeprecations/apideprecation.html" />
+		<property name="api_deprecation_report" value="${report}/apitoolsdeprecations/apideprecation.xml" />
+		<property name="api_deprecation_html" value="${report}/apitoolsdeprecations/apideprecation.html" />
 		<apitooling.apideprecation baseline="${3_6_reference_location}" profile="${current_location}" report="${api_deprecation_report}" debug="true" />
 		<apitooling.apideprecation_reportconversion xmlfile="${api_deprecation_report}" debug="true" htmlfile="${api_deprecation_html}" />
 
@@ -452,7 +452,7 @@
 				<include name="index.html" />
 			</fileset>
 		</copy>
-        <copy todir="${equinox_api_report}" file="${api_deprecation_html}"/>
+		<copy todir="${equinox_api_report}" file="${api_deprecation_html}" />
 	</target>
 
 	<target name="publishEclipse">
@@ -666,6 +666,16 @@
 					<artifact id="master-equinox" />
 				</exclude>
 			</comparator>
+		</p2.mirror>
+
+		<!--mirror JUnit test bundles and test framework bundles to the repo -->
+		<p2.mirror source="file://${buildDirectory}/buildRepoTests">
+			<destination compressed="true" name="${p2.repo.name}" location="file:${buildRepo}" append="true" format="file:${reposource}" />
+			<comparator comparator="org.eclipse.equinox.p2.repository.tools.jar.comparator" comparatorLog="${buildlogs}/comparatorlogtests.txt">
+				<repository location="${repoBaseline}" />
+			</comparator>
+			<iu id="org.eclipse.sdk.tests.feature.group" version="" />	
+			<iu id="org.eclipse.test.feature.group" version="" />			
 		</p2.mirror>
 
 		<copy todir="${buildRepo}">
