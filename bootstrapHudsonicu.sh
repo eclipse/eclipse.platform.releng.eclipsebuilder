@@ -77,7 +77,7 @@ buildId=""
 buildLabel=""
 
 # tag for build contribution project containing .map files
-mapVersionTag=HEAD
+mapVersionTag=icu481test
 
 # directory in which to export builder projects
 builderDir=$WORKSPACE/builds/eclipsebuilder
