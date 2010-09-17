@@ -123,12 +123,7 @@
 					<param name="os" value="linux" />
 					<param name="ws" value="gtk" />
 					<param name="arch" value="x86_64" />
-				</antcall>
-				<antcall target="packageSwtStandalone">
-					<param name="os" value="linux" />
-					<param name="ws" value="gtk" />
-					<param name="arch" value="ppc" />
-				</antcall>
+				</antcall>				
 				<antcall target="packageSwtStandalone">
 					<param name="os" value="linux" />
 					<param name="ws" value="gtk" />

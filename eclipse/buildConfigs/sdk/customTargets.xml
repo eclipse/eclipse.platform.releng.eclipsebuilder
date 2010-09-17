@@ -69,11 +69,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<antcall target="assemble" />
 	</target>
 
-	<target name="assemble.org.eclipse.sdk.linux.gtk.ppc">
-		<property name="archiveName" value="eclipse-SDK-${buildId}-linux-gtk-ppc.tar.gz" />
-		<antcall target="assemble" />
-	</target>
-
 	<target name="assemble.org.eclipse.sdk.linux.gtk.ppc64">
 		<property name="archiveName" value="eclipse-SDK-${buildId}-linux-gtk-ppc64.tar.gz" />
 		<antcall target="assemble" />

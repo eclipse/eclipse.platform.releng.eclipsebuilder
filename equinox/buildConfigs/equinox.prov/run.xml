@@ -7,7 +7,7 @@
 		<mkdir dir="${p2.output.base}" />
 		<property name="directorlog" value="${buildlogs}/director.txt" />
 
-		<condition property="sdk.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-ppc.tar.gz">
+		<condition property="sdk.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-ppc64.tar.gz">
 			<equals arg1="${os.arch}" arg2="ppc64" />
 		</condition>
 		<condition property="sdk.archive" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk.tar.gz">
@@ -15,7 +15,7 @@
 		</condition>
 		<property name="sdk.archive" value="" />
 		<property name="rcp.delta.archive" value="${postingDirectory}/${buildLabel}/eclipse-${buildId}-delta-pack.zip" />
-		<condition property="rcp.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-linux-gtk-ppc.tar.gz">
+		<condition property="rcp.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-linux-gtk-ppc64.tar.gz">
 			<equals arg1="${os.arch}" arg2="ppc64" />
 		</condition>
 		<condition property="rcp.archive" value="${postingDirectory}/${buildLabel}/eclipse-RCP-${buildId}-linux-gtk.tar.gz">
@@ -39,9 +39,7 @@
 		<property name="p2.sdk.install.linux.motif.x86" value="${p2.output.base}/sdk.install.linux.motif.x86" />
 		<mkdir dir="${p2.sdk.install.linux.motif.x86}" />
 		<property name="p2.sdk.install.linux.gtk.x86_64" value="${p2.output.base}/sdk.install.linux.gtk.x86_64" />
-		<mkdir dir="${p2.sdk.install.linux.gtk.x86_64}" />
-		<property name="p2.sdk.install.linux.gtk.ppc" value="${p2.output.base}/sdk.install.linux.gtk.ppc" />
-		<mkdir dir="${p2.sdk.install.linux.gtk.ppc}" />
+		<mkdir dir="${p2.sdk.install.linux.gtk.x86_64}" />	
 		<property name="p2.sdk.install.linux.gtk.ppc64" value="${p2.output.base}/sdk.install.linux.gtk.ppc64" />
 		<mkdir dir="${p2.sdk.install.linux.gtk.ppc64}" />
 		<property name="p2.sdk.install.linux.gtk.s390x" value="${p2.output.base}/sdk.install.linux.gtk.s390x" />
@@ -71,9 +69,7 @@
 		<property name="p2.platform.install.linux.gtk.x86" value="${p2.output.base}/platform.install.linux.gtk.x86" />
 		<mkdir dir="${p2.platform.install.linux.gtk.x86}" />
 		<property name="p2.platform.install.linux.gtk.x86_64" value="${p2.output.base}/platform.install.linux.gtk.x86_64" />
-		<mkdir dir="${p2.platform.install.linux.gtk.x86_64}" />
-		<property name="p2.platform.install.linux.gtk.ppc" value="${p2.output.base}/platform.install.linux.gtk.ppc" />
-		<mkdir dir="${p2.platform.install.linux.gtk.ppc}" />
+		<mkdir dir="${p2.platform.install.linux.gtk.x86_64}" />		
 		<property name="p2.platform.install.linux.gtk.ppc64" value="${p2.output.base}/platform.install.linux.gtk.ppc64" />
 		<mkdir dir="${p2.platform.install.linux.gtk.ppc64}" />
 		<property name="p2.platform.install.hpux.motif.ia64_32" value="${p2.output.base}/platform.install.hpux.motif.ia64_32" />
@@ -100,8 +96,6 @@
 		<mkdir dir="${p2.platformsdk.install.linux.gtk.x86}" />
 		<property name="p2.platformsdk.install.linux.gtk.x86_64" value="${p2.output.base}/platformsdk.install.linux.gtk.x86_64" />
 		<mkdir dir="${p2.platformsdk.install.linux.gtk.x86_64}" />
-		<property name="p2.platformsdk.install.linux.gtk.ppc" value="${p2.output.base}/platformsdk.install.linux.gtk.ppc" />
-		<mkdir dir="${p2.platformsdk.install.linux.gtk.ppc}" />
 		<property name="p2.platformsdk.install.linux.gtk.ppc64" value="${p2.output.base}/platformsdk.install.linux.gtk.ppc64" />
 		<mkdir dir="${p2.platformsdk.install.linux.gtk.ppc64}" />
 		<property name="p2.platformsdk.install.hpux.motif.ia64_32" value="${p2.output.base}/platformsdk.install.hpux.motif.ia64_32" />
@@ -247,18 +241,6 @@
 			<param name="p2.os" value="linux" />
 			<param name="p2.ws" value="gtk" />
 			<param name="p2.arch" value="x86" />
-			<param name="p2.repo" value="${buildRepo}" />
-		</antcall>
-
-		<antcall target="run.director">
-			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
-			<param name="p2.director.version" value="${sdk.version}" />
-			<param name="p2.director.profile" value="SDKProfile" />
-			<param name="p2.director.install.path" value="${p2.sdk.install.linux.gtk.ppc}/eclipse" />
-			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
-			<param name="p2.os" value="linux" />
-			<param name="p2.ws" value="gtk" />
-			<param name="p2.arch" value="ppc" />
 			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
@@ -449,18 +431,6 @@
 			<param name="p2.director.installIU" value="org.eclipse.platform.ide" />
 			<param name="p2.director.version" value="${sdk.version}" />
 			<param name="p2.director.profile" value="PlatformProfile" />
-			<param name="p2.director.install.path" value="${p2.platform.install.linux.gtk.ppc}/eclipse" />
-			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
-			<param name="p2.os" value="linux" />
-			<param name="p2.ws" value="gtk" />
-			<param name="p2.arch" value="ppc" />
-			<param name="p2.repo" value="${buildRepo}" />
-		</antcall>
-
-		<antcall target="run.director">
-			<param name="p2.director.installIU" value="org.eclipse.platform.ide" />
-			<param name="p2.director.version" value="${sdk.version}" />
-			<param name="p2.director.profile" value="PlatformProfile" />
 			<param name="p2.director.install.path" value="${p2.platform.install.linux.gtk.ppc64}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
 			<param name="p2.os" value="linux" />
@@ -601,18 +571,6 @@
 			<param name="p2.os" value="linux" />
 			<param name="p2.ws" value="gtk" />
 			<param name="p2.arch" value="x86" />
-			<param name="p2.repo" value="${buildRepo}" />
-		</antcall>
-
-		<antcall target="run.director">
-			<param name="p2.director.installIU" value="org.eclipse.platform.sdk" />
-			<param name="p2.director.version" value="${sdk.version}" />
-			<param name="p2.director.profile" value="PlatformSDKProfile" />
-			<param name="p2.director.install.path" value="${p2.platformsdk.install.linux.gtk.ppc}/eclipse" />
-			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
-			<param name="p2.os" value="linux" />
-			<param name="p2.ws" value="gtk" />
-			<param name="p2.arch" value="ppc" />
 			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
@@ -833,15 +791,6 @@
 					<param name="tar.base.filename" value="${output.dir}/equinox-p2-agent-${buildId}-linux.tar" />
 				</antcall>
 
-				<!-- linux gtk ppc-->
-				<antcall target="p2.tar">
-					<param name="tar.base.dir" value="${p2.sdk.install.linux.gtk.ppc}" />
-					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-ppc.tar" />
-				</antcall>
-				<antcall target="generateChecksums">
-					<param name="archiveName" value="eclipse-SDK-${buildId}-linux-gtk-ppc.tar.gz" />
-				</antcall>
-
 				<!-- linux gtk ppc64-->
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.sdk.install.linux.gtk.ppc64}" />
@@ -960,14 +909,6 @@
 				<antcall target="generateChecksums">
 					<param name="archiveName" value="eclipse-platform-${buildId}-linux-gtk.tar.gz" />
 				</antcall>
-				<!-- linux gtk ppc-->
-				<antcall target="p2.tar">
-					<param name="tar.base.dir" value="${p2.platform.install.linux.gtk.ppc}" />
-					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-linux-gtk-ppc.tar" />
-				</antcall>
-				<antcall target="generateChecksums">
-					<param name="archiveName" value="eclipse-platform-${buildId}-linux-gtk-ppc.tar.gz" />
-				</antcall>
 				<!-- linux gtk ppc64-->
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.platform.install.linux.gtk.ppc64}" />
@@ -1077,14 +1018,6 @@
 				</antcall>
 				<antcall target="generateChecksums">
 					<param name="archiveName" value="eclipse-platform-SDK-${buildId}-linux-gtk.tar.gz" />
-				</antcall>
-				<!-- linux gtk ppc-->
-				<antcall target="p2.tar">
-					<param name="tar.base.dir" value="${p2.platformsdk.install.linux.gtk.ppc}" />
-					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-platform-SDK-${buildId}-linux-gtk-ppc.tar" />
-				</antcall>
-				<antcall target="generateChecksums">
-					<param name="archiveName" value="eclipse-platform-SDK-${buildId}-linux-gtk-ppc.tar.gz" />
 				</antcall>
 				<!-- linux gtk ppc64-->
 				<antcall target="p2.tar">
