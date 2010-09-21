@@ -359,7 +359,7 @@
 		<!--invoke sign script and wait-->
 		<echo message="invoke sign script and wait" />
 		<exec dir="." executable="${signexec}" output="signing.txt" append="true">
-			<arg line="${signhost} ${signquote}/usr/bin/sign ${stagingDirectory}/${archiveName} nomail ${stagingDirectoryOutput}${signquote}" />
+			<arg line="${signhost} ${signquote}/usr/local/bin/sign ${stagingDirectory}/${archiveName} nomail ${stagingDirectoryOutput}${signquote}" />
 		</exec>
 
 		<!--Wait for build to be available -->
