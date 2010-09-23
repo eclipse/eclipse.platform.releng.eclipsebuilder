@@ -30,6 +30,14 @@
 		<property name="p2.agent.install.macosx" value="${p2.output.base}/agent.install.macosx" />
 		<mkdir dir="${p2.agent.install.macosx}" />
 
+		<property name="p2.agent.install.win32.director" value="${p2.output.base}/agent.install.win32/eclipse" />
+		<mkdir dir="${p2.agent.install.win32.director}" />
+		<property name="p2.agent.install.linux.director" value="${p2.output.base}/agent.install.linux/eclipse" />
+		<mkdir dir="${p2.agent.install.linux.director}" />
+		<property name="p2.agent.install.macosx.director" value="${p2.output.base}/agent.install.macosx/eclipse" />
+		<mkdir dir="${p2.agent.install.macosx.director}" />
+
+
 		<property name="p2.sdk.install.win32.win32.x86" value="${p2.output.base}/sdk.install.win32.win32.x86" />
 		<mkdir dir="${p2.sdk.install.win32.win32.x86}" />
 		<property name="p2.sdk.install.win32.win32.x86_64" value="${p2.output.base}/sdk.install.win32.win32.x86_64" />
@@ -39,7 +47,7 @@
 		<property name="p2.sdk.install.linux.motif.x86" value="${p2.output.base}/sdk.install.linux.motif.x86" />
 		<mkdir dir="${p2.sdk.install.linux.motif.x86}" />
 		<property name="p2.sdk.install.linux.gtk.x86_64" value="${p2.output.base}/sdk.install.linux.gtk.x86_64" />
-		<mkdir dir="${p2.sdk.install.linux.gtk.x86_64}" />	
+		<mkdir dir="${p2.sdk.install.linux.gtk.x86_64}" />
 		<property name="p2.sdk.install.linux.gtk.ppc64" value="${p2.output.base}/sdk.install.linux.gtk.ppc64" />
 		<mkdir dir="${p2.sdk.install.linux.gtk.ppc64}" />
 		<property name="p2.sdk.install.linux.gtk.s390x" value="${p2.output.base}/sdk.install.linux.gtk.s390x" />
@@ -69,7 +77,7 @@
 		<property name="p2.platform.install.linux.gtk.x86" value="${p2.output.base}/platform.install.linux.gtk.x86" />
 		<mkdir dir="${p2.platform.install.linux.gtk.x86}" />
 		<property name="p2.platform.install.linux.gtk.x86_64" value="${p2.output.base}/platform.install.linux.gtk.x86_64" />
-		<mkdir dir="${p2.platform.install.linux.gtk.x86_64}" />		
+		<mkdir dir="${p2.platform.install.linux.gtk.x86_64}" />
 		<property name="p2.platform.install.linux.gtk.ppc64" value="${p2.output.base}/platform.install.linux.gtk.ppc64" />
 		<mkdir dir="${p2.platform.install.linux.gtk.ppc64}" />
 		<property name="p2.platform.install.hpux.motif.ia64_32" value="${p2.output.base}/platform.install.hpux.motif.ia64_32" />
@@ -113,32 +121,13 @@
 		<property name="p2.platformsdk.install.macosx.cocoa.x86_64" value="${p2.output.base}/platformsdk.install.macosx.cocoa.x86_64" />
 		<mkdir dir="${p2.platformsdk.install.macosx.cocoa.x86_64}" />
 
-		<!-- <property name="base" value="${p2.output.base}/base" />
-		<mkdir dir="${base}" /> -->
-
 		<property file="build.properties" />
 		<property name="p2.flavor" value="tooling" />
 		<property name="p2.agent.version" value="1.1.0.${buildId}" />
-		<property name="sdk.version" value="3.7.0.${buildId}"/>
+		<property name="sdk.version" value="3.7.0.${buildId}" />
 	</target>
 
-	<target name="build" depends="init">
-		<!--		<antcall target="extract">
-			<param name="extract-src" value="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip" />
-			<param name="extract-dest" value="${base}" />
-		</antcall>
-
-		<antcall target="extract">
-			<param name="extract-src" value="${icu.base.archive}" />
-			<param name="extract-dest" value="${base}" />
-		</antcall>
-
-		<delete failonerror="false">
-			<fileset dir="${base}/eclipse/plugins">
-				<include name="**/com.ibm.icu_*.jar" />
-			</fileset>
-		</delete> -->
-
+	<target name="build" depends="init">		
 		<parallel failonany="true" threadCount='4'>
 			<antcall target="provision.agent" />
 			<antcall target="provision.sdk" />
@@ -157,16 +146,7 @@
 			<fileset dir="${p2.root}">
 				<include name="**/*.log" />
 			</fileset>
-		</copy>
-		<!-- not sure we need this step anymore -->
-		<!--		<copy file="${eclipse.build.configs}/../../extras/pack.properties" todir="${buildRepo}" />
-		<p2.process.artifacts repositoryPath="file://${buildRepo}" pack="true" />
-		<delete>
-			<fileset dir="${buildRepo}">
-				<include name="plugins/com.ibm.icu*.jar.pack.gz" />
-				<include name="pack.properties" />
-			</fileset>
-		</delete> -->
+		</copy>		
 	</target>
 
 	<target name="provision.agent">
@@ -174,7 +154,7 @@
 			<param name="p2.director.installIU" value="org.eclipse.equinox.p2.ui.admin.rcp.product" />
 			<param name="p2.director.version" value="${p2.agent.version}" />
 			<param name="p2.director.profile" value="EquinoxProvisioningUI" />
-			<param name="p2.director.install.path" value="${p2.agent.install.win32}" />
+			<param name="p2.director.install.path" value="${p2.agent.install.win32.director}" />
 			<param name="p2.director.extraArgs" value="" />
 			<param name="p2.os" value="win32" />
 			<param name="p2.ws" value="win32" />
@@ -186,7 +166,7 @@
 			<param name="p2.director.installIU" value="org.eclipse.equinox.p2.ui.admin.rcp.product" />
 			<param name="p2.director.version" value="${p2.agent.version}" />
 			<param name="p2.director.profile" value="EquinoxProvisioningUI" />
-			<param name="p2.director.install.path" value="${p2.agent.install.linux}" />
+			<param name="p2.director.install.path" value="${p2.agent.install.linux.director}" />
 			<param name="p2.director.extraArgs" value="" />
 			<param name="p2.os" value="linux" />
 			<param name="p2.ws" value="gtk" />
@@ -198,7 +178,7 @@
 			<param name="p2.director.installIU" value="org.eclipse.equinox.p2.ui.admin.rcp.product" />
 			<param name="p2.director.version" value="${p2.agent.version}" />
 			<param name="p2.director.profile" value="EquinoxProvisioningUI" />
-			<param name="p2.director.install.path" value="${p2.agent.install.macosx}" />
+			<param name="p2.director.install.path" value="${p2.agent.install.macosx.director}" />
 			<param name="p2.director.extraArgs" value="" />
 			<param name="p2.os" value="macosx" />
 			<param name="p2.ws" value="cocoa" />
@@ -772,7 +752,7 @@
 			<sequential>
 				<!-- win32 win32 x86 agent -->
 				<exec dir="${p2.agent.install.win32}" executable="zip">
-					<arg line="-q ${output.dir}/equinox-p2-agent-${buildId}-win32.zip -r ." />
+					<arg line="-q ${output.dir}/equinox-p2-adminui-${buildId}-win32.zip -r ." />
 				</exec>
 				<!-- win32 win32 x86_64 -->
 				<delete file="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32-x86_64.zip" failonerror="false" />
@@ -788,7 +768,7 @@
 				<!-- linux gtk x86 agent -->
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.agent.install.linux}" />
-					<param name="tar.base.filename" value="${output.dir}/equinox-p2-agent-${buildId}-linux.tar" />
+					<param name="tar.base.filename" value="${output.dir}/equinox-p2-adminui-${buildId}-linux-gtk-x86.tar" />
 				</antcall>
 
 				<!-- linux gtk ppc64-->
@@ -874,7 +854,7 @@
 				<!-- macosx agent -->
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${p2.agent.install.macosx}" />
-					<param name="tar.base.filename" value="${output.dir}/equinox-p2-agent-${buildId}-macosx.tar" />
+					<param name="tar.base.filename" value="${output.dir}/equinox-p2-adminui-${buildId}-macosx-cocoa-x86.tar" />
 				</antcall>
 			</sequential>
 		</parallel>
