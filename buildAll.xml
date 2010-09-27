@@ -29,10 +29,10 @@
 	<property name="base.builder" value="${basedir}/../org.eclipse.releng.basebuilder" />
 
 	<!--location of properties file containing last tag used for integration build-->
-	<property name="mapTag.properties" value="/home/users/releng/buildTools/eclipse36/mapTag.properties" />
+	<property name="mapTag.properties" value="/home/users/releng/buildTools/eclipse37/mapTag.properties" />
 
 	<!--location of properties file containing last performance reference test information-->
-	<property name="ref.properties" value="/home/users/releng/buildTools/eclipse.perf/ref36.properties" />
+	<property name="ref.properties" value="/home/users/releng/buildTools/eclipse.perf/ref37.properties" />
 
 	<!--location of test update site-->
 	<property file="${ref.properties}" />
@@ -138,6 +138,7 @@
 		</condition>
 		<property name="p2RepoURL" value="${p2repoN}" />
 		<property name="org.eclipse.equinox.p2.tests.current.build.repo" value="${p2RepoURL}/${buildId}" />
+		<property name="org.eclipse.equinox.p2.tests.last.release.build.repo" value="${p2repopreviousR}" />
 		<property name="previousPlatformZips" value="${buildDirectory}/previousPlatformZips" />
 		<mkdir dir="${previousPlatformZips}" />
 	</target>
@@ -409,19 +410,19 @@
 		<property name="report" value="${postingDirectory}/${buildLabel}/apitools" />
 		<mkdir dir="${report}" />
 		<property name="current_location" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" />
-		<property name="reference_location" value="${reference}/eclipse-SDK-3.5M6-win32.zip" />
+		<!--		<property name="reference_location" value="${reference}/eclipse-SDK-3.5M6-win32.zip" />
 		<exec executable="/usr/bin/wget" dir="${reference}" output="${reference}/error.txt" failonerror="false" os="Linux">
-			<arg line="-q -O  ${reference_location} http://archive.eclipse.org/eclipse/downloads/drops/S-3.6M6-201003121448/eclipse-SDK-3.6M6-win32.zip" />
-		</exec>
-		<property name="report" value="${postingDirectory}/${buildLabel}/apitools" />
+			<arg line="-q -O  ${reference_location} http://${localmirror}/eclipse/downloads/drops/S-3.6M6-201003121448/eclipse-SDK-3.6M6-win32.zip" />
+		</exec> -->
+		<!--	<property name="report" value="${postingDirectory}/${buildLabel}/apitools" />
 		<mkdir dir="${report}" />
 		<property name="report_location" value="${report}/report.xml" />
 		<property name="report_html_location" value="${report}/reporthtml" />
 		<property name="exclude_list_location" value="${buildDirectory}/maps/org.eclipse.releng/apiexclude/exclude_list.txt" />
 		<property name="exclude_list_external_location" value="${buildDirectory}/maps/org.eclipse.releng/apiexclude/exclude_list_external.txt" />
-		<apitooling.apifreeze baseline="${reference_location}" profile="${current_location}" report="${report_location}" excludelist="${exclude_list_location}" debug="true" />
+		<apitooling.apifreeze baseline="${reference_location}" profile="${current_location}" report="${report_location}" excludelist="${exclude_list_location}" debug="true" /> -->
 		<!-- html report will be dumped at the same location as the xml report -->
-		<apitooling.apifreeze_reportconversion xmlfile="${report_location}" debug="true" />
+		<!--	<apitooling.apifreeze_reportconversion xmlfile="${report_location}" debug="true" /> -->
 		<property name="filter_store" value="${buildDirectory}/apifilters" />
 		<mkdir dir="${filter_store}" />
 		<property name="exclude_list_external_location" value="${buildDirectory}/maps/org.eclipse.releng/apiexclude/exclude_list_external.txt" />
@@ -435,12 +436,20 @@
 		</exec>
 		<property name="html_directory_location" value="${report}/apitoolsverifications/html" />
 		<property name="report_directory_location" value="${report}/apitoolsverifications/xml" />
-		<property name="3_5_reference_location" value="${reference}/eclipse-SDK-3.5.2-win32.zip" />
+		<property name="3_6_reference_location" value="${reference}/eclipse-SDK-3.6-win32.zip" />
 		<exec executable="/usr/bin/wget" dir="${reference}" output="${reference}/error.txt" failonerror="false" os="Linux">
-			<arg line="-q -O  ${3_5_reference_location} http://${localmirror}/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-SDK-3.5.2-win32.zip" />
+			<arg line="-q -O  ${3_6_reference_location} http://${localmirror}/eclipse/downloads/drops/R-3.6-201006080911/eclipse-SDK-3.6-win32.zip" />
 		</exec>
-		<apitooling.analysis baseline="${3_5_reference_location}" profile="${current_location}" report="${report_directory_location}" filters="${filter_store}" excludelist="${exclude_list_external_location}" debug="true" />
+		<apitooling.analysis baseline="${3_6_reference_location}" profile="${current_location}" report="${report_directory_location}" filters="${filter_store}" excludelist="${exclude_list_external_location}" debug="true" />
+
 		<apitooling.analysis_reportconversion xmlfiles="${report_directory_location}" debug="true" htmlfiles="${html_directory_location}" />
+		<!--check for api deprecation in comparison with previous release -->
+
+		<property name="api_deprecation_report" value="${report}/apitoolsdeprecations/apideprecation.xml" />
+		<property name="api_deprecation_html" value="${report}/apitoolsdeprecations/apideprecation.html" />
+		<apitooling.apideprecation baseline="${3_6_reference_location}" profile="${current_location}" report="${api_deprecation_report}" debug="true" />
+		<apitooling.apideprecation_reportconversion xmlfile="${api_deprecation_report}" debug="true" htmlfile="${api_deprecation_html}" />
+
 		<property name="equinox_api_report" value="${equinoxPostingDirectory}/${buildLabel}/apitools" />
 		<mkdir dir="${equinox_api_report}" />
 		<copy todir="${equinox_api_report}">
@@ -451,13 +460,14 @@
 				<include name="index.html" />
 			</fileset>
 		</copy>
+		<copy todir="${equinox_api_report}" file="${api_deprecation_html}" />
 	</target>
 
 	<target name="publishEclipse">
 		<parallel>
-			<!-- <ant antfile="eclipse/helper.xml" target="rSyncWithSnzZrh" /> -->
+			<ant antfile="eclipse/helper.xml" target="rSyncWithSnzZrh" />
 			<sequential>
-				<!--	<ant antfile="eclipse/helper.xml" target="buildStandAloneSWT" /> -->
+				<ant antfile="eclipse/helper.xml" target="buildStandAloneSWT" />
 				<ant antfile="eclipse/helper.xml" target="publish" />
 			</sequential>
 		</parallel>
@@ -532,7 +542,6 @@
 			<config os="win32" ws="win32" arch="x86_64" />
 			<config os="linux" ws="gtk" arch="x86" />
 			<config os="linux" ws="gtk" arch="x86_64" />
-			<!-- <config os="linux" ws="gtk" arch="ppc" /> -->
 			<config os="linux" ws="gtk" arch="ppc64" />
 			<!--<config os="linux" ws="motif" arch="x86" /> 
 			<config os="linux" ws="gtk" arch="s390x" />
@@ -669,6 +678,16 @@
 		<copy todir="${buildRepo}">
 			<fileset file="${eclipse.build.configs}/../../extras/sdkinstaller.properties" />
 		</copy>
+
+		<!--mirror JUnit test bundles and test framework bundles to the repo -->
+		<p2.mirror source="file://${buildDirectory}/buildRepoTests" ignoreErrors="true">
+			<destination compressed="true" name="${p2.repo.name}" location="file:${buildRepo}" append="true" format="file:${reposource}" />
+			<comparator comparator="org.eclipse.equinox.p2.repository.tools.jar.comparator" comparatorLog="${buildlogs}/comparatorlogtests.txt">
+				<repository location="${repoBaseline}" />
+			</comparator>
+			<iu id="org.eclipse.sdk.tests.feature.group" version="" />
+			<iu id="org.eclipse.test.feature.group" version="" />
+		</p2.mirror>
 
 		<!--try create composite repository-->
 		<p2.composite.artifact.repository.create location="file://${updateSite}" name="${p2.repo.name}" compressed="true" failOnExists="false" />

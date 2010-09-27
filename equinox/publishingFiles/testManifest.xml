@@ -110,11 +110,11 @@
     	</zipType> 	
     	   	    	    	
     	<zipType name="Provisioning">
-			<platform id="provagentrcpwin32" name="Windows **early access**" fileName="equinox-p2-agent-@buildid@-win32.zip">			
+			<platform id="provagentrcpwin32" name="Windows **early access**" fileName="equinox-p2-adminui-@buildid@-win32.zip">			
  			</platform>
-			<platform id="provagentrcplinux" name="Linux **early access**" fileName="equinox-p2-agent-@buildid@-linux.tar.gz">			
+			<platform id="provagentrcplinux" name="Linux **early access**" fileName="equinox-p2-adminui-@buildid@-linux.tar.gz">			
  			</platform>	
- 			<platform id="provagentrcpmac" name="MacOSX **early access**" fileName="equinox-p2-agent-@buildid@-macosx.tar.gz">			
+ 			<platform id="provagentrcpmac" name="MacOSX **early access**" fileName="equinox-p2-adminui-@buildid@-macosx.tar.gz">			
  			</platform>		
  			<platform id="provinstallerwin" name="Windows **early access**" fileName="equinox.p2.installer-@buildid@-win32.win32.x86.zip">			
  			</platform>	
@@ -133,8 +133,6 @@
 			<platform id="SLG2" name="Linux (x86/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="launchers-linux.gtk.x86.@buildid@.tar.gz">
 			</platform>
 			<platform id="SLG264" name="Linux (x86_64/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="launchers-linux.gtk.x86_64.@buildid@.tar.gz">
-			</platform>
-			<platform id="SLG2PPC" name="Linux (PPC/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="launchers-linux.gtk.ppc.@buildid@.tar.gz">
 			</platform>		
 			<platform id="SLG2PPC64" name="Linux (PPC64/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="launchers-linux.gtk.ppc64.@buildid@.tar.gz">
 			</platform>			

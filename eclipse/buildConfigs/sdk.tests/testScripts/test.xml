@@ -82,10 +82,18 @@
 	<target name="setupPlatform">
 		<property file="equinoxp2tests.properties" />
 		<condition property="platformArchive" value="${org.eclipse.equinox.p2.reconciler.tests.35.platform.archive.linux}">
-			<os family="unix" />
+			<and>
+				<os family="unix" />
+				<not>
+					<os family="mac" />
+				</not>
+			</and>
 		</condition>
 		<condition property="platformArchive" value="${org.eclipse.equinox.p2.reconciler.tests.35.platform.archive.macosx}">
-			<os family="mac" />
+			<and>
+				<os family="mac" />
+				<os family="unix" />
+			</and>
 		</condition>
 		<condition property="platformArchive" value="${org.eclipse.equinox.p2.reconciler.tests.platform.archive.win32}">
 			<os family="windows" />
@@ -121,13 +129,16 @@
 
 	<target name="installExtraPlugins" if="extraIU">
 		<property file="equinoxp2tests.properties" />
+		<path id="launcher.paths">
+			<fileset dir="${eclipse-home}" includes="plugins/org.eclipse.equinox.launcher_*" />
+		</path>
+		<property name="launcherPath" refid="launcher.paths" />
+
 		<property name="currentBuildRepo" value="${org.eclipse.equinox.p2.tests.current.build.repo}" />
 		<echo>-installIU ${extraIU} +</echo>
-		<exec executable="${eclipse-home}/eclipse" failonerror="false" dir="${eclipse-home}" timeout="900000" output="${basedir}/director.log" resultproperty="directorcode">
+		<java jar="${launcherPath}" failonerror="false" dir="${eclipse-home}" timeout="900000" fork="true" output="${basedir}/director.log" resultproperty="directorcode">
 			<arg line="-vm ${java.home}/bin/java" />
 			<arg line="-application org.eclipse.equinox.p2.director" />
-			<arg line="-nosplash" />
-			<arg line="--launcher.suppressErrors" />
 			<arg line="-consoleLog" />
 			<arg line="-flavor tooling" />
 			<arg line="-installIUs ${extraIU}" />
@@ -139,17 +150,19 @@
 			<arg line="-repository ${currentBuildRepo}" />
 			<arg line="-destination ${eclipse-home}" />
 			<arg line="-bundlepool ${eclipse-home}" />
-		</exec>
+		</java>
 	</target>
 
 	<target name="installTestPlugins">
+		<path id="launcher.paths">
+			<fileset dir="${eclipse-home}" includes="plugins/org.eclipse.equinox.launcher_*" />
+		</path>
+		<property name="launcherPath" refid="launcher.paths" />
 		<antcall target="setupPlatform" />
 		<echo>-installIU ${testPlugin} +</echo>
-		<exec executable="${eclipse-home}/eclipse" failonerror="false" dir="${eclipse-home}" timeout="900000" output="${basedir}/director.log" resultproperty="directorcode">
+		<java jar="${launcherPath}" failonerror="false" dir="${eclipse-home}" timeout="900000" fork="true" output="${basedir}/director.log" resultproperty="directorcode">
 			<arg line="-vm ${java.home}/bin/java" />
 			<arg line="-application org.eclipse.equinox.p2.director" />
-			<arg line="-nosplash" />
-			<arg line="--launcher.suppressErrors" />
 			<arg line="-consoleLog" />
 			<arg line="-flavor tooling" />
 			<arg line="-installIUs ${testPlugin},org.eclipse.test,org.eclipse.ant.optional.junit,org.eclipse.test.performance,org.eclipse.test.performance.win32,org.easymock" />
@@ -161,7 +174,7 @@
 			<arg line="-repository file:${repoLocation}" />
 			<arg line="-destination ${eclipse-home}" />
 			<arg line="-bundlepool ${eclipse-home}" />
-		</exec>
+		</java>
 		<antcall target="configureTeamTest" />
 		<antcall target="unzipderby" />
 	</target>
@@ -215,13 +228,6 @@
 				<equals arg1="${os}" arg2="linux" />
 				<equals arg1="${ws}" arg2="motif" />
 				<equals arg1="${arch}" arg2="x86" />
-			</and>
-		</condition>
-		<condition property="runtimeArchive" value="eclipse-SDK-${buildId}-linux-gtk-ppc.tar.gz">
-			<and>
-				<equals arg1="${os}" arg2="linux" />
-				<equals arg1="${ws}" arg2="gtk" />
-				<equals arg1="${arch}" arg2="ppc" />
 			</and>
 		</condition>
 		<condition property="runtimeArchive" value="eclipse-SDK-${buildId}-linux-gtk-ppc64.tar.gz">
@@ -775,7 +781,6 @@
 		<antcall target="uadoc" />
 		<antcall target="debug" />
 		<antcall target="ui" />
-	
 	</target>
 </project>
 

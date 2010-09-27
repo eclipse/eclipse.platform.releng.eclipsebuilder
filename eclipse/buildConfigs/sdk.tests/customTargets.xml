@@ -34,7 +34,7 @@
 	<!-- Replace values for mapsCheckoutTag as desired. -->
 	<!-- ===================================================================== -->
 	<target name="getMapFiles" depends="checkLocalMaps" unless="skipMaps">
-		<property name="mapsCheckoutTag" value="HEAD" />
+		<property name="mapsCheckoutTag" value="${mapVersionTag}" />
 		<cvs cvsRoot="${mapsRepo}" package="${mapsRoot}" dest="${buildDirectory}/maps" tag="${mapsCheckoutTag}" />
 	</target>
 
@@ -244,6 +244,7 @@
 			<entry key="org.eclipse.equinox.p2.reconciler.tests.35.platform.archive.linux" value="${org.eclipse.equinox.p2.reconciler.tests.35.platform.archive.linux}" />
 			<entry key="org.eclipse.equinox.p2.reconciler.tests.35.platform.archive.macosx" value="${org.eclipse.equinox.p2.reconciler.tests.35.platform.archive.macosx}" />
 			<entry key="org.eclipse.equinox.p2.tests.current.build.repo" value="${org.eclipse.equinox.p2.tests.current.build.repo}" />
+			<entry key="org.eclipse.equinox.p2.tests.last.release.build.repo" value="${org.eclipse.equinox.p2.tests.last.release.build.repo}" />
 		</propertyfile>
 
 		<!-- rezip the JUnit plugin tests -->

@@ -126,16 +126,22 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 </li>
 <?php if (! (preg_match("/N/i",$buildName))) {
 echo " <li><a href=\"testresults/versiontool/results.xml\"><b> Versioning Compare Tool Output Logs </b></a>";
-echo "This log compares the build's plugin and features versions with 3.5 </li> ";
+echo "This log compares the build's plugin and features versions with 3.6</li> ";
 }
 ?>
 <?php
 echo " <li><a href=\"apitools/apitoolsverifications/html/index.html\"><b>API Tools Version Verification Report</b></a>";
-echo "  This tool verifies the versions of the plugins against Eclipse 3.5.2.  Exclusions are listed in org.eclipse.releng/apiexclude/exclude_list_external.txt. </li> ";
+echo "  This tool verifies the versions of the plugins against Eclipse 3.6.  Exclusions are listed in org.eclipse.releng/apiexclude/exclude_list_external.txt. </li> ";
 ?>
+
 <?php
-echo"<li><a href=\"apitools/report.html\"><b>API Tools Post-API Freeze Report</b></a>  This report describes API changes since 3.6M6.  Exclusions are listed in org.eclipse.releng/apiexclude/exclude_list.txt. </li>";
+echo " <li><a href=\"apitools/apitoolsdeprecations/apideprecation.html\"><b>API Tools Deprecation Report</b></a>";
+echo "  This tool generates a report for API deprecated since 3.6. </li> ";
 ?>
+
+<!-- <?php
+echo"<li><a href=\"apitools/report.html\"><b>API Tools Post-API Freeze Report</b></a>  This report describes API changes since 3.6M6.  Exclusions are listed in org.eclipse.releng/apiexclude/exclude_list.txt. </li>";
+?> -->
 <?php
 echo " <li><a href=\"apitools/apifilters-$buildName.zip\"><b>Zip of .api_filters files used in the build</b></a></li>";
 ?>
@@ -153,8 +159,8 @@ if (! (preg_match("/N/i",$buildName))) {
 the number of errors is indicated in a red bold font and you may access the page specific to each component on
 a specific platform by clicking the cell link.</br></br>
 <table width="85%" border="1" bgcolor="#EEEEEE" rules="groups" align="center">
-<tr bgcolor="#9999CC"> <th rowspan="2" width="40%" align="center"> org.eclipse <br> Component </th><th colspan="5" align="center"> Test Configurations </th></tr> 
-<tr bgcolor="#9999CC"><th width="12%">RHEL4, SUN 1.5.0<th width="12%">RHEL4, SUN 1.6.0 </th><th width="12%"> MacOSX, Apple  1.5.0_16-133</th><th width="12%"> WIN XP, SUN 1.5.0 </th><th width="12%"> WIN XP, SUN 1.6.0 </th></tr>
+<tr bgcolor="#9999CC"> <th rowspan="2" width="40%" align="center"> org.eclipse <br> Component </th><th colspan="5" align="center"> Test Configurations </th></tr>
+<tr bgcolor="#9999CC"><th width="20%">RHEL5, SUN 1.6.0 </th><th width="20%"> MacOSX, Apple  1.5.0_16-133</th><th width="20%"> WIN XP, SUN 1.6.0 </th><th><th width="20%"></th></tr>
 %testresults% </table>
 </br>
 </div>

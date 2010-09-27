@@ -182,7 +182,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
     $buildId = getBuildId(); 
     echo "<title>Test Results for $buildId </title>\n";
 
-echo "<h3>Logs $buildType $buildName</h3>\n";
+echo "<h3>Logs</h3>\n";
 
 echo <<<END
 <ul>
@@ -217,13 +217,9 @@ echo"<ul>\n";
 <?php
         
         listLogs("testresults/consolelogs");
-        echo "<br><strong>Individual linux.gtk.x86 test logs</strong>";
-        listLogs("testresults/linux.gtk.x86");
         echo "<strong>Individual linux.gtk.x86_6.0 test logs</strong>";
         listLogs("testresults/linux.gtk.x86_6.0");
         listLogs("testresults/consolelogs");
-        echo "<strong>Individual win32.win32.x86 test logs</strong>";
-        listLogs("testresults/win32.win32.x86");
         echo "<strong>Individual win32.win32.x86_6.0 test logs</strong>";
         listLogs("testresults/win32.win32.x86_6.0");
         echo "<strong>Individual macosx.cocoa.x86_5.0 test logs</strong>";
@@ -231,19 +227,6 @@ echo"<ul>\n";
 ?>
 </ul>
 </li>
-<?php if (! (preg_match("/N/i",$buildId))) {
-echo " <li><a href=\"testresults/versiontool/results.xml\"><b> Versioning Compare Tool Output Logs </b></a>";
-echo "This log compares the build's plugin and features versions with 3.5. </li> ";
-}
-?>
-<?php
-echo " <li><a href=\"apitools/apitoolsverifications/html/index.html\"><b>API Tools Version Verification Report</b></a>";
-echo "  This tool verifies the versions of the plugins against Eclipse 3.5.2.  Exclusions are listed in org.eclipse.releng/apiexclude/exclude_list_external.txt. </li> ";
-?>
-
-</li>
-</li>
-</div>
 </div>
 </br></br></br>
 <div id="footer">
