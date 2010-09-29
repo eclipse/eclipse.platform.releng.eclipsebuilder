@@ -3,7 +3,7 @@
 	<zipTypes>
 		
 		<zipType name="Equinox">			
-			<platform format="equinox" id="EBS" name="&lt;img src = &quot;repo.gif&quot;>All" fileName="equinox-SDK-@buildid@.zip" />
+			<platform format="equinox" images="repo.gif" id="EBS" name="&lt;img src = &quot;repo.gif&quot;>All" fileName="equinox-SDK-@buildid@.zip" />
 		</zipType>
 
 		<zipType name="Framework">
@@ -57,10 +57,10 @@
 		 </zipType>	
 					
 		<zipType name="Incubator"> 	    								
-		 	<platform id="initializer" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="@org.eclipse.equinox.initializer@.jar" />
-			<platform id="equinoxjmxcommon" name="All &lt;img src = &quot;egg.gif&quot; > &lt;img src = &quot;repo.gif&quot;>" fileName="equinox-jmx-common-@buildid@.zip" />
-			<platform id="equinoxjmxclient" name="All &lt;img src = &quot;egg.gif&quot; > &lt;img src = &quot;repo.gif&quot;>" fileName="equinox-jmx-client-@buildid@.zip" />
-			<platform id="equinoxjmxserver" name="All &lt;img src = &quot;egg.gif&quot; > &lt;img src = &quot;repo.gif&quot;>" fileName="equinox-jmx-server-@buildid@.zip" />
+		 	<platform id="initializer" images="egg.gif" name="All &lt;img src = &quot;egg.gif&quot; >" fileName="@org.eclipse.equinox.initializer@.jar" />
+			<platform id="equinoxjmxcommon" images="egg.gif,repo.gif" name="All &lt;img src = &quot;egg.gif&quot; > &lt;img src = &quot;repo.gif&quot;>" fileName="equinox-jmx-common-@buildid@.zip" />
+			<platform id="equinoxjmxclient" images="egg.gif,repo.gif" name="All &lt;img src = &quot;egg.gif&quot; > &lt;img src = &quot;repo.gif&quot;>" fileName="equinox-jmx-client-@buildid@.zip" />
+			<platform id="equinoxjmxserver" images="egg.gif,repo.gif" name="All &lt;img src = &quot;egg.gif&quot; > &lt;img src = &quot;repo.gif&quot;>" fileName="equinox-jmx-server-@buildid@.zip" />
     		</zipType> 	
     	   	    	    	
     		<zipType name="Provisioning">
