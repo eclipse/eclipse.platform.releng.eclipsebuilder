@@ -227,6 +227,7 @@
 
 		<!--copy comparator log to test directory-->
 		<copy file="${buildlogs}/comparatorlog.txt" todir="${workingDirectory}/eclipse-testing" failonerror="false"/>	
+		<copy file="${buildDirectory}/finalPluginsVersions.properties" todir="${workingDirectory}/eclipse-testing" failonerror="false"/>	
 
 		<!--create properties file for use in equinoxp2 tests -->
 		<property name="equinoxp2tests.properties" value="${workingDirectory}/eclipse-testing/equinoxp2tests.properties" />
