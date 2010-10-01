@@ -1,0 +1,22 @@
+<project default="main">
+
+	<target name="init">
+		<property name="buildId" value="I20100928-1200" />
+		<property name="workspace" value="." />
+		<property name="os" value="win32" />
+		<property name="ws" value="win32" />
+		<property name="arch" value="x86_64" />
+	</target>
+
+	<target name="main" depends="init">
+		<!--old way uses available call, could switch to this method even though the build is much faster -->
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-SDK-${buildId}-win32-x86_64.zip" dest="${workspace}" />
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-Automated-Tests-${buildId}.zip" dest="${workspace}" />
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-platform-${buildId}-win32" dest="${workspace}" />
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-${buildId}-delta-pack.zip" dest="${workspace}" />		
+		<property name="test.xml" value="${base.builder}/plugins/org.eclipse.build.tools/scripts/test.xml" />
+		<ant antfile="${test.xml}" />
+	</target>
+	
+
+</project>
