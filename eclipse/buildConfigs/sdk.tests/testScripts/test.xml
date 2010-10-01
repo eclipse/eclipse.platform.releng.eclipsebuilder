@@ -314,6 +314,13 @@
 				<equals arg1="${arch}" arg2="ppc" />
 			</and>
 		</condition>
+		<condition property="runtimeArchive" value="eclipse-SDK-${buildId}-aix-gtk-ppc64.zip">
+			<and>
+				<equals arg1="${os}" arg2="aix" />
+				<equals arg1="${ws}" arg2="gtk" />
+				<equals arg1="${arch}" arg2="ppc64" />
+			</and>
+		</condition>
 	</target>
 
 	<target name="setJVMProperties" depends="setJVMfromUserSpecified">
@@ -449,7 +456,7 @@
 
 	<target name="genResults">
 		<copy file="${eclipse-home}/${report}.xml" tofile="${results}/xml/${report}_${platform}.xml" failonerror="false" />
-	    <xslt style="${eclipse-home}/plugins/org.eclipse.test_${org.eclipse.test}/JUNIT.XSL" basedir="${results}/xml" destdir="${results}/html" />
+		<xslt style="${eclipse-home}/plugins/org.eclipse.test_${org.eclipse.test}/JUNIT.XSL" basedir="${results}/xml" destdir="${results}/html" />
 	</target>
 
 	<target name="ant">

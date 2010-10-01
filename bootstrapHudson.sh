@@ -46,21 +46,8 @@ deleteArtifacts=""
 #sets fetchTag="HEAD" for nightly builds if required
 tag=""
 
-#buildProjectTags=v20100509
-#buildProjectTags=v20100511
-#buildProjectTags=v20100513
-#buildProjectTags=v20100519
-#buildProjectTags=v20100528c
-#buildProjectTags=v20100528d
-#buildProjectTags=v20100601
-#buildProjectTags=v20100610a
-#buildProjectTags=v20100621
-#buildProjectTags=v20100628
-#buildProjectTags=v20100708
-#buildProjectTags=v20100715
-#buildProjectTags=v20100719c
-#buildProjectTags=v20100907
-buildProjectTags=v20100923
+#buildProjectTags=v20100923
+buildProjectTags=v20101001a
 
 #updateSite property setting
 updateSite=""

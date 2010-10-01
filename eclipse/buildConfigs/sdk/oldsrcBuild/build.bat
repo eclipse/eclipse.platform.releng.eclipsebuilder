@@ -39,6 +39,7 @@ if %installOs%-%ws%-%arch%==solaris-motif-sparc goto run
 if %installOs%-%ws%-%arch%==solaris-gtk-sparc goto run
 if %installOs%-%ws%-%arch%==solaris-gtk-x86 goto run
 if %installOs%-%ws%-%arch%==aix-motif-ppc goto run
+if %installOs%-%ws%-%arch%==aix-gtk-ppc64 goto run
 if %installOs%-%ws%-%arch%==hpux-motif-PA_RISC goto run
 if %installOs%-%ws%-%arch%==qnx-photon-x86 goto run
 if %installOs%-%ws%-%arch%==hpux-motif-ia64_32 goto run
