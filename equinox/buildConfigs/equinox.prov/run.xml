@@ -995,7 +995,7 @@
 
 				<!-- aix gtk ppc64 -->
 				<delete file="${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-aix-gtk-ppc64.zip" failonerror="false" />
-				<exec dir="${p2.platform.install.aix.motif.ppc}" executable="zip">
+				<exec dir="${p2.platform.install.aix.gtk.ppc64}" executable="zip">
 					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-aix-gtk-ppc64.zip -r ." />
 				</exec>
 				<antcall target="generateChecksums">
