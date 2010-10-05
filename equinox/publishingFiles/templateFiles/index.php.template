@@ -4,92 +4,116 @@
 	<title>equinox osgi downloads</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<meta name="author" content="Eclipse Foundation, Inc." />
-	<meta name="keywords" content="eclipse,project,plug-ins,plugins,java,ide,swt,refactoring,free java ide,tools,platform,open source,development environment,development,ide" />
-    <link rel="stylesheet" type="text/css" href="../../../eclipse.org-common/themes/Phoenix/css/visual.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="../../../eclipse.org-common/themes/Phoenix/css/layout.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="../../../eclipse.org-common/themes/Phoenix/css/print.css" media="print" />
-	<script type="text/javascript">
-
-sfHover = function() {
-	var sfEls = document.getElementById("leftnav").getElementsByTagName("LI");
-	for (var i=0; i<sfEls.length; i++) {
-		sfEls[i].onmouseover=function() {
-			this.className+=" sfhover";
-		}
-		sfEls[i].onmouseout=function() {
-			this.className=this.className.replace(new RegExp(" sfhover\\b"), "");
-		}
-	}
-}
-if (window.attachEvent) window.attachEvent("onload", sfHover);
-</script>
+	<meta name="keywords" content="runtime,framework,eclipse,project,plug-ins,plugins,java,ide,swt,refactoring,free java ide,tools,platform,open source,development environment,development,ide" />
+	<link rel="stylesheet" type="text/css" href="/eclipse.org-common/yui/2.6.0/build/reset-fonts-grids/reset-fonts-grids.css" media="screen" /> 
+	<link rel="stylesheet" type="text/css" href="/eclipse.org-common/yui/2.6.0/build/menu/assets/skins/sam/menu.css" media="screen" /> 
+	<link rel="stylesheet" type="text/css" href="/eclipse.org-common/themes/Nova/css/reset.css" media="screen"/> 
+	<link rel="stylesheet" type="text/css" href="/eclipse.org-common/themes/Nova/css/layout.css" media="screen" /> 
+	<link rel="stylesheet" type="text/css" href="/eclipse.org-common/themes/Nova/css/header.css" media="screen" /> 
+	<link rel="stylesheet" type="text/css" href="/eclipse.org-common/themes/Nova/css/footer.css" media="screen" /> 
+	<link rel="stylesheet" type="text/css" href="/eclipse.org-common/themes/Nova/css/visual.css" media="screen" /> 
+	<link rel="stylesheet" type="text/css" href="/eclipse.org-common/themes/Phoenix/css/print.css" media="print" /> 
+	<!--[if lte IE 7]> 	<link rel="stylesheet" type="text/css" href="/eclipse.org-common/themes/Nova/css/ie_style.css" media="screen"/> <![endif]--> 
+	<!--[if IE 6]> 	<link rel="stylesheet" type="text/css" href="/eclipse.org-common/themes/Nova/css/ie6_style.css" media="screen"/> <![endif]--> 
+	<!-- Dependencies --> 
+	<!-- Source File --> 
+	<link rel="stylesheet" type="text/css" href="/equinox/rap-layout-fixes.css"/><!--[if lt IE 8]><link rel="stylesheet" type="text/css" href="/equinox/rap-layout-fixes-ie.css"/><![endif]--><link rel="shortcut icon" href="/rt/images/favicon.ico" />
 </head>
-<body>
 
-<div id="header">
-	<a href="http://www.eclipse.org/"><img src="../../../eclipse.org-common/stylesheets/header_logo.gif" width="163" height="68" border="0" alt="Eclipse Logo" class="logo" /></a>
-	<div id="searchbar">
-		<img src="../../../eclipse.org-common/stylesheets/searchbar_transition.gif" width="92" height="26" class="transition" alt="" />
-		<img src="../../../eclipse.org-common/stylesheets/searchbar_header.gif" width="64" height="17" class="header" alt="Search" />
-		<form method="get" action="http://www.eclipse.org/search/search.cgi">
-			<input type="hidden" name="t" value="All" />
-			<input type="hidden" name="t" value="Doc" />
-			<input type="hidden" name="t" value="Downloads" />
-			<input type="hidden" name="t" value="Wiki" />
-			<input type="hidden" name="wf" value="574a74" />
-			<input type="text" name="q" value="" />
-			<input type="image" class="button" src="../../../eclipse.org-common/stylesheets/searchbar_submit.gif" alt="Submit" onclick="this.submit();" />
-		</form>
-	</div>
-	<ul id="headernav">
-		<li class="first"><a href="http://www.eclipse.org/org/foundation/contact.php">Contact</a></li>
-		<li><a href="http://www.eclipse.org/legal/">Legal</a></li>
-	</ul>
-</div>
-
-<div id="leftcol">
-<ul id="leftnav">
-<li><a href="#Equinox">Eclipse Equinox</a></li>
-<li><a href="#Framework">Framework</a></li>
-<li><a href="#Addon">Add-on Bundles</a></li>
-<li><a href="#Incubator">Incubator</a></li>
-<li><a href="#ProvisioningIncubator">Provisioning Incubator</a></li>
-<li><a href="#Other">Other</a></li>
-<li><a href="#Launchers">Launchers</a></li>
+<body> 
+	<div id="novaWrapper">
+		<div id="clearHeader"> 
+			<div id="logo"> 
+				<img src="/eclipse.org-common/themes/Nova/images/eclipse.png" alt="Eclipse.org"/> 
+			</div> 
+			<div id="otherSites"> 
+				<div id="sites"> 
+					<ul id="sitesUL"> 
+						<li><a href='http://marketplace.eclipse.org'><img alt="Eclipse Marketplace" src="http://dev.eclipse.org/custom_icons/marketplace.png"/>&nbsp;<div>Eclipse Marketplace</div></a></li> 
+						<li><a href='http://live.eclipse.org'><img alt="Eclipse Live" src="http://dev.eclipse.org/custom_icons/audio-input-microphone-bw.png"/>&nbsp;<div>Eclipse Live</div></a></li> 
+		    				<li><a href='https://bugs.eclipse.org/bugs/'><img alt="Bugzilla" src="http://dev.eclipse.org/custom_icons/system-search-bw.png"/>&nbsp;<div>Bugzilla</div></a></li> 
+		    				<li><a href='http://www.eclipse.org/forums/'><img alt="Forums" src="http://dev.eclipse.org/large_icons/apps/internet-group-chat.png"/>&nbsp;<div>Eclipse Forums</div></a></li> 
+		    				<li><a href='http://www.planeteclipse.org/'><img alt="Planet Eclipse" src="http://dev.eclipse.org/large_icons/devices/audio-card.png"/>&nbsp;<div>Planet Eclipse</div></a></li> 
+		    				<li><a href='http://wiki.eclipse.org/'><img alt="Eclipse Wiki" src="http://dev.eclipse.org/custom_icons/accessories-text-editor-bw.png"/>&nbsp;<div>Eclipse Wiki</div></a></li> 
+		    				<li><a href='http://portal.eclipse.org'><img alt="MyFoundation Portal" src="http://dev.eclipse.org/custom_icons/preferences-system-network-proxy-bw.png"/><div>My Foundation Portal</div></a></li> 
+		    			</ul> 
+		    		</div> 
+			</div>		
+		</div> 
  
-  </li>
-  <li style="background-image: url(../../../eclipse.org-common/stylesheets/leftnav_fade.jpg); background-repeat: repeat-x; border-style: none;">
-			<br /><br /><br /><br /><br />
-  </li>
-</ul>
+	<div id="header">			
+		<div id="menu"> 
+			<ul> 
+				<li><a href="/equinox/" target="_self">Home</a></li> 
+				<li><a href="/equinox/getting-started/" target="_self">Get Started</a></li> 
+				<li><a href="http//download.eclipse.org/equinox" target="_self">Downloads</a></li> 
+				<li><a href="/equinox/documents/" target="_self">Documents</a></li> 
+				<li><a href="/equinox/resources/" target="_self">Resources</a></li> 
+				<li><a href="/equinox/faq.php/" target="_self">FAQ</a></li> 
+				<li><a href="http://wiki.eclipse.org/Equinox" target="_self">Wiki</a></li> 
+			</ul> 
+		</div> 
+ 
+		<div id="search"> 
+				<form action="http://www.google.com/cse" id="searchbox_017941334893793413703:sqfrdtd112s"> 
+			 	<input type="hidden" name="cx" value="017941334893793413703:sqfrdtd112s" /> 
+		  		<input id="searchBox" type="text" name="q" size="25" /> 
+		  		<input id="searchButton" type="submit" name="sa" value="Search" /> 
+				</form> 
+			<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=searchbox_017941334893793413703%3Asqfrdtd112s&lang=en"></script>			
+		</div> 
+	</div>
 
-</div>
+	<div id="novaContent" class="faux">
+		<br style="clear:both;height:1em;"/> 
+		<div id="leftcol"> 
+			<ul id="leftnav"> 
+				<li class="separator"><a class="separator" href="index.php">Components<img src="/eclipse.org-common/themes/Nova/images/separator.png"/></a></li> 
+				<li><a href="/equinox/bundles" target="_self">Bundles</a></li> 
+				<li><a href="/equinox/framework" target="_self">Framework</a></li> 
+				<li><a href="/equinox/incubator" target="_self">Incubator</a></li> 
+				<li><a href="/equinox/p2" target="_self">p2</a></li> 
+				<li><a href="/equinox/security" target="_self">Security</a></li> 
+				<li><a href="/equinox/server" target="_self">Server</a></li> 
+				<li class="separator"><a class="separator">Related<img src="/eclipse.org-common/themes/Nova/images/separator.png"/></a></li> 
+				<li><a href="http://eclipse.org/rt" target="_self">RT</a></li> 
+				<li><a href="http://eclipse.org/eclipse" target="_self">Eclipse</a></li> 
+				<li><a href="http://eclipse.org/pde" target="_self">PDE</a></li> 
+				<li><a href="http://eclipse.org/rap" target="_self">RAP</a></li> 
+				<li><a href="http://eclipse.org/ecf" target="_self">ECF</a></li> 
+				<li><a href="http://eclipse.org/eclipse/development" target="_self">Development</a></li> 
+			</ul> 
+		</div>
 
-<div id="midcolumn">
-		<table BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > 
-		<tr> 
-			<td> 
-				<p><b><font face="Verdana" size="+2">Equinox @type@ Build: @buildid@</font></b><br> @date@. 
-				These downloads are provided under the <a href="http://www.eclipse.org/legal/epl/notice.html">
-				Eclipse Foundation Software User Agreement</a>.</p>
-			</td><tr><tr>
-		<tr>
-			<td width="75%">
-		   		<?php
-				$servername = $_SERVER["SERVER_NAME"];
-				if (! preg_match("/.eclipse.org/i",$servername)) {
-				        echo "<br> To download a file via HTTP click on its corresponding http link below.";
-				} else {
-				    echo "<br>";
-				} ?>   <BR>Click <a href="verifyMD5.html">here</a> for instructions on how to verify the 
-				integrity of your downloads.</p></td></tr>
-			</td>
-		</tr>
-		<tr></tr>
-                <tr><td><a href="apitools/index.html"><b>API Tools Version Verification Report</b></a> This tool verifies the versions of the plugins against Eclipse 3.6.  Exclusions are listed in org.eclipse.releng/apiexclude/exclude_list_external.txt.</td></tr>               
-				<tr><td><a href="apitools/apitoolsdeprecations/apideprecation.html"><b>API Tools Deprecation Report</b></a> This tool generates a report for API deprecated since 3.6. </td></tr>                
-               <!-- <tr><td><a href="apitools/report.html"><b>API Tools Post-API Freeze Report</b></a>  This report describes API changes since 3.6M6.  Exclusions are listed in org.eclipse.releng/apiexclude/exclude_list.txt.</td></tr> -->		
-		</table>
+		<div id="rap-small-header"> 
+			<a href="/equinox/"><div id="rap-small-logo"/></a> 
+		</div> 
+
+<script type="text/javascript"> 
+  // logo
+  var logo = $( '#logo:first-child' );
+  var newLogo = '<div id="logo"><a href="http://www.eclipse.org">' 
+                + logo.html() + '</a></div>';
+  logo.replaceWith( newLogo );
+</script> 
+
+		<div id="midcolumn">
+		<h3>Equinox @type@ Build: @buildid@</h3><br>
+		<b>@date@ </b> 
+		<p>These downloads are provided under the <a href="http://www.eclipse.org/legal/epl/notice.html">
+		Eclipse Foundation Software User Agreement</a>.</p>
+
+		<p>Click <a href="verifyMD5.html">here</a> for instructions on how to verify the 
+		integrity of your downloads.</p>
+
+		<p><a href="apitools/index.html">API Version Verification Report</a> Verifies the versions
+		of the plugins against Eclipse 3.6.  See org.eclipse.releng/apiexclude/exclude_list_external.txt for exclusions.</p> 
+
+		<p><a href="apitools/apitoolsdeprecations/apideprecation.html">API Deprecation Report</a> 
+		Report of API deprecated since 3.6.</p> 
+ 
+		<!--p><a href="apitools/report.html"><b>API Tools Post-API Freeze Report</b></a>  This report describes API changes 
+		since 3.6M6.  Exclusions are listed in org.eclipse.releng/apiexclude/exclude_list.txt.</p--> 
 
 <?php 
 
@@ -122,7 +146,7 @@ function getDropSize($zipfile) {
 
 function generateChecksumLinks($zipfile) {
      echo "<td><a href=\"http://download.eclipse.org/equinox/drops/@buildlabel@/checksum/$zipfile.md5\">(md5)</a>";
-     echo " <a href=\"http://download.eclipse.org/equinox/drops/@buildlabel@/checksum/$zipfile.sha1\">(sha1)</a>";
+     echo " <a href=\"http://download.eclipse.org/equinox/drops/@buildlabel@/checksum/$zipfile.sha1\">(sha1)</a></td>";
 }
 
 function genLinks($servername,$buildlabel,$zipfile) {
@@ -137,17 +161,16 @@ function genLinks($servername,$buildlabel,$zipfile) {
 }
 ?>	
 
-<table align="left" BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%">
-<tr><td><div class="homeitem3col">
+<div class="homeitem3col">
 <h3><a name="Equinox"> Equinox</a></h3>
 <p> A complete set of all bundles and launchers produced by the Equinox project. This zip is also a p2 repo. </p>
 <table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" >
 <tr><td width="5%"/> <td width="65%"/></tr>
 %equinox%
 </table>
-</div></td></tr>
+</div>
 
-<tr><td><div class="homeitem3col">
+<div class="homeitem3col">
 <h3><a name="Framework"> Framework</a></h3>
 <P>The Equinox OSGi R4 <a href="http://eclipse.org/equinox/framework">framework</a> implementation includes all optional parts 
 of the R4 spec as well as several additional mechanisms (e.g., x-internal, platform filters, ...) that are generally useful in a standalone 
@@ -156,9 +179,9 @@ package.  See the <A HREF="http://eclipse.org/equinox/quickstart.html">Quick Sta
 <tr><td width="5%"/> <td width="65%"/></tr>
 %framework%
 </table>
-</div></td></tr>
+</div>
 
-<tr><td><div class="homeitem3col">
+<div class="homeitem3col">
 <h3><a name="Addon"> Add-on Bundles</a></h3>
 <P>The drops listed here are individual <a href="http://eclipse.org/equinox/bundles">bundles</a> or sets of bundles that provide 
 a single standalone service or mechanism.  This includes implementations of many of the OSGi specified services as well as additional 
@@ -167,18 +190,18 @@ mechanisms (e.g., the Eclipse extension registry) of interest to OSGi programmer
 <tr><td width="5%"/> <td width="65%"/></tr>
 %extrabundles%
 </table>
-</div></td></tr>
+</div>
 
-<tr><td><div class="homeitem3col">
+<div class="homeitem3col">
 <h3><a name="Other"> Other Required Bundles</a></h3>
 <P>Other required bundles</P>
 <table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" >
 <tr><td width="5%"/> <td width="65%"/></tr>
 %other%
 </table>
-</div></td></tr>
+</div>
 
-<tr><td><div class="homeitem3col">
+<div class="homeitem3col">
 <h3><a name="Incubator"> Incubator</a></h3>
 <P>The Equinox Incubator is a place for exploring Eclipse and OSGi running in
 different scenarios and environments (e.g., secure, server-side, ...). The downloads supplied below are made available as a convenience and, while some
@@ -186,9 +209,9 @@ are quite complete, all should be considered experimental.</P>
 <table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" >
 <tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="33%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
 </tr> %incubator% </table>
-</div></td></tr>
+</div>
 
-<tr><td><div class="homeitem3col">
+<div class="homeitem3col">
 <h3><a name="Provisioning">Provisioning</a></h3>
 <P>Here are some of the downloads produced by the 
 Provisioning team. For more about provisoning, see <a href="http://wiki.eclipse.org/Category:Provisioning"> provisioning 
@@ -196,31 +219,62 @@ articles on the eclipse.org wiki</a>.</P>
 <table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" >
 <tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="33%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
 </tr> %provisioning% </table>
-</div></td></tr>
+</div>
 
-
-<tr><td><div class="homeitem3col">
+<div class="homeitem3col">
 <h3><a name="Launchers"> Launchers</a></h3>
 <P>While it is possible to use the Equinox framework as a standalone JAR, it is often convenient to use the executable program launcher.  
 The platform-specific archives here include precompiled executables as well as some support files such as the equinox launcher and a configuration template.</P>
 <table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" >
 <tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="33%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
 </tr> %launchers% </table>
-</div></td></tr>
-</table>
-</div>
-<p><br /></p>
-
 </div>
 
-<div id="footer">
-	<ul id="footernav">
-		<li class="first"><a href="http://www.eclipse.org">Home</a></li>
-		<li><a href="http://www.eclipse.org/legal/privacy.php">Privacy Policy</a></li>
-		<li><a href="http://www.eclipse.org/legal/termsofuse.php">Terms of Use</a></li>
-	</ul>
-	<p>Copyright &copy; 2006 The Eclipse Foundation. All Rights
-Reserved</p>
-</div>
-</body>
+		</div>
+
+		<p><br/></p>
+
+		<div id="rightcolumn"> 
+			<div class="sideitem"> 
+				<h6>Buy The Book</h6> 
+					<p><a href="http://equinoxosgi.org"> 
+					<img 
+						src="http://eclipse.org/equinox/images/osgi-and-equinox-cover.png"
+						style="position: relative; left: 33px; top: 2pt;"/></a> 
+					</p> 
+
+				<div style="position: relative; margin-bottom: 10px;"> 
+					<a href="http://www.eclipse.org/eclipsert/"><img alt="EclipseRT"
+						src="/equinox/images/EclipseRT.png"
+						style="position: relative; left: 55px; top: 0pt;"/></a> 
+				</div> 
+			</div>
+ 
+			<script type="text/javascript"> 
+			var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+			document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+			</script> 
+			<script type="text/javascript"> 
+			var pageTracker = _gat._getTracker("UA-910670-2");
+			pageTracker._initData();
+			pageTracker._trackPageview();
+			</script>		
+ 
+			<br style="clear:both;height:1em;"/>&nbsp;
+		</div> 		
+		<div id="clearFooter"></div> 
+			<div id="footer"> 
+				<ul id="footernav"> 
+					<li><a href="http://www.eclipse.org/">Home</a></li> 
+					<li><a href="http://www.eclipse.org/legal/privacy.php">Privacy Policy</a></li> 
+					<li><a href="http://www.eclipse.org/legal/termsofuse.php">Terms of Use</a></li> 
+					<li><a href="http://www.eclipse.org/legal/copyright.php">Copyright Agent</a></li> 
+					<li><a href="http://www.eclipse.org/legal/">Legal</a></li> 
+					<li><a href="http://www.eclipse.org/org/foundation/contact.php">Contact Us</a></li> 
+				</ul> 
+				<span id="copyright">Copyright &copy; 2010 The Eclipse Foundation. All Rights Reserved.</span> 
+			</div> 
+		</div>
+	</div>
+</body>		
 </html>
