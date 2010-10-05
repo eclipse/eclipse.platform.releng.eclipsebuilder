@@ -17,10 +17,10 @@
 	<!--[if IE 6]> 	<link rel="stylesheet" type="text/css" href="/eclipse.org-common/themes/Nova/css/ie6_style.css" media="screen"/> <![endif]--> 
 	<!-- Dependencies --> 
 	<!-- Source File --> 
-	<link rel="stylesheet" type="text/css" href="/equinox/rap-layout-fixes.css"/><!--[if lt IE 8]><link rel="stylesheet" type="text/css" href="/equinox/rap-layout-fixes-ie.css"/><![endif]--><link rel="shortcut icon" href="/rt/images/favicon.ico" />
-	<link rel="stylesheet" type="text/css" href="/equinox/rap-posts.css"/>
+	<link rel="stylesheet" type="text/css" href="http://www.eclipse.org/equinox/rap-layout-fixes.css"/><!--[if lt IE 8]><link rel="stylesheet" type="text/css" href="/equinox/rap-layout-fixes-ie.css"/><![endif]--><link rel="shortcut icon" href="/rt/images/favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="http://www.eclipse.org/equinox/rap-posts.css"/>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
-	<script type="text/javascript" src="/rt/jquery.zrssfeed.min.js"></script>	
+	<script type="text/javascript" src="http://www.eclipse.org/rt/jquery.zrssfeed.min.js"></script>	
 	<style type="text/css">
 		div.collapsable {
 			display: none;
@@ -265,6 +265,41 @@ of <a href="http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#t
 </tr> %launchers% </table>
 </div>
 </div>
+
+	<div class="homeitem3col"> 
+		<h3>Legend</h3> 
+		<table border="0" cellspacing="0" cellpadding="0" width="100%"> 
+			<tr><td width="5%"/></tr> 
+			<tr> 
+				<td align="center"><img src="OK.gif"/></td> 
+				<td>Build completed OK</td> 
+			</tr> 
+			<tr> 
+				<td align="center"><img src="FAIL.gif"/></td> 
+				<td>Build failed to complete</td> 
+			</tr> 
+			<tr> 
+				<td align="center"><img src="pending.gif"/></td> 
+				<td>Build is still pending</td> 
+			</tr> 
+			<tr> 
+				<td align="center"><img src="repo.gif"/></td> 
+				<td>Build artifact is also a p2 repository</td> 
+			</tr> 
+			<tr> 
+				<td align="center"><img src="md5.png"/></td> 
+				<td>Click to get the MD5 hash for the corresponding build artifact</td> 
+			</tr> 
+			<tr> 
+				<td align="center"><img src="sha1.png"/></td> 
+				<td>Click to get the SHA1 hash for the corresponding build artifact</td> 
+			</tr> 
+			<tr> 
+				<td align="center"><img src="egg.gif"/></td> 
+				<td>Build artifact is from the Equinox incubator and may not be fully complete or tested.</td> 
+			</tr> 
+		</table> 
+	</div> 
 
 		</div>
 
