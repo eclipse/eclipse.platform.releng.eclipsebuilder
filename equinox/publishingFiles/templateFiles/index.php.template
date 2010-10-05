@@ -175,8 +175,8 @@ function getDropSize($zipfile) {
 }
 
 function generateChecksumLinks($zipfile) {
-     echo "<td><a href=\"http://download.eclipse.org/equinox/drops/@buildlabel@/checksum/$zipfile.md5\"><img src="md5.png" alt="md5"/></a>";
-     echo "<a href=\"http://download.eclipse.org/equinox/drops/@buildlabel@/checksum/$zipfile.sha1\"><img src="sha1.png" alt="sha1"/></a></td>";
+     echo "<td><a href=\"http://download.eclipse.org/equinox/drops/@buildlabel@/checksum/$zipfile.md5\"><img src=\"md5.png\" alt=\"md5\"/></a>";
+     echo "<a href=\"http://download.eclipse.org/equinox/drops/@buildlabel@/checksum/$zipfile.sha1\"><img src=\"sha1.png\" alt=\"sha1\"/></a></td>";
 }
 
 function genLinks($servername,$buildlabel,$zipfile) {
