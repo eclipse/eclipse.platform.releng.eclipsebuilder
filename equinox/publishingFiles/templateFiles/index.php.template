@@ -5,22 +5,22 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<meta name="author" content="Eclipse Foundation, Inc." />
 	<meta name="keywords" content="runtime,framework,eclipse,project,plug-ins,plugins,java,ide,swt,refactoring,free java ide,tools,platform,open source,development environment,development,ide" />
-	<link rel="stylesheet" type="text/css" href="/eclipse.org-common/yui/2.6.0/build/reset-fonts-grids/reset-fonts-grids.css" media="screen" /> 
-	<link rel="stylesheet" type="text/css" href="/eclipse.org-common/yui/2.6.0/build/menu/assets/skins/sam/menu.css" media="screen" /> 
-	<link rel="stylesheet" type="text/css" href="/eclipse.org-common/themes/Nova/css/reset.css" media="screen"/> 
-	<link rel="stylesheet" type="text/css" href="/eclipse.org-common/themes/Nova/css/layout.css" media="screen" /> 
-	<link rel="stylesheet" type="text/css" href="/eclipse.org-common/themes/Nova/css/header.css" media="screen" /> 
-	<link rel="stylesheet" type="text/css" href="/eclipse.org-common/themes/Nova/css/footer.css" media="screen" /> 
-	<link rel="stylesheet" type="text/css" href="/eclipse.org-common/themes/Nova/css/visual.css" media="screen" /> 
-	<link rel="stylesheet" type="text/css" href="/eclipse.org-common/themes/Phoenix/css/print.css" media="print" /> 
-	<!--[if lte IE 7]> 	<link rel="stylesheet" type="text/css" href="/eclipse.org-common/themes/Nova/css/ie_style.css" media="screen"/> <![endif]--> 
-	<!--[if IE 6]> 	<link rel="stylesheet" type="text/css" href="/eclipse.org-common/themes/Nova/css/ie6_style.css" media="screen"/> <![endif]--> 
+	<link rel="stylesheet" type="text/css" href="http://eclipse.org/eclipse.org-common/yui/2.6.0/build/reset-fonts-grids/reset-fonts-grids.css" media="screen" /> 
+	<link rel="stylesheet" type="text/css" href="http://eclipse.org/eclipse.org-common/yui/2.6.0/build/menu/assets/skins/sam/menu.css" media="screen" /> 
+	<link rel="stylesheet" type="text/css" href="http://eclipse.org/eclipse.org-common/themes/Nova/css/reset.css" media="screen"/> 
+	<link rel="stylesheet" type="text/css" href="http://eclipse.org/eclipse.org-common/themes/Nova/css/layout.css" media="screen" /> 
+	<link rel="stylesheet" type="text/css" href="http://eclipse.org/eclipse.org-common/themes/Nova/css/header.css" media="screen" /> 
+	<link rel="stylesheet" type="text/css" href="http://eclipse.org/eclipse.org-common/themes/Nova/css/footer.css" media="screen" /> 
+	<link rel="stylesheet" type="text/css" href="http://eclipse.org/eclipse.org-common/themes/Nova/css/visual.css" media="screen" /> 
+	<link rel="stylesheet" type="text/css" href="http://eclipse.org/eclipse.org-common/themes/Phoenix/css/print.css" media="print" /> 
+	<!--[if lte IE 7]> 	<link rel="stylesheet" type="text/css" href="http://eclipse.org/eclipse.org-common/themes/Nova/css/ie_style.css" media="screen"/> <![endif]--> 
+	<!--[if IE 6]> 	<link rel="stylesheet" type="text/css" href="http://eclipse.org/eclipse.org-common/themes/Nova/css/ie6_style.css" media="screen"/> <![endif]--> 
 	<!-- Dependencies --> 
 	<!-- Source File --> 
-	<link rel="stylesheet" type="text/css" href="http://www.eclipse.org/equinox/rap-layout-fixes.css"/><!--[if lt IE 8]><link rel="stylesheet" type="text/css" href="/equinox/rap-layout-fixes-ie.css"/><![endif]--><link rel="shortcut icon" href="/rt/images/favicon.ico" />
-	<link rel="stylesheet" type="text/css" href="http://www.eclipse.org/equinox/rap-posts.css"/>
+	<link rel="stylesheet" type="text/css" href="http://eclipse.org/equinox/rap-layout-fixes.css"/><!--[if lt IE 8]><link rel="stylesheet" type="text/css" href="http://eclipse.org/equinox/rap-layout-fixes-ie.css"/><![endif]--><link rel="shortcut icon" href="http://eclipse.org/rt/images/favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="http://eclipse.org/equinox/rap-posts.css"/>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
-	<script type="text/javascript" src="http://www.eclipse.org/rt/jquery.zrssfeed.min.js"></script>	
+	<script type="text/javascript" src="http://eclipse.org/rt/jquery.zrssfeed.min.js"></script>	
 	<style type="text/css">
 		div.collapsable {
 			display: none;
@@ -33,7 +33,7 @@
 	<div id="novaWrapper">
 		<div id="clearHeader"> 
 			<div id="logo"> 
-				<img src="/eclipse.org-common/themes/Nova/images/eclipse.png" alt="Eclipse.org"/> 
+				<img src="http://eclipse.org/eclipse.org-common/themes/Nova/images/eclipse.png" alt="Eclipse.org"/> 
 			</div> 
 			<div id="otherSites"> 
 				<div id="sites"> 
@@ -84,7 +84,7 @@
 				<li><a href="/equinox/p2" target="_self">p2</a></li> 
 				<li><a href="/equinox/security" target="_self">Security</a></li> 
 				<li><a href="/equinox/server" target="_self">Server</a></li> 
-				<li class="separator"><a class="separator">Related<img src="/eclipse.org-common/themes/Nova/images/separator.png"/></a></li> 
+				<li class="separator"><a class="separator">Related<img src="http://eclipse.org/eclipse.org-common/themes/Nova/images/separator.png"/></a></li> 
 				<li><a href="http://eclipse.org/rt" target="_self">RT</a></li> 
 				<li><a href="http://eclipse.org/eclipse" target="_self">Eclipse</a></li> 
 				<li><a href="http://eclipse.org/pde" target="_self">PDE</a></li> 
@@ -95,7 +95,7 @@
 		</div>
 
 		<div id="rap-small-header"> 
-			<a href="/equinox/"><div id="rap-small-logo"/></a> 
+			<a href="/equinox/"><div id="rap-small-logo"></div></a> 
 		</div> 
 
 <script type="text/javascript"> 
@@ -107,7 +107,6 @@
 </script> 
 
 <script type="text/javascript"> 
-<!--
 function expandCollapse(id) {
 	expandCollapse(id, null);
 }
@@ -121,11 +120,10 @@ function expandCollapse(id, value) {
 	}
 	var button = document.getElementById(id + '.button');
 	if (element.className == 'collapsable')	
-		button.src="/equinox/images/arrow.png";
+		button.src="http://eclipse.org/equinox/images/arrow.png";
 	else
-		button.src="/equinox/images/downarrow.png";
+		button.src="http://eclipse.org/equinox/images/downarrow.png";
 }
-//-->
 </script> 
 
 		<div id="midcolumn">
@@ -212,7 +210,7 @@ See the <A HREF="http://eclipse.org/equinox/quickstart.html">Quick Start Guide</
 </div>
 
 <div class="homeitem3col">
-<h3><a onclick="expandCollapse('addon.bundles');"><img id="addon.bundles.button" src="/equinox/images/arrow.png"/></a>&nbsp;Add-on Bundles</h3>
+<h3><a onclick="expandCollapse('addon.bundles');"><img id="addon.bundles.button" src="http://eclipse.org/equinox/images/arrow.png"/></a>&nbsp;Add-on Bundles</h3>
 <P>Individual <a href="http://eclipse.org/equinox/bundles">bundles</a> that provide 
 standalone OSGi specified services or add-on mechanisms (e.g., the Eclipse extension registry) of interest to OSGi programmers.</P>
 <div id="addon.bundles" class="collapsable"> 
@@ -224,7 +222,7 @@ standalone OSGi specified services or add-on mechanisms (e.g., the Eclipse exten
 </div>
 
 <div class="homeitem3col">
-<h3><a onclick="expandCollapse('other.bundles');"><img id="other.bundles.button" src="/equinox/images/arrow.png"/></a>&nbsp;Other Required Bundles</h3>
+<h3><a onclick="expandCollapse('other.bundles');"><img id="other.bundles.button" src="http://eclipse.org/equinox/images/arrow.png"/></a>&nbsp;Other Required Bundles</h3>
 <P>A convenient set of bundles that are required by some of the Equinox bundles.</P>
 <div id="other.bundles" class="collapsable"> 
 <table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" >
@@ -235,7 +233,7 @@ standalone OSGi specified services or add-on mechanisms (e.g., the Eclipse exten
 </div>
 
 <div class="homeitem3col">
-<h3><a onclick="expandCollapse('incubator.bundles');"><img id="incubator.bundles.button" src="/equinox/images/arrow.png"/></a>&nbsp;Incubator</h3>
+<h3><a onclick="expandCollapse('incubator.bundles');"><img id="incubator.bundles.button" src="http://eclipse.org/equinox/images/arrow.png"/></a>&nbsp;Incubator</h3>
 <P>Equinox Incubator downloads supplied as a convenience. While some are quite complete, all should be considered experimental.</P>
 <div id="incubator.bundles" class="collapsable"> 
 <table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" >
@@ -245,7 +243,7 @@ standalone OSGi specified services or add-on mechanisms (e.g., the Eclipse exten
 </div>
 
 <div class="homeitem3col">
-<h3><a onclick="expandCollapse('provisioning.bundles');">><img  id="provisioning.bundles.button" src="/equinox/images/arrow.png"/></a>&nbsp;Provisioning (p2)</h3>
+<h3><a onclick="expandCollapse('provisioning.bundles');"><img  id="provisioning.bundles.button" src="http://eclipse.org/equinox/images/arrow.png"/></a>&nbsp;Provisioning (p2)</h3>
 <P>The following downloads are produced by the Provisioning team. For more about provisoning, see 
 the <a href="http://wiki.eclipse.org/Category:Provisioning">provisioning articles</a> on the eclipse.org wiki.</P>
 <div id="provisioning.bundles" class="collapsable"> 
@@ -256,7 +254,7 @@ the <a href="http://wiki.eclipse.org/Category:Provisioning">provisioning article
 </div>
 
 <div class="homeitem3col">
-<h3><a onclick="expandCollapse('launcher.bundles');"><img  id="launcher.bundles.button" src="/equinox/images/arrow.png"/></a>&nbsp;Native Launchers</h3>
+<h3><a onclick="expandCollapse('launcher.bundles');"><img  id="launcher.bundles.button" src="http://eclipse.org/equinox/images/arrow.png"/></a>&nbsp;Native Launchers</h3>
 <P>Platform-specific native launchers (e.g., eclipse.exe) for the Equinox framework. See the list 
 of <a href="http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments">supported OS configurations</a>.</P>
 <div id="launcher.bundles" class="collapsable"> 
@@ -316,7 +314,7 @@ of <a href="http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#t
 
 				<div style="position: relative; margin-bottom: 10px;"> 
 					<a href="http://www.eclipse.org/eclipsert/"><img alt="EclipseRT"
-						src="/equinox/images/EclipseRT.png"
+						src="http://eclipse.org/equinox/images/EclipseRT.png"
 						style="position: relative; left: 55px; top: 0pt;"/></a> 
 				</div> 
 			</div>
