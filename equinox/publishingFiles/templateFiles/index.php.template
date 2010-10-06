@@ -77,7 +77,7 @@
 		<br style="clear:both;height:1em;"/> 
 		<div id="leftcol"> 
 			<ul id="leftnav"> 
-				<li class="separator"><a class="separator" href="index.php">Work Areas<img src="/eclipse.org-common/themes/Nova/images/separator.png"/></a></li> 
+				<li class="separator"><a class="separator" href="index.php">Work Areas<img src="http://eclipse.org/eclipse.org-common/themes/Nova/images/separator.png"/></a></li> 
 				<li><a href="/equinox/bundles" target="_self">Bundles</a></li> 
 				<li><a href="/equinox/framework" target="_self">Framework</a></li> 
 				<li><a href="/equinox/incubator" target="_self">Incubator</a></li> 
@@ -237,19 +237,21 @@ standalone OSGi specified services or add-on mechanisms (e.g., the Eclipse exten
 <P>Equinox Incubator downloads supplied as a convenience. While some are quite complete, all should be considered experimental.</P>
 <div id="incubator.bundles" class="collapsable"> 
 <table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" >
-<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="33%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
-</tr> %incubator% </table>
+<tr><td width="5%"/> <td width="65%"/></tr>
+%incubator%
+</table>
 </div>
 </div>
 
 <div class="homeitem3col">
-<h3><a onclick="expandCollapse('provisioning.bundles');"><img  id="provisioning.bundles.button" src="http://eclipse.org/equinox/images/arrow.png"/></a>&nbsp;Provisioning (p2)</h3>
+<h3><a onclick="expandCollapse('provisioning.bundles');"><img  id="provisioning.bundles.button" src="http://eclipse.org/equinox/images/arrow.png"/></a>&nbsp;p2 Provisioning Tools</h3>
 <P>The following downloads are produced by the Provisioning team. For more about provisoning, see 
 the <a href="http://wiki.eclipse.org/Category:Provisioning">provisioning articles</a> on the eclipse.org wiki.</P>
 <div id="provisioning.bundles" class="collapsable"> 
 <table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" >
-<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="33%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
-</tr> %provisioning% </table>
+<tr><td width="5%"/> <td width="65%"/></tr>
+%provisioning%
+</table>
 </div>
 </div>
 
@@ -259,8 +261,9 @@ the <a href="http://wiki.eclipse.org/Category:Provisioning">provisioning article
 of <a href="http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments">supported OS configurations</a>.</P>
 <div id="launcher.bundles" class="collapsable"> 
 <table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" >
-<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="33%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
-</tr> %launchers% </table>
+<tr><td width="5%"/> <td width="65%"/></tr>
+%launchers%
+</table>
 </div>
 </div>
 
