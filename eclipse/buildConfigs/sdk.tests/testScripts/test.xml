@@ -436,8 +436,8 @@
 
 	<target name="performance" if="performance.target.present" unless="skip.test">
 		<antcall target="setup" />
-		<property name="org.eclipse.test" value="org.eclipse.test_3.3.0" />
-		<property name="library-file" value="${basedir}/test-eclipse/eclipse/plugins/${org.eclipse.test}/library.xml" />
+		<property file="finalPluginsVersions.properties" />
+		<property name="library-file" value="${basedir}/test-eclipse/eclipse/plugins/org.eclipse.test_${org.eclipse.test}/library.xml" />
 
 		<echo>trying to find ${testPlugin}_*</echo>
 		<fileset id="test.plugin.file" dir="${eclipse-home}/plugins">
