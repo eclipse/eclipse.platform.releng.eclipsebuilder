@@ -53,12 +53,12 @@
 	<div id="header">			
 		<div id="menu"> 
 			<ul> 
-				<li><a href="/equinox/" target="_self">Home</a></li> 
-				<li><a href="/equinox/getting-started/" target="_self">Get Started</a></li> 
+				<li><a href="http://eclipse.org/equinox/" target="_self">Home</a></li> 
+				<li><a href="http://eclipse.org/equinox/documents/quickstart.php" target="_self">Get Started</a></li> 
 				<li><a href="http//download.eclipse.org/equinox" target="_self">Downloads</a></li> 
-				<li><a href="/equinox/documents/" target="_self">Documents</a></li> 
-				<li><a href="/equinox/resources/" target="_self">Resources</a></li> 
-				<li><a href="/equinox/faq.php/" target="_self">FAQ</a></li> 
+				<li><a href="http://eclipse.org/equinox/documents/" target="_self">Documents</a></li> 
+				<li><a href="http://eclipse.org/equinox/resources.php" target="_self">Resources</a></li> 
+				<li><a href="http://eclipse.org/equinox/faq.php" target="_self">FAQ</a></li> 
 				<li><a href="http://wiki.eclipse.org/Equinox" target="_self">Wiki</a></li> 
 			</ul> 
 		</div> 
@@ -78,12 +78,12 @@
 		<div id="leftcol"> 
 			<ul id="leftnav"> 
 				<li class="separator"><a class="separator" href="index.php">Work Areas<img src="http://eclipse.org/eclipse.org-common/themes/Nova/images/separator.png"/></a></li> 
-				<li><a href="/equinox/bundles" target="_self">Bundles</a></li> 
-				<li><a href="/equinox/framework" target="_self">Framework</a></li> 
-				<li><a href="/equinox/incubator" target="_self">Incubator</a></li> 
-				<li><a href="/equinox/p2" target="_self">p2</a></li> 
-				<li><a href="/equinox/security" target="_self">Security</a></li> 
-				<li><a href="/equinox/server" target="_self">Server</a></li> 
+				<li><a href="http://eclipse.org/equinox/bundles" target="_self">Bundles</a></li> 
+				<li><a href="http://eclipse.org/equinox/framework" target="_self">Framework</a></li> 
+				<li><a href="http://eclipse.org/equinox/incubator" target="_self">Incubator</a></li> 
+				<li><a href="http://eclipse.org/equinox/p2" target="_self">p2</a></li> 
+				<li><a href="http://eclipse.org/equinox/security" target="_self">Security</a></li> 
+				<li><a href="http://eclipse.org/equinox/server" target="_self">Server</a></li> 
 				<li class="separator"><a class="separator">Related<img src="http://eclipse.org/eclipse.org-common/themes/Nova/images/separator.png"/></a></li> 
 				<li><a href="http://eclipse.org/rt" target="_self">RT</a></li> 
 				<li><a href="http://eclipse.org/eclipse" target="_self">Eclipse</a></li> 
@@ -95,7 +95,7 @@
 		</div>
 
 		<div id="rap-small-header"> 
-			<a href="/equinox/"><div id="rap-small-logo"></div></a> 
+			<a href="http://eclipse.org/equinox/"><div id="rap-small-logo"></div></a> 
 		</div> 
 
 <script type="text/javascript"> 
