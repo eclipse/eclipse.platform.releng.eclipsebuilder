@@ -29,6 +29,11 @@
 		<exec dir="." executable="${copyClient}">
 			<arg line="-r ${previousPlatformZips}/${previousRuntimePlatform} ${testMachine}:${executionDir}" />
 		</exec>
+
+		<!--copy comparator log so it's accessible via releng tests -->
+		<exec dir="." executable="${copyClient}">
+			<arg line="-r $${buildlogs}/comparatorlog.txt ${testMachine}:${executionDir}" />
+		</exec>
 	</target>
 
 </project>
