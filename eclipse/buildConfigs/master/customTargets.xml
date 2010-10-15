@@ -244,20 +244,19 @@
 	<!-- Steps to do before running package. -->
 	<!-- ===================================================================== -->
 	<target name="prePackage">
-		<echo message="${postingDirectory}/${buildLabel}/ecjsrc-${buildId}.jar" />
-		<eclipse.publish.featuresAndBundles repository="${buildDirectory}/buildRepo">
-			<bundles dir="${postingDirectory}/${buildLabel}" includes="ecj-${buildId}.jar" />
-			<bundles dir="${postingDirectory}/${buildLabel}" includes="ecjsrc-${buildId}.jar" />
-		</eclipse.publish.featuresAndBundles>
 	</target>
 
 	<!-- ===================================================================== -->
 	<!-- Steps to do after  running package. -->
 	<!-- ===================================================================== -->
 	<target name="postPackage">
-		<exec executable="zip" dir="okjay">
+		<exec executable="zip" dir="${buildDirectory}/${buildLabel}">
 			<arg line="-d ${archiveName} win32** wce** linux** solaris** aix** hpux** macosx** qnx**" />
 		</exec>
+		<eclipse.publish.featuresAndBundles repository="file:/${buildDirectory}/buildRepo">
+			<bundles dir="${postingDirectory}/${buildLabel}" includes="ecj-${buildId}.jar" />
+			<bundles dir="${postingDirectory}/${buildLabel}" includes="ecjsrc-${buildId}.jar" />
+		</eclipse.publish.featuresAndBundles>
 		<exec dir="${buildDirectory}/buildRepo" executable="zip">
 			<arg line="-r ${archiveFullPath} ." />
 		</exec>
