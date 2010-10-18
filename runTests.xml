@@ -12,15 +12,18 @@
 		<echo message="testDir ${testDir}"/>
 		<echo message="builderDir ${builderDir}"/>
 		<mkdir dir="${testDir}"/>
+		<property name="executionDir" value="${testDir}/eclipse-testing"/>
+		<mkdir dir="${executionDir}"/>
+		<echo message="executionDir ${excutionDir}"/>
 	</target>
 
 	<target name="main" depends="init">		
 		<!--old way uses available call, could switch to this method even though the build is much faster -->
-		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-SDK-${buildId}-win32-x86_64.zip" dest="${testDir}/eclipse-SDK-${buildId}-win32-x86_64.zip" />
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-SDK-${buildId}-win32-x86_64.zip" dest="${executionDir}/eclipse-SDK-${buildId}-win32-x86_64.zip" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-Automated-Tests-${buildId}.zip" dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
-		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-platform-${buildId}-win32.zip" dest="${testDir}/eclipse-platform-${buildId}-win32.zip" />
-		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-${buildId}-delta-pack.zip" dest="${testDir}/eclipse-${buildId}-delta-pack.zip" />
-		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-Automated-Tests-${buildId}.zip" dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />				
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-platform-${buildId}-win32-x86_64.zip" dest="${executionDir}/eclipse-platform-${buildId}-win32.zip" />
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-${buildId}-delta-pack.zip" dest="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-Automated-Tests-${buildId}.zip" dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />				
 		<property name="test.xml" value="../org.eclipse.releng.basebuilder/plugins/org.eclipse.build.tools/scripts/test.xml" />
 		<property file="eclipse/buildConfigs/sdk.tests/testConfigs/win7x86_64/testing.properties" />		
 		<ant antfile="${test.xml}" /> 
