@@ -7,10 +7,10 @@
 		<property name="arch" value="x86_64" />
 		<echo message="WORKSPACE ${WORKSPACE}"/>		
 		<echo message="BUILD_ID ${BUILD_ID}"/>
-		<property name="builderdir" value="${WORKSPACE}\${BUILD_ID}\${buildLabel}"/>
+		<property name="builderDir" value="${WORKSPACE}\${BUILD_ID}"/>
 		<property name="testdir" value="${builderDir}/testdir"/>
 		<echo message="testdir ${testdir}"/>
-		<echo message="builderdir ${builderdir}"/>
+		<echo message="builderDir ${builderDir}"/>
 		<mkdir dir="${testdir}"/>
 	</target>
 
