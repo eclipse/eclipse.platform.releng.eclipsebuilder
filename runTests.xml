@@ -17,9 +17,10 @@
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-Automated-Tests-${buildId}.zip" dest="${workspace}/eclipse-Automated-Tests-${buildId}.zip" /> -->
 		<property name="WORKSPACE" value="${env.workspace}"/>
 		<echo message="workspace ${workspace}"/>
-		<property name="test.xml" value="../org.eclipse.releng.basebuilder/plugins/org.eclipse.build.tools/scripts/test.xml" />
+		<echo message="WORKSPACE ${WORKSPACE}"/>
+		<!-- <property name="test.xml" value="../org.eclipse.releng.basebuilder/plugins/org.eclipse.build.tools/scripts/test.xml" />
 		<property file="eclipse/buildConfigs/sdk.tests/testConfigs/win7x86_64/testing.properties" />		
-		<ant antfile="${test.xml}" />
+		<ant antfile="${test.xml}" /> -->
 	</target>
 	
 
