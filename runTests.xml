@@ -10,10 +10,12 @@
 
 	<target name="main" depends="init">
 		<!--old way uses available call, could switch to this method even though the build is much faster -->
-		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-SDK-${buildId}-win32-x86_64.zip" dest="${workspace}/eclipse-SDK-${buildId}-win32-x86_64.zip" />
+		<!-- <get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-SDK-${buildId}-win32-x86_64.zip" dest="${workspace}/eclipse-SDK-${buildId}-win32-x86_64.zip" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-Automated-Tests-${buildId}.zip" dest="${workspace}/eclipse-Automated-Tests-${buildId}.zip" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-platform-${buildId}-win32.zip" dest="${workspace}/eclipse-platform-${buildId}-win32.zip" />
-		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-${buildId}-delta-pack.zip" dest="${workspace}/eclipse-${buildId}-delta-pack.zip" />		
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-${buildId}-delta-pack.zip" dest="${workspace}/eclipse-${buildId}-delta-pack.zip" />
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-Automated-Tests-${buildId}.zip" dest="${workspace}/eclipse-Automated-Tests-${buildId}.zip" /> -->		
+		<echo message="workspace $workspace"/>
 		<property name="test.xml" value="../org.eclipse.releng.basebuilder/plugins/org.eclipse.build.tools/scripts/test.xml" />
 		<property file="eclipse/buildConfigs/sdk.tests/testConfigs/win7x86_64/testing.properties" />		
 		<ant antfile="${test.xml}" />
