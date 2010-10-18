@@ -15,6 +15,7 @@
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-platform-${buildId}-win32.zip" dest="${workspace}/eclipse-platform-${buildId}-win32.zip" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-${buildId}-delta-pack.zip" dest="${workspace}/eclipse-${buildId}-delta-pack.zip" />		
 		<property name="test.xml" value="../org.eclipse.releng.basebuilder/plugins/org.eclipse.build.tools/scripts/test.xml" />
+		<property file="eclipse/buildConfigs/sdk.tests/testConfigs/win7x86_64/testing.properties" />		
 		<ant antfile="${test.xml}" />
 	</target>
 	
