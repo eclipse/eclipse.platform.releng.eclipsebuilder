@@ -4,6 +4,7 @@
 		<!--copy the script which sets up environment and invokes the tests on test machine-->
 		<exec dir="." executable="${copyClient}">
 			<arg line="${tester}/testAll.bat ${testMachine}:${executionDir}" />
+			<env key="executionDir" value="${executionDir}"/>
 		</exec>
 
 		<!--copy in test script modified for running Team CVS tests-->
