@@ -62,6 +62,8 @@
 		<mkdir dir="${p2.sdk.install.solaris.gtk.x86}" />
 		<property name="p2.sdk.install.aix.motif.ppc" value="${p2.output.base}/sdk.install.aix.motif.ppc" />
 		<mkdir dir="${p2.sdk.install.aix.motif.ppc}" />
+		<property name="p2.sdk.install.aix.gtk.ppc" value="${p2.output.base}/sdk.install.aix.motif.ppc" />
+		<mkdir dir="${p2.sdk.install.aix.gtk.ppc}" />
 		<property name="p2.sdk.install.aix.gtk.ppc64" value="${p2.output.base}/sdk.install.aix.motif.ppc64" />
 		<mkdir dir="${p2.sdk.install.aix.gtk.ppc64}" />
 		<property name="p2.sdk.install.macosx.carbon.x86" value="${p2.output.base}/sdk.install.macosx.carbon.x86" />
@@ -90,6 +92,8 @@
 		<mkdir dir="${p2.platform.install.solaris.gtk.x86}" />
 		<property name="p2.platform.install.aix.motif.ppc" value="${p2.output.base}/platform.install.aix.motif.ppc" />
 		<mkdir dir="${p2.platform.install.aix.motif.ppc}" />
+		<property name="p2.platform.install.aix.gtk.ppc" value="${p2.output.base}/platform.install.aix.gtk.ppc" />
+		<mkdir dir="${p2.platform.install.aix.gtk.ppc}" />
 		<property name="p2.platform.install.aix.gtk.ppc64" value="${p2.output.base}/platform.install.aix.gtk.ppc64" />
 		<mkdir dir="${p2.platform.install.aix.gtk.ppc64}" />
 		<property name="p2.platform.install.macosx.carbon.x86" value="${p2.output.base}/platform.install.macosx.carbon.x86" />
@@ -118,6 +122,8 @@
 		<mkdir dir="${p2.platformsdk.install.solaris.gtk.x86}" />
 		<property name="p2.platformsdk.install.aix.motif.ppc" value="${p2.output.base}/platformsdk.install.aix.motif.ppc" />
 		<mkdir dir="${p2.platformsdk.install.aix.motif.ppc}" />
+		<property name="p2.platformsdk.install.aix.gtk.ppc" value="${p2.output.base}/platformsdk.install.aix.gtk.ppc" />
+		<mkdir dir="${p2.platformsdk.install.aix.gtk.ppc}" />
 		<property name="p2.platformsdk.install.aix.gtk.ppc64" value="${p2.output.base}/platformsdk.install.aix.gtk.ppc64" />
 		<mkdir dir="${p2.platformsdk.install.aix.gtk.ppc64}" />
 		<property name="p2.platformsdk.install.macosx.carbon.x86" value="${p2.output.base}/platformsdk.install.macosx.carbon.x86" />
@@ -378,6 +384,18 @@
 			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
 			<param name="p2.director.version" value="${sdk.version}" />
 			<param name="p2.director.profile" value="SDKProfile" />
+			<param name="p2.director.install.path" value="${p2.sdk.install.aix.gtk.ppc}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="aix" />
+			<param name="p2.ws" value="gtk" />
+			<param name="p2.arch" value="ppc" />
+			<param name="p2.repo" value="${buildRepo}" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
+			<param name="p2.director.version" value="${sdk.version}" />
+			<param name="p2.director.profile" value="SDKProfile" />
 			<param name="p2.director.install.path" value="${p2.sdk.install.aix.gtk.ppc64}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
 			<param name="p2.os" value="aix" />
@@ -538,6 +556,18 @@
 			<param name="p2.director.installIU" value="org.eclipse.platform.ide" />
 			<param name="p2.director.version" value="${sdk.version}" />
 			<param name="p2.director.profile" value="PlatformProfile" />
+			<param name="p2.director.install.path" value="${p2.platform.install.aix.gtk.ppc}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="aix" />
+			<param name="p2.ws" value="gtk" />
+			<param name="p2.arch" value="ppc" />
+			<param name="p2.repo" value="${buildRepo}" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.platform.ide" />
+			<param name="p2.director.version" value="${sdk.version}" />
+			<param name="p2.director.profile" value="PlatformProfile" />
 			<param name="p2.director.install.path" value="${p2.platform.install.aix.gtk.ppc64}/eclipse" />
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
 			<param name="p2.os" value="aix" />
@@ -689,6 +719,18 @@
 			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
 			<param name="p2.os" value="aix" />
 			<param name="p2.ws" value="motif" />
+			<param name="p2.arch" value="ppc" />
+			<param name="p2.repo" value="${buildRepo}" />
+		</antcall>
+
+		<antcall target="run.director">
+			<param name="p2.director.installIU" value="org.eclipse.platform.sdk" />
+			<param name="p2.director.version" value="${sdk.version}" />
+			<param name="p2.director.profile" value="PlatformSDKProfile" />
+			<param name="p2.director.install.path" value="${p2.platformsdk.install.aix.gtk.ppc}/eclipse" />
+			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
+			<param name="p2.os" value="aix" />
+			<param name="p2.ws" value="gtk" />
 			<param name="p2.arch" value="ppc" />
 			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
@@ -876,6 +918,15 @@
 					<param name="archiveName" value="eclipse-SDK-${buildId}-aix-motif.zip" />
 				</antcall>
 
+				<!-- aix gtk ppc -->
+				<delete file="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-aix-gtk-ppc.zip" failonerror="false" />
+				<exec dir="${p2.sdk.install.aix.gtk.ppc}" executable="zip">
+					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-aix-gtk-ppc.zip -r ." />
+				</exec>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-SDK-${buildId}-aix-gtk-ppc.zip" />
+				</antcall>
+
 				<!-- aix gtk ppc64 -->
 				<delete file="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-aix-gtk-ppc64.zip" failonerror="false" />
 				<exec dir="${p2.sdk.install.aix.gtk.ppc64}" executable="zip">
@@ -991,6 +1042,15 @@
 				</exec>
 				<antcall target="generateChecksums">
 					<param name="archiveName" value="eclipse-platform-${buildId}-aix-motif.zip" />
+				</antcall>
+
+				<!-- aix gtk ppc -->
+				<delete file="${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-aix-gtk-ppc.zip" failonerror="false" />
+				<exec dir="${p2.platform.install.aix.gtk.ppc}" executable="zip">
+					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-aix-gtk-ppc.zip -r ." />
+				</exec>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-platform-${buildId}-aix-gtk-ppc.zip" />
 				</antcall>
 
 				<!-- aix gtk ppc64 -->
@@ -1110,6 +1170,15 @@
 				</exec>
 				<antcall target="generateChecksums">
 					<param name="archiveName" value="eclipse-platform-SDK-${buildId}-aix-motif.zip" />
+				</antcall>
+
+				<!-- aix gtk ppc -->
+				<delete file="${postingDirectory}/${buildLabel}/eclipse-platform-SDK-${buildId}-aix-gtk-ppc.zip" failonerror="false" />
+				<exec dir="${p2.platformsdk.install.aix.gtk.ppc}" executable="zip">
+					<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-platform-SDK-${buildId}-aix-gtk-ppc.zip -r ." />
+				</exec>
+				<antcall target="generateChecksums">
+					<param name="archiveName" value="eclipse-platform-SDK-${buildId}-aix-gtk-ppc.zip" />
 				</antcall>
 
 				<!-- aix gtk ppc64 -->
