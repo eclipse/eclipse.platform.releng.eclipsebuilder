@@ -25,7 +25,10 @@
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-${buildId}-delta-pack.zip" dest="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-Automated-Tests-${buildId}.zip" dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />				
 		<property name="test.xml" value="../org.eclipse.releng.basebuilder/plugins/org.eclipse.build.tools/scripts/test.xml" />
-		<property file="eclipse/buildConfigs/sdk.tests/testConfigs/win7x86_64/testing.properties" />		
+		<property file="eclipse/buildConfigs/sdk.tests/testConfigs/win7x86_64/testing.properties" />
+		 <copy todir="${executionDir}">
+		    <fileset dir="eclipse/buildConfigs/sdk.tests/testConfigs/win7x86_64"/>
+		  </copy>
 		<ant antfile="${test.xml}" /> 
 	</target>
 	
