@@ -8,11 +8,11 @@
 		<echo message="WORKSPACE ${WORKSPACE}" />
 		<echo message="BUILD_ID ${BUILD_ID}" />
 		<property name="testDir" value="${WORKSPACE}\${BUILD_ID}" />
-		<echo message="testDir ${testDir}" />		
+		<echo message="testDir ${testDir}" />
 		<property name="executionDir" value="${testDir}/eclipse-testing" />
 		<mkdir dir="${executionDir}" />
 		<echo message="executionDir ${excutionDir}" />
-		<echo message="hudson ${hudson}"/>
+		<echo message="hudson ${hudson}" />
 	</target>
 
 	<target name="main" depends="init">
@@ -27,6 +27,9 @@
 		<property name="tester" value="${executionDir}" />
 		<copy todir="${executionDir}">
 			<fileset dir="eclipse/buildConfigs/sdk.tests/testConfigs/win7x86_64" />
+		</copy>
+		<copy todir="${executionDir}" overwrite="true">
+			<fileset dir="eclipse/buildConfigs/sdk.tests/testScripts" />
 		</copy>
 		<ant antfile="${test.xml}" />
 	</target>
