@@ -12,6 +12,7 @@
 		<property name="executionDir" value="${testDir}/eclipse-testing" />
 		<mkdir dir="${executionDir}" />
 		<echo message="executionDir ${excutionDir}" />
+		<echo message="hudson ${hudson}"/>
 	</target>
 
 	<target name="main" depends="init">
