@@ -62,9 +62,9 @@
 		<mkdir dir="${p2.sdk.install.solaris.gtk.x86}" />
 		<property name="p2.sdk.install.aix.motif.ppc" value="${p2.output.base}/sdk.install.aix.motif.ppc" />
 		<mkdir dir="${p2.sdk.install.aix.motif.ppc}" />
-		<property name="p2.sdk.install.aix.gtk.ppc" value="${p2.output.base}/sdk.install.aix.motif.ppc" />
+		<property name="p2.sdk.install.aix.gtk.ppc" value="${p2.output.base}/sdk.install.aix.gtk.ppc" />
 		<mkdir dir="${p2.sdk.install.aix.gtk.ppc}" />
-		<property name="p2.sdk.install.aix.gtk.ppc64" value="${p2.output.base}/sdk.install.aix.motif.ppc64" />
+		<property name="p2.sdk.install.aix.gtk.ppc64" value="${p2.output.base}/sdk.install.aix.gtk.ppc64" />
 		<mkdir dir="${p2.sdk.install.aix.gtk.ppc64}" />
 		<property name="p2.sdk.install.macosx.carbon.x86" value="${p2.output.base}/sdk.install.macosx.carbon.x86" />
 		<mkdir dir="${p2.sdk.install.macosx.carbon.x86}" />
