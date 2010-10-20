@@ -7,11 +7,8 @@
 		<property name="arch" value="x86_64" />
 		<echo message="WORKSPACE ${WORKSPACE}" />
 		<echo message="BUILD_ID ${BUILD_ID}" />
-		<property name="builderDir" value="${WORKSPACE}\${BUILD_ID}" />
-		<property name="testDir" value="${builderDir}/testDir" />
-		<echo message="testDir ${testDir}" />
-		<echo message="builderDir ${builderDir}" />
-		<mkdir dir="${testDir}" />
+		<property name="testDir" value="${WORKSPACE}\${BUILD_ID}" />
+		<echo message="testDir ${testDir}" />		
 		<property name="executionDir" value="${testDir}/eclipse-testing" />
 		<mkdir dir="${executionDir}" />
 		<echo message="executionDir ${excutionDir}" />
@@ -21,7 +18,7 @@
 		<!--old way uses available call, could switch to this method even though the build is much faster -->
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-SDK-${buildId}-win32-x86_64.zip" dest="${executionDir}/eclipse-SDK-${buildId}-win32-x86_64.zip" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-Automated-Tests-${buildId}.zip" dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
-		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-platform-${buildId}-win32-x86_64.zip" dest="${executionDir}/eclipse-platform-${buildId}-win32.zip" />
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-platform-${buildId}-win32-x86_64.zip" dest="${executionDir}/eclipse-platform-${buildId}-win32_x86_64.zip" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-${buildId}-delta-pack.zip" dest="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-Automated-Tests-${buildId}.zip" dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
 		<property name="test.xml" value="../org.eclipse.releng.basebuilder/plugins/org.eclipse.build.tools/scripts/test.xml" />

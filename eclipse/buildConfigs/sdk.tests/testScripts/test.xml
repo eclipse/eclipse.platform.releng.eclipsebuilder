@@ -80,6 +80,10 @@
 
 	<!--use an stable version of the director so that instability in the current build doesn't cause all the tests to fail -->
 	<target name="setupPlatform">
+		<propertyfile file="equinoxp2tests.properties">
+			<entry key="org.eclipse.equinox.p2.reconciler.tests.platform.archive.win32_x86_64" value="${executionDir}/eclipse-platform-${buildId}-win32_x86_64.zip" />
+		</propertyfile>
+
 		<property file="equinoxp2tests.properties" />
 		<condition property="platformArchive" value="${org.eclipse.equinox.p2.reconciler.tests.35.platform.archive.linux}">
 			<and>
@@ -97,6 +101,11 @@
 		</condition>
 		<condition property="platformArchive" value="${org.eclipse.equinox.p2.reconciler.tests.platform.archive.win32}">
 			<os family="windows" />
+			<equals arg1="${hudson}" arg2="false" />
+		</condition>
+		<condition property="platformArchive" value="${org.eclipse.equinox.p2.reconciler.tests.platform.archive.win32_x86_64}">
+			<os family="windows" />
+			<equals arg1="${hudson}" arg2="true" />
 		</condition>
 		<condition property="platformTarget" value="platform-zip">
 			<contains string="${platformArchive}" substring=".zip" />
