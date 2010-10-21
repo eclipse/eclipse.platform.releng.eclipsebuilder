@@ -299,13 +299,13 @@
 		<delete file="${buildDirectory}/${buildLabel}/eclipse-junit-tests-${buildId}.zip" />
 		<!-- get to store previous release's platform zips -->
 		<exec executable="/usr/bin/wget" dir="${previousPlatformZips}" failonerror="false">
-			<arg line="-q -O ${previousPlatformZips}/eclipse-platform-3.5-win32.zip http://${localmirror}/downloads/drops/R-3.5-200906111540/eclipse-platform-3.5-win32.zip" />
+			<arg line="-q -O ${previousPlatformZips}/eclipse-platform-3.5-win32.zip http://archive.eclipse.org/eclipse/downloads/drops/R-3.5-200906111540/eclipse-platform-3.5-win32.zip" />
 		</exec>
 		<exec executable="/usr/bin/wget" dir="${previousPlatformZips}" failonerror="false">
-			<arg line="-q -O ${previousPlatformZips}/eclipse-platform-3.5-linux-gtk.tar.gz http://${localmirror}/downloads/drops/R-3.5-200906111540/eclipse-platform-3.5-linux-gtk.tar.gz" />
+			<arg line="-q -O ${previousPlatformZips}/eclipse-platform-3.5-linux-gtk.tar.gz http://archive.eclipse.org/eclipse/downloads/drops/R-3.5-200906111540/eclipse-platform-3.5-linux-gtk.tar.gz" />
 		</exec>
 		<exec executable="/usr/bin/wget" dir="${previousPlatformZips}" failonerror="false">
-			<arg line="-q -O ${previousPlatformZips}/eclipse-platform-3.5-macosx-cocoa.tar.gz http://${localmirror}/downloads/drops/R-3.5-200906111540/eclipse-platform-3.5-macosx-cocoa.tar.gz" />
+			<arg line="-q -O ${previousPlatformZips}/eclipse-platform-3.5-macosx-cocoa.tar.gz http://archive.eclipse.org/eclipse/downloads/drops/R-3.5-200906111540/eclipse-platform-3.5-macosx-cocoa.tar.gz" />
 		</exec>
 	</target>
 
