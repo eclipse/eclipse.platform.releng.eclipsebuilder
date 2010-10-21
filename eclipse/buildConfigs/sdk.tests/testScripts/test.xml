@@ -82,7 +82,7 @@
 	<target name="setupPlatform">
 		<echo message="os.arch ${os.arch}"/>
 		<propertyfile file="equinoxp2tests.properties">
-			<entry key="org.eclipse.equinox.p2.reconciler.tests.platform.archive.win32_x86_64" value="${executionDir}/eclipse-platform-${buildId}-win32_x86_64.zip" operation="+" />
+			<entry key="org.eclipse.equinox.p2.reconciler.tests.platform.archive.win32_x86_64" value="${basedir}/eclipse-platform-${buildId}-win32_x86_64.zip" operation="+" />
 		</propertyfile>
 		<property file="equinoxp2tests.properties" />
 		<condition property="platformArchive" value="${org.eclipse.equinox.p2.reconciler.tests.lastrelease.platform.archive.linux}">
