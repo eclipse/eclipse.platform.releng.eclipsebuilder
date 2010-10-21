@@ -85,7 +85,7 @@
 			<entry key="org.eclipse.equinox.p2.reconciler.tests.platform.archive.win32_x86_64" value="${executionDir}/eclipse-platform-${buildId}-win32_x86_64.zip" operation="+" />
 		</propertyfile>
 		<property file="equinoxp2tests.properties" />
-		<condition property="platformArchive" value="${org.eclipse.equinox.p2.reconciler.tests.35.platform.archive.linux}">
+		<condition property="platformArchive" value="${org.eclipse.equinox.p2.reconciler.tests.lastrelease.platform.archive.linux}">
 			<and>
 				<os family="unix" />
 				<not>
@@ -93,19 +93,19 @@
 				</not>
 			</and>
 		</condition>
-		<condition property="platformArchive" value="${org.eclipse.equinox.p2.reconciler.tests.35.platform.archive.macosx}">
+		<condition property="platformArchive" value="${org.eclipse.equinox.p2.reconciler.tests.lastrelease.platform.archive.macosx}">
 			<and>
 				<os family="mac" />
 				<os family="unix" />
 			</and>
 		</condition>
-		<condition property="platformArchive" value="${org.eclipse.equinox.p2.reconciler.tests.platform.archive.win32}">
+		<condition property="platformArchive" value="${org.eclipse.equinox.p2.reconciler.tests.lastrelease.platform.archive.win32}">
 			<and>
 				<os family="windows" />
 				<os arch="x86" />
 			</and>
 		</condition>
-		<condition property="platformArchive" value="${org.eclipse.equinox.p2.reconciler.tests.platform.archive.win32_x86_64}">
+		<condition property="platformArchive" value="${org.eclipse.equinox.p2.reconciler.tests.lastrelease.platform.archive.win32_x86_64}">
 			<and>
 				<os family="windows" />
 				<os arch="x86_64" />
