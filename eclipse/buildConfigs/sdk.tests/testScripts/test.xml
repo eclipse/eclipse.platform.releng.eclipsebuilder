@@ -102,7 +102,7 @@
 				<os arch="x86" />
 			</and>
 		</condition>
-		<condition property="platformArchive" value="${org.eclipse.equinox.p2.reconciler.tests.lastrelease.platform.archive.win32_x86_64}">
+		<condition property="platformArchive" value="${org.eclipse.equinox.p2.reconciler.tests.lastrelease.platform.archive.win32-x86_64}">
 			<and>
 				<os family="windows" />
 				<os arch="x86_64" />
