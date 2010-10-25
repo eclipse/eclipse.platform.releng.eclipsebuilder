@@ -339,6 +339,7 @@
 				<equals arg1="${arch}" arg2="ppc64" />
 			</and>
 		</condition>
+		<echo message="runtimeArchive ${runtimeArchive} !!! "/>
 	</target>
 
 	<target name="setJVMProperties" depends="setJVMfromUserSpecified">
