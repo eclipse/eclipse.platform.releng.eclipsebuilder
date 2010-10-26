@@ -756,7 +756,7 @@
 	</target>
 
 	<target name="all">
-	<!--	<antcall target="jdtcompilertool" />
+		<antcall target="jdtcompilertool" />
 		<antcall target="jdtcompilerapt" />
 		<antcall target="jdttext" />
 		<antcall target="relEng" />
@@ -764,9 +764,9 @@
 		<antcall target="ant" />
 		<antcall target="compare" />
 		<antcall target="coreruntime" />
-		<antcall target="coreresources" /> -->
+		<antcall target="coreresources" /> 
 		<antcall target="osgi" />
-		<!-- <antcall target="coreexpressions" />
+		<antcall target="coreexpressions" />
 		<antcall target="update" />
 		<antcall target="teamcore" />
 		<antcall target="jdtcoreperf" />
@@ -806,7 +806,7 @@
 		<antcall target="jdtcoremodel" />
 		<antcall target="uadoc" />
 		<antcall target="debug" />
-		<antcall target="ui" /> -->
+		<antcall target="ui" />
 	</target>
 </project>
 
