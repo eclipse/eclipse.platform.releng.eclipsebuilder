@@ -33,7 +33,8 @@
 
 		<property name="test.xml" value="../org.eclipse.releng.basebuilder/plugins/org.eclipse.build.tools/scripts/test.xml" />
 		<property file="eclipse/buildConfigs/sdk.tests/testConfigs/win7x86_64/testing.properties" />
-		<property name="tester" value="${executionDir}" />
+		<property name="tester" value="${executionDir}" />		
+		<replace file="eclipse/buildConfigs/sdk.tests/testConfigs/win7x86_64/equinoxp2tests.properties" token="@testDir@" value="${testDir}" />
 		<copy todir="${executionDir}">
 			<fileset dir="eclipse/buildConfigs/sdk.tests/testConfigs/win7x86_64" />
 		</copy>

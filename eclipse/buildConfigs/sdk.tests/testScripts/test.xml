@@ -756,7 +756,7 @@
 	</target>
 
 	<target name="all">
-		<antcall target="jdtcompilertool" />
+		<!-- <antcall target="jdtcompilertool" />
 		<antcall target="jdtcompilerapt" />
 		<antcall target="jdttext" />
 		<antcall target="relEng" />
@@ -797,16 +797,16 @@
 		<antcall target="ua" />
 		<antcall target="uiforms" />
 		<antcall target="pdeapitooling" />
-		<antcall target="equinoxsecurity" />
+		<antcall target="equinoxsecurity" /> -->
 		<antcall target="equinoxp2" />
 		<antcall target="equinoxp2ui" />
 		<antcall target="equinoxp2discovery" />
-		<antcall target="search" />
+<!--		<antcall target="search" />
 		<antcall target="pdeds" />
 		<antcall target="jdtcoremodel" />
 		<antcall target="uadoc" />
 		<antcall target="debug" />
-		<antcall target="ui" />
+		<antcall target="ui" /> -->
 	</target>
 </project>
 
