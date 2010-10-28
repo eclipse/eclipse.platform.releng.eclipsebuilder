@@ -763,9 +763,9 @@
 		<antcall target="pdeui" />
 		<antcall target="ant" />
 		<antcall target="compare" />
-		<antcall target="coreruntime" />
+		<antcall target="coreruntime" /> -->
 		<antcall target="coreresources" /> 
-		<antcall target="osgi" />
+		<!-- <antcall target="osgi" />
 		<antcall target="coreexpressions" />
 		<antcall target="update" />
 		<antcall target="teamcore" />
