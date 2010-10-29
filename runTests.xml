@@ -45,13 +45,14 @@
 			<and>
 				<os family="unix" />
 				<or>
-					<os arch="x86_64" />
-					<os arch="x86" />
+					<os arch="amd64" />					
 				</or>
 			</and>
 		</condition>
 		<echo message="testPlatform  ${testPlatform}"/>
-		<echo message="os.arch ${os.arch}"/>	
+		<echo message="os.arch ${os.arch}"/>
+		<echo message="os.arch ${os.name}"/>
+		<echo message="os.arch ${os.version}"/>
 		<antcall target="get${testPlatform}zips"/>
 		<property file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/testing.properties" />
 		<property name="tester" value="${executionDir}" />
