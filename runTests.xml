@@ -37,16 +37,16 @@
 		<property name="test.xml" value="../org.eclipse.releng.basebuilder/plugins/org.eclipse.build.tools/scripts/test.xml" />
 		<condition property="${testPlatform}" value="win7">
 			<and>
-				<equals arg1="${os}" arg2="win32" />
-				<equals arg1="${ws}" arg2="win32" />
-				<equals arg1="${arch}" arg2="x86" />
+				<equals arg1="${osgi.os}" arg2="win32" />
+				<equals arg1="${osgi.ws}" arg2="win32" />
+				<equals arg1="${osgi.arch}" arg2="x86" />
 			</and>
 		</condition>	
 		<condition property="${testPlatform}" value="linux">
 			<and>
-				<equals arg1="${os}" arg2="linux" />
-				<equals arg1="${ws}" arg2="gtk" />
-				<equals arg1="${arch}" arg2="x86_64" />
+				<equals arg1="${osgi.os}" arg2="linux" />
+				<equals arg1="${osgi.ws}" arg2="gtk" />
+				<equals arg1="${osgi.arch}" arg2="x86_64" />
 			</and>
 		</condition>
 		<echo message="testPlatform  ${testPlatform}" />		
