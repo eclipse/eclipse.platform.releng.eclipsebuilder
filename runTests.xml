@@ -35,7 +35,7 @@
 
 	<target name="main" depends="init">
 		<property name="test.xml" value="../org.eclipse.releng.basebuilder/plugins/org.eclipse.build.tools/scripts/test.xml" />
-		<condition property="${testPlatform}" value="win7">
+		<condition property="testPlatform" value="win7">
 			<and>
 				<equals arg1="${osgi.os}" arg2="win32" />
 				<equals arg1="${osgi.ws}" arg2="win32" />
@@ -43,7 +43,7 @@
 			</and>
 		</condition>	
 		<echo message="os ws arch ${osgi.os} ${osgi.ws} ${osgi.arch}"/> 
-		<condition property="${testPlatform}" value="linux">
+		<condition property="testPlatform" value="linux">
 			<and>
 				<equals arg1="${osgi.os}" arg2="linux" />
 				<equals arg1="${osgi.ws}" arg2="gtk" />
