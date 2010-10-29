@@ -41,8 +41,9 @@
 				<os arch="x86" />
 			</and>
 		</condition>
-		<condition property="${testPlatform}" value="linux"/>
-			<!-- <and>
+		<property name="${testPlatform}" value="linux"/>
+		<!--<condition property="${testPlatform}" value="linux">
+			 <and>
 				<os family="unix" />
 				 <or>
 					<os arch="amd64" />					
