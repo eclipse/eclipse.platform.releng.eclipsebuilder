@@ -11,7 +11,7 @@
 		<echo message="testDir ${testDir}" />
 		<property name="executionDir" value="${testDir}/eclipse-testing" />
 		<mkdir dir="${executionDir}" />
-		<echo message="executionDir ${excutionDir}" />
+		<echo message="executionDir ${executionDir}" />
 		<echo message="hudson ${hudson}" />
 	</target>
 
@@ -44,15 +44,14 @@
 		<condition property="${testPlatform}" value="linux">
 			<and>
 				<os family="unix" />
-				<or>
+				<!-- <or>
 					<os arch="amd64" />					
-				</or>
+				</or> -->
 			</and>
 		</condition>
 		<echo message="testPlatform  ${testPlatform}"/>
 		<echo message="os.arch ${os.arch}"/>
-		<echo message="os.arch ${os.name}"/>
-		<echo message="os.arch ${os.version}"/>
+		<echo message="os.name ${os.name}"/>
 		<antcall target="get${testPlatform}zips"/>
 		<property file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/testing.properties" />
 		<property name="tester" value="${executionDir}" />
