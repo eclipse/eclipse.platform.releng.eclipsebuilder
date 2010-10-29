@@ -15,7 +15,7 @@
 		<echo message="hudson ${hudson}" />
 	</target>
 
-	<target name="getwin7zips">
+	<target name="getwinzips">
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-SDK-${buildId}-win32.zip" dest="${executionDir}/eclipse-SDK-${buildId}-win32.zip" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-Automated-Tests-${buildId}.zip" dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-platform-${buildId}-win32.zip" dest="${executionDir}/eclipse-platform-${buildId}-win32.zip" />
@@ -24,7 +24,7 @@
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-3.6-win32.zip" dest="${executionDir}/eclipse-platform-3.6-win32.zip" />
 	</target>
 
-	<target name="getlinuxzips">
+	<target name="getlinzips">
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-SDK-${buildId}-linux-gtk-x86_64.zip" dest="${executionDir}/eclipse-SDK-${buildId}-linux-gtk-x86_64.zip" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-Automated-Tests-${buildId}.zip" dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-platform-${buildId}-linux-gtk-x86_64.zip" dest="${executionDir}/eclipse-platform-${buildId}-linux-gtk-x86_64.zip" />
@@ -37,23 +37,30 @@
 		<property name="test.xml" value="../org.eclipse.releng.basebuilder/plugins/org.eclipse.build.tools/scripts/test.xml" />
 		<condition property="${testPlatform}" value="win7">
 			<and>
-				<os family="windows" />
-				<os arch="x86" />
+				<equals arg1="${os}" arg2="win32" />
+				<equals arg1="${ws}" arg2="win32" />
+				<equals arg1="${arch}" arg2="x86" />
 			</and>
 		</condition>
-		<property name="${testPlatform}" value="linux"/>
-		<!--<condition property="${testPlatform}" value="linux">
-			 <and>
-				<os family="unix" />
-				 <or>
-					<os arch="amd64" />					
-				</or> 
-			</and> 
-		</condition> -->
-		<echo message="testPlatform  ${testPlatform}"/>
-		<echo message="os.arch ${os.arch}"/>
-		<echo message="os.name ${os.name}"/>
-		<antcall target="get${testPlatform}zips"/>
+		<condition property="getArtifactsTarget">
+
+		</condition>
+		<condition property="${testPlatform}" value="linux">
+			<and>
+				<equals arg1="${os}" arg2="linux" />
+				<equals arg1="${ws}" arg2="gtk" />
+				<equals arg1="${arch}" arg2="x86_64" />
+			</and>
+		</condition>
+		<echo message="testPlatform  ${testPlatform}" />		
+		<condition property="getArtifacts" value="getwinzips">
+			<equals arg1="${testPlatform}" arg2="win7" />
+		</condition>
+		<condition property="getArtifacts" value="getlinzips">
+			<equals arg1="${testPlatform}" arg2="linux" />
+		</condition>
+		<echo message="getArtifacts ${getArtifacts)}" />
+		<antcall target="${getArtifacts)" />
 		<property file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/testing.properties" />
 		<property name="tester" value="${executionDir}" />
 		<replace file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" token="@testDir@" value="${testDir}" />
