@@ -43,7 +43,7 @@
 		</condition>
 		<condition property="${testPlatform}" value="linux">
 			<and>
-				<os family="Linux" />
+				<os family="unix" />
 				<os arch="x86_64" />
 			</and>
 		</condition>
