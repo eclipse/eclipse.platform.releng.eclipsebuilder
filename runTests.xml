@@ -57,7 +57,7 @@
 		<condition property="getArtifacts" value="getlinzips">
 			<equals arg1="${testPlatform}" arg2="linux" />
 		</condition>
-		<echo message="getArtifacts ${getArtifacts)}" />
+		<echo message="getArtifacts ${getArtifacts}" />
 		<antcall target="${getArtifacts)" />
 		<property file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/testing.properties" />
 		<property name="tester" value="${executionDir}" />
