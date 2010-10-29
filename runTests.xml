@@ -51,6 +51,7 @@
 			</and>
 		</condition>
 		<echo message="testPlatform  ${testPlatform}"/>
+		<echo message="os.arch ${os.arch}"/>	
 		<antcall target="get${testPlatform}zips"/>
 		<property file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/testing.properties" />
 		<property name="tester" value="${executionDir}" />
