@@ -41,10 +41,7 @@
 				<equals arg1="${ws}" arg2="win32" />
 				<equals arg1="${arch}" arg2="x86" />
 			</and>
-		</condition>
-		<condition property="getArtifactsTarget">
-
-		</condition>
+		</condition>	
 		<condition property="${testPlatform}" value="linux">
 			<and>
 				<equals arg1="${os}" arg2="linux" />
