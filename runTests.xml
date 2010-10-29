@@ -44,10 +44,14 @@
 		<condition property="${testPlatform}" value="linux">
 			<and>
 				<os family="unix" />
-				<os arch="x86_64" />
+				<or>
+					<os arch="x86_64" />
+					<os arch="x86" />
+				</or>
 			</and>
 		</condition>
-		<antcall target="get${testPlatform}zips" />
+		<echo message="testPlatform  ${testPlatform}"/>
+		<antcall target="get${testPlatform}zips"/>
 		<property file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/testing.properties" />
 		<property name="tester" value="${executionDir}" />
 		<replace file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" token="@testDir@" value="${testDir}" />
