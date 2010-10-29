@@ -41,14 +41,14 @@
 				<os arch="x86" />
 			</and>
 		</condition>
-		<condition property="${testPlatform}" value="linux">
-			<and>
+		<condition property="${testPlatform}" value="linux"/>
+			<!-- <and>
 				<os family="unix" />
-				<!-- <or>
+				 <or>
 					<os arch="amd64" />					
-				</or> -->
-			</and>
-		</condition>
+				</or> 
+			</and> 
+		</condition> -->
 		<echo message="testPlatform  ${testPlatform}"/>
 		<echo message="os.arch ${os.arch}"/>
 		<echo message="os.name ${os.name}"/>
