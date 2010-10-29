@@ -42,6 +42,7 @@
 				<equals arg1="${osgi.arch}" arg2="x86" />
 			</and>
 		</condition>	
+		<echo message="os ws arch ${osgi.os} ${osgi.ws} ${osgi.arch}"/> 
 		<condition property="${testPlatform}" value="linux">
 			<and>
 				<equals arg1="${osgi.os}" arg2="linux" />
