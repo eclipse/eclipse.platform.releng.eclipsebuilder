@@ -57,8 +57,8 @@
 		<condition property="getArtifacts" value="getlinzips">
 			<equals arg1="${testPlatform}" arg2="linux" />
 		</condition>
-		<echo message="getArtifacts ${getArtifacts}" />
-		<antcall target="${getArtifacts)" />
+		<echo message="getArtifacts ${getArtifacts}" />		
+		<antcall target="${getArtifacts}" />
 		<property file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/testing.properties" />
 		<property name="tester" value="${executionDir}" />
 		<replace file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" token="@testDir@" value="${testDir}" />
