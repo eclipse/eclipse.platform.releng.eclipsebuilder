@@ -7,7 +7,7 @@
 		<property name="arch" value="x86_64" />
 		<echo message="WORKSPACE ${WORKSPACE}" />
 		<echo message="BUILD_ID ${BUILD_ID}" />
-		<property name="testDir" value="${WORKSPACE}\${BUILD_ID}" />
+		<property name="testDir" value="${WORKSPACE}/${BUILD_ID}" />
 		<echo message="testDir ${testDir}" />
 		<property name="executionDir" value="${testDir}/eclipse-testing" />
 		<mkdir dir="${executionDir}" />
