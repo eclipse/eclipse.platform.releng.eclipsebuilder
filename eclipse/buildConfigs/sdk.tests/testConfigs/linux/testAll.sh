@@ -1,5 +1,6 @@
 #!/bin/sh
 cd $executionDir
+echo $executionDir executionDir!!!!
 #environment variables
 echo localhost > auth.cfg
 Xvfb :8 -screen 0 1280x1024x24 -auth auth.cfg &
