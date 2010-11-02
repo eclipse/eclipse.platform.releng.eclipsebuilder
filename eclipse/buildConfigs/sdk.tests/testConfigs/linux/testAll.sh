@@ -16,4 +16,5 @@ export DISPLAY LD_LIBRARY_PATH
 ls -la runtests
 #execute command to run tests
 /bin/chmod 755 runtests
+ls -la runtests
 /bin/bash runtests -os linux -ws gtk -arch x86_64 -vm /shared/common/jdk-1.6.x86_64/bin/java -properties vm.properties > linux.gtk-6.0_consolelog.txt 
