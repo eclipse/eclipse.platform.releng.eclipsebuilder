@@ -60,12 +60,7 @@
 					<param name="os" value="linux" />
 					<param name="ws" value="motif" />
 					<param name="arch" value="x86" />
-				</antcall>
-				<antcall target="packageSwtStandalone">
-					<param name="os" value="aix" />
-					<param name="ws" value="motif" />
-					<param name="arch" value="ppc" />
-				</antcall>
+				</antcall>				
 			</sequential>
 			<antcall target="packageSwtStandalone">
 				<param name="os" value="aix" />

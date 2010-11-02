@@ -92,11 +92,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	</target>
 
 	<target name="assemble.org.eclipse.sdk.solaris.motif.sparc" />
-	<target name="assemble.org.eclipse.sdk.gtk.solaris.x86" />
-	<target name="assemble.org.eclipse.sdk.aix.motif.ppc">
-		<property name="archiveName" value="eclipse-SDK-${buildId}-aix-motif.zip" />
-		<antcall target="assemble" />
-	</target>
+	<target name="assemble.org.eclipse.sdk.gtk.solaris.x86" />	
 
 	<target name="assemble">
 		<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
