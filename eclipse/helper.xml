@@ -55,13 +55,6 @@
 			</sequential>
 		</parallel>
 		<parallel failonany="true">
-			<sequential>
-				<antcall target="packageSwtStandalone">
-					<param name="os" value="linux" />
-					<param name="ws" value="motif" />
-					<param name="arch" value="x86" />
-				</antcall>				
-			</sequential>
 			<antcall target="packageSwtStandalone">
 				<param name="os" value="aix" />
 				<param name="ws" value="gtk" />
