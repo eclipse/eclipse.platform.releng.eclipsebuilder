@@ -1,6 +1,5 @@
 #!/bin/sh
-cd $executionDir
-echo $executionDir executionDir!!!!
+cd .
 #environment variables
 echo localhost > auth.cfg
 Xvfb :8 -screen 0 1280x1024x24 -auth auth.cfg &
@@ -11,12 +10,9 @@ xhost +$HOSTNAME
 MOZILLA_FIVE_HOME=/usr/lib/firefox-1.5.0.12; export MOZILLA_FIVE_HOME
 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MOZILLA_FIVE_HOME
 USERNAME=`whoami`
-
 ulimit -c unlimited
 
 export USERNAME DISPLAY LD_LIBRARY_PATH
 
 #execute command to run tests
-chmod 755 $executionDir/runtests
-$executionDir/runtests -os linux -ws gtk -arch x86_64 -vm /shared/common/jdk-1.6.x86_64/bin/java -properties vm.properties > linux.gtk-6.0_consolelog.txt 
-
+./runtests -os linux -ws gtk -arch x86_64 -vm /shared/common/jdk-1.6.x86_64/bin/java -properties vm.properties > linux.gtk-6.0_consolelog.txt 
