@@ -13,6 +13,6 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MOZILLA_FIVE_HOME
 ulimit -c unlimited
 
 export DISPLAY LD_LIBRARY_PATH
-
+ls -la runtests
 #execute command to run tests
 sh runtests -os linux -ws gtk -arch x86_64 -vm /shared/common/jdk-1.6.x86_64/bin/java -properties vm.properties > linux.gtk-6.0_consolelog.txt 
