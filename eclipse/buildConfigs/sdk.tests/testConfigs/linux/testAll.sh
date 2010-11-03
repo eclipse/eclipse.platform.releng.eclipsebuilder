@@ -13,6 +13,7 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MOZILLA_FIVE_HOME
 ulimit -c unlimited
 
 export DISPLAY LD_LIBRARY_PATH
+echo $DISPLAY DISPLAY
 ls -la runtests.sh
 #execute command to run tests
 /bin/chmod 755 runtests.sh
