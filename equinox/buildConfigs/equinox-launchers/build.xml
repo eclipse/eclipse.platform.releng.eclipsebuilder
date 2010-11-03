@@ -23,6 +23,7 @@
 		<buildRepos os="solaris" ws="gtk" arch="x86" archiveName="${archiveRoot}-solaris.gtk.x86.${buildId}.zip" />
 		<buildRepos os="hpux" ws="motif" arch="a64_32" archiveName="${archiveRoot}-hpux.motif.ia64_32.${buildId}.zip" />
 		<buildRepos os="aix" ws="motif" arch="ppc" archiveName="${archiveRoot}-aix.motif.ppc.${buildId}.zip" />
+		<buildRepos os="aix" ws="gtk" arch="ppc64" archiveName="${archiveRoot}-aix.gtk.ppc64.${buildId}.zip" />
 		<buildRepos os="macosx" ws="carbon" arch="x86" archiveName="${archiveRoot}-macosx.carbon.x86.${buildId}.tar.gz" />
 		<buildRepos os="macosx" ws="cocoa" arch="x86_64" archiveName="${archiveRoot}-macosx.cocoa.x86.${buildId}.tar.gz" />
 		<buildRepos os="macosx" ws="cocoa" arch="x86_64" archiveName="${archiveRoot}-macosx.cocoa.x86_64.${buildId}.tar.gz" />
