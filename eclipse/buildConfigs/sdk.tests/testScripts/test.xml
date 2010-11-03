@@ -113,7 +113,7 @@
 		</condition>
 		<condition property="platformArchive" value="${org.eclipse.equinox.p2.reconciler.tests.lastrelease.platform.archive.linux-x86_64}">
 			<and>
-				<os family="linux" />
+				<os family="unix" />
 				<os arch="x86_64" />
 			</and>
 		</condition>
