@@ -13,10 +13,11 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MOZILLA_FIVE_HOME
 ulimit -c unlimited
 
 export DISPLAY LD_LIBRARY_PATH
-echo $DISPLAY DISPLAY
+echo DISPLAY DISPLAY
 ls -la runtests.sh
 #execute command to run tests
 /bin/chmod 755 runtests.sh
 ls -la runtests.sh
 ls -la /shared/common/jdk-1.6.x86_64/jre/bin/java
-./runtests.sh -os linux -ws gtk -arch x86_64 -vm /shared/common/jdk-1.6.x86_64/jre/bin/java -properties vm.properties > linux.gtk-6.0_consolelog.txt 
+./runtests.sh -os linux -ws gtk -arch x86_64 -vm /shared/common/jdk-1.6.x86_64/jre/bin/java -properties vm.properties > linux.gtk-6.0_consolelog.txt
+exit 
