@@ -86,11 +86,11 @@
 			<and>
 				<os family="unix" />
 				<not>
-					<and>
+					<or>
 						<os family="mac" />
 						<os arch="x86_64" />
 						<os arch="amd64" />
-					</and>
+					</or>
 				</not>
 			</and>
 		</condition>
