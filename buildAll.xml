@@ -650,7 +650,13 @@
 		</condition>
 		<property name="repoBaseline" value="file:${updateSite}" />
 
+		<replace file="${eclipse.build.configs}/../../extras/artifacts.xml" token="@p2RepoURL@" value="${p2RepoURL}" />
+		<filter token="BUILD_ID" value="${buildLabel}" />		
+		<mkdir dir="${buildDirectory}/formatRepo"/>
+		<copy filtering="true" file="${eclipse.build.configs}/../../extras/artifacts.xml" tofile="${buildDirectory}/formatRepo/artifacts.xml" />
+		
 		<p2.mirror source="file:${reposource}" log="${buildlogs}/mirrorlog.txt" ignoreErrors="true">
+			<destination compressed="true" name="${p2.repo.name}" location="file:${buildRepo}" append="true" format="file:${buildDirectory}/formatRepo" kind="artifact"/>
 			<destination compressed="true" name="${p2.repo.name}" location="file:${buildRepo}" append="true" format="file:${reposource}" />
 			<comparator comparator="org.eclipse.equinox.p2.repository.tools.jar.comparator" comparatorLog="${buildlogs}/comparatorlog.txt">
 				<repository location="${repoBaseline}" />
