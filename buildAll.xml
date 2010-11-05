@@ -136,6 +136,13 @@
 			<equals arg1="${buildType}" arg2="M" />
 		</condition>
 		<property name="p2RepoURL" value="${p2repoN}" />
+		<condition property="p2RepoPath" value="${p2repoIPath}">
+			<equals arg1="${buildType}" arg2="I" />
+		</condition>
+		<condition property="p2RepoPath" value="${p2repoMPath}">
+			<equals arg1="${buildType}" arg2="M" />
+		</condition>
+		<property name="p2RepoPath" value="${p2repoNPath}" />
 		<property name="org.eclipse.equinox.p2.tests.current.build.repo" value="${p2RepoURL}/${buildId}" />
 		<property name="org.eclipse.equinox.p2.tests.last.release.build.repo" value="${p2repopreviousR}" />
 		<property name="previousPlatformZips" value="${buildDirectory}/previousPlatformZips" />
@@ -534,8 +541,8 @@
 			<config os="win32" ws="win32" arch="x86" />
 			<config os="win32" ws="win32" arch="x86_64" />
 			<config os="linux" ws="gtk" arch="x86" />
-			<config os="linux" ws="gtk" arch="x86_64" />			
-			<config os="linux" ws="gtk" arch="ppc64" />		
+			<config os="linux" ws="gtk" arch="x86_64" />
+			<config os="linux" ws="gtk" arch="ppc64" />
 			<config os="linux" ws="gtk" arch="s390x" />
 			<config os="linux" ws="gtk" arch="s390" />
 			<config os="solaris" ws="gtk" arch="sparc" />
@@ -544,7 +551,7 @@
 			<config os="macosx" ws="cocoa" arch="x86_64" />
 			<config os="macosx" ws="carbon" arch="ppc" />
 			<config os="macosx" ws="carbon" arch="x86" />
-			<config os="hpux" ws="motif" arch="ia64_32" />			
+			<config os="hpux" ws="motif" arch="ia64_32" />
 			<config os="aix" ws="gtk" arch="ppc" />
 			<config os="aix" ws="gtk" arch="ppc64" />
 			<advice kind="featureVersions" file="${buildDirectory}/finalFeaturesVersions.properties" />
@@ -557,13 +564,13 @@
 			<config os="linux" ws="gtk" arch="x86" />
 			<config os="linux" ws="gtk" arch="x86_64" />
 			<config os="linux" ws="gtk" arch="s390x" />
-			<config os="linux" ws="gtk" arch="s390" />			
+			<config os="linux" ws="gtk" arch="s390" />
 			<config os="solaris" ws="gtk" arch="sparc" />
 			<config os="solaris" ws="gtk" arch="x86" />
 			<config os="macosx" ws="cocoa" arch="x86" />
 			<config os="macosx" ws="cocoa" arch="x86_64" />
 			<config os="macosx" ws="carbon" arch="x86" />
-			<config os="hpux" ws="motif" arch="ia64_32" />			
+			<config os="hpux" ws="motif" arch="ia64_32" />
 			<config os="aix" ws="gtk" arch="ppc64" />
 			<advice kind="featureVersions" file="${buildDirectory}/finalFeaturesVersions.properties" />
 			<advice kind="pluginVersions" file="${buildDirectory}/finalPluginsVersions.properties" />
@@ -573,7 +580,7 @@
 			<config os="win32" ws="win32" arch="x86" />
 			<config os="win32" ws="win32" arch="x86_64" />
 			<config os="linux" ws="gtk" arch="x86" />
-			<config os="linux" ws="gtk" arch="x86_64" />			
+			<config os="linux" ws="gtk" arch="x86_64" />
 			<config os="linux" ws="gtk" arch="ppc64" />
 			<config os="linux" ws="gtk" arch="s390x" />
 			<config os="linux" ws="gtk" arch="s390" />
@@ -582,7 +589,7 @@
 			<config os="macosx" ws="cocoa" arch="x86" />
 			<config os="macosx" ws="cocoa" arch="x86_64" />
 			<config os="macosx" ws="carbon" arch="ppc" />
-			<config os="hpux" ws="motif" arch="ia64_32" />		
+			<config os="hpux" ws="motif" arch="ia64_32" />
 			<config os="aix" ws="gtk" arch="ppc" />
 			<config os="aix" ws="gtk" arch="ppc64" />
 			<advice kind="featureVersions" file="${buildDirectory}/finalFeaturesVersions.properties" />
@@ -593,7 +600,7 @@
 			<config os="win32" ws="win32" arch="x86" />
 			<config os="win32" ws="win32" arch="x86_64" />
 			<config os="linux" ws="gtk" arch="x86" />
-			<config os="linux" ws="gtk" arch="x86_64" />			
+			<config os="linux" ws="gtk" arch="x86_64" />
 			<config os="linux" ws="gtk" arch="ppc64" />
 			<config os="linux" ws="gtk" arch="s390x" />
 			<config os="linux" ws="gtk" arch="s390" />
@@ -602,7 +609,7 @@
 			<config os="macosx" ws="cocoa" arch="x86" />
 			<config os="macosx" ws="cocoa" arch="x86_64" />
 			<config os="macosx" ws="carbon" arch="x86" />
-			<config os="hpux" ws="motif" arch="ia64_32" />		
+			<config os="hpux" ws="motif" arch="ia64_32" />
 			<config os="aix" ws="gtk" arch="ppc" />
 			<config os="aix" ws="gtk" arch="ppc64" />
 			<advice kind="featureVersions" file="${buildDirectory}/finalFeaturesVersions.properties" />
@@ -622,7 +629,7 @@
 			<config os="macosx" ws="cocoa" arch="x86" />
 			<config os="macosx" ws="cocoa" arch="x86_64" />
 			<config os="macosx" ws="carbon" arch="x86" />
-			<config os="hpux" ws="motif" arch="ia64_32" />		
+			<config os="hpux" ws="motif" arch="ia64_32" />
 			<config os="aix" ws="gtk" arch="ppc" />
 			<config os="aix" ws="gtk" arch="ppc64" />
 			<advice kind="featureVersions" file="${buildDirectory}/finalFeaturesVersions.properties" />
@@ -650,13 +657,13 @@
 		</condition>
 		<property name="repoBaseline" value="file:${updateSite}" />
 
-		<replace file="${eclipse.build.configs}/../../extras/artifacts.xml" token="@p2RepoURL@" value="${p2RepoURL}" />
-		<filter token="BUILD_ID" value="${buildLabel}" />		
-		<mkdir dir="${buildDirectory}/formatRepo"/>
+		<replace file="${eclipse.build.configs}/../../extras/artifacts.xml" token="@p2RepoPath@" value="${p2RepoPath}" />
+		<filter token="BUILD_ID" value="${buildLabel}" />
+		<mkdir dir="${buildDirectory}/formatRepo" />
 		<copy filtering="true" file="${eclipse.build.configs}/../../extras/artifacts.xml" tofile="${buildDirectory}/formatRepo/artifacts.xml" />
-		
+
 		<p2.mirror source="file:${reposource}" log="${buildlogs}/mirrorlog.txt" ignoreErrors="true">
-			<destination compressed="true" name="${p2.repo.name}" location="file:${buildRepo}" append="true" format="file:${buildDirectory}/formatRepo" kind="artifact"/>
+			<destination compressed="true" name="${p2.repo.name}" location="file:${buildRepo}" append="true" format="file:${buildDirectory}/formatRepo" kind="artifact" />
 			<destination compressed="true" name="${p2.repo.name}" location="file:${buildRepo}" append="true" format="file:${reposource}" />
 			<comparator comparator="org.eclipse.equinox.p2.repository.tools.jar.comparator" comparatorLog="${buildlogs}/comparatorlog.txt">
 				<repository location="${repoBaseline}" />
