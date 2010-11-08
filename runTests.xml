@@ -7,7 +7,8 @@
 		<property name="arch" value="x86_64" />
 		<echo message="WORKSPACE ${WORKSPACE}" />
 		<echo message="BUILD_ID ${BUILD_ID}" />
-		<property name="testDir" value="${WORKSPACE}/${BUILD_ID}" />
+		<echo message="BUILD_NUMBER ${BUILD_NUMBER}"/>		
+		<property name="testDir" value="${WORKSPACE}/${BUILD_ID}/ws" />		 
 		<echo message="testDir ${testDir}" />
 		<property name="executionDir" value="${testDir}/eclipse-testing" />
 		<mkdir dir="${executionDir}" />
@@ -41,8 +42,8 @@
 				<equals arg1="${osgi.ws}" arg2="win32" />
 				<equals arg1="${osgi.arch}" arg2="x86" />
 			</and>
-		</condition>	
-		<echo message="os ws arch ${osgi.os} ${osgi.ws} ${osgi.arch}"/> 
+		</condition>
+		<echo message="os ws arch ${osgi.os} ${osgi.ws} ${osgi.arch}" />
 		<condition property="testPlatform" value="linux">
 			<and>
 				<equals arg1="${osgi.os}" arg2="linux" />
@@ -50,21 +51,21 @@
 				<equals arg1="${osgi.arch}" arg2="x86_64" />
 			</and>
 		</condition>
-		<echo message="testPlatform  ${testPlatform}" />		
+		<echo message="testPlatform  ${testPlatform}" />
 		<condition property="getArtifacts" value="getwinzips">
 			<equals arg1="${testPlatform}" arg2="win7" />
 		</condition>
 		<condition property="getArtifacts" value="getlinzips">
 			<equals arg1="${testPlatform}" arg2="linux" />
 		</condition>
-		<echo message="getArtifacts ${getArtifacts}" />		
+		<echo message="getArtifacts ${getArtifacts}" />
 		<antcall target="${getArtifacts}" />
 		<property file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/testing.properties" />
 		<property name="tester" value="${executionDir}" />
 		<replace file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" token="@testDir@" value="${testDir}" />
 		<exec dir="." executable="ls">
-					<arg line="-la ${testDir}/eclipse-testing/eclipse-platform-N20101106-2000-linux-gtk.tar.gz" />
-				</exec>
+			<arg line="-la ${testDir}/eclipse-testing/eclipse-platform-N20101106-2000-linux-gtk.tar.gz" />
+		</exec>
 		<copy todir="${executionDir}">
 			<fileset dir="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}" />
 		</copy>
