@@ -786,9 +786,9 @@
 		<antcall target="jface" />
 		<antcall target="jfacedatabinding" />
 		<antcall target="filebuffers" />
-		<antcall target="antui" /> -->
+		<antcall target="antui" /> 
 		<antcall target="swt" />
-		<!-- <antcall target="teamcvs" />
+		<antcall target="teamcvs" />
 		<antcall target="coretestsnet" />
 		<antcall target="jdtapt" />
 		<antcall target="pdebuild" />
@@ -796,11 +796,11 @@
 		<antcall target="ua" />
 		<antcall target="uiforms" />
 		<antcall target="pdeapitooling" />
-		<antcall target="equinoxsecurity" />
+		<antcall target="equinoxsecurity" /> -->
 		<antcall target="equinoxp2" />
 		<antcall target="equinoxp2ui" />
 		<antcall target="equinoxp2discovery" />
-		<antcall target="search" />
+		<!-- <antcall target="search" />
 		<antcall target="pdeds" />
 		<antcall target="jdtcoremodel" />
 		<antcall target="uadoc" />
