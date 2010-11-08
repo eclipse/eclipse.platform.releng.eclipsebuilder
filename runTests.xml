@@ -7,8 +7,8 @@
 		<property name="arch" value="x86_64" />
 		<echo message="WORKSPACE ${WORKSPACE}" />
 		<echo message="BUILD_ID ${BUILD_ID}" />
-		<echo message="BUILD_NUMBER ${BUILD_NUMBER}"/>		
-		<property name="testDir" value="${WORKSPACE}/ws/${BUILD_ID}" />		 
+		<echo message="BUILD_NUMBER ${BUILD_NUMBER}" />
+		<property name="testDir" value="${WORKSPACE}/ws/${BUILD_ID}" />
 		<echo message="testDir ${testDir}" />
 		<property name="executionDir" value="${testDir}/eclipse-testing" />
 		<mkdir dir="${executionDir}" />
@@ -66,19 +66,27 @@
 		<exec dir="." executable="ls">
 			<arg line="-la ${executionDir}/eclipse-platform-N20101106-2000-linux-gtk.tar.gz" />
 		</exec>
-		
-	<!--	eclipse-JUnit-Linux/ws/2010-11-08_14-26-17/ws/eclipse-testing/
+		<echo message="executionDir ${executionDir}" />
+		<exec dir="." executable="ls">
+			<arg line="-la ${executionDir}" />
+		</exec>
+		<echo message="testDir ${testDir}" />
+		<exec dir="." executable="ls">
+			<arg line="-la ${testDir}" />
+		</exec>
+
+		<!--	eclipse-JUnit-Linux/ws/2010-11-08_14-26-17/ws/eclipse-testing/
 		
 		 WORKSPACE /opt/users/hudsonbuild/workspace/eclipse-JUnit-Linux -->
 
-		
+
 		<copy todir="${executionDir}">
 			<fileset dir="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}" />
 		</copy>
 		<copy todir="${executionDir}" overwrite="true">
 			<fileset dir="eclipse/buildConfigs/sdk.tests/testScripts" />
 		</copy>
-		<ant antfile="${test.xml}" />
+	<!--	<ant antfile="${test.xml}" /> -->
 	</target>
 
 </project>
