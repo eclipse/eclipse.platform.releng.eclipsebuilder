@@ -32,6 +32,12 @@
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-${buildId}-delta-pack.zip" dest="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-Automated-Tests-${buildId}.zip" dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-3.6-linux-gtk-x86_64.tar.gz" dest="${executionDir}/eclipse-platform-3.6-linux-gtk-x86_64.tar.gz" />
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz" dest="${executionDir}/test-eclipse/eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz" />
+				<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-Automated-Tests-${buildId}.zip" dest="${testDir}/test-eclipse/eclipse-Automated-Tests-${buildId}.zip" />
+				<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-platform-${buildId}-linux-gtk-x86_64.tar.gz" dest="${executionDir}/test-eclipse/eclipse-platform-${buildId}-linux-gtk-x86_64.tar.gz" />
+				<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-${buildId}-delta-pack.zip" dest="${executionDir}/test-eclipse/eclipse-${buildId}-delta-pack.zip" />
+				<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-Automated-Tests-${buildId}.zip" dest="${executionDir}/test-eclipse/eclipse-Automated-Tests-${buildId}.zip" />
+				<get src="http://download.eclipse.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-3.6-linux-gtk-x86_64.tar.gz" dest="${executionDir}/test-eclipse/eclipse-platform-3.6-linux-gtk-x86_64.tar.gz" />
 	</target>
 
 	<target name="main" depends="init">
