@@ -86,7 +86,7 @@
 		<copy todir="${executionDir}" overwrite="true">
 			<fileset dir="eclipse/buildConfigs/sdk.tests/testScripts" />
 		</copy>
-	<!--	<ant antfile="${test.xml}" /> -->
+		<ant antfile="${test.xml}" /> 
 	</target>
 
 </project>
