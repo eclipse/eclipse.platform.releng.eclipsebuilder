@@ -70,9 +70,9 @@
 		<exec dir="." executable="ls">
 			<arg line="-la ${executionDir}" />
 		</exec>
-		<echo message="testDir ${testDir}" />
+		<echo message="testDir ${testDir}/eclipse-testing" />
 		<exec dir="." executable="ls">
-			<arg line="-la ${testDir}" />
+			<arg line="-la ${testDir}/eclipse-testing" />
 		</exec>
 
 		<!--	eclipse-JUnit-Linux/ws/2010-11-08_14-26-17/ws/eclipse-testing/
