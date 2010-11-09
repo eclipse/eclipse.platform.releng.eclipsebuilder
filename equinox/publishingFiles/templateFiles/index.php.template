@@ -114,7 +114,7 @@
 	
 	<div class="homeitem3col">
 		<h3><a onclick="expandCollapse('osgistarterkits.bundles');"><img  id="osgistarterkits.bundles.button" src="http://eclipse.org/equinox/images/arrow.png"/></a>&nbsp;OSGi starter kits</h3>
-		<p>Platform-specific OSGi starter kits for the Equinox framework. </p>
+		<p>A useful collection of Equinox bundles packaged as a ready to run system.  This include the framework, p2 and other frequently used service implementations. </p>
 		<div id="osgistarterkits.bundles" class="collapsable"> 
 			<table border="0" cellspacing="0" cellpadding="0" width="100%">
 				<tr><td width="5%"/><td width="78%"/><td width="9%"/><td width="8%"/></tr>

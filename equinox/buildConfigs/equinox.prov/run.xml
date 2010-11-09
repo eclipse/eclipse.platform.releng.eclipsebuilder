@@ -868,29 +868,29 @@
 			<sequential>
 				<!--starter kits -->
 				<exec dir="${equinox.starterkit.install.win32}" executable="zip">
-					<arg line="-q ${output.dir}/equinox-OSGI-starterkit-${buildId}-win32.zip -r ." />
+					<arg line="-q ${output.dir}/EclipseRT-OSGi-StarterKit-${buildId}-win32.zip -r ." />
 				</exec>
 				<!-- macosx agent -->
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${equinox.starterkit.install.macosx}" />
-					<param name="tar.base.filename" value="${output.dir}/equinox-OSGi-starterkit-${buildId}-macosx-cocoa-x86.tar" />
+					<param name="tar.base.filename" value="${output.dir}/EclipseRT-OSGi-StarterKit-${buildId}-macosx-cocoa-x86.tar" />
 				</antcall>
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${equinox.starterkit.install.linux}" />
-					<param name="tar.base.filename" value="${output.dir}/equinox-OSGi-starterkit-${buildId}-linux-gtk-x86.tar" />
+					<param name="tar.base.filename" value="${output.dir}/EclipseRT-OSGi-StarterKit-${buildId}-linux-gtk-x86.tar" />
 				</antcall>
 				<!--starter kits -->
 				<exec dir="${equinox.starterkit.install.win32.x86_64}" executable="zip">
-					<arg line="-q ${output.dir}/equinox-OSGI-starterkit-${buildId}-win32-x86_64.zip -r ." />
+					<arg line="-q ${output.dir}/EclipseRT-OSGi-StarterKit-${buildId}-win32-x86_64.zip -r ." />
 				</exec>
 				<!-- macosx agent -->
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${equinox.starterkit.install.macosx.x86_64}" />
-					<param name="tar.base.filename" value="${output.dir}/equinox-OSGi-starterkit-${buildId}-macosx-cocoa-x86_64.tar" />
+					<param name="tar.base.filename" value="${output.dir}/EclipseRT-OSGi-StarterKit-${buildId}-macosx-cocoa-x86_64.tar" />
 				</antcall>
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${equinox.starterkit.install.linux.x86_64}" />
-					<param name="tar.base.filename" value="${output.dir}/equinox-OSGi-starterkit-${buildId}-linux-gtk-x86_64.tar" />
+					<param name="tar.base.filename" value="${output.dir}/EclipseRT-OSGi-StarterKit-${buildId}-linux-gtk-x86_64.tar" />
 				</antcall>
 			</sequential>
 
