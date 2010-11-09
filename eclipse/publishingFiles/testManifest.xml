@@ -126,8 +126,7 @@
 		<platform id="SWTSG" name="Solaris 10 (SPARC/GTK 2)" fileName="swt-@build@-gtk-solaris-sparc.zip"></platform>
 		<platform id="SWTSGX" name="Solaris 10 (x86/GTK 2)" fileName="swt-@build@-gtk-solaris-x86.zip"></platform>
 		<platform id="SWTSM" name="Solaris 10 (SPARC/Motif)" fileName="swt-@build@-motif-solaris-sparc.zip"></platform>		
-		<platform id="SWTHP" name="HPUX (IA64_32/Motif)" fileName="swt-@build@-motif-hpux-ia64_32.zip"></platform>
-		<platform id="SWTNP" name="QNX (x86/Photon)" fileName="swt-@build@-photon-qnx-x86.zip"></platform>	
+		<platform id="SWTHP" name="HPUX (IA64_32/Motif)" fileName="swt-@build@-motif-hpux-ia64_32.zip"></platform>			
 		<platform id="SWTAG" name="AIX (PPC/GTK 2)" fileName="swt-@build@-gtk-aix-ppc.zip"></platform>	
 		<platform id="SWTAGPPC64" name="AIX (PPC/GTK 2)" fileName="swt-@build@-gtk-aix-ppc64.zip"></platform>						
 		<platform id="SWTMCC" name="Mac OSX (Mac/Cocoa) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="swt-@build@-cocoa-macosx.zip"></platform>

@@ -74,13 +74,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<antcall target="assemble" />
 	</target>
 
-	<target name="assemble.org.eclipse.sdk.qnx.photon.x86">
-		<!--do not assemble this drop for now-->
-		<!--ant antfile="${assembleScriptName}">
-		<property name="archiveName" value="eclipse-SDK-${buildId}-qnx-photon.zip"/>
-	</ant-->
-	</target>
-
 	<target name="assemble.org.eclipse.sdk.solaris.motif.sparc" />
 	<target name="assemble.org.eclipse.sdk.gtk.solaris.x86" />	
 

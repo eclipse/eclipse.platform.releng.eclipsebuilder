@@ -87,12 +87,7 @@
 					<param name="os" value="hpux" />
 					<param name="ws" value="motif" />
 					<param name="arch" value="ia64_32" />
-				</antcall>
-				<antcall target="packageSwtStandalone">
-					<param name="os" value="qnx" />
-					<param name="ws" value="photon" />
-					<param name="arch" value="x86" />
-				</antcall>
+				</antcall>				
 			</sequential>
 		</parallel>
 		<parallel failonany="true">
