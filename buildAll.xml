@@ -649,14 +649,9 @@
 			<config os="macosx" ws="cocoa" arch="x86" />
 		</p2.publish.product>
 
-		<property name="equinox.starterkit.dir" value="${equinox.build.configs}/equinox.starterkit" />
-		<copy todir="${equinox.starterkit.dir}" flatten="true">
-			<fileset dir="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/product" />
-		</copy>		 
-
-		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${equinox.starterkit.dir}/EclipseRTOSGiStarterKit.product" compress="true">
+		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/product/EclipseRTOSGiStarterKit.product" compress="true">
 			<config os="win32" ws="win32" arch="x86" />
-			<config os="win32" ws="win32" arch="x86_64" />			
+			<config os="win32" ws="win32" arch="x86_64" />
 			<config os="linux" ws="gtk" arch="x86" />
 			<config os="linux" ws="gtk" arch="x86_64" />
 			<config os="macosx" ws="cocoa" arch="x86" />
