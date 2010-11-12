@@ -35,7 +35,7 @@
 	</target>
 
 	<target name="configure.team.cvs.test">
-		<property name="cvstest.properties" value="/shared/eclipse/buildtests/cvstest.properties"/>
+		<property name="cvstest.properties" value="/shared/eclipse/buildtests/cvstest.properties" />
 		<replace file="${test.xml}" propertyFile="${cvstest.properties}">
 			<replacefilter token="${cvs_user}" property="cvs_user" />
 			<replacefilter token="${cvs_password}" property="cvs_password" />
@@ -88,17 +88,16 @@
 		
 		 WORKSPACE /opt/users/hudsonbuild/workspace/eclipse-JUnit-Linux -->
 
-		<condition property="cvstest.properties" value="/shared/eclipse/buildtests/cvstest.properties">
-			<equals arg1="${hudson}" arg2="true" />
-		</condition>
-		<antcall target="configure.team.cvs.test" />
-
 		<copy todir="${executionDir}">
 			<fileset dir="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}" />
 		</copy>
 		<copy todir="${executionDir}" overwrite="true">
 			<fileset dir="eclipse/buildConfigs/sdk.tests/testScripts" />
 		</copy>
+		<condition property="cvstest.properties" value="/shared/eclipse/buildtests/cvstest.properties">
+			<equals arg1="${hudson}" arg2="true" />
+		</condition>
+		<antcall target="configure.team.cvs.test" />
 		<ant antfile="${test.xml}" />
 	</target>
 
