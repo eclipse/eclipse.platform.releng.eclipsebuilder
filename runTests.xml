@@ -36,8 +36,8 @@
 
 	<target name="configure.team.cvs.test">
 		<echo message="cvstest.properties ${cvstest.properties}" />
-		<exec dir="." executable="ls">
-			<arg line="-la ${cvstest.properties}" />
+		<exec dir="." executable="cat">
+			<arg line="${cvstest.properties}" />
 		</exec>
 		<replace file="${test.xml}" propertyFile="${cvstest.properties}">
 			<replacefilter token="${cvs_user}" property="cvs_user" />
