@@ -35,15 +35,16 @@
 	</target>
 
 	<target name="configure.team.cvs.test">
-		<property name="cvstest.properties" value="/shared/eclipse/buildtests/cvstest.properties" />
-		<echo message="cvstest.properties ${cvstest.properties}"/>
+		<echo message="cvstest.properties ${cvstest.properties}" />
+		<exec dir="." executable="ls">
+			<arg line="-la ${cvstest.properties}" />
+		</exec>
 		<replace file="${test.xml}" propertyFile="${cvstest.properties}">
 			<replacefilter token="${cvs_user}" property="cvs_user" />
 			<replacefilter token="${cvs_password}" property="cvs_password" />
 			<replacefilter token="${cvs_host}" property="cvs_host" />
 			<replacefilter token="${cvs_root}" property="cvs_root" />
 		</replace>
-		<delete file="${eclipse.build.configs}/sdk.tests/testScripts/test.xml.tmp" />
 	</target>
 
 	<target name="main" depends="init">
