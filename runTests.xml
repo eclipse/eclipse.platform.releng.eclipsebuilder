@@ -36,6 +36,7 @@
 
 	<target name="configure.team.cvs.test">
 		<property name="cvstest.properties" value="/shared/eclipse/buildtests/cvstest.properties" />
+		<echo message="cvstest.properties ${cvstest.properties}"/>
 		<replace file="${test.xml}" propertyFile="${cvstest.properties}">
 			<replacefilter token="${cvs_user}" property="cvs_user" />
 			<replacefilter token="${cvs_password}" property="cvs_password" />
