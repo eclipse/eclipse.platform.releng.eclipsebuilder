@@ -31,7 +31,18 @@
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-platform-${buildId}-linux-gtk-x86_64.tar.gz" dest="${executionDir}/eclipse-platform-${buildId}-linux-gtk-x86_64.tar.gz" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-${buildId}-delta-pack.zip" dest="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/${buildId}/eclipse-Automated-Tests-${buildId}.zip" dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
-		<get src="http://download.eclipse.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-3.6-linux-gtk-x86_64.tar.gz" dest="${executionDir}/eclipse-platform-3.6-linux-gtk-x86_64.tar.gz" />		
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-3.6-linux-gtk-x86_64.tar.gz" dest="${executionDir}/eclipse-platform-3.6-linux-gtk-x86_64.tar.gz" />
+	</target>
+
+	<target name="configure.team.cvs.test">
+		<property name="cvstest.properties" value="/shared/eclipse/buildtests/cvstests.properties"/>
+		<replace file="${test.xml}" propertyFile="${cvstest.properties}">
+			<replacefilter token="${cvs_user}" property="cvs_user" />
+			<replacefilter token="${cvs_password}" property="cvs_password" />
+			<replacefilter token="${cvs_host}" property="cvs_host" />
+			<replacefilter token="${cvs_root}" property="cvs_root" />
+		</replace>
+		<delete file="${eclipse.build.configs}/sdk.tests/testScripts/test.xml.tmp" />
 	</target>
 
 	<target name="main" depends="init">
@@ -77,6 +88,10 @@
 		
 		 WORKSPACE /opt/users/hudsonbuild/workspace/eclipse-JUnit-Linux -->
 
+		<condition property="cvstest.properties" value="/shared/eclipse/buildtests/cvstests.properties">
+			<equals arg1="${hudson}" arg2="true" />
+		</condition>
+		<antcall target="configure.team.cvs.test" />
 
 		<copy todir="${executionDir}">
 			<fileset dir="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}" />
