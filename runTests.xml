@@ -97,7 +97,7 @@
 			<equals arg1="${hudson}" arg2="true" />
 		</condition>
 		<antcall target="configure.team.cvs.test" />
-		<!-- <ant antfile="${test.xml}" /> -->
+		<ant antfile="${test.xml}" />
 	</target>
 
 </project>
