@@ -80,7 +80,7 @@
 			<platform format="equinox" id="SLG2PPC64" name="Linux (PPC64/GTK 2)" fileName="launchers-linux.gtk.ppc64.@buildid@.tar.gz" />
 			<platform format="equinox" id="SSG" name="Solaris 10 (SPARC/GTK 2)" fileName="launchers-solaris.gtk.sparc.@buildid@.zip" />
 			<platform format="equinox" id="SSGX" name="Solaris 10 (x86/GTK 2)" fileName="launchers-solaris.gtk.x86.@buildid@.zip" />
-			<platform format="equinox" id="SHPUX" name="HP-UX (ia64_32/Motif)" fileName="launchers-hpux.motif.ia64_32.@buildid@.zip" />			
+			<platform format="equinox" id="SHPUX" name="HP-UX (ia64_32/GTK 2)" fileName="launchers-hpux.gtk.ia64_32.@buildid@.zip" />			
 			<platform format="equinox" id="SAG" name="AIX (PPC/GTK 2)" fileName="launchers-aix.gtk.ppc.@buildid@.zip" />
 			<platform format="equinox" id="SAGPPC64" name="AIX (PPC64/GTK 2)" fileName="launchers-aix.gtk.ppc64.@buildid@.zip" />
 			<platform format="equinox" id="SMC" name="Mac OSX (Mac/Carbon)" fileName="launchers-macosx.carbon.x86.@buildid@.tar.gz" />
