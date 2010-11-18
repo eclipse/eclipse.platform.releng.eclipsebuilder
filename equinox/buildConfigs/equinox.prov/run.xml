@@ -31,6 +31,13 @@
 		<property name="p2.agent.install.macosx" value="${p2.output.base}/agent.install.macosx" />
 		<mkdir dir="${p2.agent.install.macosx}" />
 
+		<property name="p2.agent.install.win32.director" value="${p2.output.base}/agent.install.win32/eclipse" />
+		<mkdir dir="${p2.agent.install.win32.director}" />
+		<property name="p2.agent.install.linux.director" value="${p2.output.base}/agent.install.linux/eclipse" />
+		<mkdir dir="${p2.agent.install.linux.director}" />
+		<property name="p2.agent.install.macosx.director" value="${p2.output.base}/agent.install.macosx/eclipse" />
+		<mkdir dir="${p2.agent.install.macosx.director}" />
+
 		<!-- OSGi starter kits -->
 		<property name="equinox.starterkit.install.win32" value="${p2.output.base}/equinox.starterkit.install.win32/eclipse" />
 		<mkdir dir="${equinox.starterkit.install.win32}" />
@@ -875,7 +882,7 @@
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${equinox.starterkit.install.linux}" />
 					<param name="tar.base.filename" value="${output.dir}/EclipseRT-OSGi-StarterKit-${buildId}-linux-gtk-x86.tar" />
-				</antcall>				
+				</antcall>
 				<exec dir="${equinox.starterkit.install.win32.x86_64}" executable="zip">
 					<arg line="-q ${output.dir}/EclipseRT-OSGi-StarterKit-${buildId}-win32-x86_64.zip -r ." />
 				</exec>
