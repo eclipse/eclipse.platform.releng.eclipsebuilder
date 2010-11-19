@@ -1,7 +1,7 @@
 <project default="main">
 
 	<target name="init">
-		<property name="buildId" value="N20101106-2000" />
+		<property name="buildId" value="N20101118-2000" />
 		<property name="os" value="win32" />
 		<property name="ws" value="win32" />
 		<property name="arch" value="x86_64" />
