@@ -748,7 +748,7 @@
 	</target>
 
 	<target name="all">
-	<!--	<antcall target="jdtcompilertool" />
+		<!-- <antcall target="jdtcompilertool" />
 		<antcall target="jdtcompilerapt" />
 		<antcall target="jdttext" />
 		<antcall target="relEng" />
@@ -783,17 +783,17 @@
 		<antcall target="swt" />
 		<antcall target="teamcvs" />
 		<antcall target="coretestsnet" />
-		<antcall target="jdtapt" /> -->
-		<antcall target="pdebuild" />
-		<!-- <antcall target="jdtaptpluggable" />
+		<antcall target="jdtapt" /> 
+		<antcall target="pdebuild" /> 
+		<antcall target="jdtaptpluggable" />
 		<antcall target="ua" />
 		<antcall target="uiforms" />
-		<antcall target="pdeapitooling" />
-		<antcall target="equinoxsecurity" />
+		<antcall target="pdeapitooling" /> 
+		<antcall target="equinoxsecurity" /> -->
 		<antcall target="equinoxp2" />
 		<antcall target="equinoxp2ui" />
 		<antcall target="equinoxp2discovery" />
-	 	<antcall target="search" />
+<!--	 	<antcall target="search" />
 		<antcall target="pdeds" />
 		<antcall target="jdtcoremodel" />
 		<antcall target="uadoc" />
