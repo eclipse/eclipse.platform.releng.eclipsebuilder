@@ -748,7 +748,7 @@
 	</target>
 
 	<target name="all">
-		<antcall target="jdtcompilertool" />
+	<!--	<antcall target="jdtcompilertool" />
 		<antcall target="jdtcompilerapt" />
 		<antcall target="jdttext" />
 		<antcall target="relEng" />
@@ -780,9 +780,9 @@
 		<antcall target="jfacedatabinding" />
 		<antcall target="filebuffers" />
 		<antcall target="antui" /> 
-		<antcall target="swt" />
+		<antcall target="swt" /> -->
 		<antcall target="teamcvs" />
-		<antcall target="coretestsnet" />
+		<!-- <antcall target="coretestsnet" />
 		<antcall target="jdtapt" /> 
 		<antcall target="pdebuild" /> 
 		<antcall target="jdtaptpluggable" />
@@ -798,7 +798,7 @@
 		<antcall target="jdtcoremodel" />
 		<antcall target="uadoc" />
 		<antcall target="debug" />
-		<antcall target="ui" />  
+		<antcall target="ui" /> -->  
 	</target>
 </project>
 
