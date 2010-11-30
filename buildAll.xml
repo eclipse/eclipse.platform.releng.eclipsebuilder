@@ -504,6 +504,7 @@
 		<replace token="@qualifier@" file="${eclipse.build.configs}/rcp/rcp.product" value="${buildId}" />
 		<replace token="@qualifier@" file="${eclipse.build.configs}/rcp.sdk/rcp.product" value="${buildId}" />
 		<replace token="@qualifier@" file="${eclipse.build.configs}/rcp.config/feature.xml" value="${buildId}" />
+		<replace token="@qualifier@" file="${equinox.build.configs}/osgistarter.config.launcher/feature.xml" value="${buildId}" />
 		<delete dir="${reposource}" />
 		<mkdir dir="${reposource}" />
 		<exec executable="unzip" dir=".">
@@ -653,13 +654,6 @@
 		<property name="osgi.starter.config.launcher.temp" value="${equinox.build.configs}/osgistarter.config.launcher/temp" />
 		<mkdir dir="${osgi.starter.config.launcher.temp}" />
 
-		<eclipse.brand.p2.artifacts metadataRepository="file:${reposource}" artifactRepository="file:${reposource}" tempDirectory="${osgi.starter.config.launcher.temp}" launcherProvider="org.eclipse.equinox.executable" productId="org.eclipse.rt.osgistarterkit.product" launcherName="rt" config="win32.win32.x86" productVersion="1.0.0.${buildId}" iconsList="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/rt.ico" />
-		<eclipse.brand.p2.artifacts metadataRepository="file:${reposource}" artifactRepository="file:${reposource}" tempDirectory="${osgi.starter.config.launcher.temp}" launcherProvider="org.eclipse.equinox.executable" productId="org.eclipse.rt.osgistarterkit.product" launcherName="rt" config="win32.win32.x86_64" productVersion="1.0.0.${buildId}" iconsList="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/rt.ico" />
-		<eclipse.brand.p2.artifacts metadataRepository="file:${reposource}" artifactRepository="file:${reposource}" tempDirectory="${osgi.starter.config.launcher.temp}" launcherProvider="org.eclipse.equinox.executable" productId="org.eclipse.rt.osgistarterkit.product" launcherName="rt" config="linux.gtk.x86" productVersion="1.0.0.${buildId}" iconsList="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/rt.ico" />
-		<eclipse.brand.p2.artifacts metadataRepository="file:${reposource}" artifactRepository="file:${reposource}" tempDirectory="${osgi.starter.config.launcher.temp}" launcherProvider="org.eclipse.equinox.executable" productId="org.eclipse.rt.osgistarterkit.product" launcherName="rt" config="linux.gtk.x86_64" productVersion="1.0.0.${buildId}" iconsList="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/rt.ico" />
-		<eclipse.brand.p2.artifacts metadataRepository="file:${reposource}" artifactRepository="file:${reposource}" tempDirectory="${osgi.starter.config.launcher.temp}" launcherProvider="org.eclipse.equinox.executable" productId="org.eclipse.rt.osgistarterkit.product" launcherName="rt" config="macosx.cocoa.x86" productVersion="1.0.0.${buildId}" iconsList="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/rt.icns" />
-		<eclipse.brand.p2.artifacts metadataRepository="file:${reposource}" artifactRepository="file:${reposource}" tempDirectory="${osgi.starter.config.launcher.temp}" launcherProvider="org.eclipse.equinox.executable" productId="org.eclipse.rt.osgistarterkit.product" launcherName="rt" config="macosx.cocoa.x86_64" productVersion="1.0.0.${buildId}" iconsList="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/rt.icns" />
-
 		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/product/EclipseRTOSGiStarterKit.product" compress="true">
 			<config os="win32" ws="win32" arch="x86" />
 			<config os="win32" ws="win32" arch="x86_64" />
@@ -669,6 +663,12 @@
 			<config os="macosx" ws="cocoa" arch="x86_64" />
 		</p2.publish.product>
 
+		<eclipse.brand.p2.artifacts metadataRepository="file:${reposource}" artifactRepository="file:${reposource}" tempDirectory="${osgi.starter.config.launcher.temp}" launcherProvider="org.eclipse.equinox.executable" productId="org.eclipse.osgi.configuration" launcherName="rt" config="win32.win32.x86" productVersion="1.0.0.${buildId}" iconsList="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/rt.ico" />
+		<eclipse.brand.p2.artifacts metadataRepository="file:${reposource}" artifactRepository="file:${reposource}" tempDirectory="${osgi.starter.config.launcher.temp}" launcherProvider="org.eclipse.equinox.executable" productId="org.eclipse.osgi.configuration" launcherName="rt" config="win32.win32.x86_64" productVersion="1.0.0.${buildId}" iconsList="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/rt.ico" />
+		<eclipse.brand.p2.artifacts metadataRepository="file:${reposource}" artifactRepository="file:${reposource}" tempDirectory="${osgi.starter.config.launcher.temp}" launcherProvider="org.eclipse.equinox.executable" productId="org.eclipse.osgi.configuration" launcherName="rt" config="linux.gtk.x86" productVersion="1.0.0.${buildId}" iconsList="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/rt.ico" />
+		<eclipse.brand.p2.artifacts metadataRepository="file:${reposource}" artifactRepository="file:${reposource}" tempDirectory="${osgi.starter.config.launcher.temp}" launcherProvider="org.eclipse.equinox.executable" productId="org.eclipse.osgi.configuration" launcherName="rt" config="linux.gtk.x86_64" productVersion="1.0.0.${buildId}" iconsList="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/rt.ico" />
+		<eclipse.brand.p2.artifacts metadataRepository="file:${reposource}" artifactRepository="file:${reposource}" tempDirectory="${osgi.starter.config.launcher.temp}" launcherProvider="org.eclipse.equinox.executable" productId="org.eclipse.osgi.configuration" launcherName="rt" config="macosx.cocoa.x86" productVersion="1.0.0.${buildId}" iconsList="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/rt.icns" />
+		<eclipse.brand.p2.artifacts metadataRepository="file:${reposource}" artifactRepository="file:${reposource}" tempDirectory="${osgi.starter.config.launcher.temp}" launcherProvider="org.eclipse.equinox.executable" productId="org.eclipse.osgi.configuration" launcherName="rt" config="macosx.cocoa.x86_64" productVersion="1.0.0.${buildId}" iconsList="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/rt.icns" />
 
 		<antcall target="packMasterFeature" />
 
