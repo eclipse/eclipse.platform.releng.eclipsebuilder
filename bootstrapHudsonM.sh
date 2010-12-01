@@ -46,13 +46,7 @@ deleteArtifacts=""
 #sets fetchTag="HEAD" for nightly builds if required
 tag=""
 
-#buildProjectTags=v20100509
-#buildProjectTags=v20100511
-#buildProjectTags=v20100513
-#buildProjectTags=v20100519
-#buildProjectTags=v20100528c
-#buildProjectTags=v20100528d
-buildProjectTags=v20100601
+buildProjectTags=r361_v20101201
 
 #updateSite property setting
 updateSite=""
@@ -70,13 +64,13 @@ buildId=""
 buildLabel=""
 
 # tag for build contribution project containing .map files
-mapVersionTag=HEAD
+mapVersionTag==R3_6_1_for_foundation
 
 # directory in which to export builder projects
 builderDir=$WORKSPACE/builds/eclipsebuilder
 
 # buildtype determines whether map file tags are used as entered or are replaced with HEAD
-buildType=N
+buildType=
 
 # directory where to copy build
 postingDirectory=$WORKSPACE/builds/transfer/files/master/downloads/drops
@@ -212,7 +206,7 @@ echo log=$postingDirectory/$buildLabel/index.php >> monitor.properties
 buildMachineArch=`uname -p`
 if [ $buildMachineArch == "ppc64" ]
 then
-        buildLaunchingVM="/shared/common/ibm-java-ppc-605/jre/bin"
+       buildLaunchingVM="/shared/common/ibm-java-ppc-605/jre/bin"
        # echo "buildLaunchingVM $buildLaunchingVM"
        # test = `ls /shared/common`
       #  echo "test $test"

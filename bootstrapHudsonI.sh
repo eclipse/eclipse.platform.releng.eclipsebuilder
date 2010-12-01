@@ -52,7 +52,14 @@ tag=""
 #buildProjectTags=v20100519
 #buildProjectTags=v20100528c
 #buildProjectTags=v20100528d
-buildProjectTags=v20100601
+#buildProjectTags=v20100601
+#buildProjectTags=v20100610a
+#buildProjectTags=v20100621
+#buildProjectTags=v20100628
+#buildProjectTags=v20100708
+#buildProjectTags=v20100715
+#buildProjectTags=v20100719c
+buildProjectTags=v20100805
 
 #updateSite property setting
 updateSite=""
@@ -70,13 +77,13 @@ buildId=""
 buildLabel=""
 
 # tag for build contribution project containing .map files
-mapVersionTag=HEAD
+mapVersionTag=OSGI_R4_3_Generics
 
 # directory in which to export builder projects
 builderDir=$WORKSPACE/builds/eclipsebuilder
 
 # buildtype determines whether map file tags are used as entered or are replaced with HEAD
-buildType=N
+buildType=
 
 # directory where to copy build
 postingDirectory=$WORKSPACE/builds/transfer/files/master/downloads/drops
@@ -212,7 +219,7 @@ echo log=$postingDirectory/$buildLabel/index.php >> monitor.properties
 buildMachineArch=`uname -p`
 if [ $buildMachineArch == "ppc64" ]
 then
-        buildLaunchingVM="/shared/common/ibm-java-ppc-605/jre/bin"
+       buildLaunchingVM="/shared/common/ibm-java-ppc-605/jre/bin"
        # echo "buildLaunchingVM $buildLaunchingVM"
        # test = `ls /shared/common`
       #  echo "test $test"
