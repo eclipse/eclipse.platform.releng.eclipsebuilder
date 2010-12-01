@@ -64,7 +64,7 @@ buildId=""
 buildLabel=""
 
 # tag for build contribution project containing .map files
-mapVersionTag==R3_6_1_for_foundation
+mapVersionTag=R3_6_1_forfoundation
 
 # directory in which to export builder projects
 builderDir=$WORKSPACE/builds/eclipsebuilder
