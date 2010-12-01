@@ -4,4 +4,4 @@ mkdir $WORKSPACE/builds
 cd $WORKSPACE/builds
 mkdir -p $WORKSPACE/builds/I
 mkdir -p $WORKSPACE/builds/transfer/files/testUpdates-I
-$WORKSPACE/org.eclipse.releng.eclipsebuilder/bootstrapHudsonI.sh -test -skipTest -buildDirectory $WORKSPACE/builds/I -hudson -updateSite $WORKSPACE/builds/transfer/files/testUpdates-I I
+$WORKSPACE/org.eclipse.releng.eclipsebuilder/bootstrapHudsonI.sh -test -skipTest -buildDirectory $WORKSPACE/builds/I -hudson -sign -updateSite $WORKSPACE/builds/transfer/files/testUpdates-I I
