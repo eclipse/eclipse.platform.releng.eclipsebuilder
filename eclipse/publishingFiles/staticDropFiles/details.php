@@ -224,6 +224,13 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				The Eclipse platform and Java development tools are NOT included. You can combine 
 				this with the Platform and JDT Runtime Binary or SDK if your tools rely on the 
 				PDE being present.</li></ul>
+				
+				
+				<li><a name="PDE Products"> <b> PDE Build Products </b> </a>
+				<ul>
+				<li>The PDE Builders are self-contained, executable PDE Build configurations that can be used to build OSGi and Eclipse-based systems. 
+				They can also be used as the basis for more sophisticated build systems that run tests, do API scans, publish builds etc.</li></ul>
+				
 
 				<li><a name="PDESDK"> <b> PDE SDK </b> </a>
 				<ul>
