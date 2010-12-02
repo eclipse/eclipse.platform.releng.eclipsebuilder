@@ -670,20 +670,6 @@
 		<eclipse.brand.p2.artifacts metadataRepository="file:${reposource}" artifactRepository="file:${reposource}" tempDirectory="${osgi.starter.config.launcher.temp}" launcherProvider="org.eclipse.equinox.executable" productId="org.eclipse.osgi.configuration" launcherName="rt" config="macosx.cocoa.x86" productVersion="1.0.0.${buildId}" iconsList="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/rt.icns" />
 		<eclipse.brand.p2.artifacts metadataRepository="file:${reposource}" artifactRepository="file:${reposource}" tempDirectory="${osgi.starter.config.launcher.temp}" launcherProvider="org.eclipse.equinox.executable" productId="org.eclipse.osgi.configuration" launcherName="rt" config="macosx.cocoa.x86_64" productVersion="1.0.0.${buildId}" iconsList="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/rt.icns" />
 
-		<ant target="main" antfile="buildConfiguration.xml" dir="${eclipse.build.configs}/pde.build.config.launcher" />
-		<property name="pde.build.starter.config.launcher.temp" value="${eclipse.build.configs}/pde.build.config.launcher/temp" />
-		<mkdir dir="${pde.build.starter.config.launcher.temp}" />
-
-		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${buildDirectory}/features/org.eclipse.pde.build.product.feature/product/pdebuild.product" compress="true">
-			<config os="win32" ws="win32" arch="x86" />
-			<config os="win32" ws="win32" arch="x86_64" />
-			<config os="linux" ws="gtk" arch="x86" />
-			<config os="linux" ws="gtk" arch="x86_64" />
-			<config os="macosx" ws="cocoa" arch="x86" />
-			<config os="macosx" ws="cocoa" arch="x86_64" />
-		</p2.publish.product>
-
-
 		<antcall target="packMasterFeature" />
 
 		<mkdir dir="${buildRepo}" />
