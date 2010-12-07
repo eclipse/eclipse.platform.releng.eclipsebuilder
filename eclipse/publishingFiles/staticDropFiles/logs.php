@@ -191,7 +191,6 @@ echo <<<END
 These logs only need to be checked if the org.eclipse.releng.tests above report a test failures.
 END;
 
-if (! (preg_match("/N/i",$buildId))) { echo "<br><br>Cvs tag v$buildName of org.eclipse.releng.eclipsebuilder and org.eclipse.releng.basebuilder was used to create this build."; }
 echo"<ul>\n";
         listLogs("testresults/chkpii");
 ?>
