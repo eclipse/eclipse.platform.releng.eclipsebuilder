@@ -54,7 +54,8 @@ tag=""
 #buildProjectTags=v20101029
 #buildProjectTags=v20101001
 #buildProjectTags=v20101110
-buildProjectTags=v20101115a
+#buildProjectTags=v20101115a
+buildProjectTags=v20101209
 
 #updateSite property setting
 updateSite=""
@@ -210,6 +211,11 @@ echo buildLabel=$buildLabel >> monitor.properties
 echo recipients=$recipients >> monitor.properties
 echo log=$postingDirectory/$buildLabel/index.php >> monitor.properties
 
+echo BUILD_WORKSPACE=$WORKSPACE > $WORKSPACE/test.properties
+echo BUILD_JOB_NAME=$JOB_NAME >> $WORKSPACE/test.properties
+echo BUILD_BUILD_NUMBER=$BUILD_NUMBER >> $WORKSPACE/test.properties
+echo buildId=$buildId >> $WORKSPACE/test.properties
+
 #the base command used to run AntRunner headless
 buildMachineArch=`uname -p`
 if [ $buildMachineArch == "ppc64" ]
@@ -247,7 +253,7 @@ echo builderTag=$buildProjectTags
 echo buildDirectory=$buildDirectory
 
 #full command with args
-buildCommand="$antRunner -q -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $skipPack $tagMaps $hudson -DJ2SE-1.5=$bootclasspath_15 -DJ2SE-1.4=$bootclasspath -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation -DCDC-1.1/Foundation-1.1=$bootclasspath_foundation11 -DOSGi/Minimum-1.2=/shared/common/org.eclipse.sdk-feature/libs/ee.minimum-1.2.0.jar  -DJavaSE-1.6=$bootclasspath_16 -DlogExtension=.xml $javadoc $updateSite $sign -DgenerateFeatureVersionSuffix=true -Djava15home=$java15home "
+#buildCommand="$antRunner -q -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $skipPack $tagMaps $hudson -DJ2SE-1.5=$bootclasspath_15 -DJ2SE-1.4=$bootclasspath -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation -DCDC-1.1/Foundation-1.1=$bootclasspath_foundation11 -DOSGi/Minimum-1.2=/shared/common/org.eclipse.sdk-feature/libs/ee.minimum-1.2.0.jar  -DJavaSE-1.6=$bootclasspath_16 -DlogExtension=.xml $javadoc $updateSite $sign -DgenerateFeatureVersionSuffix=true -Djava15home=$java15home "
 
 #capture command used to run the build
 echo $buildCommand>command.txt
