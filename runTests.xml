@@ -105,7 +105,7 @@
 			<os family="windows" />
 		</condition>
 		<antcall target="configure.team.cvs.test" />
-	<!--	<ant antfile="${test.xml}" /> -->
+		<ant antfile="${test.xml}" />
 	</target>
 
 </project>
