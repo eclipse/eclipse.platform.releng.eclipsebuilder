@@ -372,7 +372,7 @@
 		<verifyCompile install="${postingDirectory}/${buildLabel}/compilelogs" />
 	</target>
 
-	<target name="rSyncWithSnzZrh" unless="test">
+	<target name="rSyncWithSnzZrh" if="rsync">
 		<!--copy drops to local directory for rsync with zrh-->
 		<copy todir="/builds/transfer/files/zrh">
 			<fileset dir="${postingDirectory}" includes="${buildLabel}/eclipse-SDK-*-win32.zip,${buildLabel}/eclipse-SDK-*-linux-*.tar.gz" excludes="${buildLabel}/eclipse-SDK-examples-*-win32.zip,${buildLabel}/eclipse-SDK-*-linux-gtk-x86_64.tar.gz,${buildLabel}/eclipse-SDK-*-linux-gtk-ppc.tar.gz,${buildLabel}/eclipse-SDK-*-linux-motif.tar.gz,${buildLabel}/eclipse-SDK-*-linux-gtk-s390.tar.gz,${buildLabel}/eclipse-SDK-*-linux-gtk-s390x.tar.gz,${buildLabel}/eclipse-SDK-*-linux-gtk-ppc64.tar.gz" />

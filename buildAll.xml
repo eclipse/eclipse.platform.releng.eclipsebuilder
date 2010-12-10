@@ -464,6 +464,14 @@
 	</target>
 
 	<target name="publishEclipse">
+		<condition property="rsync" value="true">
+			<not>
+				<or>
+					<equals arg1="${hudson}" arg2="true" />
+					<equals arg1="{test}" arg2="true" />
+				</or>
+			</not>
+		</condition>
 		<parallel>
 			<ant antfile="eclipse/helper.xml" target="rSyncWithSnzZrh" />
 			<sequential>
