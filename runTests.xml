@@ -78,15 +78,10 @@
 		<property file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/testing.properties" />
 		<property name="tester" value="${executionDir}" />
 		<replace file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" token="@testDir@" value="${testDir}" />
+		<replace file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" token="@buildId@" value="${buildId}" />
 		<property file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" />
-		<echo message="executionDir ${executionDir}" />
-		<exec dir="." executable="ls">
-			<arg line="-la ${executionDir}" />
-		</exec>
-		<echo message="org.eclipse.equinox.p2.reconciler.tests.platform.archive.linux-x86_64 ${org.eclipse.equinox.p2.reconciler.tests.platform.archive.linux-x86_64}" />
-		<exec dir="." executable="ls">
-			<arg line="-la ${org.eclipse.equinox.p2.reconciler.tests.platform.archive.linux-x86_64}" />
-		</exec>
+		<echo message="executionDir ${executionDir}" />		
+		<echo message="org.eclipse.equinox.p2.reconciler.tests.platform.archive.linux-x86_64 ${org.eclipse.equinox.p2.reconciler.tests.platform.archive.linux-x86_64}" />	
 
 		<!--	eclipse-JUnit-Linux/ws/2010-11-08_14-26-17/ws/eclipse-testing/
 		
