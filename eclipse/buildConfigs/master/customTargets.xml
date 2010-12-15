@@ -134,7 +134,7 @@
 		<zip zipfile="${buildDirectory}/plugins/org.eclipse.platform/launchersrc.zip" basedir="${buildDirectory}/features/org.eclipse.equinox.executable" includes="library/" />
 		<mkdir dir="${buildDirectory}/features/org.eclipse.platform/launchertmp" />
 		<mkdir dir="${buildDirectory}/launchertmp" />
-		
+
 		<!--copy linux gtk x86 about_files to in temp location where it will be copied into root of eclipse at assembly time-->
 		<property name="linux.gtk.x86.rootfiles" value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.x86" />
 		<mkdir dir="${linux.gtk.x86.rootfiles}" />
@@ -244,7 +244,7 @@
 	<target name="postPackage">
 		<exec executable="zip" dir="${buildDirectory}/${buildLabel}">
 			<arg line="-d ${archiveName} win32** wce** linux** solaris** aix** hpux** macosx**" />
-		</exec>
+		</exec>		
 		<eclipse.publish.featuresAndBundles repository="file:/${buildDirectory}/buildRepo">
 			<bundles dir="${postingDirectory}/${buildLabel}" includes="ecj-${buildId}.jar" />
 			<bundles dir="${postingDirectory}/${buildLabel}" includes="ecjsrc-${buildId}.jar" />

@@ -8,7 +8,7 @@
 	<target name="allElements">
 		<ant antfile="${genericTargets}" target="${target}">
 			<property name="type" value="feature" />
-			<property name="id" value="org.eclipse.sdk.examples" />
+			<property name="id" value="org.eclipse.pde.build.feature" />
 		</ant>
 	</target>
 
@@ -19,28 +19,19 @@
 	<!-- Add one target for each root element and each configuration -->
 	<!-- ===================================================================== -->
 
-	<target name="assemble.org.eclipse.sdk.examples">
-		<property name="archiveName" value="eclipse-examples-${buildId}.zip" />
-		<antcall target="assemble" />
-	</target>
-
-	<target name="assemble.org.eclipse.sdk.examples.win32.win32.x86">
-		<property name="archiveName" value="eclipse-examples-${buildId}-win32.zip" />
-		<antcall target="assemble" />
-	</target>
-
-	<target name="assemble">
-		<property name="archiveFullPath" value="${buildDirectory}/${buildLabel}/${archiveName}" />
-		<ant antfile="${assembleScriptName}" />
-	</target>
 	<target name="postPackage">
-		<mkdir dir="${buildDirectory}/${buildLabel}/checksum" />
-		<exec executable="sh" dir="${buildDirectory}/${buildLabel}">
-			<arg line="${eclipse.build.configs}/../../extras/produceChecksum" />
-		</exec>
-		<move todir="${postingDirectory}/${buildLabel}">
-			<fileset dir="${buildDirectory}/${buildLabel}" />
-		</move>
+		<!-- for (PDE build + compiler adapter) https://bugs.eclipse.org/bugs/show_bug.cgi?id=330240 -->
+		<loadproperties srcFile="${buildDirectory}/finalPluginsVersions.properties" />
+		<property name="tempjdtcoredir" value="${buildDirectory}/" />
+		<mkdir dir="${tempjdtcoredir}" />
+		<unzip dest="${tempjdtcoredir}" overwrite="true">
+			<fileset dir="${buildDirectory}/buildRepo">
+				<include name="plugins/org.eclipse.jdt.core_${org.eclipse.jdt.core}.jar" />
+			</fileset>
+		</unzip>
+		<eclipse.publish.featuresAndBundles repository="file:/${buildDirectory}/buildRepo">
+			<bundles dir="${tempjdtcoredir}" includes="jdtCompilerAdapter.jar" />
+		</eclipse.publish.featuresAndBundles>
 	</target>
 
 	<!-- ===================================================================== -->
@@ -107,7 +98,7 @@
 	<!-- Steps to do after fetching the build elements -->
 	<!-- ===================================================================== -->
 	<target name="postFetch">
-		<replace file="${buildDirectory}/sourceReferences.properties" token=":extssh" value=":pserver"  />	
+
 	</target>
 
 	<!-- ===================================================================== -->
@@ -177,7 +168,7 @@
 		</antcall>
 
 		<unzip dest="${postingDirectory}/${buildLabel}/compilelogs" overwrite="true">
-			<fileset dir="${buildDirectory}/features/org.eclipse.sdk.examples">
+			<fileset dir="${buildDirectory}/features/org.eclipse.pde.build.feature">
 				<include name="*.log.zip" />
 			</fileset>
 		</unzip>
