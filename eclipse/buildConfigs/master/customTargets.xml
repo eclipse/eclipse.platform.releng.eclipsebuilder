@@ -244,11 +244,15 @@
 	<target name="postPackage">
 		<exec executable="zip" dir="${buildDirectory}/${buildLabel}">
 			<arg line="-d ${archiveName} win32** wce** linux** solaris** aix** hpux** macosx**" />
-		</exec>		
+		</exec>
 		<eclipse.publish.featuresAndBundles repository="file:/${buildDirectory}/buildRepo">
 			<bundles dir="${postingDirectory}/${buildLabel}" includes="ecj-${buildId}.jar" />
 			<bundles dir="${postingDirectory}/${buildLabel}" includes="ecjsrc-${buildId}.jar" />
 		</eclipse.publish.featuresAndBundles>
+		<ant antfile="build.xml" dir="${basedir}">
+			<property name="component" value="${eclipse.build.configs}/pdebuild" />
+		</ant>
+
 		<exec dir="${buildDirectory}/buildRepo" executable="zip">
 			<arg line="-r ${archiveFullPath} ." />
 		</exec>

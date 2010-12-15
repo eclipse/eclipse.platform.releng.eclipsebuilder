@@ -19,19 +19,7 @@
 	<!-- Add one target for each root element and each configuration -->
 	<!-- ===================================================================== -->
 
-	<target name="postPackage">
-		<!-- for (PDE build + compiler adapter) https://bugs.eclipse.org/bugs/show_bug.cgi?id=330240 -->
-		<loadproperties srcFile="${buildDirectory}/finalPluginsVersions.properties" />
-		<property name="tempjdtcoredir" value="${buildDirectory}/" />
-		<mkdir dir="${tempjdtcoredir}" />
-		<unzip dest="${tempjdtcoredir}" overwrite="true">
-			<fileset dir="${buildDirectory}/buildRepo">
-				<include name="plugins/org.eclipse.jdt.core_${org.eclipse.jdt.core}.jar" />
-			</fileset>
-		</unzip>
-		<eclipse.publish.featuresAndBundles repository="file:/${buildDirectory}/buildRepo">
-			<bundles dir="${tempjdtcoredir}" includes="jdtCompilerAdapter.jar" />
-		</eclipse.publish.featuresAndBundles>
+	<target name="postPackage">				
 	</target>
 
 	<!-- ===================================================================== -->
@@ -78,6 +66,34 @@
 	<!-- Steps to do before setup -->
 	<!-- ===================================================================== -->
 	<target name="preSetup">
+		<!-- for (PDE build + compiler adapter) https://bugs.eclipse.org/bugs/show_bug.cgi?id=330240 -->
+		<loadproperties srcFile="${buildDirectory}/finalPluginsVersions.properties" />
+		<property name="tempjdtcoredir" value="${buildDirectory}/" />
+		<mkdir dir="${tempjdtcoredir}" />
+		<unzip dest="${tempjdtcoredir}" overwrite="true">
+			<fileset dir="${buildDirectory}/buildRepo">
+				<include name="plugins/org.eclipse.jdt.core_${org.eclipse.jdt.core}.jar" />
+			</fileset>
+		</unzip>
+		<eclipse.publish.featuresAndBundles repository="file:/${buildDirectory}/buildRepo">
+			<bundles dir="${tempjdtcoredir}" includes="jdtCompilerAdapter.jar" />
+		</eclipse.publish.featuresAndBundles>
+		<property name="pdebaseLocationtemp" value="${buildDirectory}/pdebaseLocationtemp" />
+		<delete dir="${pdebaseLocationtemp}" />
+		<mkdir dir="${pdebaseLocationtemp}" />
+		<p2.mirror source="file:/${buildDirectory}/buildRepo">
+			<destination kind="metadata" location="file://${pdebaseLocationtemp}" name="name" format="file://${buildRepo}" />
+			<destination kind="artifact" location="file://${pdebaseLocationtemp}" name="name" format="file://${buildRepo}" />
+			<iu id="org.eclipse.jdt.core.compiler.batch" version="" />
+			<iu id="org.eclipse.jdt.core.ant.compiler.adapter" version="" />
+			<slicingOptions includeOptional="false" includeNonGreedy="false" followStrict="true" followOnlyFilteredRequirements="true" />
+		</p2.mirror>
+		<property name="pdebaseLocation" value="${buildDirectory}/pdebaseLocation" />
+		<delete dir="${pdebaseLocation}" />
+		<mkdir dir="${pdebaseLocation}" />
+		<p2.repo2runnable destination="${pdebaseLocation}">
+			<source dir="${buildDirectory}" includes="pdebaseLocationtemp" />
+		</p2.repo2runnable>
 	</target>
 
 	<!-- ===================================================================== -->
