@@ -164,10 +164,7 @@
 	<target name="buildMasterFeature">
 		<ant antfile="build.xml" dir="${basedir}">
 			<property name="component" value="${eclipse.build.configs}/master" />
-		</ant>
-		<ant antfile="build.xml" dir="${basedir}">
-			<property name="component" value="${eclipse.build.configs}/pdebuild" />
-		</ant>
+		</ant>		
 	</target>
 
 	<target name="buildSdkTestFeature">
