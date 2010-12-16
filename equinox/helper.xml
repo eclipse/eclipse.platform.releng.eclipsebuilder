@@ -216,6 +216,9 @@
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.concurrent" />
 		</antcall>
+		<antcall target="updateTestManifest">
+			<param name="bundle.id" value="org.eclipse.equinox.coordinator" />
+		</antcall>		
 	</target>
 
 	<!-- ===================================================================== -->
