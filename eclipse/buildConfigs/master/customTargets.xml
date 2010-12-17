@@ -248,14 +248,7 @@
 		<eclipse.publish.featuresAndBundles repository="file:/${buildDirectory}/buildRepo">
 			<bundles dir="${postingDirectory}/${buildLabel}" includes="ecj-${buildId}.jar" />
 			<bundles dir="${postingDirectory}/${buildLabel}" includes="ecjsrc-${buildId}.jar" />
-		</eclipse.publish.featuresAndBundles>
-		<ant antfile="build.xml" dir="${basedir}">
-			<property name="component" value="${eclipse.build.configs}/pdebuild" />
-		</ant>
-
-		<exec dir="${buildDirectory}/buildRepo" executable="zip">
-			<arg line="-r ${archiveFullPath} ." />
-		</exec>
+		</eclipse.publish.featuresAndBundles>	
 	</target>
 
 	<!-- ===================================================================== -->
