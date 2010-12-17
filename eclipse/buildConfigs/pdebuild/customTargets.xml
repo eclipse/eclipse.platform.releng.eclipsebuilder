@@ -19,7 +19,13 @@
 	<!-- Add one target for each root element and each configuration -->
 	<!-- ===================================================================== -->
 
-	<target name="postPackage">				
+	<target name="assemble.org.eclipse.pde.build.feature.p2">
+	</target>
+
+	<target name="assemble.org.eclipse.pde.build.feature.p2.group.group.group">
+	</target>
+
+	<target name="postPackage">
 	</target>
 
 	<!-- ===================================================================== -->
