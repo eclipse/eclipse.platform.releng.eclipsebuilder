@@ -89,9 +89,7 @@
 		<mkdir dir="${pdebaseLocationtemp}" />
 		<p2.mirror source="file:/${buildDirectory}/buildRepo">
 			<destination kind="metadata" location="file://${pdebaseLocationtemp}" name="name" format="file://${buildRepo}" />
-			<destination kind="artifact" location="file://${pdebaseLocationtemp}" name="name" format="file://${buildRepo}" />
-			<iu id="org.eclipse.jdt.core.compiler.batch" version="" />
-			<iu id="org.eclipse.jdt.core.ant.compiler.adapter" version="" />
+			<destination kind="artifact" location="file://${pdebaseLocationtemp}" name="name" format="file://${buildRepo}" />		
 			<slicingOptions includeOptional="false" includeNonGreedy="false" followStrict="true" followOnlyFilteredRequirements="true" />
 		</p2.mirror>
 		<property name="pdebaseLocation" value="${buildDirectory}/pdebaseLocation" />
