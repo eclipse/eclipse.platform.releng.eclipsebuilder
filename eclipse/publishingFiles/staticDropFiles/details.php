@@ -226,7 +226,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				PDE being present.</li></ul>
 				
 				
-				<li><a name="PDE Products"> <b> PDE Build Products </b> </a>
+				<li><a name="PDEProducts"> <b> PDE Build Products </b> </a>
 				<ul>
 				<li>The PDE Builders are self-contained, executable PDE Build configurations that can be used to build OSGi and Eclipse-based systems. 
 				They can also be used as the basis for more sophisticated build systems that run tests, do API scans, publish builds etc.</li></ul>
