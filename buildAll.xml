@@ -143,7 +143,7 @@
 			<equals arg1="${buildType}" arg2="M" />
 		</condition>
 		<property name="p2RepoPath" value="${p2repoNPath}" />
-		<condition property="org.eclipse.equinox.p2.tests.current.build.repo" value="https://hudson.eclipse.org/hudson/job/${BUILD_JOB_NAME}/${BUILD_BUILD_NUMBER}/artifact/builds/transfer/files/repo/${buildId}">
+		<condition property="currentbuildrepo" value="https://hudson.eclipse.org/hudson/job/${BUILD_JOB_NAME}/${BUILD_BUILD_NUMBER}/artifact/builds/transfer/files/repo/${buildId}">
 			<equals arg1="${hudson}" arg2="true" />
 		</condition>
 		<property name="org.eclipse.equinox.p2.tests.current.build.repo" value="${p2RepoURL}/${buildId}" />
