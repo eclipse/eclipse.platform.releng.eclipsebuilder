@@ -993,28 +993,28 @@
 				<!-- pde build products -->
 				<!-- win32 -->
 				<exec dir="${pde.product.install.win32}" executable="zip">
-					<arg line="-q ${output.dir}/PDE-builder-${buildId}-win32.zip -r ." />
+					<arg line="-q ${postingDirectory}/${buildLabel}/PDE-builder-${buildId}-win32.zip -r ." />
 				</exec>
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${pde.product.install.macosx}" />
-					<param name="tar.base.filename" value="${output.dir}/PDE-builder-${buildId}-macosx-cocoa-x86.tar" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/PDE-builder-${buildId}-macosx-cocoa-x86.tar" />
 				</antcall>
 				<!-- linux -->
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${pde.product.install.linux}" />
-					<param name="tar.base.filename" value="${output.dir}/PDE-builder-${buildId}-linux-gtk-x86.tar" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/PDE-builder-${buildId}-linux-gtk-x86.tar" />
 				</antcall>
 				<exec dir="${pde.product.install.win32.x86_64}" executable="zip">
-					<arg line="-q ${output.dir}/PDE-builder-${buildId}-win32-x86_64.zip -r ." />
+					<arg line="-q ${postingDirectory}/${buildLabel}/PDE-builder-${buildId}-win32-x86_64.zip -r ." />
 				</exec>
 				<!-- macosx -->
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${pde.product.install.macosx.x86_64}" />
-					<param name="tar.base.filename" value="${output.dir}/PDE-builder-${buildId}-macosx-cocoa-x86_64.tar" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/PDE-builder-${buildId}-macosx-cocoa-x86_64.tar" />
 				</antcall>
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${pde.product.install.linux.x86_64}" />
-					<param name="tar.base.filename" value="${output.dir}/PDE-builder-${buildId}-linux-gtk-x86_64.tar" />
+					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/PDE-builder-${buildId}-linux-gtk-x86_64.tar" />
 				</antcall>
 			</sequential>
 
