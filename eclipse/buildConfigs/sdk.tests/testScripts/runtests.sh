@@ -5,7 +5,8 @@
 export no_proxy=localhost,dev.eclipse.org,hudson.eclipse.org
 
 # by default, use the java executable on the path for outer and test jvm
-vmcmd=/shared/common/jdk-1.6.x86_64/jre/bin/java
+#vmcmd=/shared/common/jdk-1.6.x86_64/jre/bin/java
+vmcmd=java
 
 #this value must be set when using rsh to execute this script, otherwise the script will execute from the user's home directory
 dir=.
