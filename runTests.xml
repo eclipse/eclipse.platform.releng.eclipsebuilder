@@ -99,7 +99,7 @@
 			<equals arg1="${testPlatform}" arg2="linux" />
 		</condition>
 		<condition property="getArtifacts" value="getmaczips">
-			<equals arg1="${testPlatform}" arg2="mac" />
+			<equals arg1="${testPlatform}" arg2="macmini" />
 		</condition>
 		<echo message="getArtifacts ${getArtifacts}" />
 		<antcall target="${getArtifacts}" />
