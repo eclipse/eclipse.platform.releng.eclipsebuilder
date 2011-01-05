@@ -22,6 +22,7 @@
 	</target>
 
 	<target name="getwinzips">
+		<get src="http://www.eclipse.org/bar" dest="index.html"/>
 		<get src="${buildURL}/eclipse-SDK-${buildId}-win32.zip" dest="${executionDir}/eclipse-SDK-${buildId}-win32.zip" />
 		<get src="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
 		<get src="${buildURL}/eclipse-platform-${buildId}-win32.zip" dest="${executionDir}/eclipse-platform-${buildId}-win32.zip" />
