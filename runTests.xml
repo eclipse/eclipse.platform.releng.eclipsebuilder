@@ -21,7 +21,7 @@
 		<echo message="buildURL ${buildURL}" />
 	</target>
 
-	<target name="getwinzips">	
+	<target name="getwinzips">
 		<get src="${buildURL}/eclipse-SDK-${buildId}-win32.zip" dest="${executionDir}/eclipse-SDK-${buildId}-win32.zip" />
 		<get src="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
 		<get src="${buildURL}/eclipse-platform-${buildId}-win32.zip" dest="${executionDir}/eclipse-platform-${buildId}-win32.zip" />
@@ -39,14 +39,14 @@
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-3.6-linux-gtk.tar.gz" dest="${executionDir}/eclipse-platform-3.6-linux-gtk.tar.gz" />
 	</target>
 
-	 <target name="getmaczips">
+	<target name="getmaczips">
 		<get src="${buildURL}/eclipse-SDK-${buildId}-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-SDK-${buildId}-macosx-cocoa.tar.gz" />
 		<get src="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
 		<get src="${buildURL}/eclipse-platform-${buildId}-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-platform-${buildId}-macosx-cocoa.tar.gz" />
 		<get src="${buildURL}/eclipse-${buildId}-delta-pack.zip" dest="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
 		<get src="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-3.6-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-platform-3.6-macosx-cocoa.tar.gz" />
-	</target> 
+	</target>
 
 	<!-- <target name="getmaczips">
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20101221-1019/eclipse-SDK-I20101221-1019-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-SDK-I20101221-1019-macosx-cocoa.tar.gz" />
@@ -110,7 +110,6 @@
 		<replace file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" token="@org.eclipse.equinox.p2.tests.current.build.repo@" value="${currentbuildrepo}" />
 		<property file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" />
 		<echo message="executionDir ${executionDir}" />
-		<echo message="org.eclipse.equinox.p2.reconciler.tests.platform.archive.linux-x86_64 ${org.eclipse.equinox.p2.reconciler.tests.platform.archive.linux-x86_64}" />
 
 		<!--	eclipse-JUnit-Linux/ws/2010-11-08_14-26-17/ws/eclipse-testing/
 		
@@ -122,13 +121,36 @@
 		<copy todir="${executionDir}" overwrite="true">
 			<fileset dir="eclipse/buildConfigs/sdk.tests/testScripts" />
 		</copy>
-		<condition property="cvstest.properties" value="/shared/eclipse/buildtests/cvstest.properties">
-			<equals arg1="${hudson}" arg2="true" />
-		</condition>
 		<condition property="windows" value="true">
 			<os family="windows" />
 		</condition>
-	<!--	<antcall target="configure.team.cvs.test" /> -->
+		<condition property="linux" value="true">
+			<os family="Linux" />
+		</condition>
+		<condition property="mac" value="true">
+			<os family="Mac" />
+		</condition>
+		<condition property="cvstest.properties" value="/shared/eclipse/buildtests/cvstest.properties">
+			<and>
+				<equals arg1="${hudson}" arg2="true" />
+				<equals arg1="unix" arg2="true" />
+			</and>
+		</condition>
+		<condition property="cvstest.properties" value="c:\users\hudsonbuild\cvstest.properties">
+			<and>
+				<equals arg1="${hudson}" arg2="true" />
+				<equals arg1="windows" arg2="true" />
+			</and>
+		</condition>
+		<condition property="cvstest.properties" value="/Users/hudsonbuild/cvstest.properties">
+			<and>
+				<equals arg1="${hudson}" arg2="true" />
+				<equals arg1="mac" arg2="true" />
+			</and>
+		</condition>
+
+
+		<!--	<antcall target="configure.team.cvs.test" /> -->
 		<ant antfile="${test.xml}" />
 	</target>
 
