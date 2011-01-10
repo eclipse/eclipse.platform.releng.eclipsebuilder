@@ -125,15 +125,15 @@
 			<os family="windows" />
 		</condition>
 		<condition property="linux" value="true">
-			<os family="Linux" />
+			<os family="unix" />
 		</condition>
 		<condition property="mac" value="true">
-			<os family="Mac" />
+			<os family="mac" />
 		</condition>
 		<condition property="cvstest.properties" value="/shared/eclipse/buildtests/cvstest.properties">
 			<and>
 				<equals arg1="${hudson}" arg2="true" />
-				<equals arg1="unix" arg2="true" />
+				<equals arg1="linux" arg2="true" />
 			</and>
 		</condition>
 		<condition property="cvstest.properties" value="c:\users\hudsonbuild\cvstest.properties">

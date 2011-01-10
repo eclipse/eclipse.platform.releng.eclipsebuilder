@@ -219,6 +219,7 @@ echo BUILD_WORKSPACE=$WORKSPACE > $WORKSPACE/test.properties
 echo BUILD_JOB_NAME=$JOB_NAME >> $WORKSPACE/test.properties
 echo BUILD_BUILD_NUMBER=$BUILD_NUMBER >> $WORKSPACE/test.properties
 echo buildId=$buildId >> $WORKSPACE/test.properties
+echo $buildId > $WORKSPACE/builds/transfer/files/buildId.txt
 echo currentbuildrepo=https://hudson.eclipse.org/hudson/job/$JOB_NAME/$BUILD_NUMBER/artifact/builds/transfer/files/repo/$buildId >> $WORKSPACE/test.properties 
 
 #the base command used to run AntRunner headless
