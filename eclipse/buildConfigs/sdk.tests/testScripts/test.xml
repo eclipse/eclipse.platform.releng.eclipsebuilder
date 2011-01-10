@@ -748,6 +748,8 @@
 	</target>
 
 	<target name="all">
+		<antcall target="teamcvs" />
+		<antcall target="equinoxp2" />
 		<antcall target="jdtcompilertool" />
 		<antcall target="jdtcompilerapt" />
 		<antcall target="jdttext" />		
@@ -788,8 +790,7 @@
 		<antcall target="ua" />
 		<antcall target="uiforms" />
 		<antcall target="pdeapitooling" /> 
-		<antcall target="equinoxsecurity" /> 
-		<antcall target="equinoxp2" />
+		<antcall target="equinoxsecurity" />
 		<antcall target="equinoxp2ui" />
 		<antcall target="equinoxp2discovery" />
 	 	<antcall target="search" />
@@ -799,6 +800,7 @@
 		<antcall target="debug" />
 		<antcall target="ui" /> 
 		<antcall target="relEng" />
+		<antcall target="swt" />
 	</target>
 </project>
 
