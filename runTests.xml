@@ -120,11 +120,8 @@
 		</copy>
 		<copy todir="${executionDir}" overwrite="true">
 			<fileset dir="eclipse/buildConfigs/sdk.tests/testScripts" />
-		</copy>
-		<condition property="windows">
-			<os family="windows" />
-		</condition>
-		<condition property="linux">
+		</copy>		
+		<condition property="cvstest.properties" value="/shared/eclipse/buildtests/cvstest.properties">
 			<and>
 				<os family="unix" />
 				<not>
@@ -132,20 +129,13 @@
 				</not>
 			</and>
 		</condition>
-		<condition property="mac">
-			<os family="mac" />
-		</condition>
-		<condition property="cvstest.properties" value="/shared/eclipse/buildtests/cvstest.properties">
-			<equals arg1="${linux}" arg2="true" />
-		</condition>
 		<condition property="cvstest.properties" value="c:\users\hudsonbuild\cvstest.properties">
-			<equals arg1="${windows}" arg2="true" />
+			<os family="windows" />
 		</condition>
 		<condition property="cvstest.properties" value="/Users/hudsonbuild/cvstest.properties">
-			<equals arg1="${mac}" arg2="true" />
-		</condition>
-		<echo message="windows ${windows} linux ${linux} mac ${mac}" />
-		<echo message="cvstest.properties ${cvstest.properties}" />		
+			<os family="mac" />
+		</condition>		
+		<echo message="cvstest.properties ${cvstest.properties}" />
 		<antcall target="configure.team.cvs.test" />
 		<ant antfile="${test.xml}" />
 	</target>
