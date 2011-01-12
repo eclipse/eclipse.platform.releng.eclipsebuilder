@@ -56,7 +56,7 @@
 	</target> -->
 
 	<target name="getmaczips">
-		<get src="http://https://hudson.eclipse.org/hudson/job/eclipse-equinox-test-N/lastSuccessfulBuild/artifact/builds/transfer/files/master/downloads/drops/N20110112-1051/eclipse-SDK-N20110112-1051-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-SDK-N20110112-1051-macosx-cocoa.tar.gz" />
+		<get src="https://hudson.eclipse.org/hudson/job/eclipse-equinox-test-N/lastSuccessfulBuild/artifact/builds/transfer/files/master/downloads/drops/N20110112-1051/eclipse-SDK-N20110112-1051-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-SDK-N20110112-1051-macosx-cocoa.tar.gz" />
 		<get src="https://hudson.eclipse.org/hudson/job/eclipse-equinox-test-N/lastSuccessfulBuild/artifact/builds/transfer/files/master/downloads/drops/N20110112-1051/eclipse-Automated-Tests-N20110112-1051.zip" dest="${testDir}/eclipse-Automated-Tests-N20110112-1051.zip" />
 		<get src="https://hudson.eclipse.org/hudson/job/eclipse-equinox-test-N/lastSuccessfulBuild/artifact/builds/transfer/files/master/downloads/drops/N20110112-1051/eclipse-platform-N20110112-1051-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-platform-N20110112-1051-macosx-cocoa.tar.gz" />
 		<get src="https://hudson.eclipse.org/hudson/job/eclipse-equinox-test-N/lastSuccessfulBuild/artifact/builds/transfer/files/master/downloads/drops/N20110112-1051/eclipse-N20110112-1051-delta-pack.zip" dest="${executionDir}/eclipse-N20110112-1051-0800-delta-pack.zip" />
