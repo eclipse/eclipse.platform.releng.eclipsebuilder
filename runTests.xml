@@ -150,7 +150,7 @@
 		</condition>
 
 
-		<antcall target="configure.team.cvs.test" /> 
+	<!--	<antcall target="configure.team.cvs.test" /> --> 
 		<ant antfile="${test.xml}" />
 	</target>
 
