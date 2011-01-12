@@ -64,13 +64,13 @@
 				<antcall target="signMasterFeature" />
 			</sequential>
 			<sequential>
-				<antcall target="buildSdkTestFeature" />
-				<ant antfile="${eclipse.build.configs}/../helper.xml" target="verifyCompile" />
+				<antcall target="buildSdkTestFeature" />			
 			</sequential>
 		</parallel>
 		<parallel failonany="true">
 			<sequential>
 				<antcall target="packageEclipseDistributables" />
+				<ant antfile="${eclipse.build.configs}/../helper.xml" target="verifyCompile" />
 				<ant antfile="${equinox.build.configs}/equinox.prov/run.xml" />
 				<antcall target="packageRepos" />
 				<antcall target="packageEquinoxDistributables" />
