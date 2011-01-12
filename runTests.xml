@@ -36,23 +36,23 @@
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-3.6-linux-gtk.tar.gz" dest="${executionDir}/eclipse-platform-3.6-linux-gtk.tar.gz" />
 	</target>
 
-	<!-- <target name="getmaczips">
+	<target name="getmaczips">
 		<get src="${buildURL}/eclipse-SDK-${buildId}-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-SDK-${buildId}-macosx-cocoa.tar.gz" />
 		<get src="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
 		<get src="${buildURL}/eclipse-platform-${buildId}-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-platform-${buildId}-macosx-cocoa.tar.gz" />
 		<get src="${buildURL}/eclipse-${buildId}-delta-pack.zip" dest="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
 		<get src="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-3.6-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-platform-3.6-macosx-cocoa.tar.gz" />
-	</target> -->
+	</target>
 
-	 <target name="getmaczips">
+	<!--  <target name="getmaczips">
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110111-0800/eclipse-SDK-I20110111-0800-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-SDK-I20110111-0800-macosx-cocoa.tar.gz" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110111-0800/eclipse-Automated-Tests-I20110111-0800.zip" dest="${testDir}/eclipse-Automated-Tests-I20110111-0800.zip" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110111-0800/eclipse-platform-I20110111-0800-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-platform-I20110111-0800-macosx-cocoa.tar.gz" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110111-0800/eclipse-I20110111-0800-delta-pack.zip" dest="${executionDir}/eclipse-I20110111-0800-delta-pack.zip" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110111-0800/eclipse-Automated-Tests-I20110111-0800.zip" dest="${executionDir}/eclipse-Automated-Tests-I20110111-0800.zip" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-3.6-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-platform-3.6-macosx-cocoa.tar.gz" />
-	</target>
+	</target>  -->
 
 	<target name="configure.team.cvs.test" unless="windows">
 		<echo message="cvstest.properties ${cvstest.properties}" />
@@ -105,7 +105,7 @@
 		<antcall target="${getArtifacts}" />
 		<property file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/testing.properties" />
 		<property name="tester" value="${executionDir}" />
-		<replace file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" token="@testDir@" value="${testDir}" />
+		<replace file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" token="@executionDir@" value="${executionDir}" />
 		<replace file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" token="@buildId@" value="${buildId}" />
 		<replace file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" token="@org.eclipse.equinox.p2.tests.current.build.repo@" value="${currentbuildrepo}" />
 		<property file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" />
@@ -149,8 +149,7 @@
 			</and>
 		</condition>
 
-
-	<!--	<antcall target="configure.team.cvs.test" /> --> 
+		<antcall target="configure.team.cvs.test" />
 		<ant antfile="${test.xml}" />
 	</target>
 
