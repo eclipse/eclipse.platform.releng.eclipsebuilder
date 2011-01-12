@@ -136,13 +136,13 @@
 			<os family="mac" />
 		</condition>
 		<condition property="cvstest.properties" value="/shared/eclipse/buildtests/cvstest.properties">
-			<equals arg1="linux" arg2="true" />
+			<equals arg1="${linux}" arg2="true" />
 		</condition>
 		<condition property="cvstest.properties" value="c:\users\hudsonbuild\cvstest.properties">
-			<equals arg1="windows" arg2="true" />
+			<equals arg1="${windows}" arg2="true" />
 		</condition>
 		<condition property="cvstest.properties" value="/Users/hudsonbuild/cvstest.properties">
-			<equals arg1="mac" arg2="true" />
+			<equals arg1="${mac}" arg2="true" />
 		</condition>
 		<echo message="windows ${windows} linux ${linux} mac ${mac}" />
 		<echo message="cvstest.properties ${cvstest.properties}" />		
