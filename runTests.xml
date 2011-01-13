@@ -61,7 +61,7 @@
 		<get src="https://hudson.eclipse.org/hudson/job/eclipse-equinox-test-N/lastSuccessfulBuild/artifact/builds/transfer/files/master/downloads/drops/N20110112-1051/eclipse-platform-N20110112-1051-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-platform-N20110112-1051-macosx-cocoa.tar.gz" />
 		<get src="https://hudson.eclipse.org/hudson/job/eclipse-equinox-test-N/lastSuccessfulBuild/artifact/builds/transfer/files/master/downloads/drops/N20110112-1051/eclipse-N20110112-1051-delta-pack.zip" dest="${executionDir}/eclipse-N20110112-1051-0800-delta-pack.zip" />
 		<get src="https://hudson.eclipse.org/hudson/job/eclipse-equinox-test-N/lastSuccessfulBuild/artifact/builds/transfer/files/master/downloads/drops/N20110112-1051/eclipse-Automated-Tests-N20110112-1051.zip" dest="${executionDir}/eclipse-Automated-Tests-N20110112-1051.zip" />
-		<get src="https://hudson.eclipse.org/hudson/job/eclipse-equinox-test-N/lastSuccessfulBuild/artifact/builds/transfer/files/master/downloads/drops/N20110112-1051/eclipse-platform-3.6-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-platform-3.6-macosx-cocoa.tar.gz" />
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-3.6-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-platform-3.6-macosx-cocoa.tar.gz" />
 	</target>
 
 	<target name="configure.team.cvs.test">
