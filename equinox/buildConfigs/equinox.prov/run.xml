@@ -166,7 +166,7 @@
 		<parallel failonany="true" threadCount='4'>
 			<antcall target="provision.agent" />
 			<antcall target="provision.starterkit" />
-			<antcall target="provision.pdeproduct" />
+			<!-- <antcall target="provision.pdeproduct" /> -->
 			<antcall target="provision.sdk" />
 			<antcall target="provision.platform" />
 			<antcall target="provision.platformsdk" />
@@ -989,9 +989,7 @@
 				</antcall>
 			</sequential>
 
-			<sequential>
-				<!-- pde build products -->
-				<!-- win32 -->
+			<!-- <sequential>
 				<exec dir="${pde.product.install.win32}" executable="zip">
 					<arg line="-q ${postingDirectory}/${buildLabel}/PDE-builder-${buildId}-win32.zip -r ." />
 				</exec>
@@ -999,7 +997,7 @@
 					<param name="tar.base.dir" value="${pde.product.install.macosx}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/PDE-builder-${buildId}-macosx-cocoa-x86.tar" />
 				</antcall>
-				<!-- linux -->
+				
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${pde.product.install.linux}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/PDE-builder-${buildId}-linux-gtk-x86.tar" />
@@ -1007,7 +1005,7 @@
 				<exec dir="${pde.product.install.win32.x86_64}" executable="zip">
 					<arg line="-q ${postingDirectory}/${buildLabel}/PDE-builder-${buildId}-win32-x86_64.zip -r ." />
 				</exec>
-				<!-- macosx -->
+				
 				<antcall target="p2.tar">
 					<param name="tar.base.dir" value="${pde.product.install.macosx.x86_64}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/PDE-builder-${buildId}-macosx-cocoa-x86_64.tar" />
@@ -1016,7 +1014,7 @@
 					<param name="tar.base.dir" value="${pde.product.install.linux.x86_64}" />
 					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/PDE-builder-${buildId}-linux-gtk-x86_64.tar" />
 				</antcall>
-			</sequential>
+			</sequential> -->
 
 			<sequential>
 				<!-- win32 win32 x86 agent -->

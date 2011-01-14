@@ -165,15 +165,15 @@
 		<ant antfile="build.xml" dir="${basedir}">
 			<property name="component" value="${eclipse.build.configs}/master" />
 		</ant>
-		<ant antfile="build.xml" dir="${basedir}">
+<!--		<ant antfile="build.xml" dir="${basedir}">
 			<property name="component" value="${eclipse.build.configs}/pdebuild" />
-		</ant>
+		</ant> 
 		<p2.mirror source="file://${buildDirectory}/buildRepoPDEbuild" ignoreErrors="true">
 			<destination compressed="true" name="${p2.repo.name}" location="file:${buildRepo}" append="true" format="file:${reposource}" />
 			<comparator comparator="org.eclipse.equinox.p2.repository.tools.jar.comparator">
 				<repository location="${repoBaseline}" />
 			</comparator>
-		</p2.mirror>
+		</p2.mirror> -->
 		<property name="archiveName" value="eclipse-master-${buildId}.zip" />
 		<property name="archiveFullPath" value="${buildDirectory}/${buildLabel}/${archiveName}" />
 		<exec dir="${buildDirectory}/buildRepo" executable="zip">
@@ -697,7 +697,7 @@
 		<eclipse.brand.p2.artifacts metadataRepository="file:${reposource}" artifactRepository="file:${reposource}" tempDirectory="${osgi.starter.config.launcher.temp}" launcherProvider="org.eclipse.equinox.executable" productId="org.eclipse.osgi.configuration" launcherName="rt" config="macosx.cocoa.x86" productVersion="1.0.0.${buildId}" iconsList="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/rt.icns" />
 		<eclipse.brand.p2.artifacts metadataRepository="file:${reposource}" artifactRepository="file:${reposource}" tempDirectory="${osgi.starter.config.launcher.temp}" launcherProvider="org.eclipse.equinox.executable" productId="org.eclipse.osgi.configuration" launcherName="rt" config="macosx.cocoa.x86_64" productVersion="1.0.0.${buildId}" iconsList="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/rt.icns" />
 
-		<ant target="main" antfile="buildConfiguration.xml" dir="${eclipse.build.configs}/pde.build.config.launcher" />
+		<!-- <ant target="main" antfile="buildConfiguration.xml" dir="${eclipse.build.configs}/pde.build.config.launcher" />
 		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${buildDirectory}/features/org.eclipse.pde.build.product.feature/product/pdebuild.product" compress="true">
 			<config os="win32" ws="win32" arch="x86" />
 			<config os="win32" ws="win32" arch="x86_64" />
@@ -705,7 +705,7 @@
 			<config os="linux" ws="gtk" arch="x86_64" />
 			<config os="macosx" ws="cocoa" arch="x86" />
 			<config os="macosx" ws="cocoa" arch="x86_64" />
-		</p2.publish.product>
+		</p2.publish.product> -->
 
 
 		<antcall target="packMasterFeature" />
