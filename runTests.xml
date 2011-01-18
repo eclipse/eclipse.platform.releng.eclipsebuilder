@@ -146,7 +146,7 @@
 			<os family="mac" />
 		</condition>
 		<echo message="cvstest.properties ${cvstest.properties}" />
-		<!-- <antcall target="configure.team.cvs.test" /> -->
+		<antcall target="configure.team.cvs.test" />
 		<ant antfile="${test.xml}" />
 	</target>
 
