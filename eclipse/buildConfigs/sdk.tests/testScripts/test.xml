@@ -750,7 +750,7 @@
 	<target name="all">
 		<antcall target="equinoxp2" />
 		<antcall target="teamcvs" />
-	<!--	<antcall target="equinoxp2" />
+		<antcall target="equinoxp2" />
 		<antcall target="jdtcompilertool" />
 		<antcall target="jdtcompilerapt" />
 		<antcall target="jdttext" />		
@@ -801,7 +801,7 @@
 		<antcall target="debug" />
 		<antcall target="ui" /> 
 		<antcall target="relEng" />
-		<antcall target="swt" /> -->
+		<antcall target="swt" />
 	</target>
 </project>
 
