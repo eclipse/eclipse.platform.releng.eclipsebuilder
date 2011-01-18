@@ -748,8 +748,9 @@
 	</target>
 
 	<target name="all">
+		<antcall target="equinoxp2" />
 		<antcall target="teamcvs" />
-		<!-- <antcall target="equinoxp2" />
+	<!--	<antcall target="equinoxp2" />
 		<antcall target="jdtcompilertool" />
 		<antcall target="jdtcompilerapt" />
 		<antcall target="jdttext" />		
