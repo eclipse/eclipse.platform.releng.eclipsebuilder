@@ -2,6 +2,7 @@
 
 REM default java executable for outer and test vm
 set vmcmd=java
+set no_proxy=localhost,dev.eclipse.org,hudson.eclipse.org
 
 REM reset list of ant targets in test.xml to execute
 set tests=

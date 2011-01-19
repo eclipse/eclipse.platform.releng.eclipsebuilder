@@ -65,6 +65,20 @@
 	</target> -->
 
 	<target name="configure.team.cvs.test">
+		<condition property="cvstest.properties" value="/shared/eclipse/buildtests/cvstest.properties">
+			<and>
+				<os family="unix" />
+				<not>
+					<os family="mac" />
+				</not>
+			</and>
+		</condition>
+		<condition property="cvstest.properties" value="c:\users\hudsonbuild\cvstest.properties">
+			<os family="windows" />
+		</condition>
+		<condition property="cvstest.properties" value="/Users/hudsonbuild/cvstest.properties">
+			<os family="mac" />
+		</condition>
 		<echo message="cvstest.properties ${cvstest.properties}" />
 		<replace file="${executionDir}/test.xml" propertyFile="${cvstest.properties}">
 			<replacefilter token="${cvs_user}" property="cvs_user" />
@@ -130,22 +144,7 @@
 		</copy>
 		<copy todir="${executionDir}" overwrite="true">
 			<fileset dir="eclipse/buildConfigs/sdk.tests/testScripts" />
-		</copy>
-		<condition property="cvstest.properties" value="/shared/eclipse/buildtests/cvstest.properties">
-			<and>
-				<os family="unix" />
-				<not>
-					<os family="mac" />
-				</not>
-			</and>
-		</condition>
-		<condition property="cvstest.properties" value="c:\users\hudsonbuild\cvstest.properties">
-			<os family="windows" />
-		</condition>
-		<condition property="cvstest.properties" value="/Users/hudsonbuild/cvstest.properties">
-			<os family="mac" />
-		</condition>
-		<echo message="cvstest.properties ${cvstest.properties}" />
+		</copy>	
 		<antcall target="configure.team.cvs.test" />
 		<ant antfile="${test.xml}" />
 	</target>
