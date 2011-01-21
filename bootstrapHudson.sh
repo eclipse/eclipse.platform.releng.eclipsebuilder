@@ -62,7 +62,8 @@ tag=""
 #buildProjectTags=v20110104
 #buildProjectTags=v20110117
 #buildProjectTags=v20110118
-buildProjectTags=v20110119
+#buildProjectTags=v20110119
+buildProjectTags=v20110121
 
 #updateSite property setting
 updateSite=""
@@ -199,7 +200,7 @@ mkdir -p $postingDirectory/$buildLabel
 chmod -R 755 $builderDir
 
 #default value of the bootclasspath attribute used in ant javac calls.  
-bootclasspath="/shared/common/jdk-1.5.0_16/jre/lib/rt.jar:/shared/common/jdk-1.5.0_16/jre/lib/jsse.jar:/shared/common/jdk-1.5.0_16/jre/lib/jce.jar"
+bootclasspath="/shared/common/j2sdk1.4.2_19/jre/lib/rt.jar:/shared/common/j2sdk1.4.2_19/jre/lib/jsse.jar:/shared/common/j2sdk1.4.2_19/jre/lib/jce.jar"
 bootclasspath_15="/shared/common/jdk-1.5.0_16/jre/lib/rt.jar"
 bootclasspath_16="/shared/common/jdk-1.6.0_10/jre/lib/rt.jar"
 bootclasspath_foundation="/shared/common/org.eclipse.sdk-feature/libs/ee.foundation-1.0.jar"
