@@ -753,8 +753,7 @@
 		<antcall target="pdeui" />
 		<antcall target="jdtcompilertool" />
 		<antcall target="jdtcompilerapt" />
-		<antcall target="jdttext" /> 		
-		<antcall target="pdeui" />
+		<antcall target="jdttext" /> 			
 		<antcall target="ant" />
 		<antcall target="compare" />
 		<antcall target="coreruntime" />
@@ -782,8 +781,7 @@
 		<antcall target="jfacedatabinding" />
 		<antcall target="filebuffers" />
 		<antcall target="antui" /> 
-		<antcall target="swt" />
-		<antcall target="teamcvs" />
+		<antcall target="swt" />		
 		<antcall target="coretestsnet" />
 		<antcall target="jdtapt" /> 
 		<antcall target="pdebuild" /> 
