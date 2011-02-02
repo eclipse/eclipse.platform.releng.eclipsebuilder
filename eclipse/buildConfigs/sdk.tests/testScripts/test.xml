@@ -419,7 +419,7 @@
 		</antcall>
 		<property file="finalPluginsVersions.properties" />
 		<property name="library-file" value="${basedir}/test-eclipse/eclipse/plugins/org.eclipse.test_${org.eclipse.test}/library.xml" />
-
+		<property name="junit-stylesheet" value="${eclipse-home}/plugins/org.eclipse.test_${org.eclipse.test}/JUNIT.XSL"/>
 		<echo>trying to find ${testPlugin}_*</echo>
 		<fileset id="test.plugin.file" dir="${eclipse-home}/plugins">
 			<filename name="${testPlugin}_*/test.xml" />
@@ -467,7 +467,7 @@
 
 	<target name="genResults">
 		<copy file="${eclipse-home}/${report}.xml" tofile="${results}/xml/${report}_${platform}.xml" failonerror="false" />
-		<xslt style="${eclipse-home}/plugins/org.eclipse.test_${org.eclipse.test}/JUNIT.XSL" basedir="${results}/xml" destdir="${results}/html" />
+		<xslt style="${junit-stylesheet}" basedir="${results}/xml" destdir="${results}/html" />
 	</target>
 
 	<target name="ant">
