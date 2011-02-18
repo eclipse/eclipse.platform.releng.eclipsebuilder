@@ -780,8 +780,7 @@
 		<antcall target="jface" />
 		<antcall target="jfacedatabinding" />
 		<antcall target="filebuffers" />
-		<antcall target="antui" /> 
-		<antcall target="swt" />		
+		<antcall target="antui" />		
 		<antcall target="coretestsnet" />
 		<antcall target="jdtapt" /> 
 		<antcall target="pdebuild" /> 
