@@ -1,7 +1,7 @@
 <project default="main">
 
 	<target name="init">
-		<!--	<property name="buildId" value="N20101123-2000" /> -->
+		<property name="buildId" value="I20110215-0800" />
 		<echo message="buildId ${buildId}" />
 		<echo message="WORKSPACE ${WORKSPACE}" />
 		<echo message="BUILD_ID ${BUILD_ID}" />
