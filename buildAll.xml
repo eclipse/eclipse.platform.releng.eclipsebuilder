@@ -483,10 +483,10 @@
 	<target name="publishEclipse">
 		<condition property="rsync" value="true">
 			<not>
-				<and>
+				<or>
 					<equals arg1="${hudson}" arg2="true" />
 					<equals arg1="{test}" arg2="true" />
-				</and>
+				</or>
 			</not>
 		</condition>
 		<parallel>
