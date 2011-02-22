@@ -899,7 +899,7 @@
 			<property name="arch" value="${p2.arch}" />
 			<property name="p2.director.log" value="${directorlog}" />
 			<property name="equinoxLauncherJar" value="${base.builder}/plugins/org.eclipse.equinox.launcher.jar" />
-			<property name="vmargs" value="-org.eclipse.ecf.provider.filetransfer.retrieve.closeTimeout=3000 -org.eclipse.ecf.provider.filetransfer.retrieve.readTimeout=3000"/>
+			<property name="vmargs" value="-Dorg.eclipse.ecf.provider.filetransfer.retrieve.closeTimeout=3000 -Dorg.eclipse.ecf.provider.filetransfer.retrieve.readTimeout=3000"/>
 		</ant>
 		<echo message="director ${p2.director.install.path}" file="${directorlog}" append="true" />
 		<echo message="${directorcode}" file="${directorlog}" append="true" />
