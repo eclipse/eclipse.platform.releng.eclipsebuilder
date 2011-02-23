@@ -106,10 +106,15 @@
 	</target>
 
 	<target name="setp2executionDir" if="windows">
-		<property name="windowsfile" value="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/windowsfile.properties"/>
-		<echo message="${executionDir}" file="${windowsfile}" />
-		<replaceregexp file="${windowsfile}" match="\\" replace="\\\\" />		
-		<loadfile property="p2executionDir" srcFile="${windowsfile}" failonerror="false" />		
+		<!--<property name="windowsfile" value="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/windowsfile.properties" />
+		<echo message="${executionDir}" file="${windowsfile}" /> -->
+		<property name="windowsfile" value="${executionDir}" />
+		<pathconvert targetos="unix" property="windowsfile">
+			<path location="${executionDir}" />
+		</pathconvert>
+		<!--	<replaceregexp file="${windowsfile}" match="/\/" replace="/\\/" />
+			<loadfile property="p2executionDir" srcFile="${windowsfile}" failonerror="false" /> -->
+		<property name="p2executionDir" value="windowsfile"/>
 	</target>
 
 	<target name="main" depends="init">
@@ -153,15 +158,15 @@
 		<antcall target="${getArtifacts}" />
 		<property file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/testing.properties" />
 		<property name="tester" value="${executionDir}" />
-		
+
 		<!--if executiondir starts with c:\ you'll need to escape it so it can load the filename properly with java -->
 		<antcall target="setp2executionDir" />
-		<property name="p2executionDir" value="${executionDir}"/>
+		<property name="p2executionDir" value="${executionDir}" />
 		<replace file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" token="@executionDir@" value="${p2executionDir}" />
 		<replace file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" token="@buildId@" value="${buildId}" />
 		<replace file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" token="@org.eclipse.equinox.p2.tests.current.build.repo@" value="${currentbuildrepo}" />
 		<property file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" />
-				
+
 		<echo message="executionDir ${executionDir}" />
 
 		<!--	eclipse-JUnit-Linux/ws/2010-11-08_14-26-17/ws/eclipse-testing/
