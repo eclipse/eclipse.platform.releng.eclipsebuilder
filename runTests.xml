@@ -105,7 +105,7 @@
 		</replace>
 	</target>
 
-	<target name="setp2setp2executionDir" if="windows">
+	<target name="setp2executionDir" if="windows">
 		<property name="windowsfile" value="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties"/>
 		<echo message="${executionDir}" file="${windowfile}" />
 		<replaceregexp file="${windowfile}" match="\" replace="\\" />
