@@ -107,13 +107,13 @@
 
 	<target name="setp2executionDir" if="windows">
 		<!--<property name="windowsfile" value="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/windowsfile.properties" />
-		<echo message="${executionDir}" file="${windowsfile}" /> -->
-		<property name="windowsfile" value="${executionDir}" />
+		<echo message="${executionDir}" file="${windowsfile}" /> -->		
 		<pathconvert targetos="unix" property="windowsfile">
 			<path location="${executionDir}" />
 		</pathconvert>
 		<!--	<replaceregexp file="${windowsfile}" match="/\/" replace="/\\/" />
 			<loadfile property="p2executionDir" srcFile="${windowsfile}" failonerror="false" /> -->
+		<echo message="windowsfile ${windowsfile}" />
 		<property name="p2executionDir" value="windowsfile"/>
 	</target>
 
