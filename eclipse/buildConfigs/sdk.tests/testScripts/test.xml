@@ -750,7 +750,7 @@
 	</target>
 
 	<target name="all">
-		<antcall target="pdeui" />
+	<!--	<antcall target="pdeui" />
 		<antcall target="jdtcompilertool" />
 		<antcall target="jdtcompilerapt" />
 		<antcall target="jdttext" /> 			
@@ -789,7 +789,7 @@
 		<antcall target="uiforms" />
 		<antcall target="pdeapitooling" /> 
 		<antcall target="equinoxsecurity" />
-		<antcall target="equinoxp2ui" />
+		<antcall target="equinoxp2ui" /> -->
 		<antcall target="equinoxp2discovery" />
 	 	<antcall target="search" />
 		<antcall target="pdeds" />

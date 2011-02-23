@@ -1,11 +1,14 @@
 <project default="main">
 
 	<target name="init">
-		<property name="buildId" value="I20110215-0800" /> 
+		<property name="buildId" value="I20110215-0800" />
 		<echo message="buildId ${buildId}" />
 		<echo message="WORKSPACE ${WORKSPACE}" />
 		<echo message="BUILD_ID ${BUILD_ID}" />
 		<echo message="BUILD_NUMBER ${BUILD_NUMBER}" />
+		<condition property="windows" value="true">
+			<os family="windows" />
+		</condition>
 		<condition property="testDir" value="${WORKSPACE}\ws\${BUILD_ID}">
 			<os family="windows" />
 		</condition>
@@ -34,14 +37,14 @@
 	</target> -->
 
 	<target name="getwinzips">
-			<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110215-0800/eclipse-SDK-${buildId}-win32.zip" dest="${executionDir}/eclipse-SDK-${buildId}-win32.zip" />
-			<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110215-0800/eclipse-Automated-Tests-${buildId}.zip" dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
-			<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110215-0800/eclipse-platform-${buildId}-win32.zip" dest="${executionDir}/eclipse-platform-${buildId}-win32.zip" />
-			<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110215-0800/eclipse-${buildId}-delta-pack.zip" dest="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
-			<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110215-0800/eclipse-Automated-Tests-${buildId}.zip" dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
-			<get src="http://download.eclipse.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-3.6-win32.zip" dest="${executionDir}/eclipse-platform-3.6-win32.zip" />
-		</target>
-	
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110215-0800/eclipse-SDK-${buildId}-win32.zip" dest="${executionDir}/eclipse-SDK-${buildId}-win32.zip" />
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110215-0800/eclipse-Automated-Tests-${buildId}.zip" dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110215-0800/eclipse-platform-${buildId}-win32.zip" dest="${executionDir}/eclipse-platform-${buildId}-win32.zip" />
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110215-0800/eclipse-${buildId}-delta-pack.zip" dest="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110215-0800/eclipse-Automated-Tests-${buildId}.zip" dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-3.6-win32.zip" dest="${executionDir}/eclipse-platform-3.6-win32.zip" />
+	</target>
+
 	<target name="getlinzips">
 		<get src="${buildURL}/eclipse-SDK-${buildId}-linux-gtk.tar.gz" dest="${executionDir}/eclipse-SDK-${buildId}-linux-gtk.tar.gz" />
 		<get src="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
@@ -51,15 +54,15 @@
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-3.6-linux-gtk.tar.gz" dest="${executionDir}/eclipse-platform-3.6-linux-gtk.tar.gz" />
 	</target>
 
-    <target name="getmaczips">
+	<target name="getmaczips">
 		<get src="${buildURL}/eclipse-SDK-${buildId}-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-SDK-${buildId}-macosx-cocoa.tar.gz" />
 		<get src="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
 		<get src="${buildURL}/eclipse-platform-${buildId}-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-platform-${buildId}-macosx-cocoa.tar.gz" />
 		<get src="${buildURL}/eclipse-${buildId}-delta-pack.zip" dest="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
 		<get src="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-3.6-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-platform-3.6-macosx-cocoa.tar.gz" />
-	</target> 
-	 
+	</target>
+
 	<!-- <target name="getmaczips">
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110215-0800/eclipse-SDK-I20110215-0800-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-SDK-I20110215-0800-macosx-cocoa.tar.gz" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110215-0800/eclipse-Automated-Tests-I20110215-0800.zip" dest="${testDir}/eclipse-Automated-Tests-I20110215-0800.zip" />
@@ -67,7 +70,7 @@
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110215-0800/eclipse-I20110215-0800-delta-pack.zip" dest="${executionDir}/eclipse-I20110215-0800-delta-pack.zip" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110215-0800/eclipse-Automated-Tests-I20110215-0800.zip" dest="${executionDir}/eclipse-Automated-Tests-I20110215-0800.zip" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/R-3.6-201006080911/eclipse-platform-3.6-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-platform-3.6-macosx-cocoa.tar.gz" />
-	</target> --> 
+	</target> -->
 
 	<!-- <target name="getmaczips">
 		<get src="https://hudson.eclipse.org/hudson/job/eclipse-equinox-test-N/lastSuccessfulBuild/artifact/builds/transfer/files/master/downloads/drops/N20110112-1051/eclipse-SDK-N20110112-1051-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-SDK-N20110112-1051-macosx-cocoa.tar.gz" />
@@ -100,6 +103,13 @@
 			<replacefilter token="${cvs_host}" property="cvs_host" />
 			<replacefilter token="${cvs_root}" property="cvs_root" />
 		</replace>
+	</target>
+
+	<target name="setp2setp2executionDir" if="windows">
+		<property name="windowsfile" value="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties"/>
+		<echo message="${executionDir}" file="${windowfile}" />
+		<replaceregexp file="${windowfile}" match="\" replace="\\" />
+		<loadfile property="p2executionDir" srcFile="${windowfile}" failonerror="false" />		
 	</target>
 
 	<target name="main" depends="init">
@@ -143,10 +153,15 @@
 		<antcall target="${getArtifacts}" />
 		<property file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/testing.properties" />
 		<property name="tester" value="${executionDir}" />
-		<replace file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" token="@executionDir@" value="${executionDir}" />
+		
+		<!--if executiondir starts with c:\ you'll need to escape it so it can load the filename properly with java -->
+		<antcall target="setp2executionDir" />
+		<property name="p2executionDir" value="${executionDir}"/>
+		<replace file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" token="@executionDir@" value="${p2executionDir}" />
 		<replace file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" token="@buildId@" value="${buildId}" />
 		<replace file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" token="@org.eclipse.equinox.p2.tests.current.build.repo@" value="${currentbuildrepo}" />
 		<property file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" />
+				
 		<echo message="executionDir ${executionDir}" />
 
 		<!--	eclipse-JUnit-Linux/ws/2010-11-08_14-26-17/ws/eclipse-testing/
