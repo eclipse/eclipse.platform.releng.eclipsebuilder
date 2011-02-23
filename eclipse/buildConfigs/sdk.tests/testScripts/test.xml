@@ -789,13 +789,13 @@
 		<antcall target="uiforms" />
 		<antcall target="pdeapitooling" /> 
 		<antcall target="equinoxsecurity" />
-		<antcall target="equinoxp2ui" /> -->
+		<antcall target="equinoxp2ui" /> 
 		<antcall target="equinoxp2discovery" />
 	 	<antcall target="search" />
 		<antcall target="pdeds" />
 		<antcall target="jdtcoremodel" />
-		<antcall target="uadoc" />
-		<antcall target="debug" />
+		<antcall target="uadoc" /> 
+		<antcall target="debug" /> -->
 		<antcall target="ui" /> 
 		<antcall target="relEng" />
 		<antcall target="swt" />
