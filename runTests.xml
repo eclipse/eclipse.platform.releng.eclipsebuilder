@@ -108,7 +108,7 @@
 	<target name="setp2executionDir" if="windows">
 		<property name="windowsfile" value="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties"/>
 		<echo message="${executionDir}" file="${windowsfile}" />
-		<replaceregexp file="${windowsfile}" match="\" replace="\\" />
+		<replaceregexp file="${windowsfile}" match="\\" replace="\\\\" />		
 		<loadfile property="p2executionDir" srcFile="${windowsfile}" failonerror="false" />		
 	</target>
 
