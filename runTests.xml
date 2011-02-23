@@ -148,7 +148,8 @@
 		<pathconvert targetos="unix" property="windowsfile">
 			<path location="${executionDir}" />
 		</pathconvert>
-		<property name="p2executionDir" value="windowsfile"/>		
+		<echo message="windowsfile ${windowsfile}"/>
+		<property name="p2executionDir" value="${windowsfile}"/>		
 		<replace file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" token="@executionDir@" value="${p2executionDir}" />
 		<replace file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" token="@buildId@" value="${buildId}" />
 		<replace file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" token="@org.eclipse.equinox.p2.tests.current.build.repo@" value="${currentbuildrepo}" />
