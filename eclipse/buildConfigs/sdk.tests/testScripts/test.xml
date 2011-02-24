@@ -750,7 +750,7 @@
 	</target>
 
 	<target name="all">
-	<!--	<antcall target="pdeui" />
+		<antcall target="pdeui" />
 		<antcall target="jdtcompilertool" />
 		<antcall target="jdtcompilerapt" />
 		<antcall target="jdttext" /> 			
@@ -795,7 +795,7 @@
 		<antcall target="pdeds" />
 		<antcall target="jdtcoremodel" />
 		<antcall target="uadoc" /> 
-		<antcall target="debug" /> -->
+		<antcall target="debug" /> 
 		<antcall target="ui" /> 
 		<antcall target="relEng" />
 		<antcall target="swt" />
