@@ -750,7 +750,7 @@
 	</target>
 
 	<target name="all">
-		<antcall target="pdeui" />
+		<!-- <antcall target="pdeui" />
 		<antcall target="jdtcompilertool" />
 		<antcall target="jdtcompilerapt" />
 		<antcall target="jdttext" /> 			
@@ -776,9 +776,9 @@
 		<antcall target="jdtuirefactoring" />
 		<antcall target="ltkuirefactoringtests" />
 		<antcall target="ltkcorerefactoringtests" />
-		<antcall target="text" />
+		<antcall target="text" /> -->
 		<antcall target="jface" />
-		<antcall target="jfacedatabinding" />
+		<!-- <antcall target="jfacedatabinding" />
 		<antcall target="filebuffers" />
 		<antcall target="antui" />		
 		<antcall target="coretestsnet" />
@@ -795,12 +795,12 @@
 		<antcall target="pdeds" />
 		<antcall target="jdtcoremodel" />
 		<antcall target="uadoc" /> 
-		<antcall target="debug" /> 
+		<antcall target="debug" /> -->
 		<antcall target="ui" /> 
-		<antcall target="relEng" />
+		<!-- <antcall target="relEng" /> -->
 		<antcall target="swt" />
-		<antcall target="teamcvs" />
-		<antcall target="equinoxp2" />					
+	<!--	<antcall target="teamcvs" />
+		<antcall target="equinoxp2" /> -->					
 	</target>
 </project>
 
