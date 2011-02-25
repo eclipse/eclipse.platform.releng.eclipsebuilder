@@ -795,10 +795,10 @@
 		<antcall target="pdeds" />
 		<antcall target="jdtcoremodel" />
 		<antcall target="uadoc" /> 
-		<antcall target="debug" /> -->
+		<antcall target="debug" />
 		<antcall target="ui" /> 
-		<!-- <antcall target="relEng" /> -->
-	    <antcall target="swt" />
+		<antcall target="relEng" />
+	    <antcall target="swt" /> -->
 		<antcall target="teamcvs" />
 		<antcall target="equinoxp2" /> 					
 	</target>
