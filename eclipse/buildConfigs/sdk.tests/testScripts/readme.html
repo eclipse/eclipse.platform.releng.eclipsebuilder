@@ -1,66 +1,82 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en">
 <head>
-<title>Instructions</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Automated Testing of Eclipse Builds</title>
 </head>
 
 <body bgcolor="#FFFFFF" text="#000000">
 <font size="+2"> Automated Testing of Eclipse Builds</font>
-<p>last updated: February 5, 2009</p><p><font size="+1">Description</font></p><p>This document describes how to run Eclipse JUnit plugin tests from the command 
-  line using Eclipse SDK  JUnit test plugins and a testing framework. This method of running tests is intended 
+<p>Last updated: March 2, 2011</p><p><font size="+1">Description</font></p><p>This document describes how to run Eclipse JUnit plugin tests from the command 
+  line using Eclipse SDK  JUnit test plug-ins and a testing framework. This method of running tests is intended 
   for anyone who wishes to automate their testing process or reproduce the testing 
-  mechanism used in Eclipse builds by the Eclipse Platform  Release Engineering team.</p><p>Click <a href="http://dev.eclipse.org/viewcvs/index.cgi/*checkout*/org.eclipse.test/testframework.html?rev=HEAD&content-type=text/html">here</a> for a description of the testing 
+  mechanism used in Eclipse builds by the Eclipse Platform  Release Engineering team.</p><p>Click <a href="http://dev.eclipse.org/viewcvs/index.cgi/*checkout*/org.eclipse.test/testframework.html?rev=HEAD">here</a> for a description of the testing 
   framework, and how it can be used outside of the setup described here.</p><p>If you simply wish to write and run JUnit tests interactively from an Eclipse 
-  workbench, try one of the links below:</p><p><a href="http://dev.eclipse.org/viewcvs/index.cgi/%7Echeckout%7E/jdt-ui-home/plugins/org.eclipse.jdt.junit/index.html">JUnit 
-  Support in Eclipse</a><br>
-<a href="http://dev.eclipse.org:8080/help/content/help:/org.eclipse.jdt.doc.user/tasks/tasks-207.htm?resultof=%6a%75%6e%69%74%20&toc=%2Forg.eclipse.jdt.doc.user%2Ftoc.xml">Using 
-  JUnit</a></p><p><font size="+1">Requirements</font></p><p>1. All test machines will require 1.4 and 1.5 java runtime environments installed to run all tests.  See <A HREF="#testtargets">test targets</A> 
-  for details on which tests require a 1.5 level jre.  All other tests can be executed with either jre levels.<BR>2.  A properties file containing the following   key-value pair: J2SE-5.0=&lt;path to 1.5  java executable&gt;.    On Windows,  the path must be enclosed with double quotes if it contains any space characters, <BR>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i.e.  J2SE-5.0=&quot;c:/program files/jdk1.5.0/jre/bin/java&quot;<br>
-  3. <a href="http://www.info-zip.org/pub/infozip/UnZip.html">Info-ZIP UnZip</a> 
-  version 5.41 or later installed and added to the path.<br>
-  4. The Automated Test feature from an Eclipse build (<a href="http://www.eclipse.org/downloads/index.php">http://www.eclipse.org/downloads/index.php</a>). 
-  This contains scripts to run the tests, the test framework plugins and the JUnit test plugins.<br>
-  5. An Eclipse SDK distribution (<a href="http://www.eclipse.org/downloads/index.php">http://www.eclipse.org/downloads/index.php</a>) 
+  workbench, try one of the links below:</p><p><a href="http://help.eclipse.org/helios/index.jsp?topic=/org.eclipse.jdt.doc.user/gettingStarted/qs-junit.htm">JUnit Support in Eclipse</a><br>
+<a href="http://help.eclipse.org/helios/index.jsp?topic=/org.eclipse.pde.doc.user/guide/tools/launchers/junit_launcher.htm">Testing Eclipse Plug-ins with JUnit</a></p><p><font size="+1">Requirements</font></p>
+<ol>
+  <li>All test machines will require 1.4 and 1.5 java runtime environments installed to run all tests.  See <A HREF="#testtargets">test targets</A> 
+  for details on which tests require a 1.5 level jre.  All other tests can be executed with either jre levels.</li>
+  
+  <li>A properties file containing the following   key-value pair: J2SE-5.0=&lt;path to 1.5  java executable&gt;. On Windows,  the path must be enclosed with double quotes if it contains any space characters, e.g. J2SE-5.0=&quot;c:/program files/jdk1.5.0/jre/bin/java&quot;.</li>
+  
+  <li><a href="http://www.info-zip.org/pub/infozip/UnZip.html">Info-ZIP UnZip</a> version 5.41 or later installed and added to the path.</li>
+  
+  <li>The JUnit Plugin Tests <code>eclipse-Automated-Tests-&lt;buildId&gt;.zip</code> from an Eclipse build (<a href="http://download.eclipse.org/eclipse/downloads/">http://download.eclipse.org/eclipse/downloads/</a>). 
+  This ZIP contains this document, scripts to run the tests, the test framework plug-ins and the JUnit test plug-ins.</li>
+
+  <li>An Eclipse SDK distribution (<a href="http://download.eclipse.org/eclipse/downloads/">http://download.eclipse.org/eclipse/downloads/</a>) 
   to test. Usually you will want to test a particular Eclipse build using a matching 
   Automated Tests feature.
-  <br>6. To run the pde build tests you will need the eclipse-&lt;buildid&gt;delta-pack.zip. 
-  <br>
-  7. To run the Team CVS tests you will need extssh access to a CVS repository. 
+  
+  <li>To run the pde build tests you will need the eclipse-&lt;buildId&gt;delta-pack.zip.</li> 
+  
+  <li>To run the Team CVS tests you will need extssh access to a CVS repository. 
   The tests create a lot of junk modules and tags so you will want to keep the 
   test repository seperate from your development repository. While it is not necessary 
   to clean up the repository between each Team test run you will probably want 
-  to clean it up periodically.
-  <br>
-  8. Some of the p2 tests require a copy of the Eclipse Platform Runtime Binary archive for the platform you
-  are testing. More information is available from the <a href="http://wiki.eclipse.org/Equinox/p2/Testing">Equinox Testing Wiki page</a>. 
-  </p>
+  to clean it up periodically.</li>
   
-  <p><font size="+1">Setup</font></p><p>1. Extract the eclipse-Automated-Tests-&lt;buildid&gt;.zip or tar.gz. On Window, extract 
-  this file close to the root of the drive to prevent some path names from exceeding 
-  the 255 character limit. This will create a top-level directory &quot;<b>eclipse-testing</b>&quot;.<br>
-  2. Place the Eclipse SDK distribution to test (and the Eclipse Platform Runtime Binary) in the eclipse-testing directory. 
-  Do not extract these files as the test scripts will take care of this.<br>
-  3. To run the Team CVS tests, edit the test.xml script to provide connection 
-  information.</p><blockquote> 
-  <p>Replace the following strings in the &quot;teamcvs&quot; target of the test.xml 
-    file with the information described below:</p></blockquote><ul>
-  <li>@cvs_user@ - the account used to connect to the cvs repository</li><li>@cvs_password@- the account password</li><li>@cvs_host@- the name of the cvs server</li><li>@cvs_root@- the repository path 
-    <p>These values are used at test time to automatically replace strings in 
+  <li>Some of the p2 tests require a copy of the Eclipse Platform Runtime Binary archive for the platform you
+  are testing. More information is available from the <a href="http://wiki.eclipse.org/Equinox/p2/Testing">Equinox Testing Wiki page</a>.</li>
+</ol> 
+  
+  <p><font size="+1">Setup</font></p>
+  <ol>
+  <li>Extract the eclipse-Automated-Tests-&lt;buildId&gt;.zip or tar.gz. On Window, extract this file close to the root of the drive to prevent some path names from exceeding 
+  the 255 character limit. This will create a top-level directory <code>eclipse-testing</code>.</li>
+  
+  <li>Place the Eclipse SDK distribution to test (and the Eclipse Platform Runtime Binary) in the eclipse-testing directory. 
+  Do not extract these files as the test scripts will take care of this.</li>
+  <li>To run the Team CVS tests, edit the test.xml script to provide connection 
+  information. Replace the following strings in the <strong>teamcvs</strong> target of the <code>test.xml</code> file with the information described below:
+  <ul>
+  <li>@cvs_user@ - the account used to connect to the cvs repository</li>
+  <li>@cvs_password@ - the account password</li><li>@cvs_host@- the name of the cvs server</li>
+  <li>@cvs_root@ - the repository path</li>
+  </ul> 
+  These values are used at test time to automatically replace strings in 
       org.eclipse.team.tests.cvs.core/repository.properties. For more information 
-      on how this file is used in the team CVS tests, click <a href="http://dev.eclipse.org/viewcvs/index.cgi/%7Echeckout%7E/org.eclipse.team.tests.cvs.core/readme.html?rev=HEAD&content-type=text/html">here</a>. 
-     </p></li></ul>
+      on how this file is used in the team CVS tests, click <a href="http://dev.eclipse.org/viewcvs/index.cgi/%7Echeckout%7E/org.eclipse.team.tests.cvs.core/readme.html?rev=HEAD">here</a>.</li>
+  </li>
      
-  4.  To Run the PDE build scripts, save the eclipse-&lt;buildid&gt;delta-pack.zip to the eclipse-testing directory.
+  <li>To Run the PDE build scripts, save the eclipse-&lt;buildId&gt;delta-pack.zip to the eclipse-testing directory.</li>
+  </ol>
     
-    <p><font size="+1">Running Tests</font></p><p>From a command prompt or terminal:</p><p>1. cd to the eclipse-testing directory<br>
-  2. Execute the following script:</p><p><b>runtests -properties &lt;path to properties file&gt; [-os &lt;operating system&gt;] [-ws &lt;windowing system&gt;] [-arch 
+    <p><font size="+1">Running Tests</font></p><p>From a command prompt or terminal:</p>
+<ol>
+  <li><code>cd</code> to the <code>eclipse-testing</code> directory</li>
+  <li>Execute the following script:</p><p><b>runtests -properties &lt;path to properties file&gt; [-os &lt;operating system&gt;] [-ws &lt;windowing system&gt;] [-arch 
   &lt;architecture&gt;] [-noclean] [-vm 
   &lt;path to java executable&gt;][-Dtest.target=performance][<I>targetname1 targetname2 targetname3 etc...</I>] </b></p><p>All parameters and targets are optional on windows systems with the exception of  &quot;-properties&quot;.  On *nix systems, the os, ws and arch parameters
   must be specified in addition to the -properties parameter.</p><p>The JUnit test results are produced in individual xml files for each test plug-in with a test.xml. These 
   results are copied to the eclipse-testing\results\xml directory. These results 
   can be converted into html by running the &quot;genHtml&quot; target as described 
   in the table below. Please be aware that &quot;Build Successful&quot; printed 
-  to the console is NOT indicative of tests passing.</p><p><font size="+1"><a name="vm"></a>Parameters</font></p><table width="90%" border="1">
+  to the console is NOT indicative of tests passing.</li>
+</ol>
+
+<p><font size="+1"><a name="vm"></a>Parameters</font></p><table width="90%" border="1">
   <tr> 
     <td>Parameter</td><td>Description</td></tr>
   <tr> 
@@ -137,7 +153,7 @@
 
 
 </table><p><br>
-</p><p><font size="+1"><a name="appendixb"></a>Appendix B- Supported os, ws, and arch 
+</p><p><font size="+1"><a name="appendixb"></a>Appendix B - Supported os, ws, and arch 
   value combinations</font></p><p>The following table contains the values that can be used with the -os, -ws, 
   and -arch switches.</p><table width="75%" border="1">
   <tr> 
