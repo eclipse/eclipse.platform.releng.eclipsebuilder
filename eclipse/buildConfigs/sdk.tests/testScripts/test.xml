@@ -904,7 +904,7 @@
 		<jacocoreport pluginName="org.eclipse.pde.ui" reportTitle="org.eclipse.pde.ui Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.pde.ui.templates" reportTitle="org.eclipse.pde.ui.templates Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.search" reportTitle="org.eclipse.search Code Coverage" />
-		<jacocoreport pluginName="org.eclipse.swt" reportTitle="org.eclipse.swt Code Coverage" />
+		<!-- <jacocoreport pluginName="org.eclipse.swt" reportTitle="org.eclipse.swt Code Coverage" /> -->
 		<jacocoreport pluginName="org.eclipse.team.core" reportTitle="org.eclipse.team.core Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.team.cvs.core" reportTitle="org.eclipse.team.cvs.core Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.team.cvs.ssh2" reportTitle="org.eclipse.team.cvs.ssh2 Code Coverage" />
@@ -926,7 +926,7 @@
 		<jacocoreport pluginName="org.eclipse.ui.views" reportTitle="org.eclipse.ui.views Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.ui.views.log" reportTitle="org.eclipse.ui.views.log Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.ui.views.properties.tabbed" reportTitle="org.eclipse.ui.views.properties.tabbed Code Coverage" />
-		<jacocoreport pluginName="org.eclipse.ui.workbench" reportTitle="org.eclipse.ui.workbench Code Coverage" />
+		<!-- <jacocoreport pluginName="org.eclipse.ui.workbench" reportTitle="org.eclipse.ui.workbench Code Coverage" /> -->
 		<jacocoreport pluginName="org.eclipse.ui.workbench.texteditor" reportTitle="org.eclipse.ui.workbench.texteditor Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.update.configurator" reportTitle="org.eclipse.update.configurator Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.update.core" reportTitle="org.eclipse.update.core Code Coverage" />
