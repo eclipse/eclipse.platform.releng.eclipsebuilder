@@ -30,7 +30,7 @@
 	<property name="coverage-output" value="${results}/coverage" />
 	<condition property="codecoverage" value="true">
 		<and>
-			<equals arg1="${buildType}" arg2="Q" />
+			<equals arg1="${buildType}" arg2="I" />
 			<os family="unix" />
 		</and>
 	</condition>
