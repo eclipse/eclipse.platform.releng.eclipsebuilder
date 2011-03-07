@@ -767,10 +767,10 @@
 				<structure name="@{reportTitle}">
 					<group name="@{pluginName}">
 						<classfiles>
-							<zipfileset src="${basedir}/test-eclipse/eclipse/plugins/@{pluginName}_${@{pluginName}}.jar" includes="**/*.class" />
+							<fileset file="${basedir}/test-eclipse/eclipse/plugins/@{pluginName}_${@{pluginName}}.jar" includes="**/*.class" />
 						</classfiles>
 						<sourcefiles>
-							<zipfileset src="${basedir}/test-eclipse/eclipse/plugins/@{pluginName}.source_${@{pluginName}.source}.jar" includes="**/*.java" />
+							<fileset file="${basedir}/test-eclipse/eclipse/plugins/@{pluginName}.source_${@{pluginName}.source}.jar" includes="**/*.java" />
 						</sourcefiles>
 					</group>
 				</structure>
@@ -778,6 +778,7 @@
 			</jacoco:report>
 		</sequential>
 	</macrodef>
+
 
 	<target name="generateJacocoReport" if="codecoverage">
 		<echo message="Coverage output location = ${coverage-output}" />
@@ -871,7 +872,7 @@
 		<jacocoreport pluginName="org.eclipse.jdt.apt.ui" reportTitle="org.eclipse.jdt.apt.ui Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.jdt.compiler.apt" reportTitle="org.eclipse.jdt.compiler.apt Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.jdt.compiler.tool" reportTitle="org.eclipse.jdt.compiler.tool Code Coverage" />
-		<!-- <jacocoreport pluginName="org.eclipse.jdt.core" reportTitle="org.eclipse.jdt.core Code Coverage" /> -->
+		<jacocoreport pluginName="org.eclipse.jdt.core" reportTitle="org.eclipse.jdt.core Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.jdt.core.manipulation" reportTitle="org.eclipse.jdt.core.manipulation Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.jdt.debug.ui" reportTitle="org.eclipse.jdt.debug.ui Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.jdt.junit" reportTitle="org.eclipse.jdt.junit Code Coverage" />
@@ -879,7 +880,7 @@
 		<jacocoreport pluginName="org.eclipse.jdt.junit.core" reportTitle="org.eclipse.jdt.junit.core Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.jdt.junit.runtime" reportTitle="org.eclipse.jdt.junit.runtime Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.jdt.launching" reportTitle="org.eclipse.jdt.launching Code Coverage" />
-<!--		<jacocoreport pluginName="org.eclipse.jdt.ui" reportTitle="org.eclipse.jdt.ui Code Coverage" /> -->
+		<jacocoreport pluginName="org.eclipse.jdt.ui" reportTitle="org.eclipse.jdt.ui Code Coverage" /> 
 		<jacocoreport pluginName="org.eclipse.jface" reportTitle="org.eclipse.jface Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.jface.databinding" reportTitle="org.eclipse.jface.databinding Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.jface.text" reportTitle="org.eclipse.jface.text Code Coverage" />
@@ -903,8 +904,7 @@
 		<jacocoreport pluginName="org.eclipse.pde.ua.ui" reportTitle="org.eclipse.pde.ua.ui Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.pde.ui" reportTitle="org.eclipse.pde.ui Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.pde.ui.templates" reportTitle="org.eclipse.pde.ui.templates Code Coverage" />
-		<jacocoreport pluginName="org.eclipse.search" reportTitle="org.eclipse.search Code Coverage" />
-		<!-- <jacocoreport pluginName="org.eclipse.swt" reportTitle="org.eclipse.swt Code Coverage" /> -->
+		<jacocoreport pluginName="org.eclipse.search" reportTitle="org.eclipse.search Code Coverage" />		
 		<jacocoreport pluginName="org.eclipse.team.core" reportTitle="org.eclipse.team.core Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.team.cvs.core" reportTitle="org.eclipse.team.cvs.core Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.team.cvs.ssh2" reportTitle="org.eclipse.team.cvs.ssh2 Code Coverage" />
@@ -926,7 +926,7 @@
 		<jacocoreport pluginName="org.eclipse.ui.views" reportTitle="org.eclipse.ui.views Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.ui.views.log" reportTitle="org.eclipse.ui.views.log Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.ui.views.properties.tabbed" reportTitle="org.eclipse.ui.views.properties.tabbed Code Coverage" />
-		<!-- <jacocoreport pluginName="org.eclipse.ui.workbench" reportTitle="org.eclipse.ui.workbench Code Coverage" /> -->
+		<jacocoreport pluginName="org.eclipse.ui.workbench" reportTitle="org.eclipse.ui.workbench Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.ui.workbench.texteditor" reportTitle="org.eclipse.ui.workbench.texteditor Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.update.configurator" reportTitle="org.eclipse.update.configurator Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.update.core" reportTitle="org.eclipse.update.core Code Coverage" />
@@ -985,23 +985,11 @@
 		<antcall target="relEng" />
 		<antcall target="swt" />
 		<antcall target="teamcvs" />
-		<antcall target="equinoxp2" /> -->
-		<antcall target="jdtcorecompiler" />
+		<antcall target="equinoxp2" /> 
+		<antcall target="jdtcorecompiler" /> -->
 
-		 <antcall target="generateJacocoReport" /> 
-		<!-- <property file="equinoxp2tests.properties" />
-		<path id="launcher.paths">
-			<fileset dir="${eclipse-home}" includes="plugins/org.eclipse.equinox.launcher_*" />
-		</path>
-		<property name="launcherPath" refid="launcher.paths" />
-		<java jar="${launcherPath}" failonerror="false" dir="${eclipse-home}" timeout="900000" fork="true">
-			<arg line="-vm ${java.home}/bin/java" />
-			<arg line="-vmargs -Xmx4096M -Xms1024M" />
-			<arg line="-application org.eclipse.ant.core.antRunner" />
-			<arg line="-consoleLog" />
-			<arg line="-buildfile ${basedir}/test.xml" />
-			<arg line="generateJacocoReport" />
-		</java> -->
+		<antcall target="generateJacocoReport" />
+		
 
 	</target>
 </project>
