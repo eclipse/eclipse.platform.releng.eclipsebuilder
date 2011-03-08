@@ -30,7 +30,7 @@
 	<property name="coverage-output" value="${results}/coverage" />
 	<condition property="codecoverage" value="true">
 		<and>
-			<equals arg1="${buildType}" arg2="I" />
+			<equals arg1="${buildType}" arg2="Q" />
 			<os family="unix" />
 		</and>
 	</condition>
@@ -767,10 +767,10 @@
 				<structure name="@{reportTitle}">
 					<group name="@{pluginName}">
 						<classfiles>
-							<fileset file="${basedir}/test-eclipse/eclipse/plugins/@{pluginName}_${@{pluginName}}.jar" includes="**/*.class" />
+							<zipfileset src="${basedir}/test-eclipse/eclipse/plugins/@{pluginName}_${@{pluginName}}.jar" includes="**/*.class" />
 						</classfiles>
 						<sourcefiles>
-							<fileset file="${basedir}/test-eclipse/eclipse/plugins/@{pluginName}.source_${@{pluginName}.source}.jar" includes="**/*.java" />
+							<zipfileset src="${basedir}/test-eclipse/eclipse/plugins/@{pluginName}.source_${@{pluginName}.source}.jar" includes="**/*.java" />
 						</sourcefiles>
 					</group>
 				</structure>
