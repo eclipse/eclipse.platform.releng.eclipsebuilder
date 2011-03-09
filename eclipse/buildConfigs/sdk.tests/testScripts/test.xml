@@ -773,7 +773,7 @@
 							<file file="${basedir}/test-eclipse/eclipse/plugins/@{pluginName}_${@{pluginName}}.jar" />
 						</classfiles>
 						<sourcefiles>
-							<fileset file="${reportunzipsource}" includes="**/*.java" />
+							<fileset dir="${reportunzipsource}" includes="**/*.java" />
 						</sourcefiles>
 					</group>
 				</structure>
