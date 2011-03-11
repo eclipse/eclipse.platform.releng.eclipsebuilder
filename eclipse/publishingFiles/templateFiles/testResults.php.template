@@ -139,6 +139,10 @@ echo " <li><a href=\"apitools/apitoolsdeprecations/apideprecation.html\"><b>API 
 echo "  This tool generates a report for API deprecated since 3.6. </li> ";
 ?>
 
+<?php
+echo " <li><a href=\"coverage.php\"><b>JaCoCo code coverage report</b></a></li>";
+?>
+
 <!-- <?php
 echo"<li><a href=\"apitools/report.html\"><b>API Tools Post-API Freeze Report</b></a>  This report describes API changes since 3.6M6.  Exclusions are listed in org.eclipse.releng/apiexclude/exclude_list.txt. </li>";
 ?> -->
