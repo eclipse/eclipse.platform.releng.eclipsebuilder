@@ -32,8 +32,8 @@
 	<p><a href="apitools/apitoolsdeprecations/apideprecation.html">API Deprecation Report</a> --
 	Report of API deprecated since 3.6.</p> 
  
-	<!--p><a href="apitools/report.html">API Tools Post-API Freeze Report</a> -- This report describes API changes 
-	since 3.6M6.  Exclusions are listed in org.eclipse.releng/apiexclude/exclude_list.txt.</p--> 
+	<p><a href="apitools/report.html">API Tools Post-API Freeze Report</a> -- This report describes API changes 
+	since 3.7M6.  Exclusions are listed in org.eclipse.releng/apiexclude/exclude_list.txt.</p> 
 
 	<div class="homeitem3col">
 		<h3>All of Equinox</h3>
