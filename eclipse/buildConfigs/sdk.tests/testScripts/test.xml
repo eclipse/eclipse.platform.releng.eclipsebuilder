@@ -815,6 +815,7 @@
 		<jacocoreport pluginName="org.eclipse.core.filebuffers" reportTitle="org.eclipse.core.filebuffers Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.core.filesystem" reportTitle="org.eclipse.core.filesystem Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.core.jobs" reportTitle="org.eclipse.core.jobs Code Coverage" />
+		<jacocoreport pluginName="org.eclipse.core.resources" reportTitle="org.eclipse.core.resources Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.core.net" reportTitle="org.eclipse.core.net Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.core.runtime" reportTitle="org.eclipse.core.runtime Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.core.runtime.compatibility" reportTitle="org.eclipse.core.runtime.compatibility Code Coverage" />
