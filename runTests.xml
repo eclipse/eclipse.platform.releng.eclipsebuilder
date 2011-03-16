@@ -169,7 +169,7 @@
 			<fileset dir="eclipse/buildConfigs/sdk.tests/testScripts" />
 		</copy>
 		<antcall target="configure.team.cvs.test" />
-	<!-- 	<ant antfile="${test.xml}" /> -->
+	 	<ant antfile="${test.xml}" />
 	</target>
 
 </project>
