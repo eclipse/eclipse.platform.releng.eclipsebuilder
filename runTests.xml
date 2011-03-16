@@ -1,7 +1,7 @@
 <project default="main">
 
 	<target name="init">
-		<property name="buildId" value="N20110112-1051" />
+		<property name="buildId" value="N20110315-0928" />
 	<!--	<property name="currentbuildrepo" value="http://download.eclipse.org/eclipse/updates/3.7-I-builds/I20110315-0800"/> -->
 		<!-- <echo message="buildId ${buildId}" /> -->
 		<echo message="WORKSPACE ${WORKSPACE}" />
