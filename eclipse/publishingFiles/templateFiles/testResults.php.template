@@ -126,17 +126,17 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 </li>
 <?php if (! (preg_match("/N/i",$buildName))) {
 echo " <li><a href=\"testresults/versiontool/results.xml\"><b> Versioning Compare Tool Output Logs </b></a>";
-echo "This log compares the build's plugin and features versions with 3.6</li> ";
+echo "This log compares the build's plugin and features versions with 3.6.2</li> ";
 }
 ?>
 <?php
 echo " <li><a href=\"apitools/apitoolsverifications/html/index.html\"><b>API Tools Version Verification Report</b></a>";
-echo "  This tool verifies the versions of the plugins against Eclipse 3.6.  Exclusions are listed in org.eclipse.releng/apiexclude/exclude_list_external.txt. </li> ";
+echo "  This tool verifies the versions of the plugins against Eclipse 3.6.2  Exclusions are listed in org.eclipse.releng/apiexclude/exclude_list_external.txt. </li> ";
 ?>
 
 <?php
 echo " <li><a href=\"apitools/apitoolsdeprecations/apideprecation.html\"><b>API Tools Deprecation Report</b></a>";
-echo "  This tool generates a report for API deprecated since 3.6. </li> ";
+echo "  This tool generates a report for API deprecated since 3.6.2 </li> ";
 ?>
 
 <?php
