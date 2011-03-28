@@ -769,7 +769,7 @@
 			<unzip src="${basedir}/test-eclipse/eclipse/plugins/@{pluginName}.source_${@{pluginName}.source}.jar" dest="${reportunzipsource}" />
 			<jacoco:report>
 				<executiondata>
-					<file file="${coverage-output}/jacoco@{pluginName}.exec"/>
+					<file file="${exec.file}" />
 				</executiondata>
 				<structure name="@{reportTitle}">
 					<group name="@{pluginName}">
@@ -790,11 +790,15 @@
 	<target name="generateJacocoReport" if="codecoverage">
 		<echo message="Coverage output location = ${coverage-output}" />
 		<mkdir dir="${coverage-output}" />
-		<mkdir dir="${results}/reports" />		
+		<mkdir dir="${results}/reports" />
+		<property name="exec.file" location="${coverage-output}/jacoco_merge.exec" />
 		<property file="finalPluginsVersions.properties" />
 		<taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
 			<classpath path="${basedir}/test-eclipse/eclipse/plugins/org.eclipse.test_${org.eclipse.test}/lib/jacocoant.jar" />
-		</taskdef>		
+		</taskdef>
+		<jacoco:merge destfile="${exec.file}">
+			<fileset dir="${coverage-output}" includes="*.exec" />
+		</jacoco:merge>
 		<antcall target="alljacocoreports" />
 	</target>
 
