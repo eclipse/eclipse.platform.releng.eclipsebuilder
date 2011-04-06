@@ -491,9 +491,9 @@
 	</target>
 
 	<target name="equinoxds">
-			<runTests testPlugin="org.eclipse.equinox.ds.tests" />
-		</target>
-	
+		<runTests testPlugin="org.eclipse.equinox.ds.tests" />
+	</target>
+
 	<target name="debug">
 		<runTests testPlugin="org.eclipse.debug.tests" />
 	</target>
@@ -830,7 +830,7 @@
 		<jacocoreport pluginName="org.eclipse.equinox.app" reportTitle="org.eclipse.equinox.app Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.equinox.common" reportTitle="org.eclipse.equinox.common Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.equinox.event" reportTitle="org.eclipse.equinox.event Code Coverage" />
-		<jacocoreport pluginName="org.eclipse.equinox.ds" reportTitle="org.eclipse.equinox.ds Code Coverage" />	
+		<jacocoreport pluginName="org.eclipse.equinox.ds" reportTitle="org.eclipse.equinox.ds Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.equinox.frameworkadmin" reportTitle="org.eclipse.equinox.frameworkadmin Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.equinox.frameworkadmin.equinox" reportTitle="org.eclipse.equinox.frameworkadmin.equinox Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.equinox.http.jetty" reportTitle="org.eclipse.equinox.http.jetty Code Coverage" />
@@ -889,7 +889,7 @@
 		<jacocoreport pluginName="org.eclipse.jdt.junit.core" reportTitle="org.eclipse.jdt.junit.core Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.jdt.junit.runtime" reportTitle="org.eclipse.jdt.junit.runtime Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.jdt.launching" reportTitle="org.eclipse.jdt.launching Code Coverage" />
-		<jacocoreport pluginName="org.eclipse.jdt.ui" reportTitle="org.eclipse.jdt.ui Code Coverage" /> 
+		<jacocoreport pluginName="org.eclipse.jdt.ui" reportTitle="org.eclipse.jdt.ui Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.jface" reportTitle="org.eclipse.jface Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.jface.databinding" reportTitle="org.eclipse.jface.databinding Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.jface.text" reportTitle="org.eclipse.jface.text Code Coverage" />
@@ -913,7 +913,7 @@
 		<jacocoreport pluginName="org.eclipse.pde.ua.ui" reportTitle="org.eclipse.pde.ua.ui Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.pde.ui" reportTitle="org.eclipse.pde.ui Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.pde.ui.templates" reportTitle="org.eclipse.pde.ui.templates Code Coverage" />
-		<jacocoreport pluginName="org.eclipse.search" reportTitle="org.eclipse.search Code Coverage" />		
+		<jacocoreport pluginName="org.eclipse.search" reportTitle="org.eclipse.search Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.team.core" reportTitle="org.eclipse.team.core Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.team.cvs.core" reportTitle="org.eclipse.team.cvs.core Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.team.cvs.ssh2" reportTitle="org.eclipse.team.cvs.ssh2 Code Coverage" />
@@ -944,6 +944,9 @@
 	</target>
 
 	<target name="all">
+		<antcall target="equinoxp2discovery" />
+		<antcall target="equinoxp2" />
+		<antcall target="equinoxp2ui" />
 		<antcall target="pdeui" />
 		<antcall target="jdtcompilertool" />
 		<antcall target="jdtcompilerapt" />
@@ -982,7 +985,7 @@
 		<antcall target="ua" />
 		<antcall target="uiforms" />
 		<antcall target="pdeapitooling" />
-		<antcall target="equinoxsecurity" /> 
+		<antcall target="equinoxsecurity" />
 		<antcall target="search" />
 		<antcall target="pdeds" />
 		<antcall target="jdtcoremodel" />
@@ -992,11 +995,8 @@
 		<antcall target="relEng" />
 		<antcall target="swt" />
 		<antcall target="teamcvs" />
-		<antcall target="equinoxds" />		
-		<antcall target="equinoxp2discovery" />
-		<antcall target="equinoxp2" />
-		<antcall target="equinoxp2ui" />		
-		
+		<antcall target="equinoxds" />
+
 		<antcall target="generateJacocoReport" />
 
 
