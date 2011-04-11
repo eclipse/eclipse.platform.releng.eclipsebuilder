@@ -944,9 +944,9 @@
 	</target>
 
 	<target name="all">
-		<!-- <antcall target="equinoxp2discovery" /> -->
+		<!-- <antcall target="equinoxp2discovery" /> 
 		<antcall target="equinoxp2" />
-		<!--<antcall target="equinoxp2ui" />
+		<antcall target="equinoxp2ui" />
 		<antcall target="pdeui" />
 		<antcall target="jdtcompilertool" />
 		<antcall target="jdtcompilerapt" />
@@ -967,9 +967,9 @@
 		<antcall target="uinavigator" />
 		<antcall target="uiworkbenchtexteditor" />
 		<antcall target="uircp" />
-		<antcall target="uiviews" />
+		<antcall target="uiviews" /> -->
 		<antcall target="jdtdebug" />
-		<antcall target="jdtui" />
+		<!-- <antcall target="jdtui" />
 		<antcall target="jdtuirefactoring" />
 		<antcall target="ltkuirefactoringtests" />
 		<antcall target="ltkcorerefactoringtests" />
