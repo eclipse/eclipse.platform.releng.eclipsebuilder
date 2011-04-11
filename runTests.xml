@@ -1,8 +1,8 @@
 <project default="main">
 
 	<target name="init">
-<!--		<property name="buildId" value="N20110317-1137" />
-		<property name="currentbuildrepo" value="https://hudson.eclipse.org/hudson/view/Eclipse%20and%20Equinox/job/eclipse-equinox-test-N/lastSuccessfulBuild/artifact/builds/transfer/files/repo/N20110317-1137"/> -->  
+		<property name="buildId" value="N20110406-1318" />
+		<property name="currentbuildrepo" value="https://hudson.eclipse.org/hudson/view/Eclipse%20and%20Equinox/job/eclipse-equinox-test-N/lastSuccessfulBuild/artifact/builds/transfer/files/repo/N20110406-1318"/>   
 		<echo message="buildId ${buildId}" />
 		<echo message="WORKSPACE ${WORKSPACE}" />
 		<echo message="BUILD_ID ${BUILD_ID}" />
@@ -35,11 +35,11 @@
 	</target> 
 
 	<!-- <target name="getwinzips">
-		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110315-0800/eclipse-SDK-${buildId}-win32.zip" dest="${executionDir}/eclipse-SDK-${buildId}-win32.zip" />
-		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110315-0800/eclipse-Automated-Tests-${buildId}.zip" dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
-		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110315-0800/eclipse-platform-${buildId}-win32.zip" dest="${executionDir}/eclipse-platform-${buildId}-win32.zip" />
-		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110315-0800/eclipse-${buildId}-delta-pack.zip" dest="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
-		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110315-0800/eclipse-Automated-Tests-${buildId}.zip" dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110406-1223/eclipse-SDK-${buildId}-win32.zip" dest="${executionDir}/eclipse-SDK-${buildId}-win32.zip" />
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110406-1223/eclipse-Automated-Tests-${buildId}.zip" dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110406-1223/eclipse-platform-${buildId}-win32.zip" dest="${executionDir}/eclipse-platform-${buildId}-win32.zip" />
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110406-1223/eclipse-${buildId}-delta-pack.zip" dest="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110406-1223/eclipse-Automated-Tests-${buildId}.zip" dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/R-3.6.2-201102101200/eclipse-platform-3.6.2-win32.zip" dest="${executionDir}/eclipse-platform-3.6.2-win32.zip" />
 	</target> -->
 
@@ -52,32 +52,32 @@
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/R-3.6.2-201102101200/eclipse-platform-3.6.2-linux-gtk.tar.gz" dest="${executionDir}/eclipse-platform-3.6.2-linux-gtk.tar.gz" />
 	</target>
 
-	<target name="getmaczips">
+	 <!-- <target name="getmaczips">
 		<get src="${buildURL}/eclipse-SDK-${buildId}-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-SDK-${buildId}-macosx-cocoa.tar.gz" />
 		<get src="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
 		<get src="${buildURL}/eclipse-platform-${buildId}-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-platform-${buildId}-macosx-cocoa.tar.gz" />
 		<get src="${buildURL}/eclipse-${buildId}-delta-pack.zip" dest="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
 		<get src="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/R-3.6.2-201102101200/eclipse-platform-3.6.2-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-platform-3.6.2-macosx-cocoa.tar.gz" />
-	</target>
+	</target> --> 
 
-  <!--  <target name="getmaczips">
-		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110315-0800/eclipse-SDK-I20110315-0800-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-SDK-I20110315-0800-macosx-cocoa.tar.gz" />
-		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110315-0800/eclipse-Automated-Tests-I20110315-0800.zip" dest="${testDir}/eclipse-Automated-Tests-I20110315-0800.zip" />
-		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110315-0800/eclipse-platform-I20110315-0800-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-platform-I20110315-0800-macosx-cocoa.tar.gz" />
-		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110315-0800/eclipse-I20110315-0800-delta-pack.zip" dest="${executionDir}/eclipse-I20110315-0800-delta-pack.zip" />
-		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110315-0800/eclipse-Automated-Tests-I20110315-0800.zip" dest="${executionDir}/eclipse-Automated-Tests-I20110315-0800.zip" />
+  <!-- <target name="getmaczips">
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110406-1223/eclipse-SDK-I20110406-1223-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-SDK-I20110406-1223-macosx-cocoa.tar.gz" />
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110406-1223/eclipse-Automated-Tests-I20110406-1223.zip" dest="${testDir}/eclipse-Automated-Tests-I20110406-1223.zip" />
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110406-1223/eclipse-platform-I20110406-1223-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-platform-I20110406-1223-macosx-cocoa.tar.gz" />
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110406-1223/eclipse-I20110406-1223-delta-pack.zip" dest="${executionDir}/eclipse-I20110406-1223-delta-pack.zip" />
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/I20110406-1223/eclipse-Automated-Tests-I20110406-1223.zip" dest="${executionDir}/eclipse-Automated-Tests-I20110406-1223.zip" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/R-3.6.2-201102101200/eclipse-platform-3.6.2-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-platform-3.6.2-macosx-cocoa.tar.gz" />
 	</target> --> 
 
-	<!-- <target name="getmaczips">
-		<get src="https://hudson.eclipse.org/hudson/job/eclipse-equinox-test-N/lastSuccessfulBuild/artifact/builds/transfer/files/master/downloads/drops/N20110317-1137/eclipse-SDK-N20110317-1137-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-SDK-N20110317-1137-macosx-cocoa.tar.gz" />
-		<get src="https://hudson.eclipse.org/hudson/job/eclipse-equinox-test-N/lastSuccessfulBuild/artifact/builds/transfer/files/master/downloads/drops/N20110317-1137/eclipse-Automated-Tests-N20110317-1137.zip" dest="${testDir}/eclipse-Automated-Tests-N20110317-1137.zip" />
-		<get src="https://hudson.eclipse.org/hudson/job/eclipse-equinox-test-N/lastSuccessfulBuild/artifact/builds/transfer/files/master/downloads/drops/N20110317-1137/eclipse-platform-N20110317-1137-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-platform-N20110317-1137-macosx-cocoa.tar.gz" />
-		<get src="https://hudson.eclipse.org/hudson/job/eclipse-equinox-test-N/lastSuccessfulBuild/artifact/builds/transfer/files/master/downloads/drops/N20110317-1137/eclipse-N20110317-1137-delta-pack.zip" dest="${executionDir}/eclipse-N20110317-1137-0800-delta-pack.zip" />
-		<get src="https://hudson.eclipse.org/hudson/job/eclipse-equinox-test-N/lastSuccessfulBuild/artifact/builds/transfer/files/master/downloads/drops/N20110317-1137/eclipse-Automated-Tests-N20110317-1137.zip" dest="${executionDir}/eclipse-Automated-Tests-N20110317-1137.zip" />
+	 <target name="getmaczips">
+		<get src="https://hudson.eclipse.org/hudson/job/eclipse-equinox-test-N/lastSuccessfulBuild/artifact/builds/transfer/files/master/downloads/drops/N20110406-1318/eclipse-SDK-N20110406-1318-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-SDK-N20110406-1318-macosx-cocoa.tar.gz" />
+		<get src="https://hudson.eclipse.org/hudson/job/eclipse-equinox-test-N/lastSuccessfulBuild/artifact/builds/transfer/files/master/downloads/drops/N20110406-1318/eclipse-Automated-Tests-N20110406-1318.zip" dest="${testDir}/eclipse-Automated-Tests-N20110406-1318.zip" />
+		<get src="https://hudson.eclipse.org/hudson/job/eclipse-equinox-test-N/lastSuccessfulBuild/artifact/builds/transfer/files/master/downloads/drops/N20110406-1318/eclipse-platform-N20110406-1318-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-platform-N20110406-1318-macosx-cocoa.tar.gz" />
+		<get src="https://hudson.eclipse.org/hudson/job/eclipse-equinox-test-N/lastSuccessfulBuild/artifact/builds/transfer/files/master/downloads/drops/N20110406-1318/eclipse-N20110406-1318-delta-pack.zip" dest="${executionDir}/eclipse-N20110406-1318-0800-delta-pack.zip" />
+		<get src="https://hudson.eclipse.org/hudson/job/eclipse-equinox-test-N/lastSuccessfulBuild/artifact/builds/transfer/files/master/downloads/drops/N20110406-1318/eclipse-Automated-Tests-N20110406-1318.zip" dest="${executionDir}/eclipse-Automated-Tests-N20110406-1318.zip" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/R-3.6.2-201102101200/eclipse-platform-3.6.2-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-platform-3.6.2-macosx-cocoa.tar.gz" />
-	</target> -->
+	</target>
 
 	<target name="configure.team.cvs.test">
 		<condition property="cvstest.properties" value="/shared/eclipse/buildtests/cvstest.properties">

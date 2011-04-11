@@ -944,9 +944,9 @@
 	</target>
 
 	<target name="all">
-		<antcall target="equinoxp2discovery" />
+		<!-- <antcall target="equinoxp2discovery" /> -->
 		<antcall target="equinoxp2" />
-		<antcall target="equinoxp2ui" />
+		<!--<antcall target="equinoxp2ui" />
 		<antcall target="pdeui" />
 		<antcall target="jdtcompilertool" />
 		<antcall target="jdtcompilerapt" />
@@ -997,7 +997,7 @@
 		<antcall target="teamcvs" />
 		<antcall target="equinoxds" />
 
-		<antcall target="generateJacocoReport" />
+		<antcall target="generateJacocoReport" /> -->
 
 
 	</target>
