@@ -30,8 +30,13 @@
 	<property name="coverage-output" value="${results}/coverage" />
 	<condition property="codecoverage" value="true">
 		<and>
-			<equals arg1="${buildType}" arg2="I" />
-			<os family="unix" />
+			<and>
+				<equals arg1="${buildType}" arg2="I" />
+				<os family="unix" />
+			</and>
+			<not>
+				<equals arg1="performance.target.present" arg2="true" />
+			</not>
 		</and>
 	</condition>
 
