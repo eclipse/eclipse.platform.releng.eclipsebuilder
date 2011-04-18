@@ -949,7 +949,7 @@
 	</target>
 
 	<target name="all">
-		<antcall target="equinoxp2discovery" />
+		<!-- <antcall target="equinoxp2discovery" />
 		<antcall target="equinoxp2" />
 		<antcall target="equinoxp2ui" />
 		<antcall target="pdeui" />
@@ -974,9 +974,9 @@
 		<antcall target="uircp" />
 		<antcall target="uiviews" />
 		<antcall target="jdtdebug" />
-		<antcall target="jdtui" />
+		<antcall target="jdtui" /> -->
 		<antcall target="jdtuirefactoring" />
-		<antcall target="ltkuirefactoringtests" />
+		<!-- <antcall target="ltkuirefactoringtests" />
 		<antcall target="ltkcorerefactoringtests" />
 		<antcall target="text" />
 		<antcall target="jface" />
@@ -1000,9 +1000,9 @@
 		<antcall target="relEng" />
 		<antcall target="swt" />
 		<antcall target="teamcvs" />
-		<antcall target="equinoxds" />
+		<antcall target="equinoxds" /> 
 
-		<antcall target="generateJacocoReport" />
+		<antcall target="generateJacocoReport" /> -->
 
 
 	</target>
