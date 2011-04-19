@@ -109,6 +109,9 @@
 			<param name="bundle.id" value="org.eclipse.equinox.initializer" />
 		</antcall>
 		<antcall target="updateTestManifest">
+			<param name="bundle.id" value="org.eclipse.equinox.region" />
+		</antcall>
+		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.console.supportability" />
 		</antcall>		
 		<antcall target="updateTestManifest">
