@@ -405,7 +405,7 @@
 		<property name="current_location" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" />
 		<property name="reference_location" value="${reference}/eclipse-SDK-3.6.1-win32.zip" />
 		<exec executable="/usr/bin/wget" dir="${reference}" output="${reference}/error.txt" failonerror="false" os="Linux">
-			<arg line="-q -O  ${reference_location} http://${localmirror}/eclipse/downloads/drops/R-3.6.1-201009090800/eclipse-SDK-3.6.1-win32.zip" />
+			<arg line="-q -O  ${reference_location} http://archive.eclipse.org/eclipse/downloads/drops/R-3.6.1-201009090800/eclipse-SDK-3.6.1-win32.zip" />
 		</exec>
 		<property name="report" value="${postingDirectory}/${buildLabel}/apitools" />
 		<mkdir dir="${report}" />
@@ -431,7 +431,7 @@
 		<property name="report_directory_location" value="${report}/apitoolsverifications/xml" />
 		<property name="3_6_reference_location" value="${reference}/eclipse-SDK-3.6.1-win32.zip" />
 		<exec executable="/usr/bin/wget" dir="${reference}" output="${reference}/error.txt" failonerror="false" os="Linux">
-			<arg line="-q -O  ${3_6_reference_location} http://${localmirror}/eclipse/downloads/drops/R-3.6.1-201009090800/eclipse-SDK-3.6.1-win32.zip" />
+			<arg line="-q -O  ${3_6_reference_location} http://archive.eclipse.org/eclipse/downloads/drops/R-3.6.1-201009090800/eclipse-SDK-3.6.1-win32.zip" />
 		</exec>
 		<apitooling.analysis baseline="${3_6_reference_location}" profile="${current_location}" report="${report_directory_location}" filters="${filter_store}" excludelist="${exclude_list_external_location}" debug="true" />
 		<apitooling.analysis_reportconversion xmlfiles="${report_directory_location}" debug="true" htmlfiles="${html_directory_location}" />
