@@ -35,7 +35,7 @@
 				<os family="unix" />
 			</and>
 			<not>
-				<equals arg1="performance.target.present" arg2="true" />
+				<equals arg1="${test.target}" arg2="performance" />
 			</not>
 		</and>
 	</condition>
@@ -994,13 +994,13 @@
 		<antcall target="search" />
 		<antcall target="pdeds" />
 		<antcall target="jdtcoremodel" />
-		<antcall target="uadoc" /> 
+		<antcall target="uadoc" />
 		<antcall target="debug" />
 		<antcall target="ui" />
 		<antcall target="relEng" />
 		<antcall target="swt" />
 		<antcall target="teamcvs" />
-		<antcall target="equinoxds" /> 
+		<antcall target="equinoxds" />
 
 		<antcall target="generateJacocoReport" />
 
