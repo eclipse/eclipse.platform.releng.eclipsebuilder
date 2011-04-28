@@ -49,7 +49,8 @@ tag=""
 #buildProjectTags=v20110411a
 #buildProjectTags=v20110418
 #buildProjectTags=v20110421
-buildProjectTags=v20110426
+#buildProjectTags=v20110426
+buildProjectTags=v20110427git
 
 #updateSite property setting
 updateSite=""
@@ -67,13 +68,13 @@ buildId=""
 buildLabel=""
 
 # tag for build contribution project containing .map files
-mapVersionTag=HEAD
+mapVersionTag=git_test
 
 # directory in which to export builder projects
 builderDir=$WORKSPACE/builds/eclipsebuilder
 
 # buildtype determines whether map file tags are used as entered or are replaced with HEAD
-buildType=
+buildType=N
 
 # directory where to copy build
 postingDirectory=$WORKSPACE/builds/transfer/files/master/downloads/drops
