@@ -54,6 +54,8 @@
 	<mkdir dir="${buildlogs}" />
 
 	<property name="buildRepo" value="${updateSite}/${buildId}" />
+	
+	<property name="fetchCacheLocation" value="${buildDirectory}/gitlocalrepo"/>
 
 	<target name="main" depends="init">
 		<antcall target="buildEclipseSourceDrops" />
