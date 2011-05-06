@@ -10,7 +10,6 @@
 
 	<!--default directory where test-eclipse will be installed-->
 	<property name="install" value="${basedir}/test-eclipse" />
-	<property name="installEquinox" value="${basedir}/test-equinox" />
 
 	<!--suffix added to test output files to identify platform on which tests ran.-->
 	<property name="platform" value="${os}.${ws}.${arch}" />
@@ -21,7 +20,6 @@
 	<property name="repoZip" value="${basedir}/eclipse-junit-tests-${buildId}.zip" />
 	<property name="repoLocation" value="${basedir}/testRepo" />
 	<property name="platformLocation" value="${basedir}/platformLocation" />
-	<property name="platformEclipse" value="${platformLocation}/eclipse" />
 
 	<!-- The directory that will contain all files containing information on the tests that ran.-->
 	<property name="results" value="${basedir}/results" />
@@ -167,13 +165,13 @@
 	<target name="installExtraPlugins" if="extraIU">
 		<property file="equinoxp2tests.properties" />
 		<path id="launcher.paths">
-			<fileset dir="${platformEclipse}" includes="plugins/org.eclipse.equinox.launcher_*" />
+			<fileset dir="${eclipse-home}" includes="plugins/org.eclipse.equinox.launcher_*" />
 		</path>
 		<property name="launcherPath" refid="launcher.paths" />
 
 		<property name="currentBuildRepo" value="${org.eclipse.equinox.p2.tests.current.build.repo}" />
 		<echo>-installIU ${extraIU} +</echo>
-		<java jar="${launcherPath}" failonerror="false" dir="${platformEclipse}" timeout="900000" fork="true" output="${basedir}/director.log" resultproperty="directorcode">
+		<java jar="${launcherPath}" failonerror="false" dir="${eclipse-home}" timeout="900000" fork="true" output="${basedir}/director.log" resultproperty="directorcode">
 			<arg line="-vm ${java.home}/bin/java" />
 			<arg line="-application org.eclipse.equinox.p2.director" />
 			<arg line="-consoleLog" />
@@ -190,55 +188,14 @@
 		</java>
 	</target>
 
-	<target name="installEquinoxTestPlugins">
-		<property file="equinoxp2tests.properties" />
-		<path id="launcher.paths">
-			<fileset dir="${platformEclipse}" includes="plugins/org.eclipse.equinox.launcher_*" />
-		</path>
-		<property name="launcherPath" refid="launcher.paths" />
-		<antcall target="setupPlatform" />
-		<property name="currentBuildRepo" value="${org.eclipse.equinox.p2.tests.current.build.repo}" />
-		<echo>-installIU ${testPlugin} +</echo>
-	        <java jar="${launcherPath}" failonerror="false" dir="${platformEclipse}" timeout="900000" fork="true" output="${basedir}/director.log" resultproperty="directorcode">
-                        <arg line="-vm ${java.home}/bin/java" />
-                        <arg line="-application org.eclipse.equinox.p2.director" />
-                        <arg line="-consoleLog" />
-                        <arg line="-flavor tooling" />
-                        <arg line="-installIUs org.aspectj.weaver,org.aspectj.runtime" />
-                        <arg line="-p2.os ${os}" />
-                        <arg line="-p2.ws ${ws}" />
-                        <arg line="-p2.arch ${arch}" />
-                        <arg line="-roaming" />
-                        <arg line="-repository http://download.eclipse.org/tools/ajdt/aspectj/update" />
-                        <arg line="-destination ${installEquinox}" />
-                        <arg line="-bundlepool ${installEquinox}" />
-                </java>
-		<java jar="${launcherPath}" failonerror="false" dir="${platformEclipse}" timeout="900000" fork="true" output="${basedir}/director.log" resultproperty="directorcode">
-			<arg line="-vm ${java.home}/bin/java" />
-			<arg line="-application org.eclipse.equinox.p2.director" />
-			<arg line="-consoleLog" />
-			<arg line="-flavor tooling" />
-			<arg line="-installIUs ${testPlugin},org.eclipse.test,org.eclipse.ant.optional.junit,org.easymock,org.eclipse.equinox.weaving.aspectj" />
-			<arg line="-p2.os ${os}" />
-			<arg line="-p2.ws ${ws}" />
-			<arg line="-p2.arch ${arch}" />
-			<arg line="-roaming" />
-			<arg line="-repository ${currentBuildRepo}" />
-			<arg line="-destination ${installEquinox}" />
-			<arg line="-bundlepool ${installEquinox}" />
-		</java>
-
-	</target>
-
-
 	<target name="installTestPlugins">
 		<path id="launcher.paths">
-			<fileset dir="${platformEclipse}" includes="plugins/org.eclipse.equinox.launcher_*" />
+			<fileset dir="${eclipse-home}" includes="plugins/org.eclipse.equinox.launcher_*" />
 		</path>
 		<property name="launcherPath" refid="launcher.paths" />
 		<antcall target="setupPlatform" />
 		<echo>-installIU ${testPlugin} +</echo>
-		<java jar="${launcherPath}" failonerror="false" dir="${platformEclipse}" timeout="900000" fork="true" output="${basedir}/director.log" resultproperty="directorcode">
+		<java jar="${launcherPath}" failonerror="false" dir="${eclipse-home}" timeout="900000" fork="true" output="${basedir}/director.log" resultproperty="directorcode">
 			<arg line="-vm ${java.home}/bin/java" />
 			<arg line="-application org.eclipse.equinox.p2.director" />
 			<arg line="-consoleLog" />
@@ -256,6 +213,7 @@
 		<antcall target="configureTeamTest" />
 		<antcall target="unzipderby" />
 	</target>
+
 
 	<target name="unzipderby" if="derby">
 		<exec dir="." executable="unzip">
@@ -434,19 +392,6 @@
 		</exec>
 	</target>
 
-	<macrodef name="runEquinoxTests">
-		<attribute name="testPlugin" />
-		<sequential>
-			<property name="test.target" value="junitEquinox" />
-			<property name="report" value="@{testPlugin}" />
-
-			<antcall target="${test.target}">
-				<param name="testPlugin" value="@{testPlugin}" />
-				<param name="output-file" value="@{testPlugin}.xml" />
-			</antcall>
-		</sequential>
-	</macrodef>
-
 
 	<macrodef name="runTests">
 		<attribute name="testPlugin" />
@@ -480,42 +425,6 @@
 		</sequential>
 	</macrodef>
 
-	<target name="junitEquinox" unless="skip.test">
-		<antcall target="setupPlatform" />
-		<property name="equinox" value="true" />
-		<condition property="repoexists" value="true">
-			<available file="${repoLocation}" />
-		</condition>
-		<!--	<condition property="extraIU" value="org.eclipse.equinox.p2.discovery.feature.feature.group">
-			<equals arg1="${testPlugin}" arg2="org.eclipse.equinox.p2.tests.discovery" />
-		</condition> -->
-		<antcall target="setupRepo" />
-		<antcall target="installEquinoxTestPlugins" />
-		<!-- <antcall target="setupEquinox" /> -->
-		<property file="finalPluginsVersions.properties" />
-		<property name="library-file" value="${basedir}/test-eclipse/eclipse/plugins/org.eclipse.test_${org.eclipse.test}/library.xml" />
-		<property name="junit-stylesheet" value="${eclipse-home}/plugins/org.eclipse.test_${org.eclipse.test}/JUNIT.XSL" />
-		<echo>trying to find ${testPlugin}_*</echo>
-		<mkdir dir="installEquinox" />
-		<fileset id="test.plugin.file" dir="${installEquinox}/plugins">
-			<filename name="${testPlugin}_*/test.xml" />
-		</fileset>
-		<property name="testPluginX" refid="test.plugin.file" />
-		<echo>trying to find ${testPluginX}</echo>
-		<condition property="pluginexists" value="true">
-			<not>
-				<equals arg1="${testPluginX}" arg2="" />
-			</not>
-		</condition>
-                <echo message="pluginexists ${pluginexists}"/>
-		<antcall target="runSuite">
-                        <param name="installLocation" value="${installEquinox}" />
-                </antcall>
-                <antcall target="genResults">
-                        <param name="installLocation" value="${eclipse-home}" />
-                </antcall>
-	</target>
-
 	<target name="junit" unless="skip.test">
 		<antcall target="setup">
 		</antcall>
@@ -533,22 +442,19 @@
 				<equals arg1="${testPluginX}" arg2="" />
 			</not>
 		</condition>
-	        <antcall target="runSuite">
-                        <param name="installLocation" value="${eclipse-home}" />
-                </antcall>
-                <antcall target="genResults">
-                        <param name="installLocation" value="${eclipse-home}" />
-                </antcall>
+		<antcall target="runSuite" />
+		<antcall target="genResults" />
 	</target>
 
 	<target name="runSuite" if="pluginexists">
-		<ant antfile="${installLocation}/plugins/${testPluginX}" dir="${eclipse-home}" />
+		<ant antfile="${eclipse-home}/plugins/${testPluginX}" dir="${eclipse-home}" />
 	</target>
+
 
 	<target name="runSuitePerf" if="pluginexists">
 		<echo message="testPluginX ${testPluginX}" />
-		<property name="junit-stylesheet" value="${installLocation}/plugins/org.eclipse.test_${org.eclipse.test}/JUNIT.XSL" />
-		<ant antfile="${installLocation}/plugins/${testPluginX}" dir="${eclipse-home}" target="performance" />
+		<property name="junit-stylesheet" value="${eclipse-home}/plugins/org.eclipse.test_${org.eclipse.test}/JUNIT.XSL" />
+		<ant antfile="${eclipse-home}/plugins/${testPluginX}" dir="${eclipse-home}" target="performance" />
 	</target>
 
 	<target name="performance" if="performance.target.present" unless="skip.test">
@@ -567,17 +473,13 @@
 				<equals arg1="${testPluginX}" arg2="" />
 			</not>
 		</condition>
-		<antcall target="runSuitePerf">
-			<param name="installLocation" value="${eclipse-home}" />
-		</antcall>
-		<antcall target="genResults">
-			<param name="installLocation" value="${eclipse-home}" />
-		</antcall>
+		<antcall target="runSuitePerf" />
+		<antcall target="genResults" />
 	</target>
 
 	<target name="genResults">
-		<copy file="${installLocation}/${report}.xml" tofile="${results}/xml/${report}_${platform}.xml" failonerror="false" />
-		<property name="junit-stylesheet" value="${installLocation}/plugins/org.eclipse.test_${org.eclipse.test}/JUNIT.XSL" />
+		<copy file="${eclipse-home}/${report}.xml" tofile="${results}/xml/${report}_${platform}.xml" failonerror="false" />
+		<property name="junit-stylesheet" value="${eclipse-home}/plugins/org.eclipse.test_${org.eclipse.test}/JUNIT.XSL" />
 		<xslt style="${junit-stylesheet}" basedir="${results}/xml" destdir="${results}/html" />
 	</target>
 
@@ -862,11 +764,6 @@
 		<runTests testPlugin="org.eclipse.pde.ds.tests" />
 	</target>
 
-	<!--equinox incubator tests -->
-	<target name="region">
-		<runEquinoxTests testPlugin="org.eclipse.equinox.region.tests" />
-	</target>
-
 	<macrodef name="jacocoreport">
 		<attribute name="pluginName" />
 		<attribute name="reportTitle" />
@@ -1104,10 +1001,10 @@
 		<antcall target="swt" />
 		<antcall target="teamcvs" />
 		<antcall target="equinoxds" />
-		<antcall target="region"/>
-		
+
 		<antcall target="generateJacocoReport" />
+
+
 	</target>
 </project>
-
 
