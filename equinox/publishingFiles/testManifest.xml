@@ -58,13 +58,8 @@
 		 </zipType>	
 					
 		<zipType name="Incubator"> 	    								
-		 	<platform format="equinox" id="initializer" images="egg.gif" name="All" fileName="@org.eclipse.equinox.initializer@.jar" />
-		 	<platform format="equinox" id="supportability" images="egg.gif" name="All" fileName="@org.eclipse.equinox.console.supportability@.jar" />
-		 	<platform format="equinox" id="region" images="egg.gif" name="All" fileName="@org.eclipse.equinox.region@.jar" />
-			<platform format="equinox" id="equinoxjmxcommon" images="egg.gif,repo.gif" name="All" fileName="equinox-jmx-common-@buildid@.zip" />
-			<platform format="equinox" id="equinoxjmxclient" images="egg.gif,repo.gif" name="All" fileName="equinox-jmx-client-@buildid@.zip" />
-			<platform format="equinox" id="equinoxjmxserver" images="egg.gif,repo.gif" name="All" fileName="equinox-jmx-server-@buildid@.zip" />
-    		</zipType> 	
+			<platform format="equinox" id="equinoxincubator" images="egg.gif,repo.gif" name="All" fileName="equinox-incubator-feature-@buildid@.zip" />
+			</zipType> 	
     	   	    	    	
     		<zipType name="Provisioning">
 			<platform format="equinox" id="provagentrcpwin32" images="egg.gif" name="Windows **early access**" fileName="equinox-p2-adminui-@buildid@-win32.zip" />			

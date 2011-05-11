@@ -7,27 +7,15 @@
 	</target>
 
 	<target name="all" depends="init">
-		<antcall target="jmxclient" />
-		<antcall target="jmxcommon" />
-		<antcall target="jmxserver" />
+		<antcall target="equinoxincubator" />		
 	</target>
 
-	<target name="jmxclient">
-		<property name="archiveRoot" value="equinox-jmx-client-${buildId}" />
-		<buildRepos feature="org.eclipse.equinox.jmx.client.feature" os="win32" ws="win32" arch="x86" archiveName="${archiveRoot}.zip" />
+	<target name="equinoxincubator">
+		<property name="archiveRoot" value="equinox-incubator-feature-${buildId}" />
+		<buildRepos feature="org.eclipse.equinox.incubator.feature" os="win32" ws="win32" arch="x86" archiveName="${archiveRoot}.zip" />
 	</target>
 
-	<target name="jmxcommon">
-		<property name="archiveRoot" value="equinox-jmx-common-${buildId}" />
-		<buildRepos feature="org.eclipse.equinox.jmx.common.feature" os="win32" ws="win32" arch="x86" archiveName="${archiveRoot}.zip" />
-	</target>
-
-	<target name="jmxserver">
-		<property name="archiveRoot" value="equinox-jmx-server-${buildId}" />
-		<buildRepos feature="org.eclipse.equinox.jmx.server.feature" os="win32" ws="win32" arch="x86" archiveName="${archiveRoot}.zip" />
-	</target>
-
-	<macrodef name="buildReposSource">
+		<macrodef name="buildReposSource">
 		<attribute name="feature" />
 		<attribute name="os" />
 		<attribute name="ws" />
