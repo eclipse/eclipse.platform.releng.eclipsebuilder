@@ -233,10 +233,10 @@
 		<property name="equinoxp2tests.properties" value="${workingDirectory}/eclipse-testing/equinoxp2tests.properties" />
 		<property name="org.eclipse.equinox.p2.reconciler.tests.platform.archive.win32" value="c:\\buildtest\\${buildId}\\eclipse-testing\\eclipse-platform-${buildId}-win32.zip" />
 		<property name="org.eclipse.equinox.p2.reconciler.tests.platform.archive.linux" value="/buildtest/${buildId}/eclipse-testing/eclipse-platform-${buildId}-linux-gtk.tar.gz" />
-		<property name="org.eclipse.equinox.p2.reconciler.tests.platform.archive.macosx" value="/Users/ibmemployee/buildtest/${buildId}/eclipse-testing/eclipse-platform-${buildId}-macosx-cocoa.tar.gz" />
+		<property name="org.eclipse.equinox.p2.reconciler.tests.platform.archive.macosx" value="/Users/ibmemployee/buildtest/${buildId}/eclipse-testing/eclipse-platform-${buildId}-macosx-cocoa-x86_64.tar.gz" />
 		<property name="org.eclipse.equinox.p2.reconciler.tests.lastrelease.platform.archive.win32" value="c:\\buildtest\\${buildId}\\eclipse-testing\\eclipse-platform-3.6.2-win32.zip" />
 		<property name="org.eclipse.equinox.p2.reconciler.tests.lastrelease.platform.archive.linux" value="/buildtest/${buildId}/eclipse-testing/eclipse-platform-3.6.2-linux-gtk.tar.gz" />
-		<property name="org.eclipse.equinox.p2.reconciler.tests.lastrelease.platform.archive.macosx" value="/Users/ibmemployee/buildtest/${buildId}/eclipse-testing/eclipse-platform-3.6.2-macosx-cocoa.tar.gz" />
+		<property name="org.eclipse.equinox.p2.reconciler.tests.lastrelease.platform.archive.macosx" value="/Users/ibmemployee/buildtest/${buildId}/eclipse-testing/eclipse-platform-3.6.2-macosx-cocoa-x86_64.tar.gz" />
 		<propertyfile file="${equinoxp2tests.properties}" comment="Properties required by equinox p2 tests">
 			<entry key="org.eclipse.equinox.p2.reconciler.tests.platform.archive.win32" value="${org.eclipse.equinox.p2.reconciler.tests.platform.archive.win32}" />
 			<entry key="org.eclipse.equinox.p2.reconciler.tests.platform.archive.linux" value="${org.eclipse.equinox.p2.reconciler.tests.platform.archive.linux}" />
@@ -306,7 +306,7 @@
 			<arg line="-q -O ${previousPlatformZips}/eclipse-platform-3.6.2-linux-gtk.tar.gz http://${localmirror}/downloads/drops/R-3.6.2-201102101200/eclipse-platform-3.6.2-linux-gtk.tar.gz" />
 		</exec>
 		<exec executable="/usr/bin/wget" dir="${previousPlatformZips}" failonerror="false">
-			<arg line="-q -O ${previousPlatformZips}/eclipse-platform-3.6.2-macosx-cocoa.tar.gz http://${localmirror}/downloads/drops/R-3.6.2-201102101200/eclipse-platform-3.6.2-macosx-cocoa.tar.gz" />
+			<arg line="-q -O ${previousPlatformZips}/eclipse-platform-3.6.2-macosx-cocoa-x86_64.tar.gz http://${localmirror}/downloads/drops/R-3.6.2-201102101200/eclipse-platform-3.6.2-macosx-cocoa-x86_64.tar.gz" />
 		</exec>
 	</target>
 
