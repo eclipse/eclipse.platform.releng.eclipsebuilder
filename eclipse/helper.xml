@@ -224,7 +224,7 @@
 				<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-Automated-Tests-${buildId}.zip.md5" />
 				<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-SDK-${buildId}-win32.zip.md5" />
 				<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-SDK-${buildId}-linux-gtk.tar.gz.md5" />
-				<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-SDK-${buildId}-macosx-cocoa-x86_64.tar.gz.md5" />
+				<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-SDK-${buildId}-macosx-cocoa.tar.gz.md5" />
 				<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-${buildId}-delta-pack.zip.md5" />
 				<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-platform-${buildId}-win32.zip.md5" />
 				<available file="${postingDirectory}/${buildLabel}/checksum/eclipse-platform-${buildId}-linux-gtk.tar.gz.md5" />
