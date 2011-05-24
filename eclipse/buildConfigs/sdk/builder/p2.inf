@@ -1,8 +1,8 @@
 instructions.configure=\
-addRepository(type:0,location:http${#58}//download.eclipse.org/eclipse/updates/4.1-I-builds,name:The Eclipse IBuild Updates);\
-addRepository(type:1,location:http${#58}//download.eclipse.org/eclipse/updates/4.1-I-builds,name:The Eclipse IBuild Updates);\
-addRepository(type:0,location:http${#58}//download.eclipse.org/e4/updates/0.11-I-builds,name:e4 0.11 IBuild Updates);\
-addRepository(type:1,location:http${#58}//download.eclipse.org/e4/updates/0.11-I-builds,name:e4 0.11 Updates);\
+addRepository(type:0,location:http${#58}//download.eclipse.org/eclipse/updates/4.1,name:The Eclipse Project Updates);\
+addRepository(type:1,location:http${#58}//download.eclipse.org/eclipse/updates/4.1,name:The Eclipse Project Updates);\
+addRepository(type:0,location:http${#58}//download.eclipse.org/e4/updates/0.11,name:e4 0.11 Updates);\
+addRepository(type:1,location:http${#58}//download.eclipse.org/e4/updates/0.11,name:e4 0.11 Updates);\
 addRepository(type:0,location:http${#58}//download.eclipse.org/releases/indigo,name:Indigo);\
 addRepository(type:1,location:http${#58}//download.eclipse.org/releases/indigo,name:Indigo);\
   mkdir(path:${installFolder}/dropins);

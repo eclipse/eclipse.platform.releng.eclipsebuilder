@@ -1,10 +1,10 @@
 instructions.configure=\
 addRepository(type:0,location:http${#58}//download.eclipse.org/eclipse/updates/4.1,name:The Eclipse Project Updates);\
 addRepository(type:1,location:http${#58}//download.eclipse.org/eclipse/updates/4.1,name:The Eclipse Project Updates);\
-addRepository(type:0,location:http${#58}//download.eclipse.org/e4/updates/2010,name:e4 2010 Updates);\
-addRepository(type:1,location:http${#58}//download.eclipse.org/e4/updates/2010,name:e4 2010 Updates);\
-addRepository(type:0,location:http${#58}//download.eclipse.org/releases/helios,name:Helios);\
-addRepository(type:1,location:http${#58}//download.eclipse.org/releases/helios,name:Helios);\
+addRepository(type:0,location:http${#58}//download.eclipse.org/e4/updates/0.11,name:e4 0.11 Updates);\
+addRepository(type:1,location:http${#58}//download.eclipse.org/e4/updates/0.11,name:e4 0.11 Updates);\
+addRepository(type:0,location:http${#58}//download.eclipse.org/releases/indigo,name:Indigo);\
+addRepository(type:1,location:http${#58}//download.eclipse.org/releases/indigo,name:Indigo);\
   mkdir(path:${installFolder}/dropins);
 requires.1.namespace=org.eclipse.equinox.p2.iu
 requires.1.name=toolingorg.eclipse.configuration.macosx
