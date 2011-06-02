@@ -402,9 +402,9 @@
 		<property name="report" value="${postingDirectory}/${buildLabel}/apitools" />
 		<mkdir dir="${report}" />
 		<property name="current_location" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" />
-		<property name="reference_location" value="${reference}/eclipse-SDK-3.5M6-win32.zip" />
+		<property name="reference_location" value="${reference}/eclipse-SDK-3.5.2-win32.zip" />
 		<exec executable="/usr/bin/wget" dir="${reference}" output="${reference}/error.txt" failonerror="false" os="Linux">
-			<arg line="-q -O  ${reference_location} http://${localmirror}/eclipse/downloads/drops/S-3.6M6-201003121448/eclipse-SDK-3.6M6-win32.zip" />
+			<arg line="-q -O  ${reference_location} http://archive.eclipse.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-SDK-3.5.2-win32.zip" />
 		</exec>
 		<property name="report" value="${postingDirectory}/${buildLabel}/apitools" />
 		<mkdir dir="${report}" />
