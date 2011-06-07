@@ -29,7 +29,7 @@
 	<property name="base.builder" value="${basedir}/../org.eclipse.releng.basebuilder" />
 
 	<!--location of properties file containing last tag used for integration build-->
-	<property name="mapTag.properties" value="/home/users/releng/buildTools/eclipse37/mapTag.properties" />
+	<property name="mapTag.properties" value="/home/users/releng/buildTools/eclipse38/mapTag.properties" />
 
 	<!--location of properties file containing last performance reference test information-->
 	<property name="ref.properties" value="/home/users/releng/buildTools/eclipse.perf/ref37.properties" />
