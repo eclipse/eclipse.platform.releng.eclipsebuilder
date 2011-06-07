@@ -49,8 +49,7 @@
 			<iu id="org.eclipse.osgi.configuration_root.gtk.solaris.x86" />
 			<iu id="org.eclipse.osgi.configuration_root.gtk.aix.ppc" />
 			<iu id="org.eclipse.osgi.configuration_root.gtk.aix.ppc64" />
-			<iu id="org.eclipse.osgi.configuration_root.gtk.hpux.ia64_32" />
-			<iu id="org.eclipse.osgi.configuration_root.carbon.macosx.x86" />
+			<iu id="org.eclipse.osgi.configuration_root.gtk.hpux.ia64_32" />	
 			<iu id="org.eclipse.osgi.configuration_root.cocoa.macosx.x86" />
 			<iu id="org.eclipse.osgi.configuration_root.cocoa.macosx.x86_64" />
 		</p2.remove.iu>
