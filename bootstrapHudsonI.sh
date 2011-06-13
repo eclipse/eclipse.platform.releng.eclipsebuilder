@@ -46,10 +46,20 @@ deleteArtifacts=""
 #sets fetchTag="HEAD" for nightly builds if required
 tag=""
 
-#buildProjectTags=v20110411a
-#buildProjectTags=v20110418
-#buildProjectTags=v20110421
-buildProjectTags=v20110426
+#buildProjectTags=v20100509
+#buildProjectTags=v20100511
+#buildProjectTags=v20100513
+#buildProjectTags=v20100519
+#buildProjectTags=v20100528c
+#buildProjectTags=v20100528d
+#buildProjectTags=v20100601
+#buildProjectTags=v20100610a
+#buildProjectTags=v20100621
+#buildProjectTags=v20100628
+#buildProjectTags=v20100708
+#buildProjectTags=v20100715
+#buildProjectTags=v20100719c
+buildProjectTags=v20100805
 
 #updateSite property setting
 updateSite=""
@@ -67,7 +77,7 @@ buildId=""
 buildLabel=""
 
 # tag for build contribution project containing .map files
-mapVersionTag=HEAD
+mapVersionTag=OSGI_R4_3_Generics
 
 # directory in which to export builder projects
 builderDir=$WORKSPACE/builds/eclipsebuilder
@@ -186,7 +196,7 @@ mkdir -p $postingDirectory/$buildLabel
 chmod -R 755 $builderDir
 
 #default value of the bootclasspath attribute used in ant javac calls.  
-bootclasspath="/shared/common/j2sdk1.4.2_19/jre/lib/rt.jar:/shared/common/j2sdk1.4.2_19/jre/lib/jsse.jar:/shared/common/j2sdk1.4.2_19/jre/lib/jce.jar"
+bootclasspath="/shared/common/jdk-1.5.0_16/jre/lib/rt.jar:/shared/common/jdk-1.5.0_16/jre/lib/jsse.jar:/shared/common/jdk-1.5.0_16/jre/lib/jce.jar"
 bootclasspath_15="/shared/common/jdk-1.5.0_16/jre/lib/rt.jar"
 bootclasspath_16="/shared/common/jdk-1.6.0_10/jre/lib/rt.jar"
 bootclasspath_foundation="/shared/common/org.eclipse.sdk-feature/libs/ee.foundation-1.0.jar"
@@ -204,13 +214,6 @@ echo timestamp=$timestamp >> monitor.properties
 echo buildLabel=$buildLabel >> monitor.properties 
 echo recipients=$recipients >> monitor.properties
 echo log=$postingDirectory/$buildLabel/index.php >> monitor.properties
-
-echo BUILD_WORKSPACE=$WORKSPACE > $WORKSPACE/test.properties
-echo BUILD_JOB_NAME=$JOB_NAME >> $WORKSPACE/test.properties
-echo BUILD_BUILD_NUMBER=$BUILD_NUMBER >> $WORKSPACE/test.properties
-echo buildId=$buildId >> $WORKSPACE/test.properties
-echo $buildId > $WORKSPACE/builds/transfer/files/buildId.txt
-echo currentbuildrepo=https://hudson.eclipse.org/hudson/job/$JOB_NAME/$BUILD_NUMBER/artifact/builds/transfer/files/repo/$buildId >> $WORKSPACE/test.properties 
 
 #the base command used to run AntRunner headless
 buildMachineArch=`uname -p`

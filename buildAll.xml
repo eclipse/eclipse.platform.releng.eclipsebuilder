@@ -29,7 +29,7 @@
 	<property name="base.builder" value="${basedir}/../org.eclipse.releng.basebuilder" />
 
 	<!--location of properties file containing last tag used for integration build-->
-	<property name="mapTag.properties" value="/home/users/releng/buildTools/eclipse37/mapTag.properties" />
+	<property name="mapTag.properties" value="/home/users/releng/buildTools/eclipse38/mapTag.properties" />
 
 	<!--location of properties file containing last performance reference test information-->
 	<property name="ref.properties" value="/home/users/releng/buildTools/eclipse.perf/ref37.properties" />
@@ -54,8 +54,6 @@
 	<mkdir dir="${buildlogs}" />
 
 	<property name="buildRepo" value="${updateSite}/${buildId}" />
-	
-	<property name="fetchCacheLocation" value="${buildDirectory}/gitlocalrepo"/>
 
 	<target name="main" depends="init">
 		<antcall target="buildEclipseSourceDrops" />
@@ -580,9 +578,7 @@
 			<config os="solaris" ws="gtk" arch="sparc" />
 			<config os="solaris" ws="gtk" arch="x86" />
 			<config os="macosx" ws="cocoa" arch="x86" />
-			<config os="macosx" ws="cocoa" arch="x86_64" />
-			<config os="macosx" ws="carbon" arch="ppc" />
-			<config os="macosx" ws="carbon" arch="x86" />
+			<config os="macosx" ws="cocoa" arch="x86_64" />		
 			<config os="hpux" ws="gtk" arch="ia64_32" />
 			<config os="aix" ws="gtk" arch="ppc" />
 			<config os="aix" ws="gtk" arch="ppc64" />
@@ -600,9 +596,9 @@
 			<config os="solaris" ws="gtk" arch="sparc" />
 			<config os="solaris" ws="gtk" arch="x86" />
 			<config os="macosx" ws="cocoa" arch="x86" />
-			<config os="macosx" ws="cocoa" arch="x86_64" />
-			<config os="macosx" ws="carbon" arch="x86" />
+			<config os="macosx" ws="cocoa" arch="x86_64" />		
 			<config os="hpux" ws="gtk" arch="ia64_32" />
+			<config os="aix" ws="gtk" arch="ppc" />
 			<config os="aix" ws="gtk" arch="ppc64" />
 			<advice kind="featureVersions" file="${buildDirectory}/finalFeaturesVersions.properties" />
 			<advice kind="pluginVersions" file="${buildDirectory}/finalPluginsVersions.properties" />
@@ -619,8 +615,7 @@
 			<config os="solaris" ws="gtk" arch="sparc" />
 			<config os="solaris" ws="gtk" arch="x86" />
 			<config os="macosx" ws="cocoa" arch="x86" />
-			<config os="macosx" ws="cocoa" arch="x86_64" />
-			<config os="macosx" ws="carbon" arch="ppc" />
+			<config os="macosx" ws="cocoa" arch="x86_64" />		
 			<config os="hpux" ws="gtk" arch="ia64_32" />
 			<config os="aix" ws="gtk" arch="ppc" />
 			<config os="aix" ws="gtk" arch="ppc64" />
@@ -639,8 +634,7 @@
 			<config os="solaris" ws="gtk" arch="sparc" />
 			<config os="solaris" ws="gtk" arch="x86" />
 			<config os="macosx" ws="cocoa" arch="x86" />
-			<config os="macosx" ws="cocoa" arch="x86_64" />
-			<config os="macosx" ws="carbon" arch="x86" />
+			<config os="macosx" ws="cocoa" arch="x86_64" />	
 			<config os="hpux" ws="gtk" arch="ia64_32" />
 			<config os="aix" ws="gtk" arch="ppc" />
 			<config os="aix" ws="gtk" arch="ppc64" />
@@ -659,8 +653,7 @@
 			<config os="solaris" ws="gtk" arch="sparc" />
 			<config os="solaris" ws="gtk" arch="x86" />
 			<config os="macosx" ws="cocoa" arch="x86" />
-			<config os="macosx" ws="cocoa" arch="x86_64" />
-			<config os="macosx" ws="carbon" arch="x86" />
+			<config os="macosx" ws="cocoa" arch="x86_64" />		
 			<config os="hpux" ws="gtk" arch="ia64_32" />
 			<config os="aix" ws="gtk" arch="ppc" />
 			<config os="aix" ws="gtk" arch="ppc64" />
