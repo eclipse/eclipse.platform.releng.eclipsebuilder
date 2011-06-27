@@ -144,7 +144,7 @@ echo " <li><a href=\"coverage.php\"><b>JaCoCo code coverage report</b></a></li>"
 ?>
 
 <?php
-echo"<li><a href=\"apitools/report.html\"><b>API Tools Post-API Freeze Report</b></a>  This report describes API changes since 3.7M6.  Exclusions are listed in org.eclipse.releng/apiexclude/exclude_list.txt. </li>";
+echo"<li><a href=\"apitools/report.html\"><b>API Tools Post-API Freeze Report</b></a>  This report describes API changes since 3.7.  Exclusions are listed in org.eclipse.releng/apiexclude/exclude_list.txt. </li>";
 ?>
 <?php
 echo " <li><a href=\"apitools/apifilters-$buildName.zip\"><b>Zip of .api_filters files used in the build</b></a></li>";
