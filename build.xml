@@ -6,7 +6,7 @@
 		<antcall target="create.label.properties" />
 		<property file="${buildDirectory}/label.properties" />
 		<!--fetch the HEAD stream of all projects if build type specified as N-->
-		<condition property="fetchTag" value="HEAD">
+		<condition property="fetchTag" value="CVS=HEAD,GIT=master">
 			<equals arg1="${buildType}" arg2="N" />
 		</condition>
 		<condition property="forceContextQualifier" value="${buildId}">
