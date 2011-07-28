@@ -57,7 +57,7 @@
 
 	<target name="main" depends="init">
 		<antcall target="buildEclipseSourceDrops" />
-		<!-- <antcall target="buildMasterFeature" />
+		<antcall target="buildMasterFeature" />
 		<parallel failonany="true">
 			<sequential>
 				<antcall target="updatePackProperties" />
@@ -79,7 +79,7 @@
 				<antcall target="publishEquinox" />
 			</sequential>
 			<antcall target="testEclipse" />
-		</parallel> -->
+		</parallel>
 	</target>
 
 	<target name="init">
