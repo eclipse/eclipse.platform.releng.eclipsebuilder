@@ -28,7 +28,7 @@
 		 <target name="provision.sdk">
 		 		 <antcall target="run.director">
 		 		 		 <param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
-		 		 		 <param name="p2.director.version" value="3.7.0.${buildId}" />
+		 		 		 <param name="p2.director.version" value="3.7.1.${buildId}" />
 		 		 		 <param name="p2.director.profile" value="SDKProfile" />
 		 		 		 <param name="p2.director.install.path" value="${p2.sdk.install}/eclipse" />
 		 		 		 <param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
