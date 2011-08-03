@@ -7,9 +7,6 @@
 
 		<!--install 1.6 vm for this configuration-->
 		<antcall target="install1.6Vm" />
-		
-		<!--install 1.7 vm for this configuration-->
-		<antcall target="install1.7Vm" />
 
 		<!--copy the script which sets up environment and invokes the tests on test machine-->
 		<chmod file="${tester}/testAll.sh" perm="755" />
@@ -67,7 +64,6 @@
 			<arg line="${testMachine} ${vmInstallCommand5}" />
 		</exec>
 	</target>
-
 	<target name="install1.6Vm">
 		<property name="testVmTag" value="HEAD" />
 		<!--get and install the vm to test with-->
@@ -75,19 +71,6 @@
 
 		<exec dir="${tester}" executable="${copyClient}">
 			<arg line="${vmUrl6} ${testMachine}:${testDir}" />
-		</exec>
-		<exec dir="." executable="${loginClient}">
-			<arg line="${testMachine} ${vmInstallCommand6}" />
-		</exec>
-	</target>
-
-	<target name="install1.7Vm">
-		<property name="testVmTag" value="HEAD" />
-		<!--get and install the vm to test with-->
-		<cvs cvsRoot="${cvsRoot}" command="export -r ${testVmTag} ${vmUrl7}" dest="${tester}" />
-
-		<exec dir="${tester}" executable="${copyClient}">
-			<arg line="${vmUrl7} ${testMachine}:${testDir}" />
 		</exec>
 		<exec dir="." executable="${loginClient}">
 			<arg line="${testMachine} ${vmInstallCommand6}" />
