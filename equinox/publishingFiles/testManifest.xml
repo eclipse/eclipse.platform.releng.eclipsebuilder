@@ -44,6 +44,7 @@
 			<platform format="equinox" id="simpleconfigurator" name="All" fileName="@org.eclipse.equinox.simpleconfigurator@.jar" />
 			<platform format="equinox" id="concurrent" name="All" fileName="@org.eclipse.equinox.concurrent@.jar" />
 			<platform format="equinox" id="coordinator" name="All" fileName="@org.eclipse.equinox.coordinator@.jar" />
+			<platform format="equinox" id="region" name="All" fileName="@org.eclipse.equinox.region@.jar" />
 		</zipType>	
 
 		<zipType name="Other">

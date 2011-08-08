@@ -113,7 +113,7 @@
 		</antcall>
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.console.supportability" />
-		</antcall>		
+		</antcall>
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.metatype" />
 		</antcall>
@@ -224,7 +224,10 @@
 		</antcall>
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.coordinator" />
-		</antcall>		
+		</antcall>
+		<antcall target="updateTestManifest">
+			<param name="bundle.id" value="org.eclipse.equinox.region" />
+		</antcall>
 	</target>
 
 	<!-- ===================================================================== -->
