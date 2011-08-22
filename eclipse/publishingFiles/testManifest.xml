@@ -259,15 +259,6 @@
 		<effectedFile id="JMCSDK"></effectedFile>
 	</logFile>
 
-	<logFile name="plugins\org.eclipse.swt.carbon_*\ws\carbon\swt.jar.bin.xml" type="compile">
-		<effectedFile id="SMCC"></effectedFile>
-		<effectedFile id="PMC"></effectedFile>
-		<effectedFile id="PMCSDK"></effectedFile>
-		<effectedFile id="SWTMC"></effectedFile>
-		<effectedFile id="RCPMC"></effectedFile>
-		<effectedFile id="RCPSDKMC"></effectedFile>
-	</logFile>
-
 	<logFile name="plugins\org.eclipse.swt.photon_*\ws\photon\swt.jar.bin.xml" type="compile">
 		<!--effectedFile id="SNP"></effectedFile>
 		<effectedFile id="PNP"></effectedFile-->
@@ -465,15 +456,6 @@
 	<logFile name="plugins\org.eclipse.jdt.core.tests.model_*\jdtcoretestsmodel.jar.bin.xml" type="compile">
 		<effectedFile id="JT"></effectedFile>
 	</logFile>
-
-    <logFile name="plugins\org.eclipse.ui.carbon_*\carbon.jar.bin.xml" type="compile">
-        <effectedFile id="SMCC"></effectedFile>    
-		<effectedFile id="RCPMC"></effectedFile>
-		<effectedFile id="RCPSDKMC"></effectedFile>
-		<effectedFile id="PMC"></effectedFile>
-		<effectedFile id="PMCSDK"></effectedFile>
-		<effectedFile id="SWTMC"></effectedFile>
-    </logFile>
 
 	<logFile name="plugins\org.eclipse.perfmsr.core_*\perfmsr.jar.bin.xml" type="compile">
 		<effectedFile id="SW"></effectedFile>

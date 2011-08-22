@@ -270,7 +270,7 @@
 			<param name="p2InstallBaseLocation" value="${reposource}" />
 		</antcall>
 		<antcall target="unziplauncherfragment">
-			<param name="bundle.id" value="org.eclipse.equinox.launcher.carbon.macosx_" />
+			<param name="bundle.id" value="org.eclipse.equinox.launcher.cocoa.macosx_" />
 			<param name="p2InstallBaseLocation" value="${reposource}" />
 		</antcall>
 

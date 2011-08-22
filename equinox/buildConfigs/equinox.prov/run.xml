@@ -456,19 +456,7 @@
 			<param name="p2.arch" value="x86_64" />
 			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
-
-		<antcall target="run.director">
-			<param name="p2.director.installIU" value="org.eclipse.platform.ide" />
-			<param name="p2.director.version" value="${sdk.version}" />
-			<param name="p2.director.profile" value="PlatformProfile" />
-			<param name="p2.director.install.path" value="${p2.platform.install.macosx.carbon.x86}/eclipse" />
-			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
-			<param name="p2.os" value="macosx" />
-			<param name="p2.ws" value="carbon" />
-			<param name="p2.arch" value="x86" />
-			<param name="p2.repo" value="${buildRepo}" />
-		</antcall>
-
+		
 		<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.platform.ide" />
 			<param name="p2.director.version" value="${sdk.version}" />
@@ -604,19 +592,7 @@
 			<param name="p2.repo" value="${buildRepo}" />
 		</antcall>
 
-		<antcall target="run.director">
-			<param name="p2.director.installIU" value="org.eclipse.platform.sdk" />
-			<param name="p2.director.version" value="${sdk.version}" />
-			<param name="p2.director.profile" value="PlatformSDKProfile" />
-			<param name="p2.director.install.path" value="${p2.platformsdk.install.macosx.carbon.x86}/eclipse" />
-			<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
-			<param name="p2.os" value="macosx" />
-			<param name="p2.ws" value="carbon" />
-			<param name="p2.arch" value="x86" />
-			<param name="p2.repo" value="${buildRepo}" />
-		</antcall>
-
-		<antcall target="run.director">
+			<antcall target="run.director">
 			<param name="p2.director.installIU" value="org.eclipse.platform.sdk" />
 			<param name="p2.director.version" value="${sdk.version}" />
 			<param name="p2.director.profile" value="PlatformSDKProfile" />
@@ -745,17 +721,7 @@
 					<param name="archiveName" value="eclipse-SDK-${buildId}-linux-gtk.tar.gz" />
 				</antcall>
 			</sequential>
-			<sequential>
-				<!-- macosx -->
-				<antcall target="p2.tar">
-					<param name="tar.base.dir" value="${p2.sdk.install.macosx.carbon.x86}" />
-					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-macosx-carbon.tar" />
-				</antcall>
-				<antcall target="generateChecksums">
-					<param name="archiveName" value="eclipse-SDK-${buildId}-macosx-carbon.tar.gz" />
-				</antcall>
-			</sequential>
-
+			
 			<sequential>
 				<!-- macosx -->
 				<antcall target="p2.tar">
@@ -965,15 +931,6 @@
 				</exec>
 				<antcall target="generateChecksums">
 					<param name="archiveName" value="eclipse-platform-${buildId}-aix-motif.zip" />
-				</antcall>
-
-				<!-- macosx -->
-				<antcall target="p2.tar">
-					<param name="tar.base.dir" value="${p2.platform.install.macosx.carbon.x86}" />
-					<param name="tar.base.filename" value="${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-macosx-carbon.tar" />
-				</antcall>
-				<antcall target="generateChecksums">
-					<param name="archiveName" value="eclipse-platform-${buildId}-macosx-carbon.tar.gz" />
 				</antcall>
 
 				<!-- macosx -->
