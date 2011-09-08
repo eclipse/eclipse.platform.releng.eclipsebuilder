@@ -1,7 +1,0 @@
-#!/bin/sh
-
-mkdir $WORKSPACE/builds
-cd $WORKSPACE/builds
-mkdir -p $WORKSPACE/builds/I
-mkdir -p $WORKSPACE/builds/transfer/files/testUpdates-I
-$WORKSPACE/org.eclipse.releng.eclipsebuilder/bootstrapHudsongit.sh -skipTest -buildDirectory $WORKSPACE/builds/I -hudson -updateSite $WORKSPACE/builds/transfer/files/testUpdates-I I

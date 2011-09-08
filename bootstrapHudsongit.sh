@@ -51,7 +51,9 @@ tag=""
 #buildProjectTags=v20110421
 #buildProjectTags=v20110426
 #buildProjectTags=v20110427git
-buildProjectTags=v20110613git
+#buildProjectTags=v20110613git
+#buildProjectTags=v20110809
+buildProjectTags=v20110816
 
 #updateSite property setting
 updateSite=""
@@ -151,7 +153,7 @@ fi
 #Set the tag to HEAD for Nightly builds
 if [ "$buildType" = "N" ]
 then
-        tag="-DfetchTag=HEAD"
+        tag="-DfetchTag=CVS=HEAD,GIT=master;git://git.eclipse.org/gitroot/platform/eclipse.platform.ui.git=R3_development"
         versionQualifier="-DforceContextQualifier=$buildId"
 fi
 
