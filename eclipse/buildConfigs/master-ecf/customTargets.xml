@@ -38,11 +38,19 @@
 
 	<target name="getMapFiles" depends="checkLocal" unless="mapsLocal">
 
-		<!-- ***  change the repo info -->
-		<property name="mapCvsRoot" value="${mapsRepo}" />
-
-		<property name="mapVersionTag" value="HEAD" />
-		<cvs cvsRoot="${mapCvsRoot}" package="org.eclipse.releng" dest="${buildDirectory}/maps" tag="${mapVersionTag}" />
+		<property name="mapsrepo" value="${buildDirectory}/commonrepo" />
+		<mkdir dir="${mapsrepo}" />
+		<exec executable="git" dir="${mapsrepo}">
+			<arg line="clone git://git.eclipse.org/gitroot/platform/eclipse.platform.common" />
+		</exec>
+		<exec executable="git" dir="${mapsrepo}/eclipse.platform.common">
+			<arg line="checkout ${mapVersionTag}" />
+		</exec>
+		<mkdir dir="${buildDirectory}/maps" />
+		<exec executable="git" dir="${buildDirectory}/maps" output="${buildDirectory}/maps/maps.tar">
+			<arg line="archive --format=tar --remote=${mapsrepo}/eclipse.platform.common ${mapVersionTag} maps/org.eclipse.releng/maps" />
+		</exec>
+		<untar src="${buildDirectory}/maps/maps.tar" dest="${buildDirectory}" />
 		<!--tag the map files project-->
 		<antcall target="tagMapFiles" />
 		<antcall target="getPrebuiltElements" />
@@ -90,7 +98,7 @@
 	<!-- Steps to do after the fetch -->
 	<!-- ===================================================================== -->
 	<target name="postFetch">
-		<replace file="${buildDirectory}/sourceReferences.properties" token=":extssh" value=":pserver"  />	
+		<replace file="${buildDirectory}/sourceReferences.properties" token=":extssh" value=":pserver" />
 		<replace dir="${buildDirectory}/plugins" value="${buildId}" token="@buildid@">
 			<include name="**/about.mappings" />
 		</replace>

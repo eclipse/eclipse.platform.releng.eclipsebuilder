@@ -1,4 +1,4 @@
-<project name="Build specific targets and properties" default="noDefault" >
+<project name="Build specific targets and properties" default="noDefault">
 
 
 	<property name="postingDirectory" value="${buildDirectory}" />
@@ -10,7 +10,7 @@
 	<!-- ****** figure out how to build the platform, sdk, examples, ... from one compile"
 see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets  -->
 	<target name="allElements">
-		<ant antfile="${genericTargets}" target="${target}" >
+		<ant antfile="${genericTargets}" target="${target}">
 			<property name="type" value="feature" />
 			<property name="id" value="org.eclipse.equinox.executable" />
 		</ant>
@@ -20,7 +20,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Targets to assemble the built elements for particular configurations  -->
 	<!-- ===================================================================== -->
 	<target name="assemble.org.eclipse.equinox.executable">
-		<property name="archiveName" value="org.eclipse.equinox.executable_${buildId}.zip"/>
+		<property name="archiveName" value="org.eclipse.equinox.executable_${buildId}.zip" />
 		<antcall target="assemble" />
 	</target>
 	<target name="assemble">
@@ -37,14 +37,19 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 
 	<target name="getMapFiles" depends="checkLocal" unless="mapsLocal">
 
-		<!-- ***  change the repo info -->
-		<property name="mapCvsRoot" value="${mapsRepo}" />
-		<property name="mapVersionTag" value="HEAD" />
-		<cvs cvsRoot="${mapCvsRoot}"
-		package="org.eclipse.releng"
-		dest="${buildDirectory}/maps"
-		tag="${mapVersionTag}"
-	/>
+		<property name="mapsrepo" value="${buildDirectory}/commonrepo" />
+		<mkdir dir="${mapsrepo}" />
+		<exec executable="git" dir="${mapsrepo}">
+			<arg line="clone git://git.eclipse.org/gitroot/platform/eclipse.platform.common" />
+		</exec>
+		<exec executable="git" dir="${mapsrepo}/eclipse.platform.common">
+			<arg line="checkout ${mapVersionTag}" />
+		</exec>
+		<mkdir dir="${buildDirectory}/maps" />
+		<exec executable="git" dir="${buildDirectory}/maps" output="${buildDirectory}/maps/maps.tar">
+			<arg line="archive --format=tar --remote=${mapsrepo}/eclipse.platform.common ${mapVersionTag} maps/org.eclipse.releng/maps" />
+		</exec>
+		<untar src="${buildDirectory}/maps/maps.tar" dest="${buildDirectory}" />
 		<!--compare the map files project-->
 		<antcall target="compareMapFiles" />
 		<!--tag the map files project-->
@@ -52,7 +57,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	</target>
 
 	<target name="compareMapFiles" if="compareMaps">
-		<property file="${mapTag.properties}"/>
+		<property file="${mapTag.properties}" />
 		<property name="cvsDiffFile" value="${buildDirectory}/cvsDiff.txt" />
 		<cvs cvsRoot="${mapCvsRoot}" dest="${buildDirectory}/maps" command="diff -w -r ${lastMapTag}" output="${cvsDiffFile}" />
 		<modifiedMaps mapDiffFile="${cvsDiffFile}" />
@@ -75,7 +80,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- ===================================================================== -->
 	<!-- Steps to do after setup but before starting the build proper -->
 	<!-- ===================================================================== -->
-	<target name="postSetup" >
+	<target name="postSetup">
 	</target>
 
 	<!-- ===================================================================== -->
