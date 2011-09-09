@@ -35,18 +35,18 @@
 	<!-- ===================================================================== -->
 
 	<target name="getMapFiles" depends="checkLocalMaps" unless="skipMaps">
-		<property name="mapsrepo" value="${buildDirectory}/commonrepo"/>
-		 <mkdir dir="${mapsrepo}"/>
-		 <exec executable="git" dir="${mapsrepo}">
-		    <arg line="clone git://git.eclipse.org/gitroot/platform/eclipse.platform.common" />
-		 </exec>		
+		<property name="mapsrepo" value="${buildDirectory}/commonrepo" />
+		<mkdir dir="${mapsrepo}" />
+		<exec executable="git" dir="${mapsrepo}">
+			<arg line="clone ${commonrepo}" />
+		</exec>
 		<exec executable="git" dir="${mapsrepo}/eclipse.platform.common">
-		  <arg line="checkout ${mapVersionTag}"/>
+			<arg line="checkout ${mapVersionTag}" />
 		</exec>
 		<mkdir dir="${buildDirectory}/maps" />
-		<exec executable="git" dir="${buildDirectory}/maps" output="${buildDirectory}/maps/maps.tar" >
-		    <arg line="archive --format=tar --remote=${mapsrepo}/eclipse.platform.common ${mapVersionTag} maps/org.eclipse.releng/maps"/>
-		 </exec>
+		<exec executable="git" dir="${buildDirectory}/maps" output="${buildDirectory}/maps/maps.tar">
+			<arg line="archive --format=tar --remote=${mapsrepo}/eclipse.platform.common ${mapVersionTag} maps/org.eclipse.releng/maps" />
+		</exec>
 		<untar src="${buildDirectory}/maps/maps.tar" dest="${buildDirectory}" />
 	</target>
 
@@ -55,7 +55,12 @@
 	</target>
 
 	<target name="tagMapFiles" if="tagMaps">
-		<cvs dest="${buildDirectory}/maps/${mapsRoot}" command="tag ${mapsTagTag}" />
+		<exec executable="git" dir="${mapsrepo}/eclipse.platform.common">
+			<arg line="branch ${buildId}" />
+		</exec>
+		<exec executable="git" dir="${mapsrepo}/eclipse.platform.common">
+			<arg line="push origin ${buildId}" />
+		</exec>
 	</target>
 
 	<target name="compareMapFiles" if="compareMaps">
@@ -259,7 +264,7 @@
 		<eclipse.publish.featuresAndBundles repository="file:/${buildDirectory}/buildRepo">
 			<bundles dir="${postingDirectory}/${buildLabel}" includes="ecj-${buildId}.jar" />
 			<bundles dir="${postingDirectory}/${buildLabel}" includes="ecjsrc-${buildId}.jar" />
-		</eclipse.publish.featuresAndBundles>	
+		</eclipse.publish.featuresAndBundles>
 	</target>
 
 	<!-- ===================================================================== -->

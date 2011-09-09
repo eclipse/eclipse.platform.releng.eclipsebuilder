@@ -89,7 +89,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<property name="mapsrepo" value="${buildDirectory}/commonrepo" />
 		<mkdir dir="${mapsrepo}" />
 		<exec executable="git" dir="${mapsrepo}">
-			<arg line="clone git://git.eclipse.org/gitroot/platform/eclipse.platform.common" />
+			<arg line="clone ${commonrepo}" />
 		</exec>
 		<exec executable="git" dir="${mapsrepo}/eclipse.platform.common">
 			<arg line="checkout ${mapVersionTag}" />
@@ -116,7 +116,12 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<echo file="${mapTag.properties}">
 		lastMapTag=${buildId}
 	</echo>
-		<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag ${buildId}" />
+		<exec executable="git" dir="${mapsrepo}/eclipse.platform.common">
+			<arg line="branch ${buildId}" />
+		</exec>
+		<exec executable="git" dir="${mapsrepo}/eclipse.platform.common">
+			<arg line="push origin ${buildId}" />
+		</exec>
 	</target>
 
 	<target name="getPrebuiltElements">
