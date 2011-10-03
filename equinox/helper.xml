@@ -20,7 +20,6 @@
 
 		<!-- generate md5s and sha1s for bundle -->
 		<mkdir dir="${equinoxPostingDirectory}/${buildLabel}/checksum" />
-
 		<exec executable="sh" dir="${equinoxPostingDirectory}/${buildLabel}">
 			<arg line="${equinox.build.configs}/../../extras/produceChecksum" />
 		</exec>

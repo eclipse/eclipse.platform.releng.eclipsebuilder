@@ -67,7 +67,7 @@
 			</antcall>
 		</parallel>
 		<parallel failonany="true">
-			<sequential>			
+			<sequential>
 				<antcall target="packageSwtStandalone">
 					<param name="os" value="solaris" />
 					<param name="ws" value="gtk" />
@@ -82,7 +82,7 @@
 					<param name="os" value="hpux" />
 					<param name="ws" value="gtk" />
 					<param name="arch" value="ia64_32" />
-				</antcall>				
+				</antcall>
 			</sequential>
 		</parallel>
 		<parallel failonany="true">
@@ -129,15 +129,6 @@
 			<param name="arch" value="arm" />
 			<param name="skipChecksum" value="true" />
 		</antcall>
-		<antcall target="generateChecksum">
-			<param name="downloadFile" value="swt-${buildId}-win32-wce_ppc-arm-j2se.zip" />
-			<param name="archiveFullPath" value="${postingDirectory}/${buildLabel}/swt-${buildId}-win32-wce_ppc-arm-j2se.zip" />
-		</antcall>
-		<antcall target="generateChecksum">
-			<param name="downloadFile" value="swt-${buildId}-win32-wce_ppc-arm-j2me.zip" />
-			<param name="archiveFullPath" value="${postingDirectory}/${buildLabel}/swt-${buildId}-win32-wce_ppc-arm-j2me.zip" />
-		</antcall>
-
 	</target>
 
 	<target name="fetch_org.eclipse.swt.win32.wce_ppc.arm" unless="org.eclipse.swt.win32.wce_ppc.arm.exists">
@@ -166,18 +157,16 @@
 		<property name="swtdir" value="${buildDirectory}/plugins/org.eclipse.swt.${ws}.${os}.${arch}" />
 		<ant antfile="build.xml" target="swtdownload" dir="${swtdir}">
 		</ant>
-
-		<antcall target="generateChecksum" />
 	</target>
 
-	<target name="generateChecksum" unless="skipChecksum">
-		<checksum file="${archiveFullPath}" property="md5" />
-		<checksum file="${archiveFullPath}" property="sha" />
-		<echo message="${md5} *${downloadFile}" file="${postingDirectory}/${buildLabel}/checksum/${downloadFile}.md5" />
-		<echo message="${sha} *${downloadFile}" file="${postingDirectory}/${buildLabel}/checksum/${downloadFile}.sha1" />
-	</target>
 
 	<target name="publish" description="Preparing to post the build...">
+
+		<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
+		<exec executable="sh" dir="${postingDirectory}/${buildLabel}">
+			<arg line="${eclipse.build.configs}/../../extras/produceChecksum" />
+		</exec>
+
 		<!--post clickThroughs-->
 		<copy todir="${postingDirectory}/${buildLabel}">
 			<fileset dir="${buildDirectory}/maps/org.eclipse.releng" includes="clickThroughs/" />

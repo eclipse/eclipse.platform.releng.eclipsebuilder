@@ -57,10 +57,6 @@
 		<property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
 		<exec executable="zip" dir="${featureTemp2}">
 			<arg line="${archiveFullPath} -r ." />
-		</exec>
-		<checksum file="${archiveFullPath}" property="md5" />
-		<checksum file="${archiveFullPath}" algorithm="SHA" property="sha" />
-		<echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5" />
-		<echo message="${sha} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.sha1" />
+		</exec>		
 	</target>
 </project>

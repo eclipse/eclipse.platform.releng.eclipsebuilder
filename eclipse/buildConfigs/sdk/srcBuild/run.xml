@@ -79,17 +79,6 @@
 		 		 </antcall>
 		 </target>
 
-		 <target name="generateChecksums">
-		 		 <mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
-		 		 <property name="archiveFullPath" value="${postingDirectory}/${buildLabel}/${archiveName}" />
-		 		 <checksum file="${archiveFullPath}" property="md5" />
-		 		 <checksum file="${archiveFullPath}" algorithm="SHA" property="sha" />
-		 		 <parallel>
-		 		 		 <echo message="${md5} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.md5" />
-		 		 		 <echo message="${sha} *${archiveName}" file="${postingDirectory}/${buildLabel}/checksum/${archiveName}.sha1" />
-		 		 </parallel>
-		 </target>
-
 
 		 <target name="p2.tar.gz">
 		 		 <echo message="Building tar ${base.filename} from ${base.dir}/*" />
