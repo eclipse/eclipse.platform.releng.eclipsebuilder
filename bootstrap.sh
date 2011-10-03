@@ -6,7 +6,8 @@ BASE_PATH=.:/bin:/usr/bin:/usr/bin/X11:/usr/local/bin:/usr/bin:/usr/X11R6/bin
 LD_LIBRARY_PATH=.
 BASH_ENV=$HOME/.bashrc
 USERNAME=`whoami`
-xhost +$HOSTNAME
+/usr/X11R6/bin/xhost +$HOSTNAME
+/usr/X11R6/bin/xhost local:kmoir
 DISPLAY=:0.0
 CVS_RSH=ssh
 ulimit -c unlimited
@@ -46,19 +47,16 @@ deleteArtifacts=""
 #sets fetchTag="HEAD" for nightly builds if required
 tag=""
 
-#buildProjectTags=v20091111
-#buildProjectTags=v20091112b
-#buildProjectTags=v20100113
-#buildProjectTags=v20100118a
-#buildProjectTags=v20100126
-#buildProjectTags=v20100204
-#buildProjectTags=v20100208
-#buildProjectTags=v20100210
-#buildProjectTags=v20100219
-#buildProjectTags=v20100222
-#buildProjectTags=v20100315
-#buildProjectTags=v20100423
-buildProjectTags=v20110816
+#buildProjectTags=v20110728a
+#buildProjectTags=v20110729
+#buildProjectTags=v20110803
+#buildProjectTags=v20110809
+#buildProjectTags=v20110816
+#buildProjectTags=v20110906
+#buildProjectTags=v20110907
+#buildProjectTags=v20110920
+#buildProjectTags=v20110927
+buildProjectTags=v20110929a
 
 #updateSite property setting
 updateSite=""
@@ -103,41 +101,42 @@ timestamp=$builddate$buildtime
 
 
 # process command line arguments
-usage="usage: $0 [-notify emailaddresses][-textRecipients textaddesses][-test][-buildDirectory directory][-buildId name][-buildLabel directory name][-tagMapFiles][-mapVersionTag tag][-builderTag tag][-bootclasspath path][-compareMaps][-skipPerf] [-skipCleanSites] [-skipTest] [-updateSite site][-skipPack][-sign] M|N|I|S|R"
+usage="usage: $0 [-notify emailaddresses][-textRecipients textaddesses][-test][-buildDirectory directory][-buildId name][-buildLabel directory name][-tagMapFiles][-mapVersionTag tag][-builderTag tag][-bootclasspath path][-compareMaps][-skipPerf] [-skipCleanSites] [-skipTest] [-skipRSS] [-updateSite site][-skipPack][-sign] M|N|I|S|R"
 
 if [ $# -lt 1 ]
 then
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     echo >&2 "$usage"
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     exit 1
+		 		  		 		   		 		  		 		    echo >&2 "$usage"
+		 		  		 		   		 		  		 		    exit 1
 fi
 
 while [ $# -gt 0 ]
 do
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     case "$1" in
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -buildId) buildId="$2"; shift;;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -buildLabel) buildLabel="$2"; shift;;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -mapVersionTag) mapVersionTag="$2"; shift;;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -tagMapFiles) tagMaps="-DtagMaps=true";;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -skipPerf) skipPerf="-Dskip.performance.tests=true";;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -skipCleanSites) skipCleanSites="-Dskip.clean.sites=true";;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -hudson) skipPerf="-Dhudson=true";;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -skipTest) skipTest="-Dskip.tests=true";;		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -deleteArtifacts) deleteArtifacts="-Ddelete.artifacts=true";;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -skipPack) skipPack="-DskipPack=true";;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -buildDirectory) builderDir="$2"; shift;;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -notify) recipients="$2"; shift;;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -textRecipients) textRecipients="$2"; shift;;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -test) postingDirectory="/builds/transfer/files/bogus/downloads/drops";testBuild="-Dtest=true";;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -builderTag) buildProjectTags="$2"; shift;;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -compareMaps) compareMaps="-DcompareMaps=true";;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -updateSite) updateSite="-DupdateSite=$2";shift;;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -sign) sign="-Dsign=true";;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -*)
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     echo >&2 $usage
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     exit 1;;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     *) break;;		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     # terminate while loop
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     esac
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     shift
+		 		  		 		   		 		  		 		    case "$1" in
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -buildId) buildId="$2"; shift;;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -buildLabel) buildLabel="$2"; shift;;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -mapVersionTag) mapVersionTag="$2"; shift;;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -tagMapFiles) tagMaps="-DtagMaps=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -skipPerf) skipPerf="-Dskip.performance.tests=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -skipCleanSites) skipCleanSites="-Dskip.clean.sites=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -hudson) skipPerf="-Dhudson=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -skipTest) skipTest="-Dskip.tests=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -skipRSS) skipRSS="-Dskip.feed=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -deleteArtifacts) deleteArtifacts="-Ddelete.artifacts=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -skipPack) skipPack="-DskipPack=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -buildDirectory) builderDir="$2"; shift;;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -notify) recipients="$2"; shift;;
+		 		  		 		   		 		  		 		   		 		  		 		   		 		  		 		    -textRecipients) textRecipients="$2"; shift;;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -test) postingDirectory="/builds/transfer/files/bogus/downloads/drops";testBuild="-Dtest=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -builderTag) buildProjectTags="$2"; shift;;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -compareMaps) compareMaps="-DcompareMaps=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -updateSite) updateSite="-DupdateSite=$2";shift;;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -sign) sign="-Dsign=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -*)
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    echo >&2 $usage
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    exit 1;;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    *) break;;		 		  		 		   		 		  		 		    # terminate while loop
+		 		  		 		   		 		  		 		    esac
+		 		  		 		   		 		  		 		    shift
 done
 
 # After the above the build type is left in $1.
@@ -146,18 +145,19 @@ buildType=$1
 # Set default buildId and buildLabel if none explicitly set
 if [ "$buildId" = "" ]
 then
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     buildId=$buildType$builddate-$buildtime
+		 		  		 		   		 		  		 		    buildId=$buildType$builddate-$buildtime
 fi
 
 if [ "$buildLabel" = "" ]
 then
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     buildLabel=$buildId
+		 		  		 		   		 		  		 		    buildLabel=$buildId
 fi
 
 #Set the tag to HEAD for Nightly builds
 if [ "$buildType" = "N" ]
 then
-        tag="-DfetchTag=CVS=HEAD,GIT=master;git://git.eclipse.org/gitroot/platform/eclipse.platform.ui.git=R3_development"
+       # tag="-DfetchTag=CVS=HEAD,GIT=master"
+	tag="-DfetchTag=CVS=HEAD,GIT=master;git://git.eclipse.org/gitroot/platform/eclipse.platform.ui.git=R3_development"
         versionQualifier="-DforceContextQualifier=$buildId"
 fi
 
@@ -170,11 +170,9 @@ baseBuilderTag=$buildProjectTags
 # tag for exporting the custom builder
 customBuilderTag=$buildProjectTags
 
-
-
 if [ -e $builderDir ]
 then
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     builderDir=$builderDir$timestamp
+		 		  		 		   		 		  		 		    builderDir=$builderDir$timestamp
 fi
 
 # directory where features and plugins will be compiled
@@ -311,7 +309,7 @@ retCode=$?
 if [ $retCode != 0 ]
 then
         echo "Build failed (error code $retCode)."
-		 		  		 		   		 		  		 		    exit $retCode
+		 		  		 		   exit $retCode
 fi
 
 if [ "$skip.feed" != "true" ]
@@ -325,5 +323,10 @@ fi
 #clean up
 if [ "$delete.artifacts" == "-Ddelete.artifacts=true"  ]
 then
-		 		  		 		   		 		  		 		    rm -rf $builderDir
+		 		  		 		   rm -rf $builderDir
 fi
+
+
+
+
+
