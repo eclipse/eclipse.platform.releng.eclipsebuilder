@@ -72,10 +72,10 @@
 				<antcall target="packageEclipseDistributables" />
 				<ant antfile="${eclipse.build.configs}/../helper.xml" target="verifyCompile" />
 				<ant antfile="${equinox.build.configs}/equinox.prov/run.xml" />
-				<antcall target="packageRepos" />
-				<antcall target="packageEquinoxDistributables" />
+				<antcall target="packageRepos" />				
 				<antcall target="apiTooling" />
 				<antcall target="publishEclipse" />
+				<antcall target="packageEquinoxDistributables" />
 				<antcall target="publishEquinox" />
 			</sequential>
 			<antcall target="testEclipse" />

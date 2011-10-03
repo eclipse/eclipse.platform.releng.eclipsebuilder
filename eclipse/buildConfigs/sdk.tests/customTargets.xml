@@ -292,11 +292,7 @@
 		<exec dir="${workingDirectory}" executable="zip">
 			<arg line="-r -q ${postingDirectory}/${buildLabel}/eclipse-Automated-Tests-${buildId}.zip eclipse-testing" />
 		</exec>
-		<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
-		<checksum file="${postingDirectory}/${buildLabel}/eclipse-Automated-Tests-${buildId}.zip" property="md5" />
-		<checksum file="${postingDirectory}/${buildLabel}/eclipse-Automated-Tests-${buildId}.zip" algorithm="SHA" property="sha" />
-		<echo message="${md5} *eclipse-Automated-Tests-${buildId}.zip" file="${postingDirectory}/${buildLabel}/checksum/eclipse-Automated-Tests-${buildId}.zip.md5" />
-		<echo message="${sha} *eclipse-Automated-Tests-${buildId}.zip" file="${postingDirectory}/${buildLabel}/checksum/eclipse-Automated-Tests-${buildId}.zip.sha1" />
+		<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />	
 		<delete file="${buildDirectory}/${buildLabel}/eclipse-junit-tests-${buildId}.zip" />
 		<!-- get to store previous release's platform zips -->
 		<exec executable="/usr/bin/wget" dir="${previousPlatformZips}" failonerror="false">

@@ -170,11 +170,7 @@
 
 	<target name="packageTestFramework">
 		<zip zipfile="${postingDirectory}/${buildLabel}/eclipse-test-framework-${buildId}.zip" basedir="${buildDirectory}/buildRepoTestFramework"/>		
-		<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
-		<checksum file="${postingDirectory}/${buildLabel}/eclipse-test-framework-${buildId}.zip" property="md5" />
-		<checksum file="${postingDirectory}/${buildLabel}/eclipse-test-framework-${buildId}.zip" algorithm="SHA" property="sha" />
-		<echo message="${md5} *eclipse-test-framework-${buildId}.zip" file="${postingDirectory}/${buildLabel}/checksum/eclipse-test-framework-${buildId}.zip.md5" />
-		<echo message="${sha} *eclipse-test-framework-${buildId}.zip" file="${postingDirectory}/${buildLabel}/checksum/eclipse-test-framework-${buildId}.zip.sha1" />
+		<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />		
 	</target>
 
 

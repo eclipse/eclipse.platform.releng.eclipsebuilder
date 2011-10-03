@@ -74,10 +74,7 @@
 		<antcall target="${compress.target}">
 			<param name="dir" value="${featureTemp2}" />
 			<param name="filename" value="${archiveName}" />
-		</antcall>
-		<antcall target="generateChecksums">
-			<param name="archiveName" value="${archiveName}" />
-		</antcall>
+		</antcall>		
 	</target>
 
 	<target name="compress-zip">
@@ -92,17 +89,7 @@
 			<arg line='-c "tar -cvzf ${dir}/${filename} *"' />
 		</exec>
 		<move file="${dir}/${filename}" tofile="${archiveFullPath}" />
-	</target>
-
-	<target name="generateChecksums">
-		<mkdir dir="${equinoxPostingDirectory}/${buildLabel}/checksum" />
-		<checksum file="${archiveFullPath}" property="md5" />
-		<checksum file="${archiveFullPath}" algorithm="SHA" property="sha" />
-		<parallel>
-			<echo message="${md5} *${archiveName}" file="${equinoxPostingDirectory}/${buildLabel}/checksum/${archiveName}.md5" />
-			<echo message="${sha} *${archiveName}" file="${equinoxPostingDirectory}/${buildLabel}/checksum/${archiveName}.sha1" />
-		</parallel>
-	</target>
+	</target>	
 
 
 </project>

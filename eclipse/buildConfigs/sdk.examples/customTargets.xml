@@ -33,14 +33,7 @@
 		<property name="archiveFullPath" value="${buildDirectory}/${buildLabel}/${archiveName}" />
 		<ant antfile="${assembleScriptName}" />
 	</target>
-	<target name="postPackage">
-		<mkdir dir="${buildDirectory}/${buildLabel}/checksum" />
-		<exec executable="sh" dir="${buildDirectory}/${buildLabel}">
-			<arg line="${eclipse.build.configs}/../../extras/produceChecksum" />
-		</exec>
-		<move todir="${postingDirectory}/${buildLabel}">
-			<fileset dir="${buildDirectory}/${buildLabel}" />
-		</move>
+	<target name="postPackage">			
 	</target>
 
 	<!-- ===================================================================== -->
