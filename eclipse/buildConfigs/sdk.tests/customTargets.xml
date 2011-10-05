@@ -34,17 +34,17 @@
 	<!-- Replace values for mapsCheckoutTag as desired. -->
 	<!-- ===================================================================== -->
 	<target name="getMapFiles" depends="checkLocalMaps" unless="skipMaps">
-		<property name="mapsRepo" value="${buildDirectory}/commonrepo" />
-		<mkdir dir="${mapsRepo}" />
-		<exec executable="git" dir="${mapsRepo}">
+		<property name="mapsGitRepo" value="${buildDirectory}/commonrepo" />
+		<mkdir dir="${mapsGitRepo}" />
+		<exec executable="git" dir="${mapsGitRepo}">
 			<arg line="clone ${commonrepo}" />
 		</exec>
-		<exec executable="git" dir="${mapsRepo}/eclipse.platform.common">
+		<exec executable="git" dir="${mapsGitRepo}/eclipse.platform.common">
 			<arg line="checkout ${mapVersionTag}" />
 		</exec>
 		<mkdir dir="${buildDirectory}/maps" />
 		<exec executable="git" dir="${buildDirectory}/maps" output="${buildDirectory}/maps/maps.tar">
-			<arg line="archive --format=tar --remote=${mapsRepo}/eclipse.platform.common ${mapVersionTag} maps/org.eclipse.releng/maps" />
+			<arg line="archive --format=tar --remote=${mapsGitRepo}/eclipse.platform.common ${mapVersionTag} maps/org.eclipse.releng/maps" />
 		</exec>
 		<untar src="${buildDirectory}/maps/maps.tar" dest="${buildDirectory}" />
 	</target>
@@ -54,10 +54,10 @@
 	</target>
 
 	<target name="tagMapFiles" if="tagMaps">
-		<exec executable="git" dir="${mapsRepo}/eclipse.platform.common">
+		<exec executable="git" dir="${mapsGitRepo}/eclipse.platform.common">
 			<arg line="branch ${buildId}" />
 		</exec>
-		<exec executable="git" dir="${mapsRepo}/eclipse.platform.common">
+		<exec executable="git" dir="${mapsGitRepo}/eclipse.platform.common">
 			<arg line="push origin ${buildId}" />
 		</exec>
 	</target>
@@ -66,8 +66,8 @@
 		<property file="${mapTag.properties}" />
 		<propery name="mapsPath" value="eclipse.platform.common/maps/org.eclipse.releng/maps" />
 		<property name="cvsDiffFile" value="${buildDirectory}/cvsDiff.txt" />
-		<exec executable="git" dir="${mapsRepo}/${mapsPath}" output="${cvsDiffFile}">
-			<arg line="diff ${lastMapTag} ${mapsRepo}/${mapsPath} ." />
+		<exec executable="git" dir="${mapsGitRepo}/${mapsPath}" output="${cvsDiffFile}">
+			<arg line="diff ${lastMapTag} ${mapsGitRepo}/${mapsPath} ." />
 		</exec>
 		<modifiedMaps mapDiffFile="${cvsDiffFile}" />
 	</target>
