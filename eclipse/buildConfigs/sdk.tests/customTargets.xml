@@ -89,7 +89,7 @@
 	<!-- ===================================================================== -->
 	<!-- Steps to do before fetching the build elements -->
 	<!-- ===================================================================== -->
-	<target name="preFetch" if="performance.base">
+	<target name="preFetch" if="performance.base" depends="getMapFiles">
 		<replace dir="${buildDirectory}/maps/org.eclipse.releng/maps" value="${localmirror}" token="download.eclipse.org" />
 		<replace dir="${buildDirectory}/maps/org.eclipse.releng/maps" value="${cvsuser}" token=":pserver:anonymous" />
 		<mkdir dir="${buildDirectory}/${buildLabel}" />
