@@ -300,7 +300,7 @@
 			<arg value="org.eclipse.ant.core.antRunner" />
 			<arg value="-buildfile" />
 			<arg value="${equinox.build.configs}/equinox.p2.installer/productBuild.xml" />
-			<arg value="-DmapsRepo=${mapsRepo}" />
+			<arg value="-DmapsGitRepo=${mapsGitRepo}" />
 			<arg value="-DbuildId=${buildId}" />
 			<arg value="-DbuildLabel=${buildLabel}" />
 			<arg value="-Dbuilder=${equinox.build.configs}/equinox.p2.installer" />
