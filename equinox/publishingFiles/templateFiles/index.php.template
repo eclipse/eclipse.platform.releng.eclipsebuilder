@@ -27,10 +27,10 @@
 	on verifying download integrity.</p>
 
 	<p><a href="apitools/index.html">API Version Verification Report</a> -- Verification of this build's versions
-	against those of Eclipse 3.6.2 See <a href="org.eclipse.releng/apiexclude/exclude_list_external.txt">here</a> for exclusions.</p> 
+	against those of Eclipse 3.7.1 See <a href="org.eclipse.releng/apiexclude/exclude_list_external.txt">here</a> for exclusions.</p> 
 
 	<p><a href="apitools/apitoolsdeprecations/apideprecation.html">API Deprecation Report</a> --
-	Report of API deprecated since 3.6.2</p> 
+	Report of API deprecated since 3.7.1</p> 
  
 	<p><a href="apitools/report.html">API Tools Post-API Freeze Report</a> -- This report describes API changes 
 	since 3.7.  Exclusions are listed in org.eclipse.releng/apiexclude/exclude_list.txt.</p> 
