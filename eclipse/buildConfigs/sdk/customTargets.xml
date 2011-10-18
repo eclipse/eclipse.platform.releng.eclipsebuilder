@@ -106,7 +106,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 
 	<target name="compareMapFiles" if="compareMaps">
 		<property file="${mapTag.properties}" />
-		<propery name="mapsPath" value="eclipse.platform.common/maps/org.eclipse.releng/maps" />
+		<property name="mapsPath" value="eclipse.platform.common/maps/org.eclipse.releng/maps" />
 		<property name="cvsDiffFile" value="${buildDirectory}/cvsDiff.txt" />
 		<exec executable="git" dir="${mapsGitRepo}/${mapsPath}" output="${cvsDiffFile}">
 			<arg line="diff ${lastMapTag} ${mapsGitRepo}/${mapsPath} ." />
