@@ -473,7 +473,7 @@
 				<include name="index.html" />
 			</fileset>
 		</copy>
-		<copy todir="${equinox_api_report}" file="${api_deprecation_html}" />
+		<copy todir="${equinox_api_report}" file="${api_deprecation_html}" failonerror="false" />
 	</target>
 
 	<target name="publishEclipse">
