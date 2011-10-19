@@ -46,7 +46,7 @@
 		<exec executable="git" dir="${buildDirectory}/maps" output="${buildDirectory}/maps/maps.tar">
 			<arg line="archive --format=tar --remote=${mapsGitRepo}/eclipse.platform.releng.maps ${mapVersionTag} org.eclipse.releng/maps" />
 		</exec>
-		<untar src="${buildDirectory}/maps/maps.tar" dest="${buildDirectory}" />
+		<untar src="${buildDirectory}/maps/maps.tar" dest="${buildDirectory}/maps" />
 	</target>
 
 	<target name="checkLocalMaps">
