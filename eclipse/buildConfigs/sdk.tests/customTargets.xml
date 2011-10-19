@@ -39,12 +39,12 @@
 		<exec executable="git" dir="${mapsGitRepo}">
 			<arg line="clone ${commonrepo}" />
 		</exec>
-		<exec executable="git" dir="${mapsGitRepo}/eclipse.platform.common">
+		<exec executable="git" dir="${mapsGitRepo}/eclipse.platform.releng.maps">
 			<arg line="checkout ${mapVersionTag}" />
 		</exec>
 		<mkdir dir="${buildDirectory}/maps" />
 		<exec executable="git" dir="${buildDirectory}/maps" output="${buildDirectory}/maps/maps.tar">
-			<arg line="archive --format=tar --remote=${mapsGitRepo}/eclipse.platform.common ${mapVersionTag} maps/org.eclipse.releng/maps" />
+			<arg line="archive --format=tar --remote=${mapsGitRepo}/eclipse.platform.releng.maps ${mapVersionTag} maps/org.eclipse.releng/maps" />
 		</exec>
 		<untar src="${buildDirectory}/maps/maps.tar" dest="${buildDirectory}" />
 	</target>
@@ -54,17 +54,17 @@
 	</target>
 
 	<target name="tagMapFiles" if="tagMaps">
-		<exec executable="git" dir="${mapsGitRepo}/eclipse.platform.common">
+		<exec executable="git" dir="${mapsGitRepo}/eclipse.platform.releng.maps">
 			<arg line="branch ${buildId}" />
 		</exec>
-		<exec executable="git" dir="${mapsGitRepo}/eclipse.platform.common">
+		<exec executable="git" dir="${mapsGitRepo}/eclipse.platform.releng.maps">
 			<arg line="push origin ${buildId}" />
 		</exec>
 	</target>
 
 	<target name="compareMapFiles" if="compareMaps">
 		<property file="${mapTag.properties}" />
-		<property name="mapsPath" value="eclipse.platform.common/maps/org.eclipse.releng/maps" />
+		<property name="mapsPath" value="eclipse.platform.releng.maps/maps/org.eclipse.releng/maps" />
 		<property name="cvsDiffFile" value="${buildDirectory}/cvsDiff.txt" />
 		<exec executable="git" dir="${mapsGitRepo}/${mapsPath}" output="${cvsDiffFile}">
 			<arg line="diff ${lastMapTag} ${mapsGitRepo}/${mapsPath} ." />
