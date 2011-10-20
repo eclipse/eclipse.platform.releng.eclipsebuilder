@@ -35,8 +35,19 @@
 	<!-- ===================================================================== -->
 
 	<target name="getMapFiles" depends="checkLocalMaps" unless="skipMaps">
-		<property name="mapsCheckoutTag" value="${mapVersionTag}" />
-		<cvs cvsRoot="${mapsRepo}" package="${mapsRoot}" dest="${buildDirectory}/maps" tag="${mapsCheckoutTag}" />
+		<property name="mapsRepo" value="${buildDirectory}/commonrepo" />
+		<mkdir dir="${mapsRepo}" />
+		<exec executable="git" dir="${mapsRepo}">
+			<arg line="clone ${commonrepo}" />
+		</exec>
+		<exec executable="git" dir="${mapsRepo}/eclipse.platform.common">
+			<arg line="checkout ${mapVersionTag}" />
+		</exec>
+		<mkdir dir="${buildDirectory}/maps" />
+		<exec executable="git" dir="${buildDirectory}/maps" output="${buildDirectory}/maps/maps.tar">
+			<arg line="archive --format=tar --remote=${mapsRepo}/eclipse.platform.common ${mapVersionTag} maps/org.eclipse.releng/maps" />
+		</exec>
+		<untar src="${buildDirectory}/maps/maps.tar" dest="${buildDirectory}" />
 	</target>
 
 	<target name="checkLocalMaps">
@@ -44,16 +55,23 @@
 	</target>
 
 	<target name="tagMapFiles" if="tagMaps">
-		<cvs dest="${buildDirectory}/maps/${mapsRoot}" command="tag ${mapsTagTag}" />
+		<exec executable="git" dir="${mapsRepo}/eclipse.platform.common">
+			<arg line="branch ${buildId}" />
+		</exec>
+		<exec executable="git" dir="${mapsRepo}/eclipse.platform.common">
+			<arg line="push origin ${buildId}" />
+		</exec>
 	</target>
 
 	<target name="compareMapFiles" if="compareMaps">
 		<property file="${mapTag.properties}" />
+		<property name="mapsPath" value="eclipse.platform.common/maps/org.eclipse.releng/maps"/>
 		<property name="cvsDiffFile" value="${buildDirectory}/cvsDiff.txt" />
-		<cvs cvsRoot="${mapCvsRoot}" dest="${buildDirectory}/maps" command="diff -w -r ${lastMapTag}" output="${cvsDiffFile}" />
+		<exec executable="git" dir="${mapsRepo}/${mapsPath}" output="${cvsDiffFile}">
+			<arg line="diff ${lastMapTag} ${mapsRepo}/${mapsPath} ." />
+		</exec>
 		<modifiedMaps mapDiffFile="${cvsDiffFile}" />
 	</target>
-
 
 	<!-- ===================================================================== -->
 

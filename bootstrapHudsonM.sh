@@ -147,7 +147,7 @@ fi
 #Set the tag to HEAD for Nightly builds
 if [ "$buildType" = "N" ]
 then
-        tag="-DfetchTag=HEAD"
+        tag="-DfetchTag=CVS=HEAD,GIT=master"
         versionQualifier="-DforceContextQualifier=$buildId"
 fi
 

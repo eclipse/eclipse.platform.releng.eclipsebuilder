@@ -140,6 +140,10 @@
 		<property name="org.eclipse.equinox.p2.tests.last.release.build.repo" value="${p2repopreviousR}" />
 		<property name="previousPlatformZips" value="${buildDirectory}/previousPlatformZips" />
 		<mkdir dir="${previousPlatformZips}" />
+		<condition property="commonrepo" value="git://git.eclipse.org/gitroot/platform/eclipse.platform.releng.maps">
+			<equals arg1="${hudson}" arg2="true" />
+		</condition>
+		<property name="commonrepo" value="ssh://git.eclipse.org/gitroot/platform/eclipse.platform.releng.maps"/>
 	</target>
 
 	<target name="buildECFMasterFeature">

@@ -118,13 +118,19 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	</target>
 
 	<target name="getMapFiles" depends="checkLocal" unless="mapsLocal">
-
-		<!-- ***  change the repo info -->
-		<property name="mapCvsRoot" value="${mapsRepo}" />
-		<property name="mapVersionTag" value="HEAD" />
-		<cvs cvsRoot="${mapCvsRoot}" package="org.eclipse.releng" dest="${buildDirectory}/maps" tag="${mapVersionTag}" />
-		<!--compare the map files project-->
-		<antcall target="compareMapFiles" />
+		<property name="mapsRepo" value="${buildDirectory}/commonrepo" />
+		<mkdir dir="${mapsRepo}" />
+		<exec executable="git" dir="${mapsRepo}">
+			<arg line="clone ${commonrepo}" />
+		</exec>
+		<exec executable="git" dir="${mapsRepo}/eclipse.platform.common">
+			<arg line="checkout ${mapVersionTag}" />
+		</exec>
+		<mkdir dir="${buildDirectory}/maps" />
+		<exec executable="git" dir="${buildDirectory}/maps" output="${buildDirectory}/maps/maps.tar">
+			<arg line="archive --format=tar --remote=${mapsRepo}/eclipse.platform.common ${mapVersionTag} maps/org.eclipse.releng/maps" />
+		</exec>
+		<untar src="${buildDirectory}/maps/maps.tar" dest="${buildDirectory}" />
 		<!--tag the map files project-->
 		<antcall target="tagMapFiles" />
 		<antcall target="getPrebuiltElements" />
@@ -132,8 +138,11 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 
 	<target name="compareMapFiles" if="compareMaps">
 		<property file="${mapTag.properties}" />
+		<property name="mapsPath" value="eclipse.platform.common/maps/org.eclipse.releng/maps" />
 		<property name="cvsDiffFile" value="${buildDirectory}/cvsDiff.txt" />
-		<cvs cvsRoot="${mapCvsRoot}" dest="${buildDirectory}/maps" command="diff -w -r ${lastMapTag}" output="${cvsDiffFile}" />
+		<exec executable="git" dir="${mapsRepo}/${mapsPath}" output="${cvsDiffFile}">
+			<arg line="diff ${lastMapTag} ${mapsRepo}/${mapsPath} ." />
+		</exec>
 		<modifiedMaps mapDiffFile="${cvsDiffFile}" />
 	</target>
 
@@ -142,7 +151,12 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<echo file="${mapTag.properties}">
 		lastMapTag=${buildId}
 	</echo>
-		<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag ${buildId}" />
+		<exec executable="git" dir="${mapsRepo}/eclipse.platform.common">
+			<arg line="branch ${buildId}" />
+		</exec>
+		<exec executable="git" dir="${mapsRepo}/eclipse.platform.common">
+			<arg line="push origin ${buildId}" />
+		</exec>
 	</target>
 
 	<target name="getPrebuiltElements">
@@ -198,7 +212,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Steps to do after the fetch -->
 	<!-- ===================================================================== -->
 	<target name="postFetch" unless="skipFetch">
-		<replace file="${buildDirectory}/sourceReferences.properties" token=":extssh" value=":pserver"  />
+		<replace file="${buildDirectory}/sourceReferences.properties" token=":extssh" value=":pserver" />
 		<antcall target="updateproperties" />
 		<ant antfile="${genericTargets}" target="fetchElement">
 			<property name="type" value="feature" />
