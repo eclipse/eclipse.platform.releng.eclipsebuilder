@@ -50,18 +50,18 @@
 	<target name="checkLocal">
 		<available property="mapsLocal" file="${buildDirectory}/maps/org.eclipse.releng" />
 	</target>
+	
 	<target name="getMapFiles" depends="checkLocal" unless="mapsLocal">
-		<property name="mapsRepo" value="${buildDirectory}/commonrepo" />
-		<mkdir dir="${mapsRepo}" />
-		<exec executable="git" dir="${mapsRepo}">
+		<property name="mapsGitRepo" value="${buildDirectory}/commonrepo" />
+		<mkdir dir="${mapsGitRepo}" />
+		<exec executable="git" dir="${mapsGitRepo}">
 			<arg line="clone ${commonrepo}" />
-		</exec>
-		<exec executable="git" dir="${mapsRepo}/eclipse.platform.releng.maps">
+		</exec>		<exec executable="git" dir="${mapsGitRepo}/eclipse.platform.releng.maps">
 			<arg line="checkout ${mapVersionTag}" />
 		</exec>
 		<mkdir dir="${buildDirectory}/maps" />
 		<exec executable="git" dir="${buildDirectory}/maps" output="${buildDirectory}/maps/maps.tar">
-			<arg line="archive --format=tar --remote=${mapsRepo}/eclipse.platform.releng.maps ${mapVersionTag} maps/org.eclipse.releng/maps" />
+			<arg line="archive --format=tar --remote=${mapsGitRepo}/eclipse.platform.releng.maps ${mapVersionTag} org.eclipse.releng/maps" />
 		</exec>
 		<untar src="${buildDirectory}/maps/maps.tar" dest="${buildDirectory}/maps" />
 		<!--compare the map files project-->
@@ -75,8 +75,8 @@
 		<property file="${mapTag.properties}" />
 		<property name="mapsPath" value="eclipse.platform.releng.maps/org.eclipse.releng/maps" />
 		<property name="cvsDiffFile" value="${buildDirectory}/cvsDiff.txt" />
-		<exec executable="git" dir="${mapsRepo}/${mapsPath}" output="${cvsDiffFile}">
-			<arg line="diff ${lastMapTag} ${mapsRepo}/${mapsPath} ." />
+		<exec executable="git" dir="${mapsGitRepo}/${mapsPath}" output="${cvsDiffFile}">
+			<arg line="diff ${lastMapTag} ${mapsGitRepo}/${mapsPath} ." />
 		</exec>
 		<modifiedMaps mapDiffFile="${cvsDiffFile}" />
 	</target>
@@ -86,10 +86,10 @@
 		<echo file="${mapTag.properties}">
 	lastMapTag=${buildId}
 </echo>
-		<exec executable="git" dir="${mapsRepo}/eclipse.platform.releng.maps">
+		<exec executable="git" dir="${mapsGitRepo}/eclipse.platform.releng.maps">
 			<arg line="branch ${buildId}" />
 		</exec>
-		<exec executable="git" dir="${mapsRepo}/eclipse.platform.releng.maps">
+		<exec executable="git" dir="${mapsGitRepo}/eclipse.platform.releng.maps">
 			<arg line="push origin ${buildId}" />
 		</exec>
 	</target>
@@ -113,7 +113,7 @@
 	<!-- ===================================================================== -->
 	<!-- Steps to do before fetching the build elements -->
 	<!-- ===================================================================== -->
-	<target name="preFetch">
+	<target name="preFetch" depends="getMapFiles">
 		<replace dir="${buildDirectory}/maps/org.eclipse.releng/maps" value="${localmirror}" token="download.eclipse.org" />
 		<replace dir="${buildDirectory}/maps/org.eclipse.releng/maps" value="${cvsuser}" token=":pserver:anonymous" />
 	</target>
