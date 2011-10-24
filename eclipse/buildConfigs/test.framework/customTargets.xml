@@ -67,7 +67,7 @@
 	lastMapTag=${buildId}
 </echo>
 		<exec executable="git" dir="${mapsGitRepo}/eclipse.platform.releng.maps">
-			<arg line="branch ${buildId}" />
+			<arg line="tag ${buildId}" />
 		</exec>
 		<exec executable="git" dir="${mapsGitRepo}/eclipse.platform.releng.maps">
 			<arg line="push origin ${buildId}" />
