@@ -934,8 +934,7 @@
 		<jacocoreport pluginName="org.eclipse.update.ui" reportTitle="org.eclipse.update.ui Code Coverage" />
 	</target>
 
-	<target name="all">
-		<!-- <antcall target="equinoxp2discovery" /> -->
+	<target name="all">	
 		<antcall target="equinoxp2" />
 		<antcall target="equinoxp2ui" />
 		<antcall target="pdeui" />
@@ -987,6 +986,7 @@
 		<antcall target="swt" />
 		<antcall target="teamcvs" />
 		<antcall target="equinoxds" />
+		<antcall target="equinoxp2discovery" />
 
 		<antcall target="generateJacocoReport" />
 
