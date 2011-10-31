@@ -935,7 +935,7 @@
 	</target>
 
 	<target name="all">
-		<antcall target="equinoxp2discovery" />
+		<!-- <antcall target="equinoxp2discovery" /> -->
 		<antcall target="equinoxp2" />
 		<antcall target="equinoxp2ui" />
 		<antcall target="pdeui" />
