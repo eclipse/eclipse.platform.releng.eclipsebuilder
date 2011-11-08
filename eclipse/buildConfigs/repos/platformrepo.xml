@@ -16,6 +16,7 @@
 			<iu id="org.eclipse.equinox.p2.user.ui.feature.group" version="" />
 			<iu id="org.eclipse.rcp.configuration.feature.group" version="" />
 			<iu id="org.eclipse.equinox.executable.feature.group" version="" />
+			<iu id="org.eclipse.platform.ide" version="" />
 			<slicingOptions includeOptional="false" includeNonGreedy="false" />
 		</p2.mirror>
 		<antcall target="assembler">
@@ -35,7 +36,8 @@
 			<iu id="org.eclipse.equinox.p2.user.ui.feature.group" version="" />
 			<iu id="org.eclipse.equinox.p2.user.ui.source.feature.group" version="" />
 			<iu id="org.eclipse.rcp.configuration.feature.group" version="" />		
-			<iu id="org.eclipse.equinox.executable.feature.group" version="" />			
+			<iu id="org.eclipse.equinox.executable.feature.group" version="" />	
+			<iu id="org.eclipse.platform.sdk" version="" />
 			<slicingOptions includeOptional="false" includeNonGreedy="false" />
 		</p2.mirror>
 		<antcall target="assembler">
