@@ -56,12 +56,8 @@
 			<platform format="equinox" id="mortbayjetty" name="All" fileName="@org.mortbay.jetty@.jar" />
 			<platform format="equinox" id="mortbayjettyutil" name="All" fileName="@org.mortbay.jetty.util@.jar" />
 			<platform format="equinox" id="mortbayjettyserver" name="All" fileName="@org.mortbay.jetty.server@.jar" />
-		 </zipType>	
-					
-		<zipType name="Incubator"> 	    								
-			<platform format="equinox" id="equinoxincubator" images="egg.gif,repo.gif" name="All" fileName="equinox-incubator-feature-@buildid@.zip" />
-			</zipType> 	
-    	   	    	    	
+		 </zipType>				
+		   	   	    	    	
     		<zipType name="Provisioning">
 			<platform format="equinox" id="provagentrcpwin32" images="egg.gif" name="Windows **early access**" fileName="equinox-p2-adminui-@buildid@-win32.zip" />			
 			<platform format="equinox" id="provagentrcplinux" images="egg.gif" name="Linux **early access**" fileName="equinox-p2-adminui-@buildid@-linux-gtk-x86.tar.gz" />			

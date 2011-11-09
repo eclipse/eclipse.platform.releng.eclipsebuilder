@@ -778,8 +778,7 @@
 		<ant antfile="${eclipse.build.configs}/rcp.deltapack/build.xml" />
 	</target>
 
-	<target name="packageEquinoxDistributables">
-		<ant antfile="${equinox.build.configs}/repos/build.xml" />
+	<target name="packageEquinoxDistributables">	
 		<!-- equinox slicer build now includes master equinox-->
 		<ant antfile="${equinox.build.configs}/equinox/build.xml" />
 		<ant antfile="${equinox.build.configs}/equinox-launchers/build.xml" />

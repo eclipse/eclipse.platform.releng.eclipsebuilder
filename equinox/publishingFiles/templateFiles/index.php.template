@@ -78,17 +78,6 @@
 	</div>
 
 	<div class="homeitem3col">
-		<h3><a onclick="expandCollapse('incubator.bundles');"><img id="incubator.bundles.button" src="http://eclipse.org/equinox/images/arrow.png"/></a>&nbsp;Incubator</h3>
-		<p>Equinox Incubator downloads supplied as a convenience. While some are quite complete, all should be considered experimental.</p>
-		<div id="incubator.bundles" class="collapsable"> 
-			<table border="0" cellspacing="0" cellpadding="0" width="100%">
-				<tr><td width="5%"/><td width="78%"/><td width="9%"/><td width="8%"/></tr>
-					%incubator%
-			</table>
-		</div>
-	</div>
-
-	<div class="homeitem3col">
 		<h3><a onclick="expandCollapse('provisioning.bundles');"><img  id="provisioning.bundles.button" src="http://eclipse.org/equinox/images/arrow.png"/></a>&nbsp;p2 Provisioning Tools</h3>
 		<p>The following downloads are produced by the Provisioning team. For more about provisoning, see 
 		the <a href="http://wiki.eclipse.org/Category:Provisioning">provisioning articles</a> on the eclipse.org wiki.</p>
@@ -150,11 +139,7 @@
 			<tr> 
 				<td align="center"><img src="/equinox/images/sha1.png"/></td> 
 				<td>Click to get the SHA1 hash for the corresponding build artifact</td> 
-			</tr> 
-			<tr> 
-				<td align="center"><img src="/equinox/images/egg.gif"/></td> 
-				<td>Build artifact is from the Equinox incubator and may not be fully complete or tested.</td> 
-			</tr> 
+			</tr>			
 			<tr> 
 				<td align="center"><img src="http://eclipse.org/equinox/images/arrow.png"/></td> 
 				<td>Click to expand section.</td> 
