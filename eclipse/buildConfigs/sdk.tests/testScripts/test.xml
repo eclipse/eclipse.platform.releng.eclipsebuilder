@@ -740,7 +740,7 @@
 			</not>
 		</condition>
 		<runTests testPlugin="org.eclipse.equinox.p2.tests.discovery" />
-	</target>
+	</target>	
 
 	<target name="search">
 		<runTests testPlugin="org.eclipse.search.tests" />
@@ -749,6 +749,10 @@
 	<target name="pdeds">
 		<runTests testPlugin="org.eclipse.pde.ds.tests" />
 	</target>
+	
+	<target name="bidi">
+			<runTests testPlugin="org.eclipse.equinox.bidi.tests" />
+		</target>
 
 	<macrodef name="jacocoreport">
 		<attribute name="pluginName" />
@@ -819,6 +823,7 @@
 		<jacocoreport pluginName="org.eclipse.debug.core" reportTitle="org.eclipse.debug.core Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.debug.ui" reportTitle="org.eclipse.debug.ui Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.equinox.app" reportTitle="org.eclipse.equinox.app Code Coverage" />
+		<jacocoreport pluginName="org.eclipse.equinox.bidi" reportTitle="org.eclipse.equinox.bidi Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.equinox.common" reportTitle="org.eclipse.equinox.common Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.equinox.event" reportTitle="org.eclipse.equinox.event Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.equinox.ds" reportTitle="org.eclipse.equinox.ds Code Coverage" />
@@ -987,7 +992,8 @@
 		<antcall target="teamcvs" />
 		<antcall target="equinoxds" />
 		<antcall target="equinoxp2discovery" />
-
+		<antcall target="bidi" />
+		
 		<antcall target="generateJacocoReport" />
 
 
