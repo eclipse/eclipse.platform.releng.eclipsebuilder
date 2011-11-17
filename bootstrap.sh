@@ -47,16 +47,8 @@ deleteArtifacts=""
 #sets fetchTag="HEAD" for nightly builds if required
 tag=""
 
-#buildProjectTags=v20110728a
-#buildProjectTags=v20110729
-#buildProjectTags=v20110803
-#buildProjectTags=v20110809
-#buildProjectTags=v20110816
-#buildProjectTags=v20110906
-#buildProjectTags=v20110907
-#buildProjectTags=v20110920
-#buildProjectTags=v20110927
-buildProjectTags=v20110929a
+#buildProjectTags=v20111111
+buildProjectTags=v20111117
 
 #updateSite property setting
 updateSite=""
@@ -242,14 +234,13 @@ then
     cd jdk/linuxppc; cvs -d kmoir@ottcvs1:/home/cvs/releng co $linuxppcJdkArchive15; tar -xzf $linuxppcJdkArchive15; rm -rf $linuxppcJdkArchive15; cd ../..
     javadoc="-Djavadoc15=$builderDir/jdk/linuxppc/ibm-java2-ppc-50/bin/javadoc"
 else
-   javadoc="-Djavadoc15=$builderDir/jdk/linux/jdk1.5.0_22/bin/javadoc"
+   javadoc="-Djavadoc16=$builderDir/jdk/linux16/jdk6_17/bin/javadoc"
 fi
 
 mkdir -p $postingDirectory/$buildLabel
 chmod -R 755 $builderDir
 
 #default value of the bootclasspath attribute used in ant javac calls.  
-#default value of the bootclasspath attribute used in ant javac calls.
 bootclasspath="$builderDir/jdk/win32/jdk1.4.2_16/jre/lib/rt.jar:$builderDir/jdk/win32/jdk1.4.2_16/jre/lib/jsse.jar:$builderDir/jdk/win32/jdk1.4.2_16/jre/lib/jce.jar"
 bootclasspath_15="$builderDir/jdk/win32_15/jdk1.5.0_22/jre/lib/rt.jar;$builderDir/jdk/win32_15/jdk1.5.0_22/jre/lib/jsse.jar;$builderDir/jdk/win32_15/jdk1.5.0_22/jre/lib/jce.jar"
 bootclasspath_16="$builderDir/jdk/win32_16/jdk6_17/jre/lib/rt.jar;$builderDir/jdk/win32_16/jdk6_17/jre/lib/jsse.jar;$builderDir/jdk/win32_16/jdk6_17/jre/lib/jce.jar"
