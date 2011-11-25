@@ -47,6 +47,15 @@ deleteArtifacts=""
 #sets fetchTag="HEAD" for nightly builds if required
 tag=""
 
+#commiter id to tag the repos
+user=kmoir
+
+#email address of committer taggin the repo
+email=kmoir@ca.ibm.com
+
+#name of build
+name="SDK Build"
+
 #buildProjectTags=v20110530
 #buildProjectTags=r37x_v20110627
 #buildProjectTags=r37x_v20110711
@@ -102,9 +111,8 @@ builddate=`date +%Y%m%d`
 buildtime=`date +%H%M`
 timestamp=$builddate$buildtime
 
-
 # process command line arguments
-usage="usage: $0 [-notify emailaddresses][-textRecipients textaddesses][-test][-buildDirectory directory][-buildId name][-buildLabel directory name][-tagMapFiles][-mapVersionTag tag][-builderTag tag][-bootclasspath path][-compareMaps][-skipPerf] [-skipCleanSites] [-skipTest] [-skipRSS] [-updateSite site][-skipPack][-sign] M|N|I|S|R"
+usage="usage: $0 [-notify emailaddresses][-textRecipients textaddesses][-test][-buildDirectory directory][-buildId name][-buildLabel directory name][-tagMapFiles][-mapVersionTag tag][-builderTag tag][-bootclasspath path][-compareMaps][-skipPerf] [-skipCleanSites] [-skipTest] [-skipRSS] [-updateSite site][-skipPack][-branch] [-root] [-noTag] [-sign] M|N|I|S|R"
 
 if [ $# -lt 1 ]
 then
@@ -134,7 +142,18 @@ do
 		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -compareMaps) compareMaps="-DcompareMaps=true";;
 		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -updateSite) updateSite="-DupdateSite=$2";shift;;
 		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -sign) sign="-Dsign=true";;
+
+							       -branch)
+						                        relengBranch="$2"; shift;;
+
+               							-root)
+               								writableBuildRoot="$2"; shift;;
+
+						                -noTag)
+               								 noTag=true;;
+
 		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -*)
+
 		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    echo >&2 $usage
 		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    exit 1;;
 		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    *) break;;		 		  		 		   		 		  		 		    # terminate while loop
@@ -143,7 +162,11 @@ do
 done
 
 # After the above the build type is left in $1.
+GIT_CLONES=$supportDir/gitClones
 buildType=$1
+buildId=$buildType$builddate-$buildtime
+supportDir=$writableBuildRoot/build/sdk
+GIT_CLONES=$supportDir/gitClones
 
 # Set default buildId and buildLabel if none explicitly set
 if [ "$buildId" = "" ]
@@ -162,6 +185,80 @@ then
         tag="-DfetchTag=CVS=HEAD,GIT=master"
         versionQualifier="-DforceContextQualifier=$buildId"
 fi
+
+#start git tagging section
+
+#Pull or clone a branch from a repository
+#Usage: pull repositoryURL  branch
+pull() {
+        pushd $GIT_CLONES
+        directory=$(basename $1 .git)
+        echo "$directory directory !!"
+        if [ ! -d $directory ]; then
+                echo git clone $1
+                git clone $1
+                cd $directory
+                git config --add user.email "$email"
+                git config --add user.name "$name"
+        fi
+        popd
+        pushd $GIT_CLONES/$directory
+        echo git checkout $2
+        git checkout $2
+        echo git pull
+        git pull
+        popd
+}
+#Nothing to do for nightly builds, or if $noTag is specified
+if [ "$buildType" == "N" -o "$noTag" ]; then
+        echo Skipping build tagging for nightly build or -noTag build
+        exit
+fi
+
+pushd $writableBuildRoot
+relengRepo=$GIT_CLONES/eclipse.platform.releng.maps/org.eclipse.releng
+#pull the releng project to get the list of repositories to tag
+pull "ssh://$user@git.eclipse.org/gitroot/platform/eclipse.platform.releng.maps.git" $relengBranch
+
+#cp $relengRepo/org.eclipse.e4.builder/scripts/git-map.sh .
+cp ~/scripts/git-map.sh .
+chmod 744 git-map.sh
+#cp $relengRepo/org.eclipse.e4.builder/scripts/git-submission.sh .
+cp ~/scripts/git-submission.sh .
+chmod 744 git-submission.sh
+
+#remove comments
+rm -f repos-clean.txt clones.txt
+cat "$relengRepo/tagging/repositories.txt" | grep -v "^#" > repos-clean.txt
+#clone or pull each repository and checkout the appropriate branch
+while read line; do
+        #each line is of the form <repository> <branch>
+        set -- $line
+        pull $1 $2
+        echo $1 | sed 's/ssh:.*@git.eclipse.org/git:\/\/git.eclipse.org/g' >> clones.txt
+done < repos-clean.txt
+
+cat clones.txt| xargs /bin/bash git-map.sh $GIT_CLONES \
+        $relengRepo > maps.txt
+
+#Trim out lines that don't require execution
+grep -v ^OK maps.txt | grep -v ^Executed >run.txt
+/bin/bash run.txt
+
+mkdir $writableBuildRoot/$buildId
+cp report.txt $writableBuildRoot/$buildId
+
+cd $relengRepo
+git add $( find . -name "*.map" )
+git commit -m "Releng build tagging for $buildId"
+git tag -f $buildId   #tag the map file change
+
+git push
+git push --tags
+
+popd
+
+#end git tagging section
 
 # tag for eclipseInternalBuildTools on ottcvs1
 internalToolsTag=$buildProjectTags
