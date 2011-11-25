@@ -6,7 +6,8 @@ BASE_PATH=.:/bin:/usr/bin:/usr/bin/X11:/usr/local/bin:/usr/bin:/usr/X11R6/bin
 LD_LIBRARY_PATH=.
 BASH_ENV=$HOME/.bashrc
 USERNAME=`whoami`
-xhost +$HOSTNAME
+/usr/X11R6/bin/xhost +$HOSTNAME
+/usr/X11R6/bin/xhost local:kmoir
 DISPLAY=:0.0
 CVS_RSH=ssh
 ulimit -c unlimited
@@ -46,18 +47,19 @@ deleteArtifacts=""
 #sets fetchTag="HEAD" for nightly builds if required
 tag=""
 
-#buildProjectTags=v20091111
-#buildProjectTags=v20091112b
-#buildProjectTags=v20100113
-#buildProjectTags=v20100118a
-#buildProjectTags=v20100126
-#buildProjectTags=v20100204
-#buildProjectTags=v20100208
-#buildProjectTags=v20100210
-#buildProjectTags=v20100219
-#buildProjectTags=v20100222
-#buildProjectTags=v20100315
-buildProjectTags=v20100423
+#buildProjectTags=v20110530
+#buildProjectTags=r37x_v20110627
+#buildProjectTags=r37x_v20110711
+#buildProjectTags=r37x_v20110714
+#buildProjectTags=r37x_v20110727
+#3.7.1rc3 tag
+#buildProjectTags=r37x_v20110729
+#buildProjectTags=r37x_v20111003
+#buildProjectTags=r37x_v20111007
+#buildProjectTags=r37x_v20111017
+#buildProjectTags=r37x_v20111020
+buildProjectTags=r37x_v20111027
+
 
 #updateSite property setting
 updateSite=""
@@ -75,7 +77,7 @@ buildId=""
 buildLabel=""
 
 # tag for build contribution project containing .map files
-mapVersionTag=HEAD
+mapVersionTag=R3_7_maintenance
 
 # directory in which to export builder projects
 builderDir=/builds/eclipsebuilder
@@ -102,41 +104,42 @@ timestamp=$builddate$buildtime
 
 
 # process command line arguments
-usage="usage: $0 [-notify emailaddresses][-textRecipients textaddesses][-test][-buildDirectory directory][-buildId name][-buildLabel directory name][-tagMapFiles][-mapVersionTag tag][-builderTag tag][-bootclasspath path][-compareMaps][-skipPerf] [-skipCleanSites] [-skipTest] [-updateSite site][-skipPack][-sign] M|N|I|S|R"
+usage="usage: $0 [-notify emailaddresses][-textRecipients textaddesses][-test][-buildDirectory directory][-buildId name][-buildLabel directory name][-tagMapFiles][-mapVersionTag tag][-builderTag tag][-bootclasspath path][-compareMaps][-skipPerf] [-skipCleanSites] [-skipTest] [-skipRSS] [-updateSite site][-skipPack][-sign] M|N|I|S|R"
 
 if [ $# -lt 1 ]
 then
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     echo >&2 "$usage"
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     exit 1
+		 		  		 		   		 		  		 		    echo >&2 "$usage"
+		 		  		 		   		 		  		 		    exit 1
 fi
 
 while [ $# -gt 0 ]
 do
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     case "$1" in
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -buildId) buildId="$2"; shift;;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -buildLabel) buildLabel="$2"; shift;;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -mapVersionTag) mapVersionTag="$2"; shift;;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -tagMapFiles) tagMaps="-DtagMaps=true";;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -skipPerf) skipPerf="-Dskip.performance.tests=true";;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -skipCleanSites) skipCleanSites="-Dskip.clean.sites=true";;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -hudson) skipPerf="-Dhudson=true";;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -skipTest) skipTest="-Dskip.tests=true";;		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -deleteArtifacts) deleteArtifacts="-Ddelete.artifacts=true";;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -skipPack) skipPack="-DskipPack=true";;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -buildDirectory) builderDir="$2"; shift;;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -notify) recipients="$2"; shift;;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -textRecipients) textRecipients="$2"; shift;;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -test) postingDirectory="/builds/transfer/files/bogus/downloads/drops";testBuild="-Dtest=true";;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -builderTag) buildProjectTags="$2"; shift;;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -compareMaps) compareMaps="-DcompareMaps=true";;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -updateSite) updateSite="-DupdateSite=$2";shift;;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -sign) sign="-Dsign=true";;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     -*)
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     echo >&2 $usage
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     exit 1;;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     *) break;;		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     # terminate while loop
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     esac
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     shift
+		 		  		 		   		 		  		 		    case "$1" in
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -buildId) buildId="$2"; shift;;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -buildLabel) buildLabel="$2"; shift;;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -mapVersionTag) mapVersionTag="$2"; shift;;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -tagMapFiles) tagMaps="-DtagMaps=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -skipPerf) skipPerf="-Dskip.performance.tests=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -skipCleanSites) skipCleanSites="-Dskip.clean.sites=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -hudson) skipPerf="-Dhudson=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -skipTest) skipTest="-Dskip.tests=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -skipRSS) skipRSS="-Dskip.feed=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -deleteArtifacts) deleteArtifacts="-Ddelete.artifacts=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -skipPack) skipPack="-DskipPack=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -buildDirectory) builderDir="$2"; shift;;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -notify) recipients="$2"; shift;;
+		 		  		 		   		 		  		 		   		 		  		 		   		 		  		 		    -textRecipients) textRecipients="$2"; shift;;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -test) postingDirectory="/builds/transfer/files/bogus/downloads/drops";testBuild="-Dtest=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -builderTag) buildProjectTags="$2"; shift;;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -compareMaps) compareMaps="-DcompareMaps=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -updateSite) updateSite="-DupdateSite=$2";shift;;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -sign) sign="-Dsign=true";;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -*)
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    echo >&2 $usage
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    exit 1;;
+		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    *) break;;		 		  		 		   		 		  		 		    # terminate while loop
+		 		  		 		   		 		  		 		    esac
+		 		  		 		   		 		  		 		    shift
 done
 
 # After the above the build type is left in $1.
@@ -145,12 +148,12 @@ buildType=$1
 # Set default buildId and buildLabel if none explicitly set
 if [ "$buildId" = "" ]
 then
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     buildId=$buildType$builddate-$buildtime
+		 		  		 		   		 		  		 		    buildId=$buildType$builddate-$buildtime
 fi
 
 if [ "$buildLabel" = "" ]
 then
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     buildLabel=$buildId
+		 		  		 		   		 		  		 		    buildLabel=$buildId
 fi
 
 #Set the tag to HEAD for Nightly builds
@@ -169,11 +172,9 @@ baseBuilderTag=$buildProjectTags
 # tag for exporting the custom builder
 customBuilderTag=$buildProjectTags
 
-
-
 if [ -e $builderDir ]
 then
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		     builderDir=$builderDir$timestamp
+		 		  		 		   		 		  		 		    builderDir=$builderDir$timestamp
 fi
 
 # directory where features and plugins will be compiled
@@ -295,9 +296,9 @@ echo buildDirectory=$buildDirectory
 #full command with args
 if [ "$HOSTNAME" == "eclipsebuildserv.ottawa.ibm.com" ]
 then
-buildCommand="$antRunner -q -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:ext:kmoir@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $skipPack $tagMaps -DJ2SE-1.5=$bootclasspath_15 -DJ2SE-1.4=$bootclasspath -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation -DCDC-1.1/Foundation-1.1=$bootclasspath_foundation11 -DOSGi/Minimum-1.2=$bootclasspath_foundation11 -DJavaSE-1.6=$bootclasspath_16 -DlogExtension=.xml $javadoc $updateSite $sign -DgenerateFeatureVersionSuffix=true -Djava15home=$builderDir/jdk/linuxppc/ibm-java2-ppc-50/jre -listener org.eclipse.releng.build.listeners.EclipseBuildListener"
+buildCommand="$antRunner -v -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:ext:kmoir@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $skipPack $tagMaps -DJ2SE-1.5=$bootclasspath_15 -DJ2SE-1.4=$bootclasspath -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation -DCDC-1.1/Foundation-1.1=$bootclasspath_foundation11 -DOSGi/Minimum-1.2=$bootclasspath_foundation11 -DJavaSE-1.6=$bootclasspath_16 -DlogExtension=.xml $javadoc $updateSite $sign -DgenerateFeatureVersionSuffix=true -Djava15home=$builderDir/jdk/linuxppc/ibm-java2-ppc-50/jre -listener org.eclipse.releng.build.listeners.EclipseBuildListener"
 else
-buildCommand="$antRunner -q -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:ext:kmoir@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $skipPack $tagMaps -DJ2SE-1.5=$bootclasspath_15 -DJ2SE-1.4=$bootclasspath -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation -DCDC-1.1/Foundation-1.1=$bootclasspath_foundation11 -DOSGi/Minimum-1.2=$bootclasspath_foundation11  -DJavaSE-1.6=$bootclasspath_16 -DlogExtension=.xml $javadoc $updateSite $sign -DgenerateFeatureVersionSuffix=true -Djava15home=$builderDir/jdk/linux/jdk1.5.0_22/jre -listener org.eclipse.releng.build.listeners.EclipseBuildListener"
+buildCommand="$antRunner -v -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:ext:kmoir@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $skipPack $tagMaps -DJ2SE-1.5=$bootclasspath_15 -DJ2SE-1.4=$bootclasspath -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation -DCDC-1.1/Foundation-1.1=$bootclasspath_foundation11 -DOSGi/Minimum-1.2=$bootclasspath_foundation11  -DJavaSE-1.6=$bootclasspath_16 -DlogExtension=.xml $javadoc $updateSite $sign -DgenerateFeatureVersionSuffix=true -Djava15home=$builderDir/jdk/linux/jdk1.5.0_22/jre -listener org.eclipse.releng.build.listeners.EclipseBuildListener"
 fi
 
 #capture command used to run the build
@@ -310,7 +311,7 @@ retCode=$?
 if [ $retCode != 0 ]
 then
         echo "Build failed (error code $retCode)."
-		 		  		 		   		 		  		 		    exit $retCode
+		 		  		 		   exit $retCode
 fi
 
 if [ "$skip.feed" != "true" ]
@@ -324,5 +325,10 @@ fi
 #clean up
 if [ "$delete.artifacts" == "-Ddelete.artifacts=true"  ]
 then
-		 		  		 		   		 		  		 		    rm -rf $builderDir
+		 		  		 		   rm -rf $builderDir
 fi
+
+
+
+
+
