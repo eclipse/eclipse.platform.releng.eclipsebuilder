@@ -85,7 +85,7 @@
 	<target name="init">
 		<ant antfile="build.xml" target="init" />
 		<property file="${buildDirectory}/label.properties" />
-		<condition property="fetchTag" value="HEAD">
+		<condition property="fetchTag" value="CVS=HEAD,GIT=master">
 			<equals arg1="${buildType}" arg2="N" />
 		</condition>
 		<condition property="forceContextQualifier" value="${buildId}">
@@ -150,6 +150,10 @@
 		<property name="org.eclipse.equinox.p2.tests.last.release.build.repo" value="${p2repopreviousR}" />
 		<property name="previousPlatformZips" value="${buildDirectory}/previousPlatformZips" />
 		<mkdir dir="${previousPlatformZips}" />
+		<condition property="commonrepo" value="git://git.eclipse.org/gitroot/platform/eclipse.platform.releng.maps">
+			<equals arg1="${hudson}" arg2="true" />
+		</condition>
+		<property name="commonrepo" value="ssh://git.eclipse.org/gitroot/platform/eclipse.platform.releng.maps"/>
 	</target>
 
 	<target name="buildECFMasterFeature">
