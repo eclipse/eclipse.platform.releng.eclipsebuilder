@@ -74,7 +74,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<antcall target="assemble" />
 	</target>
 
-	<target name="assemble.org.eclipse.sdk.gtk.solaris.x86" />	
+	<target name="assemble.org.eclipse.sdk.gtk.solaris.x86" />
 
 	<target name="assemble">
 		<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
@@ -91,13 +91,19 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	</target>
 
 	<target name="getMapFiles" depends="checkLocal" unless="mapsLocal">
-
-		<!-- ***  change the repo info -->
-		<property name="mapCvsRoot" value="${mapsRepo}" />
-		<property name="mapVersionTag" value="HEAD" />
-		<cvs cvsRoot="${mapCvsRoot}" package="org.eclipse.releng" dest="${buildDirectory}/maps" tag="${mapVersionTag}" />
-		<!--compare the map files project-->
-		<antcall target="compareMapFiles" />
+		<property name="mapsGitRepo" value="${buildDirectory}/commonrepo" />
+		<mkdir dir="${mapsGitRepo}" />
+		<exec executable="git" dir="${mapsGitRepo}">
+			<arg line="clone ${commonrepo}" />
+		</exec>
+		<exec executable="git" dir="${mapsGitRepo}/eclipse.platform.releng.maps">
+			<arg line="checkout ${mapVersionTag}" />
+		</exec>
+		<mkdir dir="${buildDirectory}/maps" />
+		<exec executable="git" dir="${buildDirectory}/maps" output="${buildDirectory}/maps/maps.tar">
+			<arg line="archive --format=tar --remote=${mapsGitRepo}/eclipse.platform.releng.maps ${mapVersionTag} org.eclipse.releng/maps" />
+		</exec>
+		<untar src="${buildDirectory}/maps/maps.tar" dest="${buildDirectory}/maps" />
 		<!--tag the map files project-->
 		<antcall target="tagMapFiles" />
 		<antcall target="getPrebuiltElements" />
@@ -105,8 +111,11 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 
 	<target name="compareMapFiles" if="compareMaps">
 		<property file="${mapTag.properties}" />
+		<property name="mapsPath" value="eclipse.platform.releng.maps/org.eclipse.releng/maps" />
 		<property name="cvsDiffFile" value="${buildDirectory}/cvsDiff.txt" />
-		<cvs cvsRoot="${mapCvsRoot}" dest="${buildDirectory}/maps" command="diff -w -r ${lastMapTag}" output="${cvsDiffFile}" />
+		<exec executable="git" dir="${mapsGitRepo}/${mapsPath}" output="${cvsDiffFile}">
+			<arg line="diff ${lastMapTag} ${mapsGitRepo}/${mapsPath} ." />
+		</exec>
 		<modifiedMaps mapDiffFile="${cvsDiffFile}" />
 	</target>
 
@@ -115,7 +124,12 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<echo file="${mapTag.properties}">
 		lastMapTag=${buildId}
 	</echo>
-		<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag ${buildId}" />
+		<exec executable="git" dir="${mapsGitRepo}/eclipse.platform.releng.maps">
+			<arg line="tag ${buildId}" />
+		</exec>
+		<exec executable="git" dir="${mapsGitRepo}/eclipse.platform.releng.maps">
+			<arg line="push origin ${buildId}" />
+		</exec>
 	</target>
 
 	<target name="getPrebuiltElements">
@@ -171,7 +185,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 	<!-- Steps to do after the fetch -->
 	<!-- ===================================================================== -->
 	<target name="postFetch" unless="skipFetch">
-		<replace file="${buildDirectory}/sourceReferences.properties" token=":extssh" value=":pserver"  />
+		<replace file="${buildDirectory}/sourceReferences.properties" token=":extssh" value=":pserver" />
 		<antcall target="updateproperties" />
 		<ant antfile="${genericTargets}" target="fetchElement">
 			<property name="type" value="feature" />
@@ -233,13 +247,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 
 	<target name="prePackage" />
 	<target name="postPackage">
-		<mkdir dir="${buildDirectory}/${buildLabel}/checksum" />
-		<exec executable="sh" dir="${buildDirectory}/${buildLabel}">
-			<arg line="${eclipse.build.configs}/../../extras/produceChecksum" />
-		</exec>
-		<move todir="${postingDirectory}/${buildLabel}">
-			<fileset dir="${buildDirectory}/${buildLabel}" />
-		</move>
 	</target>
 
 	<!-- ===================================================================== -->
@@ -334,12 +341,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-sourceBuild-srcFetch-${buildId}.zip -r ." />
 		</exec>
 
-		<!--generate md5 & sha1-->
-		<checksum file="${postingDirectory}/${buildLabel}/eclipse-sourceBuild-srcFetch-${buildId}.zip" property="md5" />
-		<checksum file="${postingDirectory}/${buildLabel}/eclipse-sourceBuild-srcFetch-${buildId}.zip" algorithm="SHA" property="sha" />
-		<echo message="${md5} *eclipse-sourceBuild-srcFetch-${buildId}.zip" file="${postingDirectory}/${buildLabel}/checksum/eclipse-sourceBuild-srcFetch-${buildId}.zip.md5" />
-		<echo message="${sha} *$eclipse-sourceBuild-srcFetch-${buildId}.zip" file="${postingDirectory}/${buildLabel}/checksum/eclipse-sourceBuild-srcFetch-${buildId}.zip.sha1" />
-
 		<!--  create zip with all source for an Eclipse SDK + maps  -->
 		<copy todir="${tempDir}/buildScripts/src">
 			<fileset dir="${buildDirectory}" includes="features/,plugins/,maps/**" />
@@ -370,11 +371,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<exec dir="${tempDir}/buildScripts" executable="zip">
 			<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-sourceBuild-srcIncluded-${buildId}.zip -r ." />
 		</exec>
-		<checksum file="${postingDirectory}/${buildLabel}/eclipse-sourceBuild-srcIncluded-${buildId}.zip" property="md5.2" />
-		<checksum file="${postingDirectory}/${buildLabel}/eclipse-sourceBuild-srcIncluded-${buildId}.zip" algorithm="SHA" property="sha.2" />
-		<echo message="${md5.2} *eclipse-sourceBuild-srcIncluded-${buildId}.zip" file="${postingDirectory}/${buildLabel}/checksum/eclipse-sourceBuild-srcIncluded-${buildId}.zip.md5" />
-		<echo message="${sha.2} *eclipse-sourceBuild-srcIncluded-${buildId}.zip" file="${postingDirectory}/${buildLabel}/checksum/eclipse-sourceBuild-srcIncluded-${buildId}.zip.sha1" />
-
 		<copy file="${eclipse.build.configs}/sdk/srcBuild/incl/instructions.html" tofile="${postingDirectory}/${buildLabel}/srcIncludedBuildInstructions.html" />
 		<copy file="${eclipse.build.configs}/sdk/srcBuild/fetch/instructions.html" tofile="${postingDirectory}/${buildLabel}/srcFetchBuildInstructions.html" />
 

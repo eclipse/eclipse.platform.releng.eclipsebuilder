@@ -51,12 +51,19 @@
 		<available property="mapsLocal" file="${buildDirectory}/maps/org.eclipse.releng" />
 	</target>
 	<target name="getMapFiles" depends="checkLocal" unless="mapsLocal">
-
-		<!-- ***  change the repo info -->
-		<property name="mapCvsRoot" value="${mapsRepo}" />
-		<property name="mapVersionTag" value="HEAD" />
-		<cvs cvsRoot="${mapCvsRoot}" package="org.eclipse.releng" dest="${buildDirectory}/maps" tag="${mapVersionTag}" />
-
+		<property name="mapsGitRepo" value="${buildDirectory}/commonrepo" />
+		<mkdir dir="${mapsGitRepo}" />
+		<exec executable="git" dir="${mapsGitRepo}">
+			<arg line="clone ${commonrepo}" />
+		</exec>
+		<exec executable="git" dir="${mapsGitRepo}/eclipse.platform.releng.maps">
+			<arg line="checkout ${mapVersionTag}" />
+		</exec>
+		<mkdir dir="${buildDirectory}/maps" />
+		<exec executable="git" dir="${buildDirectory}/maps" output="${buildDirectory}/maps/maps.tar">
+			<arg line="archive --format=tar --remote=${mapsGitRepo}/eclipse.platform.releng.maps ${mapVersionTag} org.eclipse.releng/maps" />
+		</exec>
+		<untar src="${buildDirectory}/maps/maps.tar" dest="${buildDirectory}/maps" />
 		<!--compare the map files project-->
 		<antcall target="compareMapFiles" />
 		<!--tag the map files project-->
@@ -66,8 +73,11 @@
 
 	<target name="compareMapFiles" if="compareMaps">
 		<property file="${mapTag.properties}" />
+		<property name="mapsPath" value="eclipse.platform.releng.maps/org.eclipse.releng/maps" />
 		<property name="cvsDiffFile" value="${buildDirectory}/cvsDiff.txt" />
-		<cvs cvsRoot="${mapCvsRoot}" dest="${buildDirectory}/maps" command="diff -w -r ${lastMapTag}" output="${cvsDiffFile}" />
+		<exec executable="git" dir="${mapsGitRepo}/${mapsPath}" output="${cvsDiffFile}">
+			<arg line="diff ${lastMapTag} ${mapsGitRepo}/${mapsPath} ." />
+		</exec>
 		<modifiedMaps mapDiffFile="${cvsDiffFile}" />
 	</target>
 
@@ -76,7 +86,12 @@
 		<echo file="${mapTag.properties}">
 	lastMapTag=${buildId}
 </echo>
-		<cvs dest="${buildDirectory}/maps/org.eclipse.releng" command="tag ${buildId}" />
+		<exec executable="git" dir="${mapsGitRepo}/eclipse.platform.releng.maps">
+			<arg line="tag ${buildId}" />
+		</exec>
+		<exec executable="git" dir="${mapsGitRepo}/eclipse.platform.releng.maps">
+			<arg line="push origin ${buildId}" />
+		</exec>
 	</target>
 
 	<target name="getPrebuiltElements">
