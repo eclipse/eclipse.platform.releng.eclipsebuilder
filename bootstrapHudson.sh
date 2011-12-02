@@ -55,7 +55,8 @@ tag=""
 #buildProjectTags=v20110816
 #buildProjectTags=v20110923
 #buildProjectTags=v20110929a
-buildProjectTags=v20111007atest
+#buildProjectTags=v20111007atest
+buildProjectTags=v20111201a
 
 #updateSite property setting
 updateSite=""
@@ -194,7 +195,7 @@ chmod -R 755 $builderDir
 #default value of the bootclasspath attribute used in ant javac calls.  
 bootclasspath="/shared/common/j2sdk1.4.2_19/jre/lib/rt.jar:/shared/common/j2sdk1.4.2_19/jre/lib/jsse.jar:/shared/common/j2sdk1.4.2_19/jre/lib/jce.jar"
 bootclasspath_15="/shared/common/jdk-1.5.0_16/jre/lib/rt.jar"
-bootclasspath_16="/shared/common/jdk-1.6.0_10/jre/lib/rt.jar"
+bootclasspath_16="/shared/common/jdk1.6.0_27.x86_64/jre/lib/rt.jar:/shared/common/jdk1.6.0_27.x86_64/jre/lib/jsse.jar:/shared/common/jdk1.6.0_27.x86_64/jre/lib/jce.jar"
 bootclasspath_foundation="/shared/common/org.eclipse.sdk-feature/libs/ee.foundation-1.0.jar"
 bootclasspath_foundation11="/shared/common/org.eclipse.sdk-feature/libs/ee.foundation.jar"
 
@@ -233,17 +234,17 @@ else
 fi
 if [ $buildMachineArch == "ppc64" ]
 then
-        buildLaunching15VM="/shared/common/ibm-java2-ppc64-50/jre/bin"
+        buildLaunching16VM="/shared/common/ibm-java2-ppc64-50/jre/bin"
         java15home="/shared/common/ibm-java2-ppc64-50/jre"
-        javadoc="-Djavadoc15=/shared/common/ibm-java2-ppc64-50/bin/javadoc"
+        javadoc="-Djavadoc16=/shared/common/ibm-java2-ppc64-50/bin/javadoc"
 else
-        buildLaunching15VM="/shared/common/jdk-1.5.0-22.x86_64/jre/bin"
+        buildLaunching16VM="/shared/common/jdk1.6.0_27.x86_64/jre/bin"
         java15home="/shared/common/jdk-1.5.0-22.x86_64/jre"
-        javadoc="-Djavadoc15=/shared/common/jdk-1.5.0-22.x86_64/bin/javadoc"
+        javadoc="-Djavadoc16=/shared/common/jdk1.6.0_27.x86_64/bin/javadoc"
 fi
 
-antRunner="$buildLaunchingVM/java -Xmx500m -Declipse.p2.MD5Check=false -Dorg.eclipse.update.jarprocessor.pack200=$buildLaunching15VM -jar ../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=ppc -application org.eclipse.ant.core.antRunner -Declipse.p2.MD5Check=false"
-antRunnerJDK15="$buildLaunching15VM/java -Xmx500m -Dorg.eclipse.update.jarprocessor.pack200=$buildLaunching15VM -jar ../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=ppc -application org.eclipse.ant.core.antRunner  -Declipse.p2.MD5Check=false"
+antRunner="$buildLaunchingVM/java -Xmx500m -Declipse.p2.MD5Check=false -Dorg.eclipse.update.jarprocessor.pack200=$buildLaunching16VM -jar ../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=ppc -application org.eclipse.ant.core.antRunner -Declipse.p2.MD5Check=false"
+antRunnerJDK16="$buildLaunching16VM/java -Xmx500m -Dorg.eclipse.update.jarprocessor.pack200=$buildLaunching16VM -jar ../org.eclipse.releng.basebuilder/plugins/org.eclipse.equinox.launcher.jar -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=ppc -application org.eclipse.ant.core.antRunner  -Declipse.p2.MD5Check=false"
 
 
 #clean drop directories
@@ -255,7 +256,7 @@ echo builderTag=$buildProjectTags
 echo buildDirectory=$buildDirectory
 
 #full command with args
-buildCommand="$antRunner -q -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $skipPack $tagMaps $hudson -DJ2SE-1.5=$bootclasspath_15 -DJ2SE-1.4=$bootclasspath -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation -DCDC-1.1/Foundation-1.1=$bootclasspath_foundation11 -DOSGi/Minimum-1.2=/shared/common/org.eclipse.sdk-feature/libs/ee.minimum-1.2.0.jar  -DJavaSE-1.6=$bootclasspath_16 -DlogExtension=.xml $javadoc $updateSite $sign -DgenerateFeatureVersionSuffix=true -Djava15home=$java15home "
+buildCommand="$antRunnerJDK16 -q -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $skipPack $tagMaps $hudson -DJ2SE-1.5=$bootclasspath_15 -DJ2SE-1.4=$bootclasspath -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation -DCDC-1.1/Foundation-1.1=$bootclasspath_foundation11 -DOSGi/Minimum-1.2=/shared/common/org.eclipse.sdk-feature/libs/ee.minimum-1.2.0.jar  -DJavaSE-1.6=$bootclasspath_16 -DlogExtension=.xml $javadoc $updateSite $sign -DgenerateFeatureVersionSuffix=true -Djava15home=$java15home "
 
 #capture command used to run the build
 echo $buildCommand>command.txt
