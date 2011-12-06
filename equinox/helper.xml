@@ -190,13 +190,7 @@
 		</antcall>
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="javax.servlet" />
-		</antcall>
-		<antcall target="updateTestManifest">
-			<param name="bundle.id" value="javax.servlet_2.4.0" />
-		</antcall>
-		<antcall target="updateTestManifest">
-			<param name="bundle.id" value="javax.servlet_2.5.0" />
-		</antcall>
+		</antcall>		
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="javax.servlet.jsp" />
 		</antcall>
@@ -208,13 +202,7 @@
 		</antcall>
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.mortbay.jetty" />
-		</antcall>
-		<antcall target="updateTestManifest">
-			<param name="bundle.id" value="org.mortbay.jetty.util" />
-		</antcall>
-		<antcall target="updateTestManifest">
-			<param name="bundle.id" value="org.mortbay.jetty.server" />
-		</antcall>
+		</antcall>		
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.simpleconfigurator" />
 		</antcall>
@@ -227,6 +215,30 @@
 		<antcall target="updateTestManifest">
 			<param name="bundle.id" value="org.eclipse.equinox.region" />
 		</antcall>
+		<antcall target="updateTestManifest">
+				<param name="bundle.id" value="org.eclipse.jetty.continuation" />
+		</antcall>
+		<antcall target="updateTestManifest">
+				<param name="bundle.id" value="org.eclipse.jetty.security" />
+		</antcall>
+		<antcall target="updateTestManifest">
+				<param name="bundle.id" value="org.eclipse.jetty.util" />
+		</antcall>
+		<antcall target="updateTestManifest">
+				<param name="bundle.id" value="org.eclipse.jetty.http" />
+		</antcall>
+		<antcall target="updateTestManifest">
+				<param name="bundle.id" value="org.eclipse.jetty.http" />
+		</antcall>
+		<antcall target="updateTestManifest">
+				<param name="bundle.id" value="org.eclipse.jetty.server" />
+		</antcall>
+		<antcall target="updateTestManifest">
+				<param name="bundle.id" value="org.eclipse.jetty.io" />
+		</antcall>
+		<antcall target="updateTestManifest">
+				<param name="bundle.id" value="org.eclipse.jetty.servlet" />
+		</antcall>		
 	</target>
 
 	<!-- ===================================================================== -->

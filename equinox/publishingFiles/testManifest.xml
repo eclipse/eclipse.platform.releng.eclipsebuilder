@@ -34,28 +34,29 @@
 			<platform format="equinox" id="useradmin" name="All" fileName="@org.eclipse.equinox.useradmin@.jar" />
 			<platform format="equinox" id="util" name="All" fileName="@org.eclipse.osgi.util@.jar" />
 			<platform format="equinox" id="equinoxservletbridge" name="All" fileName="@org.eclipse.equinox.servletbridge@.jar" />
-			<platform format="equinox" id="http" name="All" fileName="@org.eclipse.equinox.http@.jar" />
-			<platform format="equinox" id="httpjetty" name="All" fileName="@org.eclipse.equinox.http.jetty_1.1.100@.jar" />
-			<platform format="equinox" id="equinoxjetty" name="All" fileName="@org.eclipse.equinox.http.jetty_2.0.100@.jar" />
+			<platform format="equinox" id="http" name="All" fileName="@org.eclipse.equinox.http@.jar" />			
+			<platform format="equinox" id="equinoxjetty" name="All" fileName="@org.eclipse.equinox.http.jetty@.jar" />
 			<platform format="equinox" id="httpjettyregistry" name="All" fileName="@org.eclipse.equinox.http.registry@.jar" />
 			<platform format="equinox" id="httpservletbridge" name="All" fileName="@org.eclipse.equinox.http.servletbridge@.jar" />
-			<platform format="equinox" id="httpservlet" name="All" fileName="@org.eclipse.equinox.http.servlet_1.1.200@.jar" />
+			<platform format="equinox" id="httpservlet" name="All" fileName="@org.eclipse.equinox.http.servlet_1.1.300@.jar" />
 			<platform format="equinox" id="wireadmin" name="All" fileName="@org.eclipse.equinox.wireadmin@.jar" />
 			<platform format="equinox" id="simpleconfigurator" name="All" fileName="@org.eclipse.equinox.simpleconfigurator@.jar" />
 			<platform format="equinox" id="concurrent" name="All" fileName="@org.eclipse.equinox.concurrent@.jar" />
 			<platform format="equinox" id="coordinator" name="All" fileName="@org.eclipse.equinox.coordinator@.jar" />
-			<platform format="equinox" id="region" name="All" fileName="@org.eclipse.equinox.region@.jar" />
+			<platform format="equinox" id="region" name="All" fileName="@org.eclipse.equinox.region@.jar" />			
+			<platform format="equinox" id="jettycontinuation" name="All" fileName="@org.eclipse.jetty.continuation@.jar" />
+			<platform format="equinox" id="jettysecurity" name="All" fileName="@org.eclipse.jetty.security@.jar" />
+			<platform format="equinox" id="jettyutil" name="All" fileName="@org.eclipse.jetty.util@.jar" />
+			<platform format="equinox" id="jettyhttp" name="All" fileName="@org.eclipse.jetty.http@.jar" />
+			<platform format="equinox" id="jettyserver" name="All" fileName="@org.eclipse.jetty.server@.jar" />
+			<platform format="equinox" id="jettyio" name="All" fileName="@org.eclipse.jetty.io@.jar" />
+		    <platform format="equinox" id="jettyservlet" name="All" fileName="@org.eclipse.jetty.servlet@.jar" />			
 		</zipType>	
 
 		<zipType name="Other">
-			<platform format="equinox" id="javaxservlet_2.4.0" name="All" fileName="@javax.servlet_2.4.0@.jar" />
-			<platform format="equinox" id="javaxservlet_2.5.0" name="All" fileName="@javax.servlet_2.5.0@.jar" />
+			<platform format="equinox" id="javaxservlet_2.4.0" name="All" fileName="@javax.servlet@.jar" />			
 			<platform format="equinox" id="javaxservletjsp" name="All" fileName="@javax.servlet.jsp@.jar" />
-			<platform format="equinox" id="apachecommonsel" name="All" fileName="@org.apache.commons.el@.jar" />
-			<platform format="equinox" id="apachecomminglogging" name="All" fileName="@org.apache.commons.logging@.jar" />
-			<platform format="equinox" id="mortbayjetty" name="All" fileName="@org.mortbay.jetty@.jar" />
-			<platform format="equinox" id="mortbayjettyutil" name="All" fileName="@org.mortbay.jetty.util@.jar" />
-			<platform format="equinox" id="mortbayjettyserver" name="All" fileName="@org.mortbay.jetty.server@.jar" />
+			<platform format="equinox" id="apachecomminglogging" name="All" fileName="@org.apache.commons.logging@.jar" />			
 		 </zipType>				
 		   	   	    	    	
     		<zipType name="Provisioning">
