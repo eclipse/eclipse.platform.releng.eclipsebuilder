@@ -56,7 +56,8 @@
 		<mkdir dir="${mapsGitRepo}" />
 		<exec executable="git" dir="${mapsGitRepo}">
 			<arg line="clone ${commonrepo}" />
-		</exec>		<exec executable="git" dir="${mapsGitRepo}/eclipse.platform.releng.maps">
+		</exec>		
+		<exec executable="git" dir="${mapsGitRepo}/eclipse.platform.releng.maps">
 			<arg line="checkout ${mapVersionTag}" />
 		</exec>
 		<mkdir dir="${buildDirectory}/maps" />
@@ -113,7 +114,7 @@
 	<!-- ===================================================================== -->
 	<!-- Steps to do before fetching the build elements -->
 	<!-- ===================================================================== -->
-	<target name="preFetch" depends="getMapFiles">
+	<target name="preFetch">
 		<replace dir="${buildDirectory}/maps/org.eclipse.releng/maps" value="${localmirror}" token="download.eclipse.org" />
 		<replace dir="${buildDirectory}/maps/org.eclipse.releng/maps" value="${cvsuser}" token=":pserver:anonymous" />
 	</target>
