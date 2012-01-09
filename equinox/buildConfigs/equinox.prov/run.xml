@@ -153,7 +153,7 @@
 		<property name="p2.agent.version" value="1.1.0.${buildId}" />
 		<property name="equinox.starterkit.version" value="1.0.0.${buildId}" />
 		<property name="pde.product.version" value="1.0.0.${buildId}" />
-		<property name="sdk.version" value="3.8.0.${buildId}" />
+		<property name="sdk.version" value="4.2.0.${buildId}" />
 	</target>
 
 	<target name="build" depends="init">
