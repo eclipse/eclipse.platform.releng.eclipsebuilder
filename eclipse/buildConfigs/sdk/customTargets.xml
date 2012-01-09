@@ -317,7 +317,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<chmod file="${tempDir}/buildScripts/build" perm="755" />
 
 		<!--copy example doc -->
-		<ant antfile="buildDoc.xml" target="examplesDocCopy" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.isv" />
+	<!--	<ant antfile="buildDoc.xml" target="examplesDocCopy" dir="${buildDirectory}/plugins/org.eclipse.platform.doc.isv" /> -->
 
 		<copy todir="${tempDir}/buildScripts/src">
 			<fileset dir="${buildDirectory}" excludes="features/*example*/**,plugins/*example*/**" includes="features/*/build.xml,features/*.source*/**,plugins/*/build.xml,plugins/*/javaCompiler.*.args,plugins/*.source*/**,fetch_*.xml,assemble*.xml,plugins/org.eclipse.swt.tools/**,plugins/*doc*/**,label.properties" />
