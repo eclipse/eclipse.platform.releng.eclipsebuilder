@@ -766,12 +766,12 @@
 
 		<!--mirror EMF features the repo -->		
 		<p2.mirror source="file:${localRepoLocation}" ignoreErrors="true">
-			<destination compressed="true" name="${p2.repo.name}" location="file:${buildRepo}" append="true" format="file:${reposource}" latestVersionOnly="true" />
+			<destination compressed="true" name="${p2.repo.name}" location="file:${buildRepo}" append="true" format="file:${reposource}" />
 			<comparator comparator="org.eclipse.equinox.p2.repository.tools.jar.comparator" comparatorLog="${buildlogs}/comparatorlogtests.txt">
 				<repository location="${repoBaseline}" />
 			</comparator>
 			<iu id="org.eclipse.emf.common.feature.group" version="0.0.0" />
-			<iu id="org.eclipse.emf.ecore" version="0.0.0" />
+			<iu id="org.eclipse.emf.ecore.feature.source" version="0.0.0" />
 		</p2.mirror>
 
 
