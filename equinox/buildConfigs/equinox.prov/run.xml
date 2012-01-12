@@ -158,8 +158,8 @@
 
 	<target name="build" depends="init">
 		<parallel failonany="true" threadCount='4'>
-			<antcall target="provision.agent" />
-			<antcall target="provision.starterkit" />
+		<!--	<antcall target="provision.agent" />
+			<antcall target="provision.starterkit" /> -->
 			<!-- <antcall target="provision.pdeproduct" /> -->
 			<antcall target="provision.sdk" />
 			<antcall target="provision.platform" />
