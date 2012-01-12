@@ -72,7 +72,7 @@
 				<antcall target="packageEclipseDistributables" />
 				<ant antfile="${eclipse.build.configs}/../helper.xml" target="verifyCompile" />
 				<ant antfile="${equinox.build.configs}/equinox.prov/run.xml" />
-				<antcall target="packageRepos" />				
+				<antcall target="packageRepos" />
 				<antcall target="apiTooling" />
 				<antcall target="publishEclipse" />
 				<antcall target="packageEquinoxDistributables" />
@@ -151,9 +151,14 @@
 		<property name="previousPlatformZips" value="${buildDirectory}/previousPlatformZips" />
 		<mkdir dir="${previousPlatformZips}" />
 		<condition property="commonrepo" value="git://git.eclipse.org/gitroot/platform/eclipse.platform.releng.maps">
-			<equals arg1="${hudson}" arg2="true" />
+			<or>
+				<equals arg1="${hudson}" arg2="true" />
+				<not>
+					<equals arg1="${tagMaps}" arg2="true" />
+				</not>
+			</or>
 		</condition>
-		<property name="commonrepo" value="ssh://git.eclipse.org/gitroot/platform/eclipse.platform.releng.maps"/>
+		<property name="commonrepo" value="ssh://git.eclipse.org/gitroot/platform/eclipse.platform.releng.maps" />
 	</target>
 
 	<target name="buildECFMasterFeature">
@@ -778,7 +783,7 @@
 		<ant antfile="${eclipse.build.configs}/rcp.deltapack/build.xml" />
 	</target>
 
-	<target name="packageEquinoxDistributables">	
+	<target name="packageEquinoxDistributables">
 		<!-- equinox slicer build now includes master equinox-->
 		<ant antfile="${equinox.build.configs}/equinox/build.xml" />
 		<ant antfile="${equinox.build.configs}/equinox-launchers/build.xml" />
