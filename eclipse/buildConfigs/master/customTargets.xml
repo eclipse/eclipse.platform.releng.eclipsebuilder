@@ -136,6 +136,8 @@
 					<slicingOptions includeOptional="false" includeNonGreedy="false" latestVersionOnly="true" />
 					<iu id="org.eclipse.emf.ecore.feature.group" version="0.0.0" />
 					<iu id="org.eclipse.emf.common.feature.group" version="0.0.0" />
+					<iu id="org.eclipse.emf.ecore.source.feature.group" version="0.0.0" />
+					<iu id="org.eclipse.emf.common.source.feature.group" version="0.0.0" />
 				</p2.mirror>
 				
 				<p2.repo2runnable destination="${transformedRepoLocation}">

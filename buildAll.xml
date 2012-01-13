@@ -153,8 +153,8 @@
 		<condition property="commonrepo" value="git://git.eclipse.org/gitroot/platform/eclipse.platform.releng.maps">
 			<or>
 				<equals arg1="${hudson}" arg2="true" />
-				<equals arg1="${tagMaps}" arg2="true"/>
-				</or>				
+				<equals arg1="${tagMaps}" arg2="true" />
+			</or>
 		</condition>
 		<property name="commonrepo" value="ssh://git.eclipse.org/gitroot/platform/eclipse.platform.releng.maps" />
 	</target>
@@ -764,14 +764,17 @@
 			<iu id="org.eclipse.test.feature.group" version="" />
 		</p2.mirror>
 
-		<!--mirror EMF features the repo -->		
+		<!--mirror EMF features the repo -->
 		<p2.mirror source="file:${localRepoLocation}" ignoreErrors="true">
 			<destination compressed="true" name="${p2.repo.name}" location="file:${buildRepo}" append="true" format="file:${reposource}" />
 			<comparator comparator="org.eclipse.equinox.p2.repository.tools.jar.comparator" comparatorLog="${buildlogs}/comparatorlogtests.txt">
 				<repository location="${repoBaseline}" />
 			</comparator>
 			<iu id="org.eclipse.emf.common.feature.group" version="0.0.0" />
-			<iu id="org.eclipse.emf.ecore.feature.source" version="0.0.0" />
+			<iu id="org.eclipse.emf.ecore.feature.group" version="0.0.0" />
+			<iu id="org.eclipse.emf.common.source.feature.group" version="0.0.0" />
+			<iu id="org.eclipse.emf.ecore.source.feature.group" version="0.0.0" />
+
 		</p2.mirror>
 
 
