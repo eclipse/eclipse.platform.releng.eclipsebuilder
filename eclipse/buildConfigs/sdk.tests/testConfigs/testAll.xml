@@ -50,9 +50,9 @@
 				<param name="markerName" value="eclipse-rhelws5-6.0-${buildId}" />
 			</antcall>
 			<antcall target="test">
-				<param name="tester" value="${basedir}/win32xp-6.0" />
-				<param name="cfgKey" value="win32xp-6.0" />
-				<param name="markerName" value="eclipse-win32xp-6.0-${buildId}" />
+				<param name="tester" value="${basedir}/win32xp-7.0" />
+				<param name="cfgKey" value="win32xp-7.0" />
+				<param name="markerName" value="eclipse-win32xp-7.0-${buildId}" />
 			</antcall>
 		</parallel>
 	</target>

@@ -219,8 +219,8 @@ echo"<ul>\n";
         echo "<strong>Individual linux.gtk.x86_6.0 test logs</strong>";
         listLogs("testresults/linux.gtk.x86_6.0");
         listLogs("testresults/consolelogs");
-        echo "<strong>Individual win32.win32.x86_6.0 test logs</strong>";
-        listLogs("testresults/win32.win32.x86_6.0");
+        echo "<strong>Individual win32.win32.x86_7.0 test logs</strong>";
+        listLogs("testresults/win32.win32.x86_7.0");
         echo "<strong>Individual macosx.cocoa.x86_5.0 test logs</strong>";
         listLogs("testresults/macosx.cocoa.x86_5.0");
 ?>
