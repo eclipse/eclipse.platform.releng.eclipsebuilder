@@ -274,7 +274,7 @@
 				<equals arg1="${ws}" arg2="gtk" />
 				<equals arg1="${arch}" arg2="x86_64" />
 			</and>
-		</condition>		
+		</condition>
 		<condition property="runtimeArchive" value="eclipse-SDK-${buildId}-macosx-cocoa-ppc.tar.gz">
 			<and>
 				<equals arg1="${os}" arg2="macosx" />
@@ -345,22 +345,32 @@
 		<condition property="J2SE-6.0" value="${java.home}/bin/java">
 			<equals arg1="${ant.java.version}" arg2="1.6" />
 		</condition>
-
+		<condition property="J2SE-7.0" value="${java.home}/bin/java">
+			<equals arg1="${ant.java.version}" arg2="1.7" />
+		</condition>
 	</target>
 	<target name="setJVMfromUserSpecified" if="jvm">
 		<exec executable="${jvm}" outputproperty="javaversion">
 			<arg line="-version" />
 		</exec>
 		<echo message="java version of ${jvm} is ${javaversion}" />
+		<condition property="J2SE-7.0" value="${jvm}">
+			<contains string="${javaversion}" substring="java version &quot;1.7" />
+		</condition>
 		<condition property="J2SE-6.0" value="${jvm}">
-			<contains string="${javaversion}" substring="java version &quot;1.6" />
+			<or>
+				<contains string="${javaversion}" substring="java version &quot;1.6" />
+				<contains string="${javaversion}" substring="java version &quot;1.7" />
+			</or>
 		</condition>
 		<condition property="J2SE-5.0" value="${jvm}">
 			<or>
+				<contains string="${javaversion}" substring="java version &quot;1.7" />
 				<contains string="${javaversion}" substring="java version &quot;1.6" />
 				<contains string="${javaversion}" substring="java version &quot;1.5" />
 			</or>
 		</condition>
+		<echo message="J2SE-7.0:  ${J2SE-7.0}" />
 		<echo message="J2SE-6.0:  ${J2SE-6.0}" />
 		<echo message="J2SE-5.0:  ${J2SE-5.0}" />
 	</target>
@@ -579,7 +589,10 @@
 		<!--only run test if J2SE-5.0 property  set-->
 		<condition property="skip.test">
 			<not>
-				<isset property="J2SE-6.0" />
+				<or>
+					<isset property="J2SE-6.0" />
+					<isset property="J2SE-7.0" />
+				</or>
 			</not>
 		</condition>
 		<runTests testPlugin="org.eclipse.jdt.apt.pluggable.tests" />
@@ -599,7 +612,10 @@
 		<!--only run test if J2SE-6.0 property  set-->
 		<condition property="skip.test">
 			<not>
-				<isset property="J2SE-6.0" />
+				<or>
+					<isset property="J2SE-6.0" />
+					<isset property="J2SE-7.0" />
+				</or>
 			</not>
 		</condition>
 		<runTests testPlugin="org.eclipse.jdt.compiler.tool.tests" />
@@ -610,7 +626,10 @@
 		<!--only run test if J2SE-6.0 property  set-->
 		<condition property="skip.test">
 			<not>
-				<isset property="J2SE-6.0" />
+				<or>
+					<isset property="J2SE-6.0" />
+					<isset property="J2SE-7.0" />
+				</or>
 			</not>
 		</condition>
 		<runTests testPlugin="org.eclipse.jdt.compiler.apt.tests" />
@@ -743,7 +762,7 @@
 			</not>
 		</condition>
 		<runTests testPlugin="org.eclipse.equinox.p2.tests.discovery" />
-	</target>	
+	</target>
 
 	<target name="search">
 		<runTests testPlugin="org.eclipse.search.tests" />
@@ -752,10 +771,10 @@
 	<target name="pdeds">
 		<runTests testPlugin="org.eclipse.pde.ds.tests" />
 	</target>
-	
+
 	<target name="bidi">
-			<runTests testPlugin="org.eclipse.equinox.bidi.tests" />
-		</target>
+		<runTests testPlugin="org.eclipse.equinox.bidi.tests" />
+	</target>
 
 	<macrodef name="jacocoreport">
 		<attribute name="pluginName" />
@@ -942,7 +961,7 @@
 		<jacocoreport pluginName="org.eclipse.update.ui" reportTitle="org.eclipse.update.ui Code Coverage" />
 	</target>
 
-	<target name="all">	
+	<target name="all">
 		<antcall target="equinoxp2" />
 		<antcall target="equinoxp2ui" />
 		<antcall target="pdeui" />
@@ -996,7 +1015,7 @@
 		<antcall target="equinoxds" />
 		<antcall target="equinoxp2discovery" />
 		<antcall target="bidi" />
-		
+
 		<antcall target="generateJacocoReport" />
 
 
