@@ -368,9 +368,13 @@
 		</condition>
 		<condition property="J2SE-5.0" value="${jvm}">
 			<or>
-				<contains string="${javaversion}" substring="java version &quot;1.7" />
-				<contains string="${javaversion}" substring="java version &quot;1.6" />
-				<contains string="${javaversion}" substring="java version &quot;1.5" />
+				<and>
+					<or>
+						<contains string="${javaversion}" substring="java version &quot;1.7" />
+						<contains string="${javaversion}" substring="java version &quot;1.6" />
+					</or>
+					<contains string="${javaversion}" substring="java version &quot;1.5" />
+				</and>
 			</or>
 		</condition>
 		<echo message="J2SE-7.0:  ${J2SE-7.0}" />
@@ -965,7 +969,7 @@
 	</target>
 
 	<target name="all">
-	<!--	<antcall target="equinoxp2" />
+		<!--	<antcall target="equinoxp2" />
 		<antcall target="equinoxp2ui" />
 		<antcall target="pdeui" />
 		<antcall target="jdtcompilertool" />
