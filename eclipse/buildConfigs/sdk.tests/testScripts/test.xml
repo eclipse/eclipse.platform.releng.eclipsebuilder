@@ -965,31 +965,31 @@
 	</target>
 
 	<target name="all">
-		<antcall target="equinoxp2" />
+	<!--	<antcall target="equinoxp2" />
 		<antcall target="equinoxp2ui" />
 		<antcall target="pdeui" />
 		<antcall target="jdtcompilertool" />
 		<antcall target="jdtcompilerapt" />
-		<antcall target="jdttext" />
+		<antcall target="jdttext" /> -->
 		<antcall target="ant" />
-		<antcall target="compare" />
+		<!-- <antcall target="compare" />
 		<antcall target="coreruntime" />
-		<antcall target="coreresources" />
+		<antcall target="coreresources" /> -->
 		<antcall target="osgi" />
-		<antcall target="coreexpressions" />
+		<!-- <antcall target="coreexpressions" />
 		<antcall target="update" />
 		<antcall target="teamcore" />
 		<antcall target="jdtcoreperf" />
 		<antcall target="jdtcorebuilder" />
-		<antcall target="jdtcorecompiler" />
+		<antcall target="jdtcorecompiler" /> 
 		<antcall target="uiperformance" />
 		<antcall target="uieditors" />
 		<antcall target="uinavigator" />
 		<antcall target="uiworkbenchtexteditor" />
 		<antcall target="uircp" />
-		<antcall target="uiviews" />
+		<antcall target="uiviews" /> -->
 		<antcall target="jdtdebug" />
-		<antcall target="jdtui" />
+		<!-- <antcall target="jdtui" />
 		<antcall target="jdtuirefactoring" />
 		<antcall target="ltkuirefactoringtests" />
 		<antcall target="ltkcorerefactoringtests" />
@@ -1009,15 +1009,15 @@
 		<antcall target="search" />
 		<antcall target="pdeds" />
 		<antcall target="jdtcoremodel" />
-		<antcall target="uadoc" />
+		<antcall target="uadoc" /> -->
 		<antcall target="debug" />
 		<antcall target="ui" />
-		<antcall target="relEng" />
+		<!-- <antcall target="relEng" />
 		<antcall target="swt" />
 		<antcall target="teamcvs" />
 		<antcall target="equinoxds" />
 		<antcall target="equinoxp2discovery" />
-		<antcall target="bidi" />
+		<antcall target="bidi" /> -->
 
 		<antcall target="generateJacocoReport" />
 
