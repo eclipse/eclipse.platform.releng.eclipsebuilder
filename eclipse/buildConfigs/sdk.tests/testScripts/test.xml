@@ -38,10 +38,10 @@
 				<os family="unix" />
 			</and>
 			<not>
-				<and>
+				<or>
 					<equals arg1="${test.target}" arg2="performance" />
 					<os family="windows" />
-				</and>
+				</or>
 			</not>
 		</and>
 	</condition>
