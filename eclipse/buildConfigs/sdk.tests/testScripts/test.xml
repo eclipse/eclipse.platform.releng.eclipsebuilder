@@ -345,9 +345,11 @@
 				<equals arg1="${ant.java.version}" arg2="1.6" />
 			</or>
 		</condition>
-		<condition property="J2SE-6.0" value="${java.home}/bin/java">	     
-			<equals arg1="${ant.java.version}" arg2="1.6" />
-			<equals arg1="${ant.java.version}" arg2="1.7" />			
+		<condition property="J2SE-6.0" value="${java.home}/bin/java">
+			<or>
+				<equals arg1="${ant.java.version}" arg2="1.6" />
+				<equals arg1="${ant.java.version}" arg2="1.7" />
+			</or>
 		</condition>
 		<condition property="J2SE-7.0" value="${java.home}/bin/java">
 			<equals arg1="${ant.java.version}" arg2="1.7" />
@@ -986,7 +988,7 @@
 		<antcall target="teamcore" />
 		<antcall target="jdtcoreperf" />
 		<antcall target="jdtcorebuilder" />
-		<antcall target="jdtcorecompiler" /> 
+		<antcall target="jdtcorecompiler" />
 		<antcall target="uiperformance" />
 		<antcall target="uieditors" />
 		<antcall target="uinavigator" />
