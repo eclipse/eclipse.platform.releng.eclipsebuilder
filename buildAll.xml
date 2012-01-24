@@ -153,7 +153,9 @@
 		<condition property="commonrepo" value="git://git.eclipse.org/gitroot/platform/eclipse.platform.releng.maps">
 			<or>
 				<equals arg1="${hudson}" arg2="true" />
+				<not>
 				<equals arg1="${tagMaps}" arg2="true" />
+				</not>
 			</or>
 		</condition>
 		<property name="commonrepo" value="ssh://git.eclipse.org/gitroot/platform/eclipse.platform.releng.maps" />
