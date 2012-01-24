@@ -375,14 +375,12 @@
 			</or>
 		</condition>
 		<condition property="J2SE-5.0" value="${jvm}">
-			<or>
-				<and>
+			<or>				
 					<or>
 						<contains string="${javaversion}" substring="java version &quot;1.7" />
 						<contains string="${javaversion}" substring="java version &quot;1.6" />
 					</or>
-					<contains string="${javaversion}" substring="java version &quot;1.5" />
-				</and>
+					<contains string="${javaversion}" substring="java version &quot;1.5" />			
 			</or>
 		</condition>
 		<echo message="J2SE-7.0:  ${J2SE-7.0}" />
