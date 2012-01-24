@@ -90,3 +90,8 @@ units.5.touchpoint.id=org.eclipse.equinox.p2.osgi
 units.5.touchpoint.version=1.0.0
 units.5.instructions.configure=setProgramProperty(propName:org.eclipse.swt.internal.gtk.useCairo,propValue:true);
 units.5.instructions.unconfigure=removeProgramProperty(propName:org.eclipse.swt.internal.gtk.useCairo);
+
+units.6.id = org.eclipse.sdk.ide
+units.6.update.range = [4.0,4.3)
+units.6.update.severity = 0
+units.6.update.description = Restrict range so we are not an update for 3.x.
