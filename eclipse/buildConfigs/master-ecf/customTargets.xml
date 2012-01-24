@@ -48,7 +48,7 @@
 		</exec>
 		<mkdir dir="${buildDirectory}/maps" />
 		<exec executable="git" dir="${buildDirectory}/maps" output="${buildDirectory}/maps/maps.tar">
-			<arg line="archive --format=tar --remote=${mapsGitRepo}/eclipse.platform.releng.maps ${mapVersionTag} org.eclipse.releng/maps" />
+			<arg line="archive --format=tar --remote=${mapsGitRepo}/eclipse.platform.releng.maps ${mapVersionTag} org.eclipse.releng" />
 		</exec>
 		<untar src="${buildDirectory}/maps/maps.tar" dest="${buildDirectory}/maps" />
 		<!--tag the map files project-->
