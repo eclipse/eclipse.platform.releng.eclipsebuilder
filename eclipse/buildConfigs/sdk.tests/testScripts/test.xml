@@ -348,7 +348,6 @@
 				<equals arg1="${ant.java.version}" arg2="1.7" />
 			</or>
 		</condition>
-
 		<condition property="J2SE-6.0" value="${java.home}/bin/java">
 			<or>
 				<equals arg1="${ant.java.version}" arg2="1.6" />
