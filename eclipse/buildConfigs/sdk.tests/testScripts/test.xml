@@ -340,15 +340,13 @@
 	<target name="setJVMProperties" depends="setJVMfromUserSpecified">
 		<!--enable tests requiring 1.5 or 1.6 vms to run if running vm level detected matches required execution environment-->
 		<condition property="J2SE-5.0" value="${java.home}/bin/java">
-			<and>
+			<or>
 				<or>
 					<equals arg1="${ant.java.version}" arg2="1.5" />
 					<equals arg1="${ant.java.version}" arg2="1.6" />
 				</or>
-				<or>
-					<equals arg1="${ant.java.version}" arg2="1.7" />
-				</or>
-			</and>
+				<equals arg1="${ant.java.version}" arg2="1.7" />
+			</or>
 		</condition>
 		<condition property="J2SE-6.0" value="${java.home}/bin/java">
 			<or>
@@ -375,12 +373,12 @@
 			</or>
 		</condition>
 		<condition property="J2SE-5.0" value="${jvm}">
-			<or>				
-					<or>
-						<contains string="${javaversion}" substring="java version &quot;1.7" />
-						<contains string="${javaversion}" substring="java version &quot;1.6" />
-					</or>
-					<contains string="${javaversion}" substring="java version &quot;1.5" />			
+			<or>
+				<or>
+					<contains string="${javaversion}" substring="java version &quot;1.7" />
+					<contains string="${javaversion}" substring="java version &quot;1.6" />
+				</or>
+				<contains string="${javaversion}" substring="java version &quot;1.5" />
 			</or>
 		</condition>
 		<echo message="J2SE-7.0:  ${J2SE-7.0}" />
