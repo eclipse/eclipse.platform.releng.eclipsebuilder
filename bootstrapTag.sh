@@ -109,7 +109,7 @@ buildtime=`date +%H%M`
 timestamp=$builddate$buildtime
 
 # process command line arguments
-usage="usage: $0 [-notify emailaddresses][-textRecipients textaddesses][-test][-buildDirectory directory][-buildId name][-buildLabel directory name][-tagMapFiles][-mapVersionTag tag][-builderTag tag][-bootclasspath path][-compareMaps][-skipPerf] [-skipCleanSites] [-skipTest] [-skipRSS] [-updateSite site][-skipPack][-branch] [-root] [-noTag] [-sign] M|N|I|S|R"
+usage="usage: $0 [-notify emailaddresses][-textRecipients textaddesses][-test][-buildDirectory directory][-buildId name][-buildLabel directory name][-tagMapFiles][-mapVersionTag tag][-builderTag tag][-bootclasspath path][-compareMaps][-skipPerf] [-skipCleanSites] [-skipTest] [-skipRSS] [-repoCache cachelocation] [-updateSite site][-skipPack][-sign] M|N|I|S|R"
 
 if [ $# -lt 1 ]
 then
@@ -119,44 +119,39 @@ fi
 
 while [ $# -gt 0 ]
 do
-		 		  		 		   		 		  		 		    case "$1" in
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -buildId) buildId="$2"; shift;;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -buildLabel) buildLabel="$2"; shift;;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -mapVersionTag) mapVersionTag="$2"; shift;;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -tagMapFiles) tagMaps="-DtagMaps=true";;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -skipPerf) skipPerf="-Dskip.performance.tests=true";;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -skipCleanSites) skipCleanSites="-Dskip.clean.sites=true";;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -hudson) skipPerf="-Dhudson=true";;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -skipTest) skipTest="-Dskip.tests=true";;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -skipRSS) skipRSS="-Dskip.feed=true";;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -deleteArtifacts) deleteArtifacts="-Ddelete.artifacts=true";;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -skipPack) skipPack="-DskipPack=true";;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -buildDirectory) builderDir="$2"; shift;;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -notify) recipients="$2"; shift;;
-		 		  		 		   		 		  		 		   		 		  		 		   		 		  		 		    -textRecipients) textRecipients="$2"; shift;;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -test) postingDirectory="/builds/transfer/files/bogus/downloads/drops";testBuild="-Dtest=true";;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -builderTag) buildProjectTags="$2"; shift;;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -compareMaps) compareMaps="-DcompareMaps=true";;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -updateSite) updateSite="-DupdateSite=$2";shift;;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -sign) sign="-Dsign=true";;
-
-							       -branch)
-						                        relengBranch="$2"; shift;;
-
-               							-root)
-               								writableBuildRoot="$2"; shift;;
-
-						                -noTag)
-               								 noTag=true;;
-
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    -*)
-
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    echo >&2 $usage
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    exit 1;;
-		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    *) break;;		 		  		 		   		 		  		 		    # terminate while loop
-		 		  		 		   		 		  		 		    esac
-		 		  		 		   		 		  		 		    shift
-done
+	    case "$1" in
+		    -buildId) buildId="$2"; shift;;
+            -buildLabel) buildLabel="$2"; shift;;
+		    -mapVersionTag) mapVersionTag="$2"; shift;;
+		    -tagMapFiles) tagMaps="-DtagMaps=true";;
+		 	-skipPerf) skipPerf="-Dskip.performance.tests=true";;
+		 	-skipCleanSites) skipCleanSites="-Dskip.clean.sites=true";;
+		 	-hudson) skipPerf="-Dhudson=true";;
+		 	-skipTest) skipTest="-Dskip.tests=true";;
+		 	-skipRSS) skipRSS="-Dskip.feed=true";;
+		 	-deleteArtifacts) deleteArtifacts="-Ddelete.artifacts=true";;
+		 	-skipPack) skipPack="-DskipPack=true";;
+		 	-buildDirectory) builderDir="$2"; shift;;
+		 	-notify) recipients="$2"; shift;;
+		 	-textRecipients) textRecipients="$2"; shift;;
+		 	-test) postingDirectory="/builds/transfer/files/bogus/downloads/drops";testBuild="-Dtest=true";;
+		 	-builderTag) buildProjectTags="$2"; shift;;
+		 	-compareMaps) compareMaps="-DcompareMaps=true";;
+		 	-updateSite) updateSite="-DupdateSite=$2";shift;;
+		 	-sign) sign="-Dsign=true";;
+		 	-repoCache) repoCache="-DfetchCacheLocation=$2"; shift;;							       
+		 	-branch) relengBranch="$2"; shift;;
+			-root)	writableBuildRoot="$2"; shift;;
+			-noTag) noTag=true;;						              
+			-*)		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    		 		  		 		   		 		  		 		    
+												               							
+             echo >&2 $usage
+			 exit 1;;
+			 *) break;;
+			# terminate while loop
+			esac
+		 	   shift
+            done
 
 # After the above the build type is left in $1.
 GIT_CLONES=$supportDir/gitClones
@@ -392,9 +387,9 @@ echo buildDirectory=$buildDirectory
 #full command with args
 if [ "$HOSTNAME" == "eclipsebuildserv.ottawa.ibm.com" ]
 then
-buildCommand="$antRunner -q -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:ext:kmoir@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $skipPack $tagMaps -DJ2SE-1.5=$bootclasspath_15 -DJ2SE-1.4=$bootclasspath -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation -DCDC-1.1/Foundation-1.1=$bootclasspath_foundation11 -DOSGi/Minimum-1.2=$bootclasspath_foundation11 -DJavaSE-1.6=$bootclasspath_16 -DlogExtension=.xml $javadoc $updateSite $sign -DgenerateFeatureVersionSuffix=true -Djava15home=$builderDir/jdk/linuxppc/ibm-java2-ppc-50/jre -listener org.eclipse.releng.build.listeners.EclipseBuildListener"
+buildCommand="$antRunner -q -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:ext:kmoir@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $skipPack $tagMaps -DJ2SE-1.5=$bootclasspath_15 -DJ2SE-1.4=$bootclasspath -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation -DCDC-1.1/Foundation-1.1=$bootclasspath_foundation11 -DOSGi/Minimum-1.2=$bootclasspath_foundation11 -DJavaSE-1.6=$bootclasspath_16 -DlogExtension=.xml $javadoc $updateSite $sign $repoCache -DgenerateFeatureVersionSuffix=true -Djava15home=$builderDir/jdk/linuxppc/ibm-java2-ppc-50/jre -listener org.eclipse.releng.build.listeners.EclipseBuildListener"
 else
-buildCommand="$antRunner -q -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:ext:kmoir@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $skipPack $tagMaps -DJ2SE-1.5=$bootclasspath_15 -DJ2SE-1.4=$bootclasspath -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation -DCDC-1.1/Foundation-1.1=$bootclasspath_foundation11 -DOSGi/Minimum-1.2=$bootclasspath_foundation11  -DJavaSE-1.6=$bootclasspath_16 -DlogExtension=.xml $javadoc $updateSite $sign -DgenerateFeatureVersionSuffix=true -Djava15home=$builderDir/jdk/linux/jdk1.5.0_22/jre -listener org.eclipse.releng.build.listeners.EclipseBuildListener"
+buildCommand="$antRunner -q -buildfile buildAll.xml $mail $testBuild $compareMaps -DmapVersionTag=$mapVersionTag -DpostingDirectory=$postingDirectory -Dbootclasspath=$bootclasspath -DbuildType=$buildType -D$buildType=true -DbuildId=$buildId -Dbuildid=$buildId -DbuildLabel=$buildLabel -Dtimestamp=$timestamp -DmapCvsRoot=:ext:kmoir@dev.eclipse.org:/cvsroot/eclipse $skipPerf $skipTest $skipPack $tagMaps -DJ2SE-1.5=$bootclasspath_15 -DJ2SE-1.4=$bootclasspath -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation -DCDC-1.1/Foundation-1.1=$bootclasspath_foundation11 -DOSGi/Minimum-1.2=$bootclasspath_foundation11  -DJavaSE-1.6=$bootclasspath_16 -DlogExtension=.xml $javadoc $updateSite $sign $repoCache -DgenerateFeatureVersionSuffix=true -Djava15home=$builderDir/jdk/linux/jdk1.5.0_22/jre -listener org.eclipse.releng.build.listeners.EclipseBuildListener"
 fi
 
 #capture command used to run the build
