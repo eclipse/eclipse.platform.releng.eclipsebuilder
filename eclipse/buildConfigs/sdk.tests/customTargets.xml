@@ -289,7 +289,7 @@
 		</copy>
 
 		<!--convert .bat files to dos just in case-->
-		<condition property="${unix2dos}" value="/usr/local/bin/unix2dos">
+		<condition property="${unix2dos}" value="/opt/public/common/unix2dos">
 			<equals arg1="${hudson}" arg2="true" />
 		</condition>
 		<property name="unix2dos" value="unix2dos" />
