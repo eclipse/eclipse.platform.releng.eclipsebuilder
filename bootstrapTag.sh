@@ -59,7 +59,13 @@ name="SDK Build"
 #buildProjectTags=v20111111
 #buildProjectTags=v20111117
 #buildProjectTags=v20111201a
-buildProjectTags=v20111206
+#buildProjectTags=v20111206
+#buildProjectTags=v20120112b
+#buildProjectTags=v20120118
+#buildProjectTags=v20120119c
+#buildProjectTags=v20120120a
+#buildProjectTags=v20120120a
+buildProjectTags=v20120124a
 
 #updateSite property setting
 updateSite=""

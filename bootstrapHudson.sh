@@ -46,17 +46,8 @@ deleteArtifacts=""
 #sets fetchTag="HEAD" for nightly builds if required
 tag=""
 
-#buildProjectTags=v20110411a
-#buildProjectTags=v20110418
-#buildProjectTags=v20110421
-#buildProjectTags=v20110426
-#buildProjectTags=v20110518
-#buildProjectTags=v20110711
-#buildProjectTags=v20110816
-#buildProjectTags=v20110923
-#buildProjectTags=v20110929a
-#buildProjectTags=v20111007atest
-buildProjectTags=v20111208
+#buildProjectTags=v20111208
+buildProjectTags=v20120102test
 
 #updateSite property setting
 updateSite=""
@@ -74,7 +65,8 @@ buildId=""
 buildLabel=""
 
 # tag for build contribution project containing .map files
-mapVersionTag=HEAD
+#mapVersionTag=HEAD
+mapVersionTag=R4_HEAD
 
 # directory in which to export builder projects
 builderDir=$WORKSPACE/builds/eclipsebuilder
