@@ -2,7 +2,7 @@
 
 	<target name="all">
 		<antcall target="pde" />
-		<!-- <antcall target="pde-api" /> --> 
+		<antcall target="pde-api" />  
 		<antcall target="jdt" />
 		<antcall target="cvs" />
 		<antcall target="relengtools" />
