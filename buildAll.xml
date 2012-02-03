@@ -426,7 +426,7 @@
 
 	<target name="testEclipse">
 		<parallel>
-			<ant antfile="eclipse/helper.xml" target="testAll" />
+			<ant antfile="eclipse/helpernew.xml" target="testAll" />
 		</parallel>
 	</target>
 

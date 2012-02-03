@@ -967,7 +967,7 @@
 		<jacocoreport pluginName="org.eclipse.ui.workbench" reportTitle="org.eclipse.ui.workbench Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.ui.workbench.texteditor" reportTitle="org.eclipse.ui.workbench.texteditor Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.update.configurator" reportTitle="org.eclipse.update.configurator Code Coverage" />
-		<jacocoreport pluginName="org.eclipse.update.core" reportTitle="org.eclipse.update.core Code Coverage" />
+<!--		<jacocoreport pluginName="org.eclipse.update.core" reportTitle="org.eclipse.update.core Code Coverage" /> -->
 		<jacocoreport pluginName="org.eclipse.update.scheduler" reportTitle="org.eclipse.update.scheduler Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.update.ui" reportTitle="org.eclipse.update.ui Code Coverage" />
 	</target>
@@ -985,7 +985,7 @@
 		<antcall target="coreresources" />
 		<antcall target="osgi" />
 		<antcall target="coreexpressions" />
-		<antcall target="update" />
+		<!-- <antcall target="update" /> -->
 		<antcall target="teamcore" />
 		<antcall target="jdtcoreperf" />
 		<antcall target="jdtcorebuilder" />

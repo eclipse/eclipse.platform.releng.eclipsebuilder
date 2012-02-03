@@ -216,8 +216,32 @@
 			</and>
 		</waitfor>
 
-		<!--	<property name="cvstest.properties" value="${base.builder}/../eclipseInternalBuildTools/cvstest.properties" />
-		<antcall target="configure.team.cvs.test" /> -->
+		<condition property="cvstest.properties" value="/shared/eclipse/buildtests/cvstest.properties">
+			<and>
+				<equals arg1="${hudson}" arg2="true" />
+				<and>
+					<os family="unix" />
+					<not>
+						<os family="mac" />
+					</not>
+				</and>
+			</and>
+		</condition>
+		<condition property="cvstest.properties" value="c:\users\hudsonbuild\cvstest.properties">
+			<and>
+				<equals arg1="${hudson}" arg2="true" />
+				<os family="windows" />
+			</and>
+		</condition>
+		<condition property="cvstest.properties" value="/Users/hudsonbuild/cvstest.properties">
+			<and>
+				<equals arg1="${hudson}" arg2="true" />
+				<os family="mac" />
+			</and>
+		</condition>
+		<property name="cvstest.properties" value="${base.builder}/../eclipseInternalBuildTools/cvstest.properties" />
+		<echo message="cvstest.properties ${cvstest.properties}" />
+		<antcall target="configure.team.cvs.test" />
 
 		<!--replace buildid in vm.properties for JVM location settings-->
 		<replace dir="${eclipse.build.configs}/sdk.tests/testConfigs" token="@buildid@" value="${buildId}" includes="**/vm.properties" />
@@ -235,21 +259,24 @@
 	</target>
 
 	<target name="test-JUnit">
+
 		<echo message="Starting tests." />
 		<property name="dropLocation" value="${postingDirectory}" />
 		<!-- <ant antfile="testAll.xml" dir="${eclipse.build.configs}/sdk.tests/testConfigs" /> -->
 		<property name="testDirectory" value="${buildDirectory}/tests" />
 		<property name="testingDirectory" value="${buildDirectory}/tests/eclipse-testing" />
 		<mkdir dir="${testDirectory}" />
-		<copy file="${postingDirectory}/${buildLabel}/checksum/eclipse-Automated-Tests-${buildId}.zip" dir="${testDirectory}" />
+		<mkdir dir="${testingDirectory}" />
+		<echo message="testingDirectory ${testingDirectory}" />
+		<!--            <copy file="${postingDirectory}/${buildLabel}/checksum/eclipse-Automated-Tests-${buildId}.zip" dir="${testDirectory}" />  -->
 		<unzip src="${testDirectory}/eclipse-Automated-Tests-${buildId}.zip" dest="${testDirectory}" />
-		<copy file="${postingDirectory}/${buildLabel}/checksum/eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz" dir="${testingDirectory}" />
-		<copy file="${postingDirectory}/${buildLabel}/checksum/eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz" dir="${testingDirectory}" />
-		<copy file="${postingDirectory}/${buildLabel}/checksum/eclipse-${buildId}-delta-pack.zip" dir="${testingDirectory}" />
-		<copy file="${postingDirectory}/${buildLabel}/checksum/eclipse-platform-${buildId}-linux-gtk-x86_64.tar.gz" dir="${testingDirectory}" />
+		<copy file="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz" todir="${testingDirectory}" />
+		<copy file="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz" todir="${testingDirectory}" />
+		<copy file="${postingDirectory}/${buildLabel}/eclipse-${buildId}-delta-pack.zip" todir="${testingDirectory}" />
+		<copy file="${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-linux-gtk-x86_64.tar.gz" todir="${testingDirectory}" />
 
-		<exec executable="sh" dir="${testingDirectory}">
-			<arg line="/runtests -os linux -ws gtk -arch ${arch} sdk" />
+		<exec executable="/bin/bash" dir="${testingDirectory}">
+			<arg line="runtests.sh -os linux -ws gtk -arch x86_64" />
 		</exec>
 
 		<copy todir="${postingDirectory}/${buildLabel}/testresults">
