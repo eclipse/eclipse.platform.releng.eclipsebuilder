@@ -1,8 +1,6 @@
 instructions.configure=\
 addRepository(type:0,location:http${#58}//download.eclipse.org/eclipse/updates/4.2,name:The Eclipse Project Updates);\
 addRepository(type:1,location:http${#58}//download.eclipse.org/eclipse/updates/4.2,name:The Eclipse Project Updates);\
-addRepository(type:0,location:http${#58}//download.eclipse.org/e4/updates/0.12,name:e4 0.11 Updates);\
-addRepository(type:1,location:http${#58}//download.eclipse.org/e4/updates/0.12,name:e4 0.11 Updates);\
 addRepository(type:0,location:http${#58}//download.eclipse.org/releases/juno,name:Juno);\
 addRepository(type:1,location:http${#58}//download.eclipse.org/releases/juno,name:Juno);\
   mkdir(path:${installFolder}/dropins);
@@ -56,7 +54,6 @@ units.3.touchpoint.id=org.eclipse.equinox.p2.osgi
 units.3.touchpoint.version=1.0.0
 units.3.instructions.configure=setProgramProperty(propName:org.eclipse.swt.internal.gtk.useCairo,propValue:true);
 units.3.instructions.unconfigure=removeProgramProperty(propName:org.eclipse.swt.internal.gtk.useCairo);
-
 units.4.id = org.eclipse.platform.sdk
 units.4.update.range = [4.0,4.3)
 units.4.update.severity = 0
