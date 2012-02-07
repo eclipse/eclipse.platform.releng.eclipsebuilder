@@ -19,7 +19,7 @@
 	
 		<parallel>
 			<antcall target="triggerHudsonTests"/>
-			<antcall target="platformTests" />
+		<!--	<antcall target="platformTests" /> -->
 		</parallel>		
 		
 		<antcall target="processResults" />
