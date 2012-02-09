@@ -24,7 +24,7 @@
 		<echo message="hudson ${hudson}" />
 		<echo message="BUILD_JOB_NAME ${BUILD_NUMBER}" />
 		<echo message="BUILD_BUILD_NUMBER ${BUILD_BUILD_NUMBER}" />
-		<property name="buildURL" value="https://download.eclipse.org/eclipse/downloads/drops4/${buildId}" />
+		<property name="buildURL" value="http://download.eclipse.org/eclipse/downloads/drops4/${buildId}" />
 		<echo message="buildURL ${buildURL}" />
 	</target>
 
