@@ -7,7 +7,10 @@
 		<echo message="WORKSPACE ${WORKSPACE}" />
 		<echo message="BUILD_ID ${BUILD_ID}" />
 		<echo message="BUILD_NUMBER ${BUILD_NUMBER}" />		
-		<condition property="testDir" value="${WORKSPACE}\ws\${BUILD_ID}">
+	<!-- <condition property="testDir" value="${WORKSPACE}\ws\${BUILD_ID}">
+			<os family="windows" />
+		</condition> -->
+		<condition property="testDir" value="${WORKSPACE}\ws\WORKSPACE">
 			<os family="windows" />
 		</condition>
 		<property name="testDir" value="${WORKSPACE}/ws/${BUILD_ID}" />
@@ -21,7 +24,7 @@
 		<echo message="hudson ${hudson}" />
 		<echo message="BUILD_JOB_NAME ${BUILD_NUMBER}" />
 		<echo message="BUILD_BUILD_NUMBER ${BUILD_BUILD_NUMBER}" />
-		<property name="buildURL" value="https://download.eclipse.org/eclipse/downloads4/drops/${buildId}" />
+		<property name="buildURL" value="https://download.eclipse.org/eclipse/downloads/drops4/${buildId}" />
 		<echo message="buildURL ${buildURL}" />
 	</target>
 
