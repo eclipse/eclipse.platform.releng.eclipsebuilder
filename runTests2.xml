@@ -1,8 +1,8 @@
 <project default="main">
 
 	<target name="init">
-<!--		<property name="buildId" value="N20110317-1137" />
-		<property name="currentbuildrepo" value="https://hudson.eclipse.org/hudson/view/Eclipse%20and%20Equinox/job/eclipse-equinox-test-N/lastSuccessfulBuild/artifact/builds/transfer/files/repo/N20110317-1137"/> -->  
+<!--		<property name="buildId" value="N20110317-1137" /> -->
+		<property name="currentbuildrepo" value="http://download.eclipse.org/eclipse/downloads/drops/${buildId}"/>   
 		<echo message="buildId ${buildId}" />
 		<echo message="WORKSPACE ${WORKSPACE}" />
 		<echo message="BUILD_ID ${BUILD_ID}" />

@@ -237,6 +237,10 @@
 	<target name="test-JUnit">
 		<echo message="Starting tests." />
 		<property name="dropLocation" value="${postingDirectory}" />
+		<condition propertyname="testsInvoke" value="testHudsonAll.xml">
+			<equals arg1="${hudson}" arg2="true" />
+		</condition>
+		<property testsInvoke="testAll.xml" />
 		<ant antfile="testAll.xml" dir="${eclipse.build.configs}/sdk.tests/testConfigs" />
 
 		<antcall target="generateEclipseIndex" />
