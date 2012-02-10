@@ -23,22 +23,39 @@
 		</parallel>
 
 		<antcall target="processResults" />
-	</target>	
+	</target>
+
+
+	<target name="JUnitTests">
+		<parallel>
+			<antcall target="triggerHudsonTests">
+				<param name="job" value="JUnit-win2" />
+				<param name="suffix" value="win32.zip" />
+			</antcall>
+<!--			<antcall target="triggerHudsonTests">
+				<param name="job" value="eclipse-JUnit-Linux2" />
+				<param name="suffix" value="linux-gtk-x86_64.tar.gz" />
+			</antcall>
+			<antcall target="triggerHudsonTests">
+				<param name="job" value="eclipse-JUnit-mac2" />
+				<param name="suffix" value="macosx-cocoa-x86.zip" />
+			</antcall> -->
+		</parallel>
+	</target>		 
+			 
 
 	<target name="triggerHudsonTests">
 
 		<property environment="env" />
 
-		<echo message="${env.HUDSON_TOKEN}" />
-
 		<!-- /shared/eclipse/e4/build/e4/downloads -->
 		<property name="baseURL" value="http://download.eclipse.org/eclipse/downloads/drops4/${buildId}" />
 
-		<property name="JSON_SDK" value="{&quot;name&quot;:&quot;SDK&quot;,&quot;value&quot;:&quot;${baseURL}/eclipse-SDK-${buildId}-win32.zip&quot;}" />
+		<property name="JSON_SDK" value="{&quot;name&quot;:&quot;SDK&quot;,&quot;value&quot;:&quot;${baseURL}/eclipse-SDK-${buildId}-${suffix}&quot;}" />
 		<property name="JSON_Tests" value="{&quot;name&quot;:&quot;Tests&quot;,&quot;value&quot;:&quot;${baseURL}/eclipse-Automated-Tests-${buildId}.zip&quot;}" />
-		<property name="JSON_Platform" value="{&quot;name&quot;:&quot;Platform&quot;,&quot;value&quot;:&quot;${baseURL}/eclipse-platform-${buildId}-win32.zip&quot;}" />
+		<property name="JSON_Platform" value="{&quot;name&quot;:&quot;Platform&quot;,&quot;value&quot;:&quot;${baseURL}/eclipse-platform-${buildId}-${suffix}&quot;}" />
 		<property name="JSON_Deltapack" value="{&quot;name&quot;:&quot;Deltapack&quot;,&quot;value&quot;:&quot;${baseURL}/eclipse-${buildId}-delta-pack.zip&quot;}" />
-		<property name="JSON_PlatformRelease" value="{&quot;name&quot;:&quot;PlatformRelease&quot;,&quot;value&quot;:&quot;http://download.eclipse.org/eclipse/downloads/drops/R-3.7.1-201109091335/eclipse-platform-3.7.1-win32.zip&quot;}" />
+		<property name="JSON_PlatformRelease" value="{&quot;name&quot;:&quot;PlatformRelease&quot;,&quot;value&quot;:&quot;http://download.eclipse.org/eclipse/downloads/drops/R-3.7.1-201109091335/eclipse-platform-3.7.1-${suffix}&quot;}" />
 		<property name="JSON_buildId" value="{&quot;name&quot;:&quot;buildId&quot;,&quot;value&quot;:&quot;${buildId}&quot;}" />
 		<!--current build repository too ? -->
 
@@ -47,7 +64,7 @@
 		<!-- fetch the next hudson build number from the hudson job API -->
 		<exec executable="curl">
 			<arg line="-G" />
-			<arg value="https://hudson.eclipse.org/hudson/job/JUnit-win2/api/json" />
+			<arg value="https://hudson.eclipse.org/hudson/job/${job}/api/json" />
 			<arg line="-o ${buildDirectory}/nextBuildNumber" />
 		</exec>
 		<exec executable="bash" outputproperty="nextHudsonBuild">
@@ -59,15 +76,15 @@
 		<echo message="${json}" />
 		<exec executable="curl">
 			<arg line="-X POST" />
-			<arg value="https://hudson.eclipse.org/hudson/job/JUnit-win2/build" />
+			<arg value="https://hudson.eclipse.org/hudson/job/${job}/build" />
 			<arg line="-d token=${env.HUDSON_TOKEN}" />
 			<arg value="--data-urlencode" />
 			<arg value="json=${json}" />
 		</exec>
 
-		<property name="hudsonResultRootURL" value="https://hudson.eclipse.org/hudson/job/JUnit-win2/${nextHudsonBuild}/artifact" />
+		<!-- <property name="hudsonResultRootURL" value="https://hudson.eclipse.org/hudson/job/${job}/${nextHudsonBuild}/artifact" />
 		<property name="hudsonResultURL" value="${hudsonResultRootURL}/testsdone.txt" />
-		<antcall target="getHudsonResults" />
+		<antcall target="getHudsonResults" /> -->
 	</target>
 
 
@@ -78,7 +95,7 @@
 			<http url="${hudsonResultURL}" />
 		</waitfor>
 
-		<property name="hudsonDownloadedHTML" value="${buildDirectory}/${buildLabel}/drop/IE-9.0-testResults.html"/>
+		<property name="hudsonDownloadedHTML" value="${buildDirectory}/${buildLabel}/drop/IE-9.0-testResults.html" />
 		<get ignoreerrors="true" src="${hudsonResultURL}" dest="${hudsonDownloadedHTML}" />
 		<get ignoreerrors="true" src="${hudsonResultRootURL}/TEST-IE-9.0.Performance.xml" dest="${TestDir}/TEST-IE-9.0.Performance.xml" />
 	</target>
@@ -122,7 +139,7 @@
 
 		<delete dir="${workingDir}" />
 	</target>
-	
+
 
 	<macrodef name="updateTestResult">
 		<attribute name="testFile" />
