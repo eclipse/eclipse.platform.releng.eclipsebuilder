@@ -15,14 +15,7 @@
 	<property name="TestDir" value="${base}/tests/${buildLabel}" />
 
 	<target name="runTests">
-		<antcall target="junitTests" />
-
-		<parallel>
-			<antcall target="triggerHudsonTests" />
-			<!--	<antcall target="platformTests" /> -->
-		</parallel>
-
-		<antcall target="processResults" />
+		<antcall target="JUnitTests" />		
 	</target>
 
 
@@ -82,11 +75,10 @@
 			<arg value="json=${json}" />
 		</exec>
 
-		<!-- <property name="hudsonResultRootURL" value="https://hudson.eclipse.org/hudson/job/${job}/${nextHudsonBuild}/artifact" />
-		<property name="hudsonResultURL" value="${hudsonResultRootURL}/testsdone.txt" />
-		<antcall target="getHudsonResults" /> -->
+		<property name="hudsonResultRootURL" value="https://hudson.eclipse.org/hudson/job/${job}/${nextHudsonBuild}/artifact" />
+		<property name="hudsonResultURL" value="${hudsonResultRootURL}/archive.zip" />
+		<antcall target="getHudsonResults" /> 
 	</target>
-
 
 	<target name="getHudsonResults">
 		<!-- wait for the test results to appear -->
@@ -94,131 +86,10 @@
 		<waitfor maxwait="300" maxwaitunit="minute" checkevery="10" checkeveryunit="minutes">
 			<http url="${hudsonResultURL}" />
 		</waitfor>
-
-		<property name="hudsonDownloadedHTML" value="${buildDirectory}/${buildLabel}/drop/IE-9.0-testResults.html" />
-		<get ignoreerrors="true" src="${hudsonResultURL}" dest="${hudsonDownloadedHTML}" />
-		<get ignoreerrors="true" src="${hudsonResultRootURL}/TEST-IE-9.0.Performance.xml" dest="${TestDir}/TEST-IE-9.0.Performance.xml" />
+		
+		<get ignoreerrors="true" src="${hudsonResultURL}" dest="${postingDirectory}/testresults" />		 
+		<unzip src="${postingDirectory}/testResults/archive.zip" dest="${postingDirectory}/testresults"/>
+		<!-- <delete file="${postingDirectory}/testResults/archive.zip"/> -->
 	</target>
-
-	<target name="hudsonJsTests">
-		<!-- This target runs on the Hudson Windows Slave -->
-		<property environment="env" />
-		<property name="workingDir" value="${env.WORKSPACE}/${env.BUILD_NUMBER}" />
-
-		<mkdir dir="${workingDir}/results" />
-
-		<get src="${buildZip}" dest="${workingDir}/build.zip" />
-		<unzip src="${workingDir}/build.zip" dest="${workingDir}" />
-
-		<apply executable="${java.home}/bin/java" parallel="false">
-			<arg line="-Dhttp.proxyHost=proxy.eclipse.org -Dhttp.proxyPort=9898 -Dhttp.nonProxyHosts=*.eclipse.org" />
-			<arg line="-Dhttps.proxyHost=proxy.eclipse.org -Dhttps.proxyPort=9898 -Dhttps.nonProxyHosts=*.eclipse.org" />
-			<arg line="-Dftp.proxyHost=proxy.eclipse.org -Dftp.proxyPort=9898 -Dftp.nonProxyHosts=*.eclipse.org" />
-			<arg line="-jar ${workingDir}/JsTestDriver.jar" />
-			<arg line="--port 42442" />
-			<arg line="--tests all" />
-			<arg line="--testOutput ${workingDir}/results" />
-			<arg value="--browser" />
-			<arg value="C:\\Program Files\\Internet Explorer\\iexplore.exe" />
-			<arg value="--config" />
-			<fileset dir="${workingDir}" includes="**/jsTestDriver.conf" />
-		</apply>
-
-		<delete>
-			<fileset dir="${env.WORKSPACE}" includes="*.xml" />
-		</delete>
-
-		<junitreport todir="${env.WORKSPACE}" tofile="IE-9.0-testResults.xml">
-			<fileset dir="${workingDir}/results" includes="**/TEST-*.xml" />
-		</junitreport>
-		<copy todir="${env.WORKSPACE}">
-			<fileset dir="${workingDir}/results" includes="TEST-*.Performance.xml" />
-			<globmapper from="TEST-Microsoft_Internet_Explorer_90_Windows*" to="TEST-IE-9.0*" />
-		</copy>
-		<xslt style="${basedir}/../html/JUNIT.XSL" basedir="${env.WORKSPACE}" destdir="${env.WORKSPACE}" includes="IE-9.0-testResults.xml" />
-
-		<delete dir="${workingDir}" />
-	</target>
-
-
-	<macrodef name="updateTestResult">
-		<attribute name="testFile" />
-		<attribute name="token" />
-		<sequential>
-			<!-- grab the status summary -->
-			<loadfile srcfile="${dropLocation}/@{testFile}" property="@{testFile}_status" failonerror="false">
-				<filterchain>
-					<linecontainsregexp>
-						<regexp pattern=".*&lt;td&gt;[0-9]*&lt;/td&gt;&lt;td&gt;[0-9]*&lt;/td&gt;&lt;td&gt;(NaN|([.0-9]*%))&lt;/td&gt;.*" />
-					</linecontainsregexp>
-					<replaceregex pattern="&lt;td&gt;" replace="&lt;td align=&quot;center&quot; style=&quot;color:black&quot;&gt;" flags="g" />
-					<striplinebreaks />
-				</filterchain>
-			</loadfile>
-
-			<!-- if we couldn't read a status, use DNF -->
-			<condition property="@{testFile}_value" value="${@{testFile}_status}" else="&lt;td align=&quot;center&quot; style=&quot;color:black&quot;&gt;DNF&lt;/td&gt;">
-				<isset property="@{testFile}_status" />
-			</condition>
-
-			<!-- results will be red if they arent't 100% -->
-			<condition property="@{testFile}_color" value="black" else="red">
-				<contains string="${@{testFile}_value}" substring="100.00%" />
-			</condition>
-
-			<!-- switch the color -->
-			<loadresource property="@{testFile}_result">
-				<string value="${@{testFile}_value}" />
-				<filterchain>
-					<replaceregex pattern="color:black" replace="color:${@{testFile}_color}" flags="g" />
-				</filterchain>
-			</loadresource>
-
-			<echo message="${@{testFile}_result}" />
-			<!-- update the html -->
-			<replace file="${dropLocation}/index.html">
-				<replacefilter token="&lt;td&gt;@{token}" value="${@{testFile}_result}" />
-			</replace>
-		</sequential>
-	</macrodef>
-
-	<target name="processResults">
-		<!-- js unit results -->
-		<junitreport todir="${dropLocation}" tofile="Chrome-12.0-testResults.xml">
-			<fileset dir="${TestDir}" includes="**/TEST-Chrome_120*.xml" />
-		</junitreport>
-		<junitreport todir="${dropLocation}" tofile="Firefox-8.0-testResults.xml">
-			<fileset dir="${TestDir}" includes="**/TEST-Firefox_80*.xml" />
-		</junitreport>
-		<junitreport todir="${dropLocation}" tofile="Firefox-9.0-testResults.xml">
-			<fileset dir="${TestDir}" includes="**/TEST-Firefox_90*.xml" />
-		</junitreport>
-		<junitreport todir="${dropLocation}" tofile="Performance-testResults.xml">
-			<fileset dir="${TestDir}" includes="**/TEST-*.Performance.xml" />
-		</junitreport>
-
-		<xslt style="${builder}/html/JUNIT.XSL" basedir="${dropLocation}" destdir="${dropLocation}" includes="*.xml" />
-		<delete>
-			<fileset dir="${dropLocation}" includes="*-testResults.xml" />
-		</delete>
-
-		<!-- junit results -->
-		<xslt style="${builder}/html/JUNIT.XSL" basedir="${buildDirectory}/test/eclipse/results" destdir="${dropLocation}" includes="*.xml" />
-
-		<!-- update the test status -->
-		<updateTestResult testFile="Chrome-12.0-testResults.html" token="@JS-CHROME12@" />
-		<updateTestResult testFile="Firefox-8.0-testResults.html" token="@JS-FIREFOX80@" />
-		<updateTestResult testFile="Firefox-9.0-testResults.html" token="@JS-FIREFOX90@" />
-		<updateTestResult testFile="IE-9.0-testResults.html" token="@JS-IE9@" />
-		<updateTestResult testFile="Performance-testResults.html" token="@PERFORMANCE@" />
-		<updateTestResult testFile="org.eclipse.orion.server.tests.AllServerTests.html" token="@SERVER-TESTS@" />
-		<updateTestResult testFile="org.eclipse.orion.server.tests.performance.AllPerformanceTests.html" token="@JUNIT_PERF_BASELINE@" />
-
-		<available file="${base}/logs/current.log" property="logExists" />
-		<antcall target="copyLog" />
-	</target>
-
-	<target name="copyLog" if="logExists">
-		<copy file="${base}/logs/current.log" tofile="${dropLocation}/buildLog-${buildLabel}.txt" />
-	</target>
+	
 </project>
