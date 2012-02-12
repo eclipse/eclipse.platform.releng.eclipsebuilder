@@ -18,7 +18,7 @@
 	</target>
 
 	<target name="pde-api">
-		<buildRepos feature="org.eclipse.pde.api.tools.ee.fragments" />
+		<buildRepos feature="org.eclipse.pde.api.tools.ee.feature" />
 	</target>
 
 	<target name="jdt">
