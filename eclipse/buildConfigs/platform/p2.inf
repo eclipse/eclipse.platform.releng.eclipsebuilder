@@ -37,3 +37,8 @@ units.2.touchpoint.id=org.eclipse.equinox.p2.osgi
 units.2.touchpoint.version=1.0.0
 units.2.instructions.configure=setProgramProperty(propName:osgi.instance.area.default,propValue:@user.home/workspace);
 units.2.instructions.unconfigure=setProgramProperty(propName:osgi.instance.area.default,propValue:);
+
+units.4.id = org.eclipse.platform.ide
+units.4.update.range = [4.0,4.3)
+units.4.update.severity = 0
+units.4.update.description = Restrict range so we are not an update for 3.x.
