@@ -83,7 +83,7 @@
 	<target name="getHudsonResults">
 		<!-- wait for the test results to appear -->
 		<echo message="Waiting for ${hudsonResultURL}." />
-		<waitfor maxwait="300" maxwaitunit="minute" checkevery="10" checkeveryunit="minutes">
+		<waitfor maxwait="300" maxwaitunit="minute" checkevery="10" checkeveryunit="minute">
 			<http url="${hudsonResultURL}" />
 		</waitfor>
 		
