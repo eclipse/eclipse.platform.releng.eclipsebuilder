@@ -15,7 +15,7 @@
 	<property name="TestDir" value="${base}/tests/${buildLabel}" />
 
 	<target name="runTests">
-		<antcall target="JUnitTests" />		
+		<antcall target="JUnitTests" />
 	</target>
 
 
@@ -25,17 +25,17 @@
 				<param name="job" value="JUnit-win2" />
 				<param name="suffix" value="win32.zip" />
 			</antcall>
-<!--			<antcall target="triggerHudsonTests">
+			<antcall target="triggerHudsonTests">
 				<param name="job" value="eclipse-JUnit-Linux2" />
 				<param name="suffix" value="linux-gtk-x86_64.tar.gz" />
 			</antcall>
 			<antcall target="triggerHudsonTests">
 				<param name="job" value="eclipse-JUnit-mac2" />
 				<param name="suffix" value="macosx-cocoa-x86.zip" />
-			</antcall> -->
+			</antcall>
 		</parallel>
-	</target>		 
-			 
+	</target>
+
 
 	<target name="triggerHudsonTests">
 
@@ -58,12 +58,13 @@
 		<exec executable="curl">
 			<arg line="-G" />
 			<arg value="https://hudson.eclipse.org/hudson/job/${job}/api/json" />
-			<arg line="-o ${buildDirectory}/nextBuildNumber" />
+			<arg line="-o ${buildDirectory}/nextBuildNumber${job}" />
 		</exec>
 		<exec executable="bash" outputproperty="nextHudsonBuild">
 			<arg value="-c" />
-			<arg value="grep -o 'nextBuildNumber&quot;:[0-9]*' ${buildDirectory}/nextBuildNumber | cut -d ':' -f 2" />
+			<arg value="grep -o 'nextBuildNumber&quot;:[0-9]*' ${buildDirectory}/nextBuildNumber${job} | cut -d ':' -f 2" />
 		</exec>
+		<delete file="${buildDirectory}/nextBuildNumber${job}" />
 		<echo message="Next hudson build number is ${nextHudsonBuild}." />
 
 		<echo message="${json}" />
@@ -75,9 +76,10 @@
 			<arg value="json=${json}" />
 		</exec>
 
-		<property name="hudsonResultRootURL" value="https://hudson.eclipse.org/hudson/job/${job}/${nextHudsonBuild}/artifact" />
+		<property name="hudsonResultRootURL" value="https://hudson.eclipse.org/hudson/job/${job}/${nextHudsonBuild}/artifact/*zip*/" />
 		<property name="hudsonResultURL" value="${hudsonResultRootURL}/archive.zip" />
-		<antcall target="getHudsonResults" /> 
+		<antcall target="getHudsonResults" />
+		<echo message="hudsonResultURL ${hudsonResultURL} " />
 	</target>
 
 	<target name="getHudsonResults">
@@ -86,10 +88,16 @@
 		<waitfor maxwait="300" maxwaitunit="minute" checkevery="10" checkeveryunit="minute">
 			<http url="${hudsonResultURL}" />
 		</waitfor>
-		
-		<get ignoreerrors="true" src="${hudsonResultURL}" dest="${postingDirectory}/testresults" />		 
-		<unzip src="${postingDirectory}/testResults/archive.zip" dest="${postingDirectory}/testresults"/>
-		<!-- <delete file="${postingDirectory}/testResults/archive.zip"/> -->
+
+		<property name="tmpzipdir" value="${postingDirectory}/testresults/tmp${job}" />
+		<mkdir dir="${tmpzipdir}" />
+		<get ignoreerrors="true" src="${hudsonResultURL}" dest="${tmpzipdir}/archive.zip" />
+		<unzip src="${tmpzipdir}/archive.zip" dest="${tmpzipdir}" />
+		<zip destfile="${postingDirectory}/testresults/archive.zip" basedir="${tmpzipdir}/archive/ws" />
+		<unzip src="${postingDirectory}/testresults/archive.zip" dest="${postingDirectory}/testresults" />
+		<delete file="${tmpzipdir}/archive.zip" />
+		<delete file="${postingDirectory}/testresults/archive.zip" />
 	</target>
-	
+
+
 </project>
