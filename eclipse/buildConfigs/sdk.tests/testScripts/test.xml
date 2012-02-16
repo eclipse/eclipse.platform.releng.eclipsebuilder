@@ -974,9 +974,8 @@
 		<jacocoreport pluginName="org.eclipse.update.ui" reportTitle="org.eclipse.update.ui Code Coverage" />
 	</target>
 
-	<target name="all">
-		<antcall target="pdeui" />
-		<!--<antcall target="equinoxp2" />
+	<target name="all">		
+		<antcall target="equinoxp2" />
 		<antcall target="equinoxp2ui" />
 		<antcall target="pdeui" />
 		<antcall target="jdtcompilertool" />
@@ -1029,7 +1028,7 @@
 		<antcall target="equinoxp2discovery" />
 		<antcall target="bidi" />
 
-		<antcall target="generateJacocoReport" /> -->
+		<antcall target="generateJacocoReport" /> 
 
 
 	</target>
