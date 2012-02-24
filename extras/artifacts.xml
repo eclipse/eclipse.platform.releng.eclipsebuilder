@@ -3,6 +3,6 @@
 <repository name='e4 build Template' type='org.eclipse.equinox.p2.artifact.repository.simpleRepository' version='1.0.0'>
   <properties size='2'>
     <property name='publishPackFilesAsSiblings' value='true'/>
-    <property name='p2.mirrorsURL' value='http://www.eclipse.org/downloads/download.php?file=@p2RepoPath@/@BUILD_ID@&amp;format=xml'/>
+    <property name='p2.mirrorsURL' value='http://www.eclipse.org/downloads/download.php?file=@p2RepoPath@/@BUILD_ID@&amp;format=xml;&amp;protocol=http'/>
   </properties>
 </repository>
