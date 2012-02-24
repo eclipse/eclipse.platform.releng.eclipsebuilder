@@ -27,7 +27,7 @@
 		<!-- <property name="buildURL" value="http://download.eclipse.org/eclipse/downloads/drops/${buildId}" /> -->
 		<echo message="buildURL ${buildURL}" />
 		<!-- <property name="buildURL" value="http://build.eclipse.org/eclipse/e4/kimtest/build/e4/src/${buildId}" /> -->
-		<property name="buildURL" value="https://build.eclipse.org/shared/eclipse/e4/kimtest/build/e4/src/${buildId}" />
+		<property name="buildURL" value="https://build.eclipse.org/eclipse/e4/kimtest/build/e4/src/${buildId}" />
 	</target>
 
 	<target name="getwinzips">
