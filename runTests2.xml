@@ -24,8 +24,10 @@
 		<echo message="hudson ${hudson}" />
 		<echo message="BUILD_JOB_NAME ${BUILD_NUMBER}" />
 		<echo message="BUILD_BUILD_NUMBER ${BUILD_BUILD_NUMBER}" />
-		<property name="buildURL" value="http://download.eclipse.org/eclipse/downloads/drops/${buildId}" />
+		<!-- <property name="buildURL" value="http://download.eclipse.org/eclipse/downloads/drops/${buildId}" /> -->		
 		<echo message="buildURL ${buildURL}" />
+	   <property name="buildURL" value="http://build.eclipse.org/eclipse/e4/kimtest/build/e4/src/${buildId}" />
+
 	</target>
 
 	 <target name="getwinzips">

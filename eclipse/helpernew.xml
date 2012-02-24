@@ -259,7 +259,6 @@
 	</target>
 
 	<target name="test-JUnit">
-
 		<echo message="Starting tests." />
 		<property name="dropLocation" value="${postingDirectory}" />
 		<!-- <ant antfile="testAll.xml" dir="${eclipse.build.configs}/sdk.tests/testConfigs" /> -->
@@ -268,20 +267,21 @@
 		<mkdir dir="${testDirectory}" />
 		<mkdir dir="${testingDirectory}" />
 		<echo message="testingDirectory ${testingDirectory}" />
+		<ant antfile="/shared/eclipse/e4/kimtest/build/e4/org.eclipse.releng.eclipsebuilder_R4_2_primary/invokeTestsJSON.xml" target="runTests" />
 		<!--            <copy file="${postingDirectory}/${buildLabel}/checksum/eclipse-Automated-Tests-${buildId}.zip" dir="${testDirectory}" />  -->
-		<unzip src="${testDirectory}/eclipse-Automated-Tests-${buildId}.zip" dest="${testDirectory}" />
-		<copy file="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz" todir="${testingDirectory}" />
-		<copy file="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz" todir="${testingDirectory}" />
-		<copy file="${postingDirectory}/${buildLabel}/eclipse-${buildId}-delta-pack.zip" todir="${testingDirectory}" />
-		<copy file="${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-linux-gtk-x86_64.tar.gz" todir="${testingDirectory}" />
+		<!-- <unzip src="${postingDirectory}/${buildLabel}/eclipse-Automated-Tests-${buildId}.zip" dest="${testDirectory}" />
+	                <copy file="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz" todir="${testingDirectory}" />
+	                <copy file="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz" todir="${testingDirectory}" />
+	                <copy file="${postingDirectory}/${buildLabel}/eclipse-${buildId}-delta-pack.zip" todir="${testingDirectory}" />
+	                <copy file="${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-linux-gtk-x86_64.tar.gz" todir="${testingDirectory}" />
 
-		<exec executable="/bin/bash" dir="${testingDirectory}">
-			<arg line="runtests.sh -os linux -ws gtk -arch x86_64" />
-		</exec>
+	                <exec executable="/bin/bash" dir="${testingDirectory}">
+	                        <arg line="runtests.sh -os linux -ws gtk -arch x86_64" />
+	                </exec>
 
-		<copy todir="${postingDirectory}/${buildLabel}/testresults">
-			<fileset dir="${testingDirectory}/results" />
-		</copy>
+	                <copy todir="${postingDirectory}/${buildLabel}/testresults">
+	                        <fileset dir="${testingDirectory}/results" />
+	                </copy> -->
 
 		<antcall target="generateEclipseIndex" />
 
@@ -290,8 +290,8 @@
 			<fileset dir="${buildDirectory}/${buildLabel}" includes="testresults/**,*.php" />
 		</copy>
 		<replace file="${postingDirectory}/${buildLabel}/testResults.php" token="@build@" value="${buildId}" />
-
 	</target>
+
 
 	<!-- ===================================================================== -->
 	<!-- Target used to test the build                                         -->
