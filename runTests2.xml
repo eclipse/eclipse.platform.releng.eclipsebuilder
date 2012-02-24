@@ -38,12 +38,12 @@
 		<get src="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/R-3.7.1-201109091335/eclipse-platform-3.7.1-win32.zip" dest="${executionDir}/eclipse-platform-3.7.1-win32.zip" /> -->
 
-		<copy file="${buildURL}/eclipse-SDK-${buildId}-win32.zip" dest="${executionDir}/eclipse-SDK-${buildId}-win32.zip" />
-		<copy file="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
-		<copy file="${buildURL}/eclipse-platform-${buildId}-win32.zip" dest="${executionDir}/eclipse-platform-${buildId}-win32.zip" />
-		<copy file="${buildURL}/eclipse-${buildId}-delta-pack.zip" dest="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
-		<copy file="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
-		<copy file="http://download.eclipse.org/eclipse/downloads/drops/R-3.7.1-201109091335/eclipse-platform-3.7.1-win32.zip" dest="${executionDir}/eclipse-platform-3.7.1-win32.zip" />
+		<copy file="${buildURL}/eclipse-SDK-${buildId}-win32.zip" tofile="${executionDir}/eclipse-SDK-${buildId}-win32.zip" />
+		<copy file="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" tofile="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
+		<copy file="${buildURL}/eclipse-platform-${buildId}-win32.zip" tofile="${executionDir}/eclipse-platform-${buildId}-win32.zip" />
+		<copy file="${buildURL}/eclipse-${buildId}-delta-pack.zip" tofile="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
+		<copy file="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" tofile="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
+		<copy file="http://download.eclipse.org/eclipse/downloads/drops/R-3.7.1-201109091335/eclipse-platform-3.7.1-win32.zip" tofile="${executionDir}/eclipse-platform-3.7.1-win32.zip" />
 
 	</target>
 
@@ -56,12 +56,12 @@
 			<get src="http://download.eclipse.org/eclipse/downloads/drops/R-3.7.1-201109091335/eclipse-platform-3.7.1-linux-gtk-x86_64.tar.gz" dest="${executionDir}/eclipse-platform-3.7.1-linux-gtk-x86_64.tar.gz" /> -->
 
 
-		<copy file="${buildURL}/eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz" dest="${executionDir}/eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz" />
-		<copy file="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
-		<copy file="${buildURL}/eclipse-platform-${buildId}-linux-gtk-x86_64.tar.gz" dest="${executionDir}/eclipse-platform-${buildId}-linux-gtk-x86_64.tar.gz" />
-		<copy file="${buildURL}/eclipse-${buildId}-delta-pack.zip" dest="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
-		<copy file="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
-		<copy file="http://download.eclipse.org/eclipse/downloads/drops/R-3.7.1-201109091335/eclipse-platform-3.7.1-linux-gtk-x86_64.tar.gz" dest="${executionDir}/eclipse-platform-3.7.1-linux-gtk-x86_64.tar.gz" />
+		<copy file="${buildURL}/eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz" tofile="${executionDir}/eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz" />
+		<copy file="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" tofile="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
+		<copy file="${buildURL}/eclipse-platform-${buildId}-linux-gtk-x86_64.tar.gz" tofile="${executionDir}/eclipse-platform-${buildId}-linux-gtk-x86_64.tar.gz" />
+		<copy file="${buildURL}/eclipse-${buildId}-delta-pack.zip" tofile="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
+		<copy file="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" tofile="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
+		<copy file="http://download.eclipse.org/eclipse/downloads/drops/R-3.7.1-201109091335/eclipse-platform-3.7.1-linux-gtk-x86_64.tar.gz" tofile="${executionDir}/eclipse-platform-3.7.1-linux-gtk-x86_64.tar.gz" />
 	</target>
 
 	<target name="getmaczips">
@@ -72,12 +72,12 @@
 		<get src="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
 		<get src="http://download.eclipse.org/eclipse/downloads/drops/R-3.7.1-201109091335/eclipse-platform-3.7.1-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-platform-3.7.1-macosx-cocoa.tar.gz" /> -->
 
-		<copy file="${buildURL}/eclipse-SDK-${buildId}-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-SDK-${buildId}-macosx-cocoa.tar.gz" />
-		<copy file="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
-		<copy file="${buildURL}/eclipse-platform-${buildId}-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-platform-${buildId}-macosx-cocoa.tar.gz" />
-		<copy file="${buildURL}/eclipse-${buildId}-delta-pack.zip" dest="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
-		<copy file="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
-		<copy file="http://download.eclipse.org/eclipse/downloads/drops/R-3.7.1-201109091335/eclipse-platform-3.7.1-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-platform-3.7.1-macosx-cocoa.tar.gz" />
+		<copy file="${buildURL}/eclipse-SDK-${buildId}-macosx-cocoa.tar.gz" tofile="${executionDir}/eclipse-SDK-${buildId}-macosx-cocoa.tar.gz" />
+		<copy file="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" tofile="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
+		<copy file="${buildURL}/eclipse-platform-${buildId}-macosx-cocoa.tar.gz" tofile="${executionDir}/eclipse-platform-${buildId}-macosx-cocoa.tar.gz" />
+		<copy file="${buildURL}/eclipse-${buildId}-delta-pack.zip" tofile="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
+		<copy file="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" tofile="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
+		<copy file="http://download.eclipse.org/eclipse/downloads/drops/R-3.7.1-201109091335/eclipse-platform-3.7.1-macosx-cocoa.tar.gz" tofile="${executionDir}/eclipse-platform-3.7.1-macosx-cocoa.tar.gz" />
 	</target>
 
 	<target name="configure.team.cvs.test">
