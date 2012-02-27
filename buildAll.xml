@@ -767,6 +767,8 @@
 		</p2.mirror>
 
 		<!--mirror EMF features the repo -->
+        <property name="localRepoLocation" value="${buildDirectory}/base/targets/helios-repo-${buildLabel}"/>
+        <mkdir dir="${localRepoLocation}"/>
 		<p2.mirror source="file:${localRepoLocation}" ignoreErrors="true">
 			<destination compressed="true" name="${p2.repo.name}" location="file:${buildRepo}" append="true" format="file:${reposource}" />
 			<comparator comparator="org.eclipse.equinox.p2.repository.tools.jar.comparator" comparatorLog="${buildlogs}/comparatorlogtests.txt">
