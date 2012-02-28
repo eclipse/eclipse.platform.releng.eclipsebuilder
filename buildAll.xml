@@ -154,7 +154,7 @@
 			<or>
 				<equals arg1="${hudson}" arg2="true" />
 				<not>
-				<equals arg1="${tagMaps}" arg2="true" />
+					<equals arg1="${tagMaps}" arg2="true" />
 				</not>
 			</or>
 		</condition>
@@ -767,9 +767,8 @@
 		</p2.mirror>
 
 		<!--mirror EMF features the repo -->
-        <property name="localRepoLocation" value="${buildDirectory}/base/targets/helios-repo-${buildLabel}"/>
-        <mkdir dir="${localRepoLocation}"/>
-		<p2.mirror source="file:${localRepoLocation}" ignoreErrors="true">
+		<property name="emfRepoURL" value="http://download.eclipse.org/modeling/emf/emf/updates/2.8milestones/base" />
+		<p2.mirror source="file:${emfRepoURL}" ignoreErrors="true">
 			<destination compressed="true" name="${p2.repo.name}" location="file:${buildRepo}" append="true" format="file:${reposource}" />
 			<comparator comparator="org.eclipse.equinox.p2.repository.tools.jar.comparator" comparatorLog="${buildlogs}/comparatorlogtests.txt">
 				<repository location="${repoBaseline}" />
