@@ -71,8 +71,3 @@ units.4.touchpoint.id=org.eclipse.equinox.p2.osgi
 units.4.touchpoint.version=1.0.0
 units.4.instructions.configure=addJvmArg(jvmArg:-Xms40m);addJvmArg(jvmArg:-Xmx512m);
 units.4.instructions.unconfigure=removeJvmArg(jvmArg:-Xms40m);removeJvmArg(jvmArg:-Xmx512m);
-
-update.id= org.eclipse.sdk.ide
-update.range = [4.0,4.3)
-update.severity = 0
-update.description = Restrict range so we are not an update for 3.x.
