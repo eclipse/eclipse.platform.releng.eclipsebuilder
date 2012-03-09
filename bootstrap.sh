@@ -52,7 +52,14 @@ tag=""
 #buildProjectTags=v20120118
 #buildProjectTags=v20120119c
 #buildProjectTags=v20120120a
-buildProjectTags=v20120124a
+#buildProjectTags=v20120124a
+#buildProjectTags=v20120131
+#buildProjectTags=v20120202
+#buildProjectTags=v20120212
+#buildProjectTags=v20120213a
+#buildProjectTags=v20120223
+#buildProjectTags=v20120224
+buildProjectTags=v20120305
 
 #updateSite property setting
 updateSite=""
@@ -166,6 +173,7 @@ baseBuilderTag=$buildProjectTags
 
 # tag for exporting the custom builder
 customBuilderTag=$buildProjectTags
+#customBuilderTag=v20111212
 
 if [ -e $builderDir ]
 then
