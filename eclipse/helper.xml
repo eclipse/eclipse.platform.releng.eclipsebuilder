@@ -241,7 +241,7 @@
 			<equals arg1="${hudson}" arg2="true" />
 		</condition>
 		<property testsInvoke="testAll.xml" />
-		<ant antfile="testAll.xml" dir="${eclipse.build.configs}/sdk.tests/testConfigs" />
+		<ant antfile="${testsInvoke}" dir="${eclipse.build.configs}/sdk.tests/testConfigs" />
 
 		<antcall target="generateEclipseIndex" />
 
