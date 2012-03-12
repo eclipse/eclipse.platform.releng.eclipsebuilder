@@ -293,13 +293,13 @@
 			<equals arg1="${hudson}" arg2="true" />
 		</condition>
 		<property name="unix2dos" value="unix2dos" />
-		<exec executable="${unix2dos}" dir="${workingDirectory}/eclipse-testing">
+		<!-- <exec executable="${unix2dos}" dir="${workingDirectory}/eclipse-testing">
 			<arg line="runtests.bat" />
-		</exec>
+		</exec> -->
 		<!--convert runtests files to unix just in case-->
-		<exec executable="dos2unix" dir="${workingDirectory}/eclipse-testing">
+		<!-- <exec executable="dos2unix" dir="${workingDirectory}/eclipse-testing">
 			<arg line="runtests" />
-		</exec>
+		</exec> -->
 
 		<move file="${workingDirectory}/eclipse-junit-tests-${buildId}.zip" todir="${workingDirectory}/eclipse-testing" />
 

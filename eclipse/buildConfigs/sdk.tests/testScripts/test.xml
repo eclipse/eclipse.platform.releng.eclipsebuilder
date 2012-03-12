@@ -38,7 +38,10 @@
 				<os family="unix" />
 			</and>
 			<not>
-				<equals arg1="${test.target}" arg2="performance" />
+				<or>
+					<equals arg1="${test.target}" arg2="performance" />
+					<os family="windows" />
+				</or>
 			</not>
 		</and>
 	</condition>
@@ -102,9 +105,11 @@
 				<os family="unix" />
 				<not>
 					<or>
+						<or>
+							<os arch="x86_64" />
+							<os arch="amd64" />
+						</or>
 						<os family="mac" />
-						<os arch="x86_64" />
-						<os arch="amd64" />
 					</or>
 				</not>
 			</and>
@@ -964,12 +969,12 @@
 		<jacocoreport pluginName="org.eclipse.ui.workbench" reportTitle="org.eclipse.ui.workbench Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.ui.workbench.texteditor" reportTitle="org.eclipse.ui.workbench.texteditor Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.update.configurator" reportTitle="org.eclipse.update.configurator Code Coverage" />
-		<jacocoreport pluginName="org.eclipse.update.core" reportTitle="org.eclipse.update.core Code Coverage" />
+		<!--		<jacocoreport pluginName="org.eclipse.update.core" reportTitle="org.eclipse.update.core Code Coverage" /> -->
 		<jacocoreport pluginName="org.eclipse.update.scheduler" reportTitle="org.eclipse.update.scheduler Code Coverage" />
 		<jacocoreport pluginName="org.eclipse.update.ui" reportTitle="org.eclipse.update.ui Code Coverage" />
 	</target>
 
-	<target name="all">
+	<target name="all">		
 		<antcall target="equinoxp2" />
 		<antcall target="equinoxp2ui" />
 		<antcall target="pdeui" />
@@ -981,8 +986,7 @@
 		<antcall target="coreruntime" />
 		<antcall target="coreresources" />
 		<antcall target="osgi" />
-		<antcall target="coreexpressions" />
-		<antcall target="update" />
+		<antcall target="coreexpressions" />	
 		<antcall target="teamcore" />
 		<antcall target="jdtcoreperf" />
 		<antcall target="jdtcorebuilder" />
@@ -1024,7 +1028,7 @@
 		<antcall target="equinoxp2discovery" />
 		<antcall target="bidi" />
 
-		<antcall target="generateJacocoReport" />
+		<antcall target="generateJacocoReport" /> 
 
 
 	</target>

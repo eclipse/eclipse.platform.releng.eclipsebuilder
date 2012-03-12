@@ -216,7 +216,31 @@
 			</and>
 		</waitfor>
 
+		<condition property="cvstest.properties" value="/shared/eclipse/buildtests/cvstest.properties">
+			<and>
+				<equals arg1="${hudson}" arg2="true" />
+				<and>
+					<os family="unix" />
+					<not>
+						<os family="mac" />
+					</not>
+				</and>
+			</and>
+		</condition>
+		<condition property="cvstest.properties" value="c:\users\hudsonbuild\cvstest.properties">
+			<and>
+				<equals arg1="${hudson}" arg2="true" />
+				<os family="windows" />
+			</and>
+		</condition>
+		<condition property="cvstest.properties" value="/Users/hudsonbuild/cvstest.properties">
+			<and>
+				<equals arg1="${hudson}" arg2="true" />
+				<os family="mac" />
+			</and>
+		</condition>
 		<property name="cvstest.properties" value="${base.builder}/../eclipseInternalBuildTools/cvstest.properties" />
+		<echo message="cvstest.properties ${cvstest.properties}" />
 		<antcall target="configure.team.cvs.test" />
 
 		<!--replace buildid in vm.properties for JVM location settings-->
@@ -237,11 +261,27 @@
 	<target name="test-JUnit">
 		<echo message="Starting tests." />
 		<property name="dropLocation" value="${postingDirectory}" />
-		<condition propertyname="testsInvoke" value="testHudsonAll.xml">
-			<equals arg1="${hudson}" arg2="true" />
-		</condition>
-		<property testsInvoke="testAll.xml" />
-		<ant antfile="${testsInvoke}" dir="${eclipse.build.configs}/sdk.tests/testConfigs" />
+		<!-- <ant antfile="testAll.xml" dir="${eclipse.build.configs}/sdk.tests/testConfigs" /> -->
+		<property name="testDirectory" value="${buildDirectory}/tests" />
+		<property name="testingDirectory" value="${buildDirectory}/tests/eclipse-testing" />
+		<mkdir dir="${testDirectory}" />
+		<mkdir dir="${testingDirectory}" />
+		<echo message="testingDirectory ${testingDirectory}" />
+		<ant antfile="/shared/eclipse/e4/kimtest/build/e4/org.eclipse.releng.eclipsebuilder_R4_2_primary/invokeTestsJSON.xml" target="runTests" />
+		<!--            <copy file="${postingDirectory}/${buildLabel}/checksum/eclipse-Automated-Tests-${buildId}.zip" dir="${testDirectory}" />  -->
+		<!-- <unzip src="${postingDirectory}/${buildLabel}/eclipse-Automated-Tests-${buildId}.zip" dest="${testDirectory}" />
+	                <copy file="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz" todir="${testingDirectory}" />
+	                <copy file="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz" todir="${testingDirectory}" />
+	                <copy file="${postingDirectory}/${buildLabel}/eclipse-${buildId}-delta-pack.zip" todir="${testingDirectory}" />
+	                <copy file="${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-linux-gtk-x86_64.tar.gz" todir="${testingDirectory}" />
+
+	                <exec executable="/bin/bash" dir="${testingDirectory}">
+	                        <arg line="runtests.sh -os linux -ws gtk -arch x86_64" />
+	                </exec>
+
+	                <copy todir="${postingDirectory}/${buildLabel}/testresults">
+	                        <fileset dir="${testingDirectory}/results" />
+	                </copy> -->
 
 		<antcall target="generateEclipseIndex" />
 
@@ -250,8 +290,8 @@
 			<fileset dir="${buildDirectory}/${buildLabel}" includes="testresults/**,*.php" />
 		</copy>
 		<replace file="${postingDirectory}/${buildLabel}/testResults.php" token="@build@" value="${buildId}" />
-
 	</target>
+
 
 	<!-- ===================================================================== -->
 	<!-- Target used to test the build                                         -->
