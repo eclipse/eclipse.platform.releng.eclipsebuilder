@@ -267,7 +267,7 @@
 		<mkdir dir="${testDirectory}" />
 		<mkdir dir="${testingDirectory}" />
 		<echo message="testingDirectory ${testingDirectory}" />
-		<ant antfile="/shared/eclipse/e4/kimtest/build/e4/org.eclipse.releng.eclipsebuilder_R4_2_primary/invokeTestsJSON.xml" target="runTests" />
+		<ant antfile="invokeTestsJSON.xml" target="runTests" />
 		<!--            <copy file="${postingDirectory}/${buildLabel}/checksum/eclipse-Automated-Tests-${buildId}.zip" dir="${testDirectory}" />  -->
 		<!-- <unzip src="${postingDirectory}/${buildLabel}/eclipse-Automated-Tests-${buildId}.zip" dest="${testDirectory}" />
 	                <copy file="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz" todir="${testingDirectory}" />
