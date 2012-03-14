@@ -22,15 +22,15 @@
 	<target name="JUnitTests">
 		<parallel>
 			<antcall target="triggerHudsonTests">
-				<param name="job" value="JUnit-win2" />
+				<param name="job" value="JUnit-win" />
 				<param name="suffix" value="win32.zip" />
 			</antcall>
 			<antcall target="triggerHudsonTests">
-				<param name="job" value="eclipse-JUnit-Linux2" />
+				<param name="job" value="eclipse-JUnit-Linux" />
 				<param name="suffix" value="linux-gtk-x86_64.tar.gz" />
 			</antcall>
 			<antcall target="triggerHudsonTests">
-				<param name="job" value="eclipse-JUnit-mac2" />
+				<param name="job" value="eclipse-JUnit-mac" />
 				<param name="suffix" value="macosx-cocoa-x86.zip" />
 			</antcall>
 		</parallel>
