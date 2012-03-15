@@ -1,0 +1,153 @@
+<project default="main">
+
+	<target name="init">
+		<!--		<property name="buildId" value="N20110317-1137" /> -->
+		<property name="currentbuildrepo" value="http://download.eclipse.org/eclipse/downloads/drops/${buildId}" />
+		<echo message="buildId ${buildId}" />
+		<echo message="WORKSPACE ${WORKSPACE}" />
+		<echo message="BUILD_ID ${BUILD_ID}" />
+		<echo message="BUILD_NUMBER ${BUILD_NUMBER}" />
+		<!-- <condition property="testDir" value="${WORKSPACE}\ws\${BUILD_ID}">
+			<os family="windows" />
+		</condition> -->
+		<condition property="testDir" value="${WORKSPACE}\ws">
+			<os family="windows" />
+		</condition>
+		<property name="testDir" value="${WORKSPACE}/ws/${BUILD_ID}" />
+		<echo message="testDir ${testDir}" />
+		<condition property="executionDir" value="${testDir}\eclipse-testing">
+			<os family="windows" />
+		</condition>
+		<property name="executionDir" value="${testDir}/eclipse-testing" />
+		<mkdir dir="${executionDir}" />
+		<echo message="executionDir ${executionDir}" />
+		<echo message="hudson ${hudson}" />
+		<echo message="BUILD_JOB_NAME ${BUILD_NUMBER}" />
+		<echo message="BUILD_BUILD_NUMBER ${BUILD_BUILD_NUMBER}" />
+		<!-- <property name="buildURL" value="http://download.eclipse.org/eclipse/downloads/drops/${buildId}" /> -->
+		<echo message="buildURL ${buildURL}" />
+		<!-- <property name="buildURL" value="http://build.eclipse.org/eclipse/e4/kimtest/build/e4/src/${buildId}" /> -->		
+     	<property name="baseURL" value="http://build.eclipse.org/shared/eclipse/e4/kimtest38/build/e4/${buildId}" />
+
+	</target>	
+
+	<target name="getwinzips">
+		<get src="${buildURL}/eclipse-SDK-${buildId}-win32.zip" dest="${executionDir}/eclipse-SDK-${buildId}-win32.zip" />
+		<get src="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
+		<get src="${buildURL}/eclipse-platform-${buildId}-win32.zip" dest="${executionDir}/eclipse-platform-${buildId}-win32.zip" />
+		<get src="${buildURL}/eclipse-${buildId}-delta-pack.zip" dest="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
+		<get src="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/R-3.7.1-201109091335/eclipse-platform-3.7.1-win32.zip" dest="${executionDir}/eclipse-platform-3.7.1-win32.zip" /> 	</target>
+
+	<target name="getlinzips">
+		<get src="${buildURL}/eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz" dest="${executionDir}/eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz" />
+		<get src="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
+		<get src="${buildURL}/eclipse-platform-${buildId}-linux-gtk-x86_64.tar.gz" dest="${executionDir}/eclipse-platform-${buildId}-linux-gtk-x86_64.tar.gz" />
+		<get src="${buildURL}/eclipse-${buildId}-delta-pack.zip" dest="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
+		<get src="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/R-3.7.1-201109091335/eclipse-platform-3.7.1-linux-gtk-x86_64.tar.gz" dest="${executionDir}/eclipse-platform-3.7.1-linux-gtk-x86_64.tar.gz" />
+	</target>
+
+	<target name="getmaczips">
+		<get src="${buildURL}/eclipse-SDK-${buildId}-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-SDK-${buildId}-macosx-cocoa.tar.gz" />
+		<get src="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
+		<get src="${buildURL}/eclipse-platform-${buildId}-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-platform-${buildId}-macosx-cocoa.tar.gz" />
+		<get src="${buildURL}/eclipse-${buildId}-delta-pack.zip" dest="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
+		<get src="${buildURL}/eclipse-Automated-Tests-${buildId}.zip" dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
+		<get src="http://download.eclipse.org/eclipse/downloads/drops/R-3.7.1-201109091335/eclipse-platform-3.7.1-macosx-cocoa.tar.gz" dest="${executionDir}/eclipse-platform-3.7.1-macosx-cocoa.tar.gz" />
+	</target>
+
+	<target name="configure.team.cvs.test">
+		<condition property="cvstest.properties" value="/shared/eclipse/buildtests/cvstest.properties">
+			<and>
+				<os family="unix" />
+				<not>
+					<os family="mac" />
+				</not>
+			</and>
+		</condition>
+		<condition property="cvstest.properties" value="c:\users\hudsonbuild\cvstest.properties">
+			<os family="windows" />
+		</condition>
+		<condition property="cvstest.properties" value="/Users/hudsonbuild/cvstest.properties">
+			<os family="mac" />
+		</condition>
+		<echo message="cvstest.properties ${cvstest.properties}" />
+		<replace file="${executionDir}/test.xml" propertyFile="${cvstest.properties}">
+			<replacefilter token="${cvs_user}" property="cvs_user" />
+			<replacefilter token="${cvs_password}" property="cvs_password" />
+			<replacefilter token="${cvs_host}" property="cvs_host" />
+			<replacefilter token="${cvs_root}" property="cvs_root" />
+		</replace>
+	</target>
+
+	<target name="main" depends="init">
+		<property name="test.xml" value="../org.eclipse.releng.basebuilder/plugins/org.eclipse.build.tools/scripts/test.xml" />
+		<condition property="testPlatform" value="win7">
+			<and>
+				<equals arg1="${osgi.os}" arg2="win32" />
+				<equals arg1="${osgi.ws}" arg2="win32" />
+				<equals arg1="${osgi.arch}" arg2="x86" />
+			</and>
+		</condition>
+		<echo message="os ws arch ${osgi.os} ${osgi.ws} ${osgi.arch}" />
+		<condition property="testPlatform" value="linux">
+			<and>
+				<equals arg1="${osgi.os}" arg2="linux" />
+				<equals arg1="${osgi.ws}" arg2="gtk" />
+				<or>
+					<equals arg1="${osgi.arch}" arg2="x86_64" />
+					<equals arg1="${osgi.arch}" arg2="x86" />
+				</or>
+			</and>
+		</condition>
+		<condition property="testPlatform" value="macmini">
+			<and>
+				<equals arg1="${osgi.os}" arg2="macosx" />
+				<equals arg1="${osgi.ws}" arg2="cocoa" />
+				<equals arg1="${osgi.arch}" arg2="x86" />
+			</and>
+		</condition>
+		<echo message="testPlatform  ${testPlatform}" />
+		<condition property="getArtifacts" value="getwinzips">
+			<equals arg1="${testPlatform}" arg2="win7" />
+		</condition>
+		<condition property="getArtifacts" value="getlinzips">
+			<equals arg1="${testPlatform}" arg2="linux" />
+		</condition>
+		<condition property="getArtifacts" value="getmaczips">
+			<equals arg1="${testPlatform}" arg2="macmini" />
+		</condition>
+		<echo message="getArtifacts ${getArtifacts}" />
+		<antcall target="${getArtifacts}" />
+		<property file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/testing.properties" />
+		<property name="tester" value="${executionDir}" />
+
+		<!--if executiondir starts with c:\ you'll need to escape it so it can load the filename properly with java -->
+		<pathconvert targetos="unix" property="windowsfile">
+			<path location="${executionDir}" />
+		</pathconvert>
+		<echo message="windowsfile ${windowsfile}" />
+		<property name="p2executionDir" value="${windowsfile}" />
+		<replace file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" token="@executionDir@" value="${p2executionDir}" />
+		<replace file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" token="@buildId@" value="${buildId}" />
+		<replace file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" token="@org.eclipse.equinox.p2.tests.current.build.repo@" value="${currentbuildrepo}" />
+		<property file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" />
+
+		<echo message="executionDir ${executionDir}" />
+
+		<!--	eclipse-JUnit-Linux/ws/2010-11-08_14-26-17/ws/eclipse-testing/
+		
+		 WORKSPACE /opt/users/hudsonbuild/workspace/eclipse-JUnit-Linux -->
+
+		<copy todir="${executionDir}">
+			<fileset dir="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}" />
+		</copy>
+		<copy todir="${executionDir}" overwrite="true">
+			<fileset dir="eclipse/buildConfigs/sdk.tests/testScripts" />
+		</copy>
+		<antcall target="configure.team.cvs.test" />
+		<ant antfile="${test.xml}" />
+	</target>
+
+</project>
