@@ -60,23 +60,7 @@
 		<platform id="PMCC64" name="Mac OSX (Mac/Cocoa/x86_64)(&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-@build@-macosx-cocoa-x86_64.tar.gz"></platform>	
 		<platform id="PLR" name="&lt;img src = &quot;repo.gif&quot;> Platform Runtime Repo " fileName="org.eclipse.platform-@build@.zip"></platform>
 	</zipType>
-
-	<zipType name="Platform SDK">
-		<platform id="PWSDK" name="Windows (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-SDK-@build@-win32.zip"></platform>
-		<platform id="PWSDKX8664" name="Windows (x86_64) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-SDK-@build@-win32-x86_64.zip"></platform>
-		<platform id="PLG2SDK" name="Linux (x86/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-SDK-@build@-linux-gtk.tar.gz"></platform>
-		<platform id="PLG264SDK" name="Linux (x86_64 64/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-SDK-@build@-linux-gtk-x86_64.tar.gz"></platform>
-		<platform id="PLG2PPCSDK" name="Linux (PPC64/GTK 2) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-SDK-@build@-linux-gtk-ppc64.tar.gz"></platform>
-		<platform id="PSGSDK" name="Solaris 10 (SPARC/GTK 2)" fileName="eclipse-platform-SDK-@build@-solaris-gtk.zip"></platform>
-		<platform id="PSGSDKX" name="Solaris 10 (x86/GTK 2)" fileName="eclipse-platform-SDK-@build@-solaris-gtk-x86.zip"></platform>
-		<platform id="PHPUXSDK" name="HPUX (IA64_32/GTK 2)" fileName="eclipse-platform-SDK-@build@-hpux-gtk-ia64_32.zip"></platform>					
-		<platform id="PAGSDK" name="AIX (PPC/GTK 2)" fileName="eclipse-platform-SDK-@build@-aix-gtk-ppc.zip"></platform>		
-		<platform id="PAGPPC64SDK" name="AIX (PPC64/GTK 2)" fileName="eclipse-platform-SDK-@build@-aix-gtk-ppc64.zip"></platform>		
-		<platform id="PMCSDKC" name="Mac OSX (Mac/Cocoa) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-SDK-@build@-macosx-cocoa.tar.gz"></platform>
-		<platform id="PMCSDKC64" name="Mac OSX (Mac/Cocoa/x86_64) (&lt;a href=&quot;http://www.eclipse.org/projects/project-plan.php?projectid=eclipse#target_environments&quot;>Supported Versions&lt;/a>)" fileName="eclipse-platform-SDK-@build@-macosx-cocoa-x86_64.tar.gz"></platform>		
-		<platform id="PLSR" name="&lt;img src = &quot;repo.gif&quot;> Platform Source Repo " fileName="org.eclipse.platform.source-@build@.zip"></platform>
-	</zipType>
-
+	
 	<zipType name="JDT Runtime Binary">
 		<platform id="JRR" name="&lt;img src = &quot;repo.gif&quot;> JDT Runtime Repo " fileName="org.eclipse.jdt-@build@.zip"></platform>
 	</zipType>

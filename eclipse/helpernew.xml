@@ -335,7 +335,7 @@
 		<ant antfile="${base.builder}/plugins/org.eclipse.build.tools/scripts/publish.xml" dir="${publishingContent}" target="generateIndex">
 			<property name="isBuildTested" value="true" />
 			<property name="buildType" value="${buildType}" />
-			<property name="dropTokenList" value="%sdk%,%tests%,%example%,%rcpruntime%,%rcpsdk%,%deltapack%,%icubase%,%runtime%,%platformsdk%,%jdt%,%jdtsdk%,%jdtc%,%jarprocessor%,%pde%,%pdesdk%,%cvs%,%cvssdk%,%swt%,%relengtools%" />
+			<property name="dropTokenList" value="%sdk%,%tests%,%example%,%rcpruntime%,%rcpsdk%,%deltapack%,%icubase%,%runtime%,%jdt%,%jdtsdk%,%jdtc%,%jarprocessor%,%pde%,%pdesdk%,%cvs%,%cvssdk%,%swt%,%relengtools%" />
 			<property name="platformIdentifierToken" value="%platform%" />
 			<property name="platformSpecificTemplateList" value="Windows,${publishingContent}/templateFiles/platform.php.template,winPlatform.php;Linux,${publishingContent}/templateFiles/platform.php.template,linPlatform.php;Solaris,${publishingContent}/templateFiles/platform.php.template,solPlatform.php;AIX,${publishingContent}/templateFiles/platform.php.template,aixPlatform.php;Macintosh,${publishingContent}/templateFiles/platform.php.template,macPlatform.php;HP-UX,${publishingContent}/templateFiles/platform.php.template,hpuxPlatform.php;Source Build,${publishingContent}/templateFiles/sourceBuilds.php.template,sourceBuilds.php" />
 			<property name="indexFileName" value="index.php" />

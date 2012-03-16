@@ -354,14 +354,6 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 
 
 <tr><td><div class="homeitem3col">
-<h3><a name="PlatformSDK"> Platform SDK&nbsp;<a href="details.php#PlatformSDK"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
-</tr> %platformsdk% </table>
-</div></td></tr>
-
-
-<tr><td><div class="homeitem3col">
 <h3><a name="JDTRuntime"> JDT Runtime Binary&nbsp;<a href="details.php#JDTRuntime"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
 <tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
