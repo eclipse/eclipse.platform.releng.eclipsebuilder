@@ -104,7 +104,7 @@
 		</condition>
 		<property name="p2.repo.name" value="&quot;Eclipse Project Test Site&quot;" />
 		<property name="localmirror" value="fullmoon.ottawa.ibm.com" />
-		<property name="cvsuser" value="kmoir" />
+		<property name=":pserver:anonymous" value="kmoir" />
 	</target>
 
 	<target name="buildMasterFeature">
