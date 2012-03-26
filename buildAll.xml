@@ -200,9 +200,10 @@
 	</target>
 
     <!-- no longer build source drops, see bug 374428 -->
-	<target name="buildEclipseSourceDrops" depends="checkEclipseSourceDrops" unless="skipSourceBuild">
-	    <!-- eventually may remove this whole task? when no longer build source drops, see bug 374428 -->
+	<target name="buildEclipseSourceDrops" >
+	    <!-- eventually may remove this whole task? when no longer build source drops, see bug 374428 
 		<property name="buildSourceDrops" value="true" />
+		-->
 		<!--examples are required to pull sample doc into SDK doc plug-ins-->
 		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="preBuild">
 			<property name="builder" value="${eclipse.build.configs}/sdk.examples" />
@@ -245,9 +246,7 @@
 			<equals arg1="${buildType}" arg2="I" />
 		</condition>
 	</target>
-    <target name="checkEclipseSourceDrops" if="skipSourceBuild">
-        <echo message="Intentionally skipped the SourceBuild fetch and archive. See bug 374428" />
-    </target>
+
     
 	<target name="packMasterFeature" unless="skipPack">
 		<property name="archiveName" value="eclipse-master-${buildId}.zip" />
