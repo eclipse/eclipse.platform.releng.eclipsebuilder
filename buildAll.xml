@@ -199,7 +199,9 @@
 		</ant>
 	</target>
 
-	<target name="buildEclipseSourceDrops">
+    <!-- no longer build source drops, see bug 374428 -->
+	<target name="buildEclipseSourceDrops" unless="skipSourceBuild">
+	    <!-- eventually may remove this whole task? when no longer build source drops, see bug 374428 -->
 		<property name="buildSourceDrops" value="true" />
 		<!--examples are required to pull sample doc into SDK doc plug-ins-->
 		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="preBuild">
