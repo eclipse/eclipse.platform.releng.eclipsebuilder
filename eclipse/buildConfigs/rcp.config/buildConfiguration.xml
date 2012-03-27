@@ -13,6 +13,7 @@
 		    <dirset dir="${buildDirectory}" includes="features/org.eclipse.license*" />
 		</path>
 
+	    <echo message="generate a feature based on .product file into: ${basedir}/temp" />
 		<!-- generate a feature based on our .product file -->
 		<property file="${eclipse.build.configs}/master/build.properties" />
 		<ant antfile="${eclipse.pdebuild.scripts}/productBuild/productBuild.xml" target="generateFeature" >
@@ -21,9 +22,10 @@
 		</ant>
 		<!-- generate product build scripts for the generated feature -->
         <echo message="About to generate scritps in buildConfiguration.xml in rcp.config" />
+	    <echo message="   reposource: ${reposource} " />
 	    <echo message="   basedir: ${basedir}" />
 	    <echo message="   local?  buildDirectory:  ${basedir}/temp" />
-	    <echo message="   global? buildDirectory: $buildDirectory" />
+	    <echo message="   global? buildDirectory: ${buildDirectory}" />
 	    <echo message="   forceContextQualifier: ${buildId}" />
 		<ant antfile="${eclipse.pdebuild.scripts}/genericTargets.xml" target="generateScript" >
             <property name="buildDirectory" value="${basedir}/temp"/>
