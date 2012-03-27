@@ -20,18 +20,13 @@
 			<property name="buildDirectory" value="${basedir}/temp"/>
 		</ant>
 		<!-- generate product build scripts for the generated feature -->
+        <echo message="About to generate scritps in buildConfiguration.xml in rcp.config" />
 		<ant antfile="${eclipse.pdebuild.scripts}/genericTargets.xml" target="generateScript" >
             <property name="buildDirectory" value="${basedir}/temp"/>
 			<property name="baseLocation" value="" />
 			<property name="transformedRepoLocation" value="" />
 			<property name="pluginPath" refid="launcher.paths" />
 			<property name="forceContextQualifier" value="${buildId}" />
-		    <echo message="About to generate scritps in buildConfiguration.xml in rcp.config" />
-		    <echo message="buildDirectory: ${buildDirectory}" />
-            <echo message="baseLocation: ${baseLocation}" />
-            <echo message="transformedRepoLocation: ${transformedRepoLocation}" />
-            <echo message="pluginPath: ${pluginPath}" />
-            <echo message="forceContextQualifier: ${forceContextQualifier}" />
         </ant>
 
 		<!-- get the generate p2.inf that got generated with the above scripts --> 
