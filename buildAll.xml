@@ -578,6 +578,7 @@
 			<property name="p2.build.repo" value="file:/${buildDirectoryAbsolute}" />
 		</subant>
 
+	     <echo message="Getting ready to execute buildConfiguration.xml for ${eclipse.build.configs}/rcp.config" />
 		<ant target="main" antfile="buildConfiguration.xml" dir="${eclipse.build.configs}/rcp.config" />
 
 		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${eclipse.build.configs}/sdk/builder/sdk.product" compress="true">
