@@ -125,11 +125,6 @@
 	<!-- ===================================================================== -->
 	<target name="preSetup">
 
-<!-- this task was failing, and I do not see why is is needed. the e4.map file 
-     should contain all that is needed, though we may want to include exact version 
-     there, eventually. There could well be a reason this is needed, but ... seems to choak on 
-     making the 'runnable'. -->
-<!--
 		<echo message="Mirror from ${emfRepoURL} to ${localRepoLocation}" />
 		<p2.mirror destination="file:${localRepoLocation}" ignoreerrors="true">
 			<source location="${emfRepoURL}" />
@@ -143,7 +138,7 @@
 		<p2.repo2runnable destination="${transformedRepoLocation}">
 			<source location="file:${localRepoLocation}" />
 		</p2.repo2runnable>
-		-->
+		
 	</target>
 
 
