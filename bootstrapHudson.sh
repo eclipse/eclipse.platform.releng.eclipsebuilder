@@ -65,7 +65,7 @@ buildId=""
 buildLabel=""
 
 # tag for build contribution project containing .map files
-#mapVersionTag=HEAD
+#mapVersionTag=R4_HEAD
 mapVersionTag=R4_HEAD
 
 # directory in which to export builder projects
