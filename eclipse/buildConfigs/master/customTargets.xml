@@ -127,6 +127,7 @@
 
 	    <!-- emf needs to be part of the "runnable" target, since Eclipse wants to "require" EMF, 
 	         not "include" it -->
+	            
 		<echo message="Mirror from ${emfRepoURL} to ${localRepoLocation}" />
 		<p2.mirror destination="file:${localRepoLocation}" ignoreerrors="true">
 			<source location="${emfRepoURL}" />
@@ -137,6 +138,10 @@
 			<iu id="org.eclipse.emf.common.source.feature.group" version="0.0.0" />
 		</p2.mirror>
 
+        <echo message="creating runnable in preSetup" />
+        <echo message="basedir: ${basedir}" />
+		<echo message="buildDirectory: ${buildDirectory}" />	    
+	    <echo message="transformedRepoLocation: ${transformedRepoLocation}" />
 		<p2.repo2runnable destination="${transformedRepoLocation}">
 			<source location="file:${localRepoLocation}" />
 		</p2.repo2runnable>
