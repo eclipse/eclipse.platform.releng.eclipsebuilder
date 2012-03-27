@@ -119,6 +119,7 @@
 			<equals arg1="${hudson}" arg2="true" />
 		</condition>
 		<property name="localmirror" value="fullmoon.ottawa.ibm.com" />
+	     <echo message="localmirror: ${localMirror}" />
 		<condition property="cvsuser" value=":pserver:anonymous">
 			<equals arg1="${hudson}" arg2="true" />
 		</condition>
@@ -578,7 +579,7 @@
 			<property name="p2.build.repo" value="file:/${buildDirectoryAbsolute}" />
 		</subant>
 
-	     <echo message="Getting ready to execute buildConfiguration.xml for ${eclipse.build.configs}/rcp.config" />
+	     <echo message="Getting ready to execute ${basedir}/buildConfiguration.xml for ${eclipse.build.configs}/rcp.config" />
 		<ant target="main" antfile="buildConfiguration.xml" dir="${eclipse.build.configs}/rcp.config" />
 
 		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${eclipse.build.configs}/sdk/builder/sdk.product" compress="true">
