@@ -26,6 +26,12 @@
 			<property name="transformedRepoLocation" value="" />
 			<property name="pluginPath" refid="launcher.paths" />
 			<property name="forceContextQualifier" value="${buildId}" />
+		    <echo message="About to generate scritps in buildConfiguration.xml in rcp.config" />
+		    <echo message="buildDirectory: ${buildDirectory}" />
+            <echo message="baseLocation: ${baseLocation}" />
+            <echo message="transformedRepoLocation: ${transformedRepoLocation}" />
+            <echo message="pluginPath: ${pluginPath}" />
+            <echo message="forceContextQualifier: ${forceContextQualifier}" />
         </ant>
 
 		<!-- get the generate p2.inf that got generated with the above scripts --> 
