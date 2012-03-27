@@ -125,6 +125,8 @@
 	<!-- ===================================================================== -->
 	<target name="preSetup">
 
+	    <!-- emf needs to be part of the "runnable" target, since Eclipse wants to "require" EMF, 
+	         not "include" it -->
 		<echo message="Mirror from ${emfRepoURL} to ${localRepoLocation}" />
 		<p2.mirror destination="file:${localRepoLocation}" ignoreerrors="true">
 			<source location="${emfRepoURL}" />
@@ -153,9 +155,7 @@
 	<!-- Steps to do before fetching the build elements -->
 	<!-- ===================================================================== -->
 	<target name="preFetch">
-       <!-- removed this "replace" step, since we removed the presetup step so repos don't exist
-            but I do not see the normal "getMaps" task at all, here, 
-            so may need to do something? Or restore? 
+       <!-- removed this "replace" step, since don't believe its required any longer
 		<replace dir="${buildDirectory}/maps/org.eclipse.releng/maps" value="${localmirror}" token="download.eclipse.org" />
 		<replace dir="${buildDirectory}/maps/org.eclipse.releng/maps" value="${cvsuser}" token=":pserver:anonymous" />
 		-->
