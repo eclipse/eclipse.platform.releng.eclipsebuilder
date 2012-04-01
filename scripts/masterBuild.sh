@@ -201,7 +201,7 @@ updateBaseBuilder () {
     if [[ -d "${relengBaseBuilderDir}" ]]
      then
            echo "removing previous version of base builder, to be sure it is fresh, to see if related to to see if fixes bug 375780"
-           rm -fvr "${relengBaseBuilderDir}"
+           rm -fr "${relengBaseBuilderDir}"
      fi
 
     if [[ ! -d "${relengBaseBuilderDir}" ]] 
@@ -253,7 +253,7 @@ updateEclipseBuilder() {
     #builderDir is full path to eclipsebuilder
     if [[ -d "${builderDir}" ]] 
     then
-        rm -fvr  "${builderDir}"
+        rm -fr  "${builderDir}"
     fi
     
      # get fresh script 
