@@ -109,7 +109,7 @@ supportDir=${buildDir}/supportDir
 mkdir -p "${supportDir}"
 
 if [ -z "$gitCache" ]; then
-    gitCache=$supportDir/gitClones
+    export gitCache=$supportDir/gitClones
     # ensure exists, in case not
     mkdir -p $gitCache
     echo "INFO: value of gitCache: ${gitCache}"
@@ -119,7 +119,7 @@ fi
 
 # TODO: MIGHT be part of gitcache some day ... but, different repo
 #builderDir=${gitCache}//${relengProject}/$eclipsebuilder
-builderDir=${supportDir}/$eclipsebuilder
+export builderDir=${supportDir}/$eclipsebuilder
 # remember: do nt "mkdir" for builderDir since presence/absence is used later in co vs update logic
 # mkdir -p "${builderDir}"
 echo "INFO: value of builderDir: ${builderDir}"
