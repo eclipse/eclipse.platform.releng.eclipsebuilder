@@ -12,6 +12,7 @@
 #*******************************************************************************
 
 #default values, overridden by command line
+# this "oldBuild" was the last known 4.2 based I build on old machine. 
 oldBuildTag="I20120321-0610"
 writableBuildRoot=/shared/eclipse/e4/dwtest/eclipse4
 

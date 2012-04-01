@@ -12,7 +12,7 @@ echo "DEBUG: $DEBUG"
 # VERBOSE_REMOVES needs to be empty or literally 'v', since
 # simply makes up part of "rm" command when directories removed.
 VERBOSE_REMOVES=${VERBOSE_REMOVES:-}
-#VERBOSE_REMOVES=${VERBOSE_REMOVES:-v}
+#VERBOSE_REMOVES=${VERBOSE_REMOVES:--v}
 echo "VERBOSE_REMOVES: $VERBOSE_REMOVES"
 
 # debugVar is simply utility to display variables and values that is 
@@ -78,7 +78,7 @@ function getEclipseBuilder () {
     if [[ -d "${builderDir}" ]] 
     then
         debugMsg "     Removing previous builderDir to make sure clean"
-        rm -fr${VERBOSE_REMOVES}  "${builderDir}"
+        rm -fr ${VERBOSE_REMOVES} "${builderDir}"
     else 
         debugMsg "     Previous builderDir did not exist, so nothing to remove"
     fi

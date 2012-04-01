@@ -17,7 +17,7 @@ writableBuildRoot=/shared/eclipse/e4/dwtest/eclipse4
 mkdir -p "${writableBuildRoot}"
 export buildDir=$writableBuildRoot/build
 mkdir -p "${buildDir}"
-
+374974 - org.eclipse.releng.eclipsebuilder should be migrated to Git
 relengProject=eclipse.platform.releng
 
 relengMapsProject=org.eclipse.releng
@@ -52,7 +52,30 @@ buildTag=$buildType$buildTimestamp
 
 submissionReportFilePath=$writableBuildRoot/$buildTag/report.txt
 
-quietCVS=-Q
+# DEBUG controls verbosity of little "state and status" bash echo messages.
+# Set to true to get the most echo messages. Anything else to be quiet. 
+# Normally would be false during production, but true for debugging/tests. 
+export DEBUG=${DEBUG:-false}
+#export DEBUG=${DEBUG:-true}
+echo "DEBUG: $DEBUG"
+
+# VERBOSE_REMOVES needs to be empty or literally '-v', since
+# simply makes up part of "rm" command when directories or files removed.
+# normally empty for production runs, but might help in debugging.
+# (but, it is VERY verbose)
+export VERBOSE_REMOVES=${VERBOSE_REMOVES:-}
+#export VERBOSE_REMOVES=${VERBOSE_REMOVES:--v}
+echo "VERBOSE_REMOVES: $VERBOSE_REMOVES"
+
+# quietCVS needs to be -Q (really quiet) -q (somewhat quiet) or literally empty (verbose)
+# FYI, not that much difference between -Q and -q :) 
+# TODO: won't be needed once move off CVS is complete
+export quietCVS=${quietCVS:--Q}
+#export quietCVS=${quietCVS:--q}
+#export quietCVS=${quietCVS:-}
+
+
+
 arch="x86_64"
 archProp="-x86_64"
 archJavaProp=""
@@ -200,7 +223,7 @@ updateBaseBuilder () {
     if [[ -d "${relengBaseBuilderDir}" ]]
      then
            echo "removing previous version of base builder, to be sure it is fresh, to see if related to to see if fixes bug 375780"
-           rm -fr "${relengBaseBuilderDir}"
+           rm -fr${VERBOSE_REMOVES} "${relengBaseBuilderDir}"
      fi
 
     if [[ ! -d "${relengBaseBuilderDir}" ]] 
@@ -433,7 +456,7 @@ process_build () {
     failed=""
     testsMsg=$(sed -n '/<!--START-TESTS-->/,/<!--END-TESTS-->/p' $HUDSON_DROPS/$buildId/$buildId/results/testResults.html > mail.txt)
     testsMsg=$(cat mail.txt | sed s_href=\"_href=\"http://download.eclipse.org/eclipse/downloads/drops4/$buildId/results/_)
-    rm mail.txt
+    rm ${VERBOSE_REMOVES} mail.txt
 
     red=$(echo $testsMsg | grep "color:red")
     if [[ ! -z $red ]]; then
