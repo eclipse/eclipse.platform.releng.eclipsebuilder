@@ -4,7 +4,11 @@
 		Ant properties for buildId, buildLabel, timestamp and buildDirectory must be set before running this script.
 	-->
 	<!--A directory to look in for markers created from other running builds.-->
+    <!-- TODO: we may need to change this to a "real" value on build.eclipse.org? instead of /home/users/releng/buildTools/markers -->
+    <!-- some of the java code in tests seems to depend on it? 
 	<property name="markerContainer" value="/home/users/releng/buildTools/markers" />
+    -->
+	<property name="markerContainer" value="${basedir}/markers" />
 	<property name="cfg" value="${basedir}/machine.cfg" />
 	<property name="test.xml" value="${base.builder}/plugins/org.eclipse.build.tools/scripts/test.xml" />
 

@@ -35,6 +35,7 @@
 	<!-- ===================================================================== -->
 
 	<target name="getMapFiles" depends="checkLocalMaps" unless="skipMaps">
+	    <echoproperties description="properties at start of get maps, in master." />
 		<property name="mapsGitRepo" value="${buildDirectory}/commonrepo" />
 		<mkdir dir="${mapsGitRepo}" />
 		<exec executable="git" dir="${mapsGitRepo}">

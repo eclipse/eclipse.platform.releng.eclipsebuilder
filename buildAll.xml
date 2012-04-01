@@ -28,15 +28,6 @@
 	<property name="sdkHelper" location="${eclipse.build.configs}/eclipse/helper.xml" />
 	<property name="base.builder" value="${basedir}/../org.eclipse.releng.basebuilder" />
 
-	<!--location of properties file containing last tag used for integration build-->
-	<property name="mapTag.properties" value="/home/users/releng/buildTools/eclipse38/mapTag.properties" />
-
-	<!--location of properties file containing last performance reference test information-->
-	<property name="ref.properties" value="/home/users/releng/buildTools/eclipse.perf/ref38.properties" />
-
-	<!--location of test update site-->
-	<property file="${ref.properties}" />
-
 	<!--default buildDirectory-->
 	<property name="buildDirectory" value="${basedir}/../src" />
 
@@ -56,6 +47,7 @@
 	<property name="buildRepo" value="${updateSite}/${buildId}" />
 
 	<target name="main" depends="init">
+	    <echoproperties description="properties at start of main buildAll.xml"/>
 		<antcall target="buildEclipseSourceDrops" />
 		<antcall target="buildMasterFeature" />
 		<parallel failonany="true">
@@ -83,6 +75,14 @@
 	</target>
 
 	<target name="init">
+	    <echo message="DEBUG: echo properties at start of init in buildAll.xml" />
+	    <echoproperties />
+	    
+	    <!-- hopefully temporary "complete wipe" of buildDirectory for fresh build. 
+	         this will likely prevent "build restarts" ... but, see bug 375780 -->
+	    <available file="${buildDirectory}" property="buildDirectoryExists" />
+	    <antcall target="forceCompleteClean" />
+	    
 		<ant antfile="build.xml" target="init" />
 		<property file="${buildDirectory}/label.properties" />
 		<condition property="fetchTag" value="CVS=HEAD,GIT=master;git://git.eclipse.org/gitroot/platform/eclipse.platform.ui.git=R3_development">
@@ -160,6 +160,8 @@
 			</or>
 		</condition>
 		<property name="commonrepo" value="ssh://git.eclipse.org/gitroot/platform/eclipse.platform.releng.maps" />
+	    <echo message="DEBUG: echo properties at end of init in buildAll.xml" />
+	    <echoproperties />
 	</target>
 
 	<target name="buildECFMasterFeature">
@@ -819,4 +821,13 @@
 		</ant>
 	</target>
 
+    <target name="forceCompleteClean" depends="docCleanupValues" if="buildDirectoryExists">
+        <echo message="DEBUG: doing complete wipe of (previous) buildDirectory. See bug 375780" />
+        <!-- fail, since we may have trouble deleting directories on build.eclipse.org? -->
+        <delete dir="${buildDirectory}" failonerror="true" verbose="true" />
+    </target>
+    <target name="docCleanupValues" unless="buildDirectoryExists">
+        <echo message="DEBUG: buildDirectory did not exist, so nothing to clean up" />
+    </target>
+    
 </project>
