@@ -258,6 +258,7 @@ updateEclipseBuilder() {
     
      # get fresh script 
     wget -O getEclipseBuilder.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/getEclipseBuilder.sh?h=R4_2_primary
+    chmod +x getEclipseBuilder.sh 
     
     # execute (in current directory) ... depends on some "exported" properties. 
     ./getEclipseBuilder.sh

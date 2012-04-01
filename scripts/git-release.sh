@@ -153,6 +153,8 @@ fi
 # this are the "algorythm" scripts developed by Paul for e4. Should work for any repo. 
 wget -O git-map.sh http://git.eclipse.org/c/e4/org.eclipse.e4.releng.git/plain/org.eclipse.e4.builder/scripts/git-map.sh
 wget -O git-submission.sh http://git.eclipse.org/c/e4/org.eclipse.e4.releng.git/plain/org.eclipse.e4.builder/scripts/git-submission.sh
+chmod +x git-map.sh
+chmod +x git-submission.sh
 
 rm -f repos-clean.txt clones.txt repos-report.txt
 
