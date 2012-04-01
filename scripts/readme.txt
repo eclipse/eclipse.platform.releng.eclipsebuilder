@@ -9,7 +9,8 @@
 # though suppose it could be if it was discovered we'd forget to update manually 
 # when needed.
 
-# using wget, you will have to chmod +x *.sh to make executable
+# using wget, you will have to chmod +x *.sh to make executable (at least, first 
+# time)
 
 wget -O masterBuild.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/masterBuild.sh?h=R4_2_primary
 wget -O mbCaptureOutput.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mbCaptureOutput.sh?h=R4_2_primary
