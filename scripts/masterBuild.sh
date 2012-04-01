@@ -15,7 +15,7 @@
 #default values, overridden by command line
 writableBuildRoot=/shared/eclipse/e4/dwtest/eclipse4
 mkdir -p "${writableBuildRoot}"
-buildDir=$writableBuildRoot/build
+export buildDir=$writableBuildRoot/build
 mkdir -p "${buildDir}"
 
 relengProject=eclipse.platform.releng
@@ -52,7 +52,7 @@ buildTag=$buildType$buildTimestamp
 
 submissionReportFilePath=$writableBuildRoot/$buildTag/report.txt
 
-#quietCVS=-Q
+quietCVS=-Q
 arch="x86_64"
 archProp="-x86_64"
 archJavaProp=""
@@ -105,7 +105,7 @@ do
     shift
 done
 
-supportDir=${buildDir}/supportDir
+export supportDir=${buildDir}/supportDir
 mkdir -p "${supportDir}"
 
 if [ -z "$gitCache" ]; then
@@ -117,10 +117,9 @@ else
     echo "WARNING: unexpected value of gitCache already defined: ${gitCache}"
 fi
 
-# TODO: MIGHT be part of gitcache some day ... but, different repo
-#builderDir=${gitCache}//${relengProject}/$eclipsebuilder
 export builderDir=${supportDir}/$eclipsebuilder
-# remember: do nt "mkdir" for builderDir since presence/absence is used later in co vs update logic
+# remember: do not "mkdir" for builderDir since presence/absence 
+# might be used later to determine if fresh check out needed or not.
 # mkdir -p "${builderDir}"
 echo "INFO: value of builderDir: ${builderDir}"
 
@@ -240,6 +239,8 @@ updateBaseBuilderInfo() {
 updateEclipseBuilder() {
 
     echo "[`date +%H\:%M\:%S`] cvs get ${eclipsebuilder} using tag or branch: ${eclipsebuilderBranch}"
+
+    # TODO: I do not think we need to "cd" to supportDir here
     if [ -d $supportDir ]
     then
         cd $supportDir
@@ -249,12 +250,7 @@ updateEclipseBuilder() {
         exit 1
     fi 
 
-    # removing eclipsebuilder, for now, to see if fixes bug 375780
-    #builderDir is full path to eclipsebuilder
-    if [[ -d "${builderDir}" ]] 
-    then
-        rm -fr  "${builderDir}"
-    fi
+
     
      # get fresh script 
     wget -O getEclipseBuilder.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/getEclipseBuilder.sh?h=R4_2_primary
@@ -262,6 +258,10 @@ updateEclipseBuilder() {
     
     # execute (in current directory) ... depends on some "exported" properties. 
     ./getEclipseBuilder.sh
+    
+    
+    
+    
     
 }
 
