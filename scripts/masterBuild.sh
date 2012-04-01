@@ -250,28 +250,15 @@ updateEclipseBuilder() {
     fi 
 
     # removing eclipsebuilder, for now, to see if fixes bug 375780
+    #builderDir is full path to eclipsebuilder
     if [[ -d "${builderDir}" ]] 
     then
         rm -fvr  "${builderDir}"
     fi
      
-    #builderDir is full path to eclipsebuilder
-    if [[ ! -d "${builderDir}" ]]; then
-        cmd="cvs -d :pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse $quietCVS co -r $eclipsebuilderBranch -d ${eclipsebuilder} ${eclipsebuilder}"
-        echo "cvs checkout cmd: ${cmd}"
-        $cmd
-    else
-        cmd="cvs -d :pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse $quietCVS update -C -d ${eclipsebuilder}"
-        echo "cvs update cmd: ${cmd}"
-        $cmd
-        
-         # probably temp work around for bug 375780. 
-         # some "temp" directories are left over from previous runs?
-         # didn't help. Will try removing whole eclipse builder next
-         #find "${builderDir}" -name "temp" -type d -execdir rm -vfr  '{}' \;
-        
-    fi
-
+    wget -O getEclipseBuilder.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/getEclipseBuilder.sh?h=R4_2_primary
+    ./getEclipseBuilder.sh
+    
 }
 
 sync_sdk_repo_updates () {
