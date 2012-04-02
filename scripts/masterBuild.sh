@@ -282,7 +282,14 @@ updateEclipseBuilder() {
     # execute (in current directory) ... depends on some "exported" properties. 
     ./getEclipseBuilder.sh
     
-    
+    returnCode=$?
+     if [ "${returnCode}" -ne "0" ]
+    then
+        echo
+        echo "   ERROR. exit code: ${returnCode}"  "getEclipseBuilder failed."
+        echo
+        exit "${exitCode}"
+    fi
     
     
     
