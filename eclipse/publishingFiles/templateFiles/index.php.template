@@ -4,7 +4,7 @@
 
 if (array_key_exists("SERVER_NAME", $_SERVER)) {
     $servername = $_SERVER["SERVER_NAME"];
-    if ($servername === "build") {
+    if ($servername === "build.eclipse.org") {
           $imagesource="http://download.eclipse.org/eclipse.org-common/themes/Phoenix/images";
           $csssource="http://download.eclipse.org/eclipse.org-common//themes/Phoenix/css";
           $appsource="/home/data/httpd/download.eclipse.org/eclipse.org-common/system";
@@ -311,7 +311,7 @@ function genLinks($servername,$buildlabel,$zipfile) {
 
     global $clickthroughstr;
 
-     $httplink = "$clickthroughstr . $zipfile";
+     $httplink = "$clickthroughstr$zipfile";
      $httplabel = "(http)";
      $httpline =  "<div align=\"left\"><a href=\"$httplink\">$httplabel</a>";
      $filesize = getDropSize($zipfile);
@@ -345,8 +345,13 @@ function genLinks($servername,$buildlabel,$zipfile) {
 		 		 
 		 		 $aLine = fgets($fileHandle, 4096); // Length parameter only optional after 4.2.0
 		 		 $parts = explode(",", $aLine);
-		 		 $dropNames[trim($parts[0])] = trim($parts[1]);
- 		 }
+		 		 // if two parts do not exist, it is likely just incorrect dlconfig.txt file, 
+		 		 // or perhaps empty line. We'll ignore for now, but better solution would be to 
+		 		 // display something to error output?
+		 		 if (array_key_exists(1, $parts)) {
+		       		 $dropNames[trim($parts[0])] = trim($parts[1]);
+                    } 
+      		 }
 		 fclose($fileHandle);
 
 		 $buildType = $dropNames[$parts2[0]];
