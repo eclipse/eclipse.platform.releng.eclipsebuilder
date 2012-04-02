@@ -69,7 +69,7 @@ function debugMsg ()
 }
 
 function getEclipseBuilder () {
-    debugMsg "     At start of getEclipseBuilder, current directtory is ${PWD}"
+    debugMsg "     At start of getEclipseBuilder, current directory is ${PWD}"
     # pushd where we start from, so we end up returning to same direcotry
     pushd ${PWD}
 
@@ -77,8 +77,11 @@ function getEclipseBuilder () {
     #    but if they already exist (say via a previous export) 
     #    then we use the existing, exported value. 
 
-    # by coincidendence, repo and project are named the same
-    eclipsebuilder=${eclipsebuilder:-"eclipse.platform.releng.eclipsebuilder"}
+    # by coincidendence, git repo and git project are named the same
+    # but the working location it ends up on disk will be named its 
+    # old traditional name or org.eclipse.releng.eclipsebuilder
+    # for now. See bug 374974
+    eclipsebuilder=${eclipsebuilder:-"org.eclipse.releng.eclipsebuilder"}
     eclipsebuilderRepo=${eclipsebuilderRepo:-"eclipse.platform.releng.eclipsebuilder"}
     eclipsebuilderBranch=${eclipsebuilderBranch:-"R4_2_primary"}
     gitEmail=${gitEmail:-"e4Build"}
@@ -120,7 +123,7 @@ function getEclipseBuilder () {
     repodirectory=$gitCache/$eclipsebuilderRepo 
     debugVar repodirectory
     # in this case, project is in "root" of repo
-    projectdirectory=$gitCache/$eclipsebuilder 
+    projectdirectory=$gitCache/$eclipsebuilderRepo 
     debugVar projectdirectory
     debugMsg "testing existence of ${repodirectory}"
     if [[ ! -d "${repodirectory}" ]] 

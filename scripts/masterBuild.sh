@@ -23,7 +23,9 @@ relengProject=eclipse.platform.releng
 relengMapsProject=org.eclipse.releng
 relengRepoName=eclipse.platform.releng.maps
 
-export eclipsebuilder=eclipse.platform.releng.eclipsebuilder
+# This is eclipsebuilder name on disk, traditionally org.eclipse.releng.eclipsebuilder
+# Though now in git, the repo (and effective project name) is eclipse.platform.releng.eclipsebuilder 
+export eclipsebuilder=org.eclipse.releng.eclipsebuilder
 export eclipsebuilderRepo=eclipse.platform.releng.eclipsebuilder
 
 relengBranch=R4_HEAD
