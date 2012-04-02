@@ -1,0 +1,7 @@
+R, Latest Release
+S, 4.2 Stream Stable Build
+I, 4.2 Stream Integration Build
+N, 4.2 Stream Nightly Build
+M, 3.7.x Stream Maintenance Build
+L, Language Pack
+X, Test Build
