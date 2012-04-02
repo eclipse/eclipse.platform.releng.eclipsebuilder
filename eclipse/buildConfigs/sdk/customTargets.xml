@@ -362,13 +362,15 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		</delete>
 
 		<!--  set correct permissions on linux script -->
+	    <!--
 		<chmod file="${tempDir}/buildScripts/build" perm="755" />
 		<exec dir="${tempDir}/buildScripts" executable="zip">
 			<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-sourceBuild-srcIncluded-${buildId}.zip -r ." />
 		</exec>
 		<copy file="${eclipse.build.configs}/sdk/srcBuild/incl/instructions.html" tofile="${postingDirectory}/${buildLabel}/srcIncludedBuildInstructions.html" />
 		<copy file="${eclipse.build.configs}/sdk/srcBuild/fetch/instructions.html" tofile="${postingDirectory}/${buildLabel}/srcFetchBuildInstructions.html" />
-
+        -->
+	    
 		<delete dir="${tempDir}/" />
 	</target>
 

@@ -1,13 +1,40 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+<?php
+
+if (array_key_exists("SERVER_NAME", $_SERVER)) {
+    $servername = $_SERVER["SERVER_NAME"];
+    if ($servername === "build") {
+          $imagesource="http://download.eclipse.org/eclipse.org-common/themes/Phoenix/images";
+          $csssource="http://download.eclipse.org/eclipse.org-common//themes/Phoenix/css";
+          $appsource="/home/data/httpd/download.eclipse.org/eclipse.org-common/system";
+          $clickthroughstr="";
+      }
+      else {
+          $imagesource="../../../eclipse.org-common/stylesheets";
+          $csssource="../../../eclipse.org-common/stylesheets";
+          $appsource="../../../eclipse.org-common/system";
+          $clickthroughstr="download.php?dropFile=";
+      
+      } 
+}
+else {
+    $servername = "test machine";
+          $imagesource="http://download.eclipse.org/eclipse.org-common/themes/Phoenix/images";
+          $csssource="http://download.eclipse.org/eclipse.org-common//themes/Phoenix/css";
+          $appsource="NONE";
+          $clickthroughstr="";
+}
+
+?>
 <head>
 	<title>Eclipse Project</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<meta name="author" content="Eclipse Foundation, Inc." />
 	<meta name="keywords" content="eclipse,project,plug-ins,plugins,java,ide,swt,refactoring,free java ide,tools,platform,open source,development environment,development,ide" />
-	<link rel="stylesheet" type="text/css" href="../../../eclipse.org-common/stylesheets/visual.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="../../../eclipse.org-common/stylesheets/layout.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="../../../eclipse.org-common/stylesheets/print.css" media="print" />
+	<link rel="stylesheet" type="text/css" href=<?php $csssource?>"/visual.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href=<?php $csssource?>"/layout.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="<?php $csssource?>"/print.css" media="print" />
 	<script type="text/javascript">
 
 sfHover = function() {
@@ -27,10 +54,10 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 <body>
 
 <div id="header">
-	<a href="http://www.eclipse.org/"><img src="../../../eclipse.org-common/stylesheets/header_logo.gif" width="163" height="68" border="0" alt="Eclipse Logo" class="logo" /></a>
+	<a href="http://www.eclipse.org/"><img src="<?php $imagesource?>/header_logo.gif" width="163" height="68" border="0" alt="Eclipse Logo" class="logo" /></a>
 	<div id="searchbar">
-		<img src="../../../eclipse.org-common/stylesheets/searchbar_transition.gif" width="92" height="26" class="transition" alt="" />
-		<img src="../../../eclipse.org-common/stylesheets/searchbar_header.gif" width="64" height="17" class="header" alt="Search" />
+		<img src="<?php $imagesource?>/searchbar_transition.gif" width="92" height="26" class="transition" alt="" />
+		<img src="<?php $imagesource?>/searchbar_header.gif" width="64" height="17" class="header" alt="Search" />
 		<form method="get" action="http://www.eclipse.org/search/search.cgi">
 			<input type="hidden" name="t" value="All" />
 			<input type="hidden" name="t" value="Doc" />
@@ -38,7 +65,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 			<input type="hidden" name="t" value="Wiki" />
 			<input type="hidden" name="wf" value="574a74" />
 			<input type="text" name="q" value="" />
-			<input type="image" class="button" src="../../../eclipse.org-common/stylesheets/searchbar_submit.gif" alt="Submit" onclick="this.submit();" />
+			<input type="image" class="button" src="<?php $imagesource?>/searchbar_submit.gif" alt="Submit" onclick="this.submit();" />
 		</form>
 	</div>
 	<ul id="headernav">
@@ -46,7 +73,12 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 		<li><a href="http://www.eclipse.org/legal/">Legal</a></li>
 	</ul>
 <?php
-				require_once("../../../eclipse.org-common/system/app.class.php");
+    if ($appsource === "NONE" ) {
+        $anchor = "index.php#EclipseSDK";
+        $code = 0;
+        }
+        else {
+				require_once($appsource"/app.class.php");
 				$App = new App();
 				$clientOS = $App->getClientOS();
 				if($clientOS == "win32") {
@@ -89,6 +121,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 					$anchor = "index.php#EclipseSDK";
 					$code = 0;
 				}
+		}
 ?>
 
 </div><div id="topnav">
@@ -138,19 +171,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 </ul>
 
 </div>
-
-&nbsp; <!--?php
-	                                                                           
-        $remoteName = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-                                    
-        if (strstr($remoteName, "ibm.com")) {
-                $jre = "http://w3.hursley.ibm.com/java/jim/";
-        } else {
-                $jre = "java-runtimes.html";
-        }
-		
-	
-?--> 
+ 
 <div id="midcolumn">
 		<table BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > 
 		<tr> 
@@ -185,7 +206,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 		<div>
 		<table BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > </br>
 		<?php
-		$servername = $_SERVER["SERVER_NAME"];
+		//$servername = $_SERVER["SERVER_NAME"];
 		if (! preg_match("/.eclipse.org/i",$servername)) {
         		echo "<tr> To download a file via HTTP click on its corresponding http link below.";			
 		} else {
@@ -226,11 +247,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				<li><a href="directory.txt">View the <b>map file entries</b> for the current build.</a></li></ul>
 		</div>
 
-		<div class="homeitem">
-			<h3>Source Builds</h3>
-				<ul class="midlist">
-				<li><a href="sourceBuilds.php">Access the <b>Source Builds</b> page.</a></li></ul>
-		</div>
+
 	<hr class="clearer" />
 	</div>
 
@@ -290,7 +307,8 @@ function getDropSize($zipfile) {
 
 function genLinks($servername,$buildlabel,$zipfile) {
 
-     $httplink = "download.php?dropFile=$zipfile";
+     $httplink = <?php $clickthroughstr?>"$zipfile";
+     $httplink = "$zipfile";
      $httplabel = "(http)";
      $httpline =  "<div align=\"left\"><a href=\"$httplink\">$httplabel</a>";
      $filesize = getDropSize($zipfile);
@@ -299,8 +317,11 @@ function genLinks($servername,$buildlabel,$zipfile) {
      echo "&nbsp;&nbsp";
      echo "<td>$filesize</td>";
      echo "<td>$zipfile</td>";
-     echo "<td><a href=\"http://download.eclipse.org/eclipse/downloads/drops/@buildlabel@/checksum/$zipfile.md5\">(md5)</a>";
-     echo " <a href=\"http://download.eclipse.org/eclipse/downloads/drops/@buildlabel@/checksum/$zipfile.sha1\">(sha1)</a>";
+     // make relative so works on build.eclipse.org
+     //echo "<td><a href=\"http://download.eclipse.org/eclipse/downloads/drops/@buildlabel@/checksum/$zipfile.md5\">(md5)</a>";
+     //echo " <a href=\"http://download.eclipse.org/eclipse/downloads/drops/@buildlabel@/checksum/$zipfile.sha1\">(sha1)</a>";
+     echo "<td><a href=\"./@buildlabel@/checksum/$zipfile.md5\">(md5)</a>";
+     echo " <a href=\"./@buildlabel@/checksum/$zipfile.sha1\">(sha1)</a>";
 }
 ?>	
 
