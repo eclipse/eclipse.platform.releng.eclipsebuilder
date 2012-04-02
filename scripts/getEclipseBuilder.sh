@@ -15,6 +15,34 @@ VERBOSE_REMOVES=${VERBOSE_REMOVES:-}
 #VERBOSE_REMOVES=${VERBOSE_REMOVES:--v}
 echo "VERBOSE_REMOVES: $VERBOSE_REMOVES"
 
+# simple utility to check return code and exit if non-zero 
+function checkForErrorExit ()
+{
+    # arg 1 must be return code, $?
+    # arg 2 (remaining line) can be message to print before exiting do to non-zero exit code
+    exitCode=$1
+    shift
+    message="$*"
+    if [ -z "${exitCode}" ]
+    then
+        echo "PROGRAM ERROR: checkForErrorExit called with no arguments"
+        exit 1
+    fi
+    if [ -z "${message}" ]
+    then
+        echo "WARNING: checkForErrorExit called without message"
+        message="(Calling program provided no message)"
+    fi
+    if [ "${exitCode}" -ne "0" ]
+    then
+        echo
+        echo "   ERROR. exit code: ${exitCode}"  ${message}
+        echo
+        exit "${exitCode}"
+    fi
+}
+
+
 # debugVar is simply utility to display variables and values that is 
 # a little lighter weight that a full <echoproperties />
 # TODO: an alternative might be to have a system of prefixing variables to 
@@ -111,12 +139,15 @@ function getEclipseBuilder () {
     fi
 
     cd $projectdirectory
+    checkForErrorExit $? "Could not cd to $projectdirectory"
     debugMsg "changed direcotry in getEclipseBuilder to ${PWD}"
     debugMsg "git command: git checkout $eclipsebuilderBranch"
     git checkout $eclipsebuilderBranch
+    checkForErrorExit $? "git checkout failed"
     debugMsg "git command: git pull"
     git pull
-    
+    checkForErrorExit $? "git pull failed"
+        
     # assuming now all is fresh and current, copy the gitClone version back to 
     # the "real" builderDirectory
     debugMsg "     Will now copy cloned version back to \"real\" builderDir, ${builderDir}"

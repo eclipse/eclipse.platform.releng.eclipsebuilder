@@ -17,13 +17,13 @@ writableBuildRoot=/shared/eclipse/e4/dwtest/eclipse4
 mkdir -p "${writableBuildRoot}"
 export buildDir=$writableBuildRoot/build
 mkdir -p "${buildDir}"
-374974 - org.eclipse.releng.eclipsebuilder should be migrated to Git
+#374974 - org.eclipse.releng.eclipsebuilder should be migrated to Git
 relengProject=eclipse.platform.releng
 
 relengMapsProject=org.eclipse.releng
 relengRepoName=eclipse.platform.releng.maps
 
-export eclipsebuilder=org.eclipse.releng.eclipsebuilder
+export eclipsebuilder=eclipse.platform.releng.eclipsebuilder
 export eclipsebuilderRepo=eclipse.platform.releng.eclipsebuilder
 
 relengBranch=R4_HEAD
