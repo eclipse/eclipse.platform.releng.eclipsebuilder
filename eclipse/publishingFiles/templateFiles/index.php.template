@@ -309,6 +309,8 @@ function getDropSize($zipfile) {
 
 function genLinks($servername,$buildlabel,$zipfile) {
 
+    global $clickthroughstr;
+
      $httplink = "$clickthroughstr . $zipfile";
      $httplabel = "(http)";
      $httpline =  "<div align=\"left\"><a href=\"$httplink\">$httplabel</a>";
