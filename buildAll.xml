@@ -824,7 +824,7 @@
     <target name="forceCompleteClean" depends="docCleanupValues" if="buildDirectoryExists">
         <echo message="DEBUG: doing complete wipe of (previous) buildDirectory. See bug 375780" />
         <!-- fail, since we may have trouble deleting directories on build.eclipse.org? -->
-        <delete dir="${buildDirectory}" failonerror="true" verbose="true" />
+        <delete dir="${buildDirectory}" failonerror="true"  />
     </target>
     <target name="docCleanupValues" unless="buildDirectoryExists">
         <echo message="DEBUG: buildDirectory did not exist, so nothing to clean up" />
