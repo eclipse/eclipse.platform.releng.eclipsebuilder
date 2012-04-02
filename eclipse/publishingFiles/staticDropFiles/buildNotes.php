@@ -7,7 +7,7 @@
 	
 	// Get build type names
 
-	$fileHandle = fopen("../../dlconfig2.txt", "r");
+	$fileHandle = fopen("./dlconfig2.txt", "r");
 	while (!feof($fileHandle)) {
 		
 		$aLine = fgets($fileHandle, 4096); // Length parameter only optional after 4.2.0
