@@ -305,6 +305,7 @@
 			</patternset>
 		</unzip>
 
+	    <!-- remvoed per bug 368488
 		<property name="tmpdatadir" value="${equinox.build.configs}/equinox.p2.installer/data" />
 		<mkdir dir="${tmpdatadir}" />
 		<java jar="${eclipse.home}/plugins/org.eclipse.equinox.launcher.jar" dir="${eclipse.pdebuild.scripts}/productBuild" fork="true" failonerror="false" jvm="${java15home}/bin/java">
@@ -325,6 +326,7 @@
 			<arg value="-DpluginPath=${pPath}/eclipse/features" />
 			<arg value="-DequinoxPostingDirectory=${equinoxPostingDirectory}" />
 		</java>
+		-->
 	</target>
 
 

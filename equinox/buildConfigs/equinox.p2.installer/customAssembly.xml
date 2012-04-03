@@ -57,7 +57,9 @@
 		<condition property="assembling">
 			<contains string="${assembleScriptName}" substring="assemble" />
 		</condition>
+		<!-- removed per bug 368488	    
 		<antcall target="copyconfig" />
+		-->
 
 		<delete file="${rootFolder}/launcher.exe" quiet="true" />
 		<delete file="${rootFolder}/launcher" quiet="true" />

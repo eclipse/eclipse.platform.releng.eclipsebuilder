@@ -816,7 +816,9 @@
 		<ant antfile="${equinox.build.configs}/equinox/build.xml" />
 		<ant antfile="${equinox.build.configs}/equinox-launchers/build.xml" />
 		<!-- invoke equinox.p2.installer in a separate process -->
+	    <!-- removed per bug 368488
 		<ant antfile="${equinox.build.configs}/../helper.xml" target="build.p2.installer.product" />
+		-->
 	</target>
 
 	<target name="package">

@@ -45,6 +45,7 @@
 
 
 	<target name="postBuild">
+		    <!-- removed per bug 368488
 		<move file="${buildDirectory}/${buildLabel}/${buildLabel}-win32.win32.x86.zip" tofile="${equinoxPostingDirectory}/${buildLabel}/equinox.p2.installer-${buildLabel}-win32.win32.x86.zip" />
 		<move file="${buildDirectory}/${buildLabel}/${buildLabel}-linux.gtk.x86.zip" tofile="${equinoxPostingDirectory}/${buildLabel}/equinox.p2.installer-${buildLabel}-linux.gtk.x86.tar.gz" />
 		<move file="${buildDirectory}/${buildLabel}/${buildLabel}-macosx.cocoa.x86.zip" tofile="${equinoxPostingDirectory}/${buildLabel}/equinox.p2.installer-${buildLabel}-macosx.cocoa.x86.tar.gz" />
@@ -58,6 +59,7 @@
 		<antcall target="assembler">
 			<param name="archiveName" value="equinox.p2.installer-${buildLabel}-macosx.cocoa.x86.tar.gz" />
 		</antcall>
+		-->
 	</target>
 
 	<target name="assembler">
