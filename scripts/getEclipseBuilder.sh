@@ -156,7 +156,7 @@ function getEclipseBuilder () {
     # the "real" builderDirectory
     debugMsg "     Will now copy cloned version back to \"real\" builderDir, ${builderDir}"
     mkdir -p "${builderDir}"
-    rsync -av "${repodirectory}"/* "${builderDir}"/ 
+    rsync -a  "${repodirectory}"/* "${builderDir}"/ 
     
     popd
     debugMsg "     At exit of getEclipseBuilder, current directtory is ${PWD}"
