@@ -52,7 +52,7 @@ javaHome=/shared/common/sun-jdk1.6.0_21_x64
 buildTimestamp=${date}-${time}
 buildTag=$buildType$buildTimestamp
 
-submissionReportFilePath=$writableBuildRoot/$buildTag/report.txt
+
 
 # DEBUG controls verbosity of little "state and status" bash echo messages.
 # Set to true to get the most echo messages. Anything else to be quiet. 
@@ -134,7 +134,7 @@ export supportDir=${buildDir}/supportDir
 mkdir -p "${supportDir}"
 
 if [ -z "$gitCache" ]; then
-    export gitCache=$supportDir/gitClones
+    export gitCache=$supportDir/gitCache
     # ensure exists, in case not
     mkdir -p $gitCache
     echo "INFO: value of gitCache: ${gitCache}"
@@ -174,6 +174,10 @@ echo $buildTag >$writableBuildRoot/${buildType}build.properties
 dropDir=4.2.0
 localDropDirectory=${buildDir}/downloads/drops/$dropDir
 mkdir -p $localDropDirectory
+buildResults=$localDropDirectory/$buildTag
+mkdir -p $buildResults
+submissionReportFilePath=$buildResults/report.txt
+
 
 # these don't seem right (not sure what they are)?
 # currently ends up being 
@@ -194,8 +198,6 @@ buildDirectory=${buildDir}/$buildTag
 
 #rembember, don't point to e4Build user directory
 sdkTestDir="${writableBuildRoot}"/sdkTests/$buildTag
-
-buildResults=$buildDirectory/buildResults
 
 sdkResults=$buildDir/40builds/$buildTag/$buildTag
 sdkBuildDirectory=$buildDir/40builds/$buildTag
@@ -292,35 +294,24 @@ updateEclipseBuilder() {
     echo "[`date +%H\:%M\:%S`] cvs get ${eclipsebuilder} using tag or branch: ${eclipsebuilderBranch}"
 
     # TODO: I do not think we need to "cd" to supportDir here
-    if [ -d $supportDir ]
-    then
-        cd $supportDir
-        echo "   changed current directory to ${supportDir}"
-    else
-        echo "   ERROR: support directory did not exist as expected."  
-        exit 1
-    fi 
+    #if [ -d $supportDir ]
+    #then
+        #    cd $supportDir
+        #echo "   changed current directory to ${supportDir}"
+    # else
+        #    echo "   ERROR: support directory did not exist as expected."  
+        #exit 1
+    #fi 
 
-
-    
-     # get fresh script 
+     # get fresh script. This is one case, we must get directly from repo since the purpose of the script 
+     # is to get the eclipsebuilder! 
     wget -O getEclipseBuilder.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/getEclipseBuilder.sh?h=R4_2_primary
     chmod +x getEclipseBuilder.sh 
     
     # execute (in current directory) ... depends on some "exported" properties. 
     ./getEclipseBuilder.sh
     
-    returnCode=$?
-     if [ "${returnCode}" -ne "0" ]
-    then
-        echo
-        echo "   ERROR. exit code: ${returnCode}"  "getEclipseBuilder failed."
-        echo
-        exit "${exitCode}"
-    fi
-    
-    
-    
+    checkForErrorExit $? "Failed to get the Eclipse Buidler"
 }
 
 sync_sdk_repo_updates () {
@@ -752,25 +743,36 @@ generateSwtZip () {
 
 tagRepo () {
     echo "DEBUG: starting tagRepo"
-    pushd $writableBuildRoot
-    #releasescriptpath=$gitCache/org.eclipse.e4.releng/org.eclipse.e4.builder/scripts
-    releasescriptpath=$writableBuildRoot/../
-    echo "DEBUG: using script in ${releasescriptpath}gitdw-release.sh"
+    pushd ${PWD}
+    # we assume we already got the eclipsebuilder successfully
+    # and we use the "working" version copied from gitClones
+    releasescriptpath=$builderDir/scripts
+   
+    echo "DEBUG: using script in ${releasescriptpath}git-release.sh"
     # remember, -committerId "$committerId" not required on build.eclipse.org
     # will need to do more if/when we make it a variable property (such as for 
     # committers running remotely, or even non-committers runnning remotely.
-    tagRepocmd="/bin/bash ${releasescriptpath}gitdw-release.sh -branch \"$relengBranch\" \
+    #
+    # gitCache is "mapsGitRepo" elsewhere, where  
+    # mapsGitRepo = ${buildDirectory}/commonrepo
+    # so we'll "compute" similar value here. TODO: improve this 
+    # hardcoding later. 
+    mapsGitRepo=${supportDir}/src/commonrepo
+    # temp oldBuildTag, to go from "last known 4.2 I build", for now
+    # but eventually will use 'oldBuildTag' as computed from previous I build.
+    tempOldBuildTag="I20120321-0610"
+    tagRepocmd="/bin/bash ${releasescriptpath}/git-release.sh -branch \"$relengBranch\" \
         -relengMapsProject \"$relengMapsProject\" \
         -relengRepoName \"$relengRepoName\" \
-        -buildType \"$buildType\" -gitCache \"$gitCache\" -root \"$writableBuildRoot\" \
+        -buildType \"$buildType\" -gitCache \"$mapsGitRepo\" -root \"$writableBuildRoot\" \
         -gitEmail \"$gitEmail\" -gitName \"$gitName\" \
-        -timestamp \"$timestamp\" -oldBuildTag $oldBuildTag -buildTag $buildTag \
+        -timestamp \"$timestamp\" -oldBuildTag $tempOldBuildTag -buildTag $buildTag \
         -submissionReportFilePath $submissionReportFilePath \
         -tag $tag"
 
     echo "tag repo command: $tagRepocmd" 
 
-    $tagRepo
+    $tagRepocmd
 
     popd
     mailx -s "$eclipseStream SDK Build: $buildTag submission" david_williams@us.ibm.com <$submissionReportFilePath
@@ -784,9 +786,10 @@ updateBaseBuilderInfo
 updateEclipseBuilder
 checkForErrorExit $? "Failed while updating Eclipse Buidler"
 
-#tagRepo
+tagRepo
 
 runSDKBuild
+checkForErrorExit $? "Failed while building Eclipse-SDK"
 
 # copy some other logs
 #copyCompileLogs

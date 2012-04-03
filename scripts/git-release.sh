@@ -31,8 +31,8 @@ gitEmail=e4Build
 gitName="e4Builder-R4"
 # default is false ... must be explicit to tag
 tag=false
-# default, but let caller specify
-submissionReportFilePath=$writableBuildRoot/$buildTag/report.txt
+# default, but really caller should specify
+submissionReportFilePath=$writableBuildRoot/report.txt
 
 ARGS="$@"
 
