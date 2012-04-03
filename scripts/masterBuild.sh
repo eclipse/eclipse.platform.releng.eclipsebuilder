@@ -13,7 +13,7 @@
 
 
 #default values, overridden by command line
-writableBuildRoot=/shared/eclipse/e4/dwtest/eclipse4
+writableBuildRoot=/shared/eclipse/eclipse4
 mkdir -p "${writableBuildRoot}"
 export buildDir=$writableBuildRoot/build
 mkdir -p "${buildDir}"
