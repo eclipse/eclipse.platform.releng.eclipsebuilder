@@ -83,7 +83,7 @@
 
 	<zipType name="PDE Runtime">
 		<platform id="PRR" name="&lt;img src = &quot;repo.gif&quot;> PDE Repo " fileName="org.eclipse.pde-@build@.zip"></platform>
-		<platform id="PAR" name="&lt;img src = &quot;repo.gif&quot;> PDE API Tools execution environment fragments repo" fileName="org.eclipse.pde.api.tools.ee.fragments-@build@.zip"></platform>		
+		<platform id="PAR" name="&lt;img src = &quot;repo.gif&quot;> PDE API Tools execution environment fragments repo" fileName="org.eclipse.pde.api.tools.ee.feature-@build@.zip"></platform>		
 	</zipType>	
 	
 	<zipType name="PDE SDK">		
