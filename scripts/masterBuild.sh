@@ -349,9 +349,10 @@ runSDKBuild () {
     bootclasspath_16="/shared/common/jdk1.6.0_27.x86_64/jre/lib/rt.jar:/shared/common/jdk1.6.0_27.x86_64/jre/lib/jsse.jar:/shared/common/jdk1.6.0_27.x86_64/jre/lib/jce.jar"
     bootclasspath_foundation="/shared/common/org.eclipse.sdk-feature/libs/ee.foundation-1.0.jar"
     bootclasspath_foundation11="/shared/common/org.eclipse.sdk-feature/libs/ee.foundation.jar"
-    # was there a reason this was "hard coded" to 1.1? 
-    OSGiMinimum=$bootclasspath_foundation11
-    #OSGiMinimum="/shared/common/org.eclipse.sdk-feature/libs/ee.minimum-1.2.0.jar"
+    # was there a reason this was "hard coded" to 1.1? see bug 375976
+    # https://bugs.eclipse.org/bugs/show_bug.cgi?id=375976
+    #OSGiMinimum=$bootclasspath_foundation11
+    OSGiMinimum="/shared/common/org.eclipse.sdk-feature/libs/ee.minimum-1.2.0.jar"
 
     javadoc="-Djavadoc16=/shared/common/jdk1.6.0_27.x86_64/bin/javadoc"
     skipPerf="-Dskip.performance.tests=true"
@@ -393,6 +394,8 @@ runSDKBuild () {
         -DJ2SE-1.4=$bootclasspath \
         -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation \
         -DCDC-1.1/Foundation-1.1=$bootclasspath_foundation11 \
+        -DOSGi/Minimum-1.0=$OSGiMinimum \
+        -DOSGi/Minimum-1.1=$OSGiMinimum \
         -DOSGi/Minimum-1.2=$OSGiMinimum \
         -DJavaSE-1.6=$bootclasspath_16 \
         -DlogExtension=.xml \
