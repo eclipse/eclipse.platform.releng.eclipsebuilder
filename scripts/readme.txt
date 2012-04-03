@@ -12,8 +12,8 @@
 # using wget, you will have to chmod +x *.sh to make executable (at least, first 
 # time)
 
-wget -O masterBuild.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/masterBuild.sh?h=R4_2_primary
-wget -O mbCaptureOutput.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mbCaptureOutput.sh?h=R4_2_primary
+wget -O masterBuild.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/masterBuild.sh?h=R4_2_primary;
+wget -O mbCaptureOutput.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mbCaptureOutput.sh?h=R4_2_primary;
 
 # there are rsync methods to get, to maintain permissions
 
