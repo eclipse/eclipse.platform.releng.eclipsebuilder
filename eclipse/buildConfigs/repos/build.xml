@@ -2,8 +2,9 @@
 
 	<target name="all">
 		<antcall target="pde" />
-	    <!-- was there a reason pde-api was commented out in repo/build.xml in 4.2 builds? bug 375899 -->
+	    <!-- was there a reason pde-api was commented out in repo/build.xml in 4.2 builds? bug 375899 
 		<antcall target="pde-api" /> 
+		-->
 		<antcall target="jdt" />
 		<antcall target="cvs" />
 		<antcall target="relengtools" />
