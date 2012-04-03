@@ -748,23 +748,18 @@ tagRepo () {
     # and we use the "working" version copied from gitClones
     releasescriptpath=$builderDir/scripts
    
-    echo "DEBUG: using script in ${releasescriptpath}git-release.sh"
+    echo "DEBUG: using script in ${releasescriptpath}/git-release.sh"
     # remember, -committerId "$committerId" not required on build.eclipse.org
     # will need to do more if/when we make it a variable property (such as for 
     # committers running remotely, or even non-committers runnning remotely.
     #
-    # gitCache is "mapsGitRepo" elsewhere, where  
-    # mapsGitRepo = ${buildDirectory}/commonrepo
-    # so we'll "compute" similar value here. TODO: improve this 
-    # hardcoding later. 
-    mapsGitRepo=${supportDir}/src/commonrepo
     # temp oldBuildTag, to go from "last known 4.2 I build", for now
     # but eventually will use 'oldBuildTag' as computed from previous I build.
     tempOldBuildTag="I20120321-0610"
     tagRepocmd="/bin/bash ${releasescriptpath}/git-release.sh -branch \"$relengBranch\" \
         -relengMapsProject \"$relengMapsProject\" \
         -relengRepoName \"$relengRepoName\" \
-        -buildType \"$buildType\" -gitCache \"$mapsGitRepo\" -root \"$writableBuildRoot\" \
+        -buildType \"$buildType\" -gitCache \"$gitCache\" -root \"$writableBuildRoot\" \
         -gitEmail \"$gitEmail\" -gitName \"$gitName\" \
         -timestamp \"$timestamp\" -oldBuildTag $tempOldBuildTag -buildTag $buildTag \
         -submissionReportFilePath $submissionReportFilePath \
@@ -786,7 +781,7 @@ updateBaseBuilderInfo
 updateEclipseBuilder
 checkForErrorExit $? "Failed while updating Eclipse Buidler"
 
-tagRepo
+#tagRepo
 
 runSDKBuild
 checkForErrorExit $? "Failed while building Eclipse-SDK"
