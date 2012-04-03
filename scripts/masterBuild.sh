@@ -350,8 +350,8 @@ runSDKBuild () {
     bootclasspath_foundation="/shared/common/org.eclipse.sdk-feature/libs/ee.foundation-1.0.jar"
     bootclasspath_foundation11="/shared/common/org.eclipse.sdk-feature/libs/ee.foundation.jar"
     # was there a reason this was "hard coded" to 1.1? 
-    #OSGiMinimum=$bootclasspath_foundation11
-    OSGiMinimum="/shared/common/org.eclipse.sdk-feature/libs/ee.minimum-1.2.0.jar"
+    OSGiMinimum=$bootclasspath_foundation11
+    #OSGiMinimum="/shared/common/org.eclipse.sdk-feature/libs/ee.minimum-1.2.0.jar"
 
     javadoc="-Djavadoc16=/shared/common/jdk1.6.0_27.x86_64/bin/javadoc"
     skipPerf="-Dskip.performance.tests=true"
