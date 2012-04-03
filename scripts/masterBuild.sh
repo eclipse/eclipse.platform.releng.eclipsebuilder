@@ -770,7 +770,7 @@ tagRepo () {
 
     echo "tag repo command: $tagRepocmd" 
 
-    $tagRepocmd
+    #$tagRepocmd
 
     popd
     mailx -s "$eclipseStream SDK Build: $buildTag submission" david_williams@us.ibm.com <$submissionReportFilePath
