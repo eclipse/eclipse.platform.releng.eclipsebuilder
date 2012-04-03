@@ -159,6 +159,7 @@
 	</copy>
 </target>
 
+			    <!-- https://bugs.eclipse.org/bugs/show_bug.cgi?id=368488
 <target name="provision.agent">
 	<antcall target="run.director">
 		<param name="p2.director.installIU" value="org.eclipse.equinox.p2.ui.admin.rcp.product" />
@@ -196,7 +197,7 @@
 		<param name="p2.repo" value="${buildRepo}" />
 	</antcall>
 </target>
-
+-->
 <target name="provision.starterkit">
 	<antcall target="run.director">
 		<param name="p2.director.installIU" value="org.eclipse.rt.osgistarterkit.product" />

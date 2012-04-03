@@ -541,11 +541,15 @@
 		<replace token="@qualifier@" file="${eclipse.build.configs}/sdk/builder/sdk.product" value="${buildId}" />
 		<replace token="@qualifier@" file="${eclipse.build.configs}/platform/platform.product" value="${buildId}" />
 		<replace token="@qualifier@" file="${eclipse.build.configs}/platform.sdk/platform.product" value="${buildId}" />
-		<replace token="@qualifier@" file="${buildDirectory}/plugins/org.eclipse.equinox.p2.ui.admin.rcp/rcp.product" value="${buildId}" />
-		<replace token="@qualifier@" file="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/product/EclipseRTOSGiStarterKit.product" value="${buildId}" />
+		<!-- https://bugs.eclipse.org/bugs/show_bug.cgi?id=368488
+	    <replace token="@qualifier@" file="${buildDirectory}/plugins/org.eclipse.equinox.p2.ui.admin.rcp/rcp.product" value="${buildId}" />
+		-->
+	    <replace token="@qualifier@" file="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/product/EclipseRTOSGiStarterKit.product" value="${buildId}" />
 		<replace token="@qualifier@" file="${buildDirectory}/features/org.eclipse.pde.build.product.feature/product/pdebuild.product" value="${buildId}" />
+	    <!-- https://bugs.eclipse.org/bugs/show_bug.cgi?id=368488
 		<replace token="@qualifier@" file="${eclipse.build.configs}/rcp/rcp.product" value="${buildId}" />
 		<replace token="@qualifier@" file="${eclipse.build.configs}/rcp.sdk/rcp.product" value="${buildId}" />
+		-->
 		<replace token="@qualifier@" file="${eclipse.build.configs}/rcp.config/feature.xml" value="${buildId}" />
 		<replace token="@qualifier@" file="${equinox.build.configs}/osgistarter.config.launcher/feature.xml" value="${buildId}" />
 		<replace token="@qualifier@" file="${eclipse.build.configs}/pde.build.config.launcher/feature.xml" value="${buildId}" />
@@ -678,6 +682,7 @@
 			<advice kind="pluginVersions" file="${buildDirectory}/finalPluginsVersions.properties" />
 		</p2.publish.product>
 
+		    <!-- https://bugs.eclipse.org/bugs/show_bug.cgi?id=368488
 		<property name="equinox.p2.agent.dir" value="${equinox.build.configs}/equinox.p2.agent" />
 		<replace file="${equinox.p2.agent.dir}/p2.inf" token="@qualifier@" value="${buildId}" />
 		<copy todir="${equinox.p2.agent.dir}">
@@ -689,7 +694,7 @@
 			<config os="linux" ws="gtk" arch="x86" />
 			<config os="macosx" ws="cocoa" arch="x86" />
 		</p2.publish.product>
-
+-->
 		<ant target="main" antfile="buildConfiguration.xml" dir="${equinox.build.configs}/osgistarter.config.launcher" />
 		<property name="osgi.starter.config.launcher.temp" value="${equinox.build.configs}/osgistarter.config.launcher/temp" />
 		<mkdir dir="${osgi.starter.config.launcher.temp}" />
