@@ -148,7 +148,8 @@ export builderDir=${supportDir}/$eclipsebuilder
 # mkdir -p "${builderDir}"
 echo "INFO: value of builderDir: ${builderDir}"
 
-if [ "$buildType" = N ]; then
+if [ "$buildType" = "N" ]; then
+    echo "DEBUG: tag forced to false due to being an N build"
     tag=false
 fi
 
@@ -253,7 +254,7 @@ updateBaseBuilder () {
     if [[ -d "${relengBaseBuilderDir}" ]]
      then
            echo "removing previous version of base builder, to be sure it is fresh, to see if related to to see if fixes bug 375780"
-           rm -fr${VERBOSE_REMOVES} "${relengBaseBuilderDir}"
+           rm -fr ${VERBOSE_REMOVES} "${relengBaseBuilderDir}"
      fi
 
     if [[ ! -d "${relengBaseBuilderDir}" ]] 
@@ -759,14 +760,16 @@ tagRepo () {
     # temp oldBuildTag, to go from "last known 4.2 I build", for now
     # but eventually will use 'oldBuildTag' as computed from previous I build.
     tempOldBuildTag="I20120321-0610"
-    tagRepocmd="/bin/bash ${releasescriptpath}/git-release.sh -branch \"$relengBranch\" \
-        -relengMapsProject \"$relengMapsProject\" \
-        -relengRepoName \"$relengRepoName\" \
-        -buildType \"$buildType\" -gitCache \"$gitCache\" -root \"$writableBuildRoot\" \
+    tagRepocmd="/bin/bash ${releasescriptpath}/git-release.sh -branch $relengBranch \
+        -relengMapsProject $relengMapsProject \
+        -relengRepoName $relengRepoName \
+        -buildType $buildType \
+        -gitCache $gitCache \
+        -root $writableBuildRoot \
         -gitEmail \"$gitEmail\" -gitName \"$gitName\" \
-        -timestamp \"$timestamp\" -oldBuildTag $tempOldBuildTag -buildTag $buildTag \
-        -submissionReportFilePath \"$submissionReportFilePath\" \
-        -tag \"$tag\""
+        -timestamp $timestamp -oldBuildTag $tempOldBuildTag -buildTag $buildTag \
+        -submissionReportFilePath $submissionReportFilePath \
+        -tag $tag "
 
     echo "tag repo command: $tagRepocmd" 
 

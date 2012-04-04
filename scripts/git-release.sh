@@ -85,9 +85,11 @@ if [ -z "$oldBuildTag"  ]; then
   exit
 fi
 
-if ! $tag; then
-	noTag=true
-fi
+if [ -z "${tag}" ]
+ then
+      echo "INFO: tag set to false since not specified"
+      tag=false
+ fi
 
 supportDir=$writableBuildRoot/supportDir
 if [ -z "$gitCache" ]; then
@@ -101,24 +103,27 @@ fi
 #Pull or clone a branch from a repository
 #Usage: pull repositoryURL  branch
 pull() {
-     if [ -d "${gitCache}" ] 
-	then 
-           pushd $gitCache
-	else
-	   echo "could not pushd to $gitCache since it did not exist"
-       exit 1 
-    fi
+     echo "DEBUG: pushd gitCache: ${gitCache}"
+     if [ -d ${gitCache} ] 
+     then 
+        pushd ${gitCache}
+     else
+        echo "could not pushd to ${gitCache} since it did not exist"
+        exit 1 
+     fi
 
- # $1 is argument to pull ... what error checking to do?  
+ # $1 is argument to pull ... what error checking to do? 
+       echo "INFO: repo: $1" 
         directory=$(basename $1 .git)
         if [ ! -d $directory ]; then
-                echo git clone $1
+                echo repo dir did not exist yet, so git clone $1
                 git clone $1
-                cd $directory
+                cd ${directory}
                 git config --add user.email "$gitEmail"
                 git config --add user.name "$gitName"
+                popd
         fi
-        popd
+        
         pushd $gitCache/$directory
         echo git checkout $2
         git checkout $2
@@ -128,13 +133,13 @@ pull() {
 }
 
 #Nothing to do for nightly builds, or if $noTag is specified
-if $noTag || [ "$buildType" == "N" ]; then
-        echo Skipping build tagging for nightly build or -tag false build
+if [ ! $tag -o "${buildType}" = "N" ]
+then
+        echo "INFO: Skipping build tagging for nightly build or -tag false build"
         exit
 fi
 
-pushd $writableBuildRoot
-relengRepo=$gitCache/${relengRepoName}
+relengRepo="${gitCache}/${relengRepoName}"
 
 
 # pull the releng project to get the list of repositories to tag
@@ -198,7 +203,7 @@ git add $( find . -name "*.map" )
 git commit -m "Releng build tagging for $buildTag"
 git tag -f $buildTag   #tag the map file change
 
-echo "exiting early, before push, check working directory: ${PWD}"
+echo "exiting early, before push, check work directory?: ${PWD}"
 
 #git push
 #git push --tags
