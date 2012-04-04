@@ -765,8 +765,8 @@ tagRepo () {
         -buildType \"$buildType\" -gitCache \"$gitCache\" -root \"$writableBuildRoot\" \
         -gitEmail \"$gitEmail\" -gitName \"$gitName\" \
         -timestamp \"$timestamp\" -oldBuildTag $tempOldBuildTag -buildTag $buildTag \
-        -submissionReportFilePath $submissionReportFilePath 
-        -tag $tag"
+        -submissionReportFilePath \"$submissionReportFilePath\" \
+        -tag \"$tag\""
 
     echo "tag repo command: $tagRepocmd" 
 
