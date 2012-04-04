@@ -198,7 +198,7 @@ transformedRepo=${targetDir}/transformedRepo
 buildDirectory=${buildDir}/$buildTag
 
 #rembember, don't point to e4Build user directory
-sdkTestDir="${writableBuildRoot}"/sdkTests/$buildTag
+sdkTestDir=${writableBuildRoot}/sdkTests/$buildTag
 
 sdkResults=$buildDir/40builds/$buildTag/$buildTag
 sdkBuildDirectory=$buildDir/40builds/$buildTag
@@ -512,7 +512,7 @@ process_build () {
 
 publish_sdk () {
 
-    BASE_DIR=/shared/eclipse/e4/sdk
+    BASE_DIR=${writableBuildRoot}/sdk
     TMPL_DIR=$BASE_DIR/template
 
     ORIG_ZIPS="
@@ -538,7 +538,7 @@ publish_sdk () {
     index.php
     "
 
-    HUDSON_COMMON=/shared/eclipse/e4/build/downloads/drops/$dropDir/40builds
+    HUDSON_COMMON=${writableBuildRoot}/build/downloads/drops/$dropDir/40builds
     HUDSON_DROPS=$HUDSON_COMMON
     HUDSON_REPO=$targetDir/updates/${eclipseStream}-I-builds
 
