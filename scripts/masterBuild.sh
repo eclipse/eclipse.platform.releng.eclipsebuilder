@@ -360,6 +360,9 @@ runSDKBuild () {
     skipTest="-Dskip.tests=true"
     # temporarily always skipPack to save time
     skipPack="-DskipPack=true"
+    # I think 'sign' works by setting as anything if desire signing, 
+    # else, null out. 
+    sign="-Dsign=true"
     tagMaps=
     #TODO: assume this would eventually be downloads? Or is it a temporary location, on 
     # build machine, which is later copied over to downloads? 
