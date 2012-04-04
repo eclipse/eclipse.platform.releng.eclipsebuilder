@@ -357,7 +357,7 @@
 		<move file="${buildDirectory}/${buildLabel}/${archiveName}" tofile="${packtmp}/${archiveName}" />
 
 		<!--push drop to staging directory-->
-		<echo message="push drop to staging directory" />
+		<echo message="INFO: signing - push drop to staging directory" />
 
 		<condition property="signcopy" value="cp">
 			<equals arg1="${hudson}" arg2="true" />
@@ -389,6 +389,7 @@
 		</condition>
 		<property name="signpoll" value="ssh" />
 
+	    
 		<exec dir="${packtmp}" executable="${signcopy}" output="signing.txt">
 			<arg line="${archiveName} ${signhost}${signdelimiter}${stagingDirectory}" />
 		</exec>
@@ -397,6 +398,17 @@
 			<arg line="${signhost} /bin/chmod ugo+rw ${stagingDirectory}/${archiveName}" />
 		</exec>
 
+	    <echo message="DEBUG: signing - packtmp: ${packtmp}" />
+        <echo message="DEBUG: signing - buildDirectory: ${buildDirectory}" />
+        <echo message="DEBUG: signing - signexec: ${signexec}" />
+        <echo message="DEBUG: signing - signhost: ${signhost}" />
+        <echo message="DEBUG: signing - signquote: ${signquote}" />
+        <echo message="DEBUG: signing - stagingDirectory: ${stagingDirectory}" />
+        <echo message="DEBUG: signing - archiveName: ${archiveName}" />
+        <echo message="DEBUG: signing - hudson: ${hudson}" />
+        <echo message="DEBUG: signing - archiveName: ${archiveName}" />
+        <echo message="DEBUG: signing - archiveName: ${archiveName}" />
+	    
 		<!--invoke sign script and wait-->
 		<echo message="invoke sign script and wait" />
 		<exec dir="." executable="${signexec}" output="signing.txt" append="true">
@@ -409,6 +421,9 @@
 		</condition>
 		<property name="signpollline" value="${signhost} ${signquote}cd ${stagingDirectoryOutput};ls ${archiveName}${signquote}" />
 
+        <echo message="DEBUG: signing - signpoll: ${signpoll}" />
+        <echo message="DEBUG: signing - signpollline: ${signpollline}" />
+	    
 		<antcall target="waitForChangedAttribs">
 			<param name="signpoll" value="${signpoll}" />
 			<param name="signpollline" value="${signpollline}" />
@@ -416,13 +431,16 @@
 
 		<!--copy zip back to build machine -->
 		<sleep minutes="2" />
-		<echo message="copy zip back to build machine" />
+		<echo message="INFO: copy signed zip back to build machine." />
+		<echo message= "    From: ${signhost}${signdelimiter}${stagingDirectory}/${buildId}-out/${archiveName}" /> 
+	    <echo message= "    To: ${buildDirectory}/${buildLabel}" />
 		<exec dir="." executable="${signcopy}" output="signing.txt" append="true">
 			<arg line="${signhost}${signdelimiter}${stagingDirectory}/${buildId}-out/${archiveName} ${buildDirectory}/${buildLabel}" />
 		</exec>
 		<antcall target="deletetempsigningfiles" />
 	</target>
 
+    <!-- TODO: why not deleted if running on build.eclipse.org? -->
 	<target name="deletetempsigningfiles" unless="hudson">
 		<echo message="delete temp files on build.eclipse.org" />
 		<property name="signdeleteline" value="${signhost} ${signquote}/bin/rm -rf ${stagingDirectory}/${buildId}-out ${stagingDirectory}/${archiveName}${signquote}" />
