@@ -91,7 +91,7 @@ fi
 
 supportDir=$writableBuildRoot/supportDir
 if [ -z "$gitCache" ]; then
-	gitCache=$supportDir/gitClones
+	gitCache=$supportDir/gitCache
 fi
 
 if [ -z "$buildTag" ]; then
@@ -191,20 +191,16 @@ cat clones.txt| xargs /bin/bash git-map.sh $gitCache $buildTag \
 #Trim out lines that don't require execution
 grep -v ^OK maps.txt | grep -v ^Executed >run.txt
 
-#temp exit
-exit
-
 /bin/bash run.txt
-
-#temp exit
-exit
 
 cd $relengRepo
 git add $( find . -name "*.map" )
 git commit -m "Releng build tagging for $buildTag"
 git tag -f $buildTag   #tag the map file change
 
-git push
-git push --tags
+echo "exiting early, before push, check working directory: ${PWD}"
+
+#git push
+#git push --tags
 
 popd

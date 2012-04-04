@@ -32,14 +32,14 @@ relengBranch=R4_HEAD
 buildType=I
 date=$(date +%Y%m%d)
 time=$(date +%H%M)
-ttimestamp=$date$time
+timestamp=$date$time
 #TODO: make committerId a better property.  I think only used (now) 
 # to push things to "downloads" site.
 committerId=pwebster
 export gitEmail=e4Build
 export gitName=e4Builder-R4
 
-tag=false
+tag=true
 publish=false
 
 eclipseStream=4.2
@@ -765,12 +765,12 @@ tagRepo () {
         -buildType \"$buildType\" -gitCache \"$gitCache\" -root \"$writableBuildRoot\" \
         -gitEmail \"$gitEmail\" -gitName \"$gitName\" \
         -timestamp \"$timestamp\" -oldBuildTag $tempOldBuildTag -buildTag $buildTag \
-        -submissionReportFilePath $submissionReportFilePath \
+        -submissionReportFilePath $submissionReportFilePath 
         -tag $tag"
 
     echo "tag repo command: $tagRepocmd" 
 
-    #$tagRepocmd
+    $tagRepocmd
 
     popd
     mailx -s "$eclipseStream SDK Build: $buildTag submission" david_williams@us.ibm.com <$submissionReportFilePath
