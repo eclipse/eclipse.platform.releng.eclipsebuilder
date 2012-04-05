@@ -39,7 +39,7 @@ committerId=pwebster
 export gitEmail=e4Build
 export gitName=e4Builder-R4
 
-tag=true
+tag=false
 publish=false
 
 eclipseStream=4.2
