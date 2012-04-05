@@ -406,12 +406,12 @@
         <echo message="DEBUG: signing - stagingDirectory: ${stagingDirectory}" />
         <echo message="DEBUG: signing - archiveName: ${archiveName}" />
         <echo message="DEBUG: signing - hudson: ${hudson}" />
-        <echo message="DEBUG: signing - archiveName: ${archiveName}" />
-        <echo message="DEBUG: signing - archiveName: ${archiveName}" />
 	    
 		<!--invoke sign script and wait-->
 		<echo message="invoke sign script and wait" />
-		<exec dir="." executable="${signexec}" output="signing.txt" append="true">
+	    <!-- fail if can not even execute ... probably means current user 
+	         is not authorized to sign -->
+		<exec dir="." executable="${signexec}" output="signing.txt" append="true" failonerror="true">
 			<arg line="${signhost} ${signquote}/usr/bin/sign ${stagingDirectory}/${archiveName} nomail ${stagingDirectoryOutput}${signquote}" />
 		</exec>
 
