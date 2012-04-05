@@ -17,8 +17,6 @@ writableBuildRoot=/shared/eclipse/eclipse4
 mkdir -p "${writableBuildRoot}"
 export buildDir=$writableBuildRoot/build
 mkdir -p "${buildDir}"
-#374974 - org.eclipse.releng.eclipsebuilder should be migrated to Git
-relengProject=eclipse.platform.releng
 
 relengMapsProject=org.eclipse.releng
 relengRepoName=eclipse.platform.releng.maps
