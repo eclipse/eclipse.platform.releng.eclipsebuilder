@@ -23,6 +23,8 @@ relengRepoName=eclipse.platform.releng.maps
 
 # This is eclipsebuilder name on disk, traditionally org.eclipse.releng.eclipsebuilder
 # Though now in git, the repo (and effective project name) is eclipse.platform.releng.eclipsebuilder 
+# See https://bugs.eclipse.org/bugs/show_bug.cgi?id=374974 for details, 
+# especially https://bugs.eclipse.org/bugs/show_bug.cgi?id=374974#c28
 export eclipsebuilder=org.eclipse.releng.eclipsebuilder
 export eclipsebuilderRepo=eclipse.platform.releng.eclipsebuilder
 
