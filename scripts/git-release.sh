@@ -29,7 +29,7 @@ timestamp=$date$time
 #committerId=e4Build
 gitEmail=e4Build
 gitName="e4Builder-R4"
-# default is false ... must be explicit to tag
+# default is false ... must be explicit from caller to tag
 tag=false
 # default, but really caller should specify
 submissionReportFilePath=$writableBuildRoot/report.txt
@@ -205,7 +205,7 @@ git tag -f $buildTag   #tag the map file change
 
 echo "exiting early, before push, check work directory?: ${PWD}"
 
-#git push
-#git push --tags
+git push
+git push --tags
 
 popd
