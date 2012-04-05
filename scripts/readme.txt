@@ -17,3 +17,6 @@ wget -O mbCaptureOutput.sh http://git.eclipse.org/c/platform/eclipse.platform.re
 
 # there are rsync methods to get, to maintain permissions
 
+# occasionally may need to get the git-release.sh script to do a "manual" automatic tag
+# normally should be checked out/start from "supportDir" for now, I believe.
+wget -O git-release.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/git-release.sh?h=R4_2_primary;
