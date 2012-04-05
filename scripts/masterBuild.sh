@@ -39,7 +39,7 @@ committerId=pwebster
 export gitEmail=e4Build
 export gitName=e4Builder-R4
 
-tag=false
+tag=true
 publish=false
 
 eclipseStream=4.2
@@ -800,7 +800,8 @@ updateBaseBuilderInfo
 updateEclipseBuilder
 checkForErrorExit $? "Failed while updating Eclipse Buidler"
 
-#tagRepo
+tagRepo
+checkForErrorExit $? "Failed during auto tagging"
 
 runSDKBuild
 checkForErrorExit $? "Failed while building Eclipse-SDK"

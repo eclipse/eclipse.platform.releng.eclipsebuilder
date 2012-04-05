@@ -11,28 +11,45 @@
 #     IBM Corporation - initial API and implementation
 #*******************************************************************************
 
-#default values, overridden by command line
-# this "oldBuild" was the last known 4.2 based I build on old machine. 
-oldBuildTag="I20120321-0610"
+echo "DEBUG: current directory as entering git-release.sh ${PWD}"
+
+#default values, normally overridden by command line
+
 writableBuildRoot=/shared/eclipse/eclipse4
-
-relengMapsProject=org.eclipse.releng
-relengRepoName=eclipse.platform.releng.maps
-
 relengBranch=R4_HEAD
 buildType=I
+# normally, timestamp is passed in on command line, and 
+# date and time computed from it. 
+# here we do the reverse, for when running "standalone", 
+# so we can compute "now". 
 date=$(date +%Y%m%d)
 time=$(date +%H%M)
 timestamp=$date$time
+# shoud normally be passed in, but this matches what is set
+# in masterBuild.sh, to aide "standalone" operation.
+gitCache=$writableBuildRoot/build/supportDir/gitCache
+
+# for safety, default is false ... must be explicit from caller to tag
+# or hand-edited if runnning standalone.
+tag=false
+
+# default, but really caller should specify
+# This value does not match "masterBuild.sh", but shouldn't matter.
+submissionReportFilePath=$writableBuildRoot/report.txt
+
+
+# constants, per project. 
+# should not have to change these 
+# except if/when used for another project
+relengMapsProject=org.eclipse.releng
+relengRepoName=eclipse.platform.releng.maps
+
 # do not need committer id here, as long as using file:// or git://
 # TODO: longterm, we'd want id and protocol specifiable
 #committerId=e4Build
 gitEmail=e4Build
 gitName="e4Builder-R4"
-# default is false ... must be explicit from caller to tag
-tag=false
-# default, but really caller should specify
-submissionReportFilePath=$writableBuildRoot/report.txt
+
 
 
 ARGS="$@"
@@ -81,9 +98,12 @@ do
 done
 
 if [ -z "$oldBuildTag"  ]; then
-  echo You must provide -oldBuildTag
+    # TODO: should this really be an "error exit" condidtion? 
+    # or just warning? Not sure its really required? 
+      # Just would not have (accurate) submission report?   
+  echo You must provide -oldBuildTag to have a "submission report"
   echo args: "$ARGS"
-  exit
+  exit 1
 fi
 
 if [ -z "${tag}" ]
@@ -92,9 +112,19 @@ if [ -z "${tag}" ]
       tag=false
  fi
 
-supportDir=$writableBuildRoot/build/supportDir
+
 if [ -z "$gitCache" ]; then
-	gitCache=$supportDir/gitCache
+    echo "ERROR: must provide -gitCache location 
+	exit 1 
+fi
+
+if [ ! -d ${gitCache} ] 
+then
+    # gitCache should almost always already exist, so if doesn't
+    # we'll create but print warning, since may indicate incorrect setting.
+    echo "WARNING: gitCache location, ${gitCache}"
+    echo "         did not exist, so creating it"
+    mkdir -p ${gitCache}
 fi
 
 if [ -z "$buildTag" ]; then
@@ -137,7 +167,7 @@ pull() {
 if [ ! $tag -o "${buildType}" = "N" ]
 then
         echo "INFO: Skipping build tagging for nightly build or -tag false build"
-        exit
+        exit 0
 fi
 
 relengRepo="${gitCache}/${relengRepoName}"
@@ -201,9 +231,10 @@ git add $( find . -name "*.map" )
 git commit -m "Releng build tagging for $buildTag"
 git tag -f $buildTag   #tag the map file change
 
-echo "exiting early, before push, check work directory?: ${PWD}"
 
 git push
 git push --tags
 
 popd
+
+echo "DEBUG: current directory as existing git-release.sh ${PWD}"
