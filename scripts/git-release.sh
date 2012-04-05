@@ -101,8 +101,8 @@ if [ -z "$oldBuildTag"  ]; then
     # TODO: should this really be an "error exit" condidtion? 
     # or just warning? Not sure its really required? 
       # Just would not have (accurate) submission report?   
-  echo You must provide -oldBuildTag to have a "submission report"
-  echo args: "$ARGS"
+  echo "You must provide -oldBuildTag to have a submission report"
+  echo "args:${ARGS}"
   exit 1
 fi
 
@@ -114,7 +114,7 @@ if [ -z "${tag}" ]
 
 
 if [ -z "$gitCache" ]; then
-    echo "ERROR: must provide -gitCache location 
+    echo "ERROR: must provide -gitCache location" 
 	exit 1 
 fi
 
@@ -130,6 +130,34 @@ fi
 if [ -z "$buildTag" ]; then
 	buildTag=$buildType${date}-${time}
 fi
+
+function checkForErrorExit ()
+{
+    # arg 1 must be return code, $?
+    # arg 2 (remaining line) can be message to print before exiting do to non-zero exit code
+    exitCode=$1
+    shift
+    message="$*"
+    if [ -z "${exitCode}" ]
+    then
+        echo "PROGRAM ERROR: checkForErrorExit called with no arguments"
+        exit 1
+    fi
+    if [ -z "${message}" ]
+    then
+        echo "WARNING: checkForErrorExit called without message"
+        message="(Calling program provided no message)"
+    fi
+    if [ "${exitCode}" -ne "0" ]
+    then
+        echo
+        echo "   ERROR. exit code: ${exitCode}"  ${message}
+        echo
+        exit "${exitCode}"
+    fi
+}
+
+
 
 #Pull or clone a branch from a repository
 #Usage: pull repositoryURL  branch
@@ -149,7 +177,8 @@ pull() {
         if [ ! -d $directory ]; then
                 echo repo dir did not exist yet, so git clone $1
                 git clone $1
-                cd ${directory}
+                checkForErrorExit $? "Could not clone repository $1"
+                pushd ${directory}
                 git config --add user.email "$gitEmail"
                 git config --add user.name "$gitName"
                 popd
@@ -178,8 +207,9 @@ echo "relengRepo: $relengRepo"
 # pull the releng project to get the list of repositories to tag
 # since running on build.eclipse.org, under e4Build id, we can use "file://" protocol. Long term, we'd want to have variable, so could run remotely, etc.
 pull "file:///gitroot/platform/${relengRepoName}.git" $relengBranch
+checkForErrorExit $? "clone of repo did not succeed"
 
-if [ ! -d $relengRepo ]; then
+if [ ! -d "${relengRepo}" ]; then
     echo "relengRepo dir does not exist: $relengRepo" 
     exit 1
 fi
@@ -197,7 +227,7 @@ rm -f repos-clean.txt clones.txt repos-report.txt
 # TODO: remove blank lines
 # convert ssh://username@git.eclipse.org/gitroot...  to file:///gitroot
 repositoriesTxtPath="$relengRepo/${relengMapsProject}/tagging/repositories.txt"
-echo "repositoriesTxtPath: $repositoriesTxtPath"
+echo "DEBUG: repositoriesTxtPath: $repositoriesTxtPath"
 cat "$repositoriesTxtPath" | grep -v "^#" | sed 's!ssh://.*@git.eclipse.org!file://!' > repos-clean.txt
 
 
@@ -214,7 +244,8 @@ done < repos-clean.txt
 cat repos-clean.txt | sed "s/ / $oldBuildTag /" >repos-report.txt
 
 # generate the change report
-echo "[git-release]" git-submission.sh $gitCache $( cat repos-report.txt )
+echo "[git-release] git-submission.sh $gitCache $( cat repos-report.txt ) "
+
 /bin/bash git-submission.sh $gitCache $( cat repos-report.txt ) > $submissionReportFilePath
 
 
@@ -237,4 +268,4 @@ git push --tags
 
 popd
 
-echo "DEBUG: current directory as existing git-release.sh ${PWD}"
+echo "DEBUG: current directory as exiting git-release.sh ${PWD}"
