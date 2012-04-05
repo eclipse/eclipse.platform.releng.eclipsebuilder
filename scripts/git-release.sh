@@ -92,7 +92,7 @@ if [ -z "${tag}" ]
       tag=false
  fi
 
-supportDir=$writableBuildRoot/supportDir
+supportDir=$writableBuildRoot/build/supportDir
 if [ -z "$gitCache" ]; then
 	gitCache=$supportDir/gitCache
 fi
