@@ -800,7 +800,7 @@ updateBaseBuilderInfo
 updateEclipseBuilder
 checkForErrorExit $? "Failed while updating Eclipse Buidler"
 
-tagRepo
+#tagRepo
 
 runSDKBuild
 checkForErrorExit $? "Failed while building Eclipse-SDK"
