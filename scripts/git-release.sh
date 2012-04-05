@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #*******************************************************************************
-# Copyright (c) 2011 IBM Corporation and others.
+# Copyright (c) 2012 IBM Corporation and others.
 # All rights reserved. This program and the accompanying materials
 # are made available under the terms of the Eclipse Public License v1.0
 # which accompanies this distribution, and is available at
@@ -34,12 +34,13 @@ tag=false
 # default, but really caller should specify
 submissionReportFilePath=$writableBuildRoot/report.txt
 
+
 ARGS="$@"
 
 while [ $# -gt 0 ]
 do
         case "$1" in
-                "-branch")
+                "-relengBranch")
                         relengBranch="$2"; shift;;
                 "-buildType")
                         buildType="$2"; shift;;
@@ -142,12 +143,10 @@ fi
 relengRepo="${gitCache}/${relengRepoName}"
 
 
-# pull the releng project to get the list of repositories to tag
-# since running on build.eclipse.org, under e4Build id, we can use "file://" protocol. Long term, we'd want to have variable, so could run remotely, etc.
-#pull "ssh://$committerId@git.eclipse.org/gitroot/e4/org.eclipse.e4.releng.git" $relengBranch
 echo "relengBranch: $relengBranch"
 echo "relengRepo: $relengRepo"
-
+# pull the releng project to get the list of repositories to tag
+# since running on build.eclipse.org, under e4Build id, we can use "file://" protocol. Long term, we'd want to have variable, so could run remotely, etc.
 pull "file:///gitroot/platform/${relengRepoName}.git" $relengBranch
 
 if [ ! -d $relengRepo ]; then
@@ -185,7 +184,6 @@ done < repos-clean.txt
 cat repos-clean.txt | sed "s/ / $oldBuildTag /" >repos-report.txt
 
 # generate the change report
-mkdir $writableBuildRoot/$buildTag
 echo "[git-release]" git-submission.sh $gitCache $( cat repos-report.txt )
 /bin/bash git-submission.sh $gitCache $( cat repos-report.txt ) > $submissionReportFilePath
 

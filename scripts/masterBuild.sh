@@ -96,7 +96,7 @@ fi
 while [ $# -gt 0 ]
 do
     case "$1" in
-        "-branch")
+        "-relengBranch")
             relengBranch="$2"; shift;;
         "-eclipseStream")
             eclipseStream="$2"; shift;;
@@ -773,7 +773,7 @@ tagRepo () {
     # temp oldBuildTag, to go from "last known 4.2 I build", for now
     # but eventually will use 'oldBuildTag' as computed from previous I build.
     tempOldBuildTag="I20120321-0610"
-    tagRepocmd="/bin/bash ${releasescriptpath}/git-release.sh -branch $relengBranch \
+    tagRepocmd="/bin/bash ${releasescriptpath}/git-release.sh -relengBranch $relengBranch \
         -relengMapsProject $relengMapsProject \
         -relengRepoName $relengRepoName \
         -buildType $buildType \
