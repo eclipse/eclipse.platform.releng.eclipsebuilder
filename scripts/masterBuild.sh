@@ -367,7 +367,7 @@ runSDKBuild () {
     
     # 'sign' works by setting as anything if desire signing, 
     # else, comment out. 
-    #sign="-Dsign=true"
+    sign="-Dsign=true"
     
     # test tagMaps for autotagging, else, comment out. 
     # note: running an N build will override this setting 
