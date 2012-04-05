@@ -348,27 +348,37 @@ runSDKBuild () {
     bootclasspath="/shared/common/j2sdk1.4.2_19/jre/lib/rt.jar:/shared/common/j2sdk1.4.2_19/jre/lib/jsse.jar:/shared/common/j2sdk1.4.2_19/jre/lib/jce.jar"
     bootclasspath_15="/shared/common/jdk-1.5.0_16/jre/lib/rt.jar:/shared/common/jdk-1.5.0_16/jre/lib/jsse.jar:/shared/common/jdk-1.5.0_16/jre/lib/jce.jar"
     bootclasspath_16="/shared/common/jdk1.6.0_27.x86_64/jre/lib/rt.jar:/shared/common/jdk1.6.0_27.x86_64/jre/lib/jsse.jar:/shared/common/jdk1.6.0_27.x86_64/jre/lib/jce.jar"
-    bootclasspath_foundation="/shared/common/org.eclipse.sdk-feature/libs/ee.foundation-1.0.jar"
-    bootclasspath_foundation11="/shared/common/org.eclipse.sdk-feature/libs/ee.foundation.jar"
-    # was there a reason this was "hard coded" to 1.1? see bug 375976
-    # https://bugs.eclipse.org/bugs/show_bug.cgi?id=375976
-    #OSGiMinimum=$bootclasspath_foundation11
-    OSGiMinimum="/shared/common/org.eclipse.sdk-feature/libs/ee.minimum-1.2.0.jar"
+    bootclasspath_foundation="/shared/common/org.eclipse.sdk-feature2/libs/ee.foundation-1.0.jar"
+    bootclasspath_foundation11="/shared/common/org.eclipse.sdk-feature2/libs/ee.foundation.jar"
+    # https://bugs.eclipse.org/bugs/show_bug.cgi?id=375976, and 
+    # https://bugs.eclipse.org/bugs/show_bug.cgi?id=376029
+    OSGiMinimum11="/shared/common/org.eclipse.sdk-feature2/libs/ee.minimum.jar"
+    OSGiMinimum12="/shared/common/org.eclipse.sdk-feature2/libs/ee.minimum-1.2.0.jar"
 
     javadoc="-Djavadoc16=/shared/common/jdk1.6.0_27.x86_64/bin/javadoc"
+    
     skipPerf="-Dskip.performance.tests=true"
     skipTest="-Dskip.tests=true"
-    # temporarily always skipPack to save time
-    skipPack="-DskipPack=true"
-    # I think 'sign' works by setting as anything if desire signing, 
-    # else, null out. 
-    sign="-Dsign=true"
-    tagMaps=
+    
+    # should skipPack to save time
+    # TODO: I do not think we ever need to "pack" if we do not "sign"
+    # and if we sign, signing does it automatically. 
+    # skipPack="-DskipPack=true"
+    
+    # 'sign' works by setting as anything if desire signing, 
+    # else, comment out. 
+    #sign="-Dsign=true"
+    
+    # test tagMaps for autotagging, else, comment out. 
+    # note: running an N build will override this setting 
+    # (that is, N builds will not tag the maps, even if specify tagMaps=true.
+    tagMaps="-DtagMaps=true"
+    
     #TODO: assume this would eventually be downloads? Or is it a temporary location, on 
     # build machine, which is later copied over to downloads? 
     postingDirectory=$supportDir
-    #TODO hudson seems to be used as an indicator of running on build.eclipse.org? 
-    # perhaps as "method" to know how to run tests?
+    
+    # hudson is an indicator of running on build.eclipse.org
     hudson="-Dhudson=true"
 
     echo "DEBUG: in runSDKBuild buildfile:$buildfile"
@@ -398,22 +408,22 @@ runSDKBuild () {
         -DJ2SE-1.4=$bootclasspath \
         -DCDC-1.0/Foundation-1.0=$bootclasspath_foundation \
         -DCDC-1.1/Foundation-1.1=$bootclasspath_foundation11 \
-        -DOSGi/Minimum-1.0=$OSGiMinimum \
-        -DOSGi/Minimum-1.1=$OSGiMinimum \
-        -DOSGi/Minimum-1.2=$OSGiMinimum \
+        -DOSGi/Minimum-1.0=$OSGiMinimum11 \
+        -DOSGi/Minimum-1.1=$OSGiMinimum11 \
+        -DOSGi/Minimum-1.2=$OSGiMinimum12 \
         -DJavaSE-1.6=$bootclasspath_16 \
         -DlogExtension=.xml \
         $javadoc \
         $sign \
         $repoCache \
         -DgenerateFeatureVersionSuffix=true \
-        -Djava15home=\"${javaHome}\" \
+        -Djava15home=${javaHome} \
         -DpostingDirectory=$postingDirectory"
 
 
-    # save copy of command, to enable "restarting"
+    echo "INFO: save copy of command, to enable restarting into ${supportDir}/${eclipsebuilder}/command.txt"
     echo $cmd > $supportDir/$eclipsebuilder/command.txt
-    # echo to log/console
+    # echo cmd to log/console
     echo "cmd: $cmd"
     # finally, start the java job
     $cmd  
