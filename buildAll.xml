@@ -412,7 +412,10 @@
 		<echo message="invoke sign script and wait" />
 	    <!-- fail if can not even execute ... probably means current user 
 	         is not authorized to sign -->
+	    <!-- Note: since "sign" calls jarprocessor, which conditions jars, 
+	         we want to make sure it uses a java 5 JRE -->
 		<exec dir="." executable="${signexec}" output="signing.txt" append="true" failonerror="true">
+		    <env key="JAVA_HOME" value="${java15home}" />
 			<arg line="${signhost} ${signquote}/usr/bin/sign ${stagingDirectory}/${archiveName} nomail ${stagingDirectoryOutput}${signquote}" />
 		</exec>
 

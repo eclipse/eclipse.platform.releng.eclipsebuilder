@@ -48,7 +48,7 @@ export eclipsebuilderBranch=R4_2_primary
 
 # common properties
 
-java15home=/shared/common/jdk-1.5.0-22.x86_64
+java15home=/shared/orbit/apps/ibm-java2-i386-50/jre/
 java16home=/shared/common/sun-jdk1.6.0_21_x64
 buildTimestamp=${date}-${time}
 buildTag=$buildType$buildTimestamp
