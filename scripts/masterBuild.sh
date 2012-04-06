@@ -364,7 +364,7 @@ runSDKBuild () {
     # should skipPack to save time
     # TODO: I do not think we ever need to "pack" if we do not "sign"
     # and if we sign, signing does it automatically. 
-    # skipPack="-DskipPack=true"
+    skipPack="-DskipPack=true"
     
     # 'sign' works by setting as anything if desire signing, 
     # else, comment out. 
