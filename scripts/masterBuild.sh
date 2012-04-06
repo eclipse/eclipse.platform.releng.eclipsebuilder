@@ -48,6 +48,7 @@ export eclipsebuilderBranch=R4_2_primary
 
 # common properties
 
+java15home=/shared/common/jdk-1.5.0-22.x86_64
 javaHome=/shared/common/sun-jdk1.6.0_21_x64
 buildTimestamp=${date}-${time}
 buildTag=$buildType$buildTimestamp
@@ -396,7 +397,7 @@ runSDKBuild () {
         -Dbase=$buildDir/40builds \
         -DupdateSite=$supportDir/updates/4.2-I-builds \
         -DmapVersionTag=$mapVersionTag \
-        -Dorg.eclipse.update.jarprocessor.pack200=$javaHome \
+        -Dorg.eclipse.update.jarprocessor.pack200=$java15Home \
         -Declipse.p2.MD5Check=false \
         $skipPerf \
         $skipTest \
@@ -417,7 +418,7 @@ runSDKBuild () {
         $sign \
         $repoCache \
         -DgenerateFeatureVersionSuffix=true \
-        -Djava15home=${javaHome} \
+        -Djava15home=${java15Home} \
         -DpostingDirectory=$postingDirectory"
 
 
