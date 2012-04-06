@@ -795,7 +795,8 @@ tagRepo () {
         echo
         # eventually, of course, send to platform-releng-dev@eclipse.org
         # with pointer to the log. 
-        mailx -s "$eclipseStream SDK Build: $buildTag auto tagging failed" david_williams@us.ibm.com <<EOF
+        # remove "TEST" before production runs.
+        mailx -s "$eclipseStream SDK TEST Build: $buildTag auto tagging failed" david_williams@us.ibm.com <<EOF
    
     Auto tagging failed. See log. 
     Build halted.
@@ -804,8 +805,8 @@ EOF
         exit "${exitCode}"
     fi
 
-    
-    mailx -s "$eclipseStream SDK Build: $buildTag submission" david_williams@us.ibm.com <$submissionReportFilePath
+    # remove "TEST" before production runs.
+    mailx -s "$eclipseStream SDK TEST Build: $buildTag submission" david_williams@us.ibm.com <$submissionReportFilePath
     #mailx -s "$eclipseStream SDK Build: $buildTag submission" platform-releng-dev@eclipse.org <$submissionReportFilePath
     popd
     echo "DEBUG: ending tagRepo"
