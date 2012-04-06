@@ -6,8 +6,8 @@
 
 # DEBUG controls verbosity of little "state and status" messages
 # normally would be false during production
-#DEBUG=${DEBUG:-true}
-DEBUG=true
+export DEBUG=${DEBUG:-false}
+#export DEBUG=${DEBUG:-true}
 echo "DEBUG: $DEBUG"
 
 # VERBOSE_REMOVES needs to be empty or literally 'v', since
