@@ -771,9 +771,6 @@ tagRepo () {
     # will need to do more if/when we make it a variable property (such as for 
     # committers running remotely, or even non-committers runnning remotely.
     #
-    # temp oldBuildTag, to go from "last known 4.2 I build", for now
-    # but eventually will use 'oldBuildTag' as computed from previous I build.
-    tempOldBuildTag="I20120321-0610"
     tagRepocmd="/bin/bash ${releasescriptpath}/git-release.sh -relengBranch $relengBranch \
         -relengMapsProject $relengMapsProject \
         -relengRepoName $relengRepoName \
