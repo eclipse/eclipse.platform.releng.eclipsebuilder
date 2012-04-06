@@ -138,10 +138,10 @@
 	</target>
 
 	<target name="packageSwtStandalone">
-		<condition property="downloadFile" value="swt-${buildid}-${ws}-${os}.zip">
+		<condition property="downloadFile" value="swt-${buildId}-${ws}-${os}.zip">
 			<equals arg1="${arch}" arg2="" />
 		</condition>
-		<property name="downloadFile" value="swt-${buildid}-${ws}-${os}-${arch}.zip" />
+		<property name="downloadFile" value="swt-${buildId}-${ws}-${os}-${arch}.zip" />
 		<property name="destination" value="${postingDirectory}/${buildLabel}" />
 		<property name="archiveFullPath" value="${destination}/${downloadFile}" />
 
