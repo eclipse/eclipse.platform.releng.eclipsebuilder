@@ -778,7 +778,7 @@ tagRepo () {
         -gitCache $gitCache \
         -root $writableBuildRoot \
         -gitEmail \"$gitEmail\" -gitName \"$gitName\" \
-        -timestamp $timestamp -oldBuildTag $tempOldBuildTag -buildTag $buildTag \
+        -timestamp $timestamp -oldBuildTag $oldBuildTag -buildTag $buildTag \
         -submissionReportFilePath $submissionReportFilePath \
         -tag $tag "
 
