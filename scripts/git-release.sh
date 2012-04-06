@@ -266,7 +266,9 @@ cd $relengRepo
 git add $( find . -name "*.map" )
 checkForErrorExit $? "Could not add maps to repository"
 git commit -m "Releng build tagging for $buildTag"
-checkForErrorExit $? "Could not commit to repository"
+# if nothing to commit, returns 1
+# is this where a "merge conflict" would fail? 
+# checkForErrorExit $? "Could not commit to repository"
 git tag -f $buildTag   #tag the map file change
 checkForErrorExit $? "Could not tag repository"
 
