@@ -255,6 +255,7 @@
 		<property name="archiveName" value="eclipse-master-${buildId}.zip" />
 
 		<!-- update location of jvm arguments -->
+		<echo message="DEBUG: pack200: ${java15home}/bin/pack200" />
 		<replace file="${eclipse.build.configs}/../../extras/pack200" token="@pack200@" value="${java15home}/bin/pack200" />
 		<chmod file="${eclipse.build.configs}/../../extras/pack200" perm="755" />
 

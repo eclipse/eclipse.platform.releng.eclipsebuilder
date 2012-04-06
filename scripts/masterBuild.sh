@@ -49,7 +49,7 @@ export eclipsebuilderBranch=R4_2_primary
 # common properties
 
 java15home=/shared/common/jdk-1.5.0-22.x86_64
-javaHome=/shared/common/sun-jdk1.6.0_21_x64
+java16home=/shared/common/sun-jdk1.6.0_21_x64
 buildTimestamp=${date}-${time}
 buildTag=$buildType$buildTimestamp
 
@@ -382,9 +382,11 @@ runSDKBuild () {
     # hudson is an indicator of running on build.eclipse.org
     hudson="-Dhudson=true"
 
-    echo "DEBUG: in runSDKBuild buildfile:$buildfile"
-
-    cmd="$javaHome/bin/java -Xmx1000m -enableassertions \
+    echo "DEBUG: in runSDKBuild buildfile: $buildfile"
+    export JAVA_HOME=${java16home}
+    echo "DEBUG: in runSDKBuild buildfile: JAVA_HOME: ${JAVA_HOME}"
+        
+    cmd="${JAVA_HOME}/bin/java -Xmx1000m -enableassertions \
         -cp $cpAndMain \
         -application org.eclipse.ant.core.antRunner  \
         -buildfile $buildfile \
@@ -397,7 +399,7 @@ runSDKBuild () {
         -Dbase=$buildDir/40builds \
         -DupdateSite=$supportDir/updates/4.2-I-builds \
         -DmapVersionTag=$mapVersionTag \
-        -Dorg.eclipse.update.jarprocessor.pack200=$java15Home \
+        -Dorg.eclipse.update.jarprocessor.pack200=${java15home}/bin/pack200 \
         -Declipse.p2.MD5Check=false \
         $skipPerf \
         $skipTest \
@@ -418,7 +420,7 @@ runSDKBuild () {
         $sign \
         $repoCache \
         -DgenerateFeatureVersionSuffix=true \
-        -Djava15home=${java15Home} \
+        -Djava15home=${java15home} \
         -DpostingDirectory=$postingDirectory"
 
 
