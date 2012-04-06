@@ -167,6 +167,9 @@ pull() {
      then 
         pushd ${gitCache}
      else
+        # this is near imposible now, since we create it in this script, 
+        # with a warning, if doesn't exist ... but, will leave here, in case 
+        # that earlier part of script ever changes. 
         echo "could not pushd to ${gitCache} since it did not exist"
         exit 1 
      fi
@@ -187,8 +190,10 @@ pull() {
         pushd $gitCache/$directory
         echo git checkout $2
         git checkout $2
+        checkForErrorExit $? "Git checkout failed for repository $1 branch $2"
         echo git pull
         git pull
+        checkForErrorExit $? "Git pull failed for repository $1 branch $2"
         popd
 }
 
@@ -259,12 +264,17 @@ grep -v ^OK maps.txt | grep -v ^Executed >run.txt
 
 cd $relengRepo
 git add $( find . -name "*.map" )
+checkForErrorExit $? "Could not add maps to repository"
 git commit -m "Releng build tagging for $buildTag"
+checkForErrorExit $? "Could not commit to repository"
 git tag -f $buildTag   #tag the map file change
+checkForErrorExit $? "Could not tag repository"
 
 
 git push
+checkForErrorExit $? "Could not push to repository"
 git push --tags
+checkForErrorExit $? "Could not push tags to repository"
 
 popd
 

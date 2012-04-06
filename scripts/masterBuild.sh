@@ -787,10 +787,28 @@ tagRepo () {
 
     $tagRepocmd
 
-    popd
+    exitCode=$?
+    if [ "${exitCode}" -ne "0" ]
+    then
+        echo
+        echo "   ERROR. exit code: ${exitCode} Autotagging failed. See log."
+        echo
+        # eventually, of course, send to platform-releng-dev@eclipse.org
+        # with pointer to the log. 
+        mailx -s "$eclipseStream SDK Build: $buildTag auto tagging failed" david_williams@us.ibm.com <<EOF
+   
+    Auto tagging failed. See log. 
+    Build halted.
+    
+EOF
+        exit "${exitCode}"
+    fi
+
+    
     mailx -s "$eclipseStream SDK Build: $buildTag submission" david_williams@us.ibm.com <$submissionReportFilePath
     #mailx -s "$eclipseStream SDK Build: $buildTag submission" platform-releng-dev@eclipse.org <$submissionReportFilePath
-      echo "DEBUG: ending tagRepo"
+    popd
+    echo "DEBUG: ending tagRepo"
 }
 
 updateBaseBuilder
