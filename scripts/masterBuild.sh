@@ -409,6 +409,7 @@ runSDKBuild () {
         -Dbuilddate=$date \
         -Dbuildtime=$time \
         -DbuildId=$buildId \
+        -Dbuildid=$buildId \
         -DbuildLabel=$buildLabel \
         -Dbase=$buildDir/40builds \
         -DupdateSite=$supportDir/updates/4.2-I-builds \
