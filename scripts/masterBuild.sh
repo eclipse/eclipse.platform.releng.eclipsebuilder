@@ -47,9 +47,23 @@ basebuilderBranch=R4_2_primary
 export eclipsebuilderBranch=R4_2_primary
 
 # common properties
-
-java15home=/shared/orbit/apps/ibm-java2-i386-50/jre/
+# Note, for now, have to run under Java 1.5, to make sure 'sign' (which uses jar processor) 
+# and eventual "pack200" can all be unpacked with 1.5. 
+# long term, we can launch those tasks in seperate process, or some other better way.
+java15home=/shared/common/jdk-1.5.0-22.x86_64
+#java15home=/shared/orbit/apps/ibm-java2-i386-50/jre
 java16home=/shared/common/sun-jdk1.6.0_21_x64
+pack200dir=${java15home}/bin
+
+if [ ! -x "${pack200dir}/pack200" ]
+then
+    echo "ERROR: pack200 not found (or, not executable) where expected: ${pack200dir}"
+    exit 1
+fi
+
+export JAVA_HOME=${java15home} 
+echo "DEBUG: in testsinging script: JAVA_HOME: ${JAVA_HOME}"
+
 buildTimestamp=${date}-${time}
 buildTag=$buildType$buildTimestamp
 
@@ -364,11 +378,12 @@ runSDKBuild () {
     # should skipPack to save time
     # TODO: I do not think we ever need to "pack" if we do not "sign"
     # and if we sign, signing does it automatically. 
-    skipPack="-DskipPack=true"
+    # don't skip pack now, to confirm sign and pack200 are compatible. 
+    #skipPack="-DskipPack=true"
     
     # 'sign' works by setting as anything if desire signing, 
     # else, comment out. 
-    #sign="-Dsign=true"
+    sign="-Dsign=true"
     
     # test tagMaps for autotagging, else, comment out. 
     # note: running an N build will override this setting 
@@ -383,8 +398,6 @@ runSDKBuild () {
     hudson="-Dhudson=true"
 
     echo "DEBUG: in runSDKBuild buildfile: $buildfile"
-    export JAVA_HOME=${java16home}
-    echo "DEBUG: in runSDKBuild buildfile: JAVA_HOME: ${JAVA_HOME}"
         
     cmd="${JAVA_HOME}/bin/java -Xmx1000m -enableassertions \
         -cp $cpAndMain \
@@ -398,7 +411,7 @@ runSDKBuild () {
         -Dbase=$buildDir/40builds \
         -DupdateSite=$supportDir/updates/4.2-I-builds \
         -DmapVersionTag=$mapVersionTag \
-        -Dorg.eclipse.update.jarprocessor.pack200=${java15home}/bin/pack200 \
+        -Dorg.eclipse.update.jarprocessor.pack200=${pack200dir} \
         -Declipse.p2.MD5Check=false \
         $skipPerf \
         $skipTest \
