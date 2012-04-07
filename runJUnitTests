@@ -1,6 +1,0 @@
-#!/bin/sh
-
-mkdir $WORKSPACE/builds
-cd $WORKSPACE/builds
-mkdir -p $WORKSPACE/builds/N
-$WORKSPACE/org.eclipse.releng.eclipsebuilder/bootstrapTests.sh -skipTest -buildDirectory $WORKSPACE/builds/N -hudson N
