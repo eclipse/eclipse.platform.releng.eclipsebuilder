@@ -47,8 +47,8 @@
 	<property name="buildRepo" value="${updateSite}/${buildId}" />
 
 	<target name="main" depends="init">
-	    <echoproperties description="properties at start of main buildAll.xml"/>
-	<!--	<antcall target="buildEclipseSourceDrops" /> -->
+	    <echoproperties description="DEBUG: properties at start of main buildAll.xml"/>
+	    <antcall target="buildEclipseSourceDrops" /> 
 		<antcall target="buildMasterFeature" />
 		<parallel failonany="true">
 			<sequential>
@@ -206,7 +206,9 @@
 	<target name="buildEclipseSourceDrops" >
 	    <!-- eventually may remove this whole task? when no longer build source drops, see bug 374428
 		<property name="buildSourceDrops" value="true" /> -->
-		
+		<echo message="DEBUG: eclipse.pdebuild.scripts: ${eclipse.pdebuild.scripts}" />
+        <echo message="DEBUG: eclipse.build.configs: ${eclipse.build.configs}" />
+	    
 		<!--examples are required to pull sample doc into SDK doc plug-ins-->
 		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="preBuild">
 			<property name="builder" value="${eclipse.build.configs}/sdk.examples" />
