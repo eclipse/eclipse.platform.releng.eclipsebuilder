@@ -109,9 +109,10 @@
 	<!-- Steps to do before fetching the build elements -->
 	<!-- ===================================================================== -->
 	<target name="preFetch">
-	    <!-- should be removed ... do not think it does anything? --> 
+	    <!-- this is where we could "tweak" map files to downloads from elsewhere (such as use SSH or use a local machine. Needs work.
 		<replace dir="${buildDirectory}/maps/org.eclipse.releng/maps" value="${localmirror}" token="download.eclipse.org" />
 		<replace dir="${buildDirectory}/maps/org.eclipse.releng/maps" value="${cvsuser}" token=":pserver:anonymous" />
+		--> 
 		
 	</target>
 
