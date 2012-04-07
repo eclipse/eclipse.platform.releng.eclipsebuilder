@@ -109,25 +109,30 @@
 		<condition property="fetchjetty" value="true">
 			<equals arg1="${buildType}" arg2="N" />
 		</condition>
+	    
 		<property name="buildDirectoryAbsoluteTemp" value="${buildDirectory}/absolutetemp.txt" />
 		<echo message="${reposource}" file="${buildDirectoryAbsoluteTemp}" />
 		<replaceregexp file="${buildDirectoryAbsoluteTemp}" match="org.eclipse.releng.eclipsebuilder/../src/" replace="src/" />
 		<loadfile property="buildDirectoryAbsolute" srcFile="${buildDirectoryAbsoluteTemp}" failonerror="false" />
-		<delete file="${buildDirectoryAbsoluteTemp}" />
+		<!-- <delete file="${buildDirectoryAbsoluteTemp}" /> -->
+	    <echo message="${buildDirectoryAbsolute}" />
+	    
 		<!--set local mirror location depending if hudson is running -->
 		<condition property="localmirror" value="download.eclipse.org">
 			<equals arg1="${hudson}" arg2="true" />
 		</condition>
-		<property name="localmirror" value="fullmoon.ottawa.ibm.com" />
+		<!-- <property name="localmirror" value="fullmoon.ottawa.ibm.com" /> -->
 	     <echo message="localmirror: ${localmirror}" />
-		<condition property="cvsuser" value=":pserver:anonymous">
+		<!-- <condition property="cvsuser" value=":pserver:anonymous">
 			<equals arg1="${hudson}" arg2="true" />
-		</condition>
-		<property name="cvsuser" value="kmoir" />
-		<condition property="mapsRepo" value=":pserver:anonymous@dev.eclipse.org/cvsroot/eclipse">
+		</condition> 
+		-->
+		<!-- <property name="cvsuser" value="kmoir" /> -->
+		    <!--
+		<condition property="mapsRepo" value=":local:/cvsroot/eclipse">
 			<equals arg1="${hudson}" arg2="true" />
-		</condition>
-		<property name="mapsRepo" value="kmoir@dev.eclipse.org/cvsroot/eclipse" />
+		</condition> -->
+		<!-- <property name="mapsRepo" value="kmoir@dev.eclipse.org/cvsroot/eclipse" /> -->
 		<replace token="@localmirror@" file="${basedir}/repos.properties" value="${localmirror}" />
 		<loadproperties srcFile="${basedir}/repos.properties" />
 		<condition property="p2RepoURL" value="${p2repoI}">
@@ -151,17 +156,14 @@
 		<property name="org.eclipse.equinox.p2.tests.last.release.build.repo" value="${p2repopreviousR}" />
 		<property name="previousPlatformZips" value="${buildDirectory}/previousPlatformZips" />
 		<mkdir dir="${previousPlatformZips}" />
-		<condition property="commonrepo" value="git://git.eclipse.org/gitroot/platform/eclipse.platform.releng.maps">
-			<or>
+		    
+		<condition property="commonrepo" value="file:///gitroot/platform/eclipse.platform.releng.maps" 
+		        else="git://git.eclipse.org/gitroot/platform/eclipse.platform.releng.maps">
+
 				<equals arg1="${hudson}" arg2="true" />
-				<not>
-					<equals arg1="${tagMaps}" arg2="true" />
-				</not>
-			</or>
+
 		</condition>
-		<property name="commonrepo" value="ssh://git.eclipse.org/gitroot/platform/eclipse.platform.releng.maps" />
-	    <echo message="DEBUG: echo properties at end of init in buildAll.xml" />
-	    <echoproperties />
+	   
 	</target>
 
 	<target name="buildECFMasterFeature">

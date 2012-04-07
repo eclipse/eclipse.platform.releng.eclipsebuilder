@@ -109,8 +109,10 @@
 	<!-- Steps to do before fetching the build elements -->
 	<!-- ===================================================================== -->
 	<target name="preFetch" if="performance.base">
+	    <!--
 		<replace dir="${buildDirectory}/maps/org.eclipse.releng/maps" value="${localmirror}" token="download.eclipse.org" />
 		<replace dir="${buildDirectory}/maps/org.eclipse.releng/maps" value="${cvsuser}" token=":pserver:anonymous" />
+		-->
 		<mkdir dir="${buildDirectory}/${buildLabel}" />
 		<property name="eclipse.base" value="${downloadUrl}/eclipse-SDK-${testedBuildId}-win32.zip" />
 		<property name="linux.base" value="${downloadUrl}/eclipse-SDK-${testedBuildId}-linux-gtk.tar.gz" />
