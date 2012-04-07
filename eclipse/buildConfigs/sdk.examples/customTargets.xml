@@ -47,7 +47,7 @@
 		<property name="mapsGitRepo" value="${buildDirectory}/commonrepo" />
 		<mkdir dir="${mapsGitRepo}" />
 	    <echo message="DEBUG: made mapsGitRep: ${mapsGitRepo}" />
-	    <echo message="DEBUG: will fetch version: ${mapVersionTag)" />
+	    <echo message="DEBUG: will fetch version: ${mapVersionTag}" />
 		<exec executable="git" dir="${mapsGitRepo}">
 			<arg line="clone ${commonrepo}" />
 		</exec>
