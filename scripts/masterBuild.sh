@@ -353,13 +353,6 @@ runSDKBuild ()
     # else, comment out. 
     sign="-Dsign=true"
     
-    # test tagMaps for autotagging, else, comment out. 
-    # note: running an N build will override this setting 
-    # (that is, N builds will not tag the maps, even if specify tagMaps=true.
-    # I'm wondering if "tagMaps" is for the _old_ way of tagging map files? 
-    # Its used in customTargets.xml
-    # tagMaps="-DtagMaps=true"
-    
     #TODO: assume this would eventually be downloads? Or is it a temporary location, on 
     # build machine, which is later copied over to downloads? 
     postingDirectory=$supportDir
@@ -388,7 +381,6 @@ runSDKBuild ()
         $skipTest \
         $skipPack \
         $skipSourceBuild \
-        $tagMaps \
         $hudson \
         -DJ2SE-1.5=$bootclasspath_15 \
         -DJ2SE-1.4=$bootclasspath \
