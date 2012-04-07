@@ -123,19 +123,10 @@
 		</condition>
 		<!-- <property name="localmirror" value="fullmoon.ottawa.ibm.com" /> -->
 	     <echo message="localmirror: ${localmirror}" />
-		<!-- <condition property="cvsuser" value=":pserver:anonymous">
-			<equals arg1="${hudson}" arg2="true" />
-		</condition> 
-		-->
-		<!-- <property name="cvsuser" value="kmoir" /> -->
-		    <!--
-		<condition property="mapsRepo" value=":local:/cvsroot/eclipse">
-			<equals arg1="${hudson}" arg2="true" />
-		</condition> -->
-		<!-- <property name="mapsRepo" value="kmoir@dev.eclipse.org/cvsroot/eclipse" /> -->
-	    
+
 		<!-- hard code for now ... shouldn't be needed, but ... see bug 375807? -->
 	    <property name="cvsuser" value="pserver:anonymous" />
+	    <property name="mapsRepo" value=":local:/cvsroot/eclipse" />
 	    
 	    <replace token="@localmirror@" file="${basedir}/repos.properties" value="${localmirror}" />
 		<loadproperties srcFile="${basedir}/repos.properties" />
@@ -156,6 +147,7 @@
 		<condition property="currentbuildrepo" value="https://hudson.eclipse.org/hudson/job/${BUILD_JOB_NAME}/${BUILD_BUILD_NUMBER}/artifact/builds/transfer/files/repo/${buildId}">
 			<equals arg1="${hudson}" arg2="true" />
 		</condition>
+	    
 		<property name="org.eclipse.equinox.p2.tests.current.build.repo" value="${p2RepoURL}/${buildId}" />
 		<property name="org.eclipse.equinox.p2.tests.last.release.build.repo" value="${p2repopreviousR}" />
 		<property name="previousPlatformZips" value="${buildDirectory}/previousPlatformZips" />
