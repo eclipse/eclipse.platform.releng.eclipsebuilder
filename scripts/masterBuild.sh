@@ -87,9 +87,9 @@ echo "VERBOSE_REMOVES: $VERBOSE_REMOVES"
 # quietCVS needs to be -Q (really quiet) -q (somewhat quiet) or literally empty (verbose)
 # FYI, not that much difference between -Q and -q :) 
 # TODO: won't be needed once move off CVS is complete
-export quietCVS=${quietCVS:--Q}
+#export quietCVS=${quietCVS:--Q}
 #export quietCVS=${quietCVS:--q}
-#export quietCVS=${quietCVS:-}
+export quietCVS=${quietCVS:-" "}
 
 
 
@@ -223,8 +223,7 @@ buildDirEclipse="$buildDir/eclipse"
 WORKSPACE="$buildDir/workspace"
 export WORKSPACE
 
-function checkForErrorExit ()
-{
+checkForErrorExit () {
     # arg 1 must be return code, $?
     # arg 2 (remaining line) can be message to print before exiting do to non-zero exit code
     exitCode=$1
@@ -266,10 +265,10 @@ updateBaseBuilder () {
 
     echo "DEBUG: checking existence"
     
-    if [[ -d "${relengBaseBuilderDir}" ]]
+    if [ -d ${relengBaseBuilderDir} ]
      then
            echo "removing previous version of base builder, to be sure it is fresh, to see if related to to see if fixes bug 375780"
-           rm -fr ${VERBOSE_REMOVES} "${relengBaseBuilderDir}"
+           rm -fr ${VERBOSE_REMOVES} ${relengBaseBuilderDir}
      fi
 
     if [[ ! -d "${relengBaseBuilderDir}" ]] 
@@ -278,7 +277,8 @@ updateBaseBuilder () {
         #mkdir -p "${relengBaseBuilderDir}"
         #echo "DEBUG: creating cmd"
         #cmd="cvs -d :pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse ${quietCVS} ex -r ${basebuilderBranch} -d org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder"
-        cvs -d :pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse ${quietCVS} ex -r ${basebuilderBranch} -d org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder
+        // cvs -d :pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse ${quietCVS} ex -r ${basebuilderBranch} -d org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder
+         cvs -d :local:/cvsroot/eclipse ${quietCVS} ex -r ${basebuilderBranch} -d org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder
         #echo "cvs export cmd: ${cmd}"
         #"${cmd}"
     else
@@ -307,7 +307,7 @@ updateBaseBuilderInfo() {
 
 updateEclipseBuilder() {
 
-    echo "[`date +%H\:%M\:%S`] cvs get ${eclipsebuilder} using tag or branch: ${eclipsebuilderBranch}"
+    echo "[`date +%H\:%M\:%S`] get ${eclipsebuilder} using tag or branch: ${eclipsebuilderBranch}"
 
     # TODO: I do not think we need to "cd" to supportDir here
     #if [ -d $supportDir ]
@@ -338,7 +338,8 @@ sync_sdk_repo_updates () {
     rsync --recursive --delete "${fromDir}" "${toDir}"
 }
 
-runSDKBuild () {
+runSDKBuild () 
+{
 
     echo "Starting runSDKBuild"
     echo "[start] [`date +%H\:%M\:%S`] setting eclipse ${eclipsestream}-I-Builds"
