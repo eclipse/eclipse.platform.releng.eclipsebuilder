@@ -48,7 +48,7 @@
 
 	<target name="main" depends="init">
 	    <echoproperties description="properties at start of main buildAll.xml"/>
-		<antcall target="buildEclipseSourceDrops" />
+	<!--	<antcall target="buildEclipseSourceDrops" /> -->
 		<antcall target="buildMasterFeature" />
 		<parallel failonany="true">
 			<sequential>
