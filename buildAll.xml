@@ -122,11 +122,11 @@
 			<equals arg1="${hudson}" arg2="true" />
 		</condition>
 		<!-- <property name="localmirror" value="fullmoon.ottawa.ibm.com" /> -->
-	     <echo message="localmirror: ${localmirror}" />
+	     <echo message="DEBUG: localmirror: ${localmirror}" />
 
-		<!-- hard code for now ... shouldn't be needed, but ... see bug 375807? -->
-	    <property name="cvsuser" value=":local:" />
-	    <property name="mapsRepo" value="" />
+		<!-- not needed for now ... could be a way to "build locally" -->
+	    <property name="cvsuser" value=":dummycvsuser:" />
+	    <property name="mapsRepo" value="dummycvsmapsRepo" />
 	    
 	    <replace token="@localmirror@" file="${basedir}/repos.properties" value="${localmirror}" />
 		<loadproperties srcFile="${basedir}/repos.properties" />
