@@ -133,7 +133,11 @@
 			<equals arg1="${hudson}" arg2="true" />
 		</condition> -->
 		<!-- <property name="mapsRepo" value="kmoir@dev.eclipse.org/cvsroot/eclipse" /> -->
-		<replace token="@localmirror@" file="${basedir}/repos.properties" value="${localmirror}" />
+	    
+		<!-- hard code for now ... shouldn't be needed, but ... see bug 375807? -->
+	    <property name="cvsuser" value="pserver:anonymous" />
+	    
+	    <replace token="@localmirror@" file="${basedir}/repos.properties" value="${localmirror}" />
 		<loadproperties srcFile="${basedir}/repos.properties" />
 		<condition property="p2RepoURL" value="${p2repoI}">
 			<equals arg1="${buildType}" arg2="I" />
