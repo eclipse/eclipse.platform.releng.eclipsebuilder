@@ -83,8 +83,6 @@ do
                         submissionReportFilePath="$2"; shift;;
                  "-basebuilderBranch")
                         basebuilderBranch="$2"; shift;;
-                "-eclipsebuilderBranch")
-                        eclipsebuilderBranch="$2"; shift;;
                 "-tag")
                         tag="$2"; shift;;
                 "-timestamp")

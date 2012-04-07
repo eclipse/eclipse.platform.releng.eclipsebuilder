@@ -5,16 +5,16 @@
 # to copy back to the "working copy" of eclipse builder. 
 
 # DEBUG controls verbosity of little "state and status" messages
-# normally would be false during production
+# normally would be false during production. Set to true if 
+# debug just for this script desired.
 export DEBUG=${DEBUG:-false}
-#export DEBUG=${DEBUG:-true}
-echo "DEBUG: $DEBUG"
+#export DEBUG=true
 
-# VERBOSE_REMOVES needs to be empty or literally 'v', since
+
+# VERBOSE_REMOVES needs to be empty or literally '-v', since
 # simply makes up part of "rm" command when directories removed.
 VERBOSE_REMOVES=${VERBOSE_REMOVES:-}
 #VERBOSE_REMOVES=${VERBOSE_REMOVES:--v}
-echo "VERBOSE_REMOVES: $VERBOSE_REMOVES"
 
 # simple utility to check return code and exit if non-zero 
 function checkForErrorExit ()
