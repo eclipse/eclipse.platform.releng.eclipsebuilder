@@ -1,7 +1,7 @@
 <project default="main">
 
 	<target name="init">
-		<touch file="${user.home}/.cvspass" />
+		<!-- <touch file="${user.home}/.cvspass" /> -->
 		<available file="${buildDirectory}/label.properties" property="label.properties.exists" />
 		<antcall target="create.label.properties" />
 		<property file="${buildDirectory}/label.properties" />
