@@ -125,8 +125,8 @@
 	     <echo message="localmirror: ${localmirror}" />
 
 		<!-- hard code for now ... shouldn't be needed, but ... see bug 375807? -->
-	    <property name="cvsuser" value="pserver:anonymous" />
-	    <property name="mapsRepo" value=":local:/cvsroot/eclipse" />
+	    <property name="cvsuser" value=":local:" />
+	    <property name="mapsRepo" value="/cvsroot/eclipse" />
 	    
 	    <replace token="@localmirror@" file="${basedir}/repos.properties" value="${localmirror}" />
 		<loadproperties srcFile="${basedir}/repos.properties" />
