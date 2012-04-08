@@ -69,7 +69,7 @@ then
     exit 1
 fi
 
-export JAVA_HOME=${java15home} 
+export JAVA_HOME=${java16home} 
 echo "DEBUG: in testsinging script: JAVA_HOME: ${JAVA_HOME}"
 
 buildTimestamp=${date}-${time}
@@ -349,15 +349,13 @@ runSDKBuild ()
     skipPerf="-Dskip.performance.tests=true"
     skipTest="-Dskip.tests=true"
     
-    # should skipPack to save time
-    # TODO: I do not think we ever need to "pack" if we do not "sign"
-    # and if we sign, signing does it automatically. 
-    # don't skip pack now, to confirm sign and pack200 are compatible. 
+    # should skipPack to save time. This is the pack that 
+    # produces the jar.pack.gz files. Need to run it under Java 5, etc.
     #skipPack="-DskipPack=true"
     
     # 'sign' works by setting as anything if desire signing, 
-    # else, comment out. 
-    sign="-Dsign=true"
+    # else, comment out. Comment out now to save time. 
+    #sign="-Dsign=true"
     
     #TODO: assume this would eventually be downloads? Or is it a temporary location, on 
     # build machine, which is later copied over to downloads? 
