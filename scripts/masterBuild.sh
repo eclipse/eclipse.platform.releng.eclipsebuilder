@@ -55,7 +55,7 @@ basebuilderBranch=R4_2_primary
 export eclipsebuilderBranch=R4_2_primary
 
 # common properties
-# Note, for now, have to run under Java 1.5, to make sure 'sign' (which uses jar processor) 
+# Would have to run under Java 1.5, to make sure 'sign' (which uses jar processor) 
 # and eventual "pack200" can all be unpacked with 1.5. 
 # long term, we can launch those tasks in seperate process, or some other better way.
 java15home=/shared/common/jdk-1.5.0-22.x86_64
@@ -355,7 +355,7 @@ runSDKBuild ()
     
     # 'sign' works by setting as anything if desire signing, 
     # else, comment out. Comment out now to save time. 
-    #sign="-Dsign=true"
+    sign="-Dsign=true"
     
     #TODO: assume this would eventually be downloads? Or is it a temporary location, on 
     # build machine, which is later copied over to downloads? 
