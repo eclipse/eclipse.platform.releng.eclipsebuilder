@@ -18,6 +18,13 @@
 
 	-->
 
+    <property environment="env" />
+	 
+	<echo message="DEBUG: ENV eclipsebuilder: ${env.builderDir}" />
+    <echo message="DEBUG: ENV java15home: ${env.java15home}" />
+	<echo message="DEBUG: java15home: ${java15home}" />    
+	    
+	 	    
 	<!--build monitoring information:  e-mail, smtp server, build label-->
 	<property file="monitor.properties" />
 
@@ -377,7 +384,7 @@
 		</exec>
 
 		<exec dir="${buildDirectory}" executable="${signexec}" output="signing.txt" append="true">
-			<arg line="${signhost} /bin/chmod ugo+rw ${stagingDirectory}/${archiveName}" />
+			<arg line="${signhost} /bin/chmod -v ugo+rw ${stagingDirectory}/${archiveName}" />
 		</exec>
 
 	    <echo message="DEBUG: signing - packtmp: ${packtmp}" />
@@ -388,6 +395,7 @@
         <echo message="DEBUG: signing - stagingDirectory: ${stagingDirectory}" />
         <echo message="DEBUG: signing - archiveName: ${archiveName}" />
         <echo message="DEBUG: signing - hudson: ${hudson}" />
+        <echo message="DEBUG: signing - java15home: ${java15home}" />
 	    
 		<!--invoke sign script and wait-->
 		<echo message="invoke sign script and wait" />
@@ -395,7 +403,7 @@
 	         is not authorized to sign -->
 	    <!-- Note: since "sign" calls jarprocessor, which conditions jars, 
 	         we want to make sure it uses a java 5 JRE -->
-		<exec dir="." executable="${signexec}" output="signing.txt" append="true" failonerror="true">
+		<exec dir="." executable="${signexec}" output="signing.txt" append="true" failonerror="true" newenvironment="true">
 		    <env key="JAVA_HOME" value="${java15home}" />
 			<arg line="${signhost} ${signquote}/usr/bin/sign ${stagingDirectory}/${archiveName} nomail ${stagingDirectoryOutput}${signquote}" />
 		</exec>
