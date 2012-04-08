@@ -368,7 +368,7 @@ runSDKBuild ()
         
     cmd="${JAVA_HOME}/bin/java -Xmx1000m -enableassertions \
         -cp $cpAndMain \
-        -data $writableBuildRoot\workspaceeclipse4 \
+        -data $writableBuildRoot\workspace-eclipse4 \
         -debug \
         -application org.eclipse.ant.core.antRunner  \
         -buildfile $buildfile \
