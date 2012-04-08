@@ -368,11 +368,13 @@ runSDKBuild ()
         
     # NOTE: the builder (or, some part if it) appears to 
     # REQUIRE Java 1.6, but its not obivous
-    # See bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=375807#c50     
+    # See bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=375807#c50 
+    #
+    # Remember that setting -debug will turn on debug for ant, which produces 
+    # WAY too much output.    
     cmd="${JAVA_HOME}/bin/java -Xmx1000m -enableassertions \
         -cp $cpAndMain \
         -data $writableBuildRoot\workspace-eclipse4 \
-        -debug \
         -application org.eclipse.ant.core.antRunner  \
         -buildfile $buildfile \
         -DbuildType=$buildType \
