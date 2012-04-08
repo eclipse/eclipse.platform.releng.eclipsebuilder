@@ -350,8 +350,9 @@ runSDKBuild ()
     skipTest="-Dskip.tests=true"
     
     # should skipPack to save time. This is the pack that 
-    # produces the jar.pack.gz files. Need to run it under Java 5, etc.
-    #skipPack="-DskipPack=true"
+    # produces the jar.pack.gz files. Need to run it under Java 5.
+    # We pretty much always want to skip packing. 
+    skipPack="-DskipPack=true"
     
     # 'sign' works by setting as anything if desire signing, 
     # else, comment out. Comment out now to save time. 
