@@ -77,12 +77,7 @@
 	<target name="init">
 	    <echo message="DEBUG: echo properties at start of init in buildAll.xml" />
 	    <echoproperties />
-	    
-	    <!-- hopefully temporary "complete wipe" of buildDirectory for fresh build. 
-	         this will likely prevent "build restarts" ... but, see bug 375780 -->
-	    <available file="${buildDirectory}" property="buildDirectoryExists" />
-	    <antcall target="forceCompleteClean" />
-	    
+	       
 		<ant antfile="build.xml" target="init" />
 		<property file="${buildDirectory}/label.properties" />
 		<condition property="fetchTag" value="CVS=HEAD,GIT=master;git://git.eclipse.org/gitroot/platform/eclipse.platform.ui.git=R3_development">
@@ -835,14 +830,5 @@
 			<property name="assemblyTempDir" value="${packagingInfo}/jartmp" />
 		</ant>
 	</target>
-
-    <target name="forceCompleteClean" depends="docCleanupValues" if="buildDirectoryExists">
-        <echo message="DEBUG: doing complete wipe of (previous) buildDirectory. See bug 375780" />
-        <!-- fail, since we may have trouble deleting directories on build.eclipse.org? -->
-        <delete dir="${buildDirectory}" failonerror="true"  />
-    </target>
-    <target name="docCleanupValues" unless="buildDirectoryExists">
-        <echo message="DEBUG: buildDirectory did not exist, so nothing to clean up" />
-    </target>
     
 </project>

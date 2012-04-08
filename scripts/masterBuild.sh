@@ -11,7 +11,12 @@
 #     IBM Corporation - initial API and implementation
 #*******************************************************************************
 
+# temp test
 export CVSROOT=:local:/cvsroot/eclipse
+
+# temp hard to remove up from, using linux, as ant sometimes fail 
+# to remove .nsf files
+rm -fr /shared/eclipse/eclipse4/build/supportDir/src
 
 #default values, overridden by command line
 writableBuildRoot=/shared/eclipse/eclipse4
