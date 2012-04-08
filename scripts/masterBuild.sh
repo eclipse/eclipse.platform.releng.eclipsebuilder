@@ -366,6 +366,9 @@ runSDKBuild ()
 
     echo "DEBUG: in runSDKBuild buildfile: $buildfile"
         
+    # NOTE: the builder (or, some part if it) appears to 
+    # REQUIRE Java 1.6, but its not obivous
+    # See bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=375807#c50     
     cmd="${JAVA_HOME}/bin/java -Xmx1000m -enableassertions \
         -cp $cpAndMain \
         -data $writableBuildRoot\workspace-eclipse4 \
