@@ -130,7 +130,8 @@
 		</ant>
 		
 		<replace file="${eclipse.build.configs}/sdk/srcBuild/build" token="@build@" value="${buildId}" />
-		<condition property="builderTag" value="v${buildId}">
+		<!-- these v{buildId}'s seem inconsistent with auto tagging, and no longer used?
+		    <condition property="builderTag" value="v${buildId}">
 			<or>
 				<equals arg1="${buildType}" arg2="I" />
 				<equals arg1="${buildType}" arg2="M" />
@@ -145,6 +146,7 @@
 		</condition>
 		<property name="mapVersionTag" value="HEAD" />
 		<replace file="${eclipse.build.configs}/sdk/srcBuild/build.properties" token="@mapVersionTag@" value="${mapVersionTag}" />
+		-->
 	</target>
 
 	<target name="packageEclipseDistributables">

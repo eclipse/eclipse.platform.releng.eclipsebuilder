@@ -11,6 +11,7 @@
 #     IBM Corporation - initial API and implementation
 #*******************************************************************************
 
+export CVSROOT=:local:/cvsroot/eclipse
 
 #default values, overridden by command line
 writableBuildRoot=/shared/eclipse/eclipse4
