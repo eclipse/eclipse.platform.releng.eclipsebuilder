@@ -1,0 +1,23 @@
+<project
+    default="processArtifacts"
+    basedir=".">
+    <target name="processArtifacts">
+
+    	 <!-- normally, caller would set repoDirLocation, but for local operation, can hard code here -->
+        <property
+            name="repoDirLocation"
+            value="/shared/webtools/committers/wtp-R3.3.0-I/20101209114749/S-3.3.0M4-20101209114749/repository"/>
+        <p2.process.artifacts
+            pack="true"
+            repositoryPath="file:/${repoDirLocation}"/>
+
+        <!-- clean up some unnecessary files -->
+        <delete failonerror="false" quiet="true">
+            <fileset
+                dir="${repoDirLocation}"
+                includes="artifacts.jar.pack.gz, content.jar.pack.gz, site.xml"/>
+        </delete>
+
+    </target>
+</project>
+
