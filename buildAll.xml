@@ -746,7 +746,9 @@
 			<equals arg1="${hudson}" arg2="true" />
 		</condition>
 		<property name="repoBaseline" value="file:${updateSite}" />
-
+       
+        <echo message="DEBUG: repoBaseline: ${repoBaseline}" />   
+           
 		<replace file="${eclipse.build.configs}/../../extras/artifacts.xml" token="@p2RepoPath@" value="${p2RepoPath}" />
 		<filter token="BUILD_ID" value="${buildLabel}" />
 		<mkdir dir="${buildDirectory}/formatRepo" />
