@@ -29,7 +29,7 @@ echo
 
 
 devworkspace="${BUILD_HOME}"/workspace-antRunner
-devArgs=-Xmx256
+devArgs=-Xmx256m
 
 echo
 echo "   dev script:   $0"
@@ -39,6 +39,9 @@ echo
 
 if [ -n ${ECLIPSE_EXE} -a -x ${ECLIPSE_EXE} ]
 then 
+    
+echo "   Remember, processing artifacts can take a long time (such as 15 minutes or more) ... so, don't panic." 
+echo    
 ${ECLIPSE_EXE}  --launcher.suppressErrors  -nosplash -console -data $devworkspace -application org.eclipse.ant.core.antRunner $BUILDFILESTR ${extraArgs} -vm $devJRE -vmargs $devArgs
    RC=$?
 else

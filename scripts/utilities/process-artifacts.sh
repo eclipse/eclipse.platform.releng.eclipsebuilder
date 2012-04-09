@@ -10,7 +10,7 @@ source standardVariables.shsource
        if [[ -d "${repoDirLocation}" ]] 
        then
               echo "INFO: processing artifacts in code repo: $repoDirLocation";
-              ${ECLIPSEBUILDER_DIR}/runAntRunner.sh process-artifacts.xml -DrepoDirLocation="${repoDirLocation}" 
+              ${ECLIPSEBUILDER_DIR}/scripts/utilities/runAntRunner.sh process-artifacts.xml -DrepoDirLocation="${repoDirLocation}" 
               RC=$?
        else 
               echo "ERROR: the specified artifact repository directory does not exist: $repoDirLocation";
