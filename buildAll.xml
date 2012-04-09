@@ -255,7 +255,10 @@
 	    -->
 	</target>
 
-    
+    <!-- always skip pack during a build. No need to produce pack.gz files 
+         here, for every build, only for repos we want to "make available to 
+         the world" -->
+    <property name="skipPack" value="true"/>
 	<target name="packMasterFeature" unless="skipPack">
 		<property name="archiveName" value="eclipse-master-${buildId}.zip" />
 
