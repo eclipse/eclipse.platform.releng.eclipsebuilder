@@ -20,8 +20,9 @@
 
     <property environment="env" />
 	 
+    <!-- TODO: probably should not count on this being exported? And/or 
+    put in some fail tests if not? -->
 	<echo message="DEBUG: ENV eclipsebuilder: ${env.builderDir}" />
-    <echo message="DEBUG: ENV java15home: ${env.java15home}" />
 	<echo message="DEBUG: java15home: ${java15home}" />    
 	    
 	 	    
