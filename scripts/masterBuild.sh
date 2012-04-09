@@ -375,7 +375,7 @@ runSDKBuild ()
     # WAY too much output.    
     cmd="${JAVA_HOME}/bin/java -Xmx1000m -enableassertions \
         -cp $cpAndMain \
-        -data $writableBuildRoot\workspace-eclipse4 \
+        -data $writableBuildRoot/workspace-eclipse4 \
         -application org.eclipse.ant.core.antRunner  \
         -buildfile $buildfile \
         -DbuildType=$buildType \
