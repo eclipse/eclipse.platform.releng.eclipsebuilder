@@ -11,9 +11,6 @@
 #     IBM Corporation - initial API and implementation
 #*******************************************************************************
 
-# temp test
-export CVSROOT=:local:/cvsroot/eclipse
-
 # temp hard to remove up from, using linux, as ant sometimes fail 
 # to remove .nsf files
 rm -fr /shared/eclipse/eclipse4/build/supportDir/src
@@ -182,8 +179,8 @@ else
 fi
 echo "Last build: $oldBuildTag"
 echo $buildTag >$writableBuildRoot/${buildType}build.properties
-dropDir=4.2.0
-localDropDirectory=${buildDir}/downloads/drops/$dropDir
+
+localDropDirectory=${buildDir}/downloads/drops4
 mkdir -p $localDropDirectory
 buildResults=$localDropDirectory/$buildTag
 mkdir -p $buildResults
@@ -355,7 +352,7 @@ runSDKBuild ()
     
     #TODO: assume this would eventually be downloads? Or is it a temporary location, on 
     # build machine, which is later copied over to downloads? 
-    postingDirectory=$supportDir
+    postingDirectory=$localDropDirectory
     
     # hudson is an indicator of running on build.eclipse.org
     hudson="-Dhudson=true"
@@ -475,6 +472,8 @@ checkForErrorExit $? "Failed while updating Eclipse Buidler"
 
 tagRepo
 checkForErrorExit $? "Failed during auto tagging"
+
+exit 99
 
 runSDKBuild
 checkForErrorExit $? "Failed while building Eclipse-SDK"
