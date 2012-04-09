@@ -229,9 +229,13 @@ rm -f repos-clean.txt clones.txt repos-report.txt
 # remove comments
 # TODO: remove blank lines
 # convert ssh://username@git.eclipse.org/gitroot...  to file:///gitroot
+# or, convert even git://git.eclipse.org/gitroot...  to file:///gitroot
+# Hence, will just use "<beginningofline>.*git.eclipse.org" to cover all cases
+# Eventually, we can provide a "re-write variable", set to file:// by default, 
+# but allow others to override. (or, leave alone) 
 repositoriesTxtPath="$relengRepo/${relengMapsProject}/tagging/repositories.txt"
 echo "DEBUG: repositoriesTxtPath: $repositoriesTxtPath"
-cat "$repositoriesTxtPath" | grep -v "^#" | sed 's!ssh://.*@git.eclipse.org!file://!' > repos-clean.txt
+cat "$repositoriesTxtPath" | grep -v "^#" | sed 's!^.*git.eclipse.org!file://!' > repos-clean.txt
 
 
 # clone or pull each repository and checkout the appropriate branch
@@ -239,8 +243,7 @@ while read line; do
         #each line is of the form <repository> <branch>
         set -- $line
         pull $1 $2
-        # convert ssh://username@git.eclipse.org/gitroot...  to file:///gitroot
-        # TODO: do we need to do the ssh: to file: change since done in input, repos-clean.txt?
+        # Convert file:// back to git://git.eclipse.org for report? 
         echo $1 | sed 's!file://!git://git.eclipse.org!' >> clones.txt
 done < repos-clean.txt
 
@@ -265,8 +268,12 @@ git add $( find . -name "*.map" )
 checkForErrorExit $? "Could not add maps to repository"
 git commit -m "Releng build tagging for $buildTag"
 # if nothing to commit, returns 1
+# maybe we could use that to trigger "nothng to build" message? 
 # is this where a "merge conflict" would fail? 
 # checkForErrorExit $? "Could not commit to repository"
+# TODO: seems to me if "nothign to commit" (no changes) then 
+# the next 3 commeands would not really be needed (no sense to tag 
+# if no changes? Hence no need to push and tag?
 git tag -f $buildTag   #tag the map file change
 checkForErrorExit $? "Could not tag repository"
 
