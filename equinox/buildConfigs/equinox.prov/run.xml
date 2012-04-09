@@ -347,6 +347,8 @@
 </target>
 
 <target name="provision.sdk">
+    <echo message="DEBUG: echoproperties at start of provision.sdk" />
+    <echoproperties/>
 	<antcall target="run.director">
 		<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
 		<param name="p2.director.version" value="${sdk.version}" />
@@ -517,6 +519,8 @@
 </target>
 
 <target name="provision.platform">
+    <echo message="DEBUG: echoproperties at start of provision.platform" />
+    <echoproperties/>
 	<antcall target="run.director">
 		<param name="p2.director.installIU" value="org.eclipse.platform.ide" />
 		<param name="p2.director.version" value="${sdk.version}" />
