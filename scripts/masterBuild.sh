@@ -348,12 +348,7 @@ runSDKBuild ()
     
     skipPerf="-Dskip.performance.tests=true"
     skipTest="-Dskip.tests=true"
-    
-    # should skipPack to save time. This is the pack that 
-    # produces the jar.pack.gz files. Need to run it under Java 5.
-    # We pretty much always want to skip packing. 
-    skipPack="-DskipPack=true"
-    
+      
     # 'sign' works by setting as anything if desire signing, 
     # else, comment out. Comment out now to save time. 
     sign="-Dsign=true"
@@ -391,8 +386,6 @@ runSDKBuild ()
         -Declipse.p2.MD5Check=false \
         $skipPerf \
         $skipTest \
-        $skipPack \
-        $skipSourceBuild \
         $hudson \
         -DJ2SE-1.5=$bootclasspath_15 \
         -DJ2SE-1.4=$bootclasspath \
