@@ -463,7 +463,7 @@ tagRepo () {
         echo
         echo "   ERROR. Autotagging exit code: ${exitCode} "
         echo
-    exit $exitCode
+    return $exitCode
 }
 
 updateBaseBuilder
