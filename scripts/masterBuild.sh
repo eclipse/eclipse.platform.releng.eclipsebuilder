@@ -301,12 +301,6 @@ updateBaseBuilder () {
         echo "base builder already existed, so taking as accurate. Remember to delete it when fresh version needed."
     fi
 
-
-    # The cpAndMain is used to launch antrunner app (instead of using eclipse executable
-    cpLaunch=$( find $relengBaseBuilderDir/plugins -name "org.eclipse.equinox.launcher_*.jar" | sort | head -1 )
-    cpAndMain="$cpLaunch org.eclipse.equinox.launcher.Main"
-    echo "DEBUG: cpLaunch: ${cpLaunch}"
-    echo "DEBUG: cpAndMain: ${cpAndMain}"
 }
 
 
@@ -369,7 +363,11 @@ runSDKBuild ()
     # else, comment out. Comment out now to save time. 
     sign="-Dsign=true"
     
-
+    # The cpAndMain is used to launch antrunner app (instead of using eclipse executable
+    cpLaunch=$( find $relengBaseBuilderDir/plugins -name "org.eclipse.equinox.launcher_*.jar" | sort | head -1 )
+    cpAndMain="$cpLaunch org.eclipse.equinox.launcher.Main"
+    echo "DEBUG: cpLaunch: ${cpLaunch}"
+    echo "DEBUG: cpAndMain: ${cpAndMain}"
 
     
     # hudson is an indicator of running on build.eclipse.org
