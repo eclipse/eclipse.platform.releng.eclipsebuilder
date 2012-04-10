@@ -264,8 +264,10 @@ grep -v ^OK maps.txt | grep -v ^Executed >run.txt
 /bin/bash run.txt
 
 cd $relengRepo
+echo "git add maps"
 git add $( find . -name "*.map" )
 checkForErrorExit $? "Could not add maps to repository"
+echo "git commit"
 git commit -m "Releng build tagging for $buildTag"
 # if nothing to commit, returns 1
 # maybe we could use that to trigger "nothng to build" message? 
@@ -274,12 +276,14 @@ git commit -m "Releng build tagging for $buildTag"
 # TODO: seems to me if "nothign to commit" (no changes) then 
 # the next 3 commeands would not really be needed (no sense to tag 
 # if no changes? Hence no need to push and tag?
+echo "git tag"
 git tag -f $buildTag   #tag the map file change
 checkForErrorExit $? "Could not tag repository"
 
-
+echo "git push"
 git push
 checkForErrorExit $? "Could not push to repository"
+echo "git push tags"
 git push --tags
 checkForErrorExit $? "Could not push tags to repository"
 
