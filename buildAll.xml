@@ -791,10 +791,6 @@
 			</comparator>
 		</p2.mirror>
 
-		<copy todir="${buildRepo}">
-			<fileset file="${eclipse.build.configs}/../../extras/sdkinstaller.properties" />
-		</copy>
-
 		<!--mirror JUnit test bundles and test framework bundles to the repo -->
 		<p2.mirror source="file://${buildDirectory}/buildRepoTests" ignoreErrors="true">
 			<destination compressed="true" name="${p2.repo.name}" location="file:${buildRepo}" append="true" format="file:${reposource}" />
