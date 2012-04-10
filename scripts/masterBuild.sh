@@ -389,6 +389,7 @@ runSDKBuild ()
         -application org.eclipse.ant.core.antRunner  \
         -buildfile $buildfile \
         -DbuildType=$buildType \
+        -DeclipseStream=$eclipseStream \
         -Dbuilddate=$date \
         -Dbuildtime=$time \
         -DbuildId=$buildId \
@@ -415,7 +416,7 @@ runSDKBuild ()
         $repoCache \
         -DgenerateFeatureVersionSuffix=true \
         -Djava15home=${java15home} \
-        -DlocalUpdateSite=${localUpdateSite} \
+        -DupdateSite=${localUpdateSite} \
         -DpostingDirectory=$postingDirectory \
         -DequinoxPostingDirectory=$equinoxPostingDirectory"
 
