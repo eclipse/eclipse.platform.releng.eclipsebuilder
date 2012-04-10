@@ -11,6 +11,11 @@
 #     IBM Corporation - initial API and implementation
 #*******************************************************************************
 
+# variables to change from build to build depending on type and stream
+eclipseStream=4.2
+buildType=I
+
+
 # temp hard to remove up from, using linux, as ant sometimes fail 
 # to remove .nsf files
 rm -fr /shared/eclipse/eclipse4/build/supportDir/src
@@ -20,8 +25,12 @@ writableBuildRoot=/shared/eclipse/eclipse4
 mkdir -p "${writableBuildRoot}"
 export buildDir=$writableBuildRoot/build
 mkdir -p "${buildDir}"
-export buildDir=$writableBuildRoot/site
+export buildDir=$writableBuildRoot/siteDir
 mkdir -p "${siteDir}"
+
+echo "writableBuildRoot: $writableBuildRoot"
+echo "buildDir: $buildDir"
+echo "siteDir: $siteDir"
 
 relengMapsProject=org.eclipse.releng
 relengRepoName=eclipse.platform.releng.maps
@@ -34,7 +43,7 @@ export eclipsebuilder=org.eclipse.releng.eclipsebuilder
 export eclipsebuilderRepo=eclipse.platform.releng.eclipsebuilder
 
 relengBranch=R4_HEAD
-buildType=I
+
 date=$(date +%Y%m%d)
 time=$(date +%H%M)
 timestamp=$date$time
@@ -47,7 +56,7 @@ export gitName=e4Builder-R4
 # a nightly build would set it to false
 tag=true
 
-eclipseStream=4.2
+
 basebuilderBranch=R4_2_primary
 # relies on export, since getEclipseBuilder is seperate script, 
 # and it does not use "command line pattern"
@@ -100,15 +109,6 @@ export quietCVS=${quietCVS:-" "}
 
 
 
-arch="x86_64"
-archProp="-x86_64"
-archJavaProp=""
-processor=$( uname -p )
-if [ $processor = ppc -o $processor = ppc64 ]; then
-    archProp="-ppc"
-    archJavaProp="-DarchProp=-ppc"
-    arch="ppc"
-fi
 
 #
 #  control various aspects of the build
