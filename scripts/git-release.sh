@@ -287,9 +287,9 @@ gitrccode=$?
          noChangesToMaps="false"
    fi 
    
-if [ "${noChangesToMaps}" -ne "true" ]
+if [ "${noChangesToMaps}" != "true" ]
 then
-	echo "git tag"
+	echo "git tag $buildTag"
 	git tag -f $buildTag   #tag the map file change
 	checkForErrorExit $? "Could not tag repository"
 	
