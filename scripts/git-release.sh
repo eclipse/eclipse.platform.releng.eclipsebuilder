@@ -266,8 +266,9 @@ grep -v ^OK maps.txt | grep -v ^Executed >run.txt
 
 /bin/bash run.txt
 
-cd $relengRepo
-echo "git add maps"
+pushd $relengRepo
+echo "git add maps " 
+echo $( find . -name "*.map" )
 git add $( find . -name "*.map" )
 checkForErrorExit $? "Could not add maps to repository"
 echo "git commit"
@@ -282,7 +283,7 @@ gitrccode=$?
          checkForErrorExit ${gitrccode} "Could not commit to repository"
   fi 
    
-if [ ! "${noChangesToMaps}" ]
+if [ "${noChangesToMaps}" != "true" ]
 then
 	echo "git tag"
 	git tag -f $buildTag   #tag the map file change
