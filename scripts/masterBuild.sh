@@ -488,6 +488,7 @@ EOF
         exit ${exitCode}
     else
         exit 0
+    fi
 }
 
 updateBaseBuilder
