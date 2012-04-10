@@ -473,26 +473,26 @@ updateEclipseBuilder
 checkForErrorExit $? "Failed while updating Eclipse Buidler"
 
 tagRepo
-trExitCode=$?
+#trExitCode=$?
 
-if [ "${trExitCode}" != "99999" ]
-then
-   checkForErrorExit ${trExitCode} "Failed during auto tagging"
-fi
+#if [ "${trExitCode}" != "99999" ]
+#then
+   #   checkForErrorExit ${trExitCode} "Failed during auto tagging"
+#fi
 
-echo "trExitCode: ${trExitCode}"
-echo "continueBuildOnNoChange: $continueBuildOnNoChange"
+#echo "trExitCode: ${trExitCode}"
+#echo "continueBuildOnNoChange: $continueBuildOnNoChange"
 
-if [ ( "${trExitCode}" = "99999" ) && ( "${continueBuildOnNoChange}" != "true" ) ]
-then 
-    mailx -s "$eclipseStream SDK Build: $buildTag auto tagging failed. Build canceled." david_williams@us.ibm.com <<EOF
+#if [ ( "${trExitCode}" = "99999" ) && ( "${continueBuildOnNoChange}" != "true" ) ]
+#then 
+    #    mailx -s "$eclipseStream SDK Build: $buildTag auto tagging failed. Build canceled." david_williams@us.ibm.com <<EOF
    
-    Auto tagging failed. See log. 
-    Build halted.
+    #  Auto tagging failed. See log. 
+    #Build halted.
     
-EOF
-    exit 99999
-fi
+#EOF
+    #   exit 99999
+#fi
 
 # else, to get here, we've had zero return codes or continueBuildOnNoChange is true
 
