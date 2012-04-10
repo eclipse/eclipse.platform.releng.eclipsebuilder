@@ -184,13 +184,18 @@ echo $buildTag >$writableBuildRoot/${buildType}build.properties
 
 postingDirectory=${siteDir}/eclipse/downloads/drops4
 mkdir -p $postingDirectory
+echo "postingDirectory: $postingDirectory"
 equinoxPostingDirectory=${siteDir}/equinox
 mkdir -p $equinoxPostingDirectory
+echo "equinoxPostingDirectory: $equinoxPostingDirectory"
 localUpdateSite=${siteDir}/updates
 mkdir -p $localUpdateSite 
+echo "localUpdateSite: $localUpdateSite"
        
 buildResults=$postingDirectory/$buildTag
 mkdir -p $buildResults
+echo "buildResults: $buildResults"
+
 submissionReportFilePath=$buildResults/report.txt
 
 
@@ -464,7 +469,7 @@ EOF
         exit "${exitCode}"
     fi
 
-    # remove "TEST" before production runs.
+    echo "submissionReportFilePath: $submissionReportFilePath"
     mailx -s "$eclipseStream SDK Build: $buildTag submission" david_williams@us.ibm.com <$submissionReportFilePath
     #mailx -s "$eclipseStream SDK Build: $buildTag submission" platform-releng-dev@eclipse.org <$submissionReportFilePath
     popd
