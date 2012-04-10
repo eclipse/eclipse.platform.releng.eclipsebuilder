@@ -15,6 +15,9 @@
 eclipseStream=4.2
 buildType=I
 
+# set to true for tesing builds, even if no changes made
+# but during production, would normally be false.
+continueBuildOnNoChange=true
 
 # temp hard to remove up from, using linux, as ant sometimes fail 
 # to remove .nsf files
@@ -82,7 +85,7 @@ then
 fi
 
 export JAVA_HOME=${java16home} 
-echo "DEBUG: in testsinging script: JAVA_HOME: ${JAVA_HOME}"
+#echo "DEBUG: in testsinging script: JAVA_HOME: ${JAVA_HOME}"
 
 buildTimestamp=${date}-${time}
 buildTag=$buildType$buildTimestamp
@@ -173,7 +176,7 @@ export builderDir=${supportDir}/$eclipsebuilder
 echo "INFO: value of builderDir: ${builderDir}"
 
 if [ "$buildType" = "N" ]; then
-    echo "DEBUG: tag forced to false due to being an N build"
+    echo "INFO: tag forced to false due to being an N build"
     tag=false
 fi
 
@@ -274,7 +277,6 @@ updateBaseBuilder () {
         exit 1
     fi 
 
-    echo "DEBUG: checking existence"
     
     if [ -d ${relengBaseBuilderDir} ]
      then
@@ -303,8 +305,8 @@ updateBaseBuilder () {
     # The cpAndMain is used to launch antrunner app (instead of using eclipse executable
     cpLaunch=$( find $relengBaseBuilderDir/plugins -name "org.eclipse.equinox.launcher_*.jar" | sort | head -1 )
     cpAndMain="$cpLaunch org.eclipse.equinox.launcher.Main"
-    echo "DEBUG: cpLaunch: ${cpLaunch}"
-    echo "DEBUG: cpAndMain: ${cpAndMain}"
+    #echo "DEBUG: cpLaunch: ${cpLaunch}"
+    #echo "DEBUG: cpAndMain: ${cpAndMain}"
 }
 
 
@@ -342,6 +344,7 @@ runSDKBuild ()
 
     echo "DEBUG: current directory for build: ${PWD}" 
    
+    # TODO: should remove buildType (and others) and/or fail if not defined yet.
     buildType=I
     buildId=$buildType$date-$time
     buildLabel=$buildId
@@ -456,7 +459,7 @@ tagRepo () {
     $tagRepocmd
 
     exitCode=$?
-    if [ "${exitCode}" -ne "0" ]
+    if [ "${exitCode}" -ne "0" -a "${exitCode}" -ne "99999" ]
     then
         echo
         echo "   ERROR. exit code: ${exitCode} Autotagging failed. See log."
@@ -478,6 +481,12 @@ EOF
     #mailx -s "$eclipseStream SDK Build: $buildTag submission" platform-releng-dev@eclipse.org <$submissionReportFilePath
     popd
     echo "DEBUG: ending tagRepo"
+    
+    if "${exitCode}" -ne "99999" ]
+    then
+        exit ${exitCode}
+    else
+        exit 0
 }
 
 updateBaseBuilder
@@ -487,7 +496,23 @@ updateEclipseBuilder
 checkForErrorExit $? "Failed while updating Eclipse Buidler"
 
 tagRepo
-checkForErrorExit $? "Failed during auto tagging"
+trExitCode=$?
+
+if [ "${trExitCode}" -ne "99999" ]
+then
+   checkForErrorExit $? "Failed during auto tagging"
+fi
+
+echo "trExitCode: ${trExitCode}"
+echo "continueBuildOnNoChange: $continueBuildOnNoChange"
+
+if [ "${trExitCode}" = "99999" -a ! "${continueBuildOnNoChange}" = "true" ]
+then 
+    #TODO its around here we'd want to send the "build canceled" mail (not in tagRepo as now)
+    exit 99999
+fi
+
+# else, to get here, we've had zero return codes or continueBuildOnNoChange is true
 
 runSDKBuild
 checkForErrorExit $? "Failed while building Eclipse-SDK"

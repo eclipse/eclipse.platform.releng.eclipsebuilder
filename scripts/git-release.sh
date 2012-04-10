@@ -11,7 +11,15 @@
 #     IBM Corporation - initial API and implementation
 #*******************************************************************************
 
-echo "DEBUG: current directory as entering git-release.sh ${PWD}"
+#echo "DEBUG: current directory as entering git-release.sh ${PWD}"
+
+# control display of pushd and popd set to 
+# >/dev/null 
+# for quietness
+# leave empty for normal display to console
+pushpopDisplay=">/dev/null"
+#pushpopDisplay=""
+
 
 #default values, normally overridden by command line
 
@@ -160,10 +168,10 @@ function checkForErrorExit ()
 #Pull or clone a branch from a repository
 #Usage: pull repositoryURL  branch
 pull() {
-     echo "DEBUG: pushd gitCache: ${gitCache}"
+     #echo "DEBUG: pushd gitCache: ${gitCache}"
      if [ -d ${gitCache} ] 
      then 
-        pushd ${gitCache}
+        pushd ${gitCache} ${pushpopDisplay}
      else
         # this is near imposible now, since we create it in this script, 
         # with a warning, if doesn't exist ... but, will leave here, in case 
@@ -179,20 +187,20 @@ pull() {
                 echo repo dir did not exist yet, so git clone $1
                 git clone $1
                 checkForErrorExit $? "Could not clone repository $1"
-                pushd ${directory}
+                pushd ${directory} ${pushpopDisplay}
                 git config --add user.email "$gitEmail"
                 git config --add user.name "$gitName"
-                popd
+                popd ${pushpopDisplay}
         fi
         
-        pushd $gitCache/$directory
+        pushd $gitCache/$directory ${pushpopDisplay}
         echo git checkout $2
         git checkout $2
         checkForErrorExit $? "Git checkout failed for repository $1 branch $2"
         echo git pull
         git pull
         checkForErrorExit $? "Git pull failed for repository $1 branch $2"
-        popd
+        popd ${pushpopDisplay}
 }
 
 #Nothing to do for nightly builds, or if $noTag is specified
@@ -234,7 +242,7 @@ rm -f repos-clean.txt clones.txt repos-report.txt
 # Eventually, we can provide a "re-write variable", set to file:// by default, 
 # but allow others to override. (or, leave alone) 
 repositoriesTxtPath="$relengRepo/${relengMapsProject}/tagging/repositories.txt"
-echo "DEBUG: repositoriesTxtPath: $repositoriesTxtPath"
+#echo "DEBUG: repositoriesTxtPath: $repositoriesTxtPath"
 cat "$repositoriesTxtPath" | grep -v "^#" | sed 's!^.*git.eclipse.org!file://!' > repos-clean.txt
 
 
@@ -269,24 +277,39 @@ git add $( find . -name "*.map" )
 checkForErrorExit $? "Could not add maps to repository"
 echo "git commit"
 git commit -m "Releng build tagging for $buildTag"
+gitrccode=$?
 # if nothing to commit, returns 1
-# maybe we could use that to trigger "nothng to build" message? 
-# is this where a "merge conflict" would fail? 
-# checkForErrorExit $? "Could not commit to repository"
-# TODO: seems to me if "nothign to commit" (no changes) then 
-# the next 3 commeands would not really be needed (no sense to tag 
-# if no changes? Hence no need to push and tag?
-echo "git tag"
-git tag -f $buildTag   #tag the map file change
-checkForErrorExit $? "Could not tag repository"
+  if [ "${gitrccode}" = "1" ]
+   then 
+        # nothing to commit, no changes
+         noChangesToMaps=true
+   else
+         checkForErrorExit ${gitrccode} "Could not commit to repository"
+  fi 
+   
+if [ ! "${noChangesToMaps}" ]
+then
+	echo "git tag"
+	git tag -f $buildTag   #tag the map file change
+	checkForErrorExit $? "Could not tag repository"
+	
+	echo "git push"
+	git push
+	checkForErrorExit $? "Could not push to repository"
+	echo "git push tags"
+	git push --tags
+	checkForErrorExit $? "Could not push tags to repository"
+	# if we get here, assume we'll return 0 after final popd
+    gitRelease=0
+else 
+    # special return code 99999 meaning "no changes" 
+    # caller can decide if they want to continue building 
+    # or not. 
+    gitRelease=99999
+fi 
 
-echo "git push"
-git push
-checkForErrorExit $? "Could not push to repository"
-echo "git push tags"
-git push --tags
-checkForErrorExit $? "Could not push tags to repository"
+popd ${pushpopDisplay}
 
-popd
+#echo "DEBUG: current directory as exiting git-release.sh ${PWD}"
 
-echo "DEBUG: current directory as exiting git-release.sh ${PWD}"
+exit $gitRelease

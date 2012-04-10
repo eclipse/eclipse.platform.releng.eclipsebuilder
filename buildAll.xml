@@ -21,9 +21,10 @@
     <property environment="env" />
 	 
     <!-- TODO: probably should not count on this being exported? And/or 
-    put in some fail tests if not? -->
+    put in some fail tests if not? 
 	<echo message="DEBUG: ENV eclipsebuilder: ${env.builderDir}" />
-	<echo message="DEBUG: java15home: ${java15home}" />    
+	<echo message="DEBUG: java15home: ${java15home}" />   
+	--> 
 	    
 	 	    
 	<!--build monitoring information:  e-mail, smtp server, build label-->
@@ -56,7 +57,8 @@
 	<property name="buildRepo" value="${updateSite}/${eclipseStream}-${buildType}-builds/${buildId}" />
 
 	<target name="main" depends="init">
-	    <echoproperties description="DEBUG: properties at start of main buildAll.xml"/>
+        <echo message="DEBUG: properties at start of main buildAll.xml" />
+	    <echoproperties />
 	    <antcall target="buildEclipseSourceDrops" /> 
 		<antcall target="buildMasterFeature" />
 		<parallel failonany="true">
@@ -125,8 +127,9 @@
 		<condition property="localmirror" value="download.eclipse.org">
 			<equals arg1="${hudson}" arg2="true" />
 		</condition>
-		<!-- <property name="localmirror" value="fullmoon.ottawa.ibm.com" /> -->
+		<!-- <property name="localmirror" value="fullmoon.ottawa.ibm.com" />
 	     <echo message="DEBUG: localmirror: ${localmirror}" />
+	      -->
 
 		<!-- not needed for now ... could be a way to "build locally" -->
 	    <property name="cvsuser" value=":dummycvsuser:" />
@@ -207,9 +210,10 @@
     <!-- no longer build source drops, see bug 374428 -->
 	<target name="buildEclipseSourceDrops" >
 	    <!-- eventually may remove this whole task? when no longer build source drops, see bug 374428
-		<property name="buildSourceDrops" value="true" /> -->
+		<property name="buildSourceDrops" value="true" /> 
 		<echo message="DEBUG: eclipse.pdebuild.scripts: ${eclipse.pdebuild.scripts}" />
         <echo message="DEBUG: eclipse.build.configs: ${eclipse.build.configs}" />
+        -->
 	    
 		<!--examples are required to pull sample doc into SDK doc plug-ins-->
 		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="preBuild">
@@ -419,9 +423,11 @@
 		</condition>
 		<property name="signpollline" value="${signhost} ${signquote}cd ${stagingDirectoryOutput};ls ${archiveName}${signquote}" />
 
+	    <!--
         <echo message="DEBUG: signing - signpoll: ${signpoll}" />
         <echo message="DEBUG: signing - signpollline: ${signpollline}" />
-	    
+	    --> 
+            
 		<antcall target="waitForChangedAttribs">
 			<param name="signpoll" value="${signpoll}" />
 			<param name="signpollline" value="${signpollline}" />
@@ -751,8 +757,10 @@
 		</condition>
 		<property name="repoBaseline" value="file:${updateSite}" />
        
+		    <!--
         <echo message="DEBUG: repoBaseline: ${repoBaseline}" />   
-           
+           -->
+            
 		<replace file="${eclipse.build.configs}/../../extras/artifacts.xml" token="@p2RepoPath@" value="${p2RepoPath}" />
 		<filter token="BUILD_ID" value="${buildLabel}" />
 		<mkdir dir="${buildDirectory}/formatRepo" />
