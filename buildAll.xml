@@ -817,12 +817,12 @@
 
 
 		<!--try create composite repository-->
-		<p2.composite.artifact.repository.create location="file://${updateSite}" name="${p2.repo.name}" compressed="true" failOnExists="false" />
-		<p2.composite.metadata.repository.create location="file://${updateSite}" name="${p2.repo.name}" compressed="true" failOnExists="false" />
+		<p2.composite.artifact.repository.create location="file://${updateSite}/${eclipseStream}-${buildType}-builds" name="${p2.repo.name}" compressed="true" failOnExists="false" />
+		<p2.composite.metadata.repository.create location="file://${updateSite}/${eclipseStream}-${buildType}-builds" name="${p2.repo.name}" compressed="true" failOnExists="false" />
 
 		<!--add childRepo to composite repo-->
-		<p2.composite.artifact.repository.add location="file://${updateSite}" child="${buildId}" />
-		<p2.composite.metadata.repository.add location="file://${updateSite}" child="${buildId}" />
+		<p2.composite.artifact.repository.add location="file://${updateSite}/${eclipseStream}-${buildType}-builds" child="${buildId}" />
+		<p2.composite.metadata.repository.add location="file://${updateSite}/${eclipseStream}-${buildType}-builds" child="${buildId}" />
 	</target>
 
 	<target name="packageRepos">
