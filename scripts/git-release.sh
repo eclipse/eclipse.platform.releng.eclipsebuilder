@@ -149,7 +149,7 @@ function checkForErrorExit ()
     if [ "${exitCode}" -ne "0" ]
     then
         echo
-        echo "   ERROR. exit code: ${exitCode}"  ${message}
+        echo "   ERROR. exit code: ${exitCode}  ${message}"
         echo
         exit "${exitCode}"
     fi
@@ -160,7 +160,7 @@ function checkForErrorExit ()
 #Pull or clone a branch from a repository
 #Usage: pull repositoryURL  branch
 pull() {
-     #echo "DEBUG: pushd gitCache: ${gitCache}"
+    echo "DEBUG: current directory as entering pull ${PWD}"
      if [ -d ${gitCache} ] 
      then 
         pushd ${gitCache} 
@@ -176,7 +176,7 @@ pull() {
        echo "INFO: repo: $1" 
         directory=$(basename $1 .git)
         if [ ! -d $directory ]; then
-                echo repo dir did not exist yet, so git clone $1
+                echo "repo dir did not exist yet, so git clone $1"
                 git clone $1
                 checkForErrorExit $? "Could not clone repository $1"
                 pushd ${directory}
@@ -186,13 +186,16 @@ pull() {
         fi
         
         pushd $gitCache/$directory
-        echo git checkout $2
+        echo "git checkout $2"
         git checkout $2
         checkForErrorExit $? "Git checkout failed for repository $1 branch $2"
-        echo git pull
+        echo "git pull"
         git pull
         checkForErrorExit $? "Git pull failed for repository $1 branch $2"
         popd
+        popd
+        echo "DEBUG: current directory as exiting pull ${PWD}"
+        
 }
 
 #Nothing to do for nightly builds, or if $noTag is specified
