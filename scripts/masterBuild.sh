@@ -20,6 +20,8 @@ writableBuildRoot=/shared/eclipse/eclipse4
 mkdir -p "${writableBuildRoot}"
 export buildDir=$writableBuildRoot/build
 mkdir -p "${buildDir}"
+export buildDir=$writableBuildRoot/site
+mkdir -p "${siteDir}"
 
 relengMapsProject=org.eclipse.releng
 relengRepoName=eclipse.platform.releng.maps
@@ -180,9 +182,14 @@ fi
 echo "Last build: $oldBuildTag"
 echo $buildTag >$writableBuildRoot/${buildType}build.properties
 
-localDropDirectory=${buildDir}/downloads/drops4
-mkdir -p $localDropDirectory
-buildResults=$localDropDirectory/$buildTag
+postingDirectory=${siteDir}/eclipse/downloads/drops4
+mkdir -p $postingDirectory
+equinoxPostingDirectory=${siteDir}/equinox
+mkdir -p $equinoxPostingDirectory
+localUpdateSite=${siteDir}/updates
+mkdir -p $localUpdateSite 
+       
+buildResults=$postingDirectory/$buildTag
 mkdir -p $buildResults
 submissionReportFilePath=$buildResults/report.txt
 
@@ -202,7 +209,7 @@ transformedRepo=${targetDir}/transformedRepo
 
 # should not set globally to java via -Dproperty=value, since eclipsebuilder 
 # assumes different scopes and changes this value for direct calls to generatescripts
-buildDirectory=${buildDir}/$buildTag
+#buildDirectory=${buildDir}/$buildTag
 
 #rembember, don't point to e4Build user directory
 sdkTestDir=${writableBuildRoot}/sdkTests/$buildTag
@@ -211,7 +218,7 @@ sdkResults=$buildDir/40builds/$buildTag/$buildTag
 sdkBuildDirectory=$buildDir/40builds/$buildTag
 
 relengBaseBuilderDir=$supportDir/org.eclipse.releng.basebuilder
-buildDirEclipse="$buildDir/eclipse"
+
 
 # general purpose utility for "hard exit" is return code not zero. 
 # especially useful to call/check after basic things that should normally 
@@ -350,9 +357,8 @@ runSDKBuild ()
     # else, comment out. Comment out now to save time. 
     sign="-Dsign=true"
     
-    #TODO: assume this would eventually be downloads? Or is it a temporary location, on 
-    # build machine, which is later copied over to downloads? 
-    postingDirectory=$localDropDirectory
+
+
     
     # hudson is an indicator of running on build.eclipse.org
     hudson="-Dhudson=true"
@@ -377,7 +383,6 @@ runSDKBuild ()
         -Dbuildid=$buildId \
         -DbuildLabel=$buildLabel \
         -Dbase=$buildDir/40builds \
-        -DupdateSite=$supportDir/updates/4.2-I-builds \
         -DmapVersionTag=$mapVersionTag \
         -Dorg.eclipse.update.jarprocessor.pack200=${pack200dir} \
         -Declipse.p2.MD5Check=false \
@@ -398,7 +403,9 @@ runSDKBuild ()
         $repoCache \
         -DgenerateFeatureVersionSuffix=true \
         -Djava15home=${java15home} \
-        -DpostingDirectory=$postingDirectory"
+        -DlocalUpdateSite=${localUpdateSite} \
+        -DpostingDirectory=$postingDirectory \
+        -DequinoxPostingDirectory=$equinoxPostingDirectory"
 
 
     echo "INFO: save copy of command, to enable restarting into ${supportDir}/${eclipsebuilder}/command.txt"
@@ -458,7 +465,7 @@ EOF
     fi
 
     # remove "TEST" before production runs.
-    mailx -s "$eclipseStream SDK TEST Build: $buildTag submission" david_williams@us.ibm.com <$submissionReportFilePath
+    mailx -s "$eclipseStream SDK Build: $buildTag submission" david_williams@us.ibm.com <$submissionReportFilePath
     #mailx -s "$eclipseStream SDK Build: $buildTag submission" platform-releng-dev@eclipse.org <$submissionReportFilePath
     popd
     echo "DEBUG: ending tagRepo"
@@ -472,8 +479,6 @@ checkForErrorExit $? "Failed while updating Eclipse Buidler"
 
 tagRepo
 checkForErrorExit $? "Failed during auto tagging"
-
-exit 99
 
 runSDKBuild
 checkForErrorExit $? "Failed while building Eclipse-SDK"

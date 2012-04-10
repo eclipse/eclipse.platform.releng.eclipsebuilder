@@ -52,7 +52,8 @@
 	<property name="buildlogs" value="${postingDirectory}/${buildLabel}/buildlogs" />
 	<mkdir dir="${buildlogs}" />
 
-	<property name="buildRepo" value="${updateSite}/${buildId}" />
+	    
+	<property name="buildRepo" value="${updateSite}/${eclipseStream}-${buildType}-builds/${buildId}" />
 
 	<target name="main" depends="init">
 	    <echoproperties description="DEBUG: properties at start of main buildAll.xml"/>
