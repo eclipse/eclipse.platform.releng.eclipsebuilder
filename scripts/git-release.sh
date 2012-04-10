@@ -281,12 +281,13 @@ gitrccode=$?
    then 
         # assume nothing to commit, no changes as the reason for the "failure" to commit (though, could be other things).
          echo "git commit rccode was ${gitrccode}. Assuming no changes to maps to commit."
-         noChangesToMaps=true
-         # else
-         #      checkForErrorExit ${gitrccode} "Could not commit to repository"
-  fi 
+         noChangesToMaps="true"
+    else
+         # checkForErrorExit ${gitrccode} "Could not commit to repository"
+         noChangesToMaps="false"
+   fi 
    
-if [ "${noChangesToMaps}" != "true" ]
+if [ "${noChangesToMaps}" -ne "true" ]
 then
 	echo "git tag"
 	git tag -f $buildTag   #tag the map file change
