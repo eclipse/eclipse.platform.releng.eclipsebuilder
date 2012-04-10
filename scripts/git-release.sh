@@ -11,14 +11,14 @@
 #     IBM Corporation - initial API and implementation
 #*******************************************************************************
 
-#echo "DEBUG: current directory as entering git-release.sh ${PWD}"
+echo "DEBUG: current directory as entering git-release.sh ${PWD}"
 
 # control display of pushd and popd set to 
 # >/dev/null 
 # for quietness
 # leave empty for normal display to console
-pushpopDisplay=">/dev/null"
-#pushpopDisplay=""
+#pushpopDisplay=">/dev/null"
+pushpopDisplay=""
 
 
 #default values, normally overridden by command line
@@ -310,6 +310,6 @@ fi
 
 popd ${pushpopDisplay}
 
-#echo "DEBUG: current directory as exiting git-release.sh ${PWD}"
+echo "DEBUG: current directory as exiting git-release.sh ${PWD}"
 
 exit $gitRelease
