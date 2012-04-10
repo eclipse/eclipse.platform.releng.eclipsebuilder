@@ -274,8 +274,8 @@ checkForErrorExit $? "Could not add maps to repository"
 echo "git commit"
 git commit -m "Releng build tagging for $buildTag"
 gitrccode=$?
-# if nothing to commit, returns 1
-  if [ "${gitrccode}" = "1" ]
+# if nothing to commit, returns 159?
+  if [ "${gitrccode}" = "159" ]
    then 
         # nothing to commit, no changes
          noChangesToMaps=true
