@@ -460,35 +460,10 @@ tagRepo () {
     $tagRepocmd
 
     exitCode=$?
-    if [ "${exitCode}" -ne "0" -a "${exitCode}" -ne "99999" ]
-    then
         echo
-        echo "   ERROR. exit code: ${exitCode} Autotagging failed. See log."
+        echo "   ERROR. Autotagging exit code: ${exitCode} "
         echo
-        # eventually, of course, send to platform-releng-dev@eclipse.org
-        # with pointer to the log. 
-        # remove "TEST" before production runs.
-        mailx -s "$eclipseStream SDK TEST Build: $buildTag auto tagging failed" david_williams@us.ibm.com <<EOF
-   
-    Auto tagging failed. See log. 
-    Build halted.
-    
-EOF
-        exit "${exitCode}"
-    fi
-
-    echo "submissionReportFilePath: $submissionReportFilePath"
-    mailx -s "$eclipseStream SDK Build: $buildTag submission" david_williams@us.ibm.com <$submissionReportFilePath
-    #mailx -s "$eclipseStream SDK Build: $buildTag submission" platform-releng-dev@eclipse.org <$submissionReportFilePath
-    popd
-    echo "DEBUG: ending tagRepo"
-    
-    if "${exitCode}" -ne "99999" ]
-    then
-        exit ${exitCode}
-    else
-        exit 0
-    fi
+    exit $exitCode
 }
 
 updateBaseBuilder
@@ -500,17 +475,22 @@ checkForErrorExit $? "Failed while updating Eclipse Buidler"
 tagRepo
 trExitCode=$?
 
-if [ "${trExitCode}" -ne "99999" ]
+if [ "${trExitCode}" != "99999" ]
 then
-   checkForErrorExit $? "Failed during auto tagging"
+   checkForErrorExit ${trExitCode} "Failed during auto tagging"
 fi
 
 echo "trExitCode: ${trExitCode}"
 echo "continueBuildOnNoChange: $continueBuildOnNoChange"
 
-if [ "${trExitCode}" = "99999" -a ! "${continueBuildOnNoChange}" = "true" ]
+if [ ( "${trExitCode}" = "99999" ) && ( "${continueBuildOnNoChange}" != "true" ) ]
 then 
-    #TODO its around here we'd want to send the "build canceled" mail (not in tagRepo as now)
+    mailx -s "$eclipseStream SDK Build: $buildTag auto tagging failed. Build canceled." david_williams@us.ibm.com <<EOF
+   
+    Auto tagging failed. See log. 
+    Build halted.
+    
+EOF
     exit 99999
 fi
 
