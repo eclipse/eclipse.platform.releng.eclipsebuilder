@@ -13,14 +13,6 @@
 
 echo "DEBUG: current directory as entering git-release.sh ${PWD}"
 
-# control display of pushd and popd set to 
-# >/dev/null 
-# for quietness
-# leave empty for normal display to console
-#pushpopDisplay=">/dev/null"
-pushpopDisplay=""
-
-
 #default values, normally overridden by command line
 
 writableBuildRoot=/shared/eclipse/eclipse4
@@ -171,7 +163,7 @@ pull() {
      #echo "DEBUG: pushd gitCache: ${gitCache}"
      if [ -d ${gitCache} ] 
      then 
-        pushd ${gitCache} ${pushpopDisplay}
+        pushd ${gitCache} 
      else
         # this is near imposible now, since we create it in this script, 
         # with a warning, if doesn't exist ... but, will leave here, in case 
@@ -187,20 +179,20 @@ pull() {
                 echo repo dir did not exist yet, so git clone $1
                 git clone $1
                 checkForErrorExit $? "Could not clone repository $1"
-                pushd ${directory} ${pushpopDisplay}
+                pushd ${directory}
                 git config --add user.email "$gitEmail"
                 git config --add user.name "$gitName"
-                popd ${pushpopDisplay}
+                popd
         fi
         
-        pushd $gitCache/$directory ${pushpopDisplay}
+        pushd $gitCache/$directory
         echo git checkout $2
         git checkout $2
         checkForErrorExit $? "Git checkout failed for repository $1 branch $2"
         echo git pull
         git pull
         checkForErrorExit $? "Git pull failed for repository $1 branch $2"
-        popd ${pushpopDisplay}
+        popd
 }
 
 #Nothing to do for nightly builds, or if $noTag is specified
@@ -308,7 +300,7 @@ else
     gitRelease=99999
 fi 
 
-popd ${pushpopDisplay}
+popd
 
 echo "DEBUG: current directory as exiting git-release.sh ${PWD}"
 
