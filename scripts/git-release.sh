@@ -267,20 +267,23 @@ grep -v ^OK maps.txt | grep -v ^Executed >run.txt
 /bin/bash run.txt
 
 pushd $relengRepo
+echo "preparing to add maps in relengRepo: ${PWD}"
 echo "git add maps " 
 echo $( find . -name "*.map" )
+echo
 git add $( find . -name "*.map" )
 checkForErrorExit $? "Could not add maps to repository"
 echo "git commit"
-git commit -m "Releng build tagging for $buildTag"
+git commit -m "Releng build auto tagging for $buildTag"
 gitrccode=$?
-# if nothing to commit, returns 159?
-  if [ "${gitrccode}" = "159" ]
+# if nothing to commit, returns 1 or 159?
+  if [ "${gitrccode}" != "0" ]
    then 
-        # nothing to commit, no changes
+        # assume nothing to commit, no changes as the reason for the "failure" to commit (though, could be other things).
+         echo "git commit rccode was ${gitrccode}. Assuming no changes to maps to commit."
          noChangesToMaps=true
-   else
-         checkForErrorExit ${gitrccode} "Could not commit to repository"
+         # else
+         #      checkForErrorExit ${gitrccode} "Could not commit to repository"
   fi 
    
 if [ "${noChangesToMaps}" != "true" ]
@@ -296,16 +299,16 @@ then
 	git push --tags
 	checkForErrorExit $? "Could not push tags to repository"
 	# if we get here, assume we'll return 0 after final popd
-    gitRelease=0
+    gitReleaseExit=0
 else 
     # special return code 99999 meaning "no changes" 
     # caller can decide if they want to continue building 
     # or not. 
-    gitRelease=99999
+    gitReleaseExit=99999
 fi 
 
 popd
 
 echo "DEBUG: current directory as exiting git-release.sh ${PWD}"
 
-exit $gitRelease
+exit $gitReleaseExit
