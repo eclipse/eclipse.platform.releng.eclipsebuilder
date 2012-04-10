@@ -305,8 +305,8 @@ updateBaseBuilder () {
     # The cpAndMain is used to launch antrunner app (instead of using eclipse executable
     cpLaunch=$( find $relengBaseBuilderDir/plugins -name "org.eclipse.equinox.launcher_*.jar" | sort | head -1 )
     cpAndMain="$cpLaunch org.eclipse.equinox.launcher.Main"
-    #echo "DEBUG: cpLaunch: ${cpLaunch}"
-    #echo "DEBUG: cpAndMain: ${cpAndMain}"
+    echo "DEBUG: cpLaunch: ${cpLaunch}"
+    echo "DEBUG: cpAndMain: ${cpAndMain}"
 }
 
 
