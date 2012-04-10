@@ -12,11 +12,11 @@
 # using wget, you will have to chmod +x *.sh to make executable (at least, first 
 # time)
 
-wget -O masterBuild.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/masterBuild.sh?h=R4_2_primary;
-wget -O mbCaptureOutput.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mbCaptureOutput.sh?h=R4_2_primary;
+wget -O masterBuild.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/masterBuild.sh?h=master;
+wget -O mbCaptureOutput.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mbCaptureOutput.sh?h=master;
 
 # there are rsync methods to get, to maintain permissions
 
 # occasionally may need to get the git-release.sh script to do a "manual" automatic tag
 # normally should be checked out/start from "supportDir" for now, I believe.
-wget -O git-release.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/git-release.sh?h=R4_2_primary;
+wget -O git-release.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/git-release.sh?h=master;

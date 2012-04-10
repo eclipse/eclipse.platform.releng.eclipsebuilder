@@ -67,7 +67,7 @@ tag=true
 basebuilderBranch=R4_2_primary
 # relies on export, since getEclipseBuilder is seperate script, 
 # and it does not use "command line pattern"
-export eclipsebuilderBranch=R4_2_primary
+export eclipsebuilderBranch=master
 
 # common properties
 # Would have to run under Java 1.5, to make sure 'sign' (which uses jar processor) 
@@ -310,7 +310,7 @@ updateEclipseBuilder() {
 
      # get fresh script. This is one case, we must get directly from repo since the purpose of the script 
      # is to get the eclipsebuilder! 
-    wget -O getEclipseBuilder.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/getEclipseBuilder.sh?h=R4_2_primary
+    wget -O getEclipseBuilder.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/getEclipseBuilder.sh?h=master
     chmod +x getEclipseBuilder.sh 
     
     # execute (in current directory) ... depends on some "exported" properties. 

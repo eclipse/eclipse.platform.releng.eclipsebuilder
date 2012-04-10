@@ -83,7 +83,7 @@ function getEclipseBuilder () {
     # for now. See bug 374974
     eclipsebuilder=${eclipsebuilder:-"org.eclipse.releng.eclipsebuilder"}
     eclipsebuilderRepo=${eclipsebuilderRepo:-"eclipse.platform.releng.eclipsebuilder"}
-    eclipsebuilderBranch=${eclipsebuilderBranch:-"R4_2_primary"}
+    eclipsebuilderBranch=${eclipsebuilderBranch:-"master"}
     gitEmail=${gitEmail:-"e4Build"}
     gitName=${gitName:-"e4Builder-R4"}
     # normally buildDir would be expected to be "passed in" via export, but
