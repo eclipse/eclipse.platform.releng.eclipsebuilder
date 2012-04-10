@@ -23,14 +23,18 @@ rm -fr /shared/eclipse/eclipse4/build/supportDir/src
 #default values, overridden by command line
 writableBuildRoot=/shared/eclipse/eclipse4
 mkdir -p "${writableBuildRoot}"
+echo "writableBuildRoot: $writableBuildRoot"
+
 export buildDir=$writableBuildRoot/build
 mkdir -p "${buildDir}"
-export buildDir=$writableBuildRoot/siteDir
-mkdir -p "${siteDir}"
-
-echo "writableBuildRoot: $writableBuildRoot"
 echo "buildDir: $buildDir"
+
+export siteDir=$writableBuildRoot/siteDir
+mkdir -p "${siteDir}"
 echo "siteDir: $siteDir"
+
+
+
 
 relengMapsProject=org.eclipse.releng
 relengRepoName=eclipse.platform.releng.maps
@@ -103,9 +107,9 @@ echo "VERBOSE_REMOVES: $VERBOSE_REMOVES"
 # quietCVS needs to be -Q (really quiet) -q (somewhat quiet) or literally empty (verbose)
 # FYI, not that much difference between -Q and -q :) 
 # TODO: won't be needed once move off CVS is complete
-#export quietCVS=${quietCVS:--Q}
+export quietCVS=${quietCVS:--Q}
 #export quietCVS=${quietCVS:--q}
-export quietCVS=${quietCVS:-" "}
+#export quietCVS=${quietCVS:-" "}
 
 
 
