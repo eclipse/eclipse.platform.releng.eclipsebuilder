@@ -33,9 +33,9 @@ else {
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<meta name="author" content="Eclipse Foundation, Inc." />
 	<meta name="keywords" content="eclipse,project,plug-ins,plugins,java,ide,swt,refactoring,free java ide,tools,platform,open source,development environment,development,ide" />
-	<link rel="stylesheet" type="text/css" href=<?php $csssource?>"/visual.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href=<?php $csssource?>"/layout.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="<?php $csssource?>"/print.css" media="print" />
+	<link rel="stylesheet" type="text/css" href="<?php echo $csssource;?>/visual.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="<?php echo $csssource;?>/layout.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="<?php echo $csssource;?>/print.css" media="print" />
 	<script type="text/javascript">
 
 sfHover = function() {
@@ -55,10 +55,10 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 <body>
 
 <div id="header">
-	<a href="http://www.eclipse.org/"><img src="<?php $imagesource?>/header_logo.gif" width="163" height="68" border="0" alt="Eclipse Logo" class="logo" /></a>
+	<a href="http://www.eclipse.org/"><img src="<?php echo $imagesource;?>/header_logo.gif" width="163" height="68" border="0" alt="Eclipse Logo" class="logo" /></a>
 	<div id="searchbar">
-		<img src="<?php $imagesource?>/searchbar_transition.gif" width="92" height="26" class="transition" alt="" />
-		<img src="<?php $imagesource?>/searchbar_header.gif" width="64" height="17" class="header" alt="Search" />
+		<img src="<?php echo $imagesource;?>/searchbar_transition.gif" width="92" height="26" class="transition" alt="" />
+		<img src="<?php echo $imagesource;?>/searchbar_header.gif" width="64" height="17" class="header" alt="Search" />
 		<form method="get" action="http://www.eclipse.org/search/search.cgi">
 			<input type="hidden" name="t" value="All" />
 			<input type="hidden" name="t" value="Doc" />
@@ -66,7 +66,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 			<input type="hidden" name="t" value="Wiki" />
 			<input type="hidden" name="wf" value="574a74" />
 			<input type="text" name="q" value="" />
-			<input type="image" class="button" src="<?php $imagesource?>/searchbar_submit.gif" alt="Submit" onclick="this.submit();" />
+			<input type="image" class="button" src="<?php echo $imagesource;?>/searchbar_submit.gif" alt="Submit" onclick="this.submit();" />
 		</form>
 	</div>
 	<ul id="headernav">
