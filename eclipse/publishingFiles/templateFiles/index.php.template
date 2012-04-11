@@ -356,6 +356,7 @@ function genLinks($servername,$buildlabel,$zipfile) {
                      // without this check, was getting 7 "Undefined index: I20120410"
                      // I assume something in dlconfig2 is out of date ... or something?
                      // (there are 7 lines in dlconfig2.txt)
+                     // ah, figured it out. the file had windows EOLs. We'll check anyway.
                      // and, assume there's just one "buildType" so the last value obtained suffices? 
                      if (array_key_exists($parts2[0], $dropNames)) {
                            $buildType = $dropNames[$parts2[0]];
