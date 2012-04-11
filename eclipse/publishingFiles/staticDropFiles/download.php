@@ -13,6 +13,7 @@
            // if not on build.elcipse.org, assume we are on downloads.
            // notice "drops4" for Eclipse 4.x
            $dlprefix="http://www.eclipse.org/downloads/download.php?file=/eclipse/downloads/drops4";
+        }
     }
     else {
         // not sure what to put here (we are essentially not running on a host?) 
