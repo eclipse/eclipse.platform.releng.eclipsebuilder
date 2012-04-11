@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # This script removes old eclipse builder, to make sure we start with 
-# fresh copy. Then gets or updates clone in gitClones, then uses that 
+# fresh copy. Then gets or updates clone in gitCache, then uses that 
 # to copy back to the "working copy" of eclipse builder. 
 
 # DEBUG controls verbosity of little "state and status" messages
@@ -90,7 +90,7 @@ function getEclipseBuilder () {
     # if not, we can start of PWD for local, standalone testing.
     buildDir=${buildDir:-"${PWD}/build"}
     supportDir=${supportDir:-"${buildDir}/supportDir"}
-    gitCache=${gitCache:-"$supportDir/gitClones"}
+    gitCache=${gitCache:-"$supportDir/gitCache"}
     builderDir=${builderDir:-"${supportDir}/$eclipsebuilder"}
 
     debugVar eclipsebuilder
