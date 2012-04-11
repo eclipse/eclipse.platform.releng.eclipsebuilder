@@ -176,11 +176,6 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				<li><a href="directory.txt">View the <b>map file entries</b> for the current build.</a></li></ul>
 		</div>
 
-		<div class="homeitem">
-			<h3>Source Builds</h3>
-				<ul class="midlist">
-				<li><a href="sourceBuilds.php">Access the <b>Source Builds</b> page.</a></li></ul>
-		</div>
 	<hr class="clearer" />
 	</div>
 <div id="rightcolumn">

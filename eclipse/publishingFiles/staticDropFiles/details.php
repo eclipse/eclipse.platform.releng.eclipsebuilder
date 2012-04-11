@@ -337,7 +337,6 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				<li><a href="aixPlatform.php#EclipseSDK">AIX Platform</a></li>				
 				<li><a href="macPlatform.php#EclipseSDK">Macintosh Platform</a></li>
 				<li><a href="hpuxPlatform.php#EclipseSDK">HP-UX Platform</a></li>
-				<li><a href="sourceBuilds.php#EclipseSDK">Source Builds</a></li>
 			</ul>
 		</div>	
 </div>		
