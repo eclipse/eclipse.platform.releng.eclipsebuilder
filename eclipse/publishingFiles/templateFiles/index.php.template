@@ -20,7 +20,7 @@ if (array_key_exists("SERVER_NAME", $_SERVER)) {
       } 
 }
 else {
-    $servername = "test machine";
+    $servername = "localhost";
           $imagesource="http://download.eclipse.org/eclipse.org-common/themes/Phoenix/images";
           $csssource="http://download.eclipse.org/eclipse.org-common//themes/Phoenix/css";
           $appsource="NONE";
