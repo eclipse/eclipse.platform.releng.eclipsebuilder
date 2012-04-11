@@ -4,26 +4,32 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <link rel="stylesheet" href="../../../default_style.css" type="text/css">
 <?php
-if (array_key_exists("SERVER_NAME", $_SERVER)) {
-    $servername = $_SERVER["SERVER_NAME"];
-		$servername=$_SERVER['SERVER_NAME'];
+   if (array_key_exists("SERVER_NAME", $_SERVER)) {
+        $servername = $_SERVER["SERVER_NAME"];
         if ($servername === "build.eclipse.org") {
-        // leave relative
-        $dlprefix="";
+           // leave relative
+           $dlprefix="";
         } else {
-        // notice "drops4" for Eclipse 4.x
-        $dlprefix="http://www.eclipse.org/downloads/download.php?file=/eclipse/downloads/drops4";
-        }
-        else {
-        // not sure what to put here
+           // if not on build.elcipse.org, assume we are on downloads.
+           // notice "drops4" for Eclipse 4.x
+           $dlprefix="http://www.eclipse.org/downloads/download.php?file=/eclipse/downloads/drops4";
+    }
+    else {
+        // not sure what to put here (we are essentially not running on a host?) 
+        // we _might_ need to assume "downloads" here, for "convert to html to work?"
         $servername=localhost;  
-        }                                                                                                     
+        }
+
 		$script = $_SERVER['SCRIPT_NAME'];
 		$patharray = pathinfo($_SERVER['SCRIPT_NAME']);
 		$path = $patharray['dirname'];
 		$buildLabel = array_pop(split("/",$path,-1));
-		$qstring = $_SERVER['QUERY_STRING'];
+		// this script should nearly always have a query string, 
+		// but we check, to avoid warning when testing
+		if (array_key_exists("QUERY_STRING", $_SERVER)) {
+		    $qstring = $_SERVER['QUERY_STRING'];
 	        $dropFile=array_pop(split("=",$qstring,-1));
+	        }
          
 		if ($qstring) {
 		    $url = "http://$servername$script?$qstring";

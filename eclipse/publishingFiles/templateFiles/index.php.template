@@ -351,11 +351,18 @@ function genLinks($servername,$buildlabel,$zipfile) {
 		 		 // display something to error output?
 		 		 if (array_key_exists(1, $parts)) {
 		       		 $dropNames[trim($parts[0])] = trim($parts[1]);
-                    } 
+		       		 // echo "<p>".$parts2[0]."</p>";
+                     // echo "<p>".$dropNames[$parts2[0]]."</p>";
+                     // without this check, was getting 7 "Undefined index: I20120410"
+                     // I assume something in dlconfig2 is out of date ... or something?
+                     // (there are 7 lines in dlconfig2.txt)
+                     // and, assume there's just one "buildType" so the last value obtained suffices? 
+                     if (array_key_exists($parts2[0], $dropNames)) {
+                           $buildType = $dropNames[$parts2[0]];
+                     } 
+                } 
       		 }
 		 fclose($fileHandle);
-
-		 $buildType = $dropNames[$parts2[0]];
 		
 ?> 
 </div></td></tr>
