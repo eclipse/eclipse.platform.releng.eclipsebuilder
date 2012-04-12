@@ -192,7 +192,7 @@ echo $buildTag >$writableBuildRoot/${buildType}build.properties
 postingDirectory=${siteDir}/eclipse/downloads/drops4
 mkdir -p $postingDirectory
 echo "postingDirectory: $postingDirectory"
-equinoxPostingDirectory=${siteDir}/equinox
+equinoxPostingDirectory=${siteDir}/equinox/drops
 mkdir -p $equinoxPostingDirectory
 echo "equinoxPostingDirectory: $equinoxPostingDirectory"
 localUpdateSite=${siteDir}/updates
