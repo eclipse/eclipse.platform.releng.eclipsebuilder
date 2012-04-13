@@ -41,6 +41,8 @@
     <!--p2 repo name -->
     <property name="p2.repo.name" value="&quot;Eclipse Project Test Site&quot;" />
 
+    <property name="buildLabel" value="${buildId}" />
+
     <!--location for buildlogs -->
     <property name="buildlogs"
         value="${postingDirectory}/${buildLabel}/buildlogs" />
