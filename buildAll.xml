@@ -1,402 +1,447 @@
 <project default="main">
 
-	<!--
-		Steps
-		
-		1.  Create Eclipse SDK source drops.
-		2.  Build master feature which includes all features and plug-ins in eclipse and equinox projects, with exception of tests.
-		3.  Sign master zip, build root file drops and SDK tests in parallel.
-		4.  Repackage signed master.zip into eclipse and equinox distributables.  Start JUnit and performance tests as soon as JUnit test plug-ins
-			are packaged.
-		5.  Post drops to eclipse and equinox download areas.
-	
-	 	Ant properties available at runtime: 
-	
-	 - eclipse.pdebuild.scripts: the org.eclipse.eclipse.pdebuild.scripts folder
-	 - eclipse.pdebuild.home: the root folder of pde build
-	 - eclipse.pdebuild.templates: the  templates folder
-
-	-->
+    <!-- Steps 1. Create Eclipse SDK source drops. 2. Build master feature 
+        which includes all features and plug-ins in eclipse and equinox projects, 
+        with exception of tests. 3. Sign master zip, build root file drops and SDK 
+        tests in parallel. 4. Repackage signed master.zip into eclipse and equinox 
+        distributables. Start JUnit and performance tests as soon as JUnit test plug-ins 
+        are packaged. 5. Post drops to eclipse and equinox download areas. Ant properties 
+        available at runtime: - eclipse.pdebuild.scripts: the org.eclipse.eclipse.pdebuild.scripts 
+        folder - eclipse.pdebuild.home: the root folder of pde build - eclipse.pdebuild.templates: 
+        the templates folder -->
 
     <property environment="env" />
-	 
-    <!-- TODO: probably should not count on this being exported? And/or 
-    put in some fail tests if not? 
-	<echo message="DEBUG: ENV eclipsebuilder: ${env.builderDir}" />
-	<echo message="DEBUG: java15home: ${java15home}" />   
-	--> 
-	    
-	 	    
-	<!--build monitoring information:  e-mail, smtp server, build label-->
-	<property file="monitor.properties" />
 
-	<!--location of PDE Build configuration files for builder and packager-->
-	<property name="eclipse.build.configs" value="${basedir}/eclipse/buildConfigs" />
-	<property name="equinox.build.configs" value="${basedir}/equinox/buildConfigs" />
+    <!-- TODO: probably should not count on this being exported? And/or put 
+        in some fail tests if not? <echo message="DEBUG: ENV eclipsebuilder: ${env.builderDir}" 
+        /> <echo message="DEBUG: java15home: ${java15home}" /> -->
 
-	<property name="sdkHelper" location="${eclipse.build.configs}/eclipse/helper.xml" />
-	<property name="base.builder" value="${basedir}/../org.eclipse.releng.basebuilder" />
 
-	<!--default buildDirectory-->
-	<property name="buildDirectory" value="${basedir}/../src" />
+    <!--build monitoring information: e-mail, smtp server, build label -->
+    <property file="monitor.properties" />
 
-	<property name="transformedRepoLocation" value="${buildDirectory}" />
+    <!--location of PDE Build configuration files for builder and packager -->
+    <property name="eclipse.build.configs" value="${basedir}/eclipse/buildConfigs" />
+    <property name="equinox.build.configs" value="${basedir}/equinox/buildConfigs" />
 
-	<!--default location for build output, parent to ${buildLabel}-->
-	<property name="postingDirectory" value="${buildDirectory}" />
-	<property name="equinoxPostingDirectory" value="${postingDirectory}/../../equinox/drops" />
+    <property name="sdkHelper"
+        location="${eclipse.build.configs}/eclipse/helper.xml" />
+    <property name="base.builder"
+        value="${basedir}/../org.eclipse.releng.basebuilder" />
 
-	<!--p2 repo name-->
-	<property name="p2.repo.name" value="&quot;Eclipse Project Test Site&quot;" />
+    <!--default buildDirectory -->
+    <property name="buildDirectory" value="${basedir}/../src" />
 
-	<!--location for buildlogs-->
-	<property name="buildlogs" value="${postingDirectory}/${buildLabel}/buildlogs" />
-	<mkdir dir="${buildlogs}" />
+    <property name="transformedRepoLocation" value="${buildDirectory}" />
 
-	    
-	<property name="buildRepo" value="${updateSite}/${eclipseStream}-${buildType}-builds/${buildId}" />
+    <!--default location for build output, parent to ${buildLabel} -->
+    <property name="postingDirectory" value="${buildDirectory}" />
+    <property name="equinoxPostingDirectory" value="${postingDirectory}/../../equinox/drops" />
 
-	<target name="main" depends="init">
+    <!--p2 repo name -->
+    <property name="p2.repo.name" value="&quot;Eclipse Project Test Site&quot;" />
+
+    <!--location for buildlogs -->
+    <property name="buildlogs"
+        value="${postingDirectory}/${buildLabel}/buildlogs" />
+    <mkdir dir="${buildlogs}" />
+
+
+    <property name="buildRepo"
+        value="${updateSite}/${eclipseStream}-${buildType}-builds/${buildId}" />
+
+    <target name="main" depends="init">
         <echo message="DEBUG: properties at start of main buildAll.xml" />
-	    <echoproperties />
-	    <antcall target="buildEclipseSourceDrops" /> 
-		<antcall target="buildMasterFeature" />
-		<parallel failonany="true">
-			<sequential>
-				<antcall target="updatePackProperties" />
-				<antcall target="signMasterFeature" />
-			</sequential>
-			<sequential>
-				<antcall target="buildSdkTestFeature" />
-			</sequential>
-		</parallel>
-		<parallel failonany="true">
-			<sequential>
-				<antcall target="packageEclipseDistributables" />
-				<ant antfile="${eclipse.build.configs}/../helper.xml" target="verifyCompile" />
-				<ant antfile="${equinox.build.configs}/equinox.prov/run.xml" />
-				<antcall target="packageRepos" />
-				<antcall target="apiTooling" />
-				<antcall target="publishEclipse" />
-				<antcall target="packageEquinoxDistributables" />
-				<antcall target="publishEquinox" />
-			</sequential>
-			<antcall target="testEclipse" />
-		</parallel>
-	</target>
+        <echoproperties />
+        <antcall target="buildEclipseSourceDrops" />
+        <antcall target="buildMasterFeature" />
+        <parallel failonany="true">
+            <sequential>
+                <antcall target="updatePackProperties" />
+                <antcall target="signMasterFeature" />
+            </sequential>
+            <sequential>
+                <antcall target="buildSdkTestFeature" />
+            </sequential>
+        </parallel>
+        <parallel failonany="true">
+            <sequential>
+                <antcall target="packageEclipseDistributables" />
+                <ant antfile="${eclipse.build.configs}/../helper.xml"
+                    target="verifyCompile" />
+                <ant antfile="${equinox.build.configs}/equinox.prov/run.xml" />
+                <antcall target="packageRepos" />
+                <antcall target="apiTooling" />
+                <antcall target="publishEclipse" />
+                <antcall target="packageEquinoxDistributables" />
+                <antcall target="publishEquinox" />
+            </sequential>
+            <antcall target="testEclipse" />
+        </parallel>
+    </target>
 
-	<target name="init">
-	    <echo message="DEBUG: echo properties at start of init in buildAll.xml" />
-	    <echoproperties />
-	       
-		<ant antfile="build.xml" target="init" />
-		<property file="${buildDirectory}/label.properties" />
-		<condition property="fetchTag" value="CVS=HEAD,GIT=master;git://git.eclipse.org/gitroot/platform/eclipse.platform.ui.git=R3_development">
-			<equals arg1="${buildType}" arg2="N" />
-		</condition>
-		<condition property="forceContextQualifier" value="${buildId}">
-			<equals arg1="${buildType}" arg2="N" />
-		</condition>
-		<!--generic compiler args-->
-		<property name="javacSource" value="1.3" />
-		<property name="javacTarget" value="1.2" />
-		<property name="javacDebugInfo" value="true" />
-		<property name="javacFailOnError" value="false" />
-		<property name="javacVerbose" value="false" />
-		<property name="logExtension" value=".xml" />
-		<!--this property required as of Eclipse 3.0 stream builds > 20031126 -->
-		<property name="buildingOSGi" value="true" />
-		<!--zip args-->
-		<property name="zipargs" value="-y -qq" />
-		<!--unzip args-->
-		<property name="unzipArgs" value="-qq" />
-		<property name="repo" value="${buildDirectory}/repo" />
-		<property name="reposource" value="${buildDirectory}/reposource" />
-		<condition property="fetchjetty" value="true">
-			<equals arg1="${buildType}" arg2="N" />
-		</condition>
-	    
-		<property name="buildDirectoryAbsoluteTemp" value="${buildDirectory}/absolutetemp.txt" />
-		<echo message="${reposource}" file="${buildDirectoryAbsoluteTemp}" />
-		<replaceregexp file="${buildDirectoryAbsoluteTemp}" match="org.eclipse.releng.eclipsebuilder/../src/" replace="src/" />
-		<loadfile property="buildDirectoryAbsolute" srcFile="${buildDirectoryAbsoluteTemp}" failonerror="false" />
-		<!-- <delete file="${buildDirectoryAbsoluteTemp}" /> -->
-	    <echo message="${buildDirectoryAbsolute}" />
-	    
-		<!--set local mirror location depending if hudson is running -->
-		<condition property="localmirror" value="download.eclipse.org">
-			<equals arg1="${hudson}" arg2="true" />
-		</condition>
-		<!-- <property name="localmirror" value="fullmoon.ottawa.ibm.com" />
-	     <echo message="DEBUG: localmirror: ${localmirror}" />
-	      -->
+    <target name="init">
+        <echo message="DEBUG: echo properties at start of init in buildAll.xml" />
+        <echoproperties />
 
-		<!-- not needed for now ... could be a way to "build locally" -->
-	    <property name="cvsuser" value=":dummycvsuser:" />
-	    <property name="mapsRepo" value="dummycvsmapsRepo" />
-	    
-	    <replace token="@localmirror@" file="${basedir}/repos.properties" value="${localmirror}" />
-		<loadproperties srcFile="${basedir}/repos.properties" />
-		<condition property="p2RepoURL" value="${p2repoI}">
-			<equals arg1="${buildType}" arg2="I" />
-		</condition>
-		<condition property="p2RepoURL" value="${p2repoM}">
-			<equals arg1="${buildType}" arg2="M" />
-		</condition>
-		<property name="p2RepoURL" value="${p2repoN}" />
-		<condition property="p2RepoPath" value="${p2repoIPath}">
-			<equals arg1="${buildType}" arg2="I" />
-		</condition>
-		<condition property="p2RepoPath" value="${p2repoMPath}">
-			<equals arg1="${buildType}" arg2="M" />
-		</condition>
-		<property name="p2RepoPath" value="${p2repoNPath}" />
-		<condition property="currentbuildrepo" value="https://hudson.eclipse.org/hudson/job/${BUILD_JOB_NAME}/${BUILD_BUILD_NUMBER}/artifact/builds/transfer/files/repo/${buildId}">
-			<equals arg1="${hudson}" arg2="true" />
-		</condition>
-	    
-		<property name="org.eclipse.equinox.p2.tests.current.build.repo" value="${p2RepoURL}/${buildId}" />
-		<property name="org.eclipse.equinox.p2.tests.last.release.build.repo" value="${p2repopreviousR}" />
-		<property name="previousPlatformZips" value="${buildDirectory}/previousPlatformZips" />
-		<mkdir dir="${previousPlatformZips}" />
-		    
-		<condition property="commonrepo" value="file:///gitroot/platform/eclipse.platform.releng.maps" 
-		        else="git://git.eclipse.org/gitroot/platform/eclipse.platform.releng.maps">
+        <ant antfile="build.xml" target="init" />
+        <property file="${buildDirectory}/label.properties" />
+        <condition property="fetchTag"
+            value="CVS=HEAD,GIT=master;git://git.eclipse.org/gitroot/platform/eclipse.platform.ui.git=R3_development">
+            <equals arg1="${buildType}" arg2="N" />
+        </condition>
+        <condition property="forceContextQualifier" value="${buildId}">
+            <equals arg1="${buildType}" arg2="N" />
+        </condition>
+        <!--generic compiler args -->
+        <property name="javacSource" value="1.3" />
+        <property name="javacTarget" value="1.2" />
+        <property name="javacDebugInfo" value="true" />
+        <property name="javacFailOnError" value="false" />
+        <property name="javacVerbose" value="false" />
+        <property name="logExtension" value=".xml" />
+        <!--this property required as of Eclipse 3.0 stream builds > 20031126 -->
+        <property name="buildingOSGi" value="true" />
+        <!--zip args -->
+        <property name="zipargs" value="-y -qq" />
+        <!--unzip args -->
+        <property name="unzipArgs" value="-qq" />
+        <property name="repo" value="${buildDirectory}/repo" />
+        <property name="reposource" value="${buildDirectory}/reposource" />
+        <condition property="fetchjetty" value="true">
+            <equals arg1="${buildType}" arg2="N" />
+        </condition>
 
-				<equals arg1="${hudson}" arg2="true" />
+        <property name="buildDirectoryAbsoluteTemp" value="${buildDirectory}/absolutetemp.txt" />
+        <echo message="${reposource}" file="${buildDirectoryAbsoluteTemp}" />
+        <replaceregexp file="${buildDirectoryAbsoluteTemp}"
+            match="org.eclipse.releng.eclipsebuilder/../src/" replace="src/" />
+        <loadfile property="buildDirectoryAbsolute" srcFile="${buildDirectoryAbsoluteTemp}"
+            failonerror="false" />
+        <!-- <delete file="${buildDirectoryAbsoluteTemp}" /> -->
+        <echo message="${buildDirectoryAbsolute}" />
 
-		</condition>
-	   
-	</target>
+        <!--set local mirror location depending if hudson is running -->
+        <condition property="localmirror" value="download.eclipse.org">
+            <equals arg1="${hudson}" arg2="true" />
+        </condition>
+        <!-- <property name="localmirror" value="fullmoon.ottawa.ibm.com" 
+            /> <echo message="DEBUG: localmirror: ${localmirror}" /> -->
 
-	<target name="buildECFMasterFeature">
-		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="preBuild">
-			<property name="builder" value="${eclipse.build.configs}/master-ecf" />
-		</ant>
-		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="fetch">
-			<property name="builder" value="${eclipse.build.configs}/master-ecf" />
-		</ant>
-	</target>
+        <!-- not needed for now ... could be a way to "build locally" -->
+        <property name="cvsuser" value=":dummycvsuser:" />
+        <property name="mapsRepo" value="dummycvsmapsRepo" />
 
-	<target name="buildMasterFeature">
-		<ant antfile="build.xml" dir="${basedir}">
-			<property name="component" value="${eclipse.build.configs}/master" />
-		</ant>
-		<!--		<ant antfile="build.xml" dir="${basedir}">
-			<property name="component" value="${eclipse.build.configs}/pdebuild" />
-		</ant> 
-		<p2.mirror source="file://${buildDirectory}/buildRepoPDEbuild" ignoreErrors="true">
-			<destination compressed="true" name="${p2.repo.name}" location="file:${buildRepo}" append="true" format="file:${reposource}" />
-			<comparator comparator="org.eclipse.equinox.p2.repository.tools.jar.comparator">
-				<repository location="${repoBaseline}" />
-			</comparator>
-		</p2.mirror> -->
-		<property name="archiveName" value="eclipse-master-${buildId}.zip" />
-		<property name="archiveFullPath" value="${buildDirectory}/${buildLabel}/${archiveName}" />
-		<exec dir="${buildDirectory}/buildRepo" executable="zip">
-			<arg line="-r ${archiveFullPath} ." />
-		</exec>
-	</target>
+        <replace token="@localmirror@" file="${basedir}/repos.properties"
+            value="${localmirror}" />
+        <loadproperties srcFile="${basedir}/repos.properties" />
+        <condition property="p2RepoURL" value="${p2repoI}">
+            <equals arg1="${buildType}" arg2="I" />
+        </condition>
+        <condition property="p2RepoURL" value="${p2repoM}">
+            <equals arg1="${buildType}" arg2="M" />
+        </condition>
+        <condition property="p2RepoURL" value="${p2repoN}">
+            <equals arg1="${buildType}" arg2="N" />
+        </condition>
+        <property name="p2RepoURL" value="${p2repoN}" />
+        <condition property="p2RepoPath" value="${p2repoIPath}">
+            <equals arg1="${buildType}" arg2="I" />
+        </condition>
+        <condition property="p2RepoPath" value="${p2repoMPath}">
+            <equals arg1="${buildType}" arg2="M" />
+        </condition>
+        <condition property="p2RepoPath" value="${p2repoNPath}">
+            <equals arg1="${buildType}" arg2="N" />
+        </condition>
+        <property name="p2RepoPath" value="${p2repoXPath}" />
+        <condition property="currentbuildrepo"
+            value="https://hudson.eclipse.org/hudson/job/${BUILD_JOB_NAME}/${BUILD_BUILD_NUMBER}/artifact/builds/transfer/files/repo/${buildId}">
+            <equals arg1="${hudson}" arg2="true" />
+        </condition>
 
-	<target name="buildSdkTestFeature">
-		<ant antfile="build.xml" dir="${basedir}" target="main">
-			<property name="component" value="${eclipse.build.configs}/sdk.tests" />
-		</ant>
-		<ant antfile="build.xml" dir="${basedir}" target="main">
-			<property name="component" value="${eclipse.build.configs}/test.framework" />
-		</ant>
-	</target>
+        <property name="org.eclipse.equinox.p2.tests.current.build.repo"
+            value="${p2RepoURL}/${buildId}" />
+        <property name="org.eclipse.equinox.p2.tests.last.release.build.repo"
+            value="${p2repopreviousR}" />
+        <property name="previousPlatformZips" value="${buildDirectory}/previousPlatformZips" />
+        <mkdir dir="${previousPlatformZips}" />
+
+        <condition property="commonrepo"
+            value="file:///gitroot/platform/eclipse.platform.releng.maps"
+            else="git://git.eclipse.org/gitroot/platform/eclipse.platform.releng.maps">
+
+            <equals arg1="${hudson}" arg2="true" />
+
+        </condition>
+
+    </target>
+
+    <target name="buildECFMasterFeature">
+        <ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}"
+            target="preBuild">
+            <property name="builder"
+                value="${eclipse.build.configs}/master-ecf" />
+        </ant>
+        <ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}"
+            target="fetch">
+            <property name="builder"
+                value="${eclipse.build.configs}/master-ecf" />
+        </ant>
+    </target>
+
+    <target name="buildMasterFeature">
+        <ant antfile="build.xml" dir="${basedir}">
+            <property name="component" value="${eclipse.build.configs}/master" />
+        </ant>
+        <!-- <ant antfile="build.xml" dir="${basedir}"> <property name="component" 
+            value="${eclipse.build.configs}/pdebuild" /> </ant> <p2.mirror source="file://${buildDirectory}/buildRepoPDEbuild" 
+            ignoreErrors="true"> <destination compressed="true" name="${p2.repo.name}" 
+            location="file:${buildRepo}" append="true" format="file:${reposource}" /> 
+            <comparator comparator="org.eclipse.equinox.p2.repository.tools.jar.comparator"> 
+            <repository location="${repoBaseline}" /> </comparator> </p2.mirror> -->
+        <property name="archiveName" value="eclipse-master-${buildId}.zip" />
+        <property name="archiveFullPath"
+            value="${buildDirectory}/${buildLabel}/${archiveName}" />
+        <exec dir="${buildDirectory}/buildRepo" executable="zip">
+            <arg line="-r ${archiveFullPath} ." />
+        </exec>
+    </target>
+
+    <target name="buildSdkTestFeature">
+        <ant antfile="build.xml" dir="${basedir}" target="main">
+            <property name="component" value="${eclipse.build.configs}/sdk.tests" />
+        </ant>
+        <ant antfile="build.xml" dir="${basedir}" target="main">
+            <property name="component"
+                value="${eclipse.build.configs}/test.framework" />
+        </ant>
+    </target>
 
     <!-- no longer build source drops, see bug 374428 -->
-	<target name="buildEclipseSourceDrops" >
-	    <!-- eventually may remove this whole task? when no longer build source drops, see bug 374428
-		<property name="buildSourceDrops" value="true" /> 
-		<echo message="DEBUG: eclipse.pdebuild.scripts: ${eclipse.pdebuild.scripts}" />
-        <echo message="DEBUG: eclipse.build.configs: ${eclipse.build.configs}" />
-        -->
-	    
-		<!--examples are required to pull sample doc into SDK doc plug-ins-->
-		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="preBuild">
-			<property name="builder" value="${eclipse.build.configs}/sdk.examples" />
-		</ant>
-		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="fetch">
-			<property name="builder" value="${eclipse.build.configs}/sdk.examples" />
-		</ant>
-		<antcall target="buildECFMasterFeature" />
-		<!--fetch source and generate scripts for eclipse master feature-->
-		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="preBuild">
-			<property name="builder" value="${eclipse.build.configs}/master" />
-		</ant>
-		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="fetch">
-			<property name="builder" value="${eclipse.build.configs}/master" />
-		</ant>
-		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="generate">
-			<property name="builder" value="${eclipse.build.configs}/master" />
-		</ant>
-		<!--fetch source and generate scripts for eclipse SDK-->
-		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="preBuild">
-			<property name="builder" value="${eclipse.build.configs}/sdk" />
-		</ant>
-		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="fetch">
-			<property name="builder" value="${eclipse.build.configs}/sdk" />
-		</ant>
-		<ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}" target="generate">
-			<property name="builder" value="${eclipse.build.configs}/sdk" />
-		</ant>
+    <target name="buildEclipseSourceDrops">
+        <!-- eventually may remove this whole task? when no longer build 
+            source drops, see bug 374428 <property name="buildSourceDrops" value="true" 
+            /> <echo message="DEBUG: eclipse.pdebuild.scripts: ${eclipse.pdebuild.scripts}" 
+            /> <echo message="DEBUG: eclipse.build.configs: ${eclipse.build.configs}" 
+            /> -->
 
-		<replace file="${eclipse.build.configs}/sdk/srcBuild/build.properties" token="@build@" value="${buildId}" />
-		<replace file="${eclipse.build.configs}/sdk/srcBuild/build" token="@build@" value="${buildId}" />
-	    <!-- These v tags are what's eventually used for qualifiers, even if projects tagged with buildlabel -->
-		<condition property="builderTag" value="v${buildId}">
-			<or>
-				<equals arg1="${buildType}" arg2="I" />
-				<equals arg1="${buildType}" arg2="M" />
-			</or>
-		</condition>
-		<property name="builderTag" value="HEAD" />
-		<condition property="builderTag" value="v${buildId}">
-			<equals arg1="${buildType}" arg2="I" />
-		</condition>
-	    
-	</target>
+        <!--examples are required to pull sample doc into SDK doc plug-ins -->
+        <ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}"
+            target="preBuild">
+            <property name="builder"
+                value="${eclipse.build.configs}/sdk.examples" />
+        </ant>
+        <ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}"
+            target="fetch">
+            <property name="builder"
+                value="${eclipse.build.configs}/sdk.examples" />
+        </ant>
+        <antcall target="buildECFMasterFeature" />
+        <!--fetch source and generate scripts for eclipse master feature -->
+        <ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}"
+            target="preBuild">
+            <property name="builder" value="${eclipse.build.configs}/master" />
+        </ant>
+        <ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}"
+            target="fetch">
+            <property name="builder" value="${eclipse.build.configs}/master" />
+        </ant>
+        <ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}"
+            target="generate">
+            <property name="builder" value="${eclipse.build.configs}/master" />
+        </ant>
+        <!--fetch source and generate scripts for eclipse SDK -->
+        <ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}"
+            target="preBuild">
+            <property name="builder" value="${eclipse.build.configs}/sdk" />
+        </ant>
+        <ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}"
+            target="fetch">
+            <property name="builder" value="${eclipse.build.configs}/sdk" />
+        </ant>
+        <ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}"
+            target="generate">
+            <property name="builder" value="${eclipse.build.configs}/sdk" />
+        </ant>
+
+        <replace
+            file="${eclipse.build.configs}/sdk/srcBuild/build.properties"
+            token="@build@" value="${buildId}" />
+        <replace file="${eclipse.build.configs}/sdk/srcBuild/build"
+            token="@build@" value="${buildId}" />
+        <!-- These v tags are what's eventually used for qualifiers, even 
+            if projects tagged with buildlabel -->
+        <condition property="builderTag" value="v${buildId}">
+            <or>
+                <equals arg1="${buildType}" arg2="I" />
+                <equals arg1="${buildType}" arg2="M" />
+            </or>
+        </condition>
+        <property name="builderTag" value="HEAD" />
+        <condition property="builderTag" value="v${buildId}">
+            <equals arg1="${buildType}" arg2="I" />
+        </condition>
+
+    </target>
 
     <!-- always skip pack during a build. No need to produce pack.gz files 
-         here, for every build, only for repos we want to "make available to 
-         the world" -->
-    <property name="skipPack" value="true"/>
-	<target name="packMasterFeature" unless="skipPack">
-		<property name="archiveName" value="eclipse-master-${buildId}.zip" />
+        here, for every build, only for repos we want to "make available to the world" -->
+    <property name="skipPack" value="true" />
+    <target name="packMasterFeature" unless="skipPack">
+        <property name="archiveName" value="eclipse-master-${buildId}.zip" />
 
-	    <echo message="DEBUG: org.eclipse.update.jarprocessor.pack200: ${org.eclipse.update.jarprocessor.pack200}" />
-	    
-		<copy file="${eclipse.build.configs}/../../extras/pack.properties" todir="${reposource}" />
-		<p2.process.artifacts repositoryPath="file://${reposource}" pack="true" />
-	    <!-- temp don't delete, for debuggging
-		<delete>
-			<fileset dir="${reposource}">
-				<include name="pack.properties" />
-			</fileset>
-		</delete>
-		-->
-	    <!-- we remove these, because they end up having invalid pack.gz files -->
-		<p2.remove.iu>
-			<repository location="file://${reposource}" />
-			<iu id="com.ibm.icu" artifacts="(format=packed)" />
-			<iu id="com.ibm.icu.base" artifacts="(format=packed)" />
-			<iu id="com.ibm.icu.source" artifacts="(format=packed)" />
-			<iu id="com.ibm.icu.base.source" artifacts="(format=packed)" />
-			<iu id="org.eclipse.jdt.debug.ui" artifacts="(format=packed)" />
-			<iu id="org.eclipse.pde.api.tools" artifacts="(format=packed)" />
-		</p2.remove.iu>
-	</target>
+        <echo
+            message="DEBUG: org.eclipse.update.jarprocessor.pack200: ${org.eclipse.update.jarprocessor.pack200}" />
 
-	<target name="waitForChangedAttribs" unless="attribs.changed">
-		<antcall target="compareAttribs" inheritAll="false">
-			<param name="originalAttribs" value="${originalAttribs}" />
-			<param name="signpoll" value="${signpoll}" />
-		</antcall>
-	</target>
+        <copy file="${eclipse.build.configs}/../../extras/pack.properties"
+            todir="${reposource}" />
+        <p2.process.artifacts repositoryPath="file://${reposource}"
+            pack="true" />
+        <!-- temp don't delete, for debuggging <delete> <fileset dir="${reposource}"> 
+            <include name="pack.properties" /> </fileset> </delete> -->
+        <!-- we remove these, because they end up having invalid pack.gz 
+            files -->
+        <p2.remove.iu>
+            <repository location="file://${reposource}" />
+            <iu id="com.ibm.icu" artifacts="(format=packed)" />
+            <iu id="com.ibm.icu.base" artifacts="(format=packed)" />
+            <iu id="com.ibm.icu.source" artifacts="(format=packed)" />
+            <iu id="com.ibm.icu.base.source" artifacts="(format=packed)" />
+            <iu id="org.eclipse.jdt.debug.ui" artifacts="(format=packed)" />
+            <iu id="org.eclipse.pde.api.tools" artifacts="(format=packed)" />
+        </p2.remove.iu>
+    </target>
 
-	<target name="compareAttribs">
-		<!--poll file for change in attributes-->
-		<exec dir="${buildDirectory}" executable="${signpoll}" outputProperty="polledAttribs">
-			<arg line="${signpollline}" />
-		</exec>
-		<echo message="original:  ${originalAttribs}" />
-		<condition property="attribChanged">
-			<and>
-				<not>
-					<contains string="${polledAttribs}" substring="Permission denied, please try again." casesensitive="no" />
-				</not>
-				<not>
-					<contains string="${polledAttribs}" substring="Host key verification failed." casesensitive="no" />
-				</not>
-				<or>
-					<not>
-						<contains string="${polledAttribs}" substring="No such file or directory" casesensitive="no" />
-					</not>
-					<contains string="${polledAttribs}" substring="bash: line 0: cd:" casesensitive="no" />
-				</or>
-			</and>
-		</condition>
-		<echo message="polled:  ${polledAttribs}" />
-		<antcall target="writeDiffResult" />
-		<sleep seconds="120" />
-		<available property="attribs.changed" file="${buildDirectory}/attribDiff.txt" />
-		<antcall target="waitForChangedAttribs" />
-	</target>
+    <target name="waitForChangedAttribs" unless="attribs.changed">
+        <antcall target="compareAttribs" inheritAll="false">
+            <param name="originalAttribs" value="${originalAttribs}" />
+            <param name="signpoll" value="${signpoll}" />
+        </antcall>
+    </target>
 
-	<target name="writeDiffResult" if="attribChanged">
-		<echo message="original: ${originalAttribs}" file="${buildDirectory}/attribDiff.txt" />
-		<echo message="new: ${polledAttribs}" file="${buildDirectory}/attribDiff.txt" append="true" />
-	</target>
+    <target name="compareAttribs">
+        <!--poll file for change in attributes -->
+        <exec dir="${buildDirectory}" executable="${signpoll}"
+            outputProperty="polledAttribs">
+            <arg line="${signpollline}" />
+        </exec>
+        <echo message="original:  ${originalAttribs}" />
+        <condition property="attribChanged">
+            <and>
+                <not>
+                    <contains string="${polledAttribs}"
+                        substring="Permission denied, please try again."
+                        casesensitive="no" />
+                </not>
+                <not>
+                    <contains string="${polledAttribs}"
+                        substring="Host key verification failed."
+                        casesensitive="no" />
+                </not>
+                <or>
+                    <not>
+                        <contains string="${polledAttribs}"
+                            substring="No such file or directory"
+                            casesensitive="no" />
+                    </not>
+                    <contains string="${polledAttribs}"
+                        substring="bash: line 0: cd:" casesensitive="no" />
+                </or>
+            </and>
+        </condition>
+        <echo message="polled:  ${polledAttribs}" />
+        <antcall target="writeDiffResult" />
+        <sleep seconds="120" />
+        <available property="attribs.changed" file="${buildDirectory}/attribDiff.txt" />
+        <antcall target="waitForChangedAttribs" />
+    </target>
 
-	<target name="updatePackProperties">
-		<!--exclude pre-built Orbit bundles from being signed and packed-->
-		<property name="packproperties" value="${buildDirectory}/updatePackProperties.txt" />
-		<generateExcludeList mapFile="${buildDirectory}/maps/org.eclipse.releng/maps/orbit.map" outputFile="${packproperties}" />
-		<loadfile property="pack.properties" srcFile="${packproperties}" />
-		<delete file="${packproperties}" failonerror="false" />
-		<replace file="${eclipse.build.configs}/../../extras/pack.properties" token="@excludejars@" value="${pack.properties}" />
-		<property name="archiveName" value="eclipse-master-${buildId}.zip" />
-		<!-- add pack.properties file that specifies effort level -->
-		<exec dir="${eclipse.build.configs}/../../extras" executable="zip">
-			<arg line="-r ${buildDirectory}/${buildLabel}/${archiveName} pack.properties" />
-		</exec>
-	</target>
+    <target name="writeDiffResult" if="attribChanged">
+        <echo message="original: ${originalAttribs}" file="${buildDirectory}/attribDiff.txt" />
+        <echo message="new: ${polledAttribs}" file="${buildDirectory}/attribDiff.txt"
+            append="true" />
+    </target>
 
-	<target name="signMasterFeature" if="sign">
-		<property name="packtmp" value="${buildDirectory}/packtmp" />
-		<property name="stagingDirectoryOutput" value="/home/data/httpd/download-staging.priv/eclipse/${buildId}-out" />
-		<property name="stagingDirectory" value="/home/data/httpd/download-staging.priv/eclipse" />
-		<property name="archiveName" value="eclipse-master-${buildId}.zip" />
-		<property name="outputFile" value="${stagingDirectoryOutput}/${archiveName}" />
-		<mkdir dir="${packtmp}" />
-		<move file="${buildDirectory}/${buildLabel}/${archiveName}" tofile="${packtmp}/${archiveName}" />
+    <target name="updatePackProperties">
+        <!--exclude pre-built Orbit bundles from being signed and packed -->
+        <property name="packproperties"
+            value="${buildDirectory}/updatePackProperties.txt" />
+        <generateExcludeList
+            mapFile="${buildDirectory}/maps/org.eclipse.releng/maps/orbit.map"
+            outputFile="${packproperties}" />
+        <loadfile property="pack.properties" srcFile="${packproperties}" />
+        <delete file="${packproperties}" failonerror="false" />
+        <replace file="${eclipse.build.configs}/../../extras/pack.properties"
+            token="@excludejars@" value="${pack.properties}" />
+        <property name="archiveName" value="eclipse-master-${buildId}.zip" />
+        <!-- add pack.properties file that specifies effort level -->
+        <exec dir="${eclipse.build.configs}/../../extras"
+            executable="zip">
+            <arg
+                line="-r ${buildDirectory}/${buildLabel}/${archiveName} pack.properties" />
+        </exec>
+    </target>
 
-		<!--push drop to staging directory-->
-		<echo message="INFO: signing - push drop to staging directory" />
+    <target name="signMasterFeature" if="sign">
+        <property name="packtmp" value="${buildDirectory}/packtmp" />
+        <property name="stagingDirectoryOutput"
+            value="/home/data/httpd/download-staging.priv/eclipse/${buildId}-out" />
+        <property name="stagingDirectory"
+            value="/home/data/httpd/download-staging.priv/eclipse" />
+        <property name="archiveName" value="eclipse-master-${buildId}.zip" />
+        <property name="outputFile"
+            value="${stagingDirectoryOutput}/${archiveName}" />
+        <mkdir dir="${packtmp}" />
+        <move file="${buildDirectory}/${buildLabel}/${archiveName}"
+            tofile="${packtmp}/${archiveName}" />
 
-		<condition property="signcopy" value="cp">
-			<equals arg1="${hudson}" arg2="true" />
-		</condition>
-		<property name="signcopy" value="scp" />
+        <!--push drop to staging directory -->
+        <echo message="INFO: signing - push drop to staging directory" />
 
-		<condition property="signexec" value="/bin/bash">
-			<equals arg1="${hudson}" arg2="true" />
-		</condition>
-		<property name="signexec" value="ssh" />
+        <condition property="signcopy" value="cp">
+            <equals arg1="${hudson}" arg2="true" />
+        </condition>
+        <property name="signcopy" value="scp" />
 
-		<condition property="signhost" value="">
-			<equals arg1="${hudson}" arg2="true" />
-		</condition>
-		<property name="signhost" value="build.eclipse.org" />
+        <condition property="signexec" value="/bin/bash">
+            <equals arg1="${hudson}" arg2="true" />
+        </condition>
+        <property name="signexec" value="ssh" />
 
-		<condition property="signdelimiter" value="">
-			<equals arg1="${hudson}" arg2="true" />
-		</condition>
-		<property name="signdelimiter" value=":" />
+        <condition property="signhost" value="">
+            <equals arg1="${hudson}" arg2="true" />
+        </condition>
+        <property name="signhost" value="build.eclipse.org" />
 
-		<condition property="signquote" value="">
-			<equals arg1="${hudson}" arg2="true" />
-		</condition>
-		<property name="signquote" value="&quot;" />
+        <condition property="signdelimiter" value="">
+            <equals arg1="${hudson}" arg2="true" />
+        </condition>
+        <property name="signdelimiter" value=":" />
 
-		<condition property="signpoll" value="ls">
-			<equals arg1="${hudson}" arg2="true" />
-		</condition>
-		<property name="signpoll" value="ssh" />
+        <condition property="signquote" value="">
+            <equals arg1="${hudson}" arg2="true" />
+        </condition>
+        <property name="signquote" value="&quot;" />
 
-	    
-		<exec dir="${packtmp}" executable="${signcopy}" output="signing.txt">
-			<arg line="${archiveName} ${signhost}${signdelimiter}${stagingDirectory}" />
-		</exec>
+        <condition property="signpoll" value="ls">
+            <equals arg1="${hudson}" arg2="true" />
+        </condition>
+        <property name="signpoll" value="ssh" />
 
-		<exec dir="${buildDirectory}" executable="${signexec}" output="signing.txt" append="true">
-			<arg line="${signhost} /bin/chmod -v ugo+rw ${stagingDirectory}/${archiveName}" />
-		</exec>
 
-	    <echo message="DEBUG: signing - packtmp: ${packtmp}" />
+        <exec dir="${packtmp}" executable="${signcopy}" output="signing.txt">
+            <arg
+                line="${archiveName} ${signhost}${signdelimiter}${stagingDirectory}" />
+        </exec>
+
+        <exec dir="${buildDirectory}" executable="${signexec}"
+            output="signing.txt" append="true">
+            <arg
+                line="${signhost} /bin/chmod -v ugo+rw ${stagingDirectory}/${archiveName}" />
+        </exec>
+
+        <echo message="DEBUG: signing - packtmp: ${packtmp}" />
         <echo message="DEBUG: signing - buildDirectory: ${buildDirectory}" />
         <echo message="DEBUG: signing - signexec: ${signexec}" />
         <echo message="DEBUG: signing - signhost: ${signhost}" />
@@ -405,449 +450,596 @@
         <echo message="DEBUG: signing - archiveName: ${archiveName}" />
         <echo message="DEBUG: signing - hudson: ${hudson}" />
         <echo message="DEBUG: signing - java15home: ${java15home}" />
-	    
-		<!--invoke sign script and wait-->
-		<echo message="invoke sign script and wait" />
-	    <!-- fail if can not even execute ... probably means current user 
-	         is not authorized to sign -->
-	    <!-- Note: since "sign" calls jarprocessor, which conditions jars, 
-	         we want to make sure it uses a java 5 JRE -->
-		<exec dir="." executable="${signexec}" output="signing.txt" append="true" failonerror="true" newenvironment="true">
-		    <env key="JAVA_HOME" value="${java15home}" />
-			<arg line="${signhost} ${signquote}/usr/bin/sign ${stagingDirectory}/${archiveName} nomail ${stagingDirectoryOutput}${signquote}" />
-		</exec>
 
-		<!--Wait for build to be available -->
-		<condition property="signpollline" value="${stagingDirectoryOutput}/${archiveName}">
-			<equals arg1="${hudson}" arg2="true" />
-		</condition>
-		<property name="signpollline" value="${signhost} ${signquote}cd ${stagingDirectoryOutput};ls ${archiveName}${signquote}" />
+        <!--invoke sign script and wait -->
+        <echo message="invoke sign script and wait" />
+        <!-- fail if can not even execute ... probably means current user 
+            is not authorized to sign -->
+        <!-- Note: since "sign" calls jarprocessor, which conditions jars, 
+            we want to make sure it uses a java 5 JRE -->
+        <exec dir="." executable="${signexec}" output="signing.txt"
+            append="true" failonerror="true" newenvironment="true">
+            <env key="JAVA_HOME" value="${java15home}" />
+            <arg
+                line="${signhost} ${signquote}/usr/bin/sign ${stagingDirectory}/${archiveName} nomail ${stagingDirectoryOutput}${signquote}" />
+        </exec>
 
-	    <!--
-        <echo message="DEBUG: signing - signpoll: ${signpoll}" />
-        <echo message="DEBUG: signing - signpollline: ${signpollline}" />
-	    --> 
-            
-		<antcall target="waitForChangedAttribs">
-			<param name="signpoll" value="${signpoll}" />
-			<param name="signpollline" value="${signpollline}" />
-		</antcall>
+        <!--Wait for build to be available -->
+        <condition property="signpollline"
+            value="${stagingDirectoryOutput}/${archiveName}">
+            <equals arg1="${hudson}" arg2="true" />
+        </condition>
+        <property name="signpollline"
+            value="${signhost} ${signquote}cd ${stagingDirectoryOutput};ls ${archiveName}${signquote}" />
 
-		<!--copy zip back to build machine -->
-		<sleep minutes="2" />
-		<echo message="INFO: copy signed zip back to build machine." />
-		<echo message= "    From: ${signhost}${signdelimiter}${stagingDirectory}/${buildId}-out/${archiveName}" /> 
-	    <echo message= "    To: ${buildDirectory}/${buildLabel}" />
-		<exec dir="." executable="${signcopy}" output="signing.txt" append="true">
-			<arg line="${signhost}${signdelimiter}${stagingDirectory}/${buildId}-out/${archiveName} ${buildDirectory}/${buildLabel}" />
-		</exec>
-		<antcall target="deletetempsigningfiles" />
-	</target>
+        <!-- <echo message="DEBUG: signing - signpoll: ${signpoll}" /> <echo 
+            message="DEBUG: signing - signpollline: ${signpollline}" /> -->
+
+        <antcall target="waitForChangedAttribs">
+            <param name="signpoll" value="${signpoll}" />
+            <param name="signpollline" value="${signpollline}" />
+        </antcall>
+
+        <!--copy zip back to build machine -->
+        <sleep minutes="2" />
+        <echo message="INFO: copy signed zip back to build machine." />
+        <echo
+            message="    From: ${signhost}${signdelimiter}${stagingDirectory}/${buildId}-out/${archiveName}" />
+        <echo message="    To: ${buildDirectory}/${buildLabel}" />
+        <exec dir="." executable="${signcopy}" output="signing.txt"
+            append="true">
+            <arg
+                line="${signhost}${signdelimiter}${stagingDirectory}/${buildId}-out/${archiveName} ${buildDirectory}/${buildLabel}" />
+        </exec>
+        <antcall target="deletetempsigningfiles" />
+    </target>
 
     <!-- TODO: why not deleted if running on build.eclipse.org? -->
-	<target name="deletetempsigningfiles" unless="hudson">
-		<echo message="delete temp files on build.eclipse.org" />
-		<property name="signdeleteline" value="${signhost} ${signquote}/bin/rm -rf ${stagingDirectory}/${buildId}-out ${stagingDirectory}/${archiveName}${signquote}" />
-		<exec dir="." executable="${signexec}" output="signing.txt" append="true">
-			<arg line="${signdeleteline}" />
-		</exec>
-	</target>
+    <target name="deletetempsigningfiles" unless="hudson">
+        <echo message="delete temp files on build.eclipse.org" />
+        <property name="signdeleteline"
+            value="${signhost} ${signquote}/bin/rm -rf ${stagingDirectory}/${buildId}-out ${stagingDirectory}/${archiveName}${signquote}" />
+        <exec dir="." executable="${signexec}" output="signing.txt"
+            append="true">
+            <arg line="${signdeleteline}" />
+        </exec>
+    </target>
 
-	<target name="testEclipse">
-		<parallel>
-			<ant antfile="eclipse/helpernew.xml" target="testAll" />
-		</parallel>
-	</target>
+    <target name="testEclipse">
+        <parallel>
+            <ant antfile="eclipse/helpernew.xml" target="testAll" />
+        </parallel>
+    </target>
 
-	<target name="apiTooling">
-		<property name="reference" value="${buildDirectory}/apitooolingreference" />
-		<mkdir dir="${reference}" />
-		<property name="report" value="${postingDirectory}/${buildLabel}/apitools" />
-		<mkdir dir="${report}" />
-		<property name="current_location" value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" />
-		<property name="reference_location" value="${reference}/eclipse-SDK-3.7-win32.zip" />
-		<exec executable="/usr/bin/wget" dir="${reference}" output="${reference}/error.txt" failonerror="false" os="Linux">
-			<arg line="-q -O  ${reference_location} http://${localmirror}/eclipse/downloads/drops/R-3.7-201106131736/eclipse-SDK-3.7-win32.zip" />
-		</exec>
-		<property name="report" value="${postingDirectory}/${buildLabel}/apitools" />
-		<mkdir dir="${report}" />
-		<property name="report_location" value="${report}/report.xml" />
-		<touch file="${report_location}" />
-		<property name="report_html_location" value="${report}/reporthtml" />
-		<property name="exclude_list_location" value="${buildDirectory}/maps/org.eclipse.releng/apiexclude/exclude_list.txt" />
-		<property name="exclude_list_external_location" value="${buildDirectory}/maps/org.eclipse.releng/apiexclude/exclude_list_external.txt" />
-		<apitooling.apifreeze baseline="${reference_location}" profile="${current_location}" report="${report_location}" excludelist="${exclude_list_location}" debug="true" />
-		<!-- html report will be dumped at the same location as the xml report -->
-		<apitooling.apifreeze_reportconversion xmlfile="${report_location}" debug="true" />
-		<property name="filter_store" value="${buildDirectory}/apifilters" />
-		<mkdir dir="${filter_store}" />
-		<property name="exclude_list_external_location" value="${buildDirectory}/maps/org.eclipse.releng/apiexclude/exclude_list_external.txt" />
-		<copy todir="${filter_store}">
-			<fileset dir="${buildDirectory}/plugins" includes="**/.settings/.api_filters" />
-			<regexpmapper from="^(org.eclipse.*\/)(\.settings\/)(\.api_filters)" to="\1\3" />
-		</copy>
-		<property name="apifilterzip" value="${report}/apifilters-${buildId}.zip" />
-		<exec executable="zip" dir="${report}">
-			<arg line="-r ${apifilterzip} ${filter_store}" />
-		</exec>
-		<property name="html_directory_location" value="${report}/apitoolsverifications/html" />
-		<property name="report_directory_location" value="${report}/apitoolsverifications/xml" />
-		<property name="3_7_1_reference_location" value="${reference}/eclipse-SDK-3.7.1-win32.zip" />
-		<exec executable="/usr/bin/wget" dir="${reference}" output="${reference}/error.txt" failonerror="false" os="Linux">
-			<arg line="-q -O  ${3_7_1_reference_location} http://${localmirror}/eclipse/downloads/drops/R-3.7.1-201109091335/eclipse-SDK-3.7.1-win32.zip" />
-		</exec>
-		<apitooling.analysis baseline="${3_7_1_reference_location}" profile="${current_location}" report="${report_directory_location}" filters="${filter_store}" excludelist="${exclude_list_external_location}" debug="true" />
+    <target name="apiTooling">
+        <property name="reference" value="${buildDirectory}/apitooolingreference" />
+        <mkdir dir="${reference}" />
+        <property name="report"
+            value="${postingDirectory}/${buildLabel}/apitools" />
+        <mkdir dir="${report}" />
+        <property name="current_location"
+            value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" />
+        <property name="reference_location" value="${reference}/eclipse-SDK-3.7-win32.zip" />
+        <exec executable="/usr/bin/wget" dir="${reference}"
+            output="${reference}/error.txt" failonerror="false" os="Linux">
+            <arg
+                line="-q -O  ${reference_location} http://${localmirror}/eclipse/downloads/drops/R-3.7-201106131736/eclipse-SDK-3.7-win32.zip" />
+        </exec>
+        <property name="report"
+            value="${postingDirectory}/${buildLabel}/apitools" />
+        <mkdir dir="${report}" />
+        <property name="report_location" value="${report}/report.xml" />
+        <touch file="${report_location}" />
+        <property name="report_html_location" value="${report}/reporthtml" />
+        <property name="exclude_list_location"
+            value="${buildDirectory}/maps/org.eclipse.releng/apiexclude/exclude_list.txt" />
+        <property name="exclude_list_external_location"
+            value="${buildDirectory}/maps/org.eclipse.releng/apiexclude/exclude_list_external.txt" />
+        <apitooling.apifreeze baseline="${reference_location}"
+            profile="${current_location}" report="${report_location}"
+            excludelist="${exclude_list_location}" debug="true" />
+        <!-- html report will be dumped at the same location as the xml report -->
+        <apitooling.apifreeze_reportconversion
+            xmlfile="${report_location}" debug="true" />
+        <property name="filter_store" value="${buildDirectory}/apifilters" />
+        <mkdir dir="${filter_store}" />
+        <property name="exclude_list_external_location"
+            value="${buildDirectory}/maps/org.eclipse.releng/apiexclude/exclude_list_external.txt" />
+        <copy todir="${filter_store}">
+            <fileset dir="${buildDirectory}/plugins" includes="**/.settings/.api_filters" />
+            <regexpmapper
+                from="^(org.eclipse.*\/)(\.settings\/)(\.api_filters)"
+                to="\1\3" />
+        </copy>
+        <property name="apifilterzip" value="${report}/apifilters-${buildId}.zip" />
+        <exec executable="zip" dir="${report}">
+            <arg line="-r ${apifilterzip} ${filter_store}" />
+        </exec>
+        <property name="html_directory_location" value="${report}/apitoolsverifications/html" />
+        <property name="report_directory_location" value="${report}/apitoolsverifications/xml" />
+        <property name="3_7_1_reference_location"
+            value="${reference}/eclipse-SDK-3.7.1-win32.zip" />
+        <exec executable="/usr/bin/wget" dir="${reference}"
+            output="${reference}/error.txt" failonerror="false" os="Linux">
+            <arg
+                line="-q -O  ${3_7_1_reference_location} http://${localmirror}/eclipse/downloads/drops/R-3.7.1-201109091335/eclipse-SDK-3.7.1-win32.zip" />
+        </exec>
+        <apitooling.analysis baseline="${3_7_1_reference_location}"
+            profile="${current_location}" report="${report_directory_location}"
+            filters="${filter_store}" excludelist="${exclude_list_external_location}"
+            debug="true" />
 
-		<apitooling.analysis_reportconversion xmlfiles="${report_directory_location}" debug="true" htmlfiles="${html_directory_location}" />
-		<!--check for api deprecation in comparison with previous release -->
+        <apitooling.analysis_reportconversion
+            xmlfiles="${report_directory_location}" debug="true"
+            htmlfiles="${html_directory_location}" />
+        <!--check for api deprecation in comparison with previous release -->
 
-		<property name="api_deprecation_report" value="${report}/apitoolsdeprecations/apideprecation.xml" />
-		<property name="api_deprecation_html" value="${report}/apitoolsdeprecations/apideprecation.html" />
-		<apitooling.apideprecation baseline="${3_7_1_reference_location}" profile="${current_location}" report="${api_deprecation_report}" debug="true" />
-		<apitooling.apideprecation_reportconversion xmlfile="${api_deprecation_report}" debug="true" htmlfile="${api_deprecation_html}" />
+        <property name="api_deprecation_report"
+            value="${report}/apitoolsdeprecations/apideprecation.xml" />
+        <property name="api_deprecation_html"
+            value="${report}/apitoolsdeprecations/apideprecation.html" />
+        <apitooling.apideprecation baseline="${3_7_1_reference_location}"
+            profile="${current_location}" report="${api_deprecation_report}"
+            debug="true" />
+        <apitooling.apideprecation_reportconversion
+            xmlfile="${api_deprecation_report}" debug="true"
+            htmlfile="${api_deprecation_html}" />
 
-		<property name="equinox_api_report" value="${equinoxPostingDirectory}/${buildLabel}/apitools" />
-		<mkdir dir="${equinox_api_report}" />
-		<copy todir="${equinox_api_report}">
-			<fileset dir="${report}">
-				<include name="report.html" />
-			</fileset>
-			<fileset dir="${html_directory_location}">
-				<include name="index.html" />
-			</fileset>
-		</copy>
-		<copy todir="${equinox_api_report}" file="${api_deprecation_html}" />
-	</target>
+        <property name="equinox_api_report"
+            value="${equinoxPostingDirectory}/${buildLabel}/apitools" />
+        <mkdir dir="${equinox_api_report}" />
+        <copy todir="${equinox_api_report}">
+            <fileset dir="${report}">
+                <include name="report.html" />
+            </fileset>
+            <fileset dir="${html_directory_location}">
+                <include name="index.html" />
+            </fileset>
+        </copy>
+        <copy todir="${equinox_api_report}" file="${api_deprecation_html}" />
+    </target>
 
-	<target name="publishEclipse">
-		<condition property="rsync" value="true">
-			<not>
-				<or>
-					<equals arg1="${hudson}" arg2="true" />
-					<equals arg1="{test}" arg2="true" />
-				</or>
-			</not>
-		</condition>
-		<parallel>
-			<ant antfile="eclipse/helper.xml" target="rSyncWithSnzZrh" />
-			<sequential>
-				<ant antfile="eclipse/helper.xml" target="buildStandAloneSWT" />
-				<ant antfile="eclipse/helper.xml" target="publish" />
-			</sequential>
-		</parallel>
-	</target>
+    <target name="publishEclipse">
+        <condition property="rsync" value="true">
+            <not>
+                <or>
+                    <equals arg1="${hudson}" arg2="true" />
+                    <equals arg1="{test}" arg2="true" />
+                </or>
+            </not>
+        </condition>
+        <parallel>
+            <ant antfile="eclipse/helper.xml" target="rSyncWithSnzZrh" />
+            <sequential>
+                <ant antfile="eclipse/helper.xml" target="buildStandAloneSWT" />
+                <ant antfile="eclipse/helper.xml" target="publish" />
+            </sequential>
+        </parallel>
+    </target>
 
-	<target name="publishEquinox">
-		<ant antfile="${equinox.build.configs}/../helper.xml" target="publish" />
-	</target>
+    <target name="publishEquinox">
+        <ant antfile="${equinox.build.configs}/../helper.xml"
+            target="publish" />
+    </target>
 
-	<target name="unpackUpdateJarsForPackaging">
-		<property name="tmpsite" value="${buildDirectory}/tmpsite" />
-		<mkdir dir="${tmpsite}/new/eclipse/features" />
-		<mkdir dir="${tmpsite}/new/eclipse/plugins" />
-		<exec executable="unzip" dir="${buildDirectory}/${buildLabel}">
-			<arg line="-q eclipse-master-${buildId}.zip -d ${tmpsite}" />
-		</exec>
-		<unpackUpdateJars site="${tmpsite}/eclipse" output="${tmpsite}/new/eclipse" />
-		<waitfor maxwait="4" maxwaitunit="hour" checkevery="1" checkeveryunit="minute">
-			<available file="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip" />
-		</waitfor>
-		<move file="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip" tofile="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.bak.zip" />
-		<exec executable="zip" dir="${tmpsite}/new">
-			<arg line="-q ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -r eclipse" />
-		</exec>
-	</target>
-
-
-	<target name="packageEclipseDistributables">
-		<replace token="@qualifier@" file="${eclipse.build.configs}/sdk/builder/sdk.product" value="${buildId}" />
-		<replace token="@qualifier@" file="${eclipse.build.configs}/platform/platform.product" value="${buildId}" />
-		<replace token="@qualifier@" file="${eclipse.build.configs}/platform.sdk/platform.product" value="${buildId}" />
-		<!-- https://bugs.eclipse.org/bugs/show_bug.cgi?id=368488
-	    <replace token="@qualifier@" file="${buildDirectory}/plugins/org.eclipse.equinox.p2.ui.admin.rcp/rcp.product" value="${buildId}" />
-		-->
-	    <replace token="@qualifier@" file="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/product/EclipseRTOSGiStarterKit.product" value="${buildId}" />
-		<replace token="@qualifier@" file="${buildDirectory}/features/org.eclipse.pde.build.product.feature/product/pdebuild.product" value="${buildId}" />
-	    <!-- https://bugs.eclipse.org/bugs/show_bug.cgi?id=368488
-		<replace token="@qualifier@" file="${eclipse.build.configs}/rcp/rcp.product" value="${buildId}" />
-		<replace token="@qualifier@" file="${eclipse.build.configs}/rcp.sdk/rcp.product" value="${buildId}" />
-		-->
-		<replace token="@qualifier@" file="${eclipse.build.configs}/rcp.config/feature.xml" value="${buildId}" />
-		<replace token="@qualifier@" file="${equinox.build.configs}/osgistarter.config.launcher/feature.xml" value="${buildId}" />
-		<replace token="@qualifier@" file="${eclipse.build.configs}/pde.build.config.launcher/feature.xml" value="${buildId}" />
-		<delete dir="${reposource}" />
-		<mkdir dir="${reposource}" />
-		<exec executable="unzip" dir=".">
-			<arg line="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -d ${reposource}" />
-		</exec>
-		<p2.remove.iu>
-			<repository location="file://${reposource}" />
-			<iu id="org.aspectj.runtime" />
-			<iu id="org.aspectj.weaver" />
-			<iu id="master.feature.group" />
-			<iu id="master-ecf.feature.group" />
-			<iu id="master-jetty.feature.group" />
-			<iu id="master-equinox-weaving.feature.group" />
-		</p2.remove.iu>
-
-		<property name="tempexec" value="${buildDirectory}/tempexec" />
-		<delete dir="${tempexec}" />
-		<mkdir dir="${tempexec}" />
-		<copy todir="${tempexec}">
-			<fileset dir="${reposource}">
-				<include name="features/org.eclipse.equinox.executable_*.jar" />
-			</fileset>
-		</copy>
-		<exec executable="unzip" dir="${tempexec}">
-			<arg line="features/*.jar -d ${tempexec}" />
-		</exec>
-
-		<subant antfile="build.xml" target="publish.bin.parts" buildpath="${tempexec}/build.xml" failonerror="false">
-			<property name="p2.gathering" value="true" />
-			<property name="p2.build.repo" value="file:/${buildDirectoryAbsolute}" />
-		</subant>
-
-	     <echo message="Getting ready to execute ${basedir}/buildConfiguration.xml for ${eclipse.build.configs}/rcp.config" />
-		<ant target="main" antfile="buildConfiguration.xml" dir="${eclipse.build.configs}/rcp.config" />
-
-		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${eclipse.build.configs}/sdk/builder/sdk.product" compress="true">
-			<config os="win32" ws="win32" arch="x86" />
-			<config os="win32" ws="win32" arch="x86_64" />
-			<config os="linux" ws="gtk" arch="x86" />
-			<config os="linux" ws="gtk" arch="x86_64" />
-			<config os="linux" ws="gtk" arch="ppc64" />
-			<config os="linux" ws="gtk" arch="s390x" />
-			<config os="linux" ws="gtk" arch="s390" />
-			<config os="solaris" ws="gtk" arch="sparc" />
-			<config os="solaris" ws="gtk" arch="x86" />
-			<config os="macosx" ws="cocoa" arch="x86" />
-			<config os="macosx" ws="cocoa" arch="x86_64" />
-			<config os="hpux" ws="gtk" arch="ia64_32" />
-			<config os="aix" ws="gtk" arch="ppc" />
-			<config os="aix" ws="gtk" arch="ppc64" />
-			<advice kind="featureVersions" file="${buildDirectory}/finalFeaturesVersions.properties" />
-			<advice kind="pluginVersions" file="${buildDirectory}/finalPluginsVersions.properties" />
-		</p2.publish.product>
-
-		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${eclipse.build.configs}/platform/platform.product" compress="true">
-			<config os="win32" ws="win32" arch="x86" />
-			<config os="win32" ws="win32" arch="x86_64" />
-			<config os="linux" ws="gtk" arch="x86" />
-			<config os="linux" ws="gtk" arch="x86_64" />
-			<config os="linux" ws="gtk" arch="s390x" />
-			<config os="linux" ws="gtk" arch="s390" />
-			<config os="solaris" ws="gtk" arch="sparc" />
-			<config os="solaris" ws="gtk" arch="x86" />
-			<config os="macosx" ws="cocoa" arch="x86" />
-			<config os="macosx" ws="cocoa" arch="x86_64" />
-			<config os="hpux" ws="gtk" arch="ia64_32" />
-			<config os="aix" ws="gtk" arch="ppc" />
-			<config os="aix" ws="gtk" arch="ppc64" />
-			<advice kind="featureVersions" file="${buildDirectory}/finalFeaturesVersions.properties" />
-			<advice kind="pluginVersions" file="${buildDirectory}/finalPluginsVersions.properties" />
-		</p2.publish.product>
-
-		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${eclipse.build.configs}/platform.sdk/platform.product" compress="true">
-			<config os="win32" ws="win32" arch="x86" />
-			<config os="win32" ws="win32" arch="x86_64" />
-			<config os="linux" ws="gtk" arch="x86" />
-			<config os="linux" ws="gtk" arch="x86_64" />
-			<config os="linux" ws="gtk" arch="ppc64" />
-			<config os="linux" ws="gtk" arch="s390x" />
-			<config os="linux" ws="gtk" arch="s390" />
-			<config os="solaris" ws="gtk" arch="sparc" />
-			<config os="solaris" ws="gtk" arch="x86" />
-			<config os="macosx" ws="cocoa" arch="x86" />
-			<config os="macosx" ws="cocoa" arch="x86_64" />
-			<config os="hpux" ws="gtk" arch="ia64_32" />
-			<config os="aix" ws="gtk" arch="ppc" />
-			<config os="aix" ws="gtk" arch="ppc64" />
-			<advice kind="featureVersions" file="${buildDirectory}/finalFeaturesVersions.properties" />
-			<advice kind="pluginVersions" file="${buildDirectory}/finalPluginsVersions.properties" />
-		</p2.publish.product>
-
-		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${eclipse.build.configs}/rcp/rcp.product" compress="true">
-			<config os="win32" ws="win32" arch="x86" />
-			<config os="win32" ws="win32" arch="x86_64" />
-			<config os="linux" ws="gtk" arch="x86" />
-			<config os="linux" ws="gtk" arch="x86_64" />
-			<config os="linux" ws="gtk" arch="ppc64" />
-			<config os="linux" ws="gtk" arch="s390x" />
-			<config os="linux" ws="gtk" arch="s390" />
-			<config os="solaris" ws="gtk" arch="sparc" />
-			<config os="solaris" ws="gtk" arch="x86" />
-			<config os="macosx" ws="cocoa" arch="x86" />
-			<config os="macosx" ws="cocoa" arch="x86_64" />
-			<config os="hpux" ws="gtk" arch="ia64_32" />
-			<config os="aix" ws="gtk" arch="ppc" />
-			<config os="aix" ws="gtk" arch="ppc64" />
-			<advice kind="featureVersions" file="${buildDirectory}/finalFeaturesVersions.properties" />
-			<advice kind="pluginVersions" file="${buildDirectory}/finalPluginsVersions.properties" />
-		</p2.publish.product>
-
-		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${eclipse.build.configs}/rcp.sdk/rcp.product" compress="true">
-			<config os="win32" ws="win32" arch="x86" />
-			<config os="win32" ws="win32" arch="x86_64" />
-			<config os="linux" ws="gtk" arch="x86" />
-			<config os="linux" ws="gtk" arch="x86_64" />
-			<config os="linux" ws="gtk" arch="ppc" />
-			<config os="linux" ws="gtk" arch="s390x" />
-			<config os="linux" ws="gtk" arch="s390" />
-			<config os="solaris" ws="gtk" arch="sparc" />
-			<config os="solaris" ws="gtk" arch="x86" />
-			<config os="macosx" ws="cocoa" arch="x86" />
-			<config os="macosx" ws="cocoa" arch="x86_64" />
-			<config os="hpux" ws="gtk" arch="ia64_32" />
-			<config os="aix" ws="gtk" arch="ppc" />
-			<config os="aix" ws="gtk" arch="ppc64" />
-			<advice kind="featureVersions" file="${buildDirectory}/finalFeaturesVersions.properties" />
-			<advice kind="pluginVersions" file="${buildDirectory}/finalPluginsVersions.properties" />
-		</p2.publish.product>
-
-		    <!-- https://bugs.eclipse.org/bugs/show_bug.cgi?id=368488
-		<property name="equinox.p2.agent.dir" value="${equinox.build.configs}/equinox.p2.agent" />
-		<replace file="${equinox.p2.agent.dir}/p2.inf" token="@qualifier@" value="${buildId}" />
-		<copy todir="${equinox.p2.agent.dir}">
-			<fileset file="${buildDirectory}/plugins/org.eclipse.equinox.p2.ui.admin.rcp/rcp.product" />
-		</copy>
-		<mkdir dir="${equinox.p2.agent.dir}/org.eclipse.equinox.p2.ui.admin.rcp" />
-		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${equinox.p2.agent.dir}/rcp.product" compress="true">
-			<config os="win32" ws="win32" arch="x86" />
-			<config os="linux" ws="gtk" arch="x86" />
-			<config os="macosx" ws="cocoa" arch="x86" />
-		</p2.publish.product>
--->
-		<ant target="main" antfile="buildConfiguration.xml" dir="${equinox.build.configs}/osgistarter.config.launcher" />
-		<property name="osgi.starter.config.launcher.temp" value="${equinox.build.configs}/osgistarter.config.launcher/temp" />
-		<mkdir dir="${osgi.starter.config.launcher.temp}" />
-
-		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/product/EclipseRTOSGiStarterKit.product" compress="true">
-			<config os="win32" ws="win32" arch="x86" />
-			<config os="win32" ws="win32" arch="x86_64" />
-			<config os="linux" ws="gtk" arch="x86" />
-			<config os="linux" ws="gtk" arch="x86_64" />
-			<config os="macosx" ws="cocoa" arch="x86" />
-			<config os="macosx" ws="cocoa" arch="x86_64" />
-		</p2.publish.product>
-
-		<eclipse.brand.p2.artifacts metadataRepository="file:${reposource}" artifactRepository="file:${reposource}" tempDirectory="${osgi.starter.config.launcher.temp}" launcherProvider="org.eclipse.equinox.executable" productId="org.eclipse.osgi.configuration" launcherName="rt" config="win32.win32.x86" productVersion="1.0.0.${buildId}" iconsList="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/rt.ico" />
-		<eclipse.brand.p2.artifacts metadataRepository="file:${reposource}" artifactRepository="file:${reposource}" tempDirectory="${osgi.starter.config.launcher.temp}" launcherProvider="org.eclipse.equinox.executable" productId="org.eclipse.osgi.configuration" launcherName="rt" config="win32.win32.x86_64" productVersion="1.0.0.${buildId}" iconsList="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/rt.ico" />
-		<eclipse.brand.p2.artifacts metadataRepository="file:${reposource}" artifactRepository="file:${reposource}" tempDirectory="${osgi.starter.config.launcher.temp}" launcherProvider="org.eclipse.equinox.executable" productId="org.eclipse.osgi.configuration" launcherName="rt" config="linux.gtk.x86" productVersion="1.0.0.${buildId}" iconsList="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/rt.ico" />
-		<eclipse.brand.p2.artifacts metadataRepository="file:${reposource}" artifactRepository="file:${reposource}" tempDirectory="${osgi.starter.config.launcher.temp}" launcherProvider="org.eclipse.equinox.executable" productId="org.eclipse.osgi.configuration" launcherName="rt" config="linux.gtk.x86_64" productVersion="1.0.0.${buildId}" iconsList="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/rt.ico" />
-		<eclipse.brand.p2.artifacts metadataRepository="file:${reposource}" artifactRepository="file:${reposource}" tempDirectory="${osgi.starter.config.launcher.temp}" launcherProvider="org.eclipse.equinox.executable" productId="org.eclipse.osgi.configuration" launcherName="rt" config="macosx.cocoa.x86" productVersion="1.0.0.${buildId}" iconsList="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/rt.icns" />
-		<eclipse.brand.p2.artifacts metadataRepository="file:${reposource}" artifactRepository="file:${reposource}" tempDirectory="${osgi.starter.config.launcher.temp}" launcherProvider="org.eclipse.equinox.executable" productId="org.eclipse.osgi.configuration" launcherName="rt" config="macosx.cocoa.x86_64" productVersion="1.0.0.${buildId}" iconsList="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/rt.icns" />
-
-		<!-- <ant target="main" antfile="buildConfiguration.xml" dir="${eclipse.build.configs}/pde.build.config.launcher" />
-		<p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${buildDirectory}/features/org.eclipse.pde.build.product.feature/product/pdebuild.product" compress="true">
-			<config os="win32" ws="win32" arch="x86" />
-			<config os="win32" ws="win32" arch="x86_64" />
-			<config os="linux" ws="gtk" arch="x86" />
-			<config os="linux" ws="gtk" arch="x86_64" />
-			<config os="macosx" ws="cocoa" arch="x86" />
-			<config os="macosx" ws="cocoa" arch="x86_64" />
-		</p2.publish.product> -->
+    <target name="unpackUpdateJarsForPackaging">
+        <property name="tmpsite" value="${buildDirectory}/tmpsite" />
+        <mkdir dir="${tmpsite}/new/eclipse/features" />
+        <mkdir dir="${tmpsite}/new/eclipse/plugins" />
+        <exec executable="unzip" dir="${buildDirectory}/${buildLabel}">
+            <arg line="-q eclipse-master-${buildId}.zip -d ${tmpsite}" />
+        </exec>
+        <unpackUpdateJars site="${tmpsite}/eclipse"
+            output="${tmpsite}/new/eclipse" />
+        <waitfor maxwait="4" maxwaitunit="hour" checkevery="1"
+            checkeveryunit="minute">
+            <available
+                file="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip" />
+        </waitfor>
+        <move
+            file="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip"
+            tofile="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.bak.zip" />
+        <exec executable="zip" dir="${tmpsite}/new">
+            <arg
+                line="-q ${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -r eclipse" />
+        </exec>
+    </target>
 
 
-		<antcall target="packMasterFeature" />
+    <target name="packageEclipseDistributables">
+        <replace token="@qualifier@"
+            file="${eclipse.build.configs}/sdk/builder/sdk.product"
+            value="${buildId}" />
+        <replace token="@qualifier@"
+            file="${eclipse.build.configs}/platform/platform.product"
+            value="${buildId}" />
+        <replace token="@qualifier@"
+            file="${eclipse.build.configs}/platform.sdk/platform.product"
+            value="${buildId}" />
+        <!-- https://bugs.eclipse.org/bugs/show_bug.cgi?id=368488 <replace 
+            token="@qualifier@" file="${buildDirectory}/plugins/org.eclipse.equinox.p2.ui.admin.rcp/rcp.product" 
+            value="${buildId}" /> -->
+        <replace token="@qualifier@"
+            file="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/product/EclipseRTOSGiStarterKit.product"
+            value="${buildId}" />
+        <replace token="@qualifier@"
+            file="${buildDirectory}/features/org.eclipse.pde.build.product.feature/product/pdebuild.product"
+            value="${buildId}" />
+        <!-- https://bugs.eclipse.org/bugs/show_bug.cgi?id=368488 <replace 
+            token="@qualifier@" file="${eclipse.build.configs}/rcp/rcp.product" value="${buildId}" 
+            /> <replace token="@qualifier@" file="${eclipse.build.configs}/rcp.sdk/rcp.product" 
+            value="${buildId}" /> -->
+        <replace token="@qualifier@"
+            file="${eclipse.build.configs}/rcp.config/feature.xml"
+            value="${buildId}" />
+        <replace token="@qualifier@"
+            file="${equinox.build.configs}/osgistarter.config.launcher/feature.xml"
+            value="${buildId}" />
+        <replace token="@qualifier@"
+            file="${eclipse.build.configs}/pde.build.config.launcher/feature.xml"
+            value="${buildId}" />
+        <delete dir="${reposource}" />
+        <mkdir dir="${reposource}" />
+        <exec executable="unzip" dir=".">
+            <arg
+                line="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -d ${reposource}" />
+        </exec>
+        <p2.remove.iu>
+            <repository location="file://${reposource}" />
+            <iu id="org.aspectj.runtime" />
+            <iu id="org.aspectj.weaver" />
+            <iu id="master.feature.group" />
+            <iu id="master-ecf.feature.group" />
+            <iu id="master-jetty.feature.group" />
+            <iu id="master-equinox-weaving.feature.group" />
+        </p2.remove.iu>
 
-		<mkdir dir="${buildRepo}" />
+        <property name="tempexec" value="${buildDirectory}/tempexec" />
+        <delete dir="${tempexec}" />
+        <mkdir dir="${tempexec}" />
+        <copy todir="${tempexec}">
+            <fileset dir="${reposource}">
+                <include name="features/org.eclipse.equinox.executable_*.jar" />
+            </fileset>
+        </copy>
+        <exec executable="unzip" dir="${tempexec}">
+            <arg line="features/*.jar -d ${tempexec}" />
+        </exec>
 
-		<condition property="repoBaseline" value="${p2RepoURL}">
-			<equals arg1="${hudson}" arg2="true" />
-		</condition>
-		<property name="repoBaseline" value="file:${updateSite}" />
-       
-		    <!--
-        <echo message="DEBUG: repoBaseline: ${repoBaseline}" />   
-           -->
-            
-		<replace file="${eclipse.build.configs}/../../extras/artifacts.xml" token="@p2RepoPath@" value="${p2RepoPath}" />
-		<filter token="BUILD_ID" value="${buildLabel}" />
-		<mkdir dir="${buildDirectory}/formatRepo" />
-		<copy filtering="true" file="${eclipse.build.configs}/../../extras/artifacts.xml" tofile="${buildDirectory}/formatRepo/artifacts.xml" />
+        <subant antfile="build.xml" target="publish.bin.parts"
+            buildpath="${tempexec}/build.xml" failonerror="false">
+            <property name="p2.gathering" value="true" />
+            <property name="p2.build.repo" value="file:/${buildDirectoryAbsolute}" />
+        </subant>
 
-		<p2.mirror source="file:${reposource}" log="${buildlogs}/mirrorlog.txt" ignoreErrors="true">
-			<destination compressed="true" name="${p2.repo.name}" location="file:${buildRepo}" append="true" format="file:${buildDirectory}/formatRepo" kind="artifact" />
-			<destination compressed="true" name="${p2.repo.name}" location="file:${buildRepo}" append="true" format="file:${reposource}" />
-			<comparator comparator="org.eclipse.equinox.p2.repository.tools.jar.comparator" comparatorLog="${buildlogs}/comparatorlog.txt">
-				<repository location="${repoBaseline}" />
-				<exclude>
-					<artifact id="org.eclipse.jdt.doc.isv" />
-					<artifact id="org.eclipse.jdt.doc.user" />
-					<artifact id="org.eclipse.pde.doc.user" />
-					<artifact id="org.eclipse.platform.doc.isv" />
-					<artifact id="org.eclipse.platform.doc.user" />
-					<artifact id="org.eclipse.equinox.executable" />
-					<artifact id="org.eclipse.sdk.examples" />
-					<artifact id="org.eclipse.sdk.examples.source" />
-					<artifact id="master-equinox" />
-					<artifact id="org.apache.lucene" />
-					<artifact id="org.apache.lucene.source" />
-					<artifact id="org.apache.lucene.core" />
-					<artifact id="org.apache.lucene.core.source" />
-					<artifact id="org.apache.lucene.analysis" />
-					<artifact id="org.apache.lucene.analysis.source" />
-				</exclude>
-			</comparator>
-		</p2.mirror>
+        <echo
+            message="Getting ready to execute ${basedir}/buildConfiguration.xml for ${eclipse.build.configs}/rcp.config" />
+        <ant target="main" antfile="buildConfiguration.xml"
+            dir="${eclipse.build.configs}/rcp.config" />
 
-		<!--mirror JUnit test bundles and test framework bundles to the repo -->
-		<p2.mirror source="file://${buildDirectory}/buildRepoTests" ignoreErrors="true">
-			<destination compressed="true" name="${p2.repo.name}" location="file:${buildRepo}" append="true" format="file:${reposource}" />
-			<comparator comparator="org.eclipse.equinox.p2.repository.tools.jar.comparator" comparatorLog="${buildlogs}/comparatorlogtests.txt">
-				<repository location="${repoBaseline}" />
-			</comparator>
-			<iu id="org.eclipse.sdk.tests.feature.group" version="" />
-			<iu id="org.eclipse.test.feature.group" version="" />
-		</p2.mirror>
+        <p2.publish.product flavor="tooling"
+            repository="file:${reposource}"
+            productFile="${eclipse.build.configs}/sdk/builder/sdk.product"
+            compress="true">
+            <config os="win32" ws="win32" arch="x86" />
+            <config os="win32" ws="win32" arch="x86_64" />
+            <config os="linux" ws="gtk" arch="x86" />
+            <config os="linux" ws="gtk" arch="x86_64" />
+            <config os="linux" ws="gtk" arch="ppc64" />
+            <config os="linux" ws="gtk" arch="s390x" />
+            <config os="linux" ws="gtk" arch="s390" />
+            <config os="solaris" ws="gtk" arch="sparc" />
+            <config os="solaris" ws="gtk" arch="x86" />
+            <config os="macosx" ws="cocoa" arch="x86" />
+            <config os="macosx" ws="cocoa" arch="x86_64" />
+            <config os="hpux" ws="gtk" arch="ia64_32" />
+            <config os="aix" ws="gtk" arch="ppc" />
+            <config os="aix" ws="gtk" arch="ppc64" />
+            <advice kind="featureVersions"
+                file="${buildDirectory}/finalFeaturesVersions.properties" />
+            <advice kind="pluginVersions"
+                file="${buildDirectory}/finalPluginsVersions.properties" />
+        </p2.publish.product>
 
-		<!--mirror EMF features the repo -->
-		<property name="emfRepoURL" value="http://download.eclipse.org/modeling/emf/emf/updates/2.8milestones/base" />
-		<p2.mirror source="file:${emfRepoURL}" ignoreErrors="true">
-			<destination compressed="true" name="${p2.repo.name}" location="file:${buildRepo}" append="true" format="file:${reposource}" />
-			<comparator comparator="org.eclipse.equinox.p2.repository.tools.jar.comparator" comparatorLog="${buildlogs}/comparatorlogtests.txt">
-				<repository location="${repoBaseline}" />
-			</comparator>
-			<iu id="org.eclipse.emf.common.feature.group" version="0.0.0" />
-			<iu id="org.eclipse.emf.ecore.feature.group" version="0.0.0" />
-			<iu id="org.eclipse.emf.common.source.feature.group" version="0.0.0" />
-			<iu id="org.eclipse.emf.ecore.source.feature.group" version="0.0.0" />
+        <p2.publish.product flavor="tooling"
+            repository="file:${reposource}"
+            productFile="${eclipse.build.configs}/platform/platform.product"
+            compress="true">
+            <config os="win32" ws="win32" arch="x86" />
+            <config os="win32" ws="win32" arch="x86_64" />
+            <config os="linux" ws="gtk" arch="x86" />
+            <config os="linux" ws="gtk" arch="x86_64" />
+            <config os="linux" ws="gtk" arch="s390x" />
+            <config os="linux" ws="gtk" arch="s390" />
+            <config os="solaris" ws="gtk" arch="sparc" />
+            <config os="solaris" ws="gtk" arch="x86" />
+            <config os="macosx" ws="cocoa" arch="x86" />
+            <config os="macosx" ws="cocoa" arch="x86_64" />
+            <config os="hpux" ws="gtk" arch="ia64_32" />
+            <config os="aix" ws="gtk" arch="ppc" />
+            <config os="aix" ws="gtk" arch="ppc64" />
+            <advice kind="featureVersions"
+                file="${buildDirectory}/finalFeaturesVersions.properties" />
+            <advice kind="pluginVersions"
+                file="${buildDirectory}/finalPluginsVersions.properties" />
+        </p2.publish.product>
 
-		</p2.mirror>
+        <p2.publish.product flavor="tooling"
+            repository="file:${reposource}"
+            productFile="${eclipse.build.configs}/platform.sdk/platform.product"
+            compress="true">
+            <config os="win32" ws="win32" arch="x86" />
+            <config os="win32" ws="win32" arch="x86_64" />
+            <config os="linux" ws="gtk" arch="x86" />
+            <config os="linux" ws="gtk" arch="x86_64" />
+            <config os="linux" ws="gtk" arch="ppc64" />
+            <config os="linux" ws="gtk" arch="s390x" />
+            <config os="linux" ws="gtk" arch="s390" />
+            <config os="solaris" ws="gtk" arch="sparc" />
+            <config os="solaris" ws="gtk" arch="x86" />
+            <config os="macosx" ws="cocoa" arch="x86" />
+            <config os="macosx" ws="cocoa" arch="x86_64" />
+            <config os="hpux" ws="gtk" arch="ia64_32" />
+            <config os="aix" ws="gtk" arch="ppc" />
+            <config os="aix" ws="gtk" arch="ppc64" />
+            <advice kind="featureVersions"
+                file="${buildDirectory}/finalFeaturesVersions.properties" />
+            <advice kind="pluginVersions"
+                file="${buildDirectory}/finalPluginsVersions.properties" />
+        </p2.publish.product>
+
+        <p2.publish.product flavor="tooling"
+            repository="file:${reposource}" productFile="${eclipse.build.configs}/rcp/rcp.product"
+            compress="true">
+            <config os="win32" ws="win32" arch="x86" />
+            <config os="win32" ws="win32" arch="x86_64" />
+            <config os="linux" ws="gtk" arch="x86" />
+            <config os="linux" ws="gtk" arch="x86_64" />
+            <config os="linux" ws="gtk" arch="ppc64" />
+            <config os="linux" ws="gtk" arch="s390x" />
+            <config os="linux" ws="gtk" arch="s390" />
+            <config os="solaris" ws="gtk" arch="sparc" />
+            <config os="solaris" ws="gtk" arch="x86" />
+            <config os="macosx" ws="cocoa" arch="x86" />
+            <config os="macosx" ws="cocoa" arch="x86_64" />
+            <config os="hpux" ws="gtk" arch="ia64_32" />
+            <config os="aix" ws="gtk" arch="ppc" />
+            <config os="aix" ws="gtk" arch="ppc64" />
+            <advice kind="featureVersions"
+                file="${buildDirectory}/finalFeaturesVersions.properties" />
+            <advice kind="pluginVersions"
+                file="${buildDirectory}/finalPluginsVersions.properties" />
+        </p2.publish.product>
+
+        <p2.publish.product flavor="tooling"
+            repository="file:${reposource}" productFile="${eclipse.build.configs}/rcp.sdk/rcp.product"
+            compress="true">
+            <config os="win32" ws="win32" arch="x86" />
+            <config os="win32" ws="win32" arch="x86_64" />
+            <config os="linux" ws="gtk" arch="x86" />
+            <config os="linux" ws="gtk" arch="x86_64" />
+            <config os="linux" ws="gtk" arch="ppc" />
+            <config os="linux" ws="gtk" arch="s390x" />
+            <config os="linux" ws="gtk" arch="s390" />
+            <config os="solaris" ws="gtk" arch="sparc" />
+            <config os="solaris" ws="gtk" arch="x86" />
+            <config os="macosx" ws="cocoa" arch="x86" />
+            <config os="macosx" ws="cocoa" arch="x86_64" />
+            <config os="hpux" ws="gtk" arch="ia64_32" />
+            <config os="aix" ws="gtk" arch="ppc" />
+            <config os="aix" ws="gtk" arch="ppc64" />
+            <advice kind="featureVersions"
+                file="${buildDirectory}/finalFeaturesVersions.properties" />
+            <advice kind="pluginVersions"
+                file="${buildDirectory}/finalPluginsVersions.properties" />
+        </p2.publish.product>
+
+        <!-- https://bugs.eclipse.org/bugs/show_bug.cgi?id=368488 <property 
+            name="equinox.p2.agent.dir" value="${equinox.build.configs}/equinox.p2.agent" 
+            /> <replace file="${equinox.p2.agent.dir}/p2.inf" token="@qualifier@" value="${buildId}" 
+            /> <copy todir="${equinox.p2.agent.dir}"> <fileset file="${buildDirectory}/plugins/org.eclipse.equinox.p2.ui.admin.rcp/rcp.product" 
+            /> </copy> <mkdir dir="${equinox.p2.agent.dir}/org.eclipse.equinox.p2.ui.admin.rcp" 
+            /> <p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${equinox.p2.agent.dir}/rcp.product" 
+            compress="true"> <config os="win32" ws="win32" arch="x86" /> <config os="linux" 
+            ws="gtk" arch="x86" /> <config os="macosx" ws="cocoa" arch="x86" /> </p2.publish.product> -->
+        <ant target="main" antfile="buildConfiguration.xml"
+            dir="${equinox.build.configs}/osgistarter.config.launcher" />
+        <property name="osgi.starter.config.launcher.temp"
+            value="${equinox.build.configs}/osgistarter.config.launcher/temp" />
+        <mkdir dir="${osgi.starter.config.launcher.temp}" />
+
+        <p2.publish.product flavor="tooling"
+            repository="file:${reposource}"
+            productFile="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/product/EclipseRTOSGiStarterKit.product"
+            compress="true">
+            <config os="win32" ws="win32" arch="x86" />
+            <config os="win32" ws="win32" arch="x86_64" />
+            <config os="linux" ws="gtk" arch="x86" />
+            <config os="linux" ws="gtk" arch="x86_64" />
+            <config os="macosx" ws="cocoa" arch="x86" />
+            <config os="macosx" ws="cocoa" arch="x86_64" />
+        </p2.publish.product>
+
+        <eclipse.brand.p2.artifacts
+            metadataRepository="file:${reposource}" artifactRepository="file:${reposource}"
+            tempDirectory="${osgi.starter.config.launcher.temp}"
+            launcherProvider="org.eclipse.equinox.executable" productId="org.eclipse.osgi.configuration"
+            launcherName="rt" config="win32.win32.x86" productVersion="1.0.0.${buildId}"
+            iconsList="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/rt.ico" />
+        <eclipse.brand.p2.artifacts
+            metadataRepository="file:${reposource}" artifactRepository="file:${reposource}"
+            tempDirectory="${osgi.starter.config.launcher.temp}"
+            launcherProvider="org.eclipse.equinox.executable" productId="org.eclipse.osgi.configuration"
+            launcherName="rt" config="win32.win32.x86_64"
+            productVersion="1.0.0.${buildId}"
+            iconsList="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/rt.ico" />
+        <eclipse.brand.p2.artifacts
+            metadataRepository="file:${reposource}" artifactRepository="file:${reposource}"
+            tempDirectory="${osgi.starter.config.launcher.temp}"
+            launcherProvider="org.eclipse.equinox.executable" productId="org.eclipse.osgi.configuration"
+            launcherName="rt" config="linux.gtk.x86" productVersion="1.0.0.${buildId}"
+            iconsList="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/rt.ico" />
+        <eclipse.brand.p2.artifacts
+            metadataRepository="file:${reposource}" artifactRepository="file:${reposource}"
+            tempDirectory="${osgi.starter.config.launcher.temp}"
+            launcherProvider="org.eclipse.equinox.executable" productId="org.eclipse.osgi.configuration"
+            launcherName="rt" config="linux.gtk.x86_64" productVersion="1.0.0.${buildId}"
+            iconsList="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/rt.ico" />
+        <eclipse.brand.p2.artifacts
+            metadataRepository="file:${reposource}" artifactRepository="file:${reposource}"
+            tempDirectory="${osgi.starter.config.launcher.temp}"
+            launcherProvider="org.eclipse.equinox.executable" productId="org.eclipse.osgi.configuration"
+            launcherName="rt" config="macosx.cocoa.x86" productVersion="1.0.0.${buildId}"
+            iconsList="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/rt.icns" />
+        <eclipse.brand.p2.artifacts
+            metadataRepository="file:${reposource}" artifactRepository="file:${reposource}"
+            tempDirectory="${osgi.starter.config.launcher.temp}"
+            launcherProvider="org.eclipse.equinox.executable" productId="org.eclipse.osgi.configuration"
+            launcherName="rt" config="macosx.cocoa.x86_64"
+            productVersion="1.0.0.${buildId}"
+            iconsList="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/rt.icns" />
+
+        <!-- <ant target="main" antfile="buildConfiguration.xml" dir="${eclipse.build.configs}/pde.build.config.launcher" 
+            /> <p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${buildDirectory}/features/org.eclipse.pde.build.product.feature/product/pdebuild.product" 
+            compress="true"> <config os="win32" ws="win32" arch="x86" /> <config os="win32" 
+            ws="win32" arch="x86_64" /> <config os="linux" ws="gtk" arch="x86" /> <config 
+            os="linux" ws="gtk" arch="x86_64" /> <config os="macosx" ws="cocoa" arch="x86" 
+            /> <config os="macosx" ws="cocoa" arch="x86_64" /> </p2.publish.product> -->
 
 
-		<!--try create composite repository-->
-		<p2.composite.artifact.repository.create location="file://${updateSite}/${eclipseStream}-${buildType}-builds" name="${p2.repo.name}" compressed="true" failOnExists="false" />
-		<p2.composite.metadata.repository.create location="file://${updateSite}/${eclipseStream}-${buildType}-builds" name="${p2.repo.name}" compressed="true" failOnExists="false" />
+        <antcall target="packMasterFeature" />
 
-		<!--add childRepo to composite repo-->
-		<p2.composite.artifact.repository.add location="file://${updateSite}/${eclipseStream}-${buildType}-builds" child="${buildId}" />
-		<p2.composite.metadata.repository.add location="file://${updateSite}/${eclipseStream}-${buildType}-builds" child="${buildId}" />
-	</target>
+        <mkdir dir="${buildRepo}" />
 
-	<target name="packageRepos">
-		<!--call to generate pde, rcp, cvs and jdt repos-->
-		<ant antfile="${eclipse.build.configs}/repos/build.xml" />
-		<ant antfile="${eclipse.build.configs}/repos/platformrepo.xml" />
-		<ant antfile="${eclipse.build.configs}/repos/rcprepo.xml" />
-		<ant antfile="${eclipse.build.configs}/rcp.deltapack/build.xml" />
-	</target>
+        <condition property="repoBaseline" value="${p2RepoURL}">
+            <equals arg1="${hudson}" arg2="true" />
+        </condition>
+        <property name="repoBaseline" value="file:${updateSite}" />
 
-	<target name="packageEquinoxDistributables">
-		<!-- equinox slicer build now includes master equinox-->
-		<ant antfile="${equinox.build.configs}/equinox/build.xml" />
-		<ant antfile="${equinox.build.configs}/equinox-launchers/build.xml" />
-		<!-- invoke equinox.p2.installer in a separate process -->
-	    <!-- removed per bug 368488
-		<ant antfile="${equinox.build.configs}/../helper.xml" target="build.p2.installer.product" />
-		-->
-	</target>
+        <!-- <echo message="DEBUG: repoBaseline: ${repoBaseline}" /> -->
 
-	<target name="package">
-		<ant antfile="package.xml" dir="${eclipse.pdebuild.scripts}">
-			<property name="packagingInfo" value="${packagingInfo}" />
-			<property name="assemblyTempDir" value="${packagingInfo}/jartmp" />
-		</ant>
-	</target>
-    
+        <replace file="${eclipse.build.configs}/../../extras/artifacts.xml"
+            token="@p2RepoPath@" value="${p2RepoPath}" />
+        <filter token="BUILD_ID" value="${buildLabel}" />
+        <mkdir dir="${buildDirectory}/formatRepo" />
+        <copy filtering="true"
+            file="${eclipse.build.configs}/../../extras/artifacts.xml"
+            tofile="${buildDirectory}/formatRepo/artifacts.xml" />
+
+        <p2.mirror source="file:${reposource}" log="${buildlogs}/mirrorlog.txt"
+            ignoreErrors="true">
+            <destination compressed="true" name="${p2.repo.name}"
+                location="file:${buildRepo}" append="true"
+                format="file:${buildDirectory}/formatRepo" kind="artifact" />
+            <destination compressed="true" name="${p2.repo.name}"
+                location="file:${buildRepo}" append="true" format="file:${reposource}" />
+            <comparator
+                comparator="org.eclipse.equinox.p2.repository.tools.jar.comparator"
+                comparatorLog="${buildlogs}/comparatorlog.txt">
+                <repository location="${repoBaseline}" />
+                <exclude>
+                    <artifact id="org.eclipse.jdt.doc.isv" />
+                    <artifact id="org.eclipse.jdt.doc.user" />
+                    <artifact id="org.eclipse.pde.doc.user" />
+                    <artifact id="org.eclipse.platform.doc.isv" />
+                    <artifact id="org.eclipse.platform.doc.user" />
+                    <artifact id="org.eclipse.equinox.executable" />
+                    <artifact id="org.eclipse.sdk.examples" />
+                    <artifact id="org.eclipse.sdk.examples.source" />
+                    <artifact id="master-equinox" />
+                    <artifact id="org.apache.lucene" />
+                    <artifact id="org.apache.lucene.source" />
+                    <artifact id="org.apache.lucene.core" />
+                    <artifact id="org.apache.lucene.core.source" />
+                    <artifact id="org.apache.lucene.analysis" />
+                    <artifact id="org.apache.lucene.analysis.source" />
+                </exclude>
+            </comparator>
+        </p2.mirror>
+
+        <!--mirror JUnit test bundles and test framework bundles to the repo -->
+        <p2.mirror source="file://${buildDirectory}/buildRepoTests"
+            ignoreErrors="true">
+            <destination compressed="true" name="${p2.repo.name}"
+                location="file:${buildRepo}" append="true" format="file:${reposource}" />
+            <comparator
+                comparator="org.eclipse.equinox.p2.repository.tools.jar.comparator"
+                comparatorLog="${buildlogs}/comparatorlogtests.txt">
+                <repository location="${repoBaseline}" />
+            </comparator>
+            <iu id="org.eclipse.sdk.tests.feature.group" version="" />
+            <iu id="org.eclipse.test.feature.group" version="" />
+        </p2.mirror>
+
+        <!--mirror EMF features the repo -->
+        <!-- note: we use the same slicing options here, that we do in our 
+            customTargets.xml preSetup task where we created a runable to build against. 
+            Otherwise, we end up with LOTS of version in our repo. See bug 376552. -->
+        <!--TODO: it is not clear why we use comparator here, were are getting 
+            stuff from EMF's repo, and putting into ours. I guess we could open a bug 
+            on them if we found a problem? -->
+        <property name="emfRepoURL"
+            value="http://download.eclipse.org/modeling/emf/emf/updates/2.8milestones/base" />
+        <p2.mirror source="file:${emfRepoURL}" ignoreErrors="true">
+            <slicingOptions includeOptional="false"
+                includeNonGreedy="false" latestVersionOnly="true"
+                followStrict="true" />
+            <destination compressed="true" name="${p2.repo.name}"
+                location="file:${buildRepo}" append="true" format="file:${reposource}" />
+            <comparator
+                comparator="org.eclipse.equinox.p2.repository.tools.jar.comparator"
+                comparatorLog="${buildlogs}/comparatorlogtests.txt">
+                <repository location="${repoBaseline}" />
+            </comparator>
+            <iu id="org.eclipse.emf.common.feature.group" version="0.0.0" />
+            <iu id="org.eclipse.emf.ecore.feature.group" version="0.0.0" />
+            <iu id="org.eclipse.emf.common.source.feature.group"
+                version="0.0.0" />
+            <iu id="org.eclipse.emf.ecore.source.feature.group"
+                version="0.0.0" />
+
+        </p2.mirror>
+
+
+        <!--try create composite repository -->
+        <p2.composite.artifact.repository.create
+            location="file://${updateSite}/${eclipseStream}-${buildType}-builds"
+            name="${p2.repo.name}" compressed="true" failOnExists="false" />
+        <p2.composite.metadata.repository.create
+            location="file://${updateSite}/${eclipseStream}-${buildType}-builds"
+            name="${p2.repo.name}" compressed="true" failOnExists="false" />
+
+        <!--add childRepo to composite repo -->
+        <p2.composite.artifact.repository.add
+            location="file://${updateSite}/${eclipseStream}-${buildType}-builds"
+            child="${buildId}" />
+        <p2.composite.metadata.repository.add
+            location="file://${updateSite}/${eclipseStream}-${buildType}-builds"
+            child="${buildId}" />
+    </target>
+
+    <target name="packageRepos">
+        <!--call to generate pde, rcp, cvs and jdt repos -->
+        <ant antfile="${eclipse.build.configs}/repos/build.xml" />
+        <ant antfile="${eclipse.build.configs}/repos/platformrepo.xml" />
+        <ant antfile="${eclipse.build.configs}/repos/rcprepo.xml" />
+        <ant antfile="${eclipse.build.configs}/rcp.deltapack/build.xml" />
+    </target>
+
+    <target name="packageEquinoxDistributables">
+        <!-- equinox slicer build now includes master equinox -->
+        <ant antfile="${equinox.build.configs}/equinox/build.xml" />
+        <ant antfile="${equinox.build.configs}/equinox-launchers/build.xml" />
+        <!-- invoke equinox.p2.installer in a separate process -->
+        <!-- removed per bug 368488 <ant antfile="${equinox.build.configs}/../helper.xml" 
+            target="build.p2.installer.product" /> -->
+    </target>
+
+    <target name="package">
+        <ant antfile="package.xml" dir="${eclipse.pdebuild.scripts}">
+            <property name="packagingInfo" value="${packagingInfo}" />
+            <property name="assemblyTempDir" value="${packagingInfo}/jartmp" />
+        </ant>
+    </target>
+
 </project>

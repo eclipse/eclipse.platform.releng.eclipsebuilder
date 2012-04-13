@@ -141,7 +141,7 @@ runSDKBuild ()
 {
 
     echo "Starting runSDKBuild"
-    echo "[start] [`date +%H\:%M\:%S`] setting eclipse ${eclipsestream}-I-Builds"
+    echo "[start] [`date +%H\:%M\:%S`] setting eclipse ${eclipsestream}-${buildType}-Builds"
     echo "DEBUG: current directory: ${PWD}"
 
     if [ -d "${supportDir}" ]
@@ -155,12 +155,18 @@ runSDKBuild ()
 
     echo "DEBUG: current directory for build: ${PWD}" 
    
-    # TODO: should remove buildType (and others) and/or fail if not defined yet.
-    buildType=I
-    buildId=$buildType$date-$time
-    buildLabel=$buildId
+   # ALL these variables should already be defined and passed in. 
+   # TODO: add "fail" if any are not? Seems redundant to add
+   # defaults as we do in "processCommandLine". 
+    # buildType=I
+    # buildId=$buildType$date-$time
+    # buildLabel=$buildId
+    # mapVersionTag=R4_HEAD
+    
     buildfile=$supportDir/$eclipsebuilder/buildAll.xml
-    mapVersionTag=R4_HEAD
+
+    # TODO: we should make the these work off the defined java15home and java16home
+    #       etc., just to avoid redundency? 
     bootclasspath="/shared/common/j2sdk1.4.2_19/jre/lib/rt.jar:/shared/common/j2sdk1.4.2_19/jre/lib/jsse.jar:/shared/common/j2sdk1.4.2_19/jre/lib/jce.jar"
     bootclasspath_15="/shared/common/jdk-1.5.0_16/jre/lib/rt.jar:/shared/common/jdk-1.5.0_16/jre/lib/jsse.jar:/shared/common/jdk-1.5.0_16/jre/lib/jce.jar"
     bootclasspath_16="/shared/common/jdk1.6.0_27.x86_64/jre/lib/rt.jar:/shared/common/jdk1.6.0_27.x86_64/jre/lib/jsse.jar:/shared/common/jdk1.6.0_27.x86_64/jre/lib/jce.jar"
@@ -270,7 +276,7 @@ tagRepo () {
         -relengRepoName $relengRepoName \
         -buildType $buildType \
         -gitCache $gitCache \
-    -buildRoot $buildRoot \
+        -buildRoot $buildRoot \
         -gitEmail \"$gitEmail\" -gitName \"$gitName\" \
         -timestamp $timestamp -oldBuildTag $oldBuildTag -buildTag $buildTag \
         -submissionReportFilePath $submissionReportFilePath \
@@ -281,9 +287,7 @@ tagRepo () {
     $tagRepocmd
 
     exitCode=$?
-        echo
-        echo "   ERROR. Autotagging exit code: ${exitCode} "
-        echo
+
     return $exitCode
 }
 
