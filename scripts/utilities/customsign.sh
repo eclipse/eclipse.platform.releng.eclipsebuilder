@@ -14,9 +14,9 @@
 # required conditioning before signing. 
 # Ideally use same VM (pack200) to normalize (-repack), sign, and pack  
 # the jars. 
-#JAVA_5_HOME=${JAVA_5_HOME:=/home/shared/orbit/apps/ibm-java2-i386-50/jre}
-JAVA_5_HOME=${JAVA_5_HOME:=/shared/common/jdk-1.5.0-22.x86_64}
-JAVA_6_HOME=${JAVA_6HOME:=/shared/common/sun-jdk1.6.0_21_x64}
+#JAVA_5_HOME=${JAVA_5_HOME:-/home/shared/orbit/apps/ibm-java2-i386-50/jre}
+JAVA_5_HOME=${JAVA_5_HOME:-/shared/common/jdk-1.5.0-22.x86_64}
+JAVA_6_HOME=${JAVA_6HOME:-/shared/common/sun-jdk1.6.0_21_x64}
 
 export JAVA_HOME=${JAVA_5_HOME}
 

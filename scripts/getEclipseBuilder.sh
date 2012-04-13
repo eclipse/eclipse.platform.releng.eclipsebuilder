@@ -13,8 +13,8 @@ export DEBUG=${DEBUG:-false}
 
 # VERBOSE_REMOVES needs to be empty or literally '-v', since
 # simply makes up part of "rm" command when directories removed.
-VERBOSE_REMOVES=${VERBOSE_REMOVES:=}
-#VERBOSE_REMOVES=${VERBOSE_REMOVES:=-v}
+VERBOSE_REMOVES=${VERBOSE_REMOVES:-}
+#VERBOSE_REMOVES=${VERBOSE_REMOVES:--v}
 
 # simple utility to check return code and exit if non-zero 
 function checkForErrorExit ()
@@ -81,17 +81,17 @@ function getEclipseBuilder () {
     # but the working location it ends up on disk will be named its 
     # old traditional name or org.eclipse.releng.eclipsebuilder
     # for now. See bug 374974
-    eclipsebuilder=${eclipsebuilder:="org.eclipse.releng.eclipsebuilder"}
-    eclipsebuilderRepo=${eclipsebuilderRepo:="eclipse.platform.releng.eclipsebuilder"}
-    eclipsebuilderBranch=${eclipsebuilderBranch:="master"}
-    gitEmail=${gitEmail:="e4Build"}
-    gitName=${gitName:="e4Builder-R4"}
+    eclipsebuilder=${eclipsebuilder:-"org.eclipse.releng.eclipsebuilder"}
+    eclipsebuilderRepo=${eclipsebuilderRepo:-"eclipse.platform.releng.eclipsebuilder"}
+    eclipsebuilderBranch=${eclipsebuilderBranch:-"master"}
+    gitEmail=${gitEmail:-"e4Build"}
+    gitName=${gitName:-"e4Builder-R4"}
     # normally buildDir would be expected to be "passed in" via export, but
     # if not, we can start of PWD for local, standalone testing.
-    buildDir=${buildDir:="${PWD}/build"}
-    supportDir=${supportDir:="${buildDir}/supportDir"}
-    gitCache=${gitCache:="$supportDir/gitCache"}
-    builderDir=${builderDir:="${supportDir}/$eclipsebuilder"}
+    buildDir=${buildDir:-"${PWD}/build"}
+    supportDir=${supportDir:-"${buildDir}/supportDir"}
+    gitCache=${gitCache:-"$supportDir/gitCache"}
+    builderDir=${builderDir:-"${supportDir}/$eclipsebuilder"}
 
     debugVar eclipsebuilder
     debugVar eclipsebuilderRepo

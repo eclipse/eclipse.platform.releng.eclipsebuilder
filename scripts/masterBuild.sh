@@ -22,24 +22,24 @@ export testbuildonly=true
 # DEBUG controls verbosity of little "state and status" bash echo messages.
 # Set to true to get the most echo messages. Anything else to be quiet. 
 # Normally would be false during production, but true for debugging/tests. 
-export DEBUG=${DEBUG:=false}
-#export DEBUG=${DEBUG:=true}
+export DEBUG=${DEBUG:-false}
+#export DEBUG=${DEBUG:-true}
 echo "DEBUG: $DEBUG"
 
 # VERBOSE_REMOVES needs to be empty or literally '-v', since
 # simply makes up part of "rm" command when directories or files removed.
 # normally empty for production runs, but might help in debugging.
 # (but, it is VERY verbose)
-export VERBOSE_REMOVES=${VERBOSE_REMOVES:=}
-#export VERBOSE_REMOVES=${VERBOSE_REMOVES:=-v}
+export VERBOSE_REMOVES=${VERBOSE_REMOVES:-}
+#export VERBOSE_REMOVES=${VERBOSE_REMOVES:--v}
 echo "VERBOSE_REMOVES: $VERBOSE_REMOVES"
 
 # quietCVS needs to be -Q (really quiet) -q (somewhat quiet) or literally empty (verbose)
 # FYI, not that much difference between -Q and -q :) 
 # TODO: won't be needed once move off CVS is complete
-export quietCVS=${quietCVS:=-Q}
-#export quietCVS=${quietCVS:=-q}
-#export quietCVS=${quietCVS:=" "}
+export quietCVS=${quietCVS:--Q}
+#export quietCVS=${quietCVS:--q}
+#export quietCVS=${quietCVS:-" "}
 echo "quiteCVS: $quietCVS"
 
 
@@ -351,15 +351,15 @@ processCommandLine ()
     # either by above loop, or an environment variable, then
     # specify a reasonable default.
 
-    relengBranch=${relengBranch:=R4_HEAD}
-    eclipseStream=${eclipseStream:=4.2}
-    buildType=${buildType:=N}
+    relengBranch=${relengBranch:-R4_HEAD}
+    eclipseStream=${eclipseStream:-4.2}
+    buildType=${buildType:-N}
 
-    relengMapsProject=${relengMapsProject:=org.eclipse.releng}
-    relengRepoName=${relengRepoName:=eclipse.platform.releng.maps}
+    relengMapsProject=${relengMapsProject:-org.eclipse.releng}
+    relengRepoName=${relengRepoName:-eclipse.platform.releng.maps}
 
     # TODO: make last segment "projectName" 
-    buildRoot=${buildRoot:=/shared/eclipse/eclipse4N}
+    buildRoot=${buildRoot:-/shared/eclipse/eclipse4N}
 
     # derived values (which effect default computed values) 
     # TODO: do not recall why I export these ... should live without, if possible
@@ -380,8 +380,8 @@ processCommandLine ()
         echo "WARNING: non-derived value of gitCache already defined: ${gitCache}"
     fi
 
-    export gitEmail=${gitEMail:=e4Build}
-    export gitName=${gitName:=e4Builder-R4}
+    export gitEmail=${gitEMail:-e4Build}
+    export gitName=${gitName:-e4Builder-R4}
 
 
     # Relative constant values
@@ -393,15 +393,15 @@ processCommandLine ()
     export eclipsebuilder=org.eclipse.releng.eclipsebuilder
     export eclipsebuilderRepo=eclipse.platform.releng.eclipsebuilder
 
-    basebuilderBranch=${basebuilderBranch:=R4_2_primary}
+    basebuilderBranch=${basebuilderBranch:-R4_2_primary}
     # relies on export, since getEclipseBuilder is seperate script, 
     # and it does not use "command line pattern"
     export eclipsebuilderBranch=master
 
     # if timestamp not set, compute it from "now"
-    date=${date:=$(date +%Y%m%d)}
-    time=${time:=$(date +%H%M)}
-    timestamp=${timestamp:=$date$time}
+    date=${date:-$(date +%Y%m%d)}
+    time=${time:-$(date +%H%M)}
+    timestamp=${timestamp:-$date$time}
 
 
 
@@ -455,7 +455,7 @@ processCommandLine ()
 
 }
 
-if $DEBUG 
+if ${DEBUG:-false} 
 then
 # temp: make sure what we "see" is same thing funciton sees.
 echo "Reading commands from command line: $0 $* " 
@@ -464,7 +464,7 @@ fi
 
 processCommandLine "$@"
 
-if $DEBUG 
+if ${DEBUG:-false} 
 then
     echo " "
     echo " "
@@ -497,8 +497,8 @@ fi
 
 # be sure to exit HERE if just testing command line, 
 # before any work gets done. 
-#echo "testing params. exit before doing work"
-#exit 127
+echo "testing params. exit before doing work"
+exit 127
 
 
 # for safety, for now, we'll assume if this directory does not already exist, something is wrong, 
@@ -531,7 +531,7 @@ fi
 
 tag=true
 
-if ${testbuildonly:=false}
+if ${testbuildonly:-false}
 then
    tag=false
    echo "INFO: tag forced to $tag due to being a test build only"

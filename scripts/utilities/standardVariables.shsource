@@ -3,7 +3,7 @@
 # Intended to contain "standard setup" for running
 # java, eclispe, etc.
 
-BUILD_HOME=${BUILD_HOME:=/shared/eclipse/eclipse4}
+BUILD_HOME=${BUILD_HOME:-/shared/eclipse/eclipse4}
 
 
 if [ ! -d "${BUILD_HOME}" ] 
@@ -15,7 +15,7 @@ fi
 # For most uses, this directory does not HAVE to literally be
 # the eclipseBuider. It is in production, but for testing, it can 
 # be any directory where ${ECLIPSEBUILDER_DIR}/scripts are located. 
-ECLIPSEBUILDER_DIR=${ECLIPSEBUILDER_DIR:=${BUILD_HOME}/build/supportDir/org.eclipse.releng.eclipsebuilder}
+ECLIPSEBUILDER_DIR=${ECLIPSEBUILDER_DIR:-${BUILD_HOME}/build/supportDir/org.eclipse.releng.eclipsebuilder}
 
 if [ ! -d "${ECLIPSEBUILDER_DIR}/scripts" ] 
 then
@@ -27,9 +27,9 @@ fi
 # remember, we want to use Java 5 for processing artifacts.
 # Ideally same one used to pre-condition (normalize, -repack) 
 # the jars in the first place. 
-#JAVA_5_HOME=${JAVA_5_HOME:=/home/shared/orbit/apps/ibm-java2-i386-50/jre}
-JAVA_5_HOME=${JAVA_5_HOME:=/shared/common/jdk-1.5.0-22.x86_64}
-JAVA_6_HOME=${JAVA_6HOME:=/shared/common/sun-jdk1.6.0_21_x64}
+#JAVA_5_HOME=${JAVA_5_HOME:-/home/shared/orbit/apps/ibm-java2-i386-50/jre}
+JAVA_5_HOME=${JAVA_5_HOME:-/shared/common/jdk-1.5.0-22.x86_64}
+JAVA_6_HOME=${JAVA_6HOME:-/shared/common/sun-jdk1.6.0_21_x64}
 
 export JAVA_HOME=${JAVA_5_HOME}
 
@@ -60,7 +60,7 @@ else
 fi
 
 # remember, the eclispe install must match the VM used (e.g. both 64 bit, both 32 bit, etc).
-ECLIPSE_EXE=${ECLIPSE_EXE:=${BUILD_HOME}/eclipsesdk372/eclipse/eclipse}
+ECLIPSE_EXE=${ECLIPSE_EXE:-${BUILD_HOME}/eclipsesdk372/eclipse/eclipse}
 
 if [ ! -n ${ECLIPSE_EXE} -a -x ${ECLIPSE_EXE} ]
 then
