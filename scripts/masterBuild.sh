@@ -374,6 +374,21 @@ processCommandLine ()
 
     export supportDir=${buildDir}/supportDir
 
+    # Relative constant values
+
+    # This is eclipsebuilder name on disk, traditionally org.eclipse.releng.eclipsebuilder
+    # Though now in git, the repo (and effective project name) is eclipse.platform.releng.eclipsebuilder 
+    # See https://bugs.eclipse.org/bugs/show_bug.cgi?id=374974 for details, 
+    # especially https://bugs.eclipse.org/bugs/show_bug.cgi?id=374974#c28
+    export eclipsebuilder=org.eclipse.releng.eclipsebuilder
+    export eclipsebuilderRepo=eclipse.platform.releng.eclipsebuilder
+
+    basebuilderBranch=${basebuilderBranch:-R4_2_primary}
+    # relies on export, since getEclipseBuilder is seperate script, 
+    # and it does not use "command line pattern"
+    export eclipsebuilderBranch=master
+    
+    # NOTE: $eclipsebuilder must be defined before builderDir 
     export builderDir=${supportDir}/$eclipsebuilder
     # remember: do not "mkdir" for builderDir since presence/absence 
     # might be used later to determine if fresh check out needed or not.
@@ -390,19 +405,7 @@ processCommandLine ()
     export gitName=${gitName:-e4Builder-R4}
 
 
-    # Relative constant values
 
-    # This is eclipsebuilder name on disk, traditionally org.eclipse.releng.eclipsebuilder
-    # Though now in git, the repo (and effective project name) is eclipse.platform.releng.eclipsebuilder 
-    # See https://bugs.eclipse.org/bugs/show_bug.cgi?id=374974 for details, 
-    # especially https://bugs.eclipse.org/bugs/show_bug.cgi?id=374974#c28
-    export eclipsebuilder=org.eclipse.releng.eclipsebuilder
-    export eclipsebuilderRepo=eclipse.platform.releng.eclipsebuilder
-
-    basebuilderBranch=${basebuilderBranch:-R4_2_primary}
-    # relies on export, since getEclipseBuilder is seperate script, 
-    # and it does not use "command line pattern"
-    export eclipsebuilderBranch=master
 
     # if timestamp not set, compute it from "now"
     date=${date:-$(date +%Y%m%d)}
@@ -502,6 +505,7 @@ then
     echo "localUpdateSite: $localUpdateSite"
     echo "equinoxPostingDirectory: $equinoxPostingDirectory"
     echo "postingDirectory: $postingDirectory"
+    echo "builderDir: $builderDir"
 fi 
 
 # be sure to exit HERE if just testing command line, 
