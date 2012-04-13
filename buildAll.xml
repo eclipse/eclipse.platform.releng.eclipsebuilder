@@ -88,12 +88,19 @@
 
         <ant antfile="build.xml" target="init" />
         <property file="${buildDirectory}/label.properties" />
-        <!-- may need for 3.8? But ... not 4.2 N? 
+        <!-- may need for 3.8? But ... not 4.2 N? Eventually need checks 
+            for eclipseStream and buildType? 
+            <condition property="fetchTag" 
+                value="CVS=HEAD,GIT=master;git://git.eclipse.org/gitroot/platform/eclipse.platform.ui.git=R3_development"> 
+            <equals arg1="${buildType}" arg2="N" /> </condition> -->
+        
+        <!-- It will be a miracle of programming, if this works :)  
+             FYI, we shouldn't have anything in CVS? but ... will leave for now -->
         <condition property="fetchTag"
-            value="CVS=HEAD,GIT=master;git://git.eclipse.org/gitroot/platform/eclipse.platform.ui.git=R3_development">
-            <equals arg1="${buildType}" arg2="N" />
-        </condition>
-        -->
+            value="CVS=HEAD,GIT=master;git://git.eclipse.org/gitroot/platform/eclipse.platform.git=R4_HEAD;git://git.eclipse.org/gitroot/platform/eclipse.platform.common.git=R4_HEAD;git://git.eclipse.org/gitroot/platform/eclipse.platform.releng.git=R4_HEAD">
+        <equals arg1="${buildType}" arg2="N" />
+    </condition>
+        
         <condition property="forceContextQualifier" value="${buildId}">
             <equals arg1="${buildType}" arg2="N" />
         </condition>
