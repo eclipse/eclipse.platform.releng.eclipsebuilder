@@ -160,9 +160,9 @@ runSDKBuild ()
    # defaults as we do in "processCommandLine". 
     # buildType=I
     # buildId=$buildType$date-$time
-    # buildLabel=$buildId
     # mapVersionTag=R4_HEAD
     
+    buildLabel=$buildId
     buildfile=$supportDir/$eclipsebuilder/buildAll.xml
 
     # TODO: we should make the these work off the defined java15home and java16home
