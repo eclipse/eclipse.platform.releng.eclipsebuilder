@@ -21,12 +21,6 @@
     <fail unless="eclipseStream" message="eclipseStream must be defined" />
     <fail unless="java15home" message="java15home should be defined. Required for signing" />
         
-    <fail if="buildDirectory"
-        message="counter intuitively, buildDirectory must NOT be defined globally. It gets defined differently in different scopes)" />
-    <fail if="transformedRepoLocation"
-        message="counter intuitively, transformedRepoLocation must NOT be defined globally. It gets defined differently in different scopes)" />
-
-
 
     <!--location of PDE Build configuration files for builder and packager -->
     <property name="eclipse.build.configs" value="${basedir}/eclipse/buildConfigs" />
