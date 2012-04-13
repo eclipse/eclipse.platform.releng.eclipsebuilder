@@ -81,9 +81,7 @@
 		<property name="unzipArgs" value="-qq" />
 		<property name="repo" value="${buildDirectory}/repo" />
 		<property name="reposource" value="${buildDirectory}/reposource" />
-		<condition property="fetchjetty" value="true">
-			<equals arg1="${buildType}" arg2="N" />
-		</condition>
+			
 		<property name="buildDirectoryAbsoluteTemp" value="${buildDirectory}/absolutetemp.txt" />
 		<echo message="${reposource}" file="${buildDirectoryAbsoluteTemp}" />
 		<replaceregexp file="${buildDirectoryAbsoluteTemp}" match="org.eclipse.releng.eclipsebuilder/../src/" replace="src/" />
