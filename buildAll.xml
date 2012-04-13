@@ -10,24 +10,35 @@
         folder - eclipse.pdebuild.home: the root folder of pde build - eclipse.pdebuild.templates: 
         the templates folder -->
 
-    <property environment="env" />
-
-    <!-- TODO: probably should not count on this being exported? And/or put 
-        in some fail tests if not? <echo message="DEBUG: ENV eclipsebuilder: ${env.builderDir}" 
-        /> <echo message="DEBUG: java15home: ${java15home}" /> -->
-
-
     <!--build monitoring information: e-mail, smtp server, build label -->
     <property file="monitor.properties" />
+
+    <fail unless="basedir" message="basedir must be defined" />
+    <fail unless="buildId" message="buildId must be defined" />
+    <fail unless="buildLabel" message="buildLabel must be defined" />
+    <fail unless="postingDirectory" message="postingDirectory must be defined" />
+    <fail unless="updateSite" message="updateSite must be defined" />
+    <fail unless="eclipseStream" message="eclipseStream must be defined" />
+    <fail unless="java15home" message="java15home should be defined. Required for signing" />
+        
+    <fail if="buildDirectory"
+        message="counter intuitively, buildDirectory must NOT be defined globally. It gets defined differently in different scopes)" />
+    <fail if="transformedRepoLocation"
+        message="counter intuitively, transformedRepoLocation must NOT be defined globally. It gets defined differently in different scopes)" />
+
+
 
     <!--location of PDE Build configuration files for builder and packager -->
     <property name="eclipse.build.configs" value="${basedir}/eclipse/buildConfigs" />
     <property name="equinox.build.configs" value="${basedir}/equinox/buildConfigs" />
 
+
+
     <property name="sdkHelper"
         location="${eclipse.build.configs}/eclipse/helper.xml" />
     <property name="base.builder"
         value="${basedir}/../org.eclipse.releng.basebuilder" />
+
 
     <!--default buildDirectory -->
     <property name="buildDirectory" value="${basedir}/../src" />
@@ -41,7 +52,6 @@
     <!--p2 repo name -->
     <property name="p2.repo.name" value="&quot;Eclipse Project Test Site&quot;" />
 
-    <property name="buildLabel" value="${buildId}" />
 
     <!--location for buildlogs -->
     <property name="buildlogs"
@@ -89,18 +99,16 @@
         <ant antfile="build.xml" target="init" />
         <property file="${buildDirectory}/label.properties" />
         <!-- may need for 3.8? But ... not 4.2 N? Eventually need checks 
-            for eclipseStream and buildType? 
-            <condition property="fetchTag" 
-                value="CVS=HEAD,GIT=master;git://git.eclipse.org/gitroot/platform/eclipse.platform.ui.git=R3_development"> 
+            for eclipseStream and buildType? <condition property="fetchTag" value="CVS=HEAD,GIT=master;git://git.eclipse.org/gitroot/platform/eclipse.platform.ui.git=R3_development"> 
             <equals arg1="${buildType}" arg2="N" /> </condition> -->
-        
-        <!-- It will be a miracle of programming, if this works :)  
-             FYI, we shouldn't have anything in CVS? but ... will leave for now -->
+
+        <!-- It will be a miracle of programming, if this works :) FYI, we 
+            shouldn't have anything in CVS? but ... will leave for now -->
         <condition property="fetchTag"
             value="CVS=HEAD,GIT=master;git://git.eclipse.org/gitroot/platform/eclipse.platform.git=R4_HEAD;git://git.eclipse.org/gitroot/platform/eclipse.platform.common.git=R4_HEAD;git://git.eclipse.org/gitroot/platform/eclipse.platform.releng.git=R4_HEAD">
-        <equals arg1="${buildType}" arg2="N" />
-    </condition>
-        
+            <equals arg1="${buildType}" arg2="N" />
+        </condition>
+
         <condition property="forceContextQualifier" value="${buildId}">
             <equals arg1="${buildType}" arg2="N" />
         </condition>

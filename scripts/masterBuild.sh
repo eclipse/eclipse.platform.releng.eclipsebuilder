@@ -155,13 +155,24 @@ runSDKBuild ()
 
     echo "DEBUG: current directory for build: ${PWD}" 
    
-   # ALL these variables should already be defined and passed in. 
-   # TODO: add "fail" if any are not? Seems redundant to add
-   # defaults as we do in "processCommandLine". 
-    # buildType=I
-    # buildId=$buildType$date-$time
-    # mapVersionTag=R4_HEAD
-    
+   # These variables should already be defined and passed in. 
+
+   if [ -z "${buildType}" ]
+      then
+          echo "ERROR. buildType must be specified in call to buildSDK"
+          exit 128
+   fi
+   if [ -z "${mapVersionTag}" ]
+      then
+          echo "ERROR. mapVersionTag must be specified in call to buildSDK"
+          exit 128
+   fi       
+
+    # TODO: it is confusing that buildId and buildLabel are the same
+    # I think traditionally, buildId has been $date-$time and 
+    # buildLabel been $buildType$buildId
+    # you can see this in some of the old build.property files: buildLabel=${buildType}.${buildId}
+    buildId=$buildType$date-$time
     buildLabel=$buildId
     buildfile=$supportDir/$eclipsebuilder/buildAll.xml
 
