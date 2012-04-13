@@ -561,22 +561,22 @@ echo $buildTag >$buildRoot/${buildType}build.properties
 
 # TODO: should be able to get rid of these (eventually) 
 # and if needed at all, do closer to where needed
-echo "${supportDir}"
+echo "supportDir: ${supportDir}"
 mkdir -p "${supportDir}"
 echo "buildDir: $buildDir"
 mkdir -p "${buildDir}"
 echo "siteDir: $siteDir"
 mkdir -p "${siteDir}"
 echo "gitCache: $gitCache"
-mkdir -p "${gitCache"}
-echo "buildResults: $buildResults"
+mkdir -p "${gitCache}"
+echo "buildResults: ${buildResults}"
 mkdir -p "${buildResults}"
 
-echo "localUpdateSite: $localUpdateSite"
+echo "localUpdateSite: ${localUpdateSite}"
 mkdir -p "${localUpdateSite}" 
-echo "postingDirec: $postingDirec"
-mkdir -p "${postingDirec}"
-echo "equinoxPostingDirectory: $equinoxPostingDirectory"
+echo "postingDirec: ${postingDirectory}"
+mkdir -p "${postingDirectory}"
+echo "equinoxPostingDirectory: ${equinoxPostingDirectory}"
 mkdir -p "${equinoxPostingDirectory}"
 
 
