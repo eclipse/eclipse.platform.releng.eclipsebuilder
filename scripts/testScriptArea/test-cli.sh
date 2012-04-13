@@ -12,7 +12,7 @@
 DEBUG=true VERBOSE_REMOVES=-v  ./masterBuild.sh \
     -buildType Njunk \
     -eclipseStream 4.2junk \
-    -relengBranch rbjunk \
+    -mapVersionTag rbjunk \
     -eclipseStream esJunk \
     -buildType btJunk \
     -gitCache gcJunk \

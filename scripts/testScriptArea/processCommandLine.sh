@@ -55,8 +55,8 @@ processCommandLine ()
     while [ $# -gt 0 ]
     do
         case "$1" in
-            "-relengBranch")
-                relengBranch="$2"; shift;;
+            "-mapVersionTag")
+                mapVersionTag="$2"; shift;;
             "-eclipseStream")
                 eclipseStream="$2"; shift;;
             "-buildType")
@@ -93,7 +93,7 @@ processCommandLine ()
         echo  
         echo  
         echo "DEBUG raw values after reading command line"
-        echo "DEBUG: relengBranch: ${relengBranch}"
+        echo "DEBUG: mapVersionTag: ${mapVersionTag}"
         echo "DEBUG: eclipseStream: ${eclipseStream}"
         echo "DEBUG: buildType: ${buildType}"
         echo "DEBUG: gitCache: ${gitCache}"
@@ -117,7 +117,7 @@ processCommandLine ()
     # either by above loop, or an environment variable, then
     # specify a reasonable default.
 
-    relengBranch=${relengBranch:-R4_HEAD}
+    mapVersionTag=${mapVersionTag:-R4_HEAD}
     eclipseStream=${eclipseStream:-4.2}
     buildType=${buildType:-N}
 
@@ -236,7 +236,7 @@ then
     echo " "
     echo " "
     echo "DEBUG  Command line values after reading command line and initializing"
-    echo "DEBUG: relengBranch ${relengBranch}"
+    echo "DEBUG: mapVersionTag ${mapVersionTag}"
     echo "DEBUG: eclipseStream ${eclipseStream}"
     echo "DEBUG: buildType ${buildType}"
     echo "DEBUG: gitCache ${gitCache}"

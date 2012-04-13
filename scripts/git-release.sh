@@ -22,7 +22,7 @@ echo "DEBUG: current directory as entering git-release.sh ${PWD}"
 # (though, admittedly, will make "stand along" use not work)
 
 #buildRoot=/shared/eclipse/eclipse4
-#relengBranch=R4_HEAD
+#mapVersionTag=R4_HEAD
 #buildType=I
 
 # normally, timestamp is passed in on command line, and 
@@ -64,8 +64,8 @@ ARGS="$@"
 while [ $# -gt 0 ]
 do
         case "$1" in
-                "-relengBranch")
-                        relengBranch="$2"; shift;;
+                "-mapVersionTag")
+                        mapVersionTag="$2"; shift;;
                 "-buildType")
                         buildType="$2"; shift;;
                 "-gitCache")
@@ -215,11 +215,11 @@ fi
 relengRepo="${gitCache}/${relengRepoName}"
 
 
-echo "relengBranch: $relengBranch"
+echo "mapVersionTag: $mapVersionTag"
 echo "relengRepo: $relengRepo"
 # pull the releng project to get the list of repositories to tag
 # since running on build.eclipse.org, under e4Build id, we can use "file://" protocol. Long term, we'd want to have variable, so could run remotely, etc.
-pull "file:///gitroot/platform/${relengRepoName}.git" $relengBranch
+pull "file:///gitroot/platform/${relengRepoName}.git" $mapVersionTag
 checkForErrorExit $? "clone of repo did not succeed"
 
 if [ ! -d "${relengRepo}" ]; then

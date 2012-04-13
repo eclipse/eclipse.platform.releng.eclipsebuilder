@@ -141,7 +141,7 @@ runSDKBuild ()
 {
 
     echo "Starting runSDKBuild"
-    echo "[start] [`date +%H\:%M\:%S`] setting eclipse ${eclipsestream}-${buildType}-Builds"
+    echo "[start] [`date +%H\:%M\:%S`] setting eclipse ${eclipseStream}-${buildType}-Builds"
     echo "DEBUG: current directory: ${PWD}"
 
     if [ -d "${supportDir}" ]
@@ -157,6 +157,11 @@ runSDKBuild ()
    
    # These variables should already be defined and passed in. 
 
+   if [ -z "${eclipseStream}" ]
+      then
+          echo "ERROR. buildType must be specified in call to buildSDK"
+          exit 128
+   fi
    if [ -z "${buildType}" ]
       then
           echo "ERROR. buildType must be specified in call to buildSDK"
@@ -282,7 +287,7 @@ tagRepo () {
     # will need to do more if/when we make it a variable property (such as for 
     # committers running remotely, or even non-committers runnning remotely.
     #
-    tagRepocmd="/bin/bash ${releasescriptpath}/git-release.sh -relengBranch $relengBranch \
+    tagRepocmd="/bin/bash ${releasescriptpath}/git-release.sh -mapVersionTag $mapVersionTag \
         -relengMapsProject $relengMapsProject \
         -relengRepoName $relengRepoName \
         -buildType $buildType \
@@ -316,8 +321,8 @@ processCommandLine ()
     while [ $# -gt 0 ]
     do
         case "$1" in
-            "-relengBranch")
-                relengBranch="$2"; shift;;
+            "-mapVersionTag")
+                mapVersionTag="$2"; shift;;
             "-eclipseStream")
                 eclipseStream="$2"; shift;;
             "-buildType")
@@ -354,7 +359,7 @@ processCommandLine ()
         echo  
         echo  
         echo "DEBUG raw values after reading command line"
-        echo "DEBUG: relengBranch: ${relengBranch}"
+        echo "DEBUG: mapVersionTag: ${mapVersionTag}"
         echo "DEBUG: eclipseStream: ${eclipseStream}"
         echo "DEBUG: buildType: ${buildType}"
         echo "DEBUG: gitCache: ${gitCache}"
@@ -378,7 +383,7 @@ processCommandLine ()
     # either by above loop, or an environment variable, then
     # specify a reasonable default.
 
-    relengBranch=${relengBranch:-R4_HEAD}
+    mapVersionTag=${mapVersionTag:-R4_HEAD}
     eclipseStream=${eclipseStream:-4.2}
     buildType=${buildType:-N}
 
@@ -504,7 +509,7 @@ then
     echo " "
     echo " "
     echo "DEBUG  Command line values after reading command line and initializing"
-    echo "DEBUG: relengBranch ${relengBranch}"
+    echo "DEBUG: mapVersionTag ${mapVersionTag}"
     echo "DEBUG: eclipseStream ${eclipseStream}"
     echo "DEBUG: buildType ${buildType}"
     echo "DEBUG: gitCache ${gitCache}"
