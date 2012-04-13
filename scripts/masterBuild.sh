@@ -562,23 +562,30 @@ echo $buildTag >$buildRoot/${buildType}build.properties
 # TODO: should be able to get rid of these (eventually) 
 # and if needed at all, do closer to where needed
 mkdir -p "${supportDir}"
-mkdir -p $gitCache
-mkdir -p $buildResults
-mkdir -p $localUpdateSite 
-mkdir -p $postingDirec
-mkdir -p $equinoxPostingDirectory
+echo "${supportDir}"
 mkdir -p "${buildDir}"
 echo "buildDir: $buildDir"
 mkdir -p "${siteDir}"
 echo "siteDir: $siteDir"
+mkdir -p $gitCache
+echo "gitCache: $gitCache"
+mkdir -p $buildResults
+echo "buildResults: $buildResults"
+
+mkdir -p $localUpdateSite 
+mkdir -p $postingDirec
+mkdir -p $equinoxPostingDirectory
 
 
 # exit HERE if testing initial setup 
+# echo "testing initial setup only, exiting early"
 exit 127
 
 
-# temp hard to remove up from, using linux, as ant sometimes fail 
-# to remove .nsf files
+# temp hard to remove completely, as sometimes hard to 
+# remove some .nsf files 
+# TODO: find out if that's become some process is running? 
+#        should we wait and try again? (don't seem to need to, in this case). 
 rm -fr "${buildRoot}/build/supportDir/src"
 
 updateBaseBuilder
