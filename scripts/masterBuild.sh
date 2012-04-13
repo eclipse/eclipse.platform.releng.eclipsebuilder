@@ -77,7 +77,7 @@ checkForErrorExit () {
 # get the base builder (still in cvs)
 updateBaseBuilder () {
 
-    echo "[start] [`date +%H\:%M\:%S`] getting org.eclipse.releng.basebuilder using tag (or branch): ${basebuilderBranch}"
+    echo "[start] [`date +%H\:%M\:%S`] updateBaseBuilder getting org.eclipse.releng.basebuilder using tag (or branch): ${basebuilderBranch}"
     echo "DEBUG: current directory as entering updateBaseBuilder ${PWD}"
     if [ -d "${supportDir}" ]
     then
@@ -109,21 +109,21 @@ updateBaseBuilder () {
         # cvs -d :pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse ${quietCVS} ex -r ${basebuilderBranch} -d org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder
         # TODO: make cvs user/protocol/host variables so can be rrun remotely also
          cvs -d :local:/cvsroot/eclipse ${quietCVS} ex -r ${basebuilderBranch} -d org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder
-        checkForErrorExit $? "Could not check out basebuilder"
+         exitcode=$?
         #echo "cvs export cmd: ${cmd}"
         #"${cmd}"
     #else
         #    echo "base builder already existed, so taking as accurate. Remember to delete it when fresh version needed."
     #fi
     echo "DEBUG: current directory as exiting updateBaseBuilder ${PWD}"
-    echo "[end] [`date +%H\:%M\:%S`] getting org.eclipse.releng.basebuilder using tag (or branch): ${basebuilderBranch}"
-
+    echo "[end] [`date +%H\:%M\:%S`] updateBaseBuilder getting org.eclipse.releng.basebuilder using tag (or branch): ${basebuilderBranch}"
+    return $exitcode
 }
 
 
 updateEclipseBuilder() {
 
-    echo "[`date +%H\:%M\:%S`] get ${eclipsebuilder} using tag or branch: ${eclipsebuilderBranch}"
+    echo "[start] [`date +%H\:%M\:%S`] updateEclipseBuilder get ${eclipsebuilder} using tag or branch: ${eclipsebuilderBranch}"
 
      # get fresh script. This is one case, we must get directly from repo since the purpose of the script 
      # is to get the eclipsebuilder! 
@@ -132,16 +132,18 @@ updateEclipseBuilder() {
     
     # execute (in current directory) ... depends on some "exported" properties. 
     ./getEclipseBuilder.sh
+
+    exitcode=$?    
     
-    checkForErrorExit $? "Failed to get the Eclipse Buidler"
+    echo "[end] [`date +%H\:%M\:%S`] updateEclipseBuilder get ${eclipsebuilder} using tag or branch: ${eclipsebuilderBranch}"
+    return $exitcode
 }
 
 
 runSDKBuild () 
 {
 
-    echo "Starting runSDKBuild"
-    echo "[start] [`date +%H\:%M\:%S`] setting eclipse ${eclipseStream}-${buildType}-Builds"
+    echo "[start] [`date +%H\:%M\:%S`] runSDKBuild setting eclipse ${eclipseStream}-${buildType}-Builds"
     echo "DEBUG: current directory: ${PWD}"
 
     if [ -d "${supportDir}" ]
@@ -270,13 +272,19 @@ runSDKBuild ()
     echo "cmd: $cmd"
     # finally, start the java job
     $cmd  
-     
+    exitcode=$?
+
+    echo "[end] [`date +%H\:%M\:%S`] runSDKBuild setting eclipse ${eclipseStream}-${buildType}-Builds"
+
+    return $exitcode
 }
 
 
 
 tagRepo () {
-    echo "DEBUG: starting tagRepo"
+    
+    echo "[start] [`date +%H\:%M\:%S`] tagRepo "
+    
     pushd ${PWD}
     # we assume we already got the eclipsebuilder successfully
     # and we use the "working" version copied from gitClones
@@ -303,7 +311,7 @@ tagRepo () {
     $tagRepocmd
 
     exitCode=$?
-
+    echo "[end] [`date +%H\:%M\:%S`] tagRepo "
     return $exitCode
 }
 
@@ -490,7 +498,8 @@ processCommandLine ()
 
     relengBaseBuilderDir=$supportDir/org.eclipse.releng.basebuilder
 
-
+    # is there some error conditions that would allow us to fail fast? 
+    return 0
 
 }
 
@@ -552,7 +561,7 @@ then
 fi
 
 # if pack200 doesn't exist where expected it can cause condidtioning to not work as epxected, 
-# since -repack is called during sign
+# since -repack is called during sign, so we'll fail fast
 if [ ! -x "${pack200dir}/pack200" ]
 then
     echo "ERROR: pack200 not found (or, not executable) where expected: ${pack200dir}"
