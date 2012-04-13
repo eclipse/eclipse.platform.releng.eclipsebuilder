@@ -193,10 +193,10 @@ processCommandLine ()
 
     # these don't seem right (not sure what they are)?
     # currently ends up being 
-    # .../eclipse4/build/40builds/targets
+    # .../eclipse4/build/targets
     # and contains the ?local repo? (not runnable) for org.eclipse.emf.common, etc.
     # in directories named, for example,
-    # as .../eclipse4/build/40builds/targets/local-repo-I20120331-0050
+    # as .../eclipse4/build/targets/local-repo-I20120331-0050
     targetDir=${buildDir}/targets
     targetZips=${targetDir}/targetzips
 
@@ -212,8 +212,8 @@ processCommandLine ()
     #rembember, don't point to e4Build user directory
     sdkTestDir=${buildRoot}/sdkTests/$buildTag
 
-    sdkResults=$buildDir/40builds/$buildTag/$buildTag
-    sdkBuildDirectory=$buildDir/40builds/$buildTag
+    sdkResults=$buildDir/$buildTag/$buildTag
+    sdkBuildDirectory=$buildDir/$buildTag
 
     relengBaseBuilderDir=$supportDir/org.eclipse.releng.basebuilder
 

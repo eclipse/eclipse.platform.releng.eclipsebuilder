@@ -79,7 +79,7 @@ publish_sdk () {
     index.php
     "
 
-    HUDSON_COMMON=${buildRoot}/build/downloads/drops/$dropDir/40builds
+    HUDSON_COMMON=${buildRoot}/build/downloads/drops/$dropDir/
     HUDSON_DROPS=$HUDSON_COMMON
     HUDSON_REPO=$targetDir/updates/${eclipseStream}-I-builds
 

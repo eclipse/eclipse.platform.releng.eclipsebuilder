@@ -159,7 +159,7 @@ runSDKBuild ()
     -DbuildId=$buildId \
     -Dbuildid=$buildId \
     -DbuildLabel=$buildLabel \
-    -Dbase=$buildDir/40builds \
+    -Dbase=$buildDir \
     -DmapVersionTag=$mapVersionTag \
     -Dorg.eclipse.update.jarprocessor.pack200=${pack200dir} \
     -Declipse.p2.MD5Check=false \

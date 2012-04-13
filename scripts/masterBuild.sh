@@ -176,10 +176,16 @@ runSDKBuild ()
     skipPerf="-Dskip.performance.tests=true"
     skipTest="-Dskip.tests=true"
       
-    # 'sign' works by setting as anything if desire signing, 
-    # else, comment out. Comment out now to save time. 
-    sign="-Dsign=true"
-    
+    # 'sign' works by setting as any value if signing is desired. 
+    #  comment out (or, don't set) if signing is not desired.  
+    if [ "$buildType" = "N" ]; then
+      sign=
+      echo "INFO: sign forced off due to doing an N build"
+    else
+      sign="-Dsign=true"
+    fi 
+    echo "DEBUG: signing parameter value: ${sign}"   
+  
     # The cpAndMain is used to launch antrunner app (instead of using eclipse executable
     cpLaunch=$( find $relengBaseBuilderDir/plugins -name "org.eclipse.equinox.launcher_*.jar" | sort | head -1 )
     cpAndMain="$cpLaunch org.eclipse.equinox.launcher.Main"
@@ -200,7 +206,7 @@ runSDKBuild ()
     # WAY too much output.    
     cmd="${JAVA_HOME}/bin/java -Xmx1000m -enableassertions \
         -cp $cpAndMain \
-    -data $buildRoot/workspace-eclipse4 \
+        -data $buildRoot/workspace-eclipse4 \
         -application org.eclipse.ant.core.antRunner  \
         -buildfile $buildfile \
         -DbuildType=$buildType \
@@ -210,7 +216,7 @@ runSDKBuild ()
         -DbuildId=$buildId \
         -Dbuildid=$buildId \
         -DbuildLabel=$buildLabel \
-        -Dbase=$buildDir/40builds \
+        -Dbase=$buildDir \
         -DmapVersionTag=$mapVersionTag \
         -Dorg.eclipse.update.jarprocessor.pack200=${pack200dir} \
         -Declipse.p2.MD5Check=false \
@@ -440,26 +446,27 @@ processCommandLine ()
     # these don't seem right (not sure what they are)?
     # currently ends up being 
     # .../eclipse4/build/40builds/targets
-    # and contains the ?local repo? (not runnable) for org.eclipse.emf.common, etc.
-    # in directories named, for example,
-    # as .../eclipse4/build/40builds/targets/local-repo-I20120331-0050
+    # I removed the 40builds segment. 
+    # Should not be needed since I've moved the distinction between builds "up" to 
+    # /shared/eclipse/eclipse4
+    # /shared/eclipse/eclipse4N
+    # /shared/eclispe/eclipse3
+    # ends up producing dirctories such as 
+    # as .../eclipse4/build/targets/local-repo-I20120331-0050
     targetDir=${buildDir}/targets
     targetZips=${targetDir}/targetzips
 
-    # should not set globally to java via -Dproperty=value, since eclipsebuilder 
+    # should never set globally for eclispebuilder. That is, to java via -Dproperty=value, 
+    # since eclipsebuilder 
     # assumes different scopes and changes this value for direct calls to generatescripts
+    # TODO: I am not sure what the main one ends up being? 
     #transformedRepo=${targetDir}/transformedRepo
 
-    # should not set globally to java via -Dproperty=value, since eclipsebuilder 
+    # should never set globally for eclipsebuilder. That is, to java via -Dproperty=value, 
+    # since eclipsebuilder 
     # assumes different scopes and changes this value for direct calls to generatescripts
     # but in practice, the main one is
     #buildDirectory=${buildRoot}/build/supportDir/src
-
-    #rembember, don't point to e4Build user directory
-    sdkTestDir=${buildRoot}/sdkTests/$buildTag
-
-    sdkResults=$buildDir/40builds/$buildTag/$buildTag
-    sdkBuildDirectory=$buildDir/40builds/$buildTag
 
     relengBaseBuilderDir=$supportDir/org.eclipse.releng.basebuilder
 

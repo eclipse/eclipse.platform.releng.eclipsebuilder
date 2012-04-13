@@ -1,0 +1,10 @@
+These scripts may need variables, if not data, such as 
+
+I removed from the primary build script, since not used there ... but leaving
+small note here, in case it helps reconstruct the tests. 
+
+    #rembember, don't point to e4Build user directory
+    sdkTestDir=${buildRoot}/sdkTests/$buildTag
+    sdkResults=$buildDir/$buildTag/$buildTag
+    sdkBuildDirectory=$buildDir/$buildTag
+    
