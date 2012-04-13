@@ -78,7 +78,7 @@ checkForErrorExit () {
 updateBaseBuilder () {
 
     echo "[start] [`date +%H\:%M\:%S`] getting org.eclipse.releng.basebuilder using tag (or branch): ${basebuilderBranch}"
-
+    echo "DEBUG: current directory as entering updateBaseBuilder ${PWD}"
     if [ -d "${supportDir}" ]
     then
         cd "${supportDir}"
@@ -87,16 +87,20 @@ updateBaseBuilder () {
         echo "   ERROR: support directory did not exist as expected."  
         exit 1
     fi 
-
+    
+    echo "DEBUG: relengBaseBuilderDir: $relengBaseBuilderDir"
     
     if [ -d ${relengBaseBuilderDir} ]
      then
            echo "removing previous version of base builder, to be sure it is fresh, to see if related to to see if fixes bug 375780"
            rm -fr ${VERBOSE_REMOVES} ${relengBaseBuilderDir}
      fi
-
-    if [[ ! -d "${relengBaseBuilderDir}" ]] 
-    then
+     
+    # TODO existence or not may not be good test. Sometimes the top level directory may exist, 
+    # but didn't get cleanup up entirely due to NFS file system quirks.
+    # for now, we'll always get ... then find better "key file" under it to check for
+    #if [[ ! -d "${relengBaseBuilderDir}" ]] 
+    #then
         #    echo "making directory: ${relengBaseBuilderDir}"
         #mkdir -p "${relengBaseBuilderDir}"
         #echo "DEBUG: creating cmd"
@@ -108,9 +112,11 @@ updateBaseBuilder () {
         checkForErrorExit $? "Could not check out basebuilder"
         #echo "cvs export cmd: ${cmd}"
         #"${cmd}"
-    else
-        echo "base builder already existed, so taking as accurate. Remember to delete it when fresh version needed."
-    fi
+    #else
+        #    echo "base builder already existed, so taking as accurate. Remember to delete it when fresh version needed."
+    #fi
+    echo "DEBUG: current directory as exiting updateBaseBuilder ${PWD}"
+    echo "[end] [`date +%H\:%M\:%S`] getting org.eclipse.releng.basebuilder using tag (or branch): ${basebuilderBranch}"
 
 }
 
@@ -588,11 +594,6 @@ mkdir -p "${equinoxPostingDirectory}"
 # exit 127
 
 
-# temp hard to remove completely, as sometimes hard to 
-# remove some .nsf files 
-# TODO: find out if that's become some process is running? 
-#        should we wait and try again? (don't seem to need to, in this case). 
-rm -fr ${VERBOSE_REMOVES} "${buildRoot}/build/supportDir/src"
 
 updateBaseBuilder
 checkForErrorExit $? "Failed while updating Base Buidler"
@@ -625,6 +626,14 @@ tagRepo
 #fi
 
 # else, to get here, we've had zero return codes or continueBuildOnNoChange is true
+
+
+# temp hard to remove completely, as sometimes hard to 
+# remove some .nsf files 
+# TODO: find out if that's become some process is running? 
+#        should we wait and try again? (don't seem to need to, in this case). 
+rm -fr ${VERBOSE_REMOVES} "${buildRoot}/build/supportDir/src"
+
 
 runSDKBuild
 checkForErrorExit $? "Failed while building Eclipse-SDK"
