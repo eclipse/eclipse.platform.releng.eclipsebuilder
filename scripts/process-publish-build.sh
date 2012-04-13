@@ -53,7 +53,7 @@ sendMail () {
 
 publish_sdk () {
 
-    BASE_DIR=${writableBuildRoot}/sdk
+    BASE_DIR=${buildRoot}/sdk
     TMPL_DIR=$BASE_DIR/template
 
     ORIG_ZIPS="
@@ -79,7 +79,7 @@ publish_sdk () {
     index.php
     "
 
-    HUDSON_COMMON=${writableBuildRoot}/build/downloads/drops/$dropDir/40builds
+    HUDSON_COMMON=${buildRoot}/build/downloads/drops/$dropDir/40builds
     HUDSON_DROPS=$HUDSON_COMMON
     HUDSON_REPO=$targetDir/updates/${eclipseStream}-I-builds
 
@@ -327,7 +327,7 @@ process_build () {
 # this used to be at the end of "runSDKBuild", 
     # 
     #stop now if the build failed
-    #failure=$(sed -n '/BUILD FAILED/,/Total time/p' $writableBuildRoot/logs/current.log)
+    #failure=$(sed -n '/BUILD FAILED/,/Total time/p' $buildRoot/logs/current.log)
     #if [[ ! -z $failure ]]; then
     #   compileMsg=""
     #   prereqMsg=""
@@ -374,8 +374,8 @@ process_build () {
 #runSDKTests
 #runTheTests e4less
 
-#cp $writableBuildRoot/logs/current.log \
-    #   $writableBuildRoot/$buildTag/report.txt \
+#cp $buildRoot/logs/current.log \
+    #   $buildRoot/$buildTag/report.txt \
     #    $buildResults/buildlog.txt
 
 

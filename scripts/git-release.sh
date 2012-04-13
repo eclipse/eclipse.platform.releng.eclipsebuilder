@@ -15,7 +15,7 @@ echo "DEBUG: current directory as entering git-release.sh ${PWD}"
 
 #default values, normally overridden by command line
 
-writableBuildRoot=/shared/eclipse/eclipse4
+buildRoot=/shared/eclipse/eclipse4
 relengBranch=R4_HEAD
 buildType=I
 # normally, timestamp is passed in on command line, and 
@@ -27,7 +27,7 @@ time=$(date +%H%M)
 timestamp=$date$time
 # shoud normally be passed in, but this matches what is set
 # in masterBuild.sh, to aide "standalone" operation.
-gitCache=$writableBuildRoot/build/supportDir/gitCache
+gitCache=$buildRoot/build/supportDir/gitCache
 
 # for safety, default is false ... must be explicit from caller to tag
 # or hand-edited if runnning standalone.
@@ -35,7 +35,7 @@ tag=false
 
 # default, but really caller should specify
 # This value does not match "masterBuild.sh", but shouldn't matter.
-submissionReportFilePath=$writableBuildRoot/report.txt
+submissionReportFilePath=$buildRoot/report.txt
 
 
 # constants, per project. 
@@ -67,8 +67,8 @@ do
                         relengMapsProject="$2"; shift;;
                 "-relengRepoName")
                         relengRepoName="$2"; shift;;        
-                "-root")
-                        writableBuildRoot="$2"; shift;;
+                "-buildRoot")
+                        buildRoot="$2"; shift;;
                 "-committerId")
                         committerId="$2"; shift;;
                 "-gitEmail")

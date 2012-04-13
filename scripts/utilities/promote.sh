@@ -69,8 +69,8 @@ fi
 # see https://bugs.eclipse.org/bugs/show_bug.cgi?id=348028
 # for why mx might have to be so large as 1G
 # and this must be set early, since other's might read in commonVariations.shsource
-#export IBM_JAVA_OPTIONS=${IBM_JAVA_OPTIONS:-"-Dcom.ibm.tools.attach.enable=no -Xmx1G -Declipse.p2.mirrors=false"}
-export IBM_JAVA_OPTIONS=${IBM_JAVA_OPTIONS:-"-Dcom.ibm.tools.attach.enable=no  -Declipse.p2.mirrors=false"}
+#export IBM_JAVA_OPTIONS=${IBM_JAVA_OPTIONS:="-Dcom.ibm.tools.attach.enable=no -Xmx1G -Declipse.p2.mirrors=false"}
+export IBM_JAVA_OPTIONS=${IBM_JAVA_OPTIONS:="-Dcom.ibm.tools.attach.enable=no  -Declipse.p2.mirrors=false"}
 
 
 source rsync-retry.sh
