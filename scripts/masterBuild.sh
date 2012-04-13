@@ -90,19 +90,20 @@ updateBaseBuilder () {
     
     echo "DEBUG: relengBaseBuilderDir: $relengBaseBuilderDir"
     
-    if [ -d ${relengBaseBuilderDir} ]
-     then
-           echo "removing previous version of base builder, to be sure it is fresh, to see if related to to see if fixes bug 375780"
-           rm -fr ${VERBOSE_REMOVES} ${relengBaseBuilderDir}
-     fi
+    #if [ -e ${relengBaseBuilderDir}/eclipse.ini ]
+     # then
+           #      echo "removing previous version of base builder, to be sure it is fresh, to see if related to to see if fixes bug 375780"
+           #rm -fr ${VERBOSE_REMOVES} ${relengBaseBuilderDir}
+     #fi
      
-    # TODO existence or not may not be good test. Sometimes the top level directory may exist, 
-    # but didn't get cleanup up entirely due to NFS file system quirks.
-    # for now, we'll always get ... then find better "key file" under it to check for
-    #if [[ ! -d "${relengBaseBuilderDir}" ]] 
-    #then
-        #    echo "making directory: ${relengBaseBuilderDir}"
-        #mkdir -p "${relengBaseBuilderDir}"
+    # existence of direcotry, is not best test of existence, since 
+    # sometimes the top level directory may still exist, while most files deleted,  
+    # due to NFS filesystem quirks. Hence, we look for specific file, the eclispe.ini 
+    # file. 
+    if [[ ! -e "${relengBaseBuilderDir}/eclipse.ini" ]] 
+    then
+        # make directory in case doesn't exist ${relengBaseBuilderDir}
+        mkdir -p "${relengBaseBuilderDir}"
         #echo "DEBUG: creating cmd"
         # TODO: for some reason I could not get this "in" an executable command ... not enough quotes, or something? 
         #cmd="cvs -d :pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse ${quietCVS} ex -r ${basebuilderBranch} -d org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder"
@@ -112,11 +113,15 @@ updateBaseBuilder () {
          exitcode=$?
         #echo "cvs export cmd: ${cmd}"
         #"${cmd}"
-    #else
-        #    echo "base builder already existed, so taking as accurate. Remember to delete it when fresh version needed."
-    #fi
+    else
+        echo "INFO: base builder already existed, so taking as accurate. Remember to delete it when fresh version needed."
+        exitcode=0
+    fi
     echo "DEBUG: current directory as exiting updateBaseBuilder ${PWD}"
     echo "[end] [`date +%H\:%M\:%S`] updateBaseBuilder getting org.eclipse.releng.basebuilder using tag (or branch): ${basebuilderBranch}"
+    # note we save and return the return code from the cvs command itself. 
+    # That is so we can complete, exit, and let caller decide what to do 
+    # (to abort, retry, etc.) 
     return $exitcode
 }
 
