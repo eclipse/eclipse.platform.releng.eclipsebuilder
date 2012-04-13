@@ -13,8 +13,8 @@
 # time)
 
 wget -O masterBuild.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/masterBuild.sh?h=master;
-wget -O mbCaptureOutput.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mbCaptureOutput.sh?h=master;
-wget -O mb4NCaptureOutput.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mbCaptureOutput.sh?h=master;
+wget -O mb4ICaptureOutput.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb4ICaptureOutput.sh?h=master;
+wget -O mb4NCaptureOutput.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb4NCaptureOutput.sh?h=master;
 
 # there are rsync methods to get, to maintain permissions
 
