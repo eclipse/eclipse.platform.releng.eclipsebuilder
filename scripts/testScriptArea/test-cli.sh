@@ -5,11 +5,11 @@
 # If changes to command line procedure are changed, then 
 # this test should be changed as well
 
-# The purpose is to make sure the "junk" values do show up 
+# The purpose is to make sure the "junk" values DO show up 
 # is the debug echos (if not, then something is probably misspelled, 
 # or forgot to use conditional assignments. 
 
-DEBUG=true VERBOSE_REMOVES=-v  ./processCommandLine.sh \
+DEBUG=true VERBOSE_REMOVES=-v  ./masterBuild.sh \
     -buildType Njunk \
     -eclipseStream 4.2junk \
     -relengBranch rbjunk \

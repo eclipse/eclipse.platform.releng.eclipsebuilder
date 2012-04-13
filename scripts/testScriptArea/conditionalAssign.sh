@@ -1,5 +1,32 @@
 #!/usr/bin/env bash
 
+# I've seen the :- form used when a "temporary" default value is desired,
+# while could be overridden to one or the other if set
+#
+# if ${debug:-true}
+# then
+#     echo "by default do debug stuff here"
+# fi
+#
+# if ${debug:-false}
+# then
+#     echo "by default do NOT do debug stuff here"
+# fi
+#
+
+# I think for "initialiizing values if they haven't been set yet
+# both would work the same, in these forms, since is assigning 
+# DEBUG=${DEBUG:-true}
+# DEBUG=${DEBUG:=true}
+#
+# apparently, if the line begins with a colon, you can get the 
+# assignment done with this shorthand (but, I think not very readable)
+# : ${DEBUG:=true}
+#
+# (but, not following, since "temporary", I'm assuming 
+# : ${DEBUG:-true}
+#
+
 echo "===="
 echo
 

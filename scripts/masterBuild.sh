@@ -497,8 +497,8 @@ fi
 
 # be sure to exit HERE if just testing command line, 
 # before any work gets done. 
-echo "testing params. exit before doing work"
-exit 127
+#echo "testing params. exit before doing work"
+#exit 127
 
 
 # for safety, for now, we'll assume if this directory does not already exist, something is wrong, 
@@ -573,7 +573,8 @@ mkdir -p "${siteDir}"
 echo "siteDir: $siteDir"
 
 
-
+# exit HERE if testing initial setup 
+exit 127
 
 
 # temp hard to remove up from, using linux, as ant sometimes fail 
