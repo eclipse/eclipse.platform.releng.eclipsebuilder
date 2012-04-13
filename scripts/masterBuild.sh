@@ -417,8 +417,11 @@ processCommandLine ()
     buildTimestamp=${date}-${time}
     buildTag=$buildType$buildTimestamp
 
-
+    #TODO: for 3.8 builds, use "drops" for eclipse  
     postingDirectory=${siteDir}/eclipse/downloads/drops4
+    # TODO: for 3.8 builds, use "drops3" for equinox, and 
+    # do not publish to downloads, but leave on build machine
+    # (for a bit) in case someone wants to "compare" them
     equinoxPostingDirectory=${siteDir}/equinox/drops
     localUpdateSite=${siteDir}/updates
     buildResults=$postingDirectory/$buildTag
