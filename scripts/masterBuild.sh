@@ -585,14 +585,14 @@ mkdir -p "${equinoxPostingDirectory}"
 
 # exit HERE if testing initial setup 
 # echo "testing initial setup only, exiting early"
-exit 127
+# exit 127
 
 
 # temp hard to remove completely, as sometimes hard to 
 # remove some .nsf files 
 # TODO: find out if that's become some process is running? 
 #        should we wait and try again? (don't seem to need to, in this case). 
-rm -fr "${buildRoot}/build/supportDir/src"
+rm -fr ${VERBOSE_REMOVES} "${buildRoot}/build/supportDir/src"
 
 updateBaseBuilder
 checkForErrorExit $? "Failed while updating Base Buidler"
