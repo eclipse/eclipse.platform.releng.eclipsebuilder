@@ -11,4 +11,4 @@ timestamp=$( date +%Y%m%d-%H%M )
 outfilename=crontab-${timestamp}.txt
 crontab -l | tee $outfilename
 
-printf "\n\tlisting of crontab saved to %s \n" ${outfilename}
+printf "\n\tlisting of crontab saved to %s \n\n" ${outfilename}
