@@ -8,5 +8,7 @@
 # assume ran from "current user id" and "current directory"
 
 timestamp=$( date +%Y%m%d-%H%M )
-outfilename=cronjobs-${timestamp}.txt
+outfilename=crontab-${timestamp}.txt
 crontab -l | tee $outfilename
+
+printf "\n\tlisting of crontab saved to %s \n" ${outfilename}
