@@ -7,8 +7,8 @@ $dropPrefix[]="M";
 $dropPrefix[]="N";
 $dropType = array();
 $dropType[]="Latest Release";
-$dropType[]="3.8 Stable Build";
-$dropType[]="3.8 Integration Build";
-$dropType[]="3.8 Maintenance Build";
-$dropType[]="3.8 Nightly Build";
+$dropType[]="4.2 Stable Build";
+$dropType[]="4.2 Integration Build";
+$dropType[]="4.2 Maintenance Build";
+$dropType[]="3.2 Nightly Build";
 ?>
