@@ -158,12 +158,12 @@ function printBuildColumns($fileName, $parts) {
             break;
 
         case 5:
-            echo "<a href=\"$dropDir/results/testResults.php\"><img border=\"0\" src=\"../images/junit.gif\" title=\"Tests results are available\" alt=\"Tests results are available\" /></a>\n";
+            echo "<a href=\"$dropDir/results/testResults.html\"><img border=\"0\" src=\"../images/junit.gif\" title=\"Tests results are available\" alt=\"Tests results are available\" /></a>\n";
             break;
         default:
             // if more than 12 hours then consider that the regression tests did not finish
             if ($diff > 720) {
-                echo "<a href=\"$dropDir/results/testResults.php\"><img border=\"0\" src=\"../images/junit.gif\" title=\"Tests results are available but did not finish on all machines\" alt=\"Tests results are available but did not finish on all machines\" /></a>\n";
+                echo "<a href=\"$dropDir/results/testResults.html\"><img border=\"0\" src=\"../images/junit.gif\" title=\"Tests results are available but did not finish on all machines\" alt=\"Tests results are available but did not finish on all machines\" /></a>\n";
             } else {
                 echo "<img border=\"0\" src=\"../images/runtests.gif\" title=\"Tests are still running on some machines...\" alt=\"Tests are still running on some machines...\" />\n";
             }
