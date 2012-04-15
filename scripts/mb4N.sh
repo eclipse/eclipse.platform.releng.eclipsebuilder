@@ -21,7 +21,7 @@ wget -O masterBuild.sh http://git.eclipse.org/c/platform/eclipse.platform.releng
 chmod -c +x *.sh
 
 # Debug version
-DEBUG=true $buildRoot/masterBuild.sh -buildType N -eclipseStream 4.2 -buildRoot $buildRoot  2>&1 | tee fullmasterBuildOutput.txt
+DEBUG=true $buildRoot/masterBuild.sh -buildType N -eclipseStream 4.2 -buildRoot $buildRoot -mapVersionTag R4_HEAD 2>&1 | tee fullmasterBuildOutput.txt
 
 # production, routine version
-#$buildRoot/masterBuild.sh -buildType N -eclipseStream 4.2 -buildRoot $buildRoot
+#$buildRoot/masterBuild.sh -buildType N -eclipseStream 4.2 -buildRoot $buildRoot -mapVersionTag R4_HEAD
