@@ -1,18 +1,48 @@
-<html><head>
-<link rel="stylesheet" href="../default_style.css">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<?php
+//ini_set("display_errors", "true");
+//error_reporting (E_ALL);
+$eclipseStream="3";
+$otherIndexFile="index.html";
+$otherStream="4";
+include('dlconfig3.php');
+$subdirDrops="drops";
+
+?>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="../default_style.css" />
 <title>Eclipse Project Downloads</title></head>
 <body>
-<table border=0 cellspacing=5 cellpadding=2 width="100%" > <tr> <td align=left width="72%">
-<font class=indextop> Eclipse Project 3.x Stream Downloads</font> <br> <font class=indexsub>
-latest downloads from the eclipse project</font><br></td><td width="28%">
-<td width="19%" rowspan="2"></td>
-<img src="../images/friendslogo.jpg"><br>Support Eclipse! Become a <a href="http://www.eclipse.org/donate/">friend</a>.</br></td>
-<!--  <td width="19%" rowspan="2"><a href="http://www.eclipsecon.org/" target="_blank"><img src="../images/prom-eclipsecon1.gif" width="125" height="125" border="0"></a></td> -->
-</tr> </table>
+<table border="0" cellspacing="5" cellpadding="2" width="100%" > 
 
-<table border=0 cellspacing=5 cellpadding=2 width="100%" > <tr> 
-<td align=LEFT valign=TOP colspan="2" bgcolor="#0080C0"><b><font color="#FFFFFF" face="Arial,Helvetica">Latest
-Downloads</font></b></td></tr> <!-- The Eclipse Projects --> <tr> <td>
+<tr> 
+
+<td align="left" width="72%"> 
+<font class="indextop"> Eclipse Project <?php echo $eclipseStream;?>.x Stream Downloads</font> <br /> 
+<font class="indexsub">
+Latest downloads from the Eclipse project
+</font><br />
+</td>
+
+<td width="28%">
+
+<!-- not sure, might need this "rowspan 2" then eclipsecon logo included?
+<td width="19%" rowspan="2"></td> 
+-->
+<img src="../images/friendslogo.jpg" alt="Friends of Eclispe Logo" /><br />Support Eclipse! Become a <a href="http://www.eclipse.org/donate/">friend</a>.<br />
+</td>
+<!--  <td width="19%" rowspan="2"><a href="http://www.eclipsecon.org/" target="_blank"><img src="../images/prom-eclipsecon1.gif" width="125" height="125" border="0" /></a></td> --> 
+
+</tr> 
+
+</table>
+
+<table border="0" cellspacing="5" cellpadding="2" width="100%" > 
+<tr> 
+<td align="left" valign="top" colspan="2" bgcolor="#0080C0"><font color="#FFFFFF" face="Arial,Helvetica">Latest 
+Downloads</font></td></tr> <!-- The Eclipse Projects --> <tr> <td> 
 <p>On this
 page you can find the latest <a href="build_types.html" target="_top">builds</a> produced by
 the <a href="http://www.eclipse.org/eclipse" target="_top">Eclipse
@@ -24,10 +54,9 @@ out the Eclipse Project FAQ,</a> or try posting a question to the <a href="http:
 All downloads are provided under the terms and conditions of the <a href="http://www.eclipse.org/legal/epl/notice.php" target="_top">Eclipse Foundation
 Software User Agreement</a> unless otherwise specified. </p>
 
-</p>
 
-<p><a href="http://download.eclipse.org/eclipse/downloads/">Eclipse 4.x downloads</a> are available.</p>
-<p>See the <A HREF="http://www.eclipse.org/downloads/"> main Eclispe download site for other packages and projects</A>.</p>
+<p><a href="http://download.eclipse.org/eclipse/downloads/<?php echo $otherIndexFile;?>">Eclipse <?php echo $otherStream;?>.x downloads</a> are available.</p>
+<p>See the <a href="http://www.eclipse.org/downloads/"> main Eclispe download site for other packages and projects</a>.</p>
 <p>Help out with Eclipse translations - check out the <a href="http://babel.eclipse.org/babel/">Babel project</a>.</p>
 <p>If you prefer, try downloading with the <a href="http://build.eclipse.org/technology/phoenix/torrents/SDK/">SDK Torrents</a> </p>
 
@@ -40,11 +69,6 @@ builds</a>, access <a href="http://archive.eclipse.org/eclipse/downloads/">archi
 </table>
 
 <?php
-
-include('dlconfig3.php');
-for ($i = 0; $i < count($dropType); $i++) {
-    $typeToPrefix[$dropType[$i]] = $dropPrefix[$i];
-}
 
 function startsWithDropPrefix($dirName, $dropPrefix)
 { 
@@ -92,7 +116,7 @@ function printBuildColumns($fileName, $parts) {
     global $subdirDrops;
     // no file name, write empty column
     if ($fileName == "") {
-        echo "<td></td>";
+        echo "<td></td>\n";
         return;
     }
     // get build name, date and time
@@ -113,56 +137,56 @@ function printBuildColumns($fileName, $parts) {
     $diff=($day-$buildDay)*24*60+$time-$buildTime;
     // Add icons
     $build_done=file_exists("$dropDir/checksum/swt-$buildName-win32-wce_ppc-arm-j2me.zip.md5");
-    echo "<td valign=baseline>";
+    echo "<td valign=\"baseline\" >\n";
     if ($build_done) {
         $boxes=runTestBoxes($fileName);
-        echo "<a href=\"$dropDir/\"><img border=\"0\" src=\"../images/build_done.gif\" title=\"Build is available\"/></a>&nbsp;";
+        echo "<a href=\"$dropDir/\"><img border=\"0\" src=\"../images/build_done.gif\" title=\"Build is available\" alt=\"Build is available\" /></a>\n";
         //$testResults="$dropDir/testresults/xml";
         //if (file_exists("$testResults")) {
         switch ($boxes) {
         case 0:
             // if more than 8 hours then consider that the regression tests did not start
             if ($diff > 480) {
-                echo "<img src=\"../images/caution.gif\" title=\"Regression tests did not run!\">";
+                echo "<img src=\"../images/caution.gif\" title=\"Regression tests did not run!\" alt=\"Regression tests did not run!\" />\n";
             } else {
-                echo "<img src=\"../images/runtests.gif\" title=\"Regression tests are running...\">&nbsp;";
+                echo "<img src=\"../images/runtests.gif\" title=\"Regression tests are running...\" alt=\"Regression tests are running...\" />\n";
             }
             break;
 
         case 5:
-            echo "<a href=\"$dropDir/testResults.php\"><img border=\"0\" src=\"../images/junit.gif\" title=\"Tests results are available\"/></a>&nbsp;";
+            echo "<a href=\"$dropDir/results/testResults.php\"><img border=\"0\" src=\"../images/junit.gif\" title=\"Tests results are available\" alt=\"Tests results are available\" /></a>\n";
             break;
         default:
             // if more than 12 hours then consider that the regression tests did not finish
             if ($diff > 720) {
-                echo "<a href=\"$dropDir/testResults.php\"><img border=\"0\" src=\"../images/junit.gif\" title=\"Tests results are available but did not finish on all machines\"/></a>&nbsp;";
+                echo "<a href=\"$dropDir/results/testResults.php\"><img border=\"0\" src=\"../images/junit.gif\" title=\"Tests results are available but did not finish on all machines\" alt=\"Tests results are available but did not finish on all machines\" /></a>\n";
             } else {
-                echo "<img border=\"0\" src=\"../images/runtests.gif\" title=\"Tests are still running on some machines...\"/>&nbsp;";
+                echo "<img border=\"0\" src=\"../images/runtests.gif\" title=\"Tests are still running on some machines...\" alt=\"Tests are still running on some machines...\" />\n";
             }
         }
         //break;
-                }
+    }
     //    $perfsDir="$dropDir/performance";
     //  if (file_exists("$perfsDir")) {
     //    $perfsFile="$perfsDir/performance.php";
     //  if (file_exists("$perfsFile")) {
     //     if (file_exists("$perfsDir/global.php")) {
-    //echo "<a href=\"$perfsFile\"><img border=\"0\" src=\"../images/perfs.gif\" title=\"Performance tests are available\"/></a>";
+    //echo "<a href=\"$perfsFile\"><img border=\"0\" src=\"../images/perfs.gif\" title=\"Performance tests are available\" alt=\"Performance tests are available\"/></a>\n";
     //    } else {
-    //        echo "<img src=\"../images/caution.gif\" title=\"Performance tests ran and results should have been generated but unfortunately they are not available!\">";
+    //        echo "<img src=\"../images/caution.gif\" title=\"Performance tests ran and results should have been generated but unfortunately they are not available!\" alt=\"No Performance tests\"/>\n";
     ///   }
     // } else {
     //            if (file_exists("$perfsDir/consolelogs")) {
-                    // if more than one day then consider that perf tests did not finish
+    // if more than one day then consider that perf tests did not finish
     //              if ($diff > 1440) {
     //                if (substr($buildName, 0, 1) == "I") {
     //                  $reason="see bug 259350";
     //            } else {
     //              $reason="either they were not stored in DB or not generated";
     //        }
-    //  echo "<img src=\"../images/caution.gif\" title=\"Performance tests ran but no results are available: $reason!\">";
+    //  echo "<img src=\"../images/caution.gif\" title=\"Performance tests ran but no results are available: $reason!\" alt=\"No Performance Tests\" />\n";
     //} else {
-    //   echo "<img src=\"../images/runperfs.gif\" title=\"Performance tests are running...\">";
+    //   echo "<img src=\"../images/runperfs.gif\" title=\"Performance tests are running...\" alt=\"Performance tests are running\" />\n";
     // }
     // }
     // }
@@ -171,18 +195,17 @@ function printBuildColumns($fileName, $parts) {
     else {
         // if more than 5 hours then consider that the build did not finish
         if ($diff > 300) {
-            echo "<img src=\"../images/build_failed.gif\" title=\"Build failed!\">";
+            echo "<img src=\"../images/build_failed.gif\" title=\"Build failed!\" alt=\"Build failed!\" />\n";
         } else {
-            echo "<img src=\"../images/build_progress.gif\" title=\"Build is in progress...\">";
+            echo "<img src=\"../images/build_progress.gif\" title=\"Build is in progress...\" alt=\"Build failed!\"/>\n";
         }
     }
-    echo "</td>";
+    echo "</td>\n";
     return $buildName;
 }
 ?>
 <?php
 // this is the main data computation part
-$subdirDrops="drops";
 $aDirectory = dir($subdirDrops);
 while ($anEntry = $aDirectory->read()) {
 
@@ -190,7 +213,7 @@ while ($anEntry = $aDirectory->read()) {
 
     if ($anEntry != "." && $anEntry!=".." && $anEntry!="TIME" && startsWithDropPrefix($anEntry,$dropPrefix)) {
         $parts = explode("-", $anEntry);
-        // echo "<p>an entry: $anEntry";
+        // echo "<p>an entry: $anEntry\n";
         if (count($parts) == 3) {
 
             $buckets[$parts[0]][] = $anEntry;
@@ -225,7 +248,7 @@ while ($anEntry = $aDirectory->read()) {
             $timeStamp = mktime($hour, $minute, 0, $month, $day, $year);
             $timeStamps[$anEntry] = date("D, j M Y -- H:i (O)", $timeStamp);
 
-            if (!array_key_exists($buildType,$latestTimeStamp) || $timeStamp > $latestTimeStamp[$buildType]) {
+            if (!isset($latestTimeStamp) || !array_key_exists($buildType,$latestTimeStamp) || $timeStamp > $latestTimeStamp[$buildType]) {
                 $latestTimeStamp[$buildType] = $timeStamp;
                 $latestFile[$buildType] = $anEntry;
             }
@@ -235,21 +258,25 @@ while ($anEntry = $aDirectory->read()) {
 ?>
 
 <!-- This is the summary section, showing latest of each -->
-<table width="100%" cellspacing=0 cellpadding=3 align=center> <td align=left>
-<TABLE  width="100%" CELLSPACING=0 CELLPADDING=3>
+<table width="100%" cellspacing="0" cellpadding="3" align="center"> 
 <tr>
-<td width="30%"><b>Build Type</b></td>
-<td width="15%"><b>Build Name</b></td>
-<td width="15%"><b>Build Status</b></td>
-<td><b>Build Date</b></td>
+<td align="left"> 
+
+
+<table  width="100%" cellspacing="0" cellpadding="3"> 
+<tr>
+<th width="30%">Build Type</th>
+<th width="15%">Build Name</th>
+<th width="15%">Build Status</th>
+<th>Build Date</th>
 </tr>
 <?php
 foreach($dropType as $value) {
     $prefix=$typeToPrefix[$value];
     // if empty bucket, do not print this row
     if (array_key_exists($prefix,$buckets)) {
-        echo "<tr>";
-        echo "<td width=\"30%\">$value</td>";
+        echo "<tr>\n";
+        echo "<td width=\"30%\">$value</td>\n";
 
 
         if (array_key_exists($prefix,$latestFile)) {
@@ -258,7 +285,7 @@ foreach($dropType as $value) {
         $parts = explode("-", $fileName);
 
         // Uncomment the line below if we need click through licenses.
-        // echo "<td><a href=license.php?license=$subdirDrops/$fileName>$parts[1]</a></td>";
+        // echo "<td><a href=license.php?license=$subdirDrops/$fileName>$parts[1]</a></td>\n";
 
         // Comment the line below if we need click through licenses.
 
@@ -267,70 +294,85 @@ foreach($dropType as $value) {
             $buildName=$parts[1];
         }
         if ($fileName == "") {
-            echo "<td></td>";
+            echo "<td></td>\n";
         } else {
-            echo "<td><a href=\"$subdirDrops/$fileName/\">$buildName</a></td>";
+            echo "<td><a href=\"$subdirDrops/$fileName/\">$buildName</a></td>\n";
         }
         $buildName = printBuildColumns($fileName, $parts);
-        echo "<td>$timeStamps[$fileName]</td>";
-        echo "</tr>";
+        echo "<td>$timeStamps[$fileName]</td>\n";
+        echo "</tr>\n";
     }
 }
 ?>
-</table></table>
+    </table></td></tr></table>
+
+
 <?php
-    foreach($dropType as $value) {
-        $prefix=$typeToPrefix[$value];
+foreach($dropType as $value) {
+    $prefix=$typeToPrefix[$value];
     // skip whole section, if bucket is empty
-        if (array_key_exists($prefix,$buckets)) {
+    if (array_key_exists($prefix,$buckets)) {
 
-        echo " <table width=\"100%\" cellspacing=0 cellpadding=3 align=center>";
+        echo " <table width=\"100%\" cellspacing=\"0\" cellpadding=\"3\" align=\"center\" >\n";
         // header, colored row
-        echo "<tr bgcolor=\"#999999\">";
-            echo "<td align=left width=\"30%\"><b><a name=\"$value\">";
-        echo "<font color=\"#FFFFFF\" face=\"Arial,Helvetica\">$value";
-        echo "s</font></b></a></td>";
-        echo "</TR>";
+        echo "<tr bgcolor=\"#999999\">\n";
+        // name attribute can have no spaces, so we tranlate them to underscores
+        // (could effect targeted links)
+        $valueName=strtr($value,' ','_');
+        echo "<td align=\"left\" width=\"30%\"><a name=\"$valueName\">\n";
+        echo "<font color=\"#FFFFFF\" face=\"Arial,Helvetica\">$value\n";
+        echo "s</font></a></td>\n";
+        echo "</tr>\n";
 
-        echo "<TR>";
-        echo "<td align=left>";
-        echo "<TABLE  width=\"100%\" CELLSPACING=0 CELLPADDING=3>";
-        echo "<tr>";
+        echo "<tr>\n";
+        echo "<td align=\"left\" >\n";
+        echo "\n";
+        echo "\n";
+        echo "\n";
+        echo "\n";
+        echo "<table  width=\"100%\" cellspacing=\"0\" cellpadding=\"4\" >\n";
+        echo "<tr>\n";
 
-        echo "<td width=\"15%\"><b>Build Name</b></td>";
-        echo "<td width=\"15%\"><b>Build Status</b></td>";
-        echo "<td><b>Build Date</b></td>";
+        echo "<th width=\"15%\">Build Name</th>\n";
+        echo "<th width=\"15%\">Build Status</th>\n";
+        echo "<th>Build Date</th>\n";
 
-        echo "</tr>";
+        echo "</tr>\n";
 
-            $aBucket = $buckets[$prefix];
-            if (isset($aBucket)) {
-                rsort($aBucket);
-                foreach($aBucket as $innerValue) {
-                    $parts = explode("-", $innerValue);
-                    echo "<tr>";
+        $aBucket = $buckets[$prefix];
+        if (isset($aBucket)) {
+            rsort($aBucket);
+            foreach($aBucket as $innerValue) {
+                $parts = explode("-", $innerValue);
 
-                    // Uncomment the line below if we need click through licenses.
-                    // echo "<td><a href=\"license.php?license=$subdirDrops/$innerValue\">$parts[1]</a></td>";
+                echo "<tr>\n";
 
-                    // Comment the line below if we need click through licenses.
-                    $buildName=$innerValue;
+                // Uncomment the line below if we need click through licenses.
+                // echo "<td><a href=\"license.php?license=$subdirDrops/$innerValue\">$parts[1]</a></td>\n";
+
+                // Comment the line below if we need click through licenses.
+                $buildName=$innerValue;
                 if (count ($parts)==3) {
-                    echo "<td><a href=\"$subdirDrops/$innerValue/\">$parts[1]</a></td>";
+                    echo "<td><a href=\"$subdirDrops/$innerValue/\">$parts[1]</a></td>\n";
                 } else if (count ($parts)==2) {
-                    echo "<td><a href=\"$subdirDrops/$innerValue/\">$innerValue</a></td>";
+                    echo "<td><a href=\"$subdirDrops/$innerValue/\">$innerValue</a></td>\n";
                 } else {
-                    echo "<td>Unexpected numberof parts?</td>";
-                    }
-
-                    $buildName = printBuildColumns($innerValue, $parts);
-                    echo "<td>$timeStamps[$innerValue]</td>";
-                    echo "</tr>";
+                    echo "<td>Unexpected numberof parts?</td>\n";
                 }
-            }
-        }
-    echo "</table></table>";
 
+                $buildName = printBuildColumns($innerValue, $parts);
+                echo "<td>$timeStamps[$innerValue]</td>\n";
+                echo "</tr>\n";
+        }
     }
+        echo "</table>\n";
+        echo "</td></tr>\n";
+        echo "</table>\n";
+
+}
+}
+
 ?>
-</body></html>
+</body>
+</html>
+
