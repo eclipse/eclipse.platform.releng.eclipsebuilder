@@ -74,8 +74,9 @@ function runTestBoxes($buildName) {
     $testBoxes=array("linux", "macosx", "win32");
     $length=count($testBoxes);
     $boxes=0;
-    if (file_exists("$subdirDrops/$buildName/testresults")) {
-        $buildDir = dir("$subdirDrops/$buildName/testresults");
+    # TEMP? appears "old style" builds had directories named "results"
+    if (file_exists("$subdirDrops/$buildName/results")) {
+        $buildDir = dir("$subdirDrops/$buildName/results");
         while ($file = $buildDir->read()) {
             for ($i = 0 ; $i < $length ; $i++) {
                 if (strncmp($file, $testBoxes[$i], count($testBoxes[$i])) == 0) {
@@ -115,7 +116,7 @@ function printBuildColumns($fileName, $parts) {
     // eventually may want to put in more complicated logic to check for date, or something?  
     // presumably this particular md5 was choosen since last one made, I'd guess? 
     //$build_done=file_exists("$dropDir/checksum/swt-$buildName-win32-wce_ppc-arm-j2me.zip.md5");
-    $build_done=file_exists("$dropDir/eclipse-SDK-$buildName-win32.zip");
+    $build_done=file_exists("$dropDir/eclipse-SDK-$buildName-linux-gtk.tar.gz");
     echo "<td valign=baseline>";
     if ($build_done) {
         $boxes=runTestBoxes($fileName);
@@ -133,12 +134,12 @@ function printBuildColumns($fileName, $parts) {
             break;
 
         case 5:
-            echo "<a href=\"$dropDir/testResults.php\"><img border=\"0\" src=\"../images/junit.gif\" title=\"Tests results are available\"/></a>&nbsp;";
+            echo "<a href=\"$dropDir/results/testResults.php\"><img border=\"0\" src=\"../images/junit.gif\" title=\"Tests results are available\"/></a>&nbsp;";
             break;
         default:
             // if more than 12 hours then consider that the regression tests did not finish
             if ($diff > 720) {
-                echo "<a href=\"$dropDir/testResults.php\"><img border=\"0\" src=\"../images/junit.gif\" title=\"Tests results are available but did not finish on all machines\"/></a>&nbsp;";
+                echo "<a href=\"$dropDir/results/testResults.php\"><img border=\"0\" src=\"../images/junit.gif\" title=\"Tests results are available but did not finish on all machines\"/></a>&nbsp;";
             } else {
                 echo "<img border=\"0\" src=\"../images/runtests.gif\" title=\"Tests are still running on some machines...\"/>&nbsp;";
             }
