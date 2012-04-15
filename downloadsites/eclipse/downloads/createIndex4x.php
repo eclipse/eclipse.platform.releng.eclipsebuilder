@@ -26,7 +26,7 @@ Software User Agreement</a> unless otherwise specified. </p>
 
 </p>
 
-<p><a href="http://download.eclipse.org/eclipse/downloads/eclipse3x.php">Eclipse 3.x downloads</a> are available.</p>
+<p><a href="http://download.eclipse.org/eclipse/downloads/eclipse3x.html">Eclipse 3.x downloads</a> are available.</p>
 <p>See the <A HREF="http://www.eclipse.org/downloads/"> main Eclispe download site for other packages and projects</A>.</p>
 <p>Help out with Eclipse translations - check out the <a href="http://babel.eclipse.org/babel/">Babel project</a>.</p>
 <p>If you prefer, try downloading with the <a href="http://build.eclipse.org/technology/phoenix/torrents/SDK/">SDK Torrents</a> </p>
