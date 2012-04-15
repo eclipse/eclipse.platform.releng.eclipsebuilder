@@ -111,7 +111,11 @@ function printBuildColumns($fileName, $parts) {
     $time=intval(date("H"))*60+intval(date("i"));
     $diff=($day-$buildDay)*24*60+$time-$buildTime;
     // Add icons
-    $build_done=file_exists("$dropDir/checksum/swt-$buildName-win32-wce_ppc-arm-j2me.zip.md5");
+    // SHORT TERM? Since "old builds", not from scratch, don't have these swt md5s, well use an easy indicator file, for now. 
+    // eventually may want to put in more complicated logic to check for date, or something?  
+    // presumably this particular md5 was choosen since last one made, I'd guess? 
+    //$build_done=file_exists("$dropDir/checksum/swt-$buildName-win32-wce_ppc-arm-j2me.zip.md5");
+    $build_done=file_exists("$dropDir/eclipse-SDK-$buildName-win32.zip");
     echo "<td valign=baseline>";
     if ($build_done) {
         $boxes=runTestBoxes($fileName);
