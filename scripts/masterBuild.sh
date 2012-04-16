@@ -613,11 +613,17 @@ if [ -f $buildRoot/${buildType}build.properties ]
 then
     oldBuildTag=$( cat $buildRoot/${buildType}build.properties )
 else
-    echo "WARNING: no oldBuildTag found. Set to NONE"
     oldBuildTag="NONE"
+    echo "WARNING: no oldBuildTag found. Set to $oldBuildTag"
 fi
-echo "Last build: $oldBuildTag"
-echo $buildTag >$buildRoot/${buildType}build.properties
+
+echo "INFO: Last build: $oldBuildTag"
+# don't update this file, if doing a test build
+# TODO: unless there was no value there to begin with?
+if [ "${testbuildonly" != true ] 
+then
+      echo $buildTag >$buildRoot/${buildType}build.properties
+fi
 
 
 
@@ -674,7 +680,7 @@ echo "continueBuildOnNoChange: $continueBuildOnNoChange"
 
 if [ ( "${trExitCode}" = "59" ) && ( "${continueBuildOnNoChange}" != "true" ) ]
 then 
-    # eventually would be an email message sent here
+    # TODO: eventually would be an email message sent here
     #    mailx -s "$eclipseStream SDK Build: $buildTag auto tagging failed. Build canceled." david_williams@us.ibm.com <<EOF
       echo "No changes detected by autotagging. Build halted." 
       exit 1

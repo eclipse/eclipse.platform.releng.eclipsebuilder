@@ -311,13 +311,11 @@ then
 	# if we get here, assume we'll return 0 after final popd and echo
     gitReleaseExit=0
 elif [ "${noChangesToMaps}" == "true" && "${testbuildonly}" != "true" ]
-    then
       # if we got here ONLY because there were no changes (not because testbuildonly was true)
       # then we return special return code 59 meaning "no changes" 
       # caller can decide if they want to continue building (even during a test build)
       # send messages, etc. 
       gitReleaseExit=59
-    fi
 else 
     # this is the expected clause if we are doing a test build
     # and changes were actually detected. In that case we still return 0, as if we'd completed 
