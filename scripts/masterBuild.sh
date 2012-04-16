@@ -579,7 +579,7 @@ fi
 # since -repack is called during sign, so we'll fail fast
 if [ ! -x "${pack200dir}/pack200" ]
 then
-    echo "ERROR: pack200 not found (or, not executable) where expected: ${pack200dir}"
+    echo "ERROR: pack200 not found, or not executable, where expected: ${pack200dir}"
     exit 1
 fi
 
