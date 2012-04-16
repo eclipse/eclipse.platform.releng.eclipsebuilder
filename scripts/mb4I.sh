@@ -11,7 +11,8 @@ cd $buildRoot
 wget -O mb4I.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb4I.sh?h=master;
 wget -O masterBuild.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/masterBuild.sh?h=master;
 
-chmod -c +x *.sh
+chmod -v +x mb4I.sh
+chmod -v +x masterBuild.sh
 
 # Debug version
 DEBUG=true $buildRoot/masterBuild.sh -buildType I -eclipseStream 4.2 -buildRoot $buildRoot -mapVersionTag R4_HEAD  2>&1 | tee fullmasterBuildOutput.txt
