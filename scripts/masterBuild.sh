@@ -681,7 +681,7 @@ fi
 echo "trExitCode: ${trExitCode}"
 echo "continueBuildOnNoChange: $continueBuildOnNoChange"
 
-if [ ( "${trExitCode}" = "59" ) && ( "${continueBuildOnNoChange}" != "true" ) ]
+if [[ ( "${trExitCode}" == "59" )  &&  ( "${continueBuildOnNoChange}" != "true" ) ]]
 then 
     # TODO: eventually would be an email message sent here
     #    mailx -s "$eclipseStream SDK Build: $buildTag auto tagging failed. Build canceled." david_williams@us.ibm.com <<EOF
