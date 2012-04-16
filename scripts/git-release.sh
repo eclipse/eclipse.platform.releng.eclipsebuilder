@@ -296,7 +296,7 @@ if [ $gitrccode -eq 1 ]
    fi 
    
 # do not try to push or tag if no changes or if doing a test-build-only
-if [ "${noChangesToMaps}" != "true" && "{testbuildonly}" != "true"  ]
+if [ "${noChangesToMaps}" != "true" && "${testbuildonly}" != "true" ]
 then
 	echo "git tag $buildTag"
 	git tag -f $buildTag   #tag the map file change
@@ -310,7 +310,7 @@ then
 	checkForErrorExit $? "Could not push tags to repository"
 	# if we get here, assume we'll return 0 after final popd and echo
     gitReleaseExit=0
-elif [ "${noChangesToMaps}" == "true" && "{testbuildonly}" != "true" ]
+elif [ "${noChangesToMaps}" == "true" && "${testbuildonly}" != "true" ]
     then
       # if we got here ONLY because there were no changes (not because testbuildonly was true)
       # then we return special return code 59 meaning "no changes" 

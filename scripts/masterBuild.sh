@@ -12,11 +12,14 @@
 #*******************************************************************************
 
 
-# set to true for tesing builds, even if no changes made
-# but during production, would normally be false.
-export continueBuildOnNoChange=true
-# set to true for test builds (controls other things like notifications, etc.)
-export testbuildonly=true
+# set to true for test builds (controls things 
+# like notifications, whether or not maps are tagged, etc.
+# shoudld be false for production runs. 
+export testbuildonly=${testbuildonly:-false}
+# set to true for tesing builds, so that 
+# even if no changes made, build will continue.
+# but during production, would be false.
+export continueBuildOnNoChange=${continueBuildOnNoChange:-false}
 
 # settings related to debugging or testing
 # DEBUG controls verbosity of little "state and status" bash echo messages.
