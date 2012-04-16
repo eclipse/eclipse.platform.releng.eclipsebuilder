@@ -146,7 +146,9 @@ function printBuildColumns($fileName, $parts) {
         switch ($boxes) {
         case 0:
             // if more than 8 hours then consider that the regression tests did not start
-            if ($diff > 480) {
+            // if ($diff > 480) {
+            // for now, hard code to "0" since we are not reunning tests
+            if ($diff > 0) {
                 echo "<img src=\"../images/caution.gif\" title=\"Regression tests did not run!\" alt=\"Regression tests did not run!\" />\n";
             } else {
                 echo "<img src=\"../images/runtests.gif\" title=\"Regression tests are running...\" alt=\"Regression tests are running...\" />\n";

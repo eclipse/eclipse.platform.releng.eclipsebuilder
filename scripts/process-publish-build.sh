@@ -14,9 +14,17 @@ publishDir="${publishIndex}/drops4"
 
 
 sync_sdk_repo_updates () {
-    # TODO: change to file protocols for build.eclipse.org
-    fromDir=$targetDir/updates/${eclipseStream}-I-builds
-    toDir="${committerId}@build.eclipse.org:/home/data/httpd/download.eclipse.org/eclipse/updates"
+    
+    eclipseStream=${eclipseStream:-4.2}
+    eclipseStreamMajor=${eclipseStream:0:1}
+    echo "eclipseStream: $eclipseStream"
+    echo "eclipseStreamMajor: $eclipseStreamMajor"
+    
+    buildRoot=${buildRoot:-/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}}
+    siteDir=${buildRoot}/siteDir
+    
+    fromDir=$targetDir/updates/${eclipseStream}-${buildType}-builds
+    toDir="/home/data/httpd/download.eclipse.org/eclipse/updates"
 
     rsync --recursive --delete "${fromDir}" "${toDir}"
 }
