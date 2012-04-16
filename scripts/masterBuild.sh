@@ -64,12 +64,12 @@ checkForErrorExit () {
         echo "WARNING: checkForErrorExit called without message"
         message="(Calling program provided no message)"
     fi
-    if [ "${exitCode}" -ne "0" ]
+    if [ $exitCode -ne 0 ]
     then
         echo
-        echo "   ERROR. exit code: ${exitCode}"  ${message}
+        echo "   ERROR. exit code: ${exitCode}  ${message}"
         echo
-        exit "${exitCode}"
+        exit "$exitCode
     fi
 }
 
@@ -210,7 +210,7 @@ runSDKBuild ()
     if [ "$buildType" = "N" ]; then
       sign=
       echo "INFO: signing forced off due to doing an N build"
-    elif [ "${testbuildonly} == "true" ] 
+    elif [ "${testbuildonly}" == "true" ] 
     then
       sign=
       echo "INFO: signing forced off due to doing an test build"
