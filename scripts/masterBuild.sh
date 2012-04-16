@@ -661,7 +661,7 @@ checkForErrorExit $? "Failed while updating Eclipse Buidler"
 tagRepo
 trExitCode=$?
 
-if [ $trExitCode -ne!= 59 ]
+if [ $trExitCode -ne 59 ]
 then
    checkForErrorExit ${trExitCode} "Failed during auto tagging. Build halted."
 fi
