@@ -21,6 +21,9 @@ export testbuildonly=${testbuildonly:-false}
 # but during production, would be false.
 export continueBuildOnNoChange=${continueBuildOnNoChange:-false}
 
+echo "testbuildonly: $testbuildonly"
+echo "continueBuildOnNoChange: $continueBuildOnNoChange"
+
 # settings related to debugging or testing
 # DEBUG controls verbosity of little "state and status" bash echo messages.
 # Set to true to get the most echo messages. Anything else to be quiet. 
@@ -614,13 +617,13 @@ then
     oldBuildTag=$( cat $buildRoot/${buildType}build.properties )
 else
     oldBuildTag="NONE"
-    echo "WARNING: no oldBuildTag found. Set to $oldBuildTag"
+    echo "WARNING: no oldBuildTag found. Set to ${oldBuildTag}"
 fi
 
-echo "INFO: Last build: $oldBuildTag"
+echo "INFO: Last build: ${oldBuildTag}"
 # don't update this file, if doing a test build
 # TODO: unless there was no value there to begin with?
-if [ "${testbuildonly" != true ] 
+if [ "${testbuildonly}" != "true" ] 
 then
       echo $buildTag >$buildRoot/${buildType}build.properties
 fi
