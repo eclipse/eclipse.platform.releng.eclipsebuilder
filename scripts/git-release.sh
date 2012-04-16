@@ -205,8 +205,10 @@ pull() {
         
 }
 
-#Nothing to do for nightly builds, or if $noTag is specified
-if [ ! $tag -o "${buildType}" = "N" ]
+#Nothing to do for nightly builds, or if tag is "false" 
+# Note, if testbuildonly is set to true, (and I build) we actually let the work 
+# continue, for testing, but do not push or tag the repo
+if [[ ( "${testbuildonly}" != "true" ) &&  ( "${tag}" == "false" || "${buildType}" == "N" ) ]] 
 then
         echo "INFO: Skipping build tagging for nightly build or -tag false build"
         exit 0
@@ -311,6 +313,7 @@ then
 	# if we get here, assume we'll return 0 after final popd and echo
     gitReleaseExit=0
 elif [ "${noChangesToMaps}" == "true" && "${testbuildonly}" != "true" ]
+then
       # if we got here ONLY because there were no changes (not because testbuildonly was true)
       # then we return special return code 59 meaning "no changes" 
       # caller can decide if they want to continue building (even during a test build)
