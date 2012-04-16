@@ -5,7 +5,7 @@
 # but the steps of getting those key files and directories are repeated here.
 # This basically bootstraps the files fresh each time (after the first)
 # though of course, the mb4I.sh won't be used until the next time.
-buildRoot=/shared/eclispe/eclipse4I 
+buildRoot=/shared/eclipse/eclipse4I 
 mkdir -p $buildRoot
 cd $buildRoot
 wget -O mb4I.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb4I.sh?h=master;
@@ -14,7 +14,7 @@ wget -O masterBuild.sh http://git.eclipse.org/c/platform/eclipse.platform.releng
 chmod -c +x *.sh
 
 # Debug version
-#DEBUG=true $buildRoot/masterBuild.sh -buildType I -eclipseStream 4.2 -buildRoot $buildRoot -mapVersionTag R4_HEAD  2>&1 | tee fullmasterBuildOutput.txt
+DEBUG=true $buildRoot/masterBuild.sh -buildType I -eclipseStream 4.2 -buildRoot $buildRoot -mapVersionTag R4_HEAD  2>&1 | tee fullmasterBuildOutput.txt
 
 # production, routine version
-$buildRoot/masterBuild.sh -buildType I -eclipseStream 4.2 -buildRoot $buildRoot -mapVersionTag R4_HEAD
+#$buildRoot/masterBuild.sh -buildType I -eclipseStream 4.2 -buildRoot $buildRoot -mapVersionTag R4_HEAD
