@@ -5,15 +5,30 @@
 
 function syncDropLocation () 
 {
-    buildId=$1
+    eclipseStream=$1
+    if [ -z "${eclipseStream}" ]
+    then
+       echo "must provide eclispeStream as first argumnet, for this function $0"
+       exit 1;
+    fi
+
+
+    buildType=$2
+    if [ -z "${buildType}" ]
+    then
+        echo "must provide buildType as second argumnet, for this function $0"
+        exit 1;
+    fi
+ 
+    buildId=$3
     if [ -z "${buildId}" ]
     then
-        echo "ERROR: buildId must be specified for this function, $0"
-        exit 1
-    fi
+         echo "must provide buildId as third argumnet, for this function $0"
+         exit 1;
+     fi
+    
     pathToDL=eclipse/downloads/drops4
-    buildType=${buildType:-N}
-    eclipseStream=${eclipseStream:-4.2}
+    
     eclipseStreamMajor=${eclipseStream:0:1}
     echo "buildType: $buildType"
     echo "eclipseStream: $eclipseStream"
@@ -50,7 +65,7 @@ function syncDropLocation ()
         rccode=$?
         if [ $rccode -eq 0 ]
         then
-            rsync -p -t index.txt /home/data/httpd/download.eclipse.org/eclipse/downloads/index22.html
+            rsync -p -t index.txt /home/data/httpd/download.eclipse.org/eclipse/downloads/index.html
             rccode=$?
             if [ $rccode -eq 0 ] 
             then
@@ -67,4 +82,8 @@ function syncDropLocation ()
     fi
 }
 
-syncDropLocation $1
+syncDropLocation $1 $2 $3
+
+source sendPromoteMail.sh
+
+sendPromoteMail $1 $2 $3
