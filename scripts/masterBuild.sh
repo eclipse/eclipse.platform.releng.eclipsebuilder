@@ -209,11 +209,16 @@ runSDKBuild ()
     #  comment out (or, don't set) if signing is not desired.  
     if [ "$buildType" = "N" ]; then
       sign=
-      echo "INFO: sign forced off due to doing an N build"
+      echo "INFO: signing forced off due to doing an N build"
+    elif [ "${testbuildonly} == "true" ] 
+    then
+      sign=
+      echo "INFO: signing forced off due to doing an test build"
     else
       sign="-Dsign=true"
+      echo "INFO: signing set on by default"
     fi 
-    echo "DEBUG: signing parameter value: ${sign}"   
+    
   
     # The cpAndMain is used to launch antrunner app (instead of using eclipse executable
     cpLaunch=$( find $relengBaseBuilderDir/plugins -name "org.eclipse.equinox.launcher_*.jar" | sort | head -1 )
@@ -400,11 +405,10 @@ processCommandLine ()
     eclipseStream=${eclipseStream:-4.2}
     buildType=${buildType:-N}
 
-    relengMapsProject=${relengMapsProject:-org.eclipse.releng}
-    relengRepoName=${relengRepoName:-eclipse.platform.releng.maps}
-
-    # TODO: make last segment "projectName" 
+    # Normall must be supplied by caller.
+    # TODO: make last segment funtion of eclipse stream and build type 
     buildRoot=${buildRoot:-/shared/eclipse/eclipse4N}
+    
 
     # derived values (which effect default computed values) 
     # TODO: do not recall why I export these ... should live without, if possible
@@ -419,10 +423,16 @@ processCommandLine ()
     # Though now in git, the repo (and effective project name) is eclipse.platform.releng.eclipsebuilder 
     # See https://bugs.eclipse.org/bugs/show_bug.cgi?id=374974 for details, 
     # especially https://bugs.eclipse.org/bugs/show_bug.cgi?id=374974#c28
+
     export eclipsebuilder=org.eclipse.releng.eclipsebuilder
     export eclipsebuilderRepo=eclipse.platform.releng.eclipsebuilder
 
+    relengMapsProject=${relengMapsProject:-org.eclipse.releng}
+    relengRepoName=${relengRepoName:-eclipse.platform.releng.maps}
+
+    # base builder pretty constant in CVS now. Will likely "to away" eventually.
     basebuilderBranch=${basebuilderBranch:-R4_2_primary}
+    
     # relies on export, since getEclipseBuilder is seperate script, 
     # and it does not use "command line pattern"
     export eclipsebuilderBranch=master
@@ -649,37 +659,35 @@ checkForErrorExit $? "Failed while updating Eclipse Buidler"
 
 
 tagRepo
-#trExitCode=$?
+trExitCode=$?
 
-#if [ "${trExitCode}" != "99999" ]
-#then
-   #   checkForErrorExit ${trExitCode} "Failed during auto tagging"
-#fi
+if [ $trExitCode -ne!= 59 ]
+then
+   checkForErrorExit ${trExitCode} "Failed during auto tagging. Build halted."
+fi
 
-#echo "trExitCode: ${trExitCode}"
-#echo "continueBuildOnNoChange: $continueBuildOnNoChange"
+echo "trExitCode: ${trExitCode}"
+echo "continueBuildOnNoChange: $continueBuildOnNoChange"
 
-#if [ ( "${trExitCode}" = "99999" ) && ( "${continueBuildOnNoChange}" != "true" ) ]
-#then 
+if [ ( "${trExitCode}" = "59" ) && ( "${continueBuildOnNoChange}" != "true" ) ]
+then 
+    # eventually would be an email message sent here
     #    mailx -s "$eclipseStream SDK Build: $buildTag auto tagging failed. Build canceled." david_williams@us.ibm.com <<EOF
-   
-    #  Auto tagging failed. See log. 
-    #Build halted.
-    
-#EOF
-    #   exit 99999
-#fi
+      echo "No changes detected by autotagging. Build halted." 
+      exit 1
+# else continue building
+fi
 
 # else, to get here, we've had zero return codes or continueBuildOnNoChange is true
 
-
-# temp hard to remove completely, as sometimes hard to 
-# remove some .nsf files 
+# temp: remove previous "working area" due to bug ?????
+# temp hard to remove completely, as sometimes NFS hangs on to some .nfs file
 # TODO: find out if that's become some process is running? 
-#        should we wait and try again? (don't seem to need to, in this case). 
+# should we wait and try again? (don't seem to need to, in this case). 
 rm -fr ${VERBOSE_REMOVES} "${buildRoot}/build/supportDir/src"
 
 
 runSDKBuild
 checkForErrorExit $? "Failed while building Eclipse-SDK"
-
+echo "normal exit from $0"
+exit 0

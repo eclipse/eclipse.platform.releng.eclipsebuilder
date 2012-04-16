@@ -282,20 +282,21 @@ git add $( find . -name "*.map" )
 checkForErrorExit $? "Could not add maps to repository"
 echo "git commit"
 git commit -m "Releng build auto tagging for $buildTag"
-#gitrccode=$?
-# if nothing to commit, returns 1 or 159?
-  #  if [ "${gitrccode}" != "0" ]
-   #  then 
-        # assume nothing to commit, no changes as the reason for the "failure" to commit (though, could be other things).
-         #      echo "git commit rccode was ${gitrccode}. Assuming no changes to maps to commit."
-         #noChangesToMaps="true"
-    #else
-         # checkForErrorExit ${gitrccode} "Could not commit to repository"
-         #     noChangesToMaps="false"
-   # fi 
+gitrccode=$?
+# if nothing to commit, returns 1 
+if [ $gitrccode -eq 1 ]
+   then 
+     # assume nothing to commit, that is "no changes" as the reason for the 
+     # non-zero return code, though, in theory could be due to other things?
+     echo "git commit rccode was ${gitrccode}. Assuming no changes to maps to commit."
+     noChangesToMaps="true"
+   else
+      checkForErrorExit ${gitrccode} "Could not commit to repository"
+      noChangesToMaps="false"
+   fi 
    
-#if [ "${noChangesToMaps}" != "true" ]
-#then
+if [ "${noChangesToMaps}" != "true" ]
+then
 	echo "git tag $buildTag"
 	git tag -f $buildTag   #tag the map file change
 	checkForErrorExit $? "Could not tag repository"
@@ -306,17 +307,17 @@ git commit -m "Releng build auto tagging for $buildTag"
 	echo "git push tags"
 	git push --tags
 	checkForErrorExit $? "Could not push tags to repository"
-	# if we get here, assume we'll return 0 after final popd
-    # gitReleaseExit=0
-#else 
-    # special return code 99999 meaning "no changes" 
+	# if we get here, assume we'll return 0 after final popd and echo
+    gitReleaseExit=0
+else 
+    # special return code 59 meaning "no changes" 
     # caller can decide if they want to continue building 
     # or not. 
-    #   gitReleaseExit=99999
-#fi 
+    gitReleaseExit=59
+fi 
 
 popd
 
 echo "DEBUG: current directory as exiting git-release.sh ${PWD}"
 
-#exit $gitReleaseExit
+exit $gitReleaseExit
