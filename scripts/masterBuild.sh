@@ -69,7 +69,7 @@ checkForErrorExit () {
         echo
         echo "   ERROR. exit code: ${exitCode}  ${message}"
         echo
-        exit "$exitCode
+        exit $exitCode
     fi
 }
 
