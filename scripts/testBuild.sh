@@ -13,9 +13,12 @@ export testbuildonly=true
 # but during production, would be false.
 export continueBuildOnNoChange=true
 
+# DEBUG flag adds (a little) to the verbosity of the logging output
+export DEBUG=true
+
 if [ -n "${1}" ] 
 then
-   /bin/bash $1
+   /bin/bash $1  2>&1 | tee fullmasterBuildOutput.txt
 else 
     echo "no script given on command line of $0"
     exit 1
