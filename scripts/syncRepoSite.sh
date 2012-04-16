@@ -1,24 +1,11 @@
 #!/usr/bin/env bash
 
+# This script should not be needed often, by itself, but might need
+# for tests or to "fix" a repo that is bad.
 
-function syncRepoSite () 
-{
+source syncRepoSite.shsource
 
-    buildType=${buildType:-N}
-    eclipseStream=${eclipseStream:-4.2}
-    eclipseStreamMajor=${eclipseStream:0:1}
-    echo "buildType: $buildType"
-    echo "eclipseStream: $eclipseStream"
-    echo "eclipseStreamMajor: $eclipseStreamMajor"
+# needs eclipseStream and buildType as arguments
 
-    buildRoot=${buildRoot:-/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}}
-    siteDir=${buildRoot}/siteDir
-
-    fromDir=$siteDir/updates/${eclipseStream}-${buildType}-builds
-    toDir="/home/data/httpd/download.eclipse.org/eclipse/updates"
-
-    rsync --recursive --delete "${fromDir}" "${toDir}"
-}
-
-syncRepoSite
+syncRepoSite $1 $2
 

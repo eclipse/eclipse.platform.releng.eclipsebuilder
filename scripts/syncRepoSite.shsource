@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+# this funtion currently just synchs up the whole local repo 
+# with the whole remote repo ... so, important to use --delete and
+# provides an easy way to "fix" the remote repo by fixing the local one first. 
+
+function syncRepoSite () 
+{
+
+    eclipseStream=$1
+    if [ -z "${eclipseStream}" ]
+    then
+       echo "must provide eclispeStream as first argumnet, for this function $0"
+       return 1;
+    fi
+
+
+    buildType=$2
+    if [ -z "${buildType}" ]
+    then
+        echo "must provide buildType as second argumnet, for this function $0"
+        return 1;
+    fi
+    
+    eclipseStreamMajor=${eclipseStream:0:1}
+    echo "buildType: $buildType"
+    echo "eclipseStream: $eclipseStream"
+    echo "eclipseStreamMajor: $eclipseStreamMajor"
+
+    buildRoot=${buildRoot:-/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}}
+    siteDir=${buildRoot}/siteDir
+
+    fromDir=$siteDir/updates/${eclipseStream}-${buildType}-builds
+    toDir="/home/data/httpd/download.eclipse.org/eclipse/updates"
+
+    rsync --recursive --delete "${fromDir}" "${toDir}"
+}
+
+
