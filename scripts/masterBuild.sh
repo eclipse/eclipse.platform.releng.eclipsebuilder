@@ -765,10 +765,12 @@ checkForErrorExit $? "Failed while building Eclipse-SDK"
 promoteScriptLocationeclipse=/shared/eclipse/sdk/queue
 # directory should normall exist, but in case not
 mkdir -p "${promoteScriptLocationeclipse}"
+# note we do restrict access to "others" for a tad more security safety
+chmod -R ug=rwx,o-rwx "${promoteScriptLocationeclipse}"
 ptimestamp=$( date +%Y%m%d%H%M )
 scriptName=promote-${eclipseStream}-${buildType}-${buildId}-${ptimestamp}.sh
 echo "$buildRoot/syncDropLocation.sh $eclipseStream $buildType $buildId" > ${promoteScriptLocationeclipse}/${scriptName}
-chmod -v +x ${promoteScriptLocationeclipse}/${scriptName}
+chmod -v ug=rwx,o-rwx ${promoteScriptLocationeclipse}/${scriptName}
 
 # no need to promote anything for 3.x builds
 # (equinox portion should be the same, so we'll only do equinox for 
@@ -778,14 +780,16 @@ then
 	promoteScriptLocationequinox=/shared/eclipse/equinox/queue
     # directory should normall exist, but in case not
 	mkdir -p "${promoteScriptLocationequinox}"
+	# note we do restrict access to "others" for a tad more security safety
+	chmod -R ug=rwx,o-rwx "${promoteScriptLocationequinox}"
 	eqFromDir=${equinoxPostingDirectory}/${buildId}
 	eqToDir="/home/data/httpd/download.eclipse.org/equinox/drops/"
     # note, we do not use --delete for equinox, since should not ever be needed
     # even though (buried in the eclipse scripts) we do, since sometimes is needed. 
-	echo " rsync -p -t --recursive "${eqFromDir}" "${eqToDir}" > ${promoteScriptLocationequinox}/${scriptName}
-	chmod -v +x ${promoteScriptLocationequinox}/${scriptName}
+	echo "rsync -p -t --recursive \"${eqFromDir}\" \"${eqToDir}\"" > ${promoteScriptLocationequinox}/${scriptName}
+	chmod -v ug=rwx,o-rwx ${promoteScriptLocationequinox}/${scriptName}
 else
-    echo "Did no create promote script for equinox since $eclipseStream less than 4"
+    echo "Did not create promote script for equinox since $eclipseStream less than 4"
 fi 
 echo "normal exit from $0"
 exit 0
