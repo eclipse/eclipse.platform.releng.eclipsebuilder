@@ -18,7 +18,7 @@ export DEBUG=true
 
 if [ -n "${1}" ] 
 then
-   /bin/bash $1  2>&1 | tee fullmasterBuildOutput.txt
+   /bin/bash $1  2>&1 | tee fullmasterBuildDebugOutput.txt
 else 
     echo "no script given on command line of $0"
     exit 1
