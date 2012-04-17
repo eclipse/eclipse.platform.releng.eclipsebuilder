@@ -716,35 +716,40 @@ then
 # else continue building
 fi
 
-# else, to get here, we should do a build. Notification depends on test flags.
+# else, to get here, we should do a build. Notification depends on test flags (and N-build)
 
 # So, we send an email to list that a build has started and what changes were 
-# detected. UNLESS we are doing a test build, in which case, we do not notify releng list
+# detected. UNLESS we are doing an N build or test build, in which case, we do not notify releng list
     if [[ "${testbuildonly}" == "true" || "${continueBuildOnNoChange}" == "true" ]] 
       then
         # send mail only to testonly address
         toAddress=daddavidw@gmail.com
       else 
-        # if not a test build, send "build started" mail to list
+        # if not a test build, and not an N-build, 
+        # send "build started" mail to list
         #toAddress=platform-releng-dev@eclipse.org
         # can not have empty else clauses, so we'll have double test emails
         toAddress=david_williams@mindspring.com
      fi
-     reporttext=$( cat $submissionReportFilePath ) 
+     # for N builds, we do not notify anyone of "start of build" (but, do for all others? I, M? ) 
+     if [[ "${buildType}" != "N" ]]
+     then 
+           reporttext=$( cat $submissionReportFilePath ) 
      
-(
-echo "From: e4Builder@eclipse.org"
-echo "To: ${toAddress}"
-echo "MIME-Version: 1.0"
-echo "Content-Type: text/plain; charset=utf-8"
-echo "Subject: $eclipseStream Build: $buildId started"
-echo " "
-echo "$eclipseStream Build: $buildId started"
-echo " " 
-echo "$reporttext" 
-echo " "
-) | /usr/lib/sendmail -t
-
+		(
+		echo "From: e4Builder@eclipse.org"
+		echo "To: ${toAddress}"
+		echo "MIME-Version: 1.0"
+		echo "Content-Type: text/plain; charset=utf-8"
+		echo "Subject: $eclipseStream Build: $buildId started"
+		echo " "
+		echo "$eclipseStream Build: $buildId started"
+		echo " " 
+		echo "$reporttext" 
+		echo " "
+		) | /usr/lib/sendmail -t
+		
+	fi
 
 # temp: remove previous "working area" due to bug ?????
 # temp hard to remove completely, as sometimes NFS hangs on to some .nfs file
@@ -756,12 +761,16 @@ rm -fr ${VERBOSE_REMOVES} "${buildRoot}/build/supportDir/src"
 runSDKBuild
 checkForErrorExit $? "Failed while building Eclipse-SDK"
 
-# if all ended well, put "promote script" is known location
-promoteScriptLocation=/shared/eclipse/sdk/dwqueue
-mkdir -p promoteScriptLocation
+# if all ended well, put "promote script" in known location
+promoteScriptLocationeclipse=/shared/eclipse/sdk/queue
+promoteScriptLocationequinox=/shared/eclipse/equinox/queue
+# directory should normall exist, but in case not
+mkdir -p "${promoteScriptLocationeclipse}"
+mkdir -p "${promoteScriptLocationequinox}"
 ptimestamp=$( date +%Y%m%d%H%M )
-scriptName=promote${eclipseStream}${buildType}${buildId}-${ptimestamp}.sh
-echo "$buildRoot/syncDropLocation.sh $eclipseStream $buildType $buildId" > ${promoteScriptLocation}/${scriptName}
+scriptName=promote-${eclipseStream}-${buildType}-${buildId}-${ptimestamp}.sh
+echo "$buildRoot/syncDropLocation.sh $eclipseStream $buildType $buildId" > ${promoteScriptLocationeclipse}/${scriptName}
+echo "tbd" > ${promoteScriptLocationequinox}/${scriptName}
 
 echo "normal exit from $0"
 exit 0
