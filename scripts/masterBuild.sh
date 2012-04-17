@@ -773,7 +773,9 @@ echo "$buildRoot/syncDropLocation.sh $eclipseStream $buildType $buildId" > ${pro
 chmod -v +x ${promoteScriptLocationeclipse}/${scriptName}
 eqFromDir=${equinoxPostingDirectory}/${buildId}
 eqToDir="/home/data/httpd/download.eclipse.org/equinox/drops/"
-echo " rsync -p -t --recursive --delete "${eqFromDir}" "${eqToDir}" > ${promoteScriptLocationequinox}/${scriptName}
+# note, we do not use --delete for equinox, since should not ever be needed
+# even though (buried in the eclipse scripts) we do, since sometimes is needed. 
+echo " rsync -p -t --recursive "${eqFromDir}" "${eqToDir}" > ${promoteScriptLocationequinox}/${scriptName}
 chmod -v +x ${promoteScriptLocationequinox}/${scriptName}
 
 echo "normal exit from $0"
