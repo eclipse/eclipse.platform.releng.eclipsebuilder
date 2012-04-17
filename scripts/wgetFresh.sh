@@ -28,5 +28,8 @@ wget -O testBuild.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.e
 
 # get this script itself (would have to run twice to make use changes, naturally)
 # and has trouble "writing over itself" so we put in a file with 'NEW' suffix
+# and a command line like the following works well
+# ./wgetFresh.sh ; mv wgetFresh.shNEW wgetFresh.sh
 wget -O wgetFresh.shNEW http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/wgetFresh.sh?h=$branchOrTag;
 
+chmod +x *.sh

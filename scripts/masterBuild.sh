@@ -673,9 +673,13 @@ checkForErrorExit $? "Failed while updating Eclipse Buidler"
 tagRepo
 trExitCode=$?
 
-if [ $trExitCode -ne 59 ]
+if [[ $trExitCode != 59 && $trExitCode != 0 ]]
 then
-   checkForErrorExit ${trExitCode} "Failed during auto tagging. Build halted."
+   # check/notify of other errors, such as "push" failures
+   # TODO: eventually would be an email message sent here
+   # mailx -s "$eclipseStream SDK Build: $buildTag auto tagging failed. Build canceled." david_williams@us.ibm.com <<EOF
+   echo "Unexpected auto-tagging return code: $trExitCode. Build halted." 
+   exit 1
 fi
 
 echo "trExitCode: ${trExitCode}"
@@ -683,14 +687,53 @@ echo "continueBuildOnNoChange: $continueBuildOnNoChange"
 
 if [[ ( "${trExitCode}" == "59" )  &&  ( "${continueBuildOnNoChange}" != "true" ) ]]
 then 
-    # TODO: eventually would be an email message sent here
-    #    mailx -s "$eclipseStream SDK Build: $buildTag auto tagging failed. Build canceled." david_williams@us.ibm.com <<EOF
-      echo "No changes detected by autotagging. Build halted." 
+    if [[ "${testbuildonly}" == "true" ]] 
+      then
+        # send mail only to testonly address
+        toAddress=daddavidw@gmail.com
+      else 
+        # if not a test build, send "no change" mail to list
+        #toAddress=platform-releng-dev@eclipse.org
+     fi
+	(
+	echo "From: e4Builder@eclipse.org"
+	echo "To: ${toAddress}"
+	echo "MIME-Version: 1.0"
+	echo "Content-Type: text/plain; charset=utf-8"
+	echo "Subject: $eclipseStream Build: $buildId canceled. No changes detected (eom)"
+	echo ""
+	) | /usr/lib/sendmail -t
+
+      echo "No changes detected by autotagging. Mail sent. Build halted." 
       exit 1
 # else continue building
 fi
 
-# else, to get here, we've had zero return codes or continueBuildOnNoChange is true
+# else, to get here, we should do a build. Notification depends on test flags.
+
+# So, we send an email to list that a build has started and what changes were 
+# detected. UNLESS we are doing a test build, in which case, we do not notify releng list
+    if [[ "${testbuildonly}" == "true" || "${continueBuildOnNoChange}" == "true" ]] 
+      then
+        # send mail only to testonly address
+        toAddress=daddavidw@gmail.com
+      else 
+        # if not a test build, send "build started" mail to list
+        #toAddress=platform-releng-dev@eclipse.org
+     fi
+(
+echo "From: e4Builder@eclipse.org"
+echo "To: ${toAddress}"
+echo "MIME-Version: 1.0"
+echo "Content-Type: text/plain; charset=utf-8"
+echo "Subject: $eclipseStream Build: $buildId started"
+echo " "
+echo $eclipseStream Build: $buildId started"
+echo " " 
+echo "$reporttext" 
+echo " "
+) | /usr/lib/sendmail -t
+
 
 # temp: remove previous "working area" due to bug ?????
 # temp hard to remove completely, as sometimes NFS hangs on to some .nfs file
