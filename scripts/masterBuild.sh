@@ -694,6 +694,8 @@ then
       else 
         # if not a test build, send "no change" mail to list
         #toAddress=platform-releng-dev@eclipse.org
+        # can not have empty else clauses, so we'll have double test emails
+        toAddress=david_williams@mindspring.com
      fi
 	(
 	echo "From: e4Builder@eclipse.org"
@@ -720,6 +722,8 @@ fi
       else 
         # if not a test build, send "build started" mail to list
         #toAddress=platform-releng-dev@eclipse.org
+        # can not have empty else clauses, so we'll have double test emails
+        toAddress=david_williams@mindspring.com
      fi
 (
 echo "From: e4Builder@eclipse.org"
