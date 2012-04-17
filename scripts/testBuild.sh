@@ -16,9 +16,12 @@ export continueBuildOnNoChange=true
 # DEBUG flag adds (a little) to the verbosity of the logging output
 export DEBUG=true
 
+# in mb files, for now
+# 2>&1 | tee fullmasterBuildDebugOutput.txt
+
 if [ -n "${1}" ] 
 then
-   /bin/bash $1  2>&1 | tee fullmasterBuildDebugOutput.txt
+   /bin/bash $1  
 else 
     echo "no script given on command line of $0"
     exit 1
