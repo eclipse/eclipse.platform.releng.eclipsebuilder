@@ -786,6 +786,8 @@ then
 	eqToDir="/home/data/httpd/download.eclipse.org/equinox/drops/"
     # note, we do not use --delete for equinox, since should not ever be needed
     # even though (buried in the eclipse scripts) we do, since sometimes is needed. 
+    # Note: for proper mirroring at Eclispe, we probably do not want/need to maintain "times"
+    # But, we'll start off that way.
 	echo "rsync -p -t --recursive \"${eqFromDir}\" \"${eqToDir}\"" > ${promoteScriptLocationequinox}/${scriptName}
 	chmod -v ug=rwx,o-rwx ${promoteScriptLocationequinox}/${scriptName}
 else
