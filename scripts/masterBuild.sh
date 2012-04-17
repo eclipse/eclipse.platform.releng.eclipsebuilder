@@ -561,6 +561,8 @@ then
     echo " "
     echo
     echo "DEBUG: other interesting settings: " 
+    echo "buildId: $buildId"
+    echo "buildLabel: $buildLabel"
     echo "buildResults: $buildResults"
     echo "localUpdateSite: $localUpdateSite"
     echo "equinoxPostingDirectory: $equinoxPostingDirectory"
