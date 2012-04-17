@@ -761,7 +761,7 @@ rm -fr ${VERBOSE_REMOVES} "${buildRoot}/build/supportDir/src"
 runSDKBuild
 checkForErrorExit $? "Failed while building Eclipse-SDK"
 
-# if all ended well, put "promote script" in known location
+# if all ended well, put "promote scripts" in known locations
 promoteScriptLocationeclipse=/shared/eclipse/sdk/queue
 promoteScriptLocationequinox=/shared/eclipse/equinox/queue
 # directory should normall exist, but in case not
@@ -770,7 +770,11 @@ mkdir -p "${promoteScriptLocationequinox}"
 ptimestamp=$( date +%Y%m%d%H%M )
 scriptName=promote-${eclipseStream}-${buildType}-${buildId}-${ptimestamp}.sh
 echo "$buildRoot/syncDropLocation.sh $eclipseStream $buildType $buildId" > ${promoteScriptLocationeclipse}/${scriptName}
-echo "tbd" > ${promoteScriptLocationequinox}/${scriptName}
+chmod -v +x ${promoteScriptLocationeclipse}/${scriptName}
+eqFromDir=${equinoxPostingDirectory}/${buildId}
+eqToDir="/home/data/httpd/download.eclipse.org/equinox/drops/"
+echo " rsync -p -t --recursive --delete "${eqFromDir}" "${eqToDir}" > ${promoteScriptLocationequinox}/${scriptName}
+chmod -v +x ${promoteScriptLocationequinox}/${scriptName}
 
 echo "normal exit from $0"
 exit 0
