@@ -27,5 +27,6 @@ wget -O syncDropLocation.shsource http://git.eclipse.org/c/platform/eclipse.plat
 wget -O testBuild.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/testBuild.sh?h=$branchOrTag;
 
 # get this script itself (would have to run twice to make use changes, naturally)
-wget -O wgetFresh.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/wgetFresh.sh?h=$branchOrTag;
+# and has trouble "writing over itself" so we put in a file with 'NEW' suffix
+wget -O wgetFresh.shNEW http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/wgetFresh.sh?h=$branchOrTag;
 
