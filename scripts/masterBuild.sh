@@ -703,7 +703,7 @@ then
 	echo "MIME-Version: 1.0"
 	echo "Content-Type: text/plain; charset=utf-8"
 	echo "Subject: $eclipseStream Build: $buildId canceled. No changes detected (eom)"
-	echo ""
+	echo " "
 	) | /usr/lib/sendmail -t
 
       echo "No changes detected by autotagging. Mail sent. Build halted." 
