@@ -730,6 +730,8 @@ fi
         # can not have empty else clauses, so we'll have double test emails
         toAddress=david_williams@mindspring.com
      fi
+     reporttext=$( cat $submissionReportFilePath ) 
+     
 (
 echo "From: e4Builder@eclipse.org"
 echo "To: ${toAddress}"
