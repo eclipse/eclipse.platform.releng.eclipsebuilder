@@ -8,6 +8,20 @@
 #    buildType     (e.g. I or N) 
 #    buildId       (e.g. N20120415-2015)
 
+
+   if [[ $# != 3 ]]
+   then
+      # usage: 
+      scriptname=$(basename $0)
+      printf "\n\t%s\n" "This script, $scriptname requires three arguments, in order: "
+      printf "\t\t%s\t%s\n" "eclipseStream" "(e.g. 4.2 or 3.8) "
+      printf "\t\t%s\t%s\n" "buildType" "(e.g. I or N) "
+      printf "\t\t%s\t%s\n" "buildId" "(e.g. N20120415-2015) "
+      printf "\t%s\n" "for example," 
+      printf "\t%s\n\n" "./$scriptname 4.2 N N20120415-2015"
+      exit 1
+   fi
+
     eclipseStream=$1
     if [ -z "${eclipseStream}" ]
     then
