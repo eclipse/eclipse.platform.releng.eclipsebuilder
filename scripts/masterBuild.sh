@@ -186,12 +186,6 @@ runSDKBuild ()
           exit 128
    fi       
 
-    # TODO: it is confusing that buildId and buildLabel are the same
-    # I think traditionally, buildId has been $date-$time and 
-    # buildLabel been $buildType$buildId
-    # you can see this in some of the old build.property files: buildLabel=${buildType}.${buildId}
-    buildId=$buildType$date-$time
-    buildLabel=$buildId
     buildfile=$supportDir/$eclipsebuilder/buildAll.xml
 
     # TODO: we should make the these work off the defined java15home and java16home
@@ -480,6 +474,15 @@ processCommandLine ()
 
     buildTimestamp=${date}-${time}
     buildTag=$buildType$buildTimestamp
+    
+    # TODO: it is confusing that buildId and buildLabel are the same
+    # I think traditionally, buildId has been $date-$time and 
+    # buildLabel been $buildType$buildId
+    # you can see this in some of the old build.property files: buildLabel=${buildType}.${buildId}
+    # Note: this used to be set in the runSDKBuild function, but 
+    # are desired in some email messages, etc., before that runs. 
+    buildId=$buildType$date-$time
+    buildLabel=$buildId
 
     #TODO: for 3.8 builds, use "drops" for eclipse  
     postingDirectory=${siteDir}/eclipse/downloads/drops4
