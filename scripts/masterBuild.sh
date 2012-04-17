@@ -709,7 +709,7 @@ then
 	echo " "
 	) | /usr/lib/sendmail -t
 
-      echo "No changes detected by autotagging. Mail sent. Build halted." 
+      echo "No changes detected by autotagging. Mail sent. $eclipseStream Build: $buildId canceled." 
       exit 1
 # else continue building
 fi
@@ -751,5 +751,13 @@ rm -fr ${VERBOSE_REMOVES} "${buildRoot}/build/supportDir/src"
 
 runSDKBuild
 checkForErrorExit $? "Failed while building Eclipse-SDK"
+
+# if all ended well, put "promote script" is known location
+promoteScriptLocation=/shared/eclipse/sdk/dwqueue
+mkdir -p promoteScriptLocation
+ptimestamp=$( date +%Y%m%d%H%M )
+scriptName=promote${eclipseStream}${buildType}${buildId}-${ptimestamp}.sh
+echo "./syncDropLocation.sh $eclipseStream $buildType $buildId" > ${promoteScriptLocation}/${scriptName}
+
 echo "normal exit from $0"
 exit 0
