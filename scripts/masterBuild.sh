@@ -759,7 +759,7 @@ promoteScriptLocation=/shared/eclipse/sdk/dwqueue
 mkdir -p promoteScriptLocation
 ptimestamp=$( date +%Y%m%d%H%M )
 scriptName=promote${eclipseStream}${buildType}${buildId}-${ptimestamp}.sh
-echo "./syncDropLocation.sh $eclipseStream $buildType $buildId" > ${promoteScriptLocation}/${scriptName}
+echo "$buildRoot/syncDropLocation.sh $eclipseStream $buildType $buildId" > ${promoteScriptLocation}/${scriptName}
 
 echo "normal exit from $0"
 exit 0

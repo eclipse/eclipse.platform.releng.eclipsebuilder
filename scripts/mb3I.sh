@@ -46,4 +46,4 @@ then
 fi
 
 # production, routine version. Use 'testBuild.sh' to wrap for testing
-$buildRoot/masterBuild.sh -buildType I -eclipseStream 3.8 -buildRoot $buildRoot -mapVersionTag master
+DEBUG=true $buildRoot/masterBuild.sh -buildType I -eclipseStream 3.8 -buildRoot $buildRoot -mapVersionTag master 2>&1 | tee fullmasterBuildOutput.txt
