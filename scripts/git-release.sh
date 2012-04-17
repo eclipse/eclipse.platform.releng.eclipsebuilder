@@ -306,8 +306,10 @@ then
 	git tag -f $buildTag   #tag the map file change
 	checkForErrorExit $? "Could not tag repository"
 	
-	echo "git push"
-	git push
+	# we should push only what we've been working with, see bug 366279
+    # https://bugs.eclipse.org/bugs/show_bug.cgi?id=366279#c9
+	echo "git push origin $mapVersionTag"
+	git push origin $mapVersionTag
 	checkForErrorExit $? "Could not push to repository"
 	echo "git push tags"
 	git push --tags
