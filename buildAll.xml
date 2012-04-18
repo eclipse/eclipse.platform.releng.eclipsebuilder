@@ -1008,6 +1008,7 @@
 
         <antcall target="packMasterFeature" />
 
+        <echo message="making directory buildRepo: ${buildRepo}" />
         <mkdir dir="${buildRepo}" />
 
         <condition property="repoBaseline" value="${p2RepoURL}">
@@ -1025,6 +1026,8 @@
             file="${eclipse.build.configs}/../../extras/artifacts.xml"
             tofile="${buildDirectory}/formatRepo/artifacts.xml" />
 
+        <echo message="Mirroring main code: source repo: ${reposource}" />
+        <echo message="Mirroring main code: see log at ${buildlogs}/mirrorlog.txt" />
         <p2.mirror source="file:${reposource}" log="${buildlogs}/mirrorlog.txt"
             ignoreErrors="true">
             <destination compressed="true" name="${p2.repo.name}"
@@ -1056,8 +1059,11 @@
             </comparator>
         </p2.mirror>
 
+        <property name="testreposource" value="${buildDirectory}/buildRepoTests" />
+        <echo message="Mirroring test code: source repo: ${testreposource}" />
+        <echo message="Mirroring test code: see log at ${buildlogs}/mirrorlog.txt" />
         <!--mirror JUnit test bundles and test framework bundles to the repo -->
-        <p2.mirror source="file://${buildDirectory}/buildRepoTests"
+        <p2.mirror source="file://${testreposource}" log="${buildlogs}/mirrorlogTests.txt"
             ignoreErrors="true">
             <destination compressed="true" name="${p2.repo.name}"
                 location="file:${buildRepo}" append="true" format="file:${reposource}" />
@@ -1075,21 +1081,23 @@
 
         <antcall target="mirrorEMF" />
 
-
+        <property name="resultsRepoLocation" value="${updateSite}/${eclipseStream}-${buildType}-builds" />
+        <echo message="Create composite and add their child repos" />
+        <echo message="  composite at: ${resultsRepoLocation}" />
         <!--try create composite repository -->
         <p2.composite.artifact.repository.create
-            location="file://${updateSite}/${eclipseStream}-${buildType}-builds"
+            location="file://${resultsRepoLocation}"
             name="${p2.repo.name}" compressed="true" failOnExists="false" />
         <p2.composite.metadata.repository.create
-            location="file://${updateSite}/${eclipseStream}-${buildType}-builds"
+            location="file://${resultsRepoLocation}"
             name="${p2.repo.name}" compressed="true" failOnExists="false" />
 
         <!--add childRepo to composite repo -->
         <p2.composite.artifact.repository.add
-            location="file://${updateSite}/${eclipseStream}-${buildType}-builds"
+            location="file://${resultsRepoLocation}"
             child="${buildId}" />
         <p2.composite.metadata.repository.add
-            location="file://${updateSite}/${eclipseStream}-${buildType}-builds"
+            location="file://${resultsRepoLocation}"
             child="${buildId}" />
     </target>
 
