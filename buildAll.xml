@@ -154,10 +154,11 @@
         <property name="mapsProject" value="${buildDirectory}/maps/org.eclipse.releng" />
         <property name="configurationLocation" value="${mapsProject}/configuration" />
         
-        <!-- bug 376217: repos.properties is one of the files moved from eclispebuild to maps project  -->
-        <replace token="@localmirror@" file="${configurationLocation}/repos.properties"
+        <!-- bug 376217: repos.properties is one of the files moved from eclispebuild to maps project  
+             and into a common file, streamSpecific-build.properties -->
+        <replace token="@localmirror@" file="${configurationLocation}/streamSpecific-build.properties"
             value="${localmirror}" />
-        <loadproperties srcFile="${configurationLocation}/repos.properties" />
+        <loadproperties srcFile="${configurationLocation}/streamSpecific-build.properties" />
         <condition property="p2RepoURL" value="${p2repoI}">
             <equals arg1="${buildType}" arg2="I" />
         </condition>
