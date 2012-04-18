@@ -217,7 +217,7 @@
          /org.eclipse.releng/configuration/eclipseBuilderOverlays
      -->     
         
-        <copy todir="${builderDir}/org.eclipse.releng.eclipsebuilder " overwrite="true">
+        <copy verbose="true" failonerror="true" todir="${builderDir}/org.eclipse.releng.eclipsebuilder " overwrite="true">
                 <fileset dir="${builderDir}/src/maps/org.eclipse.releng/configuration/eclipseBuilderOverlays/">
                         <include name="**"/>
                 </fileset>
