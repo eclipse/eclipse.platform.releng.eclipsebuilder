@@ -3,6 +3,9 @@
 # path required when starting from cron job
 export PATH=/usr/local/bin:/usr/bin:/bin:
 
+# normally will alwyas be "master" except for tests or hot fixes
+eclipsebuilderBranch=${eclipsebuilderBranch:-"david_williams/38IBuilds"}
+
 # This file intended to be executed from cronjob
 # It basically assumes key files already exist in key directories, 
 # but the steps of getting those key files and directories are repeated here.
@@ -46,4 +49,4 @@ then
 fi
 
 # production, routine version. Use 'testBuild.sh' to wrap for testing
-DEBUG=true $buildRoot/masterBuild.sh -buildType I -eclipseStream 3.8 -buildRoot $buildRoot -mapVersionTag master 2>&1 | tee fullmasterBuildOutput.txt
+DEBUG=true $buildRoot/masterBuild.sh -buildType I -eclipseStream 3.8 -buildRoot $buildRoot -mapVersionTag david_williams/38IBuilds 2>&1 | tee fullmasterBuildOutput.txt

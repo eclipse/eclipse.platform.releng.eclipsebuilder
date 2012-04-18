@@ -86,7 +86,7 @@
         </parallel>
     </target>
 
-    <target name="init">
+    <target name="init" depends="streamSpecificInit">
         <echo message="DEBUG: echo properties at start of init in buildAll.xml" />
         <echoproperties />
 
@@ -142,23 +142,9 @@
         <property name="cvsuser" value=":dummycvsuser:" />
         <property name="mapsRepo" value="dummycvsmapsRepo" />
 
-        <!-- mapsProject is the "top" of the maps project after it has been 
-        checked out to the local working area (buildDirectory). 
-        TODO: its actually hard coded is scores of places as 
-        "${buildDirectory}/maps/org.eclipse.releng" but closest existing 
-        variable I could find what 'mapsRoot' which is 
-        ${buildDirectory}/maps/org.eclipse.releng/maps
-        so that (and others) should eventually be refactored to something like 
-        mapsRoot = ${mapsProject}/maps"
-        -->
-        <property name="mapsProject" value="${buildDirectory}/maps/org.eclipse.releng" />
-        <property name="configurationLocation" value="${mapsProject}/configuration" />
         
-        <!-- bug 376217: repos.properties is one of the files moved from eclispebuild to maps project  
-             and into a common file, streamSpecific-build.properties -->
-        <replace token="@localmirror@" file="${configurationLocation}/streamSpecific-build.properties"
-            value="${localmirror}" />
-        <loadproperties srcFile="${configurationLocation}/streamSpecific-build.properties" />
+        
+        <!-- these values should be coming from the streamSpecificProperties task/files -->
         <condition property="p2RepoURL" value="${p2repoI}">
             <equals arg1="${buildType}" arg2="I" />
         </condition>
@@ -201,6 +187,71 @@
 
     </target>
 
+    <target name="streamSpecificInit" unless="streamSpecificInitComplete" depends="getMapProject">
+        <echo message="DEBUG: executing streamSpectifcInit" />
+
+    <!-- mapsProject is the "top" of the maps project after it has been 
+    checked out to the local working area (buildDirectory). 
+    TODO: its actually hard coded is scores of places as 
+    "${buildDirectory}/maps/org.eclipse.releng" but closest existing 
+    variable I could find what 'mapsRoot' which is 
+    ${buildDirectory}/maps/org.eclipse.releng/maps
+    so that (and others) should eventually be refactored to something like 
+    mapsRoot = ${mapsProject}/maps"
+    -->
+    <property name="mapsProject" value="${buildDirectory}/maps/org.eclipse.releng" />
+    <property name="configurationLocation" value="${mapsProject}/configuration" />
+    
+    <!-- bug 376217: repos.properties is one of the files moved from eclispebuild to maps project  
+         and into a common file, streamSpecific-build.properties -->
+    <replace token="@localmirror@" file="${configurationLocation}/streamSpecific-build.properties"
+        value="${localmirror}" />
+    <!-- The reading/loading of the these streamSpecific-build.properties is critical to several 
+         stream specific areas of code, so may have to be moved "earlier"? Made it own task for 
+         depends on clauses? -->
+    <loadproperties srcFile="${configurationLocation}/streamSpecific-build.properties" />
+
+     <!-- no need to re-init the properties, once done (in this scope) 
+          so no one else can ever set streamSpecificInitComplete properties. 
+          It is our control property -->   
+     <property name="streamSpecificInitComplete" value="true" />   
+</target>
+    
+    <!-- Note: we have moved getting the maps project much earlier in the process 
+         that previous. They used to be retrieved in "customTaragets.xml", and 
+         still are, or could be, if needed, but those tasks should detect that 
+         they already are retrieved. I'm sure things could be re-arranged, but
+         with current code, to get stream specific values early enough, we will 
+         go ahead and get them early. -->
+    
+    <target name="getMapProject" depends="checkLocalMaps" unless="mapsLocal">
+        <echo message="DEBUG: echo properties at start of getMapProject" />
+        <echoproperties />
+        <!-- fail fast if these reuqired variables have not been defined yet -->
+        <fail unless="buildDirectory" message="buildDirectory not defined" />
+        <fail unless="commonrepo" message="commonrepo not defined" />
+        <fail unless="mapVersionTag" message="mapVersionTag not defined" />
+            
+        <property name="mapsGitRepo" value="${buildDirectory}/commonrepo" />
+        <mkdir dir="${mapsGitRepo}" />
+        <exec executable="git" dir="${mapsGitRepo}">
+            <arg line="clone ${commonrepo}" />
+        </exec>
+        <exec executable="git" dir="${mapsGitRepo}/eclipse.platform.releng.maps">
+            <arg line="checkout ${mapVersionTag}" />
+        </exec>
+        <mkdir dir="${buildDirectory}/maps" />
+        <exec executable="git" dir="${buildDirectory}/maps" output="${buildDirectory}/maps/maps.tar">
+            <arg line="archive --format=tar --remote=${mapsGitRepo}/eclipse.platform.releng.maps ${mapVersionTag} org.eclipse.releng" />
+        </exec>
+        <untar src="${buildDirectory}/maps/maps.tar" dest="${buildDirectory}/maps" />
+    </target>
+
+    <target name="checkLocalMaps">
+        <available property="mapsLocal" file="${buildDirectory}/maps" />
+    </target>
+
+    
     <target name="buildECFMasterFeature">
         <ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}"
             target="preBuild">
@@ -995,34 +1046,10 @@
             <iu id="org.eclipse.test.feature.group" version="" />
         </p2.mirror>
 
-        <!--mirror EMF features the repo -->
-        <!-- note: we use the same slicing options here, that we do in our 
-            customTargets.xml preSetup task where we created a runable to build against. 
-            Otherwise, we end up with LOTS of version in our repo. See bug 376552. -->
-        <!--TODO: it is not clear why we use comparator here, were are getting 
-            stuff from EMF's repo, and putting into ours. I guess we could open a bug 
-            on them if we found a problem? -->
-        <property name="emfRepoURL"
-            value="http://download.eclipse.org/modeling/emf/emf/updates/2.8milestones/base" />
-        <p2.mirror source="file:${emfRepoURL}" ignoreErrors="true">
-            <slicingOptions includeOptional="false"
-                includeNonGreedy="false" latestVersionOnly="true"
-                followStrict="true" />
-            <destination compressed="true" name="${p2.repo.name}"
-                location="file:${buildRepo}" append="true" format="file:${reposource}" />
-            <comparator
-                comparator="org.eclipse.equinox.p2.repository.tools.jar.comparator"
-                comparatorLog="${buildlogs}/comparatorlogtests.txt">
-                <repository location="${repoBaseline}" />
-            </comparator>
-            <iu id="org.eclipse.emf.common.feature.group" version="0.0.0" />
-            <iu id="org.eclipse.emf.ecore.feature.group" version="0.0.0" />
-            <iu id="org.eclipse.emf.common.source.feature.group"
-                version="0.0.0" />
-            <iu id="org.eclipse.emf.ecore.source.feature.group"
-                version="0.0.0" />
+        <!--mirror EMF features the repo (emfRepo, when needed, is initialized 
+           by streamSpecificInit. Do not initialize elsewehre.) -->
 
-        </p2.mirror>
+        <antcall target="mirrorEMF" />
 
 
         <!--try create composite repository -->
@@ -1042,6 +1069,42 @@
             child="${buildId}" />
     </target>
 
+    
+    
+    <!-- note: we use the same slicing options here, that we do in our 
+        customTargets.xml preSetup task where we created a runable to build against. 
+        Otherwise, we end up with LOTS of version in our repo. See bug 376552. -->
+    <!--TODO: it is not clear why we use comparator here, were are getting 
+        stuff from EMF's repo, and putting into ours. I guess we could open a bug 
+        on them if we found a problem? -->
+    <!-- the repo property is not expected to exist in 38 builds. 
+         in 4.2 builds, it much accurately point to the emfRepo to use 
+         to mirror from. 
+         Should be defined in "${mapsProject}/configuration/streamSpecific-build.properties", when needed. 
+         -->
+    <target name="mirrorEMF" if="emfRepoURL" depends="streamSpecificInit">
+        
+    <p2.mirror source="file:${emfRepoURL}" ignoreErrors="true">
+        <slicingOptions includeOptional="false"
+            includeNonGreedy="false" latestVersionOnly="true"
+            followStrict="true" />
+        <destination compressed="true" name="${p2.repo.name}"
+            location="file:${buildRepo}" append="true" format="file:${reposource}" />
+        <comparator
+            comparator="org.eclipse.equinox.p2.repository.tools.jar.comparator"
+            comparatorLog="${buildlogs}/comparatorlogtests.txt">
+            <repository location="${repoBaseline}" />
+        </comparator>
+        <iu id="org.eclipse.emf.common.feature.group" version="0.0.0" />
+        <iu id="org.eclipse.emf.ecore.feature.group" version="0.0.0" />
+        <iu id="org.eclipse.emf.common.source.feature.group"
+            version="0.0.0" />
+        <iu id="org.eclipse.emf.ecore.source.feature.group"
+            version="0.0.0" />
+
+    </p2.mirror>
+    </target>
+    
     <target name="packageRepos">
         <!--call to generate pde, rcp, cvs and jdt repos -->
         <ant antfile="${eclipse.build.configs}/repos/build.xml" />

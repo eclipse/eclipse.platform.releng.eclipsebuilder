@@ -138,7 +138,7 @@ updateEclipseBuilder() {
 
      # get fresh script. This is one case, we must get directly from repo since the purpose of the script 
      # is to get the eclipsebuilder! 
-    wget -O getEclipseBuilder.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/getEclipseBuilder.sh?h=master
+    wget -O getEclipseBuilder.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/getEclipseBuilder.sh?h=${eclipsebuilderBranch}
     chmod +x getEclipseBuilder.sh 
     
     # execute (in current directory) ... depends on some "exported" properties. 
@@ -435,7 +435,7 @@ processCommandLine ()
     
     # relies on export, since getEclipseBuilder is seperate script, 
     # and it does not use "command line pattern"
-    export eclipsebuilderBranch=master
+    export eclipsebuilderBranch=${eclipsebuilderBranch:-"master"}
     
     # NOTE: $eclipsebuilder must be defined before builderDir 
     export builderDir=${supportDir}/$eclipsebuilder
