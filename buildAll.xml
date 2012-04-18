@@ -190,6 +190,15 @@
     <target name="streamSpecificInit" unless="streamSpecificInitComplete" depends="getMapProject">
         <echo message="DEBUG: executing streamSpectifcInit" />
 
+            <!-- duplicated copy from 'init' for now -->
+            <condition property="commonrepo"
+                value="file:///gitroot/platform/eclipse.platform.releng.maps"
+                else="git://git.eclipse.org/gitroot/platform/eclipse.platform.releng.maps">
+
+                <equals arg1="${hudson}" arg2="true" />
+
+            </condition>       
+            
     <!-- mapsProject is the "top" of the maps project after it has been 
     checked out to the local working area (buildDirectory). 
     TODO: its actually hard coded is scores of places as 
