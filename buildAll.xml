@@ -129,7 +129,7 @@
         <loadfile property="buildDirectoryAbsolute" srcFile="${buildDirectoryAbsoluteTemp}"
             failonerror="false" />
         <!-- <delete file="${buildDirectoryAbsoluteTemp}" /> -->
-        <echo message="${buildDirectoryAbsolute}" />
+        <echo message="buildDirectoryAbsolute: ${buildDirectoryAbsolute}" />
 
         <!--set local mirror location depending if hudson is running -->
         <condition property="localmirror" value="download.eclipse.org">
@@ -188,7 +188,7 @@
     </target>
 
     <target name="streamSpecificInit" unless="streamSpecificInitComplete" depends="getMapProject">
-        <echo message="DEBUG: executing streamSpectifcInit" />
+        <echo message="DEBUG: executing streamSpecificInit" />
 
            
     <!-- mapsProject is the "top" of the maps project after it has been 
@@ -791,6 +791,9 @@
             <arg
                 line="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -d ${reposource}" />
         </exec>
+        
+        <!-- I wonder if it is these "removals" that were/are meant to prevent 
+             these provided features from being signed? -->
         <p2.remove.iu>
             <repository location="file://${reposource}" />
             <iu id="org.aspectj.runtime" />
