@@ -217,8 +217,10 @@
          files of eclipseBuild that are in the maps project, in the folder named
          /org.eclipse.releng/configuration/eclipseBuilderOverlays
      -->     
-    <!-- hard code for now, figure out right variables later -->
-        <property name="localbuilderDir" value="/shared/eclipse/eclipse3I/build/supportDir" />
+    <!-- TODO: semi hard code for now, figure out variables later 
+         maybe do away with "supportDir" segment? 
+         maybe call 'base' and other variables 'eclipsebulder.base'? -->
+        <property name="localbuilderDir" value="${base}/supportDir" />
         <copy verbose="true" failonerror="true" todir="${localbuilderDir}/org.eclipse.releng.eclipsebuilder" overwrite="true">
                 <fileset dir="${localbuilderDir}/src/maps/org.eclipse.releng/configuration/eclipseBuilderOverlays/">
                         <include name="**"/>
