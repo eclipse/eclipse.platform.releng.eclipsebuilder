@@ -142,9 +142,22 @@
         <property name="cvsuser" value=":dummycvsuser:" />
         <property name="mapsRepo" value="dummycvsmapsRepo" />
 
-        <replace token="@localmirror@" file="${basedir}/repos.properties"
+        <!-- mapsProject is the "top" of the maps project after it has been 
+        checked out to the local working area (buildDirectory). 
+        TODO: its actually hard coded is scores of places as 
+        "${buildDirectory}/maps/org.eclipse.releng" but closest existing 
+        variable I could find what 'mapsRoot' which is 
+        ${buildDirectory}/maps/org.eclipse.releng/maps
+        so that (and others) should eventually be refactored to something like 
+        mapsRoot = ${mapsProject}/maps"
+        -->
+        <property name="mapsProject" value="${buildDirectory}/maps/org.eclipse.releng" />
+        <property name="configurationLocation" value="${mapsProject}/configuration" />
+        
+        <!-- bug 376217: repos.properties is one of the files moved from eclispebuild to maps project  -->
+        <replace token="@localmirror@" file="${configurationLocation}/repos.properties"
             value="${localmirror}" />
-        <loadproperties srcFile="${basedir}/repos.properties" />
+        <loadproperties srcFile="${configurationLocation}/repos.properties" />
         <condition property="p2RepoURL" value="${p2repoI}">
             <equals arg1="${buildType}" arg2="I" />
         </condition>
