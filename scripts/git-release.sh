@@ -208,7 +208,9 @@ pull() {
 #Nothing to do for nightly builds, or if tag is "false" 
 # Note, if testbuildonly is set to true, (and I build) we actually let the work 
 # continue, for testing, but do not push or tag the repo
-if [[ ( "${testbuildonly}" != "true" ) &&  ( "${tag}" == "false" || "${buildType}" == "N" ) ]] 
+#if [[ ( "${testbuildonly}" != "true" ) &&  ( "${tag}" == "false" || "${buildType}" == "N" ) ]] 
+# we'll skip now, for test builds (takes too long). 
+if [[ ( "${testbuildonly}" == "true" ) ||  ( "${tag}" == "false" || "${buildType}" == "N" ) ]] 
 then
         echo "INFO: Skipping build tagging for nightly build or -tag false build"
         exit 0
