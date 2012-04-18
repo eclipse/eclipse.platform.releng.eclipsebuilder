@@ -219,7 +219,7 @@
      -->     
     <!-- hard code for now, figure out right variables later -->
         <property name="localbuilderDir" value="/shared/eclipse/eclipse3I/build/supportDir" />
-        <copy verbose="true" failonerror="true" todir="${localbuilderDir}/org.eclipse.releng.eclipsebuilder " overwrite="true">
+        <copy verbose="true" failonerror="true" todir="${localbuilderDir}/org.eclipse.releng.eclipsebuilder" overwrite="true">
                 <fileset dir="${localbuilderDir}/src/maps/org.eclipse.releng/configuration/eclipseBuilderOverlays/">
                         <include name="**"/>
                 </fileset>
