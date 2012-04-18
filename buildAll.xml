@@ -1069,7 +1069,7 @@
 
         <property name="testreposource" value="${buildDirectory}/buildRepoTests" />
         <echo message="Mirroring test code: source repo: ${testreposource}" />
-        <echo message="Mirroring test code: see log at ${buildlogs}/mirrorlog.txt" />
+        <echo message="Mirroring test code: see log at ${buildlogs}/mirrorlogTests.txt" />
         <!--mirror JUnit test bundles and test framework bundles to the repo -->
         <p2.mirror source="file://${testreposource}" log="${buildlogs}/mirrorlogTests.txt"
             ignoreErrors="true">
