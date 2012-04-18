@@ -203,6 +203,14 @@
     <property name="mapsProject" value="${buildDirectory}/maps/org.eclipse.releng" />
     <property name="configurationLocation" value="${mapsProject}/configuration" />
     
+        <!-- TODO: I moved (copied) this from init, probably only needs to be 
+        set once, but, needs to be set before loading the repo properties -->
+        <!--set local mirror location depending if hudson is running -->
+        <condition property="localmirror" value="download.eclipse.org">
+            <equals arg1="${hudson}" arg2="true" />
+        </condition>        
+        
+        
     <!-- bug 376217: repos.properties is one of the files moved from eclispebuild to maps project  
          and into a common file, streamSpecific-build.properties -->
     <replace token="@localmirror@" file="${configurationLocation}/streamSpecific-build.properties"
