@@ -4,7 +4,7 @@
 export PATH=/usr/local/bin:/usr/bin:/bin:
 
 # normally will alwyas be "master" except for tests or hot fixes
-eclipsebuilderBranch=${eclipsebuilderBranch:-"david_williams/38IBuilds"}
+export eclipsebuilderBranch=${eclipsebuilderBranch:-"david_williams/38IBuilds"}
 
 # This file intended to be executed from cronjob
 # It basically assumes key files already exist in key directories, 
