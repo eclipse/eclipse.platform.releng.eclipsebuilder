@@ -8,7 +8,7 @@
 
    <launcherArgs>
       <programArgs>-showsplash org.eclipse.platform --launcher.XXMaxPermSize 256m --launcher.defaultAction openFile</programArgs>
-      <vmArgs>-Xms40m -Xmx384m</vmArgs>
+      <vmArgs>-Xms40m -Xmx512m</vmArgs>
       <vmArgsMac>-Xdock:icon=../Resources/Eclipse.icns -XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
 
@@ -173,8 +173,8 @@ Java and all Java-based trademarks are trademarks of Oracle Corporation in the U
       <plugin id="org.eclipse.equinox.simpleconfigurator" autoStart="true" startLevel="1" />
       <plugin id="org.eclipse.update.configurator" autoStart="true" startLevel="3" />
       <property name="eclipse.buildId" value="@qualifier@" />
-      <property name="org.eclipse.update.reconcile" value="false" />                                        
-      <property name="osgi.bundles.defaultStartLevel" value="4" />   
+      <property name="org.eclipse.update.reconcile" value="false" />
+      <property name="osgi.bundles.defaultStartLevel" value="4" />
    </configurations>
 
 </product>
