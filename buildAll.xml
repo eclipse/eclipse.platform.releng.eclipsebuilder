@@ -240,6 +240,15 @@
             </fileset>
         </copy>
 
+        <!-- now that we've done that little merge, let's "fix up" eclipseBuild stuff that depends 
+        on exact version numbers -->
+        <replace summary="true" dir="${localbuilderDir}/org.eclipse.releng.eclipsebuilder" token="@eclipseStream@" value="${eclipseStream}" />
+        <replace summary="true" dir="${localbuilderDir}/org.eclipse.releng.eclipsebuilder" token="@eclipseStreamMajor@" value="${eclipseStreamMajor}" />
+        <replace summary="true" dir="${localbuilderDir}/org.eclipse.releng.eclipsebuilder" token="@eclipseStreamMinor@" value="${eclipseStreamMinor}" />
+        <!-- seems unlikely we'd ever need this all by itself, and not just use eclipseStream, which should be all three fields 
+        <replace summary="true" dir="${localbuilderDir}/org.eclipse.releng.eclipsebuilder" token="@eclipseStreamService@" value="${eclipseStreamService}" />
+        -->
+        
         <!-- no need to re-init the properties, once done (in this scope) 
             so no one else can ever set streamSpecificInitComplete properties. It is 
             our control property -->

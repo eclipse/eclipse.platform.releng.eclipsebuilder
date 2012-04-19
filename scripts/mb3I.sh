@@ -49,4 +49,4 @@ then
 fi
 
 # production, routine version. Use 'testBuild.sh' to wrap for testing
-DEBUG=true $buildRoot/masterBuild.sh -buildType I -eclipseStream 3.8 -buildRoot $buildRoot -mapVersionTag david_williams/38IBuilds 2>&1 | tee fullmasterBuildOutput.txt
+DEBUG=true $buildRoot/masterBuild.sh -buildType I -eclipseStream 3.8.0 -buildRoot $buildRoot -mapVersionTag david_williams/38IBuilds 2>&1 | tee fullmasterBuildOutput.txt
