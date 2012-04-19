@@ -5,7 +5,7 @@
 # over inclusion. 
 
 # codifying the branch (or tag) to use, so it can be set/chagned in one place
-branchOrTag=master
+branchOrTag=david_williams/38IBuilds
 
 # tags: 
 # http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/wgetFresh.sh?tag=vI20120417-0700

@@ -3,6 +3,9 @@
 # path required when starting from cron job
 export PATH=/usr/local/bin:/usr/bin:/bin:
 
+# normally will alwyas be "master" except for tests or hot fixes
+export eclipsebuilderBranch=${eclipsebuilderBranch:-"david_williams/38IBuilds"}
+
 # This file intended to be executed from cronjob
 # It basically assumes key files already exist in key directories, 
 # but the steps of getting those key files and directories are repeated here.
@@ -17,14 +20,14 @@ cd $buildRoot
 # one still is
 date >> buildstarted.txt
 
-wget -O mb3I.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb3I.sh?h=master;
+wget -O mb3I.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb3I.sh?h=${eclipsebuilderBranch}
 rccode=$?
 if [[ $rccode != 0 ]] 
 then 
     echo "ERROR: wget could not fetch init script. Return code: $rccode"
     exit $rccode
 fi
-wget -O masterBuild.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/masterBuild.sh?h=master;
+wget -O masterBuild.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/masterBuild.sh?h=${eclipsebuilderBranch}
 rccode=$?
 if [[ $rccode != 0 ]] 
 then 
@@ -46,4 +49,4 @@ then
 fi
 
 # production, routine version. Use 'testBuild.sh' to wrap for testing
-DEBUG=true $buildRoot/masterBuild.sh -buildType I -eclipseStream 3.8 -buildRoot $buildRoot -mapVersionTag master 2>&1 | tee fullmasterBuildOutput.txt
+DEBUG=true $buildRoot/masterBuild.sh -buildType I -eclipseStream 3.8.0 -buildRoot $buildRoot -mapVersionTag david_williams/38IBuilds 2>&1 | tee fullmasterBuildOutput.txt

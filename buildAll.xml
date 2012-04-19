@@ -19,8 +19,9 @@
     <fail unless="postingDirectory" message="postingDirectory must be defined" />
     <fail unless="updateSite" message="updateSite must be defined" />
     <fail unless="eclipseStream" message="eclipseStream must be defined" />
-    <fail unless="java15home" message="java15home should be defined. Required for signing" />
-        
+    <fail unless="java15home"
+        message="java15home should be defined. Required for signing" />
+
 
     <!--location of PDE Build configuration files for builder and packager -->
     <property name="eclipse.build.configs" value="${basedir}/eclipse/buildConfigs" />
@@ -86,7 +87,7 @@
         </parallel>
     </target>
 
-    <target name="init">
+    <target name="init" depends="streamSpecificInit">
         <echo message="DEBUG: echo properties at start of init in buildAll.xml" />
         <echoproperties />
 
@@ -129,7 +130,7 @@
         <loadfile property="buildDirectoryAbsolute" srcFile="${buildDirectoryAbsoluteTemp}"
             failonerror="false" />
         <!-- <delete file="${buildDirectoryAbsoluteTemp}" /> -->
-        <echo message="${buildDirectoryAbsolute}" />
+        <echo message="buildDirectoryAbsolute: ${buildDirectoryAbsolute}" />
 
         <!--set local mirror location depending if hudson is running -->
         <condition property="localmirror" value="download.eclipse.org">
@@ -142,9 +143,10 @@
         <property name="cvsuser" value=":dummycvsuser:" />
         <property name="mapsRepo" value="dummycvsmapsRepo" />
 
-        <replace token="@localmirror@" file="${basedir}/repos.properties"
-            value="${localmirror}" />
-        <loadproperties srcFile="${basedir}/repos.properties" />
+
+
+        <!-- these values should be coming from the streamSpecificProperties 
+            task/files -->
         <condition property="p2RepoURL" value="${p2repoI}">
             <equals arg1="${buildType}" arg2="I" />
         </condition>
@@ -186,6 +188,129 @@
         </condition>
 
     </target>
+
+    <target name="streamSpecificInit" unless="streamSpecificInitComplete"
+        depends="getMapProject">
+        <echo message="DEBUG: executing streamSpecificInit" />
+
+
+        <!-- mapsProject is the "top" of the maps project after it has been 
+            checked out to the local working area (buildDirectory). TODO: its actually 
+            hard coded is scores of places as "${buildDirectory}/maps/org.eclipse.releng" 
+            but closest existing variable I could find what 'mapsRoot' which is ${buildDirectory}/maps/org.eclipse.releng/maps 
+            so that (and others) should eventually be refactored to something like mapsRoot 
+            = ${mapsProject}/maps" -->
+        <property name="mapsProject"
+            value="${buildDirectory}/maps/org.eclipse.releng" />
+        <property name="configurationLocation" value="${mapsProject}/configuration" />
+
+        <!-- TODO: I moved (copied) this from init, probably only needs to 
+            be set once, but, needs to be set before loading the repo properties -->
+        <!--set local mirror location depending if hudson is running -->
+        <condition property="localmirror" value="download.eclipse.org">
+            <equals arg1="${hudson}" arg2="true" />
+        </condition>
+
+
+        <!-- bug 376217: repos.properties is one of the files moved from 
+            eclispebuild to maps project and into a common file, streamSpecific-build.properties -->
+        <replace token="@localmirror@"
+            file="${configurationLocation}/streamSpecific-build.properties"
+            value="${localmirror}" />
+        <!-- The reading/loading of the these streamSpecific-build.properties 
+            is critical to several stream specific areas of code, so may have to be moved 
+            "earlier"? Made it own task for depends on clauses? -->
+        <loadproperties
+            srcFile="${configurationLocation}/streamSpecific-build.properties" />
+
+        <!-- now that we have maps (and we already have eclipseBuider from 
+            masterBuild.sh, before calling buildAll.xml, then now its time to "overlay" 
+            the stream specific files of eclipseBuild that are in the maps project, in 
+            the folder named /org.eclipse.releng/configuration/eclipseBuilderOverlays -->
+        <!-- TODO: semi hard code for now, figure out variables later maybe 
+            do away with "supportDir" segment? maybe call 'base' and other variables 
+            'eclipsebulder.base'? -->
+        <property name="localbuilderDir" value="${base}/supportDir" />
+        <copy verbose="true" failonerror="true"
+            todir="${localbuilderDir}/org.eclipse.releng.eclipsebuilder"
+            overwrite="true">
+            <fileset
+                dir="${localbuilderDir}/src/maps/org.eclipse.releng/configuration/eclipseBuilderOverlays/">
+                <include name="**" />
+            </fileset>
+        </copy>
+
+        <!-- now that we've done that little merge, let's "fix up" eclipseBuild stuff that depends 
+        on exact version numbers -->
+        <replace summary="true" dir="${localbuilderDir}/org.eclipse.releng.eclipsebuilder" token="@eclipseStream@" value="${eclipseStream}" />
+        <replace summary="true" dir="${localbuilderDir}/org.eclipse.releng.eclipsebuilder" token="@eclipseStreamMajor@" value="${eclipseStreamMajor}" />
+        <replace summary="true" dir="${localbuilderDir}/org.eclipse.releng.eclipsebuilder" token="@eclipseStreamMinor@" value="${eclipseStreamMinor}" />
+        <!-- seems unlikely we'd ever need this all by itself, and not just use eclipseStream, which should be all three fields 
+        <replace summary="true" dir="${localbuilderDir}/org.eclipse.releng.eclipsebuilder" token="@eclipseStreamService@" value="${eclipseStreamService}" />
+        -->
+        
+        <!-- no need to re-init the properties, once done (in this scope) 
+            so no one else can ever set streamSpecificInitComplete properties. It is 
+            our control property -->
+        <property name="streamSpecificInitComplete" value="true" />
+    </target>
+
+    <!-- Note: we have moved getting the maps project much earlier in the 
+        process that previous. They used to be retrieved in "customTaragets.xml", 
+        and still are, or could be, if needed, but those tasks should detect that 
+        they already are retrieved. I'm sure things could be re-arranged, but with 
+        current code, to get stream specific values early enough, we will go ahead 
+        and get them early. -->
+
+    <!-- note: no check for "if maps local". Here we want to be sure to get 
+        a fresh copy, but only once -->
+    <target name="getMapProject" unless="mapProjectFetched">
+        <!-- fail fast if these reuqired variables have not been defined 
+            yet -->
+        <fail unless="buildDirectory" message="buildDirectory not defined" />
+        <fail unless="mapVersionTag" message="mapVersionTag not defined" />
+        <fail unless="hudson" message="hudson(build.eclipse.org) not defined" />
+        <!-- duplicated copy from 'init' for now -->
+        <condition property="commonrepo"
+            value="file:///gitroot/platform/eclipse.platform.releng.maps"
+            else="git://git.eclipse.org/gitroot/platform/eclipse.platform.releng.maps">
+
+            <equals arg1="${hudson}" arg2="true" />
+
+        </condition>
+        <echo message="DEBUG: echo properties at start of getMapProject" />
+        <echoproperties />
+
+
+        <property name="mapsGitRepo" value="${buildDirectory}/commonrepo" />
+        <mkdir dir="${mapsGitRepo}" />
+        <exec failonerror="true" executable="git" dir="${mapsGitRepo}">
+            <arg line="clone ${commonrepo}" />
+        </exec>
+        <exec failonerror="true" executable="git"
+            dir="${mapsGitRepo}/eclipse.platform.releng.maps">
+            <arg line="checkout ${mapVersionTag}" />
+        </exec>
+        <delete dir="${buildDirectory}/maps" />
+        <mkdir dir="${buildDirectory}/maps" />
+        <!-- why not copy from common repo? why tar? <exec failonerror="true" 
+            executable="git" dir="${buildDirectory}/maps" output="${buildDirectory}/maps/maps.tar"> 
+            <arg line="archive - -format=tar - -remote=${mapsGitRepo}/eclipse.platform.releng.maps 
+            ${mapVersionTag} org.eclipse.releng" /> </exec> <untar overwrite="true" src="${buildDirectory}/maps/maps.tar" 
+            dest="${buildDirectory}/maps" /> -->
+        <copy overwrite="true" failonerror="true" verbose="true"
+            todir="${buildDirectory}/maps">
+            <fileset dir="${mapsGitRepo}/eclipse.platform.releng.maps">
+                <include name="**" />
+            </fileset>
+        </copy>
+        <property name="mapProjectFetched" value="true" />
+    </target>
+
+    <target name="checkLocalMaps">
+        <available property="mapsLocal" file="${buildDirectory}/maps" />
+    </target>
+
 
     <target name="buildECFMasterFeature">
         <ant antfile="build.xml" dir="${eclipse.pdebuild.scripts}"
@@ -694,6 +819,9 @@
             <arg
                 line="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -d ${reposource}" />
         </exec>
+
+        <!-- I wonder if it is these "removals" that were/are meant to prevent 
+            these provided features from being signed? -->
         <p2.remove.iu>
             <repository location="file://${reposource}" />
             <iu id="org.aspectj.runtime" />
@@ -919,6 +1047,7 @@
 
         <antcall target="packMasterFeature" />
 
+        <echo message="making directory buildRepo: ${buildRepo}" />
         <mkdir dir="${buildRepo}" />
 
         <condition property="repoBaseline" value="${p2RepoURL}">
@@ -936,6 +1065,9 @@
             file="${eclipse.build.configs}/../../extras/artifacts.xml"
             tofile="${buildDirectory}/formatRepo/artifacts.xml" />
 
+        <echo message="Mirroring main code: source repo: ${reposource}" />
+        <echo
+            message="Mirroring main code: see log at ${buildlogs}/mirrorlog.txt" />
         <p2.mirror source="file:${reposource}" log="${buildlogs}/mirrorlog.txt"
             ignoreErrors="true">
             <destination compressed="true" name="${p2.repo.name}"
@@ -967,8 +1099,12 @@
             </comparator>
         </p2.mirror>
 
+        <property name="testreposource" value="${buildDirectory}/buildRepoTests" />
+        <echo message="Mirroring test code: source repo: ${testreposource}" />
+        <echo
+            message="Mirroring test code: see log at ${buildlogs}/mirrorlogTests.txt" />
         <!--mirror JUnit test bundles and test framework bundles to the repo -->
-        <p2.mirror source="file://${buildDirectory}/buildRepoTests"
+        <p2.mirror source="file://${testreposource}" log="${buildlogs}/mirrorlogTests.txt"
             ignoreErrors="true">
             <destination compressed="true" name="${p2.repo.name}"
                 location="file:${buildRepo}" append="true" format="file:${reposource}" />
@@ -981,15 +1117,44 @@
             <iu id="org.eclipse.test.feature.group" version="" />
         </p2.mirror>
 
-        <!--mirror EMF features the repo -->
-        <!-- note: we use the same slicing options here, that we do in our 
-            customTargets.xml preSetup task where we created a runable to build against. 
-            Otherwise, we end up with LOTS of version in our repo. See bug 376552. -->
-        <!--TODO: it is not clear why we use comparator here, were are getting 
-            stuff from EMF's repo, and putting into ours. I guess we could open a bug 
-            on them if we found a problem? -->
-        <property name="emfRepoURL"
-            value="http://download.eclipse.org/modeling/emf/emf/updates/2.8milestones/base" />
+        <!--mirror EMF features the repo (emfRepo, when needed, is initialized 
+            by streamSpecificInit. Do not initialize elsewehre.) -->
+
+        <antcall target="mirrorEMF" />
+
+        <property name="resultsRepoLocation"
+            value="${updateSite}/${eclipseStream}-${buildType}-builds" />
+        <echo message="Create composite and add their child repos" />
+        <echo message="  composite at: ${resultsRepoLocation}" />
+        <!--try create composite repository -->
+        <p2.composite.artifact.repository.create
+            location="file://${resultsRepoLocation}" name="${p2.repo.name}"
+            compressed="true" failOnExists="false" />
+        <p2.composite.metadata.repository.create
+            location="file://${resultsRepoLocation}" name="${p2.repo.name}"
+            compressed="true" failOnExists="false" />
+
+        <!--add childRepo to composite repo -->
+        <p2.composite.artifact.repository.add
+            location="file://${resultsRepoLocation}" child="${buildId}" />
+        <p2.composite.metadata.repository.add
+            location="file://${resultsRepoLocation}" child="${buildId}" />
+    </target>
+
+
+
+    <!-- note: we use the same slicing options here, that we do in our customTargets.xml 
+        preSetup task where we created a runable to build against. Otherwise, we 
+        end up with LOTS of version in our repo. See bug 376552. -->
+    <!--TODO: it is not clear why we use comparator here, were are getting 
+        stuff from EMF's repo, and putting into ours. I guess we could open a bug 
+        on them if we found a problem? -->
+    <!-- the repo property is not expected to exist in 38 builds. in 4.2 
+        builds, it much accurately point to the emfRepo to use to mirror from. Should 
+        be defined in "${mapsProject}/configuration/streamSpecific-build.properties", 
+        when needed. -->
+    <target name="mirrorEMF" if="emfRepoURL" depends="streamSpecificInit">
+
         <p2.mirror source="file:${emfRepoURL}" ignoreErrors="true">
             <slicingOptions includeOptional="false"
                 includeNonGreedy="false" latestVersionOnly="true"
@@ -1009,23 +1174,6 @@
                 version="0.0.0" />
 
         </p2.mirror>
-
-
-        <!--try create composite repository -->
-        <p2.composite.artifact.repository.create
-            location="file://${updateSite}/${eclipseStream}-${buildType}-builds"
-            name="${p2.repo.name}" compressed="true" failOnExists="false" />
-        <p2.composite.metadata.repository.create
-            location="file://${updateSite}/${eclipseStream}-${buildType}-builds"
-            name="${p2.repo.name}" compressed="true" failOnExists="false" />
-
-        <!--add childRepo to composite repo -->
-        <p2.composite.artifact.repository.add
-            location="file://${updateSite}/${eclipseStream}-${buildType}-builds"
-            child="${buildId}" />
-        <p2.composite.metadata.repository.add
-            location="file://${updateSite}/${eclipseStream}-${buildType}-builds"
-            child="${buildId}" />
     </target>
 
     <target name="packageRepos">

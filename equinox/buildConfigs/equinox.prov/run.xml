@@ -1,6 +1,9 @@
 <project name="provisioning build" default="build">
 
 	<target name="init">
+	    <!-- eclipseStream was added for bug 376217 so we fail fast if we 
+	         do not actually have access to it here -->
+	    <fail unless="eclipseStream" />
 		<property name="p2.root" value="${buildDirectory}/${buildId}/p2temp" />
 		<mkdir dir="${p2.root}" />
 		<property name="p2.output.base" value="${p2.root}/equinox.p2.build" />
@@ -128,18 +131,21 @@
 		<property name="p2.agent.version" value="1.1.0.${buildId}" />
 		<property name="equinox.starterkit.version" value="1.0.0.${buildId}" />
 		<property name="pde.product.version" value="1.0.0.${buildId}" />
-		<property name="sdk.version" value="4.2.0.${buildId}" />
+		<property name="sdk.version" value="${eclipseStream}.${buildId}" />
 	</target>
 
 	<target name="build" depends="init">
-		<parallel failonany="true" threadCount='4'>
-		<!--	<antcall target="provision.agent" />
-			<antcall target="provision.starterkit" /> -->
+	    <!-- I removed this "parallel" element, because it made it harder to debug 
+	         output. But, it can and should be added back once everything is running 
+	         smoothly -->
+	    <!--	<parallel failonany="true" threadCount='4'>  -->
+		<!--	<antcall target="provision.agent" />  -->
+	    <!--	<antcall target="provision.starterkit" /> -->
 			<!-- <antcall target="provision.pdeproduct" /> -->
 			<antcall target="provision.sdk" />
 			<antcall target="provision.platform" />
 			<!-- <antcall target="provision.platformsdk" /> -->
-		</parallel>
+	    <!-- </parallel> -->
 		<antcall target="zip.install" />
 		<mkdir dir="${postingDirectory}/${buildLabel}/checksum" />
 		<exec executable="sh" dir="${postingDirectory}/${buildLabel}">
@@ -348,7 +354,7 @@
 
 <target name="provision.sdk">
     <echo message="DEBUG: echoproperties at start of provision.sdk" />
-    <!-- <echoproperties/> -->
+    <echoproperties/> 
 	<antcall target="run.director">
 		<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
 		<param name="p2.director.version" value="${sdk.version}" />
@@ -520,7 +526,7 @@
 
 <target name="provision.platform">
     <echo message="DEBUG: echoproperties at start of provision.platform" />
-    <!-- <echoproperties/> -->
+    <echoproperties/>
 	<antcall target="run.director">
 		<param name="p2.director.installIU" value="org.eclipse.platform.ide" />
 		<param name="p2.director.version" value="${sdk.version}" />

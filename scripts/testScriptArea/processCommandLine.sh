@@ -162,7 +162,7 @@ processCommandLine ()
     basebuilderBranch=${basebuilderBranch:-R4_2_primary}
     # relies on export, since getEclipseBuilder is seperate script, 
     # and it does not use "command line pattern"
-    export eclipsebuilderBranch=master
+    export eclipsebuilderBranch=${eclipsebuilderBranch:-"master"}
 
     # if timestamp not set, compute it from "now"
     date=${date:-$(date +%Y%m%d)}

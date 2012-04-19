@@ -46,7 +46,7 @@ then
 fi
 
 # debug mode
-DEBUG=true $buildRoot/masterBuild.sh -buildType I -eclipseStream 4.2 -buildRoot $buildRoot -mapVersionTag R4_HEAD 2>&1 | tee fullmasterBuildOutput.txt
+DEBUG=true $buildRoot/masterBuild.sh -buildType I -eclipseStream 4.2.0 -buildRoot $buildRoot -mapVersionTag R4_HEAD 2>&1 | tee fullmasterBuildOutput.txt
 
 # production, routine version. Use 'testBuild.sh' to wrap for testing
 # $buildRoot/masterBuild.sh -buildType I -eclipseStream 4.2 -buildRoot $buildRoot -mapVersionTag R4_HEAD
