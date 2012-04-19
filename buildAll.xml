@@ -291,8 +291,8 @@
             dest="${buildDirectory}/maps" /> -->
         <copy overwrite="true" failonerror="true" verbose="true"
             todir="${buildDirectory}/maps">
-            <fileset dir="${mapsGitRepo}">
-                <include name="eclipse.platform.releng.maps/**" />
+            <fileset dir="${mapsGitRepo}/eclipse.platform.releng.maps">
+                <include name="**" />
             </fileset>
         </copy>
         <property name="mapProjectFetched" value="true" />
