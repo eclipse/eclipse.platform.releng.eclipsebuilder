@@ -248,7 +248,13 @@
          with current code, to get stream specific values early enough, we will 
          go ahead and get them early. -->
     
-    <target name="getMapProject" depends="checkLocalMaps" unless="mapsLocal">
+    <!-- note: no check for "if maps local". Here we want to be sure to get fresh copies -->
+    <target name="getMapProject" depends="checkLocalMaps" >
+        <!-- fail fast if these reuqired variables have not been defined yet -->
+        <fail unless="buildDirectory" message="buildDirectory not defined" />
+        <fail unless="commonrepo" message="commonrepo not defined" />
+        <fail unless="mapVersionTag" message="mapVersionTag not defined" />
+        <fail unless="hudson" message="hudson(build.eclipse.org) not defined" />
         <!-- duplicated copy from 'init' for now -->
         <condition property="commonrepo"
             value="file:///gitroot/platform/eclipse.platform.releng.maps"
@@ -259,24 +265,23 @@
         </condition>       
         <echo message="DEBUG: echo properties at start of getMapProject" />
         <echoproperties />
-        <!-- fail fast if these reuqired variables have not been defined yet -->
-        <fail unless="buildDirectory" message="buildDirectory not defined" />
-        <fail unless="commonrepo" message="commonrepo not defined" />
-        <fail unless="mapVersionTag" message="mapVersionTag not defined" />
+
             
         <property name="mapsGitRepo" value="${buildDirectory}/commonrepo" />
         <mkdir dir="${mapsGitRepo}" />
-        <exec executable="git" dir="${mapsGitRepo}">
+        <exec failonerror="true" executable="git" dir="${mapsGitRepo}">
             <arg line="clone ${commonrepo}" />
         </exec>
-        <exec executable="git" dir="${mapsGitRepo}/eclipse.platform.releng.maps">
+        <exec failonerror="true" executable="git" dir="${mapsGitRepo}/eclipse.platform.releng.maps">
             <arg line="checkout ${mapVersionTag}" />
         </exec>
+        <delete dir="${buildDirectory}/maps"/>
         <mkdir dir="${buildDirectory}/maps" />
-        <exec executable="git" dir="${buildDirectory}/maps" output="${buildDirectory}/maps/maps.tar">
+        <!-- why not copy from common repo? why tar? -->
+        <exec failonerror="true" executable="git" dir="${buildDirectory}/maps" output="${buildDirectory}/maps/maps.tar">
             <arg line="archive --format=tar --remote=${mapsGitRepo}/eclipse.platform.releng.maps ${mapVersionTag} org.eclipse.releng" />
         </exec>
-        <untar src="${buildDirectory}/maps/maps.tar" dest="${buildDirectory}/maps" />
+        <untar overwrite="true" src="${buildDirectory}/maps/maps.tar" dest="${buildDirectory}/maps" />
     </target>
 
     <target name="checkLocalMaps">

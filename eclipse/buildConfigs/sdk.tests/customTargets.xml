@@ -34,6 +34,9 @@
 	<!-- Replace values for mapsCheckoutTag as desired. -->
 	<!-- ===================================================================== -->
 	<target name="getMapFiles" depends="checkLocalMaps" unless="mapsLocal">
+    <echo message="DEBUG: getMapFiles (unexpected?) getting fresh version" />
+    <echo message="       properties at start of getMapFiles" /> 
+    <echoproperties />
 		<property name="mapsGitRepo" value="${buildDirectory}/commonrepo" />
 		<mkdir dir="${mapsGitRepo}" />
 		<exec executable="git" dir="${mapsGitRepo}">

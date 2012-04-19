@@ -41,7 +41,9 @@
     <!-- ===================================================================== -->
 
     <target name="getMapFiles" depends="checkLocalMaps" unless="mapsLocal">
-        <echoproperties description="properties at start of get maps, in master." />
+        <echo message="DEBUG: getMapFiles (unexpected?) getting fresh version" />
+        <echo message="       properties at start of getMapFiles" /> 
+        <echoproperties />
         <property name="mapsGitRepo" value="${buildDirectory}/commonrepo" />
         <mkdir dir="${mapsGitRepo}" />
         <exec executable="git" dir="${mapsGitRepo}">
