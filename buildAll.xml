@@ -248,8 +248,8 @@
          with current code, to get stream specific values early enough, we will 
          go ahead and get them early. -->
     
-    <!-- note: no check for "if maps local". Here we want to be sure to get fresh copies -->
-    <target name="getMapProject" depends="checkLocalMaps" >
+    <!-- note: no check for "if maps local". Here we want to be sure to get a fresh copy, but only once -->
+    <target name="getMapProject" unless="mapProjectFetched" >
         <!-- fail fast if these reuqired variables have not been defined yet -->
         <fail unless="buildDirectory" message="buildDirectory not defined" />
         <fail unless="mapVersionTag" message="mapVersionTag not defined" />
@@ -276,11 +276,17 @@
         </exec>
         <delete dir="${buildDirectory}/maps"/>
         <mkdir dir="${buildDirectory}/maps" />
-        <!-- why not copy from common repo? why tar? -->
+        <!-- why not copy from common repo? why tar? 
         <exec failonerror="true" executable="git" dir="${buildDirectory}/maps" output="${buildDirectory}/maps/maps.tar">
-            <arg line="archive --format=tar --remote=${mapsGitRepo}/eclipse.platform.releng.maps ${mapVersionTag} org.eclipse.releng" />
+            <arg line="archive - -format=tar - -remote=${mapsGitRepo}/eclipse.platform.releng.maps ${mapVersionTag} org.eclipse.releng" />
         </exec>
         <untar overwrite="true" src="${buildDirectory}/maps/maps.tar" dest="${buildDirectory}/maps" />
+        -->
+        <copy overwrite="true" failonerror="true" verbose="true" todir="${buildDirectory}/maps" >
+        <fileset dir="${mapsGitRepo}" />
+           <include name="eclipse.platform.releng.maps/**"/>
+        </copy>
+        <property name="mapProjectFetched" value="true" />
     </target>
 
     <target name="checkLocalMaps">
