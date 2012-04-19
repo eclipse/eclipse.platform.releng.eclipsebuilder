@@ -252,7 +252,6 @@
     <target name="getMapProject" depends="checkLocalMaps" >
         <!-- fail fast if these reuqired variables have not been defined yet -->
         <fail unless="buildDirectory" message="buildDirectory not defined" />
-        <fail unless="commonrepo" message="commonrepo not defined" />
         <fail unless="mapVersionTag" message="mapVersionTag not defined" />
         <fail unless="hudson" message="hudson(build.eclipse.org) not defined" />
         <!-- duplicated copy from 'init' for now -->
