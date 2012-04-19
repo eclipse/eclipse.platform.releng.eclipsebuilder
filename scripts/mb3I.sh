@@ -4,7 +4,7 @@
 export PATH=/usr/local/bin:/usr/bin:/bin:
 
 # normally will alwyas be "master" except for tests or hot fixes
-export eclipsebuilderBranch=${eclipsebuilderBranch:-"david_williams/38IBuilds"}
+export eclipsebuilderBranch=${eclipsebuilderBranch:-"master"}
 
 # This file intended to be executed from cronjob
 # It basically assumes key files already exist in key directories, 
@@ -49,4 +49,4 @@ then
 fi
 
 # production, routine version. Use 'testBuild.sh' to wrap for testing
-DEBUG=true $buildRoot/masterBuild.sh -buildType I -eclipseStream 3.8.0 -buildRoot $buildRoot -mapVersionTag david_williams/38IBuilds 2>&1 | tee fullmasterBuildOutput.txt
+DEBUG=true $buildRoot/masterBuild.sh -buildType I -eclipseStream 3.8.0 -buildRoot $buildRoot -mapVersionTag master 2>&1 | tee fullmasterBuildOutput.txt
