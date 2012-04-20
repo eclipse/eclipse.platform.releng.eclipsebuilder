@@ -9,8 +9,8 @@ function syncRepoSite ()
     eclipseStream=$1
     if [ -z "${eclipseStream}" ]
     then
-       echo "must provide eclispeStream as first argumnet, for this function $0"
-       return 1;
+        echo "must provide eclispeStream as first argumnet, for this function $0"
+        return 1;
     fi
 
 
@@ -20,11 +20,23 @@ function syncRepoSite ()
         echo "must provide buildType as second argumnet, for this function $0"
         return 1;
     fi
-    
-    eclipseStreamMajor=${eclipseStream:0:1}
-    echo "buildType: $buildType"
+
+    # contrary to intuition (and previous behavior, bash 3.1) do NOT use quotes around right side of expression. 
+    if [[ "${eclipseStream}" =~ ([[:digit:]]*)\.([[:digit:]]*)\.([[:digit:]]*) ]]
+    then
+        eclipseStreamMajor=${BASH_REMATCH[1]} 
+        eclipseStreamMinor=${BASH_REMATCH[2]} 
+        eclipseStreamService=${BASH_REMATCH[3]}
+    else
+        echo "eclipseStream, $eclipseStream, must contain major, minor, and service versions, such as 4.2.0"
+        exit 1
+    fi
     echo "eclipseStream: $eclipseStream"
-    echo "eclipseStreamMajor: $eclipseStreamMajor"
+    echo "eclipseStreamMajor: $eclipseStreamMajor" 
+    echo "eclipseStreamMinor: $eclipseStreamMinor"
+    echo "eclipseStreamService: $eclipseStreamService"
+    echo "buildType: $buildType"
+
 
     buildRoot=${buildRoot:-/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}}
     siteDir=${buildRoot}/siteDir
@@ -40,11 +52,12 @@ function syncRepoSite ()
 # at multiple times during a build, to make progresive updates.
 function syncDropLocation () 
 {
+    echo "start syncDropLocation"
     eclipseStream=$1
     if [ -z "${eclipseStream}" ]
     then
-       echo "must provide eclispeStream as first argumnet, for this function $0"
-       return 1;
+        echo "must provide eclispeStream as first argumnet, for this function $0"
+        return 1;
     fi
 
 
@@ -54,20 +67,22 @@ function syncDropLocation ()
         echo "must provide buildType as second argumnet, for this function $0"
         return 1;
     fi
- 
+
     buildId=$3
     if [ -z "${buildId}" ]
     then
-         echo "must provide buildId as third argumnet, for this function $0"
-         return 1;
-     fi
-    
-    pathToDL=eclipse/downloads/drops4
-    
+        echo "must provide buildId as third argumnet, for this function $0"
+        return 1;
+    fi
+
     eclipseStreamMajor=${eclipseStream:0:1}
-    echo "buildType: $buildType"
-    echo "eclipseStream: $eclipseStream"
-    echo "eclipseStreamMajor: $eclipseStreamMajor"
+
+    pathToDL=eclipse/downloads/drops
+    if [[ $eclipseStreamMajor > 3 ]]
+    then 
+        pathToDL=eclipse/downloads/drops$eclipseStreamMajor
+    fi
+
 
     buildRoot=${buildRoot:-/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}}
     siteDir=${buildRoot}/siteDir
@@ -89,32 +104,54 @@ function syncDropLocation ()
     echo "   fromDir: ${fromDir}"
     echo "     toDir: ${toDir}"
 
-    rsync -p -t --recursive --delete "${fromDir}" "${toDir}"
+    rsync --recursive --delete "${fromDir}" "${toDir}"
     rccode=$?
     if [ $rccode -ne 0 ]
     then
         echo "ERROR: rsync did not complete normally.rccode: $rccode"
         return $rccode
     else
-        wget -O index.txt http://download.eclipse.org/eclipse/downloads/createIndex4x.php
-        rccode=$?
-        if [ $rccode -eq 0 ]
+        if [[ $eclipseStreamMajor == 3 ]]         
         then
-            rsync -p -t index.txt /home/data/httpd/download.eclipse.org/eclipse/downloads/index.html
+            wget -O index3.txt http://download.eclipse.org/eclipse/downloads/eclipse3x.php
             rccode=$?
-            if [ $rccode -eq 0 ] 
+            if [ $rccode -eq 0 ]
             then
-                echo "INFO: Upated http://download.eclipse.org/eclipse/downloads/index.html"
-                return 0
+                rsync  index3.txt /home/data/httpd/download.eclipse.org/eclipse/downloads/eclipse3x.html
+                rccode=$?
+                if [ $rccode -eq 0 ] 
+                then
+                    echo "INFO: Upated http://download.eclipse.org/eclipse/downloads/eclipse3x.html"
+                    return 0
+                else
+                    echo "ERROR: Could not copy index3.html to downlaods. rccode: $rccode"
+                    return $rccode
+                fi
             else
-                echo "ERROR: Could not copy index.html to downlaods. rccode: $rccode"
+                echo "ERROR: Could not create index3.html from downlaods. rccode: $rccode"
                 return $rccode
             fi
         else
-            echo "ERROR: Could not create index.html from downlaods. rccode: $rccode"
-            return $rccode
+            # assume major version if 4    
+            wget -O index.txt http://download.eclipse.org/eclipse/downloads/createIndex4x.php
+            rccode=$?
+            if [ $rccode -eq 0 ]
+            then
+                rsync  index.txt /home/data/httpd/download.eclipse.org/eclipse/downloads/index.html
+                rccode=$?
+                if [ $rccode -eq 0 ] 
+                then
+                    echo "INFO: Upated http://download.eclipse.org/eclipse/downloads/index.html"
+                    return 0
+                else
+                    echo "ERROR: Could not copy index.html to downlaods. rccode: $rccode"
+                    return $rccode
+                fi
+            else
+                echo "ERROR: Could not create index.html from downlaods. rccode: $rccode"
+                return $rccode
+            fi
         fi
-
     fi
 }
 
@@ -158,7 +195,14 @@ function sendPromoteMail ()
     # examples of end result:
     # http://download.eclipse.org/eclipse/downloads/drops4/N20120415-2015/
     # /home/data/httpd/download.eclipse.org/eclipse/downloads/drops4/N20120415-2015
-    mainPath=eclipse/downloads/drops4
+
+    eclipseStreamMajor=${eclipseStream:0:1}
+
+    mainPath=eclipse/downloads/drops
+    if [[ $eclipseStreamMajor > 3 ]]
+    then 
+        mainPath=eclipse/downloads/drops$eclipseStreamMajor
+    fi
 
     downloadURL=http://download.eclipse.org/${mainPath}/${buildId}/
 
@@ -184,7 +228,7 @@ function sendPromoteMail ()
 
     Download:
     ${downloadURL}
-    
+
     Software site repository:
     http://download.eclipse.org/eclipse/updates/${eclipseStreamMajor}.${eclipseStreamMinor}-${buildType}-builds
 
@@ -206,40 +250,40 @@ EOF
 #    buildId       (e.g. N20120415-2015)
 
 
-   if [[ $# != 3 ]]
-   then
-      # usage: 
-      scriptname=$(basename $0)
-      printf "\n\t%s\n" "This script, $scriptname requires three arguments, in order: "
-      printf "\t\t%s\t%s\n" "eclipseStream" "(e.g. 4.2 or 3.8) "
-      printf "\t\t%s\t%s\n" "buildType" "(e.g. I or N) "
-      printf "\t\t%s\t%s\n" "buildId" "(e.g. N20120415-2015) "
-      printf "\t%s\n" "for example," 
-      printf "\t%s\n\n" "./$scriptname 4.2 N N20120415-2015"
-      exit 1
-   fi
+if [[ $# != 3 ]]
+then
+    # usage: 
+    scriptname=$(basename $0)
+    printf "\n\t%s\n" "This script, $scriptname requires three arguments, in order: "
+    printf "\t\t%s\t%s\n" "eclipseStream" "(e.g. 4.2 or 3.8) "
+    printf "\t\t%s\t%s\n" "buildType" "(e.g. I or N) "
+    printf "\t\t%s\t%s\n" "buildId" "(e.g. N20120415-2015) "
+    printf "\t%s\n" "for example," 
+    printf "\t%s\n\n" "./$scriptname 4.2 N N20120415-2015"
+    exit 1
+fi
 
-    eclipseStream=$1
-    if [ -z "${eclipseStream}" ]
-    then
-       echo "must provide eclispeStream as first argumnet, for this function $0"
-       return 1;
-    fi
+eclipseStream=$1
+if [ -z "${eclipseStream}" ]
+then
+    echo "must provide eclispeStream as first argumnet, for this function $0"
+    return 1;
+fi
 
 
-    buildType=$2
-    if [ -z "${buildType}" ]
-    then
-        echo "must provide buildType as second argumnet, for this function $0"
-        return 1;
-    fi
- 
-    buildId=$3
-    if [ -z "${buildId}" ]
-    then
-         echo "must provide buildId as third argumnet, for this function $0"
-         return 1;
-    fi
+buildType=$2
+if [ -z "${buildType}" ]
+then
+    echo "must provide buildType as second argumnet, for this function $0"
+    return 1;
+fi
+
+buildId=$3
+if [ -z "${buildId}" ]
+then
+    echo "must provide buildId as third argumnet, for this function $0"
+    return 1;
+fi
 
 
 syncRepoSite $1 $2
