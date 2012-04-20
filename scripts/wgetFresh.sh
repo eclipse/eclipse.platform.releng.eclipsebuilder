@@ -20,8 +20,8 @@ wget -O mb4I.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclips
 wget -O mb4N.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb4N.sh?h=$branchOrTag;
 
 # to get "promote" script
-
 wget -O syncDropLocation.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/syncDropLocation.sh?h=$branchOrTag;
+wget -O samplepromotionCronJob.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/samplepromotionCronJob.sh?h=$branchOrTag;
 
 # handy script to "wrap" a normal build script such as mb4I.sh to set global test/debug settings
 wget -O testBuild.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/testBuild.sh?h=$branchOrTag;
