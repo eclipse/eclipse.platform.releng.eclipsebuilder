@@ -1132,7 +1132,8 @@
         <antcall target="mirrorEMF" />
 
         <property name="resultsRepoLocation"
-            value="${updateSite}/${eclipseStream}-${buildType}-builds" />
+            value="${updateSite}/${eclipseStreamMajor}.${eclipseStreamMinor}-${buildType}-builds" />
+
         <echo message="Create composite and add their child repos" />
         <echo message="  composite at: ${resultsRepoLocation}" />
         <!--try create composite repository -->
