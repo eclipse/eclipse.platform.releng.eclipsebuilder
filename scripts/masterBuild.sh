@@ -503,12 +503,21 @@ processCommandLine ()
     buildId=$buildType$date-$time
     buildLabel=$buildId
 
-    #TODO: for 3.8 builds, use "drops" for eclipse  
-    postingDirectory=${siteDir}/eclipse/downloads/drops4
-    # TODO: for 3.8 builds, use "drops3" for equinox, and 
-    # do not publish to downloads, but leave on build machine
+
+    postingDirectory=${siteDir}/eclipse/downloads/drops
+    if [[ $eclipseStreamMajor > 3 ]]
+     then 
+        postingDirectory=${siteDir}/eclipse/downloads/drops4
+    fi
+    # For 3.x builds, use "drops3" for equinox. We do not publish 
+    # them to downloads, but will leave on build machine
     # (for a bit) in case someone wants to "compare" them
-    equinoxPostingDirectory=${siteDir}/equinox/drops
+    equinoxPostingDirectory=${siteDir}/equinox/drops3
+    if [[ $eclipseStreamMajor > 3 ]]
+     then 
+        equinoxPostingDirectory=${siteDir}/equinox/drops
+    fi
+    
     localUpdateSite=${siteDir}/updates
     buildResults=$postingDirectory/$buildTag
     submissionReportFilePath=$buildResults/report.txt
