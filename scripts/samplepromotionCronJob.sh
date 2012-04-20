@@ -2,7 +2,7 @@
 # Under development. 
 
 # First draft of a potential cron job a committer can run, 
-# say, every 10 minutes, or similar, and if a
+# say, every 15 minutes, or similar, and if a
 # promote script appears, then execute it, and if all goes
 # well, then remove (or move) that promote file.   
 
@@ -16,7 +16,7 @@
 # thought we'd be producing that many files ... but, for now, 
 # assuming there is like one, two, or three per day.
 
-promoteLocation=/home/shared/eclipse/sdk/queue
+promoteLocation=/shared/eclipse/sdk/queue
 
 promotefile=$( find $promoteLocation/promote*\.sh | sort | head -1 )  
 
@@ -31,24 +31,23 @@ else
     if [[ -x $promotefile ]]
     then 
 
-        #/bin/bash $promotefile
-        echo "DEBUG: normally would execute file here: $promotefile"
+        /bin/bash $promotefile
+        #echo "DEBUG: normally would execute file here: $promotefile"
         rccode=$?
         if [[ $rccode != 0 ]]
         then 
-            echo "ERROR: promotion returned and error: $rccode" 
+            echo "ERROR: promotion returned an error: $rccode" 
             echo "       promotefile: $promotefile"
             exit 1
         else
             # all is ok, we'll remove the file so we won't execute it again. 
-            # (we'll move for now, for inspection)
+            # (we'll move for now, for later inspection, if things go wrong, but eventually can just rm them)
             mv $promotefile $promoteLocation/RAN_$(basename $promotefile)
             exit 0
         fi
     else
-        echo "ERROR: promotion file found, but was not executable"
-        echo "       promoitefile: $promotefile"
+        echo "WARNING: promotion file found, but was not executable"
+        echo "         promoitefile: $promotefile"
         exit 1
     fi
 fi
-# we exit here if nothing is found
