@@ -44,7 +44,12 @@ function syncRepoSite ()
     fromDir=$siteDir/updates/${eclipseStreamMajor}.${eclipseStreamMinor}-${buildType}-builds
     toDir="/home/data/httpd/download.eclipse.org/eclipse/updates"
 
-    rsync --recursive --delete "${fromDir}" "${toDir}"
+    # here, for update site, good to maintain times, so 
+    # we don't re-copy things each time 
+    # TODO: ideally, for the "new" subdirectory, we would 
+    # resursively touch first, so its time is "now", time 
+    # of copy, not time of build. 
+    rsync --recursive --delete -t "${fromDir}" "${toDir}"
 }
 
 
@@ -104,6 +109,10 @@ function syncDropLocation ()
     echo "   fromDir: ${fromDir}"
     echo "     toDir: ${toDir}"
 
+    # here, for dl site, best not to preserve times, since (if mirrored) 
+    # would be more accurate for mirroring system to have 
+    # actual times (and we are copying only one specific 
+    # sub-sirectory
     rsync --recursive --delete "${fromDir}" "${toDir}"
     rccode=$?
     if [ $rccode -ne 0 ]
