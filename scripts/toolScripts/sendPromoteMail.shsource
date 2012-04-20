@@ -66,7 +66,7 @@ function sendPromoteMail ()
     ${downloadURL}
     
     Software site repository:
-    http://download.eclipse.org/eclipse/updates/${eclipseStream}-${buildType}-builds
+    http://download.eclipse.org/eclipse/updates/${eclipseStreamMajor}.${eclipseStreamMinor}-${buildType}-builds
 
 EOF
 

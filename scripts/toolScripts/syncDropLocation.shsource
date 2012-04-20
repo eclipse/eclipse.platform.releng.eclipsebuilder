@@ -2,7 +2,6 @@
 
 # Function is designed with rsync so it can be called 
 # at multiple times during a build, to make progresive updates.
-
 function syncDropLocation () 
 {
     eclipseStream=$1

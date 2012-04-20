@@ -3,7 +3,6 @@
 # this funtion currently just synchs up the whole local repo 
 # with the whole remote repo ... so, important to use --delete and
 # provides an easy way to "fix" the remote repo by fixing the local one first. 
-
 function syncRepoSite () 
 {
 
@@ -30,7 +29,7 @@ function syncRepoSite ()
     buildRoot=${buildRoot:-/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}}
     siteDir=${buildRoot}/siteDir
 
-    fromDir=$siteDir/updates/${eclipseStream}-${buildType}-builds
+    fromDir=$siteDir/updates/${eclipseStreamMajor}.${eclipseStreamMinor}-${buildType}-builds
     toDir="/home/data/httpd/download.eclipse.org/eclipse/updates"
 
     rsync --recursive --delete "${fromDir}" "${toDir}"

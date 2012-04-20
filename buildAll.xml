@@ -55,7 +55,7 @@
 
 
     <property name="buildRepo"
-        value="${updateSite}/${eclipseStream}-${buildType}-builds/${buildId}" />
+        value="${updateSite}/${eclipseStreamMajor}.${eclipseStreamMinor}-${buildType}-builds/${buildId}" />
 
     <target name="main" depends="init">
         <echo message="DEBUG: properties at start of main buildAll.xml" />

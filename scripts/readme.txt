@@ -17,11 +17,8 @@ wget -O mb3I.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclips
 wget -O mb4I.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb4I.sh?h=master;
 wget -O mb4N.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb4N.sh?h=master;
 
-# to get "promote" scripts
+# to get "promote" script
 
-wget -O syncRepoSite.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/syncRepoSite.sh?h=master;
-wget -O sendPromoteMail.shsource http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/sendPromoteMail.shsource?h=master;
-wget -O syncDropLocation.shsource http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/syncDropLocation.shsource?h=master;
 wget -O syncDropLocation.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/syncDropLocation.sh?h=master;
 
 

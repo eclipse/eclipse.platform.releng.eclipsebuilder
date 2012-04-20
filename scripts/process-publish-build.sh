@@ -23,7 +23,7 @@ sync_sdk_repo_updates () {
     buildRoot=${buildRoot:-/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}}
     siteDir=${buildRoot}/siteDir
     
-    fromDir=$targetDir/updates/${eclipseStream}-${buildType}-builds
+    fromDir=$targetDir/updates/${eclipseStreamMajor}.${eclipseStreamMinor}-${buildType}-builds
     toDir="/home/data/httpd/download.eclipse.org/eclipse/updates"
 
     rsync --recursive --delete "${fromDir}" "${toDir}"
@@ -89,7 +89,7 @@ publish_sdk () {
 
     HUDSON_COMMON=${buildRoot}/build/downloads/drops/$dropDir/
     HUDSON_DROPS=$HUDSON_COMMON
-    HUDSON_REPO=$targetDir/updates/${eclipseStream}-I-builds
+    HUDSON_REPO=$targetDir/updates/${eclipseStreamMajor}.${eclipseStreamMinor}-${buildType}-builds
 
 
 
@@ -126,7 +126,7 @@ runSDKTests() {
     echo "sdkResults=$sdkResults" >> label.properties
     echo "e4Results=$buildResults" >> label.properties
     echo "buildType=$buildType" >> label.properties
-    echo "sdkRepositoryRoot=$targetDir/updates/${eclipseStream}-I-builds" >> label.properties
+    echo "sdkRepositoryRoot=$targetDir/updates/${eclipseStreamMajor}.${eclipseStreamMinor}-${buildType}-builds" >> label.properties
 
     echo "Copying test framework."
     cp -r ${builderDir}/builder/general/tests/* .
@@ -216,7 +216,7 @@ runTheTests () {
     echo "sdkResults=$sdkResults" >> label.properties
     echo "e4Results=$buildResults" >> label.properties
     echo "buildType=$buildType" >> label.properties
-    echo "sdkRepositoryRoot=$targetDir/updates/${eclipseStream}-I-builds" >> label.properties
+    echo "sdkRepositoryRoot=$targetDir/updates/${eclipseStreamMajor}.${eclipseStreamMinor}-${buildType}-builds" >> label.properties
 
     echo "Copying test framework."
     cp -r ${builderDir}/builder/general/tests/* .
@@ -390,7 +390,7 @@ process_build () {
 #if $publish && [ ! -z "$publishDir"  ]; then
 #    echo Publishing  $buildResults to "$publishDir"
 #    scp -r $buildResults "$publishDir"
-#    rsync --recursive --delete ${targetDir}/updates/${e4Stream}-I-builds \
+#    rsync --recursive --delete ${targetDir}/updates/${eclipseStreamMajor}.${eclipseStreamMinor}-${buildType}-builds \
     #      "${publishUpdates}"
 #    sendMail
 #    sleep 60

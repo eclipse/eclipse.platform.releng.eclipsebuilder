@@ -19,13 +19,9 @@ wget -O mb3I.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclips
 wget -O mb4I.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb4I.sh?h=$branchOrTag;
 wget -O mb4N.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb4N.sh?h=$branchOrTag;
 
-# to get "promote" scripts
+# to get "promote" script
 
 wget -O syncDropLocation.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/syncDropLocation.sh?h=$branchOrTag;
-wget -O syncRepoSite.shsource http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/syncRepoSite.shsource?h=$branchOrTag;
-wget -O sendPromoteMail.shsource http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/sendPromoteMail.shsource?h=$branchOrTag;
-wget -O syncDropLocation.shsource http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/syncDropLocation.shsource?h=$branchOrTag;
-#wget -O syncRepoSite.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/syncRepoSite.sh?h=$branchOrTag;
 
 # handy script to "wrap" a normal build script such as mb4I.sh to set global test/debug settings
 wget -O testBuild.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/testBuild.sh?h=$branchOrTag;
