@@ -259,7 +259,7 @@
         <property name="configurationLocation" value="${mapsProject}/configuration" />
 
         <loadproperties
-            srcFile="${configurationLocation}/build-time-prereq.properties" />
+            srcFile="${configurationLocation}/build-time-prereqs.properties" />
 
     </target>
 
