@@ -851,7 +851,7 @@ then
     # Here is content of promtion script (note, use same ptimestamp created above):
     echo "#!/usr/bin/env bash" >  ${promoteScriptLocationEquinox}/${scriptName}
     echo "# promotion script created at $ptimestamp" >  ${promoteScriptLocationEquinox}/${scriptName}
-	echo "rsync -p -t --recursive \"${eqFromDir}\" \"${eqToDir}\"" >> ${promoteScriptLocationEquinox}/${scriptName}
+	echo "rsync --recursive \"${eqFromDir}\" \"${eqToDir}\"" >> ${promoteScriptLocationEquinox}/${scriptName}
 
     # we restrict "others" rights for a bit more security or safety from accidents
 	chmod -v ug=rwx,o-rwx ${promoteScriptLocationEquinox}/${scriptName}
