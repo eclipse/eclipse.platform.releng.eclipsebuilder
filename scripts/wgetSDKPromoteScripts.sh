@@ -12,4 +12,6 @@ branchOrTag=master
 
 wget -O syncDropLocation.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/syncDropLocation.sh?h=$branchOrTag 2>/dev/null
 wget -O sdkPromotionCronJob.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/sdkPromotionCronJob.sh?h=$branchOrTag 2/dev/null
+wget -O wgetSDKPromoteScriptsNEW.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/wgetSDKPromoteScripts.sh?h=$branchOrTag 2/dev/null
 
+chmod +x *.sh
