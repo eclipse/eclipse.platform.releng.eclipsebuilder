@@ -139,8 +139,11 @@
 	         output. But, it can and should be added back once everything is running 
 	         smoothly -->
 	    <!--	<parallel failonany="true" threadCount='4'>  -->
+
+	    <!-- removed via https://bugs.eclipse.org/bugs/show_bug.cgi?id=368488 -->
 		<!--	<antcall target="provision.agent" />  -->
 	    <!--	<antcall target="provision.starterkit" /> -->
+	    
 			<!-- <antcall target="provision.pdeproduct" /> -->
 			<antcall target="provision.sdk" />
 			<antcall target="provision.platform" />
@@ -164,8 +167,8 @@
 		</fileset>
 	</copy>
 </target>
-
-			    <!-- https://bugs.eclipse.org/bugs/show_bug.cgi?id=368488
+    
+    
 <target name="provision.agent">
 	<antcall target="run.director">
 		<param name="p2.director.installIU" value="org.eclipse.equinox.p2.ui.admin.rcp.product" />
@@ -203,7 +206,7 @@
 		<param name="p2.repo" value="${buildRepo}" />
 	</antcall>
 </target>
--->
+
 <target name="provision.starterkit">
 	<antcall target="run.director">
 		<param name="p2.director.installIU" value="org.eclipse.rt.osgistarterkit.product" />
