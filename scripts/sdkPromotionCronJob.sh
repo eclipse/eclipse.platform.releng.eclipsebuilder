@@ -45,7 +45,7 @@ else
 
         # notice these are concatenated on purpose, to give some "history", but
         # that means has to be "manually" removed every now and then. 
-        /bin/bash $promotefile 1>>$workLocation/promotion-out.txt 2>> 1>>$workLocation/promotion-err.txt
+        /bin/bash $promotefile 1>>$workLocation/promotion-out.txt 2>>$workLocation/promotion-err.txt
         #echo "DEBUG: normally would execute file here: $promotefile"
         rccode=$?
         if [[ $rccode != 0 ]]
