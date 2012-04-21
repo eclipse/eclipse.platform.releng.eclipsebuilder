@@ -798,7 +798,7 @@ workLocation=/shared/eclipse/sdk/promotion
 
 # the cron job must know about and use this same 
 # location to look for its promotions scripts. (i.e. implicite tight coupling)
-promoteScriptLocationEeclipse=$workLocation/queue
+promoteScriptLocationEclipse=$workLocation/queue
 
 # directory should normally exist -- best to create with committer's ID --
 # but in case not
