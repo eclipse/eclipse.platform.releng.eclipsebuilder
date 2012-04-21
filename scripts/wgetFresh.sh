@@ -27,6 +27,6 @@ wget --no-verbose -O testBuild.sh http://git.eclipse.org/c/platform/eclipse.plat
 # and has trouble "writing over itself" so we put in a file with 'NEW' suffix
 # and a command line like the following works well
 # ./wgetFresh.sh ; mv wgetFresh.shNEW wgetFresh.sh
-wget -O --no-verbose wgetFresh.NEW.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/wgetFresh.sh?h=$branchOrTag 2>&1;
+wget --no-verbose -O wgetFresh.NEW.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/wgetFresh.sh?h=$branchOrTag 2>&1;
 
 chmod +x *.sh
