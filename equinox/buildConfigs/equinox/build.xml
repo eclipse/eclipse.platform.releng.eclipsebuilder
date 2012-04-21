@@ -71,7 +71,9 @@
 			</p2.mirror>
 			<p2.remove.iu>
 				<repository location="file://${featureTemp}" />
+				<iu id="${runtimeIU}" />
 				<iu query="" artifacts="(format=packed)" />
+				    
 			</p2.remove.iu>
 			<!-- assemble compressed files and create checksums -->
 			<antcall target="compress">

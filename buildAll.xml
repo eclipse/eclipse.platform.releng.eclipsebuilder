@@ -827,8 +827,8 @@
                 line="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -d ${reposource}" />
         </exec>
 
-        <!-- I wonder if it is these "removals" that were/are meant to prevent 
-            these provided features from being signed? -->
+        <!-- This is to remove IUs handy during the build, but not really 
+            needed in final repo -->
         <p2.remove.iu>
             <repository location="file://${reposource}" />
             <iu id="org.aspectj.runtime" />
