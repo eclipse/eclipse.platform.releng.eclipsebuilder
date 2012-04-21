@@ -803,7 +803,13 @@ promoteScriptLocationEeclipse=$workLocation/queue
 # directory should normally exist -- best to create with committer's ID --
 # but in case not
 mkdir -p "${promoteScriptLocationeclipse}"
+
 scriptName=promote-${eclipseStream}-${buildType}-${buildId}.sh
+if [[ "${testbuildonly}" == true ]] 
+then
+    # allows the "test" creation of promotion script, but, not have it "seen" be cron job
+    scriptName=TEST-$scriptName
+fi 
 # Here is content of promtion script:
 ptimestamp=$( date +%Y%m%d%H%M )
 echo "#!/usr/bin/env bash" >  ${promoteScriptLocationEclipse}/${scriptName}
