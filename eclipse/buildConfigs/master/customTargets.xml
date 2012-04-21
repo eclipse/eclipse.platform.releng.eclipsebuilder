@@ -42,7 +42,7 @@
 
     <target name="getMapFiles" depends="checkLocalMaps" unless="mapsLocal">
         <echo message="DEBUG: getMapFiles (unexpected?) getting fresh version" />
-        <echo message="       properties at start of getMapFiles" /> 
+        <echo message="       properties at start of getMapFiles" />
         <echoproperties />
         <property name="mapsGitRepo" value="${buildDirectory}/commonrepo" />
         <mkdir dir="${mapsGitRepo}" />
@@ -160,17 +160,40 @@
     <!-- ===================================================================== -->
     <target name="preSetup">
 
-        <!-- can we just add this to the "depends" for preSetup? -->
+        <!-- can we just add the first two to the "depends" list for preSetup -->
         <antcall target="emfRunnableTarget" />
+        <antcall target="build-time-prereq-egit" />
+        <antcall target="createRunnable" />
 
     </target>
 
+    <target name="build-time-prereq-egit" if="egitRepoURL"
+        depends="init">
+        <!-- egit needs to be part of build-time pre-req, but not included 
+            in repo, etc. -->
+
+        <echo message="Mirror from ${egitRepoURL} to ${localRepoLocation}" />
+
+        <p2.mirror destination="file:${localRepoLocation}"
+            ignoreerrors="true">
+            <source location="${egitRepoURL}" />
+            <slicingOptions includeOptional="false"
+                includeNonGreedy="false" latestVersionOnly="true"
+                followStrict="true" />
+
+            <iu id="org.eclipse.jgit" />
+            <iu id="org.eclipse.egit.core" />
+
+        </p2.mirror>
+
+    </target>
     <target name="emfRunnableTarget" if="emfRepoURL" depends="streamSpecificInit">
         <!-- emf needs to be part of the "runnable" target, since Eclipse 
             wants to "require" EMF, not "include" it ... but only if in 4.2, so only 
             if emfRepoURL is defined. -->
 
         <echo message="Mirror from ${emfRepoURL} to ${localRepoLocation}" />
+
         <p2.mirror destination="file:${localRepoLocation}"
             ignoreerrors="true">
             <source location="${emfRepoURL}" />
@@ -185,6 +208,10 @@
                 version="0.0.0" />
         </p2.mirror>
 
+    </target>
+
+    <!-- should we check for existence of localRepoLocation first? -->
+    <target name="createRunnable">
         <echo message="creating runnable in preSetup" />
         <echo message="basedir: ${basedir}" />
         <echo message="buildDirectory: ${buildDirectory}" />
@@ -197,18 +224,11 @@
     <!-- this version of streamSpecificInit is identical to the one in buildAll.xml, 
         and doubt we need both ... but, for expediency will define twice to increase 
         chances it works quicker, and we can remove it later, probably -->
-    <target name="streamSpecificInit" unless="streamSpecificInitComplete">
+    <target name="streamSpecificInit" unless="streamSpecificInitComplete"
+        depends="init">
         <echo message="DEBUG: executing streamSpectifcInit" />
 
-        <!-- mapsProject is the "top" of the maps project after it has been 
-            checked out to the local working area (buildDirectory). TODO: its actually 
-            hard coded is scores of places as "${buildDirectory}/maps/org.eclipse.releng" 
-            but closest existing variable I could find what 'mapsRoot' which is ${buildDirectory}/maps/org.eclipse.releng/maps 
-            so that (and others) should eventually be refactored to something like mapsRoot 
-            = ${mapsProject}/maps" -->
-        <property name="mapsProject"
-            value="${buildDirectory}/maps/org.eclipse.releng" />
-        <property name="configurationLocation" value="${mapsProject}/configuration" />
+
 
         <!-- bug 376217: repos.properties is one of the files moved from 
             eclispebuild to maps project and into a common file, streamSpecific-build.properties -->
@@ -225,6 +245,22 @@
             so no one else can ever set streamSpecificInitComplete properties. It is 
             our control property -->
         <property name="streamSpecificInitComplete" value="true" />
+    </target>
+
+    <target name="init">
+        <!-- mapsProject is the "top" of the maps project after it has been 
+            checked out to the local working area (buildDirectory). TODO: its actually 
+            hard coded is scores of places as "${buildDirectory}/maps/org.eclipse.releng" 
+            but closest existing variable I could find what 'mapsRoot' which is ${buildDirectory}/maps/org.eclipse.releng/maps 
+            so that (and others) should eventually be refactored to something like mapsRoot 
+            = ${mapsProject}/maps" -->
+        <property name="mapsProject"
+            value="${buildDirectory}/maps/org.eclipse.releng" />
+        <property name="configurationLocation" value="${mapsProject}/configuration" />
+
+        <loadproperties
+            srcFile="${configurationLocation}/build-time-prereq.properties" />
+
     </target>
 
     <!-- ===================================================================== -->
