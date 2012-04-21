@@ -789,35 +789,66 @@ rm -fr ${VERBOSE_REMOVES} "${buildRoot}/build/supportDir/src"
 runSDKBuild
 checkForErrorExit $? "Failed while building Eclipse-SDK"
 
-# if all ended well, put "promote scripts" in known locations
-promoteScriptLocationeclipse=/shared/eclipse/sdk/queue
-# directory should normall exist, but in case not
+# if all ended well, put "promotion scripts" in known locations
+
+# The 'workLocation' provides a handy central place to have the 
+# promote script, and log results. ASSUMING this works for all 
+# types of builds, etc (which is the goal for the sdk promotions).
+workLocation=/shared/eclipse/sdk/promotion
+
+# the cron job must know about and use this same 
+# location to look for its promotions scripts. (i.e. implicite tight coupling)
+promoteScriptLocationEeclipse=$workLocation/queue
+
+# directory should normally exist -- best to create with committer's ID --
+# but in case not
 mkdir -p "${promoteScriptLocationeclipse}"
-# note we do restrict access to "others" for a tad more security safety
-chmod -R ug=rwx,o-rwx "${promoteScriptLocationeclipse}"
+scriptName=promote-${eclipseStream}-${buildType}-${buildId}.sh
+# Here is content of promtion script:
 ptimestamp=$( date +%Y%m%d%H%M )
-scriptName=promote-${eclipseStream}-${buildType}-${buildId}-${ptimestamp}.sh
-echo "$buildRoot/syncDropLocation.sh $eclipseStream $buildType $buildId" > ${promoteScriptLocationeclipse}/${scriptName}
-chmod -v ug=rwx,o-rwx ${promoteScriptLocationeclipse}/${scriptName}
+echo "#!/usr/bin/env bash" >  ${promoteScriptLocationEclipse}/${scriptName}
+echo "# promotion script created at $ptimestamp" >>  ${promoteScriptLocationEclipse}/${scriptName}
+echo "$workLocation/syncDropLocation.sh $eclipseStream $buildType $buildId" >> ${promoteScriptLocationEclipse}/${scriptName}
+
+# we restrict "others" rights for a bit more security or safety from accidents
+chmod -v ug=rwx,o-rwx ${promoteScriptLocationEclipse}/${scriptName}
 
 # no need to promote anything for 3.x builds
-# (equinox portion should be the same, so we'll only do equinox for 
-# 4.x pimary builds) 
+# (equinox portion should be the same, so we will 
+# create for equinox for for only 4.x primary builds) 
 if [[ $eclipseStream > 4 ]] 
 then
-	promoteScriptLocationequinox=/shared/eclipse/equinox/queue
-    # directory should normall exist, but in case not
-	mkdir -p "${promoteScriptLocationequinox}"
-	# note we do restrict access to "others" for a tad more security safety
-	chmod -R ug=rwx,o-rwx "${promoteScriptLocationequinox}"
+    # The 'workLocation' provides a handy central place to have the 
+    # promote script, and log results. ASSUMING this works for all 
+    # types of builds, etc (which is the goal for the sdk promotions).
+    workLocationEquinox=/shared/eclipse/equinox/promotion
+    
+    # the cron job must know about and use this same 
+    # location to look for its promotions scripts. (i.e. implicite tight coupling)
+    promoteScriptLocationEquinox=${workLocationEquinox}/queue
+    
+    # directory should normally exist -- best to create with committer's ID --
+    # but in case not
+	mkdir -p "${promoteScriptLocationEquinox}"
+
 	eqFromDir=${equinoxPostingDirectory}/${buildId}
 	eqToDir="/home/data/httpd/download.eclipse.org/equinox/drops/"
-    # note, we do not use --delete for equinox, since should not ever be needed
-    # even though (buried in the eclipse scripts) we do, since sometimes is needed. 
-    # Note: for proper mirroring at Eclispe, we probably do not want/need to maintain "times"
-    # But, we'll start off that way.
-	echo "rsync -p -t --recursive \"${eqFromDir}\" \"${eqToDir}\"" > ${promoteScriptLocationequinox}/${scriptName}
-	chmod -v ug=rwx,o-rwx ${promoteScriptLocationequinox}/${scriptName}
+	
+    # Note: for proper mirroring at Eclispe, we probably do not want/need to 
+    # maintain "times" on build machine, but let them take times at time of copying. 
+    # If it turns out to be important to maintain times (such as ran more than once, 
+    # to pick up a "more" output, such as test results, then add -t to rsync
+    # Similarly, if download server is set up right, it will end up with the 
+    # correct permissions, but if not, we may need to set some permissions first, 
+    # then use -p on rsync
+    
+    # Here is content of promtion script (note, use same ptimestamp created above):
+    echo "#!/usr/bin/env bash" >  ${promoteScriptLocationEquinox}/${scriptName}
+    echo "# promotion script created at $ptimestamp" >  ${promoteScriptLocationEquinox}/${scriptName}
+	echo "rsync -p -t --recursive \"${eqFromDir}\" \"${eqToDir}\"" >> ${promoteScriptLocationEquinox}/${scriptName}
+
+    # we restrict "others" rights for a bit more security or safety from accidents
+	chmod -v ug=rwx,o-rwx ${promoteScriptLocationEquinox}/${scriptName}
 else
     echo "Did not create promote script for equinox since $eclipseStream less than 4"
 fi 

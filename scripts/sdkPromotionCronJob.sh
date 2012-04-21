@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
-# Under development. 
 
-# First draft of a potential cron job a committer can run, 
-# say, every 15 minutes, or similar, and if a
-# promote script appears, then execute it, and if all goes
-# well, then remove (or move) that promote file.   
+# cron job a committer can run, 
+# say, every 15 minutes, or similar. If a
+# promotion script appears in the promoteLocation, then execute it, and if all goes
+# well, then remove (or move) that promotion script.   
+
+# Note: if there are errors that occur during this cron job, they go to the 
+# "default user" for that crontab, which may be what's desired, but you can also 
+# set MAILTO in your crontab, cautiously, to send it where ever you'd like. 
 
 # TODO: currently we will count on the promote script 
 # finishing before the cron job runs again. But 
@@ -16,9 +19,18 @@
 # thought we'd be producing that many files ... but, for now, 
 # assuming there is like one, two, or three per day.
 
-promoteLocation=/shared/eclipse/sdk/queue
+# The 'workLocation' provides a handy central place to have the 
+# promote script, and log results. ASSUMING this works for all 
+# types of builds, etc (which is the goal for the sdk promotions).
+workLocation=/shared/eclipse/sdk/promotion
 
-promotefile=$( find $promoteLocation/promote*\.sh | sort | head -1 )  
+# masterBuilder.sh must know about and use this same 
+# location to put its promotions scripts. (i.e. implicite tight coupling)
+promoteScriptLocationEclipse=$workLocation/queue
+
+# we redirect "find" std err to nowhere, else "not finding something" is reported 
+# on "standard err" (which isn't very interesting).
+promotefile=$( find $promoteLocation/promote*\.sh 2>/dev/null | sort | head -1 )  
 
 echo $promotefile
 
@@ -31,7 +43,9 @@ else
     if [[ -x $promotefile ]]
     then 
 
-        /bin/bash $promotefile
+        # notice these are concatenated on purpose, to give some "history", but
+        # that means has to be "manually" removed every now and then. 
+        /bin/bash $promotefile 1>>$workLocation/promotion-out.txt 2>> 1>>$workLocation/promotion-err.txt
         #echo "DEBUG: normally would execute file here: $promotefile"
         rccode=$?
         if [[ $rccode != 0 ]]
