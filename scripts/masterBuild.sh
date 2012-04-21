@@ -802,7 +802,7 @@ promoteScriptLocationEclipse=$workLocation/queue
 
 # directory should normally exist -- best to create with committer's ID --
 # but in case not
-mkdir -p "${promoteScriptLocationeclipse}"
+mkdir -p "${promoteScriptLocationEclipse}"
 
 scriptName=promote-${eclipseStream}-${buildType}-${buildId}.sh
 if [[ "${testbuildonly}" == true ]] 
