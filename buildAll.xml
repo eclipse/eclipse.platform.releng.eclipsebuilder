@@ -837,8 +837,7 @@
             <iu id="master-ecf.feature.group" />
             <iu id="master-jetty.feature.group" />
             <iu id="master-equinox-weaving.feature.group" />
-            <iu id="master-equinox.feature.group" />
-            <iu id="master-equinox-p2.feature.group" />
+
         </p2.remove.iu>
 
         <property name="tempexec" value="${buildDirectory}/tempexec" />
