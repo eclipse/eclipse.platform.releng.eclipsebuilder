@@ -32,6 +32,8 @@
 		<attribute name="archiveName" />
 
 		<sequential>
+		    <echo message="DEBUG macrodef 1 buildReposSource feature: @{feature}" />
+		    <echo message="DEBUG macrodef 1 buildReposSource archiveName: @{archiveName}" />
 			<property name="runtimeIU" value="@{feature}.feature.group" />
 			<property name="sdkIU" value="@{feature}.source.feature.group" />
 			<delete dir="${featureTemp}" />
@@ -60,6 +62,8 @@
 		<attribute name="archiveName" />
 
 		<sequential>
+	        <echo message="DEBUG macrodef 2 buildRepos feature: @{feature}" />
+	        <echo message="DEBUG macrodef 2 buildRepos archiveName: @{archiveName}" />
 			<property name="runtimeIU" value="@{feature}.feature.group" />
 			<delete dir="${featureTemp}" />
 			<mkdir dir="${featureTemp}" />
@@ -71,7 +75,6 @@
 			</p2.mirror>
 			<p2.remove.iu>
 				<repository location="file://${featureTemp}" />
-				<iu id="${runtimeIU}" />
 				<iu query="" artifacts="(format=packed)" />
 				    
 			</p2.remove.iu>
