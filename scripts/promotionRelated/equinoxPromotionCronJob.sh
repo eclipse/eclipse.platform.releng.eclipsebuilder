@@ -22,7 +22,7 @@
 # The 'workLocation' provides a handy central place to have the 
 # promote script, and log results. ASSUMING this works for all 
 # types of builds, etc (which is the goal for the sdk promotions).
-workLocation=/shared/eclipse/sdk/promotion
+workLocation=/shared/eclipse/equinox/promotion
 
 # masterBuilder.sh must know about and use this same 
 # location to put its promotions scripts. (i.e. implicite tight coupling)
