@@ -69,14 +69,16 @@ ls -lA --classify --group-directories-first
 
 # same concepts as when running builds, but, different, since
 # no longer running on "shared"
-    buildRoot=${buildRoot:-$WORKSPACE/WORKSPACE}
+    buildRoot=${buildRoot:-$WORKSPACE}
     
     # derived values (which effect default computed values) 
     # TODO: do not recall why I export these ... should live without, if possible
     export buildDir=${buildRoot}/build
     export siteDir=${buildRoot}/siteDir
 
+
     export supportDir=${buildDir}/supportDir
+    mkdir -p $supporDir
     export relengBaseBuilderDir=$buildRoot/org.eclipse.releng.basebuilder
     export basebuilderBranch=R4_2_primary
     export eclipseBuilderDir=$WORKSPACE/WORKSPACE/org.eclipse.releng.eclipsebuilder
