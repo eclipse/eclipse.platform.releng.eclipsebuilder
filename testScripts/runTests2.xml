@@ -49,8 +49,8 @@
             name="BUILD_NUMBER"
             value="${hudson.BUILD_NUMBER}" />
         <property
-            name="BUILD_NAME"
-            value="${hudson.BUILD_NAME}" />
+            name="JOB_NAME"
+            value="${hudson.JOB_NAME}" />
 
 
 
@@ -62,10 +62,9 @@
         <echo message="WORKSPACE: ${WORKSPACE}" />
         <echo message="BUILD_ID: ${BUILD_ID}" />
         <echo message="BUILD_NUMBER: ${BUILD_NUMBER}" />
-        <echo message="BUILD_NAME: ${BUILD_NAME}" />
+        <echo message="JOB_NAME: ${JOB_NAME}" />
         <echo message="buildId: ${buildId}" />
 		
-        <echo message="currentbuildrepo: ${currentbuildrepo}" />
         
 		<!-- <condition property="testDir" value="${hudson.WORKSPACE}\ws\${hudson.BUILD_ID}">
 			<os family="windows" />
@@ -94,12 +93,13 @@
         <!-- TODO: vary to drops for 3.8 -->
         <property
             name="currentbuildrepo"
-            value="http://download.eclipse.org/eclipse/downloads/drops4/${buildId}" />
+            value="http://download.eclipse.org/eclipse/updates/4.2-N-Builds" />
+        <echo message="currentbuildrepo: ${currentbuildrepo}" />
 
         <!-- TODO: vary to drops for 3.8 -->
         <property
             name="buildURL"
-            value="http:/download.eclipse.org/eclipse/download/drops4/${buildId}" />
+            value="http:/download.eclipse.org/eclipse/downloads/drops4/${buildId}" />
         <echo message="buildURL ${buildURL}" />
     </target>
 
