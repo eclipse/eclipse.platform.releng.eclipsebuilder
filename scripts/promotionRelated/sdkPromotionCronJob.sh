@@ -32,7 +32,8 @@ promoteScriptLocationEclipse=$workLocation/queue
 # on "standard err" (which isn't very interesting).
 promotefile=$( find $promoteScriptLocationEclipse -name "promote*.sh" | sort | head -1 )  
 
-echo $promotefile
+# having an echo here will cause cron job so send mail for EACH job, even if all is fine.
+#echo $promotefile
 
 if [[ -z "$promotefile" ]] 
 then
