@@ -64,6 +64,9 @@ updateBaseBuilder () {
     return $exitcode
 }
 
+# make this listing, so we get layout logged
+ls -lA --classify --group-directories-first
+
 # same concepts as when running builds, but, different, since
 # no longer running on "shared"
     buildRoot=${buildRoot:-$WORKSPACE/WORKSPACE}
@@ -75,6 +78,7 @@ updateBaseBuilder () {
 
     export supportDir=${buildDir}/supportDir
     export relengBaseBuilderDir=$buildRoot/org.eclipse.releng.basebuilder
+    export basebuilderBranch=R4_2_primary
     export eclipseBuilderDir=$WORKSPACE/WORKSPACE/org.eclipse.releng.eclipsebuilder
     
 updateBaseBuilder 
@@ -84,5 +88,9 @@ updateBaseBuilder
 # git, but then have the first thing done was to fetch 
 # the basebuilder from CVS (which Hudson used to do for us, 
 # but apparently it can do initial fetch from only one SCM. 
+
+# make this listing, so we get layout logged
+ls -lA --classify --group-directories-first
+
 
 /shared/common/jdk-1.6.x86_64/bin/java -Xmx500m -jar $relengBaseBuilderDir/plugins/org.eclipse.equinox.launcher.jar -DWORKSPACE=$WORKSPACE  -DbuildId=$buildId -DBUILD_WORKSPACE=$BUILD_WORKSPACE -DBUILD_JOB_NAME=$BUILD_JOB_NAME -DBUILD_BUILD_NUMBER=$BUILD_BUILD_NUMBER -DBUILD_ID=$BUILD_ID -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=x86_64 -Dhudson=true -Dcurrentbuildrepo=$currentbuildrepo -Djava.home=$JAVA_HOME -application org.eclipse.ant.core.antRunner -v -f $eclipseBuilderDir/testScripts/runTests2.xml
