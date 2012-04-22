@@ -78,7 +78,7 @@ ls -lA --classify --group-directories-first
 
 
     export supportDir=${buildDir}/supportDir
-    mkdir -p $supporDir
+    mkdir -p $supportDir
     export relengBaseBuilderDir=$buildRoot/org.eclipse.releng.basebuilder
     export basebuilderBranch=R4_2_primary
     export eclipseBuilderDir=$WORKSPACE/WORKSPACE/org.eclipse.releng.eclipsebuilder
