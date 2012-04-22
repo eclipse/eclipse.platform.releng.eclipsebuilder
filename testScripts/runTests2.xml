@@ -319,12 +319,12 @@
         <echo message="executionDir ${executionDir}" />
 
         <copy todir="${executionDir}">
-            <fileset dir="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}" />
+            <fileset dir="${eclipseBuilderDir}/eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}" />
         </copy>
         <copy
             todir="${executionDir}"
             overwrite="true">
-            <fileset dir="eclipse/buildConfigs/sdk.tests/testScripts" />
+            <fileset dir="${eclipseBuilderDir}/eclipse/buildConfigs/sdk.tests/testScripts" />
         </copy>
         <antcall target="configure.team.cvs.test" />
         <ant antfile="${test.xml}" />
