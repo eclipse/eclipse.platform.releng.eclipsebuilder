@@ -30,7 +30,7 @@ promoteScriptLocationEclipse=$workLocation/queue
 
 # we redirect "find" std err to nowhere, else "not finding something" is reported 
 # on "standard err" (which isn't very interesting).
-promotefile=$( find $promoteLocation/promote*\.sh 2>/dev/null | sort | head -1 )  
+promotefile=$( find $promoteScriptLocationEclipse -name "promote*.sh" | sort | head -1 )  
 
 echo $promotefile
 
@@ -45,8 +45,9 @@ else
 
         # notice these are concatenated on purpose, to give some "history", but
         # that means has to be "manually" removed every now and then. 
-        /bin/bash $promotefile 1>>$workLocation/promotion-out.txt 2>>$workLocation/promotion-err.txt
-        #echo "DEBUG: normally would execute file here: $promotefile"
+        # /bin/bash $promotefile 1>>$workLocation/promotion-out.txt
+        # 2>>$workLocation/promotion-err.txt
+        echo "DEBUG: normally would execute file here: $promotefile" 1>>$workLocation/promotion-out.txt 2>>$workLocation/promotion-err.txt
         rccode=$?
         if [[ $rccode != 0 ]]
         then 
@@ -56,7 +57,7 @@ else
         else
             # all is ok, we'll remove the file so we won't execute it again. 
             # (we'll move for now, for later inspection, if things go wrong, but eventually can just rm them)
-            mv $promotefile $promoteLocation/RAN_$(basename $promotefile)
+            mv $promotefile $promoteScriptLocationEclipse/RAN_$(basename $promotefile)
             exit 0
         fi
     else
