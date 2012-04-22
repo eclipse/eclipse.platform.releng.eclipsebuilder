@@ -8,6 +8,12 @@
     name="Hudson-Tests"
     default="runTests">
 
+    <!-- 
+    this script is invoked by the build, on the build machine, 
+    to signify to hudson "the build is done", pass a few parameters, 
+    then let Hudson's job/scripts take over 
+    -->
+    
     <!-- normally "passed in" but for testing ... we'll hard code -->
     <property
         name="buildId"
@@ -47,6 +53,7 @@
 
     <target name="JUnitTests">
         <parallel>
+        <!--
             <antcall target="triggerHudsonTests">
                 <param
                     name="job"
@@ -55,7 +62,7 @@
                     name="suffix"
                     value="win32.zip" />
             </antcall>
-
+        -->
             <antcall target="triggerHudsonTests">
                 <param
                     name="job"
@@ -64,6 +71,7 @@
                     name="suffix"
                     value="linux-gtk-x86_64.tar.gz" />
             </antcall>
+   <!--
             <antcall target="triggerHudsonTests">
                 <param
                     name="job"
@@ -72,7 +80,7 @@
                     name="suffix"
                     value="macosx-cocoa-x86.zip" />
             </antcall>
-
+    -->
         </parallel>
     </target>
 

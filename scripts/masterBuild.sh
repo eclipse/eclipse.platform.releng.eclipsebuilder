@@ -94,7 +94,19 @@ updateBaseBuilder () {
         exit 1
     fi 
     
+    if [[ -z "${relengBaseBuilderDir}" ]]
+    then 
+        echo "ERROR: relengBaseBuilderDir must be defined for this script, $0"
+        exit 1
+    fi
+        if [[ -z "${basebuilderBranch}" ]]
+    then 
+        echo "ERROR: basebuilderBranch must be defined for this script, $0"
+        exit 1
+    fi
+    
     echo "DEBUG: relengBaseBuilderDir: $relengBaseBuilderDir"
+    echo "INFO: basebuilderBranch: $basebuilderBranch"
     
     #if [ -e ${relengBaseBuilderDir}/eclipse.ini ]
      # then
