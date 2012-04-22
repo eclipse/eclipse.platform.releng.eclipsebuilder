@@ -71,7 +71,7 @@ ls -lA --classify --group-directories-first
 # no longer running on "shared"
 # WORKSPACE is hudson's variable to current jobs working area
     buildRoot=${buildRoot:-$WORKSPACE}
-    
+    echo "buildRoot: ${buildRoot}"
     # derived values (which effect default computed values) 
     # TODO: do not recall why I export these ... should live without, if possible
     export buildDir=${buildRoot}/build
@@ -80,7 +80,7 @@ ls -lA --classify --group-directories-first
 
     export supportDir=${buildDir}/supportDir
     mkdir -p $supportDir
-    export relengBaseBuilderDir=$buildRoot/org.eclipse.releng.basebuilder
+    export relengBaseBuilderDir=$supportDir/org.eclipse.releng.basebuilder
     export basebuilderBranch=R4_2_primary
     export eclipseBuilderDir=$buildRoot/org.eclipse.releng.eclipsebuilder
     
