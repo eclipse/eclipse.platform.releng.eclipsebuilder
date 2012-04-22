@@ -96,4 +96,4 @@ ls -lA --classify --group-directories-first
 # but apparently it can do initial fetch from only one SCM. 
 
 
-/shared/common/jdk-1.6.x86_64/bin/java -Xmx500m -jar $relengBaseBuilderDir/plugins/org.eclipse.equinox.launcher.jar  -DbuildId=$buildId  -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=x86_64 -Dhudson=true  -application org.eclipse.ant.core.antRunner -v -f $eclipseBuilderDir/testScripts/runTests2.xml
+/shared/common/jdk-1.6.x86_64/bin/java -Xmx500m -jar $relengBaseBuilderDir/plugins/org.eclipse.equinox.launcher.jar -DeclipseBuilderDir=${eclipseBuilderDir} -DbuildId=$buildId  -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=x86_64 -Dhudson=true  -application org.eclipse.ant.core.antRunner -v -f $eclipseBuilderDir/testScripts/runTests2.xml

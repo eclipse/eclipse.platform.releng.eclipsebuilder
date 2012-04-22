@@ -287,7 +287,7 @@
         </condition>
         <echo message="getArtifacts ${getArtifacts}" />
         <antcall target="${getArtifacts}" />
-        <property file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/testing.properties" />
+        <property file="${eclipseBuilderDir}/eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/testing.properties" />
         <property
             name="tester"
             value="${executionDir}" />
@@ -303,18 +303,18 @@
             name="p2executionDir"
             value="${windowsfile}" />
         <replace
-            file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties"
+            file="${eclipseBuilderDir}/eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties"
             token="@executionDir@"
             value="${p2executionDir}" />
         <replace
-            file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties"
+            file="${eclipseBuilderDir}/eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties"
             token="@buildId@"
             value="${buildId}" />
         <replace
-            file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties"
+            file="${eclipseBuilderDir}/eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties"
             token="@org.eclipse.equinox.p2.tests.current.build.repo@"
             value="${currentbuildrepo}" />
-        <property file="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" />
+        <property file="${eclipseBuilderDir}/eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties" />
 
         <echo message="executionDir ${executionDir}" />
 
