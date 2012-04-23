@@ -268,9 +268,13 @@ echo "[git-release] git-submission.sh $gitCache $( cat repos-report.txt ) "
 
 /bin/bash git-submission.sh $gitCache $( cat repos-report.txt ) > $submissionReportFilePath
 
+# See bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=375807#c65
+# as to why second form is prefered. (xargs not really needed). 
+#cat clones.txt| xargs /bin/bash git-map.sh $gitCache $buildTag \
+#        $relengRepo > maps.txt
+/bin/bash git-map.sh $gitCache $buildTag \
+        $relengRepo $( cat clones.txt ) > maps.txt
 
-cat clones.txt| xargs /bin/bash git-map.sh $gitCache $buildTag \
-        $relengRepo > maps.txt
 
 #Trim out lines that don't require execution
 grep -v ^OK maps.txt | grep -v ^Executed >run.txt
