@@ -93,27 +93,27 @@ updateBaseBuilder () {
         echo "   ERROR: support directory did not exist as expected."  
         exit 1
     fi 
-    
+
     if [[ -z "${relengBaseBuilderDir}" ]]
     then 
         echo "ERROR: relengBaseBuilderDir must be defined for this script, $0"
         exit 1
     fi
-        if [[ -z "${basebuilderBranch}" ]]
+    if [[ -z "${basebuilderBranch}" ]]
     then 
         echo "ERROR: basebuilderBranch must be defined for this script, $0"
         exit 1
     fi
-    
+
     echo "DEBUG: relengBaseBuilderDir: $relengBaseBuilderDir"
     echo "INFO: basebuilderBranch: $basebuilderBranch"
-    
+
     #if [ -e ${relengBaseBuilderDir}/eclipse.ini ]
-     # then
-           #      echo "removing previous version of base builder, to be sure it is fresh, to see if related to to see if fixes bug 375780"
-           #rm -fr ${VERBOSE_REMOVES} ${relengBaseBuilderDir}
-     #fi
-     
+    # then
+    #      echo "removing previous version of base builder, to be sure it is fresh, to see if related to to see if fixes bug 375780"
+    #rm -fr ${VERBOSE_REMOVES} ${relengBaseBuilderDir}
+    #fi
+
     # existence of direcotry, is not best test of existence, since 
     # sometimes the top level directory may still exist, while most files deleted,  
     # due to NFS filesystem quirks. Hence, we look for specific file, the eclispe.ini 
@@ -127,8 +127,8 @@ updateBaseBuilder () {
         #cmd="cvs -d :pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse ${quietCVS} ex -r ${basebuilderBranch} -d org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder"
         # cvs -d :pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse ${quietCVS} ex -r ${basebuilderBranch} -d org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder
         # TODO: make cvs user/protocol/host variables so can be rrun remotely also
-         cvs -d :local:/cvsroot/eclipse ${quietCVS} ex -r ${basebuilderBranch} -d org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder
-         exitcode=$?
+        cvs -d :local:/cvsroot/eclipse ${quietCVS} ex -r ${basebuilderBranch} -d org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder
+        exitcode=$?
         #echo "cvs export cmd: ${cmd}"
         #"${cmd}"
     else
@@ -148,16 +148,16 @@ updateEclipseBuilder() {
 
     echo "[start] [`date +%H\:%M\:%S`] updateEclipseBuilder get ${eclipsebuilder} using tag or branch: ${eclipsebuilderBranch}"
 
-     # get fresh script. This is one case, we must get directly from repo since the purpose of the script 
-     # is to get the eclipsebuilder! 
+    # get fresh script. This is one case, we must get directly from repo since the purpose of the script 
+    # is to get the eclipsebuilder! 
     wget -O getEclipseBuilder.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/getEclipseBuilder.sh?h=${eclipsebuilderBranch}
     chmod +x getEclipseBuilder.sh 
-    
+
     # execute (in current directory) ... depends on some "exported" properties. 
     ./getEclipseBuilder.sh
 
     exitcode=$?    
-    
+
     echo "[end] [`date +%H\:%M\:%S`] updateEclipseBuilder get ${eclipsebuilder} using tag or branch: ${eclipsebuilderBranch}"
     return $exitcode
 }
@@ -179,24 +179,24 @@ runSDKBuild ()
     fi
 
     echo "DEBUG: current directory for build: ${PWD}" 
-   
-   # These variables should already be defined and passed in. 
 
-   if [ -z "${eclipseStream}" ]
-      then
-          echo "ERROR. buildType must be specified in call to buildSDK"
-          exit 128
-   fi
-   if [ -z "${buildType}" ]
-      then
-          echo "ERROR. buildType must be specified in call to buildSDK"
-          exit 128
-   fi
-   if [ -z "${mapVersionTag}" ]
-      then
-          echo "ERROR. mapVersionTag must be specified in call to buildSDK"
-          exit 128
-   fi       
+    # These variables should already be defined and passed in. 
+
+    if [ -z "${eclipseStream}" ]
+    then
+        echo "ERROR. buildType must be specified in call to buildSDK"
+        exit 128
+    fi
+    if [ -z "${buildType}" ]
+    then
+        echo "ERROR. buildType must be specified in call to buildSDK"
+        exit 128
+    fi
+    if [ -z "${mapVersionTag}" ]
+    then
+        echo "ERROR. mapVersionTag must be specified in call to buildSDK"
+        exit 128
+    fi       
 
     buildfile=$supportDir/$eclipsebuilder/buildAll.xml
 
@@ -213,37 +213,37 @@ runSDKBuild ()
     OSGiMinimum12="/shared/common/org.eclipse.sdk-feature2/libs/ee.minimum-1.2.0.jar"
 
     javadoc="-Djavadoc16=/shared/common/jdk1.6.0_27.x86_64/bin/javadoc"
-    
+
     skipPerf="-Dskip.performance.tests=true"
     skipTest="-Dskip.tests=true"
-      
+
     # 'sign' works by setting as any value if signing is desired. 
     #  comment out (or, don't set) if signing is not desired.  
     if [ "$buildType" = "N" ]; then
-      sign=
-      echo "INFO: signing forced off due to doing an N build"
+        sign=
+        echo "INFO: signing forced off due to doing an N build"
     elif [ "${testbuildonly}" == "true" ] 
     then
-      sign=
-      echo "INFO: signing forced off due to doing an test build"
+        sign=
+        echo "INFO: signing forced off due to doing an test build"
     else
-      sign="-Dsign=true"
-      echo "INFO: signing set on by default"
+        sign="-Dsign=true"
+        echo "INFO: signing set on by default"
     fi 
-    
-  
+
+
     # The cpAndMain is used to launch antrunner app (instead of using eclipse executable
     cpLaunch=$( find $relengBaseBuilderDir/plugins -name "org.eclipse.equinox.launcher_*.jar" | sort | head -1 )
     cpAndMain="$cpLaunch org.eclipse.equinox.launcher.Main"
     echo "DEBUG: cpLaunch: ${cpLaunch}"
     echo "DEBUG: cpAndMain: ${cpAndMain}"
 
-    
+
     # hudson is an indicator of running on build.eclipse.org
     hudson="-Dhudson=true"
 
     echo "DEBUG: in runSDKBuild buildfile: $buildfile"
-        
+
     # NOTE: the builder (or, some part if it) appears to 
     # REQUIRE Java 1.6, but its not obivous
     # See bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=375807#c50 
@@ -307,14 +307,14 @@ runSDKBuild ()
 
 
 tagRepo () {
-    
+
     echo "[start] [`date +%H\:%M\:%S`] tagRepo "
-    
+
     pushd ${PWD}
     # we assume we already got the eclipsebuilder successfully
     # and we use the "working" version copied from gitClones
     releasescriptpath=$builderDir/scripts
-   
+
     echo "DEBUG: using script in ${releasescriptpath}/git-release.sh"
     # remember, -committerId "$committerId" not required on build.eclipse.org
     # will need to do more if/when we make it a variable property (such as for 
@@ -419,37 +419,37 @@ processCommandLine ()
     mapVersionTag=${mapVersionTag:-R4_HEAD}
     eclipseStream=${eclipseStream:-4.2.0}
     buildType=${buildType:-N}
-    
-      # contrary to intuition (and previous behavior, bash 3.1) do NOT use quotes around right side of expression. 
-      if [[ "${eclipseStream}" =~ ([[:digit:]]*)\.([[:digit:]]*)\.([[:digit:]]*) ]]
-       then
-          eclipseStreamMajor=${BASH_REMATCH[1]} 
-          eclipseStreamMinor=${BASH_REMATCH[2]} 
-          eclipseStreamService=${BASH_REMATCH[3]}
-       else
-            echo "eclipseStream, $eclipseStream, must contain major, minor, and service versions, such as 4.2.0"
-            exit 1
-       fi
-       echo "eclipseStream: $eclipseStream"
-       echo "eclipseStreamMajor: $eclipseStreamMajor" 
-       echo "eclipseStreamMinor: $eclipseStreamMinor"
-       echo "eclipseStreamService: $eclipseStreamService"
-           
+
+    # contrary to intuition (and previous behavior, bash 3.1) do NOT use quotes around right side of expression. 
+    if [[ "${eclipseStream}" =~ ([[:digit:]]*)\.([[:digit:]]*)\.([[:digit:]]*) ]]
+    then
+        eclipseStreamMajor=${BASH_REMATCH[1]} 
+        eclipseStreamMinor=${BASH_REMATCH[2]} 
+        eclipseStreamService=${BASH_REMATCH[3]}
+    else
+        echo "eclipseStream, $eclipseStream, must contain major, minor, and service versions, such as 4.2.0"
+        exit 1
+    fi
+    echo "eclipseStream: $eclipseStream"
+    echo "eclipseStreamMajor: $eclipseStreamMajor" 
+    echo "eclipseStreamMinor: $eclipseStreamMinor"
+    echo "eclipseStreamService: $eclipseStreamService"
+
 
     # Normall must be supplied by caller.
     # TODO: make last segment funtion of eclipse stream and build type 
     buildRoot=${buildRoot:-/shared/eclipse/eclipse4N}
-    
+
 
     # derived values (which effect default computed values) 
     # TODO: do not recall why I export these ... should live without, if possible
     export buildDir=${buildRoot}/build
-if [[ "${testbuildonly}" == "true" ]] 
-then
-    export siteDir=${buildRoot}/siteDirTESTONLY    
-else
-    export siteDir=${buildRoot}/siteDir
-fi
+    if [[ "${testbuildonly}" == "true" ]] 
+    then
+        export siteDir=${buildRoot}/siteDirTESTONLY
+    else
+        export siteDir=${buildRoot}/siteDir
+    fi
     export supportDir=${buildDir}/supportDir
 
     # Relative constant values
@@ -467,11 +467,11 @@ fi
 
     # base builder pretty constant in CVS now. Will likely "to away" eventually.
     basebuilderBranch=${basebuilderBranch:-R4_2_primary}
-    
+
     # relies on export, since getEclipseBuilder is seperate script, 
     # and it does not use "command line pattern"
     export eclipsebuilderBranch=${eclipsebuilderBranch:-"master"}
-    
+
     # NOTE: $eclipsebuilder must be defined before builderDir 
     export builderDir=${supportDir}/$eclipsebuilder
     # remember: do not "mkdir" for builderDir since presence/absence 
@@ -509,7 +509,7 @@ fi
 
     buildTimestamp=${date}-${time}
     buildTag=$buildType$buildTimestamp
-    
+
     # TODO: it is confusing that buildId and buildLabel are the same
     # I think traditionally, buildId has been $date-$time and 
     # buildLabel been $buildType$buildId
@@ -522,7 +522,7 @@ fi
 
     postingDirectory=${siteDir}/eclipse/downloads/drops
     if [[ $eclipseStreamMajor > 3 ]]
-     then 
+    then 
         postingDirectory=${siteDir}/eclipse/downloads/drops4
     fi
     # For 3.x builds, use "drops3" for equinox. We do not publish 
@@ -530,10 +530,10 @@ fi
     # (for a bit) in case someone wants to "compare" them
     equinoxPostingDirectory=${siteDir}/equinox/drops3
     if [[ $eclipseStreamMajor > 3 ]]
-     then 
+    then 
         equinoxPostingDirectory=${siteDir}/equinox/drops
     fi
-    
+
     localUpdateSite=${siteDir}/updates
     buildResults=$postingDirectory/$buildTag
     submissionReportFilePath=$buildResults/report.txt
@@ -573,9 +573,9 @@ fi
 
 if ${DEBUG:-false} 
 then
-# temp: make sure what we "see" is same thing funciton sees.
-echo "Reading commands from command line: $0 $* " 
-echo "     It contained $# arguments"
+    # temp: make sure what we "see" is same thing funciton sees.
+    echo "Reading commands from command line: $0 $* " 
+    echo "     It contained $# arguments"
 fi 
 
 processCommandLine "$@"
@@ -652,8 +652,8 @@ tag=true
 
 if ${testbuildonly:-false}
 then
-   tag=false
-   echo "INFO: tag forced to $tag due to being a test build only"
+    tag=false
+    echo "INFO: tag forced to $tag due to being a test build only"
 fi
 
 if [ "$buildType" = "N" ]; then
@@ -672,11 +672,11 @@ fi
 echo "INFO: Last build: ${oldBuildTag}"
 # don't update this file, if doing a test build
 # TODO: unless there was no value there to begin with?
-if [ "${testbuildonly}" != "true" ] 
+if [[ "${testbuildonly}" != "true" ]] 
 then
-      echo $buildTag >$buildRoot/${buildType}build.properties
+    echo $buildTag >$buildRoot/${buildType}build.properties
 else
-      echo $buildTag >$buildRoot/${buildType}-TEST-build.properties      
+    echo $buildTag >$buildRoot/${buildType}-TEST-build.properties      
 fi
 
 
@@ -726,11 +726,11 @@ trExitCode=$?
 
 if [[ $trExitCode != 59 && $trExitCode != 0 ]]
 then
-   # check/notify of other errors, such as "push" failures
-   # TODO: eventually would be an email message sent here
-   # mailx -s "$eclipseStream SDK Build: $buildTag auto tagging failed. Build canceled." david_williams@us.ibm.com <<EOF
-   echo "Unexpected auto-tagging return code: $trExitCode. Build halted." 
-   exit 1
+    # check/notify of other errors, such as "push" failures
+    # TODO: eventually would be an email message sent here
+    # mailx -s "$eclipseStream SDK Build: $buildTag auto tagging failed. Build canceled." david_williams@us.ibm.com <<EOF
+    echo "Unexpected auto-tagging return code: $trExitCode. Build halted." 
+    exit 1
 fi
 
 echo "trExitCode: ${trExitCode}"
@@ -739,63 +739,63 @@ echo "continueBuildOnNoChange: $continueBuildOnNoChange"
 if [[ ( "${trExitCode}" == "59" )  &&  ( "${continueBuildOnNoChange}" != "true" ) ]]
 then 
     if [[ "${testbuildonly}" == "true" ]] 
-      then
+    then
         # send mail only to testonly address
         toAddress=daddavidw@gmail.com
-      else 
+    else 
         # if not a test build, send "no change" mail to list
         #toAddress=platform-releng-dev@eclipse.org
         # can not have empty else clauses, so we'll have double test emails
         toAddress=david_williams@mindspring.com
-     fi
-	(
-	echo "From: e4Builder@eclipse.org"
-	echo "To: ${toAddress}"
-	echo "MIME-Version: 1.0"
-	echo "Content-Type: text/plain; charset=utf-8"
-	echo "Subject: $eclipseStream Build: $buildId canceled. No changes detected (eom)"
-	echo " "
-	) | /usr/lib/sendmail -t
+    fi
+    (
+    echo "From: e4Builder@eclipse.org"
+    echo "To: ${toAddress}"
+    echo "MIME-Version: 1.0"
+    echo "Content-Type: text/plain; charset=utf-8"
+    echo "Subject: $eclipseStream Build: $buildId canceled. No changes detected (eom)"
+    echo " "
+    ) | /usr/lib/sendmail -t
 
-      echo "No changes detected by autotagging. Mail sent. $eclipseStream Build: $buildId canceled." 
-      exit 1
-# else continue building
+    echo "No changes detected by autotagging. Mail sent. $eclipseStream Build: $buildId canceled." 
+    exit 1
+    # else continue building
 fi
 
 # else, to get here, we should do a build. Notification depends on test flags (and N-build)
 
 # So, we send an email to list that a build has started and what changes were 
 # detected. UNLESS we are doing an N build or test build, in which case, we do not notify releng list
-    if [[ "${testbuildonly}" == "true" || "${continueBuildOnNoChange}" == "true" ]] 
-      then
-        # send mail only to testonly address
-        toAddress=daddavidw@gmail.com
-      else 
-        # if not a test build, and not an N-build, 
-        # send "build started" mail to list
-        #toAddress=platform-releng-dev@eclipse.org
-        # can not have empty else clauses, so we'll have double test emails
-        toAddress=david_williams@mindspring.com
-     fi
-     # for N builds, we do not notify anyone of "start of build" (but, do for all others? I, M? ) 
-     if [[ "${buildType}" != "N" ]]
-     then 
-           reporttext=$( cat $submissionReportFilePath ) 
-     
-		(
-		echo "From: e4Builder@eclipse.org"
-		echo "To: ${toAddress}"
-		echo "MIME-Version: 1.0"
-		echo "Content-Type: text/plain; charset=utf-8"
-		echo "Subject: $eclipseStream Build: $buildId started"
-		echo " "
-		echo "$eclipseStream Build: $buildId started"
-		echo " " 
-		echo "$reporttext" 
-		echo " "
-		) | /usr/lib/sendmail -t
-		
-	fi
+if [[ "${testbuildonly}" == "true" || "${continueBuildOnNoChange}" == "true" ]] 
+then
+    # send mail only to testonly address
+    toAddress=daddavidw@gmail.com
+else 
+    # if not a test build, and not an N-build, 
+    # send "build started" mail to list
+    #toAddress=platform-releng-dev@eclipse.org
+    # can not have empty else clauses, so we'll have double test emails
+    toAddress=david_williams@mindspring.com
+fi
+# for N builds, we do not notify anyone of "start of build" (but, do for all others? I, M? ) 
+if [[ "${buildType}" != "N" ]]
+then 
+    reporttext=$( cat $submissionReportFilePath ) 
+
+    (
+    echo "From: e4Builder@eclipse.org"
+    echo "To: ${toAddress}"
+    echo "MIME-Version: 1.0"
+    echo "Content-Type: text/plain; charset=utf-8"
+    echo "Subject: $eclipseStream Build: $buildId started"
+    echo " "
+    echo "$eclipseStream Build: $buildId started"
+    echo " " 
+    echo "$reporttext" 
+    echo " "
+    ) | /usr/lib/sendmail -t
+
+fi
 
 # temp: remove previous "working area" due to bug ?????
 # temp hard to remove completely, as sometimes NFS hangs on to some .nfs file
@@ -823,7 +823,7 @@ promoteScriptLocationEclipse=$workLocation/queue
 mkdir -p "${promoteScriptLocationEclipse}"
 
 scriptName=promote-${eclipseStream}-${buildType}-${buildId}.sh
-if [[ "${testbuildonly}" == true ]] 
+if [[ "${testbuildonly}" == "true" ]] 
 then
     # allows the "test" creation of promotion script, but, not have it "seen" be cron job
     scriptName=TEST-$scriptName
@@ -846,18 +846,18 @@ then
     # promote script, and log results. ASSUMING this works for all 
     # types of builds, etc (which is the goal for the sdk promotions).
     workLocationEquinox=/shared/eclipse/equinox/promotion
-    
+
     # the cron job must know about and use this same 
     # location to look for its promotions scripts. (i.e. implicite tight coupling)
     promoteScriptLocationEquinox=${workLocationEquinox}/queue
-    
+
     # directory should normally exist -- best to create with committer's ID --
     # but in case not
-	mkdir -p "${promoteScriptLocationEquinox}"
+    mkdir -p "${promoteScriptLocationEquinox}"
 
-	eqFromDir=${equinoxPostingDirectory}/${buildId}
-	eqToDir="/home/data/httpd/download.eclipse.org/equinox/drops/"
-	
+    eqFromDir=${equinoxPostingDirectory}/${buildId}
+    eqToDir="/home/data/httpd/download.eclipse.org/equinox/drops/"
+
     # Note: for proper mirroring at Eclispe, we probably do not want/need to 
     # maintain "times" on build machine, but let them take times at time of copying. 
     # If it turns out to be important to maintain times (such as ran more than once, 
@@ -865,14 +865,14 @@ then
     # Similarly, if download server is set up right, it will end up with the 
     # correct permissions, but if not, we may need to set some permissions first, 
     # then use -p on rsync
-    
+
     # Here is content of promtion script (note, use same ptimestamp created above):
     echo "#!/usr/bin/env bash" >  ${promoteScriptLocationEquinox}/${scriptName}
     echo "# promotion script created at $ptimestamp" >  ${promoteScriptLocationEquinox}/${scriptName}
-	echo "rsync --recursive \"${eqFromDir}\" \"${eqToDir}\"" >> ${promoteScriptLocationEquinox}/${scriptName}
+    echo "rsync --recursive \"${eqFromDir}\" \"${eqToDir}\"" >> ${promoteScriptLocationEquinox}/${scriptName}
 
     # we restrict "others" rights for a bit more security or safety from accidents
-	chmod -v ug=rwx,o-rwx ${promoteScriptLocationEquinox}/${scriptName}
+    chmod -v ug=rwx,o-rwx ${promoteScriptLocationEquinox}/${scriptName}
 else
     echo "Did not create promote script for equinox since $eclipseStream less than 4"
 fi 
