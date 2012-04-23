@@ -27,7 +27,10 @@
 	<!--Directory for JUnit report output, console log output and .log content for each test suite.  
 			Overrides default in org.eclipse.test/library.xml-->
 	<property name="junit-report-output" value="${results}/${platform}" />
-	<property name="coverage-output" value="${results}/coverage" />
+	
+	<!-- this dirctory, with some sort files are created during unit tests 
+	... need to find where to disable jacoco -->
+	<property name="coverage-output" value="${results}/coverageIGNORE" />
 
 	<!--Directory name of org.eclipse.test plug-in installed in ${eclipse-home}-->
 	<target name="setup" unless="noclean" depends="init">

@@ -77,14 +77,18 @@ ls -lA --classify --group-directories-first
     export buildDir=${buildRoot}/build
     export siteDir=${buildRoot}/siteDir
 
-
-    export supportDir=${buildDir}/supportDir
+    # first tried .../build/supporDir ... but, some assumptions that 
+    # they are peers, so we'll put both at "top"
+    # tests go under ./ws/${BUILD_ID} where BUILD_ID is Hudson's build ID
+    export supportDir=${buildRoot}
     mkdir -p $supportDir
     export relengBaseBuilderDir=$supportDir/org.eclipse.releng.basebuilder
     export basebuilderBranch=R4_2_primary
-    export eclipseBuilderDir=$buildRoot/org.eclipse.releng.eclipsebuilder
     
 updateBaseBuilder 
+
+    export eclipseBuilderDir=$buildRoot/org.eclipse.releng.eclipsebuilder
+
 
 # make this listing, so we get layout logged
 ls -lA --classify --group-directories-first
@@ -96,4 +100,4 @@ ls -lA --classify --group-directories-first
 # but apparently it can do initial fetch from only one SCM. 
 
 
-/shared/common/jdk-1.6.x86_64/bin/java -Xmx500m -jar $relengBaseBuilderDir/plugins/org.eclipse.equinox.launcher.jar -DrelengBaseBuilderDir=${relengBaseBuilderDir} -DeclipseBuilderDir=${eclipseBuilderDir} -DbuildId=$buildId  -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=x86_64 -Dhudson=true  -application org.eclipse.ant.core.antRunner -v -f $eclipseBuilderDir/testScripts/runTests2.xml
+/shared/common/jdk-1.6.x86_64/bin/java -Xmx500m -jar $relengBaseBuilderDir/plugins/org.eclipse.equinox.launcher.jar -DrelengBaseBuilderDir=${relengBaseBuilderDir} -DeclipseBuilderDir=${eclipseBuilderDir} -DbuildId=$buildId  -Dosgi.os=linux -Dosgi.ws=gtk -Dosgi.arch=x86_64 -Dhudson=true  -application org.eclipse.ant.core.antRunner -v -f $eclipseBuilderDir/runTests2.xml

@@ -13,29 +13,7 @@
     to signify to hudson "the build is done", pass a few parameters, 
     then let Hudson's job/scripts take over 
     -->
-    
-    <!-- normally "passed in" but for testing ... we'll hard code -->
-    <property
-        name="buildId"
-        value="N20120421-2021" />
-    <property
-        name="buildId"
-        value="${buildID}" />
-    <property
-        name="buildDirectory"
-        value="/shared/eclispe/eclipse4N/tdir/" />
-    <mkdir dir="${buildDirectory}" />
-    <property
-        name="siteDir"
-        value="/shared/eclipse/eclipse4N/siteDir" />
-    <property
-        name="postingDirectory"
-        value="${siteDir}/eclipse/downloads/drops4" />
 
-    
-    
-    
-    
     
     <!-- not used? -->
     <property
@@ -165,7 +143,7 @@
 
         <property
             name="tmpzipdir"
-            value="${postingDirectory}/testresults/tmp${job}" />
+            value="${postingDirectory}/${buildId}/testresults/tmp${job}" />
         <mkdir dir="${tmpzipdir}" />
         <get
             ignoreerrors="true"
@@ -175,13 +153,13 @@
             src="${tmpzipdir}/archive.zip"
             dest="${tmpzipdir}" />
         <zip
-            destfile="${postingDirectory}/testresults/archive.zip"
+            destfile="${postingDirectory}/${buildId}/testresults/archive.zip"
             basedir="${tmpzipdir}/archive/ws" />
         <unzip
-            src="${postingDirectory}/testresults/archive.zip"
-            dest="${postingDirectory}/testresults" />
+            src="${postingDirectory}/${buildId}/testresults/archive.zip"
+            dest="${postingDirectory}/${buildId}/testresults" />
         <delete file="${tmpzipdir}/archive.zip" />
-        <delete file="${postingDirectory}/testresults/archive.zip" />
+        <delete file="${postingDirectory}/${buildId}/testresults/archive.zip" />
     </target>
 
 

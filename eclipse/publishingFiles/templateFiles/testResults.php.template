@@ -143,8 +143,10 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 <div class="homeitem">
 <h3><a name="Logs"> Logs <?php echo "$buildType $buildName"; ?></h3>
 <ul>
+<!-- have removed chkpii processing on build.eclilpse.org
 <li> <a href="logs.php#chkpii"><b> CHKPII Test Logs </b></a>
 </li>
+-->
 <li>
 <a href="logs.php#javadoc"><b> Javadoc Logs </b></a>
 </li>
@@ -168,7 +170,8 @@ echo "  This tool generates a report for API deprecated since 3.7.1 </li> ";
 ?>
 
 <?php
-echo " <li><a href=\"coverage.php\"><b>JaCoCo code coverage report</b></a></li>";
+// have removed coverage measurements for now
+// echo " <li><a href=\"coverage.php\"><b>JaCoCo code coverage report</b></a></li>";
 ?>
 
 <?php
