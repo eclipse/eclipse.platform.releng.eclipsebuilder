@@ -773,21 +773,35 @@ then
 else 
     # if not a test build, and not an N-build, 
     # send "build started" mail to list
-    #toAddress=platform-releng-dev@eclipse.org
-    # can not have empty else clauses, so we'll have double test emails
-    toAddress=david_williams@mindspring.com
+    # remember, can not have empty else clauses, 
+    # so if desired to "comment out", must supply another
+    # harmless address
+    toAddress=platform-releng-dev@eclipse.org
 fi
 # for N builds, we do not notify anyone of "start of build" (but, do for all others? I, M? ) 
 if [[ "${buildType}" != "N" ]]
 then 
-    reporttext=$( cat $submissionReportFilePath ) 
+    
+    # during test builds, won't exist, so we check for 
+    # existence, to avoid false warnings
+    if [[ -f "$submissionReportFilePath" ]] 
+    then
+       reporttext=$( cat $submissionReportFilePath ) 
+    fi 
+    
+    if [[ "${testbuildonly}" == "true" ]]
+    then
+        buildsubject="$eclipseStream TEST Build: $buildId started"
+    else
+        buildsubject="$eclipseStream Build: $buildId started"
+    fi
 
     (
     echo "From: e4Builder@eclipse.org"
     echo "To: ${toAddress}"
     echo "MIME-Version: 1.0"
     echo "Content-Type: text/plain; charset=utf-8"
-    echo "Subject: $eclipseStream Build: $buildId started"
+    echo "Subject: $buildsubject"
     echo " "
     echo "$eclipseStream Build: $buildId started"
     echo " " 
