@@ -444,7 +444,7 @@ processCommandLine ()
     # derived values (which effect default computed values) 
     # TODO: do not recall why I export these ... should live without, if possible
     export buildDir=${buildRoot}/build
-if [[ ${testbuildonly}" == "true" ]] 
+if [[ "${testbuildonly}" == "true" ]] 
 then
     export siteDir=${buildRoot}/siteDirTESTONLY    
 else
@@ -675,7 +675,7 @@ echo "INFO: Last build: ${oldBuildTag}"
 if [ "${testbuildonly}" != "true" ] 
 then
       echo $buildTag >$buildRoot/${buildType}build.properties
-  else
+else
       echo $buildTag >$buildRoot/${buildType}-TEST-build.properties      
 fi
 
