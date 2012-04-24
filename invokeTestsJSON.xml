@@ -152,6 +152,20 @@
         <unzip
             src="${tmpzipdir}/archive.zip"
             dest="${tmpzipdir}" />
+
+        <available
+            file="${tmpzipdir}/archive/ws"
+            property="resultAvailable" />
+
+        <antcall target="finishup" />
+
+
+
+    </target>
+    <target
+        name="finishup"
+        depends="checkresults"
+        if="resultAvailable">
         <zip
             destfile="${postingDirectory}/${buildId}/testresults/archive.zip"
             basedir="${tmpzipdir}/archive/ws" />
@@ -160,7 +174,11 @@
             dest="${postingDirectory}/${buildId}/testresults" />
         <delete file="${tmpzipdir}/archive.zip" />
         <delete file="${postingDirectory}/${buildId}/testresults/archive.zip" />
+
     </target>
-
-
+    <target
+        name="checkresults"
+        unless="resultAvailable">
+        <echo message="ERROR: archive (zip) file came back empty from hudon build" />
+    </target>
 </project>
