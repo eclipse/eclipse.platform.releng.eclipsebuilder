@@ -77,7 +77,7 @@
         <property
             name="testDir"
             value="${WORKSPACE}/ws/${BUILD_ID}" />
-        <echo message="testDir ${testDir}" />
+        <echo message="DEBUG: testDir ${testDir}" />
         <condition
             property="executionDir"
             value="${testDir}\eclipse-testing">
@@ -209,6 +209,9 @@
     <target
         name="main"
         depends="init">
+
+        <echo message="DEBUG: echoproperties at start of main runTests2.xml (after inits)" />
+        <echoproperties />
         <property
             name="test.xml"
             value="${relengBaseBuilderDir}/plugins/org.eclipse.build.tools/scripts/test.xml" />
@@ -287,11 +290,27 @@
         </condition>
         <echo message="getArtifacts ${getArtifacts}" />
         <antcall target="${getArtifacts}" />
-        <property file="${eclipseBuilderDir}/eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/testing.properties" />
+        
+        <!-- 
+            Try using "loadproperties", insstead of "properties file=" to see if 
+            that will "evaluate" variables as loaded. Otherwise, the <properties form 
+            has to move to "top of file" ... outer scope?
+           <property file="${eclipseBuilderDir}/eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/testing.properties" />
+        -->
+        <property
+            name="testingPropertiesfile"
+            value="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/testing.properties" />
+        <loadproperties>
+            <file file="${testingPropertiesfile}" />
+        </loadproperties>
+
         <property
             name="tester"
             value="${executionDir}" />
 
+        <echo message="DEBUG: testDir: ${testDir}" />
+        <echo message="DEBUG: executionDir: ${executionDir}" />
+        
 		<!--if executiondir starts with c:\ you'll need to escape it so it can load the filename properly with java -->
         <pathconvert
             targetos="unix"
