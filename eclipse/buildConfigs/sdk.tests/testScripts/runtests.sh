@@ -74,7 +74,8 @@ then
 	if [ ! -r eclipse ]
 	then
 		tar -xzf eclipse-SDK-*.tar.gz
-		unzip -qq -o -C eclipse-junit-tests-*.zip */plugins/org.eclipse.test* -d eclipse/dropins/
+		# note, the file pattern to match, must not start with */plugins because there is no leading '/' in the zip file, since they are repos.
+		unzip -qq -o -C eclipse-junit-tests-*.zip plugins/org.eclipse.test* -d eclipse/dropins/
 fi
 
 # run tests
