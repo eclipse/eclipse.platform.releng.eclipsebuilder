@@ -86,7 +86,7 @@
             value="{&quot;name&quot;:&quot;Deltapack&quot;,&quot;value&quot;:&quot;${baseURL}/eclipse-${buildId}-delta-pack.zip&quot;}" />
         <property
             name="JSON_PlatformRelease"
-            value="{&quot;name&quot;:&quot;PlatformRelease&quot;,&quot;value&quot;:&quot;http://download.eclipse.org/eclipse/downloads/drops/R-3.7.2-201202080800/eclipse-platform-3.7.2-${suffix}&quot;}" />
+            value="{&quot;name&quot;:&quot;PlatformRelease&quot;,&quot;value&quot;:&quot;http://download.eclipse.org/eclipse/downloads/drops/R-3.7.1-201109091335/eclipse-platform-3.7.1-${suffix}&quot;}" />
         <property
             name="JSON_buildId"
             value="{&quot;name&quot;:&quot;buildId&quot;,&quot;value&quot;:&quot;${buildId}&quot;}" />

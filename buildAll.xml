@@ -53,9 +53,11 @@
         value="${postingDirectory}/${buildLabel}/buildlogs" />
     <mkdir dir="${buildlogs}" />
 
+    <property name="resultsRepoLocation"
+        value="${updateSite}/${eclipseStreamMajor}.${eclipseStreamMinor}-${buildType}-builds" />
 
     <property name="buildRepo"
-        value="${updateSite}/${eclipseStreamMajor}.${eclipseStreamMinor}-${buildType}-builds/${buildId}" />
+        value="${resultsRepoLocation}/${buildId}" />
 
     <target name="main" depends="init">
         <echo message="DEBUG: properties at start of main buildAll.xml" />
@@ -699,14 +701,14 @@
         </exec>
         <property name="html_directory_location" value="${report}/apitoolsverifications/html" />
         <property name="report_directory_location" value="${report}/apitoolsverifications/xml" />
-        <property name="3_7_1_reference_location"
+        <property name="previous_reference_location"
             value="${reference}/eclipse-SDK-3.7.1-win32.zip" />
         <exec executable="/usr/bin/wget" dir="${reference}"
             output="${reference}/error.txt" failonerror="false" os="Linux">
             <arg
-                line="-q -O  ${3_7_1_reference_location} http://${localmirror}/eclipse/downloads/drops/R-3.7.1-201109091335/eclipse-SDK-3.7.1-win32.zip" />
+                line="-q -O  ${previous_reference_location} http://${localmirror}/eclipse/downloads/drops/R-3.7.1-201109091335/eclipse-SDK-3.7.1-win32.zip" />
         </exec>
-        <apitooling.analysis baseline="${3_7_1_reference_location}"
+        <apitooling.analysis baseline="${previous_reference_location}"
             profile="${current_location}" report="${report_directory_location}"
             filters="${filter_store}" excludelist="${exclude_list_external_location}"
             debug="true" />
@@ -720,7 +722,7 @@
             value="${report}/apitoolsdeprecations/apideprecation.xml" />
         <property name="api_deprecation_html"
             value="${report}/apitoolsdeprecations/apideprecation.html" />
-        <apitooling.apideprecation baseline="${3_7_1_reference_location}"
+        <apitooling.apideprecation baseline="${previous_reference_location}"
             profile="${current_location}" report="${api_deprecation_report}"
             debug="true" />
         <apitooling.apideprecation_reportconversion
@@ -1050,17 +1052,26 @@
             productVersion="1.0.0.${buildId}"
             iconsList="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/rt.icns" />
 
-        <!-- <ant target="main" antfile="buildConfiguration.xml" dir="${eclipse.build.configs}/pde.build.config.launcher" 
-            /> <p2.publish.product flavor="tooling" repository="file:${reposource}" productFile="${buildDirectory}/features/org.eclipse.pde.build.product.feature/product/pdebuild.product" 
-            compress="true"> <config os="win32" ws="win32" arch="x86" /> <config os="win32" 
-            ws="win32" arch="x86_64" /> <config os="linux" ws="gtk" arch="x86" /> <config 
-            os="linux" ws="gtk" arch="x86_64" /> <config os="macosx" ws="cocoa" arch="x86" 
-            /> <config os="macosx" ws="cocoa" arch="x86_64" /> </p2.publish.product> -->
+           <!-- 
+            <ant target="main" antfile="buildConfiguration.xml" 
+                 dir="${eclipse.build.configs}/pde.build.config.launcher" /> 
+            <p2.publish.product flavor="tooling" 
+                repository="file:${reposource}" 
+                productFile="${buildDirectory}/features/org.eclipse.pde.build.product.feature/product/pdebuild.product" 
+            compress="true"> 
+            <config os="win32" ws="win32" arch="x86" /> 
+            <config os="win32" ws="win32" arch="x86_64" /> 
+            <config os="linux" ws="gtk" arch="x86" /> 
+            <config os="linux" ws="gtk" arch="x86_64" /> 
+            <config os="macosx" ws="cocoa" arch="x86" /> 
+            <config os="macosx" ws="cocoa" arch="x86_64" /> 
+            </p2.publish.product> 
+            -->
 
 
         <antcall target="packMasterFeature" />
 
-        <echo message="making directory buildRepo: ${buildRepo}" />
+        <echo message="DEBUG: making directory buildRepo: ${buildRepo}" />
         <mkdir dir="${buildRepo}" />
 
         <condition property="repoBaseline" value="${p2RepoURL}">
@@ -1068,9 +1079,9 @@
         </condition>
         <property name="repoBaseline" value="file:${updateSite}" />
 
-        <!-- <echo message="DEBUG: repoBaseline: ${repoBaseline}" /> -->
+        <echo message="DEBUG: repoBaseline: ${repoBaseline}" />
 
-        <replace file="${eclipse.build.configs}/../../extras/artifacts.xml"
+        <replace summary="true" file="${eclipse.build.configs}/../../extras/artifacts.xml"
             token="@p2RepoPath@" value="${p2RepoPath}" />
         <filter token="BUILD_ID" value="${buildLabel}" />
         <mkdir dir="${buildDirectory}/formatRepo" />
@@ -1135,8 +1146,6 @@
 
         <antcall target="mirrorEMF" />
 
-        <property name="resultsRepoLocation"
-            value="${updateSite}/${eclipseStreamMajor}.${eclipseStreamMinor}-${buildType}-builds" />
 
         <echo message="Create composite and add their child repos" />
         <echo message="  composite at: ${resultsRepoLocation}" />
