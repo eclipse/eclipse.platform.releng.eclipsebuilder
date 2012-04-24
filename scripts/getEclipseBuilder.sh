@@ -87,8 +87,12 @@ function getEclipseBuilder () {
     gitEmail=${gitEmail:-"e4Build"}
     gitName=${gitName:-"e4Builder-R4"}
     # normally buildDir would be expected to be "passed in" via export, but
-    # if not, we can start of PWD for local, standalone testing.
-    buildDir=${buildDir:-"${PWD}/build"}
+    # if not, we can start at PWD and move up one level before
+    # setting supportDir. This "mimics" the correct behavior, if 
+    # we are just replacing eclipsebuilder, after the build has ran, 
+    # say, to correct some test script, etc. during development/debugging. 
+    
+    buildDir=${buildDir:-"${PWD}/../"}
     supportDir=${supportDir:-"${buildDir}/supportDir"}
     gitCache=${gitCache:-"$supportDir/gitCache"}
     builderDir=${builderDir:-"${supportDir}/$eclipsebuilder"}

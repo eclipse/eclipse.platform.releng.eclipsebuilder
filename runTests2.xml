@@ -93,7 +93,7 @@
         <!-- TODO: vary to drops for 3.8 -->
         <property
             name="currentbuildrepo"
-            value="http://download.eclipse.org/eclipse/updates/4.2-N-builds" />
+            value="http://download.eclipse.org/eclipse/updates/4.2-N-builds/${buildId}" />
         <echo message="currentbuildrepo: ${currentbuildrepo}" />
 
         <!-- TODO: vary to drops for 3.8 -->
