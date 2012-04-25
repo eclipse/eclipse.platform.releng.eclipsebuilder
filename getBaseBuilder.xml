@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <!--
+        A utility ant script get the base builder from CVS
+    -->
+<project
+    name="getBaseBuilder"
+    default="getBaseBuilder"
+    basedir=".">
+
+    <target
+        name="hudson-init"
+        if="hudson">
+         <!-- as of this writing, 04/22/2012, this was current list of 
+              hudson provided variables. We take advantage of a number 
+              of them, but "translate" them into our own variable names, 
+              for a little loser build-system seperattion 
+         BUILD_NUMBER
+             The current build number, such as "153"
+         BUILD_ID
+             The current build id, such as "2005-08-22_23-59-59" (YYYY-MM-DD_hh-mm-ss)
+         JOB_NAME
+             Name of the project of this build, such as "foo"
+         BUILD_TAG
+             String of "hudson-${JOB_NAME}-${BUILD_NUMBER}". Convenient to put into a resource file, a jar file, etc for easier identification.
+         EXECUTOR_NUMBER
+             The unique number that identifies the current executor (among executors of the same machine) that's carrying out this build. This is the number you see in the "build executor status", except that the number starts from 0, not 1.
+         NODE_NAME
+             Name of the slave if the build is on a slave, or "" if run on master
+         NODE_LABELS
+             Whitespace-separated list of labels that the node is assigned.
+         JAVA_HOME
+             If your job is configured to use a specific JDK, this variable is set to the JAVA_HOME of the specified JDK. When this variable is set, PATH is also updated to have $JAVA_HOME/bin.
+         WORKSPACE
+             The absolute path of the workspace.
+         HUDSON_URL
+             Full URL of Hudson, like http://server:port/hudson/
+         BUILD_URL
+             Full URL of this build, like http://server:port/hudson/job/foo/15/
+         JOB_URL
+             Full URL of this job, like http://server:port/hudson/job/foo/
+         SVN_REVISION
+             For Subversion-based projects, this variable contains the revision number of the module.
+         CVS_BRANCH
+             For CVS-based projects, this variable contains the branch of the module. If CVS is configured to check out the trunk, this environment variable will not be set.
+         HUDSON_USER
+             Currently logged in user
+             -->
+        <property environment="hudson" />
+        <property
+            name="WORKSPACE"
+            value="${hudson.WORKSPACE}" />
+        <!--
+        <property
+            name="BUILD_ID"
+            value="${hudson.BUILD_ID}" />
+        <property
+            name="BUILD_NUMBER"
+            value="${hudson.BUILD_NUMBER}" />
+        <property
+            name="JOB_NAME"
+            value="${hudson.JOB_NAME}" />
+        -->
+
+
+    </target>
+    <target
+        name="init"
+        depends="hudson-init">
+            
+        <!-- assign defaults if not on husson, for local testing if nothing else -->
+        <property
+            name="WORKSPACE"
+            value="${basedir}" />
+
+        <property
+            name="builderVersion"
+            value="R4_2_primary" />
+
+        <property
+            name="cvsRoot"
+            value=":pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse" />
+        <property
+            name="cvsProject"
+            value="org.eclipse.releng.basebuilder" />
+
+        <echo message="hudson: ${hudson}" />
+        <echo message="WORKSPACE: ${WORKSPACE}" />
+        <echo message="basebuilder version: ${builderVersion}" />
+        <echo message="cvsRoot: ${cvsRoot}" />
+        <echo message="cvsProject: ${cvsProject}" />    
+            
+        <!-- don't need? yet
+             <echo message="BUILD_ID: ${BUILD_ID}" />
+             <echo message="BUILD_NUMBER: ${BUILD_NUMBER}" />
+             <echo message="JOB_NAME: ${JOB_NAME}" />
+             <echo message="buildId: ${buildId}" />
+        -->
+                 
+                 
+       <!-- not used? But, may want in future? 
+        <condition
+            property="buildcleanarg"
+            value="-Dbuild.clean=${build.clean}"
+            else="">
+            <isset property="build.clean" />
+        </condition>
+
+        <condition
+            property="buildercleanarg"
+            value="-Dcheckout.builder.clean=${checkout.builder.clean}"
+            else="">
+            <isset property="checkout.builder.clean" />
+        </condition>
+       -->
+
+    </target>
+
+
+
+
+
+    <target
+        name="getBaseBuilder"
+        depends="init">
+
+        <fail
+            unless="builderVersion"
+            message="This script needs builderVersion to run" />
+
+        <cvs
+            cvsroot="${cvsRoot}"
+            command="checkout"
+            dest="${WORKSPACE}"
+            tag="${builderVersion}"
+            package="${cvsProject}">
+
+        </cvs>
+
+
+    </target>
+
+
+
+</project>
