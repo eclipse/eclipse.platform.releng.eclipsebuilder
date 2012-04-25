@@ -58,11 +58,17 @@
     <target
         name="init"
         depends="hudson-init">
-        
-        <property name="WORKSPACE" value="${basedir}"/>
-        <property name="relengBaseBuilderDir" value="${WORKSPACE}/org.eclipse.releng.basebuilder"/>
-        <property name="eclipseBuilderDir" value="${WORKSPACE}/org.eclipse.releng.eclipsebuilder" />
-        
+
+        <property
+            name="WORKSPACE"
+            value="${basedir}" />
+        <property
+            name="relengBaseBuilderDir"
+            value="${WORKSPACE}/org.eclipse.releng.basebuilder" />
+        <property
+            name="eclipseBuilderDir"
+            value="${WORKSPACE}/org.eclipse.releng.eclipsebuilder" />
+
         <echo message="hudson: ${hudson}" />
         <echo message="WORKSPACE: ${WORKSPACE}" />
         <echo message="BUILD_ID: ${BUILD_ID}" />
@@ -327,15 +333,15 @@
         <property
             name="p2executionDir"
             value="${windowsfile}" />
-        <replace
+        <replace summary="true"
             file="${eclipseBuilderDir}/eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties"
             token="@executionDir@"
             value="${p2executionDir}" />
-        <replace
+        <replace summary="true"
             file="${eclipseBuilderDir}/eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties"
             token="@buildId@"
             value="${buildId}" />
-        <replace
+        <replace summary="true"
             file="${eclipseBuilderDir}/eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties"
             token="@org.eclipse.equinox.p2.tests.current.build.repo@"
             value="${currentbuildrepo}" />
@@ -346,7 +352,7 @@
         <copy todir="${executionDir}">
             <fileset dir="${eclipseBuilderDir}/eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}" />
         </copy>
-        <copy
+        <copy verbose="true"
             todir="${executionDir}"
             overwrite="true">
             <fileset dir="${eclipseBuilderDir}/eclipse/buildConfigs/sdk.tests/testScripts" />
