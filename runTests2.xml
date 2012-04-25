@@ -358,7 +358,11 @@
             <fileset dir="${eclipseBuilderDir}/eclipse/buildConfigs/sdk.tests/testScripts" />
         </copy>
         <antcall target="configure.team.cvs.test" />
-        <ant antfile="${test.xml}" />
+        <ant antfile="${test.xml}" >
+            <property name="args" value="org.eclipse.jdt"/>
+
+        </ant>
+            
     </target>
 
 </project>
