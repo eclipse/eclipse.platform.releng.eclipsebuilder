@@ -49,7 +49,8 @@ function syncRepoSite ()
     # TODO: ideally, for the "new" subdirectory, we would 
     # resursively touch first, so its time is "now", time 
     # of copy, not time of build. 
-    rsync --recursive --delete -t "${fromDir}" "${toDir}"
+    # remove -t for now, due to permission problems
+    rsync --recursive --delete  "${fromDir}" "${toDir}"
 }
 
 
