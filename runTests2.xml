@@ -200,7 +200,7 @@
             <os family="mac" />
         </condition>
         <echo message="cvstest.properties ${cvstest.properties}" />
-        <replace
+        <replace summary="true"
             file="${executionDir}/test.xml"
             propertyFile="${cvstest.properties}">
             <replacefilter
