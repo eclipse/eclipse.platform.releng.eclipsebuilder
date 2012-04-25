@@ -429,9 +429,22 @@
 
     </target>
 
-    <!-- always skip pack during a build. No need to produce pack.gz files 
-        here, for every build, only for repos we want to "make available to the world" -->
-    <property name="skipPack" value="true" />
+    <!-- Note: we still call this "pack" even though we do not specify "pack" attribute
+         In order to fix up any MD5 checksums that may need to be tweaked after all the 
+         processing and custom processing that has gone on. 
+         See bug 377437 for why MD5 checksums need to be fixed up, 
+         and see bug 376032 for why we no longer specify 'pack' at this point. 
+         https://bugs.eclipse.org/bugs/show_bug.cgi?id=377437
+         https://bugs.eclipse.org/bugs/show_bug.cgi?id=377437
+         
+         way to disable:
+         <property name="skipPack" value="true" />
+         
+         previous form: 
+         <p2.process.artifacts repositoryPath="file://${reposource}"
+            pack="true" />
+     -->
+    
     <target name="packMasterFeature" unless="skipPack">
         <property name="archiveName" value="eclipse-master-${buildId}.zip" />
 
@@ -440,12 +453,21 @@
 
         <copy file="${eclipse.build.configs}/../../extras/pack.properties"
             todir="${reposource}" />
-        <p2.process.artifacts repositoryPath="file://${reposource}"
-            pack="true" />
-        <!-- temp don't delete, for debuggging <delete> <fileset dir="${reposource}"> 
-            <include name="pack.properties" /> </fileset> </delete> -->
-        <!-- we remove these, because they end up having invalid pack.gz 
-            files -->
+        <p2.process.artifacts repositoryPath="file://${reposource}" />
+        
+            <!-- temp don't delete, for debuggging 
+            <delete> 
+               <fileset dir="${reposource}"> 
+                   <include name="pack.properties" /> 
+               </fileset> </delete> 
+               -->
+        <!-- 
+            we remove these, because they end up having invalid pack.gz 
+            files. 
+            Note: even though we no longer "pack" here, we will leave the 
+            "remove" step just so we don't later forget to add back if/when 
+            needed. 
+            -->
         <p2.remove.iu>
             <repository location="file://${reposource}" />
             <iu id="com.ibm.icu" artifacts="(format=packed)" />
