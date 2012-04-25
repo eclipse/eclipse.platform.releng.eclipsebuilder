@@ -58,14 +58,20 @@
     <target
         name="init"
         depends="hudson-init">
+        
+        <property name="WORKSPACE" value="${basedir}"/>
+        <property name="relengBaseBuilderDir" value="${WORKSPACE}/org.eclipse.releng.basebuilder"/>
+        <property name="eclipseBuilderDir" value="${WORKSPACE}/org.eclipse.releng.eclipsebuilder" />
+        
         <echo message="hudson: ${hudson}" />
         <echo message="WORKSPACE: ${WORKSPACE}" />
         <echo message="BUILD_ID: ${BUILD_ID}" />
         <echo message="BUILD_NUMBER: ${BUILD_NUMBER}" />
         <echo message="JOB_NAME: ${JOB_NAME}" />
         <echo message="buildId: ${buildId}" />
+        <echo message="relengBaseBuilderDir: ${relengBaseBuilderDir}" />
+        <echo message="eclipseBuilderDir: ${eclipseBuilderDir}" />
 		
-        
 		<!-- <condition property="testDir" value="${hudson.WORKSPACE}\ws\${hudson.BUILD_ID}">
 			<os family="windows" />
 		</condition> -->
@@ -90,10 +96,10 @@
         <echo message="executionDir ${executionDir}" />
 
         <!-- what's intended difference for currentbuildrepo and buildURL? -->
-        <!-- TODO: vary to drops for 3.8 -->
+        <!-- TODO: vary to drops for 3.8  and N builds-->
         <property
             name="currentbuildrepo"
-            value="http://download.eclipse.org/eclipse/updates/4.2-N-builds/${buildId}" />
+            value="http://download.eclipse.org/eclipse/updates/4.2-I-builds/${buildId}" />
         <echo message="currentbuildrepo: ${currentbuildrepo}" />
 
         <!-- TODO: vary to drops for 3.8 -->
