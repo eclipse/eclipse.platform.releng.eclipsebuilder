@@ -804,7 +804,10 @@ then
     echo "Subject: $buildsubject"
     echo " "
     echo "$eclipseStream Build: $buildId started"
-    echo " " 
+    echo " "
+    echo "   Report of changes based on comparaison to" 
+    echo "   previous build or tag of $oldBbuildId"
+    echo " "
     echo "$reporttext" 
     echo " "
     ) | /usr/lib/sendmail -t
