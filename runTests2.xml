@@ -311,7 +311,7 @@
         -->
         <property
             name="testingPropertiesfile"
-            value="eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/testing.properties" />
+            value="${eclipseBuilderDir}/eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/testing.properties" />
         <loadproperties>
             <file file="${testingPropertiesfile}" />
         </loadproperties>
