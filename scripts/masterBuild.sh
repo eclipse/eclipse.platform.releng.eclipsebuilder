@@ -806,7 +806,7 @@ then
     echo "$eclipseStream Build: $buildId started"
     echo " "
     echo "   Report of changes based on comparaison to" 
-    echo "   previous build or tag of $oldBbuildId"
+    echo "   previous build or tag of $oldBuildTag"
     echo " "
     echo "$reporttext" 
     echo " "
