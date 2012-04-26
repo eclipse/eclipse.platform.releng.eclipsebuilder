@@ -130,6 +130,7 @@
         <cvs
             cvsroot="${cvsRoot}"
             command="checkout"
+            quiet="true"
             dest="${WORKSPACE}"
             tag="${builderVersion}"
             package="${cvsProject}">
