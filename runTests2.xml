@@ -7,12 +7,20 @@
     <target name="checkHudson">
         <!-- HUDSON_USER should just be "anonyous" for most of our cases (currently)
              but seems a safe variable to check ... if set, assume we are on hudson, 
-             if not set, assume we are not and leave "hudson" unset (not false) -->
+             if not set, assume we are not and leave "hudson" unset (not false) 
+             Hmm, seems HUDSON_USER is not reliably set. The only 4 I saw reliably 
+             set were
+             [echoproperties] env.HUDSON_COOKIE
+             [echoproperties] env.HUDSON_HOME
+             [echoproperties] env.HUDSON_SERVER_COOKIE
+             [echoproperties] env.HUDSON_URL
+             Not sure which would be best/safest to use in huristic, but 
+             I'll go with URL for now. 
+             -->
         <property environment="env" />
         <condition property="hudson">
-            <isset property="env.HUDSON_USER" />
+            <isset property="env.HUDSON_URL" />
         </condition>
-
 
     </target>
 
