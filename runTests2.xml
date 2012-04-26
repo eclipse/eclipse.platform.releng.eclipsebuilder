@@ -1,8 +1,25 @@
-<project default="main">
+<project
+    name="runTests2"
+    default="runTests2"
+    basedir=".">
+
+    <!-- hurestic to check if we are running on hudson variable, if so -->
+    <target name="checkHudson">
+        <!-- HUDSON_USER should just be "anonyous" for most of our cases (currently)
+             but seems a safe variable to check ... if set, assume we are on hudson, 
+             if not set, assume we are not and leave "hudson" unset (not false) -->
+        <property environment="env" />
+        <condition property="hudson">
+            <isset property="env.HUDSON_USER" />
+        </condition>
+
+
+    </target>
 
     <target
         name="hudson-init"
-        if="hudson">
+        if="hudson"
+        depends="checkHudson">
         <!-- as of this writing, 04/22/2012, this was current list of 
              hudson provided variables. We take advantage of a number 
              of them, but "translate" them into our own variable names, 
@@ -59,6 +76,8 @@
         name="init"
         depends="hudson-init">
 
+        <!-- if not otherwise set, such as by hudson-init, 
+             assume "current directory" for WORKSPACE -->
         <property
             name="WORKSPACE"
             value="${basedir}" />
@@ -68,6 +87,34 @@
         <property
             name="eclipseBuilderDir"
             value="${WORKSPACE}/org.eclipse.releng.eclipsebuilder" />
+        
+        <!-- 
+             recently added variables, required for correct operation, 
+             so we will fail fast if we forget to pass them in 
+        -->
+        <fail unless="eclipseStream" />
+        <fail unless="buildType" />
+
+        <!-- 
+            TODO: make less exactly hard coded in future
+            also, check for validity using "matches" digit*\.digit*\.digit*
+        -->
+        <condition
+            property="dropsDirSegment"
+            value="drops4"
+            else="drops">
+            <equals
+                arg1="${eclipseStream}"
+                arg2="4.2.0" />
+        </condition>
+        <condition
+            property="updateSiteSegment"
+            value="4.2"
+            else="3.8">
+            <equals
+                arg1="${eclipseStream}"
+                arg2="4.2.0" />
+        </condition>        
 
         <echo message="hudson: ${hudson}" />
         <echo message="WORKSPACE: ${WORKSPACE}" />
@@ -77,6 +124,10 @@
         <echo message="buildId: ${buildId}" />
         <echo message="relengBaseBuilderDir: ${relengBaseBuilderDir}" />
         <echo message="eclipseBuilderDir: ${eclipseBuilderDir}" />
+        <echo message="java.home: ${java.home}" />
+        <echo message="eclipseStream: ${eclipseStream}" />
+        <echo message="buildType: ${buildType}" />
+        
 		
 		<!-- <condition property="testDir" value="${hudson.WORKSPACE}\ws\${hudson.BUILD_ID}">
 			<os family="windows" />
@@ -101,17 +152,15 @@
         <mkdir dir="${executionDir}" />
         <echo message="executionDir ${executionDir}" />
 
-        <!-- what's intended difference for currentbuildrepo and buildURL? -->
-        <!-- TODO: vary to drops for 3.8  and N builds-->
+        <!-- what's intended/needed? specific, simple repo? Or composite? -->
         <property
             name="currentbuildrepo"
-            value="http://download.eclipse.org/eclipse/updates/4.2-I-builds/${buildId}" />
+            value="http://download.eclipse.org/eclipse/updates/${updateSiteSegment}-${buildType}-builds/${buildId}" />
         <echo message="currentbuildrepo: ${currentbuildrepo}" />
 
-        <!-- TODO: vary to drops for 3.8 -->
         <property
             name="buildURL"
-            value="http://download.eclipse.org/eclipse/downloads/drops4/${buildId}" />
+            value="http://download.eclipse.org/eclipse/downloads/${dropsDirSegment}/${buildId}" />
         <echo message="buildURL ${buildURL}" />
     </target>
 
@@ -200,7 +249,8 @@
             <os family="mac" />
         </condition>
         <echo message="cvstest.properties ${cvstest.properties}" />
-        <replace summary="true"
+        <replace
+            summary="true"
             file="${executionDir}/test.xml"
             propertyFile="${cvstest.properties}">
             <replacefilter
@@ -219,7 +269,7 @@
     </target>
 
     <target
-        name="main"
+        name="runTests2"
         depends="init">
 
         <echo message="DEBUG: echoproperties at start of main runTests2.xml (after inits)" />
@@ -333,15 +383,18 @@
         <property
             name="p2executionDir"
             value="${windowsfile}" />
-        <replace summary="true"
+        <replace
+            summary="true"
             file="${eclipseBuilderDir}/eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties"
             token="@executionDir@"
             value="${p2executionDir}" />
-        <replace summary="true"
+        <replace
+            summary="true"
             file="${eclipseBuilderDir}/eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties"
             token="@buildId@"
             value="${buildId}" />
-        <replace summary="true"
+        <replace
+            summary="true"
             file="${eclipseBuilderDir}/eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties"
             token="@org.eclipse.equinox.p2.tests.current.build.repo@"
             value="${currentbuildrepo}" />
@@ -352,16 +405,17 @@
         <copy todir="${executionDir}">
             <fileset dir="${eclipseBuilderDir}/eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}" />
         </copy>
-        <copy verbose="true"
+        <copy
+            verbose="true"
             todir="${executionDir}"
             overwrite="true">
             <fileset dir="${eclipseBuilderDir}/eclipse/buildConfigs/sdk.tests/testScripts" />
         </copy>
         <antcall target="configure.team.cvs.test" />
         <echo message="test.xml: ${test.xml}" />
-        <ant antfile="${test.xml}" >
+        <ant antfile="${test.xml}">
         </ant>
-            
+
     </target>
 
 </project>

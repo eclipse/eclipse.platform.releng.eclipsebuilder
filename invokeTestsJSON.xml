@@ -29,6 +29,10 @@
     </target>
 
 
+    <!-- 
+        note: implicitly assumes the antcalls inheret context, 
+        so have access to $eclipseStream and $buildType
+    -->
     <target name="JUnitTests">
         <parallel>
         <!--
@@ -67,10 +71,25 @@
 
         <property environment="env" />
 
-        <!-- /shared/eclipse/e4/build/e4/downloads -->
+        <!-- 
+             recently added variables, required for correct operation, 
+             so we will fail fast if we forget to pass them in 
+        -->
+        <fail unless="eclipseStream" />
+        <fail unless="buildType" />
+
+        <!-- 
+            TODO: make less exactly hard coded in future
+            also, check for validity using "matches" digit*\.digit*\.digit*
+        -->
+        <condition property="dropsDirSegment"
+          value="drops4" else="drops">
+          <equals arg1="${eclipseStream}" arg2="4.2.0" />  
+        </condition>
+        
         <property
             name="baseURL"
-            value="http://download.eclipse.org/eclipse/downloads/drops4/${buildId}" />
+            value="http://download.eclipse.org/eclipse/downloads/${dropsDirSegment}/${buildId}" />
 
         <property
             name="JSON_SDK"
@@ -90,11 +109,17 @@
         <property
             name="JSON_buildId"
             value="{&quot;name&quot;:&quot;buildId&quot;,&quot;value&quot;:&quot;${buildId}&quot;}" />
+        <property
+            name="JSON_eclipseStream"
+            value="{&quot;name&quot;:&quot;eclipseStream&quot;,&quot;value&quot;:&quot;${eclipseStream}&quot;}" />
+        <property
+            name="JSON_buildType"
+            value="{&quot;name&quot;:&quot;buildType&quot;,&quot;value&quot;:&quot;${buildType}&quot;}" />
         <!--current build repository too ? -->
 
         <property
             name="json"
-            value="{&quot;parameter&quot;: [${JSON_SDK}, ${JSON_Tests},${JSON_Platform},${JSON_Deltapack},${JSON_PlatformRelease},${JSON_buildId}] }" />
+            value="{&quot;parameter&quot;: [${JSON_SDK}, ${JSON_Tests},${JSON_Platform},${JSON_Deltapack},${JSON_PlatformRelease},${JSON_buildId},${JSON_eclipseStream},${JSON_buildType}] }" />
 
         <!-- fetch the next hudson build number from the hudson job API -->
         <exec executable="curl">
@@ -134,7 +159,7 @@
         <!-- wait for the test results to appear -->
         <echo message="Waiting for ${hudsonResultURL}." />
         <waitfor
-            maxwait="300"
+            maxwait="720"
             maxwaitunit="minute"
             checkevery="10"
             checkeveryunit="minute">
