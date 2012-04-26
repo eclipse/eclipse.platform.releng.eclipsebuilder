@@ -89,6 +89,22 @@
         <property
             name="WORKSPACE"
             value="${basedir}" />
+        
+        <!-- 
+             Similarly other "hudson parameters" may need default values. 
+             Will assume empty string, for now, but maybe something smarter could be done in future for standalone tests  
+        -->
+        <property
+            name="BUILD_ID"
+            value="" />
+        <property
+            name="BUILD_NUMBER"
+            value="" />
+        <property
+            name="JOB_NAME"
+            value="" />
+        
+        
         <property
             name="relengBaseBuilderDir"
             value="${WORKSPACE}/org.eclipse.releng.basebuilder" />
