@@ -781,14 +781,14 @@ fi
 # for N builds, we do not notify anyone of "start of build" (but, do for all others? I, M? ) 
 if [[ "${buildType}" != "N" ]]
 then 
-    
+
     # during test builds, won't exist, so we check for 
     # existence, to avoid false warnings
     if [[ -f "$submissionReportFilePath" ]] 
     then
-       reporttext=$( cat $submissionReportFilePath ) 
+        reporttext=$( cat $submissionReportFilePath ) 
     fi 
-    
+
     if [[ "${testbuildonly}" == "true" ]]
     then
         buildsubject="$eclipseStream TEST Build: $buildId started"
@@ -893,5 +893,19 @@ then
 else
     echo "Did not create promote script for equinox since $eclipseStream less than 4"
 fi 
+
+# save a copy of full build log if we created one
+if [[ -e "${buildRoot}/fullmasterBuildOutput.txt" ]] 
+then
+    buildlogsDir="${postingDirectory}/${buildId}/buildlogs"
+    # it really should exist by now ... but ... in case not
+    mkdir -p "${buildlogsDir}"
+    # we specify -v though guess that output won't be in the log we copy :/ 
+    # also we do no expect an existing one, but specify -b incase in 
+    # future there are some sort of "re-run" scenerios where it would 
+    # already exist, we'd want to keep all copies. 
+    cp -v -b "${buildRoot}/fullmasterBuildOutput.txt" "${buildlogsDir}"
+fi
+
 echo "normal exit from $0"
 exit 0
