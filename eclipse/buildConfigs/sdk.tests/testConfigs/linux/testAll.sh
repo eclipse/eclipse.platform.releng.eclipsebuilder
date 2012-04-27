@@ -24,6 +24,6 @@ eclipseArch=${eclipseArch:-x86_64}
 
 /bin/chmod 755 runtests.sh
 
-./runtests.sh -args "-Dtimeout=\"60000\"" -os linux -ws gtk -arch $eclipseArch -vm "${vmcmd}" -properties vm.properties > linux.gtk-6.0_consolelog.txt
+./runtests.sh -args "-Dtimeout=60000" -os linux -ws gtk -arch $eclipseArch -vm "${vmcmd}" -properties vm.properties > linux.gtk-6.0_consolelog.txt
 
 
