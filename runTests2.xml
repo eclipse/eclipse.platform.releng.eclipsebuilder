@@ -103,8 +103,8 @@
         <property
             name="JOB_NAME"
             value="" />
-        
-        
+
+
         <property
             name="relengBaseBuilderDir"
             value="${WORKSPACE}/org.eclipse.releng.basebuilder" />
@@ -138,7 +138,7 @@
             <equals
                 arg1="${eclipseStream}"
                 arg2="4.2.0" />
-        </condition>        
+        </condition>
 
         <echo message="hudson: ${hudson}" />
         <echo message="WORKSPACE: ${WORKSPACE}" />
@@ -188,70 +188,72 @@
         <echo message="buildURL ${buildURL}" />
     </target>
 
-    <target name="getwinzips">
-        <get
-            src="${buildURL}/eclipse-SDK-${buildId}-win32.zip"
-            dest="${executionDir}/eclipse-SDK-${buildId}-win32.zip" />
+    <target name="platformIndependentZips">
         <get
             src="${buildURL}/eclipse-Automated-Tests-${buildId}.zip"
             dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
-        <get
-            src="${buildURL}/eclipse-platform-${buildId}-win32.zip"
-            dest="${executionDir}/eclipse-platform-${buildId}-win32.zip" />
         <get
             src="${buildURL}/eclipse-${buildId}-delta-pack.zip"
             dest="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
         <get
             src="${buildURL}/eclipse-Automated-Tests-${buildId}.zip"
             dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
+
+    </target>
+
+    <target name="getwinzips" depends="platformIndependentZips">
+        <get
+            src="${buildURL}/eclipse-SDK-${buildId}-win32.zip"
+            dest="${executionDir}/eclipse-SDK-${buildId}-win32.zip" />
+        <get
+            src="${buildURL}/eclipse-platform-${buildId}-win32.zip"
+            dest="${executionDir}/eclipse-platform-${buildId}-win32.zip" />
         <get
             src="http://download.eclipse.org/eclipse/downloads/drops/R-3.7.1-201109091335/eclipse-platform-3.7.1-win32.zip"
             dest="${executionDir}/eclipse-platform-3.7.1-win32.zip" />
     </target>
 
-    <target name="getlinzips">
+    <target name="getlinzips" depends="platformIndependentZips">
         <get
             src="${buildURL}/eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz"
             dest="${executionDir}/eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz" />
         <get
-            src="${buildURL}/eclipse-Automated-Tests-${buildId}.zip"
-            dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
-        <get
             src="${buildURL}/eclipse-platform-${buildId}-linux-gtk-x86_64.tar.gz"
             dest="${executionDir}/eclipse-platform-${buildId}-linux-gtk-x86_64.tar.gz" />
-        <get
-            src="${buildURL}/eclipse-${buildId}-delta-pack.zip"
-            dest="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
-        <get
-            src="${buildURL}/eclipse-Automated-Tests-${buildId}.zip"
-            dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
         <get
             src="http://download.eclipse.org/eclipse/downloads/drops/R-3.7.1-201109091335/eclipse-platform-3.7.1-linux-gtk-x86_64.tar.gz"
             dest="${executionDir}/eclipse-platform-3.7.1-linux-gtk-x86_64.tar.gz" />
     </target>
 
-    <target name="getmaczips">
+    <target name="getlinzips32" depends="platformIndependentZips">
+        <get
+            src="${buildURL}/eclipse-SDK-${buildId}-linux-gtk.tar.gz"
+            dest="${executionDir}/eclipse-SDK-${buildId}-linux-gtk.tar.gz" />
+        <get
+            src="${buildURL}/eclipse-platform-${buildId}-linux-gtk.tar.gz"
+            dest="${executionDir}/eclipse-platform-${buildId}-linux-gtk.tar.gz" />
+        <get
+            src="http://download.eclipse.org/eclipse/downloads/drops/R-3.7.1-201109091335/eclipse-platform-3.7.1-linux-gtk-x86_64.tar.gz"
+            dest="${executionDir}/eclipse-platform-3.7.1-linux-gtk-x86_64.tar.gz" />
+    </target>
+
+    <target name="getmaczips" depends="platformIndependentZips">
         <get
             src="${buildURL}/eclipse-SDK-${buildId}-macosx-cocoa.tar.gz"
             dest="${executionDir}/eclipse-SDK-${buildId}-macosx-cocoa.tar.gz" />
         <get
-            src="${buildURL}/eclipse-Automated-Tests-${buildId}.zip"
-            dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
-        <get
             src="${buildURL}/eclipse-platform-${buildId}-macosx-cocoa.tar.gz"
             dest="${executionDir}/eclipse-platform-${buildId}-macosx-cocoa.tar.gz" />
-        <get
-            src="${buildURL}/eclipse-${buildId}-delta-pack.zip"
-            dest="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
-        <get
-            src="${buildURL}/eclipse-Automated-Tests-${buildId}.zip"
-            dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
         <get
             src="http://download.eclipse.org/eclipse/downloads/drops/R-3.7.1-201109091335/eclipse-platform-3.7.1-macosx-cocoa.tar.gz"
             dest="${executionDir}/eclipse-platform-3.7.1-macosx-cocoa.tar.gz" />
     </target>
 
-    <target name="configure.team.cvs.test">
+    <target
+        name="configure.team.cvs.test"
+        depends="computeExpectedLocation,getcvstestProperties" />
+
+    <target name="computeExpectedLocation">
         <condition
             property="cvstest.properties"
             value="/shared/eclipse/buildtests/cvstest.properties">
@@ -272,7 +274,14 @@
             value="/Users/hudsonbuild/cvstest.properties">
             <os family="mac" />
         </condition>
-        <echo message="cvstest.properties ${cvstest.properties}" />
+    </target>
+
+    <target
+        name="getcvstestProperties"
+        if="cvsPropertiesAvailable"
+        depends="computeExpectedLocation,checkCVSPropExists,logNoExistence">
+
+        <echo message="cvstest.properties file: ${cvstest.properties}" />
         <replace
             summary="true"
             file="${executionDir}/test.xml"
@@ -290,8 +299,23 @@
                 token="${cvs_root}"
                 property="cvs_root" />
         </replace>
+
     </target>
 
+    <target
+        name="checkCVSPropExists"
+        depends="computeExpectedLocation">
+        <condition property="cvsPropertiesAvailable">
+            <available file="${cvstest.properties}" />
+        </condition>
+    </target>
+    <target
+        name="logNoExistence"
+        depends="checkCVSPropExists"
+        unless="cvsPropertiesAvailable">
+        <echo message="cvs properties file was not found in this environment. " />
+        <echo message="   expected file: ${cvstest.properties} " />
+    </target>
     <target
         name="runTests2"
         depends="init">
@@ -339,6 +363,26 @@
         </condition>
         <condition
             property="testPlatform"
+            value="linux32">
+            <and>
+                <equals
+                    arg1="${osgi.os}"
+                    arg2="linux" />
+                <equals
+                    arg1="${osgi.ws}"
+                    arg2="gtk" />
+                <or>
+                    <equals
+                        arg1="${osgi.arch}"
+                        arg2="x86" />
+                    <equals
+                        arg1="${osgi.arch}"
+                        arg2="x86" />
+                </or>
+            </and>
+        </condition>
+        <condition
+            property="testPlatform"
             value="macmini">
             <and>
                 <equals
@@ -366,6 +410,13 @@
             <equals
                 arg1="${testPlatform}"
                 arg2="linux" />
+        </condition>
+        <condition
+            property="getArtifacts"
+            value="getlinzips32">
+            <equals
+                arg1="${testPlatform}"
+                arg2="linux32" />
         </condition>
         <condition
             property="getArtifacts"
