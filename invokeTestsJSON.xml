@@ -6,7 +6,8 @@
 
 <project
     name="Hudson-Tests"
-    default="runTests">
+    default="runTests"
+    basedir=".">
 
     <!-- 
     this script is invoked by the build, on the build machine, 
@@ -14,15 +15,12 @@
     then let Hudson's job/scripts take over 
     -->
 
-    
-    <!-- not used? -->
     <property
-        name="dropLocation"
-        value="${buildDirectory}/${buildLabel}/drop" />
-    <!-- not used> -->
+        name="buildDirectory"
+        value="${basedir}" />
     <property
-        name="TestDir"
-        value="${base}/tests/${buildLabel}" />
+        name="buildLabel"
+        value="${buildId}" />    
 
     <target name="runTests">
         <antcall target="JUnitTests" />
@@ -104,7 +102,7 @@
 
         <property
             name="json"
-            value="{&quot;parameter&quot;: [${JSON_SDK}, ${JSON_Tests},${JSON_Platform},${JSON_Deltapack},${JSON_PlatformRelease},${JSON_buildId},${JSON_eclipseStream},${JSON_buildType}] }" />
+            value="{&quot;parameter&quot;: [${JSON_buildId},${JSON_eclipseStream},${JSON_buildType}] }" />
 
         <!-- fetch the next hudson build number from the hudson job API -->
         <exec executable="curl">
