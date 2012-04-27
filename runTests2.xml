@@ -185,28 +185,42 @@
         <property
             name="buildURL"
             value="http://download.eclipse.org/eclipse/downloads/${dropsDirSegment}/${buildId}" />
+        
+        <!-- 
+             there's nothing "automatic" about the local cache (so far). 
+             If specified (such as on hudson command line that executes this 
+             file, as, say, -DlocalCache=/shared/eclipse/localCache
+             then all the downloads required must be already available there.
+             It is intended to speed up local testing to avoid re-downloading 
+             files. 
+             -->
+        <condition property="archiveLocation" value="${localCache}" else="${buildURL}">
+           <isset property="localCache"/>
+        </condition>
+        
         <echo message="buildURL ${buildURL}" />
+        <echo message="archiveLocation ${archiveLocation}" />
     </target>
 
     <target name="platformIndependentZips">
         <get
-            src="${buildURL}/eclipse-Automated-Tests-${buildId}.zip"
+            src="${archiveLocation}/eclipse-Automated-Tests-${buildId}.zip"
             dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
         <get
-            src="${buildURL}/eclipse-${buildId}-delta-pack.zip"
+            src="${archiveLocation}/eclipse-${buildId}-delta-pack.zip"
             dest="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
         <get
-            src="${buildURL}/eclipse-Automated-Tests-${buildId}.zip"
+            src="${archiveLocation}/eclipse-Automated-Tests-${buildId}.zip"
             dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
 
     </target>
 
     <target name="getwinzips" depends="platformIndependentZips">
         <get
-            src="${buildURL}/eclipse-SDK-${buildId}-win32.zip"
+            src="${archiveLocation}/eclipse-SDK-${buildId}-win32.zip"
             dest="${executionDir}/eclipse-SDK-${buildId}-win32.zip" />
         <get
-            src="${buildURL}/eclipse-platform-${buildId}-win32.zip"
+            src="${archiveLocation}/eclipse-platform-${buildId}-win32.zip"
             dest="${executionDir}/eclipse-platform-${buildId}-win32.zip" />
         <get
             src="http://download.eclipse.org/eclipse/downloads/drops/R-3.7.1-201109091335/eclipse-platform-3.7.1-win32.zip"
@@ -215,10 +229,10 @@
 
     <target name="getlinzips" depends="platformIndependentZips">
         <get
-            src="${buildURL}/eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz"
+            src="${archiveLocation}/eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz"
             dest="${executionDir}/eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz" />
         <get
-            src="${buildURL}/eclipse-platform-${buildId}-linux-gtk-x86_64.tar.gz"
+            src="${archiveLocation}/eclipse-platform-${buildId}-linux-gtk-x86_64.tar.gz"
             dest="${executionDir}/eclipse-platform-${buildId}-linux-gtk-x86_64.tar.gz" />
         <get
             src="http://download.eclipse.org/eclipse/downloads/drops/R-3.7.1-201109091335/eclipse-platform-3.7.1-linux-gtk-x86_64.tar.gz"
@@ -227,10 +241,10 @@
 
     <target name="getlinzips32" depends="platformIndependentZips">
         <get
-            src="${buildURL}/eclipse-SDK-${buildId}-linux-gtk.tar.gz"
+            src="${archiveLocation}/eclipse-SDK-${buildId}-linux-gtk.tar.gz"
             dest="${executionDir}/eclipse-SDK-${buildId}-linux-gtk.tar.gz" />
         <get
-            src="${buildURL}/eclipse-platform-${buildId}-linux-gtk.tar.gz"
+            src="${archiveLocation}/eclipse-platform-${buildId}-linux-gtk.tar.gz"
             dest="${executionDir}/eclipse-platform-${buildId}-linux-gtk.tar.gz" />
         <get
             src="http://download.eclipse.org/eclipse/downloads/drops/R-3.7.1-201109091335/eclipse-platform-3.7.1-linux-gtk-x86_64.tar.gz"
@@ -239,10 +253,10 @@
 
     <target name="getmaczips" depends="platformIndependentZips">
         <get
-            src="${buildURL}/eclipse-SDK-${buildId}-macosx-cocoa.tar.gz"
+            src="${archiveLocation}/eclipse-SDK-${buildId}-macosx-cocoa.tar.gz"
             dest="${executionDir}/eclipse-SDK-${buildId}-macosx-cocoa.tar.gz" />
         <get
-            src="${buildURL}/eclipse-platform-${buildId}-macosx-cocoa.tar.gz"
+            src="${archiveLocation}/eclipse-platform-${buildId}-macosx-cocoa.tar.gz"
             dest="${executionDir}/eclipse-platform-${buildId}-macosx-cocoa.tar.gz" />
         <get
             src="http://download.eclipse.org/eclipse/downloads/drops/R-3.7.1-201109091335/eclipse-platform-3.7.1-macosx-cocoa.tar.gz"
