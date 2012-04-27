@@ -1,13 +1,24 @@
 #!/bin/sh
 
+# This file should never exist or be needed for production machine, 
+# but allows an easy way for a "local user" to provide this file 
+# somewhere on the search path ($HOME/bin is common), 
+# and it will be included here, thus can provide "override values" 
+# to those defined by defaults for production machine., 
+# such as for vmcmd
+
+source localTestsProperties.shsource
+
 #set the DISPLAY for running tests on Linux
 #DISPLAY=`$HOST`:0.0;export DISPLAY
 #export no_proxy=localhost,dev.eclipse.org,hudson.eclipse.org
 #DISPLAY=localhost:8.0;export DISPLAY
 
 # by default, use the java executable on the path for outer and test jvm
-vmcmd=/shared/common/jdk-1.6.x86_64/jre/bin/java
+vmcmd=${vmcmd:-/shared/common/jdk-1.6.x86_64/jre/bin/java}
 #vmcmd=java
+
+echo "vmcmd: $vmcmd"
 
 #this value must be set when using rsh to execute this script, otherwise the script will execute from the user's home directory
 dir=.
