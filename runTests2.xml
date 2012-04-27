@@ -189,7 +189,8 @@
         <!-- 
              there's nothing "automatic" about the local cache (so far). 
              If specified (such as on hudson command line that executes this 
-             file, as, say, -DlocalCache=/shared/eclipse/localCache
+             file, as, say, 
+             -DlocalCache=file:///shared/eclipse/localCache
              then all the downloads required must be already available there.
              It is intended to speed up local testing to avoid re-downloading 
              files. 

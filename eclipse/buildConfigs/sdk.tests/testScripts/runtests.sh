@@ -1,5 +1,7 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
+echo "USER: $USER"
+echo "PATH: $PATH"
 # This file should never exist or be needed for production machine, 
 # but allows an easy way for a "local user" to provide this file 
 # somewhere on the search path ($HOME/bin is common), 
