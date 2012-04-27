@@ -1,4 +1,4 @@
-<project default="main">
+<project name="buildAll" default="main" basedir=".">
 
     <!-- Steps 1. Create Eclipse SDK source drops. 2. Build master feature 
         which includes all features and plug-ins in eclipse and equinox projects, 
@@ -13,7 +13,16 @@
     <!--build monitoring information: e-mail, smtp server, build label -->
     <property file="monitor.properties" />
 
-    <fail unless="basedir" message="basedir must be defined" />
+    <!-- 
+         fetchCacheLocation is used by git fetch factories to pull code to. 
+         We want a common, obvious, location. See bug 375788.
+         https://bugs.eclipse.org/bugs/show_bug.cgi?id=375788
+         TODO: would be best to use "supportDir" here, like we do "gitCache"
+         but dont' currently "pass that in", so a little hard coded assumption 
+         there that supportDir = buildRoot/build/suppprtDir
+         -->
+    <property name="fetchCacheLocation" value="${buildRoot}/build/suppprtDir/scmCache" />
+    
     <fail unless="buildId" message="buildId must be defined" />
     <fail unless="buildLabel" message="buildLabel must be defined" />
     <fail unless="postingDirectory" message="postingDirectory must be defined" />
