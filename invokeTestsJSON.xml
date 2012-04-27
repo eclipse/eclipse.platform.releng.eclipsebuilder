@@ -13,6 +13,9 @@
     this script is invoked by the build, on the build machine, 
     to signify to hudson "the build is done", pass a few parameters, 
     then let Hudson's job/scripts take over 
+    
+    wget - -no-verbose -O invokeTestsJSON.xml http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/invokeTestsJSON.xml?h=master 2>&1;
+    
     -->
 
     <property
