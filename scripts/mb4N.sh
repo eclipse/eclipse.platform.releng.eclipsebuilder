@@ -63,5 +63,5 @@ then
 fi
 
 # debug mode, for now
-DEBUG=true $buildRoot/masterBuild.sh -buildType buildType -eclipseStream $eclipseStream -buildRoot $buildRoot -mapVersionTag $mapVersionTag 2>&1 | tee fullmasterBuildOutput.txt
+DEBUG=true $buildRoot/masterBuild.sh -buildType $buildType -eclipseStream $eclipseStream -buildRoot $buildRoot -mapVersionTag $mapVersionTag 2>&1 | tee fullmasterBuildOutput.txt
 
