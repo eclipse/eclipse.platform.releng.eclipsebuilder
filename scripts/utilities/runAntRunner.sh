@@ -46,6 +46,6 @@ ${ECLIPSE_EXE}  --launcher.suppressErrors  -nosplash -console -data $devworkspac
    RC=$?
 else
    echo "ERROR: ECLIPSE_EXE is not defined to executable eclipse"
-   RC=1001
+   RC=1
 fi 
 exit $RC
