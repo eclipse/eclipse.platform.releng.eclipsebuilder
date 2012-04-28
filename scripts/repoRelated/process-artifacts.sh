@@ -24,7 +24,7 @@ then
     echo "ERROR: builder scripts was not an existing directory as expected: ${ECLIPSEBUILDER_DIR}/scripts/repoRelated"
     exit 1
 fi
-BUILDFILESTR="${ECLIPSEBUILDER_DIR}"/scripts/repoRelated/process-artifacts.xml
+BUILDFILESTR="-f ${ECLIPSEBUILDER_DIR}"/scripts/repoRelated/process-artifacts.xml
 # specify devworkspace and JRE to use to runEclipse
 # remember, we want to use Java 5 for processing artifacts.
 # Ideally same one used to pre-condition (normalize, -repack) 
@@ -77,7 +77,7 @@ then
     echo "INFO: processing artifacts in code repo: $repoDirLocation";
     if [ -n ${ECLIPSE_EXE} -a -x ${ECLIPSE_EXE} ]
     then 
-
+        devArgs="-DrepoDirLocation=${repoDirLocation}"
         echo "   Remember, processing artifacts can take a long time (such as 15 minutes or more) ... so, don't panic." 
         echo    
         ${ECLIPSE_EXE}  --launcher.suppressErrors  -nosplash -console -data $devworkspace -application org.eclipse.ant.core.antRunner $BUILDFILESTR ${extraArgs} -vm $devJRE -vmargs $devArgs
