@@ -5,7 +5,7 @@
 # over inclusion. 
 
 # codifying the branch (or tag) to use, so it can be set/chagned in one place
-branchOrTag=master
+initScriptTag=master
 
 # tags: 
 # http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/wgetFresh.sh?tag=vI20120417-0700
@@ -14,10 +14,9 @@ branchOrTag=master
 # to build, all that's needed is the appropriate mbNX.sh scripts. It gets what ever 
 # else it needs. 
 
-wget --no-verbose -O masterBuild.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/masterBuild.sh?h=$branchOrTag 2>&1;
-wget --no-verbose -O mb3I.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb3I.sh?h=$branchOrTag 2>&1;
-wget --no-verbose -O mb4I.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb4I.sh?h=$branchOrTag 2>&1;
-wget --no-verbose -O mb4N.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb4N.sh?h=$branchOrTag 2>&1;
+wget --no-verbose -O mb3I.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb3I.sh?h=$initScriptTag 2>&1;
+wget --no-verbose -O mb4I.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb4I.sh?h=$initScriptTag 2>&1;
+wget --no-verbose -O mb4N.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb4N.sh?h=$initScriptTag 2>&1;
 
 
 # handy script to "wrap" a normal build script such as mb4I.sh to set global test/debug settings
