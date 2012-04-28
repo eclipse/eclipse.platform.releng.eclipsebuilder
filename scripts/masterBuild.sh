@@ -438,7 +438,7 @@ processCommandLine ()
 
     # Normall must be supplied by caller.
     # TODO: make last segment funtion of eclipse stream and build type 
-    buildRoot=${buildRoot:-/shared/eclipse/eclipse4N}
+    export buildRoot=${buildRoot:-/shared/eclipse/eclipse4N}
 
 
     # derived values (which effect default computed values) 
@@ -470,7 +470,7 @@ processCommandLine ()
 
     # relies on export, since getEclipseBuilder is seperate script, 
     # and it does not use "command line pattern"
-    export eclipsebuilderBranch=${eclipsebuilderBranch:-"master"}
+    export eclipsebuilderBranch=${eclipsebuilderBranch:-"origin/master"}
 
     # NOTE: $eclipsebuilder must be defined before builderDir 
     export builderDir=${supportDir}/$eclipsebuilder

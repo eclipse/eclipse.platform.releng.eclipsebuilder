@@ -12,7 +12,7 @@ export eclipsebuilderBranch=${eclipsebuilderBranch:-"master"}
 # This basically bootstraps the files fresh each time (after the first)
 # though of course, the mbXX.sh file won't be used until the next time.
 
-buildRoot=/shared/eclipse/eclipse3I 
+export buildRoot=/shared/eclipse/eclipse3I 
 mkdir -p $buildRoot
 cd $buildRoot
 

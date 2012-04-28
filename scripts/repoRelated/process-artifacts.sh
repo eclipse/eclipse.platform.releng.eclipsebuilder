@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
-
 # Utility to invoke p2.process.artifacts via eclipse antrunner
 # First argument must be the absolute directory path to the 
 # (simple) artifact repository.
 
+repoDirLocation=$1
 
-BUILD_HOME=${BUILD_HOME:-/shared/eclipse/eclipse4I}
+# For now, we will assume buildRoot has been exported by 
+ # calling process (if they want a non default value).  
+buildRoot=${buildRoot:-/shared/eclipse/eclipse4I}
 devworkspace="${BUILD_HOME}"/process-artifacts-workspace
 
 if [ ! -d "${BUILD_HOME}" ] 
@@ -24,18 +26,19 @@ then
     echo "ERROR: builder scripts was not an existing directory as expected: ${ECLIPSEBUILDER_DIR}/scripts/repoRelated"
     exit 1
 fi
+# note we need the -f (file) argument here, since this is intened to be "the whole" argument to ant.
 BUILDFILESTR="-f ${ECLIPSEBUILDER_DIR}"/scripts/repoRelated/process-artifacts.xml
 # specify devworkspace and JRE to use to runEclipse
 # remember, we want to use Java 5 for processing artifacts.
 # Ideally same one used to pre-condition (normalize, -repack) 
 # the jars in the first place. 
 #JAVA_5_HOME=${JAVA_5_HOME:-/home/shared/orbit/apps/ibm-java2-i386-50/jre}
-JAVA_5_HOME=${JAVA_5_HOME:-/shared/common/jdk-1.5.0-22.x86_64}
+JAVA_5_HOME=${JAVA_5_HOME:-/shared/common/jdk-1.5.0-22.x86_64/jre}
 JAVA_6_HOME=${JAVA_6HOME:-/shared/common/sun-jdk1.6.0_21_x64}
 
 export JAVA_HOME=${JAVA_5_HOME}
 
-devJRE=$JAVA_HOME/jre/bin/java
+devJRE="${JAVA_HOME}"/bin/java
 
 if [ ! -n ${devJRE} -a -x ${devJRE} ] 
 then
@@ -60,7 +63,7 @@ else
     echo "pack200 version: "
     echo $( ${PACK200_DIR}/pack200 -V )
 fi
-
+      
 # remember, the eclispe install must match the VM used (e.g. both 64 bit, both 32 bit, etc).
 ECLIPSE_EXE=${ECLIPSE_EXE:-/shared/eclipse/sdk/eclipsesdk372/eclipse/eclipse}
 
@@ -71,14 +74,13 @@ then
 fi 
 
 
-repoDirLocation=$1
 if [[ -d "${repoDirLocation}" ]] 
 then
     echo "INFO: processing artifacts in code repo: $repoDirLocation";
     if [ -n ${ECLIPSE_EXE} -a -x ${ECLIPSE_EXE} ]
     then 
         devArgs="-DrepoDirLocation=${repoDirLocation}"
-        echo "   Remember, processing artifacts can take a long time (such as 15 minutes or more) ... so, don't panic." 
+        echo "   Don't panic! Processing artifacts can take a long time (such as 15 minutes or more)." 
         echo    
         ${ECLIPSE_EXE}  --launcher.suppressErrors  -nosplash -console -data $devworkspace -application org.eclipse.ant.core.antRunner $BUILDFILESTR ${extraArgs} -vm $devJRE -vmargs $devArgs
         RC=$?
@@ -86,6 +88,12 @@ then
         echo "ERROR: ECLIPSE_EXE is not defined to executable eclipse"
         RC=1
     fi 
+
+    # bit of a hueristic here, but if there are any jar.pack.gz files of zero length, that means
+    # they were invalid, and while we should have already removed them from metadata (if they were 
+    # there, at all), we'll remove the physical files too, to help avoid confusion. 
+    find "${repoDirLocation}" -size 0 -name "*.jar.pack.gz" -ls -exec rm '{}' \;
+    
     exit $RC
 else 
     echo "ERROR: the specified artifact repository directory does not exist: $repoDirLocation";

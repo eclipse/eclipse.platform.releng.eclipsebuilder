@@ -443,54 +443,17 @@
 
     </target>
 
-    <!-- Note: we still call this "pack" even though we do not specify "pack" attribute
-         In order to fix up any MD5 checksums that may need to be tweaked after all the 
-         processing and custom processing that has gone on. 
-         See bug 377437 for why MD5 checksums need to be fixed up, 
-         and see bug 376032 for why we no longer specify 'pack' at this point. 
-         https://bugs.eclipse.org/bugs/show_bug.cgi?id=377437
-         https://bugs.eclipse.org/bugs/show_bug.cgi?id=377437
-         
-         way to disable:
-         <property name="skipPack" value="true" />
-         
-         previous form: 
-         <p2.process.artifacts repositoryPath="file://${reposource}"
-            pack="true" />
+    <!-- 
+         Note: even if do not want to "pack" at this point, we would want to process 
+         artifacts, to fix up MD5 checksums. See bug 377437 for why MD5 
+         checksums need to be fixed up (batch compiler). If we do not fix the 
+         MD5 checksums here, then some later mirroring tasks will 
+         fail. We will do the actual pack 200 at the very end once we are 
+         sure we have the complete and final repo.
      -->
     
-    <target name="packMasterFeature" unless="skipPack">
-        <property name="archiveName" value="eclipse-master-${buildId}.zip" />
-
-        <echo
-            message="DEBUG: org.eclipse.update.jarprocessor.pack200: ${org.eclipse.update.jarprocessor.pack200}" />
-
-        <copy file="${eclipse.build.configs}/../../extras/pack.properties"
-            todir="${reposource}" />
-        <p2.process.artifacts repositoryPath="file://${reposource}" />
-        
-            <!-- temp don't delete, for debuggging 
-            <delete> 
-               <fileset dir="${reposource}"> 
-                   <include name="pack.properties" /> 
-               </fileset> </delete> 
-               -->
-        <!-- 
-            we remove these, because they end up having invalid pack.gz 
-            files. 
-            Note: even though we no longer "pack" here, we will leave the 
-            "remove" step just so we don't later forget to add back if/when 
-            needed. 
-            -->
-        <p2.remove.iu>
-            <repository location="file://${reposource}" />
-            <iu id="com.ibm.icu" artifacts="(format=packed)" />
-            <iu id="com.ibm.icu.base" artifacts="(format=packed)" />
-            <iu id="com.ibm.icu.source" artifacts="(format=packed)" />
-            <iu id="com.ibm.icu.base.source" artifacts="(format=packed)" />
-            <iu id="org.eclipse.jdt.debug.ui" artifacts="(format=packed)" />
-            <iu id="org.eclipse.pde.api.tools" artifacts="(format=packed)" />
-        </p2.remove.iu>
+    <target name="packMasterFeature" >
+       <p2.process.artifacts repositoryPath="file://${reposource}"  />
     </target>
 
     <target name="waitForChangedAttribs" unless="attribs.changed">
@@ -1117,6 +1080,11 @@
 
         <echo message="DEBUG: repoBaseline: ${repoBaseline}" />
 
+        <!-- 
+             needed, files should be copied to "working area" before having valudes chagned, 
+             or will require clean up and refetch for multiple runs. But, there are better 
+             ways to "name" a repo or add p2.mirrorsURL (not even sure these are working). 
+        -->
         <replace summary="true" file="${eclipse.build.configs}/../../extras/artifacts.xml"
             token="@p2RepoPath@" value="${p2RepoPath}" />
         <filter token="BUILD_ID" value="${buildLabel}" />
@@ -1198,6 +1166,18 @@
             location="file://${resultsRepoLocation}" child="${buildId}" />
         <p2.composite.metadata.repository.add
             location="file://${resultsRepoLocation}" child="${buildId}" />
+        
+        <!-- Now that they are finished, is a good time to pack them, and (eventually) 
+        add names, p2.mirrorsURL, etc. 
+        We go to this trouble of calling a seperate exec, because we want to be sure to use 
+        Java 5 to do the pack, but this build must be running in Java 6. 
+        -->
+        
+        <exec executable="/bin/bash">
+           <arg line="../scripts/repoRelated/process-artifacts.sh  ${resultsRepoLocation}/${buildId}" />
+        </exec>
+        
+        
     </target>
 
 

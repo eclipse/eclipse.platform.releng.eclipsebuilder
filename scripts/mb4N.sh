@@ -9,7 +9,7 @@ export PATH=/usr/local/bin:/usr/bin:/bin:
 # This basically bootstraps the files fresh each time (after the first)
 # though of course, the mbXX.sh file won't be used until the next time.
 
-buildRoot=/shared/eclipse/eclipse4N 
+export buildRoot=/shared/eclipse/eclipse4N 
 mkdir -p $buildRoot
 cd $buildRoot
 
