@@ -16,7 +16,7 @@
             files.  
             -->
         <p2.remove.iu>
-            <repository location="file://${reposource}" />
+            <repository location="file://${repoDirLocation}" />
             <iu
                 id="com.ibm.icu"
                 artifacts="(format=packed)" />
