@@ -6,7 +6,7 @@
 
 
 BUILD_HOME=${BUILD_HOME:-/shared/eclipse/eclipse4I}
-devworkspace=${$BUILD_HOME}/process-artifacts-workspace
+devworkspace="${BUILD_HOME}"/process-artifacts-workspace
 
 if [ ! -d "${BUILD_HOME}" ] 
 then
