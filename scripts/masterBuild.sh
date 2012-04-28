@@ -470,7 +470,7 @@ processCommandLine ()
 
     # relies on export, since getEclipseBuilder is seperate script, 
     # and it does not use "command line pattern"
-    export eclipsebuilderBranch=${eclipsebuilderBranch:-"origin/master"}
+    export eclipsebuilderBranch=${eclipsebuilderBranch:-"master"}
 
     # NOTE: $eclipsebuilder must be defined before builderDir 
     export builderDir=${supportDir}/$eclipsebuilder
