@@ -5,21 +5,23 @@
 
 repoDirLocation=$1
 
+echo "   Final p2 processing artifacts to pack: $repoDirLocation"
+
 # For now, we will assume buildRoot has been exported by 
  # calling process (if they want a non default value).  
 buildRoot=${buildRoot:-/shared/eclipse/eclipse4I}
-devworkspace="${BUILD_HOME}"/process-artifacts-workspace
+devworkspace="${buildRoot}"/process-artifacts-workspace
 
-if [ ! -d "${BUILD_HOME}" ] 
+if [ ! -d "${buildRoot}" ] 
 then
-    echo "ERROR: BUILD_HOME was not an existing directory as expected: ${BUILD_HOME}"
+    echo "ERROR: buildRoot was not an existing directory as expected: ${buildRoot}"
     exit 1
 fi
 
 # For most uses, this directory does not HAVE to literally be
 # the eclipseBuider. It is in production, but for testing, it can 
 # be any directory where ${ECLIPSEBUILDER_DIR}/scripts/repoRelated are located. 
-ECLIPSEBUILDER_DIR=${ECLIPSEBUILDER_DIR:-${BUILD_HOME}/build/supportDir/org.eclipse.releng.eclipsebuilder}
+ECLIPSEBUILDER_DIR=${ECLIPSEBUILDER_DIR:-${buildRoot}/build/supportDir/org.eclipse.releng.eclipsebuilder}
 
 if [ ! -d "${ECLIPSEBUILDER_DIR}/scripts/repoRelated" ] 
 then
