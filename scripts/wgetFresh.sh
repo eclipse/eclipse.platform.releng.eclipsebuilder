@@ -20,12 +20,12 @@ wget --no-verbose -O mb4N.sh http://git.eclipse.org/c/platform/eclipse.platform.
 
 
 # handy script to "wrap" a normal build script such as mb4I.sh to set global test/debug settings
-wget --no-verbose -O testBuild.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/testBuild.sh?h=$branchOrTag 2>&1;
+wget --no-verbose -O testBuild.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/testBuild.sh?h=$initScriptTag 2>&1;
 
 # get this script itself (would have to run twice to make use changes, naturally)
 # and has trouble "writing over itself" so we put in a file with 'NEW' suffix
 # and a command line like the following works well
 # ./wgetFresh.sh ; mv wgetFresh.shNEW wgetFresh.sh
-wget --no-verbose -O wgetFresh.NEW.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/wgetFresh.sh?h=$branchOrTag 2>&1;
+wget --no-verbose -O wgetFresh.NEW.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/wgetFresh.sh?h=$initScriptTag 2>&1;
 
 chmod +x *.sh
