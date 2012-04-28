@@ -4,6 +4,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <link rel="stylesheet" href="../../../default_style.css" type="text/css">
 <?php
+
+
+
    if (array_key_exists("SERVER_NAME", $_SERVER)) {
         $servername = $_SERVER["SERVER_NAME"];
         if ($servername === "build.eclipse.org") {
@@ -11,8 +14,19 @@
            $dlprefix="";
         } else {
            // if not on build.elcipse.org, assume we are on downloads.
-           // notice "drops4" for Eclipse 4.x
-           $dlprefix="http://www.eclipse.org/downloads/download.php?file=/eclipse/downloads/drops4";
+           // we "compute" this segment based on if "drops4" is in the request URI. 
+           // Seems we could compute the whole thing, given some thought and good regex? 
+            // Remember to always use === or !== with strpos.  
+            // Simply == or != would not work as expected since
+            // if found in first position it return 0 (so, must match "type" of false also, 
+            // to mean truely "not found".
+           $oos=strpos($_SERVER["REQUEST_URI"], "drops4");
+           if ($pos === false) {
+              $dlprefix="http://www.eclipse.org/downloads/download.php?file=/eclipse/downloads/drops";
+           }
+           else {
+              $dlprefix="http://www.eclipse.org/downloads/download.php?file=/eclipse/downloads/drops4";
+           }
         }
     }
     else {
