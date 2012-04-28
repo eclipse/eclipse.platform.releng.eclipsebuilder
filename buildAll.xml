@@ -19,9 +19,9 @@
          https://bugs.eclipse.org/bugs/show_bug.cgi?id=375788
          TODO: would be best to use "supportDir" here, like we do "gitCache"
          but dont' currently "pass that in", so a little hard coded assumption 
-         there that supportDir = buildRoot/build/suppprtDir
+         there that supportDir = $base/suppprtDir, where base=$buildRoot/build
          -->
-    <property name="fetchCacheLocation" value="${buildRoot}/build/suppprtDir/scmCache" />
+    <property name="fetchCacheLocation" value="${base}/build/suppprtDir/scmCache" />
     
     <fail unless="buildId" message="buildId must be defined" />
     <fail unless="buildLabel" message="buildLabel must be defined" />
