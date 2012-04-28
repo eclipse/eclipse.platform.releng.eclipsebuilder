@@ -1174,7 +1174,7 @@
         -->
         
         <exec executable="/bin/bash">
-           <arg line="../scripts/repoRelated/process-artifacts.sh  ${resultsRepoLocation}/${buildId}" />
+           <arg line="${base}/supportDir/org.eclipse.releng.eclipsebuilder/scripts/repoRelated/process-artifacts.sh  ${resultsRepoLocation}/${buildId}" />
         </exec>
         
         
