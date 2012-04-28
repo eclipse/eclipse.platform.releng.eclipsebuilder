@@ -21,7 +21,7 @@
          but dont' currently "pass that in", so a little hard coded assumption 
          there that supportDir = $base/suppprtDir, where base=$buildRoot/build
          -->
-    <property name="fetchCacheLocation" value="${base}/suppprtDir/scmCache" />
+    <property name="fetchCacheLocation" value="${base}/supportDir/scmCache" />
     
     <fail unless="buildId" message="buildId must be defined" />
     <fail unless="buildLabel" message="buildLabel must be defined" />
