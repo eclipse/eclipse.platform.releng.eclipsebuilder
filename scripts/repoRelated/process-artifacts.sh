@@ -6,7 +6,7 @@
 
 
 BUILD_HOME=${BUILD_HOME:-/shared/eclipse/eclipse4I}
-
+devworkspace=${$BUILD_HOME}/process-artifacts-workspace
 
 if [ ! -d "${BUILD_HOME}" ] 
 then
@@ -24,7 +24,7 @@ then
     echo "ERROR: builder scripts was not an existing directory as expected: ${ECLIPSEBUILDER_DIR}/scripts/repoRelated"
     exit 1
 fi
-
+BUILDFILESTR="${ECLIPSEBUILDER_DIR}"/scripts/repoRelated/process-artifacts.xml
 # specify devworkspace and JRE to use to runEclipse
 # remember, we want to use Java 5 for processing artifacts.
 # Ideally same one used to pre-condition (normalize, -repack) 
