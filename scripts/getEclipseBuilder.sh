@@ -110,6 +110,10 @@ function getEclipseBuilder () {
     mkdir -p $gitCache
 
     # removing eclipsebuilder, for now, to see if fixes bug 375780
+    # it will always be necessary to do a complete (or, a lot) of cleanup
+    # in eclipseBuilder, there many places we replace data in files, such 
+    # such as @buildId@ with ${buildId} which would not work if @buildId" had 
+    # already been replaced. Could be improved, in long run. 
     #builderDir is full path to eclipsebuilder
     if [[ -d "${builderDir}" ]] 
     then
@@ -155,7 +159,7 @@ function getEclipseBuilder () {
     debugMsg "git command: git pull"
     git pull
     checkForErrorExit $? "git pull failed"
-        
+
     # assuming now all is fresh and current, copy the gitClone version back to 
     # the "real" builderDirectory
     debugMsg "     Will now copy cloned version back to \"real\" builderDir, ${builderDir}"
