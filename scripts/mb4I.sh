@@ -34,7 +34,7 @@ cd "${buildRoot}"
 # one still is
 date >> buildstarted.txt
 
-wget -O "mb${eclipseStreamMajor}${buildType}.NEW.sh" "http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb${eclipseStreamMajor}${buildType}.sh\?h=${initScriptTag}"
+wget -O "mb${eclipseStreamMajor}${buildType}.NEW.sh" "http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb${eclipseStreamMajor}${buildType}.sh?h=${initScriptTag}"
 rccode=$?
 if [[ $rccode != 0 ]] 
 then 
