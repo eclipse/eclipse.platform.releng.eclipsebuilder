@@ -27,7 +27,7 @@ if [[ ! -d "${buildRoot}" ]]
      echo "ERROR: the expected buildRoot directory didn't exist: $buildRoot"
      exit 1
  fi
- 
+
 cd "${buildRoot}"
 
 # TODO: need a "lock file" to prevent another job from staring if 

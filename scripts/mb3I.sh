@@ -30,7 +30,7 @@ if [[ ! -d "${buildRoot}" ]]
 
 cd "${buildRoot}"
 
-#TODO: need a "lock file" to prevent another job from staring if 
+# TODO: need a "lock file" to prevent another job from staring if 
 # one still is
 date >> buildstarted.txt
 
