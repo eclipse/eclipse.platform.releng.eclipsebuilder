@@ -41,7 +41,7 @@ then
     echo "ERROR: wget could not fetch init script. Return code: $rccode"
     exit $rccode
 fi
-wget -O "masterBuild.sh" "http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/masterBuild.sh\?h=${initScriptTag}"
+wget -O "masterBuild.sh" "http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/masterBuild.sh?h=${initScriptTag}"
 rccode=$?
 if [[ $rccode != 0 ]] 
 then 
