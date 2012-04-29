@@ -108,11 +108,17 @@ updateBaseBuilder () {
     echo "DEBUG: relengBaseBuilderDir: $relengBaseBuilderDir"
     echo "INFO: basebuilderBranch: $basebuilderBranch"
 
-    #if [ -e ${relengBaseBuilderDir}/eclipse.ini ]
-    # then
-    #      echo "removing previous version of base builder, to be sure it is fresh, to see if related to to see if fixes bug 375780"
-    #rm -fr ${VERBOSE_REMOVES} ${relengBaseBuilderDir}
-    #fi
+    # scmCache has been "moved out" of base builder area, 
+    # and it has been improved to use origin/master to better 
+    # overwrite anything that it thinks should be pulled instead. 
+    # (creating a detached head, which is fine for scmCache). 
+    # but until ALL areas are known to be "unchanged" 
+    # safest to be sure we are clean. See bug 375794. 
+    if [ -e ${relengBaseBuilderDir}/eclipse.ini ]
+    then
+        echo "removing previous version of base builder, to be sure it is fresh. See bug 375794 "
+        rm -fr ${VERBOSE_REMOVES} ${relengBaseBuilderDir}
+    fi
 
     # existence of direcotry, is not best test of existence, since 
     # sometimes the top level directory may still exist, while most files deleted,  
