@@ -20,7 +20,7 @@
             // Simply == or != would not work as expected since
             // if found in first position it return 0 (so, must match "type" of false also, 
             // to mean truely "not found".
-           $oos=strpos($_SERVER["REQUEST_URI"], "drops4");
+           $pos=strpos($_SERVER["REQUEST_URI"], "drops4");
            if ($pos === false) {
               $dlprefix="http://www.eclipse.org/downloads/download.php?file=/eclipse/downloads/drops";
            }
