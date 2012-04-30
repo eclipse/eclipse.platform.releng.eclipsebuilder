@@ -1,0 +1,90 @@
+<project
+    name="Helper targets"
+    default="generateEclipseIndex">
+    
+    
+    <property
+        name="postingDirectory"
+        value="/home/shared/eclipse/eclipse4I/siteDir/eclipse/downloads/drops4/I20120428-0800" />
+    <property
+        name="publishingContent"
+        value="/home/shared/eclipse/eclipse4I/build/supportDir/org.eclipse.releng.eclipsebuilder/eclipse/publishingFiles" />
+    <property
+        name="base.builder"
+        value="/home/shared/eclipse/eclipse4I/build/supportDir/org.eclipse.releng.basebuilder" />
+
+    <property 
+        name="buildType"
+        value="I" />
+    <property
+        name="buildLabel"
+        value="" />
+
+
+
+    <target name="generateEclipseIndex">
+        <condition
+            property="generatorClass"
+            value="org.eclipse.releng.generators.EclipseTestResultsGeneratorNoMail">
+            <equals
+                arg1="${hudson}"
+                arg2="true" />
+        </condition>
+        <property
+            name="generatorClass"
+            value="org.eclipse.releng.generators.EclipseTestResultsGenerator" />
+
+        <available
+            classname="${generatorClass}"
+            property="class"
+            value="${generatorClass}" />
+
+        <!--regenerate the index page with links to test results -->
+        <ant
+            antfile="${base.builder}/plugins/org.eclipse.build.tools/scripts/publish.xml"
+            dir="${publishingContent}"
+            target="generateIndex">
+            <property
+                name="isBuildTested"
+                value="true" />
+            <property
+                name="buildType"
+                value="${buildType}" />
+            <property
+                name="dropTokenList"
+                value="%sdk%,%tests%,%example%,%rcpruntime%,%rcpsdk%,%deltapack%,%icubase%,%runtime%,%jdt%,%jdtsdk%,%jdtc%,%jarprocessor%,%pde%,%pdesdk%,%cvs%,%cvssdk%,%swt%,%relengtools%" />
+            <property
+                name="platformIdentifierToken"
+                value="%platform%" />
+            <property
+                name="platformSpecificTemplateList"
+                value="Windows,${publishingContent}/templateFiles/platform.php.template,winPlatform.php;Linux,${publishingContent}/templateFiles/platform.php.template,linPlatform.php;Solaris,${publishingContent}/templateFiles/platform.php.template,solPlatform.php;AIX,${publishingContent}/templateFiles/platform.php.template,aixPlatform.php;Macintosh,${publishingContent}/templateFiles/platform.php.template,macPlatform.php;HP-UX,${publishingContent}/templateFiles/platform.php.template,hpuxPlatform.php" />
+            <property
+                name="indexFileName"
+                value="index.php" />
+            <property
+                name="result"
+                value="${postingDirectory}/${buildLabel}" />
+            <property
+                name="testResultsTemplateFileName"
+                value="${publishingContent}/templateFiles/testResults.php.template" />
+            <property
+                name="dropTemplateFileName"
+                value="${publishingContent}/templateFiles/index.php.template" />
+            <property
+                name="testManifestFileName"
+                value="${publishingContent}/testManifest.xml" />
+        </ant>
+
+        <!-- Replace build label in generated html files -->
+        <replace
+            dir="${postingDirectory}/${buildLabel}"
+            token="@buildlabel@"
+            value="${buildLabel}"
+            includes="**/*.php" />
+
+    </target>
+
+
+
+</project>

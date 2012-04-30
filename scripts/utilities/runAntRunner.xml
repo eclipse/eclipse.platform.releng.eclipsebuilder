@@ -1,132 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
     <!--
-        A utility ant script to invoke AntRunner application with
-        Eclipse. This is handy since some ant scripts are running in
-        plain ant, but we'd like to use Eclipse's ant tasks for things
-        like p2 operations.
+        A utility ant script to run Eclipse's antRunner, from a "plain" ant 
+        script. It assumes the existence of (or, but "get") the base builder. 
+        Long term, won't really need to be literally the base builder, 
+        but any eclipse installed into a directory named org.eclipse.releng.basebuilder.
     -->
 <project
     name="runAntRunner"
     default="runAntRunner"
     basedir=".">
 
-    <!-- = = = standard properties pattern = = = -->
-    <!--
-        Note to be cross-platform, "environment variables" are only
-        appropriate for some variables, e.g. ones we set, since
-        properties are case sensitive, even if the environment variables
-        on your operating system are not, e.g. it will be ${env.Path}
-        not ${env.PATH} on Windows
-    -->
-    <property environment="env"/>
-    <!--
-        Let users override standard properties, if desired. If
-        directory, file, or some properties do not exist, then standard
-        properties will be used.
-    -->
-    <property file="${env.LOCAL_BUILD_PROPERTIES_DIR}/${ant.project.name}.properties"/>
-
-    <!-- = = = end standard properties pattern = = = -->
-    <fail
-        unless="env.BUILD_HOME"
-        message="all scripts need a BUILD_HOME"/>
-    <echo
-        level="debug"
-        message="buildDirectory: ${buildDirectory}"/>
-    <property
-        name="keyCfgFile"
-        value="${env.PROJECT_BUILDERS}/${projectname}/${env.RELENG}/maps/build.cfg"/>
-    <echo
-        level="debug"
-        message="keyCfgFile: ${keyCfgFile}"/>
-    <property file="${keyCfgFile}"/>
-    <fail
-        unless="builderVersion"
-        message="Could not get builderVersion. Probably could not checkout build.cfg?"/>
-
     <property
         name="failOnError"
-        value="true"/>
-
-    <!-- if not set by caller, be sure it is empty string -->
+        value="true" />
     <property
         name="antrunnertarget"
-        value="build"/>
-    <fail
-        unless="antrunnerfile"
-        message="Must provide ant file to run"/>
-    <target name="runAntRunner" depends="init">
+        value="build" />
+    <!-- we assume default, if not specified by caller -->
+    <property
+        name="antrunnerfile"
+        value="build.xml" />
 
-         <!-- long term we should make this sensitive to if already running in eclipse, and if so, 
-         just invoke the script? check if="eclipse.running" -->
-        <mkdir dir="${buildDirectory}/${buildLabel}"/>
-        <mkdir dir="${buildDirectory}/${buildLabel}/buildworkspaces"/>
-        <condition
-            property="antQuietValue"
-            value="-quiet"
-            else="">
-            <istrue value="${env.USE_QUIET}"/>
-        </condition>
+    <target name="runAntRunner">
+
+        <!-- 
+             must tell full path of VM to use (probably easier ways to integrate
+             with Hudson? But for now ... old school 
+        -->
+        <fail unless="JAVA_6_HOME" />
+        
         <java
             taskname="AntRunner"
-    fork="true"
-    failonerror="${failOnError}"
-    classname="org.eclipse.equinox.launcher.Main">
-    <classpath>
-        <fileset dir="${pde.builder.path}/plugins">
-            <include name="org.eclipse.equinox.launcher_*.jar"/>
-        </fileset>
-    </classpath>
-            <jvmarg value="-Djava.protocol.handler.pkgs=org.eclipse.wtp.releng.www.protocol"/>
-            <jvmarg value="-DurlLogLocation=${buildDirectory}/${buildLabel}/outgoinghttplog-antrunner.log"/>
-            <jvmarg value="-Dosgi.ws=${env.BASEWS}"/>
-            <jvmarg value="-Dosgi.os=${env.BASEOS}"/>
-            <jvmarg value="-Dosgi.arch=${env.BASEARCH}"/>
-            <jvmarg value="-Dbuild.home=${env.BUILD_HOME}"/>
-            <jvmarg value="-DJAVA_6_HOME=${env.JAVA_6_HOME}"/>
-            <jvmarg value="-DJAVA_5_HOME=${env.JAVA_5_HOME}"/>
-            <jvmarg value="-DJAVA_4_HOME=${env.JAVA_4_HOME}"/>
-
-            <jvmarg value="-Dprojectname=${projectname}"/>
-            <jvmarg value="-DbuildDirectory=${buildDirectory}"/>
-            <jvmarg value="-DbuildLabel=${buildLabel}"/>
-            <jvmarg value="-Dwtp.builder.home=${wtp.builder.home}"/>
-            <jvmarg value="-Dbuild.distribution=${build.distribution}"/>
-            <jvmarg value="-Dcomponent=${component}"/>
-            <jvmarg value="-Djava.io.tmpdir=${env.RECOMMENDED_TMP_DIR}"/>
+            jvm="${JAVA_6_HOME}/bin/java"
+            fork="true"
+            failonerror="${failOnError}"
+            classname="org.eclipse.equinox.launcher.Main">
+            <classpath>
+                <fileset dir="${pde.builder.path}/plugins">
+                    <include name="org.eclipse.equinox.launcher_*.jar" />
+                </fileset>
+            </classpath>
+            <!--
+            <jvmarg value="-Dosgi.ws=${env.BASEWS}" />
+            <jvmarg value="-Dosgi.os=${env.BASEOS}" />
+            <jvmarg value="-Dosgi.arch=${env.BASEARCH}" />
             
-            <jvmarg value="${buildcleanarg}"/>
-            <jvmarg value="${buildercleanarg}"/>
-                
-            <jvmarg
-                value="-Dosgi.instance.area=${buildDirectory}/${buildLabel}/buildworkspaces/workspace-runAntRunner-${antrunnerfile}-${antrunnertarget}"/>
-            <arg value="-application"/>
-            <arg value="org.eclipse.ant.core.antRunner"/>
-            <arg value="${antQuietValue}"/>
-            <arg value="-buildfile"/>
-            <arg value="${antrunnerfile}"/>
-            <arg value="${antrunnertarget}"/>
+            <jvmarg value="-Dbuild.home=${env.BUILD_HOME}" />
+            -->
+            <jvmarg value="-DJAVA_6_HOME=${env.JAVA_6_HOME}" />
+            <jvmarg value="-DJAVA_5_HOME=${env.JAVA_5_HOME}" />
+            <jvmarg value="-DJAVA_4_HOME=${env.JAVA_4_HOME}" />
+
+            <jvmarg value="${buildcleanarg}" />
+            <jvmarg value="${buildercleanarg}" />
+
+            <arg value="-application" />
+            <arg value="org.eclipse.ant.core.antRunner" />
+            <arg value="-buildfile" />
+            <arg value="${antrunnerfile}" />
+            <arg value="${antrunnertarget}" />
         </java>
     </target>
     
-     
-     <target name="init">           
-            <condition
-                property="buildcleanarg"
-                value="-Dbuild.clean=${build.clean}"
-                else="">
-                <isset
-                   property="build.clean" />
-            </condition>
-        
+    <!-- 
+    don't need right now, but will ... and good example of how to pass, 
+    or not, arguments without getting "noise" on the line. 
+    -->
+    <target name="init">
+        <condition
+            property="buildcleanarg"
+            value="-Dbuild.clean=${build.clean}"
+            else="">
+            <isset property="build.clean" />
+        </condition>
+
         <condition
             property="buildercleanarg"
             value="-Dcheckout.builder.clean=${checkout.builder.clean}"
             else="">
-            <isset
-               property="checkout.builder.clean" />
+            <isset property="checkout.builder.clean" />
         </condition>
-        
+
     </target>
-    
 </project>
