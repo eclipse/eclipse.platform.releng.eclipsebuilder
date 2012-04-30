@@ -23,7 +23,7 @@
         value="${basedir}" />
     <property
         name="buildLabel"
-        value="${buildId}" />    
+        value="${buildId}" />
 
     <target name="runTests">
         <antcall target="JUnitTests" />
@@ -36,7 +36,7 @@
     -->
     <target name="JUnitTests">
         <parallel>
-        
+
             <antcall target="triggerHudsonTests">
                 <param
                     name="job"
@@ -45,7 +45,7 @@
                     name="suffix"
                     value="win32.zip" />
             </antcall>
-        
+
             <antcall target="triggerHudsonTests">
                 <param
                     name="job"
@@ -54,7 +54,7 @@
                     name="suffix"
                     value="linux-gtk-x86_64.tar.gz" />
             </antcall>
-   
+
             <antcall target="triggerHudsonTests">
                 <param
                     name="job"
@@ -63,7 +63,7 @@
                     name="suffix"
                     value="macosx-cocoa-x86.zip" />
             </antcall>
-    
+
         </parallel>
     </target>
 
@@ -83,11 +83,15 @@
             TODO: make less exactly hard coded in future
             also, check for validity using "matches" digit*\.digit*\.digit*
         -->
-        <condition property="dropsDirSegment"
-          value="drops4" else="drops">
-          <equals arg1="${eclipseStream}" arg2="4.2.0" />  
+        <condition
+            property="dropsDirSegment"
+            value="drops4"
+            else="drops">
+            <equals
+                arg1="${eclipseStream}"
+                arg2="4.2.0" />
         </condition>
-        
+
         <property
             name="baseURL"
             value="http://download.eclipse.org/eclipse/downloads/${dropsDirSegment}/${buildId}" />
