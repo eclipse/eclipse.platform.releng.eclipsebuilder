@@ -67,16 +67,6 @@
         <property
             name="WORKSPACE"
             value="${hudson.WORKSPACE}" />
-        <property
-            name="BUILD_ID"
-            value="${hudson.BUILD_ID}" />
-        <property
-            name="BUILD_NUMBER"
-            value="${hudson.BUILD_NUMBER}" />
-        <property
-            name="JOB_NAME"
-            value="${hudson.JOB_NAME}" />
-
 
 
     </target>
@@ -90,20 +80,6 @@
             name="WORKSPACE"
             value="${basedir}" />
         
-        <!-- 
-             Similarly other "hudson parameters" may need default values. 
-             Will assume empty string, for now, but maybe something smarter could be done in future for standalone tests  
-        -->
-        <property
-            name="BUILD_ID"
-            value="" />
-        <property
-            name="BUILD_NUMBER"
-            value="" />
-        <property
-            name="JOB_NAME"
-            value="" />
-
 
         <property
             name="relengBaseBuilderDir"
@@ -142,9 +118,6 @@
 
         <echo message="hudson: ${hudson}" />
         <echo message="WORKSPACE: ${WORKSPACE}" />
-        <echo message="BUILD_ID: ${BUILD_ID}" />
-        <echo message="BUILD_NUMBER: ${BUILD_NUMBER}" />
-        <echo message="JOB_NAME: ${JOB_NAME}" />
         <echo message="buildId: ${buildId}" />
         <echo message="relengBaseBuilderDir: ${relengBaseBuilderDir}" />
         <echo message="eclipseBuilderDir: ${eclipseBuilderDir}" />
@@ -163,7 +136,7 @@
         </condition>
         <property
             name="testDir"
-            value="${WORKSPACE}/ws/${BUILD_ID}" />
+            value="${WORKSPACE}/ws/${buildId}" />
         <echo message="DEBUG: testDir ${testDir}" />
         <condition
             property="executionDir"
