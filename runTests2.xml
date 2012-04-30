@@ -139,11 +139,13 @@
             name="testDir"
             value="${WORKSPACE}/ws/${buildId}" />
         <echo message="DEBUG: testDir ${testDir}" />
+        <!--
         <condition
             property="executionDir"
             value="${testDir}\eclipse-testing">
             <os family="windows" />
         </condition>
+        -->
         <property
             name="executionDir"
             value="${testDir}/eclipse-testing" />
