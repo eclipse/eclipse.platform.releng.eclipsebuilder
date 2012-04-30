@@ -119,7 +119,11 @@
             <arg value="-c" />
             <arg value="grep -o 'nextBuildNumber&quot;:[0-9]*' ${buildDirectory}/nextBuildNumber${job} | cut -d ':' -f 2" />
         </exec>
+        <!-- 
+             don't delete ... for debugging for now ... but long term might make use of this (and 
+             other info) to "find" our results? 
         <delete file="${buildDirectory}/nextBuildNumber${job}" />
+        -->
         <echo message="Next hudson build number is ${nextHudsonBuild}." />
 
         <echo message="${json}" />
