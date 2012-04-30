@@ -676,17 +676,6 @@ else
 fi
 
 echo "INFO: Last build: ${oldBuildTag}"
-# don't update this file, if doing a test build
-# TODO: unless there was no value there to begin with?
-if [[ "${testbuildonly}" != "true" ]] 
-then
-    echo $buildTag >$buildRoot/${buildType}build.properties
-else
-    echo $buildTag >$buildRoot/${buildType}-TEST-build.properties      
-fi
-
-
-
 
 
 # setup - make sure reuqired directories exist 
@@ -829,6 +818,16 @@ rm -fr ${VERBOSE_REMOVES} "${buildRoot}/build/supportDir/src"
 
 runSDKBuild
 checkForErrorExit $? "Failed while building Eclipse-SDK"
+
+# Only update the IBuild.properties file if the build was successful. 
+# And, never for test builds. Otherwise the next build "changes" report
+# will be "off", since it'd use the wrong reference point.
+if [[ "${testbuildonly}" != "true" ]] 
+then
+    echo $buildTag >$buildRoot/${buildType}build.properties
+else
+    echo $buildTag >$buildRoot/${buildType}-TEST-build.properties      
+fi
 
 # if all ended well, put "promotion scripts" in known locations
 
