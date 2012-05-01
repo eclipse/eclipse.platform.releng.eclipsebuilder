@@ -18,13 +18,18 @@
     
     -->
 
-    
+
     <property
         name="jobNumberOut"
         value="${postingDirectory}/${buildId}/testresults/" />
     <property
         name="buildLabel"
         value="${buildId}" />
+
+    <!-- make sure this directory exists, as we'll later try to 
+         write information file there -->
+    <echo message="jobNumberOut: ${jobNumberOut}" />
+    <mkdir dir="${jobNumberOut}" />
 
     <target name="runTests">
         <antcall target="JUnitTests" />
