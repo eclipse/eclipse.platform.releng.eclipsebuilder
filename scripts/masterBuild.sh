@@ -914,9 +914,10 @@ fi
 
 echo "normal exit from build phase of $0"
 
-# we won't invoke tests automatically if doing test builds
- if [[ "${testbuildonly}" != "true" ]] 
-    then
+# we may not want to invoke tests automatically if doing test build?
+# guess it wouldn't hurt, as long as we don't promote?  
+# if [[ "${testbuildonly}" != "true" ]] 
+#    then
         # TODO: can not (do not) set buildDirectory higher up. 
         # probably better way. Bit of "hard coding" here.  
         # assume's ant is "on path" (which is pretty normal since 
@@ -928,6 +929,6 @@ echo "normal exit from build phase of $0"
         -DeclipseStream=${eclipseStream} \
         -f $builderDir/invokeTestsJSON.xml
 
-fi
+#fi
 
 exit 0
