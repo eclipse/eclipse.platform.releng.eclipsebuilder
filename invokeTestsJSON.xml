@@ -35,12 +35,26 @@
         so have access to $eclipseStream and $buildType
     -->
     <target name="JUnitTests">
+        
+        <!-- 
+            TODO: make less exactly hard coded in future
+            also, check for validity using "matches" digit*\.digit*\.digit*
+        -->
+        <condition
+            property="jobNameSuffix"
+            value="2"
+            else="">
+            <equals
+                arg1="${eclipseStream}"
+                arg2="4.2.0" />
+        </condition>
+
         <parallel>
 
             <antcall target="triggerHudsonTests">
                 <param
                     name="job"
-                    value="JUnit-win2" />
+                    value="JUnit-win${jobNameSuffix}" />
                 <param
                     name="suffix"
                     value="win32.zip" />
@@ -49,7 +63,7 @@
             <antcall target="triggerHudsonTests">
                 <param
                     name="job"
-                    value="eclipse-JUnit-Linux2" />
+                    value="eclipse-JUnit-Linux${jobNameSuffix}" />
                 <param
                     name="suffix"
                     value="linux-gtk-x86_64.tar.gz" />
@@ -58,7 +72,7 @@
             <antcall target="triggerHudsonTests">
                 <param
                     name="job"
-                    value="eclipse-JUnit-mac2" />
+                    value="eclipse-JUnit-mac${jobNameSuffix}" />
                 <param
                     name="suffix"
                     value="macosx-cocoa-x86.zip" />
