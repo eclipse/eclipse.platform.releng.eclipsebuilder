@@ -18,9 +18,10 @@
     
     -->
 
+    
     <property
-        name="buildDirectory"
-        value="${basedir}" />
+        name="jobNumberOut"
+        value="${postingDirectory}/${buildId}/testresults/" />
     <property
         name="buildLabel"
         value="${buildId}" />
@@ -129,18 +130,18 @@
         <exec executable="curl">
             <arg line="-G" />
             <arg value="https://hudson.eclipse.org/hudson/job/${job}/api/json" />
-            <arg line="-o ${buildDirectory}/nextBuildNumber${job}" />
+            <arg line="-o ${jobNumberOut}/nextBuildNumber${job}" />
         </exec>
         <exec
             executable="bash"
             outputproperty="nextHudsonBuild">
             <arg value="-c" />
-            <arg value="grep -o 'nextBuildNumber&quot;:[0-9]*' ${buildDirectory}/nextBuildNumber${job} | cut -d ':' -f 2" />
+            <arg value="grep -o 'nextBuildNumber&quot;:[0-9]*' ${jobNumberOut}/nextBuildNumber${job} | cut -d ':' -f 2" />
         </exec>
         <!-- 
              don't delete ... for debugging for now ... but long term might make use of this (and 
              other info) to "find" our results? 
-        <delete file="${buildDirectory}/nextBuildNumber${job}" />
+        <delete file="${jobNumberOut}/nextBuildNumber${job}" />
         -->
         <echo message="Next hudson build number is ${nextHudsonBuild}." />
 

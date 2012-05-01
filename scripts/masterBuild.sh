@@ -912,5 +912,22 @@ then
     cp -v -b "${buildRoot}/fullmasterBuildOutput.txt" "${buildlogsDir}"
 fi
 
-echo "normal exit from $0"
+echo "normal exit from build phase of $0"
+
+# we won't invoke tests automatically if doing test builds
+ if [[ "${testbuildonly}" != "true" ]] 
+    then
+        # TODO: can not (do not) set buildDirectory higher up. 
+        # probably better way. Bit of "hard coding" here.  
+        # assume's ant is "on path" (which is pretty normal since 
+        # we are buiding on linux. 
+        HUDSON_TOKEN=windows2012tests ant \
+        -DpostingDirectory=${postingDirectory} \
+        -DbuildId=${buildId} \
+        -DbuildType=${buildType} \
+        -DeclipseStream=${eclipseStream} \
+        -f $builderDir/invokeTestsJSON.xml
+
+fi
+
 exit 0
