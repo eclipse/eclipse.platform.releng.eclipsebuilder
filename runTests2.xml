@@ -125,27 +125,10 @@
         <echo message="eclipseStream: ${eclipseStream}" />
         <echo message="buildType: ${buildType}" />
         
-		
-		<!-- <condition property="testDir" value="${hudson.WORKSPACE}\ws\${hudson.BUILD_ID}">
-			<os family="windows" />
-		</condition> 
-        <condition
-            property="testDir"
-            value="${WORKSPACE}\ws">
-            <os family="windows" />
-        </condition>
-        -->
         <property
             name="testDir"
             value="${WORKSPACE}/workarea/${buildId}" />
         <echo message="DEBUG: testDir ${testDir}" />
-        <!--
-        <condition
-            property="executionDir"
-            value="${testDir}\eclipse-testing">
-            <os family="windows" />
-        </condition>
-        -->
         <property
             name="executionDir"
             value="${testDir}/eclipse-testing" />

@@ -193,7 +193,7 @@
             dest="${tmpzipdir}" />
 
         <available
-            file="${tmpzipdir}/archive/ws"
+            file="${tmpzipdir}/archive/workarea"
             property="resultAvailable" />
 
         <antcall target="finishup" />
@@ -207,7 +207,7 @@
         if="resultAvailable">
         <zip
             destfile="${postingDirectory}/${buildId}/testresults/archive.zip"
-            basedir="${tmpzipdir}/archive/ws" />
+            basedir="${tmpzipdir}/archive/workarea" />
         <unzip
             src="${postingDirectory}/${buildId}/testresults/archive.zip"
             dest="${postingDirectory}/${buildId}/testresults" />
