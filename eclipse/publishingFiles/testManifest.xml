@@ -492,7 +492,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.pde.build.tests_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.pde.build.tests_win32.win32.x86_7.0.xml">
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
 	<effectedFile id="SW"></effectedFile>
@@ -1282,7 +1282,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
- <logFile name="org.eclipse.core.tests.runtime_win32.win32.x86_6.0.xml">
+ <logFile name="org.eclipse.core.tests.runtime_win32.win32.x86_7.0.xml">
 	<effectedFile id="RCPW"></effectedFile>
 	<effectedFile id="RCPWSDK"></effectedFile>
 	<effectedFile id="PW"></effectedFile>
@@ -1294,7 +1294,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ui.tests_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.ui.tests_win32.win32.x86_7.0.xml">
 	<effectedFile id="RCPW"></effectedFile>
 	<effectedFile id="RCPWSDK"></effectedFile>
 	<effectedFile id="PW"></effectedFile>
@@ -1306,7 +1306,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jface.tests.databinding_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.jface.tests.databinding_win32.win32.x86_7.0.xml">
 	<effectedFile id="RCPW"></effectedFile>
 	<effectedFile id="RCPWSDK"></effectedFile>
 	<effectedFile id="PW"></effectedFile>
@@ -1318,7 +1318,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.swt.tests_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.swt.tests_win32.win32.x86_7.0.xml">
 	<effectedFile id="RCPW"></effectedFile>
 	<effectedFile id="RCPWSDK"></effectedFile>
 	<effectedFile id="PW"></effectedFile>
@@ -1330,7 +1330,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.core.expressions.tests_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.core.expressions.tests_win32.win32.x86_7.0.xml">
 	<effectedFile id="RCPW"></effectedFile>
 	<effectedFile id="RCPWSDK"></effectedFile>
 	<effectedFile id="PW"></effectedFile>
@@ -1343,7 +1343,7 @@
 </logFile>
 
 
-<logFile name="org.eclipse.osgi.tests_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.osgi.tests_win32.win32.x86_7.0.xml">
 	<effectedFile id="RCPW"></effectedFile>
 	<effectedFile id="RCPWSDK"></effectedFile>
 	<effectedFile id="PW"></effectedFile>
@@ -1355,7 +1355,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.equinox.security.tests_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.equinox.security.tests_win32.win32.x86_7.0.xml">
 	<effectedFile id="RCPW"></effectedFile>
 	<effectedFile id="RCPWSDK"></effectedFile>
 	<effectedFile id="PW"></effectedFile>
@@ -1363,15 +1363,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.equinox.p2.tests_win32.win32.x86_6.0.xml">
-	<effectedFile id="RCPW"></effectedFile>
-	<effectedFile id="RCPWSDK"></effectedFile>
-	<effectedFile id="PW"></effectedFile>
-	<effectedFile id="PWSDK"></effectedFile>	
-	<effectedFile id="SW"></effectedFile>
-</logFile>
-
-<logFile name="org.eclipse.equinox.p2.tests.ui_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.equinox.p2.tests_win32.win32.x86_7.0.xml">
 	<effectedFile id="RCPW"></effectedFile>
 	<effectedFile id="RCPWSDK"></effectedFile>
 	<effectedFile id="PW"></effectedFile>
@@ -1379,7 +1371,15 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ui.tests.rcp_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.equinox.p2.tests.ui_win32.win32.x86_7.0.xml">
+	<effectedFile id="RCPW"></effectedFile>
+	<effectedFile id="RCPWSDK"></effectedFile>
+	<effectedFile id="PW"></effectedFile>
+	<effectedFile id="PWSDK"></effectedFile>	
+	<effectedFile id="SW"></effectedFile>
+</logFile>
+
+<logFile name="org.eclipse.ui.tests.rcp_win32.win32.x86_7.0.xml">
 	<effectedFile id="RCPW"></effectedFile>
 	<effectedFile id="RCPWSDK"></effectedFile>
 	<effectedFile id="PW"></effectedFile>
@@ -1391,7 +1391,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ui.tests.forms_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.ui.tests.forms_win32.win32.x86_7.0.xml">
 	<effectedFile id="RCPW"></effectedFile>
 	<effectedFile id="RCPWSDK"></effectedFile>
 	<effectedFile id="PW"></effectedFile>
@@ -1404,23 +1404,23 @@
 </logFile>
 
 
-<logFile name="org.eclipse.releng.tests_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.releng.tests_win32.win32.x86_7.0.xml">
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.pde.ui.tests_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.pde.ui.tests_win32.win32.x86_7.0.xml">
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.pde.api.tools.tests_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.pde.api.tools.tests_win32.win32.x86_7.0.xml">
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.apt.tests_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.jdt.apt.tests_win32.win32.x86_7.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -1428,7 +1428,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.compiler.apt.tests_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.jdt.compiler.apt.tests_win32.win32.x86_7.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -1436,7 +1436,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.compiler.tool.tests_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.jdt.compiler.tool.tests_win32.win32.x86_7.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -1444,7 +1444,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.apt.pluggable.tests_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.jdt.apt.pluggable.tests_win32.win32.x86_7.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -1452,7 +1452,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.core.tests.builder_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.jdt.core.tests.builder_win32.win32.x86_7.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -1460,7 +1460,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.core.tests.compiler_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.jdt.core.tests.compiler_win32.win32.x86_7.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -1468,7 +1468,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.core.tests.model_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.jdt.core.tests.model_win32.win32.x86_7.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -1476,7 +1476,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.core.tests.performance_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.jdt.core.tests.performance_win32.win32.x86_7.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -1484,7 +1484,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.debug.tests_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.jdt.debug.tests_win32.win32.x86_7.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -1492,7 +1492,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.text.tests_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.jdt.text.tests_win32.win32.x86_7.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -1500,7 +1500,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.search.tests_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.search.tests_win32.win32.x86_7.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -1508,7 +1508,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.ui.tests_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.jdt.ui.tests_win32.win32.x86_7.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -1516,7 +1516,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.ui.tests.refactoring_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.jdt.ui.tests.refactoring_win32.win32.x86_7.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -1524,7 +1524,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ant.tests.core_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.ant.tests.core_win32.win32.x86_7.0.xml">
 	<effectedFile id="PW"></effectedFile>
 	<effectedFile id="PWSDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -1534,7 +1534,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ant.tests.ui_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.ant.tests.ui_win32.win32.x86_7.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -1542,7 +1542,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.compare.tests_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.compare.tests_win32.win32.x86_7.0.xml">
 	<effectedFile id="PW"></effectedFile>
 	<effectedFile id="PWSDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -1552,7 +1552,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.core.filebuffers.tests_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.core.filebuffers.tests_win32.win32.x86_7.0.xml">
 	<effectedFile id="PW"></effectedFile>
 	<effectedFile id="PWSDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -1562,7 +1562,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.core.tests.resources_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.core.tests.resources_win32.win32.x86_7.0.xml">
 	<effectedFile id="PW"></effectedFile>
 	<effectedFile id="PWSDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -1572,7 +1572,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jface.text.tests_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.jface.text.tests_win32.win32.x86_7.0.xml">
 	<effectedFile id="PW"></effectedFile>
 	<effectedFile id="PWSDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -1582,7 +1582,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.team.tests.core_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.team.tests.core_win32.win32.x86_7.0.xml">
 	<effectedFile id="PW"></effectedFile>
 	<effectedFile id="PWSDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -1592,7 +1592,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.team.tests.cvs.core_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.team.tests.cvs.core_win32.win32.x86_7.0.xml">
 	<effectedFile id="PW"></effectedFile>
 	<effectedFile id="PWSDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -1602,7 +1602,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.core.tests.net_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.core.tests.net_win32.win32.x86_7.0.xml">
 	<effectedFile id="PW"></effectedFile>
 	<effectedFile id="PWSDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -1612,7 +1612,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.text.tests_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.text.tests_win32.win32.x86_7.0.xml">
 	<effectedFile id="PW"></effectedFile>
 	<effectedFile id="PWSDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -1622,7 +1622,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ua.tests_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.ua.tests_win32.win32.x86_7.0.xml">
 	<effectedFile id="PW"></effectedFile>
 	<effectedFile id="PWSDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -1632,7 +1632,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ui.editors.tests_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.ui.editors.tests_win32.win32.x86_7.0.xml">
 	<effectedFile id="PW"></effectedFile>
 	<effectedFile id="PWSDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -1642,7 +1642,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ui.tests.navigator_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.ui.tests.navigator_win32.win32.x86_7.0.xml">
 	<effectedFile id="PW"></effectedFile>
 	<effectedFile id="PWSDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -1652,7 +1652,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ui.tests.views.properties.tabbed_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.ui.tests.views.properties.tabbed_win32.win32.x86_7.0.xml">
 	<effectedFile id="PW"></effectedFile>
 	<effectedFile id="PWSDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -1662,7 +1662,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ui.workbench.texteditor.tests_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.ui.workbench.texteditor.tests_win32.win32.x86_7.0.xml">
 	<effectedFile id="PW"></effectedFile>
 	<effectedFile id="PWSDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -1672,7 +1672,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.update.tests.core_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.update.tests.core_win32.win32.x86_7.0.xml">
 	<effectedFile id="PW"></effectedFile>
 	<effectedFile id="PWSDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -1682,7 +1682,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ltk.core.refactoring.tests_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.ltk.core.refactoring.tests_win32.win32.x86_7.0.xml">
 	<effectedFile id="PW"></effectedFile>
 	<effectedFile id="PWSDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -1692,7 +1692,7 @@
 	<effectedFile id="SW"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ltk.ui.refactoring.tests_win32.win32.x86_6.0.xml">
+<logFile name="org.eclipse.ltk.ui.refactoring.tests_win32.win32.x86_7.0.xml">
 	<effectedFile id="PW"></effectedFile>
 	<effectedFile id="PWSDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
