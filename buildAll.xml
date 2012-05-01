@@ -833,8 +833,17 @@
                 line="${buildDirectory}/${buildLabel}/eclipse-master-${buildId}.zip -d ${reposource}" />
         </exec>
 
-        <!-- This is to remove IUs handy during the build, but not really 
-            needed in final repo -->
+
+        <!-- 
+            We used to remove these IUs where, but changed to be later in the process. 
+            See the process-artifacts.xml file. 
+            TODO: we might have to adjust the "exclude" list on comparator 
+            below due to this change. 
+            See bug 377314 and bug 378137. 
+            https://bugs.eclipse.org/bugs/show_bug.cgi?id=377314
+            https://bugs.eclipse.org/bugs/show_bug.cgi?id=378137
+            This is to remove IUs handy during the build, but not really 
+            needed in final repo 
         <p2.remove.iu>
             <repository location="file://${reposource}" />
             <iu id="org.aspectj.runtime" />
@@ -845,7 +854,8 @@
             <iu id="master-equinox-weaving.feature.group" />
 
         </p2.remove.iu>
-
+        -->
+        
         <property name="tempexec" value="${buildDirectory}/tempexec" />
         <delete dir="${tempexec}" />
         <mkdir dir="${tempexec}" />
