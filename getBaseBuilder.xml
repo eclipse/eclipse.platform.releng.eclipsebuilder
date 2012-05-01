@@ -128,6 +128,8 @@
             unless="builderVersion"
             message="This script needs builderVersion to run" />
 
+        <delete dir="${WORKSPACE}/workarea" />
+        
         <cvs
             cvsroot="${cvsRoot}"
             command="checkout"

@@ -137,7 +137,7 @@
         -->
         <property
             name="testDir"
-            value="${WORKSPACE}/ws/${buildId}" />
+            value="${WORKSPACE}/workarea/${buildId}" />
         <echo message="DEBUG: testDir ${testDir}" />
         <!--
         <condition
