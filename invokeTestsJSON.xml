@@ -211,9 +211,10 @@
         <unzip
             src="${postingDirectory}/${buildId}/testresults/archive.zip"
             dest="${postingDirectory}/${buildId}/testresults" />
+        <!-- don't delete for now, to aide debugging
         <delete file="${tmpzipdir}/archive.zip" />
         <delete file="${postingDirectory}/${buildId}/testresults/archive.zip" />
-
+        -->
     </target>
     <target
         name="checkresults"
