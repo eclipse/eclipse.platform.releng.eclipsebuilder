@@ -922,6 +922,15 @@ echo "normal exit from build phase of $0"
         # probably better way. Bit of "hard coding" here.  
         # assume's ant is "on path" (which is pretty normal since 
         # we are buiding on linux. 
+# before we do anything, lets wait 5 minutes, as there appears to be 
+# a delay in putting the files on downloads, and being able to get them 
+# via http. See bug 378303. 
+# note, we sleep here in bash file, so when invokeed manuallly, 
+# there will be no waiting in invokeTestsJSON. 
+sleeptime=5
+echo "sleeping for $sleeptime minutes while downloads become available"
+sleep ${sleeptime}m
+echo " ... resuming from sleep"
         HUDSON_TOKEN=windows2012tests ant \
         -DpostingDirectory=${postingDirectory} \
         -DbuildId=${buildId} \
