@@ -3,27 +3,54 @@
     default="generateEclipseIndex"
     basedir=".">
 
-    <fail unless="buildId"   />
+    <fail unless="buildId" />
     <fail unless="eclipseStream" />
     <fail unless="buildType" />
+    <!-- 
+        TODO: make less exactly hard coded in future
+        also, check for validity using "matches" digit*\.digit*\.digit*
+    -->
+    <condition
+        property="eclipseStreamMajor"
+        value="4"
+        else="3">
+        <equals
+            arg1="${eclipseStream}"
+            arg2="4.2.0" />
+    </condition>
+                
+      <!-- 
+        TODO: make less exactly hard coded in future
+         also, check for validity using "matches" digit*\.digit*\.digit*
+      -->
+    <condition
+        property="dropsDirSegment"
+        value="drops4"
+        else="drops">
+        <equals
+            arg1="${eclipseStream}"
+            arg2="4.2.0" />
+    </condition>
 
     <property
         name="postingDirectory"
-        value="/shared/eclipse/eclipse3I/siteDir/eclipse/downloads/drops" />
-    <property 
+        value="/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}/siteDir/eclipse/downloads/${dropsDirSegment}" />
+    <property
         name="builderDir"
-        value="/shared/eclipse/eclipse3I/build/supportDir/org.eclipse.releng.eclipsebuilder" />
+        value="/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}/build/supportDir/org.eclipse.releng.eclipsebuilder" />
     <property
         name="publishingContent"
-        value="/shared/eclipse/eclipse3I/build/supportDir/org.eclipse.releng.eclipsebuilder/eclipse/publishingFiles" />
-    <property 
+        value="/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}/build/supportDir/org.eclipse.releng.eclipsebuilder/eclipse/publishingFiles" />
+    <property
         name="base.builder"
-        value="/shared/eclipse/eclipse3I/build/supportDir/org.eclipse.releng.basebuilder" />
+        value="/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}/build/supportDir/org.eclipse.releng.basebuilder" />
 
     <property
         name="buildLabel"
         value="${buildId}" />
-    <property name="eclipse.build.configs" value="${builderDir}/eclipse/buildConfigs" />
+    <property
+        name="eclipse.build.configs"
+        value="${builderDir}/eclipse/buildConfigs" />
     <property
         name="buildDirectory"
         value="${basedir}/../src" />
