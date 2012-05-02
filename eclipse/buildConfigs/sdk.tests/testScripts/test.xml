@@ -1185,11 +1185,11 @@
         <antcall target="equinoxp2" />
         <antcall target="equinoxp2ui" />
         <antcall target="pdeui" />
-        <!-- temp remove long running tests
+        
         <antcall target="jdtcompilertool" />
         <antcall target="jdtcompilerapt" />
         <antcall target="jdttext" />
-        -->
+        
         <antcall target="ant" />
         <antcall target="compare" />
         <antcall target="coreruntime" />
@@ -1223,9 +1223,9 @@
         <antcall target="filebuffers" />
         <antcall target="antui" />
         <antcall target="coretestsnet" />
-        <!-- temp remove long running tests
+        
         <antcall target="jdtapt" />
-        -->
+        
         <antcall target="pdebuild" />
         <antcall target="jdtaptpluggable" />
         <antcall target="ua" />
