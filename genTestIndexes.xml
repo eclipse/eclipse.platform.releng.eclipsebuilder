@@ -4,10 +4,9 @@
     basedir=".">
 
     <fail unless="buildId"   />
+    <fail unless="eclipseStream" />
+    <fail unless="buildType" />
 
-    <property
-        name="eclipseStream"
-        value="3.8.0" /> 
     <property
         name="postingDirectory"
         value="/shared/eclipse/eclipse3I/siteDir/eclipse/downloads/drops" />
@@ -20,9 +19,7 @@
     <property 
         name="base.builder"
         value="/shared/eclipse/eclipse3I/build/supportDir/org.eclipse.releng.basebuilder" />
-    <property 
-        name="buildType"
-        value="I" />
+
     <property
         name="buildLabel"
         value="${buildId}" />
@@ -52,11 +49,8 @@
         <ant
             antfile="${builderDir}/eclipse/helpernew.xml"
             dir="${publishingContent}"
-            target="publish">
-
-<!--
             target="generateEclipseIndex">
--->
+
             <property
                 name="isBuildTested"
                 value="true" />
