@@ -102,12 +102,13 @@ then
    exit 1
 fi 
 
-BUILDFILESTR=${BUILDFILESTR:-${buildRoot}/build/supportDir/org.eclipse.releng.eclipsebuilder/genTestIndexes.xml}
+BUILDFILE=${BUILDFILE:-${buildRoot}/build/supportDir/org.eclipse.releng.eclipsebuilder/genTestIndexes.xml}
 
+BUILDFILESTR="-f ${BUILDFILE}"
 echo
 echo " BUILDFILESTR: $BUILDFILESTR"
 
-# must provide blank, to get default?
+# provide blank, to get default
 BUILDTARGET=" "
 
 devworkspace="${buildRoot}"/workspace-updateTestResults
