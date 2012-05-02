@@ -641,11 +641,18 @@
         </ant>
 
         <!-- Replace build label in generated html files -->
-        <replace
-            dir="${postingDirectory}/${buildLabel}"
-            token="@buildlabel@"
-            value="${buildLabel}"
-            includes="**/*.php" />
+         <replace
+             dir="${postingDirectory}/${buildId}"
+             token="@buildlabel@"
+             value="${buildLabel}"
+             includes="**/*.php" />
+         <replace
+             dir="${postingDirectory}/${buildId}"
+             token="@eclipseStream@"
+             value="${eclipseStream}"
+             includes="**/*.php" />
+       
+        
 
     </target>
 
