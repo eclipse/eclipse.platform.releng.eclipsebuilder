@@ -110,7 +110,7 @@ echo " BUILDFILESTR: $BUILDFILESTR"
 
 
 devworkspace="${buildRoot}"/workspace-updateTestResults
-devArgs="-Xmx256m -Dhudson=true -DbuildId=${buildId}" 
+devArgs="-Xmx256m -Dhudson=true -DbuildType=${buildType} -DeclipseStream=${eclipseStream} -DbuildId=${buildId}" 
 
 echo
 echo "   dev script:   $0"
