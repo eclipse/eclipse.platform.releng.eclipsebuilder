@@ -40,7 +40,7 @@
 
     <property
         name="postingDirectory"
-        value="/shared/eclipse/eclipse${eclipseMajorStream}${buildType}/siteDir/eclipse/downloads/${dropsDirSegment}" />
+        value="/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}/siteDir/eclipse/downloads/${dropsDirSegment}" />
 
 
     <property
