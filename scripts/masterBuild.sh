@@ -919,9 +919,6 @@ echo "normal exit from build phase of $0"
 # if [[ "${testbuildonly}" != "true" ]] 
 #    then
 
-echo "sleeping for $sleeptime minutes while downloads become available"
-sleep ${sleeptime}m
-echo " ... resuming from sleep"
         HUDSON_TOKEN=windows2012tests ant \
         -DbuildId=${buildId} \
         -DbuildType=${buildType} \
