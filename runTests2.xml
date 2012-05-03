@@ -175,22 +175,29 @@
              https://bugs.eclipse.org/bugs/show_bug.cgi?id=378303
              -->
         <retry retrycount="20">
-            <get verbose="true" 
-                src="${archiveLocation}/eclipse-Automated-Tests-${buildId}.zip"
-                dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
-            <sleep minutes="1" />
+            <sequential>
+                <get
+                    verbose="true"
+                    src="${archiveLocation}/eclipse-Automated-Tests-${buildId}.zip"
+                    dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
+                <sleep minutes="1" />
+            </sequential>
         </retry>
         <retry retrycount="20">
-            <get
-                src="${archiveLocation}/eclipse-${buildId}-delta-pack.zip"
-                dest="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
-            <sleep minutes="1" />
+            <sequential>
+                <get
+                    src="${archiveLocation}/eclipse-${buildId}-delta-pack.zip"
+                    dest="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
+                <sleep minutes="1" />
+            </sequential>
         </retry>
         <retry retrycount="20">
-            <get
-                src="${archiveLocation}/eclipse-Automated-Tests-${buildId}.zip"
-                dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
-            <sleep minutes="1" />
+            <sequential>
+                <get
+                    src="${archiveLocation}/eclipse-Automated-Tests-${buildId}.zip"
+                    dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
+                <sleep minutes="1" />
+            </sequential>
         </retry>
     </target>
 
