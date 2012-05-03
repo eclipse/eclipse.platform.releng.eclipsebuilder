@@ -173,7 +173,7 @@
         <!-- wait for the test results to appear -->
         <echo message="Waiting for ${hudsonResultURL}." />
         <waitfor
-            maxwait="720"
+            maxwait="960"
             maxwaitunit="minute"
             checkevery="10"
             checkeveryunit="minute">
@@ -205,15 +205,16 @@
         name="finishup"
         depends="checkresults"
         if="resultAvailable">
-        <zip
-            destfile="${postingDirectory}/${buildId}/testresults/archive.zip"
-            basedir="${tmpzipdir}/archive/workarea" />
-        <unzip
-            src="${postingDirectory}/${buildId}/testresults/archive.zip"
-            dest="${postingDirectory}/${buildId}/testresults" />
-        <!-- don't delete for now, to aide debugging
-        <delete file="${tmpzipdir}/archive.zip" />
-        <delete file="${postingDirectory}/${buildId}/testresults/archive.zip" />
+
+        <exec executable="/usr/bin/rsync">
+             <arg value="--recursive"/>
+             <arg value="${tmpzipdir}/archive/ws/${buildId}/eclipse-testing/results/" />
+             <arg value="${postingDirectory}/${buildId}/testresults/" />
+         </exec>
+<!-- dont' delete for now, to aide debugging
+        <delete includeEmptyDirs="true">
+            <fileset dir="${tmpzipdir}" />
+        </delete>
         -->
     </target>
     <target
