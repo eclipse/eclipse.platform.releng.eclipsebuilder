@@ -927,7 +927,7 @@ echo "normal exit from build phase of $0"
 # via http. See bug 378303. 
 # note, we sleep here in bash file, so when invokeed manuallly, 
 # there will be no waiting in invokeTestsJSON. 
-sleeptime=5
+sleeptime=10
 echo "sleeping for $sleeptime minutes while downloads become available"
 sleep ${sleeptime}m
 echo " ... resuming from sleep"
