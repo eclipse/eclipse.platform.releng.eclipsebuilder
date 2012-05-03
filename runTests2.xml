@@ -79,7 +79,7 @@
         <property
             name="WORKSPACE"
             value="${basedir}" />
-        
+
 
         <property
             name="relengBaseBuilderDir"
@@ -124,7 +124,7 @@
         <echo message="java.home: ${java.home}" />
         <echo message="eclipseStream: ${eclipseStream}" />
         <echo message="buildType: ${buildType}" />
-        
+
         <property
             name="testDir"
             value="${WORKSPACE}/workarea/${buildId}" />
@@ -154,28 +154,49 @@
              It is intended to speed up local testing to avoid re-downloading 
              files. 
              -->
-        <condition property="archiveLocation" value="${localCache}" else="${buildURL}">
-           <isset property="localCache"/>
+        <condition
+            property="archiveLocation"
+            value="${localCache}"
+            else="${buildURL}">
+            <isset property="localCache" />
         </condition>
-        
+
         <echo message="buildURL ${buildURL}" />
         <echo message="archiveLocation ${archiveLocation}" />
     </target>
 
     <target name="platformIndependentZips">
-        <get
-            src="${archiveLocation}/eclipse-Automated-Tests-${buildId}.zip"
-            dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
-        <get
-            src="${archiveLocation}/eclipse-${buildId}-delta-pack.zip"
-            dest="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
-        <get
-            src="${archiveLocation}/eclipse-Automated-Tests-${buildId}.zip"
-            dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
-
+        <!-- note: we try these platfrom independ zips first, by coincidence 
+             so we will make the 
+             effort to "wait" if they are not ready yet. But, assuming
+             they get ready and succeed, we'll automatically assume the 
+             platfrom specific files are ready by then also and not "wait" for them 
+             other than the normal default 3 re-tries 
+             https://bugs.eclipse.org/bugs/show_bug.cgi?id=378303
+             -->
+        <retry retrycount="20">
+            <get verbose="true" 
+                src="${archiveLocation}/eclipse-Automated-Tests-${buildId}.zip"
+                dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
+            <sleep minutes="1" />
+        </retry>
+        <retry retrycount="20">
+            <get
+                src="${archiveLocation}/eclipse-${buildId}-delta-pack.zip"
+                dest="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
+            <sleep minutes="1" />
+        </retry>
+        <retry retrycount="20">
+            <get
+                src="${archiveLocation}/eclipse-Automated-Tests-${buildId}.zip"
+                dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
+            <sleep minutes="1" />
+        </retry>
     </target>
 
-    <target name="getwinzips" depends="platformIndependentZips">
+    <target
+        name="getwinzips"
+        depends="platformIndependentZips">
         <get
             src="${archiveLocation}/eclipse-SDK-${buildId}-win32.zip"
             dest="${executionDir}/eclipse-SDK-${buildId}-win32.zip" />
@@ -187,7 +208,9 @@
             dest="${executionDir}/eclipse-platform-3.7.1-win32.zip" />
     </target>
 
-    <target name="getlinzips" depends="platformIndependentZips">
+    <target
+        name="getlinzips"
+        depends="platformIndependentZips">
         <get
             src="${archiveLocation}/eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz"
             dest="${executionDir}/eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz" />
@@ -199,7 +222,9 @@
             dest="${executionDir}/eclipse-platform-3.7.1-linux-gtk-x86_64.tar.gz" />
     </target>
 
-    <target name="getlinzips32" depends="platformIndependentZips">
+    <target
+        name="getlinzips32"
+        depends="platformIndependentZips">
         <get
             src="${archiveLocation}/eclipse-SDK-${buildId}-linux-gtk.tar.gz"
             dest="${executionDir}/eclipse-SDK-${buildId}-linux-gtk.tar.gz" />
@@ -211,7 +236,9 @@
             dest="${executionDir}/eclipse-platform-3.7.1-linux-gtk-x86_64.tar.gz" />
     </target>
 
-    <target name="getmaczips" depends="platformIndependentZips">
+    <target
+        name="getmaczips"
+        depends="platformIndependentZips">
         <get
             src="${archiveLocation}/eclipse-SDK-${buildId}-macosx-cocoa.tar.gz"
             dest="${executionDir}/eclipse-SDK-${buildId}-macosx-cocoa.tar.gz" />
