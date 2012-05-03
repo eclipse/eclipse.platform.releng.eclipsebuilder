@@ -17,6 +17,30 @@
     wget - -no-verbose -O invokeTestsJSON.xml http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/invokeTestsJSON.xml?h=master 2>&1;
     
     -->
+    <!-- 
+        TODO: make less exactly hard coded in future
+        also, check for validity using "matches" digit*\.digit*\.digit*
+    -->
+    <condition
+        property="dropsDirSegment"
+        value="drops4"
+        else="drops">
+        <equals
+            arg1="${eclipseStream}"
+            arg2="4.2.0" />
+    </condition>
+    <condition
+        property="eclipseStreamMajor"
+        value="4"
+        else="3">
+        <equals
+            arg1="${eclipseStream}"
+            arg2="4.2.0" />
+    </condition>
+
+    <property
+        name="postingDirectory"
+        value="/shared/eclipse/eclipse${eclipseMajorStream}${buildType}/siteDir/eclipse/downloads/${dropsDirSegment}" />
 
 
     <property
@@ -207,10 +231,10 @@
         if="resultAvailable">
 
         <exec executable="/usr/bin/rsync">
-             <arg value="--recursive"/>
-             <arg value="${tmpzipdir}/archive/ws/${buildId}/eclipse-testing/results/" />
-             <arg value="${postingDirectory}/${buildId}/testresults/" />
-         </exec>
+            <arg value="--recursive" />
+            <arg value="${tmpzipdir}/archive/ws/${buildId}/eclipse-testing/results/" />
+            <arg value="${postingDirectory}/${buildId}/testresults/" />
+        </exec>
 <!-- dont' delete for now, to aide debugging
         <delete includeEmptyDirs="true">
             <fileset dir="${tmpzipdir}" />

@@ -932,7 +932,6 @@ echo "sleeping for $sleeptime minutes while downloads become available"
 sleep ${sleeptime}m
 echo " ... resuming from sleep"
         HUDSON_TOKEN=windows2012tests ant \
-        -DpostingDirectory=${postingDirectory} \
         -DbuildId=${buildId} \
         -DbuildType=${buildType} \
         -DeclipseStream=${eclipseStream} \
