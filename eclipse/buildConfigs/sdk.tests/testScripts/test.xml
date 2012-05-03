@@ -1196,27 +1196,27 @@
         <antcall target="coreresources" />
         <antcall target="osgi" />
         <antcall target="coreexpressions" />
-        <!-- temp remove long running tests
+        
         <antcall target="teamcore" />
-        -->
-	    <!-- temp remove long running tests
-		<antcall target="jdtcoreperf" />
-		<antcall target="jdtcorebuilder" />
-		<antcall target="jdtcorecompiler" />
-		-->
+       
+	 
+        <antcall target="jdtcoreperf" />
+        <antcall target="jdtcorebuilder" />
+        <antcall target="jdtcorecompiler" />
+	
         <antcall target="uiperformance" />
         <antcall target="uieditors" />
         <antcall target="uinavigator" />
         <antcall target="uiworkbenchtexteditor" />
         <antcall target="uircp" />
         <antcall target="uiviews" />
-        <!--
+     
         <antcall target="jdtdebug" />
         <antcall target="jdtui" />
         <antcall target="jdtuirefactoring" />
         <antcall target="ltkuirefactoringtests" />
         <antcall target="ltkcorerefactoringtests" />
-        -->
+  
         <antcall target="text" />
         <antcall target="jface" />
         <antcall target="jfacedatabinding" />
@@ -1234,17 +1234,17 @@
         <antcall target="equinoxsecurity" />
         <antcall target="search" />
         <antcall target="pdeds" />
-        <!-- temp remove long running tests
+       
         <antcall target="jdtcoremodel" />
-        -->
+     
         <antcall target="uadoc" />
         <antcall target="debug" />
         <antcall target="ui" />
         <antcall target="relEng" />
         <antcall target="swt" />
-        <!-- temp remove long running tests
+        
         <antcall target="teamcvs" />
-         -->
+      
         <antcall target="equinoxds" />
         <antcall target="equinoxp2discovery" />
         <antcall target="bidi" />
