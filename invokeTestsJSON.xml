@@ -232,7 +232,7 @@
 
         <exec executable="/usr/bin/rsync">
             <arg value="--recursive" />
-            <arg value="${tmpzipdir}/archive/workara/${buildId}/eclipse-testing/results/" />
+            <arg value="${tmpzipdir}/archive/workarea/${buildId}/eclipse-testing/results/" />
             <arg value="${postingDirectory}/${buildId}/testresults/" />
         </exec>
 <!-- dont' delete for now, to aide debugging
