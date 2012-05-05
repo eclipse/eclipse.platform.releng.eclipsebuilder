@@ -471,11 +471,19 @@
         </exec>
         <delete dir="${buildDirectory}/maps" />
         <mkdir dir="${buildDirectory}/maps" />
-        <!-- why not copy from common repo? why tar? <exec failonerror="true" 
-            executable="git" dir="${buildDirectory}/maps" output="${buildDirectory}/maps/maps.tar"> 
-            <arg line="archive - -format=tar - -remote=${mapsGitRepo}/eclipse.platform.releng.maps 
-            ${mapVersionTag} org.eclipse.releng" /> </exec> <untar overwrite="true" src="${buildDirectory}/maps/maps.tar" 
-            dest="${buildDirectory}/maps" /> -->
+        <!-- why not copy from common repo? why tar? 
+        <exec failonerror="true" 
+            executable="git" 
+            dir="${buildDirectory}/maps" 
+            output="${buildDirectory}/maps/maps.tar"> 
+            <arg line="archive 
+                 - -format=tar 
+                 - -remote=${mapsGitRepo}/eclipse.platform.releng.maps 
+                    ${mapVersionTag} org.eclipse.releng" /> 
+         </exec> 
+         <untar overwrite="true" src="${buildDirectory}/maps/maps.tar" 
+            dest="${buildDirectory}/maps" /> 
+         -->
         <copy
             overwrite="true"
             failonerror="true"
@@ -489,13 +497,6 @@
             name="mapProjectFetched"
             value="true" />
     </target>
-
-    <target name="checkLocalMaps">
-        <available
-            property="mapsLocal"
-            file="${buildDirectory}/maps" />
-    </target>
-
 
     <target name="buildECFMasterFeature">
         <ant
