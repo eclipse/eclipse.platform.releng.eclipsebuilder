@@ -16,9 +16,9 @@ vmcmd=${vmcmd:-/shared/common/jdk-1.6.x86_64/jre/bin/java}
 
 echo "vmcmd: $vmcmd"
 
-export MOZILLA_FIVE_HOME=${MOZILLA_FIVE_HOME:-/usr/lib/xulrunner-1.9.0.19}
+#export MOZILLA_FIVE_HOME=${MOZILLA_FIVE_HOME:-/usr/lib/xulrunner-1.9.0.19}
 
-echo "MOZILLA_FIVE_HOME: ${MOZILLA_FIVE_HOME}"
+#echo "MOZILLA_FIVE_HOME: ${MOZILLA_FIVE_HOME}"
 
 eclipseArch=${eclipseArch:-x86_64}
 
