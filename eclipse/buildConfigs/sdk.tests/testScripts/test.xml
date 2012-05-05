@@ -1182,6 +1182,10 @@
 
 
     <target name="all">
+        <antcall target="relEng" />
+
+        <!-- 
+        temporarily try only releng tests 
         <antcall target="equinoxp2" />
         <antcall target="equinoxp2ui" />
         <antcall target="pdeui" />
@@ -1240,7 +1244,6 @@
         <antcall target="uadoc" />
         <antcall target="debug" />
         <antcall target="ui" />
-        <antcall target="relEng" />
         <antcall target="swt" />
         
         <antcall target="teamcvs" />
@@ -1248,7 +1251,7 @@
         <antcall target="equinoxds" />
         <antcall target="equinoxp2discovery" />
         <antcall target="bidi" />
-
+      --> 
     </target>
 </project>
 
