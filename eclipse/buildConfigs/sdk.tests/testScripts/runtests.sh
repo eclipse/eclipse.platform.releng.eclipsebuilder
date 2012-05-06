@@ -102,7 +102,7 @@ then
     # run tests
     launcher=`ls eclipse/plugins/org.eclipse.equinox.launcher_*.jar`
     # -Dtimeout=1800000
-    $vmcmd  -Dosgi.os=$os -Dosgi.ws=$ws -Dosgi.arch=$arch -jar $launcher -data workspace -application org.eclipse.ant.core.antRunner -file ${pwd}/test.xml $tests -Dws=$ws -Dos=$os -Darch=$arch -D$installmode=true $properties -logger org.apache.tools.ant.DefaultLogger
+    $vmcmd  -Dosgi.os=$os -Dosgi.ws=$ws -Dosgi.arch=$arch -jar $launcher -data workspace -application org.eclipse.ant.core.antRunner -file ${PWD}/test.xml $tests -Dws=$ws -Dos=$os -Darch=$arch -D$installmode=true $properties -logger org.apache.tools.ant.DefaultLogger
 
 else
     # display message to user if os, ws and arch are invalid
