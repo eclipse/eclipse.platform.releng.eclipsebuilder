@@ -1004,9 +1004,18 @@
         <property
             name="current_location"
             value="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-win32.zip" />
+        <!-- 
+             fail fast if apiTests variables are not defined, since recently moved to 
+             stream specific properties 
+        -->
+        <fail unless="apiTestsPreviousBaseDLBaseURL" />
+        <fail unless="apiTestsPreviousBaseWin32Filename" />
+        <fail unless="apiTestsPreviousRefererenceBaseDLBaseURL" />
+        <fail unless="apiTestsPreviousRefererenceWin32Filename" />
+        
         <property
             name="reference_location"
-            value="${reference}/eclipse-SDK-3.7-win32.zip" />
+            value="${reference}/${apiTestsPreviousBaseWin32Filename}" />
         <exec
             executable="/usr/bin/wget"
             dir="${reference}"
@@ -1014,7 +1023,7 @@
             failonerror="false"
             os="Linux">
             <arg
-                line="-q -O  ${reference_location} http://${localmirror}/eclipse/downloads/drops/R-3.7-201106131736/eclipse-SDK-3.7-win32.zip" />
+                line="-q -O  ${reference_location} ${apiTestsPreviousBaseDLBaseURL}/${apiTestsPreviousBaseWin32Filename}" />
         </exec>
         <property
             name="report"
@@ -1074,7 +1083,7 @@
             value="${report}/apitoolsverifications/xml" />
         <property
             name="previous_reference_location"
-            value="${reference}/eclipse-SDK-3.7.1-win32.zip" />
+            value="${reference}/${apiTestsPreviousRefererenceWin32Filename}" />
         <exec
             executable="/usr/bin/wget"
             dir="${reference}"
@@ -1082,7 +1091,7 @@
             failonerror="false"
             os="Linux">
             <arg
-                line="-q -O  ${previous_reference_location} http://${localmirror}/eclipse/downloads/drops/R-3.7.1-201109091335/eclipse-SDK-3.7.1-win32.zip" />
+                line="-q -O  ${previous_reference_location} ${apiTestsPreviousRefererenceBaseDLBaseURL}/${apiTestsPreviousRefererenceWin32Filename}" />
         </exec>
         <apitooling.analysis
             baseline="${previous_reference_location}"
