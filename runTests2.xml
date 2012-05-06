@@ -99,39 +99,6 @@
             TODO: make less exactly hard coded in future
             also, check for validity using "matches" digit*\.digit*\.digit*
         -->
-        <condition
-            property="dropsDirSegment"
-            value="drops4"
-            else="drops">
-            <equals
-                arg1="${eclipseStream}"
-                arg2="4.2.0" />
-        </condition>
-        <condition
-            property="updateSiteSegment"
-            value="4.2"
-            else="3.8">
-            <equals
-                arg1="${eclipseStream}"
-                arg2="4.2.0" />
-        </condition>
-
-        <condition
-            property="eclipseStreamMajor"
-            value="4"
-            else="3">
-            <equals
-                arg1="${eclipseStream}"
-                arg2="4.2.0" />
-        </condition>
-        <condition
-            property="eclipseStreamMinor"
-            value="2"
-            else="8">
-            <equals
-                arg1="${eclipseStream}"
-                arg2="4.2.0" />
-        </condition>
         <echo message="hudson: ${hudson}" />
         <echo message="WORKSPACE: ${WORKSPACE}" />
         <echo message="buildId: ${buildId}" />
@@ -562,6 +529,44 @@
             <equals
                 arg1="${hudson}"
                 arg2="true" />
+        </condition>
+        
+        <!-- 
+             these condidtions used to be in "init". Conceptually seems right to be in "stream 
+             specific" init (since their value depends on stream) but may have side effects?)
+         -->
+        <condition
+            property="dropsDirSegment"
+            value="drops4"
+            else="drops">
+            <equals
+                arg1="${eclipseStream}"
+                arg2="4.2.0" />
+        </condition>
+        <condition
+            property="updateSiteSegment"
+            value="4.2"
+            else="3.8">
+            <equals
+                arg1="${eclipseStream}"
+                arg2="4.2.0" />
+        </condition>
+
+        <condition
+            property="eclipseStreamMajor"
+            value="4"
+            else="3">
+            <equals
+                arg1="${eclipseStream}"
+                arg2="4.2.0" />
+        </condition>
+        <condition
+            property="eclipseStreamMinor"
+            value="2"
+            else="8">
+            <equals
+                arg1="${eclipseStream}"
+                arg2="4.2.0" />
         </condition>
 
 
