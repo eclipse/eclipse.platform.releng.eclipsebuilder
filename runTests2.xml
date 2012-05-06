@@ -116,6 +116,22 @@
                 arg2="4.2.0" />
         </condition>
 
+        <condition
+            property="eclipseStreamMajor"
+            value="4"
+            else="3">
+            <equals
+                arg1="${eclipseStream}"
+                arg2="4.2.0" />
+        </condition>
+        <condition
+            property="eclipseStreamMinor"
+            value="2"
+            else="8">
+            <equals
+                arg1="${eclipseStream}"
+                arg2="4.2.0" />
+        </condition>
         <echo message="hudson: ${hudson}" />
         <echo message="WORKSPACE: ${WORKSPACE}" />
         <echo message="buildId: ${buildId}" />
