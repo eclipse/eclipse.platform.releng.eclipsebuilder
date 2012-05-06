@@ -522,7 +522,7 @@
     <target
         name="streamSpecificInit"
         unless="streamSpecificInitComplete"
-        depends="getMapProject">
+        depends="getMapProject,hudson-init">
         <echo message="DEBUG: executing streamSpecificInit" />
 
 
@@ -532,7 +532,7 @@
           -->
         <property
             name="mapsProject"
-            value="${WORKSPACE}/maps/org.eclipse.releng" />
+            value="${WORKSPACE}/workarea/maps/org.eclipse.releng" />
         <property
             name="configurationLocation"
             value="${mapsProject}/configuration" />
@@ -567,15 +567,17 @@
                 <!-- TODO: semi hard code for now, figure out variables later maybe 
                     do away with "supportDir" segment? maybe call 'base' and other variables 
                     'eclipsebulder.base'? -->
+
         <property
-            name="localbuilderDir"
-            value="${base}/supportDir" />
+            name="eclipseBuilderDir"
+            value="${WORKSPACE}/org.eclipse.releng.eclipsebuilder" />
+
         <copy
             verbose="true"
             failonerror="true"
-            todir="${localbuilderDir}/org.eclipse.releng.eclipsebuilder"
+            todir="${eclipseBuilderDir}"
             overwrite="true">
-            <fileset dir="${localbuilderDir}/src/maps/org.eclipse.releng/configuration/eclipseBuilderOverlays/">
+            <fileset dir="${configurationLocation}/eclipseBuilderOverlays/">
                 <include name="**" />
             </fileset>
         </copy>
@@ -584,23 +586,25 @@
                     stuff that depends on exact version numbers -->
         <replace
             summary="true"
-            dir="${localbuilderDir}/org.eclipse.releng.eclipsebuilder"
+            dir="${eclipseBuilderDir}"
             token="@eclipseStream@"
             value="${eclipseStream}" />
         <replace
             summary="true"
-            dir="${localbuilderDir}/org.eclipse.releng.eclipsebuilder"
+            dir="${eclipseBuilderDir}"
             token="@eclipseStreamMajor@"
             value="${eclipseStreamMajor}" />
         <replace
             summary="true"
-            dir="${localbuilderDir}/org.eclipse.releng.eclipsebuilder"
+            dir="${eclipseBuilderDir}"
             token="@eclipseStreamMinor@"
             value="${eclipseStreamMinor}" />
                 <!-- seems unlikely we'd ever need this all by itself, and not just 
-                    use eclipseStream, which should be all three fields <replace summary="true" 
-                    dir="${localbuilderDir}/org.eclipse.releng.eclipsebuilder" token="@eclipseStreamService@" 
-                    value="${eclipseStreamService}" /> -->
+                    use eclipseStream, which should be all three fields 
+                    <replace summary="true" 
+                      dir="${eclipseBuilderDir}" token="@eclipseStreamService@" 
+                      value="${eclipseStreamService}" /> 
+                    -->
 
                 <!-- no need to re-init the properties, once done (in this scope) 
                     so no one else can ever set streamSpecificInitComplete properties. It is 
