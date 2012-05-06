@@ -508,7 +508,9 @@
         depends="getMapProject,hudson-init">
         <echo message="DEBUG: executing streamSpecificInit" />
 
-
+        <fail
+            unless="eclipseStream"
+            message="eclipseStream not defined" />
          <!-- 
               mapsProject is the "top" of the maps project after it has been 
               checked out to the local working area. 
