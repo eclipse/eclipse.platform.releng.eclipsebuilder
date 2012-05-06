@@ -67,7 +67,7 @@
         <property
             name="WORKSPACE"
             value="${hudson.WORKSPACE}" />
-
+        <echo message="Found we are running in hudson and set workspace to ${WORKSPACE}" />
 
     </target>
     <target
@@ -584,7 +584,7 @@
         <loadproperties srcFile="${configurationLocation}/streamSpecific-build.properties" />
 
         <!-- echo a few typically expected properties, to make sure getting right file -->
-        
+
         <echo message="streamSpecificPropertiesTitle: ${streamSpecificPropertiesTitle}" />
         <echo message="p2repopreviousR: ${p2repopreviousR}" />
         <echo message="apiTestsPreviousBaseDLBaseURL: ${apiTestsPreviousBaseDLBaseURL}" />
@@ -649,6 +649,7 @@
         -->
     <target
         name="getMapProject"
+        depends="hudson-init"
         unless="mapProjectFetched">
                     <!-- fail fast if these reuqired variables have not been defined 
                         yet -->
@@ -678,6 +679,11 @@
             name="mapsGitRepo"
             value="${WORKSPACE}/workarea/commonrepo" />
         <mkdir dir="${mapsGitRepo}" />
+
+        <echo message="WORKSPACE: ${WORKSPACE}" />
+        <echo message="mapsGitRepo: ${mapsGitRepo}" />
+
+
         <exec
             failonerror="true"
             executable="git"

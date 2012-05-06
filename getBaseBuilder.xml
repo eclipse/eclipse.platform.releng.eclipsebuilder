@@ -131,7 +131,6 @@
             message="This script needs builderVersion to run" />
 
         <!-- temp, clean up old use of 'ws' -->
-        <delete dir="${WORKSPACE}/ws" />
         <delete dir="${WORKSPACE}/workarea" />
         
         <cvs
