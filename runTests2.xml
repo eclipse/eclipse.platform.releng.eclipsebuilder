@@ -583,6 +583,13 @@
                     "earlier"? Made it own task for depends on clauses? -->
         <loadproperties srcFile="${configurationLocation}/streamSpecific-build.properties" />
 
+        <!-- echo a few typically expected properties, to make sure getting right file -->
+        
+        <echo message="streamSpecificPropertiesTitle: ${streamSpecificPropertiesTitle}" />
+        <echo message="p2repopreviousR: ${p2repopreviousR}" />
+        <echo message="apiTestsPreviousBaseDLBaseURL: ${apiTestsPreviousBaseDLBaseURL}" />
+        <echo message="apiTestsPreviousBaseWin32Filename: ${apiTestsPreviousBaseWin32Filename}" />
+
                 <!-- now that we have maps (and we already have eclipseBuider from 
                     masterBuild.sh, before calling buildAll.xml, then now its time to "overlay" 
                     the stream specific files of eclipseBuild that are in the maps project, in 
