@@ -72,7 +72,7 @@
     </target>
     <target
         name="init"
-        depends="hudson-init">
+        depends="hudson-init, streamSpecificInit">
 
         <!-- if not otherwise set, such as by hudson-init, 
              assume "current directory" for WORKSPACE -->
@@ -178,7 +178,8 @@
             <sequential>
                 <sleep minutes="1" />
                 <get
-                    verbose="true" httpusecaches="false" 
+                    verbose="true"
+                    httpusecaches="false"
                     src="${archiveLocation}/eclipse-Automated-Tests-${buildId}.zip"
                     dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
             </sequential>
@@ -186,15 +187,17 @@
         <retry retrycount="20">
             <sequential>
                 <sleep minutes="1" />
-                <get httpusecaches="false"
+                <get
+                    httpusecaches="false"
                     src="${archiveLocation}/eclipse-${buildId}-delta-pack.zip"
                     dest="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
             </sequential>
         </retry>
         <retry retrycount="20">
             <sequential>
-              <sleep minutes="1" />
-              <get httpusecaches="false"
+                <sleep minutes="1" />
+                <get
+                    httpusecaches="false"
                     src="${archiveLocation}/eclipse-Automated-Tests-${buildId}.zip"
                     dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
             </sequential>
@@ -499,6 +502,176 @@
         <ant antfile="${test.xml}">
         </ant>
 
-    </target>
 
+    </target>
+            
+            <!-- 
+                 This streamSpecificInit target was copied from buildAll.xml and does about exactly the same thing, 
+                 purposely left close to original, though not as much is actually required.
+                 TODO: in future, pull out into one file, and reuse
+                 
+                 Its purpose, here, is entirely to pick up "stream specific" stings from the releng maps 
+                 project, 'configuration' folder. 
+                 
+                 Important note: here, unlike the one in buildAll.xml, we assume the maps have already 
+                 been checked out, say by hudson, as a peer of eclipseBuilder, rather then us doing
+                 the checkout here, ourselves. Not sure which is easier, but current means hudson job 
+                 has to be set up with two git checkout steps, right version for maps (for 3.8 vs 4.2).
+                 
+             -->
+    <target
+        name="streamSpecificInit"
+        unless="streamSpecificInitComplete"
+            depends="getMapProject">
+        <echo message="DEBUG: executing streamSpecificInit" />
+
+
+                <!-- mapsProject is the "top" of the maps project after it has been 
+                    checked out to the local working area (buildDirectory). TODO: its actually 
+                    hard coded is scores of places as "${buildDirectory}/maps/org.eclipse.releng" 
+                    but closest existing variable I could find what 'mapsRoot' which is ${buildDirectory}/maps/org.eclipse.releng/maps 
+                    so that (and others) should eventually be refactored to something like mapsRoot 
+                    = ${mapsProject}/maps" -->
+        <property
+            name="mapsProject"
+            value="${buildDirectory}/maps/org.eclipse.releng" />
+        <property
+            name="configurationLocation"
+            value="${mapsProject}/configuration" />
+
+                <!-- TODO: I moved (copied) this from init, probably only needs to 
+                    be set once, but, needs to be set before loading the repo properties -->
+                <!--set local mirror location depending if hudson is running -->
+        <condition
+            property="localmirror"
+            value="download.eclipse.org">
+            <equals
+                arg1="${hudson}"
+                arg2="true" />
+        </condition>
+
+
+                <!-- bug 376217: repos.properties is one of the files moved from 
+                    eclispebuild to maps project and into a common file, streamSpecific-build.properties -->
+        <replace
+            token="@localmirror@"
+            file="${configurationLocation}/streamSpecific-build.properties"
+            value="${localmirror}" />
+                <!-- The reading/loading of the these streamSpecific-build.properties 
+                    is critical to several stream specific areas of code, so may have to be moved 
+                    "earlier"? Made it own task for depends on clauses? -->
+        <loadproperties srcFile="${configurationLocation}/streamSpecific-build.properties" />
+
+                <!-- now that we have maps (and we already have eclipseBuider from 
+                    masterBuild.sh, before calling buildAll.xml, then now its time to "overlay" 
+                    the stream specific files of eclipseBuild that are in the maps project, in 
+                    the folder named /org.eclipse.releng/configuration/eclipseBuilderOverlays -->
+                <!-- TODO: semi hard code for now, figure out variables later maybe 
+                    do away with "supportDir" segment? maybe call 'base' and other variables 
+                    'eclipsebulder.base'? -->
+        <property
+            name="localbuilderDir"
+            value="${base}/supportDir" />
+        <copy
+            verbose="true"
+            failonerror="true"
+            todir="${localbuilderDir}/org.eclipse.releng.eclipsebuilder"
+            overwrite="true">
+            <fileset dir="${localbuilderDir}/src/maps/org.eclipse.releng/configuration/eclipseBuilderOverlays/">
+                <include name="**" />
+            </fileset>
+        </copy>
+
+                <!-- now that we've done that little merge, let's "fix up" eclipseBuild 
+                    stuff that depends on exact version numbers -->
+        <replace
+            summary="true"
+            dir="${localbuilderDir}/org.eclipse.releng.eclipsebuilder"
+            token="@eclipseStream@"
+            value="${eclipseStream}" />
+        <replace
+            summary="true"
+            dir="${localbuilderDir}/org.eclipse.releng.eclipsebuilder"
+            token="@eclipseStreamMajor@"
+            value="${eclipseStreamMajor}" />
+        <replace
+            summary="true"
+            dir="${localbuilderDir}/org.eclipse.releng.eclipsebuilder"
+            token="@eclipseStreamMinor@"
+            value="${eclipseStreamMinor}" />
+                <!-- seems unlikely we'd ever need this all by itself, and not just 
+                    use eclipseStream, which should be all three fields <replace summary="true" 
+                    dir="${localbuilderDir}/org.eclipse.releng.eclipsebuilder" token="@eclipseStreamService@" 
+                    value="${eclipseStreamService}" /> -->
+
+                <!-- no need to re-init the properties, once done (in this scope) 
+                    so no one else can ever set streamSpecificInitComplete properties. It is 
+                    our control property -->
+        <property
+            name="streamSpecificInitComplete"
+            value="true" />
+    </target>
+        <!-- 
+            note: no check for "if maps local". Here we want to be sure to get 
+            a fresh copy, but only once 
+        -->
+    <target
+        name="getMapProject"
+        unless="mapProjectFetched">
+                    <!-- fail fast if these reuqired variables have not been defined 
+                        yet -->
+        <fail
+            unless="WORKSPACE"
+            message="WORKSPACE not defined" />
+
+        <fail
+            unless="eclipseStream"
+            message="eclipseStream not defined" />
+
+             <!-- TODO: maybe make smarter in future? get from property file or something? -->
+        <condition
+            property="mapVersionTag"
+            value="R4_HEAD"
+            else="master">
+            <equals
+                arg1="${eclipseStream}"
+                arg2="4.2.0" />
+        </condition>
+
+        <property
+            name="commonrepo"
+            value="git://git.eclipse.org/gitroot/platform/eclipse.platform.releng.maps" />
+
+        <property
+            name="mapsGitRepo"
+            value="${WORKSPACE}/workarea/commonrepo" />
+        <mkdir dir="${mapsGitRepo}" />
+        <exec
+            failonerror="true"
+            executable="git"
+            dir="${mapsGitRepo}">
+            <arg line="clone ${commonrepo}" />
+        </exec>
+        <exec
+            failonerror="true"
+            executable="git"
+            dir="${mapsGitRepo}/eclipse.platform.releng.maps">
+            <arg line="checkout ${mapVersionTag}" />
+        </exec>
+        <delete dir="${WORKSPACE}/workarea/maps" />
+        <mkdir dir="${WORKSPACE}/workarea/maps" />
+
+        <copy
+            overwrite="true"
+            failonerror="true"
+            verbose="true"
+            todir="${WORKSPACE}/workarea/maps">
+            <fileset dir="${mapsGitRepo}/eclipse.platform.releng.maps">
+                <include name="**" />
+            </fileset>
+        </copy>
+        <property
+            name="mapProjectFetched"
+            value="true" />
+    </target>
 </project>
