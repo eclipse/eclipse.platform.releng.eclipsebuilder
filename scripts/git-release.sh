@@ -13,37 +13,6 @@
 
 echo "DEBUG: current directory as entering git-release.sh ${PWD}"
 
-#default values, normally overridden by command line
-
-# TODO: we should fail or other wise 
-# handle in a smarter way? 
-# 
-# For now Commenting out all, to make errors more visible as I try to get N builds working
-# (though, admittedly, will make "stand along" use not work)
-
-#buildRoot=/shared/eclipse/eclipse4
-#mapVersionTag=R4_HEAD
-#buildType=I
-
-# normally, timestamp is passed in on command line, and 
-# date and time computed from it. 
-# here we do the reverse, for when running "standalone", 
-# so we can compute "now". 
-#date=$(date +%Y%m%d)
-#time=$(date +%H%M)
-#timestamp=$date$time
-# shoud normally be passed in, but this matches what is set
-# in masterBuild.sh, to aide "standalone" operation.
-#gitCache=$buildRoot/build/supportDir/gitCache
-
-# for safety, default is false ... must be explicit from caller to tag
-# or hand-edited if runnning standalone.
-#tag=false
-
-# default, but really caller should specify
-# This value does not match "masterBuild.sh", but shouldn't matter.
-#submissionReportFilePath=$buildRoot/report.txt
-
 
 # constants, per project. 
 # should not have to change these 
