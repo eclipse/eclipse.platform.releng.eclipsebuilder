@@ -10,12 +10,14 @@
 	</target>
 
 	<target name="build" depends="init">
-		<delete dir="${featureTemp}" />
+	    <echo message="DEBUG: echoproperties at beginning of deltapack (after init)" />
+	    <echoproperties />
+		<delete verbose="true" dir="${featureTemp}" />
 		<mkdir dir="${featureTemp}" />
-		<delete dir="${featureTemp2}" />
+		<delete verbose="true" dir="${featureTemp2}" />
 		<mkdir dir="${featureTemp2}" />
 		<!--need to change slicing options to only include platform specific bits -->
-		<p2.mirror source="file://${buildRepo}">
+		<p2.mirror source="file://${buildRepo}" log="deltapackmirrorlog.txt">
 			<destination kind="metadata" location="file://${featureTemp}" name="RCP Delta Pack Repo" format="file://${buildRepo}" />
 			<destination kind="artifact" location="file://${featureTemp}" name="RCP Delta Pack Repo" format="file://${buildRepo}" />
 			<iu id="org.eclipse.platform.feature.group" version="" />
@@ -45,7 +47,7 @@
 		<p2.repo2runnable destination="${featureTemp2}/eclipse">
 			<source dir="${featureTempRoot}" includes="${featureTempDir}" />
 		</p2.repo2runnable>
-		<delete>
+		<delete verbose="true">
 			<fileset dir="${featureTemp2}/eclipse" includes="*.jar" />
 			<fileset dir="${featureTemp2}/eclipse" includes="*.xml" />
 		</delete>
