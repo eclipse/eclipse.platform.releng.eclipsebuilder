@@ -94,6 +94,10 @@ function startsWithDropPrefix($dirName, $dropPrefix)
     return $result;
 }
 function runTestBoxes($buildName) {
+    // hard code for now the tests ran on one box
+    // https://bugs.eclipse.org/bugs/show_bug.cgi?id=378706
+    return 1;
+
     global $subdirDrops;
     $testBoxes=array("linux", "macosx", "win32");
     $length=count($testBoxes);
@@ -142,7 +146,10 @@ function printBuildColumns($fileName, $parts) {
     //$build_done=file_exists("$dropDir/checksum/swt-$buildName-win32-wce_ppc-arm-j2me.zip.md5");
     $build_done=file_exists("$dropDir/eclipse-SDK-$buildName-linux-gtk.tar.gz");
     echo "<td valign=\"baseline\">\n";
-    if ($build_done) {
+    // hard code for now the build is done
+    // https://bugs.eclipse.org/bugs/show_bug.cgi?id=378706
+    // if ($build_done) {
+    if (true) {
         $boxes=runTestBoxes($fileName);
         echo "<a href=\"$dropDir/\"><img border=\"0\" src=\"../images/build_done.gif\" title=\"Build is available\" alt=\"Build is available\" /></a>\n";
         //$testResults="$dropDir/testresults/xml";
@@ -150,9 +157,9 @@ function printBuildColumns($fileName, $parts) {
         switch ($boxes) {
         case 0:
             // if more than 8 hours then consider that the regression tests did not start
-            // if ($diff > 480) {
+            //if ($diff > 480) {
             // for now, hard code to "0" since we are not reunning tests
-            if ($diff > 0) {
+            if ($diff > 0) { 
                 echo "<img src=\"../images/caution.gif\" title=\"Regression tests did not run!\" alt=\"Regression tests did not run!\" />\n";
             } else {
                 echo "<img src=\"../images/runtests.gif\" title=\"Regression tests are running...\" alt=\"Regression tests are running...\" />\n";
@@ -203,7 +210,7 @@ function printBuildColumns($fileName, $parts) {
         if ($diff > 300) {
             echo "<img src=\"../images/build_failed.gif\" title=\"Build failed!\" alt=\"Build failed!\" />\n";
         } else {
-            echo "<img src=\"../images/build_progress.gif\" title=\"Build is in progress...\" alt=\"Build failed!\"/>\n";
+            echo "<img src=\"../images/build_progress.gif\" title=\"Build is in progress...\" alt=\"Build is in progress.\"/>\n";
         }
     }
     echo "</td>\n";
