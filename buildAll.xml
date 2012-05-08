@@ -1233,13 +1233,13 @@
             token="@qualifier@"
             file="${buildDirectory}/features/org.eclipse.pde.build.product.feature/product/pdebuild.product"
             value="${buildId}" />
-        <!-- https://bugs.eclipse.org/bugs/show_bug.cgi?id=368488 
+        
         <replace 
             token="@qualifier@" file="${eclipse.build.configs}/rcp/rcp.product" value="${buildId}" 
             /> 
         <replace token="@qualifier@" file="${eclipse.build.configs}/rcp.sdk/rcp.product" 
             value="${buildId}" /> 
-        -->
+       
         <replace
             token="@qualifier@"
             file="${eclipse.build.configs}/rcp.config/feature.xml"
