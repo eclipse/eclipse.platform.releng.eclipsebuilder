@@ -242,8 +242,10 @@
 
     <target
         name="fetch_org.eclipse.swt.win32.wce_ppc.arm"
-        unless="org.eclipse.swt.win32.wce_ppc.arm.exists">
+        unless="org.eclipse.swt.win32.wce_ppc.arm.exists"
+        depends="checkSWTwce">
         <!--need to check out -->
+        <echo message="DEBUG: ${buildDirectory}/plugins/org.eclipse.swt.win32.wce_ppc.arm did not exist, so will fetch now" />
         <property
             name="featureOnly"
             value="false" />
@@ -266,6 +268,10 @@
         </ant>
     </target>
 
+    <target name="checkSWTwce" if="org.eclipse.swt.win32.wce_ppc.arm.exists">
+        <echo message="DEBUG: ${buildDirectory}/plugins/org.eclipse.swt.win32.wce_ppc.arm already exists, so will not be re-fetched" />
+    </target>
+    
     <target name="packageSwtStandalone">
         <condition
             property="downloadFile"
@@ -642,7 +648,7 @@
 
         <!-- Replace build label in generated html files -->
          <replace
-             dir="${postingDirectory}/${buildId}"
+            dir="${postingDirectory}/${buildLabel}"
              token="@buildlabel@"
              value="${buildLabel}"
              includes="**/*.php" />
