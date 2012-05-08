@@ -664,8 +664,8 @@
              <!-- TODO: maybe make smarter in future? get from property file or something? -->
         <condition
             property="mapVersionTag"
-            value="R4_HEAD"
-            else="master">
+            value="master"
+            else="R3_development">
             <equals
                 arg1="${eclipseStream}"
                 arg2="4.2.0" />

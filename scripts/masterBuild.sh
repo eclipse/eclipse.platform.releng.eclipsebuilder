@@ -422,7 +422,7 @@ processCommandLine ()
     # either by above loop, or an environment variable, then
     # specify a reasonable default.
 
-    mapVersionTag=${mapVersionTag:-R4_HEAD}
+    mapVersionTag=${mapVersionTag:-master}
     eclipseStream=${eclipseStream:-4.2.0}
     buildType=${buildType:-N}
 

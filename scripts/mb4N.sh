@@ -4,7 +4,7 @@
 
 buildType=N
 eclipseStream=4.2.0
-mapVersionTag=R4_HEAD
+mapVersionTag=master
 
 # should always be 'master' for now, but in future might want
 # a tag, or might need deviation between branches, temporarily). 

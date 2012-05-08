@@ -16,7 +16,7 @@
 supportDir=/home/shared/eclipse/eclipse4I/build/supportDir
 buildDirectory="${supportDir}/src"
 commonrepoDirectory="${supportDir}/src/commonrepo"
-mapsVersionTag=R4_HEAD
+mapsVersionTag=master
 
 # should be relatively constant
 remoteMapsGitRepo=git://git.eclipse.org/gitroot/platform/eclipse.platform.releng.maps.git

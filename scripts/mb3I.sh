@@ -4,7 +4,7 @@
 
 buildType=I
 eclipseStream=3.8.0
-mapVersionTag=master
+mapVersionTag=R3_development
 
 # should always be 'master' for now, but in future might want
 # a tag, or might need deviation between branches, temporarily). 

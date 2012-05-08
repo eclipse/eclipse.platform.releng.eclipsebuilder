@@ -151,7 +151,7 @@
             shouldn't have anything in CVS? but ... will leave for now -->
         <condition
             property="fetchTag"
-            value="CVS=HEAD,GIT=origin/master;git://git.eclipse.org/gitroot/platform/eclipse.platform.git=origin/R4_HEAD;git://git.eclipse.org/gitroot/platform/eclipse.platform.common.git=origin/R4_HEAD;git://git.eclipse.org/gitroot/platform/eclipse.platform.releng.git=origin/R4_HEAD;git://git.eclipse.org/gitroot/platform/eclipse.platform.releng.maps.git=origin/R4_HEAD">
+            value="CVS=HEAD,GIT=origin/master;git://git.eclipse.org/gitroot/platform/eclipse.platform.git=origin/R4_HEAD;git://git.eclipse.org/gitroot/platform/eclipse.platform.common.git=origin/R4_HEAD;git://git.eclipse.org/gitroot/platform/eclipse.platform.releng.git=origin/R4_HEAD">
             <equals
                 arg1="${buildType}"
                 arg2="N" />
