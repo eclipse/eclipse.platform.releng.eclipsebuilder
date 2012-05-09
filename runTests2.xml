@@ -685,7 +685,7 @@
 
 
         <get
-            dest="${commonrepo}"
+            dest="${mapsGitRepo}"
             src="http://git.eclipse.org/c/platform/eclipse.platform.releng.maps.git/snapshot/${mapVersionTag}.zip" />
 
         <delete dir="${WORKSPACE}/workarea/maps" />
