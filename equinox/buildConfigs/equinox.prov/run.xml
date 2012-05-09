@@ -693,7 +693,7 @@
 
 <target name="run.director">
 	<ant antfile="${eclipse.pdebuild.scripts}/genericTargets.xml" target="runDirector" inheritAll="true">
-		<property name="p2.repo" value="file:${p2.repo}" />
+		<property name="p2.repo" value="file://${p2.repo}" />
 		<property name="p2.director.iu" value="${p2.director.installIU}" />
 		<property name="p2.director.installPath" value="${p2.director.install.path}" />
 		<property name="os" value="${p2.os}" />
@@ -701,7 +701,7 @@
 		<property name="arch" value="${p2.arch}" />
 		<property name="p2.director.log" value="${directorlog}" />
 		<property name="equinoxLauncherJar" value="${base.builder}/plugins/org.eclipse.equinox.launcher.jar" />
-		<property name="vmargs" value="-Dorg.eclipse.ecf.provider.filetransfer.retrieve.closeTimeout=3000 -Dorg.eclipse.ecf.provider.filetransfer.retrieve.readTimeout=3000" />
+		<property name="vmargs" value="-Dorg.eclipse.ecf.provider.filetransfer.retrieve.closeTimeout=3000 -Dorg.eclipse.ecf.provider.filetransfer.retrieve.readTimeout=3000 -Dorg.eclipse.ecf.provider.filetransfer.retrieve.connectTimeout=15000 org.eclipse.ecf.provider.filetransfer.retrieve.retryAttempts=20" />
 	</ant>
 	<echo message="director ${p2.director.install.path}" file="${directorlog}" append="true" />
 	<echo message="${directorcode}" file="${directorlog}" append="true" />
@@ -741,9 +741,10 @@
 			</antcall>
 		</sequential>
 
+	<!-- removed per bug 368488	    
 		<sequential>
-			<!-- starter kits -->
-			<!-- win32 -->
+			<!- - starter kits - ->
+			<!- - win32 - ->
 			<exec dir="${equinox.starterkit.install.win32}" executable="zip">
 				<arg line="-q ${output.dir}/EclipseRT-OSGi-StarterKit-${buildId}-win32-win32-x86.zip -r ." />
 			</exec>
@@ -751,7 +752,7 @@
 				<param name="tar.base.dir" value="${equinox.starterkit.install.macosx}" />
 				<param name="tar.base.filename" value="${output.dir}/EclipseRT-OSGi-StarterKit-${buildId}-macosx-cocoa-x86.tar" />
 			</antcall>
-			<!-- linux -->
+			<!- - linux - ->
 			<antcall target="p2.tar">
 				<param name="tar.base.dir" value="${equinox.starterkit.install.linux}" />
 				<param name="tar.base.filename" value="${output.dir}/EclipseRT-OSGi-StarterKit-${buildId}-linux-gtk-x86.tar" />
@@ -759,7 +760,7 @@
 			<exec dir="${equinox.starterkit.install.win32.x86_64}" executable="zip">
 				<arg line="-q ${output.dir}/EclipseRT-OSGi-StarterKit-${buildId}-win32-win32-x86_64.zip -r ." />
 			</exec>
-			<!-- macosx -->
+			<!- - macosx - ->
 			<antcall target="p2.tar">
 				<param name="tar.base.dir" value="${equinox.starterkit.install.macosx.x86_64}" />
 				<param name="tar.base.filename" value="${output.dir}/EclipseRT-OSGi-StarterKit-${buildId}-macosx-cocoa-x86_64.tar" />
@@ -769,7 +770,7 @@
 				<param name="tar.base.filename" value="${output.dir}/EclipseRT-OSGi-StarterKit-${buildId}-linux-gtk-x86_64.tar" />
 			</antcall>
 		</sequential>
-
+-->
 		<!-- <sequential>
 				<exec dir="${pde.product.install.win32}" executable="zip">
 					<arg line="-q ${postingDirectory}/${buildLabel}/PDE-builder-${buildId}-win32.zip -r ." />
