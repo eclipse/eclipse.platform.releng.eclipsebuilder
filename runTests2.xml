@@ -691,7 +691,7 @@
         <delete dir="${WORKSPACE}/workarea/maps" />
         <mkdir dir="${WORKSPACE}/workarea/maps" />
 
-        <unzip dest="${WORKSPACE}/workarea/maps">
+        <unzip src="${mapsGitRepo}" dest="${WORKSPACE}/workarea/maps">
             <globmapper
                 from="${mapVersionTag}/*"
                 to="*" />
