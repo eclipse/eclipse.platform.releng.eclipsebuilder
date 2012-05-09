@@ -41,7 +41,7 @@
             source="file://${buildRepo}"
             log="deltapackmirrorlog.txt"
             verbose="true"
-            ignoreerrors="false">
+            ignoreerrors="true">
             <destination
                 kind="metadata"
                 location="file://${featureTemp}"
@@ -73,6 +73,9 @@
             <iu
                 id="org.eclipse.equinox.executable"
                 version="" />
+            <iu
+                id="org.eclipse.e4.rcp.feature.group"
+                version="" />
             <slicingOptions
                 includeOptional="false"
                 includeNonGreedy="false"
@@ -87,6 +90,7 @@
             <iu id="org.eclipse.platform.source.feature" />
             <iu id="org.eclipse.rcp.feature" />
             <iu id="org.eclipse.rcp.source.feature" />
+            <iu id="org.eclipse.e4.rcp.feature.jar" />
             <iu id="org.eclipse.jdt.feature.jar" />
             <iu id="org.eclipse.jdt.source.feature.jar" />
             <iu id="org.eclipse.platform.feature.jar" />
