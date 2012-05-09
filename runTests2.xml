@@ -684,30 +684,20 @@
         <echo message="mapsGitRepo: ${mapsGitRepo}" />
 
 
-        <exec
-            failonerror="true"
-            executable="git"
-            dir="${mapsGitRepo}">
-            <arg line="clone ${commonrepo}" />
-        </exec>
-        <exec
-            failonerror="true"
-            executable="git"
-            dir="${mapsGitRepo}/eclipse.platform.releng.maps">
-            <arg line="checkout ${mapVersionTag}" />
-        </exec>
+        <get
+            dest="${commonrepo}"
+            src="http://git.eclipse.org/c/platform/eclipse.platform.releng.maps.git/snapshot/${mapVersionTag}.zip" />
+
         <delete dir="${WORKSPACE}/workarea/maps" />
         <mkdir dir="${WORKSPACE}/workarea/maps" />
 
-        <copy
-            overwrite="true"
-            failonerror="true"
-            verbose="true"
-            todir="${WORKSPACE}/workarea/maps">
-            <fileset dir="${mapsGitRepo}/eclipse.platform.releng.maps">
-                <include name="**" />
-            </fileset>
-        </copy>
+        <unzip dest="${WORKSPACE}/workarea/maps">
+            <globmapper
+                from="${mapVersionTag}/*"
+                to="*" />
+        </unzip>
+
+
         <property
             name="mapProjectFetched"
             value="true" />
