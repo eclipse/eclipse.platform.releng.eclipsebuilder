@@ -13,3 +13,6 @@ Other than the features involved, the build.xml should be identical, so there
 could be better or different ways to "split streams" without duplicating the whole
 build.xml file ... but ... for simplicity for Juno we'll leave whole build.xml 
 file.  
+
+See bug 339430
+https://bugs.eclipse.org/bugs/show_bug.cgi?id=339430
