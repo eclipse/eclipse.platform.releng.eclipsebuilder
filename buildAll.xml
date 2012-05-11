@@ -1228,14 +1228,16 @@
             token="@qualifier@"
             file="${eclipse.build.configs}/platform.sdk/platform.product"
             value="${buildId}" />
-        <!-- https://bugs.eclipse.org/bugs/show_bug.cgi?id=368488 <replace 
+        <!-- https://bugs.eclipse.org/bugs/show_bug.cgi?id=368488 
+        <replace 
             token="@qualifier@" file="${buildDirectory}/plugins/org.eclipse.equinox.p2.ui.admin.rcp/rcp.product" 
-            value="${buildId}" /> -->
-        <!--
+            value="${buildId}" /> 
+        -->
+
         <replace token="@qualifier@"
             file="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/product/EclipseRTOSGiStarterKit.product"
             value="${buildId}" />
-         -->
+
         <replace
             token="@qualifier@"
             file="${buildDirectory}/features/org.eclipse.pde.build.product.feature/product/pdebuild.product"
