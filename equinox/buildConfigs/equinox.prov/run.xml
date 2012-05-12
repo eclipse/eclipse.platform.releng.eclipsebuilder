@@ -741,36 +741,39 @@
 			</antcall>
 		</sequential>
 
-	<!-- removed per bug 368488	    
+
 		<sequential>
-			<!- - starter kits - ->
-			<!- - win32 - ->
+			<!-- starter kits -->
+			<!-- win32 -->
 			<exec dir="${equinox.starterkit.install.win32}" executable="zip">
 				<arg line="-q ${output.dir}/EclipseRT-OSGi-StarterKit-${buildId}-win32-win32-x86.zip -r ." />
 			</exec>
+		    <!-- macosx 32 -->
 			<antcall target="p2.tar">
 				<param name="tar.base.dir" value="${equinox.starterkit.install.macosx}" />
 				<param name="tar.base.filename" value="${output.dir}/EclipseRT-OSGi-StarterKit-${buildId}-macosx-cocoa-x86.tar" />
 			</antcall>
-			<!- - linux - ->
+			<!-- linux 32 -->
 			<antcall target="p2.tar">
 				<param name="tar.base.dir" value="${equinox.starterkit.install.linux}" />
 				<param name="tar.base.filename" value="${output.dir}/EclipseRT-OSGi-StarterKit-${buildId}-linux-gtk-x86.tar" />
 			</antcall>
+		    <!-- windows 64 -->
 			<exec dir="${equinox.starterkit.install.win32.x86_64}" executable="zip">
 				<arg line="-q ${output.dir}/EclipseRT-OSGi-StarterKit-${buildId}-win32-win32-x86_64.zip -r ." />
 			</exec>
-			<!- - macosx - ->
+			<!-- macosx 64 -->
 			<antcall target="p2.tar">
 				<param name="tar.base.dir" value="${equinox.starterkit.install.macosx.x86_64}" />
 				<param name="tar.base.filename" value="${output.dir}/EclipseRT-OSGi-StarterKit-${buildId}-macosx-cocoa-x86_64.tar" />
 			</antcall>
+		    <!-- linux 64 -->
 			<antcall target="p2.tar">
 				<param name="tar.base.dir" value="${equinox.starterkit.install.linux.x86_64}" />
 				<param name="tar.base.filename" value="${output.dir}/EclipseRT-OSGi-StarterKit-${buildId}-linux-gtk-x86_64.tar" />
 			</antcall>
 		</sequential>
--->
+
 		<!-- <sequential>
 				<exec dir="${pde.product.install.win32}" executable="zip">
 					<arg line="-q ${postingDirectory}/${buildLabel}/PDE-builder-${buildId}-win32.zip -r ." />
