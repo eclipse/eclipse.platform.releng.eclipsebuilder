@@ -34,13 +34,16 @@ if (file_exists("report.txt")) {
 
 
 if (file_exists("buildnotes")) {
-
-    echo "<h2>Build Notes</h2>\n";
-    echo "<ul>";
-
+    $hasNotes = false;
     $aDirectory = dir("buildnotes");
     while ($anEntry = $aDirectory->read()) {
         if (($anEntry != "." && $anEntry != "..") && (! preg_match("/\.css/",$anEntry))) {
+            // found something, so we do "have notes"
+            if (! $hasNotes) {
+                echo "<h2>Build Notes</h2>\n";
+                echo "<ul>";
+                $hasNotes=true;
+            } 
             $parts = explode("_", $anEntry);
             $baseName = $parts[1];
             $parts = explode(".", $baseName);
@@ -49,7 +52,9 @@ if (file_exists("buildnotes")) {
             echo "$line";
             echo "</li>";
         }
-    echo "</ul>\n";
+        if ($hasNotes) {
+           echo "</ul>\n";
+        }
     }
     aDirectory.closedir();
 }
