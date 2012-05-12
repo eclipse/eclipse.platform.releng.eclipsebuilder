@@ -142,7 +142,7 @@
 
 	    <!-- removed via https://bugs.eclipse.org/bugs/show_bug.cgi?id=368488 -->
 		<!--	<antcall target="provision.agent" />  -->
-	    <!--	<antcall target="provision.starterkit" /> -->
+	    <antcall target="provision.starterkit" />
 	    
 			<!-- <antcall target="provision.pdeproduct" /> -->
 			<antcall target="provision.sdk" />
