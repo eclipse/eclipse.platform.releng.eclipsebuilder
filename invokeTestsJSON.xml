@@ -241,6 +241,17 @@
         <!-- gen Indexes requires "buildId" "eclipseStream" "buildType", which it will inherit -->
         <ant antfile="${buildRoot}/build/supportDir/org.eclipse.releng.eclipsebuilder/genTestIndexes.xml" />
 
+        <!-- create and que up promotion script -->
+        <!-- the "updateDropLocation.sh" file is similar to initial "sync" file, 
+             but, a little different, and could potential be more different, or more similar? 
+             in future. -->
+        <!-- temp use 'test' name so won't actually run .. just in case its' way off -->
+        <property name="updatescriptname" value="/shared/eclipse/sdk/promotion/queue/test-promote-update-${buildId}-${job}.sh"/>
+
+        <echo message="#!/usr/bin/env bash" file="${updatescriptname}" />
+        <echo message="# promotion script created" append="true" file="${updatescriptname}" />
+        <echo message="/shared/eclipse/sdk/promotion/udpateDropLocation.sh ${buildStream} ${buildType} ${buildId}" append="true" file="${updatescriptname}" />
+        
         <!-- dont' delete zip, for now, to aide debugging
         <delete includeEmptyDirs="true">
             <fileset dir="${tmpzipdir}" />
