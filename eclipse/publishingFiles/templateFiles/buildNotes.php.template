@@ -24,8 +24,7 @@
 <link rel="stylesheet" href="../../../default_style.css" type="text/css">
 </head>
 <body>
-
-<p><b><font face="Verdana" size="+3">Build Notes</font></b> </p>
+<p><a href="report.txt">Report of changes</a> from previous build.</p>
 
 <table border=0 cellspacing=5 cellpadding=2 width="100%" >
   <tr> 
