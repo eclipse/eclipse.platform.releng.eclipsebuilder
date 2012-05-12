@@ -214,14 +214,22 @@
             dest="${tmpzipdir}/archive.zip" />
         <unzip
             src="${tmpzipdir}/archive.zip"
-            dest="${tmpzipdir}" />
+            dest="${postingDirectory}/${buildId}/testresults/">
+            <globmapper
+                from="archive/workarea/${buildId}/eclipse-testing/results/*"
+                to="*" />
+        </unzip>
+        
+        <!-- 
+             TODO: can eventually check size of returned zip to see if 
+             reasonable to call "resultavailable". For now, assume true
+         -->
 
-        <available
-            file="${tmpzipdir}/archive/workarea"
-            property="resultAvailable" />
+        <property
+            name="resultAvailable"
+            value="true" />
 
         <antcall target="finishup" />
-
 
 
     </target>
@@ -230,12 +238,10 @@
         depends="checkresults"
         if="resultAvailable">
 
-        <exec executable="/usr/bin/rsync">
-            <arg value="--recursive" />
-            <arg value="${tmpzipdir}/archive/workarea/${buildId}/eclipse-testing/results/" />
-            <arg value="${postingDirectory}/${buildId}/testresults/" />
-        </exec>
-<!-- dont' delete for now, to aide debugging
+        <!-- gen Indexes requires "buildId" "eclipseStream" "buildType", which it will inherit -->
+        <ant antfile="${buildRoot}/build/supportDir/org.eclipse.releng.eclipsebuilder/genTestIndexes.xml" />
+
+        <!-- dont' delete zip, for now, to aide debugging
         <delete includeEmptyDirs="true">
             <fileset dir="${tmpzipdir}" />
         </delete>

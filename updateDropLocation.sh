@@ -254,8 +254,8 @@ rccode=$?
 
 if [ $rccode -ne 0 ] 
 then 
-    echo "ERROR occurred during promotion to download server, so halted promotion and did not send mail."
-    exit 1
+    echo "ERROR occurred during promotion to download serve: rccode: $rccode."
+    exit $rccode
 fi 
 
 exit 0
