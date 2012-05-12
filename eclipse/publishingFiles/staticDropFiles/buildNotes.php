@@ -52,9 +52,9 @@ if (file_exists("buildnotes")) {
             echo "$line";
             echo "</li>";
         }
-        if ($hasNotes) {
-           echo "</ul>\n";
-        }
+    }
+    if ($hasNotes) {
+       echo "</ul>\n";
     }
     aDirectory.closedir();
 }
