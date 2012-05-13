@@ -224,16 +224,34 @@
                 to="*" />
         </unzip>
         
-        <!-- 
-             TODO: can eventually check size of returned zip to see if 
-             reasonable to call "resultavailable". For now, assume true
-         -->
+        <!-- ant call doesn't seem to work, when called "in parallel" ? 
+             Was gettting and unzipping, but not generating index and updating. 
+             Perhaps waiting till all compomplete? Sort of an implied sequential?
+             But that's why I "moved up" all this code. TODO: delete original 'finishup' 
+             task once works as desired. Or, perhaps would work if seperate ant file/task? 
+             So, invoked with <ant not <antcall? Or, perhaps "results" needs to be a 
+             parameter? But, all here should work since the "unzip" was working. 
+             --> 
+        
+        <!-- gen Indexes requires "buildId" "eclipseStream" "buildType", which it will inherit -->
+        <ant antfile="${buildRoot}/build/supportDir/org.eclipse.releng.eclipsebuilder/genTestIndexes.xml" />
 
-        <property
-            name="resultAvailable"
-            value="true" />
+        <!-- create and que up promotion script -->
+        <!-- the "updateDropLocation.sh" file is similar to initial "sync" file, 
+             but, a little different, and could potential be more different, or more similar? 
+             in future. -->
+        <!-- temp use 'test' name so won't actually run .. just in case its' way off -->
+        <property name="updatescriptname" value="/shared/eclipse/sdk/promotion/queue/test-promote-update-${buildId}-${job}.sh"/>
 
-        <antcall target="finishup" />
+        <echo message="#!/usr/bin/env bash" file="${updatescriptname}" />
+        <echo message="# promotion script created" append="true" file="${updatescriptname}" />
+        <echo message="/shared/eclipse/sdk/promotion/udpateDropLocation.sh ${buildStream} ${buildType} ${buildId}" append="true" file="${updatescriptname}" />
+        
+        <!-- dont' delete zip, for now, to aide debugging
+        <delete includeEmptyDirs="true">
+            <fileset dir="${tmpzipdir}" />
+        </delete>
+        -->
 
 
     </target>
