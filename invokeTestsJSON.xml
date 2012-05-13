@@ -39,8 +39,12 @@
     </condition>
 
     <property
+        name="buildRoot"
+        value="/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}" />
+    
+    <property
         name="postingDirectory"
-        value="/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}/siteDir/eclipse/downloads/${dropsDirSegment}" />
+        value="${buildRoot}/siteDir/eclipse/downloads/${dropsDirSegment}" />
 
 
     <property

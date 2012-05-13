@@ -32,18 +32,21 @@
             arg2="4.2.0" />
     </condition>
 
+    <property name="buildRoot" value="/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}"/>
+
+    
     <property
         name="postingDirectory"
-        value="/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}/siteDir/eclipse/downloads/${dropsDirSegment}" />
+        value="${buildRoot}/siteDir/eclipse/downloads/${dropsDirSegment}" />
     <property
         name="builderDir"
-        value="/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}/build/supportDir/org.eclipse.releng.eclipsebuilder" />
+        value="${buildRoot}/build/supportDir/org.eclipse.releng.eclipsebuilder" />
     <property
         name="publishingContent"
-        value="/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}/build/supportDir/org.eclipse.releng.eclipsebuilder/eclipse/publishingFiles" />
+        value="${buildRoot}/build/supportDir/org.eclipse.releng.eclipsebuilder/eclipse/publishingFiles" />
     <property
         name="base.builder"
-        value="/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}/build/supportDir/org.eclipse.releng.basebuilder" />
+        value="${buildRoot}/build/supportDir/org.eclipse.releng.basebuilder" />
 
     <property
         name="buildLabel"
