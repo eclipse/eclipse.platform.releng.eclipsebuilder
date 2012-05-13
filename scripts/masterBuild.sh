@@ -731,7 +731,8 @@ fi
 echo "trExitCode: ${trExitCode}"
 echo "continueBuildOnNoChange: $continueBuildOnNoChange"
 
-if [[ ( "${trExitCode}" == "59" )  &&  ( "${continueBuildOnNoChange}" != "true" ) ]]
+# check for "no change" code
+if [[  "${trExitCode}" == "59"  ]]
 then 
     if [[ "${testbuildonly}" == "true" ]] 
     then
@@ -741,26 +742,49 @@ then
         # if not a test build, send "no change" mail to list
         #toAddress=platform-releng-dev@eclipse.org
         # can not have empty else clauses, so we'll have double test emails
-        toAddress=david_williams@mindspring.com
+        toAddress=platform-releng-dev@eclipse.org
     fi
-    (
-    echo "From: e4Builder@eclipse.org"
-    echo "To: ${toAddress}"
-    echo "MIME-Version: 1.0"
-    echo "Content-Type: text/plain; charset=utf-8"
-    echo "Subject: $eclipseStream Build: $buildId canceled. No changes detected (eom)"
-    echo " "
-    ) | /usr/lib/sendmail -t
+    if [[ "${continueBuildOnNoChange}" != "true"  ]]
+    then
+        (
+        echo "From: e4Builder@eclipse.org"
+        echo "To: ${toAddress}"
+        echo "MIME-Version: 1.0"
+        echo "Content-Type: text/plain; charset=utf-8"
+        echo "Subject: $eclipseStream Build: $buildId canceled. No changes detected (eom)"
+        echo " "
+        ) | /usr/lib/sendmail -t
 
-    echo "No changes detected by autotagging. Mail sent. $eclipseStream Build: $buildId canceled." 
-    exit 1
-    # else continue building
+        echo "No changes detected by autotagging. Mail sent. $eclipseStream Build: $buildId canceled." 
+        exit 1
+
+    else
+        # else continue building since flag true 
+        (
+        echo "From: e4Builder@eclipse.org"
+        echo "To: ${toAddress}"
+        echo "MIME-Version: 1.0"
+        echo "Content-Type: text/plain; charset=utf-8"
+        echo "Subject: $eclipseStream Build: $buildId started."
+        echo " "
+        echo " No changes from previous build were detected, but "
+        echo " continueBuildOnNoChange was set to true."
+        echo " "
+        ) | /usr/lib/sendmail -t
+
+        echo "No changes detected by autotagging. Mail sent. $eclipseStream Build: $buildId continues." 
+
+    fi
+
 fi
 
 # else, to get here, we should do a build. Notification depends on test flags (and N-build)
 
 # So, we send an email to list that a build has started and what changes were 
 # detected. UNLESS we are doing an N build or test build, in which case, we do not notify releng list
+# Note: "continueBuildOnNoChange will sometimes be "normal" need (such if infrastructure or 
+# build script changes, but we've already sent that mail above. 
+# TODO: could use some refactoring/functions here to simply code.
 if [[ "${testbuildonly}" == "true" || "${continueBuildOnNoChange}" == "true" ]] 
 then
     # send mail only to testonly address
@@ -774,7 +798,7 @@ else
     toAddress=platform-releng-dev@eclipse.org
 fi
 # for N builds, we do not notify anyone of "start of build" (but, do for all others? I, M? ) 
-if [[ "${buildType}" != "N" ]]
+if [[ "${buildType}" != "N"  ]]
 then 
 
     # during test builds, won't exist, so we check for 
@@ -919,11 +943,11 @@ echo "normal exit from build phase of $0"
 # if [[ "${testbuildonly}" != "true" ]] 
 #    then
 
-        HUDSON_TOKEN=windows2012tests ant \
-        -DbuildId=${buildId} \
-        -DbuildType=${buildType} \
-        -DeclipseStream=${eclipseStream} \
-        -f $builderDir/invokeTestsJSON.xml
+HUDSON_TOKEN=windows2012tests ant \
+    -DbuildId=${buildId} \
+    -DbuildType=${buildType} \
+    -DeclipseStream=${eclipseStream} \
+    -f $builderDir/invokeTestsJSON.xml
 
 #fi
 
