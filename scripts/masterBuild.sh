@@ -27,7 +27,7 @@ export testbuildonly=${testbuildonly:-false}
 # set to true for tesing builds, so that 
 # even if no changes made, build will continue.
 # but during production, would be false.
-export continueBuildOnNoChange=${continueBuildOnNoChange:-true}
+export continueBuildOnNoChange=${continueBuildOnNoChange:-false}
 
 echo "testbuildonly: $testbuildonly"
 echo "continueBuildOnNoChange: $continueBuildOnNoChange"
