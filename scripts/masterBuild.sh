@@ -11,6 +11,13 @@
 #     IBM Corporation - initial API and implementation
 #*******************************************************************************
 
+# this should be the default, but, just to be sure, since 
+# directory under "drops" on build machine, is being created 
+# without group write. May have to set/change explicitly, but 
+# will try this first. 
+
+oldumask=umask 0002
+echo "umask explicitly set to 0002, old value was $oldumask"
 
 # set to true for test builds (controls things 
 # like notifications, whether or not maps are tagged, etc.
