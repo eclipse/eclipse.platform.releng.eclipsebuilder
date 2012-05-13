@@ -16,7 +16,8 @@
 # without group write. May have to set/change explicitly, but 
 # will try this first. 
 
-oldumask=umask 0002
+oldumask=`umask`
+umask 0002
 echo "umask explicitly set to 0002, old value was $oldumask"
 
 # set to true for test builds (controls things 
