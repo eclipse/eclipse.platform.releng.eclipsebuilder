@@ -746,12 +746,13 @@ then
     fi
     if [[ "${continueBuildOnNoChange}" != "true"  ]]
     then
+        subjectBuildCanceled="$eclipseStream Build: $buildId canceled. No changes detected (eom)"
         (
         echo "From: e4Builder@eclipse.org"
         echo "To: ${toAddress}"
         echo "MIME-Version: 1.0"
         echo "Content-Type: text/plain; charset=utf-8"
-        echo "Subject: $eclipseStream Build: $buildId canceled. No changes detected (eom)"
+        echo "Subject: $subjectBuildCanceled"
         echo " "
         ) | /usr/lib/sendmail -t
 
@@ -760,12 +761,13 @@ then
 
     else
         # else continue building since flag true 
+        subjectBuildContinue="$eclipseStream Build: $buildId started."
         (
         echo "From: e4Builder@eclipse.org"
         echo "To: ${toAddress}"
         echo "MIME-Version: 1.0"
         echo "Content-Type: text/plain; charset=utf-8"
-        echo "Subject: $eclipseStream Build: $buildId started."
+        echo "Subject: $subjectBuildContinue"
         echo " "
         echo " No changes from previous build were detected, but "
         echo " continueBuildOnNoChange was set to true."
