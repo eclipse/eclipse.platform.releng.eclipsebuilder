@@ -247,6 +247,10 @@ then
     return 1;
 fi
 
+buildRoot=${buildRoot:-/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}}
+builderDir=${buildRoot}/build/supportDir/org.eclipse.releng.eclipsebuilder
+
+${buildDir}/updateTestResultsPages.sh  $1 $2 $3
 
 updateDropLocation $1 $2 $3
 
