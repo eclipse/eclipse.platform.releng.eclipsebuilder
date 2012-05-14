@@ -246,11 +246,19 @@ then
     echo "must provide buildId as third argumnet, for this function $0"
     return 1;
 fi
-
+eclipseStreamMajor=${eclipseStream:0:1}
 buildRoot=${buildRoot:-/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}}
 builderDir=${buildRoot}/build/supportDir/org.eclipse.releng.eclipsebuilder
+echo "DEBUG: builderDir: ${builderDir}"
 
-${buildDir}/updateTestResultsPages.sh  $1 $2 $3
+${builderDir}/updateTestResultsPages.sh  $1 $2 $3
+rccode=$?
+
+if [[ $rccode != 0 ]] 
+then
+    echo "error updating index pages: $rccode"
+    exit $rccode
+fi
 
 updateDropLocation $1 $2 $3
 
