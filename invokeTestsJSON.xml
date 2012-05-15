@@ -244,7 +244,7 @@
             append="true"
             file="${updatescriptname}" />
         <echo
-            message="/shared/eclipse/sdk/promotion/udpateDropLocation.sh ${buildStream} ${buildType} ${buildId}"
+            message="/shared/eclipse/sdk/promotion/udpateDropLocation.sh ${eclipseStream} ${buildType} ${buildId}"
             append="true"
             file="${updatescriptname}" />
         
@@ -274,14 +274,14 @@
             value="/shared/eclipse/sdk/promotion/queue/test-promote-update-${buildId}-${job}.sh" />
 
         <echo
-            message="#!/usr/bin/env bash"
+            message="#!/usr/bin/env bash${line.separator}"
             file="${updatescriptname}" />
         <echo
-            message="# promotion script created"
+            message="# promotion script created${line.separator}"
             append="true"
             file="${updatescriptname}" />
         <echo
-            message="/shared/eclipse/sdk/promotion/udpateDropLocation.sh ${buildStream} ${buildType} ${buildId}"
+            message="/shared/eclipse/sdk/promotion/udpateDropLocation.sh ${eclipseStream} ${buildType} ${buildId}${line.separator}"
             append="true"
             file="${updatescriptname}" />
         
