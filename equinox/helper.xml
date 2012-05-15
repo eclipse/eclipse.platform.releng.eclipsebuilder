@@ -26,6 +26,7 @@
         </copy>
 
         <antcall target="updateTestManifests" />
+        <!--
         <condition
             property="generatorClass"
             value="org.eclipse.releng.generators.EclipseTestResultsGeneratorNoMail">
@@ -33,6 +34,7 @@
                 arg1="${hudson}"
                 arg2="true" />
         </condition>
+        -->
         <property
             name="generatorClass"
             value="org.eclipse.releng.generators.EclipseTestResultsGenerator" />
