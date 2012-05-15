@@ -281,7 +281,7 @@
             append="true"
             file="${updatescriptname}" />
         <echo
-            message="/shared/eclipse/sdk/promotion/udpateDropLocation.sh ${eclipseStream} ${buildType} ${buildId}${line.separator}"
+            message="/shared/eclipse/sdk/promotion/updateDropLocation.sh ${eclipseStream} ${buildType} ${buildId}${line.separator}"
             append="true"
             file="${updatescriptname}" />
         
