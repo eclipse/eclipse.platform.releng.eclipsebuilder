@@ -285,6 +285,9 @@
             append="true"
             file="${updatescriptname}" />
         
+        <!-- we restrict "others" rights for a bit more security or safety from accidents -->
+        <chmod perm="ug=rwx,o-rwx" file="${updatescriptname}"/>
+
         <!-- dont' delete zip, for now, to aide debugging
         <delete includeEmptyDirs="true">
             <fileset dir="${tmpzipdir}" />
