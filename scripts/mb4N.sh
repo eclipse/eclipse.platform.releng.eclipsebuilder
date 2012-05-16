@@ -55,6 +55,20 @@ if [[ $rccode != 0 ]]
 then 
     echo "WARNING: could not chmod new init script. Return code: $rccode"
 fi
+
+# if no difference bewteen old and new, remove "new" else, print warning
+differs=`diff mb${eclipseStreamMajor}${buildType}.NEW.sh mb${eclipseStreamMajor}${buildType}.sh`
+echo "differs: ${differs}"
+if [ -z "${differs}" ]
+then 
+    # 'new' not different from existing, so remove 'new' one
+    rm mb${eclipseStreamMajor}${buildType}.NEW.sh
+else
+    echo " " 
+    echo "     wgetSDKPromoteScripts.sh has changed. Compare with and consider replacing with mb${eclipseStreamMajor}${buildType}.NEW.sh"
+    echo "  "
+fi
+
 chmod -v +x masterBuild.sh
 rccode=$?
 if [[ $rccode != 0 ]] 

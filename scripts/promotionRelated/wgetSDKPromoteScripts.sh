@@ -29,5 +29,5 @@ else
     echo "     wgetSDKPromoteScripts.sh has changed. Compare with and consider replacing with wgetSDKPromoteScripts.NEW.sh"
     echo "  "
 fi
-#
+
 chmod +x *.sh

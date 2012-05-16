@@ -24,8 +24,21 @@ wget --no-verbose -O testBuild.sh http://git.eclipse.org/c/platform/eclipse.plat
 
 # get this script itself (would have to run twice to make use changes, naturally)
 # and has trouble "writing over itself" so we put in a file with 'NEW' suffix
+# but will remove it if no differences found.
 # and a command line like the following works well
-# ./wgetFresh.sh ; mv wgetFresh.shNEW wgetFresh.sh
+
 wget --no-verbose -O wgetFresh.NEW.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/wgetFresh.sh?h=$initScriptTag 2>&1;
+
+differs=`diff wgetFresh.NEW.sh wgetFresh.sh`
+echo "differs: ${differs}"
+if [ -z "${differs}" ]
+then 
+    # 'new' not different from existing, so remove 'new' one
+    rm wgetFresh.NEW.sh
+else
+    echo " " 
+    echo "     wgetFresh.sh has changed. Compare with and consider replacing with wgetFresh.NEW.sh"
+    echo "  "
+fi
 
 chmod +x *.sh
