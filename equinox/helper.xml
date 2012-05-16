@@ -88,7 +88,6 @@
         <!-- equinox uses same test results -->
         <indexResults
             isBuildTested="false"
-            sendMail="false"
             buildType="${buildType}"
             dropTokenList="%equinox%,%framework%,%extrabundles%,%other%,%provisioning%,%launchers%,%osgistarterkits%"
             platformIdentifierToken="%platform%"
