@@ -234,43 +234,6 @@
         <!-- temp use 'test' name so won't actually run .. just in case its' way off -->
         <property
             name="updatescriptname"
-            value="/shared/eclipse/sdk/promotion/queue/test-promote-update-${buildId}-${job}.sh" />
-
-        <echo
-            message="#!/usr/bin/env bash"
-            file="${updatescriptname}" />
-        <echo
-            message="# promotion script created"
-            append="true"
-            file="${updatescriptname}" />
-        <echo
-            message="/shared/eclipse/sdk/promotion/udpateDropLocation.sh ${eclipseStream} ${buildType} ${buildId}"
-            append="true"
-            file="${updatescriptname}" />
-        
-        <!-- dont' delete zip, for now, to aide debugging
-        <delete includeEmptyDirs="true">
-            <fileset dir="${tmpzipdir}" />
-        </delete>
-        -->
-
-
-    </target>
-    <target
-        name="finishup"
-        depends="checkresults"
-        if="resultAvailable">
-
-        <!-- gen Indexes requires "buildId" "eclipseStream" "buildType", which it will inherit -->
-        <ant antfile="${buildRoot}/build/supportDir/org.eclipse.releng.eclipsebuilder/genTestIndexes.xml" />
-
-        <!-- create and que up promotion script -->
-        <!-- the "updateDropLocation.sh" file is similar to initial "sync" file, 
-             but, a little different, and could potential be more different, or more similar? 
-             in future. -->
-        <!-- temp use 'test' name so won't actually run .. just in case its' way off -->
-        <property
-            name="updatescriptname"
             value="/shared/eclipse/sdk/promotion/queue/promote-update-${buildId}-${job}.sh" />
 
         <echo
@@ -287,16 +250,14 @@
         
         <!-- we restrict "others" rights for a bit more security or safety from accidents -->
         <chmod perm="ug=rwx,o-rwx" file="${updatescriptname}"/>
-
+        
         <!-- dont' delete zip, for now, to aide debugging
         <delete includeEmptyDirs="true">
             <fileset dir="${tmpzipdir}" />
         </delete>
         -->
+
+
     </target>
-    <target
-        name="checkresults"
-        unless="resultAvailable">
-        <echo message="ERROR: archive (zip) file came back empty from hudon build" />
-    </target>
+
 </project>
