@@ -191,33 +191,41 @@ processCommandLine ()
     submissionReportFilePath=$buildResults/report.txt
 
 
-    # these don't seem right (not sure what they are)?
-    # currently ends up being 
+    # targets ends up being similar to
     # .../eclipse4/build/targets
     # and contains the ?local repo? (not runnable) for org.eclipse.emf.common, etc.
     # in directories named, for example,
     # as .../eclipse4/build/targets/local-repo-I20120331-0050
+    # I can't find in our scripts where its actually created (maybe in basebuilder?), so 
+    # is never removed, and ends up accumulating. 
+    # so ... will remove previous ones here, before the build starts
+    # and leave the "per build" one there, until next build runs. 
     targetDir=${buildDir}/targets
+    if [[ -d ${targetDir} ]]
+    then 
+       rm -fr ${targetDir} 
+    fi
+    # targetZips seems to be longer used or created, 
+    # but will leave defined here, until understood.
     targetZips=${targetDir}/targetzips
 
-    # should not set globally to java via -Dproperty=value, since eclipsebuilder 
+    # must not set globally to java via -Dproperty=value, since eclipsebuilder 
     # assumes different scopes and changes this value for direct calls to generatescripts
     #transformedRepo=${targetDir}/transformedRepo
 
-    # should not set globally to java via -Dproperty=value, since eclipsebuilder 
+    # must not set globally to java via -Dproperty=value, since eclipsebuilder 
     # assumes different scopes and changes this value for direct calls to generatescripts
     # but in practice, the main one is
     #buildDirectory=${buildRoot}/build/supportDir/src
 
-    #rembember, don't point to e4Build user directory
+    #rembember, don't point to e4Build user's "home" directory
+    # not sure this is used any longers?
     sdkTestDir=${buildRoot}/sdkTests/$buildTag
 
     sdkResults=$buildDir/$buildTag/$buildTag
     sdkBuildDirectory=$buildDir/$buildTag
 
     relengBaseBuilderDir=$supportDir/org.eclipse.releng.basebuilder
-
-
 
 }
 

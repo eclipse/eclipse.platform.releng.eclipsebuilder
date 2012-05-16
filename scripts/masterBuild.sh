@@ -552,17 +552,11 @@ processCommandLine ()
     buildResults=$postingDirectory/$buildTag
     submissionReportFilePath=$buildResults/report.txt
 
-
-    # these don't seem right (not sure what they are)?
-    # currently ends up being 
-    # .../eclipse4/build/40builds/targets
-    # I removed the 40builds segment. 
-    # Should not be needed since I've moved the distinction between builds "up" to 
-    # /shared/eclipse/eclipse4
-    # /shared/eclipse/eclipse4N
-    # /shared/eclispe/eclipse3
-    # ends up producing dirctories such as 
-    # as .../eclipse4/build/targets/local-repo-I20120331-0050
+    # targetzips doesn't seem to used, even created 
+    # any longer? Or at the moment? 
+    # targets ends up producing 
+    # dirctories such as 
+    # .../eclipse4/build/targets/local-repo-I20120331-0050
     targetDir=${buildDir}/targets
     targetZips=${targetDir}/targetzips
 
