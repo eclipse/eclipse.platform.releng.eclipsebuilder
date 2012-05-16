@@ -948,17 +948,18 @@ fi
 
 echo "normal exit from build phase of $0"
 
-# we may not want to invoke tests automatically if doing test build?
-# guess it wouldn't hurt, as long as we don't promote?  
-# if [[ "${testbuildonly}" != "true" ]] 
-#    then
+# we usually do not want to invoke tests automatically if doing test build.
+# we don't promote them, so the tests won't find them, anyway. That'd take 
+# more work (and begins to get to the point its not longer a "test build" :) 
+if [[ "${testbuildonly}" != "true" ]] 
+then
 
-HUDSON_TOKEN=windows2012tests ant \
-    -DbuildId=${buildId} \
-    -DbuildType=${buildType} \
-    -DeclipseStream=${eclipseStream} \
-    -f $builderDir/invokeTestsJSON.xml
+   HUDSON_TOKEN=windows2012tests ant \
+       -DbuildId=${buildId} \
+       -DbuildType=${buildType} \
+       -DeclipseStream=${eclipseStream} \
+       -f $builderDir/invokeTestsJSON.xml
 
-#fi
+fi
 
 exit 0
