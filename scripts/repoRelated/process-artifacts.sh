@@ -10,7 +10,7 @@ echo "   Final p2 processing artifacts to pack: $repoDirLocation"
 # For now, we will assume buildRoot has been exported by 
  # calling process (if they want a non default value).  
 buildRoot=${buildRoot:-/shared/eclipse/eclipse4I}
-devworkspace="${buildRoot}"/process-artifacts-workspace
+devworkspace="${buildRoot}"/workspace-process-artifacts
 
 if [ ! -d "${buildRoot}" ] 
 then

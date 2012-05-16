@@ -66,6 +66,7 @@
 		</div>
 	</div>
 
+
 	<div class="homeitem3col">
 		<h3><a onclick="expandCollapse('other.bundles');"><img id="other.bundles.button" src="http://eclipse.org/equinox/images/arrow.png"/></a>&nbsp;Other Required Bundles</h3>
 		<p>A convenient set of bundles that are required by some of the Equinox bundles.</p>
@@ -77,6 +78,7 @@
 		</div>
 	</div>
 
+<!-- provisioning removed per bug 368488 
 	<div class="homeitem3col">
 		<h3><a onclick="expandCollapse('provisioning.bundles');"><img  id="provisioning.bundles.button" src="http://eclipse.org/equinox/images/arrow.png"/></a>&nbsp;p2 Provisioning Tools</h3>
 		<p>The following downloads are produced by the Provisioning team. For more about provisoning, see 
@@ -88,7 +90,7 @@
 			</table>
 		</div>
 	</div>
-
+-->
 	<div class="homeitem3col">
 		<h3><a onclick="expandCollapse('launcher.bundles');"><img  id="launcher.bundles.button" src="http://eclipse.org/equinox/images/arrow.png"/></a>&nbsp;Native Launchers</h3>
 		<p>Platform-specific native launchers (e.g., eclipse.exe) for the Equinox framework. See the list 
