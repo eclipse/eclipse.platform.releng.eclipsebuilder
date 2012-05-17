@@ -135,7 +135,7 @@
              removed in the final step. See p2.remove in process-artifacts.xml -->
         <fail unless="p2RemoveRepoDir" />
         <p2.remove.iu>
-            <repository location="file://${p2removerepo}" />
+            <repository location="file://${p2RemoveRepoDir}" />
             <iu id="org.eclipse.equinox.slf4j.stub" />
         </p2.remove.iu>
     </target>
