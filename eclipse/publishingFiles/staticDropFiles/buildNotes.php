@@ -56,8 +56,8 @@ if (file_exists("buildnotes")) {
     if ($hasNotes) {
        echo "</ul>\n";
     }
-    echo "<p>Build notes (if displayed) are used to notify the community of notable, but temporary, issues or changes in a particular build.";
-    echo "Committers, to include build notes for your bundle, add a file with the pattern buildnotes_<component-name>.html to the root of your bundle's source tree.</p>";
+    echo "<p>Build notes (if any) are used to notify the community of notable, but temporary, issues or changes in a particular build.</p>";
+    echo "<p>Committers, to include build notes for your component, add a file with the pattern buildnotes_&lt;component-name&gt;.html to the root of one of your bundle's source tree.</p>";
 
     aDirectory.closedir();
 }
