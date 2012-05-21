@@ -129,19 +129,6 @@
 
     </target>
 
-    <!-- 
-    <target name="removeSomeUnwantedIUs">
-        <!- - we remove very few here, since we have not packaged up anything.
-             Most need to stay until we are done packaging things up, and are 
-             removed in the final step. See p2.remove in process-artifacts.xml 
-         - ->
-        <fail unless="p2RemoveRepoDir" />
-        <p2.remove.iu>
-            <repository location="file://${p2RemoveRepoDir}" />
-            <iu id="org.eclipse.equinox.slf4j.stub" />
-        </p2.remove.iu>
-    </target>
-    -->
     <target
         name="init"
         depends="streamSpecificInit">
@@ -1306,14 +1293,6 @@
         </p2.remove.iu>
         -->
 
-        <!-- but, later decided, there is one special case we want to 
-             remove before any packaging takes place 
-             https://bugs.eclipse.org/bugs/show_bug.cgi?id=379501    
-         
-       <antcall target="removeSomeUnwantedIUs">
-         <param name="p2RemoveRepoDir" value="${reposource}"/>
-       </antcall>
-        -->
         <property
             name="tempexec"
             value="${buildDirectory}/tempexec" />
