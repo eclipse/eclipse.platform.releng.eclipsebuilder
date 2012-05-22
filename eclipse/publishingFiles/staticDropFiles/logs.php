@@ -208,12 +208,13 @@ listLogs("compilelogs");
 </li>
 
 
-
 <li>
 <ul>
 <strong><a name="console" id="console"></a>Console Logs</strong>
 <p>These logs contain the console output captured while running the JUnit automated tests.</p>
 <?php
+
+listLogs("testresults/consolelogs");
 
 echo "<strong>Individual linux.gtk.x86_6.0 test logs</strong>";
 listLogs("testresults/linux.gtk.x86_6.0");
