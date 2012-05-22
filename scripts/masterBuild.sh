@@ -276,6 +276,7 @@ runSDKBuild ()
         -DeclipseStreamService=$eclipseStreamService \
         -Dbuilddate=$date \
         -Dbuildtime=$time \
+        -Dtimestamp=$timestamp \
         -DbuildId=$buildId \
         -Dbuildid=$buildId \
         -DbuildLabel=$buildLabel \
