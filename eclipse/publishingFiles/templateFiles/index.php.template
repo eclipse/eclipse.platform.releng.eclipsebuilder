@@ -183,7 +183,13 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				These downloads are provided under the <a href="http://www.eclipse.org/legal/epl/notice.html">
 				<b>Eclipse Foundation Software User Agreement</b></a>.</p>
 			</td><tr><tr>
-		<tr>
+            <?php 
+            if (file_exists("news/")) {
+                echo "<tr><td width="75%"><font size="+1">
+                <a href="news/"><b>New and Noteworthy</b></a></font></td></tr>";
+            }   
+            ?>
+            <tr>
 				<td width="75%">
 		   			The page provides access to the various sections of this build along with details
 					relating to its results. Test results are provided below and performance results
