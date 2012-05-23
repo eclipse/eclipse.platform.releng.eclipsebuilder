@@ -335,7 +335,7 @@ foreach($dropType as $value) {
         $valueName=strtr($value,' ','_');
         echo "<td align=\"left\" width=\"30%\"><a name=\"$valueName\">\n";
         echo "<font color=\"#FFFFFF\" face=\"Arial,Helvetica\">$value\n";
-        echo "s</font></a></td>\n";
+        echo "</font></a></td>\n";
         echo "</tr>\n";
 
         echo "<tr>\n";
