@@ -185,9 +185,9 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 			</td><tr><tr>
             <?php 
             if (file_exists("news/")) {
-                echo "<tr><td width="75%"><font size="+1">
-                <a href="news/"><b>New and Noteworthy</b></a></font></td></tr>";
-            }   
+               echo "<tr><td width=\"75%\"><font size=\"+1\">";
+               echo "<a href=\"news/\"><b>New and Noteworthy</b></a></font></td></tr>";
+             }   
             ?>
             <tr>
 				<td width="75%">
