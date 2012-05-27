@@ -3,6 +3,7 @@
 <?php
 //ini_set("display_errors", "true");
 //error_reporting (E_ALL);
+include buildProperties.php;
 if (array_key_exists("SERVER_NAME", $_SERVER)) {
     $servername = $_SERVER["SERVER_NAME"];
     if ($servername === "build.eclipse.org") {
@@ -181,9 +182,10 @@ echo"<li><a href=\"apitools/report.html\"><b>API Tools Post-API Freeze Report</b
 echo " <li><a href=\"apitools/apifilters-$buildName.zip\"><b>Zip of .api_filters files used in the build</b></a></li>";
 ?>
 <?php
-if (! (preg_match("/N/i",$buildName))) {
-    echo"<li>Cvs tag v$buildName of org.eclipse.releng.eclipsebuilder and org.eclipse.releng.basebuilder was used to create this build.</li> ";
-}
+
+    echo"<li>org.eclipse.releng.eclipsebuilder: $eclipsebuilderBranch</li> ";
+    echo"<li>org.eclipse.releng.basebuilder: $basebuilderBranch</li> ";
+
 ?>
 </div>
 

@@ -709,7 +709,10 @@ mkdir -p "${equinoxPostingDirectory}"
 # echo "testing initial setup only, exiting early"
 # exit 127
 
-
+# make sure exists, before we write a file there
+mkdir -p $buildResults
+echo "\$basebuilderBranch=${basebuilderBranch}" >> ${buildResults}/buildProperties.php
+echo "\$eclipsebuilderBranch=${eclipsebuilderBranch}" >> $buildResults/buildProperties.php
 
 updateBaseBuilder
 checkForErrorExit $? "Failed while updating Base Buidler"
