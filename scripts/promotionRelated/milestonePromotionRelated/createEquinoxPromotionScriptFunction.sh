@@ -11,7 +11,11 @@ fi
 
 scriptName="promote-${buildId}.sh"
 
-equinoxPostingDirectory=/opt/public/eclipse/eclipse4I/siteDir/equinox/downloads/drops
+# remember, there is no 'downloads' segment in equinox locations, 
+# unlike the eclipse locations
+buildRoot=/shared/eclipse/eclipse4I
+siteDir=${buildRoot}/siteDir
+equinoxPostingDirectory=${siteDir}/equinox/drops
 
 # The 'workLocation' provides a handy central place to have the 
 # promote script, and log results. ASSUMING this works for all 
