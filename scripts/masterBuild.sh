@@ -711,8 +711,10 @@ mkdir -p "${equinoxPostingDirectory}"
 
 # make sure exists, before we write a file there
 mkdir -p $buildResults
-echo "\$basebuilderBranch=${basebuilderBranch}" >> ${buildResults}/buildProperties.php
-echo "\$eclipsebuilderBranch=${eclipsebuilderBranch}" >> $buildResults/buildProperties.php
+echo "<?php " > ${buildResults}/buildProperties.php 
+echo "\$basebuilderBranch='${basebuilderBranch}';" >> ${buildResults}/buildProperties.php
+echo "\$eclipsebuilderBranch='${eclipsebuilderBranch}';" >> $buildResults/buildProperties.php
+echo "?>" >> $buildResults/buildProperties.php
 
 updateBaseBuilder
 checkForErrorExit $? "Failed while updating Base Buidler"
