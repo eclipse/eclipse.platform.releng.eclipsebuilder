@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 
 
-DROP_SITE_ID=I20120525-1400
+DROP_SITE_ID=I20120531-0600
 
-DL_SITE_ID=S-3.8RC2-201205251400
+DROP_LABEL=S-3.8RC3
+
+BUILD_TIMESTAMP=${DROP_SITE_ID//[I-]/}
+
+DL_SITE_ID="${DROP_LABEL}"-"${BUILD_TIMESTAMP}"
 
 BUILDMACHINE_BASE_SITE=/opt/public/eclipse/eclipse3I/siteDir/updates/3.8-I-builds
 
@@ -17,7 +21,7 @@ DLMACHINE_SITE=${DLMACHINE_BASE_SITE}/${DL_SITE_ID}
 # contents to new directories contents
 echo "BUILDMACHINE_SITE: ${BUILDMACHINE_SITE}/"
 echo "DLMACHINE_SITE: ${DLMACHINE_SITE}"
-rsync -r "${BUILDMACHINE_SITE}/"  "${DLMACHINE_SITE}"
+rsync --dry-run -vr "${BUILDMACHINE_SITE}/"  "${DLMACHINE_SITE}"
 
 echo " ... remember to update composite files ... "
 
