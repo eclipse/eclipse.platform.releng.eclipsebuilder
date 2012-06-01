@@ -25,7 +25,7 @@ echo "rename ${DROP_ID} ${DL_DROP_ID} ${DL_LABEL}"
 
 # For Equinox, we don't do the promotion, just create a 
 # script to do it and put it in the right place for others to run.
-createPromotionScriptEq ${DROP_ID}
+createPromotionScriptEq ${DL_DROP_ID}
 
 echo "move backup back to original"
 mv ${DROP_ID}ORIG ${DROP_ID}
