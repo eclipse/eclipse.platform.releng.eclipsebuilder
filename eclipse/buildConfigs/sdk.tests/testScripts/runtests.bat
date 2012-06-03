@@ -57,7 +57,7 @@ dir /b eclipse\plugins\org.eclipse.equinox.launcher_*.jar>launcher-jar-name.txt
 set /p launcher-jar=<launcher-jar-name.txt
 
 rem -Dtimeout=1800000
-%vmcmd% -Dhttp.nonProxyHosts=127.0.0.1|localhost|*.localhost|local|*.local|169.254/16|*.169.254/16|eclipse.org|*.eclipse.org|hudson.eclipse.org|*.hudson.eclipse.org|dev.eclipse.org|*.dev.eclipse.org  -Dosgi.os=%os% -Dosgi.ws=%ws% -Dosgi.arch=%arch% -jar eclipse\plugins\%launcher-jar% -data workspace -application org.eclipse.ant.core.antRunner -file test.xml %tests% -Dws=%ws% -Dos=%os% -Darch=%arch% -D%installmode%=true %properties% -logger org.apache.tools.ant.DefaultLogger
+%vmcmd% -Dhttp.nonProxyHosts="127.0.0.1|localhost|*.localhost|local|*.local|169.254/16|*.169.254/16|eclipse.org|*.eclipse.org|hudson.eclipse.org|*.hudson.eclipse.org|dev.eclipse.org|*.dev.eclipse.org"  -Dosgi.os=%os% -Dosgi.ws=%ws% -Dosgi.arch=%arch% -jar eclipse\plugins\%launcher-jar% -data workspace -application org.eclipse.ant.core.antRunner -file test.xml %tests% -Dws=%ws% -Dos=%os% -Darch=%arch% -D%installmode%=true %properties% -logger org.apache.tools.ant.DefaultLogger
 
 goto end
 
