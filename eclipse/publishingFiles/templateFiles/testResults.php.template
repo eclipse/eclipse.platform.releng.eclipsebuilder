@@ -191,10 +191,22 @@ echo " <li><a href=\"apitools/apifilters-$buildName.zip\"><b>Zip of .api_filters
 
 <div class="homeitem3col">
 <h3><a name="UnitTest"> Unit Test Results for <?php echo "$buildType $buildName"; ?> </a></h3> 
-</br>
-&nbsp;&nbsp;The table shows the test results of the build on the various platforms: Red Hat and Windows. If errors occured,
-the number of errors is indicated in a red bold font and you may access the page specific to each component on
-a specific platform by clicking the cell link.</br></br>
+
+<p>The table shows the unit test results for this build on the platforms 
+tested. You may access the test results page specific to each 
+component on a specific platform by clicking the cell link. 
+Normally, the number of errors is indicated in the cell. 
+A "-1" or "DNF" means the test "Did Not Finish" for unknown reasosns 
+and hence no results page is available. In that case, 
+more information can sometimes be found in 
+the <a href="logs.php#console">console logs</a>.</p>
+<?php 
+if (file_exists("testNotes.html")) {
+    $my_file = file_get_contents("testNotes.html");
+    echo $my_file;
+}
+?>
+
 <table width="85%" border="1" bgcolor="#EEEEEE" rules="groups" align="center">
 <tr bgcolor="#9999CC"> <th rowspan="2" width="40%" align="center"> org.eclipse <br> Component </th><th colspan="5" align="center"> Test Configurations </th></tr>
 <tr bgcolor="#9999CC"><th width="20%">Linux, 1.6 VM</th><th width="20%">MacOSX, 1.6 VM</th><th width="20%">Win 7, 1.7 VM</th><th><th width="20%"></th></tr>
