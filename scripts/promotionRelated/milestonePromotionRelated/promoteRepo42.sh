@@ -21,7 +21,7 @@ DLMACHINE_SITE=${DLMACHINE_BASE_SITE}/${DL_SITE_ID}
 # contents to new directories contents
 echo "BUILDMACHINE_SITE: ${BUILDMACHINE_SITE}/"
 echo "DLMACHINE_SITE: ${DLMACHINE_SITE}"
-rsync --dry-run -vr "${BUILDMACHINE_SITE}/"  "${DLMACHINE_SITE}"
+rsync -vr "${BUILDMACHINE_SITE}/"  "${DLMACHINE_SITE}"
 
 echo " ... remember to update composite files ... "
 
