@@ -3,8 +3,8 @@
 # note, for equinox, we use the "4.2 build", 
 # but label is "3.8"
 
-DROP_ID=I20120531-1500
-DL_LABEL=3.8RC3
+DROP_ID=I20120608-1400
+DL_LABEL=3.8RC4
 
 BUILD_TIMESTAMP=${DROP_ID//[I-]/}
 DL_DROP_ID=S-${DL_LABEL}-${BUILD_TIMESTAMP}
