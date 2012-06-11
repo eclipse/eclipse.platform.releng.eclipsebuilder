@@ -97,7 +97,6 @@ function runTestBoxes($buildName) {
     // hard code for now the tests ran on one box
     // https://bugs.eclipse.org/bugs/show_bug.cgi?id=378706
     return 1;
-
     global $subdirDrops;
     $testBoxes=array("linux", "macosx", "win32");
     $length=count($testBoxes);
@@ -140,16 +139,18 @@ function printBuildColumns($fileName, $parts) {
     $time=intval(date("H"))*60+intval(date("i"));
     $diff=($day-$buildDay)*24*60+$time-$buildTime;
     // Add icons
-    // SHORT TERM? Since "old builds", not from scratch, don't have these swt md5s, well use an easy indicator file, for now. 
-    // eventually may want to put in more complicated logic to check for date, or something?  
-    // presumably this particular md5 was choosen since last one made, I'd guess? 
-    //$build_done=file_exists("$dropDir/checksum/swt-$buildName-win32-wce_ppc-arm-j2me.zip.md5");
-    $build_done=file_exists("$dropDir/eclipse-SDK-$buildName-linux-gtk.tar.gz");
     echo "<td valign=\"baseline\">\n";
     // hard code for now the build is done
     // https://bugs.eclipse.org/bugs/show_bug.cgi?id=378706
-    // if ($build_done) {
-    if (true) {
+    // but later, changed ...
+    // compute build done based on "buildPending" file, but if not 
+    // present, assume build is done
+    // https://bugs.eclipse.org/bugs/show_bug.cgi?id=382196
+    $build_done=true;
+    if (file_exists("$dropDir/buildPending")) {
+        $build_done=false;
+    }
+    if ($build_done) {
         $boxes=runTestBoxes($fileName);
         echo "<a href=\"$dropDir/\"><img border=\"0\" src=\"../images/build_done.gif\" title=\"Build is available\" alt=\"Build is available\" /></a>\n";
         //$testResults="$dropDir/testresults/xml";
@@ -227,43 +228,47 @@ while ($anEntry = $aDirectory->read()) {
     if ($anEntry != "." && $anEntry!=".." && $anEntry!="TIME" && startsWithDropPrefix($anEntry,$dropPrefix)) {
         $parts = explode("-", $anEntry);
         // echo "<p>an entry: $anEntry\n";
-        if (count($parts) == 3) {
+        // do not count hidden directories in computation
+        // allows non-hidden ones to still show up as "most recent" else will be blank.
+        if (!file_exists($subdirDrops."/".$anEntry."/buildHidden")) {
+            if (count($parts) == 3) {
 
-            $buckets[$parts[0]][] = $anEntry;
+                $buckets[$parts[0]][] = $anEntry;
 
-            $timePart = $parts[2];
-            $year = substr($timePart, 0, 4);
-            $month = substr($timePart, 4, 2);
-            $day = substr($timePart, 6, 2);
-            $hour = substr($timePart,8,2);
-            $minute = substr($timePart,10,2);
-            $timeStamp = mktime($hour, $minute, 0, $month, $day, $year);
+                $timePart = $parts[2];
+                $year = substr($timePart, 0, 4);
+                $month = substr($timePart, 4, 2);
+                $day = substr($timePart, 6, 2);
+                $hour = substr($timePart,8,2);
+                $minute = substr($timePart,10,2);
+                $timeStamp = mktime($hour, $minute, 0, $month, $day, $year);
 
-            $timeStamps[$anEntry] = date("D, j M Y -- H:i (O)", $timeStamp);
-            // latestTimeStamp will not be defined, first time through
-            if (!isset($latestTimeStamp) || !array_key_exists($parts[0],$latestTimeStamp)  || $timeStamp > $latestTimeStamp[$parts[0]]) {
-                $latestTimeStamp[$parts[0]] = $timeStamp;
-                $latestFile[$parts[0]] = $anEntry;
+                $timeStamps[$anEntry] = date("D, j M Y -- H:i (O)", $timeStamp);
+                // latestTimeStamp will not be defined, first time through
+                if (!isset($latestTimeStamp) || !array_key_exists($parts[0],$latestTimeStamp)  || $timeStamp > $latestTimeStamp[$parts[0]]) {
+                    $latestTimeStamp[$parts[0]] = $timeStamp;
+                    $latestFile[$parts[0]] = $anEntry;
+                }
             }
-        }
 
-        if (count($parts) == 2) {
+            if (count($parts) == 2) {
 
-            $buildType=substr($parts[0],0,1);
-            $buckets[$buildType][] = $anEntry;
-            $datePart = substr($parts[0],1);
-            $timePart = $parts[1];
-            $year = substr($datePart, 0, 4);
-            $month = substr($datePart, 4, 2);
-            $day = substr($datePart, 6, 2);
-            $hour = substr($timePart,0,2);
-            $minute = substr($timePart,2,2);
-            $timeStamp = mktime($hour, $minute, 0, $month, $day, $year);
-            $timeStamps[$anEntry] = date("D, j M Y -- H:i (O)", $timeStamp);
+                $buildType=substr($parts[0],0,1);
+                $buckets[$buildType][] = $anEntry;
+                $datePart = substr($parts[0],1);
+                $timePart = $parts[1];
+                $year = substr($datePart, 0, 4);
+                $month = substr($datePart, 4, 2);
+                $day = substr($datePart, 6, 2);
+                $hour = substr($timePart,0,2);
+                $minute = substr($timePart,2,2);
+                $timeStamp = mktime($hour, $minute, 0, $month, $day, $year);
+                $timeStamps[$anEntry] = date("D, j M Y -- H:i (O)", $timeStamp);
 
-            if (!isset($latestTimeStamp) || !array_key_exists($buildType,$latestTimeStamp) || $timeStamp > $latestTimeStamp[$buildType]) {
-                $latestTimeStamp[$buildType] = $timeStamp;
-                $latestFile[$buildType] = $anEntry;
+                if (!isset($latestTimeStamp) || !array_key_exists($buildType,$latestTimeStamp) || $timeStamp > $latestTimeStamp[$buildType]) {
+                    $latestTimeStamp[$buildType] = $timeStamp;
+                    $latestFile[$buildType] = $anEntry;
+                }
             }
         }
     }
@@ -289,8 +294,6 @@ foreach($dropType as $value) {
     $prefix=$typeToPrefix[$value];
     // if empty bucket, do not print this row
     if (array_key_exists($prefix,$buckets)) {
-        echo "<tr>\n";
-        echo "<td width=\"30%\">$value</td>\n";
 
 
         if (array_key_exists($prefix,$latestFile)) {
@@ -307,14 +310,18 @@ foreach($dropType as $value) {
         if (count($parts)==3) {
             $buildName=$parts[1];
         }
-        if ($fileName == "") {
-            echo "<td></td>\n";
-        } else {
-            echo "<td><a href=\"$subdirDrops/$fileName/\">$buildName</a></td>\n";
+        if (!file_exists($subdirDrops."/".$fileName."/buildHidden")) {
+            echo "<tr>\n";
+            echo "<td width=\"30%\">$value</td>\n";
+            if ($fileName == "") {
+                echo "<td></td>\n";
+            } else {
+                echo "<td><a href=\"$subdirDrops/$fileName/\">$buildName</a></td>\n";
+            }
+            $buildName = printBuildColumns($fileName, $parts);
+            echo "<td>$timeStamps[$fileName]</td>\n";
+            echo "</tr>\n";
         }
-        $buildName = printBuildColumns($fileName, $parts);
-        echo "<td>$timeStamps[$fileName]</td>\n";
-        echo "</tr>\n";
     }
 }
 ?> 
@@ -357,26 +364,30 @@ foreach($dropType as $value) {
         if (isset($aBucket)) {
             rsort($aBucket);
             foreach($aBucket as $innerValue) {
-                $parts = explode("-", $innerValue);
 
-                echo "<tr>\n";
+                if (!file_exists($subdirDrops."/".$innerValue."/buildHidden")) {
 
-                // Uncomment the line below if we need click through licenses.
-                // echo "<td><a href=\"license.php?license=$subdirDrops/$innerValue\">$parts[1]</a></td>\n";
+                    $parts = explode("-", $innerValue);
 
-                // Comment the line below if we need click through licenses.
-                $buildName=$innerValue;
-                if (count ($parts)==3) {
-                    echo "<td><a href=\"$subdirDrops/$innerValue/\">$parts[1]</a></td>\n";
-                } else if (count ($parts)==2) {
-                    echo "<td><a href=\"$subdirDrops/$innerValue/\">$innerValue</a></td>\n";
-                } else {
-                    echo "<td>Unexpected numberof parts?</td>\n";
+                    echo "<tr>\n";
+
+                    // Uncomment the line below if we need click through licenses.
+                    // echo "<td><a href=\"license.php?license=$subdirDrops/$innerValue\">$parts[1]</a></td>\n";
+
+                    // Comment the line below if we need click through licenses.
+                    $buildName=$innerValue;
+                    if (count ($parts)==3) {
+                        echo "<td><a href=\"$subdirDrops/$innerValue/\">$parts[1]</a></td>\n";
+                    } else if (count ($parts)==2) {
+                        echo "<td><a href=\"$subdirDrops/$innerValue/\">$innerValue</a></td>\n";
+                    } else {
+                        echo "<td>Unexpected numberof parts?</td>\n";
+                    }
+
+                    $buildName = printBuildColumns($innerValue, $parts);
+                    echo "<td>$timeStamps[$innerValue]</td>\n";
+                    echo "</tr>\n";
                 }
-
-                $buildName = printBuildColumns($innerValue, $parts);
-                echo "<td>$timeStamps[$innerValue]</td>\n";
-                echo "</tr>\n";
             }
         }
         echo "</table>\n";
