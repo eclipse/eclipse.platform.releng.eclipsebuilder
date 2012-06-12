@@ -93,7 +93,7 @@ function startsWithDropPrefix($dirName, $dropPrefix)
     }
     return $result;
 }
-function runTestBoxes($buildName) {
+function runTestBoxes($buildName, $testResultsDirName) {
     // hard code for now the tests ran on one box
     // https://bugs.eclipse.org/bugs/show_bug.cgi?id=378706
     return 1;
@@ -102,8 +102,8 @@ function runTestBoxes($buildName) {
     $length=count($testBoxes);
     $boxes=0;
     // TEMP? appears "old style" builds had directories named "results"
-    if (file_exists("$subdirDrops/$buildName/results")) {
-        $buildDir = dir("$subdirDrops/$buildName/results");
+    if (file_exists("$subdirDrops/$buildName/$testResultsDirName")) {
+        $buildDir = dir("$subdirDrops/$buildName/$testResultsDirName");
         while ($file = $buildDir->read()) {
             for ($i = 0 ; $i < $length ; $i++) {
                 if (strncmp($file, $testBoxes[$i], count($testBoxes[$i])) == 0) {
@@ -151,7 +151,11 @@ function printBuildColumns($fileName, $parts) {
         $build_done=false;
     }
     if ($build_done) {
-        $boxes=runTestBoxes($fileName);
+    	$testResultsDirName="results";
+    	if (file_exists("$dropDir/testresults")) {
+    		$testResultsDirName="testresults";
+    	}
+        $boxes=runTestBoxes($fileName, $testResultsDirName);
         echo "<a href=\"$dropDir/\"><img border=\"0\" src=\"../images/build_done.gif\" title=\"Build is available\" alt=\"Build is available\" /></a>\n";
         //$testResults="$dropDir/testresults/xml";
         //if (file_exists("$testResults")) {
@@ -168,12 +172,22 @@ function printBuildColumns($fileName, $parts) {
             break;
 
         case 5:
-            echo "<a href=\"$dropDir/results/testResults.html\"><img border=\"0\" src=\"../images/junit.gif\" title=\"Tests results are available\" alt=\"Tests results are available\" /></a>\n";
+        	if ($testResultsDirName === "testresults") {
+               echo "<a href=\"$dropDir/testResults.php\">";
+        	} else {
+            echo "<a href=\"$dropDir/results/testResults.html\">";
+        	}
+            echo "<img border=\"0\" src=\"../images/junit.gif\" title=\"Tests results are available\" alt=\"Tests results are available\" /></a>\n";
             break;
         default:
             // if more than 12 hours then consider that the regression tests did not finish
             if ($diff > 720) {
-                echo "<a href=\"$dropDir/results/testResults.html\"><img border=\"0\" src=\"../images/junit.gif\" title=\"Tests results are available but did not finish on all machines\" alt=\"Tests results are available but did not finish on all machines\" /></a>\n";
+	            if ($testResultsDirName === "testresults") {
+	               echo "<a href=\"$dropDir/testResults.php\">";
+	        	} else {
+	        		echo "<a href=\"$dropDir/results/testResults.html\">";
+	        	}
+                echo "<img border=\"0\" src=\"../images/junit.gif\" title=\"Tests results are available but did not finish on all machines\" alt=\"Tests results are available but did not finish on all machines\" /></a>\n";
             } else {
                 echo "<img border=\"0\" src=\"../images/runtests.gif\" title=\"Tests are still running on some machines...\" alt=\"Tests are still running on some machines...\" />\n";
             }
