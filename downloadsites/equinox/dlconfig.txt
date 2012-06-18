@@ -1,0 +1,2 @@
+dropPrefix[]=R&dropPrefix[]=S&dropPrefix[]=I&dropPrefix[]=N&dropPrefix[]=M&
+dropType[]=Latest Release&dropType[]=Juno Stable&dropType[]=Juno Integration&dropType[]=Juno Nightly&dropType[]=3.7.x Maintenance&
