@@ -9,6 +9,14 @@ then
   exit 1
 fi
 
+BUILD_ID=$1
+DL_LABEL=$2
+DROP_TYPE=$3
+
+echo "BUILD_ID: ${BUILD_ID}"
+echo "DL_LABEL: ${DL_LABEL}"
+echo "DROP_TYPE: ${DROP_TYPE}"
+
 # BUILD_TYPE, I or M, inferred from first letter of BUILD_ID
 # is build type on build machine. 
 # DROP_TYPE from input, is what we are promoting to

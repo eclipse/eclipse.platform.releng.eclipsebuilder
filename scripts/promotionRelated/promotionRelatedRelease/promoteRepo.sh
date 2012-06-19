@@ -9,6 +9,14 @@ then
   exit 1
 fi
 
+BUILD_ID=$1
+DL_LABEL=$2
+DROP_TYPE=$3
+
+echo "BUILD_ID: ${BUILD_ID}"
+echo "DL_LABEL: ${DL_LABEL}"
+echo "DROP_TYPE: ${DROP_TYPE}"
+
 DROP_SITE_LABEL=${DROP_TYPE}-${DL_LABEL}
 
 BUILD_TIMESTAMP=${BUILD_ID//[IM-]/}
@@ -32,7 +40,7 @@ then
 fi
 # third character taken as build minor number (should be 8 or 2, for now)
 BUILD_MINOR=${DL_LABEL:2:1}
-if [[ $BUILD_MAJOR != 8 && $BUILD_MAJOR != 2 ]]
+if [[ $BUILD_MINOR != 8 && $BUILD_MINOR != 2 ]]
 then
     echo "ERROR: BUILD_MINOR number was unexected: ${BUILD_MINOR}"
     exit 1
