@@ -7,4 +7,4 @@ DL_LABEL=4.2
 # DROP_TYPE either S, R
 DROP_TYPE=R
 
-./promoteToDropSite ${BUILD_ID} ${DL_LABEL} ${DROP_TYPE}
+./promoteDropSite.sh ${BUILD_ID} ${DL_LABEL} ${DROP_TYPE}
