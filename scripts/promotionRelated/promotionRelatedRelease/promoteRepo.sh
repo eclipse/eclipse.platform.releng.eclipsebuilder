@@ -49,7 +49,7 @@ fi
 BUILDMACHINE_BASE_SITE=/opt/public/eclipse/eclipse${BUILD_MAJOR}${BUILD_TYPE}/siteDir/updates/${BUILD_MAJOR}.${BUILD_MINOR}-${BUILD_TYPE}-builds
 
 DLMACHINE_BASE_SITE=/home/data/httpd/download.eclipse.org/eclipse/updates/${BUILD_MAJOR}.${BUILD_MINOR}milestones
-if [[ ${DROP_TYPE} = R ]] 
+if [[ ${DROP_TYPE} == "R" ]] 
 then
  DLMACHINE_BASE_SITE=/home/data/httpd/download.eclipse.org/eclipse/updates/${BUILD_MAJOR}.${BUILD_MINOR}
 fi

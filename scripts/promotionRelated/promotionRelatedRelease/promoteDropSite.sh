@@ -106,7 +106,7 @@ fi
 
 
 # keep releases hidden until release day
-if [[ ${BUILD_TYPE} == "R" ]] 
+if [[ ${DROP_TYPE} == "R" ]] 
 then
   touch ${DL_DROP_ID}/buildHidden
 fi 
@@ -125,7 +125,7 @@ fi
 
 # no need to update of index, bug with "buildHidden" file in place, should not show up
 # note: updating the index is a minor operation, no need to check for error.
-if [[ ${BUILD_TYPE} != "R" ]] 
+if [[ ${DROP_TYPE} != "R" ]] 
 then
  updateIndex ${BUILD_MAJOR}
 fi 
