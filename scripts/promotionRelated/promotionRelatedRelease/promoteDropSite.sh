@@ -18,7 +18,7 @@ fi
 BUILD_TYPE=${BUILD_ID:0:1}
 if [[ $BUILD_TYPE != I && $BUILD_TYPE != M ]]
 then
-    echo "ERROR: BUILD_TYPE was unexected: ${BUILD_TYPE}
+    echo "ERROR: BUILD_TYPE was unexected: ${BUILD_TYPE}"
     exit 1
 fi
 
@@ -26,7 +26,7 @@ fi
 BUILD_MAJOR=${DL_LABEL:0:1}
 if [[ $BUILD_MAJOR != 3 && $BUILD_MAJOR != 4 ]]
 then
-    echo "ERROR: BUILD_MAJOR number was unexected: ${BUILD_MAJOR}
+    echo "ERROR: BUILD_MAJOR number was unexected: ${BUILD_MAJOR}"
     exit 1
 fi
 
@@ -44,7 +44,7 @@ fi
 # sanity check
 if [[ ! -d ${DL_SITE_PATH} ]]
 then
-    echo "ERROR: DL_SITE_PATH does not exist?: ${DL_SITE_PATH}
+    echo "ERROR: DL_SITE_PATH does not exist?: ${DL_SITE_PATH}"
     exit 1
 fi
 # note: always working from "I build" even when going from RC to S
@@ -58,7 +58,7 @@ fi
 # sanity check
 if [[ ! -d ${BUILD_DIR} ]]
 then
-    echo "ERROR: BUILD_DIR does not exist?: ${BUILD_DIR}
+    echo "ERROR: BUILD_DIR does not exist?: ${BUILD_DIR}"
     exit 1
 fi
 

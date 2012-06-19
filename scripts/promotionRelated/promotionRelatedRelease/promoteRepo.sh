@@ -19,7 +19,7 @@ DL_SITE_ID="${DROP_SITE_LABEL}"-"${BUILD_TIMESTAMP}"
 BUILD_TYPE=${BUILD_ID:0:1}
 if [[ $BUILD_TYPE != I && $BUILD_TYPE != M ]]
 then
-    echo "ERROR: BUILD_TYPE was unexected: ${BUILD_TYPE}
+    echo "ERROR: BUILD_TYPE was unexected: ${BUILD_TYPE}"
     exit 1
 fi
 
@@ -27,14 +27,14 @@ fi
 BUILD_MAJOR=${DL_LABEL:0:1}
 if [[ $BUILD_MAJOR != 3 && $BUILD_MAJOR != 4 ]]
 then
-    echo "ERROR: BUILD_MAJOR number was unexected: ${BUILD_MAJOR}
+    echo "ERROR: BUILD_MAJOR number was unexected: ${BUILD_MAJOR}"
     exit 1
 fi
 # third character taken as build minor number (should be 8 or 2, for now)
 BUILD_MINOR=${DL_LABEL:2:1}
 if [[ $BUILD_MAJOR != 8 && $BUILD_MAJOR != 2 ]]
 then
-    echo "ERROR: BUILD_MINOR number was unexected: ${BUILD_MINOR}
+    echo "ERROR: BUILD_MINOR number was unexected: ${BUILD_MINOR}"
     exit 1
 fi
 
