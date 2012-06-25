@@ -14,8 +14,8 @@ initScriptTag=master
 # to build, all that's needed is the appropriate mbNX.sh scripts. It gets what ever 
 # else it needs. 
 
-wget --no-verbose -O mb3M.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb3I.sh?h=$initScriptTag 2>&1;
-wget --no-verbose -O mb4M.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb3I.sh?h=$initScriptTag 2>&1;
+wget --no-verbose -O mb3M.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb3M.sh?h=$initScriptTag 2>&1;
+wget --no-verbose -O mb4M.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb4M.sh?h=$initScriptTag 2>&1;
 wget --no-verbose -O mb4I.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb4I.sh?h=$initScriptTag 2>&1;
 wget --no-verbose -O mb4N.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb4N.sh?h=$initScriptTag 2>&1;
 
