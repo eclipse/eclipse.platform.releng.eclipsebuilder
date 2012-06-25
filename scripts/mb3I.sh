@@ -2,9 +2,9 @@
 
 # Must have these three, rest computed
 
-buildType=I
-eclipseStream=3.8.0
-mapVersionTag=R3_development
+buildType=M
+eclipseStream=3.8.1
+mapVersionTag=R3_maintenance
 
 # should always be 'master' for now, but in future might want
 # a tag, or might need deviation between branches, temporarily). 
