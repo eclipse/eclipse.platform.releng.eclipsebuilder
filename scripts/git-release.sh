@@ -174,7 +174,7 @@ pull() {
         currentTag=$( git describe --exact-match --tags HEAD )
         if [[ "$2" == "$currentTag" ]]
          then
-              echo "CAUTION: repositories.txt specified a tag, no associated maps updated"
+              echo "CAUTION: repositories.txt specified a tag ($2) for a repository ($1), no associated maps updated"
          else
               echo "git pull"
               git pull
