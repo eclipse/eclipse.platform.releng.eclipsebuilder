@@ -5,21 +5,10 @@
 
     <fail unless="buildId" />
     <fail unless="eclipseStream" />
+    <fail unless="eclipseStreamMajor" />
     <fail unless="buildType" />
-    <!-- 
-        TODO: make less exactly hard coded in future
-        also, check for validity using "matches" digit*\.digit*\.digit*
-    -->
-    <condition
-        property="eclipseStreamMajor"
-        value="4"
-        else="3">
-        <equals
-            arg1="${eclipseStream}"
-            arg2="4.2.0" />
-    </condition>
-                
-      <!-- 
+
+     <!-- 
         TODO: make less exactly hard coded in future
          also, check for validity using "matches" digit*\.digit*\.digit*
       -->
@@ -28,8 +17,8 @@
         value="drops4"
         else="drops">
         <equals
-            arg1="${eclipseStream}"
-            arg2="4.2.0" />
+            arg1="${eclipseStreamMajor}"
+            arg2="4" />
     </condition>
 
     <property name="buildRoot" value="/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}"/>
