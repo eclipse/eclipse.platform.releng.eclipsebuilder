@@ -171,8 +171,10 @@ pull() {
         # Note, we can do things like "check out master" and a tag might still be returned (if not changes 
         # yet, so can not go by what's returned, alone, need to compare with what's requested. 
         # if the current HEAD has not tag, it will return "fatal" message, but return empty string.
-        currentTag=$( git describe --exact-match --tags HEAD )
-        if [[ "$2" == "$currentTag" ]]
+        # Since we expect "fatal" error message in normal operation, we will not log those.   
+        currentTag=$( git describe --exact-match --tags HEAD 2>/dev/null)
+        echo "DEBUG: currentTag: >$currentTag<"
+        if [[ -n "$currentTag" && "$2" == "$currentTag" ]]
          then
               echo "CAUTION: repositories.txt specified a tag ($2) for a repository ($1), no associated maps updated"
          else
