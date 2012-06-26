@@ -656,7 +656,7 @@
 
         <condition
             property="mapVersionTag"
-            value="R4_maintenance">
+            value="R4_2_maintenance">
             <and>
                 <equals
                     arg1="${eclipseStreamMajor}"
@@ -669,14 +669,14 @@
         
         <condition
             property="mapVersionTag"
-            value="R3_maintenance">
+            value="R3_8_maintenance">
             <and>
                 <equals
                     arg1="${eclipseStreamMajor}"
                     arg2="3" />
                 <equals
                     arg1="${eclipseStreamMinor}"
-                    arg2="3" />
+                    arg2="8" />
             </and>
         </condition>
         
