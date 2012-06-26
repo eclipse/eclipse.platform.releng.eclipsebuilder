@@ -165,9 +165,21 @@ pull() {
         echo "git checkout $2"
         git checkout $2
         checkForErrorExit $? "Git checkout failed for repository $1 branch $2"
-        echo "git pull"
-        git pull
-        checkForErrorExit $? "Git pull failed for repository $1 branch $2"
+        
+        # check if we just checked out a tag. If so, then we'll have a detached HEAD here, 
+        # and no use trying to do a pull, etc. It implies the maps are "up to date" as they are. 
+        # Note, we can do things like "check out master" and a tag might still be returned (if not changes 
+        # yet, so can not go by what's returned, alone, need to compare with what's requested. 
+        # if the current HEAD has not tag, it will return "fatal" message, but return empty string.
+        currentTag=$( git describe --exact-match --tags HEAD )
+        if [[ "$2" == "$currentTag" ]]
+         then
+              echo "CAUTION: repositories.txt specified a tag, no associated maps updated"
+         else
+              echo "git pull"
+              git pull
+              checkForErrorExit $? "Git pull failed for repository $1 branch $2"
+         fi
         popd
         popd
         echo "DEBUG: current directory as exiting pull ${PWD}"
