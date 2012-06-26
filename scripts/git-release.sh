@@ -180,7 +180,7 @@ pull() {
          else
               echo "git pull"
               git pull
-              checkForErrorExit $? "Git pull failed for repository $1 branch $2"
+              checkForErrorExit $? "Git pull() failed for repository $1 branch $2"
          fi
         popd
         popd
