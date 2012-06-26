@@ -1,0 +1,53 @@
+<project
+    name="testregex"
+    default="testregex"
+    basedir=".">
+    <property
+        name="eclipseStream"
+        value="4.2.1" />
+    <target
+        name="testregex"
+        depends="init">
+
+        <echo message="eclipseStream: ${eclipseStream}" />
+        <echo message="eclipseStreamMajor: ${eclipseStreamMajor}" />
+        <echo message="eclipseStreamMinor: ${eclipseStreamMinor}" />
+        <echo message="eclipseStreamService: ${eclipseStreamService}" />
+        <echo message="updateSiteSegment: ${updateSiteSegment}" />
+        
+    </target>
+
+
+    <!-- 
+       main purpose of init, it to be sure we have eclipseStreamMajor and eclipseStreamMinor
+       Uses script, which requires Java 1.6 (or ... else gets complicated to setup) 
+     -->
+    <target name="init">
+        <fail
+            unless="eclipseStream"
+            message="eclipseStream must be provided by caller" />
+        <condition property="streamOK">
+            <matches
+                pattern="\d\.\d\.\d"
+                string="${eclipseStream}" />
+        </condition>
+        <fail
+            message="eclipseStream variable had unexpected format. Should be digit.digit.digit, but was ${eclipseStream}"
+            unless="streamOK" />
+        
+        <script language="javascript">
+            var eclipseStream = project.getProperty("eclipseStream");
+            var pattern = new RegExp(/(\d+)\.(\d+)\.(\d+)/);
+
+            var sArray = pattern.exec(eclipseStream);
+            // sArray 0 is "whole match"
+            project.setProperty("eclipseStreamMajor", sArray[1]);
+            project.setProperty("eclipseStreamMinor", sArray[2]);
+            project.setProperty("eclipseStreamService", sArray[3]);
+            project.setProperty("updateSiteSegment", sArray[1] + "." + sArray[2]);
+        </script>
+     
+
+    </target>
+
+</project>

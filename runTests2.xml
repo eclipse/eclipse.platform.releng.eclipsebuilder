@@ -505,12 +505,18 @@
     <target
         name="streamSpecificInit"
         unless="streamSpecificInitComplete"
-        depends="getMapProject,hudson-init">
+        depends="initStreamVariables,getMapProject,hudson-init">
         <echo message="DEBUG: executing streamSpecificInit" />
 
         <fail
             unless="eclipseStream"
             message="eclipseStream not defined" />
+        <fail
+            unless="eclipseStreamMajor"
+            message="eclipseStreamMajor not defined" />
+        <fail
+            unless="eclipseStreamMinor"
+            message="eclipseStreamMinor not defined" />
          <!-- 
               mapsProject is the "top" of the maps project after it has been 
               checked out to the local working area. 
@@ -533,6 +539,9 @@
                 arg2="true" />
         </condition>
         
+        
+        
+        
         <!-- 
              these condidtions used to be in "init". Conceptually seems right to be in "stream 
              specific" init (since their value depends on stream) but may have side effects?)
@@ -542,35 +551,9 @@
             value="drops4"
             else="drops">
             <equals
-                arg1="${eclipseStream}"
-                arg2="4.2.0" />
+                arg1="${eclipseStreamMajor}"
+                arg2="4" />
         </condition>
-        <condition
-            property="updateSiteSegment"
-            value="4.2"
-            else="3.8">
-            <equals
-                arg1="${eclipseStream}"
-                arg2="4.2.0" />
-        </condition>
-
-        <condition
-            property="eclipseStreamMajor"
-            value="4"
-            else="3">
-            <equals
-                arg1="${eclipseStream}"
-                arg2="4.2.0" />
-        </condition>
-        <condition
-            property="eclipseStreamMinor"
-            value="2"
-            else="8">
-            <equals
-                arg1="${eclipseStream}"
-                arg2="4.2.0" />
-        </condition>
-
 
                 <!-- bug 376217: repos.properties is one of the files moved from 
                     eclispebuild to maps project and into a common file, streamSpecific-build.properties -->
@@ -649,7 +632,7 @@
         -->
     <target
         name="getMapProject"
-        depends="hudson-init"
+        depends="hudson-init,initStreamVariables"
         unless="mapProjectFetched">
                     <!-- fail fast if these reuqired variables have not been defined 
                         yet -->
@@ -657,20 +640,48 @@
             unless="WORKSPACE"
             message="WORKSPACE not defined" />
 
-        <fail
-            unless="eclipseStream"
-            message="eclipseStream not defined" />
 
-             <!-- TODO: maybe make smarter in future? get from property file or something? -->
         <condition
             property="mapVersionTag"
-            value="master"
-            else="R3_development">
-            <equals
-                arg1="${eclipseStream}"
-                arg2="4.2.0" />
+            value="master">
+            <and>
+                <equals
+                    arg1="${eclipseStreamMajor}"
+                    arg2="4" />
+                <equals
+                    arg1="${eclipseStreamMinor}"
+                    arg2="3" />
+            </and>
         </condition>
 
+        <condition
+            property="mapVersionTag"
+            value="R4_maintenance">
+            <and>
+                <equals
+                    arg1="${eclipseStreamMajor}"
+                    arg2="4" />
+                <equals
+                    arg1="${eclipseStreamMinor}"
+                    arg2="2" />
+            </and>
+        </condition>
+        
+        <condition
+            property="mapVersionTag"
+            value="R3_maintenance">
+            <and>
+                <equals
+                    arg1="${eclipseStreamMajor}"
+                    arg2="3" />
+                <equals
+                    arg1="${eclipseStreamMinor}"
+                    arg2="3" />
+            </and>
+        </condition>
+        
+        <fail unless="mapVersionTag" message="Seems none of the expected major/minor combinations matched expectations for mapVersionTag" />
+        
         <property
             name="commonrepo"
             value="git://git.eclipse.org/gitroot/platform/eclipse.platform.releng.maps" />
@@ -691,7 +702,9 @@
         <delete dir="${WORKSPACE}/workarea/maps" />
         <mkdir dir="${WORKSPACE}/workarea/maps" />
 
-        <unzip src="${mapsGitRepo}/${mapVersionTag}.zip" dest="${WORKSPACE}/workarea/maps">
+        <unzip
+            src="${mapsGitRepo}/${mapVersionTag}.zip"
+            dest="${WORKSPACE}/workarea/maps">
             <globmapper
                 from="${mapVersionTag}/*"
                 to="*" />
@@ -702,4 +715,35 @@
             name="mapProjectFetched"
             value="true" />
     </target>
+    
+    <!-- 
+       main purpose of initStreamVariables, it to be sure we have eclipseStreamMajor and eclipseStreamMinor
+       Uses script, which requires Java 1.6 (or ... else gets complicated to setup) 
+     -->
+    <target name="initStreamVariables">
+        <fail
+            unless="eclipseStream"
+            message="eclipseStream must be provided by caller" />
+        <condition property="streamOK">
+            <matches
+                pattern="\d\.\d\.\d"
+                string="${eclipseStream}" />
+        </condition>
+        <fail
+            message="eclipseStream variable had unexpected format. Should be digit.digit.digit, but was ${eclipseStream}"
+            unless="streamOK" />
+
+        <script language="javascript">
+            var eclipseStream = project.getProperty("eclipseStream");
+            var pattern = new RegExp(/(\d+)\.(\d+)\.(\d+)/);
+
+            var sArray = pattern.exec(eclipseStream);
+            // sArray[0] is "whole match"
+            project.setProperty("eclipseStreamMajor", sArray[1]);
+            project.setProperty("eclipseStreamMinor", sArray[2]);
+            project.setProperty("eclipseStreamService", sArray[3]);
+            project.setProperty("updateSiteSegment", sArray[1] + "." + sArray[2]);
+        </script>
+    </target>
+
 </project>
