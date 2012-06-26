@@ -79,8 +79,8 @@
             value="2"
             else="">
             <equals
-                arg1="${eclipseStream}"
-                arg2="4.2.0" />
+                arg1="${eclipseMajor}"
+                arg2="4" />
         </condition>
 
         <parallel>
