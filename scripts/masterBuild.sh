@@ -481,7 +481,7 @@ processCommandLine ()
     relengRepoName=${relengRepoName:-eclipse.platform.releng.maps}
 
     # base builder pretty constant in CVS now. Will likely "to away" eventually.
-    basebuilderBranch=${basebuilderBranch:-R4_2_primary}
+    basebuilderBranch=${basebuilderBranch:-R38M6PlusRC3}
 
     # relies on export, since getEclipseBuilder is seperate script, 
     # and it does not use "command line pattern"

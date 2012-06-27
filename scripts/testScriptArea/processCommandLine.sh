@@ -159,7 +159,7 @@ processCommandLine ()
     export eclipsebuilder=org.eclipse.releng.eclipsebuilder
     export eclipsebuilderRepo=eclipse.platform.releng.eclipsebuilder
 
-    basebuilderBranch=${basebuilderBranch:-R4_2_primary}
+    basebuilderBranch=${basebuilderBranch:-R38M6PlusRC3}
     # relies on export, since getEclipseBuilder is seperate script, 
     # and it does not use "command line pattern"
     export eclipsebuilderBranch=${eclipsebuilderBranch:-"master"}
