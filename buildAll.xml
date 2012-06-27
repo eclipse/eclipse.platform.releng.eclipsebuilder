@@ -363,7 +363,7 @@
 
 
         <!-- bug 376217: repos.properties is one of the files moved from 
-            eclispebuild to maps project and into a common file, streamSpecific-build.properties -->
+            Eclipsebuild to maps project and into a common file, streamSpecific-build.properties -->
         <replace
             token="@localmirror@"
             file="${configurationLocation}/streamSpecific-build.properties"

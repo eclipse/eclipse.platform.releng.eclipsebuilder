@@ -29,7 +29,7 @@ fi
 eclipseStream=$1
 if [ -z "${eclipseStream}" ]
 then
-    echo "must provide eclispeStream as first argumnet, for this function $0"
+    echo "must provide EclipseStream as first argumnet, for this function $0"
     return 1;
 fi
 
@@ -91,7 +91,7 @@ else
     echo $( $devJRE -version )
 fi
 
-# remember, the eclispe install must match the VM used (e.g. both 64 bit, both 32 bit, etc).
+# remember, the Eclipse install must match the VM used (e.g. both 64 bit, both 32 bit, etc).
 ECLIPSE_EXE=${ECLIPSE_EXE:-${buildRoot}/build/supportDir/org.eclipse.releng.basebuilder/eclipse}
 # somehow, seems like this is often not executable ... I guess launcher jar usually used.
 chmod -c +x $ECLIPSE_EXE

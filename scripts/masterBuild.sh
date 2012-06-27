@@ -130,7 +130,7 @@ updateBaseBuilder () {
 
     # existence of direcotry, is not best test of existence, since 
     # sometimes the top level directory may still exist, while most files deleted,  
-    # due to NFS filesystem quirks. Hence, we look for specific file, the eclispe.ini 
+    # due to NFS filesystem quirks. Hence, we look for specific file, the Eclipse.ini 
     # file. 
     if [[ ! -e "${relengBaseBuilderDir}/eclipse.ini" ]] 
     then
@@ -561,7 +561,7 @@ processCommandLine ()
     targetDir=${buildDir}/targets
     targetZips=${targetDir}/targetzips
 
-    # should never set globally for eclispebuilder. That is, to java via -Dproperty=value, 
+    # should never set globally for Eclipsebuilder. That is, to java via -Dproperty=value, 
     # since eclipsebuilder 
     # assumes different scopes and changes this value for direct calls to generatescripts
     # TODO: I am not sure what the main one ends up being? 
@@ -914,7 +914,7 @@ then
     eqFromDir=${equinoxPostingDirectory}/${buildId}
     eqToDir="/home/data/httpd/download.eclipse.org/equinox/drops/"
 
-    # Note: for proper mirroring at Eclispe, we probably do not want/need to 
+    # Note: for proper mirroring at Eclipse, we probably do not want/need to 
     # maintain "times" on build machine, but let them take times at time of copying. 
     # If it turns out to be important to maintain times (such as ran more than once, 
     # to pick up a "more" output, such as test results, then add -t to rsync

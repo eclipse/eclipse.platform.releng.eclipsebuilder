@@ -1,6 +1,6 @@
    
    eclipseStream=4.11112.100
-   echo "eclispeStream: $eclipseStream"
+   echo "EclipseStream: $eclipseStream"
    
       if [[ "${eclipseStream}" =~ ([[:digit:]]*)\.([[:digit:]]*)\.([[:digit:]]*) ]]
        then

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Intended to contain "standard setup" for running
-# java, eclispe, etc.
+# java, Eclipse, etc.
 
 BUILD_HOME=${BUILD_HOME:-/home/shared/eclipse/eclipse4I}
 
@@ -45,7 +45,7 @@ else
     echo $( $devJRE -version )
 fi
 
-# remember, the eclispe install must match the VM used (e.g. both 64 bit, both 32 bit, etc).
+# remember, the Eclipse install must match the VM used (e.g. both 64 bit, both 32 bit, etc).
 ECLIPSE_EXE=${ECLIPSE_EXE:-/home/shared/eclipse/eclipse4I/build/supportDir/org.eclipse.releng.basebuilder/eclipse}
 
 if [ ! -n ${ECLIPSE_EXE} -a -x ${ECLIPSE_EXE} ]

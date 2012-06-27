@@ -10,7 +10,7 @@ function updateDropLocation ()
     eclipseStream=$1
     if [ -z "${eclipseStream}" ]
     then
-        echo "must provide eclispeStream as first argumnet, for this function $0"
+        echo "must provide EclipseStream as first argumnet, for this function $0"
         return 1;
     fi
 
@@ -125,7 +125,7 @@ function sendTestMail ()
     eclipseStream=$1
     if [ -z "${eclipseStream}" ]
     then
-        echo "must provide eclispeStream as first argumnet"
+        echo "must provide EclipseStream as first argumnet"
         exit 1;
     fi
 
@@ -228,7 +228,7 @@ fi
 eclipseStream=$1
 if [ -z "${eclipseStream}" ]
 then
-    echo "must provide eclispeStream as first argumnet, for this function $0"
+    echo "must provide EclipseStream as first argumnet, for this function $0"
     return 1;
 fi
 

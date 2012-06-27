@@ -47,7 +47,7 @@ else
     echo $( $devJRE -version )
 fi
 
-# remember, the eclispe install must match the VM used (e.g. both 64 bit, both 32 bit, etc).
+# remember, the Eclipse install must match the VM used (e.g. both 64 bit, both 32 bit, etc).
 ECLIPSE_EXE=${ECLIPSE_EXE:-/shared/eclipse/eclipse3I/build/supportDir/org.eclipse.releng.basebuilder/eclipse}
 chmod -c +x $ECLIPSE_EXE
 

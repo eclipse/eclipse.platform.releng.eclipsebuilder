@@ -55,7 +55,7 @@ Latest downloads from the Eclipse project
 <!-- not sure, might need this "rowspan 2" then eclipsecon logo included?
 <td width="19%" rowspan="2"></td> 
 -->
-<img src="../images/friendslogo.jpg" alt="Friends of Eclispe Logo" /><br />Support Eclipse! Become a <a href="http://www.eclipse.org/donate/">friend</a>.<br />
+<img src="../images/friendslogo.jpg" alt="Friends of Eclipse Logo" /><br />Support Eclipse! Become a <a href="http://www.eclipse.org/donate/">friend</a>.<br />
 </td>
 <!--  <td width="19%" rowspan="2"><a href="http://www.eclipsecon.org/" target="_blank"><img src="../images/prom-eclipsecon1.gif" width="125" height="125" border="0" /></a></td> --> 
 
@@ -80,7 +80,7 @@ Software User Agreement</a> unless otherwise specified. </p>
 
 
 <p><a href="http://download.eclipse.org/eclipse/downloads/<?php echo $otherIndexFile;?>">Eclipse <?php echo $otherStream;?>.x downloads</a> are available.</p>
-<p>See the <a href="http://www.eclipse.org/downloads/"> main Eclispe download site for other packages and projects</a>.</p>
+<p>See the <a href="http://www.eclipse.org/downloads/"> main Eclipse download site for other packages and projects</a>.</p>
 <p>Help out with Eclipse translations - check out the <a href="http://babel.eclipse.org/babel/">Babel project</a>.</p>
 <p>If you prefer, try downloading with the <a href="http://build.eclipse.org/technology/phoenix/torrents/SDK/">SDK Torrents</a> </p>
 
