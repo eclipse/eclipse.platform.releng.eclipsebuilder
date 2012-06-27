@@ -118,9 +118,13 @@ function startsWithDropPrefix($dirName, $dropPrefix)
     return $result;
 }
 function runTestBoxes($buildName, $testResultsDirName) {
-    // hard code for now the tests ran on one box
+    // hard code for now the tests ran on one box (or, zero, if no testResultsDirName yet)
     // https://bugs.eclipse.org/bugs/show_bug.cgi?id=378706
-    return 1;
+    if ($testResultsDirName === "" ) {
+       return 0;
+    } else {
+       return 1;
+    }
     global $subdirDrops;
     $testBoxes=array("linux", "macosx", "win32");
     $length=count($testBoxes);
@@ -178,14 +182,16 @@ function printBuildColumns($fileName, $parts) {
     	// test results location changed. 'testresults' is new standard
     	// but we check for 'results' for older stuff.
     	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=379408
-        $testResultsDirName="results";
+        $testResultsDirName="";
         if (file_exists("$dropDir/testresults")) {
             $testResultsDirName="testresults";
+        } else 
+        if (file_exists("$dropDir/results")) {
+            $testResultsDirName="results";
         }
         $boxes=runTestBoxes($fileName, $testResultsDirName);
         echo "<a href=\"$dropDir/\"><img border=\"0\" src=\"../images/build_done.gif\" title=\"Build is available\" alt=\"Build is available\" /></a>\n";
-        //$testResults="$dropDir/testresults/xml";
-        //if (file_exists("$testResults")) {
+
         switch ($boxes) {
         case 0:
             // if more than 8 hours then consider that the regression tests did not start
