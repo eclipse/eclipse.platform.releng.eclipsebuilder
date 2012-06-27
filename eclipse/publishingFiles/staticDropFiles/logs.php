@@ -87,7 +87,7 @@ function getBuildId() {
     $buildType =  $buildType=substr($buildName,0,1);
    // echo "<p>buildType: $buildType</p>";
 
-    $buildId = $buildType.$buildName;
+    $buildId = $buildName;
    // echo "<p>buildId: $buildId</p>";
 
     return($buildId);
