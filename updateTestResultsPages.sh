@@ -111,8 +111,10 @@ echo " BUILDFILESTR: $BUILDFILESTR"
 # provide blank, to get default
 BUILDTARGET=" "
 
+eclipseStreamMajor=${eclipseStream:0:1}
+
 devworkspace="${buildRoot}"/workspace-updateTestResults
-devArgs="-Xmx256m -Dhudson=true -DbuildType=${buildType} -DeclipseStream=${eclipseStream} -DbuildId=${buildId}" 
+devArgs="-Xmx256m -Dhudson=true -DbuildType=${buildType} -DeclipseStream=${eclipseStream} -DeclipseStreamMajor=${eclipseStreamMajor} -DbuildId=${buildId}" 
 
 echo
 echo "   dev script:   $0"
