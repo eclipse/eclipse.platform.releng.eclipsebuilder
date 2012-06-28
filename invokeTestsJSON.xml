@@ -196,10 +196,15 @@
     </target>
 
     <target name="getHudsonResults">
-        <!-- wait for the test results to appear -->
+        <!-- wait for the test results to appear 
+            1440 is 24 hours. This should be temporay and is needed for when 
+            2 builds happen near each other, windows and mac might take 12 hours, and 
+            are ran serially. This should be reduced to 960 (16 hours) or 600 (10 hours)
+            in future as we get tests running right.
+        -->
         <echo message="Waiting for ${hudsonResultURL}." />
         <waitfor
-            maxwait="960"
+            maxwait="1440"
             maxwaitunit="minute"
             checkevery="10"
             checkeveryunit="minute">
