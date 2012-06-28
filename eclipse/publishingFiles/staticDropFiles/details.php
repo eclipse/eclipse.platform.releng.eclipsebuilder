@@ -81,7 +81,6 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 <li><a href="#DeltaPack">Delta Pack</a></li>
 <li><a href="#com.ibm.icu">com.ibm.icu.base Binary and Source Plug-ins</a></li>
 <li><a href="#PlatformRuntime">Platform Runtime Binary</a></li>
-<li><a href="#PlatformSDK">Platform SDK</a></li>
 <li><a href="#JDTRuntime">JDT Runtime Binary</a></li>
 <li><a href="#JDTSDK">JDT SDK</a></li>
 <li><a href="#JDTCORE">JDT Core Batch Compiler</a></li>
