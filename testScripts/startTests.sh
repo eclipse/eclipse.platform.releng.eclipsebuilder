@@ -51,5 +51,6 @@ HUDSON_TOKEN=windows2012tests ant \
 -DbuildType=${buildType} \
 -DeclipseStream=${eclipseStream} \
 -DeclipseStreamMajor=${eclipseStreamMajor} \
+-DeclipseStreamMinor=${eclipseStreamMinor} \
 -f ${builderDir}/invokeTestsJSON.xml 
 
