@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 
+# Small utility to start unit tests (or re-run them) after a build (and initial tests) 
+# is complete. 
+
 source buildParams.shsource
 
-buildType=${buildType:-I}
-buildId=${buildId:-I20120424-1700}
-eclipseStream=${eclipseStream:-4.2.0}
+buildType=${buildType:-M}
+buildId=${buildId:-M20120705-1200}
+eclipseStream=${eclipseStream:-4.2.1}
 
 # contrary to intuition (and previous behavior, bash 3.1) do NOT use quotes around right side of expression. 
 if [[ "${eclipseStream}" =~ ([[:digit:]]*)\.([[:digit:]]*)\.([[:digit:]]*) ]]
