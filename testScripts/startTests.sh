@@ -28,10 +28,13 @@ echo "buildId: $buildId"
 
 buildLabel=${buildId}
 buildRoot=/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}
+buildDir=${buildRoot}/build
+supportDir=${buildDir}/supportDir
+eclipsebuilder=org.eclipse.releng.eclipsebuilder
+builderDir=${supportDir}/$eclipsebuilder
 
-buildBase=${buildRoot}/build/supportDir
 # should buildDirectory be set at "main" one from actual build? 
-buildDirectory=${buildBase}/src
+buildDirectory=${supportDir}/src
 
 # note, to be consistent, I changed json xml file so it adds buildId to postingDirectory 
 siteDir=${buildRoot}/siteDir
@@ -48,5 +51,5 @@ HUDSON_TOKEN=windows2012tests ant \
 -DbuildType=${buildType} \
 -DeclipseStream=${eclipseStream} \
 -DeclipseStreamMajor=${eclipseStreamMajor} \
--f invokeTestsJSON.xml 
+-f ${builderDir}\invokeTestsJSON.xml 
 
