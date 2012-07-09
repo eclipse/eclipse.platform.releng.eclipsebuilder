@@ -11,11 +11,9 @@
 #     IBM Corporation - initial API and implementation
 #*******************************************************************************
 
-# this should be the default, but, just to be sure, since 
-# directory under "drops" on build machine, is being created 
-# without group write. May have to set/change explicitly, but 
-# will try this first. 
-
+# 0002 is often the default for shell users, but it is not when ran from 
+# a cron job, so we set it explicitly, so group has write access to anything 
+# we create.  
 oldumask=`umask`
 umask 0002
 echo "umask explicitly set to 0002, old value was $oldumask"

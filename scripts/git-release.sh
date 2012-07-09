@@ -108,7 +108,7 @@ fi
 function checkForErrorExit ()
 {
     # arg 1 must be return code, $?
-    # arg 2 (remaining line) can be message to print before exiting do to non-zero exit code
+    # arg 2 (remaining line) can be message to print before exiting due to non-zero exit code
     exitCode=$1
     shift
     message="$*"
