@@ -42,5 +42,6 @@ else
     echo "  "
 fi
 
-chmod +x *.sh
+chmod ug+x *.sh
+chmod o-rwx *.sh
 
