@@ -29,7 +29,7 @@ checkForErrorExit $? "could not wget file: ${gitfile}"
 wget --no-verbose -O wgetFresh.NEW.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/sdk/wgetFresh.sh?$initScriptTag 2>&1;
 
 differs=`diff wgetFresh.NEW.sh wgetFresh.sh`
-echo "differs: ${differs}"
+
 if [ -z "${differs}" ]
 then 
     # 'new' not different from existing, so remove 'new' one
@@ -38,33 +38,9 @@ else
     echo " " 
     echo "     wgetFresh.sh has changed. Compare with and consider replacing with wgetFresh.NEW.sh"
     echo "  "
+    echo "differences: ${differs}"
+    echo "  "
 fi
 
 chmod +x *.sh
 
-
-function checkForErrorExit ()
-{
-    # arg 1 must be return code, $?
-    # arg 2 (remaining line) can be message to print before exiting due to non-zero exit code
-    exitCode=$1
-    shift
-    message="$*"
-    if [ -z "${exitCode}" ]
-    then
-        echo "PROGRAM ERROR: checkForErrorExit called with no arguments"
-        exit 1
-    fi
-    if [ -z "${message}" ]
-    then
-        echo "WARNING: checkForErrorExit called without message"
-        message="(Calling program provided no message)"
-    fi
-    if [ "${exitCode}" -ne "0" ]
-    then
-        echo
-        echo "   ERROR. exit code: ${exitCode}  ${message}"
-        echo
-        exit "${exitCode}"
-    fi
-}
