@@ -2,7 +2,5 @@ This directory hold utilities which just so happen to normally be used from
 /shared/eclipse/sdk
 
 There's no technical reason for it ... just handy spot to have some utility scripts. 
-
-
-wget -O makeBranch.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb3I.sh?h=master;
-wget -O mb3I.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb3I.sh?h=master;
+(And, its recommended not to build any dependencies on this exact folder location, 
+of, if done, please update this file). 
