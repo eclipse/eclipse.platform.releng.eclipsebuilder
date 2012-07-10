@@ -3,7 +3,7 @@
 # Utility script to semi-automate creation of a branch using committer shell (or, e4Build id)
 
 project=platform
-reponame=eclipse.platform.debug
+reponame=eclipse.platform.team
 startTag=R3_8
 branchName=R3_8_maintenance
 
@@ -42,7 +42,7 @@ checkForErrorExit $? "Could not create local branch ($branchName) from tag ($sta
 # (which is accomplished by using e4Build id for the general case). 
 
 # note: using cd here is where executing this whole thing from a committer shell on server is handy
-cd repo 
+cd $repo 
 checkForErrorExit $? "Could not cd to repo: $repo" 
 
 git config hooks.allowcreatenottopicbranch true
@@ -54,7 +54,7 @@ checkForErrorExit $? "Could not cd back to local repo"
 git push origin $branchName 
 checkForErrorExit $? "Could not push branch to origin" 
 
-cd repo
+cd $repo
 checkForErrorExit $? "Could not cd to repo: $repo" 
 
 git config --unset hooks.allowcreatenottopicbranch
@@ -67,5 +67,5 @@ checkForErrorExit $? "Error while removing temp repo"
 printf "\n\t%s" "Completed creating branch $branchName from $startTag "
 printf "\t%s\n" "   for repo $repo "
 
-echo 0
+exit 0
 
