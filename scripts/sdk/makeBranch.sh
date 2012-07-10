@@ -14,7 +14,7 @@ gitreponame=$reponame.git
 repo=${repoprojectroot}/${gitreponame}
 
 printf "\n\t%s" "Creating branch $branchName from $startTag "
-printf "\t%s\n" "   for repo $repo "
+printf "\n\t%s\n\n" "   for repo $repo "
 
 temprepoarea=/shared/eclipse/sdk/gittemp
 mkdir -p $temprepoarea
@@ -65,7 +65,7 @@ rm -fr $temprepoarea
 checkForErrorExit $? "Error while removing temp repo"
 
 printf "\n\t%s" "Completed creating branch $branchName from $startTag "
-printf "\t%s\n" "   for repo $repo "
+printf "\n\t%s\n\n" "   for repo $repo "
 
 exit 0
 
