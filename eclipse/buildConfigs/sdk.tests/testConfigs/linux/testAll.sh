@@ -24,6 +24,6 @@ eclipseArch=${eclipseArch:-x86_64}
 
 /bin/chmod 755 runtests.sh
 /bin/mkdir -p results/consolelogs
-./runtests.sh -os linux -ws gtk -arch $eclipseArch -vm "${vmcmd}" -properties vm.properties > results/consolelogs/linux.gtk-6.0_consolelog.txt
+./runtests.sh -os linux -ws gtk -arch $eclipseArch -vm "${vmcmd}" -properties vm.properties $* > results/consolelogs/linux.gtk-6.0_consolelog.txt
 
 

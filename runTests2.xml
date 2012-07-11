@@ -161,7 +161,6 @@
             <sequential>
                 <sleep minutes="3" />
                 <get
-                    verbose="true"
                     httpusecaches="false"
                     src="${archiveLocation}/eclipse-Automated-Tests-${buildId}.zip"
                     dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
@@ -169,7 +168,7 @@
         </retry>
         <retry retrycount="20">
             <sequential>
-                <sleep minutes="3" />
+                <sleep minutes="1" />
                 <get
                     httpusecaches="false"
                     src="${archiveLocation}/eclipse-${buildId}-delta-pack.zip"
@@ -178,7 +177,7 @@
         </retry>
         <retry retrycount="20">
             <sequential>
-                <sleep minutes="3" />
+                <sleep minutes="1" />
                 <get
                     httpusecaches="false"
                     src="${archiveLocation}/eclipse-Automated-Tests-${buildId}.zip"
@@ -277,7 +276,6 @@
 
         <echo message="cvstest.properties file: ${cvstest.properties}" />
         <replace
-            summary="true"
             file="${executionDir}/test.xml"
             propertyFile="${cvstest.properties}">
             <replacefilter
@@ -453,17 +451,14 @@
             name="p2executionDir"
             value="${windowsfile}" />
         <replace
-            summary="true"
             file="${eclipseBuilderDir}/eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties"
             token="@executionDir@"
             value="${p2executionDir}" />
         <replace
-            summary="true"
             file="${eclipseBuilderDir}/eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties"
             token="@buildId@"
             value="${buildId}" />
         <replace
-            summary="true"
             file="${eclipseBuilderDir}/eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/equinoxp2tests.properties"
             token="@org.eclipse.equinox.p2.tests.current.build.repo@"
             value="${currentbuildrepo}" />
@@ -598,17 +593,14 @@
                 <!-- now that we've done that little merge, let's "fix up" eclipseBuild 
                     stuff that depends on exact version numbers -->
         <replace
-            summary="true"
             dir="${eclipseBuilderDir}"
             token="@eclipseStream@"
             value="${eclipseStream}" />
         <replace
-            summary="true"
             dir="${eclipseBuilderDir}"
             token="@eclipseStreamMajor@"
             value="${eclipseStreamMajor}" />
         <replace
-            summary="true"
             dir="${eclipseBuilderDir}"
             token="@eclipseStreamMinor@"
             value="${eclipseStreamMinor}" />

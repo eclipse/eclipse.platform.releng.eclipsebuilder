@@ -46,6 +46,7 @@ if x%1==x-vm set vmcmd="%2" && shift && shift && goto processcmdlineargs
 
 set tests=%tests% %1 && shift && goto processcmdlineargs
 
+echo Specified test targets (if any): %tests%
 
 :run
 REM ***************************************************************************
