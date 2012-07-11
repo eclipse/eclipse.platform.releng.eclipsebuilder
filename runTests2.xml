@@ -163,7 +163,6 @@
             <sequential>
                 <sleep minutes="3" />
                 <get
-                    verbose="true"
                     httpusecaches="false"
                     src="${archiveLocation}/eclipse-Automated-Tests-${buildId}.zip"
                     dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
@@ -171,7 +170,7 @@
         </retry>
         <retry retrycount="20">
             <sequential>
-                <sleep minutes="3" />
+                <sleep minutes="1" />
                 <get
                     httpusecaches="false"
                     src="${archiveLocation}/eclipse-${buildId}-delta-pack.zip"
@@ -180,7 +179,7 @@
         </retry>
         <retry retrycount="20">
             <sequential>
-                <sleep minutes="3" />
+                <sleep minutes="1" />
                 <get
                     httpusecaches="false"
                     src="${archiveLocation}/eclipse-Automated-Tests-${buildId}.zip"
