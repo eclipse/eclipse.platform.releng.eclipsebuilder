@@ -2,9 +2,9 @@
 
 REM default java executable for outer and test vm
 set vmcmd=java
-set no_proxy=%no_proxy%,::1
-set JAVA_ARGS=%JAVA_ARGS%,::1
-set ANT_ARGS=%ANT_ARGS%,::1
+set no_proxy=%no_proxy%
+set JAVA_ARGS=%JAVA_ARGS%
+set ANT_ARGS=%ANT_ARGS%
 
 REM reset list of ant targets in test.xml to execute
 set tests=
