@@ -67,6 +67,8 @@ do
     shift
 done
 
+echo "Specified test targets (if any): ${tests}"
+
 # for *nix systems, os, ws and arch values must be specified
 if [ "x$os" = "x" ]
 then
