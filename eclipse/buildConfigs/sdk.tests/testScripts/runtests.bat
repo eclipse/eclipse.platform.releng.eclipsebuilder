@@ -67,8 +67,11 @@ rem -Dtimeout=1800000
 echo "list all environment variables in effect as tests start"
 set
 
-# passing in JAVA_ARGS explicitly
-%vmcmd% %JAVA_ARGS% -Dosgi.os=%os% -Dosgi.ws=%ws% -Dosgi.arch=%arch% -jar eclipse\plugins\%launcher-jar% -data workspace -application org.eclipse.ant.core.antRunner -file test.xml %tests% -Dws=%ws% -Dos=%os% -Darch=%arch% -D%installmode%=true %properties% -logger org.apache.tools.ant.DefaultLogger
+REM passing in JAVA_ARGS, ANT_ARGS explicitly
+echo JAVA_ARGS: %JAVA_ARGS%
+echo ANT_ARGS:  %ANT_ARGS%
+echo no_proxy:  %no_proxy%
+%vmcmd% %JAVA_ARGS% -Dno_proxy=%no_proxy% -Dosgi.os=%os% -Dosgi.ws=%ws% -Dosgi.arch=%arch% -jar eclipse\plugins\%launcher-jar% -data workspace -application org.eclipse.ant.core.antRunner -file test.xml %tests% %ANT_ARGS% -Dno_proxy=%no_proxy% -Dws=%ws% -Dos=%os% -Darch=%arch% -D%installmode%=true %properties% -logger org.apache.tools.ant.DefaultLogger
 
 goto end
 
