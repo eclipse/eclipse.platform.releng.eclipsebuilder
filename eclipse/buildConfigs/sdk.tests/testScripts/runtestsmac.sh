@@ -1,10 +1,5 @@
 #!/bin/sh
 
-#set the DISPLAY for running tests on Linux
-#DISPLAY=`$HOST`:0.0;export DISPLAY
-export no_proxy=localhost,127.0.0.1,172.30.206.0,dev.eclipse.org,hudson.eclipse.org,eclipse.org
-DISPLAY=localhost:8.0;export DISPLAY
-
 # by default, use the java executable on the path for outer and test jvm
 #vmcmd=/shared/common/jdk-1.6.x86_64/jre/bin/java
 vmcmd=java
