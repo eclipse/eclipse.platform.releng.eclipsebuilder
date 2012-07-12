@@ -1,4 +1,4 @@
-
+@echo on
 
 REM default java executable for outer and test vm
 set vmcmd=java
