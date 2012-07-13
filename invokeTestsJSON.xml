@@ -12,74 +12,32 @@
     <!-- 
     this script is invoked by the build, on the build machine, 
     to signify to hudson "the build is done", pass a few parameters, 
-    then let Hudson's job/scripts take over 
+    then let Hudson take over. 
     
     wget - -no-verbose -O invokeTestsJSON.xml http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/invokeTestsJSON.xml?h=master 2>&1;
     
     -->
-    <!-- 
-        TODO: make less exactly hard coded in future
-        also, check for validity using "matches" digit*\.digit*\.digit*
-    -->
-    <condition
-        property="dropsDirSegment"
-        value="drops4"
-        else="drops">
-        <equals
-            arg1="${eclipseStreamMajor}"
-            arg2="4" />
-    </condition>
-
-    <property
-        name="buildRoot"
-        value="/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}" />
-
-    <property
-        name="postingDirectory"
-        value="${buildRoot}/siteDir/eclipse/downloads/${dropsDirSegment}" />
 
 
-    <property
-        name="jobNumberOut"
-        value="${postingDirectory}/${buildId}/testresults/" />
-    <property
-        name="buildLabel"
-        value="${buildId}" />
 
-    <!-- make sure this directory exists, as we'll later try to 
-         write information file there -->
-    <echo message="jobNumberOut: ${jobNumberOut}" />
-    <mkdir dir="${jobNumberOut}" />
 
-    <target name="runTests">
-        <fail unless="eclipseStream" />
-        <fail unless="buildType" />
-        <fail unless="eclipseStreamMajor" />
-        <fail unless="eclipseStreamMinor" />
-        <fail unless="eclipseStreamService" />
-        
+
+    <target
+        name="runTests"
+        depends="init">
         <antcall target="JUnitTests" />
     </target>
 
 
-    <!-- 
-        note: implicitly assumes the antcalls inheret context, 
-        so have access to $eclipseStream and $buildType
-    -->
-    <target name="JUnitTests">
+    <target name="JUnitTests"
+        depends="init">
         
         <!-- 
-            TODO: make less exactly hard coded in future
-            also, check for validity using "matches" digit*\.digit*\.digit*
+          currently we test on three platforms. 
+          So, three parallel calls since on different machines (and Hudson queues). 
+          TODO: Can these be called, in parrallel via callant (or, perhaps subant?) 
+          for greater flexibility in what to test?
         -->
-        <condition
-            property="jobNameSuffix"
-            value="2"
-            else="">
-            <equals
-                arg1="${eclipseStreamMajor}"
-                arg2="4" />
-        </condition>
 
         <parallel>
 
@@ -113,35 +71,25 @@
         </parallel>
     </target>
 
-        
-    <target name="triggerHudsonTests">
+
+    <target
+        name="triggerHudsonTests"
+        depends="init">
 
         <property environment="env" />
 
-        <!-- 
-             recently added variables, required for correct operation, 
-             so we will fail fast if we forget to pass them in 
-        -->
-        <fail unless="eclipseStream" />
-        <fail unless="buildType" />
-
-        <!-- 
-            TODO: make less exactly hard coded in future
-            also, check for validity using "matches" digit*\.digit*\.digit*
-        -->
-        <condition
-            property="dropsDirSegment"
-            value="drops4"
-            else="drops">
-            <equals
-                arg1="${eclipseStreamMajor}"
-                arg2="4" />
-        </condition>
-
+     <!-- 
+     baseURL used to be "required parameter" for Hudson job, but seemed overly complicated so 
+     I compute all this later (based on stream and id) but, I've learned, one disadvantage is this 
+     restricts test code locations to "downloads". There might be times we want to do from "build" 
+     locations, or similar. Not to mention, other, internal test systems someday. 
+     
         <property
             name="baseURL"
             value="http://download.eclipse.org/eclipse/downloads/${dropsDirSegment}/${buildId}" />
-
+     -->
+        
+        <!-- Hudson jobs currentl have three required parameters -->
         <property
             name="JSON_buildId"
             value="{&quot;name&quot;:&quot;buildId&quot;,&quot;value&quot;:&quot;${buildId}&quot;}" />
@@ -151,7 +99,6 @@
         <property
             name="JSON_buildType"
             value="{&quot;name&quot;:&quot;buildType&quot;,&quot;value&quot;:&quot;${buildType}&quot;}" />
-        <!--current build repository too ? -->
 
         <property
             name="json"
@@ -170,8 +117,8 @@
             <arg value="grep -o 'nextBuildNumber&quot;:[0-9]*' ${jobNumberOut}/nextBuildNumber${job} | cut -d ':' -f 2" />
         </exec>
         <!-- 
-             don't delete ... for debugging for now ... but long term might make use of this (and 
-             other info) to "find" our results? 
+         don't delete ... for debugging for now ... but long term might make use of this (and 
+         other info) to "find" our results? 
         <delete file="${jobNumberOut}/nextBuildNumber${job}" />
         -->
         <echo message="Next hudson build number is ${nextHudsonBuild}." />
@@ -191,11 +138,14 @@
         <property
             name="hudsonResultURL"
             value="${hudsonResultRootURL}/archive.zip" />
-        <antcall target="getHudsonResults" />
         <echo message="hudsonResultURL ${hudsonResultURL} " />
+        <antcall target="getHudsonResults" />
+
     </target>
 
-    <target name="getHudsonResults">
+    <target
+        name="getHudsonResults"
+        depends="init">
         <!-- wait for the test results to appear 
             1440 is 24 hours. This should be temporay and is needed for when 
             2 builds happen near each other, windows and mac might take 12 hours, and 
@@ -226,15 +176,19 @@
                 from="archive/workarea/${buildId}/eclipse-testing/results/*"
                 to="*" />
         </unzip>
-        
 
-        <!-- create and que up promotion script 
-        TODO: will need to add "generate index pages" to the promote commands (or script)
-        -->
-        <!-- the "updateDropLocation.sh" file is similar to initial "sync" file, 
+        <antcall target="createPromoteScript" />
+    </target>
+
+    <target name="createPromoteScript" 
+        depends="init">
+        <!-- Create and que up promotion script after we have fetched the results back from hudson.
+             (We need to promote under a different user ID since we builder under e4Build that 
+             that is not a userID). 
+             The "updateDropLocation.sh" file is similar to initial "sync" file, 
              but, a little different, and could potential be more different, or more similar? 
              in future. -->
-        <!-- temp use 'test' name so won't actually run .. just in case its' way off -->
+
         <property
             name="updatescriptname"
             value="/shared/eclipse/sdk/promotion/queue/promote-update-${buildId}-${job}.sh" />
@@ -252,7 +206,9 @@
             file="${updatescriptname}" />
         
         <!-- we restrict "others" rights for a bit more security or safety from accidents -->
-        <chmod perm="ug=rwx,o-rwx" file="${updatescriptname}"/>
+        <chmod
+            perm="ug=rwx,o-rwx"
+            file="${updatescriptname}" />
         
         <!-- dont' delete zip, for now, to aide debugging
         <delete includeEmptyDirs="true">
@@ -262,5 +218,93 @@
 
 
     </target>
+
+    <target
+        name="init"
+        depends="initStreamVariables"
+        unless="invokeTestsJSONinitialized">
+
+        <fail
+            unless="buildType"
+            message="buildType (e.g. I, N, M)  much be provided for this script." />
+
+        <condition
+            property="dropsDirSegment"
+            value="drops4"
+            else="drops">
+            <equals
+                arg1="${eclipseStreamMajor}"
+                arg2="4" />
+        </condition>
+        
+        <!-- 
+          current convention distinguishes hudson jobs with "2" for 4.x tests, nothing if 3.x tests
+          TODO: change to be more specific to version (such as "4" and "3"). 
+         -->
+        <condition
+            property="jobNameSuffix"
+            value="2"
+            else="">
+            <equals
+                arg1="${eclipseStreamMajor}"
+                arg2="4" />
+        </condition>
+
+        <property
+            name="buildRoot"
+            value="/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}" />
+
+        <property
+            name="postingDirectory"
+            value="${buildRoot}/siteDir/eclipse/downloads/${dropsDirSegment}" />
+
+
+        <property
+            name="jobNumberOut"
+            value="${postingDirectory}/${buildId}/testresults/" />
+        <!-- make sure this directory exists, as we'll later try to 
+             write information file there -->
+        <echo message="jobNumberOut: ${jobNumberOut}" />
+        <mkdir dir="${jobNumberOut}" />
+        
+        <!-- TODO: find out if and why we need "buildLabel" defined here? -->
+        <property
+            name="buildLabel"
+            value="${buildId}" />
+
+
+        <property
+            name="invokeTestsJSONinitialized"
+            value="true" />
+    </target>
+
+    <target name="initStreamVariables">
+
+        <fail
+            unless="eclipseStream"
+            message="eclipseStream must be provided by caller" />
+        <condition property="streamOK">
+            <matches
+                pattern="\d\.\d\.\d"
+                string="${eclipseStream}" />
+        </condition>
+        <fail
+            message="eclipseStream variable had unexpected format. Should be digit.digit.digit, but was ${eclipseStream}"
+            unless="streamOK" />
+        <script language="javascript">
+            var eclipseStream = project.getProperty("eclipseStream");
+            var pattern = new
+            RegExp(/(\d+)\.(\d+)\.(\d+)/);
+
+            var sArray = pattern.exec(eclipseStream);
+            // sArray[0] is "whole match"
+            project.setProperty("eclipseStreamMajor", sArray[1]);
+            project.setProperty("eclipseStreamMinor", sArray[2]);
+            project.setProperty("eclipseStreamService", sArray[3]);
+
+        </script>
+
+    </target>
+
 
 </project>
