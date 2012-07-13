@@ -956,9 +956,6 @@ then
        -DbuildId=${buildId} \
        -DbuildType=${buildType} \
        -DeclipseStream=${eclipseStream} \
-       -DeclipseStreamMajor=${eclipseStreamMajor} \
-       -DeclipseStreamMinor=${eclipseStreamMinor} \
-       -DeclipseStreamService=${eclipseStreamService} \
        -f $builderDir/invokeTestsJSON.xml
 
 fi
