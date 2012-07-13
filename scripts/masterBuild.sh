@@ -952,6 +952,10 @@ echo "normal exit from build phase of $0"
 if [[ "${testbuildonly}" != "true" ]] 
 then
 
+   # need to be running Java 6 and Ant 1.8 for <sript> to work in invokeTestsJSON
+   # and, default on current build system is Ant 1.7 ... so ... 
+   export ANT_HOME=/shared/common/apache-ant-1.8.2
+
    HUDSON_TOKEN=windows2012tests ant \
        -DbuildId=${buildId} \
        -DbuildType=${buildType} \

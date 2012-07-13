@@ -3,8 +3,14 @@
 # Small utility to start unit tests (or re-run them) after a build (and initial tests) 
 # is complete. 
 
+# need to be running Java 6 and Ant 1.8 for <sript> to work in invokeTestsJSON
+# and, default on current build system is Ant 1.7 ... so ... 
+export ANT_HOME=/shared/common/apache-ant-1.8.2
+
+
 source buildParams.shsource
 
+# remember, best (if not necessary) to define these three variables in buildParams.shsource
 buildType=${buildType:-M}
 buildId=${buildId:-M20120705-1200}
 eclipseStream=${eclipseStream:-4.2.1}
