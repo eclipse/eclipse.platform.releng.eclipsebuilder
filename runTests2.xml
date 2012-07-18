@@ -183,7 +183,7 @@
                 <get
                     httpusecaches="false"
                     src="${archiveLocation}/eclipse-Automated-Tests-${buildId}.zip"
-                    dest="${testDir}/eclipse-Automated-Tests-${}.zip" />
+                    dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
             </sequential>
         </retry>
         <retry retrycount="20">
