@@ -37,7 +37,7 @@
         
         <script language="javascript">
             var eclipseStream = project.getProperty("eclipseStream");
-            var pattern = new RegExp(/(\d+)\.(\d+)\.(\d+)/);
+            var pattern = new RegExp(/^(\d+)\.(\d+)\.(\d+)$/);
 
             var sArray = pattern.exec(eclipseStream);
             // sArray 0 is "whole match"

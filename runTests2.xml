@@ -87,18 +87,38 @@
         <property
             name="eclipseBuilderDir"
             value="${WORKSPACE}/org.eclipse.releng.eclipsebuilder" />
-        
-        <!-- 
-             recently added variables, required for correct operation, 
-             so we will fail fast if we forget to pass them in 
-        -->
-        <fail unless="eclipseStream" />
-        <fail unless="buildType" />
+
+        <fail
+            unless="buildId"
+            message="buildId value must be provided by caller (such as 'I20120717-0800'" />
 
         <!-- 
-            TODO: make less exactly hard coded in future
-            also, check for validity using "matches" digit*\.digit*\.digit*
+             this "buildId check" may be overly strict, but best to start off strict for now, 
+             loosen in future if we start to find/have variety 
         -->
+
+        <condition property="buildIdOK">
+            <matches
+                pattern="^[IMNSR]\d{8}-\d{4}$"
+                string="${buildId}" />
+        </condition>
+        <fail
+            message="buildId variable had unexpected format. Should be of the form  [IMNSR] 8 digits '-' 4 digits, but was ${buildId}"
+            unless="buildIdOK" />
+
+        <script language="javascript">
+            var buildId = project.getProperty("buildId");
+            var pattern = new RegExp(/^([IMNSR])(\d{8})-(\d{4})$/);
+
+            var sArray = pattern.exec(buildId);
+            // sArray 0 is "whole match"
+            project.setProperty("buildType", sArray[1]);
+        </script>
+
+
+        <fail unless="buildType" />
+
+
         <echo message="hudson: ${hudson}" />
         <echo message="WORKSPACE: ${WORKSPACE}" />
         <echo message="buildId: ${buildId}" />
@@ -163,7 +183,7 @@
                 <get
                     httpusecaches="false"
                     src="${archiveLocation}/eclipse-Automated-Tests-${buildId}.zip"
-                    dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
+                    dest="${testDir}/eclipse-Automated-Tests-${}.zip" />
             </sequential>
         </retry>
         <retry retrycount="20">
@@ -503,15 +523,7 @@
         depends="initStreamVariables,getMapProject,hudson-init">
         <echo message="DEBUG: executing streamSpecificInit" />
 
-        <fail
-            unless="eclipseStream"
-            message="eclipseStream not defined" />
-        <fail
-            unless="eclipseStreamMajor"
-            message="eclipseStreamMajor not defined" />
-        <fail
-            unless="eclipseStreamMinor"
-            message="eclipseStreamMinor not defined" />
+
          <!-- 
               mapsProject is the "top" of the maps project after it has been 
               checked out to the local working area. 
@@ -658,7 +670,7 @@
                     arg2="2" />
             </and>
         </condition>
-        
+
         <condition
             property="mapVersionTag"
             value="R3_8_maintenance">
@@ -671,9 +683,11 @@
                     arg2="8" />
             </and>
         </condition>
-        
-        <fail unless="mapVersionTag" message="Seems none of the expected major/minor combinations matched expectations for mapVersionTag" />
-        
+
+        <fail
+            unless="mapVersionTag"
+            message="Seems none of the expected major/minor combinations matched expectations for mapVersionTag" />
+
         <property
             name="commonrepo"
             value="git://git.eclipse.org/gitroot/platform/eclipse.platform.releng.maps" />
@@ -715,19 +729,20 @@
     <target name="initStreamVariables">
         <fail
             unless="eclipseStream"
-            message="eclipseStream must be provided by caller" />
+            message="eclipseStream value must be provided by caller, such as '4.3.0'." />
         <condition property="streamOK">
             <matches
                 pattern="\d\.\d\.\d"
                 string="${eclipseStream}" />
         </condition>
         <fail
-            message="eclipseStream variable had unexpected format. Should be digit.digit.digit, but was ${eclipseStream}"
+            message="eclipseStream variable had unexpected format. Should be of form digit.digit.digit, but was ${eclipseStream}"
             unless="streamOK" />
 
         <script language="javascript">
             var eclipseStream = project.getProperty("eclipseStream");
-            var pattern = new RegExp(/(\d+)\.(\d+)\.(\d+)/);
+            var pattern = new
+            RegExp(/(\d+)\.(\d+)\.(\d+)/);
 
             var sArray = pattern.exec(eclipseStream);
             // sArray[0] is "whole match"
@@ -736,6 +751,20 @@
             project.setProperty("eclipseStreamService", sArray[3]);
             project.setProperty("updateSiteSegment", sArray[1] + "." + sArray[2]);
         </script>
+
+        <fail
+            unless="eclipseStreamMajor"
+            message="eclipseStreamMajor not defined or computed" />
+        <fail
+            unless="eclipseStreamMinor"
+            message="eclipseStreamMinor not defined or computed" />
+        <fail
+            unless="eclipseStreamService"
+            message="eclipseStreamService not defined or computed" />
+        <fail
+            unless="updateSiteSegment"
+            message="updateSiteSegment not defined or computed" />
+
     </target>
 
 </project>

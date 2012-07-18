@@ -1,0 +1,48 @@
+<project
+    name="testregex"
+    default="testregex"
+    basedir=".">
+
+    <property
+        name="buildId"
+        value="I20120626-9933" />
+    <target
+        name="testregex"
+        depends="init">
+
+        <echo message="buildId: ${buildId}" />
+        <echo message="buildType: ${buildType}" />
+
+
+    </target>
+
+
+    <!-- main purpose of init, it to be sure we have eclipseStreamMajor and eclipseStreamMinor -->
+    <target name="init">
+       
+        <fail
+            unless="buildId"
+            message="buildId must be provided by caller" />
+
+        <condition property="buildIdOK">
+            <matches
+                pattern="^[IMNSR]\d{8}-\d{4}$"
+                string="${buildId}" />
+        </condition>
+        <fail
+            message="buildId variable had unexpected format. Should be [IMNSR] 8 digits - 4 digits, but was ${buildId}"
+            unless="buildIdOK" />
+        
+        <script language="javascript">
+            var buildId = project.getProperty("buildId");
+            var pattern = new RegExp(/^([IMNSR])(\d{8})-(\d{4})$/);
+
+            var sArray = pattern.exec(buildId);
+            // sArray 0 is "whole match"
+            project.setProperty("buildType", sArray[1]);
+        </script>
+
+
+    </target>
+
+</project>
