@@ -96,13 +96,10 @@
         <property
             name="JSON_eclipseStream"
             value="{&quot;name&quot;:&quot;eclipseStream&quot;,&quot;value&quot;:&quot;${eclipseStream}&quot;}" />
-        <property
-            name="JSON_buildType"
-            value="{&quot;name&quot;:&quot;buildType&quot;,&quot;value&quot;:&quot;${buildType}&quot;}" />
 
         <property
             name="json"
-            value="{&quot;parameter&quot;: [${JSON_buildId},${JSON_eclipseStream},${JSON_buildType}] }" />
+            value="{&quot;parameter&quot;: [${JSON_buildId},${JSON_eclipseStream}] }" />
 
         <!-- fetch the next hudson build number from the hudson job API -->
         <exec executable="curl">
@@ -201,7 +198,7 @@
             append="true"
             file="${updatescriptname}" />
         <echo
-            message="/shared/eclipse/sdk/promotion/updateDropLocation.sh ${eclipseStream} ${buildType} ${buildId}${line.separator}"
+            message="/shared/eclipse/sdk/promotion/updateDropLocation.sh ${eclipseStream} ${buildId}${line.separator}"
             append="true"
             file="${updatescriptname}" />
         
@@ -223,10 +220,6 @@
         name="init"
         depends="initStreamVariables"
         unless="invokeTestsJSONinitialized">
-
-        <fail
-            unless="buildType"
-            message="buildType (e.g. I, N, M)  much be provided for this script." />
 
         <condition
             property="dropsDirSegment"
@@ -250,6 +243,15 @@
                 arg2="4" />
         </condition>
 
+        <script language="javascript">
+            var buildId = project.getProperty("buildId");
+            var pattern = new RegExp(/^([IMNSR])(\d{8})-(\d{4})$/);
+
+            var sArray = pattern.exec(buildId);
+            // sArray 0 is "whole match"
+            project.setProperty("buildType", sArray[1]);
+        </script>
+        
         <property
             name="buildRoot"
             value="/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}" />

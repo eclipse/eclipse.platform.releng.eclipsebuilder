@@ -10,11 +10,13 @@ export ANT_HOME=/shared/common/apache-ant-1.8.2
 
 source buildParams.shsource
 
-# remember, best (if not necessary) to define these three variables in buildParams.shsource
-buildType=${buildType:-M}
+# remember, best (if not necessary) to define these variables in buildParams.shsource
+
 buildId=${buildId:-M20120705-1200}
 eclipseStream=${eclipseStream:-4.2.1}
 
+buildType=${buildId:0:1}
+        
 # contrary to intuition (and previous behavior, bash 3.1) do NOT use quotes around right side of expression. 
 if [[ "${eclipseStream}" =~ ([[:digit:]]*)\.([[:digit:]]*)\.([[:digit:]]*) ]]
 then
@@ -54,7 +56,6 @@ HUDSON_TOKEN=windows2012tests ant \
 -DbuildDirectory=${buildDirectory} \
 -DpostingDirectory=${postingDirectory} \
 -DbuildId=${buildId} \
--DbuildType=${buildType} \
 -DeclipseStream=${eclipseStream} \
 -f ${builderDir}/invokeTestsJSON.xml 
 
