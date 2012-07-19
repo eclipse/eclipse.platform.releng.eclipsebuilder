@@ -2,7 +2,7 @@
 cd %executionDir
 REM test script
 
-set vmcmdvalue=c:\\java\\jdk7u2\\jre\\bin\\java
+set vmcmdvalue=c:\\java\\jdk7u2\\jre\\bin\\javaw
 
 REM localTestProperties.bat is not used or expected in production environment, 
 REM but allows a place for people to have their own machines variables defined
