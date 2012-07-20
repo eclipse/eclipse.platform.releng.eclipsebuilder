@@ -228,7 +228,7 @@ then
 fi
 
 eclipseStreamMajor=${eclipseStream:0:1}
-buildTyper=${buildId:0:1}
+buildType=${buildId:0:1}
 
 buildRoot=${buildRoot:-/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}}
 builderDir=${buildRoot}/build/supportDir/org.eclipse.releng.eclipsebuilder
