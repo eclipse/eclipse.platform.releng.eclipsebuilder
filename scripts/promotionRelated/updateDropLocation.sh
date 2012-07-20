@@ -15,14 +15,7 @@ function updateDropLocation ()
     fi
 
 
-    buildType=$2
-    if [ -z "${buildType}" ]
-    then
-        echo "must provide buildType as second argumnet, for this function $0"
-        return 1;
-    fi
-
-    buildId=$3
+    buildId=$2
     if [ -z "${buildId}" ]
     then
         echo "must provide buildId as third argumnet, for this function $0"
@@ -30,6 +23,7 @@ function updateDropLocation ()
     fi
 
     eclipseStreamMajor=${eclipseStream:0:1}
+    buildType=${buildId:0:1}
 
     pathToDL=eclipse/downloads/drops
     if [[ $eclipseStreamMajor > 3 ]]
@@ -129,20 +123,15 @@ function sendTestMail ()
         exit 1;
     fi
 
-
-    buildType=$2
-    if [ -z "${buildType}" ]
-    then
-        echo "must provide buildType as second argumnet"
-        exit 1;
-    fi
-    buildId=$3
+    buildId=$2
     if [ -z "${buildId}" ]
     then
         echo "must provide buildId as third argumnet"
         exit 1;
     fi
-
+    
+    buildType=${buildId:0:1}
+    
     # ideally, the user executing this mail will have this special file in their home direcotry,
     # that can specify a custom 'from' variable, but still you must use your "real" ID that is subscribed
     # to the wtp-dev mailing list
@@ -206,19 +195,17 @@ EOF
 # this is the single script to call that "does it all" to promote build 
 # to update site, drop site, update index page on downlaods, and send mail to list.
 
-# it requires three arguments
-#    eclipseStream (e.g. 4.2 or 3.8) 
-#    buildType     (e.g. I or N) 
+# it requires two arguments
+#    eclipseStream (e.g. 4.2.0 or 3.8.1) 
 #    buildId       (e.g. N20120415-2015)
 
 
-if [[ $# != 3 ]]
+if [[ $# != 2 ]]
 then
     # usage: 
     scriptname=$(basename $0)
     printf "\n\t%s\n" "This script, $scriptname requires three arguments, in order: "
     printf "\t\t%s\t%s\n" "eclipseStream" "(e.g. 4.2.0 or 3.8.0) "
-    printf "\t\t%s\t%s\n" "buildType" "(e.g. I or N) "
     printf "\t\t%s\t%s\n" "buildId" "(e.g. N20120415-2015) "
     printf "\t%s\n" "for example," 
     printf "\t%s\n\n" "./$scriptname 4.2.0 N N20120415-2015"
@@ -233,25 +220,21 @@ then
 fi
 
 
-buildType=$2
-if [ -z "${buildType}" ]
-then
-    echo "must provide buildType as second argumnet, for this function $0"
-    return 1;
-fi
-
-buildId=$3
+buildId=$2
 if [ -z "${buildId}" ]
 then
     echo "must provide buildId as third argumnet, for this function $0"
     return 1;
 fi
+
 eclipseStreamMajor=${eclipseStream:0:1}
+buildTyper=${buildId:0:1}
+
 buildRoot=${buildRoot:-/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}}
 builderDir=${buildRoot}/build/supportDir/org.eclipse.releng.eclipsebuilder
 echo "DEBUG: builderDir: ${builderDir}"
 
-${builderDir}/updateTestResultsPages.sh  $1 $2 $3
+${builderDir}/updateTestResultsPages.sh  $1 $2
 rccode=$?
 
 if [[ $rccode != 0 ]] 
@@ -260,7 +243,7 @@ then
     exit $rccode
 fi
 
-updateDropLocation $1 $2 $3
+updateDropLocation $1 $2
 
 rccode=$?
 
@@ -274,7 +257,7 @@ exit 0
 
 # may be hard to know when to send test mail ... we'd have to make 
 # sure they are all done?
-#sendTestMail $1 $2 $3
+#sendTestMail $1 $2
 #rccode=$?
 #if [ $rccode -ne 0 ] 
 #then 
