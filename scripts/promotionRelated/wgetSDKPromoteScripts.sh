@@ -19,7 +19,7 @@ wget --no-verbose -O updateDropLocation.sh http://git.eclipse.org/c/platform/ecl
 wget --no-verbose -O wgetSDKPromoteScripts.NEW.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/promotionRelated/wgetSDKPromoteScripts.sh?h=$branchOrTag 2>&1
 
 differs=`diff wgetSDKPromoteScripts.NEW.sh wgetSDKPromoteScripts.sh`
-echo "differs: ${differs}"
+
 if [ -z "${differs}" ]
 then 
     # 'new' not different from existing, so remove 'new' one
@@ -27,6 +27,7 @@ then
 else
     echo " " 
     echo "     wgetSDKPromoteScripts.sh has changed. Compare with and consider replacing with wgetSDKPromoteScripts.NEW.sh"
+    echo "differs: ${differs}"
     echo "  "
 fi
 
