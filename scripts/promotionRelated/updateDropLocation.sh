@@ -18,7 +18,7 @@ function updateDropLocation ()
     buildId=$2
     if [ -z "${buildId}" ]
     then
-        echo "must provide buildId as third argumnet, for this function $0"
+        echo "must provide buildId as second argumnet, for this function $0"
         return 1;
     fi
 
@@ -126,7 +126,7 @@ function sendTestMail ()
     buildId=$2
     if [ -z "${buildId}" ]
     then
-        echo "must provide buildId as third argumnet"
+        echo "must provide buildId as second argumnet"
         exit 1;
     fi
     
@@ -223,7 +223,7 @@ fi
 buildId=$2
 if [ -z "${buildId}" ]
 then
-    echo "must provide buildId as third argumnet, for this function $0"
+    echo "must provide buildId as second argumnet, for this function $0"
     return 1;
 fi
 
@@ -234,7 +234,7 @@ buildRoot=${buildRoot:-/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}}
 builderDir=${buildRoot}/build/supportDir/org.eclipse.releng.eclipsebuilder
 echo "DEBUG: builderDir: ${builderDir}"
 
-${builderDir}/updateTestResultsPages.sh  $1 $2
+${builderDir}/updateTestResultsPages.sh  $eclipseStream $buildId
 rccode=$?
 
 if [[ $rccode != 0 ]] 
@@ -243,7 +243,7 @@ then
     exit $rccode
 fi
 
-updateDropLocation $1 $2
+updateDropLocation $eclipseStream $buildId
 
 rccode=$?
 
@@ -257,7 +257,7 @@ exit 0
 
 # may be hard to know when to send test mail ... we'd have to make 
 # sure they are all done?
-#sendTestMail $1 $2
+#sendTestMail $eclipseStream $buildId
 #rccode=$?
 #if [ $rccode -ne 0 ] 
 #then 

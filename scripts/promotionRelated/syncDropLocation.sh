@@ -67,22 +67,16 @@ function syncDropLocation ()
     fi
 
 
-    buildType=$2
-    if [ -z "${buildType}" ]
-    then
-        echo "must provide buildType as second argumnet, for this function $0"
-        return 1;
-    fi
-
-    buildId=$3
+    buildId=$2
     if [ -z "${buildId}" ]
     then
-        echo "must provide buildId as third argumnet, for this function $0"
+        echo "must provide buildId as second argumnet, for this function $0"
         return 1;
     fi
 
     eclipseStreamMajor=${eclipseStream:0:1}
-
+    buildType=${buildId:0:1}
+    
     pathToDL=eclipse/downloads/drops
     if [[ $eclipseStreamMajor > 3 ]]
     then 
@@ -178,19 +172,15 @@ function sendPromoteMail ()
     fi
 
 
-    buildType=$2
-    if [ -z "${buildType}" ]
-    then
-        echo "must provide buildType as second argumnet"
-        exit 1;
-    fi
-    buildId=$3
+    buildId=$2
     if [ -z "${buildId}" ]
     then
-        echo "must provide buildId as third argumnet"
+        echo "must provide buildId as second argumnet"
         exit 1;
     fi
-
+    
+    buildType=${buildId:0:1}
+ 
     # ideally, the user executing this mail will have this special file in their home direcotry,
     # that can specify a custom 'from' variable, but still you must use your "real" ID that is subscribed
     # to the wtp-dev mailing list
@@ -256,17 +246,15 @@ EOF
 
 # it requires three arguments
 #    eclipseStream (e.g. 4.2 or 3.8) 
-#    buildType     (e.g. I or N) 
 #    buildId       (e.g. N20120415-2015)
 
 
-if [[ $# != 3 ]]
+if [[ $# != 2 ]]
 then
     # usage: 
     scriptname=$(basename $0)
     printf "\n\t%s\n" "This script, $scriptname requires three arguments, in order: "
     printf "\t\t%s\t%s\n" "eclipseStream" "(e.g. 4.2 or 3.8) "
-    printf "\t\t%s\t%s\n" "buildType" "(e.g. I or N) "
     printf "\t\t%s\t%s\n" "buildId" "(e.g. N20120415-2015) "
     printf "\t%s\n" "for example," 
     printf "\t%s\n\n" "./$scriptname 4.2 N N20120415-2015"
@@ -281,22 +269,16 @@ then
 fi
 
 
-buildType=$2
-if [ -z "${buildType}" ]
-then
-    echo "must provide buildType as second argumnet, for this function $0"
-    return 1;
-fi
-
-buildId=$3
+buildId=$2
 if [ -z "${buildId}" ]
 then
-    echo "must provide buildId as third argumnet, for this function $0"
+    echo "must provide buildId as second argumnet, for this function $0"
     return 1;
 fi
 
+buildType=${buildId:0:1}
 
-syncRepoSite $1 $2
+syncRepoSite $eclipseStream $buildType
 
 rccode=$?
 
@@ -307,7 +289,7 @@ then
 fi
 
 
-syncDropLocation $1 $2 $3
+syncDropLocation $eclipseStream $buildType $buildId
 
 rccode=$?
 
@@ -317,7 +299,7 @@ then
     exit 1
 fi 
 
-sendPromoteMail $1 $2 $3
+sendPromoteMail $eclipseStream $buildType $buildId
 
 rccode=$?
 
