@@ -1,51 +1,26 @@
 <project
     name="Helper targets"
-    default="generateEclipseIndex"
-    basedir=".">
-
-    <fail unless="buildId" />
-    <fail unless="eclipseStream" />
-    <fail unless="eclipseStreamMajor" />
-    <fail unless="buildType" />
-
-     <!-- 
-        TODO: make less exactly hard coded in future
-         also, check for validity using "matches" digit*\.digit*\.digit*
-      -->
-    <condition
-        property="dropsDirSegment"
-        value="drops4"
-        else="drops">
-        <equals
-            arg1="${eclipseStreamMajor}"
-            arg2="4" />
-    </condition>
-
-    <property name="buildRoot" value="/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}"/>
-
+    default="generateEclipseIndex">
+    
     
     <property
         name="postingDirectory"
-        value="${buildRoot}/siteDir/eclipse/downloads/${dropsDirSegment}" />
-    <property
-        name="builderDir"
-        value="${buildRoot}/build/supportDir/org.eclipse.releng.eclipsebuilder" />
+        value="/home/shared/eclipse/eclipse4I/siteDir/eclipse/downloads/drops4/I20120428-0800" />
     <property
         name="publishingContent"
-        value="${buildRoot}/build/supportDir/org.eclipse.releng.eclipsebuilder/eclipse/publishingFiles" />
+        value="/home/shared/eclipse/eclipse4I/build/supportDir/org.eclipse.releng.eclipsebuilder/eclipse/publishingFiles" />
     <property
         name="base.builder"
-        value="${buildRoot}/build/supportDir/org.eclipse.releng.basebuilder" />
+        value="/home/shared/eclipse/eclipse4I/build/supportDir/org.eclipse.releng.basebuilder" />
 
+    <property 
+        name="buildType"
+        value="I" />
     <property
         name="buildLabel"
-        value="${buildId}" />
-    <property
-        name="eclipse.build.configs"
-        value="${builderDir}/eclipse/buildConfigs" />
-    <property
-        name="buildDirectory"
-        value="${basedir}/../src" />
+        value="" />
+
+
 
     <target name="generateEclipseIndex">
         <condition
@@ -63,13 +38,12 @@
             classname="${generatorClass}"
             property="class"
             value="${generatorClass}" />
-        
+
         <!--regenerate the index page with links to test results -->
         <ant
-            antfile="${builderDir}/eclipse/helpernew.xml"
+            antfile="${base.builder}/plugins/org.eclipse.build.tools/scripts/publish.xml"
             dir="${publishingContent}"
-            target="generateEclipseIndex">
-
+            target="generateIndex">
             <property
                 name="isBuildTested"
                 value="true" />
@@ -90,7 +64,7 @@
                 value="index.php" />
             <property
                 name="result"
-                value="${postingDirectory}/${buildId}" />
+                value="${postingDirectory}/${buildLabel}" />
             <property
                 name="testResultsTemplateFileName"
                 value="${publishingContent}/templateFiles/testResults.php.template" />
@@ -101,6 +75,13 @@
                 name="testManifestFileName"
                 value="${publishingContent}/testManifest.xml" />
         </ant>
+
+        <!-- Replace build label in generated html files -->
+        <replace
+            dir="${postingDirectory}/${buildLabel}"
+            token="@buildlabel@"
+            value="${buildLabel}"
+            includes="**/*.php" />
 
     </target>
 

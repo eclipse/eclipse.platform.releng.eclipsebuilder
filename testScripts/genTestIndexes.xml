@@ -1,28 +1,68 @@
 <project
     name="Helper targets"
-    default="generateEclipseIndex">
+    default="generateEclipseIndex"
+    basedir=".">
+
+    <target name="init" depends="initStreamVariables" unless="genTestIndexesInitialized">
+        <fail unless="buildId" />
+        <fail unless="eclipseStream" />
+
+    <script language="javascript">
+        var buildId = project.getProperty("buildId");
+        var pattern = new RegExp(/^([IMNSR])(\d{8})-(\d{4})$/);
+
+        var sArray = pattern.exec(buildId);
+        // sArray 0 is "whole match"
+        project.setProperty("buildType", sArray[1]);
+    </script>
     
-    
-    <property
-        name="postingDirectory"
-        value="/home/shared/eclipse/eclipse4I/siteDir/eclipse/downloads/drops4/I20120428-0800" />
-    <property
-        name="publishingContent"
-        value="/home/shared/eclipse/eclipse4I/build/supportDir/org.eclipse.releng.eclipsebuilder/eclipse/publishingFiles" />
-    <property
-        name="base.builder"
-        value="/home/shared/eclipse/eclipse4I/build/supportDir/org.eclipse.releng.basebuilder" />
+     <!-- 
+        TODO: make less exactly hard coded in future
+         also, check for validity using "matches" digit*\.digit*\.digit*
+      -->
+        <condition
+            property="dropsDirSegment"
+            value="drops4"
+            else="drops">
+            <equals
+                arg1="${eclipseStreamMajor}"
+                arg2="4" />
+        </condition>
 
-    <property 
-        name="buildType"
-        value="I" />
-    <property
-        name="buildLabel"
-        value="" />
-
+        <property
+            name="buildRoot"
+            value="/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}" />
 
 
-    <target name="generateEclipseIndex">
+        <property
+            name="postingDirectory"
+            value="${buildRoot}/siteDir/eclipse/downloads/${dropsDirSegment}" />
+        <property
+            name="builderDir"
+            value="${buildRoot}/build/supportDir/org.eclipse.releng.eclipsebuilder" />
+        <property
+            name="publishingContent"
+            value="${buildRoot}/build/supportDir/org.eclipse.releng.eclipsebuilder/eclipse/publishingFiles" />
+        <property
+            name="base.builder"
+            value="${buildRoot}/build/supportDir/org.eclipse.releng.basebuilder" />
+
+        <property
+            name="buildLabel"
+            value="${buildId}" />
+        <property
+            name="eclipse.build.configs"
+            value="${builderDir}/eclipse/buildConfigs" />
+        <property
+            name="buildDirectory"
+            value="${basedir}/../src" />
+
+        <property name="genTestIndexesInitialized" value="true"/>
+        
+                
+    </target>
+
+    <target name="generateEclipseIndex" depends="init" >
         <condition
             property="generatorClass"
             value="org.eclipse.releng.generators.EclipseTestResultsGeneratorNoMail">
@@ -38,12 +78,13 @@
             classname="${generatorClass}"
             property="class"
             value="${generatorClass}" />
-
+        
         <!--regenerate the index page with links to test results -->
         <ant
-            antfile="${base.builder}/plugins/org.eclipse.build.tools/scripts/publish.xml"
+            antfile="${builderDir}/eclipse/helpernew.xml"
             dir="${publishingContent}"
-            target="generateIndex">
+            target="generateEclipseIndex">
+
             <property
                 name="isBuildTested"
                 value="true" />
@@ -64,7 +105,7 @@
                 value="index.php" />
             <property
                 name="result"
-                value="${postingDirectory}/${buildLabel}" />
+                value="${postingDirectory}/${buildId}" />
             <property
                 name="testResultsTemplateFileName"
                 value="${publishingContent}/templateFiles/testResults.php.template" />
@@ -76,15 +117,34 @@
                 value="${publishingContent}/testManifest.xml" />
         </ant>
 
-        <!-- Replace build label in generated html files -->
-        <replace
-            dir="${postingDirectory}/${buildLabel}"
-            token="@buildlabel@"
-            value="${buildLabel}"
-            includes="**/*.php" />
-
     </target>
 
+    <target name="initStreamVariables">
 
+        <fail
+            unless="eclipseStream"
+            message="eclipseStream must be provided by caller" />
+        <condition property="streamOK">
+            <matches
+                pattern="\d\.\d\.\d"
+                string="${eclipseStream}" />
+        </condition>
+        <fail
+            message="eclipseStream variable had unexpected format. Should be digit.digit.digit, but was ${eclipseStream}"
+            unless="streamOK" />
+        <script language="javascript">
+            var eclipseStream = project.getProperty("eclipseStream");
+            var pattern = new
+            RegExp(/(\d+)\.(\d+)\.(\d+)/);
+
+            var sArray = pattern.exec(eclipseStream);
+            // sArray[0] is "whole match"
+            project.setProperty("eclipseStreamMajor", sArray[1]);
+            project.setProperty("eclipseStreamMinor", sArray[2]);
+            project.setProperty("eclipseStreamService", sArray[3]);
+
+        </script>
+
+    </target>
 
 </project>

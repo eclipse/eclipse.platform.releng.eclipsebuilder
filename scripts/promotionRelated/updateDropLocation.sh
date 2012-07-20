@@ -234,7 +234,7 @@ buildRoot=${buildRoot:-/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}}
 builderDir=${buildRoot}/build/supportDir/org.eclipse.releng.eclipsebuilder
 echo "DEBUG: builderDir: ${builderDir}"
 
-${builderDir}/updateTestResultsPages.sh  $eclipseStream $buildId
+${builderDir}/testScripts/updateTestResultsPages.sh  $eclipseStream $buildId
 rccode=$?
 
 if [[ $rccode != 0 ]] 
