@@ -289,7 +289,7 @@ then
 fi
 
 
-syncDropLocation $eclipseStream $buildType $buildId
+syncDropLocation $eclipseStream $buildId
 
 rccode=$?
 
@@ -299,7 +299,7 @@ then
     exit 1
 fi 
 
-sendPromoteMail $eclipseStream $buildType $buildId
+sendPromoteMail $eclipseStream  $buildId
 
 rccode=$?
 
