@@ -886,7 +886,7 @@ fi
 ptimestamp=$( date +%Y%m%d%H%M )
 echo "#!/usr/bin/env bash" >  ${promoteScriptLocationEclipse}/${scriptName}
 echo "# promotion script created at $ptimestamp" >>  ${promoteScriptLocationEclipse}/${scriptName}
-echo "$workLocation/syncDropLocation.sh $eclipseStream $buildType $buildId" >> ${promoteScriptLocationEclipse}/${scriptName}
+echo "$workLocation/syncDropLocation.sh $eclipseStream $buildId" >> ${promoteScriptLocationEclipse}/${scriptName}
 
 # we restrict "others" rights for a bit more security or safety from accidents
 chmod -v ug=rwx,o-rwx ${promoteScriptLocationEclipse}/${scriptName}
