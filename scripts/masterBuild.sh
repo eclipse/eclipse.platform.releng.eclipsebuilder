@@ -162,7 +162,7 @@ updateEclipseBuilder() {
 
     # get fresh script. This is one case, we must get directly from repo since the purpose of the script 
     # is to get the eclipsebuilder! 
-    wget -O getEclipseBuilder.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/getEclipseBuilder.sh?h=${eclipsebuilderBranch}
+wget --no-verbose -O getEclipseBuilder.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/getEclipseBuilder.sh?h=${eclipsebuilderBranch} 2>&1
     chmod +x getEclipseBuilder.sh 
 
     # execute (in current directory) ... depends on some "exported" properties. 
@@ -876,7 +876,7 @@ promoteScriptLocationEclipse=$workLocation/queue
 # but in case not
 mkdir -p "${promoteScriptLocationEclipse}"
 
-scriptName=promote-${eclipseStream}-${buildType}-${buildId}.sh
+scriptName=promote-${eclipseStream}-${buildId}.sh
 if [[ "${testbuildonly}" == "true" ]] 
 then
     # allows the "test" creation of promotion script, but, not have it "seen" be cron job

@@ -34,14 +34,14 @@ cd "${buildRoot}"
 # one still is
 date >> buildstarted.txt
 
-wget -O "mb${eclipseStreamMajor}${buildType}.NEW.sh" "http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb${eclipseStreamMajor}${buildType}.sh?h=${initScriptTag}"
+wget --no-verbose -O "mb${eclipseStreamMajor}${buildType}.NEW.sh" "http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb${eclipseStreamMajor}${buildType}.sh?h=${initScriptTag}" 2>&1
 rccode=$?
 if [[ $rccode != 0 ]] 
 then 
-    echo "ERROR: wget could not fetch init script. Return code: $rccode"
+    echo "ERROR: wget could not fetch init script. Return code: $rccode" 2>&1
     exit $rccode
 fi
-wget -O "masterBuild.sh" "http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/masterBuild.sh?h=${initScriptTag}"
+wget --no-verbose -O "masterBuild.sh" "http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/masterBuild.sh?h=${initScriptTag}" 2>&1
 rccode=$?
 if [[ $rccode != 0 ]] 
 then 

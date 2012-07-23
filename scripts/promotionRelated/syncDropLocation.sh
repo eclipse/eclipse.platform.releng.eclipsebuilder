@@ -117,7 +117,7 @@ function syncDropLocation ()
     else
         if [[ $eclipseStreamMajor == 3 ]]         
         then
-            wget -O index3.txt http://download.eclipse.org/eclipse/downloads/eclipse3x.php
+            wget --no-verbose -O index3.txt http://download.eclipse.org/eclipse/downloads/eclipse3x.php 2>&1 2>&1
             rccode=$?
             if [ $rccode -eq 0 ]
             then
@@ -137,7 +137,7 @@ function syncDropLocation ()
             fi
         else
             # assume major version if 4    
-            wget -O index.txt http://download.eclipse.org/eclipse/downloads/createIndex4x.php
+            wget --no-verbose -O index.txt http://download.eclipse.org/eclipse/downloads/createIndex4x.php 2>&1 2>&1
             rccode=$?
             if [ $rccode -eq 0 ]
             then

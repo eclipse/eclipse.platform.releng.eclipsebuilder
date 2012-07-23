@@ -20,7 +20,7 @@ function internalUpdateIndex ()
 
     TEMP_INDEX_TXT=tempIndex.txt
 
-    wget -O ${TEMP_INDEX_TXT} http://download.eclipse.org/eclipse/downloads/${PHP_PAGE}
+    wget --no-verbose -O ${TEMP_INDEX_TXT} http://download.eclipse.org/eclipse/downloads/${PHP_PAGE} 2>&1
     rccode=$?
     if [ $rccode -eq 0 ]
     then

@@ -109,7 +109,7 @@ publish_sdk () {
 
 
     #Temporarily do not update index.htmLd
-    #wget -O index.txt http://download.eclipse.org/eclipse/downloads/createIndex4x.php
+    #wget --no-verbose -O index.txt http://download.eclipse.org/eclipse/downloads/createIndex4x.php
     #scp index.txt ${committerId}@build.eclipse.org:/home/data/httpd/download.eclipse.org/eclipse/downloads/index.html
 }
 
@@ -394,7 +394,7 @@ process_build () {
     #      "${publishUpdates}"
 #    sendMail
 #    sleep 60
-#    wget -O index.txt http://download.eclipse.org/e4/downloads/createIndex.php
+#    wget --no-verbose -O index.txt http://download.eclipse.org/e4/downloads/createIndex.php
 #    scp index.txt "$publishIndex"/index.html
 #fi
 

@@ -60,7 +60,7 @@ function syncDropLocation ()
         echo "ERROR: rsync did not complete normally.rccode: $rccode"
         return $rccode
     else
-        wget -O index.txt http://download.eclipse.org/eclipse/downloads/createIndex4x.php
+        wget --no-verbose -O index.txt http://download.eclipse.org/eclipse/downloads/createIndex4x.php
         rccode=$?
         if [ $rccode -eq 0 ]
         then
