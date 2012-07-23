@@ -195,7 +195,7 @@ processCommandLine ()
     # .../eclipse4/build/targets
     # and contains the ?local repo? (not runnable) for org.eclipse.emf.common, etc.
     # in directories named, for example,
-    # as .../eclipse4/build/targets/local-repo-I20120331-0050
+    # as .../eclipse4/build/targets/local-prereq-repo
     # I can't find in our scripts where its actually created (maybe in basebuilder?), so 
     # is never removed, and ends up accumulating. 
     # so ... will remove previous ones here, before the build starts

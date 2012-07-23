@@ -555,7 +555,7 @@ processCommandLine ()
     # any longer? Or at the moment? 
     # targets ends up producing 
     # dirctories such as 
-    # .../eclipse4/build/targets/local-repo-I20120331-0050
+    # .../eclipse4/build/targets/local-prereq-repo
     targetDir=${buildDir}/targets
     targetZips=${targetDir}/targetzips
 
