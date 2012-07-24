@@ -408,10 +408,6 @@
 	<logFile name="plugins\org.eclipse.ui.tests_*\uitests.jar.bin.xml" type="compile">
 		<effectedFile id="JT"></effectedFile>
 	</logFile>
-	
-	<logFile name="plugins\org.eclipse.update.tests.core_*\updatetests.jar.bin.xml" type="compile">
-		<effectedFile id="JT"></effectedFile>
-	</logFile>
 
 	<logFile name="plugins\org.eclipse.team.tests.core_*\teamtests.jar.bin.xml" type="compile">
 		<effectedFile id="JT"></effectedFile>
