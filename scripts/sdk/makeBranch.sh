@@ -2,8 +2,12 @@
 
 # Utility script to semi-automate creation of a branch using committer shell (or, e4Build id)
 
-project=platform
-reponame=eclipse.platform.team
+#project=platform
+project=jdt
+
+#reponame=eclipse.platform.team
+reponame=eclipse.jdt.debug
+
 startTag=R3_8
 branchName=R3_8_maintenance
 
