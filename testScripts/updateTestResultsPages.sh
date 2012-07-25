@@ -7,7 +7,7 @@
 # this is the single script to call that "does it all" to promote build 
 # to update site, drop site, update index page on downlaods, and send mail to list.
 
-# it requires three arguments
+# it requires two arguments
 #    eclipseStream (e.g. 4.2 or 3.8) 
 #    buildId       (e.g. N20120415-2015)
 
