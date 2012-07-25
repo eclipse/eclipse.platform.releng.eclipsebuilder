@@ -159,6 +159,7 @@ processCommandLine ()
     export eclipsebuilder=org.eclipse.releng.eclipsebuilder
     export eclipsebuilderRepo=eclipse.platform.releng.eclipsebuilder
 
+    # remmember "test script" area only. No need to match production scripts
     basebuilderBranch=${basebuilderBranch:-HEAD}
     # relies on export, since getEclipseBuilder is seperate script, 
     # and it does not use "command line pattern"
