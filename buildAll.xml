@@ -1877,12 +1877,6 @@
                     <artifact id="org.eclipse.sdk.examples" />
                     <artifact id="org.eclipse.sdk.examples.source" />
                     <artifact id="master-equinox" />
-                    <artifact id="org.apache.lucene" />
-                    <artifact id="org.apache.lucene.source" />
-                    <artifact id="org.apache.lucene.core" />
-                    <artifact id="org.apache.lucene.core.source" />
-                    <artifact id="org.apache.lucene.analysis" />
-                    <artifact id="org.apache.lucene.analysis.source" />
                 </exclude>
             </comparator>
         </p2.mirror>
