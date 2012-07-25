@@ -480,7 +480,7 @@ processCommandLine ()
 
     # base builder pretty constant in CVS now. 
     #basebuilderBranch=${basebuilderBranch:-R38M6PlusRC3}
-    basebuilderBranch=${basebuilderBranch:-R38M6PlusRC3B}
+    basebuilderBranch=${basebuilderBranch:-R38M6PlusRC3C}
 
     # relies on export, since getEclipseBuilder is seperate script, 
     # and it does not use "command line pattern"
