@@ -86,7 +86,7 @@
     <!--p2 repo name -->
     <property
         name="p2.repo.name"
-        value="&quot;Eclipse Project Test Site&quot;" />
+        value="&quot;Eclipse Project Software Repository&quot;" />
 
 
     <!--location for buildlogs -->
