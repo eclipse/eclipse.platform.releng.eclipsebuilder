@@ -16,7 +16,7 @@
 		
 		<!--Default values for required properties-->
 		<property name="buildDirectory" value="${basedir}/src" />
-		<property name="transformedRepoLocation" value="${buildDirectory}" />
+		<property name="transformedRepoLocation" value="${base}/targets/transformedRepoLocation" />
 
 		<!--compiler args-->
 		<property name="javacDebugInfo" value="true" />
