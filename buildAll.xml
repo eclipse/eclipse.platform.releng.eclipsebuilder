@@ -73,7 +73,7 @@
 
     <property
         name="transformedRepoLocation"
-        value="${base}/targets/transformedRepoLocation" />
+        value="${buildDirectory}" />
 
     <!--default location for build output, parent to ${buildLabel} -->
     <property
