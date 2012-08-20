@@ -84,9 +84,9 @@ function listLogs($myDir) {
             $linktext = $myDir . "_" . $anEntry;
             # remove the directory name from the link to the log
             $dir = substr(strrchr($linktext, "/"), 1);
-            $line = "<td><a href=\"$myDir/$anEntry\">$dir</a>" .  fileSizeForDisplay("$myDir/$anEntry") . "</td>";
+            $line = "<td><a href=\"$myDir/$anEntry\">$dir</a> " . fileSizeForDisplay("$myDir/$anEntry") . " </td>";
         } else {
-            $line = "<td><a href=\"$myDir/$anEntry\">$anEntry</a> " .  fileSizeForDisplay("$myDir/$anEntry") . " </td>";
+            $line = "<td><a href=\"$myDir/$anEntry\">$anEntry</a> " . fileSizeForDisplay("$myDir/$anEntry") . " </td>";
         }
         echo "<li>$line</li>";
     }
