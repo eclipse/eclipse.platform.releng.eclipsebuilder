@@ -103,6 +103,19 @@ then
     echo "list all environment variables in effect as tests start"
     printenv
     
+    # make sure there is a window manager running. See bug 379026
+    # we should not have to, but may be a quirk/bug of hudson setup
+    # assuming metacity attaches to "current" display by default (which should have 
+    # already been set by Hudson). We echo its value here just for extra reference/cross-checks.  
+    echo "DISPLAY: $DISPLAY"
+    metacity --replace --sm-disable  &
+    METACITYPID=$!
+    echo $METACITYPID > epmetacity.pid
+    
+    # list out metacity processes so overtime we can see if they accumulate, or if killed automatically 
+    # when our process exits. If not automatic, should use epmetacity.pid to kill it when we are done.
+    ps -ef | grep "metacity" | grep -v grep
+    
     $vmcmd  -Dosgi.os=$os -Dosgi.ws=$ws -Dosgi.arch=$arch -jar $launcher -data workspace -application org.eclipse.ant.core.antRunner -file ${PWD}/test.xml $tests -Dws=$ws -Dos=$os -Darch=$arch -D$installmode=true $properties -logger org.apache.tools.ant.DefaultLogger
 
 else
