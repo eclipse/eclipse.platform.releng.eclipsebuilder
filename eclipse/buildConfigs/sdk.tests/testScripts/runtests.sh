@@ -104,7 +104,7 @@ then
     echo "list all environment variables in effect as tests start"
     printenv
     
-    $vmcmd  -Dosgi.os=$os -Dosgi.ws=$ws -Dosgi.arch=$arch -jar $launcher -data workspace -application org.eclipse.ant.core.antRunner -file ${PWD}/test.xml $tests -Dws=$ws -Dos=$os -Darch=$arch -Dtimeout=6000000 -D$installmode=true $properties -logger org.apache.tools.ant.DefaultLogger
+    $vmcmd  -Dosgi.os=$os -Dosgi.ws=$ws -Dosgi.arch=$arch -jar $launcher -data workspace -application org.eclipse.ant.core.antRunner -file ${PWD}/test.xml $tests -Dws=$ws -Dos=$os -Darch=$arch -Dtimeout=600000 -D$installmode=true $properties -logger org.apache.tools.ant.DefaultLogger
 
 else
     # display message to user if os, ws and arch are invalid
