@@ -6,7 +6,7 @@
 
 function checkPlatform($line) {
 
-    if (preg_match("/win32|linux|macosx/i", $line)) {
+    if (preg_match("/win7|win32|linux|macosx/i", $line)) {
         return 1;
     } else {
         return 0;
@@ -17,7 +17,7 @@ function checkPlatform($line) {
 
 function checkFile($p) {
 
-    if ((is_file($p)) && (preg_match("/.txt/i", $p)))  {
+    if ((is_file($p)) && (preg_match("/.txt|.log/i", $p)))  {
         return 1; 
     } else {
         return 0;
@@ -25,6 +25,28 @@ function checkFile($p) {
 
 }
 
+function fileSizeForDisplay($filename) {
+       $onekilo=1024;
+       $onemeg=$onekilo * $onekilo;
+       $criteria = 10 * $onemeg;
+       $scaleChar = "M";
+       if (file_exists($filename)) {
+              $zipfilesize=filesize($filename);
+              if ($zipfilesize > $criteria) {
+                     $zipfilesize=round($zipfilesize/$onemeg, 0);
+                     $scaleChar = "M";
+              }
+              else {
+                     $zipfilesize=round($zipfilesize/$onekilo, 0);
+                     $scaleChar = "K";
+              }
+       }
+       else {
+              $zipfilesize = 0;
+       }
+       $result =  "(" . $zipfilesize . $scaleChar . ")";
+       return $result;
+}
 
 function listLogs($myDir) {
     $entries = array();
@@ -62,12 +84,21 @@ function listLogs($myDir) {
             $linktext = $myDir . "_" . $anEntry;
             # remove the directory name from the link to the log
             $dir = substr(strrchr($linktext, "/"), 1);
-            $line = "<td><a href=\"$myDir/$anEntry\">$dir</a></td>";
+            $line = "<td><a href=\"$myDir/$anEntry\">$dir</a>" .  fileSizeForDisplay("$myDir/$anEntry") . "</td>";
         } else {
-            $line = "<td><a href=\"$myDir/$anEntry\">$anEntry</a></td>";
+            $line = "<td><a href=\"$myDir/$anEntry\">$anEntry</a> " .  fileSizeForDisplay("$myDir/$anEntry") . " </td>";
         }
         echo "<li>$line</li>";
     }
+}
+
+function listDegailedLogs ($machineplatform) {
+echo "<strong>Individual $machineplatform test logs</strong><br />";
+listLogs("testresults/$machineplatform");
+if (file_exists("testresults/$machineplatform/crashlogs")) {
+  echo "<strong>Crash logs captured on $machineplatform</strong>";
+  listLogs("testresults/$machineplatform/crashlogs");
+}
 }
 
 function getBuildId() {
@@ -216,14 +247,11 @@ listLogs("compilelogs");
 
 listLogs("testresults/consolelogs");
 
-echo "<strong>Individual linux.gtk.x86_6.0 test logs</strong>";
-listLogs("testresults/linux.gtk.x86_6.0");
+listDegailedLogs("linux.gtk.x86_6.0");
+listDegailedLogs("win32.win32.x86_7.0");
+listDegailedLogs("macosx.cocoa.x86_5.0");
 
-echo "<strong>Individual win32.win32.x86_7.0 test logs</strong>";
-listLogs("testresults/win32.win32.x86_7.0");
 
-echo "<strong>Individual macosx.cocoa.x86_5.0 test logs</strong>";
-listLogs("testresults/macosx.cocoa.x86_5.0");
 ?>
 </ul>
 </li>
