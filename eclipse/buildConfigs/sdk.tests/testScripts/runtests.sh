@@ -113,7 +113,7 @@ then
     echo
     
     # TODO: there must be a better way to determine "what gtk are we running"? 
-    echo "list gtk packages installed"
+    echo "list gtk packages installed, using rpm -qa | grep gtk"
     rpm -qa | grep gtk
     echo
     
