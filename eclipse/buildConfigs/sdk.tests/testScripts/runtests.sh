@@ -105,13 +105,17 @@ then
     
     echo "uname -a information"
     uname -a
+    echo 
     
     echo "lsb_release -a information"
-    lsb_release -a
+    lsbinfo=`lsb_release -a`
+    echo $lsbinfo
+    echo
     
     # TODO: there must be a better way to determine "what gtk are we running"? 
     echo "list gtk packages installed"
     rpm -qa | grep gtk
+    echo
     
     # make sure there is a window manager running. See bug 379026
     # we should not have to, but may be a quirk/bug of hudson setup
@@ -121,11 +125,13 @@ then
     metacity --replace --sm-disable  &
     METACITYPID=$!
     echo $METACITYPID > epmetacity.pid
+    echo
     
     # list out metacity processes so overtime we can see if they accumulate, or if killed automatically 
     # when our process exits. If not automatic, should use epmetacity.pid to kill it when we are done.
     echo "Current metacity processes running:"
     ps -ef | grep "metacity" | grep -v grep
+    echo 
     
     $vmcmd  -Dosgi.os=$os -Dosgi.ws=$ws -Dosgi.arch=$arch -jar $launcher -data workspace -application org.eclipse.ant.core.antRunner -file ${PWD}/test.xml $tests -Dws=$ws -Dos=$os -Darch=$arch ${ANT_OPTS} -D$installmode=true $properties -logger org.apache.tools.ant.DefaultLogger
 
