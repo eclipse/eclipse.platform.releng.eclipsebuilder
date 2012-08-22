@@ -80,7 +80,7 @@ launcher=`ls eclipse/plugins/org.eclipse.equinox.launcher_*.jar`
     echo "list all environment variables in effect as tests start"
     printenv
 
-$vmcmd  -Dosgi.os=$os -Dosgi.ws=$ws -Dosgi.arch=$arch -jar $launcher -data workspace -application org.eclipse.ant.core.antRunner -file `pwd`/test.xml $tests -Dws=$ws -Dos=$os -Darch=$arch ${ANT_OPTS} -D$installmode=true $properties -logger org.apache.tools.ant.DefaultLogger
+$vmcmd  -Dosgi.os=$os -Dosgi.ws=$ws -Dosgi.arch=$arch -jar $launcher -data workspace -application org.eclipse.ant.core.antRunner -file `pwd`/test.xml $tests -Dws=$ws -Dos=$os -Darch=$arch -Dtimeout=300000 '${ANT_OPTS}' -D$installmode=true $properties -logger org.apache.tools.ant.DefaultLogger
 
 # display message to user if os, ws and arch are invalid
 else

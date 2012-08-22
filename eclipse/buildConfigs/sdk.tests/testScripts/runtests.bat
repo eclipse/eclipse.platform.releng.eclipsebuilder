@@ -60,7 +60,7 @@ set /p launcher-jar=<launcher-jar-name.txt
 echo "list all environment variables in effect as tests start"
 set
 
-%vmcmd% -Dosgi.os=%os% -Dosgi.ws=%ws% -Dosgi.arch=%arch% -jar eclipse\plugins\%launcher-jar% -data workspace -application org.eclipse.ant.core.antRunner -file test.xml %tests% -Dws=%ws% -Dos=%os% -Darch=%arch% %ANT_OPTS% -D%installmode%=true %properties% -logger org.apache.tools.ant.DefaultLogger
+%vmcmd% -Dosgi.os=%os% -Dosgi.ws=%ws% -Dosgi.arch=%arch% -jar eclipse\plugins\%launcher-jar% -data workspace -application org.eclipse.ant.core.antRunner -file test.xml %tests% -Dws=%ws% -Dos=%os% -Darch=%arch% -Dtimeout=300000 '%ANT_OPTS%' -D%installmode%=true %properties% -logger org.apache.tools.ant.DefaultLogger
 
 goto end
 
