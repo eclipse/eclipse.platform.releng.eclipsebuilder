@@ -133,7 +133,8 @@ then
     ps -ef | grep "metacity" | grep -v grep
     echo 
     
-    $vmcmd  -Dosgi.os=$os -Dosgi.ws=$ws -Dosgi.arch=$arch -jar $launcher -data workspace -application org.eclipse.ant.core.antRunner -file ${PWD}/test.xml $tests -Dws=$ws -Dos=$os -Darch=$arch -Dtimeout=300000 "${ANT_OPTS}" -D$installmode=true $properties -logger org.apache.tools.ant.DefaultLogger
+    # -Dtimeout=300000 "${ANT_OPTS}"
+    $vmcmd  -Dosgi.os=$os -Dosgi.ws=$ws -Dosgi.arch=$arch -jar $launcher -data workspace -application org.eclipse.ant.core.antRunner -file ${PWD}/test.xml $tests -Dws=$ws -Dos=$os -Darch=$arch -D$installmode=true $properties -logger org.apache.tools.ant.DefaultLogger
 
 else
     # display message to user if os, ws and arch are invalid
