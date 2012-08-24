@@ -107,15 +107,31 @@ then
     uname -a
     echo 
     
-    echo "lsb_release -a information"
-    lsbinfo=`lsb_release -a`
-    echo $lsbinfo
-    echo
-    
-    # TODO: there must be a better way to determine "what gtk are we running"? 
-    echo "list gtk packages installed, using rpm -qa | grep gtk"
-    rpm -qa | grep gtk
-    echo
+echo "cat /etc/lsb-release"
+cat /etc/lsb-release
+
+echo "cat /etc/SuSE-release"
+cat /etc/SuSE-release
+
+echo "rpm -q cairo"
+rpm -q cairo
+
+echo "rpm -q gtk2"
+rpm -q gtk2
+
+echo "rpm -q glibc"
+rpm -q glibc
+
+echo "rpm -q glib"
+rpm -q glib
+
+echo "rpm -q pango"
+rpm -q pango
+
+echo "rpm -q ORBit2"
+rpm -q ORBit2
+
+echo
     
     # make sure there is a window manager running. See bug 379026
     # we should not have to, but may be a quirk/bug of hudson setup
