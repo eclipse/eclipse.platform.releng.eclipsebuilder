@@ -99,6 +99,10 @@ if (file_exists("testresults/$machineplatform/crashlogs")) {
   echo "<strong>Crash logs captured on $machineplatform</strong>";
   listLogs("testresults/$machineplatform/crashlogs");
 }
+if (file_exists("testresults/$machineplatform/timeoutScreens")) {
+  echo "<strong>Screen captures for tests timing out on $machineplatform</strong>";
+  listLogs("testresults/$machineplatform/timeoutScreens");
+}
 }
 
 function getBuildId() {
