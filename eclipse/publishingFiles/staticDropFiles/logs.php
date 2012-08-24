@@ -17,7 +17,7 @@ function checkPlatform($line) {
 
 function checkFile($p) {
 
-    if ((is_file($p)) && (preg_match("/.txt|.log/i", $p)))  {
+    if ((is_file($p)) && (preg_match("/.txt|.log|.png/i", $p)))  {
         return 1; 
     } else {
         return 0;
