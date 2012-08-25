@@ -37,9 +37,7 @@ echo
 echo "rpm -q glib2"
 rpm -q glib2 
 echo 
-echo "rpm -q ORBit2"
-rpm -q ORBit2
-echo 
+
 echo
     echo "Check if any window managers are running (xfwm|twm|metacity|beryl|fluxbox|compiz):"
     ps -ef | egrep -i "xfwm|twm|metacity|beryl|fluxbox|compiz" | grep -v egrep

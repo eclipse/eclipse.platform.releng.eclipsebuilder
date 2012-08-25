@@ -148,9 +148,6 @@ echo "rpm -q pango"
 rpm -q pango
     echo 
 
-echo "rpm -q ORBit2"
-rpm -q ORBit2
-    echo 
 
 echo
     
