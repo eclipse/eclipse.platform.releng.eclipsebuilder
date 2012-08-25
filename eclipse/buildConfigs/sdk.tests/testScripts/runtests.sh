@@ -140,8 +140,8 @@ echo "rpm -q glibc"
 rpm -q glibc
     echo 
 
-echo "rpm -q glib"
-rpm -q glib
+echo "rpm -q glib2"
+rpm -q glib2
     echo 
 
 echo "rpm -q pango"

@@ -34,8 +34,8 @@ echo
 echo "rpm -q pango"
 rpm -q pango
 echo 
-echo "rpm -q glib"
-rpm -q glib 
+echo "rpm -q glib2"
+rpm -q glib2 
 echo 
 echo "rpm -q ORBit2"
 rpm -q ORBit2
