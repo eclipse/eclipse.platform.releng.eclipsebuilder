@@ -1,8 +1,10 @@
+
+#!/usr/bin/env bash
 echo "uname -a"
 uname -a
 echo 
-#echo "lsb_release -a"
-#lsb_release -a
+echo "lsb_release -a"
+lsb_release -a
 echo 
 echo "cat /etc/lsb-release"
 cat /etc/lsb-release
@@ -29,3 +31,5 @@ echo "rpm -q ORBit2"
 rpm -q ORBit2
 echo 
 echo
+# we always end with "success" even though some commands may "fail"
+exit 0
