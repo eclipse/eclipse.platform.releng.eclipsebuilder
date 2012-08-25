@@ -1,5 +1,11 @@
 
 #!/usr/bin/env bash
+
+echo "echo \$WINDOW_MANAGER"
+echo "echo $WINDOW_MANAGER"
+echo "echo \$DESKTOP_SESSION"
+echo "echo $DESKTOP_SESSION"
+
 echo "uname -a"
 uname -a
 echo 
