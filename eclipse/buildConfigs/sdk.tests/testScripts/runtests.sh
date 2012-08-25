@@ -152,7 +152,7 @@ echo
     ps -ef | egrep -i "xfwm|twm|metacity|beryl|fluxbox|compiz" | grep -v egrep
     echo
     echo
-    echo "Check for popular desktop environments:"
+    echo "Check for popular desktop environments (gnome|kde):"
     ps -ef | egrep -i "gnome|kde" | grep -v egrep
         
     
