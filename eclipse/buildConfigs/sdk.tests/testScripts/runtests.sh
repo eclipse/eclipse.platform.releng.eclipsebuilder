@@ -102,7 +102,17 @@ then
     
     echo "list all environment variables in effect as tests start"
     printenv
-    
+
+# of special interest, though most won't be defined
+echo "\$WINDOW_MANAGER"
+echo "$WINDOW_MANAGER"
+echo "\$DESKTOP_SESSION"
+echo "$DESKTOP_SESSION"
+echo "\$XDG_CURRENT_DESKTOP"
+echo "$XDG_CURRENT_DESKTOP"
+echo "\$GDMSESSION"
+echo "$GDMSESSION"
+            
     echo "uname -a"
     uname -a
     echo 
@@ -144,6 +154,14 @@ rpm -q ORBit2
 
 echo
     
+    echo "Check if any window managers are running:"
+    ps -ef | egrep -i "xfwm|twm|metacity|beryl|fluxbox|compiz" | grep -v egrep
+    echo
+    echo
+    echo "Check for popular desktop environments:"
+    ps -ef | egrep -i "unity|mint|gnome|kde|xfce|ion|wmii|dwm" | grep -v egrep
+        
+    
     # make sure there is a window manager running. See bug 379026
     # we should not have to, but may be a quirk/bug of hudson setup
     # assuming metacity attaches to "current" display by default (which should have 
@@ -154,12 +172,29 @@ echo
     echo $METACITYPID > epmetacity.pid
     echo
     
+# of special interest, though most won't be defined
+echo "\$WINDOW_MANAGER"
+echo "$WINDOW_MANAGER"
+echo "\$DESKTOP_SESSION"
+echo "$DESKTOP_SESSION"
+echo "\$XDG_CURRENT_DESKTOP"
+echo "$XDG_CURRENT_DESKTOP"
+echo "\$GDMSESSION"
+echo "$GDMSESSION"    
+    
     # list out metacity processes so overtime we can see if they accumulate, or if killed automatically 
     # when our process exits. If not automatic, should use epmetacity.pid to kill it when we are done.
     echo "Current metacity processes running:"
     ps -ef | grep "metacity" | grep -v grep
     echo 
-    
+
+    echo "Check if any window managers are running (metacity should be!):"
+    ps -ef | egrep -i "xfwm|twm|metacity|beryl|fluxbox|compiz" | grep -v egrep
+    echo
+    echo
+    echo "Check for popular desktop environments:"
+    ps -ef | egrep -i "unity|mint|gnome|kde|xfce|ion|wmii|dwm" | grep -v egrep
+        
     # -Dtimeout=300000 "${ANT_OPTS}"
     $vmcmd  -Dosgi.os=$os -Dosgi.ws=$ws -Dosgi.arch=$arch -jar $launcher -data workspace -application org.eclipse.ant.core.antRunner -file ${PWD}/test.xml $tests -Dws=$ws -Dos=$os -Darch=$arch -Dtimeout=300000 -D$installmode=true $properties -logger org.apache.tools.ant.DefaultLogger
 

@@ -1,10 +1,14 @@
 
 #!/usr/bin/env bash
 
-echo "echo \$WINDOW_MANAGER"
-echo "echo $WINDOW_MANAGER"
-echo "echo \$DESKTOP_SESSION"
-echo "echo $DESKTOP_SESSION"
+echo "\$WINDOW_MANAGER"
+echo "$WINDOW_MANAGER"
+echo "\$DESKTOP_SESSION"
+echo "$DESKTOP_SESSION"
+echo "\$XDG_CURRENT_DESKTOP"
+echo "$XDG_CURRENT_DESKTOP"
+echo "\$GDMSESSION"
+echo "$GDMSESSION"
 
 echo "uname -a"
 uname -a
@@ -37,5 +41,12 @@ echo "rpm -q ORBit2"
 rpm -q ORBit2
 echo 
 echo
+    echo "Check if any window managers are running:"
+    ps -ef | egrep -i "xfwm|twm|metacity|beryl|fluxbox|compiz" | grep -v egrep
+    echo
+    echo
+    echo "Check for popular desktop environments:"
+    ps -ef | egrep -i "unity|mint|gnome|kde|xfce|ion|wmii|dwm" | grep -v egrep
+
 # we always end with "success" even though some commands may "fail"
 exit 0
