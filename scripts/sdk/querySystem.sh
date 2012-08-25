@@ -1,14 +1,12 @@
 
 #!/usr/bin/env bash
 
-echo "\$WINDOW_MANAGER"
-echo "$WINDOW_MANAGER"
-echo "\$DESKTOP_SESSION"
-echo "$DESKTOP_SESSION"
-echo "\$XDG_CURRENT_DESKTOP"
-echo "$XDG_CURRENT_DESKTOP"
-echo "\$GDMSESSION"
-echo "$GDMSESSION"
+# of special interest, though most won't be defined
+echo "\$WINDOWMANAGER: $WINDOWMANAGER"
+echo "\$WINDOW_MANAGER: $WINDOW_MANAGER"
+echo "\$DESKTOP_SESSION: $DESKTOP_SESSION"
+echo "\$XDG_CURRENT_DESKTOP: $XDG_CURRENT_DESKTOP"
+echo "\$GDMSESSION: $GDMSESSION"   
 
 echo "uname -a"
 uname -a

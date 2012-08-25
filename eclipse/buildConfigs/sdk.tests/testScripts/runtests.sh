@@ -104,6 +104,7 @@ then
     printenv
 
 # of special interest, though most won't be defined
+echo "\$WINDOWMANAGER: $WINDOWMANAGER"
 echo "\$WINDOW_MANAGER: $WINDOW_MANAGER"
 echo "\$DESKTOP_SESSION: $DESKTOP_SESSION"
 echo "\$XDG_CURRENT_DESKTOP: $XDG_CURRENT_DESKTOP"
@@ -166,6 +167,7 @@ echo
     echo
     
 # of special interest, though most won't be defined
+echo "\$WINDOWMANAGER: $WINDOWMANAGER"
 echo "\$WINDOW_MANAGER: $WINDOW_MANAGER"
 echo "\$DESKTOP_SESSION: $DESKTOP_SESSION"
 echo "\$XDG_CURRENT_DESKTOP: $XDG_CURRENT_DESKTOP"
