@@ -104,14 +104,10 @@ then
     printenv
 
 # of special interest, though most won't be defined
-echo "\$WINDOW_MANAGER"
-echo "$WINDOW_MANAGER"
-echo "\$DESKTOP_SESSION"
-echo "$DESKTOP_SESSION"
-echo "\$XDG_CURRENT_DESKTOP"
-echo "$XDG_CURRENT_DESKTOP"
-echo "\$GDMSESSION"
-echo "$GDMSESSION"
+echo "\$WINDOW_MANAGER: $WINDOW_MANAGER"
+echo "\$DESKTOP_SESSION: $DESKTOP_SESSION"
+echo "\$XDG_CURRENT_DESKTOP: $XDG_CURRENT_DESKTOP"
+echo "\$GDMSESSION: $GDMSESSION"    
             
     echo "uname -a"
     uname -a
@@ -170,14 +166,10 @@ echo
     echo
     
 # of special interest, though most won't be defined
-echo "\$WINDOW_MANAGER"
-echo "$WINDOW_MANAGER"
-echo "\$DESKTOP_SESSION"
-echo "$DESKTOP_SESSION"
-echo "\$XDG_CURRENT_DESKTOP"
-echo "$XDG_CURRENT_DESKTOP"
-echo "\$GDMSESSION"
-echo "$GDMSESSION"    
+echo "\$WINDOW_MANAGER: $WINDOW_MANAGER"
+echo "\$DESKTOP_SESSION: $DESKTOP_SESSION"
+echo "\$XDG_CURRENT_DESKTOP: $XDG_CURRENT_DESKTOP"
+echo "\$GDMSESSION: $GDMSESSION"    
     
     # list out metacity processes so overtime we can see if they accumulate, or if killed automatically 
     # when our process exits. If not automatic, should use epmetacity.pid to kill it when we are done.

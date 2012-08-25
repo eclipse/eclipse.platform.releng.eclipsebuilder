@@ -48,5 +48,10 @@ echo
     echo "Check for popular desktop environments (gnome or kde):"
     ps -ef | egrep -i "gnome|kde" | grep -v egrep
 
+echo 
+echo " == all env variables == "
+printenv
+echo
+echo
 # we always end with "success" even though some commands may "fail"
 exit 0
