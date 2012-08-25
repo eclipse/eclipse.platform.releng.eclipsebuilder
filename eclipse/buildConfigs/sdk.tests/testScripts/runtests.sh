@@ -154,12 +154,12 @@ rpm -q ORBit2
 
 echo
     
-    echo "Check if any window managers are running:"
+    echo "Check if any window managers are running (xfwm|twm|metacity|beryl|fluxbox|compiz):"
     ps -ef | egrep -i "xfwm|twm|metacity|beryl|fluxbox|compiz" | grep -v egrep
     echo
     echo
     echo "Check for popular desktop environments:"
-    ps -ef | egrep -i "unity|mint|gnome|kde|xfce|ion|wmii|dwm" | grep -v egrep
+    ps -ef | egrep -i "gnome|kde" | grep -v egrep
         
     
     # make sure there is a window manager running. See bug 379026
