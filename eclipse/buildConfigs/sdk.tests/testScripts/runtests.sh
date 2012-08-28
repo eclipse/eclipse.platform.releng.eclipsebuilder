@@ -100,91 +100,100 @@ then
     # run tests
     launcher=`ls eclipse/plugins/org.eclipse.equinox.launcher_*.jar`
     
-    echo "list all environment variables in effect as tests start"
-    printenv
 
-# of special interest, though most won't be defined
-echo "\$WINDOWMANAGER: $WINDOWMANAGER"
-echo "\$WINDOW_MANAGER: $WINDOW_MANAGER"
-echo "\$DESKTOP_SESSION: $DESKTOP_SESSION"
-echo "\$XDG_CURRENT_DESKTOP: $XDG_CURRENT_DESKTOP"
-echo "\$GDMSESSION: $GDMSESSION"    
+
+# it have been recommended not to "probe and publish" information about systems 
+# for slight improvement in security. Bug 387747
+# so I have commented out most such probes, so they won't be routine. 
+
+    #echo "list all environment variables in effect as tests start"
+    #printenv
+
+
+# variables of special interest, though most won't be defined
+#echo "\$WINDOWMANAGER: $WINDOWMANAGER"
+#echo "\$WINDOW_MANAGER: $WINDOW_MANAGER"
+#echo "\$DESKTOP_SESSION: $DESKTOP_SESSION"
+#echo "\$XDG_CURRENT_DESKTOP: $XDG_CURRENT_DESKTOP"
+#echo "\$GDMSESSION: $GDMSESSION"    
             
-    echo "uname -a"
-    uname -a
-    echo 
-    echo "lsb_release -a"
-    lsb_release -a
-    echo 
+#echo "uname -a"
+#uname -a
+    #    echo 
+    #echo "lsb_release -a"
+    #lsb_release -a
+    #echo 
         
-echo "cat /etc/lsb-release"
-cat /etc/lsb-release
-    echo 
+#echo "cat /etc/lsb-release"
+#cat /etc/lsb-release
+    #    echo 
 
-echo "cat /etc/SuSE-release"
-cat /etc/SuSE-release
-    echo 
+#echo "cat /etc/SuSE-release"
+#cat /etc/SuSE-release
+    #    echo 
 
-echo "rpm -q cairo"
-rpm -q cairo
-    echo 
+#echo "rpm -q cairo"
+#rpm -q cairo
+    #    echo 
 
-echo "rpm -q gtk2"
-rpm -q gtk2
-    echo 
+#echo "rpm -q gtk2"
+#rpm -q gtk2
+    #    echo 
 
-echo "rpm -q glibc"
-rpm -q glibc
-    echo 
+#echo "rpm -q glibc"
+#rpm -q glibc
+    #    echo 
 
-echo "rpm -q glib2"
-rpm -q glib2
-    echo 
+#echo "rpm -q glib2"
+#rpm -q glib2
+    #    echo 
 
-echo "rpm -q pango"
-rpm -q pango
-    echo 
+#echo "rpm -q pango"
+#rpm -q pango
+    #    echo 
 
+       #    echo
+    #echo "Check for popular desktop environments (gnome|kde):"
+    #ps -ef | egrep -i "gnome|kde" | grep -v egrep
+ 
+     #    echo
+    #echo "Check for popular desktop environments:"
+    #ps -ef | egrep -i "unity|mint|gnome|kde|xfce|ion|wmii|dwm" | grep -v egrep
+ 
+     #echo "DISPLAY: $DISPLAY"
 
-echo
-    
-    echo "Check if any window managers are running (xfwm|twm|metacity|beryl|fluxbox|compiz):"
-    ps -ef | egrep -i "xfwm|twm|metacity|beryl|fluxbox|compiz" | grep -v egrep
-    echo
-    echo
-    echo "Check for popular desktop environments (gnome|kde):"
-    ps -ef | egrep -i "gnome|kde" | grep -v egrep
-        
-    
     # make sure there is a window manager running. See bug 379026
     # we should not have to, but may be a quirk/bug of hudson setup
     # assuming metacity attaches to "current" display by default (which should have 
     # already been set by Hudson). We echo its value here just for extra reference/cross-checks.  
-    echo "DISPLAY: $DISPLAY"
-    metacity --replace --sm-disable  &
-    METACITYPID=$!
-    echo $METACITYPID > epmetacity.pid
+
+    echo "Check if any window managers are running (xfwm|twm|metacity|beryl|fluxbox|compiz):"
+    wmpss=$(ps -ef | egrep -i "xfwm|twm|metacity|beryl|fluxbox|compiz" | grep -v egrep)
+    echo "Window Manager processes: $wmpss"
     echo
+
+    if [[ -z $wmpss ]]
+    then 
+             echo "No window managers processes found running, so will start metacity"
+             metacity --replace --sm-disable  &
+             METACITYPID=$!
+             echo $METACITYPID > epmetacity.pid
+     else 
+             echo "Existing window manager found running, so did not force start of metacity"         
+    fi
     
-# of special interest, though most won't be defined
-echo "\$WINDOWMANAGER: $WINDOWMANAGER"
-echo "\$WINDOW_MANAGER: $WINDOW_MANAGER"
-echo "\$DESKTOP_SESSION: $DESKTOP_SESSION"
-echo "\$XDG_CURRENT_DESKTOP: $XDG_CURRENT_DESKTOP"
-echo "\$GDMSESSION: $GDMSESSION"    
-    
+    echo
+        
     # list out metacity processes so overtime we can see if they accumulate, or if killed automatically 
     # when our process exits. If not automatic, should use epmetacity.pid to kill it when we are done.
-    echo "Current metacity processes running:"
+    echo "Current metacity processes running (check for accumulation):"
     ps -ef | grep "metacity" | grep -v grep
     echo 
 
-    echo "Check if any window managers are running (metacity should be!):"
-    ps -ef | egrep -i "xfwm|twm|metacity|beryl|fluxbox|compiz" | grep -v egrep
+    echo "Triple check if any window managers are running (at least metacity should be!):"
+    wmpss=$(ps -ef | egrep -i "xfwm|twm|metacity|beryl|fluxbox|compiz" | grep -v egrep)
+    echo "Window Manager processes: $wmpss"
     echo
-    echo
-    echo "Check for popular desktop environments:"
-    ps -ef | egrep -i "unity|mint|gnome|kde|xfce|ion|wmii|dwm" | grep -v egrep
         
     # -Dtimeout=300000 "${ANT_OPTS}"
     $vmcmd  -Dosgi.os=$os -Dosgi.ws=$ws -Dosgi.arch=$arch -jar $launcher -data workspace -application org.eclipse.ant.core.antRunner -file ${PWD}/test.xml $tests -Dws=$ws -Dos=$os -Darch=$arch  -D$installmode=true $properties -logger org.apache.tools.ant.DefaultLogger
