@@ -1,0 +1,13 @@
+eclipse.preferences.version=1
+nonProxiedHosts=download.eclipse.org|git.eclipse.org|hudson.eclipse.org|dev.eclipse.org|build.eclipse.org|<local>|172.25.25.*|206.191.52.58|127.0.0.1|172.30.206.*|*.eclipse.org|localhost
+org.eclipse.core.net.hasMigrated=true
+proxyData/HTTP/hasAuth=false
+proxyData/HTTP/host=proxy.eclipse.org
+proxyData/HTTP/port=9898
+proxyData/HTTPS/hasAuth=false
+proxyData/HTTPS/host=proxy.eclipse.org
+proxyData/HTTPS/port=9898
+proxyData/SOCKS/hasAuth=false
+proxyData/SOCKS/host=proxy.eclipse.org
+proxyData/SOCKS/port=9898
+systemProxiesEnabled=false
