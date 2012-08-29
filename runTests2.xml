@@ -363,14 +363,9 @@
                 <equals
                     arg1="${osgi.ws}"
                     arg2="gtk" />
-                <or>
-                    <equals
-                        arg1="${osgi.arch}"
-                        arg2="x86_64" />
-                    <equals
-                        arg1="${osgi.arch}"
-                        arg2="x86" />
-                </or>
+                <equals
+                    arg1="${osgi.arch}"
+                    arg2="x86_64" />
             </and>
         </condition>
         <condition
@@ -383,14 +378,9 @@
                 <equals
                     arg1="${osgi.ws}"
                     arg2="gtk" />
-                <or>
-                    <equals
-                        arg1="${osgi.arch}"
-                        arg2="x86" />
-                    <equals
-                        arg1="${osgi.arch}"
-                        arg2="x86" />
-                </or>
+                <equals
+                    arg1="${osgi.arch}"
+                    arg2="x86" />
             </and>
         </condition>
         <condition
