@@ -168,7 +168,8 @@
         <echo message="archiveLocation ${archiveLocation}" />
     </target>
 
-    <target name="platformIndependentZips">
+    <target name="platformIndependentZips"
+        unless="skipInstall">
         <!-- note: we try these platfrom independ zips first, by coincidence 
              so we will make the 
              effort to "wait" if they are not ready yet. But, assuming
@@ -208,7 +209,8 @@
 
     <target
         name="getwinzips"
-        depends="platformIndependentZips">
+        depends="platformIndependentZips"
+        unless="skipInstall">
         <get
             src="${archiveLocation}/eclipse-SDK-${buildId}-win32.zip"
             dest="${executionDir}/eclipse-SDK-${buildId}-win32.zip" />
@@ -222,7 +224,8 @@
 
     <target
         name="getlinzips"
-        depends="platformIndependentZips">
+        depends="platformIndependentZips"
+        unless="skipInstall">
         <get
             src="${archiveLocation}/eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz"
             dest="${executionDir}/eclipse-SDK-${buildId}-linux-gtk-x86_64.tar.gz" />
@@ -236,7 +239,8 @@
 
     <target
         name="getlinzips32"
-        depends="platformIndependentZips">
+        depends="platformIndependentZips"
+        unless="skipInstall">
         <get
             src="${archiveLocation}/eclipse-SDK-${buildId}-linux-gtk.tar.gz"
             dest="${executionDir}/eclipse-SDK-${buildId}-linux-gtk.tar.gz" />
@@ -250,7 +254,8 @@
 
     <target
         name="getmaczips"
-        depends="platformIndependentZips">
+        depends="platformIndependentZips"
+        unless="skipInstall">
         <get
             src="${archiveLocation}/eclipse-SDK-${buildId}-macosx-cocoa.tar.gz"
             dest="${executionDir}/eclipse-SDK-${buildId}-macosx-cocoa.tar.gz" />
@@ -399,6 +404,7 @@
             </and>
         </condition>
         <echo message="testPlatform  ${testPlatform}" />
+        <fail unless="testPlatform" message="testPlatform did not match any of the supported combinations of osgi.os, osgi.ws, osgi.arch" />
         <condition
             property="getArtifacts"
             value="getwinzips">
@@ -485,8 +491,10 @@
             overwrite="true">
             <fileset dir="${eclipseBuilderDir}/eclipse/buildConfigs/sdk.tests/testScripts" />
         </copy>
+        
         <antcall target="configure.team.cvs.test" />
         <echo message="test.xml: ${test.xml}" />
+        <echoproperties />
         <ant antfile="${test.xml}">
         </ant>
 
@@ -626,8 +634,8 @@
         -->
     <target
         name="getMapProject"
-        depends="hudson-init,initStreamVariables"
-        unless="mapProjectFetched">
+        depends="hudson-init,initStreamVariables,checkMapsNeeded"
+        unless="mapsNotNeeded">
                     <!-- fail fast if these reuqired variables have not been defined 
                         yet -->
         <fail
@@ -755,6 +763,18 @@
             unless="updateSiteSegment"
             message="updateSiteSegment not defined or computed" />
 
+    </target>
+
+    <!-- skipInstall=true passed in when user knows things have already been installed, and 
+         just wants to re-run the tests -->
+    <target
+        name="checkMapsNeeded">
+        <condition property="mapsNotNeeded">
+            <or>
+              <isset property="mapProjectFetched"/>
+              <isset property="skipInstall"/>
+            </or>
+        </condition>
     </target>
 
 </project>
