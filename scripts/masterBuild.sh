@@ -11,6 +11,9 @@
 #     IBM Corporation - initial API and implementation
 #*******************************************************************************
 
+# this file is to ease local builds. It should not be used for production builds. 
+source buildeclipse.shsource
+
 # 0002 is often the default for shell users, but it is not when ran from 
 # a cron job, so we set it explicitly, so group has write access to anything 
 # we create.  
