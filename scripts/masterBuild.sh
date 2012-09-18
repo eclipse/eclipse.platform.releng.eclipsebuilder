@@ -142,7 +142,8 @@ updateBaseBuilder () {
         #cmd="cvs -d :pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse ${quietCVS} ex -r ${basebuilderBranch} -d org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder"
         # cvs -d :pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse ${quietCVS} ex -r ${basebuilderBranch} -d org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder
         # TODO: make cvs user/protocol/host variables so can be rrun remotely also
-        cvs -d :local:/cvsroot/eclipse ${quietCVS} ex -r ${basebuilderBranch} -d org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder
+        CVSROOT=${CVSROOT:-:local:/cvsroot/eclipse}
+        cvs -d ${CVSROOT} ${quietCVS} ex -r ${basebuilderBranch} -d org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder
         exitcode=$?
         #echo "cvs export cmd: ${cmd}"
         #"${cmd}"
