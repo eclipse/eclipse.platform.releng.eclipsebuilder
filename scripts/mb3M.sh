@@ -14,11 +14,11 @@ initScriptTag=master
 
 eclipseStreamMajor=${eclipseStream:0:1}
 
+# path required when starting from cron job
+export PATH=/usr/local/bin:/usr/bin:/bin:${HOME}/bin:
+
 # this file is to ease local builds. It should not be used for production builds. 
 source buildeclipse.shsource
-
-# path required when starting from cron job
-export PATH=/usr/local/bin:/usr/bin:/bin:
 
 # This file intended to be executed from cronjob
 # It assumes the mbNxTx.sh file already exist in key directory, 
