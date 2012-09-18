@@ -214,17 +214,17 @@ runSDKBuild ()
 
     # TODO: we should make the these work off the defined java15home and java16home
     #       etc., just to avoid redundency? 
-    bootclasspath="/shared/common/j2sdk1.4.2_19/jre/lib/rt.jar:/shared/common/j2sdk1.4.2_19/jre/lib/jsse.jar:/shared/common/j2sdk1.4.2_19/jre/lib/jce.jar"
-    bootclasspath_15="/shared/common/jdk-1.5.0_16/jre/lib/rt.jar:/shared/common/jdk-1.5.0_16/jre/lib/jsse.jar:/shared/common/jdk-1.5.0_16/jre/lib/jce.jar"
-    bootclasspath_16="/shared/common/jdk1.6.0_27.x86_64/jre/lib/rt.jar:/shared/common/jdk1.6.0_27.x86_64/jre/lib/jsse.jar:/shared/common/jdk1.6.0_27.x86_64/jre/lib/jce.jar"
-    bootclasspath_foundation="/shared/common/org.eclipse.sdk-feature2/libs/ee.foundation-1.0.jar"
-    bootclasspath_foundation11="/shared/common/org.eclipse.sdk-feature2/libs/ee.foundation.jar"
+    bootclasspath=${bootclasspath:-"/shared/common/j2sdk1.4.2_19/jre/lib/rt.jar:/shared/common/j2sdk1.4.2_19/jre/lib/jsse.jar:/shared/common/j2sdk1.4.2_19/jre/lib/jce.jar"}
+    bootclasspath_15=${bootclasspath_15:-"/shared/common/jdk-1.5.0_16/jre/lib/rt.jar:/shared/common/jdk-1.5.0_16/jre/lib/jsse.jar:/shared/common/jdk-1.5.0_16/jre/lib/jce.jar"}
+    bootclasspath_16=${bootclasspath_16:-"/shared/common/jdk1.6.0_27.x86_64/jre/lib/rt.jar:/shared/common/jdk1.6.0_27.x86_64/jre/lib/jsse.jar:/shared/common/jdk1.6.0_27.x86_64/jre/lib/jce.jar"}
+    bootclasspath_foundation=${bootclasspath_foundation:-"/shared/common/org.eclipse.sdk-feature2/libs/ee.foundation-1.0.jar"}
+    bootclasspath_foundation11=${bootclasspath_foundation11:-"/shared/common/org.eclipse.sdk-feature2/libs/ee.foundation.jar"}
     # https://bugs.eclipse.org/bugs/show_bug.cgi?id=375976, and 
     # https://bugs.eclipse.org/bugs/show_bug.cgi?id=376029
-    OSGiMinimum11="/shared/common/org.eclipse.sdk-feature2/libs/ee.minimum.jar"
-    OSGiMinimum12="/shared/common/org.eclipse.sdk-feature2/libs/ee.minimum-1.2.0.jar"
+    OSGiMinimum11=${OSGiMinimum11:-"/shared/common/org.eclipse.sdk-feature2/libs/ee.minimum.jar"}
+    OSGiMinimum12=${OSGiMinimum12:-"/shared/common/org.eclipse.sdk-feature2/libs/ee.minimum-1.2.0.jar"}
 
-    javadoc="-Djavadoc16=/shared/common/jdk1.6.0_27.x86_64/bin/javadoc"
+    javadoc=${javadoc:-"-Djavadoc16=/shared/common/jdk1.6.0_27.x86_64/bin/javadoc"}
 
     skipPerf="-Dskip.performance.tests=true"
     skipTest="-Dskip.tests=true"
@@ -516,9 +516,9 @@ processCommandLine ()
     # Would have to run under Java 1.5, to make sure 'sign' (which uses jar processor) 
     # and eventual "pack200" can all be unpacked with 1.5. 
     # long term, we can launch those tasks in seperate process, or some other better way.
-    java15home=/shared/common/jdk-1.5.0-22.x86_64
+    java15home=${java15home:-/shared/common/jdk-1.5.0-22.x86_64}
     #java15home=/shared/orbit/apps/ibm-java2-i386-50/jre
-    java16home=/shared/common/sun-jdk1.6.0_21_x64
+    java16home=${java16home:-/shared/common/sun-jdk1.6.0_21_x64}
     pack200dir=${java15home}/bin
 
     buildTimestamp=${date}-${time}

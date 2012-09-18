@@ -14,6 +14,9 @@ initScriptTag=master
 
 eclipseStreamMajor=${eclipseStream:0:1}
 
+# this file is to ease local builds. It should not be used for production builds. 
+source buildeclipse.shsource
+
 # path required when starting from cron job
 export PATH=/usr/local/bin:/usr/bin:/bin:
 
