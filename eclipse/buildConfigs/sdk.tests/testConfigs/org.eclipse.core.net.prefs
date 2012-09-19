@@ -1,11 +1,3 @@
-! This file can be copied to 
-! "${directorInstallDirectory}/director/configuration/.settings/org.eclipse.core.net.prefs
-! or 
-! .../eclipse/configuration/.settings/
-! in some cases it is required. See 
-! http://wiki.eclipse.org/Hudson#Configuring_a_proxy_for_the_p2_director
-! or bug 372880
-! https://bugs.eclipse.org/bugs/show_bug.cgi?id=372880
 eclipse.preferences.version=1
 nonProxiedHosts=127.0.0.1|localhost|*.localhost|local|*.local|169.254/16|*.169.254/16|eclipse.org|*.eclipse.org|hudson.eclipse.org|*.hudson.eclipse.org|dev.eclipse.org|*.dev.eclipse.org
 org.eclipse.core.net.hasMigrated=true
