@@ -1,5 +1,5 @@
 @echo off
-@echo executionDir: executionDir
+echo executionDir: %executionDir%
 cd %executionDir%
 
 REM test script
