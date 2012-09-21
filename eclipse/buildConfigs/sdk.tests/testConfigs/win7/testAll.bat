@@ -1,5 +1,7 @@
 @echo off
-cd %executionDir
+@echo executionDir: executionDir
+cd %executionDir%
+
 REM test script
 
 REM localTestProperties.bat is not used or expected in production builds,
@@ -10,8 +12,8 @@ REM a typical example is that their version/location/vendor of VM is likely to d
 REM so they could redefine vmcmdvalue to what's appropriate to their machine and setup.
 IF EXIST localTestProperties.bat call localTestProperties.bat 
 
-# vm.properties is used by default on production machines, but will 
-# need to override on local setups and performance tests
+REM vm.properties is used by default on production machines, but will 
+REM need to override on local setups and performance tests
 IF NOT DEFINED propertyFile SET propertyFile=vm.properties
 
 IF NOT DEFINED vmcmdvalue SET vmcmdvalue=c:\\java\\jdk7u2\\jre\\bin\\javaw
