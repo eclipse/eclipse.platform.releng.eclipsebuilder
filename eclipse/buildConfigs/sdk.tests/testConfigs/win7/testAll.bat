@@ -7,13 +7,15 @@ REM cd %executionDir%
 
 REM test script
 
-REM localTestProperties.bat is not used or expected in production builds,
+REM localTestsProperties.bat is not used or expected in production builds,
 REM but is needed for production performance tests and  
 REM allows a place for people to have their own machines variables defined
 REM there so they do not have to hand edit each time to do a local build. 
 REM a typical example is that their version/location/vendor of VM is likely to differ,
 REM so they could redefine vmcmdvalue to what's appropriate to their machine and setup.
-IF EXIST localTestProperties.bat call localTestProperties.bat 
+
+IF EXIST localTestsProperties.bat CALL localTestsProperties.bat
+
 
 REM vm.properties is used by default on production machines, but will 
 REM need to override on local setups and performance tests

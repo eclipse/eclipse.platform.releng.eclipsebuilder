@@ -20,6 +20,9 @@ set arch=x86
 REM reset ant command line args
 set ANT_CMD_LINE_ARGS=
 
+IF EXIST localTestsProperties.bat CALL localTestsProperties.bat
+
+
 REM ****************************************************************
 REM
 REM Install Eclipse if it does not exist
