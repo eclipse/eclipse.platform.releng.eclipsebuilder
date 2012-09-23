@@ -1,6 +1,9 @@
 @echo off
-echo executionDir: %executionDir%
-cd %executionDir%
+
+REM Is this even needed? If so, probalby should be @exectutionDir@ and it be filled in. 
+REM but other scripts don't seem to 
+REM echo executionDir: %executionDir%
+REM cd %executionDir%
 
 REM test script
 
