@@ -485,7 +485,7 @@
 
         <echo message="executionDir ${executionDir}" />
 
-        <copy todir="${executionDir}">
+        <copy todir="${executionDir}" verbose="true" >
             <fileset dir="${eclipseBuilderDir}/eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}" />
         </copy>
         <copy
