@@ -61,6 +61,9 @@ echo "list all environment variables in effect as tests start"
 set
 
 rem -Dtimeout=300000 "%ANT_OPTS%" 
+
+IF NOT EXIST %vmcmd% ECHO ERROR: vmcmd not defined or does not exist: %vmcmd%
+
 %vmcmd% -Dosgi.os=%os% -Dosgi.ws=%ws% -Dosgi.arch=%arch% -jar eclipse\plugins\%launcher-jar% -data workspace -application org.eclipse.ant.core.antRunner -file test.xml %tests% -Dws=%ws% -Dos=%os% -Darch=%arch%  -D%installmode%=true %properties% -logger org.apache.tools.ant.DefaultLogger
 
 goto end
