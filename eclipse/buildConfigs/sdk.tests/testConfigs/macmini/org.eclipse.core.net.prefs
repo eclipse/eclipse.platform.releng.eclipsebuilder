@@ -10,4 +10,4 @@ proxyData/HTTPS/port=9898
 proxyData/SOCKS/hasAuth=false
 proxyData/SOCKS/host=proxy.eclipse.org
 proxyData/SOCKS/port=9898
-systemProxiesEnabled=false
+systemProxiesEnabled=true
