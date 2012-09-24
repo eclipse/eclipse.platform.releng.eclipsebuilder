@@ -41,6 +41,7 @@
 
         <parallel>
 
+            <!--
             <antcall target="triggerHudsonTests">
                 <param
                     name="job"
@@ -49,7 +50,8 @@
                     name="suffix"
                     value="win32.zip" />
             </antcall>
-
+            -->
+ 
             <antcall target="triggerHudsonTests">
                 <param
                     name="job"
