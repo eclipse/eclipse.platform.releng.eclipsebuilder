@@ -44,7 +44,7 @@
             <antcall target="triggerHudsonTests">
                 <param
                     name="job"
-                    value="JUnit-win${jobNameSuffix}" />
+                    value="ep${eclipseStreamMajor}-unit-win32" />
                 <param
                     name="suffix"
                     value="win32.zip" />
@@ -53,7 +53,7 @@
             <antcall target="triggerHudsonTests">
                 <param
                     name="job"
-                    value="eclipse-JUnit-Linux${jobNameSuffix}" />
+                    value="ep${eclipseStreamMajor}-unit-lin64" />
                 <param
                     name="suffix"
                     value="linux-gtk-x86_64.tar.gz" />
@@ -62,7 +62,7 @@
             <antcall target="triggerHudsonTests">
                 <param
                     name="job"
-                    value="eclipse-JUnit-mac${jobNameSuffix}" />
+                    value="ep${eclipseStreamMajor}-unit-mac32" />
                 <param
                     name="suffix"
                     value="macosx-cocoa-x86.zip" />
@@ -230,18 +230,6 @@
                 arg2="4" />
         </condition>
         
-        <!-- 
-          current convention distinguishes hudson jobs with "2" for 4.x tests, nothing if 3.x tests
-          TODO: change to be more specific to version (such as "4" and "3"). 
-         -->
-        <condition
-            property="jobNameSuffix"
-            value="2"
-            else="">
-            <equals
-                arg1="${eclipseStreamMajor}"
-                arg2="4" />
-        </condition>
 
         <script language="javascript">
             var buildId = project.getProperty("buildId");
