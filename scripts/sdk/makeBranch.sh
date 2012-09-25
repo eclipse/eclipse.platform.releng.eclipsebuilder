@@ -2,14 +2,21 @@
 
 # Utility script to semi-automate creation of a branch using committer shell (or, e4Build id)
 
+project=simrel
 #project=platform
-project=jdt
+#project=jdt
 
 #reponame=eclipse.platform.team
-reponame=eclipse.jdt.debug
+#reponame=eclipse.jdt.debug
+#reponame=eclipse.platform.releng
+reponame=org.eclipse.simrel.build
 
-startTag=R3_8
-branchName=R3_8_maintenance
+startTag=JunoSR0
+#startTag=R4_2
+#startTag=R3_8
+branchName=Juno_maintenance
+#branchName=R4_2_maintenance
+#branchName=R3_8_maintenance
 
 source checkForErrorExit.sh
 
