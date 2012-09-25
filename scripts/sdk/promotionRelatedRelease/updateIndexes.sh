@@ -1,0 +1,2 @@
+source updateIndexFilesFunction.sh
+updateIndex
