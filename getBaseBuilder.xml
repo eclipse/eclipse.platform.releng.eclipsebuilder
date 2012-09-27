@@ -181,7 +181,8 @@
         
         <echo message="xalanLocation: ${xalanLocation}" /> 
         
-        <copy todir="${WORKSPACE}/${cvsProject}/plugins/" >
+        <mkdir dir="${WORKSPACE}/${cvsProject}/dropins" />
+        <copy todir="${WORKSPACE}/${cvsProject}/dropins/" >
             <fileset dir="${xalanLocation}" >
                 <include name="*.jar"/>
             </fileset>
