@@ -143,6 +143,7 @@
 
         </cvs>
 
+        <antcall target="getXalan" />
 
     </target>
     <!-- hurestic to check if we are running on hudson variable, if so -->
@@ -166,5 +167,22 @@
 
     </target>
 
+    <target name="getXalan" depends="checklocation" if="xalanLocation">
+        
+        <echo message="xalanLocation: ${xalanLocation}" /> 
+        
+        <copy todir="${WORKSPACE}/${cvsProject}/plugins/" >
+            <fileset dir="${xalanLocation}" >
+                <include name="org.apache.xalan*.jar"/>
+            </fileset>
+        </copy>
+
+    </target>
+
+    <target name="checklocation" unless="xalanLocation">
+        
+        <echo message="xalanLocation not provided, so not copied into builder" /> 
+
+    </target>
 
 </project>
