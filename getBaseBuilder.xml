@@ -169,11 +169,21 @@
 
     <target name="getXalan" depends="checklocation" if="xalanLocation">
         
+        <!-- 
+            5 jars (from Orbit) expected under xalanLocation: 
+            java_cup.runtime_0.10.0**
+            javax.xml_1.3.4*
+            org.apache.bcel_5.2.0*
+            org.apache.xalan_2.7.1*
+            org.apache.xerces_2.9.0* 
+        (not sure all are litierally required?) 
+        -->
+        
         <echo message="xalanLocation: ${xalanLocation}" /> 
         
         <copy todir="${WORKSPACE}/${cvsProject}/plugins/" >
             <fileset dir="${xalanLocation}" >
-                <include name="org.apache.xalan*.jar"/>
+                <include name="*.jar"/>
             </fileset>
         </copy>
 
