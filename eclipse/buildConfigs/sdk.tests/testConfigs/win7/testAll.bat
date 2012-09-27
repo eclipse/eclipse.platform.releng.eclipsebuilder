@@ -23,9 +23,10 @@ IF NOT DEFINED propertyFile SET propertyFile=vm.properties
 
 ECHO propertyFile: %propertyFile%
 
-REM IF NOT DEFINED vmcmd SET vmcmd=c:\\java\\jdk7u2\\jre\\bin\\javaw
+REM TODO: not sure there is a good default here. should probably just say "java"? 
+IF NOT DEFINED vmcmd SET vmcmd=c:\\java\\jdk7u2\\jre\\bin\\javaw
 REM https://bugs.eclipse.org/bugs/show_bug.cgi?id=390286
-IF NOT DEFINED vmcmd SET vmcmd=c:\\java\\jdk1.7.0_07\\jre\\bin\\javaw
+REM IF NOT DEFINED vmcmd SET vmcmd=c:\\java\\jdk1.7.0_07\\jre\\bin\\javaw
 ECHO vmcmd: %vmcmd%
 
 mkdir results\consolelogs
