@@ -8,7 +8,7 @@ DL_LABEL=3.8.1
 # DROP_TYPE either S, R
 DROP_TYPE=R
 
-BUILD_TIMESTAMP=${DROP_ID//[I-]/}
+BUILD_TIMESTAMP=${DROP_ID//[MI-]/}
 DL_DROP_ID=${DROP_TYPE}-${DL_LABEL}-${BUILD_TIMESTAMP}
 
 source createEquinoxPromotionScriptFunction.sh
