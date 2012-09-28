@@ -13,7 +13,7 @@ scriptName="MANUAL-promote-${buildId}.sh"
 
 # remember, there is no 'downloads' segment in equinox locations, 
 # unlike the eclipse locations
-buildRoot=/shared/eclipse/eclipse4I
+buildRoot=/shared/eclipse/eclipse4M
 siteDir=${buildRoot}/siteDir
 equinoxPostingDirectory=${siteDir}/equinox/drops
 

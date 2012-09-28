@@ -15,7 +15,7 @@ source createEquinoxPromotionScriptFunction.sh
 
 #
 
-cd /opt/public/eclipse/eclipse4I/siteDir/equinox/drops
+cd /opt/public/eclipse/eclipse4M/siteDir/equinox/drops
 echo "PWD: ${PWD}"
 cp /opt/public/eclipse/sdk/renameBuild.sh .
 
