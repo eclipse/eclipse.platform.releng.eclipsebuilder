@@ -75,6 +75,7 @@ ECHO ERROR: vmcmd not defined or does not exist: %vmcmd%
 exit 1
 )
 
-%vmcmd% %outervmargs% -Dosgi.os=%os% -Dosgi.ws=%ws% -Dosgi.arch=%arch% -jar eclipse\plugins\%launcher-jar% -data workspace -application org.eclipse.ant.core.antRunner -file test.xml %tests% -Dws=%ws% -Dos=%os% -Darch=%arch%  -D%installmode%=true %properties% -logger org.apache.tools.ant.DefaultLogger
+REM %vmcmd% %outervmargs% -Dosgi.os=%os% -Dosgi.ws=%ws% -Dosgi.arch=%arch% -jar eclipse\plugins\%launcher-jar% -data workspace -application org.eclipse.ant.core.antRunner -file test.xml %tests% -Dws=%ws% -Dos=%os% -Darch=%arch%  -D%installmode%=true %properties% -logger org.apache.tools.ant.DefaultLogger
+%vmcmd% -Xbootclasspath/a:D:\shared\xalanjars\serializer.jar;D:\shared\xalanjars\xalan.jar -Djavax.xml.transform.TransformerFactory=org.apache.xalan.processor.TransformerFactoryImpl -Dosgi.os=%os% -Dosgi.ws=%ws% -Dosgi.arch=%arch% -jar eclipse\plugins\%launcher-jar% -data workspace -application org.eclipse.ant.core.antRunner -file test.xml %tests% -Dws=%ws% -Dos=%os% -Darch=%arch%  -D%installmode%=true %properties% -logger org.apache.tools.ant.DefaultLogger
 
 
