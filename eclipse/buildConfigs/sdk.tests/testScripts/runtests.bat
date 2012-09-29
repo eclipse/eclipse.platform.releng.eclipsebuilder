@@ -14,7 +14,7 @@ REM property file to pass to Ant scripts
 set properties=
 
 REM make sure blank value
-outervmargs=
+SET outervmargs=
 
 REM default values for os, ws and arch
 set os=win32
