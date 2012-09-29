@@ -1,4 +1,5 @@
 @echo off
+SETLOCAL
 
 REM localTestsProperties.bat is not used or expected in production builds,
 REM but is needed for production performance tests and  
@@ -32,5 +33,6 @@ REM IF NOT DEFINED vmcmd SET vmcmd=c:\\java\\jdk1.7.0_07\\jre\\bin\\javaw
 ECHO vmcmd: %vmcmd%
 
 mkdir results\consolelogs
+ECHO outervmargsstr: %outervmargsstr%
 runtests.bat -os win32 -ws win32 -arch x86 %outervmargsstr% -vm %vmcmd% -properties %propertyFile%  %* > results\consolelogs\win7consolelog.txt
 

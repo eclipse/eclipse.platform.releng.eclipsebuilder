@@ -1,4 +1,5 @@
 @echo off
+SETLOCAL 
 
 REM default java executable for outer and test vm
 set vmcmd=java
@@ -69,8 +70,7 @@ set
 
 rem -Dtimeout=300000 "%ANT_OPTS%" 
 
-IF NOT EXIST %vmcmd% 
-(
+IF NOT EXIST %vmcmd% (
 ECHO ERROR: vmcmd not defined or does not exist: %vmcmd%
 exit 1
 )
