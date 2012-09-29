@@ -22,7 +22,7 @@ REM outervmargs="-Xbootclasspath/p:D:\shared\xalanjars\serializer.jar;D:\shared\
 REM usually VM specific, which is why they are left a variable, instead of hard coded here.   
 
 outervmargsstr=
-if x%outervmargs%!=x outervmargsstr=-outervmargs %outervmargs%
+IF DEFINED outervmargs SET outervmargsstr=-outervmargs %outervmargs%
 
 REM TODO: not sure it is good to put VM here? Is there a good default here; such as "java"? 
 IF NOT DEFINED vmcmd SET vmcmd=c:\\java\\jdk7u2\\jre\\bin\\javaw
