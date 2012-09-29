@@ -12,6 +12,9 @@ set installmode=clean
 REM property file to pass to Ant scripts
 set properties=
 
+REM make sure blank value
+outervmargs=
+
 REM default values for os, ws and arch
 set os=win32
 set ws=win32
@@ -46,6 +49,7 @@ if x%1==x-arch set arch=%2 && shift && shift && goto processcmdlineargs
 if x%1==x-noclean set installmode=noclean&& shift && goto processcmdlineargs
 if x%1==x-properties set properties=-propertyfile %2 && shift && shift && goto processcmdlineargs
 if x%1==x-vm set vmcmd="%2" && shift && shift && goto processcmdlineargs
+if x%1==x-outervmargs set outervmargs="%2" && shift && shift && goto processcmdlineargs
 
 set tests=%tests% %1 && shift && goto processcmdlineargs
 
@@ -65,10 +69,12 @@ set
 
 rem -Dtimeout=300000 "%ANT_OPTS%" 
 
-IF NOT EXIST %vmcmd% ECHO ERROR: vmcmd not defined or does not exist: %vmcmd%
+IF NOT EXIST %vmcmd% 
+(
+ECHO ERROR: vmcmd not defined or does not exist: %vmcmd%
+exit 1
+)
 
-%vmcmd% -Dosgi.os=%os% -Dosgi.ws=%ws% -Dosgi.arch=%arch% -jar eclipse\plugins\%launcher-jar% -data workspace -application org.eclipse.ant.core.antRunner -file test.xml %tests% -Dws=%ws% -Dos=%os% -Darch=%arch%  -D%installmode%=true %properties% -logger org.apache.tools.ant.DefaultLogger
+%vmcmd% %outervmargs% -Dosgi.os=%os% -Dosgi.ws=%ws% -Dosgi.arch=%arch% -jar eclipse\plugins\%launcher-jar% -data workspace -application org.eclipse.ant.core.antRunner -file test.xml %tests% -Dws=%ws% -Dos=%os% -Darch=%arch%  -D%installmode%=true %properties% -logger org.apache.tools.ant.DefaultLogger
 
-goto end
 
-:end
