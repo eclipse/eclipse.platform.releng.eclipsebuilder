@@ -29,8 +29,16 @@ eclipseArch=${eclipseArch:-x86_64}
 # see bug 388269
 propertyFile=${propertyFile:-vm.properties}
 
+echo "extdir in testAll: ${extdir}"
+echo "extdirprop in testAll: ${extdirprop}"
 /bin/chmod 755 runtests.sh
 /bin/mkdir -p results/consolelogs
-./runtests.sh -os linux -ws gtk -arch $eclipseArch -vm "${vmcmd}" -properties ${propertyFile} $* > results/consolelogs/linux.gtk-6.0_consolelog.txt
+
+if [[ -n "${extdir}" ]]
+then
+./runtests.sh -os linux -ws gtk -arch $eclipseArch -extdirprop "${extdir}" -vm "${vmcmd}" -properties ${propertyFile} $* > results/consolelogs/linux.gtk-6.0_consolelog.txt
+else 
+./runtests.sh -os linux -ws gtk -arch $eclipseArch -vm "${vmcmd}" -properties ${propertyFile} $* > results/consolelogs/linux.gtk-6.0_consolelog.txt	
+fi
 
 

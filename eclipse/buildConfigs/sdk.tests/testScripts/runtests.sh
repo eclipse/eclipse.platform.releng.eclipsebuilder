@@ -35,6 +35,9 @@ installmode="clean"
 # name of a property file to pass to Ant
 properties=
 
+# ext dir customization. Be sure "blank", if not defined explicitly on command line
+extdirproperty=
+
 # message printed to console
 usage="usage: $0 -os <osType> -ws <windowingSystemType> -arch <architecture> [-noclean] [<test target>][-properties <path>]"
 
@@ -55,6 +58,8 @@ do
             installmode="noclean";;
         -properties) 
             properties="-propertyfile ${2}";shift;;
+        -extdirprop) 
+            extdirproperty="-Djava.ext.dirs=${2}";shift;;    
         -vm) 
             vmcmd="${2}"; shift;;
         *) 
@@ -64,6 +69,8 @@ do
 done
 
 echo "Specified test targets (if any): ${tests}"
+
+echo "Specified ext dir (if any): ${extdirproperty}"
 
 # for *nix systems, os, ws and arch values must be specified
 if [ "x$os" = "x" ]
@@ -194,9 +201,16 @@ then
     wmpss=$(ps -ef | egrep -i "xfwm|twm|metacity|beryl|fluxbox|compiz" | grep -v egrep)
     echo "Window Manager processes: $wmpss"
     echo
-        
+    echo "extdirprop in runtest: ${extdirprop}"
+    echo "extdirproperty in runtest: ${extdirproperty}"    
+      
     # -Dtimeout=300000 "${ANT_OPTS}"
-    $vmcmd  -Dosgi.os=$os -Dosgi.ws=$ws -Dosgi.arch=$arch -jar $launcher -data workspace -application org.eclipse.ant.core.antRunner -file ${PWD}/test.xml $tests -Dws=$ws -Dos=$os -Darch=$arch  -D$installmode=true $properties -logger org.apache.tools.ant.DefaultLogger
+ if [[ ! -z "${extdirproperty}" ]]
+ then 
+	$vmcmd "${extdirproperty}" -Dosgi.os=$os -Dosgi.ws=$ws -Dosgi.arch=$arch -XshowSettings  -jar $launcher -data workspace -application org.eclipse.ant.core.antRunner -file ${PWD}/test.xml $tests -Dws=$ws -Dos=$os -Darch=$arch -D$installmode=true $properties -logger org.apache.tools.ant.DefaultLogger
+ else
+	$vmcmd -Dosgi.os=$os -Dosgi.ws=$ws -Dosgi.arch=$arch -XshowSettings  -jar $launcher -data workspace -application org.eclipse.ant.core.antRunner -file ${PWD}/test.xml $tests -Dws=$ws -Dos=$os -Darch=$arch -D$installmode=true $properties -logger org.apache.tools.ant.DefaultLogger
+ fi		
 
 else
     # display message to user if os, ws and arch are invalid
