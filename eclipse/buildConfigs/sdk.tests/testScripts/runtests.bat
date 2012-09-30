@@ -13,8 +13,8 @@ set installmode=clean
 REM property file to pass to Ant scripts
 set properties=
 
-REM make sure blank value
-SET outervmargs=
+REM ext dir customization. Be sure "blank", if not defined explicitly on command line
+SET extdirproperty=
 
 REM default values for os, ws and arch
 set os=win32
@@ -50,7 +50,9 @@ if x%1==x-arch set arch=%2 && shift && shift && goto processcmdlineargs
 if x%1==x-noclean set installmode=noclean&& shift && goto processcmdlineargs
 if x%1==x-properties set properties=-propertyfile %2 && shift && shift && goto processcmdlineargs
 if x%1==x-vm set vmcmd="%2" && shift && shift && goto processcmdlineargs
-if x%1==x-outervmargs set outervmargs="%2" && shift && shift && goto processcmdlineargs
+if x%1==x-extdirprop set extdirprop="-Djava.ext.dirs=${2}" && shift && shift && goto processcmdlineargs
+
+
 
 set tests=%tests% %1 && shift && goto processcmdlineargs
 
@@ -75,11 +77,7 @@ ECHO ERROR: vmcmd not defined or does not exist: %vmcmd%
 exit 1
 )
 
-REM %vmcmd% %outervmargs% -Dosgi.os=%os% -Dosgi.ws=%ws% -Dosgi.arch=%arch% -jar eclipse\plugins\%launcher-jar% -data workspace -application org.eclipse.ant.core.antRunner -file test.xml %tests% -Dws=%ws% -Dos=%os% -Darch=%arch%  -D%installmode%=true %properties% -logger org.apache.tools.ant.DefaultLogger
 
-REM %vmcmd% -XshowSettings -Xbootclasspath/a:D:\shared\xalan\java_cup.runtime_0.10.0.v201005080400.jar;D:\shared\xalan\org.apache.bcel_5.2.0.v201005080400.jar;D:\shared\xalan\javax.xml_1.3.4.v201005080400.jar;D:\shared\xalan\org.apache.xerces_2.9.0.v201101211617.jar;D:\shared\xalan\org.apache.xalan_2.7.1.v201005080400.jar;D:\shared\xalan\org.apache.xml.serializer_2.7.1.v201005080400.jar -Djavax.xml.transform.TransformerFactory=org.apache.xalan.processor.TransformerFactoryImpl -Dosgi.os=%os% -Dosgi.ws=%ws% -Dosgi.arch=%arch% -jar eclipse\plugins\%launcher-jar% -data workspace -application org.eclipse.ant.core.antRunner -file test.xml %tests% -Dws=%ws% -Dos=%os% -Darch=%arch%  -D%installmode%=true %properties% -logger org.apache.tools.ant.DefaultLogger
-REM %vmcmd% -XshowSettings -Xbootclasspath/a:D:\shared\xalan\java_cup.runtime_0.10.0.v201005080400.jar;D:\shared\xalan\org.apache.bcel_5.2.0.v201005080400.jar;D:\shared\xalan\org.apache.xalan_2.7.1.v201005080400.jar;D:\shared\xalan\org.apache.xml.serializer_2.7.1.v201005080400.jar -Djavax.xml.transform.TransformerFactory=org.apache.xalan.processor.TransformerFactoryImpl -Dosgi.os=%os% -Dosgi.ws=%ws% -Dosgi.arch=%arch% -jar eclipse\plugins\%launcher-jar% -data workspace -application org.eclipse.ant.core.antRunner -file test.xml %tests% -Dws=%ws% -Dos=%os% -Darch=%arch%  -D%installmode%=true %properties% -logger org.apache.tools.ant.DefaultLogger
-
-%vmcmd% -XshowSettings -Xbootclasspath/a:D:\shared\xalan\org.apache.xalan_2.7.1.v201005080400.jar;D:\shared\xalan\org.apache.xml.serializer_2.7.1.v201005080400.jar -Djavax.xml.transform.TransformerFactory=org.apache.xalan.processor.TransformerFactoryImpl -Dosgi.os=%os% -Dosgi.ws=%ws% -Dosgi.arch=%arch% -jar eclipse\plugins\%launcher-jar% -data workspace -application org.eclipse.ant.core.antRunner -file test.xml %tests% -Dws=%ws% -Dos=%os% -Darch=%arch%  -D%installmode%=true %properties% -logger org.apache.tools.ant.DefaultLogger
+%vmcmd% %extdirproperty% -Dosgi.os=%os% -Dosgi.ws=%ws% -Dosgi.arch=%arch% -jar eclipse\plugins\%launcher-jar% -data workspace -application org.eclipse.ant.core.antRunner -file test.xml %tests% -Dws=%ws% -Dos=%os% -Darch=%arch%  -D%installmode%=true %properties% -logger org.apache.tools.ant.DefaultLogger
 
 

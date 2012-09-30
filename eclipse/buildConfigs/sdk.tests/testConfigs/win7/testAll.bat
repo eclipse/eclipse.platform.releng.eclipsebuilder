@@ -37,5 +37,11 @@ ECHO vmcmd: %vmcmd%
 
 mkdir results\consolelogs
 
+IF SWT extdir {
+runtests.bat -extdirprop %extdir% -os win32 -ws win32 -arch x86 %outervmargsstr% -vm %vmcmd% -properties %propertyFile%  %* > results\consolelogs\win7consolelog.txt
+GOTO END
+)
+
 runtests.bat -os win32 -ws win32 -arch x86 %outervmargsstr% -vm %vmcmd% -properties %propertyFile%  %* > results\consolelogs\win7consolelog.txt
 
+:END
