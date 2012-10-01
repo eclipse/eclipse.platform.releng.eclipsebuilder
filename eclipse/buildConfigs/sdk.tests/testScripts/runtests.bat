@@ -50,7 +50,7 @@ if x%1==x-arch set arch=%2 && shift && shift && goto processcmdlineargs
 if x%1==x-noclean set installmode=noclean&& shift && goto processcmdlineargs
 if x%1==x-properties set properties=-propertyfile %2 && shift && shift && goto processcmdlineargs
 if x%1==x-vm set vmcmd="%2" && shift && shift && goto processcmdlineargs
-if x%1==x-extdirprop set extdirprop="-Djava.ext.dirs=${2}" && shift && shift && goto processcmdlineargs
+if x%1==x-extdirprop SET extdirproperty="-Djava.ext.dirs=${2}" && shift && shift && goto processcmdlineargs
 
 
 
