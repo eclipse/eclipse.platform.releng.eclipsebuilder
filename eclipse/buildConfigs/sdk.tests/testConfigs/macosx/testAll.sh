@@ -28,5 +28,12 @@ echo "extdir in testAll: ${extdir}"
 echo "extdirprop in testAll: ${extdirprop}"
 
 #execute command to run tests
-./runtests -os macosx -ws cocoa -arch x86 -properties `pwd`/vm.properties 1> macosx.cocoa_consolelog.txt 2>&1
+/bin/chmod 755 runtestsmac.sh
+/bin/mkdir -p results/consolelogs
 
+if [[ -n "${extdir}" ]]
+then
+./runtestsmac.sh -os linux -ws gtk -arch $eclipseArch -extdirprop "${extdir}" -vm "${vmcmd}" -properties ${propertyFile} $* > results/consolelogs/macosx.cocoa.x86_64_6.0_consolelog.txt
+else 
+./runtestsmac.sh -os linux -ws gtk -arch $eclipseArch -vm "${vmcmd}" -properties ${propertyFile} $* > results/consolelogs/macosx.cocoa.x86_64_6.0_consolelog.txt
+fi

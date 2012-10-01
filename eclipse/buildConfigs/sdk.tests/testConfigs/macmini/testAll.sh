@@ -33,7 +33,7 @@ echo "extdirprop in testAll: ${extdirprop}"
 
 if [[ -n "${extdir}" ]]
 then
-./runtestsmac.sh -os linux -ws gtk -arch $eclipseArch -extdirprop "${extdir}" -vm "${vmcmd}" -properties ${propertyFile} $* > results/consolelogs/linux.gtk-6.0_consolelog.txt
+./runtestsmac.sh -os linux -ws gtk -arch $eclipseArch -extdirprop "${extdir}" -vm "${vmcmd}" -properties ${propertyFile} $* > results/consolelogs/macosx.cocoa.x86_5.0_consolelog.txt
 else 
-./runtestsmac.sh -os linux -ws gtk -arch $eclipseArch -vm "${vmcmd}" -properties ${propertyFile} $* > results/consolelogs/linux.gtk-6.0_consolelog.txt	
+./runtestsmac.sh -os linux -ws gtk -arch $eclipseArch -vm "${vmcmd}" -properties ${propertyFile} $* > results/consolelogs/macosx.cocoa.x86_5.0_consolelog.txt	
 fi
