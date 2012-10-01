@@ -13,9 +13,6 @@ set installmode=clean
 REM property file to pass to Ant scripts
 set properties=
 
-REM ext dir customization. Be sure "blank", if not defined explicitly on command line
-SET extdirproperty=
-
 REM default values for os, ws and arch
 set os=win32
 set ws=win32
@@ -78,7 +75,12 @@ ECHO ERROR: vmcmd not defined or does not exist: %vmcmd%
 exit 1
 )
 
-
+IF DEFINED extdirproperty (
 %vmcmd%  %extdirproperty% -XshowSettings -Dosgi.os=%os% -Dosgi.ws=%ws% -Dosgi.arch=%arch% -jar eclipse\plugins\%launcher-jar% -data workspace -application org.eclipse.ant.core.antRunner -file test.xml %tests% -Dws=%ws% -Dos=%os% -Darch=%arch%  -D%installmode%=true %properties% -logger org.apache.tools.ant.DefaultLogger
+GOTO END
+)
 
+%vmcmd% -XshowSettings -Dosgi.os=%os% -Dosgi.ws=%ws% -Dosgi.arch=%arch% -jar eclipse\plugins\%launcher-jar% -data workspace -application org.eclipse.ant.core.antRunner -file test.xml %tests% -Dws=%ws% -Dos=%os% -Darch=%arch%  -D%installmode%=true %properties% -logger org.apache.tools.ant.DefaultLogger
+
+:END
 
