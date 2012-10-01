@@ -54,7 +54,7 @@ if x%1==x-extdirprop SET extdirproperty="-Djava.ext.dirs=%2" && shift && shift &
 set tests=%tests% %1 && shift && goto processcmdlineargs
 
 echo Specified test targets (if any): %tests%
-echo Specified ext dirs (if any): %extdirprop%
+echo Specified extdirs (if any): %extdirprop%
 
 :run
 REM ***************************************************************************
