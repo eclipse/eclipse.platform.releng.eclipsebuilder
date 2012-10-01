@@ -17,18 +17,8 @@ IF NOT DEFINED propertyFile SET propertyFile=vm.properties
 
 ECHO propertyFile: %propertyFile%
 
-REM At times, the "outer VM", the one that runs the test runner, not the test VM itself,
-REM needs special arguments, such as 
-REM outervmargs="-Xbootclasspath/p:D:\shared\xalanjars\serializer.jar;D:\shared\xalanjars\xalan.jar -Djavax.xml.transform.TransformerFactory=org.apache.xalan.processor.TransformerFactoryImpl"
-REM usually VM specific, which is why they are left a variable, instead of hard coded here.   
-
-ECHO outervmargs: %outervmargs%
-SET outervmargsstr=
-IF DEFINED outervmargs SET outervmargsstr=-outervmargs %outervmargs%
-ECHO outervmargsstr: %outervmargsstr%
-
-
 REM TODO: not sure it is good to put VM here? Is there a good default here; such as "java"? 
+REM though currently in practice, we always set in hudson scripts.
 IF NOT DEFINED vmcmd SET vmcmd=c:\\java\\jdk7u2\\jre\\bin\\javaw
 
 REM https://bugs.eclipse.org/bugs/show_bug.cgi?id=390286
@@ -37,11 +27,11 @@ ECHO vmcmd: %vmcmd%
 
 mkdir results\consolelogs
 
-IF SWT extdir {
-runtests.bat -extdirprop %extdir% -os win32 -ws win32 -arch x86 %outervmargsstr% -vm %vmcmd% -properties %propertyFile%  %* > results\consolelogs\win7consolelog.txt
+IF DEFINED extdir {
+runtests.bat -extdirprop %extdir% -os win32 -ws win32 -arch x86 -vm %vmcmd% -properties %propertyFile%  %* > results\consolelogs\win7consolelog.txt
 GOTO END
 )
 
-runtests.bat -os win32 -ws win32 -arch x86 %outervmargsstr% -vm %vmcmd% -properties %propertyFile%  %* > results\consolelogs\win7consolelog.txt
+runtests.bat -os win32 -ws win32 -arch x86 -vm %vmcmd% -properties %propertyFile%  %* > results\consolelogs\win7consolelog.txt
 
 :END
