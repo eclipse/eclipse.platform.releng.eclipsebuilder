@@ -13,6 +13,8 @@ source localTestsProperties.shsource
 #vmcmd=/shared/common/jdk-1.6.x86_64/jre/bin/java
 vmcmd=java
 
+echo "vmcmd: $vmcmd"
+
 #this value must be set when using rsh to execute this script, otherwise the script will execute from the user's home directory
 dir=.
 
