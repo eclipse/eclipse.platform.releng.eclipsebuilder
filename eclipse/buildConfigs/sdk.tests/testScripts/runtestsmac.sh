@@ -92,14 +92,15 @@ fi
 cd $dir
 
 # verify os, ws and arch values passed in are valid before running tests
-if [ "$os-$ws-$arch" = "linux-gtk-x86" ] || [ "$os-$ws-$arch" = "macosx-cocoa-ppc" ] || [ "$os-$ws-$arch" = "macosx-cocoa-x86" ] || [ "$os-$ws-$arch" = "aix-gtk-ppc" ] || [ "$os-$ws-$arch" = "aix-gtk-ppc64" ]  || [ "$os-$ws-$arch" = "solaris-gtk-sparc" ] || [ "$os-$ws-$arch" = "solaris-gtk-x86" ] || [ "$os-$ws-$arch" = "linux-gtk-ppc64" ] ||  [ "$os-$ws-$arch" = "linux-gtk-ia64" ] ||  [ "$os-$ws-$arch" = "linux-gtk-x86_64" ] ||  [ "$os-$ws-$arch" = "hpux-gtk-ia64_32"]
+if  [ "$os-$ws-$arch" = "linux-gtk-x86" ] || [ "$os-$ws-$arch" = "macosx-cocoa-ppc" ] || [ "$os-$ws-$arch" = "macosx-cocoa-x86" ] || [ "$os-$ws-$arch" = "macosx-cocoa-x86_64" ] || [ "$os-$ws-$arch" = "aix-gtk-ppc" ] || [ "$os-$ws-$arch" = "aix-gtk-ppc64" ]  || [ "$os-$ws-$arch" = "solaris-gtk-sparc" ] || [ "$os-$ws-$arch" = "solaris-gtk-x86" ] || [ "$os-$ws-$arch" = "linux-gtk-ppc64" ] ||  [ "$os-$ws-$arch" = "linux-gtk-ia64" ] ||  [ "$os-$ws-$arch" = "linux-gtk-x86_64" ] ||  [ "$os-$ws-$arch" = "hpux-gtk-ia64_32" ] 
 then
-	if [ ! -r eclipse ]
+	if [[ ! -r eclipse ]]
 	then
 		tar -xzf eclipse-SDK-*.tar.gz
         # note, the file pattern to match, must not start with */plugins because there is no leading '/' in the zip file, since they are repos.
 		unzip -qq -o -C eclipse-junit-tests-*.zip plugins/org.eclipse.test* -d eclipse/dropins/
-fi
+	fi
+
 
 # run tests
 launcher=`ls eclipse/plugins/org.eclipse.equinox.launcher_*.jar`
