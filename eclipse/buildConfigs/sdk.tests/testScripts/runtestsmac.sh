@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # This file should never exist or be needed for production machine, 
 # but allows an easy way for a "local user" to provide this file 
