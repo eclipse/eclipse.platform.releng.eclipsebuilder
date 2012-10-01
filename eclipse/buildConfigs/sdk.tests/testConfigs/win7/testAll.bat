@@ -24,6 +24,7 @@ IF NOT DEFINED vmcmd SET vmcmd=c:\\java\\jdk7u2\\jre\\bin\\javaw
 REM https://bugs.eclipse.org/bugs/show_bug.cgi?id=390286
 REM IF NOT DEFINED vmcmd SET vmcmd=c:\\java\\jdk1.7.0_07\\jre\\bin\\javaw
 ECHO vmcmd: %vmcmd%
+ECHO extdir: %extdir%
 
 mkdir results\consolelogs
 

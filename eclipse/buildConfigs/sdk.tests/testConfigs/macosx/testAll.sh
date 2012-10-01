@@ -25,7 +25,6 @@ eclipseArch=${eclipseArch:-x86_64}
 propertyFile=${propertyFile:-vm.properties}
 
 echo "extdir in testAll: ${extdir}"
-echo "extdirprop in testAll: ${extdirprop}"
 
 #execute command to run tests
 /bin/chmod 755 runtestsmac.sh

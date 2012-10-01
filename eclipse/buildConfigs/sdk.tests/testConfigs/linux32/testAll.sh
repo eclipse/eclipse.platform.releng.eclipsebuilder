@@ -30,7 +30,7 @@ eclipseArch=${eclipseArch:-x86_64}
 propertyFile=${propertyFile:-vm.properties}
 
 echo "extdir in testAll: ${extdir}"
-echo "extdirprop in testAll: ${extdirprop}"
+
 /bin/chmod 755 runtests.sh
 /bin/mkdir -p results/consolelogs
 
