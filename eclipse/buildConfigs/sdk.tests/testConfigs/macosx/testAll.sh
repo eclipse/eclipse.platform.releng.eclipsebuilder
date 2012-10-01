@@ -1,4 +1,4 @@
-# !/bin/sh
+#!/usr/bin/env bash
 ulimit -c unlimited
 
 # This file should never exist or be needed for production machine, 
@@ -17,7 +17,7 @@ echo "vmcmd: $vmcmd"
 
 # production machine is x86_64, but some local setups may be 32 bit and will need to provide 
 # this value in localTestsProperties.shsource.
-eclipseArch=${eclipseArch:-x86}
+eclipseArch=${eclipseArch:-x86_64}
 
 # vm.properties is used by default on production machines, but will 
 # need to override on local setups to specify appropriate vm (usually same as vmcmd). 
@@ -33,7 +33,7 @@ echo "extdirprop in testAll: ${extdirprop}"
 
 if [[ -n "${extdir}" ]]
 then
-./runtestsmac.sh -os linux -ws gtk -arch $eclipseArch -extdirprop "${extdir}" -vm "${vmcmd}" -properties ${propertyFile} $* > results/consolelogs/macosx.cocoa.x86_64_6.0_consolelog.txt
+./runtestsmac.sh -os macosx -ws cocoa -arch $eclipseArch -extdirprop "${extdir}" -vm "${vmcmd}" -properties ${propertyFile} $* > results/consolelogs/macosx.cocoa.x86_64_6.0_consolelog.txt
 else 
-./runtestsmac.sh -os linux -ws gtk -arch $eclipseArch -vm "${vmcmd}" -properties ${propertyFile} $* > results/consolelogs/macosx.cocoa.x86_64_6.0_consolelog.txt
+./runtestsmac.sh -os macosx -ws cocoa -arch $eclipseArch -vm "${vmcmd}" -properties ${propertyFile} $* > results/consolelogs/macosx.cocoa.x86_64_6.0_consolelog.txt
 fi
