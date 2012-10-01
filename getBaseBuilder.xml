@@ -143,8 +143,6 @@
 
         </cvs>
 
-        <antcall target="getXalan" />
-
     </target>
     <!-- hurestic to check if we are running on hudson variable, if so -->
     <target name="checkHudson">
@@ -164,35 +162,6 @@
         <condition property="hudson">
             <isset property="env.HUDSON_URL" />
         </condition>
-
-    </target>
-
-    <target name="getXalan" depends="checklocation" if="xalanLocation">
-        
-        <!-- 
-            5 jars (from Orbit) expected under xalanLocation: 
-            java_cup.runtime_0.10.0**
-            javax.xml_1.3.4*
-            org.apache.bcel_5.2.0*
-            org.apache.xalan_2.7.1*
-            org.apache.xerces_2.9.0* 
-        (not sure all are litierally required?) 
-        -->
-        
-        <echo message="xalanLocation: ${xalanLocation}" /> 
-        
-        <mkdir dir="${WORKSPACE}/${cvsProject}/dropins" />
-        <copy todir="${WORKSPACE}/${cvsProject}/dropins/" >
-            <fileset dir="${xalanLocation}" >
-                <include name="*.jar"/>
-            </fileset>
-        </copy>
-
-    </target>
-
-    <target name="checklocation" unless="xalanLocation">
-        
-        <echo message="xalanLocation not provided, so not copied into builder" /> 
 
     </target>
 
