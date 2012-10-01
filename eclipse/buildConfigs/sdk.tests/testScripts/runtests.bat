@@ -50,13 +50,14 @@ if x%1==x-arch set arch=%2 && shift && shift && goto processcmdlineargs
 if x%1==x-noclean set installmode=noclean&& shift && goto processcmdlineargs
 if x%1==x-properties set properties=-propertyfile %2 && shift && shift && goto processcmdlineargs
 if x%1==x-vm set vmcmd="%2" && shift && shift && goto processcmdlineargs
-if x%1==x-extdirprop SET extdirproperty="-Djava.ext.dirs=${2}" && shift && shift && goto processcmdlineargs
+if x%1==x-extdirprop SET extdirproperty="-Djava.ext.dirs=%2" && shift && shift && goto processcmdlineargs
 
 
 
 set tests=%tests% %1 && shift && goto processcmdlineargs
 
 echo Specified test targets (if any): %tests%
+echo Specified ext dirs (if any): %extdirprop%
 
 :run
 REM ***************************************************************************
