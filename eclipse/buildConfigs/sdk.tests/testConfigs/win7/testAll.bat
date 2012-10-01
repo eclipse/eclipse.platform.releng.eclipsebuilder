@@ -27,7 +27,7 @@ ECHO vmcmd: %vmcmd%
 
 mkdir results\consolelogs
 
-IF DEFINED extdir {
+IF DEFINED extdir (
 runtests.bat -extdirprop %extdir% -os win32 -ws win32 -arch x86 -vm %vmcmd% -properties %propertyFile%  %* > results\consolelogs\win7consolelog.txt
 GOTO END
 )
