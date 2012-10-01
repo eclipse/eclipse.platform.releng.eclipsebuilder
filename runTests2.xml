@@ -390,6 +390,21 @@
         </condition>
         <condition
             property="testPlatform"
+            value="macosx">
+            <and>
+                <equals
+                    arg1="${osgi.os}"
+                    arg2="macosx" />
+                <equals
+                    arg1="${osgi.ws}"
+                    arg2="cocoa" />
+                <equals
+                    arg1="${osgi.arch}"
+                    arg2="x86_64" />
+            </and>
+        </condition>
+        <condition
+            property="testPlatform"
             value="macmini">
             <and>
                 <equals

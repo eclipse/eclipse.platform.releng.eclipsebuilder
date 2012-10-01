@@ -11,7 +11,7 @@ ulimit -c unlimited
 source localTestsProperties.shsource
 
 echo "PWD: $PWD"
-vmcmd=${vmcmd:-/shared/common/jdk-1.6.x86_64/jre/bin/java}
+vmcmd=${vmcmd:-/System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Commands/java}
 
 echo "vmcmd: $vmcmd"
 
