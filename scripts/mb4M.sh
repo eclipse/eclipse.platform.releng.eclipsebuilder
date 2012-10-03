@@ -3,7 +3,7 @@
 # Must have these three, rest computed
 
 buildType=M
-eclipseStream=4.2.1
+eclipseStream=4.2.2
 mapVersionTag=R4_2_maintenance
 
 # should always be 'master' for now, but in future might want
