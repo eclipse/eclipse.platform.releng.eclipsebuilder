@@ -448,7 +448,7 @@
 	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.releng.tests_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.releng.tests_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
@@ -464,13 +464,13 @@
 	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.pde.ui.tests_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.pde.ui.tests_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.pde.api.tools.tests_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.pde.api.tools.tests_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
 	<effectedFile id="SLG2"></effectedFile>
@@ -482,7 +482,7 @@
 	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.pde.ds.tests_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.pde.ds.tests_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
 	<effectedFile id="SLG2"></effectedFile>
@@ -500,7 +500,7 @@
 	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.pde.build.tests_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.pde.build.tests_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="PDE"></effectedFile>
 	<effectedFile id="PDESDK"></effectedFile>
 	<effectedFile id="SLG2"></effectedFile>
@@ -586,7 +586,7 @@
 	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.apt.tests_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.jdt.apt.tests_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -594,7 +594,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.compiler.tool.tests_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.jdt.compiler.tool.tests_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -602,7 +602,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.apt.pluggable.tests_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.jdt.apt.pluggable.tests_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -610,7 +610,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.core.tests.builder_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.jdt.core.tests.builder_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -618,7 +618,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.core.tests.compiler_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.jdt.core.tests.compiler_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -626,7 +626,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.core.tests.model_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.jdt.core.tests.model_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -634,7 +634,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.core.tests.performance_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.jdt.core.tests.performance_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -642,7 +642,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.debug.tests_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.jdt.debug.tests_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -650,7 +650,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.text.tests_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.jdt.text.tests_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -658,7 +658,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.search.tests_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.search.tests_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -666,7 +666,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.ui.tests_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.jdt.ui.tests_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -674,7 +674,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jdt.ui.tests.refactoring_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.jdt.ui.tests.refactoring_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -851,7 +851,7 @@
 	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ant.tests.core_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.ant.tests.core_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="PLG2"></effectedFile>
 	<effectedFile id="PLG2SDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -861,7 +861,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ant.tests.ui_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.ant.tests.ui_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="JA"></effectedFile>
 	<effectedFile id="JASDK"></effectedFile>
 	<effectedFile id="PDE"></effectedFile>
@@ -869,7 +869,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.compare.tests_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.compare.tests_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="PLG2"></effectedFile>
 	<effectedFile id="PLG2SDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -879,7 +879,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.core.filebuffers.tests_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.core.filebuffers.tests_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="PLG2"></effectedFile>
 	<effectedFile id="PLG2SDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -889,7 +889,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.core.tests.resources_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.core.tests.resources_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="PLG2"></effectedFile>
 	<effectedFile id="PLG2SDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -899,7 +899,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jface.text.tests_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.jface.text.tests_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="PLG2"></effectedFile>
 	<effectedFile id="PLG2SDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -909,7 +909,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.team.tests.core_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.team.tests.core_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="PLG2"></effectedFile>
 	<effectedFile id="PLG2SDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -919,7 +919,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.team.tests.cvs.core_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.team.tests.cvs.core_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="PLG2"></effectedFile>
 	<effectedFile id="PLG2SDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -929,7 +929,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.core.tests.net_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.core.tests.net_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="PLG2"></effectedFile>
 	<effectedFile id="PLG2SDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -939,7 +939,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.text.tests_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.text.tests_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="PLG2"></effectedFile>
 	<effectedFile id="PLG2SDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -949,7 +949,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ua.tests_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.ua.tests_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="PLG2"></effectedFile>
 	<effectedFile id="PLG2SDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -959,7 +959,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ui.editors.tests_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.ui.editors.tests_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="PLG2"></effectedFile>
 	<effectedFile id="PLG2SDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -969,7 +969,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ui.tests.navigator_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.ui.tests.navigator_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="PLG2"></effectedFile>
 	<effectedFile id="PLG2SDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -979,7 +979,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ui.tests.views.properties.tabbed_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.ui.tests.views.properties.tabbed_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="PLG2"></effectedFile>
 	<effectedFile id="PLG2SDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -989,7 +989,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ui.workbench.texteditor.tests_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.ui.workbench.texteditor.tests_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="PLG2"></effectedFile>
 	<effectedFile id="PLG2SDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -1000,7 +1000,7 @@
 </logFile>
 
 
-<logFile name="org.eclipse.ltk.core.refactoring.tests_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.ltk.core.refactoring.tests_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="PLG2"></effectedFile>
 	<effectedFile id="PLG2SDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -1010,7 +1010,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ltk.ui.refactoring.tests_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.ltk.ui.refactoring.tests_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="PLG2"></effectedFile>
 	<effectedFile id="PLG2SDK"></effectedFile>
 	<effectedFile id="JA"></effectedFile>
@@ -1140,7 +1140,7 @@
 	<effectedFile id="SMCC"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.core.tests.runtime_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.core.tests.runtime_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="RCPLG2"></effectedFile>
 	<effectedFile id="RCPLG2SDK"></effectedFile>
 	<effectedFile id="PLG2"></effectedFile>
@@ -1152,7 +1152,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ui.tests_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.ui.tests_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="RCPLG2"></effectedFile>
 	<effectedFile id="RCPLG2SDK"></effectedFile>
 	<effectedFile id="PLG2"></effectedFile>
@@ -1164,7 +1164,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.jface.tests.databinding_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.jface.tests.databinding_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="RCPLG2"></effectedFile>
 	<effectedFile id="RCPLG2SDK"></effectedFile>
 	<effectedFile id="PLG2"></effectedFile>
@@ -1176,7 +1176,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.swt.tests_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.swt.tests_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="RCPLG2"></effectedFile>
 	<effectedFile id="RCPLG2SDK"></effectedFile>
 	<effectedFile id="PLG2"></effectedFile>
@@ -1188,7 +1188,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.core.expressions.tests_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.core.expressions.tests_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="RCPLG2"></effectedFile>
 	<effectedFile id="RCPLG2SDK"></effectedFile>
 	<effectedFile id="PLG2"></effectedFile>
@@ -1200,7 +1200,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.osgi.tests_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.osgi.tests_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="RCPLG2"></effectedFile>
 	<effectedFile id="RCPLG2SDK"></effectedFile>
 	<effectedFile id="PLG2"></effectedFile>
@@ -1212,7 +1212,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.equinox.security.tests_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.equinox.security.tests_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="RCPLG2"></effectedFile>
 	<effectedFile id="RCPLG2SDK"></effectedFile>
 	<effectedFile id="PLG2"></effectedFile>
@@ -1220,7 +1220,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.equinox.p2.tests_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.equinox.p2.tests_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="RCPLG2"></effectedFile>
 	<effectedFile id="RCPLG2SDK"></effectedFile>
 	<effectedFile id="PLG2"></effectedFile>
@@ -1228,7 +1228,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.equinox.p2.tests.ui_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.equinox.p2.tests.ui_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="RCPLG2"></effectedFile>
 	<effectedFile id="RCPLG2SDK"></effectedFile>
 	<effectedFile id="PLG2"></effectedFile>
@@ -1236,7 +1236,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ui.tests.rcp_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.ui.tests.rcp_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="RCPLG2"></effectedFile>
 	<effectedFile id="RCPLG2SDK"></effectedFile>
 	<effectedFile id="PLG2"></effectedFile>
@@ -1248,7 +1248,7 @@
 	<effectedFile id="SLG2"></effectedFile>
 </logFile>
 
-<logFile name="org.eclipse.ui.tests.forms_linux.gtk.x86_6.0.xml">
+<logFile name="org.eclipse.ui.tests.forms_linux.gtk.x86_64_6.0.xml">
 	<effectedFile id="RCPLG2"></effectedFile>
 	<effectedFile id="RCPLG2SDK"></effectedFile>
 	<effectedFile id="PLG2"></effectedFile>
