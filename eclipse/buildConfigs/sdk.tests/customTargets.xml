@@ -311,6 +311,7 @@
 		<!--set execute permission on *nix shell script-->
 		<chmod file="${workingDirectory}/eclipse-testing/runtests" perm="755" />
 		<chmod file="${workingDirectory}/eclipse-testing/runtests.sh" perm="755" />
+	    <chmod file="${workingDirectory}/eclipse-testing/runtestsmac.sh" perm="755" />
 		<property name="postingDirectory" value="${buildDirectory}" />
 
 		<!--create zip file of the automated testing framework-->
