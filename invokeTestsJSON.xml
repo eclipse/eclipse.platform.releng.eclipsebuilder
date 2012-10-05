@@ -41,33 +41,23 @@
 
         <parallel>
 
-            <!--
             <antcall target="triggerHudsonTests">
                 <param
                     name="job"
                     value="ep${eclipseStreamMajor}-unit-win32" />
-                <param
-                    name="suffix"
-                    value="win32.zip" />
             </antcall>
-            -->
+
  
             <antcall target="triggerHudsonTests">
                 <param
                     name="job"
                     value="ep${eclipseStreamMajor}-unit-lin64" />
-                <param
-                    name="suffix"
-                    value="linux-gtk-x86_64.tar.gz" />
             </antcall>
 
             <antcall target="triggerHudsonTests">
                 <param
                     name="job"
-                    value="ep${eclipseStreamMajor}-unit-mac32" />
-                <param
-                    name="suffix"
-                    value="macosx-cocoa-x86.zip" />
+                    value="ep${eclipseStreamMajor}-unit-mac64" />
             </antcall>
 
         </parallel>
