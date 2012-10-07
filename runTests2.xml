@@ -472,7 +472,7 @@
         </condition>
         <condition
             property="getArtifacts"
-            value="getwinzips">
+            value="getwinzips64">
             <equals
                 arg1="${testPlatform}"
                 arg2="win7-64" />

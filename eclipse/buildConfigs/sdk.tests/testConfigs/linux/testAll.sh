@@ -25,7 +25,7 @@ eclipseArch=${eclipseArch:-x86_64}
 propertyFile=${propertyFile:-vm.properties}
 
 echo "vmcmd in testAll: ${vmcmd}"
-echo "extdir in testAll: ${extdir}"
+echo "extdir in testAll (if any): ${extdir}"
 echo "propertyFile in testAll: ${propertyFile}
 
 #execute command to run tests
