@@ -10,7 +10,7 @@
              --> 
             <echo message="@{msg}     " append="true" file="@{filename}" />
             <!-- This executable should run on all platforms -->
-            <exec executable="date" append="true" output="@{filename}">
+            <exec executable="date" append="true" output="@{filename}" os="unix">
                 <arg value="+%s" />
             </exec>
            
