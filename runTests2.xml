@@ -221,7 +221,20 @@
             src="http://archive.eclipse.org/eclipse/downloads/drops/R-3.7.2-201202080800/eclipse-platform-3.7.2-win32.zip"
             dest="${executionDir}/eclipse-platform-3.7.2-win32.zip" />
     </target>
-
+    <target
+         name="getwinzips64"
+         depends="platformIndependentZips"
+         unless="skipInstall">
+         <get
+             src="${archiveLocation}/eclipse-SDK-${buildId}-win32-x86_64.zip"
+             dest="${executionDir}/eclipse-SDK-${buildId}-win32-x86_64.zip" />
+         <get
+             src="${archiveLocation}/eclipse-platform-${buildId}-win32-x86_64.zip"
+             dest="${executionDir}/eclipse-platform-${buildId}-win32-x86_64.zip" />
+         <get
+             src="http://archive.eclipse.org/eclipse/downloads/drops/R-3.7.2-201202080800/eclipse-platform-3.7.2-win32-x86_64.zip"
+             dest="${executionDir}/eclipse-platform-3.7.2-win32.zip-x86_64" />
+     </target>
     <target
         name="getlinzips"
         depends="platformIndependentZips"
@@ -359,6 +372,21 @@
             value="${relengBaseBuilderDir}/plugins/org.eclipse.build.tools/scripts/test.xml" />
         <condition
             property="testPlatform"
+            value="win7-64">
+            <and>
+                <equals
+                    arg1="${osgi.os}"
+                    arg2="win32" />
+                <equals
+                    arg1="${osgi.ws}"
+                    arg2="win32" />
+                <equals
+                    arg1="${osgi.arch}"
+                    arg2="x86_64" />
+            </and>
+        </condition>
+        <condition
+            property="testPlatform"
             value="win7">
             <and>
                 <equals
@@ -442,6 +470,13 @@
                 arg1="${testPlatform}"
                 arg2="win7" />
         </condition>
+        <condition
+            property="getArtifacts"
+            value="getwinzips">
+            <equals
+                arg1="${testPlatform}"
+                arg2="win7-64" />
+        </condition>        
         <condition
             property="getArtifacts"
             value="getlinzips">
