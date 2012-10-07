@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-echo "USER: $USER"
-echo "PATH: $PATH"
+
 # This file should never exist or be needed for production machine, 
 # but allows an easy way for a "local user" to provide this file 
 # somewhere on the search path ($HOME/bin is common), 
@@ -16,10 +15,6 @@ vmcmd=${vmcmd:-/shared/common/jdk-1.6.x86_64/jre/bin/java}
 
 echo "vmcmd: $vmcmd"
 
-#export MOZILLA_FIVE_HOME=${MOZILLA_FIVE_HOME:-/usr/lib/xulrunner-1.9.0.19}
-
-#echo "MOZILLA_FIVE_HOME: ${MOZILLA_FIVE_HOME}"
-
 # production machine is x86_64, but some local setups may be 32 bit and will need to provide 
 # this value in localTestsProperties.shsource.
 eclipseArch=${eclipseArch:-x86_64}
@@ -29,8 +24,11 @@ eclipseArch=${eclipseArch:-x86_64}
 # see bug 388269
 propertyFile=${propertyFile:-vm.properties}
 
+echo "vmcmd in testAll: ${vmcmd}"
 echo "extdir in testAll: ${extdir}"
+echo "propertyFile in testAll: ${propertyFile}
 
+#execute command to run tests
 /bin/chmod 755 runtests.sh
 /bin/mkdir -p results/consolelogs
 

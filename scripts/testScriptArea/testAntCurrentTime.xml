@@ -1,0 +1,30 @@
+<project name="testCurrentTime" default="testCurrentTime" basedir=".">
+
+    <macrodef name="currentTime">
+        <attribute name="msg" />
+        <attribute name="filename" />
+        <sequential>
+            <!-- 
+               we write the message first, with no ${line.separator} so that the timestamp can 
+               go on same line, and my side-effect writes an EOL 
+             --> 
+            <echo message="@{msg}     " append="true" file="@{filename}" />
+            <!-- This executable should run on all platforms -->
+            <exec executable="date" append="true" output="@{filename}">
+                <arg value="+%s" />
+            </exec>
+           
+        </sequential>
+    </macrodef>
+
+
+    <target name="testCurrentTime" />
+   
+    <delete file="totaltesttimes.txt" />
+    <currentTime msg="test 1" filename="totaltesttimes.txt" />
+    <sleep seconds="10" />
+    <currentTime msg="test 2" filename="totaltesttimes.txt" />
+    <sleep seconds="10" />
+    <currentTime msg="test 3" filename="totaltesttimes.txt" />
+
+</project>
