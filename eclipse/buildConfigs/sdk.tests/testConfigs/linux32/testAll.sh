@@ -17,7 +17,7 @@ echo "vmcmd: $vmcmd"
 
 # production machine is x86_64, but some local setups may be 32 bit and will need to provide 
 # this value in localTestsProperties.shsource.
-eclipseArch=${eclipseArch:-x86_64}
+eclipseArch=${eclipseArch:-x86}
 
 # vm.properties is used by default on production machines, but will 
 # need to override on local setups to specify appropriate vm (usually same as vmcmd). 
