@@ -13,8 +13,6 @@ source localTestsProperties.shsource
 echo "PWD: $PWD"
 vmcmd=${vmcmd:-/System/Library/Frameworks/JavaVM.framework/Versions/Current/Commands/java}
 
-echo "vmcmd: $vmcmd"
-
 # production machine is x86_64, but some local setups may be 32 bit and will need to provide 
 # this value in localTestsProperties.shsource.
 eclipseArch=${eclipseArch:-x86_64}
@@ -24,7 +22,9 @@ eclipseArch=${eclipseArch:-x86_64}
 # see bug 388269
 propertyFile=${propertyFile:-vm.properties}
 
-echo "extdir in testAll: ${extdir}"
+echo "vmcmd in testAll: ${vmcmd}"
+echo "extdir in testAll (if any): ${extdir}"
+echo "propertyFile in testAll: ${propertyFile}"
 
 #execute command to run tests
 /bin/chmod 755 runtestsmac.sh

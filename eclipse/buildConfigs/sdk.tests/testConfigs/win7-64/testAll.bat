@@ -15,8 +15,6 @@ REM vm.properties is used by default on production machines, but will
 REM need to override on local setups and performance tests
 IF NOT DEFINED propertyFile SET propertyFile=vm.properties
 
-ECHO propertyFile: %propertyFile%
-
 REM TODO: not sure it is good to put VM here? Is there a good default here; such as "java"? 
 REM currently, in practice, we sometimes set in hudson scripts.
 REM https://bugs.eclipse.org/bugs/show_bug.cgi?id=390286
