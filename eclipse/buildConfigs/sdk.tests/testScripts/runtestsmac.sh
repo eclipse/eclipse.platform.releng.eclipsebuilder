@@ -11,7 +11,10 @@ source localTestsProperties.shsource
 
 # by default, use the java executable on the path for outer and test jvm
 #vmcmd=/shared/common/jdk-1.6.x86_64/jre/bin/java
-vmcmd=java
+if [[ -z "{vmcmd}" ]]
+then
+    vmcmd=java
+fi
 
 echo "vmcmd: $vmcmd"
 
