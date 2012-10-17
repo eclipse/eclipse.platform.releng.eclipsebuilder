@@ -11,7 +11,7 @@ ulimit -c unlimited
 source localTestsProperties.shsource
 
 echo "PWD: $PWD"
-vmcmd=${vmcmd:-/System/Library/Frameworks/JavaVM.framework/Versions/Current/Commands/java}
+vmcmd=${vmcmd:-/Library/Java/JavaVirtualMachines/jdk1.7.0_10.jdk/Contents/Home/jre/bin/java}
 
 # production machine is x86_64, but some local setups may be 32 bit and will need to provide 
 # this value in localTestsProperties.shsource.
