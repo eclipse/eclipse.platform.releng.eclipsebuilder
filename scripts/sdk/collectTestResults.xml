@@ -39,6 +39,10 @@
                 to="*" />
         </unzip>
 
+        <exec executable="/bin/bash">
+            <arg line="/shared/eclipse/sdk/promotion/updateDropLocation.sh ${eclipseStream} ${buildId}" />
+        </exec>
+
     </target>
 
 
