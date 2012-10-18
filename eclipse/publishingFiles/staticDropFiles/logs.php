@@ -26,26 +26,31 @@ function checkFile($p) {
 }
 
 function fileSizeForDisplay($filename) {
-       $onekilo=1024;
-       $onemeg=$onekilo * $onekilo;
-       $criteria = 10 * $onemeg;
-       $scaleChar = "M";
-       if (file_exists($filename)) {
-              $zipfilesize=filesize($filename);
-              if ($zipfilesize > $criteria) {
-                     $zipfilesize=round($zipfilesize/$onemeg, 0);
-                     $scaleChar = "M";
-              }
-              else {
-                     $zipfilesize=round($zipfilesize/$onekilo, 0);
-                     $scaleChar = "K";
-              }
-       }
-       else {
-              $zipfilesize = 0;
-       }
-       $result =  "(" . $zipfilesize . $scaleChar . ")";
-       return $result;
+    $onekilo=1024;
+    $onemeg=$onekilo * $onekilo;
+    $criteria = 10 * $onemeg;
+    $scaleChar = "M";
+    if (file_exists($filename)) {
+        $zipfilesize=filesize($filename);
+        if ($zipfilesize > $criteria) {
+            $zipfilesize=round($zipfilesize/$onemeg, 0);
+            $scaleChar = "M";
+        }
+        else {
+            if ($zipfilesize > $onekilo) {
+                $zipfilesize=round($zipfilesize/$onekilo, 0);
+                $scaleChar = "K";
+            } else {
+                // use raw size in bytes if less that one 1K
+                $scaleChar = "b"
+            }
+        }
+    }
+    else {
+        $zipfilesize = 0;
+    }
+    $result =  "(" . $zipfilesize . $scaleChar . ")";
+    return $result;
 }
 
 function listLogs($myDir) {
@@ -93,23 +98,23 @@ function listLogs($myDir) {
 }
 
 function listDegailedLogs ($machineplatform) {
-echo "<strong>Individual $machineplatform test logs</strong><br />";
-listLogs("testresults/$machineplatform");
-if (file_exists("testresults/$machineplatform/crashlogs")) {
-  echo "<strong>Crash logs captured on $machineplatform</strong>";
-  listLogs("testresults/$machineplatform/crashlogs");
-}
-if (file_exists("testresults/$machineplatform/timeoutScreens")) {
-  echo "<strong>Screen captures for tests timing out on $machineplatform</strong>";
-  listLogs("testresults/$machineplatform/timeoutScreens");
-}
+    echo "<strong>Individual $machineplatform test logs</strong><br />";
+    listLogs("testresults/$machineplatform");
+    if (file_exists("testresults/$machineplatform/crashlogs")) {
+        echo "<strong>Crash logs captured on $machineplatform</strong>";
+        listLogs("testresults/$machineplatform/crashlogs");
+    }
+    if (file_exists("testresults/$machineplatform/timeoutScreens")) {
+        echo "<strong>Screen captures for tests timing out on $machineplatform</strong>";
+        listLogs("testresults/$machineplatform/timeoutScreens");
+    }
 }
 
 function getBuildId() {
     $parts = explode("/", getcwd());
     $parts2 = explode("-", $parts[count($parts) - 1]);
     $buildName = $parts2[0] . "-" . $parts2[1];
-   // echo "<p>buildName: $buildName</p>";
+    // echo "<p>buildName: $buildName</p>";
     // Get build type names
     $fileHandle = fopen("./dlconfig2.txt", "r");
     while (!feof($fileHandle)) {
@@ -120,10 +125,10 @@ function getBuildId() {
     fclose($fileHandle);
 
     $buildType =  $buildType=substr($buildName,0,1);
-   // echo "<p>buildType: $buildType</p>";
+    // echo "<p>buildType: $buildType</p>";
 
     $buildId = $buildName;
-   // echo "<p>buildId: $buildId</p>";
+    // echo "<p>buildId: $buildId</p>";
 
     return($buildId);
 
