@@ -29,20 +29,20 @@ function fileSizeForDisplay($filename) {
     $onekilo=1024;
     $onemeg=$onekilo * $onekilo;
     $criteria = 10 * $onemeg;
-    $scaleChar = "M";
+    $scaleChar = " ";
     if (file_exists($filename)) {
         $zipfilesize=filesize($filename);
         if ($zipfilesize > $criteria) {
             $zipfilesize=round($zipfilesize/$onemeg, 0);
-            $scaleChar = "M";
+            $scaleChar = " MB";
         }
         else {
             if ($zipfilesize > $onekilo) {
                 $zipfilesize=round($zipfilesize/$onekilo, 0);
-                $scaleChar = "K";
+                $scaleChar = " KB";
             } else {
                 // use raw size in bytes if less that one 1K
-                $scaleChar = "b";
+                $scaleChar = " B";
             }
         }
     }
