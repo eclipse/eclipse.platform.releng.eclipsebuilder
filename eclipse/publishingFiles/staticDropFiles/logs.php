@@ -42,7 +42,7 @@ function fileSizeForDisplay($filename) {
                 $scaleChar = "K";
             } else {
                 // use raw size in bytes if less that one 1K
-                $scaleChar = "b"
+                $scaleChar = "b";
             }
         }
     }
