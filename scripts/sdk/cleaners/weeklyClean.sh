@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 # clean 4.x M builds
 find /home/data/httpd/download.eclipse.org/eclipse/downloads/drops4 -maxdepth 1 -ctime +30 -name "M*" -exec echo '{}' \;
