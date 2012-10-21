@@ -139,6 +139,8 @@ function syncDropLocation ()
     fi
 }
 
+
+
 function sendPromoteMail ()
 {
 
@@ -277,7 +279,7 @@ then
     exit 1
 fi 
 
-sendPromoteMail $eclipseStream  $buildId
+sendPromoteMail $eclipseStream $buildId
 
 rccode=$?
 
