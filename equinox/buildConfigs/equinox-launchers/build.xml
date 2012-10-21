@@ -20,7 +20,7 @@
 		<buildRepos os="linux" ws="gtk" arch="ppc64" archiveName="${archiveRoot}-linux.gtk.ppc64.${buildId}.tar.gz" />
 		<buildRepos os="solaris" ws="gtk" arch="sparc" archiveName="${archiveRoot}-solaris.gtk.sparc.${buildId}.zip" />
 		<buildRepos os="solaris" ws="gtk" arch="x86" archiveName="${archiveRoot}-solaris.gtk.x86.${buildId}.zip" />
-		<buildRepos os="hpux" ws="gtk" arch="a64_32" archiveName="${archiveRoot}-hpux.gtk.ia64.${buildId}.zip" />	
+		<buildRepos os="hpux" ws="gtk" arch="ia64" archiveName="${archiveRoot}-hpux.gtk.ia64.${buildId}.zip" />	
 		<buildRepos os="aix" ws="gtk" arch="ppc" archiveName="${archiveRoot}-aix.gtk.ppc.${buildId}.zip" />
 		<buildRepos os="aix" ws="gtk" arch="ppc64" archiveName="${archiveRoot}-aix.gtk.ppc64.${buildId}.zip" />	
 		<buildRepos os="macosx" ws="cocoa" arch="x86_64" archiveName="${archiveRoot}-macosx.cocoa.x86.${buildId}.tar.gz" />
