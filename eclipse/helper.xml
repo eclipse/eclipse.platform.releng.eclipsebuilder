@@ -154,7 +154,7 @@
                         value="gtk" />
                     <param
                         name="arch"
-                        value="ia64_32" />
+                        value="${hpuxia64bitness}" />
                 </antcall>
             </sequential>
         </parallel>

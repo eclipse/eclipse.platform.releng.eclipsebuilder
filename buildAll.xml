@@ -1372,7 +1372,7 @@
             <config
                 os="hpux"
                 ws="gtk"
-                arch="ia64_32" />
+                arch="${hpuxia64bitness}" />
             <config
                 os="aix"
                 ws="gtk"
@@ -1437,7 +1437,7 @@
             <config
                 os="hpux"
                 ws="gtk"
-                arch="ia64_32" />
+                arch="${hpuxia64bitness}" />
             <config
                 os="aix"
                 ws="gtk"
@@ -1506,7 +1506,7 @@
             <config
                 os="hpux"
                 ws="gtk"
-                arch="ia64_32" />
+                arch="${hpuxia64bitness}" />
             <config
                 os="aix"
                 ws="gtk"
@@ -1575,7 +1575,7 @@
             <config
                 os="hpux"
                 ws="gtk"
-                arch="ia64_32" />
+                arch="${hpuxia64bitness}" />
             <config
                 os="aix"
                 ws="gtk"
@@ -1644,7 +1644,7 @@
             <config
                 os="hpux"
                 ws="gtk"
-                arch="ia64_32" />
+                arch="${hpuxia64bitness}" />
             <config
                 os="aix"
                 ws="gtk"
