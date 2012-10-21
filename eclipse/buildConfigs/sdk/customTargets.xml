@@ -314,10 +314,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 		<mkdir dir="${tempDir}/buildScripts/src" />
 		<copy file="${buildDirectory}/label.properties" todir="${tempDir}/src/buildScripts" />
 
-		<copy todir="${tempDir}/buildScripts" flatten="true" overwrite="true">
-			<fileset dir="${eclipse.build.configs}/sdk/srcBuild" excludes="incl,fetch/**,buildFromSource.xml,run.xml" />
-		</copy>
-
 		<!--  set correct permissions on linux script -->
 		<chmod file="${tempDir}/buildScripts/build" perm="755" />
 
@@ -346,9 +342,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<fileset dir="${buildDirectory}" includes="features/,plugins/,maps/**" />
 		</copy>
 		<!-- <fileset dir="${buildDirectory}" includes="features/,plugins/,maps/**" excludes="features/*example*/**,plugins/*example*/**" /> -->
-		<copy todir="${tempDir}/buildScripts" flatten="true" overwrite="true">
-			<fileset dir="${eclipse.build.configs}/sdk/srcBuild" excludes="fetch/**,incl,buildFromSource.xml,build.properties,run.xml" />
-		</copy>
+
 		<!--replace hard-coded location of Orbit bundles in generated packaging scripts to avoid bug 182331, 178869 -->
 		<replaceregexp match="/builds/(I\d*|N\d*|M\d*)/src" replace="${buildDirectory}" byline="true">
 			<fileset dir="${tempDir}/buildScripts" includes="package*" />
@@ -366,16 +360,6 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 			<fileset file="${tempDir}/buildScripts/src/plugins/org.eclipse.osgi/osgi/osgi-r3-jdk131-notsigned.jar" />
 		</delete>
 
-		<!--  set correct permissions on linux script -->
-	    <!--
-		<chmod file="${tempDir}/buildScripts/build" perm="755" />
-		<exec dir="${tempDir}/buildScripts" executable="zip">
-			<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-sourceBuild-srcIncluded-${buildId}.zip -r ." />
-		</exec>
-		<copy file="${eclipse.build.configs}/sdk/srcBuild/incl/instructions.html" tofile="${postingDirectory}/${buildLabel}/srcIncludedBuildInstructions.html" />
-		<copy file="${eclipse.build.configs}/sdk/srcBuild/fetch/instructions.html" tofile="${postingDirectory}/${buildLabel}/srcFetchBuildInstructions.html" />
-        -->
-	    
 		<delete dir="${tempDir}/" />
 	</target>
 

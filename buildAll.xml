@@ -648,14 +648,6 @@
                 value="${eclipse.build.configs}/sdk" />
         </ant>
 
-        <replace
-            file="${eclipse.build.configs}/sdk/srcBuild/build.properties"
-            token="@build@"
-            value="${buildId}" />
-        <replace
-            file="${eclipse.build.configs}/sdk/srcBuild/build"
-            token="@build@"
-            value="${buildId}" />
         <!-- These v tags are what's eventually used for qualifiers, even 
             if projects tagged with buildlabel -->
         <condition
