@@ -18,6 +18,9 @@ workLocation=/shared/eclipse/sdk/promotion
 # location to put its promotions scripts. (i.e. implicit tight coupling)
 promoteScriptLocation=$workLocation/queue
 
+# Note: if we ever need to handle spaces, or newlines in names (seems unlikely) this 
+# for loop won't quiet work, and will be more complicated (or, at least unintuitive). 
+
 allfiles=$( find $promoteScriptLocation -name "promote*.sh" | sort )
 for promotefile in $allfiles 
 do
