@@ -1,0 +1,2 @@
+source updateIndexFilesFunction.shsource
+updateIndex

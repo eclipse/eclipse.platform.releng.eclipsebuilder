@@ -1,5 +1,21 @@
 #!/usr/bin/env bash
 
+# start tests function
+function startTests()
+{
+    eclipseStreamMajor=$1
+    buildType=$2
+    eclipseStream=$3
+    buildId=$4
+    buildRoot=/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}
+    buildDir=${buildRoot}/build
+    supportDir=${buildDir}/supportDir
+    eclipsebuilder=org.eclipse.releng.eclipsebuilder
+    builderDir=${supportDir}/$eclipsebuilder
+    # finally, execute
+    $builderDir/testScripts/startTests.sh ${eclipseStream} ${buildId}
+}
+
 # this funtion currently just synchs up the whole local repo 
 # with the whole remote repo ... so, important to use --delete and
 # provides an easy way to "fix" the remote repo by fixing the local one first. 
@@ -115,51 +131,13 @@ function syncDropLocation ()
         echo "ERROR: rsync did not complete normally.rccode: $rccode"
         return $rccode
     else
-        if [[ $eclipseStreamMajor == 3 ]]         
-        then
-            wget --no-verbose -O index3.txt http://download.eclipse.org/eclipse/downloads/eclipse3x.php 2>&1 2>&1
-            rccode=$?
-            if [ $rccode -eq 0 ]
-            then
-                rsync  index3.txt /home/data/httpd/download.eclipse.org/eclipse/downloads/eclipse3x.html
-                rccode=$?
-                if [ $rccode -eq 0 ] 
-                then
-                    echo "INFO: Upated http://download.eclipse.org/eclipse/downloads/eclipse3x.html"
-                    return 0
-                else
-                    echo "ERROR: Could not copy index3.html to downlaods. rccode: $rccode"
-                    return $rccode
-                fi
-            else
-                echo "ERROR: Could not create index3.html from downlaods. rccode: $rccode"
-                return $rccode
-            fi
-        else
-            # assume major version if 4    
-            wget --no-verbose -O index.txt http://download.eclipse.org/eclipse/downloads/createIndex4x.php 2>&1 2>&1
-            rccode=$?
-            if [ $rccode -eq 0 ]
-            then
-                rsync  index.txt /home/data/httpd/download.eclipse.org/eclipse/downloads/index.html
-                rccode=$?
-                if [ $rccode -eq 0 ] 
-                then
-                    echo "INFO: Upated http://download.eclipse.org/eclipse/downloads/index.html"
-                    return 0
-                else
-                    echo "ERROR: Could not copy index.html to downlaods. rccode: $rccode"
-                    return $rccode
-                fi
-            else
-                echo "ERROR: Could not create index.html from downlaods. rccode: $rccode"
-                return $rccode
-            fi
-        fi
+        # if update to downloads succeeded, start the unit tests on Hudson
+        startTests $eclipseStreamMajor $buildType $eclipseStream $buildId
+        # Now update main DL page index pages, to show available
+        source /shared/eclipse/sdk/updateIndexFilesFunction.shsource
+        updateIndex $eclipseStreamMajor 
     fi
 }
-
-
 
 function sendPromoteMail ()
 {

@@ -57,6 +57,24 @@ export quietCVS=${quietCVS:--Q}
 #export quietCVS=${quietCVS:-" "}
 echo "quiteCVS: $quietCVS"
 
+# function to save a copy of full build log if we created one
+function saveBuildLog()
+{
+    buildRoot=$1
+    postingDirectory=$2
+    buildId=$3
+    if [[ -e "${buildRoot}/fullmasterBuildOutput.txt" ]] 
+    then
+        buildlogsDir="${postingDirectory}/${buildId}/buildlogs"
+        # it really should exist by now ... but ... in case not
+        mkdir -p "${buildlogsDir}"
+        # we specify -v though guess that output won't be in the log we copy :/ 
+        # also we do no expect an existing one, but specify -b incase in 
+        # future there are some sort of "re-run" scenerios where it would 
+        # already exist, we'd want to keep all copies. 
+        cp -v -b "${buildRoot}/fullmasterBuildOutput.txt" "${buildlogsDir}"
+    fi
+}
 
 # general purpose utility for "hard exit" is return code not zero. 
 # especially useful to call/check after basic things that should normally 
@@ -853,6 +871,8 @@ rm -fr ${VERBOSE_REMOVES} "${buildRoot}/build/supportDir/src"
 
 
 runSDKBuild
+SDKRC=$?
+saveBuildLog $buildRoot $postingDirectory $buildId
 checkForErrorExit $? "Failed while building Eclipse-SDK"
 
 # Only update the IBuild.properties file if the build was successful. 
@@ -935,36 +955,7 @@ else
     echo "Did not create promote script for equinox since $eclipseStream less than 4"
 fi 
 
-# save a copy of full build log if we created one
-if [[ -e "${buildRoot}/fullmasterBuildOutput.txt" ]] 
-then
-    buildlogsDir="${postingDirectory}/${buildId}/buildlogs"
-    # it really should exist by now ... but ... in case not
-    mkdir -p "${buildlogsDir}"
-    # we specify -v though guess that output won't be in the log we copy :/ 
-    # also we do no expect an existing one, but specify -b incase in 
-    # future there are some sort of "re-run" scenerios where it would 
-    # already exist, we'd want to keep all copies. 
-    cp -v -b "${buildRoot}/fullmasterBuildOutput.txt" "${buildlogsDir}"
-fi
 
 echo "normal exit from build phase of $0"
-
-# we usually do not want to invoke tests automatically if doing test build.
-# we don't promote them, so the tests won't find them, anyway. That'd take 
-# more work (and begins to get to the point its not longer a "test build" :) 
-if [[ "${testbuildonly}" != "true" ]] 
-then
-
-   # need to be running Java 6 and Ant 1.8 for <sript> to work in invokeTestsJSON
-   # and, default on current build system is Ant 1.7 ... so ... 
-   export ANT_HOME=/shared/common/apache-ant-1.8.2
-
-   HUDSON_TOKEN=windows2012tests ant \
-       -DbuildId=${buildId} \
-       -DeclipseStream=${eclipseStream} \
-       -f $builderDir/invokeTestsJSON.xml
-
-fi
 
 exit 0
