@@ -49,10 +49,14 @@ else
     if [[ -x $promotefile  && -f $promotefile ]]
     then 
 
-        # notice these are concatenated on purpose, to give some "history", but
+        # if found a file to execute, temporarily change its name to "RUNNING-$promotefile
+        # so a subsequent cron job won't find it (if it does not finish by the time of the next cron job). 
+        runningpromotefile=$promoteScriptLocation/RUNNING_$(basename $promotefile)
+        mv  $promotefile $runningpromotefile
+        # notice these logs are concatenated on purpose, to give some "history", but
         # that means has to be "manually" removed every now and then. 
         # improve as desired.
-        /bin/bash $promotefile 1>>$workLocation/promotion-out.txt 2>>$workLocation/promotion-err.txt
+        /bin/bash $runningpromotefile 1>>$workLocation/promotion-out.txt 2>>$workLocation/promotion-err.txt
         # to test cron job, without doing anything, comment out above line, and uncomment folloiwng line.
         # then try various types of files file names, etc. 
         # echo "DEBUG: normally would execute file here: $promotefile" 1>>$workLocation/promotion-out.txt 2>>$workLocation/promotion-err.txt
@@ -61,11 +65,12 @@ else
         then 
             echo "ERROR: promotion returned an error: $rccode" 
             echo "       promotefile: $promotefile"
+            mv $runningpromotefile $promoteScriptLocation/ERROR_$(basename $promotefile)
             exit 1
         else
-            # all is ok, we'll remove the file so we won't execute it again. 
-            # (we'll move for now, for later inspection, if things go wrong, but eventually can just rm them)
-            mv $promotefile $promoteScriptLocation/RAN_$(basename $promotefile)
+            # all is ok, we'll move the file to "RAN-" in case needed for later inspection, 
+            # if things go wrong. Perhaps eventually just remove them?
+            mv $runningpromotefile $promoteScriptLocation/RAN_$(basename $promotefile)
             exit 0
         fi
     else
