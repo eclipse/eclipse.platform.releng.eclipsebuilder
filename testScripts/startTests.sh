@@ -69,7 +69,6 @@ echo "eclipseStreamService: $eclipseStreamService"
 echo "buildType: $buildType"
 echo "buildId: $buildId"
 
-exit
 
 buildRoot=/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}
 buildDir=${buildRoot}/build
