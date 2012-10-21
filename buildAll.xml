@@ -56,6 +56,11 @@
         name="equinox.build.configs"
         value="${basedir}/equinox/buildConfigs" />
 
+
+
+    <property
+        name="sdkHelper"
+        location="${eclipse.build.configs}/eclipse/helper.xml" />
     <property
         name="base.builder"
         value="${basedir}/../org.eclipse.releng.basebuilder" />
