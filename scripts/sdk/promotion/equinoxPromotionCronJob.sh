@@ -9,28 +9,18 @@
 # "default user" for that crontab, which may be what's desired, but you can also 
 # set MAILTO in your crontab, cautiously, to send it where ever you'd like. 
 
-# TODO: currently we will count on the promote script 
-# finishing before the cron job runs again. But 
-# would be better to write a lock file, which, if found, 
-# would indicate to the cron job to not do anything 
-# (maybe return a warning). 
-
-# TODO: we could "loop" if we found more than one ... if we ever 
-# thought we'd be producing that many files ... but, for now, 
-# assuming there is like one, two, or three per day.
-
 # The 'workLocation' provides a handy central place to have the 
 # promote script, and log results. ASSUMING this works for all 
 # types of builds, etc (which is the goal for the sdk promotions).
 workLocation=/shared/eclipse/equinox/promotion
 
 # masterBuilder.sh must know about and use this same 
-# location to put its promotions scripts. (i.e. implicite tight coupling)
+# location to put its promotions scripts. (i.e. implicit tight coupling)
 promoteScriptLocation=$workLocation/queue
 
-# we redirect "find" std err to nowhere, else "not finding something" is reported 
-# on "standard err" (which isn't very interesting).
-promotefile=$( find $promoteScriptLocation -name "promote*.sh" | sort | head -1 )  
+allfiles=$( find $promoteScriptLocation -name "promote*.sh" | sort )
+for promotefile in $allfiles 
+do
 
 # having an echo here will cause cron job to send mail for EACH job, even if all is fine.
 # so use only for testing. 
@@ -75,7 +65,9 @@ else
         fi
     else
         echo "WARNING: promotion file found, but was not executable"
-        echo "         promoitefile: $promotefile"
+        echo "         promotefile: $promotefile"
         exit 1
     fi
 fi
+done
+
