@@ -92,9 +92,6 @@ fi
 #necessary when invoking this script through rsh
 cd $dir
 
-# verify os, ws and arch values passed in are valid before running tests
-if [ "$os-$ws-$arch" = "linux-gtk-x86" ] || [ "$os-$ws-$arch" = "macosx-cocoa-ppc" ] || [ "$os-$ws-$arch" = "macosx-cocoa-x86" ] || [ "$os-$ws-$arch" = "aix-gtk-ppc" ] || [ "$os-$ws-$arch" = "aix-gtk-ppc64" ]  || [ "$os-$ws-$arch" = "solaris-gtk-sparc" ] || [ "$os-$ws-$arch" = "solaris-gtk-x86" ] || [ "$os-$ws-$arch" = "linux-gtk-ppc64" ] ||  [ "$os-$ws-$arch" = "linux-gtk-ia64" ] ||  [ "$os-$ws-$arch" = "linux-gtk-x86_64" ] ||  [ "$os-$ws-$arch" = "hpux-gtk-ia64_32" ]
-then
     if [ ! -r eclipse ]
     then
         tar -xzf eclipse-SDK-*.tar.gz
@@ -104,68 +101,7 @@ then
 
     # run tests
     launcher=`ls eclipse/plugins/org.eclipse.equinox.launcher_*.jar`
-    
 
-
-# it have been recommended not to "probe and publish" information about systems 
-# for slight improvement in security. Bug 387747
-# so I have commented out most such probes, so they won't be routine. 
-
-    #echo "list all environment variables in effect as tests start"
-    #printenv
-
-
-# variables of special interest, though most won't be defined
-#echo "\$WINDOWMANAGER: $WINDOWMANAGER"
-#echo "\$WINDOW_MANAGER: $WINDOW_MANAGER"
-#echo "\$DESKTOP_SESSION: $DESKTOP_SESSION"
-#echo "\$XDG_CURRENT_DESKTOP: $XDG_CURRENT_DESKTOP"
-#echo "\$GDMSESSION: $GDMSESSION"    
-            
-#echo "uname -a"
-#uname -a
-    #    echo 
-    #echo "lsb_release -a"
-    #lsb_release -a
-    #echo 
-        
-#echo "cat /etc/lsb-release"
-#cat /etc/lsb-release
-    #    echo 
-
-#echo "cat /etc/SuSE-release"
-#cat /etc/SuSE-release
-    #    echo 
-
-#echo "rpm -q cairo"
-#rpm -q cairo
-    #    echo 
-
-#echo "rpm -q gtk2"
-#rpm -q gtk2
-    #    echo 
-
-#echo "rpm -q glibc"
-#rpm -q glibc
-    #    echo 
-
-#echo "rpm -q glib2"
-#rpm -q glib2
-    #    echo 
-
-#echo "rpm -q pango"
-#rpm -q pango
-    #    echo 
-
-       #    echo
-    #echo "Check for popular desktop environments (gnome|kde):"
-    #ps -ef | egrep -i "gnome|kde" | grep -v egrep
- 
-     #    echo
-    #echo "Check for popular desktop environments:"
-    #ps -ef | egrep -i "unity|mint|gnome|kde|xfce|ion|wmii|dwm" | grep -v egrep
- 
-     #echo "DISPLAY: $DISPLAY"
 
     # make sure there is a window manager running. See bug 379026
     # we should not have to, but may be a quirk/bug of hudson setup
@@ -201,18 +137,11 @@ then
     echo
     echo "extdirprop in runtest: ${extdirprop}"
     echo "extdirproperty in runtest: ${extdirproperty}"    
-      
+
     # -Dtimeout=300000 "${ANT_OPTS}"
  if [[ ! -z "${extdirproperty}" ]]
  then 
 	$vmcmd "${extdirproperty}" -Dosgi.os=$os -Dosgi.ws=$ws -Dosgi.arch=$arch -jar $launcher -data workspace -application org.eclipse.ant.core.antRunner -file ${PWD}/test.xml $tests -Dws=$ws -Dos=$os -Darch=$arch -D$installmode=true $properties -logger org.apache.tools.ant.DefaultLogger
  else
 	$vmcmd -Dosgi.os=$os -Dosgi.ws=$ws -Dosgi.arch=$arch  -jar $launcher -data workspace -application org.eclipse.ant.core.antRunner -file ${PWD}/test.xml $tests -Dws=$ws -Dos=$os -Darch=$arch -D$installmode=true $properties -logger org.apache.tools.ant.DefaultLogger
- fi		
-
-else
-    # display message to user if os, ws and arch are invalid
-    echo "The os, ws and arch values are either invalid or are an invalid combination"
-    exit 1
-fi
-
+ fi
