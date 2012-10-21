@@ -287,8 +287,8 @@ publish:
      [exec] [sha1] eclipse-platform-I20120430-2000-aix-gtk-ppc64.zip
      [exec] [md5] eclipse-platform-I20120430-2000-aix-gtk-ppc.zip
      [exec] [sha1] eclipse-platform-I20120430-2000-aix-gtk-ppc.zip
-     [exec] [md5] eclipse-platform-I20120430-2000-hpux-gtk-ia64.zip
-     [exec] [sha1] eclipse-platform-I20120430-2000-hpux-gtk-ia64.zip
+     [exec] [md5] eclipse-platform-I20120430-2000-hpux-gtk-ia64_32.zip
+     [exec] [sha1] eclipse-platform-I20120430-2000-hpux-gtk-ia64_32.zip
      [exec] [md5] eclipse-platform-I20120430-2000-solaris-gtk-x86.zip
      [exec] [sha1] eclipse-platform-I20120430-2000-solaris-gtk-x86.zip
      [exec] [md5] eclipse-platform-I20120430-2000-solaris-gtk.zip
@@ -301,8 +301,8 @@ publish:
      [exec] [sha1] eclipse-SDK-I20120430-2000-aix-gtk-ppc64.zip
      [exec] [md5] eclipse-SDK-I20120430-2000-aix-gtk-ppc.zip
      [exec] [sha1] eclipse-SDK-I20120430-2000-aix-gtk-ppc.zip
-     [exec] [md5] eclipse-SDK-I20120430-2000-hpux-gtk-ia64.zip
-     [exec] [sha1] eclipse-SDK-I20120430-2000-hpux-gtk-ia64.zip
+     [exec] [md5] eclipse-SDK-I20120430-2000-hpux-gtk-ia64_32.zip
+     [exec] [sha1] eclipse-SDK-I20120430-2000-hpux-gtk-ia64_32.zip
      [exec] [md5] eclipse-SDK-I20120430-2000-solaris-gtk-x86.zip
      [exec] [sha1] eclipse-SDK-I20120430-2000-solaris-gtk-x86.zip
      [exec] [md5] eclipse-SDK-I20120430-2000-solaris-gtk.zip
@@ -349,8 +349,8 @@ publish:
      [exec] [sha1] swt-I20120430-2000-gtk-aix-ppc64.zip
      [exec] [md5] swt-I20120430-2000-gtk-aix-ppc.zip
      [exec] [sha1] swt-I20120430-2000-gtk-aix-ppc.zip
-     [exec] [md5] swt-I20120430-2000-gtk-hpux-ia64.zip
-     [exec] [sha1] swt-I20120430-2000-gtk-hpux-ia64.zip
+     [exec] [md5] swt-I20120430-2000-gtk-hpux-ia64_32.zip
+     [exec] [sha1] swt-I20120430-2000-gtk-hpux-ia64_32.zip
      [exec] [md5] swt-I20120430-2000-gtk-linux-ppc64.zip
      [exec] [sha1] swt-I20120430-2000-gtk-linux-ppc64.zip
      [exec] [md5] swt-I20120430-2000-gtk-linux-x86_64.zip

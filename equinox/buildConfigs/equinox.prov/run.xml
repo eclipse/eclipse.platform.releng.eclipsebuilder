@@ -84,8 +84,8 @@
 		<mkdir dir="${p2.sdk.install.linux.gtk.s390x}" />
 		<property name="p2.sdk.install.linux.gtk.s390" value="${p2.output.base}/sdk.install.linux.gtk.s390" />
 		<mkdir dir="${p2.sdk.install.linux.gtk.s390}" />
-		<property name="p2.sdk.install.hpux.gtk.ia64" value="${p2.output.base}/sdk.install.hpux.gtk.ia64" />
-		<mkdir dir="${p2.sdk.install.hpux.gtk.ia64}" />
+		<property name="p2.sdk.install.hpux.gtk.ia64_32" value="${p2.output.base}/sdk.install.hpux.gtk.ia64_32" />
+		<mkdir dir="${p2.sdk.install.hpux.gtk.ia64_32}" />
 		<property name="p2.sdk.install.solaris.gtk.sparc" value="${p2.output.base}/sdk.install.solaris.gtk.sparc" />
 		<mkdir dir="${p2.sdk.install.solaris.gtk.sparc}" />
 		<property name="p2.sdk.install.solaris.gtk.x86" value="${p2.output.base}/sdk.install.solaris.gtk.x86" />
@@ -110,8 +110,8 @@
 		<mkdir dir="${p2.platform.install.linux.gtk.x86_64}" />
 		<property name="p2.platform.install.linux.gtk.ppc64" value="${p2.output.base}/platform.install.linux.gtk.ppc64" />
 		<mkdir dir="${p2.platform.install.linux.gtk.ppc64}" />
-		<property name="p2.platform.install.hpux.gtk.ia64" value="${p2.output.base}/platform.install.hpux.gtk.ia64" />
-		<mkdir dir="${p2.platform.install.hpux.gtk.ia64}" />
+		<property name="p2.platform.install.hpux.gtk.ia64_32" value="${p2.output.base}/platform.install.hpux.gtk.ia64_32" />
+		<mkdir dir="${p2.platform.install.hpux.gtk.ia64_32}" />
 		<property name="p2.platform.install.solaris.gtk.sparc" value="${p2.output.base}/platform.install.solaris.gtk.sparc" />
 		<mkdir dir="${p2.platform.install.solaris.gtk.sparc}" />
 		<property name="p2.platform.install.solaris.gtk.x86" value="${p2.output.base}/platform.install.solaris.gtk.x86" />
@@ -470,11 +470,11 @@
 		<param name="p2.director.installIU" value="org.eclipse.sdk.ide" />
 		<param name="p2.director.version" value="${sdk.version}" />
 		<param name="p2.director.profile" value="SDKProfile" />
-		<param name="p2.director.install.path" value="${p2.sdk.install.hpux.gtk.ia64}/eclipse" />
+		<param name="p2.director.install.path" value="${p2.sdk.install.hpux.gtk.ia64_32}/eclipse" />
 		<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true -iuProfileProperties ${equinox.build.configs}/equinox.prov/lock.properties -purgeHistory" />
 		<param name="p2.os" value="hpux" />
 		<param name="p2.ws" value="gtk" />
-		<param name="p2.arch" value="ia64" />
+		<param name="p2.arch" value="ia64_32" />
 		<param name="p2.repo" value="${buildRepo}" />
 	</antcall>
 
@@ -618,11 +618,11 @@
 		<param name="p2.director.installIU" value="org.eclipse.platform.ide" />
 		<param name="p2.director.version" value="${sdk.version}" />
 		<param name="p2.director.profile" value="PlatformProfile" />
-		<param name="p2.director.install.path" value="${p2.platform.install.hpux.gtk.ia64}/eclipse" />
+		<param name="p2.director.install.path" value="${p2.platform.install.hpux.gtk.ia64_32}/eclipse" />
 		<param name="p2.director.extraArgs" value="-profileProperties org.eclipse.update.install.features=true" />
 		<param name="p2.os" value="hpux" />
 		<param name="p2.ws" value="gtk" />
-		<param name="p2.arch" value="ia64" />
+		<param name="p2.arch" value="ia64_32" />
 		<param name="p2.repo" value="${buildRepo}" />
 	</antcall>
 
@@ -839,11 +839,11 @@
 		</sequential>
 
 		<sequential>
-			<!-- hpux gtk ia64-->
-			<delete file="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-hpux-gtk-ia64.zip" failonerror="false" />
-			<chmod dir="${p2.sdk.install.hpux.gtk.ia64}" perm="755" includes="**/*.so" />
-			<exec dir="${p2.sdk.install.hpux.gtk.ia64}" executable="zip">
-				<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-hpux-gtk-ia64.zip -r ." />
+			<!-- hpux gtk ia64_32-->
+			<delete file="${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-hpux-gtk-ia64_32.zip" failonerror="false" />
+			<chmod dir="${p2.sdk.install.hpux.gtk.ia64_32}" perm="755" includes="**/*.so" />
+			<exec dir="${p2.sdk.install.hpux.gtk.ia64_32}" executable="zip">
+				<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-SDK-${buildId}-hpux-gtk-ia64_32.zip -r ." />
 			</exec>
 
 			<!-- solaris gtk sparc -->
@@ -925,11 +925,11 @@
 			</antcall>
 		</sequential>
 		<sequential>
-			<!-- hpux gtk ia64-->
-			<delete file="${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-hpux-gtk-ia64.zip" failonerror="false" />
-			<chmod dir="${p2.platform.install.hpux.gtk.ia64}" perm="755" includes="**/*.so" />
-			<exec dir="${p2.platform.install.hpux.gtk.ia64}" executable="zip">
-				<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-hpux-gtk-ia64.zip -r ." />
+			<!-- hpux gtk ia64_32-->
+			<delete file="${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-hpux-gtk-ia64_32.zip" failonerror="false" />
+			<chmod dir="${p2.platform.install.hpux.gtk.ia64_32}" perm="755" includes="**/*.so" />
+			<exec dir="${p2.platform.install.hpux.gtk.ia64_32}" executable="zip">
+				<arg line="-q ${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-hpux-gtk-ia64_32.zip -r ." />
 			</exec>
 			<!-- solaris gtk sparc -->
 			<delete file="${postingDirectory}/${buildLabel}/eclipse-platform-${buildId}-solaris-gtk.zip" failonerror="false" />

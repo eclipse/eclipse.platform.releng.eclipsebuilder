@@ -74,7 +74,7 @@ publish_sdk () {
     eclipse-SDK-ReplaceMe-win32.zip
     eclipse-SDK-ReplaceMe-aix-gtk-ppc.zip
     eclipse-SDK-ReplaceMe-aix-gtk-ppc64.zip
-    eclipse-SDK-ReplaceMe-hpux-gtk-ia64.zip
+    eclipse-SDK-ReplaceMe-hpux-gtk-ia64_32.zip
     eclipse-SDK-ReplaceMe-solaris-gtk.zip
     eclipse-SDK-ReplaceMe-solaris-gtk-x86.zip
     "
