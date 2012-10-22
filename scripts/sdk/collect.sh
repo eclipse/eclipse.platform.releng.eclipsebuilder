@@ -25,9 +25,9 @@ echo "eclipseStream: $eclipseStream"
 # Uncomment once ready, but synchronize "release" of code with 
 # removing the check/wait loop in invokeTestsJSON.xml
 
-#${ANT_HOME}/bin/ant -f /shared/eclipse/sdk/collectTestResults.xml \
-   #   -lib /shared/common/apache-ant-1.8.4/lib/ \
-   #-Djob=${job} \
-   #-DbuildNumber=${buildNumber} \
-   #-DbuildId=${buildId} \
-   #-DeclipseStream=${eclipseStream}
+${ANT_HOME}/bin/ant -f /shared/eclipse/sdk/collectTestResults.xml \
+      -lib /shared/common/apache-ant-1.8.4/lib/ \
+   -Djob=${job} \
+   -DbuildNumber=${buildNumber} \
+   -DbuildId=${buildId} \
+   -DeclipseStream=${eclipseStream}

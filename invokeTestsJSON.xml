@@ -93,7 +93,8 @@
             name="json"
             value="{&quot;parameter&quot;: [${JSON_buildId},${JSON_eclipseStream}] }" />
 
-        <!-- fetch the next hudson build number from the hudson job API -->
+        <!-- fetch the next hudson build number from the hudson job API
+        Bug 389048
         <exec executable="curl">
             <arg line="-G" />
             <arg value="https://hudson.eclipse.org/hudson/job/${job}/api/json" />
@@ -105,6 +106,7 @@
             <arg value="-c" />
             <arg value="grep -o 'nextBuildNumber&quot;:[0-9]*' ${jobNumberOut}/nextBuildNumber${job} | cut -d ':' -f 2" />
         </exec>
+         -->
         <!-- 
          don't delete ... for debugging for now ... but long term might make use of this (and 
          other info) to "find" our results? 
@@ -120,7 +122,8 @@
             <arg value="--data-urlencode" />
             <arg value="json=${json}" />
         </exec>
-
+        
+        <!-- Changed to handle with cron job
         <property
             name="hudsonResultRootURL"
             value="https://hudson.eclipse.org/hudson/job/${job}/${nextHudsonBuild}/artifact/*zip*/" />
@@ -128,7 +131,11 @@
             name="hudsonResultURL"
             value="${hudsonResultRootURL}/archive.zip" />
         <echo message="hudsonResultURL ${hudsonResultURL} " />
+        
+
+        Bug 389048 - test results sometimes do not get routed back to right download page summary
         <antcall target="getHudsonResults" />
+        -->
 
     </target>
 
