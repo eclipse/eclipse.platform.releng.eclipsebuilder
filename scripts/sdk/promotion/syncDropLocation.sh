@@ -12,8 +12,8 @@ function startTests()
     supportDir=${buildDir}/supportDir
     eclipsebuilder=org.eclipse.releng.eclipsebuilder
     builderDir=${supportDir}/$eclipsebuilder
-    # finally, execute
-    $builderDir/testScripts/startTests.sh ${eclipseStream} ${buildId}
+    # finally, execute (in background)
+    $builderDir/testScripts/startTests.sh ${eclipseStream} ${buildId} &
 }
 
 # this funtion currently just synchs up the whole local repo 
