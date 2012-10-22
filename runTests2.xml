@@ -168,43 +168,22 @@
         <echo message="archiveLocation ${archiveLocation}" />
     </target>
 
-    <target name="platformIndependentZips"
+    <target
+        name="platformIndependentZips"
         unless="skipInstall">
-        <!-- note: we try these platfrom independ zips first, by coincidence 
-             so we will make the 
-             effort to "wait" if they are not ready yet. But, assuming
-             they get ready and succeed, we'll automatically assume the 
-             platfrom specific files are ready by then also and not "wait" for them 
-             other than the normal default 3 re-tries 
-             https://bugs.eclipse.org/bugs/show_bug.cgi?id=378303
-             -->
-        <retry retrycount="20">
-            <sequential>
-                <sleep minutes="3" />
-                <get
-                    httpusecaches="false"
-                    src="${archiveLocation}/eclipse-Automated-Tests-${buildId}.zip"
-                    dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
-            </sequential>
-        </retry>
-        <retry retrycount="20">
-            <sequential>
-                <sleep minutes="1" />
-                <get
-                    httpusecaches="false"
-                    src="${archiveLocation}/eclipse-${buildId}-delta-pack.zip"
-                    dest="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
-            </sequential>
-        </retry>
-        <retry retrycount="20">
-            <sequential>
-                <sleep minutes="1" />
-                <get
-                    httpusecaches="false"
-                    src="${archiveLocation}/eclipse-Automated-Tests-${buildId}.zip"
-                    dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
-            </sequential>
-        </retry>
+
+        <get
+            httpusecaches="false"
+            src="${archiveLocation}/eclipse-Automated-Tests-${buildId}.zip"
+            dest="${testDir}/eclipse-Automated-Tests-${buildId}.zip" />
+        <get
+            httpusecaches="false"
+            src="${archiveLocation}/eclipse-${buildId}-delta-pack.zip"
+            dest="${executionDir}/eclipse-${buildId}-delta-pack.zip" />
+        <get
+            httpusecaches="false"
+            src="${archiveLocation}/eclipse-Automated-Tests-${buildId}.zip"
+            dest="${executionDir}/eclipse-Automated-Tests-${buildId}.zip" />
     </target>
 
     <target
@@ -222,19 +201,19 @@
             dest="${executionDir}/eclipse-platform-3.7.2-win32.zip" />
     </target>
     <target
-         name="getwinzips64"
-         depends="platformIndependentZips"
-         unless="skipInstall">
-         <get
-             src="${archiveLocation}/eclipse-SDK-${buildId}-win32-x86_64.zip"
-             dest="${executionDir}/eclipse-SDK-${buildId}-win32-x86_64.zip" />
-         <get
-             src="${archiveLocation}/eclipse-platform-${buildId}-win32-x86_64.zip"
-             dest="${executionDir}/eclipse-platform-${buildId}-win32-x86_64.zip" />
-         <get
-             src="http://archive.eclipse.org/eclipse/downloads/drops/R-3.7.2-201202080800/eclipse-platform-3.7.2-win32-x86_64.zip"
-             dest="${executionDir}/eclipse-platform-3.7.2-win32.zip-x86_64" />
-     </target>
+        name="getwinzips64"
+        depends="platformIndependentZips"
+        unless="skipInstall">
+        <get
+            src="${archiveLocation}/eclipse-SDK-${buildId}-win32-x86_64.zip"
+            dest="${executionDir}/eclipse-SDK-${buildId}-win32-x86_64.zip" />
+        <get
+            src="${archiveLocation}/eclipse-platform-${buildId}-win32-x86_64.zip"
+            dest="${executionDir}/eclipse-platform-${buildId}-win32-x86_64.zip" />
+        <get
+            src="http://archive.eclipse.org/eclipse/downloads/drops/R-3.7.2-201202080800/eclipse-platform-3.7.2-win32-x86_64.zip"
+            dest="${executionDir}/eclipse-platform-3.7.2-win32.zip-x86_64" />
+    </target>
     <target
         name="getlinzips"
         depends="platformIndependentZips"
@@ -294,7 +273,7 @@
             src="http://archive.eclipse.org/eclipse/downloads/drops/R-3.7.2-201202080800/eclipse-platform-3.7.2-macosx-cocoa-x86_64.tar.gz"
             dest="${executionDir}/eclipse-platform-3.7.2-macosx-cocoa-x86_64.tar.gz" />
     </target>
-    
+
     <target
         name="configure.team.cvs.test"
         depends="computeExpectedLocation,getcvstestProperties" />
@@ -462,7 +441,9 @@
             </and>
         </condition>
         <echo message="testPlatform  ${testPlatform}" />
-        <fail unless="testPlatform" message="testPlatform did not match any of the supported combinations of osgi.os, osgi.ws, osgi.arch" />
+        <fail
+            unless="testPlatform"
+            message="testPlatform did not match any of the supported combinations of osgi.os, osgi.ws, osgi.arch" />
         <condition
             property="getArtifacts"
             value="getwinzips">
@@ -476,7 +457,7 @@
             <equals
                 arg1="${testPlatform}"
                 arg2="win7-64" />
-        </condition>        
+        </condition>
         <condition
             property="getArtifacts"
             value="getlinzips">
@@ -521,9 +502,9 @@
             <file file="${testingPropertiesfile}" />
         </loadproperties>
 
-        <echo message="DEBUG: testingPropertiesfile: ${testingPropertiesfile}" />   
-        <echo message="DEBUG: org.eclipse.core.net.prefs: ${org.eclipse.core.net.prefs}" /> 
-                
+        <echo message="DEBUG: testingPropertiesfile: ${testingPropertiesfile}" />
+        <echo message="DEBUG: org.eclipse.core.net.prefs: ${org.eclipse.core.net.prefs}" />
+
         <property
             name="tester"
             value="${executionDir}" />
@@ -557,7 +538,9 @@
 
         <echo message="executionDir ${executionDir}" />
 
-        <copy todir="${executionDir}" verbose="true" >
+        <copy
+            todir="${executionDir}"
+            verbose="true">
             <fileset dir="${eclipseBuilderDir}/eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}" />
         </copy>
         <copy
@@ -566,7 +549,7 @@
             overwrite="true">
             <fileset dir="${eclipseBuilderDir}/eclipse/buildConfigs/sdk.tests/testScripts" />
         </copy>
-        
+
         <antcall target="configure.team.cvs.test" />
         <echo message="test.xml: ${test.xml}" />
         <echoproperties />
@@ -822,7 +805,8 @@
             project.setProperty("eclipseStreamMajor", sArray[1]);
             project.setProperty("eclipseStreamMinor", sArray[2]);
             project.setProperty("eclipseStreamService", sArray[3]);
-            project.setProperty("updateSiteSegment", sArray[1] + "." + sArray[2]);
+            project.setProperty("updateSiteSegment", sArray[1] + "." +
+            sArray[2]);
         </script>
 
         <fail
@@ -842,12 +826,11 @@
 
     <!-- skipInstall=true passed in when user knows things have already been installed, and 
          just wants to re-run the tests -->
-    <target
-        name="checkMapsNeeded">
+    <target name="checkMapsNeeded">
         <condition property="mapsNotNeeded">
             <or>
-              <isset property="mapProjectFetched"/>
-              <isset property="skipInstall"/>
+                <isset property="mapProjectFetched" />
+                <isset property="skipInstall" />
             </or>
         </condition>
     </target>
