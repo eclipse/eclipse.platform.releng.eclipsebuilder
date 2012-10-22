@@ -204,7 +204,7 @@ if [[ $# != 2 ]]
 then
     # usage: 
     scriptname=$(basename $0)
-    printf "\n\t%s\n" "This script, $scriptname requires three arguments, in order: "
+    printf "\n\t%s\n" "This script, $scriptname requires two arguments, in order: "
     printf "\t\t%s\t%s\n" "eclipseStream" "(e.g. 4.2.0 or 3.8.0) "
     printf "\t\t%s\t%s\n" "buildId" "(e.g. N20120415-2015) "
     printf "\t%s\n" "for example," 
