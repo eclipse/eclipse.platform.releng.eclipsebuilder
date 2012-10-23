@@ -29,7 +29,7 @@ checkForErrorExit $? "could not change directory up?!"
 mkdir -p tempeb
 checkForErrorExit $? "could not mkdir?!"
 
-wget http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/snapshot/master.zip 
+wget -O master.zip http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/snapshot/master.zip 
 checkForErrorExit $? "could not get eclispebuilder?!"
 
 unzip -q master.zip -d tempeb
