@@ -7,7 +7,8 @@ find /home/data/httpd/download.eclipse.org/eclipse/downloads/drops4 -maxdepth 1 
 find /home/data/httpd/download.eclipse.org/eclipse/downloads/drops -maxdepth 1 -ctime +30 -name "M*" -exec echo '{}' \;
 find /home/data/httpd/download.eclipse.org/eclipse/downloads/drops -maxdepth 1 -ctime +30 -name "M*" -exec rm -fr '{}' \;
 
-/opt/public/eclipse/sdk/promotionRelatedRelease/updateIndexes.sh
+source /shared/eclipse/sdk/updateIndexFilesFunction.shsource
+/shared/eclipse/sdk/updateIndexes.sh
 
 
 # shared (build machine)

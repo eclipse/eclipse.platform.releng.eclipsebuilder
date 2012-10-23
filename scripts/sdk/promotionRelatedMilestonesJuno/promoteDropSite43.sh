@@ -8,8 +8,6 @@ DL_LABEL=4.3M1
 BUILD_TIMESTAMP=${DROP_ID//[I-]/}
 DL_DROP_ID=S-${DL_LABEL}-${BUILD_TIMESTAMP}
 
-source updateIndexFilesFunction.sh
-
 DL_SITE_PATH=/home/data/httpd/download.eclipse.org/eclipse/downloads/drops4/
 
 cd /opt/public/eclipse/eclipse4I/siteDir/eclipse/downloads/drops4
@@ -25,6 +23,7 @@ echo "rename ${DROP_ID} ${DL_DROP_ID} ${DL_LABEL}"
 echo "rsync ${DL_DROP_ID} to ${DL_SITE_PATH}"
 rsync -r ${DL_DROP_ID} ${DL_SITE_PATH}
 
+source /shared/eclipse/sdk/updateIndexFilesFunction.shsource
 updateIndex 4
 
 echo "move backup back to original"

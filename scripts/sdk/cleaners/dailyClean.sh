@@ -11,7 +11,9 @@ then
     find /home/data/httpd/download.eclipse.org/eclipse/downloads/drops4 -maxdepth 1 -ctime +3 -name "N*" -exec rm -fr '{}' \;
     nbuilds=$( find /home/data/httpd/download.eclipse.org/eclipse/downloads/drops4 -maxdepth 1 -name "N*" -exec echo '{}' \; | wc -l )
     echo "Number of builds after cleaning: $nbuilds"
-    /opt/public/eclipse/sdk/promotionRelatedRelease/updateIndexes.sh
+    source /shared/eclipse/sdk/updateIndexFilesFunction.shsource
+    updateIndex 4
+    
 else
     echo "Nothing cleaned, not more than 4 days"
 fi

@@ -70,8 +70,8 @@ then
     exit 1
 fi
 
-# Be sure to include source before we "change directories"
-source updateIndexFilesFunction.sh
+
+
 
 # change to parent of drop, and work from there
 # (rename build assumes it)
@@ -127,7 +127,8 @@ fi
 # note: updating the index is a minor operation, no need to check for error.
 if [[ ${DROP_TYPE} != "R" ]]
 then
- updateIndex ${BUILD_MAJOR}
+    source /shared/eclipse/sdk/updateIndexFilesFunction.shsource
+    updateIndex ${BUILD_MAJOR}
 fi
 
 # if we get to here without error exit, then ok to move back to original name, and remove
