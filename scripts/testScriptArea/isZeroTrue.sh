@@ -1,5 +1,5 @@
-# I always forget  ... hmm, neither? 
-# MUST use (( )) to get it evaluated, 
+# I always forget  ... hmm, neither?
+# MUST use (( )) to get it evaluated,
 # but then zero is false, non-zero is true
 # still confusing
 

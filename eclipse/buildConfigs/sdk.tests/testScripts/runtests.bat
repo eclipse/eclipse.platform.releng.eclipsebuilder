@@ -1,5 +1,5 @@
 @echo off
-SETLOCAL 
+SETLOCAL
 
 REM default java executable for outer and test vm
 set vmcmd=java
@@ -68,14 +68,14 @@ set /p launcher-jar=<launcher-jar-name.txt
 echo "list all environment variables in effect as tests start"
 set
 
-rem -Dtimeout=300000 "%ANT_OPTS%" 
+rem -Dtimeout=300000 "%ANT_OPTS%"
 
 IF NOT EXIST %vmcmd% (
 ECHO ERROR: vmcmd not defined or does not exist: %vmcmd%
 exit 1
 )
 
-REM -XshowSettings is supported on windows VMs but ... not every where. So where not supported 
+REM -XshowSettings is supported on windows VMs but ... not every where. So where not supported
 REM causes VM to not start at all. Can be handy for diagnostics. (without running ant <echoproperties/>
 
 IF DEFINED extdirproperty (

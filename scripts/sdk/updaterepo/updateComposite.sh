@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Utility to invoke p2.process.artifacts via eclipse antrunner
-# First argument must be the absolute directory path to the 
+# First argument must be the absolute directory path to the
 # (simple) artifact repository.
 
 #JAVA_5_HOME=${JAVA_5_HOME:-/home/shared/orbit/apps/ibm-java2-i386-50/jre}
@@ -12,12 +12,12 @@ export JAVA_HOME=${JAVA_6_HOME}
 
 devJRE="${JAVA_HOME}"/bin/java
 
-if [ ! -n ${devJRE} -a -x ${devJRE} ] 
+if [ ! -n ${devJRE} -a -x ${devJRE} ]
 then
     echo "ERROR: could not find (or execute) JRE were expected: ${devJRE}"
     exit 1
 else
-    # display version, just to be able to log it. 
+    # display version, just to be able to log it.
     echo "JRE Location and Version: ${devJRE}"
     echo $( $devJRE -version )
 fi
@@ -30,10 +30,10 @@ if [ ! -n ${ECLIPSE_EXE} -a -x ${ECLIPSE_EXE} ]
 then
     echo "ERROR: ECLIPSE_EXE is not defined or not executable: ${ECLIPSE_EXE}"
     exit 2
-fi 
+fi
 
 BUILDFILE=$1
-if [[ -z "${BUILDFILE}" ]] 
+if [[ -z "${BUILDFILE}" ]]
 then
     printf "/n/t%s/t%s/n" "ERROR" "must provide ant file to perform composite update as first argument"
     exit 1
@@ -80,7 +80,7 @@ then
     exit $RC
 fi
 
-# sanity check existence of directory or else risk removing wrong stuff 
+# sanity check existence of directory or else risk removing wrong stuff
 compdir="${repodir}/${complocation}"
 if [[ -d ${compdir} ]]
 then
@@ -91,7 +91,7 @@ then
         echo "remove failed: ${compdir}: $RC"
         exit $RC
     fi
-else 
+else
     echo "ERROR: expected directory did not exist: ${compdir}"
     exit 1
 fi

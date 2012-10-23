@@ -28,7 +28,7 @@ function sendPromoteMail ()
     # that can specify a custom 'from' variable, but still you must use your "real" ID that is subscribed
     # to the wtp-dev mailing list
     #   set from="\"Your Friendly WTP Builder\" <real-subscribed-id@real.address>"
-    # correction ... doesn't work. Seems the subscription system set's the "from" name, so doesn't work when 
+    # correction ... doesn't work. Seems the subscription system set's the "from" name, so doesn't work when
     # sent to mail list (just other email addresses)
     # espeically handy if send from one id (e.g. "david_williams)
     export MAILRC=~/.e4Buildmailrc
@@ -53,8 +53,8 @@ function sendPromoteMail ()
     #TO="david_williams@us.ibm.com"
 
     # make sure reply to goes back to the list
-    # I'm not positive this is required for mailing list? 
-    # does anything "from" list, automatically get reply-to: list? 
+    # I'm not positive this is required for mailing list?
+    # does anything "from" list, automatically get reply-to: list?
     #REPLYTO="platform-releng-dev@eclipse.org"
     #we could? to "fix up" TODIR since it's in file form, not URL
     # URLTODIR=${TODIR##*${DOWNLOAD_ROOT}}
@@ -64,7 +64,7 @@ function sendPromoteMail ()
 
     Download:
     ${downloadURL}
-    
+
     Software site repository:
     http://download.eclipse.org/eclipse/updates/${eclipseStreamMajor}.${eclipseStreamMinor}-${buildType}-builds
 

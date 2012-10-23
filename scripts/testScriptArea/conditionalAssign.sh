@@ -15,15 +15,15 @@
 #
 
 # I think for "initialiizing values if they haven't been set yet
-# both would work the same, in these forms, since is assigning 
+# both would work the same, in these forms, since is assigning
 # DEBUG=${DEBUG:-true}
 # DEBUG=${DEBUG:=true}
 #
-# apparently, if the line begins with a colon, you can get the 
+# apparently, if the line begins with a colon, you can get the
 # assignment done with this shorthand (but, I think not very readable)
 # : ${DEBUG:=true}
 #
-# (but, not following, since "temporary", I'm assuming 
+# (but, not following, since "temporary", I'm assuming
 # : ${DEBUG:-true}
 #
 
@@ -45,8 +45,8 @@ echo "===="
 echo
 echo "Test case 2 variable does exist, when :- used: "
 
-    
-testvar2=false            
+
+testvar2=false
 
 if ${testvar2:-true}
  then
@@ -56,7 +56,7 @@ if ${testvar2:-true}
 fi
 
 echo "And testvar2 value later is $testvar2"
- 
+
 echo
 echo "===="
 echo
@@ -71,8 +71,8 @@ else
 fi
 echo "And testvar3 value later is $testvar3"
 
-              
-              
+
+
 echo
 echo "===="
 echo
@@ -87,4 +87,3 @@ else
 fi
 echo "And testvar4 value later is $testvar4"
 
-                            

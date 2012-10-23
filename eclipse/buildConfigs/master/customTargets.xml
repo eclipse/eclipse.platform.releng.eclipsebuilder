@@ -26,8 +26,8 @@
     <!-- ===================================================================== -->
     <target name="getBaseComponents" depends="checkLocalBase"
         unless="skipBase">
-        <!-- <get src="${eclipseBaseURL}" dest="${buildDirectory}/../temp-base.zip" 
-            /> <unzip dest="${base}" overwrite="true" src="${buildDirectory}/../temp-base.zip" 
+        <!-- <get src="${eclipseBaseURL}" dest="${buildDirectory}/../temp-base.zip"
+            /> <unzip dest="${base}" overwrite="true" src="${buildDirectory}/../temp-base.zip"
             /> -->
     </target>
 
@@ -169,7 +169,7 @@
 
     <target name="build-time-prereq-egit" if="egitRepoURL"
         depends="init">
-        <!-- egit needs to be part of build-time pre-req, but not included 
+        <!-- egit needs to be part of build-time pre-req, but not included
             in repo, etc. -->
 
         <echo message="Mirror from ${egitRepoURL} to ${localRepoLocation}" />
@@ -188,8 +188,8 @@
 
     </target>
     <target name="emfRunnableTarget" if="emfRepoURL" depends="streamSpecificInit">
-        <!-- emf needs to be part of the "runnable" target, since Eclipse 
-            wants to "require" EMF, not "include" it ... but only if in 4.2, so only 
+        <!-- emf needs to be part of the "runnable" target, since Eclipse
+            wants to "require" EMF, not "include" it ... but only if in 4.2, so only
             if emfRepoURL is defined. -->
 
         <echo message="Mirror from ${emfRepoURL} to ${localRepoLocation}" />
@@ -221,8 +221,8 @@
         </p2.repo2runnable>
     </target>
 
-    <!-- this version of streamSpecificInit is identical to the one in buildAll.xml, 
-        and doubt we need both ... but, for expediency will define twice to increase 
+    <!-- this version of streamSpecificInit is identical to the one in buildAll.xml,
+        and doubt we need both ... but, for expediency will define twice to increase
         chances it works quicker, and we can remove it later, probably -->
     <target name="streamSpecificInit" unless="streamSpecificInitComplete"
         depends="init">
@@ -230,29 +230,29 @@
 
 
 
-        <!-- bug 376217: repos.properties is one of the files moved from 
+        <!-- bug 376217: repos.properties is one of the files moved from
             Eclipsebuild to maps project and into a common file, streamSpecific-build.properties -->
         <replace token="@localmirror@"
             file="${configurationLocation}/streamSpecific-build.properties"
             value="${localmirror}" />
-        <!-- The reading/loading of the these streamSpecific-build.properties 
-            is critical to several stream specific areas of code, so may have to be moved 
+        <!-- The reading/loading of the these streamSpecific-build.properties
+            is critical to several stream specific areas of code, so may have to be moved
             "earlier"? Made it own task for depends on clauses? -->
         <loadproperties
             srcFile="${configurationLocation}/streamSpecific-build.properties" />
 
-        <!-- no need to re-init the properties, once done (in this scope) 
-            so no one else can ever set streamSpecificInitComplete properties. It is 
+        <!-- no need to re-init the properties, once done (in this scope)
+            so no one else can ever set streamSpecificInitComplete properties. It is
             our control property -->
         <property name="streamSpecificInitComplete" value="true" />
     </target>
 
     <target name="init">
-        <!-- mapsProject is the "top" of the maps project after it has been 
-            checked out to the local working area (buildDirectory). TODO: its actually 
-            hard coded is scores of places as "${buildDirectory}/maps/org.eclipse.releng" 
-            but closest existing variable I could find what 'mapsRoot' which is ${buildDirectory}/maps/org.eclipse.releng/maps 
-            so that (and others) should eventually be refactored to something like mapsRoot 
+        <!-- mapsProject is the "top" of the maps project after it has been
+            checked out to the local working area (buildDirectory). TODO: its actually
+            hard coded is scores of places as "${buildDirectory}/maps/org.eclipse.releng"
+            but closest existing variable I could find what 'mapsRoot' which is ${buildDirectory}/maps/org.eclipse.releng/maps
+            so that (and others) should eventually be refactored to something like mapsRoot
             = ${mapsProject}/maps" -->
         <property name="mapsProject"
             value="${buildDirectory}/maps/org.eclipse.releng" />
@@ -274,9 +274,9 @@
     <!-- Steps to do before fetching the build elements -->
     <!-- ===================================================================== -->
     <target name="preFetch">
-        <!-- removed this "replace" step, since don't believe its required 
-            any longer <replace dir="${buildDirectory}/maps/org.eclipse.releng/maps" 
-            value="${localmirror}" token="download.eclipse.org" /> <replace dir="${buildDirectory}/maps/org.eclipse.releng/maps" 
+        <!-- removed this "replace" step, since don't believe its required
+            any longer <replace dir="${buildDirectory}/maps/org.eclipse.releng/maps"
+            value="${localmirror}" token="download.eclipse.org" /> <replace dir="${buildDirectory}/maps/org.eclipse.releng/maps"
             value="${cvsuser}" token=":pserver:anonymous" /> -->
     </target>
 
@@ -298,7 +298,7 @@
             dir="${buildDirectory}/features/org.eclipse.platform/launchertmp" />
         <mkdir dir="${buildDirectory}/launchertmp" />
 
-        <!--copy linux gtk x86 about_files to in temp location where it will 
+        <!--copy linux gtk x86 about_files to in temp location where it will
             be copied into root of eclipse at assembly time -->
         <property name="linux.gtk.x86.rootfiles"
             value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.x86" />
@@ -312,7 +312,7 @@
                 includes="about_files/**" />
         </copy>
 
-        <!--copy linux gtk x86_64 about_files to in temp location where it 
+        <!--copy linux gtk x86_64 about_files to in temp location where it
             will be copied into root of eclipse at assembly time -->
         <property name="linux.gtk.x86_64.rootfiles"
             value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.x86_64" />
@@ -326,7 +326,7 @@
                 includes="about_files/**" />
         </copy>
 
-        <!--copy linux gtk ppc about_files to in temp location where it will 
+        <!--copy linux gtk ppc about_files to in temp location where it will
             be copied into root of eclipse at assembly time -->
         <property name="linux.gtk.ppc64.rootfiles"
             value="${buildDirectory}/features/org.eclipse.platform/about_files/linux.gtk.ppc64" />
@@ -367,7 +367,7 @@
     </target>
 
     <!-- ===================================================================== -->
-    <!-- Steps to do before running the build.xmls for the elements being 
+    <!-- Steps to do before running the build.xmls for the elements being
         built. -->
     <!-- ===================================================================== -->
     <target name="preProcess">
@@ -393,7 +393,7 @@
     </target>
 
     <!-- ===================================================================== -->
-    <!-- Steps to do after running the build.xmls for the elements being 
+    <!-- Steps to do after running the build.xmls for the elements being
         built. -->
     <!-- ===================================================================== -->
     <target name="postProcess">

@@ -14,11 +14,11 @@
            $dlprefix="";
         } else {
            // if not on build.elcipse.org, assume we are on downloads.
-           // we "compute" this segment based on if "drops4" is in the request URI. 
-           // Seems we could compute the whole thing, given some thought and good regex? 
-            // Remember to always use === or !== with strpos.  
+           // we "compute" this segment based on if "drops4" is in the request URI.
+           // Seems we could compute the whole thing, given some thought and good regex?
+            // Remember to always use === or !== with strpos.
             // Simply == or != would not work as expected since
-            // if found in first position it return 0 (so, must match "type" of false also, 
+            // if found in first position it return 0 (so, must match "type" of false also,
             // to mean truely "not found".
            $pos=strpos($_SERVER["REQUEST_URI"], "drops4");
            if ($pos === false) {
@@ -30,22 +30,22 @@
         }
     }
     else {
-        // not sure what to put here (we are essentially not running on a host?) 
+        // not sure what to put here (we are essentially not running on a host?)
         // we _might_ need to assume "downloads" here, for "convert to html to work?"
-        $servername=localhost;  
+        $servername=localhost;
         }
 
 		$script = $_SERVER['SCRIPT_NAME'];
 		$patharray = pathinfo($_SERVER['SCRIPT_NAME']);
 		$path = $patharray['dirname'];
 		$buildLabel = array_pop(split("/",$path,-1));
-		// this script should nearly always have a query string, 
+		// this script should nearly always have a query string,
 		// but we check, to avoid warning when testing
 		if (array_key_exists("QUERY_STRING", $_SERVER)) {
 		    $qstring = $_SERVER['QUERY_STRING'];
 	        $dropFile=array_pop(split("=",$qstring,-1));
 	        }
-         
+
 		if ($qstring) {
 		    $url = "http://$servername$script?$qstring";
 		} else {
@@ -82,7 +82,7 @@
 		 		 fclose($fileHandle);
 		 	} else {
             	if ($mirror) {
-                	echo '<META HTTP-EQUIV="Refresh" CONTENT="0;URL='.$dropFile.'">';		 
+                	echo '<META HTTP-EQUIV="Refresh" CONTENT="0;URL='.$dropFile.'">';		
 					echo '<b><font size "+4">Downloading: '.$mirrorlink.'</font></b>';
                 } else {
                     echo '<META HTTP-EQUIV="Refresh" CONTENT="0;URL='.$eclipselink.'">';
@@ -104,15 +104,15 @@
 		if (file_exists($clickFile)) {
 			echo '<p><b><font size="+4">Important Notes<BR>';
 			echo '</font></b></font></p>
-		 <p>It is very important to read the following notes in order to run this version 
-		   of Eclipse. Once you have read the notes you can click on the Download link 
+		 <p>It is very important to read the following notes in order to run this version
+		   of Eclipse. Once you have read the notes you can click on the Download link
 		   to download the drop.</p>
 		 ';
 		   echo '<textarea name="textfield" cols="80" rows="18" wrap="PHYSICAL">'.$result;
 		   echo '</textarea>';
 		   echo '<BR>';
 		   echo '<BR>';
-          
+
 		if ($mirror) {     	
 			echo '<a href="'.$dropFile.'">Download</a>';
 		} else {

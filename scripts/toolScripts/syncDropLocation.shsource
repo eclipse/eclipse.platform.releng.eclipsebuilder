@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-# Function is designed with rsync so it can be called 
+# Function is designed with rsync so it can be called
 # at multiple times during a build, to make progresive updates.
-function syncDropLocation () 
+function syncDropLocation ()
 {
     eclipseStream=$1
     if [ -z "${eclipseStream}" ]
@@ -18,16 +18,16 @@ function syncDropLocation ()
         echo "must provide buildType as second argumnet, for this function $0"
         return 1;
     fi
- 
+
     buildId=$3
     if [ -z "${buildId}" ]
     then
          echo "must provide buildId as third argumnet, for this function $0"
          return 1;
      fi
-    
+
     pathToDL=eclipse/downloads/drops4
-    
+
     eclipseStreamMajor=${eclipseStream:0:1}
     echo "buildType: $buildType"
     echo "eclipseStream: $eclipseStream"
@@ -66,7 +66,7 @@ function syncDropLocation ()
         then
             rsync -p -t index.txt /home/data/httpd/download.eclipse.org/eclipse/downloads/index.html
             rccode=$?
-            if [ $rccode -eq 0 ] 
+            if [ $rccode -eq 0 ]
             then
                 echo "INFO: Upated http://download.eclipse.org/eclipse/downloads/index.html"
                 return 0

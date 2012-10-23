@@ -86,8 +86,8 @@
             name="indexResults"
             classname="${class}" />
         <!-- equinox uses same test results -->
-        <!-- provisioning removed per bug 368488 
-          dropTokenList="%equinox%,%framework%,%extrabundles%,%other%,%provisioning%,%launchers%,%osgistarterkits%" 
+        <!-- provisioning removed per bug 368488
+          dropTokenList="%equinox%,%framework%,%extrabundles%,%other%,%provisioning%,%launchers%,%osgistarterkits%"
           -->
         <indexResults
             isBuildTested="false"

@@ -1,9 +1,9 @@
-<?php   
-  # Begin: page-specific settings.  Change these. 
+<?php
+  # Begin: page-specific settings.  Change these.
   $pageTitle    = "Eclipse Project Downloads";
   $pageKeywords = "";
   $pageAuthor   = "";
-  
+
   //ini_set("display_errors", "true");
   //error_reporting (E_ALL);
   $eclipseStream="4";
@@ -11,23 +11,23 @@
   $otherStream="3";
   include('dlconfig4.php');
   $subdirDrops="drops4";
- 
+
   # Use the basic white layout if the file is not hosted on download.eclipse.org
   $layout = (array_key_exists("SERVER_NAME", $_SERVER) && ($_SERVER['SERVER_NAME'] == "download.eclipse.org")) ? "default" : "html";
-  
+
   ob_start();
 
   switch($layout){
     case 'html':
-      #If this file is not on download.eclipse.org print the legacy headers.?> 
+      #If this file is not on download.eclipse.org print the legacy headers.?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" href="../default_style.css" />
 <title><?php echo $pageTitle;?></title></head>
-<body><?php 
-      break;    
+<body><?php
+      break;
     default:
       #Otherwise use the default layout (content printed inside the nova theme).
       require_once($_SERVER['DOCUMENT_ROOT'] . "/eclipse.org-common/system/app.class.php");
@@ -36,15 +36,15 @@
       $App  = new App();
       $Nav  = new Nav();
       $Menu   = new Menu();
-      break;      
+      break;
   }?>
 <div class="container_<?php echo $layout;?>">
-<table border="0" cellspacing="5" cellpadding="2" width="100%" > 
+<table border="0" cellspacing="5" cellpadding="2" width="100%" >
 
-<tr> 
+<tr>
 
-<td align="left" width="72%"> 
-<font class="indextop"> Eclipse Project <?php echo $eclipseStream;?>.x Stream Downloads</font> <br /> 
+<td align="left" width="72%">
+<font class="indextop"> Eclipse Project <?php echo $eclipseStream;?>.x Stream Downloads</font> <br />
 <font class="indexsub">
 Latest downloads from the Eclipse project
 </font><br />
@@ -53,29 +53,29 @@ Latest downloads from the Eclipse project
 <td width="28%">
 
 <!-- not sure, might need this "rowspan 2" then eclipsecon logo included?
-<td width="19%" rowspan="2"></td> 
+<td width="19%" rowspan="2"></td>
 -->
 <img src="../images/friendslogo.jpg" alt="Friends of Eclipse Logo" /><br />Support Eclipse! Become a <a href="http://www.eclipse.org/donate/">friend</a>.<br />
 </td>
-<!--  <td width="19%" rowspan="2"><a href="http://www.eclipsecon.org/" target="_blank"><img src="../images/prom-eclipsecon1.gif" width="125" height="125" border="0" /></a></td> --> 
+<!--  <td width="19%" rowspan="2"><a href="http://www.eclipsecon.org/" target="_blank"><img src="../images/prom-eclipsecon1.gif" width="125" height="125" border="0" /></a></td> -->
 
-</tr> 
+</tr>
 
 </table>
 
-<table border="0" cellspacing="5" cellpadding="2" width="100%" > 
-<tr> 
-<td align="left" valign="top" colspan="2" bgcolor="#0080C0"><font color="#FFFFFF" face="Arial,Helvetica">Latest 
-Downloads</font></td></tr> <!-- The Eclipse Projects --> <tr> <td> 
+<table border="0" cellspacing="5" cellpadding="2" width="100%" >
+<tr>
+<td align="left" valign="top" colspan="2" bgcolor="#0080C0"><font color="#FFFFFF" face="Arial,Helvetica">Latest
+Downloads</font></td></tr> <!-- The Eclipse Projects --> <tr> <td>
 <p>On this
-page you can find the latest <a href="build_types.html" target="_top">builds</a> produced by 
-the <a href="http://www.eclipse.org/eclipse" target="_top">Eclipse 
-Project</a>. To get started run the program and go through the user and developer 
+page you can find the latest <a href="build_types.html" target="_top">builds</a> produced by
+the <a href="http://www.eclipse.org/eclipse" target="_top">Eclipse
+Project</a>. To get started run the program and go through the user and developer
 documentation provided in the online help system. If you have problems downloading
 the drops, contact the <font size="-1" face="arial,helvetica,geneva"><a href="mailto:webmaster@eclipse.org">webmaster</a></font>.
-If you have problems installing or getting the workbench to run, <a href="http://wiki.eclipse.org/index.php/The_Official_Eclipse_FAQs" target="_top">check 
-out the Eclipse Project FAQ,</a> or try posting a question to the <a href="http://www.eclipse.org/newsgroups" target="_top">newsgroup</a>. 
-All downloads are provided under the terms and conditions of the <a href="http://www.eclipse.org/legal/epl/notice.php" target="_top">Eclipse Foundation 
+If you have problems installing or getting the workbench to run, <a href="http://wiki.eclipse.org/index.php/The_Official_Eclipse_FAQs" target="_top">check
+out the Eclipse Project FAQ,</a> or try posting a question to the <a href="http://www.eclipse.org/newsgroups" target="_top">newsgroup</a>.
+All downloads are provided under the terms and conditions of the <a href="http://www.eclipse.org/legal/epl/notice.php" target="_top">Eclipse Foundation
 Software User Agreement</a> unless otherwise specified. </p>
 
 
@@ -89,13 +89,13 @@ See also the <a href="http://www.eclipse.org/eclipse/platform-releng/buildSchedu
 builds</a>, access <a href="http://archive.eclipse.org/eclipse/downloads/">archived builds</a> (including language packs), or see a list of
 <a href="http://wiki.eclipse.org/Eclipse_Project_Update_Sites">p2 update sites</a>.
 </p>
-</td></tr> 
+</td></tr>
 </table>
 
 <?php
 
 function startsWithDropPrefix($dirName, $dropPrefix)
-{  
+{
 
     $result = false;
     // sanity check "setup" is as we expect
@@ -104,7 +104,7 @@ function startsWithDropPrefix($dirName, $dropPrefix)
         if (isset($dirName) && strlen($dirName) > 0) {
             $firstChar = substr($dirName, 0, 1);
             //echo "first char: ".$firstChar;
-            foreach($dropPrefix as $type) {  
+            foreach($dropPrefix as $type) {
                 if ($firstChar == "$type") {
                     $result = true;
                     break;
@@ -171,7 +171,7 @@ function printBuildColumns($fileName, $parts) {
     // hard code for now the build is done
     // https://bugs.eclipse.org/bugs/show_bug.cgi?id=378706
     // but later, changed ...
-    // compute build done based on "buildPending" file, but if not 
+    // compute build done based on "buildPending" file, but if not
     // present, assume build is done
     // https://bugs.eclipse.org/bugs/show_bug.cgi?id=382196
     $build_done=true;
@@ -185,7 +185,7 @@ function printBuildColumns($fileName, $parts) {
         $testResultsDirName="";
         if (file_exists("$dropDir/testresults")) {
             $testResultsDirName="testresults";
-        } else 
+        } else
         if (file_exists("$dropDir/results")) {
             $testResultsDirName="results";
         }
@@ -197,7 +197,7 @@ function printBuildColumns($fileName, $parts) {
             // if more than 8 hours then consider that the regression tests did not start
             //if ($diff > 480) {
             // for now, hard code to "0" since we are not reunning tests
-            if ($diff > 0) { 
+            if ($diff > 0) {
                 echo "<img src=\"../images/caution.gif\" title=\"Regression tests did not run!\" alt=\"Regression tests did not run!\" />\n";
             } else {
                 echo "<img src=\"../images/runtests.gif\" title=\"Regression tests are running...\" alt=\"Regression tests are running...\" />\n";
@@ -252,7 +252,7 @@ function printBuildColumns($fileName, $parts) {
     // }
     // }
     //}
-    //} 
+    //}
     else {
         // if more than 5 hours then consider that the build did not finish
         if ($diff > 300) {
@@ -264,7 +264,7 @@ function printBuildColumns($fileName, $parts) {
     echo "</td>\n";
     return $buildName;
 }
-?> 
+?>
 <?php
 // this is the main data computation part
 $aDirectory = dir($subdirDrops);
@@ -323,12 +323,12 @@ while ($anEntry = $aDirectory->read()) {
 ?>
 
 <!-- This is the summary section, showing latest of each -->
-<table width="100%" cellspacing="0" cellpadding="3" align="center"> 
+<table width="100%" cellspacing="0" cellpadding="3" align="center">
 <tr>
-<td align="left"> 
+<td align="left">
 
 
-<table  width="100%" cellspacing="0" cellpadding="3"> 
+<table  width="100%" cellspacing="0" cellpadding="3">
 <tr>
 <th width="30%">Build Type</th>
 <th width="15%">Build Name</th>
@@ -371,7 +371,7 @@ foreach($dropType as $value) {
         }
     }
 }
-?> 
+?>
     </table></td></tr></table>
 
 

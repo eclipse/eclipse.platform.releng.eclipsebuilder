@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-# This file should never exist or be needed for production machine, 
-# but allows an easy way for a "local user" to provide this file 
-# somewhere on the search path ($HOME/bin is common), 
-# and it will be included here, thus can provide "override values" 
-# to those defined by defaults for production machine., 
+# This file should never exist or be needed for production machine,
+# but allows an easy way for a "local user" to provide this file
+# somewhere on the search path ($HOME/bin is common),
+# and it will be included here, thus can provide "override values"
+# to those defined by defaults for production machine.,
 # such as for vmcmd
 
 source localTestsProperties.shsource
@@ -44,23 +44,23 @@ usage="usage: $0 -os <osType> -ws <windowingSystemType> -arch <architecture> [-n
 while [ $# -gt 0 ]
 do
     case "${1}" in
-        -dir) 
+        -dir)
             dir="${2}"; shift;;
-        -os) 
+        -os)
             os="${2}"; shift;;
-        -ws) 
+        -ws)
             ws="${2}"; shift;;
-        -arch) 
+        -arch)
             arch="${2}"; shift;;
-        -noclean) 
+        -noclean)
             installmode="noclean";;
-        -properties) 
+        -properties)
             properties="-propertyfile ${2}";shift;;
-        -extdirprop) 
-            extdirproperty="-Djava.ext.dirs=${2}";shift;;    
-        -vm) 
+        -extdirprop)
+            extdirproperty="-Djava.ext.dirs=${2}";shift;;
+        -vm)
             vmcmd="${2}"; shift;;
-        *) 
+        *)
             tests=$tests\ ${1};;
     esac
     shift
@@ -105,8 +105,8 @@ cd $dir
 
     # make sure there is a window manager running. See bug 379026
     # we should not have to, but may be a quirk/bug of hudson setup
-    # assuming metacity attaches to "current" display by default (which should have 
-    # already been set by Hudson). We echo its value here just for extra reference/cross-checks.  
+    # assuming metacity attaches to "current" display by default (which should have
+    # already been set by Hudson). We echo its value here just for extra reference/cross-checks.
 
     echo "Check if any window managers are running (xfwm|twm|metacity|beryl|fluxbox|compiz):"
     wmpss=$(ps -ef | egrep -i "xfwm|twm|metacity|beryl|fluxbox|compiz" | grep -v egrep)
@@ -114,33 +114,33 @@ cd $dir
     echo
 
     if [[ -z $wmpss ]]
-    then 
+    then
              echo "No window managers processes found running, so will start metacity"
              metacity --replace --sm-disable  &
              METACITYPID=$!
              echo $METACITYPID > epmetacity.pid
-     else 
-             echo "Existing window manager found running, so did not force start of metacity"         
+     else
+             echo "Existing window manager found running, so did not force start of metacity"
     fi
-    
+
     echo
-        
-    # list out metacity processes so overtime we can see if they accumulate, or if killed automatically 
+
+    # list out metacity processes so overtime we can see if they accumulate, or if killed automatically
     # when our process exits. If not automatic, should use epmetacity.pid to kill it when we are done.
     echo "Current metacity processes running (check for accumulation):"
     ps -ef | grep "metacity" | grep -v grep
-    echo 
+    echo
 
     echo "Triple check if any window managers are running (at least metacity should be!):"
     wmpss=$(ps -ef | egrep -i "xfwm|twm|metacity|beryl|fluxbox|compiz" | grep -v egrep)
     echo "Window Manager processes: $wmpss"
     echo
     echo "extdirprop in runtest: ${extdirprop}"
-    echo "extdirproperty in runtest: ${extdirproperty}"    
+    echo "extdirproperty in runtest: ${extdirproperty}"
 
     # -Dtimeout=300000 "${ANT_OPTS}"
  if [[ ! -z "${extdirproperty}" ]]
- then 
+ then
 	$vmcmd "${extdirproperty}" -Dosgi.os=$os -Dosgi.ws=$ws -Dosgi.arch=$arch -jar $launcher -data workspace -application org.eclipse.ant.core.antRunner -file ${PWD}/test.xml $tests -Dws=$ws -Dos=$os -Darch=$arch -D$installmode=true $properties -logger org.apache.tools.ant.DefaultLogger
  else
 	$vmcmd -Dosgi.os=$os -Dosgi.ws=$ws -Dosgi.arch=$arch  -jar $launcher -data workspace -application org.eclipse.ant.core.antRunner -file ${PWD}/test.xml $tests -Dws=$ws -Dos=$os -Darch=$arch -D$installmode=true $properties -logger org.apache.tools.ant.DefaultLogger

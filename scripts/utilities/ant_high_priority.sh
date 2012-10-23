@@ -20,5 +20,5 @@ then
 fi
 
 echo "Running ant at priority " $JOB_NOT_NICE
-echo "args to ant: " "$@" 
+echo "args to ant: " "$@"
 exec nice --adjustment $JOB_NOT_NICE "${RELENG_CONTROL}/ant.sh" "$@"

@@ -25,12 +25,12 @@ echo "<title>Build Notes for $buildType $buildName </title>";
 </head>
 <body>
 
-<?php 
-if (file_exists("report.txt")) { 
+<?php
+if (file_exists("report.txt")) {
 
     echo "<h2>Change Reports</h2>";
     echo "<p><a href=\"report.txt\">Report of changes</a> from previous build.</p>";
-} 
+}
 
 
 if (file_exists("buildnotes")) {
@@ -43,7 +43,7 @@ if (file_exists("buildnotes")) {
                 echo "<h2>Build Notes</h2>\n";
                 echo "<ul>";
                 $hasNotes=true;
-            } 
+            }
             $parts = explode("_", $anEntry);
             $baseName = $parts[1];
             $parts = explode(".", $baseName);

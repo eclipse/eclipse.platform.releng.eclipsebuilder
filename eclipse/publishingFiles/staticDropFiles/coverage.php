@@ -46,11 +46,11 @@ function getBuildId() {
         fclose($fileHandle);
 
         $buildType = $dropNames[$parts2[0]];
-    
+
         $buildId = $buildType.$buildName;
- 
+
         return($buildId);
-       
+
 }
 
 
@@ -132,9 +132,9 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 
 <div id="midcolumn">
 <div class="homeitem3col">
-<?php 
+<?php
     global $buildId;
-    $buildId = getBuildId(); 
+    $buildId = getBuildId();
     echo "<title>Code coverage for $buildId </title>\n";
 
 echo "<h3>Code coverage for $buildId</h3>\n";

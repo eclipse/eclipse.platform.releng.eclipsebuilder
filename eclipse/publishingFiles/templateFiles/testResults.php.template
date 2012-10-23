@@ -17,8 +17,8 @@ if (array_key_exists("SERVER_NAME", $_SERVER)) {
           $csssource="../../../eclipse.org-common/stylesheets";
           $appsource="../../../eclipse.org-common/system";
           $clickthroughstr="download.php?dropFile=";
-      
-      } 
+
+      }
 }
 else {
     $servername = "localhost";
@@ -35,12 +35,12 @@ else {
 		 $parts = explode("/", getcwd());
 		 $parts2 = explode("-", $parts[count($parts) - 1]);
 		 $buildName = $parts2[0] . "-" . $parts2[1];
-		 
+		
 		 // Get build type names
 
 		 $fileHandle = fopen("./dlconfig2.txt", "r");
 		 while (!feof($fileHandle)) {
-		 		 
+		 		
 		 		 $aLine = fgets($fileHandle, 4096); // Length parameter only optional after 4.2.0
 		 		 $parts = explode(",", $aLine);
 		 		 $dropNames[trim($parts[0])] = trim($parts[1]);
@@ -116,12 +116,12 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 		 		 <li class="tabstart">&#160;&#160;&#160;</li>
 		 		 <li><a class="" href="solPlatform.php" target="_self">Solaris</a></li>
 		 		 <li class="tabstart">&#160;&#160;&#160;</li>
-		 		 <li><a class="" href="aixPlatform.php" target="_self">AIX</a></li>		 		 
+		 		 <li><a class="" href="aixPlatform.php" target="_self">AIX</a></li>		 		
 		 		 <li class="tabstart">&#160;&#160;&#160;</li>
 		 		 <li><a class="" href="macPlatform.php" target="_self">Macintosh</a></li>
 		 		 <li class="tabseparator">&#160;&#160;&#160;</li>
 		 		 <li><a class="" href="hpuxPlatform.php" target="_self">HPUX</a></li>
-		 		 <li class="tabseparator">&#160;&#160;&#160;</li>		 		 		 		 
+		 		 <li class="tabseparator">&#160;&#160;&#160;</li>		 		 		 		
 		 </ul>
 </div>
 <div id="topnavsep"></div>
@@ -130,7 +130,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 <li><a href="#Logs">Logs</a></li>
 <li><a href="#UnitTest">Unit Test Results</a></li>
 <li><a href="#PluginsErrors">Plugins Containing Compile Errors</a></li>
- 
+
   </li>
   <li style="background-image: url(../../../eclipse.org-common/stylesheets/leftnav_fade.jpg); background-repeat: repeat-x; border-style: none;">
 		 		 		 <br /><br /><br /><br /><br />
@@ -185,17 +185,17 @@ echo " <li><a href=\"apitools/apifilters-$buildName.zip\"><b>Zip of .api_filters
 </div>
 
 <div class="homeitem3col">
-<h3><a name="UnitTest"> Unit Test Results for <?php echo "$buildType $buildName"; ?> </a></h3> 
+<h3><a name="UnitTest"> Unit Test Results for <?php echo "$buildType $buildName"; ?> </a></h3>
 
-<p>The table shows the unit test results for this build on the platforms 
-tested. You may access the test results page specific to each 
-component on a specific platform by clicking the cell link. 
-Normally, the number of errors is indicated in the cell. 
-A "-1" or "DNF" means the test "Did Not Finish" for unknown reasosns 
-and hence no results page is available. In that case, 
-more information can sometimes be found in 
+<p>The table shows the unit test results for this build on the platforms
+tested. You may access the test results page specific to each
+component on a specific platform by clicking the cell link.
+Normally, the number of errors is indicated in the cell.
+A "-1" or "DNF" means the test "Did Not Finish" for unknown reasosns
+and hence no results page is available. In that case,
+more information can sometimes be found in
 the <a href="logs.php#console">console logs</a>.</p>
-<?php 
+<?php
 if (file_exists("testNotes.html")) {
     $my_file = file_get_contents("testNotes.html");
     echo $my_file;
@@ -210,7 +210,7 @@ if (file_exists("testNotes.html")) {
 </div>
 
 <div class="homeitem3col">
-<h3><a name="PluginsErrors"> Plugins containing compile errors or warnings</a></h3> 
+<h3><a name="PluginsErrors"> Plugins containing compile errors or warnings</a></h3>
 </br>
 &nbsp;&nbsp;The table below shows the plugins in which errors or warnings were encountered. Click on the jar file link to view its
 detailed report.

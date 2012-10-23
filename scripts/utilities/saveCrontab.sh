@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # simply utility to show, and save current cronjobs
-# 
+#
 # not a bad idea to save a complete copy before making
 # changes
 

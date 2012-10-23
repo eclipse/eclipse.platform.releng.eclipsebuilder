@@ -19,11 +19,11 @@
  * @author kmoir
  *
  * A custom ant task that will generate pdf documents for all the Eclipse documentation
- * 
+ *
  * The caller must set the directory, the regular expression to search for in the the directory,
- * the name of the script to generate pdf, the program and the parameters to run the html to pdf 
+ * the name of the script to generate pdf, the program and the parameters to run the html to pdf
  * conversion.
- * 
+ *
  */
 
 
@@ -34,9 +34,9 @@ import org.apache.tools.ant.Task;
 
 public class ReadFile extends Task {
 		 /**
-		  * 
+		  *
 		  */
-	 
+	
      	 ArrayList listLinks = new ArrayList();
      	 ArrayList tempList = new ArrayList();
  		
@@ -45,40 +45,40 @@ public class ReadFile extends Task {
 		 	
 		 String initialPath = "";
 		 String htmlFileName = "toc.html";
-		 String htmlFile = initialPath + htmlFileName;	 
+		 String htmlFile = initialPath + htmlFileName;	
 		 String docDir;
 		 String scriptName = "test.sh";
 		 String scriptParam = "htmldoc --book -f";
-		 String styleSheet = ""; 
+		 String styleSheet = "";
 		 String docName = "";
 		 	
 	
 	 public ReadFile() {
 		 super();
 		
-		 
-		 
+		
+		
 		 // TODO Auto-generated constructor stub
 }
 	
 	    	     	
-						 
+						
 		 public String getInitialPath() {		 	
 		 	return initialPath;
-		 }		 
-		 
+		 }		
+		
 		 public String getHtmlFileName() {
 		 	return htmlFileName;
 		 }
-		 
+		
 		 public String getTempFileName() {
 		 	return tempFileName;
 		 }
-		 
+		
 		 public String getScriptName() {
 		 	return scriptName;
 		 }
-		 
+		
 		 public String getScriptParam() {
 		 	return scriptParam;
 		 }
@@ -101,7 +101,7 @@ public class ReadFile extends Task {
 			public void setDocDir(String docDir) {
 				this.docDir = docDir;
 			}
-		 
+		
 			/**
 			 * @param htmlFile The htmlFile to set.
 			 */
@@ -173,39 +173,39 @@ public class ReadFile extends Task {
 			public String getdocName() {
 			 	return docName;
 			 }
-		 
+		
 		 void verifySourceFiles(String path, String xmlFileName, String styleSheet, String htmlFileName) {
 		 	
 		// 	verify that the contents of the xml file are valid		 			 			 	
-		 	 
-		    ArrayList fileContents = new ArrayList();		 
-		 	Properties convertFiles = new Properties();		 	 		 	 
+		 	
+		    ArrayList fileContents = new ArrayList();		
+		 	Properties convertFiles = new Properties();		 	 		 	
 		 	convertFiles.put(path+"/"+xmlFileName+".2",path+"/"+htmlFileName);
-		 	 
+		 	
 		 	 try {
-	 
+	
 	 		 	File file = new File(path+"/" + xmlFileName);
-		 		 
+		 		
 		 		if (!file.exists()) {		 		 	 		 	
 		 			 return;
 		 		 }
 		 		
 		 		FileReader fileReader = new FileReader(file);
 		 		BufferedReader reader = new BufferedReader(fileReader);		    	
-        	   		 		 		 		 		 		 		 		 		 		 		 
-		 		String line = null;		 
-		 		 		 		 
+        	   		 		 		 		 		 		 		 		 		 		 		
+		 		String line = null;		
+		 		 		 		
 		 		while ((line = reader.readLine()) != null) {
 		 			 fileContents.add(line);		 			
 		 		}
-		 		reader.close();		 		 
+		 		reader.close();		 		
 		 	 } catch(Exception ex) {
         		 ex.printStackTrace();
 		 	 }
-       
-		 	 String nextLine,newFileName ="";	 	 
-		 	 
-		 	  	 	 
+
+		 	 String nextLine,newFileName ="";	 	
+		 	
+		 	  	 	
 		 	 try {
 		 	 	BufferedWriter outfile = new BufferedWriter(new FileWriter(path+"/"+xmlFileName+".2"));
 		 	 	
@@ -224,10 +224,10 @@ public class ReadFile extends Task {
 		 	 				boolean indexLastSlashNext = currentLine.lastIndexOf("/") > 0;
 		 	 				int indexStartNext = nextLine.indexOf("=\"");
 		 	 				int indexEndNext = nextLine.lastIndexOf("\"");
-		 	 					 	 			                        
+		 	 					 	 			
 		 	 				currentLine = currentLine.substring(0,indexEndCurrent);
 		 	 				newFileName =  nextLine.substring(indexStartNext+2,indexEndNext);
-		 	 				currentLine = currentLine + newFileName;            
+		 	 				currentLine = currentLine + newFileName;
 		 	 					 	 			
 		 	 				//	If xml file, add to the list of files that need to be converted
 		 	 				if (newFileName.matches("(?i).*xml")) {		 	 				
@@ -244,23 +244,23 @@ public class ReadFile extends Task {
 		 	 				} 	 			
 		 	 				String newLink = " href=\"" + htmlFileName + closeString;
 		 	 				String newLine = currentLine.substring(0,indexEndCurrent) + newLink;
-                       
-                                           
+
+
 		 	 				outfile.write(newLine+"\n");
 		 	 				} else {
 		 	 					outfile.write(currentLine+"\n");
 		 	 					outfile.write(nextLine+"\n");		 	 					
 		 	 				}
-                        
+
 		 	 				//add the xml link to the list of files that needs to be constructed via xslt
-                    
-                } else {                   
+
+                } else {
                     outfile.write(currentLine+"\n");
                 }
 		 	 }
 		 	outfile.write("\n");
 		 	outfile.close();
-		 	 
+		 	
 		  } catch(Exception ex) {
 		  		ex.printStackTrace();
 		  }
@@ -268,17 +268,17 @@ public class ReadFile extends Task {
 		 for (Enumeration e = convertFiles.propertyNames(); e.hasMoreElements();) {
 		 		  	   Object n = e.nextElement();		  	
 		  		  	   String x = n.toString();
-		  		  	   String h = convertFiles.getProperty(x);		  		  
+		  		  	   String h = convertFiles.getProperty(x);		  		
 		  		  	   tempList.add(h);	
-		  		  	   
+		  		  	
 		  		  	   transformXML(x,path,styleSheet,h);
 		 }
-        } 
+        }
 
 
-		 
+		
 		 boolean addLink(String url) {
-		 		 		 		 
+		 		 		 		
 		 //If the string is legal related then add it automatically
 		 //check if the link already exists in the array
 		     if (! listLinks.contains(url)) {
@@ -286,12 +286,12 @@ public class ReadFile extends Task {
 		 		 return true;
 		 	 } else {
 		 	 	return false;
-		 	 }	 			 		 		 
+		 	 }	 			 		 		
 		 }
-		 		 		 		  
-		 
+		 		 		 		
+		
 		 String findUrl(String line) {
-		 		 
+		 		
 		 int indexStart = line.indexOf("href=\"");
 		 String url="";
 		 if (indexStart > 0) {
@@ -299,35 +299,35 @@ public class ReadFile extends Task {
 		 }
 		 int indexEnd = url.indexOf("\">");
 		 if (indexEnd > 0) {
-		     url = url.substring(0,indexEnd);   
+		     url = url.substring(0,indexEnd);
 		 } else {
 		  	url = "";	 		 	
 		 }
-		    return(url);		 	    
+		    return(url);		 	
 		 }
-		 
+		
 		 boolean verifyUrl(String url) {	
 		 	
-		 	  		 
+		 	  		
 		 //verify that the link is valid and return a boolean value
 		 //verify that the link doesn't start with #
-	 	 if (url.matches("(?i).*#.*")){		 		 
-	 	     return false;		 		 
-	 	 }  
+	 	 if (url.matches("(?i).*#.*")){		 		
+	 	     return false;		 		
+	 	 }
 		 //verify that the link ends in .htm
 		 if (!(url.matches("(?i).*.htm.*"))) {		 		 	
 		     return false;
 		 }
 		 if (!(url.matches("(?i).*/*"))) {		 		 	
 	 		  return false;
-	 	 } 
+	 	 }
 		 //verify that the link doesn't start with ../..
 		 if (url.startsWith("../..")){
-		 	 return false;		 		 
-		 }  
-		 if (url.matches("../..")){		 		 	  
-		 	 return false;		 		 
-		 }  
+		 	 return false;		 		
+		 }
+		 if (url.matches("../..")){		 		 	
+		 	 return false;		 		
+		 }
 		 //verify url doesn't have multiple ../.. strings
 		 int indexS = url.indexOf("../");
 		 int indexE = url.lastIndexOf("../");
@@ -339,24 +339,24 @@ public class ReadFile extends Task {
 		 }
 		 				 	
 		 //verify that the url doesn't refer to the api reference
-		 if (url.matches("(?i).*/reference/api/.*")) {                        
+		 if (url.matches("(?i).*/reference/api/.*")) {
 		 	 return false;
-		 } 
-         if (url.matches("(?i).*/reference/.*/../api/.*")) {                        
+		 }
+         if (url.matches("(?i).*/reference/.*/../api/.*")) {
             return false;
-         } 
+         }
 		 if (url.matches("(?i).*platform_whatsnew.html.*")) {
 		 	 return false;
-		 } 
+		 }
 		 //verify that the url doesn't refer to the api reference	
 		 if	 (url.matches("(?i).*http://.*")) {
 		     return false;
-		 }                               
+		 }
   		     		     return true;
 	 }
-		 
+		
 	
-			 
+			
 		 public void parseLinks(String fileName) {
 		 	
 		 try {
@@ -366,11 +366,11 @@ public class ReadFile extends Task {
 		 	 }
 		 	 if	 (fileName.matches("(?i).*hglegal.*")) {
 		 	 		 return;
-		 	} 
+		 	}
 
 		 	FileReader fileReader = new FileReader(myFile);
-		 	BufferedReader reader = new BufferedReader(fileReader);		 		 		 		 		 
-		 		 		 		 
+		 	BufferedReader reader = new BufferedReader(fileReader);		 		 		 		 		
+		 		 		 		
 		 	String line = null;
 		 	ArrayList fileContents = new ArrayList();
 		 	
@@ -383,41 +383,41 @@ public class ReadFile extends Task {
 		 	 	// parse the file for lines with links
 		 		    String l = (String)(i.next());
 		 		    if (l.matches("(?).*href=.*")) {
-		 		 			 		 		 		 		 
+		 		 			 		 		 		 		
 		 		        int indexPathStart = fileName.indexOf("/");
 		 		        int indexPathEnd = fileName.lastIndexOf("/");
 		 			    String path = fileName.substring(indexPathStart,indexPathEnd);
 		 	   	        String nextUrl;
 		 	   	        String url = findUrl(l);		 			
-		 			 
+		 			
 		 			if (verifyUrl(path+"/"+url)) {		 			
 		 				boolean upLevel = url.startsWith("../");
-		 		 	 	if (upLevel) {		 		 			     
-		 		 	 	 	int indexLastDirPath = path.lastIndexOf('/');		 		 		 		 		 		 
+		 		 	 	if (upLevel) {		 		 			
+		 		 	 	 	int indexLastDirPath = path.lastIndexOf('/');		 		 		 		 		 		
 		 		 		 	String shorterPath = path.substring(0,indexLastDirPath);
 		 		 		 	url = url.replaceFirst("..","");
-		 		 		 	nextUrl = shorterPath + url;		 		 		 		 		 
+		 		 		 	nextUrl = shorterPath + url;		 		 		 		 		
 		 		 	 	 } else {
 		 		 			     nextUrl = path + "/" + url;
 		 		 		 }
 		 		 	 		if (addLink(nextUrl)) {
-		 		 	 			if (nextUrl.matches("(?i).*samples.*")) {		 		 		 	 //  
+		 		 	 			if (nextUrl.matches("(?i).*samples.*")) {		 		 		 	 //
 		 		 	 			}
 		 		 		 	   parseLinks(nextUrl);	
 		 		 	 		}
 		 		 		 }
 		 		 	 }		 		
-		 		  }		 		 
+		 		  }		 		
 		  		 } catch (Exception ex) {
 		 		 		   ex.printStackTrace();
 		 		 }
-		 	}		 
-		 
+		 	}		
+		
 		 	String findFiles(String path, final String re) {
-		 		 		 		 		 		 
-		 	File dir = new File(path); 		 		 
-		 	File[] files = dir.listFiles();		  
-		 		 
+		 		 		 		 		 		
+		 	File dir = new File(path); 		 		
+		 	File[] files = dir.listFiles();		
+		 		
 		 	//Filter the list of returned files so they only match re
 		         FilenameFilter filter = new FilenameFilter() {
 		         public boolean accept(File dir, String name) {
@@ -425,15 +425,15 @@ public class ReadFile extends Task {
 		         	   //
 		         }
 		     };
-		     
+		
 		     files = dir.listFiles(filter);
-		     
+		
 		     //convert array to a string
-		     String docfiles = ""; 
-		     for(int i=0; i<files.length; i++ ){		     		 
+		     String docfiles = "";
+		     for(int i=0; i<files.length; i++ ){		     		
 		     		 docfiles = docfiles + " " + files[i];
-		     }		   
-		     return docfiles;       
+		     }		
+		     return docfiles;
 		 }
 		 	
 		 String findDocName(String path) {
@@ -441,12 +441,12 @@ public class ReadFile extends Task {
  		 //construct the name of the doc from the path
  		 int startDoc = path.lastIndexOf("/");
 	 	 int endDoc = path.lastIndexOf("_");
-		 		 
+		 		
 		 String docFileName = path + "/" + path.substring(startDoc+1,endDoc+6) + ".pdf";
 		
 		 	 return(docFileName);
 		 }
-		 
+		
 		 void transformXML(String fileName, String path, String styleSheet, String outputFile) {
 		 			
 		     String[] command;
@@ -455,36 +455,36 @@ public class ReadFile extends Task {
 		     command[0] = "-in";
 		     command[1] = fileName;
 		     command[2] = "-xsl";
-		     command[3] = styleSheet; 
+		     command[3] = styleSheet;
 		     command[4] = "-out";
 		     command[5] = outputFile;
 				 		
  		 	try {
- 		 	    org.apache.xalan.xslt.Process.main(command);	 	      
-		 	} catch (Exception ex) {		 		 	    
+ 		 	    org.apache.xalan.xslt.Process.main(command);	 	
+		 	} catch (Exception ex) {		 		 	
  		 	    	ex.printStackTrace();
  		 	}
 
 		 	
 		 }
-		 
+		
 		  void writeDocGenScript(String path, String docName, String scriptName, String docParam) {
-		 		 		 		 
-		      String docGenScript = path + "/" + scriptName;	    	 		 
-		 		 
+		 		 		 		
+		      String docGenScript = path + "/" + scriptName;	    	 		
+		 		
 		      try {
 		          BufferedWriter outfile = new BufferedWriter(new FileWriter(docGenScript));
                   outfile.write("#!/bin/sh\n");
 		          outfile.write(docParam + " " + docName+" ");
 		          for (Iterator i = listLinks.iterator(); i.hasNext();) {
-		              outfile.write((String)(i.next())+" ");		 		 		     
+		              outfile.write((String)(i.next())+" ");		 		 		
 		 		 }
 		         outfile.write("\n");
-		         outfile.close();    
+		         outfile.close();
 		     } catch (IOException ex) {
 		     		 ex.printStackTrace();
-		     }  
-		     
+		     }
+		
 		     try {
 		         String command = "sh " + docGenScript;
 		         Process child = Runtime.getRuntime().exec(command);
@@ -492,27 +492,27 @@ public class ReadFile extends Task {
 		    	 ex.printStackTrace();
 		    }
 		 }
-		 
-		 
-		 		 
+		
+		
+		 		
 		 public void execute() {
-             
+
 		 String path = docDir;
 		 listLinks = new ArrayList();
 		 //Update xml if required
 		 htmlFile = path + "/" + htmlFileName;		 	
 		 //fix xml and generate html as required
 		 verifySourceFiles(path,xmlFileName,styleSheet,htmlFileName);	    	 			 		 	 			
-		 //add the first link to the array		 		 		 
+		 //add the first link to the array		 		 		
 		 listLinks.add(htmlFile);		 		 		
 		 parseLinks(htmlFile);		 		 	
 		 writeDocGenScript(path,docName,scriptName,scriptParam);	
 		 //Clean up temporary files
 		 for (Iterator f = tempList.iterator(); f.hasNext();) {		 			
-		 		boolean success = new File (f.next().toString()).delete(); 
+		 		boolean success = new File (f.next().toString()).delete();
 		     }	 		
 		 }
-		 
+		
 		 public static void main(String args[]) {		 			 	
 		 		
 		 	ReadFile instance = new ReadFile();

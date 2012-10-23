@@ -14,13 +14,13 @@
         <echo message="eclipseStreamMinor: ${eclipseStreamMinor}" />
         <echo message="eclipseStreamService: ${eclipseStreamService}" />
         <echo message="updateSiteSegment: ${updateSiteSegment}" />
-        
+
     </target>
 
 
-    <!-- 
+    <!--
        main purpose of init, it to be sure we have eclipseStreamMajor and eclipseStreamMinor
-       Uses script, which requires Java 1.6 (or ... else gets complicated to setup) 
+       Uses script, which requires Java 1.6 (or ... else gets complicated to setup)
      -->
     <target name="init">
         <fail
@@ -34,7 +34,7 @@
         <fail
             message="eclipseStream variable had unexpected format. Should be digit.digit.digit, but was ${eclipseStream}"
             unless="streamOK" />
-        
+
         <script language="javascript">
             var eclipseStream = project.getProperty("eclipseStream");
             var pattern = new RegExp(/^(\d+)\.(\d+)\.(\d+)$/);
@@ -46,7 +46,7 @@
             project.setProperty("eclipseStreamService", sArray[3]);
             project.setProperty("updateSiteSegment", sArray[1] + "." + sArray[2]);
         </script>
-     
+
 
     </target>
 

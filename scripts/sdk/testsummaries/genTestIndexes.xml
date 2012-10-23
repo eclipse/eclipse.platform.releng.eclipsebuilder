@@ -7,20 +7,20 @@
 
     <property
         name="eclipseStream"
-        value="3.8.0" /> 
+        value="3.8.0" />
     <property
         name="postingDirectory"
         value="/shared/eclipse/eclipse3I/siteDir/eclipse/downloads/drops" />
-    <property 
+    <property
         name="builderDir"
         value="/shared/eclipse/eclipse3I/build/supportDir/org.eclipse.releng.eclipsebuilder" />
     <property
         name="publishingContent"
         value="/shared/eclipse/eclipse3I/build/supportDir/org.eclipse.releng.eclipsebuilder/eclipse/publishingFiles" />
-    <property 
+    <property
         name="base.builder"
         value="/shared/eclipse/eclipse3I/build/supportDir/org.eclipse.releng.basebuilder" />
-    <property 
+    <property
         name="buildType"
         value="I" />
     <property
@@ -52,7 +52,7 @@
             antfile="${builderDir}/eclipse/helpernew.xml"
             dir="${publishingContent}"
             target="generateEclipseIndex">
- 
+
 <!--
            target="publish">
 -->

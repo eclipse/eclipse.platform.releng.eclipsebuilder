@@ -1,4 +1,4 @@
-// General purpose functions. 
+// General purpose functions.
 
 function hide_element(elementId) {
 	element = document.getElementById(elementId);

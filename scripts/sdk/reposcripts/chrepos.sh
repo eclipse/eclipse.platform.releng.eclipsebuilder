@@ -3,7 +3,7 @@ function checkrepo ()
 {
  cd $1
  echo $1
- 
+
  NUNREACHABLE=`git fsck --unreachable | wc -l`
  echo "Unreachable: " $NUNREACHABLE
  #find objects/?? -type f | wc -l

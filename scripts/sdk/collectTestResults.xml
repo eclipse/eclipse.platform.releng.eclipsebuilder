@@ -60,7 +60,7 @@
             // sArray 0 is "whole match"
             var buildType =  sArraybuildType[1];
             project.setProperty("buildType", buildType);
-            
+
             var eclipseStream = project.getProperty("eclipseStream");
             var patternStream = new RegExp(/(\d+)\.(\d+)\.(\d+)/);
 
@@ -90,10 +90,10 @@
         eclipsebuilder=org.eclipse.releng.eclipsebuilder
         builderDir=${supportDir}/$eclipsebuilder
 
-        # should buildDirectory be set at "main" one from actual build? 
+        # should buildDirectory be set at "main" one from actual build?
         buildDirectory=${supportDir}/src
 
-        # note, to be consistent, I changed json xml file so it adds buildId to postingDirectory 
+        # note, to be consistent, I changed json xml file so it adds buildId to postingDirectory
         siteDir=${buildRoot}/siteDir
         postingDirectory=${siteDir}/eclipse/downloads/drops
         if [[ "${eclipseStreamMajor}" > 3 ]]

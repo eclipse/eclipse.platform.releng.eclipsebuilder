@@ -23,7 +23,7 @@ fi
 # that can specify a custom 'from' variable, but still you must use your "real" ID that is subscribed
 # to the wtp-dev mailing list
 #   set from="\"Your Friendly WTP Builder\" <real-subscribed-id@real.address>"
-# correction ... doesn't work. Seems the subscription system set's the "from" name, so doesn't work when 
+# correction ... doesn't work. Seems the subscription system set's the "from" name, so doesn't work when
 # sent to mail list (just other email addresses)
 export MAILRC=~/.buildermailrc
 
@@ -36,10 +36,10 @@ TO="wtp-dev@eclipse.org"
 REPLYTO="wtp-dev@eclipse.org"
 #we need to "fix up" TODIR since it's in file form, not URL
 URLTODIR=${TODIR##*${DOWNLOAD_ROOT}}
-mail -s "$SUBJECT" -R "$REPLYTO" "$TO"  <<EOF 
- 
+mail -s "$SUBJECT" -R "$REPLYTO" "$TO"  <<EOF
 
-Download Page: 
+
+Download Page:
 http://download.eclipse.org$URLTODIR$DROPDIR
 
 General Smoketest results page:

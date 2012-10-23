@@ -15,10 +15,10 @@
 	$Nav->addCustomNav("Security", "http://eclipse.org/equinox/security", "_self", 1);
 	$Nav->addCustomNav("Server", "http://eclipse.org/equinox/server", "_self", 1);
 	
-	if (file_exists("component-links.php")) 
+	if (file_exists("component-links.php"))
 		include "component-links.php";
 	else
-		if (file_exists("../component-links.php")) 
+		if (file_exists("../component-links.php"))
 			include "../component-links.php";
 	
 	$Nav->addNavSeparator("Related", "");
@@ -56,14 +56,14 @@
 <script type="text/javascript">
   // logo
   var logo = $( '#logo:first-child' );
-  var newLogo = '<div id="logo"><a href="http://eclipse.org">' 
+  var newLogo = '<div id="logo"><a href="http://eclipse.org">'
                 + logo.html() + '</a></div>';
   logo.replaceWith( newLogo );
 </script>
 
 
 EOHTML;
-    
+
     return $html;
   }
 
@@ -84,5 +84,5 @@ EOHTML;
     $proc->importStylesheet( $xslDoc );
     return $proc->transformToXML( $xmlDoc );
   }
-  
+
 ?>

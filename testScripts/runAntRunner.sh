@@ -38,12 +38,12 @@ echo "   devArgs:      $devArgs"
 echo
 
 if [ -n ${ECLIPSE_EXE} -a -x ${ECLIPSE_EXE} ]
-then 
+then
 
     ${ECLIPSE_EXE}  --launcher.suppressErrors  -nosplash -console -data $devworkspace -application org.eclipse.ant.core.antRunner $BUILDFILESTR ${extraArgs} -vm $devJRE -vmargs $devArgs
     RC=$?
 else
     echo "ERROR: ECLIPSE_EXE is not defined to executable eclipse"
     RC=1
-fi 
+fi
 exit $RC

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# this funtion currently just synchs up the whole local repo 
+# this funtion currently just synchs up the whole local repo
 # with the whole remote repo ... so, important to use --delete and
-# provides an easy way to "fix" the remote repo by fixing the local one first. 
-function syncRepoSite () 
+# provides an easy way to "fix" the remote repo by fixing the local one first.
+function syncRepoSite ()
 {
 
     eclipseStream=$1
@@ -20,7 +20,7 @@ function syncRepoSite ()
         echo "must provide buildType as second argumnet, for this function $0"
         return 1;
     fi
-    
+
     eclipseStreamMajor=${eclipseStream:0:1}
     echo "buildType: $buildType"
     echo "eclipseStream: $eclipseStream"

@@ -5,7 +5,7 @@
 # codifying the branch (or tag) to use, so it can be set/chagned in one place
 initScriptTag="h=master"
 
-# to use a tag instead of branch, would be tag=X, such as 
+# to use a tag instead of branch, would be tag=X, such as
 # tag=vI20120417-0700, or in full form
 # http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/wgetFresh.sh?tag=vI20120417-0700
 
@@ -31,11 +31,11 @@ wget --no-verbose -O wgetFresh.NEW.sh http://git.eclipse.org/c/platform/eclipse.
 differs=`diff wgetFresh.NEW.sh wgetFresh.sh`
 
 if [ -z "${differs}" ]
-then 
+then
     # 'new' not different from existing, so remove 'new' one
     rm wgetFresh.NEW.sh
 else
-    echo " " 
+    echo " "
     echo "     wgetFresh.sh has changed. Compare with and consider replacing with wgetFresh.NEW.sh"
     echo "  "
     echo "differences: ${differs}"

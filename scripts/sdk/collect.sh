@@ -1,7 +1,7 @@
-#!/usr/bin/env bash 
+#!/usr/bin/env bash
 
-# Utility to be called from test data collection cron job, 
-# to invoke the main code. expected to be called with piped 
+# Utility to be called from test data collection cron job,
+# to invoke the main code. expected to be called with piped
 # input, such as
 # ./collect.sh < testjobs/testjobdata201210220811.txt
 
@@ -22,7 +22,7 @@ echo "buildNumber: $buildNumber"
 echo "buildId: $buildId"
 echo "eclipseStream: $eclipseStream"
 
-# Uncomment once ready, but synchronize "release" of code with 
+# Uncomment once ready, but synchronize "release" of code with
 # removing the check/wait loop in invokeTestsJSON.xml
 
 ${ANT_HOME}/bin/ant -f /shared/eclipse/sdk/collectTestResults.xml \

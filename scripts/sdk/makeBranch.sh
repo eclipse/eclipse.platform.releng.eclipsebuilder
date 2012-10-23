@@ -34,44 +34,44 @@ cd $temprepoarea
 checkForErrorExit $? "Could not cd to temprepoarea!?: $temprepoarea"
 
 git clone $repo
-checkForErrorExit $? "Could not create clone repo: $repo" 
+checkForErrorExit $? "Could not create clone repo: $repo"
 
 
 cd $reponame
-checkForErrorExit $? "Could not cd to reponame: $reponame" 
+checkForErrorExit $? "Could not cd to reponame: $reponame"
 
 git checkout master
-checkForErrorExit $? "Error during initial checkout of master" 
+checkForErrorExit $? "Error during initial checkout of master"
 
 git fetch
-checkForErrorExit $? "Error during fetch" 
+checkForErrorExit $? "Error during fetch"
 
 git checkout -b $branchName $startTag
-checkForErrorExit $? "Could not create local branch ($branchName) from tag ($startTag)" 
+checkForErrorExit $? "Could not create local branch ($branchName) from tag ($startTag)"
 
-# The part above could be done by anyone. The following code is where committer access is required 
-# (which is accomplished by using e4Build id for the general case). 
+# The part above could be done by anyone. The following code is where committer access is required
+# (which is accomplished by using e4Build id for the general case).
 
 # note: using cd here is where executing this whole thing from a committer shell on server is handy
-cd $repo 
-checkForErrorExit $? "Could not cd to repo: $repo" 
+cd $repo
+checkForErrorExit $? "Could not cd to repo: $repo"
 
 git config hooks.allowcreatenottopicbranch true
-checkForErrorExit $? "Could not change config hook"  
+checkForErrorExit $? "Could not change config hook"
 
 cd -
-checkForErrorExit $? "Could not cd back to local repo" 
+checkForErrorExit $? "Could not cd back to local repo"
 
-git push origin $branchName 
-checkForErrorExit $? "Could not push branch to origin" 
+git push origin $branchName
+checkForErrorExit $? "Could not push branch to origin"
 
 cd $repo
-checkForErrorExit $? "Could not cd to repo: $repo" 
+checkForErrorExit $? "Could not cd to repo: $repo"
 
 git config --unset hooks.allowcreatenottopicbranch
-checkForErrorExit $? "Could not unset config hook" 
+checkForErrorExit $? "Could not unset config hook"
 
-# simple cleanup ... 
+# simple cleanup ...
 rm -fr $temprepoarea
 checkForErrorExit $? "Error while removing temp repo"
 

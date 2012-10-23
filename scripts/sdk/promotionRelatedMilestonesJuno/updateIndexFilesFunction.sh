@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
 
-# this function accomplished "from a client" the same function that 
-# could be done like this, on the download server (in .../eclipse/downloads directory): 
+# this function accomplished "from a client" the same function that
+# could be done like this, on the download server (in .../eclipse/downloads directory):
 # php createIndex4x.php > index.html
 # php eclipse3x.php > eclipse3x.html
 
-function internalUpdateIndex () 
+function internalUpdateIndex ()
 {
 
-    if [[ $# != 2 ]] 
+    if [[ $# != 2 ]]
     then
         echo "PROGRAM ERROR: this function requires to arguments, in order, "
         echo "    the php page to use to create the html page, named in second argument)."
         exit 1
-    fi 
+    fi
 
     PHP_PAGE=$1
     HTML_PAGE=$2
@@ -26,7 +26,7 @@ function internalUpdateIndex ()
     then
         rsync ${TEMP_INDEX_TXT} /home/data/httpd/download.eclipse.org/eclipse/downloads/${HTML_PAGE}
         rccode=$?
-        if [ $rccode -eq 0 ] 
+        if [ $rccode -eq 0 ]
         then
             echo "INFO: Upated http://download.eclipse.org/eclipse/downloads/${HTML_PAGE}"
             return 0
@@ -43,7 +43,7 @@ function internalUpdateIndex ()
 }
 
 
-function updateIndex () 
+function updateIndex ()
 {
 
 
@@ -53,14 +53,14 @@ function updateIndex ()
     x3X_HTML_PAGE="eclipse3x.html"
 
     # if no arguments, do both, else we expect "3" or "4"
-    # TODO: would be polite to detect unexpected arguments and give warnings. 
-    if [[ $# == 0 ]] 
-    then 
+    # TODO: would be polite to detect unexpected arguments and give warnings.
+    if [[ $# == 0 ]]
+    then
         internalUpdateIndex ${x4X_PHP_PAGE} ${x4X_HTML_PAGE}
         internalUpdateIndex ${x3X_PHP_PAGE} ${x3X_HTML_PAGE}
     else
-        if [[ "$1" == "3" ]] 
-        then 
+        if [[ "$1" == "3" ]]
+        then
             internalUpdateIndex ${x3X_PHP_PAGE} ${x3X_HTML_PAGE}
         elif [[ "$1" == "4" ]]
         then

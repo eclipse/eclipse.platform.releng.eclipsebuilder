@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 
 # gets a fresh copy of many of the primary/working scripts needed in buildRoot
-# not all are needed, so may change over time, but erring on the side of 
-# over inclusion. 
+# not all are needed, so may change over time, but erring on the side of
+# over inclusion.
 
 # codifying the branch (or tag) to use, so it can be set/chagned in one place
 initScriptTag=master
 
-# tags: 
+# tags:
 # http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/wgetFresh.sh?tag=vI20120417-0700
 
 
-# to build, all that's needed is the appropriate mbNX.sh scripts. It gets what ever 
-# else it needs. 
+# to build, all that's needed is the appropriate mbNX.sh scripts. It gets what ever
+# else it needs.
 
 wget --no-verbose -O mb3M.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb3M.sh?h=$initScriptTag 2>&1;
 wget --no-verbose -O mb4M.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb4M.sh?h=$initScriptTag 2>&1;
@@ -33,11 +33,11 @@ wget --no-verbose -O wgetFresh.NEW.sh http://git.eclipse.org/c/platform/eclipse.
 differs=`diff wgetFresh.NEW.sh wgetFresh.sh`
 echo "differs: ${differs}"
 if [ -z "${differs}" ]
-then 
+then
     # 'new' not different from existing, so remove 'new' one
     rm wgetFresh.NEW.sh
 else
-    echo " " 
+    echo " "
     echo "     wgetFresh.sh has changed. Compare with and consider replacing with wgetFresh.NEW.sh"
     echo "  "
 fi

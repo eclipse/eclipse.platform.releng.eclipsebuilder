@@ -18,7 +18,7 @@ fi
 export JAVA_HOME=${JAVA_6_HOME}
 devJRE=$JAVA_HOME/jre/bin/java
 
-ibmDevArgs="-Xms128M -Xmx256M -Dosgi.ws=gtk -Dosgi.os=linux -Dosgi.arch=x86" 
+ibmDevArgs="-Xms128M -Xmx256M -Dosgi.ws=gtk -Dosgi.os=linux -Dosgi.arch=x86"
 
 devArgs=$ibmDevArgs
 

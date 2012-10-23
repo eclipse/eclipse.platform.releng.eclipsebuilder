@@ -2,9 +2,9 @@
 
 
 
-# Function is designed with rsync so it can be called 
+# Function is designed with rsync so it can be called
 # at multiple times during a build, to make progresive updates.
-function updateDropLocation () 
+function updateDropLocation ()
 {
     echo "start updateDropLocation"
     eclipseStream=$1
@@ -27,7 +27,7 @@ function updateDropLocation ()
 
     pathToDL=eclipse/downloads/drops
     if [[ $eclipseStreamMajor > 3 ]]
-    then 
+    then
         pathToDL=eclipse/downloads/drops$eclipseStreamMajor
     fi
 
@@ -52,13 +52,13 @@ function updateDropLocation ()
     echo "   fromDir: ${fromDir}"
     echo "     toDir: ${toDir}"
 
-    # here, for updating dl site, best to preserve times, 
-    # but only if initial first-time upload are all "touched" to 
-    # have "current time" (otherwise, that first time throws off mirrors, 
-    # and to "change" times at this point would be bad ... sending some 
-    # "back in time"? 
-    # TODO: we probably only need to do this for a few types of files, but not sure 
-    # which yet .. PHP, XML?, HTML? properties? 
+    # here, for updating dl site, best to preserve times,
+    # but only if initial first-time upload are all "touched" to
+    # have "current time" (otherwise, that first time throws off mirrors,
+    # and to "change" times at this point would be bad ... sending some
+    # "back in time"?
+    # TODO: we probably only need to do this for a few types of files, but not sure
+    # which yet .. PHP, XML?, HTML? properties?
     rsync --recursive "${fromDir}" "${toDir}"
     rccode=$?
     if [ $rccode -ne 0 ]
@@ -66,7 +66,7 @@ function updateDropLocation ()
         echo "ERROR: rsync did not complete normally.rccode: $rccode"
         return $rccode
     else
-        if [[ $eclipseStreamMajor == 3 ]]         
+        if [[ $eclipseStreamMajor == 3 ]]
         then
             wget --no-verbose -O index3.txt http://download.eclipse.org/eclipse/downloads/eclipse3x.php 2>&1
             rccode=$?
@@ -74,7 +74,7 @@ function updateDropLocation ()
             then
                 rsync  index3.txt /home/data/httpd/download.eclipse.org/eclipse/downloads/eclipse3x.html
                 rccode=$?
-                if [ $rccode -eq 0 ] 
+                if [ $rccode -eq 0 ]
                 then
                     echo "INFO: Upated http://download.eclipse.org/eclipse/downloads/eclipse3x.html"
                     return 0
@@ -87,14 +87,14 @@ function updateDropLocation ()
                 return $rccode
             fi
         else
-            # assume major version if 4    
+            # assume major version if 4
             wget --no-verbose -O index.txt http://download.eclipse.org/eclipse/downloads/createIndex4x.php 2>&1
             rccode=$?
             if [ $rccode -eq 0 ]
             then
                 rsync  index.txt /home/data/httpd/download.eclipse.org/eclipse/downloads/index.html
                 rccode=$?
-                if [ $rccode -eq 0 ] 
+                if [ $rccode -eq 0 ]
                 then
                     echo "INFO: Upated http://download.eclipse.org/eclipse/downloads/index.html"
                     return 0
@@ -111,7 +111,7 @@ function updateDropLocation ()
 }
 
 
-# may be hard to know when to send test mail ... we'd have to make 
+# may be hard to know when to send test mail ... we'd have to make
 # sure they are all done?
 function sendTestMail ()
 {
@@ -129,14 +129,14 @@ function sendTestMail ()
         echo "must provide buildId as second argumnet"
         exit 1;
     fi
-    
+
     buildType=${buildId:0:1}
-    
+
     # ideally, the user executing this mail will have this special file in their home direcotry,
     # that can specify a custom 'from' variable, but still you must use your "real" ID that is subscribed
     # to the wtp-dev mailing list
     #   set from="\"Your Friendly WTP Builder\" <real-subscribed-id@real.address>"
-    # correction ... doesn't work. Seems the subscription system set's the "from" name, so doesn't work when 
+    # correction ... doesn't work. Seems the subscription system set's the "from" name, so doesn't work when
     # sent to mail list (just other email addresses)
     # espeically handy if send from one id (e.g. "david_williams)
     export MAILRC=~/.e4Buildmailrc
@@ -151,7 +151,7 @@ function sendTestMail ()
 
     mainPath=eclipse/downloads/drops
     if [[ $eclipseStreamMajor > 3 ]]
-    then 
+    then
         mainPath=eclipse/downloads/drops$eclipseStreamMajor
     fi
 
@@ -168,8 +168,8 @@ function sendTestMail ()
     #TO="david_williams@us.ibm.com"
 
     # make sure reply to goes back to the list
-    # I'm not positive this is required for mailing list? 
-    # does anything "from" list, automatically get reply-to: list? 
+    # I'm not positive this is required for mailing list?
+    # does anything "from" list, automatically get reply-to: list?
     #REPLYTO="platform-releng-dev@eclipse.org"
     #we could? to "fix up" TODIR since it's in file form, not URL
     # URLTODIR=${TODIR##*${DOWNLOAD_ROOT}}
@@ -192,22 +192,22 @@ EOF
 
 
 
-# this is the single script to call that "does it all" to promote build 
+# this is the single script to call that "does it all" to promote build
 # to update site, drop site, update index page on downlaods, and send mail to list.
 
 # it requires two arguments
-#    eclipseStream (e.g. 4.2.0 or 3.8.1) 
+#    eclipseStream (e.g. 4.2.0 or 3.8.1)
 #    buildId       (e.g. N20120415-2015)
 
 
 if [[ $# != 2 ]]
 then
-    # usage: 
+    # usage:
     scriptname=$(basename $0)
     printf "\n\t%s\n" "This script, $scriptname requires two arguments, in order: "
     printf "\t\t%s\t%s\n" "eclipseStream" "(e.g. 4.2.0 or 3.8.0) "
     printf "\t\t%s\t%s\n" "buildId" "(e.g. N20120415-2015) "
-    printf "\t%s\n" "for example," 
+    printf "\t%s\n" "for example,"
     printf "\t%s\n\n" "./$scriptname 4.2.0 N N20120415-2015"
     exit 1
 fi
@@ -237,7 +237,7 @@ echo "DEBUG: builderDir: ${builderDir}"
 ${builderDir}/testScripts/updateTestResultsPages.sh  $eclipseStream $buildId
 rccode=$?
 
-if [[ $rccode != 0 ]] 
+if [[ $rccode != 0 ]]
 then
     echo "error updating index pages: $rccode"
     exit $rccode
@@ -247,22 +247,22 @@ updateDropLocation $eclipseStream $buildId
 
 rccode=$?
 
-if [ $rccode -ne 0 ] 
-then 
+if [ $rccode -ne 0 ]
+then
     echo "ERROR occurred during promotion to download serve: rccode: $rccode."
     exit $rccode
-fi 
+fi
 
 exit 0
 
-# may be hard to know when to send test mail ... we'd have to make 
+# may be hard to know when to send test mail ... we'd have to make
 # sure they are all done?
 #sendTestMail $eclipseStream $buildId
 #rccode=$?
-#if [ $rccode -ne 0 ] 
-#then 
+#if [ $rccode -ne 0 ]
+#then
 #  echo "ERROR occurred during sending final mail to list"
 #  exit 1
-#fi 
+#fi
 
 

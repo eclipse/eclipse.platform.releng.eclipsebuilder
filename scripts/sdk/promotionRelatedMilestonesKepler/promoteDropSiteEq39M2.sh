@@ -13,7 +13,7 @@ rsync -ra ${DROP_ID}/ ${DROP_ID}ORIG
 
 mv ${DROP_ID}ORIG ${DROP_ID}
 
-rm renameBuild.sh 
+rm renameBuild.sh
 
 echo "rsync -r /opt/public/eclipse/eclipse4I/siteDir/equinox/drops/${DL_DROP_ID} /home/data/httpd/download.eclipse.org/equinox/downloads/drops/" \
      > /opt/public/eclipse/equinox/promotion/queue/promote-${DL_LABEL}.sh

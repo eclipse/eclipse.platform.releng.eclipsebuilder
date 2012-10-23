@@ -1,15 +1,15 @@
 <project name="Build specific targets and properties" default="noDefault">
 
 	<!-- =====================================================================
-	    
+	
 	    The Following Properties are available in all targets:
 		 - eclipse.base : the base folder everything will be collected into
 		 - eclipse.plugins : the plugins folder
 		 - eclipse.features: the features folder
 		 - archiveFullPath : the full path of the final archive once it is created
-		 
+		
 		 ===================================================================== -->
-		 
+		
 	<!-- =====================================================================  -->
 	<!-- Called after each invocation of the gather.bin.parts target on the     -->
 	<!-- individual plugins and features.                                       -->

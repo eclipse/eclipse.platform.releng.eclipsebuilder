@@ -6,16 +6,16 @@
     <!-- hurestic to check if we are running on hudson variable, if so -->
     <target name="checkHudson">
         <!-- HUDSON_USER should just be "anonyous" for most of our cases (currently)
-             but seems a safe variable to check ... if set, assume we are on hudson, 
-             if not set, assume we are not and leave "hudson" unset (not false) 
-             Hmm, seems HUDSON_USER is not reliably set. The only 4 I saw reliably 
+             but seems a safe variable to check ... if set, assume we are on hudson,
+             if not set, assume we are not and leave "hudson" unset (not false)
+             Hmm, seems HUDSON_USER is not reliably set. The only 4 I saw reliably
              set were
              [echoproperties] env.HUDSON_COOKIE
              [echoproperties] env.HUDSON_HOME
              [echoproperties] env.HUDSON_SERVER_COOKIE
              [echoproperties] env.HUDSON_URL
-             Not sure which would be best/safest to use in huristic, but 
-             I'll go with URL for now. 
+             Not sure which would be best/safest to use in huristic, but
+             I'll go with URL for now.
              -->
         <property environment="env" />
         <condition property="hudson">
@@ -28,10 +28,10 @@
         name="hudson-init"
         if="hudson"
         depends="checkHudson">
-        <!-- as of this writing, 04/22/2012, this was current list of 
-             hudson provided variables. We take advantage of a number 
-             of them, but "translate" them into our own variable names, 
-             for a little loser build-system seperattion 
+        <!-- as of this writing, 04/22/2012, this was current list of
+             hudson provided variables. We take advantage of a number
+             of them, but "translate" them into our own variable names,
+             for a little loser build-system seperattion
         BUILD_NUMBER
             The current build number, such as "153"
         BUILD_ID
@@ -74,7 +74,7 @@
         name="init"
         depends="hudson-init, streamSpecificInit">
 
-        <!-- if not otherwise set, such as by hudson-init, 
+        <!-- if not otherwise set, such as by hudson-init,
              assume "current directory" for WORKSPACE -->
         <property
             name="WORKSPACE"
@@ -92,9 +92,9 @@
             unless="buildId"
             message="buildId value must be provided by caller (such as 'I20120717-0800'" />
 
-        <!-- 
-             this "buildId check" may be overly strict, but best to start off strict for now, 
-             loosen in future if we start to find/have variety 
+        <!--
+             this "buildId check" may be overly strict, but best to start off strict for now,
+             loosen in future if we start to find/have variety
         -->
 
         <condition property="buildIdOK">
@@ -147,15 +147,15 @@
         <property
             name="buildURL"
             value="http://download.eclipse.org/eclipse/downloads/${dropsDirSegment}/${buildId}" />
-        
-        <!-- 
-             there's nothing "automatic" about the local cache (so far). 
-             If specified (such as on hudson command line that executes this 
-             file, as, say, 
+
+        <!--
+             there's nothing "automatic" about the local cache (so far).
+             If specified (such as on hudson command line that executes this
+             file, as, say,
              -DlocalCache=file:///shared/eclipse/localCache
              then all the downloads required must be already available there.
-             It is intended to speed up local testing to avoid re-downloading 
-             files. 
+             It is intended to speed up local testing to avoid re-downloading
+             files.
              -->
         <condition
             property="archiveLocation"
@@ -488,10 +488,10 @@
         </condition>
         <echo message="getArtifacts ${getArtifacts}" />
         <antcall target="${getArtifacts}" />
-        
-        <!-- 
-            Try using "loadproperties", insstead of "properties file=" to see if 
-            that will "evaluate" variables as loaded. Otherwise, the <properties form 
+
+        <!--
+            Try using "loadproperties", insstead of "properties file=" to see if
+            that will "evaluate" variables as loaded. Otherwise, the <properties form
             has to move to "top of file" ... outer scope?
            <property file="${eclipseBuilderDir}/eclipse/buildConfigs/sdk.tests/testConfigs/${testPlatform}/testing.properties" />
         -->
@@ -511,7 +511,7 @@
 
         <echo message="DEBUG: testDir: ${testDir}" />
         <echo message="DEBUG: executionDir: ${executionDir}" />
-        
+
 		<!--if executiondir starts with c:\ you'll need to escape it so it can load the filename properly with java -->
         <pathconvert
             targetos="unix"
@@ -558,20 +558,20 @@
 
 
     </target>
-            
-            <!-- 
-                 This streamSpecificInit target was copied from buildAll.xml and does about exactly the same thing, 
+
+            <!--
+                 This streamSpecificInit target was copied from buildAll.xml and does about exactly the same thing,
                  purposely left close to original, though not as much is actually required.
                  TODO: in future, pull out into one file, and reuse
-                 
-                 Its purpose, here, is entirely to pick up "stream specific" stings from the releng maps 
-                 project, 'configuration' folder. 
-                 
-                 Important note: here, unlike the one in buildAll.xml, we assume the maps have already 
+
+                 Its purpose, here, is entirely to pick up "stream specific" stings from the releng maps
+                 project, 'configuration' folder.
+
+                 Important note: here, unlike the one in buildAll.xml, we assume the maps have already
                  been checked out, say by hudson, as a peer of eclipseBuilder, rather then us doing
-                 the checkout here, ourselves. Not sure which is easier, but current means hudson job 
+                 the checkout here, ourselves. Not sure which is easier, but current means hudson job
                  has to be set up with two git checkout steps, right version for maps (for 3.8 vs 4.2).
-                 
+
              -->
     <target
         name="streamSpecificInit"
@@ -580,9 +580,9 @@
         <echo message="DEBUG: executing streamSpecificInit" />
 
 
-         <!-- 
-              mapsProject is the "top" of the maps project after it has been 
-              checked out to the local working area. 
+         <!--
+              mapsProject is the "top" of the maps project after it has been
+              checked out to the local working area.
           -->
         <property
             name="mapsProject"
@@ -591,7 +591,7 @@
             name="configurationLocation"
             value="${mapsProject}/configuration" />
 
-                <!-- TODO: I moved (copied) this from init, probably only needs to 
+                <!-- TODO: I moved (copied) this from init, probably only needs to
                     be set once, but, needs to be set before loading the repo properties -->
                 <!--set local mirror location depending if hudson is running -->
         <condition
@@ -601,12 +601,12 @@
                 arg1="${hudson}"
                 arg2="true" />
         </condition>
-        
-        
-        
-        
-        <!-- 
-             these condidtions used to be in "init". Conceptually seems right to be in "stream 
+
+
+
+
+        <!--
+             these condidtions used to be in "init". Conceptually seems right to be in "stream
              specific" init (since their value depends on stream) but may have side effects?)
          -->
         <condition
@@ -618,14 +618,14 @@
                 arg2="4" />
         </condition>
 
-                <!-- bug 376217: repos.properties is one of the files moved from 
+                <!-- bug 376217: repos.properties is one of the files moved from
                     Eclipsebuild to maps project and into a common file, streamSpecific-build.properties -->
         <replace
             token="@localmirror@"
             file="${configurationLocation}/streamSpecific-build.properties"
             value="${localmirror}" />
-                <!-- The reading/loading of the these streamSpecific-build.properties 
-                    is critical to several stream specific areas of code, so may have to be moved 
+                <!-- The reading/loading of the these streamSpecific-build.properties
+                    is critical to several stream specific areas of code, so may have to be moved
                     "earlier"? Made it own task for depends on clauses? -->
         <loadproperties srcFile="${configurationLocation}/streamSpecific-build.properties" />
 
@@ -636,12 +636,12 @@
         <echo message="apiTestsPreviousBaseDLBaseURL: ${apiTestsPreviousBaseDLBaseURL}" />
         <echo message="apiTestsPreviousBaseWin32Filename: ${apiTestsPreviousBaseWin32Filename}" />
 
-                <!-- now that we have maps (and we already have eclipseBuider from 
-                    masterBuild.sh, before calling buildAll.xml, then now its time to "overlay" 
-                    the stream specific files of eclipseBuild that are in the maps project, in 
+                <!-- now that we have maps (and we already have eclipseBuider from
+                    masterBuild.sh, before calling buildAll.xml, then now its time to "overlay"
+                    the stream specific files of eclipseBuild that are in the maps project, in
                     the folder named /org.eclipse.releng/configuration/eclipseBuilderOverlays -->
-                <!-- TODO: semi hard code for now, figure out variables later maybe 
-                    do away with "supportDir" segment? maybe call 'base' and other variables 
+                <!-- TODO: semi hard code for now, figure out variables later maybe
+                    do away with "supportDir" segment? maybe call 'base' and other variables
                     'eclipsebulder.base'? -->
 
         <property
@@ -658,7 +658,7 @@
             </fileset>
         </copy>
 
-                <!-- now that we've done that little merge, let's "fix up" eclipseBuild 
+                <!-- now that we've done that little merge, let's "fix up" eclipseBuild
                     stuff that depends on exact version numbers -->
         <replace
             dir="${eclipseBuilderDir}"
@@ -672,29 +672,29 @@
             dir="${eclipseBuilderDir}"
             token="@eclipseStreamMinor@"
             value="${eclipseStreamMinor}" />
-                <!-- seems unlikely we'd ever need this all by itself, and not just 
-                    use eclipseStream, which should be all three fields 
-                    <replace summary="true" 
-                      dir="${eclipseBuilderDir}" token="@eclipseStreamService@" 
-                      value="${eclipseStreamService}" /> 
+                <!-- seems unlikely we'd ever need this all by itself, and not just
+                    use eclipseStream, which should be all three fields
+                    <replace summary="true"
+                      dir="${eclipseBuilderDir}" token="@eclipseStreamService@"
+                      value="${eclipseStreamService}" />
                     -->
 
-                <!-- no need to re-init the properties, once done (in this scope) 
-                    so no one else can ever set streamSpecificInitComplete properties. It is 
+                <!-- no need to re-init the properties, once done (in this scope)
+                    so no one else can ever set streamSpecificInitComplete properties. It is
                     our control property -->
         <property
             name="streamSpecificInitComplete"
             value="true" />
     </target>
-        <!-- 
-            note: no check for "if maps local". Here we want to be sure to get 
-            a fresh copy, but only once 
+        <!--
+            note: no check for "if maps local". Here we want to be sure to get
+            a fresh copy, but only once
         -->
     <target
         name="getMapProject"
         depends="hudson-init,initStreamVariables,checkMapsNeeded"
         unless="mapsNotNeeded">
-                    <!-- fail fast if these reuqired variables have not been defined 
+                    <!-- fail fast if these reuqired variables have not been defined
                         yet -->
         <fail
             unless="WORKSPACE"
@@ -777,10 +777,10 @@
             name="mapProjectFetched"
             value="true" />
     </target>
-    
-    <!-- 
+
+    <!--
        main purpose of initStreamVariables, it to be sure we have eclipseStreamMajor and eclipseStreamMinor
-       Uses script, which requires Java 1.6 (or ... else gets complicated to setup) 
+       Uses script, which requires Java 1.6 (or ... else gets complicated to setup)
      -->
     <target name="initStreamVariables">
         <fail
@@ -824,7 +824,7 @@
 
     </target>
 
-    <!-- skipInstall=true passed in when user knows things have already been installed, and 
+    <!-- skipInstall=true passed in when user knows things have already been installed, and
          just wants to re-run the tests -->
     <target name="checkMapsNeeded">
         <condition property="mapsNotNeeded">

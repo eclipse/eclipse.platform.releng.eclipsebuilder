@@ -19,7 +19,7 @@
 
     <!-- main purpose of init, it to be sure we have eclipseStreamMajor and eclipseStreamMinor -->
     <target name="init">
-       
+
         <fail
             unless="buildId"
             message="buildId must be provided by caller" />
@@ -32,7 +32,7 @@
         <fail
             message="buildId variable had unexpected format. Should be [IMNSR] 8 digits - 4 digits, but was ${buildId}"
             unless="buildIdOK" />
-        
+
         <script language="javascript">
             var buildId = project.getProperty("buildId");
             var pattern = new RegExp(/^([IMNSR])(\d{8})-(\d{4})$/);

@@ -2,13 +2,13 @@
 
     <!-- small utility to test invoking sh file from ant -->
     <target name="ex">
-    
+
         <property name="repoDirLocation" value="/opt/public/eclipse/eclipse4I/siteDir/updates/4.2-I-builds/I20120427-0800"/>
 
         <exec executable="/bin/bash">
            <arg line="process-artifacts.sh ${repoDirLocation}"/>
         </exec>
-    
+
     </target>
-    
+
 </project>

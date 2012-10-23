@@ -16,7 +16,7 @@ BUILDMACHINE_SITE=${BUILDMACHINE_BASE_SITE}/${DROP_SITE_ID}
 
 DLMACHINE_SITE=${DLMACHINE_BASE_SITE}/${DL_SITE_ID}
 
-# remember, need trailing slash since going from existing directories 
+# remember, need trailing slash since going from existing directories
 # contents to new directories contents
 echo "BUILDMACHINE_SITE: ${BUILDMACHINE_SITE}/"
 echo "DLMACHINE_SITE: ${DLMACHINE_SITE}"

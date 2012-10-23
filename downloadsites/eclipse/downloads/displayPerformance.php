@@ -2,7 +2,7 @@
 <body>
 
 <?php
-	echo "<h2>Scenarios: $QUERY_STRING*</h2>"; 
+	echo "<h2>Scenarios: $QUERY_STRING*</h2>";
 	
 	$packageprefix=$QUERY_STRING;
 
@@ -19,7 +19,7 @@
 	}
 	
 	aDirectory.closedir();	
-?> 
+?>
 
 </body>
 </html>

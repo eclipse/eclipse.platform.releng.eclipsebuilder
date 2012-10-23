@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-# This script removes old eclipse builder, to make sure we start with 
-# fresh copy. Then gets or updates clone in gitCache, then uses that 
-# to copy back to the "working copy" of eclipse builder. 
+# This script removes old eclipse builder, to make sure we start with
+# fresh copy. Then gets or updates clone in gitCache, then uses that
+# to copy back to the "working copy" of eclipse builder.
 
 # DEBUG controls verbosity of little "state and status" messages
-# normally would be false during production. Set to true if 
+# normally would be false during production. Set to true if
 # debug just for this script desired.
 export DEBUG=${DEBUG:-false}
 #export DEBUG=true
@@ -16,7 +16,7 @@ export DEBUG=${DEBUG:-false}
 VERBOSE_REMOVES=${VERBOSE_REMOVES:-}
 #VERBOSE_REMOVES=${VERBOSE_REMOVES:--v}
 
-# simple utility to check return code and exit if non-zero 
+# simple utility to check return code and exit if non-zero
 function checkForErrorExit ()
 {
     # arg 1 must be return code, $?
@@ -44,11 +44,11 @@ function checkForErrorExit ()
 }
 
 
-# debugVar is simply utility to display variables and values that is 
+# debugVar is simply utility to display variables and values that is
 # a little lighter weight that a full <echoproperties />
-# TODO: an alternative might be to have a system of prefixing variables to 
-# with meaning full prefixes so that <echoproperties>... could still be used 
-# with meaningfuil subset. But, large change. For example, "basedirectory" could 
+# TODO: an alternative might be to have a system of prefixing variables to
+# with meaning full prefixes so that <echoproperties>... could still be used
+# with meaningfuil subset. But, large change. For example, "basedirectory" could
 # become "eclipsebuilder.basedirectory"
 function debugVar ()
 {
@@ -57,7 +57,7 @@ function debugVar ()
         variablenametodisplay=$1
         eval variableValue=\$${variablenametodisplay}
         echo "DEBUG VAR: ${variablenametodisplay}: ${variableValue}"
-    fi 
+    fi
 }
 function debugMsg ()
 {
@@ -65,7 +65,7 @@ function debugMsg ()
     then
         message=$1
         echo "DEBUG MSG: ${message}"
-    fi 
+    fi
 }
 
 function getEclipseBuilder () {
@@ -73,12 +73,12 @@ function getEclipseBuilder () {
     # pushd where we start from, so we end up returning to same direcotry
     pushd ${PWD}
 
-    # we set these variables here, to allow standalone test, 
-    #    but if they already exist (say via a previous export) 
-    #    then we use the existing, exported value. 
+    # we set these variables here, to allow standalone test,
+    #    but if they already exist (say via a previous export)
+    #    then we use the existing, exported value.
 
     # by coincidendence, git repo and git project are named the same
-    # but the working location it ends up on disk will be named its 
+    # but the working location it ends up on disk will be named its
     # old traditional name or org.eclipse.releng.eclipsebuilder
     # for now. See bug 374974
     eclipsebuilder=${eclipsebuilder:-"org.eclipse.releng.eclipsebuilder"}
@@ -88,10 +88,10 @@ function getEclipseBuilder () {
     gitName=${gitName:-"e4Builder-R4"}
     # normally buildDir would be expected to be "passed in" via export, but
     # if not, we can start at PWD and move up one level before
-    # setting supportDir. This "mimics" the correct behavior, if 
-    # we are just replacing eclipsebuilder, after the build has ran, 
-    # say, to correct some test script, etc. during development/debugging. 
-    
+    # setting supportDir. This "mimics" the correct behavior, if
+    # we are just replacing eclipsebuilder, after the build has ran,
+    # say, to correct some test script, etc. during development/debugging.
+
     buildDir=${buildDir:-"${PWD}/../"}
     supportDir=${supportDir:-"${buildDir}/supportDir"}
     gitCache=${gitCache:-"$supportDir/gitCache"}
@@ -111,30 +111,30 @@ function getEclipseBuilder () {
 
     # removing eclipsebuilder, for now, to see if fixes bug 375780
     # it will always be necessary to do a complete (or, a lot) of cleanup
-    # in eclipseBuilder, there many places we replace data in files, such 
-    # such as @buildId@ with ${buildId} which would not work if @buildId" had 
-    # already been replaced. Could be improved, in long run. 
+    # in eclipseBuilder, there many places we replace data in files, such
+    # such as @buildId@ with ${buildId} which would not work if @buildId" had
+    # already been replaced. Could be improved, in long run.
     #builderDir is full path to eclipsebuilder
-    if [[ -d "${builderDir}" ]] 
+    if [[ -d "${builderDir}" ]]
     then
         debugMsg "     Removing previous builderDir to make sure clean"
         rm -fr ${VERBOSE_REMOVES} "${builderDir}"
-    else 
+    else
         debugMsg "     Previous builderDir did not exist, so nothing to remove"
     fi
-    
+
 
     cd $gitCache
 
     debugMsg "INFO: changed direcotry in getEclipseBuilder to ${PWD}"
-    
-    repodirectory=$gitCache/$eclipsebuilderRepo 
+
+    repodirectory=$gitCache/$eclipsebuilderRepo
     debugVar repodirectory
     # in this case, project is in "root" of repo
-    projectdirectory=$gitCache/$eclipsebuilderRepo 
+    projectdirectory=$gitCache/$eclipsebuilderRepo
     debugVar projectdirectory
     debugMsg "testing existence of ${repodirectory}"
-    if [[ ! -d "${repodirectory}" ]] 
+    if [[ ! -d "${repodirectory}" ]]
     then
         debugMsg "eclipsebuilder repo, ${repodirectory}, did not exist, so will clone"
         # TODO: make protocol/user etc variables?
@@ -146,7 +146,7 @@ function getEclipseBuilder () {
         cd $repodirectory
         git config --add user.email "$gitEmail"
         git config --add user.name "$gitName"
-    else 
+    else
         echo "INFO: directory already exists: ${repodirectory}"
     fi
 
@@ -160,12 +160,12 @@ function getEclipseBuilder () {
     git pull
     checkForErrorExit $? "git pull failed"
 
-    # assuming now all is fresh and current, copy the gitClone version back to 
+    # assuming now all is fresh and current, copy the gitClone version back to
     # the "real" builderDirectory
     debugMsg "     Will now copy cloned version back to \"real\" builderDir, ${builderDir}"
     mkdir -p "${builderDir}"
-    rsync -r  "${repodirectory}"/* "${builderDir}"/ 
-    
+    rsync -r  "${repodirectory}"/* "${builderDir}"/
+
     popd
     debugMsg "     At exit of getEclipseBuilder, current directtory is ${PWD}"
 }

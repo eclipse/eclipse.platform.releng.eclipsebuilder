@@ -37,7 +37,7 @@ see the sdkFeatures, platformFeatures, ... targets in the orginal customTargets 
 
 	<target name="getMapFiles" depends="checkLocal" unless="mapsLocal">
 	        <echo message="DEBUG: getMapFiles (unexpected?) getting fresh version" />
-	        <echo message="       properties at start of getMapFiles" /> 
+	        <echo message="       properties at start of getMapFiles" />
 	        <echoproperties />
 
 		<property name="mapsGitRepo" value="${buildDirectory}/commonrepo" />

@@ -6,8 +6,8 @@
 # we say "branch or tag", but for tag, the wget has to use tag= instead of h=
 branchOrTag=master
 
-# remember that wget puts most its output on "standard error", I assume 
-# following the philosophy that anything "diagnosic" related goes to standard err, 
+# remember that wget puts most its output on "standard error", I assume
+# following the philosophy that anything "diagnosic" related goes to standard err,
 # and only things the user really needs wants to see as "results" goes to standard out
 # but in cron jobs and similar, this comes across as "an error".
 
@@ -21,11 +21,11 @@ wget --no-verbose -O wgetSDKPromoteScripts.NEW.sh http://git.eclipse.org/c/platf
 differs=`diff wgetSDKPromoteScripts.NEW.sh wgetSDKPromoteScripts.sh`
 
 if [ -z "${differs}" ]
-then 
+then
     # 'new' not different from existing, so remove 'new' one
     rm wgetSDKPromoteScripts.NEW.sh
 else
-    echo " " 
+    echo " "
     echo "     wgetSDKPromoteScripts.sh has changed. Compare with and consider replacing with wgetSDKPromoteScripts.NEW.sh"
     echo "differs: ${differs}"
     echo "  "

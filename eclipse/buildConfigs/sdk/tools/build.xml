@@ -8,10 +8,10 @@
 	
 <target name="compileSrc" depends="checkBinary">
     <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
-    <javac verbose="true" failonerror="false"  srcdir="${builderDirectory}\tools" destdir="${builderDirectory}\tools" />     
+    <javac verbose="true" failonerror="false"  srcdir="${builderDirectory}\tools" destdir="${builderDirectory}\tools" />
     <available classname="ReadFile" classpath="${builderDirectory}\tools" property="compileSrc"/>
 </target>
-  
+
 		
 <property name="doczipfile" value="doc.zip"/>
 <property name="scriptName" value="test.sh"/>
@@ -57,13 +57,13 @@
 </target>
 
 <target name="genDoc" if = "parseFiles">
-   <!--generate the doc in pdf format -->      
+   <!--generate the doc in pdf format -->
    <chmod file="${buildDirectory}/plugins/${docPlugin}/${scriptName}" perm="700"/>
       <exec dir="${buildDirectory}/plugins/${docPlugin}"  executable="${buildDirectory}/plugins/${docPlugin}/${scriptName}"/>
       <property name="genDoc" value="true"/>
 </target>
-     
- <target name="assemble" if = "genDoc">    
+
+ <target name="assemble" if = "genDoc">
       <property name="postingDirectory" value="${buildDirectory}" />
       <zip destfile="${postingDirectory}/${buildLabel}/${docPlugin}.${buildId}.pdf.zip"
        basedir="${buildDirectory}/plugins/${docPlugin}/"
@@ -72,7 +72,7 @@
      <property name="assemble" value="true"/>
  	  <antcall target = "cleanUp"/>
  </target>
-  
+
  <target name="cleanUp" if = "assemble">
  <delete>
     <fileset dir="${builderDirectory}" includes="**/*.xml.2"/>
@@ -82,6 +82,6 @@
   </delete>
    <property name="cleanUp" value="true"/>
  </target>
- 
-     
+
+
 </project>

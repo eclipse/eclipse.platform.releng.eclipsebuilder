@@ -6,14 +6,14 @@
 <?php
 
 		$servername=$_SERVER['SERVER_NAME'];
-                                                                                                                       
+
 		$script = $_SERVER['SCRIPT_NAME'];
 		$patharray = pathinfo($_SERVER['SCRIPT_NAME']);
 		$path = $patharray['dirname'];
 		$buildLabel = array_pop(split("/",$path,-1));
 		$qstring = $_SERVER['QUERY_STRING'];
 	        $dropFile=array_pop(split("=",$qstring,-1));
-         
+
 		if ($qstring) {
 		    $url = "http://$servername$script?$qstring";
 		} else {
@@ -50,7 +50,7 @@
 		 		 fclose($fileHandle);
 		 	} else {
             	if ($mirror) {
-                	echo '<META HTTP-EQUIV="Refresh" CONTENT="0;URL='.$dropFile.'">';		 
+                	echo '<META HTTP-EQUIV="Refresh" CONTENT="0;URL='.$dropFile.'">';		
 					echo '<b><font size "+4">Downloading: '.$mirrorlink.'</font></b>';
                 } else {
                     echo '<META HTTP-EQUIV="Refresh" CONTENT="0;URL='.$eclipselink.'">';
@@ -72,15 +72,15 @@
 		if (file_exists($clickFile)) {
 			echo '<p><b><font size="+4">Important Notes<BR>';
 			echo '</font></b></font></p>
-		 <p>It is very important to read the following notes in order to run this version 
-		   of Eclipse. Once you have read the notes you can click on the Download link 
+		 <p>It is very important to read the following notes in order to run this version
+		   of Eclipse. Once you have read the notes you can click on the Download link
 		   to download the drop.</p>
 		 ';
 		   echo '<textarea name="textfield" cols="80" rows="18" wrap="PHYSICAL">'.$result;
 		   echo '</textarea>';
 		   echo '<BR>';
 		   echo '<BR>';
-          
+
 		if ($mirror) {     	
 			echo '<a href="'.$dropFile.'">Download</a>';
 		} else {

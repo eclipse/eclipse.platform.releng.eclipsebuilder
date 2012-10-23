@@ -18,7 +18,7 @@ function checkPlatform($line) {
 function checkFile($p) {
 
     if ((is_file($p)) && (preg_match("/.txt|.log|.png/i", $p)))  {
-        return 1; 
+        return 1;
     } else {
         return 0;
     }
@@ -56,7 +56,7 @@ function fileSizeForDisplay($filename) {
 function listLogs($myDir) {
     $entries = array();
     $aDirectory = dir($myDir);
-    if ($aDirectory === NULL || $aDirectory === FALSE) 
+    if ($aDirectory === NULL || $aDirectory === FALSE)
     {
         return;
     }
@@ -201,11 +201,11 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 <li><a class="" href="solPlatform.php" target="_self">Solaris</a></li>
 <li class="tabstart">&#160;&#160;&#160;</li>
 <li><a class="" href="aixPlatform.php" target="_self">AIX</a></li>
-<li class="tabstart">&#160;&#160;&#160;</li>		 		  		 		  
+<li class="tabstart">&#160;&#160;&#160;</li>		 		  		 		
 <li><a class="" href="macPlatform.php" target="_self">Macintosh</a></li>
 <li class="tabseparator">&#160;&#160;&#160;</li>
 <li><a class="" href="hpuxPlatform.php" target="_self">HP-UX</a></li>
-<li class="tabseparator">&#160;&#160;&#160;</li>		 		  		 		  		 		  
+<li class="tabseparator">&#160;&#160;&#160;</li>		 		  		 		  		 		
 </ul>
 </div>
 <div id="topnavsep"></div>
@@ -225,9 +225,9 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 
 <div id="midcolumn">
 <div class="homeitem3col">
-<?php 
+<?php
 global $buildId;
-$buildId = getBuildId(); 
+$buildId = getBuildId();
 echo "<title>Test Results for $buildId </title>\n";
 echo "<h2>Test Results for $buildId </title></h2>\n";
 

@@ -7,8 +7,8 @@ eclipseStream=4.3.0
 mapVersionTag=master
 
 # should always be 'master' for now, but in future might want
-# a tag, or might need deviation between branches, temporarily). 
-# (remember, if tag used, be sure to change wget commands too, they'd 
+# a tag, or might need deviation between branches, temporarily).
+# (remember, if tag used, be sure to change wget commands too, they'd
 # need tag= instead of h=
 initScriptTag=master
 
@@ -17,15 +17,15 @@ eclipseStreamMajor=${eclipseStream:0:1}
 # path required when starting from cron job
 export PATH=/usr/local/bin:/usr/bin:/bin:${HOME}/bin:
 
-# this file is to ease local builds. It should not be used for production builds. 
+# this file is to ease local builds. It should not be used for production builds.
 source buildeclipse.shsource
 
 # This file intended to be executed from cronjob
-# It assumes the mbNxTx.sh file already exist in key directory, 
+# It assumes the mbNxTx.sh file already exist in key directory,
 
 export buildRoot=${buildRoot:-/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}}
 
-if [[ ! -d "${buildRoot}" ]] 
+if [[ ! -d "${buildRoot}" ]]
  then
      echo "ERROR: the expected buildRoot directory didn't exist: $buildRoot"
      exit 1
@@ -33,29 +33,29 @@ if [[ ! -d "${buildRoot}" ]]
 
 cd "${buildRoot}"
 
-# TODO: need a "lock file" to prevent another job from staring if 
+# TODO: need a "lock file" to prevent another job from staring if
 # one still is
 date >> buildstarted.txt
 
 wget --no-verbose -O "mb${eclipseStreamMajor}${buildType}.NEW.sh" "http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/mb${eclipseStreamMajor}${buildType}.sh?h=${initScriptTag}"
 rccode=$?
-if [[ $rccode != 0 ]] 
-then 
+if [[ $rccode != 0 ]]
+then
     echo "ERROR: wget could not fetch init script. Return code: $rccode"
     exit $rccode
 fi
 wget --no-verbose -O "masterBuild.sh" "http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/masterBuild.sh?h=${initScriptTag}" 2>&1
 rccode=$?
-if [[ $rccode != 0 ]] 
-then 
+if [[ $rccode != 0 ]]
+then
     echo "ERROR: wget could not fetch init script. Return code: $rccode"
     exit $rccode
 fi
 
 chmod -v +x mb${eclipseStreamMajor}${buildType}.NEW.sh
 rccode=$?
-if [[ $rccode != 0 ]] 
-then 
+if [[ $rccode != 0 ]]
+then
     echo "WARNING: could not chmod new init script. Return code: $rccode"
 fi
 
@@ -63,11 +63,11 @@ fi
 differs=`diff mb${eclipseStreamMajor}${buildType}.NEW.sh mb${eclipseStreamMajor}${buildType}.sh`
 echo "differs: ${differs}"
 if [ -z "${differs}" ]
-then 
+then
     # 'new' not different from existing, so remove 'new' one
     rm mb${eclipseStreamMajor}${buildType}.NEW.sh
 else
-    echo " " 
+    echo " "
     echo "     wgetSDKPromoteScripts.sh has changed. Compare with and consider replacing with mb${eclipseStreamMajor}${buildType}.NEW.sh"
     echo "  "
 fi
@@ -75,8 +75,8 @@ fi
 
 chmod -v +x masterBuild.sh
 rccode=$?
-if [[ $rccode != 0 ]] 
-then 
+if [[ $rccode != 0 ]]
+then
     echo "WARNING: could not chmod init script. Return code: $rccode"
 fi
 

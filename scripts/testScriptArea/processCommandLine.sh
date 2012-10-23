@@ -20,8 +20,8 @@ export testbuildonly=true
 
 # settings related to debugging or testing
 # DEBUG controls verbosity of little "state and status" bash echo messages.
-# Set to true to get the most echo messages. Anything else to be quiet. 
-# Normally would be false during production, but true for debugging/tests. 
+# Set to true to get the most echo messages. Anything else to be quiet.
+# Normally would be false during production, but true for debugging/tests.
 export DEBUG=${DEBUG:-false}
 #export DEBUG=${DEBUG:-true}
 echo "DEBUG: $DEBUG"
@@ -35,7 +35,7 @@ export VERBOSE_REMOVES=${VERBOSE_REMOVES:-}
 echo "VERBOSE_REMOVES: $VERBOSE_REMOVES"
 
 # quietCVS needs to be -Q (really quiet) -q (somewhat quiet) or literally empty (verbose)
-# FYI, not that much difference between -Q and -q :) 
+# FYI, not that much difference between -Q and -q :)
 # TODO: won't be needed once move off CVS is complete
 export quietCVS=${quietCVS:--Q}
 #export quietCVS=${quietCVS:--q}
@@ -49,7 +49,7 @@ processCommandLine ()
     #  control various aspects of the build via command line arguments
     #
 
-    echo "Reading commands from command line: $0 $* " 
+    echo "Reading commands from command line: $0 $* "
     echo "     It contained $# arguments"
 
     while [ $# -gt 0 ]
@@ -66,7 +66,7 @@ processCommandLine ()
             "-relengMapsProject")
                 relengMapsProject="$2"; shift;;
             "-relengRepoName")
-                relengRepoName="$2"; shift;;  
+                relengRepoName="$2"; shift;;
             "-buildRoot")
                 buildRoot="$2"; shift;;
             "-gitEmail")
@@ -87,11 +87,11 @@ processCommandLine ()
         shift
     done
 
-    if $DEBUG 
+    if $DEBUG
     then
-        echo  
-        echo  
-        echo  
+        echo
+        echo
+        echo
         echo "DEBUG raw values after reading command line"
         echo "DEBUG: mapVersionTag: ${mapVersionTag}"
         echo "DEBUG: eclipseStream: ${eclipseStream}"
@@ -107,9 +107,9 @@ processCommandLine ()
         echo "DEBUG: timestamp: ${timestamp}"
         echo "DEBUG: date: ${date}"
         echo "DEBUG: time: ${time}"
-        echo  
-        echo  
-        echo  
+        echo
+        echo
+        echo
     fi
 
 
@@ -124,10 +124,10 @@ processCommandLine ()
     relengMapsProject=${relengMapsProject:-org.eclipse.releng}
     relengRepoName=${relengRepoName:-eclipse.platform.releng.maps}
 
-    # TODO: make last segment "projectName" 
+    # TODO: make last segment "projectName"
     buildRoot=${buildRoot:-/shared/eclipse/eclipse4N}
 
-    # derived values (which effect default computed values) 
+    # derived values (which effect default computed values)
     # TODO: do not recall why I export these ... should live without, if possible
     export buildDir=${buildRoot}/build
     export siteDir=${buildRoot}/siteDir
@@ -135,7 +135,7 @@ processCommandLine ()
     export supportDir=${buildDir}/supportDir
 
     export builderDir=${supportDir}/$eclipsebuilder
-    # remember: do not "mkdir" for builderDir since presence/absence 
+    # remember: do not "mkdir" for builderDir since presence/absence
     # might be used later to determine if fresh check out needed or not.
     # mkdir -p "${builderDir}"
 
@@ -153,15 +153,15 @@ processCommandLine ()
     # Relative constant values
 
     # This is eclipsebuilder name on disk, traditionally org.eclipse.releng.eclipsebuilder
-    # Though now in git, the repo (and effective project name) is eclipse.platform.releng.eclipsebuilder 
-    # See https://bugs.eclipse.org/bugs/show_bug.cgi?id=374974 for details, 
+    # Though now in git, the repo (and effective project name) is eclipse.platform.releng.eclipsebuilder
+    # See https://bugs.eclipse.org/bugs/show_bug.cgi?id=374974 for details,
     # especially https://bugs.eclipse.org/bugs/show_bug.cgi?id=374974#c28
     export eclipsebuilder=org.eclipse.releng.eclipsebuilder
     export eclipsebuilderRepo=eclipse.platform.releng.eclipsebuilder
 
     # remmember "test script" area only. No need to match production scripts
     basebuilderBranch=${basebuilderBranch:-HEAD}
-    # relies on export, since getEclipseBuilder is seperate script, 
+    # relies on export, since getEclipseBuilder is seperate script,
     # and it does not use "command line pattern"
     export eclipsebuilderBranch=${eclipsebuilderBranch:-"master"}
 
@@ -173,8 +173,8 @@ processCommandLine ()
 
 
     # common properties that would vary machine to machine
-    # Would have to run under Java 1.5, to make sure 'sign' (which uses jar processor) 
-    # and eventual "pack200" can all be unpacked with 1.5. 
+    # Would have to run under Java 1.5, to make sure 'sign' (which uses jar processor)
+    # and eventual "pack200" can all be unpacked with 1.5.
     # long term, we can launch those tasks in seperate process, or some other better way.
     java15home=${java15home:-/shared/common/jdk-1.5.0-22.x86_64}
     #java15home=/shared/orbit/apps/ibm-java2-i386-50/jre
@@ -197,24 +197,24 @@ processCommandLine ()
     # and contains the ?local repo? (not runnable) for org.eclipse.emf.common, etc.
     # in directories named, for example,
     # as .../eclipse4/build/targets/local-prereq-repo
-    # I can't find in our scripts where its actually created (maybe in basebuilder?), so 
-    # is never removed, and ends up accumulating. 
+    # I can't find in our scripts where its actually created (maybe in basebuilder?), so
+    # is never removed, and ends up accumulating.
     # so ... will remove previous ones here, before the build starts
-    # and leave the "per build" one there, until next build runs. 
+    # and leave the "per build" one there, until next build runs.
     targetDir=${buildDir}/targets
     if [[ -d ${targetDir} ]]
-    then 
-       rm -fr ${targetDir} 
+    then
+       rm -fr ${targetDir}
     fi
-    # targetZips seems to be longer used or created, 
+    # targetZips seems to be longer used or created,
     # but will leave defined here, until understood.
     targetZips=${targetDir}/targetzips
 
-    # must not set globally to java via -Dproperty=value, since eclipsebuilder 
+    # must not set globally to java via -Dproperty=value, since eclipsebuilder
     # assumes different scopes and changes this value for direct calls to generatescripts
     #transformedRepo=${targetDir}/transformedRepo
 
-    # must not set globally to java via -Dproperty=value, since eclipsebuilder 
+    # must not set globally to java via -Dproperty=value, since eclipsebuilder
     # assumes different scopes and changes this value for direct calls to generatescripts
     # but in practice, the main one is
     #buildDirectory=${buildRoot}/build/supportDir/src
@@ -230,16 +230,16 @@ processCommandLine ()
 
 }
 
-if $DEBUG 
+if $DEBUG
 then
 # temp: make sure what we "see" is same thing funciton sees.
-echo "Reading commands from command line: $0 $* " 
+echo "Reading commands from command line: $0 $* "
 echo "     It contained $# arguments"
-fi 
+fi
 
 processCommandLine "$@"
 
-if $DEBUG 
+if $DEBUG
 then
     echo " "
     echo " "
@@ -263,30 +263,30 @@ then
     echo " "
     echo " "
     echo
-    echo "DEBUG: other interesting settings: " 
+    echo "DEBUG: other interesting settings: "
     echo "buildResults: $buildResults"
     echo "localUpdateSite: $localUpdateSite"
     echo "equinoxPostingDirectory: $equinoxPostingDirectory"
     echo "postingDirectory: $postingDirectory"
-fi 
+fi
 
-# be sure to exit HERE if just testing command line, 
-# before any work gets done. 
+# be sure to exit HERE if just testing command line,
+# before any work gets done.
 #echo "testing params. exit before doing work"
 #exit 127
 
 
-# for safety, for now, we'll assume if this directory does not already exist, something is wrong, 
-# since, currently, we should be running "under" it. 
+# for safety, for now, we'll assume if this directory does not already exist, something is wrong,
+# since, currently, we should be running "under" it.
 #mkdir -p "${buildRoot}"
 if [  ! -d $buildRoot ]
 then
     echo "ERROR: the top level buildRoot must already exist. exiting build."
-    echo "buildRoot: $buildRoot" 
+    echo "buildRoot: $buildRoot"
     exit 128
 fi
 
-# if pack200 doesn't exist where expected it can cause condidtioning to not work as epxected, 
+# if pack200 doesn't exist where expected it can cause condidtioning to not work as epxected,
 # since -repack is called during sign
 if [ ! -x "${pack200dir}/pack200" ]
 then
@@ -294,19 +294,19 @@ then
     exit 1
 fi
 
-export JAVA_HOME=${java16home} 
+export JAVA_HOME=${java16home}
 echo "INFO: JAVA_HOME ${JAVA_HOME}"
 if [  ! -d ${JAVA_HOME} ]
 then
     echo "ERROR: JAVA_HOME does not exist, so is probably defined incorrectly."
-    echo "JAVA_HOME: $JAVA_HOME" 
+    echo "JAVA_HOME: $JAVA_HOME"
     exit 128
 fi
 
 
 
 # used in auto-tagging
-# normally set true here, for production, but then 
+# normally set true here, for production, but then
 # a nightly build would set it to false
 # set to false for test builds
 tag=true
@@ -330,14 +330,14 @@ echo $buildTag >$buildRoot/${buildType}build.properties
 
 
 
-# setup - make sure reuqired directories exist 
+# setup - make sure reuqired directories exist
 
 
 # TODO: should be able to get rid of these (eventually) and if needed at all, do closer to where needed
 mkdir -p "${supportDir}"
 mkdir -p $gitCache
 mkdir -p $buildResults
-mkdir -p $localUpdateSite 
+mkdir -p $localUpdateSite
 mkdir -p $postingDirec
 mkdir -p $equinoxPostingDirectory
 mkdir -p "${buildDir}"
@@ -349,7 +349,7 @@ echo "siteDir: $siteDir"
 
 
 
-# temp hard to remove up from, using linux, as ant sometimes fail 
+# temp hard to remove up from, using linux, as ant sometimes fail
 # to remove .nsf files
 rm -fr "${buildRoot}/build/supportDir/src"
 
@@ -371,10 +371,10 @@ tagRepo
 #echo "continueBuildOnNoChange: $continueBuildOnNoChange"
 
 #if [ ( "${trExitCode}" = "99999" ) && ( "${continueBuildOnNoChange}" != "true" ) ]
-#then 
+#then
 #    mailx -s "$eclipseStream SDK Build: $buildTag auto tagging failed. Build canceled." david_williams@us.ibm.com <<EOF
 
-#  Auto tagging failed. See log. 
+#  Auto tagging failed. See log.
 #Build halted.
 
 #EOF

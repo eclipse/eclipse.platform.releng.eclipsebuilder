@@ -18,7 +18,7 @@ echo "DL_LABEL: ${DL_LABEL}"
 echo "DROP_TYPE: ${DROP_TYPE}"
 
 # BUILD_TYPE, I or M, inferred from first letter of BUILD_ID
-# is build type on build machine. 
+# is build type on build machine.
 # DROP_TYPE from input, is what we are promoting to
 # I build's go to S or R. M builds go only to R (release).
 
@@ -80,8 +80,8 @@ echo "PWD: ${PWD}"
 cp /opt/public/eclipse/sdk/renameBuild.sh .
 
 RC=$?
-if [[ $RC != 0 ]] 
-then 
+if [[ $RC != 0 ]]
+then
     echo "ERROR: copy of renameBuild.sh returned non-zero return code: $RC"
     exit $RC
 fi
@@ -89,8 +89,8 @@ fi
 echo "save temp backup copy to ${BUILD_ID}ORIG"
 rsync -ra ${BUILD_ID}/ ${BUILD_ID}ORIG
 RC=$?
-if [[ $RC != 0 ]] 
-then 
+if [[ $RC != 0 ]]
+then
     echo "ERROR: backup of original returned non-zero return code: $RC"
     exit $RC
 fi
@@ -98,42 +98,42 @@ fi
 echo "rename ${BUILD_ID} ${DL_DROP_ID} ${DL_LABEL}"
 ./renameBuild.sh ${BUILD_ID} ${DL_DROP_ID} ${DL_LABEL}
 RC=$?
-if [[ $RC != 0 ]] 
-then 
+if [[ $RC != 0 ]]
+then
     echo "ERROR: renameBuild.sh returned non-zero return code: $RC"
     exit $RC
 fi
 
 
 # keep releases hidden until release day
-if [[ ${DROP_TYPE} == "R" ]] 
+if [[ ${DROP_TYPE} == "R" ]]
 then
   touch ${DL_DROP_ID}/buildHidden
-fi 
+fi
 
-# note to maintain times (-t), so future rsyncs can be more efficient, 
-# EXCEPT for directories (-O) which allows mirrors 
+# note to maintain times (-t), so future rsyncs can be more efficient,
+# EXCEPT for directories (-O) which allows mirrors
 # system to work as intended
 echo "rsync ${DL_DROP_ID} to ${DL_SITE_PATH}"
 rsync -r -t -O ${DL_DROP_ID} ${DL_SITE_PATH}
 RC=$?
-if [[ $RC != 0 ]] 
-then 
+if [[ $RC != 0 ]]
+then
     echo "ERROR: rsync from build machine to downloads returned non-zero return code: $RC"
     exit $RC
 fi
 
 # no need to update of index, bug with "buildHidden" file in place, should not show up
 # note: updating the index is a minor operation, no need to check for error.
-if [[ ${DROP_TYPE} != "R" ]] 
+if [[ ${DROP_TYPE} != "R" ]]
 then
  updateIndex ${BUILD_MAJOR}
-fi 
+fi
 
 # if we get to here without error exit, then ok to move back to original name, and remove
 # working files
 echo "move backup back to original"
 mv ${BUILD_ID}ORIG ${BUILD_ID}
 
-rm renameBuild.sh 
+rm renameBuild.sh
 

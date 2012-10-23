@@ -14,8 +14,8 @@
 echo "DEBUG: current directory as entering git-release.sh ${PWD}"
 
 
-# constants, per project. 
-# should not have to change these 
+# constants, per project.
+# should not have to change these
 # except if/when used for another project
 relengMapsProject=org.eclipse.releng
 relengRepoName=eclipse.platform.releng.maps
@@ -42,7 +42,7 @@ do
                 "-relengMapsProject")
                         relengMapsProject="$2"; shift;;
                 "-relengRepoName")
-                        relengRepoName="$2"; shift;;        
+                        relengRepoName="$2"; shift;;
                 "-buildRoot")
                         buildRoot="$2"; shift;;
                 "-committerId")
@@ -72,9 +72,9 @@ do
 done
 
 if [ -z "$oldBuildTag"  ]; then
-    # TODO: should this really be an "error exit" condidtion? 
-    # or just warning? Not sure its really required? 
-      # Just would not have (accurate) submission report?   
+    # TODO: should this really be an "error exit" condidtion?
+    # or just warning? Not sure its really required?
+      # Just would not have (accurate) submission report?
   echo "You must provide -oldBuildTag to have a submission report"
   echo "args:${ARGS}"
   exit 1
@@ -88,11 +88,11 @@ if [ -z "${tag}" ]
 
 
 if [ -z "$gitCache" ]; then
-    echo "ERROR: must provide -gitCache location" 
-	exit 1 
+    echo "ERROR: must provide -gitCache location"
+	exit 1
 fi
 
-if [ ! -d ${gitCache} ] 
+if [ ! -d ${gitCache} ]
 then
     # gitCache should almost always already exist, so if doesn't
     # we'll create but print warning, since may indicate incorrect setting.
@@ -137,19 +137,19 @@ function checkForErrorExit ()
 #Usage: pull repositoryURL  branch
 pull() {
     echo "DEBUG: current directory as entering pull ${PWD}"
-     if [ -d ${gitCache} ] 
-     then 
-        pushd ${gitCache} 
+     if [ -d ${gitCache} ]
+     then
+        pushd ${gitCache}
      else
-        # this is near imposible now, since we create it in this script, 
-        # with a warning, if doesn't exist ... but, will leave here, in case 
-        # that earlier part of script ever changes. 
+        # this is near imposible now, since we create it in this script,
+        # with a warning, if doesn't exist ... but, will leave here, in case
+        # that earlier part of script ever changes.
         echo "could not pushd to ${gitCache} since it did not exist"
-        exit 1 
+        exit 1
      fi
 
- # $1 is argument to pull ... what error checking to do? 
-       echo "INFO: repo: $1" 
+ # $1 is argument to pull ... what error checking to do?
+       echo "INFO: repo: $1"
         directory=$(basename $1 .git)
         if [ ! -d $directory ]; then
                 echo "repo dir did not exist yet, so git clone $1"
@@ -160,7 +160,7 @@ pull() {
                 git config --add user.name "$gitName"
                 popd
         fi
-        
+
         pushd $gitCache/$directory
         # git fetch first, to be sure new branches can be "seen" to be checked out
         echo "git fetch"
@@ -168,13 +168,13 @@ pull() {
         echo "git checkout $2"
         git checkout $2
         checkForErrorExit $? "Git checkout failed for repository $1 branch $2"
-        
-        # check if we just checked out a tag. If so, then we'll have a detached HEAD here, 
-        # and no use trying to do a pull, etc. It implies the maps are "up to date" as they are. 
-        # Note, we can do things like "check out master" and a tag might still be returned (if not changes 
-        # yet, so can not go by what's returned, alone, need to compare with what's requested. 
+
+        # check if we just checked out a tag. If so, then we'll have a detached HEAD here,
+        # and no use trying to do a pull, etc. It implies the maps are "up to date" as they are.
+        # Note, we can do things like "check out master" and a tag might still be returned (if not changes
+        # yet, so can not go by what's returned, alone, need to compare with what's requested.
         # if the current HEAD has not tag, it will return "fatal" message, but return empty string.
-        # Since we expect "fatal" error message in normal operation, we will not log those.   
+        # Since we expect "fatal" error message in normal operation, we will not log those.
         currentTag=$( git describe --exact-match --tags HEAD 2>/dev/null)
         echo "DEBUG: currentTag: >$currentTag<"
         if [[ -n "$currentTag" && "$2" == "$currentTag" ]]
@@ -188,15 +188,15 @@ pull() {
         popd
         popd
         echo "DEBUG: current directory as exiting pull ${PWD}"
-        
+
 }
 
-#Nothing to do for nightly builds, or if tag is "false" 
-# Note, if testbuildonly is set to true, (and I build) we actually let the work 
+#Nothing to do for nightly builds, or if tag is "false"
+# Note, if testbuildonly is set to true, (and I build) we actually let the work
 # continue, for testing, but do not push or tag the repo
-#if [[ ( "${testbuildonly}" != "true" ) &&  ( "${tag}" == "false" || "${buildType}" == "N" ) ]] 
-# we'll skip now, for test builds (takes too long). 
-if [[ ( "${testbuildonly}" == "true" ) ||  ( "${tag}" == "false" || "${buildType}" == "N" ) ]] 
+#if [[ ( "${testbuildonly}" != "true" ) &&  ( "${tag}" == "false" || "${buildType}" == "N" ) ]]
+# we'll skip now, for test builds (takes too long).
+if [[ ( "${testbuildonly}" == "true" ) ||  ( "${tag}" == "false" || "${buildType}" == "N" ) ]]
 then
         echo "INFO: Skipping build tagging for nightly build or -tag false build"
         exit 0
@@ -213,12 +213,12 @@ pull "file:///gitroot/platform/${relengRepoName}.git" $mapVersionTag
 checkForErrorExit $? "clone of repo did not succeed"
 
 if [ ! -d "${relengRepo}" ]; then
-    echo "relengRepo dir does not exist: $relengRepo" 
+    echo "relengRepo dir does not exist: $relengRepo"
     exit 1
 fi
 
 
-# this are the "algorythm" scripts developed by Paul for e4. Should work for any repo. 
+# this are the "algorythm" scripts developed by Paul for e4. Should work for any repo.
 wget --no-verbose -O git-map.sh http://git.eclipse.org/c/e4/org.eclipse.e4.releng.git/plain/org.eclipse.e4.builder/scripts/git-map.sh 2>&1
 wget --no-verbose -O git-submission.sh http://git.eclipse.org/c/e4/org.eclipse.e4.releng.git/plain/org.eclipse.e4.builder/scripts/git-submission.sh 2>&1
 chmod +x git-map.sh
@@ -231,8 +231,8 @@ rm -f repos-clean.txt clones.txt repos-report.txt
 # convert ssh://username@git.eclipse.org/gitroot...  to file:///gitroot
 # or, convert even git://git.eclipse.org/gitroot...  to file:///gitroot
 # Hence, will just use "<beginningofline>.*git.eclipse.org" to cover all cases
-# Eventually, we can provide a "re-write variable", set to file:// by default, 
-# but allow others to override. (or, leave alone) 
+# Eventually, we can provide a "re-write variable", set to file:// by default,
+# but allow others to override. (or, leave alone)
 repositoriesTxtPath="$relengRepo/${relengMapsProject}/tagging/repositories.txt"
 #echo "DEBUG: repositoriesTxtPath: $repositoriesTxtPath"
 cat "$repositoriesTxtPath" | grep -v "^#" | sed 's!^.*git.eclipse.org!file://!' > repos-clean.txt
@@ -243,7 +243,7 @@ while read line; do
         #each line is of the form <repository> <branch>
         set -- $line
         pull $1 $2
-        # Convert file:// back to git://git.eclipse.org for report? 
+        # Convert file:// back to git://git.eclipse.org for report?
         echo $1 | sed 's!file://!git://git.eclipse.org!' >> clones.txt
 done < repos-clean.txt
 
@@ -255,7 +255,7 @@ echo "[git-release] git-submission.sh $gitCache $( cat repos-report.txt ) "
 /bin/bash git-submission.sh $gitCache $( cat repos-report.txt ) > $submissionReportFilePath
 
 # See bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=375807#c65
-# as to why second form is prefered. (xargs not really needed). 
+# as to why second form is prefered. (xargs not really needed).
 #cat clones.txt| xargs /bin/bash git-map.sh $gitCache $buildTag \
 #        $relengRepo > maps.txt
 /bin/bash git-map.sh $gitCache $buildTag \
@@ -269,7 +269,7 @@ grep -v ^OK maps.txt | grep -v ^Executed >run.txt
 
 pushd $relengRepo
 echo "preparing to add maps in relengRepo: ${PWD}"
-echo "git add maps " 
+echo "git add maps "
 echo $( find . -name "*.map" )
 echo
 git add $( find . -name "*.map" )
@@ -277,10 +277,10 @@ checkForErrorExit $? "Could not add maps to repository"
 echo "git commit"
 git commit -m "Releng build auto tagging for $buildTag"
 gitrccode=$?
-# if nothing to commit, returns 1 
+# if nothing to commit, returns 1
 if [[ $gitrccode ==  1 ]]
-   then 
-     # assume nothing to commit, that is "no changes" as the reason for the 
+   then
+     # assume nothing to commit, that is "no changes" as the reason for the
      # non-zero return code, though, in theory could be due to other things?
      echo "git commit rccode was $gitrccode. Assuming no changes to maps to commit."
      noChangesToMaps="true"
@@ -289,8 +289,8 @@ if [[ $gitrccode ==  1 ]]
       checkForErrorExit $gitrccode "Could not commit to repository"
       noChangesToMaps="false"
       gitReleaseExit=$gitrccode
-   fi 
-   
+   fi
+
 # do not try to push or tag if no changes or if doing a test-build-only
 if [[ "${noChangesToMaps}" != "true" && "${testbuildonly}" != "true" ]]
 then

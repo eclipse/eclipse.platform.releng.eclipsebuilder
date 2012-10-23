@@ -38,14 +38,14 @@ echo "   devArgs:      $devArgs"
 echo
 
 if [ -n ${ECLIPSE_EXE} -a -x ${ECLIPSE_EXE} ]
-then 
-    
-echo "   Remember, processing artifacts can take a long time (such as 15 minutes or more) ... so, don't panic." 
-echo    
+then
+
+echo "   Remember, processing artifacts can take a long time (such as 15 minutes or more) ... so, don't panic."
+echo
 ${ECLIPSE_EXE}  --launcher.suppressErrors  -nosplash -console -data $devworkspace -application org.eclipse.ant.core.antRunner $BUILDFILESTR ${extraArgs} -vm $devJRE -vmargs $devArgs
    RC=$?
 else
    echo "ERROR: ECLIPSE_EXE is not defined to executable eclipse"
    RC=1
-fi 
+fi
 exit $RC

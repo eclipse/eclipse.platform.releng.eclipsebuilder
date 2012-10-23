@@ -49,7 +49,7 @@ fi
 BUILDMACHINE_BASE_SITE=/opt/public/eclipse/eclipse${BUILD_MAJOR}${BUILD_TYPE}/siteDir/updates/${BUILD_MAJOR}.${BUILD_MINOR}-${BUILD_TYPE}-builds
 
 DLMACHINE_BASE_SITE=/home/data/httpd/download.eclipse.org/eclipse/updates/${BUILD_MAJOR}.${BUILD_MINOR}milestones
-if [[ ${DROP_TYPE} == "R" ]] 
+if [[ ${DROP_TYPE} == "R" ]]
 then
  DLMACHINE_BASE_SITE=/home/data/httpd/download.eclipse.org/eclipse/updates/${BUILD_MAJOR}.${BUILD_MINOR}
 fi
@@ -58,7 +58,7 @@ BUILDMACHINE_SITE=${BUILDMACHINE_BASE_SITE}/${BUILD_ID}
 
 DLMACHINE_SITE=${DLMACHINE_BASE_SITE}/${DL_SITE_ID}
 
-# remember, need trailing slash since going from existing directories 
+# remember, need trailing slash since going from existing directories
 # contents to new directories contents
 echo "BUILDMACHINE_SITE: ${BUILDMACHINE_SITE}/"
 echo "DLMACHINE_SITE: ${DLMACHINE_SITE}"

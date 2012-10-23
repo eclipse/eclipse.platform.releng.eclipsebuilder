@@ -8,18 +8,18 @@
 BUILD_HOME=${BUILD_HOME:-/shared/eclipse/eclipse3I}
 
 
-if [ ! -d "${BUILD_HOME}" ] 
+if [ ! -d "${BUILD_HOME}" ]
 then
     echo "ERROR: BUILD_HOME was not an existing directory as expected: ${BUILD_HOME}"
     exit 1
 fi
 
 # For most uses, this directory does not HAVE to literally be
-# the eclipseBuider. It is in production, but for testing, it can 
-# be any directory where ${ECLIPSEBUILDER_DIR}/scripts are located. 
+# the eclipseBuider. It is in production, but for testing, it can
+# be any directory where ${ECLIPSEBUILDER_DIR}/scripts are located.
 ECLIPSEBUILDER_DIR=${ECLIPSEBUILDER_DIR:-${BUILD_HOME}/build/supportDir/org.eclipse.releng.eclipsebuilder}
 
-if [ ! -d "${ECLIPSEBUILDER_DIR}/scripts" ] 
+if [ ! -d "${ECLIPSEBUILDER_DIR}/scripts" ]
 then
     echo "ERROR: builder scripts was not an existing directory as expected: ${ECLIPSEBUILDER_DIR}/scripts}"
     exit 1
@@ -27,8 +27,8 @@ fi
 
 # specify devworkspace and JRE to use to runEclipse
 # remember, we want to use Java 5 for processing artifacts.
-# Ideally same one used to pre-condition (normalize, -repack) 
-# the jars in the first place. 
+# Ideally same one used to pre-condition (normalize, -repack)
+# the jars in the first place.
 #JAVA_5_HOME=${JAVA_5_HOME:-/home/shared/orbit/apps/ibm-java2-i386-50/jre}
 #JAVA_5_HOME=${JAVA_5_HOME:-${HOME}/jdks/ibm-java2-x86_64-50}
 JAVA_6_HOME=${JAVA_6_HOME:-/shared/common/jdk-1.6.0_26.x86_64}
@@ -37,12 +37,12 @@ export JAVA_HOME=${JAVA_6_HOME}
 
 devJRE=$JAVA_HOME/jre/bin/java
 
-if [ ! -n ${devJRE} -a -x ${devJRE} ] 
+if [ ! -n ${devJRE} -a -x ${devJRE} ]
 then
     echo "ERROR: could not find (or execute) JRE were expected: ${devJRE}"
     exit 1
 else
-    # display version, just to be able to log it. 
+    # display version, just to be able to log it.
     echo "JRE Location and Version: ${devJRE}"
     echo $( $devJRE -version )
 fi
@@ -55,14 +55,14 @@ if [ ! -n ${ECLIPSE_EXE} -a -x ${ECLIPSE_EXE} ]
 then
    echo "ERROR: ECLIPSE_EXE is not defined or not executable: ${ECLIPSE_EXE}"
    exit 1
-fi 
+fi
 
 
 
 buildId=$1
 shift
 if [[ -z "${buildId}" ]]
-then 
+then
 echo "need buildId as first argument"
 fi
 
@@ -90,7 +90,7 @@ echo
 
 
 devworkspace="${BUILD_HOME}"/workspace-antRunner
-devArgs="-Xmx256m -DbuildId=${buildId}" 
+devArgs="-Xmx256m -DbuildId=${buildId}"
 
 echo
 echo "   dev script:   $0"
@@ -99,12 +99,12 @@ echo "   devArgs:      $devArgs"
 echo
 
 if [ -n ${ECLIPSE_EXE} -a -x ${ECLIPSE_EXE} ]
-then 
+then
 
     ${ECLIPSE_EXE}  -Dhuson=true --launcher.suppressErrors  -nosplash -console -data $devworkspace -application org.eclipse.ant.core.antRunner $BUILDFILESTR ${extraArgs} -vm $devJRE -vmargs $devArgs
     RC=$?
 else
     echo "ERROR: ECLIPSE_EXE is not defined to executable eclipse"
     RC=1
-fi 
+fi
 exit $RC

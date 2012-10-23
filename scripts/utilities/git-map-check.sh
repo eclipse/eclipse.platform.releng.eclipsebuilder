@@ -1,25 +1,25 @@
 #!/usr/bin/env bash
 #
 # This utility is to double check the "sanity" of the map files
-# produced in earlier step. 
+# produced in earlier step.
 # Repos must be checked out on the branch you
-# expect to tag, map file tags already computed, "added" to repo, 
+# expect to tag, map file tags already computed, "added" to repo,
 # and committed (to local workspace), but not yet pushed ... not good
-# to push, if turns our there are errors and we cancel build. 
-# 
+# to push, if turns our there are errors and we cancel build.
+#
 #
 # USAGE: repoRoot buildTag relengRoot repoURL [repoURL]*
 #    repoRoot   - absolute path to a folder containing cloned git repositories
 #    buildTag   - build tag to tag all repositories
 #    relengRoot - asolute path to releng project containing map files
 #    repoURL    - git repository urls to check, must match entries in the map files (i.e. git://... form)
-# EXAMPLE: 
+# EXAMPLE:
 #   ./git-map-check.sh \
 #   /opt/public/eclipse/eclipse3I/build/supportDir/gitCache \
 #   I20120529-2100 \
 #   /opt/public/eclipse/eclipse3I/build/supportDir/gitCache/eclipse.platform.releng.maps/org.eclipse.releng \
-#   $( cat clones.txt ) | tee mapcheckout.txt 
-# 
+#   $( cat clones.txt ) | tee mapcheckout.txt
+#
 # returns 1 if FAILURE, else 0. Examine the maps-check.txt file for details.
 #
 
@@ -37,9 +37,9 @@ check_map () {
 	FOUND_ERROR=0
 	pushd "$gitCache/$REPO_DIR" >/dev/null
 	grep "repo=${REPO}," "$MAP" >/tmp/maplines_$$.txt
-	# check that file exists and is not empty. 
-    # (probably some type of an error if it does not, 
-    # but, not the type of error we are interested in here). 
+	# check that file exists and is not empty.
+    # (probably some type of an error if it does not,
+    # but, not the type of error we are interested in here).
 	if [ ! -s /tmp/maplines_$$.txt ]; then
 		return $FOUND_ERROR
 	fi
@@ -87,8 +87,8 @@ echo "DEBUG: buildTag: $buildTag"
 echo "DEBUG: RELENG: $RELENG"
 echo "DEBUG: REPOS: $REPOS"
 
-# If there is one failure, the whole thing is a failure, 
-# but, important to keep going to check all in one run, in case 
+# If there is one failure, the whole thing is a failure,
+# but, important to keep going to check all in one run, in case
 # there is more than one inaccuracy.
 OVERALL_FAIL=0
 
@@ -103,8 +103,8 @@ for REPO in $REPOS; do
 		for MAP in $MAPS; do
 		    echo "DEBUG: MAP : $MAP"
 			FAILED=$( check_map $REPO $MAP )
-			if [[ $FAILED == 1 ]] 
-			then 
+			if [[ $FAILED == 1 ]]
+			then
 			    OVERALL_FAIL=1;
 			fi
 		done

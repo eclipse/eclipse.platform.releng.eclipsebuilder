@@ -9,13 +9,13 @@
     default="runTests"
     basedir=".">
 
-    <!-- 
-    this script is invoked by the build, on the build machine, 
-    to signify to hudson "the build is done", pass a few parameters, 
-    then let Hudson take over. 
-    
+    <!--
+    this script is invoked by the build, on the build machine,
+    to signify to hudson "the build is done", pass a few parameters,
+    then let Hudson take over.
+
     wget - -no-verbose -O invokeTestsJSON.xml http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/invokeTestsJSON.xml?h=master 2>&1;
-    
+
     -->
 
 
@@ -31,11 +31,11 @@
 
     <target name="JUnitTests"
         depends="init">
-        
-        <!-- 
-          currently we test on three platforms. 
-          So, three parallel calls since on different machines (and Hudson queues). 
-          TODO: Can these be called, in parrallel via callant (or, perhaps subant?) 
+
+        <!--
+          currently we test on three platforms.
+          So, three parallel calls since on different machines (and Hudson queues).
+          TODO: Can these be called, in parrallel via callant (or, perhaps subant?)
           for greater flexibility in what to test?
         -->
 
@@ -47,7 +47,7 @@
                     value="ep${eclipseStreamMajor}-unit-win32" />
             </antcall>
 
- 
+
             <antcall target="triggerHudsonTests">
                 <param
                     name="job"
@@ -70,17 +70,17 @@
 
         <property environment="env" />
 
-     <!-- 
-     baseURL used to be "required parameter" for Hudson job, but seemed overly complicated so 
-     I compute all this later (based on stream and id) but, I've learned, one disadvantage is this 
-     restricts test code locations to "downloads". There might be times we want to do from "build" 
-     locations, or similar. Not to mention, other, internal test systems someday. 
-     
+     <!--
+     baseURL used to be "required parameter" for Hudson job, but seemed overly complicated so
+     I compute all this later (based on stream and id) but, I've learned, one disadvantage is this
+     restricts test code locations to "downloads". There might be times we want to do from "build"
+     locations, or similar. Not to mention, other, internal test systems someday.
+
         <property
             name="baseURL"
             value="http://download.eclipse.org/eclipse/downloads/${dropsDirSegment}/${buildId}" />
      -->
-        
+
         <!-- Hudson jobs currentl have three required parameters -->
         <property
             name="JSON_buildId"
@@ -107,9 +107,9 @@
             <arg value="grep -o 'nextBuildNumber&quot;:[0-9]*' ${jobNumberOut}/nextBuildNumber${job} | cut -d ':' -f 2" />
         </exec>
          -->
-        <!-- 
-         don't delete ... for debugging for now ... but long term might make use of this (and 
-         other info) to "find" our results? 
+        <!--
+         don't delete ... for debugging for now ... but long term might make use of this (and
+         other info) to "find" our results?
         <delete file="${jobNumberOut}/nextBuildNumber${job}" />
         -->
         <echo message="Next hudson build number is ${nextHudsonBuild}." />
@@ -122,7 +122,7 @@
             <arg value="--data-urlencode" />
             <arg value="json=${json}" />
         </exec>
-        
+
         <!-- Changed to handle with cron job
         <property
             name="hudsonResultRootURL"
@@ -131,7 +131,7 @@
             name="hudsonResultURL"
             value="${hudsonResultRootURL}/archive.zip" />
         <echo message="hudsonResultURL ${hudsonResultURL} " />
-        
+
 
         Bug 389048 - test results sometimes do not get routed back to right download page summary
         <antcall target="getHudsonResults" />
@@ -142,9 +142,9 @@
     <target
         name="getHudsonResults"
         depends="init">
-        <!-- wait for the test results to appear 
-            1440 is 24 hours. This should be temporay and is needed for when 
-            2 builds happen near each other, windows and mac might take 12 hours, and 
+        <!-- wait for the test results to appear
+            1440 is 24 hours. This should be temporay and is needed for when
+            2 builds happen near each other, windows and mac might take 12 hours, and
             are ran serially. This should be reduced to 960 (16 hours) or 600 (10 hours)
             in future as we get tests running right.
         -->
@@ -176,13 +176,13 @@
         <antcall target="createPromoteScript" />
     </target>
 
-    <target name="createPromoteScript" 
+    <target name="createPromoteScript"
         depends="init">
         <!-- Create and que up promotion script after we have fetched the results back from hudson.
-             (We need to promote under a different user ID since we builder under e4Build that 
-             that is not a userID). 
-             The "updateDropLocation.sh" file is similar to initial "sync" file, 
-             but, a little different, and could potential be more different, or more similar? 
+             (We need to promote under a different user ID since we builder under e4Build that
+             that is not a userID).
+             The "updateDropLocation.sh" file is similar to initial "sync" file,
+             but, a little different, and could potential be more different, or more similar?
              in future. -->
 
         <property
@@ -200,12 +200,12 @@
             message="/shared/eclipse/sdk/promotion/updateDropLocation.sh ${eclipseStream} ${buildId}${line.separator}"
             append="true"
             file="${updatescriptname}" />
-        
+
         <!-- we restrict "others" rights for a bit more security or safety from accidents -->
         <chmod
             perm="ug=rwx,o-rwx"
             file="${updatescriptname}" />
-        
+
         <!-- dont' delete zip, for now, to aide debugging
         <delete includeEmptyDirs="true">
             <fileset dir="${tmpzipdir}" />
@@ -228,7 +228,7 @@
                 arg1="${eclipseStreamMajor}"
                 arg2="4" />
         </condition>
-        
+
 
         <script language="javascript">
             var buildId = project.getProperty("buildId");
@@ -238,7 +238,7 @@
             // sArray 0 is "whole match"
             project.setProperty("buildType", sArray[1]);
         </script>
-        
+
         <property
             name="buildRoot"
             value="/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}" />
@@ -251,11 +251,11 @@
         <property
             name="jobNumberOut"
             value="${postingDirectory}/${buildId}/testresults/" />
-        <!-- make sure this directory exists, as we'll later try to 
+        <!-- make sure this directory exists, as we'll later try to
              write information file there -->
         <echo message="jobNumberOut: ${jobNumberOut}" />
         <mkdir dir="${jobNumberOut}" />
-        
+
         <!-- TODO: find out if and why we need "buildLabel" defined here? -->
         <property
             name="buildLabel"

@@ -11,11 +11,11 @@
             pack="true"
             repositoryPath="file:/${repoDirLocation}" />
 
-        
-        
-        <!-- 
-            we remove these, because they end up having invalid pack.gz 
-            files.  
+
+
+        <!--
+            we remove these, because they end up having invalid pack.gz
+            files.
             -->
         <p2.remove.iu>
             <repository location="file://${repoDirLocation}" />
@@ -36,20 +36,20 @@
                 artifacts="(format=packed)" />
 
         </p2.remove.iu>
-        
-        
-        <!-- This is to remove IUs handy during the build, but not really 
+
+
+        <!-- This is to remove IUs handy during the build, but not really
             needed in final repo -->
         <!--
-           we used to remove this IU, but leavig it now. 
+           we used to remove this IU, but leavig it now.
            See bug 378137
            https://bugs.eclipse.org/bugs/show_bug.cgi?id=378137
-           <iu id="org.aspectj.runtime" /> 
+           <iu id="org.aspectj.runtime" />
         -->
-        <!-- 
-           Note, we used to not remove 
+        <!--
+           Note, we used to not remove
            master-equinox.feature.group
-           but that technically makes the repo invalid since 
+           but that technically makes the repo invalid since
            it requires other things we removed. See bug 377314
            https://bugs.eclipse.org/bugs/show_bug.cgi?id=377314
         -->
@@ -64,7 +64,7 @@
 
         </p2.remove.iu>
 
-        
+
         <!-- clean up some unnecessary files, in case they are around -->
         <delete
             failonerror="false"

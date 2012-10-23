@@ -5,7 +5,7 @@
 	-->
 	<!--A directory to look in for markers created from other running builds.-->
     <!-- TODO: we may need to change this to a "real" value on build.eclipse.org? instead of /home/users/releng/buildTools/markers -->
-    <!-- some of the java code in tests seems to depend on it? 
+    <!-- some of the java code in tests seems to depend on it?
 	<property name="markerContainer" value="/home/users/releng/buildTools/markers" />
     -->
 	<property name="markerContainer" value="${basedir}/markers" />
@@ -17,9 +17,9 @@
 		<findMachine cfg="${cfg}" markerContainer="${markerContainer}" cfgKey="${cfgKey}" markerName="${markerName}" waitInterval="30" />
 
 		<!--The result of the findMachine task is a .marker files
-		 with a key-value pair identifying which machine has been assigned for testing.  
+		 with a key-value pair identifying which machine has been assigned for testing.
 		 The ${testMachine} property value is then used in the ${test.xml} script.
-		 The marker is also used by other builds that use <findMachine> to signal that the 
+		 The marker is also used by other builds that use <findMachine> to signal that the
 		 specified test machine is in use.-->
 		<property file="${markerContainer}/${markerName}.marker" />
 		<property name="testMachine" value="${0}" />

@@ -271,7 +271,7 @@
     <target name="checkSWTwce" if="org.eclipse.swt.win32.wce_ppc.arm.exists">
         <echo message="DEBUG: ${buildDirectory}/plugins/org.eclipse.swt.win32.wce_ppc.arm already exists, so will not be re-fetched" />
     </target>
-    
+
     <target name="packageSwtStandalone">
         <condition
             property="downloadFile"
@@ -636,18 +636,18 @@
                 line="${configArgs} -consolelog -nosplash -data ${buildDirectory}/perf-workspace -application org.eclipse.test.performance.ui.resultGenerator
 						-current ${buildId}
 						-jvm ${eclipse.perf.jvm}
-						-print					    
+						-print					
 						-output ${postingDirectory}/${buildLabel}/performance/
 						-config eplnx1,eplnx2,epwin2,epwin3
 			            -dataDir ${postingDirectory}/../../data/v38
 						-config.properties ${eclipse.perf.config.descriptors}
 						-scenario.pattern org.eclipse.%.test%" />
-			<!-- baselines arguments are no longer necessary since bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=209322 has been 
+			<!-- baselines arguments are no longer necessary since bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=209322 has been
 			     fixed...
 						-baseline ${eclipse.perf.ref}
 						-baseline.prefix R-3.4_200806172000
 			-->
-			<!-- add this argument to list above when there are milestone builds to highlight 
+			<!-- add this argument to list above when there are milestone builds to highlight
 			-highlight.latest 3.3M1_
 			-->
             <env

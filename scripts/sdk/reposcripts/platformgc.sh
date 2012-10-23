@@ -6,7 +6,7 @@ function checkrepo ()
  #git fsck --unreachable | wc -l
  #find objects/?? -type f | wc -l
  #find objects/pack -ls | wc -l
- git gc 
+ git gc
 }
 PROJECTROOT=/gitroot/platform
 

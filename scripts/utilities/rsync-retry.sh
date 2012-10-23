@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function rsync-retry () {
-    if [ -z $1 -o -z $2 ] 
+    if [ -z $1 -o -z $2 ]
     then
         echo "Invalid arguments. Usage is rsync-retry FROMDIR TODIR [verbose] [maxtrys] [pausetime]"
         return 1
@@ -14,7 +14,7 @@ function rsync-retry () {
     else
        local verboseFlag=$3
     fi
-    
+
     if [ -z $4 ]
     then
        local maxTrys=5
@@ -33,18 +33,18 @@ function rsync-retry () {
     # https://bugs.eclipse.org/bugs/show_bug.cgi?id=278471
 
     local rsyncArgs="rup"
-    if [ $verboseFlag -gt 0 ] 
+    if [ $verboseFlag -gt 0 ]
     then
         rsyncArgs="${rsyncArgs}v"
     else
         rsyncArgs="${rsyncArgs}q"
     fi
-     
+
     exitCode=-1
     nTrys=0
-    
+
     until [ $exitCode == 0 ]
-    do  
+    do
      rsync -${rsyncArgs} ${FROMDIR} ${TODIR}
      exitCode=$?
      if [ $exitCode != 0 ]
@@ -58,8 +58,8 @@ function rsync-retry () {
              fi
          sleep $nPauseTime
          fi
-     fi 
+     fi
     done
-    
+
     return $exitCode
 }

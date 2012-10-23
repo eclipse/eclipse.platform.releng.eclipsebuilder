@@ -95,7 +95,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 <li><a href="#CVSSDK">CVS Client SDK</a></li>
 <li><a href="#SWT">SWT binary and Source</a></li>
 <li><a href="#org.eclipse.releng">org.eclipse.releng.tools plug-in</a></li>
- 
+
   </li>
   <li style="background-image: url(../../../eclipse.org-common/stylesheets/leftnav_fade.jpg); background-repeat: repeat-x; border-style: none;">
 			<br /><br /><br /><br /><br />
@@ -105,9 +105,9 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 </div>
 
 &nbsp; <!--?php
-	                                                                           
+	
         $remoteName = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-                                    
+
         if (strstr($remoteName, "ibm.com")) {
                 $jre = "http://w3.hursley.ibm.com/java/jim/";
         } else {
@@ -115,26 +115,26 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
         }
 		
 	
-?--> 
+?-->
 <div id="midcolumn">
-		<table BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > 
-		<tr> 
-			<td> 
-				<p><b><font face="Verdana" size="+3">@type@ Build: @build@ - </font><font face="Verdana" size="+2"> <?php echo $platform; ?> </font></b><br> @date@. 
+		<table BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" >
+		<tr>
+			<td>
+				<p><b><font face="Verdana" size="+3">@type@ Build: @build@ - </font><font face="Verdana" size="+2"> <?php echo $platform; ?> </font></b><br> @date@.
 				These downloads are provided under the <a href="http://www.eclipse.org/legal/epl/notice.html">
 				<b>Eclipse Foundation Software User Agreement</b></a>.</p>
 			</td><tr><tr>
 		<tr>
 				<td width="75%">
-		   			This page provides all the downloads specific to the various <?php echo $platform; ?> platform. Test results 
-					are provided below and performance results are posted once they are available. 
-					You may navigate through the other platform pages by selecting a tab from the 
-					list of platform navigation tabs above. 
+		   			This page provides all the downloads specific to the various <?php echo $platform; ?> platform. Test results
+					are provided below and performance results are posted once they are available.
+					You may navigate through the other platform pages by selecting a tab from the
+					list of platform navigation tabs above.
 				</td>
 			</tr>
 		</table>
 		<br /><br /><a href="#EclipseSDK"><img align="left" src="../../../eclipse.org-common/stylesheets/update_wiz.gif" border="0" alt="Download Eclipse SDK" /></a>
-						&#160;&#160;<font size="+1"><b>Download now: <a href="#EclipseSDK">Eclipse SDK</a></b></font>, <?php echo $platform; ?> <br /><br /> 
+						&#160;&#160;<font size="+1"><b>Download now: <a href="#EclipseSDK">Eclipse SDK</a></b></font>, <?php echo $platform; ?> <br /><br />
 				<br /><br />
 		<div>
 		<table BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > </br>
@@ -144,7 +144,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
         		echo "<tr> To download a file via HTTP click on its corresponding http link below.";			
 		} else {
     			echo "<tr>";
-		} ?> 
+		} ?>
 		</table>
 		</div>
 		
@@ -205,7 +205,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
             </ul>
         </div>	
 </div>		
-<?php 
+<?php
 
 function column($servername) {
 
@@ -214,7 +214,7 @@ function column($servername) {
           echo "<td width=\"7%\"><b>Size</b></td>";
                 echo "<td width=\"37%\"><b>File</b></td>";
                    echo "<td width=\"11%\"><b>Checksum</b></td>";
-      } else { 
+      } else {
            echo "<td width=\"7%\"><b>Download</b></td>";
           echo "<td width=\"7%\"><b>Size</b></td>";
                 echo "<td width=\"37%\"><b>File</b></td>";
@@ -245,19 +245,19 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 #     $httplink = "http://www.eclipse.org/downloads/download.php?file=/eclipse/downloads/drops/$buildlabel/$zipfile";
      $httplink = "download.php?dropFile=$zipfile";
      $httplabel = $zipfile;
-     $httpline =  "<div align=\"left\"><a href=\"$httplink\">$httplabel</a>";    
+     $httpline =  "<div align=\"left\"><a href=\"$httplink\">$httplabel</a>";
      $md5name = "";
      $shaname = "";
 } else {
     $httplink = "download.php?dropFile=$zipfile";
     $httplabel = "(http)";
-    $httpline = "<div align=\"left\"><a href=\"$httplink\">$httplabel</a>"; 
+    $httpline = "<div align=\"left\"><a href=\"$httplink\">$httplabel</a>";
     $md5name = $zipfile;
     $shaname = $zipfile;
 }
   $filesize = getDropSize($zipfile);
-    
-  echo "$httpline"; 
+
+  echo "$httpline";
   echo "&nbsp;&nbsp";
   echo "<td>$filesize</td>";
   echo "<td>$zipfile</td>";
@@ -269,18 +269,18 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 <table align="left" BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%">
 <tr><td><div class="homeitem3col">
 <h3><a name="EclipseSDK"> Eclipse SDK&nbsp;<a href="details.php#EclipseSDK"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
+<table BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" bordercolor="#999999" >
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?>
 </tr> %sdk% </table><?php
 		 $parts = explode("/", getcwd());
 		 $parts2 = explode("-", $parts[count($parts) - 1]);
 		 $buildName = $parts2[1];
-		 
+		
 		 // Get build type names
 
 		 $fileHandle = fopen("./dlconfig2.txt", "r");
 		 while (!feof($fileHandle)) {
-		 		 
+		 		
 		 		 $aLine = fgets($fileHandle, 4096); // Length parameter only optional after 4.2.0
 		 		 $parts = explode(",", $aLine);
 		 		 $dropNames[trim($parts[0])] = trim($parts[1]);
@@ -289,44 +289,44 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 
 		 $buildType = $dropNames[$parts2[0]];
 		
-?> 
+?>
 </div></td></tr>
 
 <tr><td><div class="homeitem3col">
 <h3><a name="JUnitPlugin"> JUnit Plugin Tests and Automated Testing Framework&nbsp;<a href="details.php#JUnitPlugin"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >   
-<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
+<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?>
 </tr> %tests% </table>
 </div></td></tr>
 
 
 <tr><td><div class="homeitem3col">
 <h3><a name="ExamplePlugins"> Example Plug-ins&nbsp;<a href="details.php#ExamplePlugins"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
+<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?>
 </tr> %example% </table>
 </div></td></tr>
 
 
 <tr><td><div class="homeitem3col">
 <h3><a name="RCPRuntime"> RCP Runtime Binary&nbsp;<a href="details.php#RCPRuntime"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >  
-<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
+<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?>
 </tr> %rcpruntime% </table>
 </div></td></tr>
 
 
 <tr><td><div class="homeitem3col">
 <h3><a name="RCPSDK"> RCP SDK&nbsp;<a href="details.php#RCPSDK"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
+<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?>
 </tr> %rcpsdk% </table>
 </div></td></tr>
 
 <tr><td><div class="homeitem3col">
 <h3><a name="DeltaPack"> DeltaPack&nbsp;<a href="details.php#DeltaPack"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
+<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?>
 </tr> %deltapack% </table>
 </div></td></tr>
 
@@ -334,92 +334,92 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 <tr><td><div class="homeitem3col">
 <h3><a name="com.ibm.icu"> com.ibm.icu.base binary and source Plug-ins&nbsp;<a href="details.php#com.ibm.icu"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <TABLE BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" BORDERCOLOR="#999999" >
-<TR> <TD ALIGN=RIGHT VALIGN=TOP WIDTH="5%"> <DIV ALIGN="left"><B>Status</B></DIV></TD><TD WIDTH="36%"><B>Platform</B></TD><?php column($_SERVER["SERVER_NAME"]); ?> 
+<TR> <TD ALIGN=RIGHT VALIGN=TOP WIDTH="5%"> <DIV ALIGN="left"><B>Status</B></DIV></TD><TD WIDTH="36%"><B>Platform</B></TD><?php column($_SERVER["SERVER_NAME"]); ?>
 </TR> %icubase% </TABLE>
 </div></td></tr>
 
 
 <tr><td><div class="homeitem3col">
 <h3><a name="PlatformRuntime"> Platform Runtime Binary&nbsp;<a href="details.php#PlatformRuntime"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
+<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?>
 </tr> %runtime% </table>
 </div></td></tr>
 
 
 <tr><td><div class="homeitem3col">
 <h3><a name="JDTRuntime"> JDT Runtime Binary&nbsp;<a href="details.php#JDTRuntime"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
+<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?>
 </tr> %jdt% </table>
 </div></td></tr>
 
 
 <tr><td><div class="homeitem3col">
 <h3><a name="JDTSDK"> JDT SDK &nbsp;<a href="details.php#JDTSDK"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
+<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?>
 </tr> %jdtsdk% </table>
 </div></td></tr>
 
 <tr><td><div class="homeitem3col">
 <h3><a name="JDTCORE"> JDT Core Batch Compiler &nbsp;<a href="details.php#JDTCORE"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
+<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?>
 </tr> %jdtc% </table>
 </div></td></tr>
 
 <tr><td><div class="homeitem3col">
 <h3><a name="JARPROCESSOR"> Jar Processor &nbsp;<a href="details.php#JARPROCESSOR"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
+<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?>
 </tr> %jarprocessor% </table>
 </div></td></tr>
 
 <tr><td><div class="homeitem3col">
 <h3><a name="PDERuntime"> PDE Runtime Binary&nbsp;<a href="details.php#PDERuntime"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >  
-<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
+<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?>
 </tr> %pde% </table>
 </div></td></tr>
 
 
 <tr><td><div class="homeitem3col">
 <h3><a name="PDESDK"> PDE SDK&nbsp;<a href="details.php#PDESDK"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
+<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?>
 %pdesdk% </table>
 </div></td></tr>
 
 
 <tr><td><div class="homeitem3col">
 <h3><a name="CVSRuntime"> CVS Client Runtime Binary&nbsp;<a href="details.php#CVSRuntime"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >  
-<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
+<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?>
 </tr> %cvs% </table>
 </div></td></tr>
 
 
 <tr><td><div class="homeitem3col">
 <h3><a name="CVSSDK"> CVS Client SDK&nbsp;<a href="details.php#CVSSDK"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
+<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?>
 %cvssdk% </table>
 </div></td></tr>
 
 
 <tr><td><div class="homeitem3col">
 <h3><a name="SWT"> SWT Binary and Source&nbsp;<a href="details.php#SWT"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
+<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?>
 </tr> %swt% </table>
 </div></td></tr>
 
 
 <tr><td><div class="homeitem3col">
 <h3><a name="org.eclipse.releng"> org.eclipse.releng.tools plug-in&nbsp;<a href="details.php#org.eclipse.releng"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
-<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" > 
-<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?> 
+<table border=0 cellspacing=2 cellpadding=0 width="99%" bordercolor="#999999" >
+<tr> <td align=RIGHT valign=TOP width="5%"> <div align="left"><b>Status</b></div></td><td width="36%"><b>Platform</b></td><?php column($_SERVER["SERVER_NAME"]); ?>
 </tr> %relengtools% </table>
 </div></td></tr>
 </table>

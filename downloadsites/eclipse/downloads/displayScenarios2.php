@@ -2,7 +2,7 @@
 <body>
 
 <?php
-	$parts=explode("&","$QUERY_STRING"); 
+	$parts=explode("&","$QUERY_STRING");
 	$config=trim($parts[0]);
 	$packageprefix=trim($parts[1]);
 
@@ -27,7 +27,7 @@
 	}
 	else{
 	sort($scenarios);
-	echo "<h2>$packageprefix* ($scenarioCount scenarios)</h2>"; 
+	echo "<h2>$packageprefix* ($scenarioCount scenarios)</h2>";
 
 	for ($counter=0;$counter<count($scenarios);$counter++){
 		$line = "<a href=\"performance/$config/$scenarios[$counter].html\">$scenarios[$counter]</a><br>";
@@ -35,7 +35,7 @@
 	}
 	}
 	aDirectory.closedir();	
-?> 
+?>
 
 </body>
 </html>

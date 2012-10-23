@@ -4,8 +4,8 @@
 <link rel="stylesheet" href="../../../../../default_style.css" type="text/css">
 <TITLE>Performance Results</TITLE></head>
 <body>
-<p><B><FONT FACE="Verdana" SIZE="+3">Performance Results</FONT></B><BR><BR> <TABLE BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > 
-<TR> <TD ALIGN=LEFT VALIGN=TOP COLSPAN="3" BGCOLOR="#0080C0"><B><FONT COLOR="#FFFFFF" FACE="Arial,Helvetica"> 
+<p><B><FONT FACE="Verdana" SIZE="+3">Performance Results</FONT></B><BR><BR> <TABLE BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" >
+<TR> <TD ALIGN=LEFT VALIGN=TOP COLSPAN="3" BGCOLOR="#0080C0"><B><FONT COLOR="#FFFFFF" FACE="Arial,Helvetica">
 Performance fingerprint</FONT></B></TD></TR></TABLE>
 <?php
     $performance = dir(".");
@@ -28,13 +28,13 @@ Performance fingerprint</FONT></B></TD></TR></TABLE>
         }
     }
 ?>
-<P><A NAME="unit"></A>* Missing reference data. Build used for comparison specified 
+<P><A NAME="unit"></A>* Missing reference data. Build used for comparison specified
 in ending parenthesis.<BR>green: faster, less memory
 <BR>red: slower, more memory
 <BR>grey: regression with explanation. Click the bar for notes on this scenario.
 <BR>x axis: difference between current value and baseline value as percentage<BR></P>
-<TABLE BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > 
-<TR> <TD ALIGN=LEFT VALIGN=TOP COLSPAN="3" BGCOLOR="#0080C0"><B><FONT COLOR="#FFFFFF" FACE="Arial,Helvetica"> 
+<TABLE BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" >
+<TR> <TD ALIGN=LEFT VALIGN=TOP COLSPAN="3" BGCOLOR="#0080C0"><B><FONT COLOR="#FFFFFF" FACE="Arial,Helvetica">
 Detailed performance data grouped by scenario prefix</FONT></B></TD></TR></TABLE>
 <?php
 
@@ -57,13 +57,13 @@ Detailed performance data grouped by scenario prefix</FONT></B></TD></TR></TABLE
         }
     }
 ?>
-<p><BR><BR><TABLE BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > <TR> <TD ALIGN=LEFT VALIGN=TOP COLSPAN="3" BGCOLOR="#0080C0"><B><FONT COLOR="#FFFFFF" FACE="Arial,Helvetica">Performance 
-Unit Test Results for <?php echo "$buildName"; ?> </FONT></B></TD></TR> </TABLE><P></P><TABLE BORDER="0"> 
-</TABLE>** test errors or failures here do not produce Red X's for now**<TABLE WIDTH="77%" BORDER="1"> 
-<TR> <TD WIDTH="81%"><B>Tests Performed</B></TD><TD WIDTH="19%"><B>Errors &amp; 
-Failures</B></TD></TR> %testresults% </TABLE><BR> <A NAME="consolelog"></A><TABLE BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > 
-<TR> <TD ALIGN=LEFT VALIGN=TOP COLSPAN="3" BGCOLOR="#0080C0"><B><FONT COLOR="#FFFFFF" FACE="Arial,Helvetica"> 
-Console output logs <?php echo "$buildName"; ?> </FONT></B></TD></TR></TABLE><P> 
+<p><BR><BR><TABLE BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" > <TR> <TD ALIGN=LEFT VALIGN=TOP COLSPAN="3" BGCOLOR="#0080C0"><B><FONT COLOR="#FFFFFF" FACE="Arial,Helvetica">Performance
+Unit Test Results for <?php echo "$buildName"; ?> </FONT></B></TD></TR> </TABLE><P></P><TABLE BORDER="0">
+</TABLE>** test errors or failures here do not produce Red X's for now**<TABLE WIDTH="77%" BORDER="1">
+<TR> <TD WIDTH="81%"><B>Tests Performed</B></TD><TD WIDTH="19%"><B>Errors &amp;
+Failures</B></TD></TR> %testresults% </TABLE><BR> <A NAME="consolelog"></A><TABLE BORDER=0 CELLSPACING=5 CELLPADDING=2 WIDTH="100%" >
+<TR> <TD ALIGN=LEFT VALIGN=TOP COLSPAN="3" BGCOLOR="#0080C0"><B><FONT COLOR="#FFFFFF" FACE="Arial,Helvetica">
+Console output logs <?php echo "$buildName"; ?> </FONT></B></TD></TR></TABLE><P>
 <?php
 	$hasNotes = false;
 	$aDirectory = dir("consolelogs");

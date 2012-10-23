@@ -5,7 +5,7 @@
         name="updateReferenceComposite">
        <!-- fail if our key required variables are not defined by caller. There are no
        good defaults -->
-    	<!-- currently, can be values such as 
+    	<!-- currently, can be values such as
     	/shared/webtools/integration
     	/shared/webtools/maintenance
     	-->
@@ -13,8 +13,8 @@
             unless="referenceCompositeDir"/>
         <fail
             unless="dropDirectory"/>
-       <!-- note, we currently don't require that dropDirectory exists, since techically does 
-       not have to ... but, we might want to put a sanity check in here, since its anticipated it 
+       <!-- note, we currently don't require that dropDirectory exists, since techically does
+       not have to ... but, we might want to put a sanity check in here, since its anticipated it
        always will for the way we are using this script -->
     	
     	<!-- make sure directory exists, if it doesn't already, since p2 operation will fail if it doesn't. -->

@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-# small utilitity to confirm command line processing utility 
-# is working as expected. 
-# If changes to command line procedure are changed, then 
+# small utilitity to confirm command line processing utility
+# is working as expected.
+# If changes to command line procedure are changed, then
 # this test should be changed as well
 
-# The purpose is to make sure the "junk" values DO show up 
-# is the debug echos (if not, then something is probably misspelled, 
-# or forgot to use conditional assignments. 
+# The purpose is to make sure the "junk" values DO show up
+# is the debug echos (if not, then something is probably misspelled,
+# or forgot to use conditional assignments.
 
 DEBUG=true VERBOSE_REMOVES=-v  ./masterBuild.sh \
     -buildType Njunk \
@@ -26,9 +26,8 @@ DEBUG=true VERBOSE_REMOVES=-v  ./masterBuild.sh \
     -timestamp tsJunkdateandtime \
     2>&1 | tee fullmasterBuildOutput.txt
 
-    # call with no arguments specified, 
-    # to confirm reasonable defaults are assigned. 
+    # call with no arguments specified,
+    # to confirm reasonable defaults are assigned.
 DEBUG=true  ./processCommandLine.sh \
        2>&1 | tee fullmasterBuildOutput.txt
 
-        

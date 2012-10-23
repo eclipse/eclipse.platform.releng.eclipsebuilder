@@ -13,7 +13,7 @@ DLMACHINE_BASE_SITE=/home/data/httpd/download.eclipse.org/eclipse/updates/4.3mil
 
 DLMACHINE_SITE=${DLMACHINE_BASE_SITE}/${DL_SITE_ID}
 
-# remember, need trailing slash since going from existing directories 
+# remember, need trailing slash since going from existing directories
 # contents to new directories contents
 rsync -r "${BUILDMACHINE_SITE}/"  "${DLMACHINE_SITE}"
 

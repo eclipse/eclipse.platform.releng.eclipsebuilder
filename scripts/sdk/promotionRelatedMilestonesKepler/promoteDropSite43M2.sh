@@ -13,7 +13,7 @@ rsync -ra ${DROP_ID}/ ${DROP_ID}ORIG
 
 mv ${DROP_ID}ORIG ${DROP_ID}
 
-rm renameBuild.sh 
+rm renameBuild.sh
 
 rsync -r ${DL_DROP_ID} /home/data/httpd/download.eclipse.org/eclipse/downloads/drops4/
 
@@ -25,7 +25,7 @@ rsync -r ${DL_DROP_ID} /home/data/httpd/download.eclipse.org/eclipse/downloads/d
     then
         rsync index.txt /home/data/httpd/download.eclipse.org/eclipse/downloads/index.html
         rccode=$?
-        if [ $rccode -eq 0 ] 
+        if [ $rccode -eq 0 ]
         then
             echo "INFO: Upated http://download.eclipse.org/eclipse/downloads/index.html"
             return 0

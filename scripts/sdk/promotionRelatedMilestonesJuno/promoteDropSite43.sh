@@ -30,4 +30,4 @@ updateIndex 4
 echo "move backup back to original"
 mv ${DROP_ID}ORIG ${DROP_ID}
 
-rm renameBuild.sh 
+rm renameBuild.sh

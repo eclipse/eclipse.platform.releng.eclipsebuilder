@@ -15,8 +15,8 @@
         // sArray 0 is "whole match"
         project.setProperty("buildType", sArray[1]);
     </script>
-    
-     <!-- 
+
+     <!--
         TODO: make less exactly hard coded in future
          also, check for validity using "matches" digit*\.digit*\.digit*
       -->
@@ -58,8 +58,8 @@
             value="${basedir}/../src" />
 
         <property name="genTestIndexesInitialized" value="true"/>
-        
-                
+
+
     </target>
 
     <target name="generateEclipseIndex" depends="init" >
@@ -78,7 +78,7 @@
             classname="${generatorClass}"
             property="class"
             value="${generatorClass}" />
-        
+
         <!--regenerate the index page with links to test results -->
         <ant
             antfile="${builderDir}/eclipse/helpernew.xml"

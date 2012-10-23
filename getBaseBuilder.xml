@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
     <!--
-        A utility ant script get the base builder from CVS. 
-        Hudson jobs can call this script from ant 
-        as one of it first build steps. 
+        A utility ant script get the base builder from CVS.
+        Hudson jobs can call this script from ant
+        as one of it first build steps.
     -->
 <project
     name="getBaseBuilder"
@@ -13,10 +13,10 @@
         name="hudson-init"
         if="hudson"
         depends="checkHudson">
-         <!-- as of this writing, 04/22/2012, this was current list of 
-              hudson provided variables. We take advantage of a number 
-              of them, but "translate" them into our own variable names, 
-              for a little loser build-system seperattion 
+         <!-- as of this writing, 04/22/2012, this was current list of
+              hudson provided variables. We take advantage of a number
+              of them, but "translate" them into our own variable names,
+              for a little loser build-system seperattion
          BUILD_NUMBER
              The current build number, such as "153"
          BUILD_ID
@@ -69,7 +69,7 @@
     <target
         name="init"
         depends="hudson-init">
-            
+
         <!-- assign defaults if not on husson, for local testing if nothing else -->
         <property
             name="WORKSPACE"
@@ -90,17 +90,17 @@
         <echo message="WORKSPACE: ${WORKSPACE}" />
         <echo message="basebuilder version: ${builderVersion}" />
         <echo message="cvsRoot: ${cvsRoot}" />
-        <echo message="cvsProject: ${cvsProject}" />    
-            
+        <echo message="cvsProject: ${cvsProject}" />
+
         <!-- don't need? yet
              <echo message="BUILD_ID: ${BUILD_ID}" />
              <echo message="BUILD_NUMBER: ${BUILD_NUMBER}" />
              <echo message="JOB_NAME: ${JOB_NAME}" />
              <echo message="buildId: ${buildId}" />
              -->
-                 
-                 
-       <!-- not used? But, may want in future? 
+
+
+       <!-- not used? But, may want in future?
         <condition
             property="buildcleanarg"
             value="-Dbuild.clean=${build.clean}"
@@ -132,7 +132,7 @@
 
         <!-- temp, clean up old use of 'ws' -->
         <delete dir="${WORKSPACE}/workarea" />
-        
+
         <cvs
             cvsroot="${cvsRoot}"
             command="checkout"
@@ -147,16 +147,16 @@
     <!-- hurestic to check if we are running on hudson variable, if so -->
     <target name="checkHudson">
         <!-- HUDSON_USER should just be "anonyous" for most of our cases (currently)
-             but seems a safe variable to check ... if set, assume we are on hudson, 
-             if not set, assume we are not and leave "hudson" unset (not false) 
-             Hmm, seems HUDSON_USER is not reliably set. The only 4 I saw reliably 
+             but seems a safe variable to check ... if set, assume we are on hudson,
+             if not set, assume we are not and leave "hudson" unset (not false)
+             Hmm, seems HUDSON_USER is not reliably set. The only 4 I saw reliably
              set were
              [echoproperties] env.HUDSON_COOKIE
              [echoproperties] env.HUDSON_HOME
              [echoproperties] env.HUDSON_SERVER_COOKIE
              [echoproperties] env.HUDSON_URL
-             Not sure which would be best/safest to use in huristic, but 
-             I'll go with URL for now. 
+             Not sure which would be best/safest to use in huristic, but
+             I'll go with URL for now.
              -->
         <property environment="env" />
         <condition property="hudson">

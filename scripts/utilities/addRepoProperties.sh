@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # use of this script requires our WTP addRepoProperties app to have already been added to eclipse instance.
-# TODO: we could probably integrate and always call 'install-relengTools.sh' for ease? Just a little longer? and might update, when not intended or expected (e.g. untested changes?) 
+# TODO: we could probably integrate and always call 'install-relengTools.sh' for ease? Just a little longer? and might update, when not intended or expected (e.g. untested changes?)
 #${RELENG_CONTROL}/install-relengTools.sh
 
 APP_NAME=org.eclipse.wtp.releng.tools.addRepoProperties
@@ -20,7 +20,7 @@ fi
 export JAVA_HOME=${JAVA_6_HOME}
 devJRE=$JAVA_HOME/jre/bin/java
 
-ibmDevArgs="-Xms128M -Xmx256M -Dosgi.ws=gtk -Dosgi.os=linux -Dosgi.arch=x86" 
+ibmDevArgs="-Xms128M -Xmx256M -Dosgi.ws=gtk -Dosgi.os=linux -Dosgi.arch=x86"
 
 
 #REPO="/shared/webtools/committers/wtp-R3.3.0-I/20101209114749/S-3.3.0M4-20101209114749/repository"
@@ -37,7 +37,7 @@ STATS_TAG_SUFFIX=$5
 
 if [[ -z "${REPO}" ]]
 then
-  echo "ERROR: this script requires a repository to add properties to."; 
+  echo "ERROR: this script requires a repository to add properties to.";
   exit 1;
 fi
 
@@ -46,21 +46,21 @@ echo "BUILD_ID: ${BUILD_ID}";
 echo "STATS_TAG_SUFFIX: ${STATS_TAG_SUFFIX}";
 
 if [[ ( ! ( -z "${BUILD_BRANCH}" ) ) && ( ! ( -z "${BUILD_ID}" ) ) ]]
-then 
+then
  MIRRORURL="/webtools/downloads/drops/${BUILD_BRANCH}/${BUILD_ID}/repository/"
 else
  echo "WARNING: no mirror URL specified.";
  MIRRORURL=""
 fi
 
-if [ ! -z $MIRRORURL ] 
-then 
+if [ ! -z $MIRRORURL ]
+then
    MIRRORURL_ARG="http://www.eclipse.org/downloads/download.php?format=xml&file=${MIRRORURL}"
 else
     MIRRORURL_ARG=""
 fi
 
-# remember, the '&' should NOT be unescaped here ... the p2 api (or underlying xml) will escape it. 
+# remember, the '&' should NOT be unescaped here ... the p2 api (or underlying xml) will escape it.
 devArgs="$ibmDevArgs \
 -Dp2MirrorsURL=${MIRRORURL_ARG} \
 -DartifactRepoDirectory=${REPO}  \
@@ -77,11 +77,11 @@ echo
 
 
 if [ -n ${ECLIPSE_EXE} -a -x ${ECLIPSE_EXE} ]
-then 
+then
    ${ECLIPSE_EXE} --launcher.suppressErrors -nosplash -console -data $devworkspace -application ${APP_NAME} ${OTHER_ARGS} -vm $devJRE -vmargs $devArgs
    RC=$?
 else
    echo "ERROR: ECLIPSE_EXE is not defined to executable eclipse"
    RC=1001
-fi 
+fi
 exit $RC
