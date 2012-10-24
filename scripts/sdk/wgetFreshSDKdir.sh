@@ -26,6 +26,7 @@ chmod -c +x ../${fileToGet}
 cd ..
 checkForErrorExit $? "could not change directory up?!"
 
+rm -fr tempeb 2>/dev/null
 mkdir -p tempeb
 checkForErrorExit $? "could not mkdir?!"
 
