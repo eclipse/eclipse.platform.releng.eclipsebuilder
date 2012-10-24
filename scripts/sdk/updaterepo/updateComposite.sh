@@ -24,7 +24,7 @@ fi
 
 
 # remember, the eclispe install must match the VM used (e.g. both 64 bit, both 32 bit, etc).
-ECLIPSE_EXE=${ECLIPSE_EXE:-/shared/eclipse/sdk/eclipsesdk372/eclipse/eclipse}
+ECLIPSE_EXE=${ECLIPSE_EXE:-/shared/eclipse/eclipsesdk372/eclipse/eclipse}
 
 if [ ! -n ${ECLIPSE_EXE} -a -x ${ECLIPSE_EXE} ]
 then
