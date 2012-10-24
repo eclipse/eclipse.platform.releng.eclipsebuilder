@@ -37,10 +37,8 @@ unzip -q master.zip -d tempeb
 checkForErrorExit $? "could not unzip master?!"
 
 # save a copy to diff with (and revert to if needed)
-rm -fr sdkTempSave 2>/dev/null
-rsync -r sdk sdkTempSave/
+sdk sdkTempSave
 
-# we always need to write over sdk (for now) since there's other stuff in there
 rsync -r tempeb/master/scripts/sdk . 
 
 diff -r sdk sdkTempSave > sdkdiffout.txt
