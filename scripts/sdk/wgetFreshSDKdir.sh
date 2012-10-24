@@ -18,14 +18,16 @@ cd /shared/eclipse/sdk
 checkForErrorExit $? "could cd to /shared/eclipse/sdk"
 
 # first get a fresh copy of just this file, put in parent directory
+# since overtime there will be few changes and can re-invoke from there.
 fileToGet=wgetFreshSDKdir.sh
 wget --no-verbose -O ../${fileToGet} http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/sdk/${fileToGet}?${initScriptTag}  2>&1
 checkForErrorExit $? "could not wget file: ${fileToGet}"
 
 chmod -c +x ../${fileToGet}
-cd ..
+cd /shared/eclipse
 checkForErrorExit $? "could not change directory up?!"
 
+# remove if exists from previous (failed) run
 rm -fr tempeb 2>/dev/null
 mkdir -p tempeb
 checkForErrorExit $? "could not mkdir?!"
