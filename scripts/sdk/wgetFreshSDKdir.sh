@@ -37,7 +37,7 @@ unzip -q master.zip -d tempeb
 checkForErrorExit $? "could not unzip master?!"
 
 # save a copy to diff with (and revert to if needed)
-sdk sdkTempSave
+mv sdk sdkTempSave
 
 rsync -r tempeb/master/scripts/sdk . 
 
