@@ -42,7 +42,7 @@ checkForErrorExit $? "could not unzip master?!"
 rm -fr sdkTempSave 2>/dev/null
 mv sdk sdkTempSave
 
-rsync -r tempeb/master/scripts/sdk . 
+rsync -r tempeb/master/scripts/sdk/ sdk 
 
 diff -r sdk sdkTempSave > sdkdiffout.txt
 
