@@ -44,3 +44,5 @@ rsync -r tempeb/master/scripts/sdk .
 
 diff -r sdk sdkTempSave > sdkdiffout.txt
 
+rm master.zip
+rm -fr tempeb
