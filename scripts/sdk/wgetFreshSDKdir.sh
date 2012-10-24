@@ -36,10 +36,11 @@ unzip -q master.zip -d tempeb
 checkForErrorExit $? "could not unzip master?!"
 
 # save a copy to diff with (and revert to if needed)
-mv sdk sdkTempSave
+rm -fr sdkTempSave 2>/dev/null
+rsync -r sdk sdkTempSave
 
+# we always need to write over sdk (for now) since there's other stuff in there
 rsync -r ebtemp/master/org.eclipse.releng.eclipsebuilder/scripts/sdk . 
 
 diff -r sdk sdkTempSave > sdkdiffout.txt
 
-rm -fr tempeb
