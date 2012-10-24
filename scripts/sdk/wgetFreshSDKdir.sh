@@ -41,7 +41,7 @@ rm -fr sdkTempSave 2>/dev/null
 rsync -r sdk sdkTempSave/
 
 # we always need to write over sdk (for now) since there's other stuff in there
-rsync -r tempeb/master/org.eclipse.releng.eclipsebuilder/scripts/sdk . 
+rsync -r tempeb/master/scripts/sdk . 
 
 diff -r sdk sdkTempSave > sdkdiffout.txt
 
