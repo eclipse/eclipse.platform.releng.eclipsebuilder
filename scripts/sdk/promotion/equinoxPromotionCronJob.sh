@@ -2,8 +2,8 @@
 
 # cron job a committer can run,
 # say, every 15 minutes, or similar. If a
-# promotion script appears in the promoteLocation, then execute it, and if all goes
-# well, then remove (or move) that promotion script.
+# file appears in the promoteLocation, then execute it, and if all goes
+# well, then remove (or move) that file.
 
 # Note: if there are errors that occur during this cron job, they go to the
 # "default user" for that crontab, which may be what's desired, but you can also
@@ -21,6 +21,9 @@ promoteScriptLocation=$workLocation/queue
 # Note: if we ever need to handle spaces, or newlines in names (seems unlikely) this
 # for loop won't quiet work, and will be more complicated (or, at least unintuitive).
 
+# Remember, do no call "exit" from for loop for normal cases, else
+# the whole script exits. Could use "continue" or "break" if needed.
+
 allfiles=$( find $promoteScriptLocation -name "promote*.sh" | sort )
 for promotefile in $allfiles
 do
@@ -31,14 +34,14 @@ do
 
 if [[ -z "$promotefile" ]]
 then
-    # nothing to do, exit zero
-    exit 0
+        # would be an odd error, but nothing to do (Remember, can not have an empty if/then/else clause! Syntax error.
+        echo "WARNING: unexpectedly found promotefile variable to be null or empty."
 else
     # found a file, make sure it is executable
     # I've discovered, just testing, that even if $promotefile is a
     #       directory, and executable, and fits the pattern, it is attempted to be
     #       processed. It was just a test case, nearly impossible to occur in reality,
-    #       but guess best to test it is a file, for future oddities.
+    #       but best to test it is a file, for safety.
     if [[ -x $promotefile  && -f $promotefile ]]
     then
 
@@ -64,10 +67,9 @@ else
             # all is ok, we'll move the file to "RAN-" in case needed for later inspection,
             # if things go wrong. Perhaps eventually just remove them?
             mv $runningpromotefile $promoteScriptLocation/RAN_$(basename $promotefile)
-            exit 0
         fi
     else
-        echo "WARNING: promotion file found, but was not executable"
+            echo "ERROR: promotion file found, but was not executable"
         echo "         promotefile: $promotefile"
         exit 1
     fi
