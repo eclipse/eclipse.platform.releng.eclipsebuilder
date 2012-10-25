@@ -62,9 +62,9 @@ do
                 echo "ERROR: promotion returned an error: $rccode"
                 echo "       promotefile: $promotefile"
                 mv $runningpromotefile $promoteScriptLocation/ERROR_$(basename $promotefile)
-                # probably would not have to exit here, could continue looping since renamed problematic
-                # file , but since something unexpected happened, best to pause to give some opportunity 
-                # to examine the issue and make sure not something harmful. 
+                    # probably would not have to exit here, could continue looping since renamed problematic
+                    # file , but since something unexpected happened, best to pause to give some opportunity 
+                    # to examine the issue and make sure not something harmful. 
                 exit 1
             else
                 # all is ok, we'll move the file to "RAN-" in case needed for later inspection,
