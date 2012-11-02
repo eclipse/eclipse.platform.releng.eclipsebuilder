@@ -46,15 +46,14 @@ rsync -r ${DL_DROP_ID} /home/data/httpd/download.eclipse.org/eclipse/downloads/d
         if [ $rccode -eq 0 ]
         then
             echo "INFO: Upated http://download.eclipse.org/eclipse/downloads/index.html"
-            return 0
+            rm index.txt
+             exit 0
         else
             echo "ERROR: Could not copy index.html to downlaods. rccode: $rccode"
-            return $rccode
+            exit $rccode
         fi
     else
         echo "ERROR: Could not create index.html from downlaods. rccode: $rccode"
-        return $rccode
+         exit $rccode
     fi
-
-rm index.txt
 
