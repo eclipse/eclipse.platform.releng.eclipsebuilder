@@ -57,7 +57,8 @@ perl -w -pi -e ${replaceCommand} ${oldname}/checksum/*
 # These are for cases where used in headers, titles, etc.
 oldBuildName="Integration Build"
 newBuildName="Stable Build"
-perl -w -pi -e ${oldBuildName} ${newBuildName}/*.php
+replaceBuildNameCommand="s!${oldBuildName}!${newBuildName}!g"
+perl -w -pi -e ${replaceBuildNameCommand} ${newBuildName}/*.php
 
 # move directory before file renames, so it won't be in file path name twice
 mv $oldname $newdirname
