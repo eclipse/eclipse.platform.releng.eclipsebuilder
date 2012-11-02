@@ -6,13 +6,13 @@ DL_LABEL=$2
 function usage ()
 {
     printf "\n\tUsage: %s DROP_ID DL_LABEL " $(basename $0) >&2
-    printf "\n\t\t%s\t%s" "DROP_ID " "such as I20121031-2000." >&2 
-    printf "\n\t\t%s\t%s" "DL_LABEL " "such as KeplerM3." >&2 
+    printf "\n\t\t%s\t%s" "DROP_ID " "such as I20121031-2000." >&2
+    printf "\n\t\t%s\t%s" "DL_LABEL " "such as KeplerM3." >&2
 }
 
 if [[ -z "${DROP_ID}" || -z "${DL_LABEL}" ]]
 then
-    echo "ERROR: arguments missing in call to $( basename $0 )"
+    printf "\n\n\t%s\n\n" "ERROR: arguments missing in call to $( basename $0 )" >&2
     usage
     exit 1
 fi
@@ -33,7 +33,7 @@ mv ${DROP_ID}ORIG ${DROP_ID}
 rm renameBuild.sh
 
 echo "rsync -r /shared/eclipse/eclipse4I/siteDir/equinox/drops/${DL_DROP_ID} /home/data/httpd/download.eclipse.org/equinox/downloads/drops/" \
-     > /shared/eclipse/equinox/promotion/queue/promote-${DL_LABEL}.sh
+    > /shared/eclipse/equinox/promotion/queue/promote-${DL_LABEL}.sh
 
 chmod +x /shared/eclipse/equinox/promotion/queue/promote-${DL_LABEL}.sh
 

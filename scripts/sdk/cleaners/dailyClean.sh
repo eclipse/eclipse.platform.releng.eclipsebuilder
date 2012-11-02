@@ -13,7 +13,7 @@ then
     echo "Number of builds after cleaning: $nbuilds"
     source /shared/eclipse/sdk/updateIndexFilesFunction.shsource
     updateIndex 4
-    
+
 else
     echo "Nothing cleaned, not more than 4 days"
 fi

@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 
-DROP_SITE_ID=$1 
-DL_LABEL=$2 
+DROP_SITE_ID=$1
+DL_LABEL=$2
 
 function usage ()
 {
     printf "\n\tUsage: %s DROP_SITE_ID DL_LABEL " $(basename $0) >&2
-    printf "\n\t\t%s\t%s" "DROP_SITE_ID " "such as I20121031-2000." >&2 
-    printf "\n\t\t%s\t%s" "DL_LABEL " "such as 4.3M3." >&2 
+    printf "\n\t\t%s\t%s" "DROP_SITE_ID " "such as I20121031-2000." >&2
+    printf "\n\t\t%s\t%s" "DL_LABEL " "such as 4.3M3." >&2
 }
 
 if [[ -z "${DROP_SITE_ID}" || -z "${DL_LABEL}" ]]
 then
-    echo "ERROR: arguments missing in call to $( basename $0 )"
+    printf "\n\n\t%s\n\n" "ERROR: arguments missing in call to $( basename $0 )." >&2
     usage
     exit 1
 fi
@@ -34,5 +34,4 @@ DLMACHINE_SITE=${DLMACHINE_BASE_SITE}/${DL_SITE_ID}
 rsync -r "${BUILDMACHINE_SITE}/"  "${DLMACHINE_SITE}"
 
 # TODO: automate this
-echo " ... remember to update composite files and mirrors URL ... "
-
+printf "\n\n\t%s\n\n" "Remember to update composite files and mirrors URL." >&2

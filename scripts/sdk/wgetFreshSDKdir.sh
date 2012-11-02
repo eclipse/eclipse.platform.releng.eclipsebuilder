@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # directly gets a fresh copy of sdk directory from eclipsebuilder
-# need to manually check and make sure nothing is running or will 
-# be running soon. 
+# need to manually check and make sure nothing is running or will
+# be running soon.
 
 # codifying the branch (or tag) to use, so it can be set/chagned in one place
 initScriptTag="h=master"
@@ -31,7 +31,7 @@ rm -fr tempeb 2>/dev/null
 mkdir -p tempeb
 checkForErrorExit $? "could not mkdir?!"
 
-wget -O master.zip http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/snapshot/master.zip 
+wget -O master.zip http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/snapshot/master.zip
 checkForErrorExit $? "could not get eclispebuilder?!"
 
 unzip -q master.zip -d tempeb
@@ -41,7 +41,7 @@ checkForErrorExit $? "could not unzip master?!"
 rm -fr sdkTempSave 2>/dev/null
 mv sdk sdkTempSave
 
-rsync -r tempeb/master/scripts/sdk/ sdk 
+rsync -r tempeb/master/scripts/sdk/ sdk
 
 diff -r sdk sdkTempSave > sdkdiffout.txt
 

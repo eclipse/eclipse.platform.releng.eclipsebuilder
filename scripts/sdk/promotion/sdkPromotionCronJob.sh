@@ -63,8 +63,8 @@ do
                 echo "       promotefile: $promotefile"
                 mv $runningpromotefile $promoteScriptLocation/ERROR_$(basename $promotefile)
                     # probably would not have to exit here, could continue looping since renamed problematic
-                    # file , but since something unexpected happened, best to pause to give some opportunity 
-                    # to examine the issue and make sure not something harmful. 
+                    # file , but since something unexpected happened, best to pause to give some opportunity
+                    # to examine the issue and make sure not something harmful.
                 exit 1
             else
                 # all is ok, we'll move the file to "RAN-" in case needed for later inspection,
@@ -74,7 +74,7 @@ do
         else
             echo "ERROR: promotion file found, but was not executable?"
             echo "         promotefile: $promotefile"
-            # We could likely do some rename-and-proceed thing here, but should 
+            # We could likely do some rename-and-proceed thing here, but should
             # be so rare and unexpected something is likely very wrong? So, we'll just exit.
             exit 1
         fi
