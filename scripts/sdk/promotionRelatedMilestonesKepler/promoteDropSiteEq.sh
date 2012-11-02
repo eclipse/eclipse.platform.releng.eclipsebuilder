@@ -32,7 +32,7 @@ mv ${DROP_ID}ORIG ${DROP_ID}
 
 rm renameBuild.sh
 
-echo "rsync -r /shared/eclipse/eclipse4I/siteDir/equinox/drops/${DL_DROP_ID} /home/data/httpd/download.eclipse.org/equinox/downloads/drops/" \
+echo "rsync -r /shared/eclipse/eclipse4I/siteDir/equinox/drops/${DL_DROP_ID} /home/data/httpd/download.eclipse.org/equinox/drops/" \
     > /shared/eclipse/equinox/promotion/queue/promote-${DL_LABEL}.sh
 
 chmod +x /shared/eclipse/equinox/promotion/queue/promote-${DL_LABEL}.sh
