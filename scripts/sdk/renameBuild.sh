@@ -29,7 +29,7 @@ then
     printf "\n\t%s\n" "This script, $scriptname requires three arguments, in order: "
     printf "\t\t%s\t%s\n" "oldname" "(e.g. I20120503-1800) "
     printf "\t\t%s\t%s\n" "newdirname" "(e.g. S-3.8M7-201205031800) "
-    printf "\t\t%s\t%s\n" "newlabel" "(e.g. 3.8M7 or 4.2M7) "
+    printf "\t\t%s\t%s\n" "newlabel" "(e.g. 3.8M7 or 4.2M7 or KeplerM3) "
     printf "\t%s\n" "for example,"
     printf "\t%s\n\n" "./$scriptname I20120503-1800 S-3.8M7-201205031800 3.8M7"
     exit 1
@@ -58,8 +58,6 @@ perl -w -pi -e ${replaceCommand} ${oldname}/checksum/*
 oldBuildName="Integration Build"
 newBuildName="Stable Build"
 perl -w -pi -e ${oldBuildName} ${newBuildName}/*.php
-perl -w -pi -e ${oldBuildName} ${newBuildName}/*.html
-perl -w -pi -e ${oldBuildName} ${newBuildName}/*.xml
 
 # move directory before file renames, so it won't be in file path name twice
 mv $oldname $newdirname
