@@ -218,59 +218,9 @@
             </sequential>
         </parallel>
 
-        <available
-            property="org.eclipse.swt.win32.wce_ppc.arm.exists"
-            file="${buildDirectory}/plugins/org.eclipse.swt.win32.wce_ppc.arm"
-            type="dir" />
-        <antcall target="fetch_org.eclipse.swt.win32.wce_ppc.arm" />
-
-        <antcall target="packageSwtStandalone">
-            <param
-                name="ws"
-                value="win32" />
-            <param
-                name="os"
-                value="wce_ppc" />
-            <param
-                name="arch"
-                value="arm" />
-            <param
-                name="skipChecksum"
-                value="true" />
-        </antcall>
     </target>
 
-    <target
-        name="fetch_org.eclipse.swt.win32.wce_ppc.arm"
-        unless="org.eclipse.swt.win32.wce_ppc.arm.exists"
-        depends="checkSWTwce">
-        <!--need to check out -->
-        <echo message="DEBUG: ${buildDirectory}/plugins/org.eclipse.swt.win32.wce_ppc.arm did not exist, so will fetch now" />
-        <property
-            name="featureOnly"
-            value="false" />
-        <property
-            name="featureAndPlugins"
-            value="true" />
-        <property
-            name="featuresRecursively"
-            value="false" />
-        <ant
-            antfile="genericTargets.xml"
-            dir="${eclipse.pdebuild.scripts}"
-            target="fetchElement">
-            <property
-                name="type"
-                value="fragment" />
-            <property
-                name="id"
-                value="org.eclipse.swt.win32.wce_ppc.arm" />
-        </ant>
-    </target>
 
-    <target name="checkSWTwce" if="org.eclipse.swt.win32.wce_ppc.arm.exists">
-        <echo message="DEBUG: ${buildDirectory}/plugins/org.eclipse.swt.win32.wce_ppc.arm already exists, so will not be re-fetched" />
-    </target>
 
     <target name="packageSwtStandalone">
         <condition

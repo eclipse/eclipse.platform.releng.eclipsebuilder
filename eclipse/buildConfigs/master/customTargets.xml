@@ -431,7 +431,7 @@
     <target name="postPackage">
         <exec executable="zip" dir="${buildDirectory}/${buildLabel}">
             <arg
-                line="-d ${archiveName} win32** wce** linux** solaris** aix** hpux** macosx**" />
+                line="-d ${archiveName} win32** linux** solaris** aix** hpux** macosx**" />
         </exec>
         <eclipse.publish.featuresAndBundles
             repository="file:/${buildDirectory}/buildRepo">
