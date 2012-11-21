@@ -16,21 +16,10 @@
         <!--
             we remove these, because they end up having invalid pack.gz
             files.
+            11/20/21012: icu should no longer be invalid. See bug 386657
             -->
         <p2.remove.iu>
             <repository location="file://${repoDirLocation}" />
-            <iu
-                id="com.ibm.icu"
-                artifacts="(format=packed)" />
-            <iu
-                id="com.ibm.icu.base"
-                artifacts="(format=packed)" />
-            <iu
-                id="com.ibm.icu.source"
-                artifacts="(format=packed)" />
-            <iu
-                id="com.ibm.icu.base.source"
-                artifacts="(format=packed)" />
             <iu
                 id="org.eclipse.jdt.core.tests.compiler"
                 artifacts="(format=packed)" />
