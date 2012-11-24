@@ -337,7 +337,7 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 <TR> <TD ALIGN=RIGHT VALIGN=TOP WIDTH="5%"> <DIV ALIGN="left"><B>Status</B></DIV></TD><TD WIDTH="36%"><B>Platform</B></TD><?php column($_SERVER["SERVER_NAME"]); ?>
 </TR> 
 <?php $icubasefiles = glob('com.ibm.icu.base*');
-      if ($icubasefiles > 0) { ?>
+      if (sizeof($icubasefiles) > 0) { ?>
     %icubase% 
 <?php } else { ?>
     <tr><td><p>See <a href="">Orbit Download Page</a> for com.ibm.icu.base. It was removed from Eclipse Platform page due to <a href="">bug </a>.</p></td></tr>
