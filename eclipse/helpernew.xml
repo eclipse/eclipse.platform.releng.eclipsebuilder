@@ -535,6 +535,12 @@
             property="class"
             value="${generatorClass}" />
 
+        <condition property="helpernewdropTokenList" 
+            value="%sdk%,%tests%,%example%,%rcpruntime%,%rcpsdk%,%deltapack%,%runtime%,%jdt%,%jdtsdk%,%jdtc%,%jarprocessor%,%pde%,%pdesdk%,%cvs%,%cvssdk%,%swt%,%relengtools%" 
+            else="%sdk%,%tests%,%example%,%rcpruntime%,%rcpsdk%,%deltapack%,%icubase%,%runtime%,%jdt%,%jdtsdk%,%jdtc%,%jarprocessor%,%pde%,%pdesdk%,%cvs%,%cvssdk%,%swt%,%relengtools%">
+            <isset property="excludeicubase" />
+        </condition>
+        
         <!--regenerate the index page with links to test results -->
         <ant
             antfile="${base.builder}/plugins/org.eclipse.build.tools/scripts/publish.xml"
@@ -546,11 +552,9 @@
             <property
                 name="buildType"
                 value="${buildType}" />
-            <condition property="dropTokenList" 
-                value="%sdk%,%tests%,%example%,%rcpruntime%,%rcpsdk%,%deltapack%,%runtime%,%jdt%,%jdtsdk%,%jdtc%,%jarprocessor%,%pde%,%pdesdk%,%cvs%,%cvssdk%,%swt%,%relengtools%" 
-                else="%sdk%,%tests%,%example%,%rcpruntime%,%rcpsdk%,%deltapack%,%icubase%,%runtime%,%jdt%,%jdtsdk%,%jdtc%,%jarprocessor%,%pde%,%pdesdk%,%cvs%,%cvssdk%,%swt%,%relengtools%">
-                <isset property="excludeicubase" />
-            </condition>
+            <property
+                name="dropTokenList" 
+                value="${helpernewdropTokenList}" />
             <property
                 name="platformIdentifierToken"
                 value="%platform%" />
