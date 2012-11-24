@@ -33,7 +33,7 @@
 		<buildRepos feature="org.eclipse.releng.tools" />
 	</target>
 
-	<target name="icubase">
+	<target name="icubase" unless="excludeicubase">
 		<buildRepos feature="com.ibm.icu.base" />
 	</target>
 

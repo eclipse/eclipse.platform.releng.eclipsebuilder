@@ -415,7 +415,15 @@ function genLinks($servername,$buildlabel,$zipfile) {
 <h3><a name="com.ibm.icu"> com.ibm.icu.base binary and source Plug-ins&nbsp;<a href="details.php#com.ibm.icu"><img src="../../../eclipse.org-common/stylesheets/more.gif" title="More..." alt="[More]"></a></h3>
 <TABLE BORDER=0 CELLSPACING=2 CELLPADDING=0 WIDTH="99%" BORDERCOLOR="#999999" >
 <TR> <TD ALIGN=RIGHT VALIGN=TOP WIDTH="5%"> <DIV ALIGN="left"><B>Status</B></DIV></TD><TD WIDTH="36%"><B>Platform</B></TD><?php column($servername); ?>
-</TR> %icubase% </TABLE>
+</TR> 
+<?php $icubasefiles = glob('com.ibm.icu.base*');
+      if ($icubasefiles > 0) { ?>
+    %icubase% 
+<?php } else { ?>
+    <tr><td><p>See <a href="">Orbit Download Page</a> for com.ibm.icu.base. It was removed from Eclipse Platform page due to <a href="">bug </a>.</p></td></tr>
+<?php } ?>
+
+</TABLE>
 </div></td></tr>
 
 
