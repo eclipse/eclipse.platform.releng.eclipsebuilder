@@ -342,7 +342,15 @@ if (preg_match("/.eclipse.org/i",$servername)) {
 </TR>       
     %icubase% 
 <?php } else { ?>
-    <tr><td><p>See <a href="http://download.eclipse.org/tools/orbit/downloads/">Orbit Download Page</a> for com.ibm.icu.base bundle. It was removed from Eclipse Platform page due to <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=395003">bug 395003</a>.</p></td></tr>
+    <tr><td>
+    <p>ICU4J (bundle com.ibm.icu) provides advanced Unicode and Globalization support for
+software applications. The full version is included in Eclipse SDK. For those that do not need that support but 
+need a smaller footprint for their own products, there is a subset of ICU4J, "com.ibm.icu.base" available 
+from the <a href="http://download.eclipse.org/tools/orbit/downloads/">Orbit Download Page</a>. That subset 
+used to provided on this Eclipse download page, but was removed to simplify builds, and to avoid 
+unnecessary redundency and duplication (see <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=395003">bug 395003</a>).
+</p>
+</td></tr>
 <?php } ?>
 
 </TABLE>
