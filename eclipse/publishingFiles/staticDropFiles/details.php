@@ -175,7 +175,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 				
 				<li><a name="com.ibm.icu"> <b> com.ibm.icu.base binary and source Plug-ins </b> </a>
 				<ul>
-				<li>
+				<li>The com.ibm.icu.base bundle should be used directly from <a href="http://download.eclipse.org/tools/orbit/downloads/">Orbit Download Page</a>. See <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=395003">bug 395003</a>.
 				</li></ul>
 				
 				<li><a name="PlatformRuntime"> <b> Platform Runtime Binary </b> </a>
