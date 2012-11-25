@@ -54,7 +54,7 @@ then
     exit 1
 fi
 
-rsync -r "${overlayDir}/" "${eclipseBuilderDir}/"
+rsync -vr "${overlayDir}/" "${eclipseBuilderDir}/"
 RC=$?
 if [[ $RC != 0 ]]
  then
