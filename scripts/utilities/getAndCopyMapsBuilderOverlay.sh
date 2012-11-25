@@ -18,7 +18,8 @@ eclipseBuilderDir="${supportDir}/org.eclipse.releng.eclipsebuilder"
 
 if [[ ! -d "${overlayDir}" ]]
 then
-    echo "ERROR: expected overlay direcotry did not exist"
+    echo "ERROR: expected overlay directory did not exist"
+    echo "       expected: ${overlayDir}"
     exit 1
 fi
 
@@ -26,6 +27,7 @@ fi
 if [[ ! -d "${eclipseBuilderDir}" ]]
 then
     echo "ERROR: expected eclipsebuilder directory did not exist"
+    echo "       expected: ${eclipseBuilderDir}"
     exit 1
 fi
 
