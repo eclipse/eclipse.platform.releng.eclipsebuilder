@@ -153,6 +153,8 @@ function getEclipseBuilder () {
     cd $projectdirectory
     checkForErrorExit $? "Could not cd to $projectdirectory"
     debugMsg "changed direcotry in getEclipseBuilder to ${PWD}"
+    debugMsg "fetch first, in case new branches added"
+    git fetch
     debugMsg "git command: git checkout $eclipsebuilderBranch"
     git checkout $eclipsebuilderBranch
     checkForErrorExit $? "git checkout failed"
