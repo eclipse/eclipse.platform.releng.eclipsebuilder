@@ -13,7 +13,9 @@
 # things have to be udpated after the fact for testing.
 
 # TODO: make into variables to pass in, check, keep off of eclipseStream, etc.
-supportDir=/home/shared/eclipse/eclipse4I/build/supportDir
+#supportDir=/shared/eclipse/eclipse4N/build/supportDir
+supportDir="${PWD}"
+
 buildDirectory="${supportDir}/src"
 commonrepoDirectory="${supportDir}/src/commonrepo"
 mapsVersionTag=master
