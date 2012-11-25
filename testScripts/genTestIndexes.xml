@@ -97,7 +97,7 @@
                 name="buildType"
                 value="${buildType}" />
             <property name="dropTokenList" 
-                value="${genTestIndexesdropTokenList}" />
+                value="%sdk%,%tests%,%example%,%rcpruntime%,%rcpsdk%,%deltapack%,%icubase%,%runtime%,%jdt%,%jdtsdk%,%jdtc%,%jarprocessor%,%pde%,%pdesdk%,%cvs%,%cvssdk%,%swt%,%relengtools%" />
             <property
                 name="platformIdentifierToken"
                 value="%platform%" />
