@@ -12,6 +12,24 @@
 # this this can be used in similar way (in similar situation) where
 # things have to be udpated after the fact for testing.
 
+function debugVar ()
+{
+    if [[ "${DEBUG}" == "true" ]]
+    then
+        variablenametodisplay=$1
+        eval variableValue=\$${variablenametodisplay}
+        echo "DEBUG VAR: ${variablenametodisplay}: ${variableValue}"
+    fi
+}
+function debugMsg ()
+{
+    if [[ "${DEBUG}" == "true" ]]
+    then
+        message=$1
+        echo "DEBUG MSG: ${message}"
+    fi
+}
+
 # TODO: make into variables to pass in, check, keep off of eclipseStream, etc.
 #supportDir=/shared/eclipse/eclipse4N/build/supportDir
 supportDir="${PWD}"
