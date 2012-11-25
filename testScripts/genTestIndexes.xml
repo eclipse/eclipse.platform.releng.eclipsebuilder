@@ -79,6 +79,11 @@
             property="class"
             value="${generatorClass}" />
 
+        <condition property="genTestIndexesdropTokenList" 
+            value="%sdk%,%tests%,%example%,%rcpruntime%,%rcpsdk%,%deltapack%,%runtime%,%jdt%,%jdtsdk%,%jdtc%,%jarprocessor%,%pde%,%pdesdk%,%cvs%,%cvssdk%,%swt%,%relengtools%" 
+            else="%sdk%,%tests%,%example%,%rcpruntime%,%rcpsdk%,%deltapack%,%icubase%,%runtime%,%jdt%,%jdtsdk%,%jdtc%,%jarprocessor%,%pde%,%pdesdk%,%cvs%,%cvssdk%,%swt%,%relengtools%">
+            <isset property="excludeicubase" />
+        </condition>
         <!--regenerate the index page with links to test results -->
         <ant
             antfile="${builderDir}/eclipse/helpernew.xml"
@@ -91,11 +96,8 @@
             <property
                 name="buildType"
                 value="${buildType}" />
-            <condition property="dropTokenList" 
-                value="%sdk%,%tests%,%example%,%rcpruntime%,%rcpsdk%,%deltapack%,%runtime%,%jdt%,%jdtsdk%,%jdtc%,%jarprocessor%,%pde%,%pdesdk%,%cvs%,%cvssdk%,%swt%,%relengtools%" 
-                else="%sdk%,%tests%,%example%,%rcpruntime%,%rcpsdk%,%deltapack%,%icubase%,%runtime%,%jdt%,%jdtsdk%,%jdtc%,%jarprocessor%,%pde%,%pdesdk%,%cvs%,%cvssdk%,%swt%,%relengtools%">
-                <isset property="excludeicubase" />
-            </condition>
+            <property name="dropTokenList" 
+                value="${genTestIndexesdropTokenList}" />
             <property
                 name="platformIdentifierToken"
                 value="%platform%" />
