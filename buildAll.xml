@@ -1231,10 +1231,12 @@
             file="${buildDirectory}/features/org.eclipse.equinox.starterkit.product.feature/product/EclipseRTOSGiStarterKit.product"
             value="${buildId}" />
 
+        <!-- removed via bug 39501
         <replace
             token="@qualifier@"
             file="${buildDirectory}/features/org.eclipse.pde.build.product.feature/product/pdebuild.product"
             value="${buildId}" />
+         -->
 
         <replace
             token="@qualifier@" file="${eclipse.build.configs}/rcp/rcp.product" value="${buildId}"
