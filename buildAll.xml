@@ -940,9 +940,6 @@
             name="signpollline"
             value="${signhost} ${signquote}cd ${stagingDirectoryOutput};ls ${archiveName}${signquote}" />
 
-        <!-- <echo message="DEBUG: signing - signpoll: ${signpoll}" /> <echo
-            message="DEBUG: signing - signpollline: ${signpollline}" /> -->
-
         <antcall target="waitForChangedAttribs">
             <param
                 name="signpoll"
@@ -967,10 +964,9 @@
         <antcall target="deletetempsigningfiles" />
     </target>
 
-    <!-- TODO: why not deleted if running on build.eclipse.org? -->
+
     <target
-        name="deletetempsigningfiles"
-        unless="hudson">
+        name="deletetempsigningfiles">
         <echo message="delete temp files on build.eclipse.org" />
         <property
             name="signdeleteline"

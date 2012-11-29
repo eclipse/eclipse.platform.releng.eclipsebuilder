@@ -14,9 +14,9 @@
 # required conditioning before signing.
 # Ideally use same VM (pack200) to normalize (-repack), sign, and pack
 # the jars.
-#JAVA_5_HOME=${JAVA_5_HOME:-/home/shared/orbit/apps/ibm-java2-i386-50/jre}
+# 2012-11-29 Update: See bug 395320. We'll use Java 6 (for Kepler)
 JAVA_5_HOME=${JAVA_5_HOME:-/shared/common/jdk-1.5.0-22.x86_64}
-JAVA_6_HOME=${JAVA_6HOME:-/shared/common/sun-jdk1.6.0_21_x64}
+JAVA_6_HOME=${JAVA_6_HOME:-/shared/common/jdk1.6.0_27.x86_64}
 
 export JAVA_HOME=${JAVA_5_HOME}
 
@@ -35,7 +35,7 @@ fi
 # in theory, could "get" a pack200 processor from other places,
 # so this check may not always be appropriate?
 # But, will be a good sanity check for now
-PACK200_DIR=${JAVA_5_HOME}/bin
+PACK200_DIR=${JAVA_HOME}/bin
 
 if [ ! -x "${PACK200_DIR}/pack200" ]
 then

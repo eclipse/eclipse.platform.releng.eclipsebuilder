@@ -177,8 +177,7 @@ processCommandLine ()
     # and eventual "pack200" can all be unpacked with 1.5.
     # long term, we can launch those tasks in seperate process, or some other better way.
     java15home=${java15home:-/shared/common/jdk-1.5.0-22.x86_64}
-    #java15home=/shared/orbit/apps/ibm-java2-i386-50/jre
-    java16home=${java16home:-/shared/common/sun-jdk1.6.0_21_x64}
+    java16home=${java16home:-/shared/common/jdk1.6.0_27.x86_64
     pack200dir=${java15home}/bin
 
     buildTimestamp=${date}-${time}
