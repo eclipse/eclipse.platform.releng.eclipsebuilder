@@ -11,8 +11,9 @@
 #     IBM Corporation - initial API and implementation
 #*******************************************************************************
 
-# this file is to ease local builds. It should not be used for production builds.
-source buildeclipse.shsource
+# this buildeclipse.shsource file is to ease local builds. It should not exist used for production builds.
+# so we surpress the message that is does not exist.
+source buildeclipse.shsource 2>/dev/null
 
 # 0002 is often the default for shell users, but it is not when ran from
 # a cron job, so we set it explicitly, so group has write access to anything
@@ -233,11 +234,9 @@ runSDKBuild ()
 
     buildfile=$supportDir/$eclipsebuilder/buildAll.xml
 
-    # TODO: we should make the these work off the defined java15home and java16home
-    #       etc., just to avoid redundency?
-    bootclasspath=${bootclasspath:-"/shared/common/j2sdk1.4.2_19/jre/lib/rt.jar:/shared/common/j2sdk1.4.2_19/jre/lib/jsse.jar:/shared/common/j2sdk1.4.2_19/jre/lib/jce.jar"}
-    bootclasspath_15=${bootclasspath_15:-"/shared/common/jdk-1.5.0_16/jre/lib/rt.jar:/shared/common/jdk-1.5.0_16/jre/lib/jsse.jar:/shared/common/jdk-1.5.0_16/jre/lib/jce.jar"}
-    bootclasspath_16=${bootclasspath_16:-"/shared/common/jdk1.6.0_27.x86_64/jre/lib/rt.jar:/shared/common/jdk1.6.0_27.x86_64/jre/lib/jsse.jar:/shared/common/jdk1.6.0_27.x86_64/jre/lib/jce.jar"}
+    bootclasspath=${bootclasspath:-"${java14home}/jre/lib/rt.jar:${java14home}/jre/lib/jsse.jar:${java14home}/jre/lib/jce.jar"}
+    bootclasspath_15=${bootclasspath_15:-"${java15home}/jre/lib/rt.jar:${java15home}/jre/lib/jsse.jar:${java15home}/jre/lib/jce.jar"}
+    bootclasspath_16=${bootclasspath_16:-"${java16home}/jre/lib/rt.jar:${java16home}/jre/lib/jsse.jar:${java16home}/jre/lib/jce.jar"}
     bootclasspath_foundation=${bootclasspath_foundation:-"/shared/common/org.eclipse.sdk-feature2/libs/ee.foundation-1.0.jar"}
     bootclasspath_foundation11=${bootclasspath_foundation11:-"/shared/common/org.eclipse.sdk-feature2/libs/ee.foundation.jar"}
     # https://bugs.eclipse.org/bugs/show_bug.cgi?id=375976, and
@@ -245,7 +244,7 @@ runSDKBuild ()
     OSGiMinimum11=${OSGiMinimum11:-"/shared/common/org.eclipse.sdk-feature2/libs/ee.minimum.jar"}
     OSGiMinimum12=${OSGiMinimum12:-"/shared/common/org.eclipse.sdk-feature2/libs/ee.minimum-1.2.0.jar"}
 
-    javadoc=${javadoc:-"-Djavadoc16=/shared/common/jdk1.6.0_27.x86_64/bin/javadoc"}
+    javadoc=${javadoc:-"-Djavadoc16=${java16home}/bin/javadoc"}
 
     skipPerf="-Dskip.performance.tests=true"
     skipTest="-Dskip.tests=true"
@@ -319,7 +318,7 @@ runSDKBuild ()
         $sign \
         $repoCache \
         -DgenerateFeatureVersionSuffix=true \
-        -Djava15home=${java15home} \
+        -DjavaPackAndSignVMhome=${javaPackAndSignVMhome} \
         -DupdateSite=${localUpdateSite} \
         -DpostingDirectory=$postingDirectory \
         -DequinoxPostingDirectory=$equinoxPostingDirectory"
@@ -535,11 +534,20 @@ processCommandLine ()
     # common properties that would vary machine to machine
     # Would have to run under Java 1.5, to make sure 'sign' (which uses jar processor)
     # and eventual "pack200" can all be unpacked with 1.5.
-    # long term, we can launch those tasks in seperate process, or some other better way.
+    # Changed this principle via bug 395320. For at least Kepler we'll pack/sign with Java 6.
+    java14home=${java14home:-/shared/common/j2sdk1.4.2_19}
     java15home=${java15home:-/shared/common/jdk-1.5.0-22.x86_64}
     #java16home=${java16home:-/shared/common/sun-jdk1.6.0_21_x64}
-    java16home=${java16home:-/shared/common/jdk1.6.0_27.x86_64
-    pack200dir=${java15home}/bin
+    java16home=${java16home:-/shared/common/jdk1.6.0_27.x86_64}
+
+    #still use for java15home for M builds, for now
+    javaPackAndSignVMhome=${java16home}
+    if [[ $buildType == "M" ]] 
+    then
+        javaPackAndSignVMhome=${java15home}
+    fi
+
+    pack200dir=${javaPackAndSignVMhome}/bin
 
     buildTimestamp=${date}-${time}
     buildTag=$buildType$buildTimestamp

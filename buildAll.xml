@@ -44,8 +44,8 @@
         unless="eclipseStream"
         message="eclipseStream must be defined" />
     <fail
-        unless="java15home"
-        message="java15home should be defined. Required for signing" />
+        unless="javaPackAndSignVMhome"
+        message="javaPackAndSignVMhome should be defined. Required for signing" />
 
 
     <!--location of PDE Build configuration files for builder and packager -->
@@ -906,7 +906,7 @@
         <echo message="DEBUG: signing - stagingDirectory: ${stagingDirectory}" />
         <echo message="DEBUG: signing - archiveName: ${archiveName}" />
         <echo message="DEBUG: signing - hudson: ${hudson}" />
-        <echo message="DEBUG: signing - java15home: ${java15home}" />
+        <echo message="DEBUG: signing - javaPackAndSignVMhome: ${javaPackAndSignVMhome}" />
 
         <!--invoke sign script and wait -->
         <echo message="invoke sign script and wait" />
@@ -923,7 +923,7 @@
             newenvironment="true">
             <env
                 key="JAVA_HOME"
-                value="${java15home}" />
+                value="${javaPackAndSignVMhome}" />
             <arg
                 line="${signhost} ${signquote}/usr/bin/sign ${stagingDirectory}/${archiveName} nomail ${stagingDirectoryOutput}${signquote}" />
         </exec>
