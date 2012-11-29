@@ -547,6 +547,9 @@ processCommandLine ()
         javaPackAndSignVMhome=${java15home}
     fi
 
+    # echo for log, even if we don't sign, to verify value
+    echo "VM version used for packing and signing (jarprocessor): ${javaPackAndSignVMhome}"
+
     pack200dir=${javaPackAndSignVMhome}/bin
 
     buildTimestamp=${date}-${time}
