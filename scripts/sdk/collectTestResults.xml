@@ -27,10 +27,12 @@
 
         <mkdir dir="${tmpzipdir}" />
 
-        <get
-            ignoreerrors="true"
-            src="${hudsonResultURL}"
-            dest="${tmpzipdir}/archive.zip" />
+        <retry retrycount="3" retrydelay="1000">
+           <get
+               src="${hudsonResultURL}"
+               dest="${tmpzipdir}/archive.zip" />
+        </retry>
+
         <unzip
             src="${tmpzipdir}/archive.zip"
             dest="${postingDirectory}/${buildId}/testresults/">
