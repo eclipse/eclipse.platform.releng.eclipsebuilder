@@ -970,10 +970,10 @@
         <echo message="delete temp files on build.eclipse.org" />
         <property
             name="signdeleteline"
-            value="${signhost} ${signquote}/bin/rm -rf ${stagingDirectory}/${buildId}-out ${stagingDirectory}/${archiveName}${signquote}" />
+            value="${signhost} ${signquote} -rf ${stagingDirectory}/${buildId}-out ${stagingDirectory}/${archiveName}${signquote}" />
         <exec
             dir="."
-            executable="${signexec}"
+            executable="/bin/rm"
             output="signing.txt"
             append="true">
             <arg line="${signdeleteline}" />
