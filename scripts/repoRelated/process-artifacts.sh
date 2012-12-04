@@ -4,8 +4,10 @@
 # (simple) artifact repository.
 
 repoDirLocation=$1
+buildType=$2
 
 echo "   Final p2 processing artifacts to pack: $repoDirLocation"
+echo "   buildType: $buildType"
 
 # For now, we will assume buildRoot has been exported by
  # calling process (if they want a non default value).
@@ -44,7 +46,12 @@ if [[ $buildType == "M" ]]
 then
      javaPackAndSignVMhome=${java15home}
 fi
-    
+
+
+# echo for log, to verify value
+echo "VM version used for packing and signing (jarprocessor): ${javaPackAndSignVMhome}"
+
+
 export JAVA_HOME=${javaPackAndSignVMhome}
 
 devJRE="${JAVA_HOME}"/bin/java

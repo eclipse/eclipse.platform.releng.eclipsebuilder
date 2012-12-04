@@ -1939,7 +1939,7 @@
 
         <exec executable="/bin/bash">
             <arg
-                line="${base}/supportDir/org.eclipse.releng.eclipsebuilder/scripts/repoRelated/process-artifacts.sh  ${buildRepo}" />
+                line="${base}/supportDir/org.eclipse.releng.eclipsebuilder/scripts/repoRelated/process-artifacts.sh  ${buildRepo} ${buildType}" />
         </exec>
     </target>
 
