@@ -38,7 +38,14 @@ BUILDFILESTR="-f ${ECLIPSEBUILDER_DIR}"/scripts/repoRelated/process-artifacts.xm
 JAVA_5_HOME=${JAVA_5_HOME:-/shared/common/jdk-1.5.0-22.x86_64/jre}
 JAVA_6_HOME=${JAVA_6HOME:-/shared/common/jdk1.6.0_27.x86_64}
 
-export JAVA_HOME=${JAVA_5_HOME}
+#still use for java15home for M builds, for now
+javaPackAndSignVMhome=${java16home}
+if [[ $buildType == "M" ]] 
+then
+     javaPackAndSignVMhome=${java15home}
+fi
+    
+export JAVA_HOME=${javaPackAndSignVMhome}
 
 devJRE="${JAVA_HOME}"/bin/java
 
@@ -55,7 +62,7 @@ fi
 # in theory, could "get" a pack200 processor from other places,
 # so this check may not always be appropriate?
 # But, will be a good sanity check for now
-PACK200_DIR=${JAVA_5_HOME}/bin
+PACK200_DIR=${javaPackAndSignVMhome}/bin
 
 if [ ! -x "${PACK200_DIR}/pack200" ]
 then
