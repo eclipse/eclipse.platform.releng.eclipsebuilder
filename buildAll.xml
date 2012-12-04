@@ -892,10 +892,10 @@
 
         <exec
             dir="${buildDirectory}"
-            executable="${signexec}"
+            executable="/bin/chmod"
             output="signing.txt"
             append="true">
-            <arg line="${signhost} /bin/chmod -v ugo+rw ${stagingDirectory}/${archiveName}" />
+            <arg line="${signhost} -v ugo+rw ${stagingDirectory}/${archiveName}" />
         </exec>
 
         <echo message="DEBUG: signing - packtmp: ${packtmp}" />
