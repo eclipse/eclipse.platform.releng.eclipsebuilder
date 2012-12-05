@@ -38,13 +38,13 @@ BUILDFILESTR="-f ${ECLIPSEBUILDER_DIR}"/scripts/repoRelated/process-artifacts.xm
 # the jars in the first place.
 #JAVA_5_HOME=${JAVA_5_HOME:-/home/shared/orbit/apps/ibm-java2-i386-50/jre}
 JAVA_5_HOME=${JAVA_5_HOME:-/shared/common/jdk-1.5.0-22.x86_64/jre}
-JAVA_6_HOME=${JAVA_6HOME:-/shared/common/jdk1.6.0_27.x86_64}
+JAVA_6_HOME=${JAVA_6_HOME:-/shared/common/jdk1.6.0_27.x86_64}
 
 #still use for java15home for M builds, for now
-javaPackAndSignVMhome=${java16home}
+javaPackAndSignVMhome=${JAVA_6_HOME}
 if [[ $buildType == "M" ]] 
 then
-     javaPackAndSignVMhome=${java15home}
+     javaPackAndSignVMhome=${JAVA_5_HOME}
 fi
 
 
