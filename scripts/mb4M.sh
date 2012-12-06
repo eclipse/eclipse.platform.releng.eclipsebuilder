@@ -68,7 +68,7 @@ then
     rm mb${eclipseStreamMajor}${buildType}.NEW.sh
 else
     echo " "
-    echo "     wgetSDKPromoteScripts.sh has changed. Compare with and consider replacing with mb${eclipseStreamMajor}${buildType}.NEW.sh"
+    echo "     mb script has changed. Compare with and consider replacing with mb${eclipseStreamMajor}${buildType}.NEW.sh"
     echo "  "
 fi
 
