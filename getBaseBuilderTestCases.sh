@@ -38,3 +38,44 @@ mv org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder-R35_RC4-git
 ant -f getBaseBuilder.xml -DbuilderVersion=R35_RC4 -DfetchSource=cvs 
 mv org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder-R35_RC4-cvs 
 
+# versions used for previous final releases or patch builds
+#3.4.x   buildProjectTags=r34x_v20120319
+#3.5.x   buildProjectTags=r35x_v20120319
+#3.6.x   buildProjectTags=r36x_v20120306
+#3.6.2j7 buildProjectTags=r36x_v20120306
+#3.7.2   buildProjectTags=R3_7_maintenance
+
+buildProjectTags=r34x_v20120319
+ant -f getBaseBuilder.xml -DbuilderVersion=$buildProjectTags
+mv org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder-$buildProjectTags-git 
+
+ant -f getBaseBuilder.xml -DbuilderVersion=$buildProjectTags -DfetchSource=cvs 
+mv org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder-$buildProjectTags-cvs 
+
+buildProjectTags=r35x_v20120319
+ant -f getBaseBuilder.xml -DbuilderVersion=$buildProjectTags
+mv org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder-$buildProjectTags-git 
+
+ant -f getBaseBuilder.xml -DbuilderVersion=$buildProjectTags -DfetchSource=cvs 
+mv org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder-$buildProjectTags-cvs 
+
+buildProjectTags=r36x_v20120306
+ant -f getBaseBuilder.xml -DbuilderVersion=$buildProjectTags
+mv org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder-$buildProjectTags-git 
+
+ant -f getBaseBuilder.xml -DbuilderVersion=$buildProjectTags -DfetchSource=cvs 
+mv org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder-$buildProjectTags-cvs 
+
+buildProjectTags=r36x_v20120306
+ant -f getBaseBuilder.xml -DbuilderVersion=$buildProjectTags
+mv org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder-$buildProjectTags-git 
+
+ant -f getBaseBuilder.xml -DbuilderVersion=$buildProjectTags -DfetchSource=cvs 
+mv org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder-$buildProjectTags-cvs 
+
+buildProjectTags=R3_7_maintenance
+ant -f getBaseBuilder.xml -DbuilderVersion=$buildProjectTags
+mv org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder-$buildProjectTags-git 
+
+ant -f getBaseBuilder.xml -DbuilderVersion=$buildProjectTags -DfetchSource=cvs 
+mv org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder-$buildProjectTags-cvs 
