@@ -182,7 +182,7 @@ updateBaseBuilderGit () {
 
     source ../utilities/getbasebuilder.sh
 
-    echo "[start] [`date +%H\:%M\:%S`] updateBaseBuilder getting org.eclipse.releng.basebuilder using tag (or branch): ${basebuilderBranch}"
+    echo "[start] [`date +%H\:%M\:%S`] updateBaseBuilder from Git getting org.eclipse.releng.basebuilder using tag (or branch): ${basebuilderBranch}"
     echo "DEBUG: current directory as entering updateBaseBuilder ${PWD}"
     if [ -d "${supportDir}" ]
     then
@@ -227,15 +227,9 @@ updateBaseBuilderGit () {
     then
         # make directory in case doesn't exist ${relengBaseBuilderDir}
         mkdir -p "${relengBaseBuilderDir}"
-        #echo "DEBUG: creating cmd"
-        # TODO: for some reason I could not get this "in" an executable command ... not enough quotes, or something?
-        #cmd="cvs -d :pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse ${quietCVS} ex -r ${basebuilderBranch} -d org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder"
-        # cvs -d :pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse ${quietCVS} ex -r ${basebuilderBranch} -d org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder
-        CVSROOT=${CVSROOT:-:local:/cvsroot/eclipse}
-        cvs -d ${CVSROOT} ${quietCVS} ex -r ${basebuilderBranch} -d org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder
+        getBasebuilderFromGit
         exitcode=$?
-        #echo "cvs export cmd: ${cmd}"
-        #"${cmd}"
+
     else
         echo "INFO: base builder already existed, so taking as accurate. Remember to delete it when fresh version needed."
         exitcode=0

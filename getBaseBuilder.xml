@@ -68,9 +68,10 @@
     </target>
     <target
         name="init"
-        depends="hudson-init">
+        depends="hudson-init"
+        unless="getBaseBuilderInitialized">
 
-        <!-- assign defaults if not on husson, for local testing if nothing else -->
+        <!-- assign defaults if not on hudson, for local testing if nothing else -->
         <property
             name="WORKSPACE"
             value="${basedir}" />
@@ -85,13 +86,25 @@
         <property
             name="cvsProject"
             value="org.eclipse.releng.basebuilder" />
+        
+        <property 
+            name="fetchSource"
+            value="git" />
 
         <echo message="hudson: ${hudson}" />
         <echo message="WORKSPACE: ${WORKSPACE}" />
         <echo message="basebuilder version: ${builderVersion}" />
         <echo message="cvsRoot: ${cvsRoot}" />
         <echo message="cvsProject: ${cvsProject}" />
+        <echo message="fetchSource: ${fetchSource}" />
 
+        <!-- leave useGit undefined to imply to use CVS. Callers can override git defaults with -DfetchSource=cvs 
+             or, anything besides 'git' implies cvs.
+        -->
+        <condition property="useGit" value="true">
+           <equals arg1="${fetchSource}" arg2="git" casesensitive="false" trim="true" forcestring="true"/>
+        </condition>
+        <echo message="useGit: ${useGit}" />
         <!-- don't need? yet
              <echo message="BUILD_ID: ${BUILD_ID}" />
              <echo message="BUILD_NUMBER: ${BUILD_NUMBER}" />
@@ -115,11 +128,10 @@
             <isset property="checkout.builder.clean" />
         </condition>
        -->
-
+        <property 
+            name="getBaseBuilderInitialized"
+            value="true" />
     </target>
-
-
-
 
 
     <target
@@ -130,19 +142,12 @@
             unless="builderVersion"
             message="This script needs builderVersion to run" />
 
-        <!-- temp, clean up old use of 'ws' -->
-        <delete dir="${WORKSPACE}/workarea" />
+        <!-- remove old one, if there, and make sure one exists for eventual checkout/copy/globmapper -->
+        <delete dir="${WORKSPACE}/org.eclipse.releng.basebuilder" />
+        <mkdir dir="${WORKSPACE}/org.eclipse.releng.basebuilder" />
 
-        <cvs
-            cvsroot="${cvsRoot}"
-            command="checkout"
-            quiet="true"
-            dest="${WORKSPACE}"
-            tag="${builderVersion}"
-            package="${cvsProject}">
-
-        </cvs>
-
+        <antcall target="fetchBaseBuilder"/>
+        
     </target>
     <!-- hurestic to check if we are running on hudson variable, if so -->
     <target name="checkHudson">
@@ -164,5 +169,57 @@
         </condition>
 
     </target>
+    <target
+        name="fetchBaseBuilderFromGit" 
+        depends="init"
+        if="useGit">
+        <echo message="Fetching basebuilder from CGit" />
+        <get 
+          src="http://git.eclipse.org/c/platform/eclipse.platform.releng.basebuilder.git/snapshot/eclipse.platform.releng.basebuilder-${builderVersion}.zip"
+          dest="basebuilder-${builderVersion}.zip" 
+          usetimestamp="true"
+            skipexisting="true"/>
+        <unzip  
+            src="basebuilder-${builderVersion}.zip"
+            dest="${WORKSPACE}"
+            overwrite="true" />
 
+        <move  todir="org.eclipse.releng.basebuilder" >
+            <fileset dir="eclipse.platform.releng.basebuilder-${builderVersion}" />
+        </move>
+        <!-- we've moved the files, now to remove the empty dir -->
+        <delete dir="eclipse.platform.releng.basebuilder-${builderVersion}" />
+
+        <!-- not sure why I couldn't get globmapper to work here with unzip? 
+        <globmapper 
+                from="eclipse.platform.releng.basebuilder-${builderVersion}/*"
+                to="org.eclipse.releng.basebuilder/*" />
+         -->
+
+        <!-- cleanup (may eventually want to "cache" this zip file, so no need to re-fetch if already exists --> 
+        <delete file="basebuilder-${builderVersion}.zip" />
+
+    </target>
+    
+    <target
+        name="fetchBaseBuilderFromCVS" 
+        depends="init"
+        unless="useGit">
+        <echo message="Fetching basebuilder from CVS" />
+        <cvs
+            cvsroot="${cvsRoot}"
+            command="export"
+            quiet="true"
+            dest="${WORKSPACE}"
+            tag="${builderVersion}"
+            package="${cvsProject}">
+        </cvs>
+    </target>
+    
+    <target
+        name="fetchBaseBuilder" 
+        depends="init, fetchBaseBuilderFromCVS, fetchBaseBuilderFromGit" >
+        <echo message="Fetched basebuilder to ${WORKSPACE}/org.eclipse.releng.basebuilder" />
+
+    </target>
 </project>
