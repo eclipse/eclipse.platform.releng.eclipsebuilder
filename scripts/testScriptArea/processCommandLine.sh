@@ -576,10 +576,10 @@ echo "\$eclipsebuilderBranch='${eclipsebuilderBranch}';" >> $buildResults/buildP
 echo "?>" >> $buildResults/buildProperties.php
 
 updateBaseBuilder
-checkForErrorExit $? "Failed while updating Base Buidler"
+checkForErrorExit $? "Failed while updating Base Builder"
 
 updateEclipseBuilder
-checkForErrorExit $? "Failed while updating Eclipse Buidler"
+checkForErrorExit $? "Failed while updating Eclipse Builder"
 
 
 

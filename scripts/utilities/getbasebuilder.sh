@@ -67,7 +67,7 @@ function getBasebuilderFromGit () {
 
 }
 
-# this script is normally 'source'd into masterbuild and the function called
+# this script is normally copied into masterbuild.sh and the function called
 # if this script is executed, it assumes reasonable (or, current) defaults 
 getBasebuilderFromGit
 
