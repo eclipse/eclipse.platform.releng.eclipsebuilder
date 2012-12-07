@@ -177,6 +177,77 @@ updateBaseBuilder () {
     return $exitcode
 }
 
+# get the base builder (from git)
+updateBaseBuilderGit () {
+
+    source ../utilities/getbasebuilder.sh
+
+    echo "[start] [`date +%H\:%M\:%S`] updateBaseBuilder getting org.eclipse.releng.basebuilder using tag (or branch): ${basebuilderBranch}"
+    echo "DEBUG: current directory as entering updateBaseBuilder ${PWD}"
+    if [ -d "${supportDir}" ]
+    then
+        cd "${supportDir}"
+        echo "   changed current directory to ${PWD}"
+    else
+        echo "   ERROR: support directory did not exist as expected."
+        exit 1
+    fi
+
+    if [[ -z "${relengBaseBuilderDir}" ]]
+    then
+        echo "ERROR: relengBaseBuilderDir must be defined for this script, $0"
+        exit 1
+    fi
+    if [[ -z "${basebuilderBranch}" ]]
+    then
+        echo "ERROR: basebuilderBranch must be defined for this script, $0"
+        exit 1
+    fi
+
+    echo "DEBUG: relengBaseBuilderDir: $relengBaseBuilderDir"
+    echo "INFO: basebuilderBranch: $basebuilderBranch"
+
+    # scmCache has been "moved out" of base builder area,
+    # and it has been improved to use origin/master to better
+    # overwrite anything that it thinks should be pulled instead.
+    # (creating a detached head, which is fine for scmCache).
+    # but until ALL areas are known to be "unchanged"
+    # safest to be sure we are clean. See bug 375794.
+    if [ -e ${relengBaseBuilderDir}/eclipse.ini ]
+    then
+        echo "removing previous version of base builder, to be sure it is fresh. See bug 375794 "
+        rm -fr ${VERBOSE_REMOVES} ${relengBaseBuilderDir}
+    fi
+
+    # existence of direcotry, is not best test of existence, since
+    # sometimes the top level directory may still exist, while most files deleted,
+    # due to NFS filesystem quirks. Hence, we look for specific file, the Eclipse.ini
+    # file.
+    if [[ ! -e "${relengBaseBuilderDir}/eclipse.ini" ]]
+    then
+        # make directory in case doesn't exist ${relengBaseBuilderDir}
+        mkdir -p "${relengBaseBuilderDir}"
+        #echo "DEBUG: creating cmd"
+        # TODO: for some reason I could not get this "in" an executable command ... not enough quotes, or something?
+        #cmd="cvs -d :pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse ${quietCVS} ex -r ${basebuilderBranch} -d org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder"
+        # cvs -d :pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse ${quietCVS} ex -r ${basebuilderBranch} -d org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder
+        CVSROOT=${CVSROOT:-:local:/cvsroot/eclipse}
+        cvs -d ${CVSROOT} ${quietCVS} ex -r ${basebuilderBranch} -d org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder
+        exitcode=$?
+        #echo "cvs export cmd: ${cmd}"
+        #"${cmd}"
+    else
+        echo "INFO: base builder already existed, so taking as accurate. Remember to delete it when fresh version needed."
+        exitcode=0
+    fi
+    echo "DEBUG: current directory as exiting updateBaseBuilder ${PWD}"
+    echo "[end] [`date +%H\:%M\:%S`] updateBaseBuilder getting org.eclipse.releng.basebuilder using tag (or branch): ${basebuilderBranch}"
+    # note we save and return the return code from the cvs command itself.
+    # That is so we can complete, exit, and let caller decide what to do
+    # (to abort, retry, etc.)
+    return $exitcode
+}
+
 
 updateEclipseBuilder() {
 
@@ -746,7 +817,7 @@ echo "\$basebuilderBranch='${basebuilderBranch}';" >> ${buildResults}/buildPrope
 echo "\$eclipsebuilderBranch='${eclipsebuilderBranch}';" >> $buildResults/buildProperties.php
 echo "?>" >> $buildResults/buildProperties.php
 
-updateBaseBuilder
+updateBaseBuilderGit
 checkForErrorExit $? "Failed while updating Base Buidler"
 
 updateEclipseBuilder
