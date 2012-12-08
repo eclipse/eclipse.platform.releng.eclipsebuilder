@@ -193,6 +193,14 @@
                 <include name="**/*" />
             </fileset>
         </move>
+
+        <chmod  perm="ugo+x" >
+            <fileset dir="${WORKSPACE}/${folderName}">
+                <include name="eclipse"/>
+                <include name="*.so*"/>
+            </fileset>
+        </chmod>
+
         <!-- we've moved the files, now to remove the empty dir -->
         <delete dir="${WORKSPACE}/eclipse.platform.releng.basebuilder-${builderVersion}" />
 
