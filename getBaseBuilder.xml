@@ -179,20 +179,22 @@
         name="fetchBaseBuilderFromGit" 
         depends="init"
         if="useGit">
-        <echo message="Fetching basebuilder from CGit" />
+        <echo message="Fetching basebuilder from Git via CGit" />
         <get 
           src="http://git.eclipse.org/c/platform/eclipse.platform.releng.basebuilder.git/snapshot/eclipse.platform.releng.basebuilder-${builderVersion}.zip"
-          dest="basebuilder-${builderVersion}.zip" />
+          dest="${WORKSPACE}/basebuilder-${builderVersion}.zip" />
         <unzip  
-            src="basebuilder-${builderVersion}.zip"
+            src="${WORKSPACE}/basebuilder-${builderVersion}.zip"
             dest="${WORKSPACE}"
             overwrite="true" />
 
         <move  todir="${WORKSPACE}/${folderName}" >
-            <fileset dir="eclipse.platform.releng.basebuilder-${builderVersion}" />
+            <fileset dir="${WORKSPACE}/eclipse.platform.releng.basebuilder-${builderVersion}" >
+                <include name="**/*" />
+            </fileset>
         </move>
         <!-- we've moved the files, now to remove the empty dir -->
-        <delete dir="eclipse.platform.releng.basebuilder-${builderVersion}" />
+        <delete dir="${WORKSPACE}/eclipse.platform.releng.basebuilder-${builderVersion}" />
 
         <!-- not sure why I couldn't get globmapper to work here with unzip? 
         <globmapper 
@@ -201,7 +203,7 @@
          -->
 
         <!-- cleanup (may eventually want to "cache" this zip file, so no need to re-fetch if already exists --> 
-        <delete file="basebuilder-${builderVersion}.zip" />
+        <delete file="${WORKSPACE}/basebuilder-${builderVersion}.zip" />
 
     </target>
     
