@@ -87,6 +87,12 @@
             name="cvsProject"
             value="org.eclipse.releng.basebuilder" />
         
+        <!-- the desired folder name (made to stay consistent with cvs module name, though Git project 
+             is named eclipse.platform.releng.basebuilder fil--> 
+        <property
+            name="folderName"
+            value="org.eclipse.releng.basebuilder" />
+        
         <property 
             name="fetchSource"
             value="git" />
@@ -143,8 +149,8 @@
             message="This script needs builderVersion to run" />
 
         <!-- remove old one, if there, and make sure one exists for eventual checkout/copy/globmapper -->
-        <delete dir="${WORKSPACE}/org.eclipse.releng.basebuilder" />
-        <mkdir dir="${WORKSPACE}/org.eclipse.releng.basebuilder" />
+        <delete dir="${WORKSPACE}/${folderName}" />
+        <mkdir dir="${WORKSPACE}/${folderName}" />
 
         <antcall target="fetchBaseBuilder"/>
         
@@ -182,7 +188,7 @@
             dest="${WORKSPACE}"
             overwrite="true" />
 
-        <move  todir="org.eclipse.releng.basebuilder" >
+        <move  todir="${WORKSPACE}/${folderName}" >
             <fileset dir="eclipse.platform.releng.basebuilder-${builderVersion}" />
         </move>
         <!-- we've moved the files, now to remove the empty dir -->
@@ -191,7 +197,7 @@
         <!-- not sure why I couldn't get globmapper to work here with unzip? 
         <globmapper 
                 from="eclipse.platform.releng.basebuilder-${builderVersion}/*"
-                to="org.eclipse.releng.basebuilder/*" />
+                to="${folderName}/*" />
          -->
 
         <!-- cleanup (may eventually want to "cache" this zip file, so no need to re-fetch if already exists --> 
@@ -217,7 +223,7 @@
     <target
         name="fetchBaseBuilder" 
         depends="init, fetchBaseBuilderFromCVS, fetchBaseBuilderFromGit" >
-        <echo message="Fetched basebuilder to ${WORKSPACE}/org.eclipse.releng.basebuilder" />
+        <echo message="Fetched basebuilder to ${WORKSPACE}/${folderName}" />
 
     </target>
 </project>
