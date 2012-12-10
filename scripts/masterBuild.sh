@@ -109,6 +109,10 @@ function getBasebuilderFromGit () {
     # copy basebuilder into directory is constant name, so rest of build script stays the same
     rsync -r ${TEMP_LOC}/eclipse.platform.releng.basebuilder-${basebuilderBranch}/  ${relengBaseBuilderDir}
 
+    # make sure executables are executable
+     chmod -c ugo+x "${relengBaseBuilderDir}/eclipse"
+     chmod -c ugo+x "${relengBaseBuilderDir}/*.so*"
+
     # remove the tempoary directory
     # (but leaving for now, for demonstration/confirmation of what is fetched from git)
     # caution, if TEMP_LOC not defined, this may rm current directory?!
