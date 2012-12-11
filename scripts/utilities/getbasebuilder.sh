@@ -58,7 +58,7 @@ function getBasebuilderFromGit () {
 
     # make sure executables are executable
      chmod -c ugo+x "${relengBaseBuilderDir}/eclipse"
-     chmod -c ugo+x "${relengBaseBuilderDir}/*.so*"
+     chmod -c ugo+x "${relengBaseBuilderDir}"/*.so*
 
     # remove the tempoary directory
     # (but leaving for now, for demonstration/confirmation of what is fetched from git)
