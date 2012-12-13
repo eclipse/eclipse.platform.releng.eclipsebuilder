@@ -29,7 +29,7 @@ Detailed performance data grouped by scenario prefix</FONT></B></TD></TR></TABLE
 			$index++;
 		}
 	}
-	aDirectory.closedir();	
+	aDirectory.closedir();
 
 	$result=array_unique($packageprefixes);
 

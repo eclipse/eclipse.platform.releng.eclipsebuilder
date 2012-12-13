@@ -1,9 +1,9 @@
-<?php
+<?php  
   # Begin: page-specific settings.  Change these.
   $pageTitle    = "Eclipse Project Downloads";
   $pageKeywords = "";
   $pageAuthor   = "";
-
+ 
   //ini_set("display_errors", "true");
   //error_reporting (E_ALL);
   $eclipseStream="4";
@@ -14,7 +14,7 @@
 
   # Use the basic white layout if the file is not hosted on download.eclipse.org
   $layout = (array_key_exists("SERVER_NAME", $_SERVER) && ($_SERVER['SERVER_NAME'] == "download.eclipse.org")) ? "default" : "html";
-
+ 
   ob_start();
 
   switch($layout){
@@ -27,7 +27,7 @@
 <link rel="stylesheet" href="../default_style.css" />
 <title><?php echo $pageTitle;?></title></head>
 <body><?php
-      break;
+      break;   
     default:
       #Otherwise use the default layout (content printed inside the nova theme).
       require_once($_SERVER['DOCUMENT_ROOT'] . "/eclipse.org-common/system/app.class.php");
@@ -36,7 +36,7 @@
       $App  = new App();
       $Nav  = new Nav();
       $Menu   = new Menu();
-      break;
+      break;     
   }?>
 <div class="container_<?php echo $layout;?>">
 <table border="0" cellspacing="5" cellpadding="2" width="100%" >
@@ -95,7 +95,7 @@ builds</a>, access <a href="http://archive.eclipse.org/eclipse/downloads/">archi
 <?php
 
 function startsWithDropPrefix($dirName, $dropPrefix)
-{
+{ 
 
     $result = false;
     // sanity check "setup" is as we expect
@@ -104,7 +104,7 @@ function startsWithDropPrefix($dirName, $dropPrefix)
         if (isset($dirName) && strlen($dirName) > 0) {
             $firstChar = substr($dirName, 0, 1);
             //echo "first char: ".$firstChar;
-            foreach($dropPrefix as $type) {
+            foreach($dropPrefix as $type) { 
                 if ($firstChar == "$type") {
                     $result = true;
                     break;
@@ -454,12 +454,12 @@ switch($layout){
       echo '</body>';
       echo '</html>';
       break;
-      	
+
 	default:
       #For the default view we use $App->generatePage to generate the page inside nova.
 	  $App->AddExtraHtmlHeader('<link rel="stylesheet" href="../default_style.css" />');
 	  $App->Promotion = FALSE;
 	  $App->generatePage('Nova', $Menu, NULL , $pageAuthor, $pageKeywords, $pageTitle, $html);
-	  break;	
+	  break;
 }
 

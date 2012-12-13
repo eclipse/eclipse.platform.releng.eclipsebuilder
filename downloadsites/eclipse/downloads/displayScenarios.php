@@ -8,7 +8,7 @@
 
 	$aDirectory=dir("$buildType-scenarios");
 	$index = 0;
-	
+
 	while ($anEntry = $aDirectory->read()) {
 
 		if ($anEntry != "." && $anEntry != "..") {
@@ -16,7 +16,7 @@
 				$scenarioname=substr($anEntry,0,-5);
 				$scenarios[$index]=$scenarioname;
 				$index++;
-				
+
 			}
 		}
 	}
@@ -34,7 +34,7 @@
 	 	echo "$line";
 	}
 	}
-	aDirectory.closedir();	
+	aDirectory.closedir();
 ?>
 
 </body>
