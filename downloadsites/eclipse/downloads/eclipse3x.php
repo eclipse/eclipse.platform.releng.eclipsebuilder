@@ -194,10 +194,10 @@ function printBuildColumns($fileName, $parts) {
 
         switch ($boxes) {
         case 0:
-            // if more than 8 hours then consider that the regression tests did not start
-            //if ($diff > 480) {
+            // if more than 12 hours then consider that the regression tests did not start
+            if ($diff > 720) {
             // for now, hard code to "0" since we are not reunning tests
-            if ($diff > 0) {
+            // if ($diff > 0) {
                 echo "<img src=\"../images/caution.gif\" title=\"Regression tests did not run!\" alt=\"Regression tests did not run!\" />\n";
             } else {
                 echo "<img src=\"../images/runtests.gif\" title=\"Regression tests are running...\" alt=\"Regression tests are running...\" />\n";
@@ -213,7 +213,7 @@ function printBuildColumns($fileName, $parts) {
             echo "<img border=\"0\" src=\"../images/junit.gif\" title=\"Tests results are available\" alt=\"Tests results are available\" /></a>\n";
             break;
         default:
-            // if more than 12 hours then consider that the regression tests did not finish
+            // if more than 18 hours then consider that the regression tests did not finish
             if ($diff > 720) {
                 if ($testResultsDirName === "testresults") {
                     echo "<a href=\"$dropDir/testResults.php\">";
