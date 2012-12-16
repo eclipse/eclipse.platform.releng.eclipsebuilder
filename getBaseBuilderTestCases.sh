@@ -3,8 +3,12 @@
 # Note for production. Simple test cases to verify script to get basebuilder, 
 # from CVS or Git, saving each version (with mv) to diff afterwards
 
-# defaults to CGit (fetchSource=git) , builderVersion=R38M6PlusRC3D 
+# defaults to CGit (fetchSource=git) , builderVersion=R38M6PlusRC3E 
 ant -f getBaseBuilder.xml 
+mv org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder-E-git 
+
+# get previously used version
+ant -f getBaseBuilder.xml -DbuilderVersion=R38M6PlusRC3D
 mv org.eclipse.releng.basebuilder org.eclipse.releng.basebuilder-D-git 
 
 # get previously used version

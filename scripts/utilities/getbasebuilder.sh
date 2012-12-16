@@ -10,7 +10,7 @@ function getBasebuilderFromGit () {
     # specify branch or tag to retrieve
     # default to what we are currently using
     # basebuilderBranch=R3_7_maintenance
-    basebuilderBranch=${basebuilderBranch:-R38M6PlusRC3D}
+    basebuilderBranch=${basebuilderBranch:-R38M6PlusRC3E}
     # could/should put the basebuilder in to any existing directory, (where ever current scripts put it) 
     # but for demonstration or current case will use current directory
     supportDir=${supportDir:-${PWD}}
