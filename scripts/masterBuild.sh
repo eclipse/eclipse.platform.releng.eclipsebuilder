@@ -63,7 +63,7 @@ function getBasebuilderFromGit () {
     # specify branch or tag to retrieve
     # default to what we are currently using
     # basebuilderBranch=R3_7_maintenance
-    basebuilderBranch=${basebuilderBranch:-R38M6PlusRC3E}
+    basebuilderBranch=${basebuilderBranch:-R38M6PlusRC3F}
     # could/should put the basebuilder in to any existing directory, (where ever current scripts put it) 
     # but for demonstration or current case will use current directory
     supportDir=${supportDir:-${PWD}}
@@ -631,7 +631,7 @@ processCommandLine ()
     relengRepoName=${relengRepoName:-eclipse.platform.releng.maps}
 
     # base builder pretty constant
-    basebuilderBranch=${basebuilderBranch:-R38M6PlusRC3E}
+    basebuilderBranch=${basebuilderBranch:-R38M6PlusRC3F}
 
     # relies on export, since getEclipseBuilder is seperate script,
     # and it does not use "command line pattern"

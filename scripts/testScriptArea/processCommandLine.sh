@@ -322,7 +322,7 @@ processCommandLine ()
     relengRepoName=${relengRepoName:-eclipse.platform.releng.maps}
 
     # base builder pretty constant.
-    basebuilderBranch=${basebuilderBranch:-R38M6PlusRC3E}
+    basebuilderBranch=${basebuilderBranch:-R38M6PlusRC3F}
 
     # relies on export, since getEclipseBuilder is seperate script,
     # and it does not use "command line pattern"

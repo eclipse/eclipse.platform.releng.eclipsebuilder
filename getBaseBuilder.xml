@@ -78,7 +78,7 @@
 
         <property
             name="builderVersion"
-            value="R38M6PlusRC3E" />
+            value="R38M6PlusRC3F" />
 
         <property
             name="cvsRoot"
