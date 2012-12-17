@@ -877,13 +877,11 @@ echo "\$basebuilderBranch='${basebuilderBranch}';" >> ${buildResults}/buildPrope
 echo "\$eclipsebuilderBranch='${eclipsebuilderBranch}';" >> $buildResults/buildProperties.php
 echo "?>" >> $buildResults/buildProperties.php
 
-updateBaseBuilderGit
-checkForErrorExit $? "Failed while updating Base Builder"
-
 updateEclipseBuilder
 checkForErrorExit $? "Failed while updating Eclipse Builder"
 
-
+updateBaseBuilderGit
+checkForErrorExit $? "Failed while updating Base Builder"
 
 tagRepo
 trExitCode=$?
