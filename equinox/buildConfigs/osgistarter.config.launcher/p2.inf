@@ -1,4 +1,4 @@
-filter=((&(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))(&(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))(&(osgi.arch=x86)(osgi.os=macosx)(osgi.ws=cocoa))(&(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))(&(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))(&(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk)))
+filter=(|(&(osgi.arch=x86)(osgi.os=win32)(osgi.ws=win32))(&(osgi.arch=x86_64)(osgi.os=win32)(osgi.ws=win32))(&(osgi.arch=x86)(osgi.os=macosx)(osgi.ws=cocoa))(&(osgi.arch=x86_64)(osgi.os=macosx)(osgi.ws=cocoa))(&(osgi.arch=x86)(osgi.os=linux)(osgi.ws=gtk))(&(osgi.arch=x86_64)(osgi.os=linux)(osgi.ws=gtk)))
 
 org.eclipse.pde.build.append.startlevels=false
 org.eclipse.pde.build.append.launchers=true
