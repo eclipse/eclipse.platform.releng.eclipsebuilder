@@ -144,7 +144,7 @@ function saveBuildLog()
     fi
 }
 
-# general purpose utility for "hard exit" is return code not zero.
+# general purpose utility for "hard exit" if return code not zero.
 # especially useful to call/check after basic things that should normally
 # easily succeeed.
 # usage:
