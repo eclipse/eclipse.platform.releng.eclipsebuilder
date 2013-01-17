@@ -1342,6 +1342,10 @@
             <config
                 os="linux"
                 ws="gtk"
+                arch="ppc" />
+            <config
+                os="linux"
+                ws="gtk"
                 arch="ppc64" />
             <config
                 os="linux"
@@ -1476,6 +1480,10 @@
             <config
                 os="linux"
                 ws="gtk"
+                arch="ppc" />
+            <config
+                os="linux"
+                ws="gtk"
                 arch="ppc64" />
             <config
                 os="linux"
@@ -1549,6 +1557,10 @@
             <config
                 os="linux"
                 ws="gtk"
+                arch="ppc" />
+            <config
+                os="linux"
+                ws="gtk"
                 arch="s390x" />
             <config
                 os="linux"
@@ -1615,6 +1627,10 @@
                 os="linux"
                 ws="gtk"
                 arch="ppc" />
+            <config
+                os="linux"
+                ws="gtk"
+                arch="ppc64" />
             <config
                 os="linux"
                 ws="gtk"
