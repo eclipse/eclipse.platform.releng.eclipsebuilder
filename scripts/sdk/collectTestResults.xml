@@ -4,6 +4,7 @@
     default="collectTestResults"
     basedir=".">
 
+    <!-- example properties. Caller normally provides. -->
     <property
         name="job"
         value="ep4-unit-mac64" />
@@ -16,7 +17,12 @@
     <property
         name="eclipseStream"
         value="4.3.0" />
-
+    <property
+        name="BUILD_TECH"
+        value="CBI" />
+    <property
+        name="EBUILDER_HASH"
+        value="master" />
 
 
     <target
@@ -27,12 +33,17 @@
 
         <mkdir dir="${tmpzipdir}" />
 
-        <retry retrycount="3" retrydelay="1000">
+        <retry
+            retrycount="3"
+            retrydelay="1000">
             <get
                 src="${hudsonResultURL}"
                 dest="${tmpzipdir}/archive.zip" />
         </retry>
-        <unzip
+
+        <mkdir dir="${postingDirectory}/${buildId}/testresults" />
+        
+        <unzip overwrite="true" 
             src="${tmpzipdir}/archive.zip"
             dest="${postingDirectory}/${buildId}/testresults/">
             <globmapper
@@ -40,9 +51,18 @@
                 to="*" />
         </unzip>
 
+        <echo message="DEBUG: eclipseStream buildId BUILD_TECH EBUILDER_HASH: ${eclipseStream} ${buildId} ${BUILD_TECH} ${EBUILDER_HASH}" />
+        
         <exec executable="/bin/bash">
-            <arg line="/shared/eclipse/sdk/promotion/updateDropLocation.sh ${eclipseStream} ${buildId}" />
+            <arg line="/shared/eclipse/sdk/promotion/updateDropLocation.sh ${eclipseStream} ${buildId} ${BUILD_TECH} ${EBUILDER_HASH}" />
         </exec>
+
+        <delete>
+        	<fileset dir="${postingDirectory}/${buildId}/testresults">
+        	    <include name="${tmpzipdir}" />
+        	    <include name="archive/**" />
+        	</fileset>
+        </delete>
 
     </target>
 
@@ -53,10 +73,20 @@
         name="init"
         unless="collectTestResultsInitialized">
 
+        <property environment="env" />
+
+        <property
+            name="env.HUDSON_HOST"
+            value="hudson.eclipse.org" />
+        <property
+            name="env.HUDSON_PROTOCOL"
+            value="https" />
+
         <script language="javascript"><![CDATA[
             var buildId = project.getProperty("buildId");
             var patternbuildType = new RegExp(/^([IMNSR])(\d{8})-(\d{4})$/);
-
+            var buildTech = project.getProperty("BUILD_TECH");
+            
             var sArraybuildType = patternbuildType.exec(buildId);
             // sArray 0 is "whole match"
             var buildType =  sArraybuildType[1];
@@ -75,39 +105,30 @@
             project.setProperty("eclipseStreamService", eclipseStreamService);
 
             var buildRoot="/shared/eclipse/eclipse" + eclipseStreamMajor + buildType;
+            if (buildTech == "CBI") 
+            {
+                buildRoot="/shared/eclipse/builds/" + eclipseStreamMajor + buildType;
+            }
             var siteDir= buildRoot + "/siteDir";
             var postingDirectory = siteDir + "/eclipse/downloads/drops"
             if (eclipseStreamMajor > 3 )
             {
-            postingDirectory = siteDir + "/eclipse/downloads/drops" + eclipseStreamMajor;
+                postingDirectory = siteDir + "/eclipse/downloads/drops" + eclipseStreamMajor;
+            }
+            if (buildTech == "CBI") 
+            {
+                postingDirectory = postingDirectory + "cbibased";
             }
             project.setProperty("postingDirectory", postingDirectory);
             ]]>
         </script>
-        <!--
-        buildRoot=/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}
-        buildDir=${buildRoot}/build
-        supportDir=${buildDir}/supportDir
-        eclipsebuilder=org.eclipse.releng.eclipsebuilder
-        builderDir=${supportDir}/$eclipsebuilder
 
-        # should buildDirectory be set at "main" one from actual build?
-        buildDirectory=${supportDir}/src
-
-        # note, to be consistent, I changed json xml file so it adds buildId to postingDirectory
-        siteDir=${buildRoot}/siteDir
-        postingDirectory=${siteDir}/eclipse/downloads/drops
-        if [[ "${eclipseStreamMajor}" > 3 ]]
-        then
-        postingDirectory=${siteDir}/eclipse/downloads/drops${eclipseStreamMajor}
-        fi
-        -->
 
         <echo message="postingDirectory: ${postingDirectory}" />
 
         <property
             name="hudsonResultRootURL"
-            value="https://hudson.eclipse.org/hudson/job/${job}/${buildNumber}/artifact/*zip*" />
+            value="${env.HUDSON_PROTOCOL}://${env.HUDSON_HOST}/hudson/job/${job}/${buildNumber}/artifact/*zip*" />
         <property
             name="hudsonResultURL"
             value="${hudsonResultRootURL}/archive.zip" />

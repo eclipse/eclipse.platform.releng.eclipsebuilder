@@ -3,6 +3,10 @@
 # Small utility to start unit tests (or re-run them) after a build
 # and after upload to downloads server is complete.
 
+# This file mentions "CBI" but is really only used for PDE builds. 
+# It was modified to more closely resemble (for double checking) the 
+# corresponding file in aggregator/production
+
 # need to be running Java 6 and Ant 1.8 for <sript> to work in invokeTestsJSON
 # and, default on current build system is Ant 1.7 ... so ...
 export ANT_HOME=/shared/common/apache-ant-1.8.4
@@ -29,6 +33,8 @@ source buildParams.shsource 2>/dev/null
 # which is how invoke from "promote script"
 eclipseStream=${eclipseStream:-${1}}
 buildId=${buildId:-${2}}
+BUILD_TECH=${BUILD_TECH:-${3}}
+EBUILDER_HASH=${EBUILDER_HASH:-${4}}
 
 if [[ -z ${eclipseStream} || -z ${buildId} ]]
 then
@@ -37,7 +43,15 @@ then
     exit 1
 fi
 
+if [[ -z "${BUILD_TECH}" ]]
+then
+    BUILD_TECH=PDE
+fi
 
+if [[ -z "${EBUILDER_HASH}" ]]
+then
+    EBUILDER_HASH=master
+fi
 
 # contrary to intuition (and previous behavior, bash 3.1) do NOT use quotes around right side of expression.
 if [[ "${eclipseStream}" =~ ([[:digit:]]*)\.([[:digit:]]*)\.([[:digit:]]*) ]]
@@ -62,12 +76,17 @@ else
     exit 1
 fi
 
+source buildeclipse.shsource 2>/dev/null
+
+echo "values in ${0}"
 echo "eclipseStream: $eclipseStream"
 echo "eclipseStreamMajor: $eclipseStreamMajor"
 echo "eclipseStreamMinor: $eclipseStreamMinor"
 echo "eclipseStreamService: $eclipseStreamService"
 echo "buildType: $buildType"
 echo "buildId: $buildId"
+echo "BUILD_TECH: $BUILD_TECH"
+echo "EBUILDER_HASH: $EBUILDER_HASH"
 
 
 buildRoot=/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}
@@ -92,5 +111,7 @@ HUDSON_TOKEN=windows2012tests ant \
     -DpostingDirectory=${postingDirectory} \
     -DbuildId=${buildId} \
     -DeclipseStream=${eclipseStream} \
+    -DBUILD_TECH=${BUILD_TECH} \
+    -DEBUILDER_HASH=${EBUILDER_HASH} \
     -f ${builderDir}/invokeTestsJSON.xml
 

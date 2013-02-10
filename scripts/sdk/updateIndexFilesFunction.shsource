@@ -5,12 +5,20 @@
 # php createIndex4x.php > index.html
 # php eclipse3x.php > eclipse3x.html
 
+
+
 function internalUpdateIndex ()
 {
 
+# this buildeclipse.shsource file is to ease local builds to override some variables. 
+# It should not be used for production builds.
+source buildeclipse.shsource 2>/dev/null
+SITE_HOST=${SITE_HOST:-download.eclipse.org}
+echo "SITE_HOST: $SITE_HOST"
+
     if [[ $# != 2 ]]
     then
-        echo "PROGRAM ERROR: this function requires to arguments, in order, "
+        echo "PROGRAM ERROR: this function requires two arguments, in order, "
         echo "    the php page to use to create the html page, named in second argument)."
         exit 1
     fi
@@ -20,7 +28,7 @@ function internalUpdateIndex ()
 
     TEMP_INDEX_TXT=tempIndex.txt
 
-    wget --no-verbose -O ${TEMP_INDEX_TXT} http://download.eclipse.org/eclipse/downloads/${PHP_PAGE} 2>&1
+wget --no-verbose -O ${TEMP_INDEX_TXT} http://${SITE_HOST}/eclipse/downloads/${PHP_PAGE} 2>&1
     rccode=$?
     if [ $rccode -eq 0 ]
     then
@@ -28,7 +36,7 @@ function internalUpdateIndex ()
         rccode=$?
         if [ $rccode -eq 0 ]
         then
-            echo "INFO: Upated http://download.eclipse.org/eclipse/downloads/${HTML_PAGE}"
+            echo "INFO: Upated http://${SITE_HOST}/eclipse/downloads/${HTML_PAGE}"
             return 0
         else
             echo "ERROR: Could not copy ${HTML_PAGE} to downlaods. rccode: $rccode"
@@ -51,20 +59,56 @@ function updateIndex ()
     x4X_HTML_PAGE="index.html"
     x3X_PHP_PAGE="eclipse3x.php"
     x3X_HTML_PAGE="eclipse3x.html"
+    x4X_PHP_PAGE_CBI="cbibasedcreateIndex4x.php"
+    x4X_HTML_PAGE_CBI="cbibasedindex.html"
+    x3X_PHP_PAGE_CBI="cbibasedeclipse3x.php"
+    x3X_HTML_PAGE_CBI="cbibasedeclipse3x.html"
 
     # if no arguments, do both, else we expect "3" or "4"
     # TODO: would be polite to detect unexpected arguments and give warnings.
     if [[ $# == 0 ]]
     then
+        # if 0 args, assume build_tech is PDE
+        BUILD_TECH=PDE
         internalUpdateIndex ${x4X_PHP_PAGE} ${x4X_HTML_PAGE}
         internalUpdateIndex ${x3X_PHP_PAGE} ${x3X_HTML_PAGE}
     else
-        if [[ "$1" == "3" ]]
+        if [[ $# == 1 ]] 
         then
-            internalUpdateIndex ${x3X_PHP_PAGE} ${x3X_HTML_PAGE}
-        elif [[ "$1" == "4" ]]
-        then
-            internalUpdateIndex ${x4X_PHP_PAGE} ${x4X_HTML_PAGE}
+            # assume the one argument is build_tech, and still call for both 3 and 4
+            BUILD_TECH=$1
+            if [[ "$BUILD_TECH" == "PDE" ]]
+            then
+               internalUpdateIndex ${x4X_PHP_PAGE} ${x4X_HTML_PAGE}
+               internalUpdateIndex ${x3X_PHP_PAGE} ${x3X_HTML_PAGE}
+            elif [[ "$BUILD_TECH" == "CBI" ]]
+            then
+               internalUpdateIndex ${x4X_PHP_PAGE_CBI} ${x4X_HTML_PAGE_CBI}
+               internalUpdateIndex ${x3X_PHP_PAGE_CBI} ${x3X_HTML_PAGE_CBI}
+            else
+                echo "ERROR: BUILD_TECH not recognized as 'CBI' or 'PDE'. Found ${BUILD_TECH}"
+            fi
+        else
+            # two arguments given for specific update
+            MAJOR=$1
+            BUILD_TECH=$2
+            echo "BUILD_TECH: $BUILD_TECH"
+            echo "MAJOR: $MAJOR"
+            if [[ "$BUILD_TECH" == "PDE" && "$MAJOR" == "3" ]]
+            then
+                internalUpdateIndex ${x3X_PHP_PAGE} ${x3X_HTML_PAGE}
+            elif [[ "$BUILD_TECH" == "PDE" && "$MAJOR" == "4" ]]
+            then
+                internalUpdateIndex ${x4X_PHP_PAGE} ${x4X_HTML_PAGE}
+            elif [[ "$BUILD_TECH" == "CBI" && "$MAJOR" == "3" ]]
+            then
+                internalUpdateIndex ${x3X_PHP_PAGE_CBI} ${x3X_HTML_PAGE_CBI}
+            elif [[ "$BUILD_TECH" == "CBI" && "$MAJOR" == "4" ]]
+            then
+                internalUpdateIndex ${x4X_PHP_PAGE_CBI} ${x4X_HTML_PAGE_CBI}
+            else
+                echo "ERROR. Combination of parameters did not patch any conditions."
+            fi
         fi
     fi
 

@@ -9,6 +9,33 @@
 # "default user" for that crontab, which may be what's desired, but you can also
 # set MAILTO in your crontab, cautiously, to send it where ever you'd like.
 
+# Start with minimal path for consistency across machines
+# plus, cron jobs do not inherit an environment
+# care is needed not have anything in ${HOME}/bin that would effect the build 
+# unintentionally, but is required to make use of "source buildeclipse.shsource" on 
+# local machines.  
+# Likely only a "release engineer" would be interested, such as to override "SIGNING" (setting it 
+# to false) for a test I-build on a remote machine. 
+export PATH=/usr/local/bin:/usr/bin:/bin:${HOME}/bin
+# unset common variables (some defined for e4Build) which we don't want (or, set ourselves)
+unset JAVA_HOME
+unset JAVA_ROOT
+unset JAVA_JRE
+unset CLASSPATH
+unset JAVA_BINDIR
+unset JRE_HOME
+
+# 0002 is often the default for shell users, but it is not when ran from
+# a cron job, so we set it explicitly, so releng group has write access to anything
+# we create.
+oldumask=`umask`
+umask 0002
+# Remember, don't echo except when testing, or mail will be sent each time it runs. 
+# echo "umask explicitly set to 0002, old value was $oldumask"
+
+
+
+
 # masterBuilder.sh must know about and use this same
 # location to put its collections scripts. (i.e. implicit tight coupling)
 testdataLocation=/shared/eclipse/sdk/testjobdata
@@ -58,6 +85,8 @@ do
                 # all is ok, we'll move the file to "RAN-" in case needed for later inspection,
                 # if things go wrong. Perhaps eventually just remove them?
                 mv $runningdatafile $testdataLocation/RAN_$(basename $datafile)
+                # if testing scripts, only, sometimes handy to leave named to catch the next cronjob
+                #mv $runningdatafile $testdataLocation/$(basename $datafile)
             fi
         else
             echo "ERROR: data file found, but was not an actual file?"

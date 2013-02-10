@@ -11,12 +11,13 @@ branchOrTag=master
 # and only things the user really needs wants to see as "results" goes to standard out
 # but in cron jobs and similar, this comes across as "an error".
 
-wget --no-verbose -O syncDropLocation.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/promotionRelated/syncDropLocation.sh?h=$branchOrTag 2>&1
-wget --no-verbose -O sdkPromotionCronJob.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/promotionRelated/sdkPromotionCronJob.sh?h=$branchOrTag 2>&1
+wget --no-verbose -O syncDropLocation.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/sdk/promotion/syncDropLocation.sh?h=$branchOrTag 2>&1
+wget --no-verbose -O sdkPromotionCronJob.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/sdk/promotion/sdkPromotionCronJob.sh?h=$branchOrTag 2>&1
+wget --no-verbose -O updateDropLocation.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/sdk/promotion/updateDropLocation.sh?h=$branchOrTag 2>&1
+wget --no-verbose -O getBaseBuilder.xml http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/sdk/promotion/getBaseBuilder.xml?h=$branchOrTag 2>&1
+wget --no-verbose -O getEBuilder.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/sdk/promotion/getEBuilder.sh?h=$branchOrTag 2>&1
 
-wget --no-verbose -O updateDropLocation.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/promotionRelated/updateDropLocation.sh?h=$branchOrTag 2>&1
-
-wget --no-verbose -O wgetSDKPromoteScripts.NEW.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/promotionRelated/wgetSDKPromoteScripts.sh?h=$branchOrTag 2>&1
+wget --no-verbose -O wgetSDKPromoteScripts.NEW.sh http://git.eclipse.org/c/platform/eclipse.platform.releng.eclipsebuilder.git/plain/scripts/sdk/promotion/wgetSDKPromoteScripts.sh?h=$branchOrTag 2>&1
 
 differs=`diff wgetSDKPromoteScripts.NEW.sh wgetSDKPromoteScripts.sh`
 
