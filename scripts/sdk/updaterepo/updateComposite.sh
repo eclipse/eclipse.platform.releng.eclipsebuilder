@@ -4,8 +4,9 @@
 # First argument must be the absolute directory path to the
 # (simple) artifact repository.
 
+#JAVA_5_HOME=${JAVA_5_HOME:-/home/shared/orbit/apps/ibm-java2-i386-50/jre}
 JAVA_5_HOME=${JAVA_5_HOME:-/shared/common/jdk-1.5.0-22.x86_64/jre}
-JAVA_6_HOME=${JAVA_6HOME:-/shared/common/jdk1.6.0_27.x86_64}
+JAVA_6_HOME=${JAVA_6HOME:-/shared/common/sun-jdk1.6.0_21_x64}
 
 export JAVA_HOME=${JAVA_6_HOME}
 

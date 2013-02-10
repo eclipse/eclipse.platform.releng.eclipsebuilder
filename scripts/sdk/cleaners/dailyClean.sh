@@ -25,7 +25,7 @@ find /opt/public/eclipse/eclipse4N/siteDir/eclipse/downloads/drops4 -maxdepth 1 
 
 find /opt/public/eclipse/eclipse4N/siteDir/equinox/drops -maxdepth 1 -ctime +1 -name "N*" -exec echo '{}' \;
 find /opt/public/eclipse/eclipse4N/siteDir/equinox/drops -maxdepth 1 -ctime +1 -name "N*" -exec rm -fr '{}' \;
-
+#
 # promotion scripts
 find /opt/public/eclipse/sdk/promotion/queue -name "RAN*" -ctime +2 -exec echo '{}' \;
 find /opt/public/eclipse/sdk/promotion/queue -name "RAN*" -ctime +2 -exec rm '{}' \;
