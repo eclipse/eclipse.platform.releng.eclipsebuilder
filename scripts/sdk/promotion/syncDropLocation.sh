@@ -230,7 +230,7 @@ function startTests()
 
     # finally, execute (assumed in ../sdk/promotion directory for now
     #${builderDropDir}/startTests.sh ${eclipseStream} ${buildId} ${BUILD_TECH} ${EBUILDER_HASH}
-    ./startTests.sh ${eclipseStream} ${buildId} ${BUILD_TECH} ${EBUILDER_HASH}
+    /shared/eclipse/sdk/promotion/startTests.sh ${eclipseStream} ${buildId} ${BUILD_TECH} ${EBUILDER_HASH}
 }
 
 # this funtion currently just synchs up the whole local repo
