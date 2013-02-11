@@ -226,11 +226,13 @@ function startTests()
         supportDir=${buildDir}/supportDir
         eclipsebuilder=org.eclipse.releng.eclipsebuilder
         builderDir=${supportDir}/$eclipsebuilder
-    fi
+        # assumed in fixed location, for now, for PDE builds
+        builderDropDir=/shared/eclipse/sdk/promotion
+        echo "DEBUG: builderDropDir for PDE: ${builderDropDir}"
+    fi  
 
-    # finally, execute (assumed in ../sdk/promotion directory for now
-    #${builderDropDir}/startTests.sh ${eclipseStream} ${buildId} ${BUILD_TECH} ${EBUILDER_HASH}
-    /shared/eclipse/sdk/promotion/startTests.sh ${eclipseStream} ${buildId} ${BUILD_TECH} ${EBUILDER_HASH}
+    # finally, execute 
+    ${builderDropDir}/startTests.sh ${eclipseStream} ${buildId} ${BUILD_TECH} ${EBUILDER_HASH}
 }
 
 # this funtion currently just synchs up the whole local repo
