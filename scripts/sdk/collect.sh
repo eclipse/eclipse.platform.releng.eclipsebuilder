@@ -65,5 +65,5 @@ ${ANT_HOME}/bin/ant -f /shared/eclipse/sdk/collectTestResults.xml \
    -DbuildNumber=${buildNumber} \
    -DbuildId=${buildId} \
    -DeclipseStream=${eclipseStream} \
-   -DBULID_TECH=${BUILD_TECH} \
-   -DEBULIDER_HASH=${EBULIDER_HASH}
+   -DBUILD_TECH=${BUILD_TECH} \
+   -DEBUILDER_HASH=${EBUILDER_HASH}
