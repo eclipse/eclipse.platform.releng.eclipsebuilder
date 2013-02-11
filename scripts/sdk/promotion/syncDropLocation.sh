@@ -222,10 +222,10 @@ function startTests()
         echo "DEBUG: builderDropDir: ${builderDropDir}"
     else
         buildRoot=/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}
-        #buildDir=${buildRoot}/build
-        #supportDir=${buildDir}/supportDir
-        #eclipsebuilder=org.eclipse.releng.eclipsebuilder
-        #builderDir=${supportDir}/$eclipsebuilder
+        buildDir=${buildRoot}/build
+        supportDir=${buildDir}/supportDir
+        eclipsebuilder=org.eclipse.releng.eclipsebuilder
+        builderDir=${supportDir}/$eclipsebuilder
     fi
 
     # finally, execute 
