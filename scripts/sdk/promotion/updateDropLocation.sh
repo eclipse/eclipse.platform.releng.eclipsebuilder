@@ -228,14 +228,15 @@ function updatePages()
         echo "DEBUG dlPath: $dlPath"
         buildDropDir=${buildRoot}/siteDir/$dlPath/${buildId}
         echo "DEBGUG buildDropDir: $buildDropDir"
-        ebuilderDropDir=${buildDropDir}/${eclipsebuilder}
+        ebuilderDropDir="${buildDropDir}/${eclipsebuilder}/production/testScripts"
         echo "DEBUG: ebuilderDropDir: ${ebuilderDropDir}"
     else
         buildRoot=/shared/eclipse/eclipse${eclipseStreamMajor}${buildType}
-        #buildDir=${buildRoot}/build
-        #supportDir=${buildDir}/supportDir
-        #eclipsebuilder=org.eclipse.releng.eclipsebuilder
-        #builderDir=${supportDir}/$eclipsebuilder
+        buildDir=${buildRoot}/build
+        supportDir=${buildDir}/supportDir
+        eclipsebuilder=org.eclipse.releng.eclipsebuilder
+        builderDir=${supportDir}/$eclipsebuilder
+        ebuilderDropDir="${builderDir}/testScripts"
     fi
 
     ${ebuilderDropDir}/production/testScripts/updateTestResultsPages.sh  $eclipseStream $buildId $BUILD_TECH
