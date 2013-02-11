@@ -12,7 +12,7 @@
 #    buildId       (e.g. N20120415-2015)
 
 
-if [[ $# != 2 ]]
+if [[ $# < 2 ]]
 then
     # usage:
     scriptname=$(basename $0)
