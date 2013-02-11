@@ -239,7 +239,7 @@ function updatePages()
         ebuilderDropDir="${builderDir}/testScripts"
     fi
 
-    ${ebuilderDropDir}/production/testScripts/updateTestResultsPages.sh  $eclipseStream $buildId $BUILD_TECH
+    ${ebuilderDropDir}/updateTestResultsPages.sh  $eclipseStream $buildId $BUILD_TECH
      rccode=$?
      if [[ $rccode != 0 ]]
      then
