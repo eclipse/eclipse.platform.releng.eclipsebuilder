@@ -44,6 +44,6 @@ mv sdk sdkTempSave
 rsync -r tempeb/master/scripts/sdk/ sdk
 
 diff -r sdk sdkTempSave > sdkdiffout.txt
-
+find ./ -name "*.sh" -exec chmod -c +x '{}' \;
 rm master.zip
 rm -fr tempeb
