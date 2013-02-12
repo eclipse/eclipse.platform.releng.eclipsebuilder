@@ -8,42 +8,36 @@
 
 function usage () 
 {
-    printf "\n\n\t%s\n" "promote-build.sh (PDE|CBI) if none specified, PDE assumed"
+    printf "\n\n\t%s\n" "promote-build.sh eclipseStream buildId (PDE|CBI) if none specified, PDE assumed"
 }
 
-BUILD_TECH=$1
+eclipseStream=$1
+if [[ -z "$eclipseStream" ]]
+  then
+      echo usage
+      exit 1
+fi
+
+buildId=$2
+if [[ -z "$buildId" ]]
+  then
+      echo usage
+      exit 1
+fi
+
+
+BUILD_TECH=$3
 if [[ -z "$BUILD_TECH" ]]
   then
       BUILD_TECH=PDE
   fi
 
-case $BUILD_TECH in
+EBUILDER_HASH=$4
+if [[ -z "$EBUILDER_HASH" ]]
+  then
+      EBUILDER_HASH=master
+  fi
 
-        'PDE' )
-                echo "Promote Build from PDE"
-                EBUILDER_HASH=master
-                ;;
-
-        'CBI' )
-                 echo "Promote Build from CBI"
-                 # TODO
-                 # We don't have hash tag here, yet, should not expect has tag, 
-                 # but for early testing, will use master
-                 EBUILDER_HASH=master
-                
-                ;;
-        *) echo "ERROR: Invalid argument to $(basename $0)";
-           usage;
-           exit 1;
-            ;;
-esac
-
-
-if [[ -z "${eclipseStream}" || -z "${buildId}" ]]
-then
-    echo "eclipseStream and buildId must be provided as environment variables"
-    exit 1
-fi
 
 # The 'workLocation' provides a handy central place to have the
 # promote script, and log results. ASSUMING this works for all
@@ -70,9 +64,6 @@ echo "#!/usr/bin/env bash" >  ${promoteScriptLocationEclipse}/${scriptName}
 echo "# promotion script created at $ptimestamp" >>  ${promoteScriptLocationEclipse}/${scriptName}
 echo "${workLocation}/syncDropLocation.sh ${eclipseStream} ${buildId} ${BUILD_TECH} master" >> ${promoteScriptLocationEclipse}/${scriptName}
 
-# TODO: changed "syncDropLocation" to handle a third parameter (CBI or PDE)
-# And now a fourth ... eBuilder HASHTAG,so won't always have to assume master, and 
-# so the tests can get their own copy.echo "$workLocation/syncDropLocation.sh $eclipseStream $buildId $BUILD_TECH $AGGR_HASH" >> ${promoteScriptLocationEclipse}/${scriptName}
 
 # we restrict "others" rights for a bit more security or safety from accidents
 chmod -v ug=rwx,o-rwx ${promoteScriptLocationEclipse}/${scriptName}
