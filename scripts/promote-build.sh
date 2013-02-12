@@ -33,10 +33,17 @@ case $BUILD_TECH in
                 
                 ;;
         *) echo "ERROR: Invalid argument to $(basename $0)";
-           usage ();
-           exit 1
+           usage;
+           exit 1;
             ;;
 esac
+
+
+if [[ -z "${eclipseStream}" || -z "${buildId}" ]]
+then
+    echo "eclipseStream and buildId must be provided as environment variables"
+    exit 1
+fi
 
 # The 'workLocation' provides a handy central place to have the
 # promote script, and log results. ASSUMING this works for all

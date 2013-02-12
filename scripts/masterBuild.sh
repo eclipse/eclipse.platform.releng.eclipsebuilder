@@ -1026,7 +1026,7 @@ fi
 
 # if all ended well, put "promotion scripts" in known locations
 
-/shared/eclipse/sdk/promote-build.sh PDE
+${buildRoot}/build/supportDir/$eclipsebuilder/scripts/promote-build.sh PDE
 
 echo "normal exit from build phase of $0"
 
