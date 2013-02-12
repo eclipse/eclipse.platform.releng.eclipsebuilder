@@ -156,14 +156,14 @@ function sendPromoteMail ()
         SUBJECT="${eclipseStream} ${buildType}-Build: ${buildId}"
     fi
 
-
-
-    TO="platform-releng-dev@eclipse.org"
-    # for initial testing, only to me
-    if [[ "${BUILD_TECH}" == "CBI" ]]
-    then 
-      TO="david_williams@us.ibm.com"
-    fi
+    # override in buildeclipse.shsource if doing local tests
+    TO=${TO:-"platform-releng-dev@eclipse.org"}
+    
+    # for initial testing, only to me -- change to PDE, after switch over
+    #if [[ "${BUILD_TECH}" == "CBI" ]]
+    #then 
+      #  TO="david_williams@us.ibm.com"
+    #fi
 
     # make sure reply to goes back to the list
     # I'm not positive this is required for mailing list?
