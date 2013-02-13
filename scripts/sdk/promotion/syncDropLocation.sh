@@ -158,11 +158,11 @@ function sendPromoteMail ()
 
     # override in buildeclipse.shsource if doing local tests
     TO=${TO:-"platform-releng-dev@eclipse.org"}
-    
+
     # for initial testing, only to me -- change to PDE, after switch over
     #if [[ "${BUILD_TECH}" == "CBI" ]]
     #then 
-      #  TO="david_williams@us.ibm.com"
+    #  TO="david_williams@us.ibm.com"
     #fi
 
     # make sure reply to goes back to the list
@@ -172,27 +172,15 @@ function sendPromoteMail ()
     #we could? to "fix up" TODIR since it's in file form, not URL
     # URLTODIR=${TODIR##*${DOWNLOAD_ROOT}}
 
+    message1="\n\n\tDownload:\n\t${downloadURL}\n\n"
+    message2="\n\n\tDownload:\n\t${downloadURL}\n\n\n\tSoftware site repository:\n\thttp://${SITE_HOST}/eclipse/updates/${eclipseStreamMajor}.${eclipseStreamMinor}-${buildType}-builds"
+
     if [[ "${BUILD_TECH}" == "CBI" ]]
     then 
-    mail -s "${SUBJECT}" "${TO}"  <<EOF
-
-    Download:
-    ${downloadURL}
-
-
-EOF
+        echo -e ${message1} | mail -s "${SUBJECT}" "${TO}"  
     else
-    
-    mail -s "${SUBJECT}" "${TO}"  <<EOF
-
-    Download:
-    ${downloadURL}
-
-    Software site repository:
-    http://${SITE_HOST}/eclipse/updates/${eclipseStreamMajor}.${eclipseStreamMinor}-${buildType}-builds
-
-EOF
-
+        echo -e ${message2} | mail -s "${SUBJECT}" "${TO}"  
+    fi
     echo "mail sent for $eclipseStream $buildType-build $buildId"
     return 0
 }
