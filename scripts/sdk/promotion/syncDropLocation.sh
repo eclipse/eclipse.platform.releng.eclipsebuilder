@@ -172,7 +172,17 @@ function sendPromoteMail ()
     #we could? to "fix up" TODIR since it's in file form, not URL
     # URLTODIR=${TODIR##*${DOWNLOAD_ROOT}}
 
+    if [[ "${BUILD_TECH}" == "CBI" ]]
+    then 
+    mail -s "${SUBJECT}" "${TO}"  <<EOF
 
+    Download:
+    ${downloadURL}
+
+
+EOF
+    else
+    
     mail -s "${SUBJECT}" "${TO}"  <<EOF
 
     Download:
