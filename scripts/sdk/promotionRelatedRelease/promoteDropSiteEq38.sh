@@ -3,8 +3,8 @@
 # note, for equinox, we use the "4.2 build",
 # but label is "3.8"
 
-DROP_ID=M20120914-1800
-DL_LABEL=3.8.1
+DROP_ID=M20130204-1200
+DL_LABEL=3.8.2
 # DROP_TYPE either S, R
 DROP_TYPE=R
 
