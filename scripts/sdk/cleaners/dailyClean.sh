@@ -12,7 +12,7 @@ then
     nbuilds=$( find /home/data/httpd/download.eclipse.org/eclipse/downloads/drops4 -maxdepth 1 -name "N*" -exec echo '{}' \; | wc -l )
     echo "Number of builds after cleaning: $nbuilds"
     source /shared/eclipse/sdk/updateIndexFilesFunction.shsource
-    updateIndex 4
+    updateIndex 4 PDE
 
 else
     echo "Nothing cleaned, not more than 4 days"
