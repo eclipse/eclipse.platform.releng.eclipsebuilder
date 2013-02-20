@@ -98,6 +98,7 @@ function updateIndex ()
             echo "ERROR: BUILD_TECH not recognized as 'CBI' or 'PDE'. Found ${BUILD_TECH}"
         fi
     elif [[ $# == 2 ]] 
+    then
         # two arguments given for specific update
         MAJOR=$1
         BUILD_TECH=$2
@@ -119,7 +120,6 @@ function updateIndex ()
             echo "ERROR. Combination of parameters did not patch any conditions."
         fi
     fi
-fi
 
 }
 
