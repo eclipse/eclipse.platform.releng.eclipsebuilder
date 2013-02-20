@@ -14,7 +14,7 @@ function internalUpdateIndex ()
     # It should not be used for production builds.
     source buildeclipse.shsource 2>/dev/null
     SITE_HOST=${SITE_HOST:-download.eclipse.org}
-    echo "SITE_HOST: $SITE_HOST"
+    #echo "SITE_HOST: $SITE_HOST"
 
     if [[ $# != 2 ]]
     then
@@ -30,14 +30,15 @@ function internalUpdateIndex ()
 
     wget --no-verbose -O ${TEMP_INDEX_TXT} http://${SITE_HOST}/eclipse/downloads/${PHP_PAGE} 2>&1
     rccode=$?
-    if [ $rccode -eq 0 ]
+    if [[ $rccode = 0 ]]
     then
         rsync ${TEMP_INDEX_TXT} /home/data/httpd/download.eclipse.org/eclipse/downloads/${HTML_PAGE}
         rccode=$?
-        if [ $rccode -eq 0 ]
+        if [[ $rccode = 0 ]]
         then
             echo "INFO: Upated http://${SITE_HOST}/eclipse/downloads/${HTML_PAGE}"
-            return 0
+            # normal exit. Return out the bottom, to include 'remove' temp file. 
+            # return 0
         else
             echo "ERROR: Could not copy ${HTML_PAGE} to downlaods. rccode: $rccode"
             return $rccode
@@ -47,7 +48,7 @@ function internalUpdateIndex ()
         return $rccode
     fi
 
-    rm -v ${TEMP_INDEX_TXT}
+    rm  ${TEMP_INDEX_TXT}
 }
 
 function updateIndexPDE ()
@@ -102,8 +103,8 @@ function updateIndex ()
         # two arguments given for specific update
         MAJOR=$1
         BUILD_TECH=$2
-        echo "BUILD_TECH: $BUILD_TECH"
-        echo "MAJOR: $MAJOR"
+        #echo "BUILD_TECH: $BUILD_TECH"
+        #echo "MAJOR: $MAJOR"
         if [[ "$BUILD_TECH" == "PDE" && "$MAJOR" == "3" ]]
         then
             internalUpdateIndex ${x3X_PHP_PAGE} ${x3X_HTML_PAGE}
