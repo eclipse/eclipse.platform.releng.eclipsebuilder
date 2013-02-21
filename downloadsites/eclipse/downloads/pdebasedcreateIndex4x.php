@@ -6,11 +6,11 @@
  
   //ini_set("display_errors", "true");
   //error_reporting (E_ALL);
-$eclipseStream="3";
-$otherIndexFile="index.html";
-$otherStream="4";
-include('dlconfig3.php');
-$subdirDrops="drops";
+  $eclipseStream="4";
+  $otherIndexFile="eclipse3x.html";
+  $otherStream="3";
+  include('dlconfig4.php');
+  $subdirDrops="drops4pdebased";
 
   # Use the basic white layout if the file is not hosted on download.eclipse.org
   $layout = (array_key_exists("SERVER_NAME", $_SERVER) && ($_SERVER['SERVER_NAME'] == "download.eclipse.org")) ? "default" : "html";
@@ -123,7 +123,7 @@ function runTestBoxes($buildName, $testResultsDirName) {
     if ($testResultsDirName === "" ) {
        return 0;
     } else {
-    return 1;
+       return 1;
     }
     global $subdirDrops;
     $testBoxes=array("linux", "macosx", "win32");
@@ -179,9 +179,9 @@ function printBuildColumns($fileName, $parts) {
         $build_done=false;
     }
     if ($build_done) {
-        // test results location changed. 'testresults' is new standard
-        // but we check for 'results' for older stuff.
-        // https://bugs.eclipse.org/bugs/show_bug.cgi?id=379408
+    	// test results location changed. 'testresults' is new standard
+    	// but we check for 'results' for older stuff.
+    	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=379408
         $testResultsDirName="";
         if (file_exists("$dropDir/testresults")) {
             $testResultsDirName="testresults";
@@ -197,7 +197,7 @@ function printBuildColumns($fileName, $parts) {
             // if more than 12 hours then consider that the regression tests did not start
             if ($diff > 720) {
             // for now, hard code to "0" since we are not reunning tests
-            // if ($diff > 0) {
+            //if ($diff > 0) {
                 echo "<img src=\"../images/caution.gif\" title=\"Regression tests did not run!\" alt=\"Regression tests did not run!\" />\n";
             } else {
                 echo "<img src=\"../images/runtests.gif\" title=\"Regression tests are running...\" alt=\"Regression tests are running...\" />\n";
@@ -454,12 +454,12 @@ switch($layout){
       echo '</body>';
       echo '</html>';
       break;
-       
-    default:
+
+	default:
       #For the default view we use $App->generatePage to generate the page inside nova.
-      $App->AddExtraHtmlHeader('<link rel="stylesheet" href="../default_style.css" />');
-      $App->Promotion = FALSE;
-      $App->generatePage('Nova', $Menu, NULL , $pageAuthor, $pageKeywords, $pageTitle, $html);
-      break;   
+	  $App->AddExtraHtmlHeader('<link rel="stylesheet" href="../default_style.css" />');
+	  $App->Promotion = FALSE;
+	  $App->generatePage('Nova', $Menu, NULL , $pageAuthor, $pageKeywords, $pageTitle, $html);
+	  break;
 }
 

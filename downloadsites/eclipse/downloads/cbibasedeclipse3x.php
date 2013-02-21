@@ -10,7 +10,7 @@ $eclipseStream="3";
 $otherIndexFile="index.html";
 $otherStream="4";
 include('dlconfig3.php');
-$subdirDrops="drops";
+$subdirDrops="dropscbibased";
 
   # Use the basic white layout if the file is not hosted on download.eclipse.org
   $layout = (array_key_exists("SERVER_NAME", $_SERVER) && ($_SERVER['SERVER_NAME'] == "download.eclipse.org")) ? "default" : "html";
