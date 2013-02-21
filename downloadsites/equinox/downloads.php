@@ -1,5 +1,5 @@
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/eclipse.org-common/system/app.class.php");	require_once($_SERVER['DOCUMENT_ROOT'] . "/eclipse.org-common/system/nav.class.php"); 	require_once($_SERVER['DOCUMENT_ROOT'] . "/eclipse.org-common/system/menu.class.php"); 	$App 	= new App();	$Nav	= new Nav();	$Menu 	= new Menu();		include($App->getProjectCommon());    # All on the same line to unclutter the user's desktop'
-	# Begin: page-specific settings.  Change these.
+	# Begin: page-specific settings.  Change these. 
 	$pageTitle = "Equinox Downloads";
 	$pageKeywords = "equinox, osgi, framework, runtime, download";
 	$pageAuthor = "Equinox committers";
@@ -9,7 +9,7 @@
 
         #split the content file by & and fill the arrays
         $elements = explode("&",$contents);
-        $t = 0;
+        $t = 0; 
         $p = 0;
         for ($c = 0; $c < count($elements)-1; $c++) {
                $tString = "dropType";
@@ -80,7 +80,7 @@
 
 	<div class="homeitem3col">
 		<h3>Latest Builds</h3>
-		<table  width="100%" CELLSPACING=0 CELLPADDING=3>
+		<table  width="100%" CELLSPACING=0 CELLPADDING=3> 
 
 EOHTML;
 
@@ -99,7 +99,7 @@ EOHTML;
 				<td width="30%"><a href="drops/$fileName/index.php">$parts[1]</a></td>
 
 EOHTML;
-		if (count($parts)==2)
+		if (count($parts)==2) 
 			$html .= <<<EOHTML
 			<tr>
 				<td width="30%"><a href="drops/$fileName/index.php">$fileName</a></td>
@@ -118,7 +118,7 @@ EOHTML;
 		</table>
 
 EOHTML;
-	
+	 
 	foreach($dropType as $value) {
 		$prefix=$typeToPrefix[$value];
 

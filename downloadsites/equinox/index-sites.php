@@ -15,8 +15,8 @@
 ?>
 
 <table border=0 cellspacing=5 cellpadding=2 width="100%" >
-  <tr>
-    <td align=left width="72%"> <font class=indextop> eclipse project<br>downloads</font>
+  <tr> 
+    <td align=left width="72%"> <font class=indextop> eclipse project<br>downloads</font> 
       <br>
       <font class=indexsub> latest downloads from the eclipse project</font><br>
 	  <?php echo $warning; ?>
@@ -26,25 +26,25 @@
 
 </table>
 <table border=0 cellspacing=5 cellpadding=2 width="100%" >
-  <tr>
-    <td align=LEFT valign=TOP colspan="2" bgcolor="#0080C0"><b><font color="#FFFFFF" face="Arial,Helvetica">Latest
+  <tr> 
+    <td align=LEFT valign=TOP colspan="2" bgcolor="#0080C0"><b><font color="#FFFFFF" face="Arial,Helvetica">Latest 
       Downloads</font></b></td>
   </tr>
   <!-- The Eclipse Projects -->
-  <tr>
-    <td>
-      <p>On this page you can find the latest <a href="build_types.html">builds</a>
-        produced by the <a href="http://www.eclipse.org/eclipse/index.html" target="_top">Eclipse
-        Project</a>. To get started run the program and and go through the user
-        and developer documentation provided in the online help system. If you
-        have problems downloading the drops, contact the <font size="-1" face="arial,helvetica,geneva"><a href="mailto:webmaster@eclipse.org">webmaster</a></font>.
-        If you have problems installing or getting the workbench to run, <a href="http://www.eclipse.org/eclipse/faq/eclipse-faq.html" target="_top">check
-        out the Eclipse Project FAQ,</a> or try posting a question to the <a href="http://www.eclipse.org/newsgroups/index.html" target="_top">newsgroup</a>.
-        All downloads are provided under the terms and conditions of the <a href="http://www.eclipse.org/legal/notice.html">Eclipse.org
+  <tr> 
+    <td> 
+      <p>On this page you can find the latest <a href="build_types.html">builds</a> 
+        produced by the <a href="http://www.eclipse.org/eclipse/index.html" target="_top">Eclipse 
+        Project</a>. To get started run the program and and go through the user 
+        and developer documentation provided in the online help system. If you 
+        have problems downloading the drops, contact the <font size="-1" face="arial,helvetica,geneva"><a href="mailto:webmaster@eclipse.org">webmaster</a></font>. 
+        If you have problems installing or getting the workbench to run, <a href="http://www.eclipse.org/eclipse/faq/eclipse-faq.html" target="_top">check 
+        out the Eclipse Project FAQ,</a> or try posting a question to the <a href="http://www.eclipse.org/newsgroups/index.html" target="_top">newsgroup</a>. 
+        All downloads are provided under the terms and conditions of the <a href="http://www.eclipse.org/legal/notice.html">Eclipse.org 
         Software User Agreement</a> unless otherwise specified. </p>
-      <p>Looking for<b> Tools PMC</b> downloads page then look <a href="http://www.eclipse.org/tools/downloads.html">here</a>.
+      <p>Looking for<b> Tools PMC</b> downloads page then look <a href="http://www.eclipse.org/tools/downloads.html">here</a>. 
         Looking for the<b> Technology PMC</b> downloads page then look <a href="http://www.eclipse.org/technology/downloads.html">here</a>.</p>
-      <p>Looking for the build schedule or build stats then look <a href="http://dev.eclipse.org/viewcvs/index.cgi/%7Echeckout%7E/platform-releng-home/main.html">here</a>.
+      <p>Looking for the build schedule or build stats then look <a href="http://dev.eclipse.org/viewcvs/index.cgi/%7Echeckout%7E/platform-releng-home/main.html">here</a>. 
         For information about different kinds of builds look <a href="build_types.html">here</a>.</p>
       </td>
   </tr>
@@ -113,7 +113,7 @@
 	}
 	// $aDirectory.closedir();
  ?>
-
+ 
 <table width="100%" cellspacing=0 cellpadding=3 align=center>
 
 

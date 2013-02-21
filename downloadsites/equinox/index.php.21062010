@@ -21,7 +21,7 @@
 
         #split the content file by & and fill the arrays
         $elements = explode("&",$contents);
-        $t = 0;
+        $t = 0; 
         $p = 0;
         for ($c = 0; $c < count($elements)-1; $c++) {
                $tString = "dropType";
@@ -90,8 +90,8 @@
                         }
 		}
 	}
- ?> <table width="100%" cellspacing=0 cellpadding=3 align=center> <td align=left>
-<TABLE  width="100%" CELLSPACING=0 CELLPADDING=3> <tr> <td width=\"30%\"><b>Build
+ ?> <table width="100%" cellspacing=0 cellpadding=3 align=center> <td align=left> 
+<TABLE  width="100%" CELLSPACING=0 CELLPADDING=3> <tr> <td width=\"30%\"><b>Build 
 Type</b></td><td><b>Build Name</b></td><td><b>Build Date</b></td></tr> <?php
 	foreach($dropType as $value) {
 		$prefix=$typeToPrefix[$value];
@@ -152,5 +152,5 @@ Type</b></td><td><b>Build Name</b></td><td><b>Build Date</b></td></tr> <?php
 		}
 		echo "</table></table>&nbsp;";
 	}
-?> &nbsp;
+?> &nbsp; 
 </body></html>
