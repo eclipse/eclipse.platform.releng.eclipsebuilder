@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# don't tag, for now
+export tag=false
+# continue even if no changes detected (happens a lot for test builds)
+export continueBuildOnNoChange=true
+
 # Must have these three, rest computed
 
 buildType=I
