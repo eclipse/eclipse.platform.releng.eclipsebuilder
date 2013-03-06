@@ -818,7 +818,7 @@ then
 fi
 
 
-tag=true
+tag=${tag:-true}
 
 if ${testbuildonly:-false}
 then
