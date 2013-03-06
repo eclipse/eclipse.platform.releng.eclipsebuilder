@@ -909,7 +909,9 @@ then
         # if not a test build, send "no change" mail to list
         #toAddress=platform-releng-dev@eclipse.org
         # can not have empty else clauses, so we'll have double test emails
-        toAddress=platform-releng-dev@eclipse.org
+        # for transition period, email only to me
+        #toAddress=platform-releng-dev@eclipse.org
+        toAddress=david_williams@us.ibm.com
     fi
     if [[ "${continueBuildOnNoChange}" != "true"  ]]
     then
@@ -964,7 +966,8 @@ else
     # remember, can not have empty else clauses,
     # so if desired to "comment out", must supply another
     # harmless address
-    toAddress=platform-releng-dev@eclipse.org
+    #toAddress=platform-releng-dev@eclipse.org
+    toAddress=david_williams@us.ibm.com
 fi
 # for N builds, we do not notify anyone of "start of build" (but, do for all others? I, M? )
 if [[ "${buildType}" != "N"  ]]

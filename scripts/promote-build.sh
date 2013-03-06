@@ -58,6 +58,14 @@ then
     # allows the "test" creation of promotion script, but, not have it "seen" be cron job
     scriptName=TEST-$scriptName
 fi
+
+# For now, don't promote automatically
+if [[ "${BUILD_TECH}" == "PDE" ]]
+then
+    # allows the "test" creation of promotion script, but, not have it "seen" be cron job
+    scriptName=PDE-$scriptName
+fi
+
 # Here is content of promtion script:
 ptimestamp=$( date +%Y%m%d%H%M )
 echo "#!/usr/bin/env bash" >  ${promoteScriptLocationEclipse}/${scriptName}

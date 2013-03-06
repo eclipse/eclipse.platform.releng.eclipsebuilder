@@ -74,6 +74,19 @@
         name="init"
         depends="hudson-init, streamSpecificInit">
 
+        <!-- if not specified on command line, assume files come from 'download.eclipse.org' -->
+        <property name="DOWNLOAD_HOST" value="download.eclipse.org"/>
+        <property name="ARCHIVE_HOST" value="archive.eclipse.org"/>
+        
+        <condition
+            property="dropsSuffix"
+            value=""
+            else="pdebased">
+            <equals
+                arg1="${BUILD_TECH}"
+                arg2="CBI" />
+        </condition>
+        
         <!-- if not otherwise set, such as by hudson-init,
              assume "current directory" for WORKSPACE -->
         <property
@@ -141,12 +154,12 @@
         <!-- what's intended/needed? specific, simple repo? Or composite? -->
         <property
             name="currentbuildrepo"
-            value="http://download.eclipse.org/eclipse/updates/${updateSiteSegment}-${buildType}-builds/${buildId}" />
+            value="http://${DOWNLOAD_HOST}/eclipse/updates/${updateSiteSegment}-${buildType}-builds/${buildId}" />
         <echo message="currentbuildrepo: ${currentbuildrepo}" />
 
         <property
             name="buildURL"
-            value="http://download.eclipse.org/eclipse/downloads/${dropsDirSegment}/${buildId}" />
+            value="http://${DOWNLOAD_HOST}/eclipse/downloads/${dropsDirSegment}${dropsSuffix}/${buildId}" />
 
         <!--
              there's nothing "automatic" about the local cache (so far).
@@ -197,7 +210,7 @@
             src="${archiveLocation}/eclipse-platform-${buildId}-win32.zip"
             dest="${executionDir}/eclipse-platform-${buildId}-win32.zip" />
         <get
-            src="http://archive.eclipse.org/eclipse/downloads/drops/R-3.7.2-201202080800/eclipse-platform-3.7.2-win32.zip"
+            src="http://${ARCHIVE_HOST}/eclipse/downloads/drops/R-3.7.2-201202080800/eclipse-platform-3.7.2-win32.zip"
             dest="${executionDir}/eclipse-platform-3.7.2-win32.zip" />
     </target>
     <target
@@ -211,7 +224,7 @@
             src="${archiveLocation}/eclipse-platform-${buildId}-win32-x86_64.zip"
             dest="${executionDir}/eclipse-platform-${buildId}-win32-x86_64.zip" />
         <get
-            src="http://archive.eclipse.org/eclipse/downloads/drops/R-3.7.2-201202080800/eclipse-platform-3.7.2-win32-x86_64.zip"
+            src="http://${ARCHIVE_HOST}/eclipse/downloads/drops/R-3.7.2-201202080800/eclipse-platform-3.7.2-win32-x86_64.zip"
             dest="${executionDir}/eclipse-platform-3.7.2-win32.zip-x86_64" />
     </target>
     <target
@@ -225,7 +238,7 @@
             src="${archiveLocation}/eclipse-platform-${buildId}-linux-gtk-x86_64.tar.gz"
             dest="${executionDir}/eclipse-platform-${buildId}-linux-gtk-x86_64.tar.gz" />
         <get
-            src="http://archive.eclipse.org/eclipse/downloads/drops/R-3.7.2-201202080800/eclipse-platform-3.7.2-linux-gtk-x86_64.tar.gz"
+            src="http://${ARCHIVE_HOST}/eclipse/downloads/drops/R-3.7.2-201202080800/eclipse-platform-3.7.2-linux-gtk-x86_64.tar.gz"
             dest="${executionDir}/eclipse-platform-3.7.2-linux-gtk-x86_64.tar.gz" />
     </target>
 
@@ -240,7 +253,7 @@
             src="${archiveLocation}/eclipse-platform-${buildId}-linux-gtk.tar.gz"
             dest="${executionDir}/eclipse-platform-${buildId}-linux-gtk.tar.gz" />
         <get
-            src="http://archive.eclipse.org/eclipse/downloads/drops/R-3.7.2-201202080800/eclipse-platform-3.7.2-linux-gtk.tar.gz"
+            src="http://${ARCHIVE_HOST}/eclipse/downloads/drops/R-3.7.2-201202080800/eclipse-platform-3.7.2-linux-gtk.tar.gz"
             dest="${executionDir}/eclipse-platform-3.7.2-linux-gtk.tar.gz" />
     </target>
 
@@ -255,7 +268,7 @@
             src="${archiveLocation}/eclipse-platform-${buildId}-macosx-cocoa.tar.gz"
             dest="${executionDir}/eclipse-platform-${buildId}-macosx-cocoa.tar.gz" />
         <get
-            src="http://archive.eclipse.org/eclipse/downloads/drops/R-3.7.2-201202080800/eclipse-platform-3.7.2-macosx-cocoa.tar.gz"
+            src="http://${ARCHIVE_HOST}/eclipse/downloads/drops/R-3.7.2-201202080800/eclipse-platform-3.7.2-macosx-cocoa.tar.gz"
             dest="${executionDir}/eclipse-platform-3.7.2-macosx-cocoa.tar.gz" />
     </target>
 
@@ -270,7 +283,7 @@
             src="${archiveLocation}/eclipse-platform-${buildId}-macosx-cocoa-x86_64.tar.gz"
             dest="${executionDir}/eclipse-platform-${buildId}-macosx-cocoa-x86_64.tar.gz" />
         <get
-            src="http://archive.eclipse.org/eclipse/downloads/drops/R-3.7.2-201202080800/eclipse-platform-3.7.2-macosx-cocoa-x86_64.tar.gz"
+            src="http://${ARCHIVE_HOST}/eclipse/downloads/drops/R-3.7.2-201202080800/eclipse-platform-3.7.2-macosx-cocoa-x86_64.tar.gz"
             dest="${executionDir}/eclipse-platform-3.7.2-macosx-cocoa-x86_64.tar.gz" />
     </target>
 
@@ -579,6 +592,9 @@
         depends="initStreamVariables,getMapProject,hudson-init">
         <echo message="DEBUG: executing streamSpecificInit" />
 
+        <!-- if not specified on command line, assume files come from 'download.eclipse.org' -->
+        <property name="DOWNLOAD_HOST" value="download.eclipse.org"/>
+        <property name="ARCHIVE_HOST" value="archive.eclipse.org"/>
 
          <!--
               mapsProject is the "top" of the maps project after it has been
@@ -596,7 +612,7 @@
                 <!--set local mirror location depending if hudson is running -->
         <condition
             property="localmirror"
-            value="download.eclipse.org">
+            value="${DOWNLOAD_HOST}">
             <equals
                 arg1="${hudson}"
                 arg2="true" />
