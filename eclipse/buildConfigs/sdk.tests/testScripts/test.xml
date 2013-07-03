@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-This file moved to /org.eclipse.releng/configuration/eclipseBuilderOverlays
-So the tests can differ slightly for 3.8 and 4.2 builds.
-See bug 380553. Once root bug is fixed, should move test.xml
-back to here, so only one version for both streams.
--->
