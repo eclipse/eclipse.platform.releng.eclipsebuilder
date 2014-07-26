@@ -1,46 +1,27 @@
 Contributing to Eclipse Platform
 ================================
 
-Thanks for your interest in this project.
+Thanks for your interest in this the Eclipse Platform.
 
-Project description:
---------------------
+This particular repository, org.eclipse.releng.eclipsebuilder, is 
+no longer in active use. If you arrived here by casual browsing, fine. 
+But if some wiki link lead you here, please report a bug so it can be fixed. 
 
-The Platform defines the set of frameworks and common services that collectively make up infrastructure required to support the use of Eclipse as a component model, as a Rich Client Platform (RCP) and as a comprehensive tool integration platform. These services and frameworks include a standard workbench user interface model and portable native widget toolkit, a project model for managing resources, automatic resource delta management for incremental compilers and builders, language-independent debug infrastructure, and infrastructure for distributed multi-user versioned resource management.
+- https://bugs.eclipse.org/bugs/enter_bug.cgi?product=Platform&component=Releng
 
-- https://projects.eclipse.org/projects/eclipse.platform
+If for what ever reason you think you do need a change here, please open 
+a bug for that, being sure to explain what you are trying to accomplish -- there 
+may be a new way, based on current code base. 
 
-Developer resources:
---------------------
+This project was "retired" during Kepler release, as we moved to the
+Tycho/Maven builds. Many of the scripts (and concepts) here were moved to 
+the eclipse.platform.releng.aggregator project/repository ... in particular, 
+many to the eclipse.platform.releng.tychoeclipsebuilder. 
 
-Information regarding source code management, builds, coding standards, and more.
+The final version of this repository that was used to do a milestone build
+as tagged with R4_3_M5a. The final version to do the last PDE I-build,
+a few weeks after M5, was tagged with R4_3_FinalPDE. That would be the 
+version to start with is the PDE Build was ever "restarted". 
 
-- https://projects.eclipse.org/projects/eclipse.platform/developer
-
-Contributor License Agreement:
-------------------------------
-
-Before your contribution can be accepted by the project, you need to create and electronically sign the Eclipse Foundation Contributor License Agreement (CLA).
-
-- http://www.eclipse.org/legal/CLA.php
-
-Contact:
---------
-
-Contact the project developers via the project's "dev" list.
-
-- https://dev.eclipse.org/mailman/listinfo/platform-dev
-
-Search for bugs:
-----------------
-
-This project uses Bugzilla to track ongoing development and issues.
-
-- https://bugs.eclipse.org/bugs/buglist.cgi?product=Platform
-
-Create a new bug:
------------------
-
-Be sure to search for existing bugs before you create another one. Remember that contributions are always welcome!
-
-- https://bugs.eclipse.org/bugs/enter_bug.cgi?product=Platform
+See also retired 'org.eclipse.releng' project, which is closely related; 
+tagged in similar ways, and retired at same time as this one. 
